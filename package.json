@@ -8,6 +8,7 @@
     "daily": "tsx scripts/daily.ts",
     "dry-run": "tsx scripts/dry-run.ts",
     "render": "tsx scripts/render.ts",
+    "ipo:local": "tsx scripts/ipo-local.ts",
     "architecture:check": "tsx scripts/architecture-check.ts",
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test \"tests/**/*.test.ts\""

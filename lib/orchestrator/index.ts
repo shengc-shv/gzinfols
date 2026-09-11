@@ -18,12 +18,13 @@ import type {
 import { createAdapters, type AdapterOverrides } from "../adapters";
 import { ConsoleLogger } from "../adapters/logger";
 
-/** 从 sources.config.json 载入源注册表（唯一真源）。 */
+/** 从 sources.config.json 载入源注册表（唯一真源）。兼容顶层数组与 {sources:[...]} 两种形状。 */
 export async function loadSources(fs: FileStore): Promise<SourceDef[]> {
-  const cfg = await fs.readJson<{ sources?: SourceDef[] }>("sources.config.json");
-  if (!cfg?.sources || cfg.sources.length === 0)
+  const cfg = await fs.readJson<SourceDef[] | { sources?: SourceDef[] }>("sources.config.json");
+  const sources = Array.isArray(cfg) ? cfg : cfg?.sources;
+  if (!sources || sources.length === 0)
     throw new Error("sources.config.json 缺少 sources 字段或为空");
-  return cfg.sources;
+  return sources;
 }
 
 function buildTierMap(sources: SourceDef[]): Map<string, SourceTier> {

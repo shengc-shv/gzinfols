@@ -11,7 +11,7 @@ import { jsonrepair } from "jsonrepair";
 
 const execFileP = promisify(execFile);
 
-type Backend = "claude-cli" | "anthropic" | "openai" | "deepseek" | "minimax";
+type Backend = "claude-cli" | "anthropic" | "openai" | "deepseek";
 
 export class LlmAdapter implements LlmPort {
   private readonly backend: Backend;

@@ -8,6 +8,7 @@
  */
 import type { RawArticle } from "../../contracts/article";
 import type { CrawlerRegistry, HttpClient, IngestResult, PipelineContext } from "../../contracts/pipeline";
+import { crawledToRaw, SOURCE_ROUTE } from "../normalize/crawl";
 import { fetchOne } from "./providers";
 
 export interface CollectDeps {
@@ -73,7 +74,7 @@ function dedupeByUrl(articles: RawArticle[]): RawArticle[] {
   return out;
 }
 
-/** 采集入口：fetchAll → 爬虫 → 合并去重（RawArticle 原样透传，加工全在 C2）。 */
+/** 采集入口：fetchAll → 爬虫 → 爬虫线格式归一化（routeRegion/时间解析）→ 去重。 */
 export async function ingestAll(
   ctx: PipelineContext,
   deps: CollectDeps,
@@ -81,10 +82,23 @@ export async function ingestAll(
   const fetched = await fetchAllSources(ctx, deps);
   const crawled = await fetchCrawlers(ctx, deps);
 
-  // CrawledArticle 是 RawArticle 的结构子集（多出的可选字段兼容），直接并入
-  const articles = dedupeByUrl([...fetched, ...crawled.ipo, ...crawled.gz, ...crawled.stocks]);
+  // 爬虫产物三批次归一化（与 gzinfo mergeCrawledBatch 语义一致）：
+  //  - ipo：region 三分流（gz→gz+前缀改写 / gd→gd-ipo / 其它→ipo）
+  //  - gz：category 走 SOURCE_ROUTE 路由表兜底（采集元数据，非最终归属）
+  //  - stocks：强制 category=stocks（昨日股市复盘输入）
+  const crawledRaw = [
+    ...crawled.ipo.map((c) => crawledToRaw(c, "ipo")),
+    ...crawled.gz.map((c) =>
+      crawledToRaw(c, "gz", { gzCategory: c.sourceId ? SOURCE_ROUTE[c.sourceId]?.category : undefined }),
+    ),
+    ...crawled.stocks.map((c) => crawledToRaw(c, "gz", { gzCategory: "stocks" })),
+  ];
+  const articles = dedupeByUrl([...fetched, ...crawledRaw]);
 
   if (articles.length === 0) throw new Error("no articles fetched — aborting");
-  ctx.log.info("collect", `采集合计 ${articles.length} 条`);
+  ctx.log.info(
+    "collect",
+    `采集合计 ${articles.length} 条（RSS/API/Scrape ${fetched.length} + 爬虫 ${crawledRaw.length}）`,
+  );
   return { articles, crawled };
 }

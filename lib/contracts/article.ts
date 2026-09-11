@@ -42,6 +42,12 @@ export interface RawArticle {
   listedDate?: string;
   gdBasis?: string;
   subcategories?: string[];
+  /** 注册省份（结构化地域信号；爬虫透传，IPO 板块广东判定第一优先级）。 */
+  registeredProvince?: string;
+  /** 已知股票代码（可选，供广东判定离线精确匹配）。 */
+  stockCode?: string;
+  /** 条目级子标签（昨日股市 a-share/hk/us；广州媒体 gz-media 等），采集元数据透传。 */
+  subcategory?: string;
 }
 
 /** 归一化后条目：已通过时间红线，publishedAt 必填。 */
@@ -65,20 +71,35 @@ export interface ArticleInput extends NormalizedArticle {
   valueTag?: ValueTag;
 }
 
-/** TS 爬虫产物（providers 进程内调用，归一化接入）。 */
+/**
+ * 爬虫线格式（adapters/crawlers 产物 → 归一化 crawl.ts 的入参）。
+ *
+ * 与 gzinfo lib/ingest/merge.ts 的 CrawledArticle 同构：
+ * - publishedAt 为**字符串**（裸北京时间 / ISO / 日期），由归一化层 normalizePubTime
+ *   统一补 +08:00 后 parse；无发布时间的条目由 C2 归一化丢弃（红线 #1，绝不兜底抓取时间）。
+ * - region（gz | gd | nation）由 routeRegion 消费做三分流 + `gd-`→`gz-` 前缀改写；
+ *   category 在此仅是采集元数据兜底，不驱动最终板块归属（红线 #2）。
+ */
 export interface CrawledArticle {
-  sourceId: string;
-  title: string;
-  url: string;
+  sourceId?: string;
+  source?: string;
+  title?: string;
+  url?: string;
   excerpt?: string;
-  publishedAt?: Date;
-  fetchedAt: Date;
-  category: ArticleCategory;
+  publishedAt?: string;
+  fetchedAt?: string;
+  region?: string;
+  category?: string;
+  subcategory?: string;
+  summary?: string;
   tier?: SourceTier;
+  registeredProvince?: string;
+  stockCode?: string;
+  officialUrl?: string;
+  officialLabel?: string;
   ipoStage?: string;
   listedDate?: string;
   gdBasis?: string;
-  subcategories?: string[];
 }
 
 import type { SourceTier } from "./source";

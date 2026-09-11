@@ -6,8 +6,12 @@ daily_reports/
 history/
 data/cache/
 data/local-acquired.json
-data/local-ipo.json
+# 注意：data/local-ipo.json **必须入库**——本地 ipo:local 产出后提交推送，
+# 远端 CI 读取补数（本地/远端唯一衔接文件），见 lib/adapters/local-ipo.ts
 *.log
+
+# WorkBuddy 工作区数据（项目代码仓库不携带）
+.workbuddy/
 
 # 环境变量 / 密钥
 .env

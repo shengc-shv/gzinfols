@@ -8,21 +8,35 @@ import { SystemClock } from "./clock";
 import { FetchAdapter } from "./http";
 import { LlmAdapter } from "./llm";
 import { ConsoleLogger } from "./logger";
-import type { Clock, FileStore, HttpClient, Logger, LlmPort, PipelineDeps } from "../contracts/pipeline";
+import { fetchCrawledArticles } from "./crawlers";
+import type {
+  Clock,
+  CrawlerRegistry,
+  FileStore,
+  HttpClient,
+  Logger,
+  LlmPort,
+  PipelineDeps,
+} from "../contracts/pipeline";
 
 export interface AdapterOverrides {
   fs?: FileStore;
   clock?: Clock;
   llm?: LlmPort;
   http?: HttpClient;
+  /** 爬虫注册表（默认装配真实爬虫；测试传 null 显式关闭，或不传 = 真实爬虫）。 */
+  crawlers?: CrawlerRegistry | null;
 }
 
 export function createAdapters(overrides: AdapterOverrides = {}): PipelineDeps {
+  const crawlers: CrawlerRegistry = { fetchCrawledArticles };
   return {
     fs: overrides.fs ?? new NodeFsAdapter(),
     clock: overrides.clock ?? new SystemClock(),
     llm: overrides.llm ?? new LlmAdapter(),
     http: overrides.http ?? new FetchAdapter(),
+    // 默认装配真实爬虫；测试注入 overrides.crawlers === null 显式关闭（不传 = 真实爬虫）。
+    crawlers: overrides.crawlers === null ? undefined : (overrides.crawlers ?? crawlers),
   };
 }
 
