@@ -178,9 +178,13 @@ jobs:
       # 逐字对齐 gzinfo daily.yml 的归档步骤（2026-09-10 #201 并发教训）。
       - name: Archive reports to history/ + commit rolling history
         run: |
-          # 1) 归档唯一存储里的报告到 main/history/（gzinfo 产物 data/history/reports/<date>/）
+          # 1) 归档唯一存储里的报告到 main/history/：2.0 唯一存储 = daily_reports/<date>/
+          #    （<date>.html/.json/.md + audio/；gzinfo 的 data/history/reports/<date>/ 对应物，
+          #     见 parity-plan R3）。cp 到已存在的 history/<date>/（writeExecStore 写的 store.json
+          #     所在目录）→ 合并为同一目录：报告文件 + store.json 同构 gzinfo 的 history/<date>/。
+          #    保留 [ -d ] 守卫：首次运行尚无产物时不报错。
           mkdir -p history
-          for d in data/history/reports/20*/; do
+          for d in daily_reports/20*/; do
             [ -d "$d" ] && cp -r "$d" history/
           done
           # 2) 提交历史库 + 报告归档（存在才 add —— 首次运行可选文件可能尚未生成）

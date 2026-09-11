@@ -103,7 +103,8 @@ B5 聚焦「发布链路可核对移植」四项（parity-plan §2.4 的 P1 + �
 | # | 差异 | 说明 | 处置 |
 |---|---|---|---|
 | D1 | **gate 对 workflow_dispatch 永远放行** | 2.0 保留「手动触发永远跑」（用户选择最高优先级）；gzinfo 的 gate 在 `release_mode=final` 且当天已 in-effect 时会拦截手动重跑 | 按本批次任务要求「保留 dispatch 永远跑」；如需与 gzinfo 完全一致（手动 final 被 in-effect 拦截），B6 可再收紧 |
-| D2 | **报告归档源目录** | gzinfo 唯一存储=`data/history/reports/<date>/`，workflow `cp data/history/reports/20*/ → history/`；2.0 当前唯一存储=`daily_reports/<date>/`（parity-plan R3），且写入 `history/<date>/store.json`（exec store）。故 B5 的 `data/history/reports/20*/` 归档步骤**当前为安全 no-op**（`[ -d ]` 守卫），待 B6 对齐 R1-R3 后自动生效；main 的 `history/` 现由 `writeExecStore` 直接产出 store.json | 逐字对齐 gzinfo 源目录；如确需在 B5 即归档 html/json/md，可把源改为 `daily_reports/20*/`（一行）——**待主理人确认** |
+| D2 | **报告归档源目录（已按主理人拍板修正）** | 2.0 唯一存储=`daily_reports/<date>/`（`<date>.html/.json/.md` + `audio/`；gzinfo `data/history/reports/<date>/` 的对应物，parity-plan R3），exec store 由 `writeExecStore` 写 `history/<date>/store.json`。归档步骤源目录已从 gzinfo 的 `data/history/reports/20*/` 改为 **`daily_reports/20*/`**，`cp -r` 合并进已存在的 `history/<date>/` → 报告文件与 store.json **同目录**，结构同构 gzinfo 的 `history/<date>/`（实测见下） | ✅ 已修正（保留 `[ -d ]` 守卫，首次运行无产物不报错） |
+| D2-证据 | 归档后 `history/<date>/` 实测内容 | `<date>.html` / `<date>.json` / `<date>.md` / `audio/briefing-<date>.mp3` / `store.json`（同一目录） | ✅ 对齐 gzinfo |
 | D3 | **`.gitignore` 必要调整** | 将 `history/` 改为 `data/history/`（gzinfo 口径），否则归档步骤 `git add history/` 因路径被忽略而失败。副作用：本地既有 `history/2026-09-11/store.json`（此前被忽略）现暴露为未跟踪文件 | 已改；该本地文件是否随本批提交由主理人定 |
 | D4 | **可选文件 add 的健壮化** | `git add … article-history-backup.json / event-memory.json` 改为「存在才 add」，避免首次运行（可选文件尚未生成，如 dispatch publish=false 不写 event-memory）导致步骤失败。gzinfo 因其仓库已提交这些文件而恒存在 | 语义等价（要提交的内容不变），仅规避首次运行边界 |
 | D5 | `tests/history.test.ts` / `history-backfill.test.ts` 未移植 | 二者覆盖历史库滚动/回填，属 B3 历史库重构范畴（B3 已落地并通过回归）；与 B5 发布链路无直接关系 | 本批不移植，符合任务「可作取舍并说明」 |
