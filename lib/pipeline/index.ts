@@ -23,7 +23,6 @@ import { companyNameOf } from "../services/classify/gd-ipo-spoken";
 import { loadHistoryStore, loadExecStore, loadEventMemory, saveEventMemory } from "../adapters/persistence";
 import { dayGap } from "../utils/time";
 import { recordIpoVoicing, ipoShouldSkip } from "../services/memory/event-memory";
-import { isEventMemoryEnabled } from "../services/memory/store";
 
 export interface RunOutput {
   report: DailyReport;
@@ -70,7 +69,8 @@ export async function runPipeline(
   // → TTS 合成（AUDIO_ENABLED 门控；失败降级为无播放器）
   const exec = loadExecStore(ctx.date);
   // IPO 口播事件记忆（gzinfo ipoVoicing）：读库算今日应跳过的企业；写回仅正式发布 run
-  const memoryOn = isEventMemoryEnabled();
+  // 开关由组合根从 EVENT_MEMORY 注入 ctx.config（服务层不直读 env）
+  const memoryOn = ctx.config.eventMemory;
   const ipoMem = memoryOn ? loadEventMemory() : null;
   const ipoSkip = new Set<string>();
   if (ipoMem) {

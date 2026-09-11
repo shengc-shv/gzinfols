@@ -242,10 +242,13 @@ export async function assembleBriefingScript(
   const skipCompanies = opts.ipoMemory?.skip ?? new Set<string>();
   const voicedCompanies: string[] = [];
   // ① 确定性拼装（免 LLM，AI / SKIP_AI 双模式可用；同一企业 2 天去重由 skipCompanies 承担）
-  const spokenIpo = buildGdIpoSpoken(ipoItems, { skipCompanies });
+  // 窗口以「报告日」为基准（不读隐式时钟），与渲染横滑卡同口径
+  const spokenIpo = buildGdIpoSpoken(ipoItems, { skipCompanies, today: report.date });
   if (spokenIpo) {
     ipo = sanitize(spokenIpo);
-    voicedCompanies.push(...pickGdIpoCompanies(ipoItems, { skipCompanies }));
+    voicedCompanies.push(
+      ...pickGdIpoCompanies(ipoItems, { skipCompanies, today: report.date }),
+    );
   } else {
     // ② 媒体源线索 → LLM 兜底（仅在确实有线索且提供 runner 时）
     const clues = detectGdIpo(ipoItems);
@@ -259,7 +262,9 @@ export async function assembleBriefingScript(
         const t = fb.trim();
         if (t.length >= 8) {
           ipo = sanitize(t);
-          voicedCompanies.push(...pickGdIpoCompanies(ipoItems, { skipCompanies }));
+          voicedCompanies.push(
+      ...pickGdIpoCompanies(ipoItems, { skipCompanies, today: report.date }),
+    );
         }
       } catch {
         // 兜底生成失败，跳过该语块（不阻断）

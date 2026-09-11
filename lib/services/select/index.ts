@@ -21,7 +21,12 @@
  */
 import type { ArticleInput } from "../../contracts/article";
 import type { SourceTier } from "../../contracts/source";
-import type { FilterResult, PipelineContext, SelectResult } from "../../contracts/pipeline";
+import type {
+  FilterFlags,
+  FilterResult,
+  PipelineContext,
+  SelectResult,
+} from "../../contracts/pipeline";
 import type { FileStore, Logger } from "../../contracts/pipeline";
 import { isWithinCalendarDays } from "../../utils/time";
 import { applyKeywordFilter, type KeywordConfig } from "./funnel";
@@ -57,6 +62,8 @@ interface FilterContext {
   allSourceIds: Set<string>;
   windowDays: number;
   keywordConfig: KeywordConfig;
+  /** 过滤链旁路开关（由组合根注入 ctx.config.filters，服务层不读 env）。 */
+  filters: FilterFlags;
   startTime: () => Date;
   log: Logger;
 }
@@ -128,7 +135,7 @@ const stockSingleStage: FilterStage = {
 /** Stage 4：关键词漏斗（L0 硬过滤；全量误杀回退保底；KEYWORD_FILTER=off 旁路）。 */
 const keywordFunnelStage: FilterStage = {
   name: "keyword-funnel",
-  enabled: () => keywordFilterEnabled(),
+  enabled: (ctx) => keywordFilterEnabled(ctx.filters),
   apply: (articles, ctx) => {
     const kwConfig = ctx.keywordConfig;
     const before = articles.length;
@@ -151,7 +158,7 @@ const keywordFunnelStage: FilterStage = {
       if (r.bucket === "opportunity") opp++;
       if (r.bucket === "weekly") weekly++;
     }
-    if (keep.length === 0 && keywordFilterFallbackEnabled()) {
+    if (keep.length === 0 && keywordFilterFallbackEnabled(ctx.filters)) {
       ctx.log.warn(
         "filter",
         `⚠️ 关键词漏斗将全部 ${before} 条过滤为 0（疑似误杀/词表过严）— 回退全量保底，避免空报告`,
@@ -169,9 +176,9 @@ const keywordFunnelStage: FilterStage = {
 /** Stage 5：标题相似度判重（同主题 ≤ maxPerTheme、同 tier 只留 1；IPO 豁免；DEDUP_SIMILAR=off 旁路）。 */
 const titleSimilarityStage: FilterStage = {
   name: "title-similarity",
-  enabled: () => dedupSimilarEnabled(),
+  enabled: (ctx) => dedupSimilarEnabled(ctx.filters),
   apply: (articles, ctx) => {
-    const dd = loadDedupConfig(ctx.keywordConfig);
+    const dd = loadDedupConfig(ctx.keywordConfig, ctx.filters);
     const ipo = articles.filter((a) => a.isIpo === true);
     const others = articles.filter((a) => a.isIpo !== true);
     const before = articles.length;
@@ -278,6 +285,7 @@ export async function select(
     allSourceIds: new Set(ctx.sources.map((s) => s.id)),
     windowDays,
     keywordConfig: config,
+    filters: ctx.config.filters,
     startTime: () => ctx.startTime,
     log: ctx.log,
   };

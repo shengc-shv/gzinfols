@@ -8,7 +8,8 @@ import {
   type HistoryEntry,
   type HistoryStore,
 } from "../lib/services/memory/history";
-import { reviveEventMemory, prepareEventMemory, isEventMemoryEnabled } from "../lib/services/memory/store";
+import { reviveEventMemory, prepareEventMemory } from "../lib/services/memory/store";
+import { createContext } from "../lib/orchestrator/index";
 import { extractReportRunId } from "../lib/services/memory/publish-run-id";
 import { emptyMemory } from "../lib/services/memory/event-memory";
 import type { ArticleInput } from "../lib/contracts/article";
@@ -130,13 +131,19 @@ test("prepareEventMemory：返回清理后的库（不抛错）", () => {
   assert.equal(cleaned.version, 1);
 });
 
-test("isEventMemoryEnabled：EVENT_MEMORY=0 关闭", () => {
+test("EVENT_MEMORY=0 关闭：由组合根注入 ctx.config（服务层不读 env）", () => {
   const prev = process.env.EVENT_MEMORY;
   try {
     process.env.EVENT_MEMORY = "0";
-    assert.equal(isEventMemoryEnabled(), false);
+    assert.equal(
+      createContext({ date: "2026-09-11", mode: { kind: "ai" }, sources: [] }).config.eventMemory,
+      false,
+    );
     delete process.env.EVENT_MEMORY;
-    assert.equal(isEventMemoryEnabled(), true);
+    assert.equal(
+      createContext({ date: "2026-09-11", mode: { kind: "ai" }, sources: [] }).config.eventMemory,
+      true,
+    );
   } finally {
     if (prev === undefined) delete process.env.EVENT_MEMORY;
     else process.env.EVENT_MEMORY = prev;

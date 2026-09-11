@@ -22,7 +22,6 @@ export {
   MEMORY_RETAIN_DAYS,
   reviveEventMemory,
   prepareEventMemory,
-  isEventMemoryEnabled,
 } from "./store";
 export { buildMemoryBrief, formatMemoryBrief } from "./event-memory";
 export { applyMemoryGuard } from "./exec-guard";

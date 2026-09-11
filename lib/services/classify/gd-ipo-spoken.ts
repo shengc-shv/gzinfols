@@ -13,13 +13,22 @@ import { isGdIpoCandidate } from "../enrich/heuristics";
 import { todayKey } from "../../utils/time";
 import { IPO_VOICE_WINDOW_DAYS } from "../../ipo-config";
 
-/** 近 N 天的 MM/DD 集合（报告时区日历日口径；与 side-output 展示窗口同源）。 */
-function recentMmddSet(days: number): Set<string> {
+/**
+ * 近 N 天的 MM/DD 集合（报告时区日历日口径；与 side-output 展示窗口同源）。
+ *
+ * 以**报告日**（`ctx.date` / `report.date`，北京时间日历日键）为基准做纯日期推算，
+ * 不读 `Date.now()`：服务层禁止隐式时钟，窗口口径因此完全确定、可注入、跨时区一致。
+ */
+function recentMmddSet(days: number, today: string): Set<string> {
   const out = new Set<string>();
-  const now = Date.now();
+  // 仅做「减整天」的纯日期运算，故以 UTC 零点为锚（不涉及时区换算）
+  const base = Date.parse(`${today}T00:00:00Z`);
+  if (Number.isNaN(base)) return out;
   for (let i = 0; i < days; i++) {
-    const d = new Date(now - i * 86_400_000);
-    out.add(todayKey(d).slice(5).replace("-", "/"));
+    const d = new Date(base - i * 86_400_000);
+    out.add(
+      `${String(d.getUTCMonth() + 1).padStart(2, "0")}/${String(d.getUTCDate()).padStart(2, "0")}`,
+    );
   }
   return out;
 }
@@ -126,13 +135,13 @@ function progressOf(title: string, summary: string): string {
  */
 export function buildGdIpoSpoken(
   items: ReportItem[],
-  opts?: { skipCompanies?: Set<string>; withinDays?: number },
+  opts?: { skipCompanies?: Set<string>; withinDays?: number; today?: string },
 ): string {
   const cand = gdIpoCandidates(
     items,
     opts?.skipCompanies,
     opts?.withinDays ?? IPO_VOICE_WINDOW_DAYS,
-    { uniqueCompany: true }, // 口播不把同一家企业念两遍（P1-4）
+    { uniqueCompany: true, today: opts?.today }, // 口播不把同一家企业念两遍（P1-4）
   );
   if (cand.length === 0) return "";
   const head = cand.slice(0, 3);
@@ -215,9 +224,10 @@ export function gdIpoCandidates(
   items: ReportItem[],
   skip?: Set<string>,
   withinDays?: number,
-  opts?: { uniqueCompany?: boolean },
+  opts?: { uniqueCompany?: boolean; today?: string },
 ): ReportItem[] {
-  const allowed = withinDays && withinDays > 0 ? recentMmddSet(withinDays) : null;
+  const allowed =
+    withinDays && withinDays > 0 ? recentMmddSet(withinDays, opts?.today ?? todayKey()) : null;
   const sorted = items
     .filter(
       (it) =>
@@ -249,10 +259,11 @@ export function topGdIpo(
   skip?: Set<string>,
   n = 3,
   withinDays: number = IPO_VOICE_WINDOW_DAYS,
-  opts?: { uniqueCompany?: boolean },
+  opts?: { uniqueCompany?: boolean; today?: string },
 ): ReportItem[] {
   return gdIpoCandidates(items, skip, withinDays, {
     uniqueCompany: opts?.uniqueCompany ?? true,
+    today: opts?.today,
   }).slice(0, n);
 }
 
@@ -262,12 +273,9 @@ export function topGdIpo(
  */
 export function pickGdIpoCompanies(
   items: ReportItem[],
-  opts?: { skipCompanies?: Set<string>; withinDays?: number },
+  opts?: { skipCompanies?: Set<string>; withinDays?: number; today?: string },
 ): string[] {
-  return topGdIpo(
-    items,
-    opts?.skipCompanies,
-    3,
-    opts?.withinDays ?? IPO_VOICE_WINDOW_DAYS,
-  ).map((it) => companyNameOf(it.title_cn || ""));
+  return topGdIpo(items, opts?.skipCompanies, 3, opts?.withinDays ?? IPO_VOICE_WINDOW_DAYS, {
+    today: opts?.today,
+  }).map((it) => companyNameOf(it.title_cn || ""));
 }

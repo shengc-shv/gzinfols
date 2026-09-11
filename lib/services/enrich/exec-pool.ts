@@ -113,6 +113,8 @@ export interface BuildTwoDayExecPoolOpts {
   report: DailyReport;
   /** 参照「今天」；默认取 REPORT_TZ 当前日期。注入便于单测。 */
   today?: string;
+  /** 参照时刻（默认 new Date()）。由调用方注入 ctx.startTime，服务层不隐式读时钟。 */
+  now?: Date;
 }
 
 /**
@@ -123,11 +125,12 @@ export interface BuildTwoDayExecPoolOpts {
  */
 export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResult {
   const tz = getReportTz();
-  const tk = opts.today ?? todayKey();
+  const now = opts.now ?? new Date();
+  const tk = opts.today ?? todayKey(now);
   // 昨天：以「今天 00:00 减 24h」再取日期键，规避 DST 边缘（Asia/Shanghai 无 DST）。
   const yk = opts.today
     ? shiftDayKey(opts.today, -1)
-    : todayKey(new Date(Date.now() - 86_400_000));
+    : todayKey(new Date(now.getTime() - 86_400_000));
   const inWindow = (iso: string | Date | undefined): boolean => {
     const k = dateKeyOf(iso, tz);
     return k === tk || k === yk;
@@ -343,7 +346,7 @@ function buildRelaxedTwoDayPool(
  * → 不足时补 opts.articles 里的 gd-ipo/ipo 条目（摘要可能为空，用 excerpt 兜底）。
  */
 function buildIpoPool(opts: BuildTwoDayExecPoolOpts): ExecPoolItem[] {
-  const cutoff = Date.now() - 7 * 86_400_000;
+  const cutoff = (opts.now ?? new Date()).getTime() - 7 * 86_400_000;
   const inIpoWindow = (iso: string | Date | undefined): boolean => {
     if (!iso) return false; // 无发布时间：遵守时间红线，一律排除
     const t = new Date(iso).getTime();

@@ -30,7 +30,6 @@ import type { PipelineContext } from "../../contracts/pipeline";
 import { buildMemoryBrief, formatMemoryBrief } from "../../services/memory/event-memory";
 import { applyMemoryGuard } from "../../services/memory/exec-guard";
 import { loadEventMemory, saveEventMemory } from "../../adapters/persistence";
-import { isEventMemoryEnabled } from "../../services/memory/store";
 
 /**
  * 口播记忆对齐（2026-09-09）：去重之后、写盘之前，把 spoken_* 整块文本改为
@@ -144,8 +143,8 @@ export async function buildExecutiveSummary(
   // —— 内容记忆与去重（2026-09-02）——
   // 解决「同一事件连续多天重复口播」：生成前把近期已播报事件告诉 LLM（含建议
   // 切入角度），生成后再用确定性闸门过滤掉无增量的重复表述。
-  // 总开关 EVENT_MEMORY=0 可整体关闭（回滚用）。
-  const memoryOn = isEventMemoryEnabled();
+  // 总开关 EVENT_MEMORY=0 可整体关闭（回滚用；由组合根注入 ctx.config）。
+  const memoryOn = ctx.config.eventMemory;
   let memStore = memoryOn ? loadEventMemory() : null;
   /**
    * 记忆写入绑定「上线 run」（2026-09-03）：只有会被 publish 到 gh-pages 的 run
@@ -246,7 +245,13 @@ export async function buildExecutiveSummary(
 
   // 生成新执行摘要
   try {
-    const pool = buildTwoDayExecPool({ history, articles, report, today: date });
+    const pool = buildTwoDayExecPool({
+      history,
+      articles,
+      report,
+      today: date,
+      now: ctx.startTime,
+    });
     // B-1：从 filterResults 提取 risk_tracker 候选，喂给 LLM 作为 risk 段输入
     const riskCandidates = filterResults
       ? extractRiskCandidates(filterResults, articles, report)

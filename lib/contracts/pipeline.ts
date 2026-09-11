@@ -91,6 +91,16 @@ export type RunMode =
       relevantUrls?: Set<string>;
     };
 
+/** 过滤链旁路开关（默认全开；对应 env 的 `=off` 旁路由组合根读入）。 */
+export interface FilterFlags {
+  /** 关键词漏斗（KEYWORD_FILTER）。 */
+  keyword: boolean;
+  /** 漏斗全量误杀时的回退保底（KEYWORD_FILTER_FALLBACK）。 */
+  keywordFallback: boolean;
+  /** 标题相似度判重（DEDUP_SIMILAR）。 */
+  dedupSimilar: boolean;
+}
+
 /** 运行配置（由组合根从环境变量注入，服务层禁止直读 process.env）。 */
 export interface PipelineConfig {
   /** 采集窗口（天）：仅取该窗口内发布的条目。 */
@@ -99,6 +109,12 @@ export interface PipelineConfig {
   maxPerSection: number;
   /** 单板块内单源条数上限。 */
   maxPerSourcePerSection: number;
+  /** 事件记忆总开关（EVENT_MEMORY=0 关闭，回滚/A-B 用）。 */
+  eventMemory: boolean;
+  /** 过滤链旁路开关。 */
+  filters: FilterFlags;
+  /** LLM 模型覆盖（PASS1_MODEL / PASS2_MODEL；空则走后端默认）。 */
+  models: { pass1?: string; pass2?: string };
 }
 
 /** 管道运行上下文（跨阶段共享的只读环境）。 */

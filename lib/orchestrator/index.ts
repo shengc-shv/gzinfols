@@ -31,12 +31,30 @@ function buildTierMap(sources: SourceDef[]): Map<string, SourceTier> {
   return new Map(sources.map((s) => [s.id, s.tier ?? "T2"]));
 }
 
-/** 默认运行配置：组合根从环境变量读取（服务层不直读 env）。 */
+/** `X=off` 形式的环境旁路开关：默认开启，显式 off 才关闭。 */
+function envFlag(name: string): boolean {
+  return process.env[name] !== "off";
+}
+
+/**
+ * 默认运行配置：组合根从环境变量读取（服务层不直读 env）。
+ * 全项目唯一允许读这些 env 的地方；换口径只改此处。
+ */
 function defaultConfig(): PipelineConfig {
   return {
     windowDays: Number(process.env.FETCH_WINDOW_DAYS || 2),
     maxPerSection: Number(process.env.MAX_PER_SECTION || 18),
     maxPerSourcePerSection: Number(process.env.MAX_PER_SOURCE_PER_SECTION || 4),
+    eventMemory: (process.env.EVENT_MEMORY ?? "1") !== "0",
+    filters: {
+      keyword: envFlag("KEYWORD_FILTER"),
+      keywordFallback: envFlag("KEYWORD_FILTER_FALLBACK"),
+      dedupSimilar: envFlag("DEDUP_SIMILAR"),
+    },
+    models: {
+      pass1: process.env.PASS1_MODEL?.trim() || undefined,
+      pass2: process.env.PASS2_MODEL?.trim() || undefined,
+    },
   };
 }
 

@@ -81,7 +81,9 @@ export function prepareEventMemory(
   return pruneMemory(store, today, { retainDays });
 }
 
-/** 记忆层总开关（EVENT_MEMORY=0 关闭，便于回滚与 A/B 对比）。 */
-export function isEventMemoryEnabled(): boolean {
-  return (process.env.EVENT_MEMORY ?? "1") !== "0";
-}
+/**
+ * 记忆层总开关（EVENT_MEMORY=0 关闭，便于回滚与 A/B 对比）。
+ *
+ * 开关值由组合根注入 `ctx.config.eventMemory`（`PipelineConfig`），服务层不直读 env：
+ * 需判断时直接读 `ctx.config.eventMemory`，无需再经本函数。
+ */

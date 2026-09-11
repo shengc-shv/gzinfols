@@ -28,14 +28,11 @@ export interface EnrichDeps {
 
 /**
  * 把 LlmPort 适配成 gzinfo 的 LlmRunner（(system, user) → text）。
- * 模型覆盖：PASS1_MODEL / PASS2_MODEL 环境变量（stage 由调用方传入）。
+ *
+ * 模型覆盖由调用方从 `ctx.config.models`（组合根读 PASS1_MODEL / PASS2_MODEL 注入）传入，
+ * 服务层不直读 env。
  */
-export function makeLlmRunner(
-  llm: LlmPort,
-  stage: "pass1" | "pass2",
-): LlmRunner {
-  const modelEnv = stage === "pass1" ? process.env.PASS1_MODEL : process.env.PASS2_MODEL;
-  const model = modelEnv?.trim() || undefined;
+export function makeLlmRunner(llm: LlmPort, model?: string): LlmRunner {
   return (systemPrompt, userPrompt) =>
     llm.complete({ system: systemPrompt, prompt: userPrompt, model }).then((r) => r);
 }
@@ -73,11 +70,11 @@ export async function enrich(
     `进入两阶段 AI 管线：${inputs.length} 条（PASS1 筛选 + PASS2 成稿 + 校验回炉/降级）`,
   );
 
-  const runner: LlmRunner = makeLlmRunner(deps.llm, "pass1");
+  const runner: LlmRunner = makeLlmRunner(deps.llm, ctx.config.models.pass1);
   // PASS2 用独立模型覆盖（PASS2_MODEL）；runner 内按 system prompt 无法区分阶段，
   // 故管线以 runner 参数区分：generateDaily 内部 PASS2 仍调同一 runner —— gzinfo 用
   // PASS1_MODEL/PASS2_MODEL 区分默认 runner，这里统一注入「按 stage 选择模型」的组合 runner。
-  const runner2: LlmRunner = makeLlmRunner(deps.llm, "pass2");
+  const runner2: LlmRunner = makeLlmRunner(deps.llm, ctx.config.models.pass2);
   const combined: LlmRunner = (system, user) =>
     system.includes("总编辑") ? runner2(system, user) : runner(system, user);
 
