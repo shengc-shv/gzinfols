@@ -21,7 +21,7 @@ test("红线#1：有发布时间的条目转入 NormalizedArticle 且 publishedA
   const n = normalizeOne(raw({ publishedAt: new Date("2026-09-11T08:00:00Z") }));
   assert.ok(n);
   assert.ok(n!.publishedAt instanceof Date);
-  assert.equal(n!.tier, "T2", "缺省补齐为 T2");
+  assert.equal(n!.tier, undefined, "未声明 tier 的源保持 undefined（gzinfo 无等级垫底语义）");
   assert.ok(n!.excerpt.length > 0, "excerpt 非空兜底");
 });
 

@@ -40,7 +40,13 @@ export interface RiskTracker {
 }
 export interface KeywordConfig {
   version?: number;
+  note?: string;
   global_exclude?: Record<string, string[]>;
+  /** 判重参数（标题相似度判重消费）：threshold 默认 0.7 / max_per_theme 默认 2。 */
+  filter_rules?: {
+    deduplication?: { threshold?: number; max_per_theme?: number };
+    [k: string]: unknown;
+  };
   geo_filter?: {
     tier1_exact?: string[];
     tier2_risky?: string[];
@@ -53,9 +59,15 @@ export interface KeywordConfig {
 export interface FunnelInput {
   title: string;
   content?: string;
+  sourceId?: string;
+  url?: string;
+  /** 归一化 region 分流结果（gz / gd / …），当前过滤以文本地域判定为准，此字段仅透传。 */
+  region?: string;
   category?: string;
   tier?: string;
 }
+/** gzinfo 兼容别名（tests/keyword-filter.test.ts 使用同名）。 */
+export type RawArticleInput = FunnelInput;
 
 const REGEX_META = /[.*+?^${}()|[\]\\]/;
 function matchToken(token: string, text: string): boolean {

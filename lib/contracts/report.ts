@@ -129,12 +129,23 @@ export interface ReportSections {
   ipo: ReportItem[];
 }
 
-/** 漏斗三价值标签（确定性、免费、可解释），供口播直接消费。 */
+/**
+ * 漏斗三价值标签（自 gzinfo lib/types.ts ValueTag 移植；写回条目，供口播/排序直接消费）。
+ * Tier/Vertical 与 relevance-score 评分器同口径（评分器实现于 services，类型词汇表归契约层）。
+ */
+export type RelevanceTier = "must_read" | "insight" | "context" | "drop";
+export type RelevanceVertical = "must_read" | "insight" | "risk" | "context" | "drop";
+
 export interface ValueTag {
-  tier: import("./source").SourceTier;
+  /** 优先级档位（与 scoreBranchRelevance 同口径） */
+  tier: RelevanceTier;
+  /** 0-100 综合分行相关性分 */
   score: number;
+  /** 命中的业务线（按权重降序，取前 3） */
   businessLines: string[];
-  vertical: "retail" | "wealth" | "credit" | "risk";
+  /** 落位建议：risk = 威胁/合规向（进风险卡） */
+  vertical: RelevanceVertical;
+  /** 是否风险/合规向 */
   risk: boolean;
 }
 

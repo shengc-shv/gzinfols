@@ -9,9 +9,9 @@ import { MemFs, FakeHttp, FakeLlm, FakeClock, SilentLog } from "./helpers";
 const RSS = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel><title>测试频道</title>
 <item>
-  <title>AI 大模型驱动银行金融科技升级</title>
+  <title>AI 大模型驱动金融科技升级</title>
   <link>https://example.com/a</link>
-  <description>某行发布 AI 中台，理财与风控效率显著提升。</description>
+  <description>头部机构发布 AI 中台，财富管理数字化效率显著提升。</description>
   <pubDate>${new Date().toUTCString()}</pubDate>
 </item>
 </channel></rss>`;

@@ -55,8 +55,11 @@ export interface NormalizedArticle extends RawArticle {
   publishedAt: Date;
   /** IPO 内容态（红线 #2 支撑）：归一化期一次性标注，后续过滤据此豁免去重/窗口。 */
   isIpo: boolean;
-  /** 源等级，归一化期补齐。 */
-  tier: SourceTier;
+  /**
+   * 源等级（gzinfo 语义：可缺省——未声明 tier 的源保持 undefined，
+   * 标题相似度判重按「无等级垫底」单独成档，不与 T2 同档）。
+   */
+  tier?: SourceTier;
   /** 保证非空（无 excerpt 时回退标题前 90 字），避免历史库写入后被判空踢出。 */
   excerpt: string;
 }

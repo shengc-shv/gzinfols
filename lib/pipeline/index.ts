@@ -15,7 +15,7 @@ import { assembleReport } from "../services/assemble";
 import { renderHtml, renderMarkdown } from "../services/render";
 import { assembleBriefingScript, type AudioMeta } from "../services/voice";
 import { publishReport } from "../services/publish";
-import { dedupeAgainstHistory, loadHistory, saveHistory } from "../services/memory";
+import { loadHistory, saveHistory } from "../services/memory";
 
 export interface RunOutput {
   report: DailyReport;
@@ -34,13 +34,20 @@ export async function runPipeline(
 ): Promise<RunOutput> {
   const ingest = await ingestAll(ctx, { http: deps.http, crawlers: deps.crawlers });
   const { articles, dropped } = normalize(ingest.articles, ctx);
-  const selected = await select(articles, ctx, { fs: deps.fs });
 
-  // 历史库回放去重（先读后写都在 memory 单一写者内）
+  // 历史库先读（跨天标题判重 stage 6 需要；先读后写都在 memory 单一写者内）
   const history = await loadHistory({ fs: deps.fs });
-  const deduped = dedupeAgainstHistory(selected.articles, history, ctx);
+  const selected = await select(articles, ctx, {
+    fs: deps.fs,
+    history: history.items.map((it) => ({
+      title: it.title,
+      url: it.url,
+      sourceId: it.sourceId,
+      publishedAt: it.publishedAt,
+    })),
+  });
 
-  const enriched = await enrich(deduped.kept, ctx, { llm: deps.llm }, {
+  const enriched = await enrich(selected.articles, ctx, { llm: deps.llm }, {
     filterResults: selected.filterResults,
   });
   const report = assembleReport(enriched, ctx);
@@ -74,12 +81,12 @@ export async function runPipeline(
   const html = renderHtml(report, { audio });
   const markdown = renderMarkdown(report);
 
-  await saveHistory(report, deduped.kept, ctx, { fs: deps.fs });
+  await saveHistory(report, selected.articles, ctx, { fs: deps.fs });
   const paths = await publishReport({ report, html, markdown }, ctx, { fs: deps.fs });
 
   ctx.log.info(
     "pipeline",
-    `完成：原始 ${ingest.articles.length} / 归一化 ${articles.length}（丢 ${dropped}）/ 漏斗 ${selected.articles.length} / 历史去重丢 ${deduped.dropped} → 发布 ${paths.htmlPath}${audio ? " + audio" : ""}`,
+    `完成：原始 ${ingest.articles.length} / 归一化 ${articles.length}（丢 ${dropped}）/ 漏斗 ${selected.articles.length} → 发布 ${paths.htmlPath}${audio ? " + audio" : ""}`,
   );
   ctx.log.info(
     "pipeline",

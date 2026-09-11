@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { dedupeAgainstHistory, loadHistory, rollingSince, saveHistory } from "../lib/services/memory";
+import { loadHistory, rollingSince, saveHistory } from "../lib/services/memory";
 import { createContext } from "../lib/orchestrator";
 import type { ArticleInput } from "../lib/contracts/article";
 import type { DailyReport, ReportItem } from "../lib/contracts/report";
@@ -95,20 +95,8 @@ test("saveHistory：与既有历史合并（不丢旧条目）", async () => {
   assert.ok(store.items.some((it) => it.url === "u-fresh"), "本次条目应写入");
 });
 
-test("dedupeAgainstHistory：历史库已有 url 命中被丢弃", () => {
-  const ctx = makeCtx();
-  const store: HistoryStore = {
-    date: "2026-09-10",
-    items: [{ url: "u1", title: "", summary: "", date: "09/10", section: "gz_local" }],
-  };
-  const { kept, dropped } = dedupeAgainstHistory(
-    [articleInput("u1", NOW), articleInput("u2", NOW)],
-    store,
-    ctx,
-  );
-  assert.equal(dropped, 1);
-  assert.deepEqual(kept.map((a) => a.url), ["u2"]);
-});
+// 注：URL 级 dedupeAgainstHistory 已随 B1 对齐 gzinfo 移除——跨天去重由 select 过滤链
+// stage 6（标题相似度 Dice 判重，见 tests/dedup-similar.test.ts）承担。
 
 test("rollingSince：publishedAt 缺省且 date 为 MM/DD 的条目视为窗外", () => {
   const store: HistoryStore = {

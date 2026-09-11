@@ -19,7 +19,6 @@ export function normalizeOne(raw: RawArticle): NormalizedArticle | null {
     ...raw,
     publishedAt: raw.publishedAt,
     isIpo: raw.isIpo ?? (raw.category === "gd-ipo" || raw.category === "ipo"),
-    tier: raw.tier ?? "T2",
     excerpt: raw.excerpt?.trim() || raw.title?.slice(0, 90) || "",
   };
 }

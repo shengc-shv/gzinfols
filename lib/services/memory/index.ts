@@ -15,6 +15,8 @@ export interface HistoryItem {
   summary: string;
   date: string;
   section: string;
+  /** 数据源 id（跨天标题判重的 tier 查询用）。 */
+  sourceId?: string;
   source?: string;
   publishedAt?: string;
 }
@@ -34,21 +36,6 @@ const HISTORY_CAP = 5000;
 
 export async function loadHistory(deps: MemoryDeps): Promise<HistoryStore> {
   return (await deps.fs.readJson<HistoryStore>(HISTORY_PATH)) ?? { date: "", items: [] };
-}
-
-/** 回放去重：按 url 与历史库现有条目比对，命中即丢（跨天重复卡片防线）。 */
-export function dedupeAgainstHistory(
-  articles: ArticleInput[],
-  store: HistoryStore,
-  ctx: PipelineContext,
-): { kept: ArticleInput[]; dropped: number } {
-  const seen = new Set(store.items.map((it) => it.url));
-  const kept = articles.filter((a) => !seen.has(a.url));
-  const dropped = articles.length - kept.length;
-  if (dropped > 0) {
-    ctx.log.info("memory", `历史库回放去重：丢弃 ${dropped} 条已上榜过的重复条目`);
-  }
-  return { kept, dropped };
 }
 
 /** 30 天滚动窗口判定：按 publishedAt（ISO）；缺省/非法时间戳保守保留（不误删）。 */
@@ -76,6 +63,7 @@ export async function saveHistory(
         summary: it.summary,
         date: it.date,
         section,
+        sourceId: byUrl.get(it.url)?.sourceId ?? "",
         source: byUrl.get(it.url)?.source ?? "",
         publishedAt: byUrl.get(it.url)?.publishedAt?.toISOString() ?? "",
       })),
