@@ -8,14 +8,13 @@
  * 「今天+昨天」两日窗口统一生成，B3 批次接入）；本阶段只产出 hero_line + sections。
  *
  * 与 gzinfo 的刻意差异（改进项，见核对报告）：
- *  - prefillCache 的 ai_relevant 判定：gzinfo 读历史库 ai_relevant 字段；2.0 历史库暂无
- *    该字段（H1 批次对齐存储），近似为「历史上榜条目」= ai_relevant（上榜即通过全管线）。
  *  - 2.0 早期自创的「AI 相关性回检」已移除：PASS1 的 keep 判定（保留标准 1-4 条）即
  *    gzinfo 的相关性闸门，功能覆盖相同且省一半 LLM 调用。
  */
 import type { ArticleInput } from "../../contracts/article";
 import type { DailyReport } from "../../contracts/report";
 import type { LlmPort, PipelineContext } from "../../contracts/pipeline";
+import type { HistoryStore } from "../memory/history";
 import { isWithinCalendarDays } from "../../utils/time";
 import { generateDaily, makeSkipAiRunner } from "./pipeline";
 import type { LlmRunner } from "./pass1";
@@ -23,8 +22,8 @@ import { toPass1Input } from "./pass1-input";
 
 export interface EnrichDeps {
   llm: LlmPort;
-  /** 跨天 prefill 历史条目（pipeline 从记忆服务加载后传入）。 */
-  history?: Array<{ url: string; summary?: string; publishedAt?: string }>;
+  /** 跨天 prefill 历史库（gzinfo HistoryStore 形状；pipeline 从持久化加载后传入）。 */
+  history?: HistoryStore;
 }
 
 /**
@@ -42,22 +41,22 @@ export function makeLlmRunner(
 }
 
 /**
- * 从历史条目构建 prefillCache（url→summary），供全 AI 模式 PASS2 确定性复用。
+ * 从历史库构建 prefillCache（url→summary），供全 AI 模式 PASS2 确定性复用。
  * gzinfo 口径：ai_relevant===true + 非空 summary + 发布时间落在抓取窗口内（最近 2 天）。
- * 2.0 近似：历史上榜条目即通过全管线（等价 ai_relevant=true）；存储字段对齐在 H1 批次。
  */
 function buildPrefillCache(
-  history: Array<{ url: string; summary?: string; publishedAt?: string }> | undefined,
+  history: HistoryStore | undefined,
   now: Date,
   windowDays: number,
 ): Map<string, string> {
   const cache = new Map<string, string>();
-  for (const e of history ?? []) {
+  for (const [url, e] of Object.entries(history ?? {})) {
+    if (e.ai_relevant !== true) continue;
     const s = e.summary?.trim();
     if (!s) continue;
     if (!e.publishedAt) continue;
     if (!isWithinCalendarDays(e.publishedAt, windowDays, now)) continue;
-    cache.set(e.url, s);
+    cache.set(url, s);
   }
   return cache;
 }

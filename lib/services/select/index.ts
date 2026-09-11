@@ -44,7 +44,8 @@ import { capLightAiSources, LIGHT_AI_MAX_PER_SOURCE } from "./filters/light-ai";
 export interface SelectDeps {
   fs: FileStore;
   /** 跨天判重用的历史库（pipeline 在 select 前加载传入；缺省 = 空历史）。 */
-  history?: Array<{ title: string; url: string; sourceId?: string; publishedAt?: string }>;
+  /** 跨天判重历史库（gzinfo HistoryStore 形状；pipeline 从持久化加载后传入）。 */
+  history?: import("../memory/history").HistoryStore;
 }
 
 /** 过滤阶段共享上下文（gzinfo FilterContext 适配版）。 */
@@ -261,16 +262,14 @@ export async function select(
   const config = await deps.fs.readJson<KeywordConfig>("sources.keywords.json");
   if (!config) throw new Error("sources.keywords.json 缺失，无法执行漏斗");
 
-  // 历史条目投影（gzinfo：rolling store 的 Object.values → {title,url,tier}；
-  // 2.0 近似：仅取发布日落在抓取窗口内的条目——gzinfo 的 store 由 lastSeenAt 裁剪到同窗口，H1 批次对齐存储形状）
+  // 历史条目投影（gzinfo 同款：rolling store 的 Object.values → {title,url,tier}；
+  // store 本身由 pruneHistory 按日历窗口裁剪到「今天+昨天」，投影无需再过滤）
   const windowDays = ctx.config.windowDays;
-  const histSim: HistorySimilarEntry[] = (deps.history ?? [])
-    .filter((it) => isWithinCalendarDays(it.publishedAt, windowDays + 1, ctx.startTime))
-    .map((it) => ({
-      title: it.title,
-      url: it.url,
-      tier: it.sourceId ? ctx.tierBySource.get(it.sourceId) : undefined,
-    }));
+  const histSim: HistorySimilarEntry[] = Object.values(deps.history ?? {}).map((e) => ({
+    title: e.title,
+    url: e.url,
+    tier: ctx.tierBySource.get(e.sourceId),
+  }));
 
   const fctx = {
     date: ctx.date,

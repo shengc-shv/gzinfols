@@ -25,6 +25,9 @@ export function todayKeyOf(d: Date = new Date()): string {
   return fmt.format(d);
 }
 
+/** gzinfo 命名别名（todayKey；移植模块按 gzinfo 原名引用）。 */
+export const todayKey = todayKeyOf;
+
 /**
  * 日历日窗口判定：发布日期（报告时区）∈ {今天, 今天-1, ……, 今天-(days-1)}。
  * 无 publishedAt（时间红线）→ false；非法日期 → false。

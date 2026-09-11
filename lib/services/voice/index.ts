@@ -16,6 +16,9 @@
  *  - 股市段挂钩 StockRecap（C10 落地后自动接入），未产出时跳过该段（gzinfo 同款降级）。
  */
 import type { DailyReport, ReportItem, StockRecap } from "../../contracts/report";
+import type { ExecutiveSummary } from "../enrich/executive-summary";
+import { ipoShouldSkip } from "../memory/event-memory";
+import { buildGdIpoSpoken, pickGdIpoCompanies, companyNameOf } from "../classify/gd-ipo-spoken";
 // 广东企业注册表（纯数据模块，与卡面判定同源；类型由 lib/guangdong.d.mts 提供）
 import { isGuangdongEnterprise } from "../../guangdong.mjs";
 
@@ -139,13 +142,29 @@ export function detectGdIpo(ipoItems: ReportItem[]): string[] {
 }
 
 /**
- * 拼装口播稿：从 DailyReport 已有章节拼装 → 消毒/句界截断 → 段落时序。
+ * 拼装口播稿：gzinfo 链路对齐——执行摘要（store.json 的 exec）为主输入：
+ * spoken_hero / spoken_must_read / spoken_insights / spoken_risk 优先（AI 生成或
+ * syncNarration 从卡面确定性派生，1:1 对齐），缺失时回退 report 字段拼装（口径一致）。
  * 全部内容段缺失时返回 null（调用方降级：页面不出播放器、不阻断发布）。
  */
-export function assembleBriefingScript(
+export async function assembleBriefingScript(
   report: DailyReport,
-  opts: { stockRecap?: StockRecap | null } = {},
-): AudioBuildResult | null {
+  opts: {
+    exec?: ExecutiveSummary | null;
+    stockRecap?: StockRecap | null;
+    /** IPO 线索兜底生成用（gzinfo fallbackGdIpo；组合根注入，纯函数不直连 LLM）。 */
+    llmRunner?: (systemPrompt: string, userPrompt: string) => Promise<string>;
+    /**
+     * IPO 口播事件记忆（gzinfo ipoVoicing，2 天去重）：由组合根注入读结果与写回回调，
+     * 本函数保持纯函数（不直连 fs）；注入即可用，缺省视为记忆关闭。
+     */
+    ipoMemory?: {
+      skip: Set<string>;
+      onVoiced: (companies: string[]) => void;
+    };
+  } = {},
+): Promise<AudioBuildResult | null> {
+  const exec = opts.exec ?? null;
   const parts: string[] = [OPENER];
   const partMap: Record<string, string> = {};
   const segments: AudioSegment[] = [];
@@ -154,8 +173,8 @@ export function assembleBriefingScript(
 
   segments.push({ id: "intro", startSec: 0, durationSec: cursor, refs: [], text: OPENER });
 
-  // —— 今日定调（hero_line）——
-  const hero = sanitize(report.hero_line ?? "");
+  // —— 今日定调（exec.spoken_hero 优先；gzinfo：与 hero_line 结论一致的主播解读感口语）——
+  const hero = sanitize(exec?.spoken_hero ?? report.hero_line ?? "");
   if (hero) {
     const t = truncateAtSentence(hero, AUDIO_SPEAK_LIMITS.hero);
     const segText = `先看今日定调。${t}`;
@@ -167,8 +186,21 @@ export function assembleBriefingScript(
     found++;
   }
 
-  // —— 今日必读（title + why）——
-  const mrTexts = (report.must_read ?? [])
+  // —— 今日必读（exec.spoken_must_read 优先：syncNarration 1:1 由卡面派生）——
+  if (exec?.spoken_must_read) {
+    const t = truncateAtSentence(sanitize(exec.spoken_must_read), AUDIO_SPEAK_LIMITS.must_read);
+    const segText = `接下去看今日必读。${t}`;
+    parts.push(segText);
+    partMap.must_read = t;
+    const dur = estimateDurationSec(segText.length);
+    const mrUrls = (report.must_read ?? []).map((m) => m.url).filter(Boolean);
+    segments.push({ id: "must", startSec: cursor, durationSec: dur, refs: mrUrls, text: segText });
+    cursor += dur;
+    found++;
+  }
+  const mrTexts = exec?.spoken_must_read
+    ? []
+    : (report.must_read ?? [])
     .map((m) => sanitize(`${m.title ?? ""}。${m.why}`.replace(/^。/, "")))
     .filter(Boolean)
     .map((t) => truncateAtSentence(t, 70));
@@ -184,8 +216,23 @@ export function assembleBriefingScript(
     found++;
   }
 
-  // —— 商机洞察（topic + impact + action）——
-  const insTexts = (report.insights ?? [])
+  // —— 商机洞察（exec.spoken_insights 优先）——
+  if (exec?.spoken_insights) {
+    const t = truncateAtSentence(sanitize(exec.spoken_insights), AUDIO_SPEAK_LIMITS.insights);
+    const segText = `接下去是商机洞察。${t}`;
+    parts.push(segText);
+    partMap.insights = t;
+    const dur = estimateDurationSec(segText.length);
+    const insightUrls = (report.insights ?? [])
+      .flatMap((i) => (i.sources ?? []).map((s) => s.url))
+      .filter(Boolean);
+    segments.push({ id: "insight", startSec: cursor, durationSec: dur, refs: insightUrls, text: segText });
+    cursor += dur;
+    found++;
+  }
+  const insTexts = exec?.spoken_insights
+    ? []
+    : (report.insights ?? [])
     .map((i) => sanitize(`${i.topic}。${i.impact}。${i.action}`))
     .filter(Boolean)
     .map((t) => truncateAtSentence(t, 80));
@@ -203,8 +250,21 @@ export function assembleBriefingScript(
     found++;
   }
 
-  // —— 风险预警（M 层，30s 预算；当日无风险 → 跳过）——
-  const riskRaw = report.risk
+  // —— 风险预警（exec.spoken_risk 优先；M 层，30s 预算；当日无风险 → 跳过）——
+  if (exec?.spoken_risk) {
+    const t = truncateAtSentence(sanitize(exec.spoken_risk), AUDIO_SPEAK_LIMITS.risk);
+    const segText = `接下去是风险预警。${t}`;
+    parts.push(segText);
+    partMap.risk = t;
+    const dur = estimateDurationSec(segText.length);
+    const riskUrls = (report.risk?.sources ?? []).map((s) => s.url).filter(Boolean);
+    segments.push({ id: "risk", startSec: cursor, durationSec: dur, refs: riskUrls, text: segText });
+    cursor += dur;
+    found++;
+  }
+  const riskRaw = exec?.spoken_risk
+    ? ""
+    : report.risk
     ? sanitize(`${report.risk.topic}。${report.risk.impact}。${report.risk.action}`)
     : "";
   if (riskRaw) {
@@ -224,17 +284,55 @@ export function assembleBriefingScript(
     return null;
   }
 
-  // —— 广东IPO：确定性拼装（进度词表 + 注册表双层判定，免 LLM；与卡面同一候选池口径）——
+  // —— 广东IPO（gzinfo 三级链 + 事件记忆 2 天去重）：确定性拼装优先，与横滑卡同池同序同量——
   const ipoItems = report.sections.ipo ?? [];
-  const clues = detectGdIpo(ipoItems);
-  if (clues.length) {
-    const joined = clues
-      .map((c) => truncateAtSentence(c, 50))
-      .join("。");
-    let ipo = truncateAtSentence(joined, AUDIO_SPEAK_LIMITS.ipo);
+  const llmIpo = exec?.guangdong_ipo?.spoken ? sanitize(exec.guangdong_ipo.spoken) : "";
+  let ipo = "";
+  const skipCompanies = opts.ipoMemory?.skip ?? new Set<string>();
+  const voicedCompanies: string[] = [];
+  // ① 确定性拼装（免 LLM，AI / SKIP_AI 双模式可用；同一企业 2 天去重由 skipCompanies 承担）
+  const spokenIpo = buildGdIpoSpoken(ipoItems, { skipCompanies });
+  if (spokenIpo) {
+    ipo = sanitize(spokenIpo);
+    voicedCompanies.push(...pickGdIpoCompanies(ipoItems, { skipCompanies }));
+  } else {
+    // ② 媒体源线索 → LLM 兜底（仅在确实有线索且提供 runner 时）
+    const clues = detectGdIpo(ipoItems);
+    if (clues.length && opts.llmRunner) {
+      try {
+        const fb = await opts.llmRunner(
+          "你是中文新闻播报员。只输出纯口播文本：无 Markdown、无 URL、无 emoji，不超60字，直接输出正文。",
+          "以下是今日简报中与广东IPO相关的原文片段。请改写为不超过60字的中文口播稿：说清企业名称、上市板块与最新进展，一两句话即可，不要念链接。\n\n" +
+            clues.join("\n"),
+        );
+        const t = fb.trim();
+        if (t.length >= 8) {
+          ipo = sanitize(t);
+          voicedCompanies.push(...pickGdIpoCompanies(ipoItems, { skipCompanies }));
+        }
+      } catch {
+        // 兜底生成失败，跳过该语块（不阻断）
+      }
+    }
+    // ③ 最后兜底：exec 的上游 LLM 槽位（仅 ①② 皆空时使用，罕见路径）
+    if (!ipo && llmIpo) {
+      ipo = llmIpo;
+      for (const it of ipoItems) {
+        const c = companyNameOf(it.title_cn || "");
+        if (c && ipo.includes(c)) voicedCompanies.push(c);
+      }
+    }
+  }
+  // 写回 IPO 口播记忆：组合根决定闸门（PUBLISH_RUN）与持久化；本函数只回调
+  if (voicedCompanies.length && opts.ipoMemory) {
+    opts.ipoMemory.onVoiced(voicedCompanies);
+  }
+  if (ipo) {
+    // 兜底/上游口播稿若已自带「另外，关注…广东IPO…」过渡语，先剥离避免与固定过渡语重复
     ipo = ipo
       .replace(/^(?:另外[，,]?\s*)?(?:关注(?:一条)?)?广东IP[ＯO]?[^。：:]*[。：:]?\s*/, "")
       .trim();
+    ipo = truncateAtSentence(ipo, AUDIO_SPEAK_LIMITS.ipo);
     const segText = `${IPO_TRANSITION}${ipo}`;
     parts.push(segText);
     partMap.guangdong_ipo = ipo;

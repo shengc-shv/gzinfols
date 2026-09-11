@@ -1,111 +1,150 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { loadHistory, rollingSince, saveHistory } from "../lib/services/memory";
-import { createContext } from "../lib/orchestrator";
+import {
+  buildRolling,
+  mergeHistory,
+  pruneHistory,
+  buildSubcatIndex,
+  type HistoryEntry,
+  type HistoryStore,
+} from "../lib/services/memory/history";
+import { reviveEventMemory, prepareEventMemory, isEventMemoryEnabled } from "../lib/services/memory/store";
+import { extractReportRunId } from "../lib/services/memory/publish-run-id";
+import { emptyMemory } from "../lib/services/memory/event-memory";
 import type { ArticleInput } from "../lib/contracts/article";
-import type { DailyReport, ReportItem } from "../lib/contracts/report";
-import type { HistoryStore } from "../lib/services/memory";
-import { MemFs, SilentLog } from "./helpers";
 
 const NOW = new Date("2026-09-11T08:00:00Z");
 
-function makeCtx() {
-  return createContext({
-    date: "2026-09-11",
-    mode: { kind: "ai" },
-    sources: [],
-    log: new SilentLog(),
-    startTime: NOW,
-  });
-}
-
-function articleInput(url: string, publishedAt: Date): ArticleInput {
-  return {
-    sourceId: "s",
-    title: `标题-${url}`,
+const article = (url: string, over: Partial<ArticleInput> = {}): ArticleInput =>
+  ({
+    sourceId: "src-a",
+    source: "源A",
+    title: `标题 ${url}`,
     url,
     category: "finance",
-    publishedAt,
-    excerpt: "摘要",
+    publishedAt: new Date("2026-09-11T07:00:00Z"),
+    excerpt: "摘要内容",
     isIpo: false,
-    tier: "T2",
-    source: "源",
-  } as ArticleInput;
-}
+    ...over,
+  }) as ArticleInput;
 
-function reportItem(url: string): ReportItem {
-  return {
-    url,
-    title_cn: `标题-${url}`,
-    source: "源",
-    source_type: "media",
-    date: "09/11",
-    summary: "摘要",
-    importance: 2,
-    rank: 0,
-    tags: [],
-    locale: "national",
-  };
-}
-
-function reportWith(urls: string[]): DailyReport {
-  return {
-    date: "2026-09-11",
-    must_read: [],
-    insights: [],
-    sections: {
-      gz_local: urls.map(reportItem),
-      biz_insight: [],
-      policy_market: [],
-      tech: [],
-      ipo: [],
-    },
-  };
-}
-
-test("saveHistory：合并历史 + 真 30 天滚动裁剪（31 天前条目被裁掉）", async () => {
-  const fs = new MemFs();
-  const ctx = makeCtx();
-
-  const fresh = articleInput("u-fresh", NOW);
-  const old = articleInput("u-old", new Date(NOW.getTime() - 31 * 86_400_000));
-  await saveHistory(reportWith(["u-fresh", "u-old"]), [fresh, old], ctx, { fs });
-
-  const store = await loadHistory({ fs });
-  assert.ok(store.items.some((it) => it.url === "u-fresh"), "界内条目应保留");
-  assert.ok(
-    store.items.every((it) => it.url !== "u-old"),
-    "31 天前的条目应被滚动裁剪剔除",
-  );
+const entry = (url: string, over: Partial<HistoryEntry> = {}): HistoryEntry => ({
+  title: `标题 ${url}`,
+  url,
+  sourceId: "src-a",
+  source: "源A",
+  category: "finance",
+  publishedAt: "2026-09-11T07:00:00Z",
+  firstSeenAt: "2026-09-10T20:00:00Z",
+  lastSeenAt: "2026-09-11T00:00:00Z",
+  ...over,
 });
 
-test("saveHistory：与既有历史合并（不丢旧条目）", async () => {
-  const fs = new MemFs();
-  const ctx = makeCtx();
-  // 预置 1 天前的历史条目
-  const prev: HistoryStore = {
-    date: "2026-09-10",
-    items: [{ url: "u-prev", title: "昨日", summary: "", date: "09/10", section: "gz_local", publishedAt: new Date(NOW.getTime() - 86_400_000).toISOString() }],
-  };
-  await fs.writeJson("data/history.json", prev);
-
-  await saveHistory(reportWith(["u-fresh"]), [articleInput("u-fresh", NOW)], ctx, { fs });
-  const store = await loadHistory({ fs });
-  assert.ok(store.items.some((it) => it.url === "u-prev"), "旧历史条目应保留");
-  assert.ok(store.items.some((it) => it.url === "u-fresh"), "本次条目应写入");
-});
-
-// 注：URL 级 dedupeAgainstHistory 已随 B1 对齐 gzinfo 移除——跨天去重由 select 过滤链
-// stage 6（标题相似度 Dice 判重，见 tests/dedup-similar.test.ts）承担。
-
-test("rollingSince：publishedAt 缺省且 date 为 MM/DD 的条目视为窗外", () => {
+test("pruneHistory：窗口外（2 天前发布）条目被裁剪；无发布时间的条目被剔除（时间红线）", () => {
   const store: HistoryStore = {
-    date: "2026-09-11",
-    items: [
-      { url: "iso", title: "", summary: "", date: "09/11", section: "gz_local", publishedAt: new Date(NOW.getTime() - 5 * 86_400_000).toISOString() },
-      { url: "mmdd", title: "", summary: "", date: "09/11", section: "gz_local" },
-    ],
+    fresh: entry("fresh", { publishedAt: "2026-09-11T01:00:00Z" }),
+    yesterday: entry("yesterday", { publishedAt: "2026-09-10T12:00:00Z" }),
+    stale: entry("stale", { publishedAt: "2026-09-08T12:00:00Z" }),
+    nodate: entry("nodate", { publishedAt: undefined }),
   };
-  const items = rollingSince(store, NOW.toISOString());
-  assert.deepEqual(items.map((it) => it.url), ["iso"]);
+  const pruned = pruneHistory(store, NOW);
+  assert.deepEqual(Object.keys(pruned).sort(), ["fresh", "yesterday"]);
+});
+
+test("mergeHistory：今日条目并入；ai_relevant 本轮无判定时保留历史打标；summary 不被空覆盖", () => {
+  const prev: HistoryStore = {
+    "u1": entry("u1", { ai_relevant: false, summary: "历史摘要" }),
+  };
+  const merged = mergeHistory(
+    [article("u1", { relevant: undefined, summary: undefined }), article("u2", { relevant: true, summary: "本轮摘要" })],
+    prev,
+    "2026-09-11T08:00:00Z",
+    buildSubcatIndex([{ id: "src-a", name: "源A", type: "rss", url: "x", category: "finance", subcategory: "gz-wealth" } as never]),
+    NOW,
+  );
+  assert.equal(merged["u1"].ai_relevant, false, "本轮无判定 → 保留历史 ai_relevant=false");
+  assert.equal(merged["u1"].summary, "历史摘要", "本轮无摘要 → 保留历史摘要");
+  assert.equal(merged["u2"].ai_relevant, true);
+  assert.equal(merged["u2"].subcategory, "gz-wealth", "注册表源级 subcategory 兜底");
+  assert.ok(merged["u1"].lastSeenAt.startsWith("2026-09-11"));
+  assert.ok(merged["u1"].firstSeenAt.startsWith("2026-09-10"), "firstSeenAt 保留");
+});
+
+test("buildRolling：URL 冲突今日优先且继承历史 AI 元数据；fetchedToday 标记正确", () => {
+  const history: HistoryStore = {
+    "u1": entry("u1", {
+      ai_relevant: true,
+      summary: "历史AI摘要",
+      subcategory: "gz-credit",
+      lastSeenAt: "2026-09-11T02:00:00Z",
+    }),
+    "u3": entry("u3", { lastSeenAt: "2026-09-10T02:00:00Z", publishedAt: "2026-09-10T01:00:00Z" }),
+  };
+  const rolling = buildRolling(
+    [article("u1", { relevant: undefined, summary: undefined })],
+    history,
+    NOW,
+  );
+  const byUrl = new Map(rolling.map((a) => [a.url, a]));
+  assert.equal(byUrl.get("u1")?.fetchedToday, true, "今日条目 fetchedToday=true");
+  assert.equal(byUrl.get("u1")?.relevant, true, "继承历史 ai_relevant");
+  assert.equal(byUrl.get("u1")?.summary, "历史AI摘要", "本轮无摘要 → 继承");
+  assert.equal(byUrl.get("u3")?.fetchedToday, false, "历史条目 fetchedToday=false");
+});
+
+test("reviveEventMemory：损坏结构自愈（非对象/缺 events → 空库；损坏记录逐条丢弃）", () => {
+  assert.deepEqual(reviveEventMemory(null), emptyMemory());
+  assert.deepEqual(reviveEventMemory([1, 2]), emptyMemory());
+  assert.deepEqual(reviveEventMemory({ nope: 1 }), emptyMemory());
+  const revived = reviveEventMemory({
+    version: 1,
+    events: {
+      ok: {
+        id: "e1",
+        topicTags: ["住房金融"],
+        anchors: ["房贷", "#40"],
+        kind: "policy",
+        firstBroadcastAt: "2026-09-08",
+        lastBroadcastAt: "2026-09-10",
+        broadcastCount: 2,
+        sections: ["must_read"],
+        anglesUsed: ["policy"],
+        samples: [],
+        broadcastedTexts: [],
+        broadcastedFacts: [],
+        peakScore: 3,
+      },
+      bad: { totally: "wrong" },
+    },
+  });
+  assert.deepEqual(Object.keys(revived.events), ["ok"], "损坏记录被丢弃");
+});
+
+test("prepareEventMemory：返回清理后的库（不抛错）", () => {
+  const store = reviveEventMemory({
+    version: 1,
+    events: {},
+    today: { date: "2026-09-11", entries: [] },
+  });
+  const cleaned = prepareEventMemory(store, "2026-09-11");
+  assert.equal(cleaned.version, 1);
+});
+
+test("isEventMemoryEnabled：EVENT_MEMORY=0 关闭", () => {
+  const prev = process.env.EVENT_MEMORY;
+  try {
+    process.env.EVENT_MEMORY = "0";
+    assert.equal(isEventMemoryEnabled(), false);
+    delete process.env.EVENT_MEMORY;
+    assert.equal(isEventMemoryEnabled(), true);
+  } finally {
+    if (prev === undefined) delete process.env.EVENT_MEMORY;
+    else process.env.EVENT_MEMORY = prev;
+  }
+});
+
+test("extractReportRunId：gh-pages commit message 提取 run id（gzinfo 2026-09-05 修复语义）", () => {
+  assert.equal(extractReportRunId("daily: report for 12345678 abcdef"), "12345678");
+  assert.equal(extractReportRunId("no match here"), undefined);
+  assert.equal(extractReportRunId(undefined), undefined);
 });

@@ -42,7 +42,7 @@ function makeCtx(over: { startTime?: Date; windowDays?: number } = {}) {
 async function runSelect(
   articles: ArticleInput[],
   ctx: ReturnType<typeof makeCtx>,
-  history: Array<{ title: string; url: string; sourceId?: string; publishedAt?: string }> = [],
+  history: import("../lib/services/memory/history").HistoryStore = {},
 ) {
   const fs = new MemFs();
   fs.setJson("sources.keywords.json", KEYWORDS);
@@ -153,14 +153,18 @@ test("Stage6 跨天判重：历史库已有相似标题（先来后到），新�
     title: "央行两部门：个人住房贷款最长可贷40年",
     publishedAt: now,
   });
-  const history = [
-    {
+  const history: Record<string, import("../lib/services/memory/history").HistoryEntry> = {
+    "hist-1": {
       title: "央行两部门：个人住房贷款最长可贷40年",
       url: "hist-1",
       sourceId: "s2",
+      source: "历史源",
+      category: "finance",
       publishedAt: new Date(now.getTime() - 86_400_000).toISOString(),
+      firstSeenAt: new Date(now.getTime() - 86_400_000).toISOString(),
+      lastSeenAt: new Date(now.getTime() - 86_400_000).toISOString(),
     },
-  ];
+  };
   const r = await runSelect([fresh], makeCtx({ startTime: now }), history);
   assert.deepEqual(r.articles.map((a) => a.url), [], "历史先来者占同 tier 位 → 新条目被丢");
 });

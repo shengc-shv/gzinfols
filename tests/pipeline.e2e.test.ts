@@ -1,7 +1,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import fsSync from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { runPipeline } from "../lib/pipeline";
 import { createContext } from "../lib/orchestrator";
+import { setPersistenceBaseDir } from "../lib/adapters/persistence";
 import type { PipelineDeps } from "../lib/contracts/pipeline";
 import type { SourceDef } from "../lib/contracts/source";
 import { MemFs, FakeHttp, FakeLlm, FakeClock, SilentLog } from "./helpers";
@@ -29,6 +33,17 @@ const sources: SourceDef[] = [
 ];
 
 test("runPipeline 端到端（注入内存适配器，不联网/不调真实 LLM）", async () => {
+  // 历史库/记忆库落盘走真实 fs（gzinfo 同步语义），注入临时目录做测试隔离
+  const tmp = fsSync.mkdtempSync(path.join(os.tmpdir(), "gzinfols-e2e-"));
+  setPersistenceBaseDir(tmp);
+  try {
+    await e2eBody();
+  } finally {
+    setPersistenceBaseDir(undefined);
+    fsSync.rmSync(tmp, { recursive: true, force: true });
+  }
+
+  async function e2eBody() {
   const fs = new MemFs();
   fs.setJson("sources.config.json", { sources });
   fs.setJson("sources.keywords.json", {
@@ -64,7 +79,10 @@ test("runPipeline 端到端（注入内存适配器，不联网/不调真实 LLM
   // C9：产物路径正确落盘
   assert.ok(out.paths.htmlPath.endsWith(".html"));
   assert.ok((fs.getText(out.paths.htmlPath) ?? "").includes("AI 大模型驱动金融科技升级"));
-  // C5：历史库已写入
-  const hist = await fs.readJson<{ items: unknown[] }>("data/history.json");
-  assert.ok(hist && hist.items.length >= 1, "历史库应记录本次条目");
+  // C5：历史库已写入（gzinfo 形状：data/article-history.json，Record<url, HistoryEntry>）
+  const histPath = path.join(tmp, "data", "article-history.json");
+  assert.ok(fsSync.existsSync(histPath), "article-history.json 应落盘");
+  const hist = JSON.parse(fsSync.readFileSync(histPath, "utf8")) as Record<string, { url: string; summary?: string }>;
+  assert.ok(Object.keys(hist).length >= 1, "历史库应记录本次条目");
+  }
 });

@@ -70,15 +70,11 @@ test("单源配额：同一来源最多保留 maxPerSourcePerSection 条", () =>
   assert.ok(out.sections.gz_local.every((i) => i.source === "单一来源"));
 });
 
-test("must_read 为空时：按板块顺序取各板块头部条目兜底回填", () => {
+test("must_read 恒空：gzinfo 语义下 assemble 不兜底（必读由 side-outputs 旁路产出）", () => {
   const report = emptyReport();
   report.sections.gz_local = [item("广州头条")];
-  report.sections.tech = [item("科技头条")];
   const out = assembleReport(report, ctx());
-  assert.equal(out.must_read.length, 2);
-  assert.equal(out.must_read[0].url, report.sections.gz_local[0].url);
-  assert.ok(out.must_read[0].why.includes("广州本地"));
-  assert.equal(out.must_read[1].title, "科技头条");
+  assert.deepEqual(out.must_read, [], "assemble 不再生成兜底必读");
 });
 
 test("must_read 已有值时：不覆盖，原样保留", () => {

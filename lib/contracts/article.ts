@@ -72,6 +72,14 @@ export interface ArticleInput extends NormalizedArticle {
   title_cn?: string;
   /** 漏斗三价值标签（确定性评分写回，供口播直接消费）。 */
   valueTag?: ValueTag;
+  /**
+   * 条目级相关性判定（gzinfo ArticleInput.relevant 同名同义）：
+   * PASS1 keep=true 时置 true；false = AI/打标判无关（滚动并入硬门槛）。
+   * 历史库字段名 ai_relevant（entryToArticle/buildRolling 双向映射）。
+   */
+  relevant?: boolean;
+  /** 滚动并入标记：true=当日已处理（buildRolling 标注），渲染按「当天」视图归组。 */
+  fetchedToday?: boolean;
 }
 
 /**

@@ -45,24 +45,7 @@ function rankSection(items: ReportItem[], ctx: PipelineContext): ReportItem[] {
   return out;
 }
 
-/** 必读兜底：must_read 为空时，按板块顺序取各板块头部一条，最多 MAX_MUST_READ。 */
-function backfillMustRead(report: DailyReport): ReportMustRead[] {
-  if (report.must_read && report.must_read.length > 0) return report.must_read;
-  const out: ReportMustRead[] = [];
-  for (const key of SECTION_ORDER) {
-    if (out.length >= MAX_MUST_READ) break;
-    const top = report.sections[key]?.[0];
-    if (!top) continue;
-    out.push({
-      url: top.url,
-      title: top.title_cn,
-      why: `本板块最高优先级（${SECTION_LABELS[key]}）：${top.summary.slice(0, 40)}`,
-    });
-  }
-  return out;
-}
-
-/** 组装入口：排序定档 → 必读兜底 → 收口。 */
+/** 组装入口：排序定档 → 收口（must_read/insights 由 side-outputs 旁路产出，本阶段不兜底）。 */
 export function assemble(report: DailyReport, _ctx: PipelineContext): AssembledResult {
   const sections = {
     gz_local: rankSection(report.sections.gz_local, _ctx),
@@ -80,7 +63,7 @@ export function assemble(report: DailyReport, _ctx: PipelineContext): AssembledR
 
   return {
     sections,
-    must_read: backfillMustRead(report),
+    must_read: report.must_read ?? [],
     insights: report.insights ?? [],
     hero_line: report.hero_line,
     risk: report.risk,

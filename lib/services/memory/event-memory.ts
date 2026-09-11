@@ -1,0 +1,1614 @@
+/**
+ * 内容记忆与去重（Content Memory & De-duplication）
+ * ============================================================================
+ * 解决的问题：
+ *   每日抓取的新闻源高度重复。同一事件（如「房贷期限从 30 年延长至 40 年」）
+ *   会在未来数周持续产生大量报道。若连续多天口播同一新闻，行长会觉得系统
+ *   不专业；但完全屏蔽后续报道，又会漏掉真实进展（如政策落地、细则出台、
+ *   银行跟进、数据验证）。
+ *
+ * 设计要点：
+ *   1. 事件级记忆：基于「事件指纹 + 主题标签」去重，而非文本完全匹配；
+ *      记忆库持久化到 data/event-memory.json（随 CI 归档提交，跨运行生效）。
+ *   2. 判定规则：量化「信息增量」，区分「新进展（progress）」与「重复表述（duplicate）」。
+ *   3. 冷却与衰减：按事件类型给冷却期，冷却期随时间衰减；重大事件可打破冷却。
+ *   4. 角度轮换：必须再次播报时，强制切换到未用过的切入角度。
+ *   5. 板块差异化：hero / must_read / insights / risk 四板块参数互不相同。
+ *   6. 兜底：候选全命中去重时分三级放宽，绝不产出空板块。
+ *
+ * 纯函数层（不碰 fs，便于单测）；持久化见 ./store.ts。
+ */
+
+import { eventFingerprint, dice, titleBigrams } from "../select/filters/dedup-similar";
+// P2-3 收敛（2026-09-10）：口播窗常量改引全链路唯一来源（此前本文件与
+// pipeline/side-outputs/gd-ipo.ts 各定义一份，值相同但是真隐患——改一处不生效）。
+import { IPO_VOICE_WINDOW_DAYS } from "../../ipo-config";
+// 仅引入运行时函数；broadcast-time 对本文件只做 `import type`，无循环依赖
+// 2026-09-03：isTestBroadcastAt（9:00 启发式）已从结算路径退役 —— 结算闸门改为
+// 「交付信号」（deliveries：人工确认推送过才算正式交付），broadcastAt 仅用于溯源/人工分区。
+import { formatBroadcastAt } from "./broadcast-time";
+
+// ---------------------------------------------------------------------------
+// 1) 类型定义
+// ---------------------------------------------------------------------------
+
+/** 四个记忆板块（与口播/展示板块一一对应）。 */
+export type MemorySection = "hero" | "must_read" | "insights" | "risk";
+
+/**
+ * 切入角度（去重后重播时必须轮换，避免表述雷同）。
+ * 顺序即默认轮换顺序：从「政策本身」逐步推进到「客户该做什么」。
+ */
+export type EventAngle =
+  | "政策变化"
+  | "市场反应"
+  | "受影响人群"
+  | "数据验证"
+  | "同业动作"
+  | "客户行动";
+
+/** 角度轮换顺序表（务必与 EventAngle 一致）。 */
+export const ANGLE_ORDER: EventAngle[] = [
+  "政策变化",
+  "市场反应",
+  "受影响人群",
+  "数据验证",
+  "同业动作",
+  "客户行动",
+];
+
+/** 每个角度的写作指引（注入 LLM 提示词，让重播有明确的新视角）。 */
+export const ANGLE_GUIDE: Record<EventAngle, string> = {
+  政策变化: "只讲政策/规则本身变了什么、何时生效、适用范围，不评价影响",
+  市场反应: "讲市场与机构的第一反应（股价、利率、报价、同业表态），少复述政策条文",
+  受影响人群: "讲哪一类客户/客群被直接影响，他们的处境与需求发生了什么变化",
+  数据验证: "用最新数据验证进展（规模、增速、占比、环比），用数字说话",
+  同业动作: "讲同业/他行已经怎么做了（产品、定价、流程），突出竞争位次",
+  客户行动: "讲分行与该客群当下可执行的动作（联系谁、推什么、什么时点）",
+};
+
+/** 事件类型 → 决定基础冷却期（重大政策类冷却更长）。 */
+export type EventKind = "policy" | "enforcement" | "ipo" | "market" | "local" | "generic";
+
+/** 判定结论。 */
+export type MemoryVerdict =
+  /** 记忆库中没有该事件 → 直接放行。 */
+  | "new"
+  /** 有实质新进展 → 放行（可不换角度）。 */
+  | "progress"
+  /** 增量有限、可重播，但**必须换角度**（板块拥挤时优先被降级）。 */
+  | "refresh"
+  /** 处于冷却期且增量不足以打破冷却 → 过滤。 */
+  | "cooldown"
+  /** 纯重复表述（无信息增量）→ 过滤。 */
+  | "duplicate"
+  /** 播报次数已达该板块上限且无重大进展 → 过滤。 */
+  | "exhausted";
+
+/** 单次判定结果（可解释：每条都带 reason，便于日志与回归测试）。 */
+export interface MemoryDecision {
+  section: MemorySection;
+  /** 候选标题（日志/测试用）。 */
+  title: string;
+  verdict: MemoryVerdict;
+  /** 是否放行（new/progress/refresh = 放行）。 */
+  allow: boolean;
+  /** 0-1 信息增量。 */
+  novelty: number;
+  /** 距上次播报天数；新事件为 undefined。 */
+  daysSince?: number;
+  /** 冷却期（天）；新事件为 undefined。 */
+  cooldownDays?: number;
+  /** 本次判定使用的增量门槛。 */
+  threshold?: number;
+  /** 匹配到的历史事件 id；新事件为 undefined。 */
+  eventId?: string;
+  /** 命中事件的历史播报次数（含本次前的累计）。 */
+  broadcastCount?: number;
+  /** refresh/progress 重播时强制要求切换到的角度。 */
+  requiredAngle?: EventAngle;
+  /** 人类可读原因。 */
+  reason: string;
+  /** 是否因「重大事件打破冷却」而放行。 */
+  brokeCooldown?: boolean;
+}
+
+/** 单条播报留痕（同一事件保留最近若干条，用于增量计算与审计）。 */
+export interface BroadcastSample {
+  /** YYYY-MM-DD */
+  date: string;
+  section: MemorySection;
+  title: string;
+  url?: string;
+  novelty?: number;
+  angle?: EventAngle;
+  /** 播报内容全文（标题 + 正文），用于**同日内**的信息增量计算。 */
+  text?: string;
+  /** 播报内容的事实锚点，用于**同日内**的信息增量计算。 */
+  facts?: string[];
+  /** 分行相关性分（0-100），透传给长期记忆以计算峰值分 peakScore（重大事件长期保留）。 */
+  score?: number;
+  /**
+   * 播报时刻（ISO 8601 完整时间戳，带时区偏移，默认北京时间 +08:00）。
+   *
+   * 形如 `2026-09-02T23:39:47+08:00`。与 `date`（仅 YYYY-MM-DD）互补：
+   * date 用于「哪天播的」的冷却计算，broadcastAt 记录「当天几点播的」。
+   *
+   * 2026-09-03 起仅作**溯源与人工分区**用途（partitionByHour / filterByTimeRange /
+   * listBroadcasts 等工具仍可用 9:00 为界人工区分演示与测试数据）；
+   * 「是否正式」的判定已交给 deliveries 交付信号（beginDay 结算闸门），
+   * 不再用时刻启发式 —— 9 点前可能是测试重试、9 点后可能是人工补发，时刻无法证伪。
+   *
+   * 设为可选：历史记录无此字段时不影响任何既有读取逻辑（向后兼容）。
+   */
+  broadcastAt?: string;
+}
+
+/** 事件记忆条目。 */
+export interface EventRecord {
+  /** 稳定事件 id（首次创建时由锚点生成，后续不因措辞变化而改变）。 */
+  id: string;
+  /** 主题标签（如「住房金融」「利率流动性」），多值。 */
+  topicTags: string[];
+  /** 事件指纹锚点集合（关键词 + #数字锚点）。 */
+  anchors: string[];
+  /** 事件类型 → 冷却期。 */
+  kind: EventKind;
+  /** 首次播报日期 YYYY-MM-DD。 */
+  firstBroadcastAt: string;
+  /** 最近播报日期 YYYY-MM-DD。 */
+  lastBroadcastAt: string;
+  /** 累计播报次数。 */
+  broadcastCount: number;
+  /** 曾在哪些板块播报过。 */
+  sections: MemorySection[];
+  /** 已用过的切入角度（按顺序）。 */
+  anglesUsed: EventAngle[];
+  /** 最近播报留痕（上限 MAX_SAMPLES，FIFO）。 */
+  samples: BroadcastSample[];
+  /** 已播报过的内容原文（标题+摘要）集合，用于计算 bigram 增量。 */
+  broadcastedTexts: string[];
+  /** 已播报过的事实锚点（数字/机构/进展动词），用于计算事实增量。 */
+  broadcastedFacts: string[];
+  /** 历史最高分行相关性分（用于「重大事件打破冷却」）。 */
+  peakScore: number;
+}
+
+/** 记忆库落盘结构。 */
+export interface EventMemoryStore {
+  version: 1;
+  updatedAt?: string;
+  /**
+   * 长期记忆：**只含「昨天及更早」**的播报（今天的播报存在 today 里）。
+   */
+  events: Record<string, EventRecord>;
+  /**
+   * 当天播报暂存区（每次运行开始即清空重写）。
+   *
+   * 为什么要有这一层（幂等性关键）：
+   * CI 一天会跑很多次（daily.yml 在北京 6-8 点每 15 分钟触发一次）。
+   * 若第一次运行就把当天播报写进长期记忆，第二次运行时这些条目
+   * daysSince=0，会被判定为「当日已播」而大面积过滤 → 同一天两次
+   * 运行产出不一致，报告内容漂移。
+   *
+   * 因此当天播报只暂存在这里，**跨天时才结算进 events**（见 beginDay）。
+   * 这样同一天无论跑多少次，判定输入都完全相同 → 结果稳定可复现。
+   */
+  today?: {
+    date: string;
+    entries: BroadcastSample[];
+    /**
+     * 该暂存区由哪个「上线 run」落盘（GITHUB_RUN_ID，persistMemory 注入）。
+     * 用于结算指纹校验：与 deliveries.reportRunId 对账，证明「将结算的内容
+     * 就是人工推送时 gh-pages 上的那个版本」（2026-09-03 补严，见
+     * deliverySettlementGate）。可选：历史文件无此字段 → 无指纹、按信任交付结算。
+     */
+    runId?: string;
+  };
+  /**
+   * 人工确认交付记录（2026-09-03 新增）：微信推送改为手动触发后，
+   * 一次「人工触发推送且微信全量送达（API 全 target errcode=0）」= 当天报告
+   * 正式生效。⚠️ 生效判据 = **触达**（微信侧受理并投递）——模板消息渠道无
+   * 「客户已读」回执（仅企业微信应用消息有），已读不可观测，经用户 2026-09-03
+   * 拍板以「触达即生效」为判据（宁严勿松：无目标 / 部分失败 → 不算交付）。
+   *
+   * beginDay 的结算闸门（取代 9:00 启发式）：昨天**有交付记录**才把
+   * 昨天的播报结算进长期记忆（进入后续去重范围）；无交付记录（当天从未被
+   * 人工推送，或全部是测试/验证运行）→ 不结算（宁漏勿误，次日同源新闻
+   * 允许重播，测试内容绝不污染去重）。测试集触发与正式推送的判定边界 =
+   * 是否真正 Run notify.yml 且推送全成功 —— 时刻 / run 次数 / 是否 publish
+   * 到 gh-pages 均不作数。
+   *
+   * 写入方：notify.yml 推送成功后的 mark-delivered 步骤（appendDelivery）。
+   * 可选字段：旧版本文件无此字段 → 按「无任何交付」处理（向下兼容）。
+   */
+  deliveries?: DeliveryRecord[];
+
+  /**
+   * IPO 口播去重命名空间（2026-09-09 新增，与 events 隔离）。
+   *
+   * 背景：IPO 板块是「参考/结构板块」，展示窗口独立于商机洞察（展示仍按
+   * 7 天滚动窗口，见 buildGdIpo），但口播不应把同一家在审企业每天重复念——
+   * 东财在审表条目会在表中停留数周，导致同一企业被日更口播。
+   * 用户要求「同一企业口播 2 天就够了」。
+   *
+   * 设计：复用同一份 event-memory.json（共享持久化 + 交付闸门语义），但用
+   * 独立的命名空间，避免与 insights/must_read/risk 的事件指纹去重逻辑纠缠。
+   *  - 键：企业名（buildGdIpoSpoken 的 companyNameOf 归一化结果）
+   *  - 值：该企业被口播过的日期数组（YYYY-MM-DD），只保留最近 IPO_VOICE_PRUNE_DAYS 天
+   *  - 判定：滚动窗口内（最近 IPO_VOICE_WINDOW_DAYS 天，含今天）已口播 ≥
+   *    IPO_VOICE_MAX_IN_WINDOW 天 → 今天跳过（自然形成「约 2 天播、1 天歇」
+   *    的节奏，杜绝数周连播；展示卡面不受影响）。
+   *  - 写回受 PUBLISH_RUN 闸门约束（与 events 的 persistMemory 同口径），
+   *    测试/本地运行不污染正式口播记忆。
+   */
+  ipoVoicing?: Record<string, string[]>;
+}
+
+/** IPO 口播去重窗口（天）：统计「最近多少天内的口播天数」（值来源 lib/ipo-config.ts）。 */
+export { IPO_VOICE_WINDOW_DAYS };
+/** 窗口内口播天数上限：达到即今天跳过（默认 2 → 约「2 天播、1 天歇」）。 */
+export const IPO_VOICE_MAX_IN_WINDOW = 2;
+/** ipoVoicing 日期数组保留天数（超出丢弃，防无限膨胀）。 */
+export const IPO_VOICE_PRUNE_DAYS = 7;
+
+/**
+ * 一次人工确认交付的留痕（date + 推送成功时刻 + 被推送版本指纹）。
+ * 除 notify run 自身（runId）外，还记录**被推送版本**的 gh-pages 发布 run 与
+ * commit（reportRunId / reportSha，mark-delivered 从 gh-pages commit message 反查），
+ * 供次日结算前与 today.runId 对账 —— 防止「推的是 A 版本、结算的是 B 版本」。
+ */
+export interface DeliveryRecord {
+  /** 被交付的报告日期 YYYY-MM-DD。 */
+  date: string;
+  /** 推送成功时刻（ISO 8601 带时区，与 broadcastAt 同格式）。 */
+  pushedAt: string;
+  /** 触发推送的 notify run id（溯源用，可选）。 */
+  runId?: string;
+  /** 被推送版本对应的 gh-pages 发布 run id（daily publish 步骤的 commit message 反查，可选）。 */
+  reportRunId?: string;
+  /** 被推送版本对应的 gh-pages commit sha（审计用，可选）。 */
+  reportSha?: string;
+}
+
+/** 候选条目（由调用方从 exec 产出或两天池构造）。 */
+export interface MemoryCandidate {
+  title: string;
+  /** 用于增量计算的正文（标题 + why/impact/摘要）。 */
+  text?: string;
+  url?: string;
+  /** 分行相关性分（0-100），可选；用于打破冷却的重要性判定。 */
+  score?: number;
+  /** 是否命中评分器硬规则（如房贷40年）→ 可打破冷却。 */
+  override?: boolean;
+  /** 评分档位，可选。 */
+  tier?: "must_read" | "insight" | "context" | "drop";
+}
+
+// ---------------------------------------------------------------------------
+// 2) 板块差异化参数（要求 5）
+// ---------------------------------------------------------------------------
+
+/**
+ * 四板块的重复容忍度与去重优先级（互不相同，可参数化覆盖）。
+ *
+ * 设计取向：
+ *  - hero（今日定调）：一天只有一句话，重复最刺眼 → 最严格。
+ *    不允许「换角度重播」式刷新（allowRefresh=false），必须有实质进展。
+ *  - must_read（今日必读）：宏观信号，允许多次，但需进展或新角度。
+ *  - insights（商机洞察）：商机本就需要持续跟进，容忍度更高。
+ *  - risk（风险提示）：风险不因「说过」而消失，只要有新证据就要继续预警
+ *    → 容忍度最高，但仍要求 evidence 有新事实（newFacts > 0）。
+ *
+ * dedupePriority：数值越小越先被保护（兜底放宽时，高优先级板块的候选
+ * 先被释放）。cooldownScale：在事件基础冷却期上缩放。
+ */
+export interface SectionPolicy {
+  /** 冷却期缩放系数（× 事件基础冷却期）。 */
+  cooldownScale: number;
+  /** 冷却结束后的基础增量门槛。 */
+  noveltyBase: number;
+  /** 门槛下限（衰减到此为止，防止时间久了无脑放行）。 */
+  noveltyFloor: number;
+  /** 冷却期内打破冷却所需的高增量门槛。 */
+  noveltyToBreak: number;
+  /** 同一事件在同一板块的累计播报上限（超出需 noveltyToBreak 才放行）。 */
+  maxRepeat: number;
+  /** 去重优先级（越小越优先保留）。 */
+  dedupePriority: number;
+  /** 是否允许「换角度重播」（refresh 级放行）。 */
+  allowRefresh: boolean;
+  /** 兜底时该板块的最低保底条数。 */
+  minKeep: number;
+}
+
+export const SECTION_POLICY: Record<MemorySection, SectionPolicy> = {
+  hero: {
+    cooldownScale: 1.5,
+    noveltyBase: 0.45,
+    noveltyFloor: 0.22,
+    noveltyToBreak: 0.6,
+    maxRepeat: 2,
+    dedupePriority: 1,
+    allowRefresh: false,
+    minKeep: 1,
+  },
+  must_read: {
+    cooldownScale: 1.0,
+    noveltyBase: 0.3,
+    noveltyFloor: 0.12,
+    noveltyToBreak: 0.45,
+    maxRepeat: 3,
+    dedupePriority: 2,
+    allowRefresh: true,
+    minKeep: 2,
+  },
+  insights: {
+    cooldownScale: 0.7,
+    noveltyBase: 0.22,
+    noveltyFloor: 0.08,
+    noveltyToBreak: 0.35,
+    maxRepeat: 4,
+    dedupePriority: 3,
+    allowRefresh: true,
+    minKeep: 1,
+  },
+  risk: {
+    cooldownScale: 0.5,
+    noveltyBase: 0.15,
+    noveltyFloor: 0.05,
+    noveltyToBreak: 0.25,
+    maxRepeat: 5,
+    dedupePriority: 4,
+    allowRefresh: true,
+    minKeep: 1,
+  },
+};
+
+/** 事件类型 → 基础冷却期（天）。重大政策类最长。 */
+export const BASE_COOLDOWN_DAYS: Record<EventKind, number> = {
+  policy: 6,
+  enforcement: 7,
+  ipo: 5,
+  market: 3,
+  local: 5,
+  generic: 4,
+};
+
+/** 冷却期上限（天）：无论重复多少次，不超过此值。 */
+export const MAX_COOLDOWN_DAYS = 14;
+/** 播报留痕保留条数。 */
+const MAX_SAMPLES = 6;
+/** 已播报文本保留条数（用于 bigram 增量计算）。 */
+const MAX_TEXTS = 8;
+
+// ---------------------------------------------------------------------------
+// 3) 文本特征抽取
+// ---------------------------------------------------------------------------
+
+/** 归一化：只保留字母/数字（中文保留），小写化。 */
+export function normText(s: string): string {
+  return (s ?? "").replace(/[^\p{L}\p{N}]+/gu, "").toLowerCase();
+}
+
+/** 候选文本（标题 + 正文），去空。 */
+function candidateText(c: MemoryCandidate): string {
+  return [c.title, c.text ?? ""].filter(Boolean).join(" ").trim();
+}
+
+/**
+ * 事实锚点抽取（信息增量的主要判据）。
+ *
+ * 三类，分别加前缀区分：
+ *  - `#数字锚点`：40年 / 1.5% / 5000元 / 38万亿 —— 政策力度、规模数据
+ *  - `!进展动词`：受理 / 问询 / 过会 / 落地 / 处罚 / 下调 —— 事件所处阶段
+ *  - `@主体机构`：央行 / 金融监管总局 / 广州 / 招行 —— 涉及主体
+ *
+ * 为什么用事实锚点而非纯文本相似度：同一事件的不同报道，措辞高度雷同
+ * （Dice 常 > 0.8），但只有**数字/阶段/主体**的变化才构成真正的「新进展」。
+ */
+const NUM_RE =
+  /\d+(?:\.\d+)?\s*(?:个百分点|万亿元|万亿|亿元|万元|(?:个)?基点|bp|BP|年|个月|月|日|%|％|元|倍|‰|家|户|笔)/g;
+
+const STAGE_WORDS = [
+  "受理", "问询", "过会", "提交注册", "注册生效", "辅导备案", "招股", "申购", "敲钟",
+  "批复", "落地", "实施", "施行", "试点", "扩围", "首单", "出台", "印发", "发布",
+  "约谈", "处罚", "罚款", "通报", "整改", "下调", "上调", "降息", "降准", "加息",
+  "受理申请", "正式生效", "窗口指导",
+];
+
+const ORG_WORDS = [
+  "央行", "人民银行", "金融监管总局", "金监总局", "国务院", "证监会", "发改委",
+  "财政部", "住建部", "外汇局", "美联储", "交易所", "北交所", "科创板", "创业板",
+  "广州", "广东", "南沙", "大湾区",
+];
+
+export function extractFacts(text: string): string[] {
+  const t = text ?? "";
+  const out = new Set<string>();
+  let m: RegExpExecArray | null;
+  NUM_RE.lastIndex = 0;
+  while ((m = NUM_RE.exec(t))) out.add("#" + m[0].replace(/\s+/g, ""));
+  for (const w of STAGE_WORDS) if (t.includes(w)) out.add("!" + w);
+  for (const w of ORG_WORDS) if (t.includes(w)) out.add("@" + w);
+  return [...out];
+}
+
+/** 主题标签规则表（锚点 → 标签），用于「同一主题」的软去重与主题记忆。 */
+const THEME_RULES: Array<{ tag: string; kws: string[] }> = [
+  {
+    tag: "住房金融",
+    kws: ["房贷", "按揭", "公积金", "购房", "楼市", "住房", "房抵", "存量房贷", "商品房", "抵押贷"],
+  },
+  { tag: "利率流动性", kws: ["LPR", "降息", "降准", "利率", "贴息", "存款"] },
+  {
+    tag: "监管合规",
+    kws: ["罚", "处罚", "违规", "整改", "通报", "不良", "逾期", "违约", "爆雷", "约谈"],
+  },
+  {
+    tag: "资本市场",
+    kws: ["IPO", "上市", "过会", "注册", "招股", "申购", "敲钟", "北交所", "科创板", "创业板"],
+  },
+  { tag: "财富管理", kws: ["理财", "基金", "黄金", "保险", "资管", "信托", "债基", "ETF", "REITs"] },
+  { tag: "私行客群", kws: ["私行", "高净值", "家族信托", "客群", "获客", "新客", "开户"] },
+  { tag: "消费信贷", kws: ["消费贷", "经营贷", "小微", "普惠", "信用卡"] },
+  { tag: "广州本地", kws: ["广州", "广东", "大湾区", "南沙", "粤"] },
+  { tag: "科技金融", kws: ["科技金融", "数字人民币", "金融科技"] },
+];
+
+/** 主题标签抽取（可能为空数组）。 */
+export function extractTopicTags(text: string): string[] {
+  const t = text ?? "";
+  const tags: string[] = [];
+  for (const r of THEME_RULES) {
+    if (r.kws.some((k) => t.includes(k))) tags.push(r.tag);
+  }
+  return tags;
+}
+
+/** 事件类型判定（顺序敏感：越具体越靠前）。 */
+export function classifyKind(text: string): EventKind {
+  const t = text ?? "";
+  if (STAGE_WORDS.some((w) => ["受理", "问询", "过会", "注册", "辅导备案", "招股", "申购", "敲钟"].includes(w) && t.includes(w)))
+    return "ipo";
+  if (t.includes("IPO")) return "ipo";
+  if (/(处罚|罚款|违规|整改|通报|约谈|不良|爆雷|违约)/.test(t)) return "enforcement";
+  if (/(国务院|央行|人民银行|金融监管总局|金监总局|证监会|发改委|财政部|住建部|外汇局|政策|新规|办法|通知|意见|试点|施行|条例|细则)/.test(t))
+    return "policy";
+  if (/(广州|广东|南沙|大湾区)/.test(t)) return "local";
+  if (/(股|指数|板块|涨|跌|行情|收评|资金|北向)/.test(t)) return "market";
+  return "generic";
+}
+
+// ---------------------------------------------------------------------------
+// 4) 事件指纹与匹配
+// ---------------------------------------------------------------------------
+
+/** 候选的事件锚点集合（复用展示层同一套指纹，保证口径一致）。 */
+export function candidateAnchors(c: MemoryCandidate): string[] {
+  return [...eventFingerprint(candidateText(c))];
+}
+
+/**
+ * 生成稳定事件 id。
+ *
+ * 取锚点集合中「最具区分度」的若干锚点（数字锚点 > 关键词锚点），
+ * 排序后拼接。首次创建后 id 不再改变——后续同事件报道即使新增锚点，
+ * 也只是合并进 record.anchors，不改 id（否则记忆会断裂）。
+ */
+export function makeEventId(anchors: string[]): string {
+  const nums = anchors.filter((a) => a.startsWith("#")).sort();
+  const kws = anchors.filter((a) => !a.startsWith("#")).sort();
+  const picked = [...nums.slice(0, 2), ...kws.slice(0, 3)];
+  if (picked.length === 0) return "";
+  return picked.join("|");
+}
+
+/** 两个锚点集合的 Jaccard 相似度。 */
+function anchorJaccard(a: string[], b: string[]): number {
+  const A = new Set(a);
+  const B = new Set(b);
+  if (A.size === 0 || B.size === 0) return 0;
+  let inter = 0;
+  for (const x of A) if (B.has(x)) inter++;
+  return inter / (A.size + B.size - inter);
+}
+
+/** 两个标签数组的共享数量。 */
+function sharedTags(a: string[], b: string[]): number {
+  const B = new Set(b);
+  let n = 0;
+  for (const x of a) if (B.has(x)) n++;
+  return n;
+}
+
+/**
+ * 记录结构完整性校验（2026-09-02 复审修复·高优先级）。
+ *
+ * 背景：单条记录损坏（samples/anchors/topicTags 缺失或类型错误）会触发
+ * `record.samples is not iterable`，异常冒泡到集成点 try/catch 后被
+ * 「放行原产出」吞掉 → **整个记忆去重静默失效**，且因损坏记录被持续写回
+ * 而**永不自愈**。用户只会感觉「又开始重复播报了」，日志仅一行 warn。
+ *
+ * 策略：损坏记录**逐条跳过**（不参与匹配），其余记录照常工作；
+ * 配合 store.ts 落盘前清理，损坏记录不再写回 → 具备自愈能力。
+ */
+export function isUsableRecord(rec: unknown): rec is EventRecord {
+  if (!rec || typeof rec !== "object") return false;
+  const r = rec as Partial<EventRecord>;
+  // 仅校验「会引发崩溃」的必填结构；数值/日期字段另行归一化，不因类型瑕疵丢弃整个事件
+  return (
+    typeof r.id === "string" &&
+    r.id.length > 0 &&
+    Array.isArray(r.samples) &&
+    Array.isArray(r.anchors) &&
+    Array.isArray(r.topicTags)
+  );
+}
+
+/**
+ * 矫正记录中的数值/日期字段类型，避免脏值污染计算。
+ *
+ * 为什么是「归一化」而非「丢弃」：peakScore 为字符串这类瑕疵只是局部脏值，
+ * 整条事件丢弃会让它被遗忘（重复播报），代价大于收益；但若放任不管，
+ * `Math.max("high", 0)` 会产出 NaN，进而让「重大事件双倍保留」判定恒假。
+ */
+export function normalizeRecord(rec: EventRecord): EventRecord {
+  const out: EventRecord = { ...rec };
+  if (!Number.isFinite(out.peakScore)) out.peakScore = 0;
+  if (!Number.isFinite(out.broadcastCount) || (out.broadcastCount ?? 0) < 1) {
+    out.broadcastCount = 1;
+  }
+  if (!Array.isArray(out.broadcastedTexts)) out.broadcastedTexts = [];
+  if (!Array.isArray(out.broadcastedFacts)) out.broadcastedFacts = [];
+  if (!Array.isArray(out.sections)) out.sections = [];
+  if (!Array.isArray(out.anglesUsed)) out.anglesUsed = [];
+  if (typeof out.lastBroadcastAt !== "string") {
+    out.lastBroadcastAt = typeof out.firstBroadcastAt === "string" ? out.firstBroadcastAt : "";
+  }
+  if (typeof out.firstBroadcastAt !== "string") out.firstBroadcastAt = out.lastBroadcastAt;
+  return out;
+}
+
+/** 剔除结构损坏的事件记录，并对保留记录做数值归一化（损坏者自愈式丢弃）。 */
+export function sanitizeEvents(
+  events: Record<string, EventRecord> | undefined | null,
+): Record<string, EventRecord> {
+  if (!events || typeof events !== "object" || Array.isArray(events)) return {};
+  const out: Record<string, EventRecord> = {};
+  for (const [id, rec] of Object.entries(events)) {
+    if (isUsableRecord(rec)) out[id] = normalizeRecord(rec);
+  }
+  return out;
+}
+
+/** 与某条历史记录的最高标题 Dice（与最近若干条样本比）。 */
+function bestTitleDice(title: string, record: EventRecord): number {
+  const g = titleBigrams(title);
+  let best = 0;
+  // 防御：samples 非数组或元素异常时退化为 0，不抛错
+  const samples = Array.isArray(record.samples) ? record.samples : [];
+  for (const s of samples) {
+    if (!s || typeof s.title !== "string") continue;
+    const d = dice(g, titleBigrams(s.title));
+    if (d > best) best = d;
+  }
+  return best;
+}
+
+/** 合并阈值：硬信号（锚点 Jaccard / 标题 Dice）达此值即视为同一事件。 */
+const MATCH_THRESHOLD = 0.5;
+/**
+ * 硬信号软命中置信线：锚点/标题相似度落在区间 [HARD_CORROB, MATCH_THRESHOLD)
+ * 且共享 ≥2 个主题标签时，才升格为合并（兜底「同一主题不同切入」的软重复）。
+ */
+const HARD_CORROB = 0.3;
+/**
+ * 标签软命中辅助值：仅共享 ≥2 个主题标签、无硬信号支撑时给出的相似度，
+ * 低于合并阈 → 不单独触发合并，避免把不同事件（如「存量房贷利率下调」vs
+ * 「公积金贷款额度上调」）按宽泛标签串味误并。
+ */
+const TAG_SOFT_BOOST = 0.35;
+/** 历史无事实锚点时，newFactRatio 封顶值（防 novelty 虚高误判 progress）。 */
+const NO_FACT_BASELINE_CAP = 0.5;
+
+/**
+ * 把「当天暂存区」的播报聚类成伪事件记录，供判定期统一匹配。
+ *
+ * 用途：同一次运行内的板块内去重（如 LLM 把同一事件拆成两条必读）——
+ * 第二条必须能匹配到第一条，否则会出现「同一天、同一板块、同一事件两条」。
+ */
+function todayPseudoRecords(store: EventMemoryStore): Array<{ id: string; record: EventRecord }> {
+  const entries = store.today?.entries ?? [];
+  if (entries.length === 0) return [];
+  const clusters: BroadcastSample[][] = [];
+  const reps: string[][] = []; // 每簇代表条目的锚点集合
+  for (const e of entries) {
+    const text = e.text || e.title;
+    const anchors = [...eventFingerprint(text)];
+    let placed = false;
+    for (let i = 0; i < clusters.length; i++) {
+      const aj = anchorJaccard(anchors, reps[i]);
+      const td = dice(titleBigrams(e.title), titleBigrams(clusters[i][0].title));
+      if (aj >= MATCH_THRESHOLD || td >= MATCH_THRESHOLD) {
+        clusters[i].push(e);
+        placed = true;
+        break;
+      }
+    }
+    if (!placed) {
+      clusters.push([e]);
+      reps.push(anchors);
+    }
+  }
+  return clusters.map((c, i) => {
+    const texts = c.map((s) => s.text || s.title);
+    const facts = [...new Set(c.flatMap((s) => s.facts ?? []))];
+    const angles = [...new Set(c.map((s) => s.angle).filter(Boolean) as EventAngle[])];
+    const first = c[0];
+    const rec: EventRecord = {
+      id: `today#${i}`,
+      topicTags: [...new Set(c.flatMap((s) => extractTopicTags(s.text || s.title)))],
+      anchors: [...new Set(c.flatMap((s) => [...eventFingerprint(s.text || s.title)]))],
+      kind: classifyKind(texts.join(" ")),
+      firstBroadcastAt: first.date,
+      lastBroadcastAt: first.date,
+      broadcastCount: 1,
+      sections: [...new Set(c.map((s) => s.section))],
+      anglesUsed: angles,
+      samples: c,
+      broadcastedTexts: texts,
+      broadcastedFacts: facts,
+      peakScore: 0,
+    };
+    return { id: rec.id, record: rec };
+  });
+}
+
+/**
+ * 在记忆库中查找与候选匹配的事件。
+ *
+ * 查找顺序：**当天暂存区优先 → 长期记忆**。
+ * 当天优先是为了让「同一次运行内已播过」成为最强信号（板块内去重）。
+ *
+ * 匹配规则（硬信号优先，标签仅作辅助）：
+ *  1. 锚点 Jaccard —— 抓「同事件不同措辞」（如「住房贷款…40年」vs「房贷…40年」）
+ *  2. 标题 Dice    —— 抓「媒体改写通稿」这类措辞近似的重复
+ *  3. 主题标签共享 ≥2 —— 弱辅助信号：仅当硬信号已具一定置信（≥ HARD_CORROB）时
+ *     才抬到合并阈（兜底「同一主题不同切入」）；单独出现不触发合并，防误并。
+ */
+export function findMatchingEvent(
+  cand: MemoryCandidate,
+  store: EventMemoryStore,
+): { id: string; record: EventRecord; similarity: number; source: "today" | "events" } | null {
+  const anchors = candidateAnchors(cand);
+  const tags = extractTopicTags(candidateText(cand));
+  const url = cand.url;
+  const score = (
+    rec: EventRecord,
+  ): number => {
+    const samples = Array.isArray(rec.samples) ? rec.samples : [];
+    if (url && samples.some((s) => s && s.url && s.url === url)) return 1;
+    const aj = anchorJaccard(anchors, Array.isArray(rec.anchors) ? rec.anchors : []);
+    const td = bestTitleDice(cand.title, rec);
+    const st = sharedTags(tags, rec.topicTags);
+    const hard = Math.max(aj, td);
+    // 合并判定：
+    //  - 硬信号达合并阈 → 直接合并；
+    //  - 硬信号达 HARD_CORROB 且共享 ≥2 主题标签 → 软命中合并（同一主题不同切入兜底）；
+    //  - 否则标签共享只给弱辅助值（TAG_SOFT_BOOST），不触发合并，防不同事件误并。
+    if (hard >= MATCH_THRESHOLD) return hard;
+    if (hard >= HARD_CORROB && st >= 2) return MATCH_THRESHOLD;
+    return Math.max(hard, st >= 2 ? TAG_SOFT_BOOST : 0);
+  };
+
+  // 1) 当天暂存区（同一次运行内已播报）
+  let bestToday: { id: string; record: EventRecord; similarity: number } | null = null;
+  for (const p of todayPseudoRecords(store)) {
+    const sim = score(p.record);
+    if (sim >= MATCH_THRESHOLD && (!bestToday || sim > bestToday.similarity)) {
+      bestToday = { id: p.id, record: p.record, similarity: sim };
+    }
+  }
+  if (bestToday) return { ...bestToday, source: "today" };
+
+  // 2) 长期记忆（昨天及更早）
+  let best: { id: string; record: EventRecord; similarity: number } | null = null;
+  for (const [id, rec] of Object.entries(store.events ?? {})) {
+    // 损坏记录跳过（不使整体匹配失效）；落盘时会被 sanitizeEvents 清除 → 自愈
+    if (!isUsableRecord(rec)) continue;
+    const sim = score(rec);
+    if (sim >= MATCH_THRESHOLD && (!best || sim > best.similarity)) {
+      best = { id, record: rec, similarity: sim };
+    }
+  }
+  return best ? { ...best, source: "events" } : null;
+}
+
+// ---------------------------------------------------------------------------
+// 5) 信息增量的量化标准（要求 2）
+// ---------------------------------------------------------------------------
+
+export interface NoveltyResult {
+  /** 0-1 综合信息增量。 */
+  novelty: number;
+  /** 新增事实锚点（相对历史已播报内容）。 */
+  newFacts: string[];
+  /** 新增 bigram 占比（0-1）：历史内容中未出现的二元组比例。 */
+  newBigramRatio: number;
+  /** 是否发生「阶段推进」（如 受理 → 过会、传闻 → 正式印发）。 */
+  stageAdvance: boolean;
+  /** 与历史内容的标题重复度（0-1，越高越雷同）。 */
+  titleOverlap: number;
+}
+
+/**
+ * 量化信息增量。
+ *
+ * 综合三项（加权）：
+ *  - 新事实占比（权重 0.45）：数字/阶段/主体的新增 —— 最能代表「有进展」
+ *  - 新 bigram 占比（权重 0.35）：表述层面的新增内容量
+ *  - 阶段推进（权重 0.20）：事件生命周期往前走了一步
+ * 最后按标题重复度做惩罚（措辞越雷同，增量越被压低）。
+ *
+ * 阈值语义（在 evaluateCandidate 中消费）：
+ *  - ≥ 0.35 视为「有实质进展」
+ *  - 0.15 ~ 0.35 视为「增量有限」（可重播但需换角度）
+ *  - < 0.15 视为「重复表述」
+ */
+export function computeNovelty(cand: MemoryCandidate, record: EventRecord): NoveltyResult {
+  const text = candidateText(cand);
+  const facts = extractFacts(text);
+  const histFacts = new Set(record.broadcastedFacts ?? []);
+  const newFacts = facts.filter((f) => !histFacts.has(f));
+  // 历史无事实锚点时：无基线可比对，「全部为新」不可置信——封顶到 NO_FACT_BASELINE_CAP
+  // （默认 0.5），避免首播纯政策表述（抽不出事实）后，后续带事实报道的 novelty 被事实项拉满、
+  // 误判 progress 放行。有基线时按真实新增占比计算（分母取 max(候选事实数, 历史事实数)）。
+  const newFactRatio =
+    facts.length === 0
+      ? 0
+      : Math.min(
+          newFacts.length / Math.max(facts.length, histFacts.size, 1),
+          histFacts.size === 0 ? NO_FACT_BASELINE_CAP : 1,
+        );
+
+  // bigram 增量
+  const g = titleBigrams(normText(text));
+  const histGrams = new Set<string>();
+  for (const t of record.broadcastedTexts ?? []) {
+    for (const x of titleBigrams(normText(t))) histGrams.add(x);
+  }
+  let novel = 0;
+  for (const x of g) if (!histGrams.has(x)) novel++;
+  const newBigramRatio = g.size === 0 ? 0 : novel / g.size;
+
+  // 阶段推进：候选含进展动词，且该动词未在历史事实中出现
+  const histStages = new Set([...(record.broadcastedFacts ?? [])].filter((f) => f.startsWith("!")));
+  const candStages = facts.filter((f) => f.startsWith("!"));
+  const stageAdvance = candStages.some((s) => !histStages.has(s));
+
+  // 标题重复度惩罚
+  const titleOverlap = bestTitleDice(cand.title, record);
+
+  const raw =
+    0.45 * clamp01(newFactRatio) + 0.35 * clamp01(newBigramRatio) + (stageAdvance ? 0.2 : 0);
+  // 措辞高度雷同（Dice ≥ 0.6）时按超出部分线性压低，最低压到 55%
+  const penalty = titleOverlap > 0.6 ? Math.min((titleOverlap - 0.6) / 0.4, 1) * 0.45 : 0;
+  const novelty = clamp01(raw * (1 - penalty));
+
+  return { novelty, newFacts, newBigramRatio, stageAdvance, titleOverlap };
+}
+
+function clamp01(n: number): number {
+  if (!Number.isFinite(n)) return 0;
+  return Math.max(0, Math.min(1, n));
+}
+
+// ---------------------------------------------------------------------------
+// 6) 冷却期与衰减（要求 3）
+// ---------------------------------------------------------------------------
+
+/** YYYY-MM-DD 相差天数（b - a，纯字符串运算，规避时区）。 */
+export function diffDays(a: string, b: string): number {
+  const pa = a.split("-").map(Number);
+  const pb = b.split("-").map(Number);
+  const da = Date.UTC(pa[0], pa[1] - 1, pa[2]);
+  const db = Date.UTC(pb[0], pb[1] - 1, pb[2]);
+  return Math.round((db - da) / 86_400_000);
+}
+
+/**
+ * 有效冷却期（天）。
+ *
+ * = 事件类型基础冷却期 × 板块缩放系数 × (1 + 0.5 × (播报次数 - 1))，上限 14 天。
+ * 语义：同一件事说得越多，越要隔久一点才能再说（避免连日刷屏）。
+ */
+export function effectiveCooldownDays(
+  record: EventRecord,
+  section: MemorySection,
+): number {
+  const base = BASE_COOLDOWN_DAYS[record.kind] ?? BASE_COOLDOWN_DAYS.generic;
+  const scale = SECTION_POLICY[section].cooldownScale;
+  const repeat = Math.max(1, record.broadcastCount ?? 1);
+  const grown = base * scale * (1 + 0.5 * (repeat - 1));
+  return Math.min(Math.round(grown), MAX_COOLDOWN_DAYS);
+}
+
+/**
+ * 衰减后的增量门槛。
+ *
+ * 冷却期内用 noveltyToBreak（高门槛，需足够进展才打破）；
+ * 冷却结束后，门槛随「超出冷却期的天数」线性衰减，14 天后降到
+ * noveltyBase 的 30%，但不低于板块下限 noveltyFloor
+ * —— 即「时间越久，重播越容易被接受」，但绝不无脑放行。
+ */
+export function decayedThreshold(
+  section: MemorySection,
+  daysSince: number,
+  cooldownDays: number,
+): number {
+  const p = SECTION_POLICY[section];
+  if (daysSince < cooldownDays) return p.noveltyToBreak;
+  const overdue = daysSince - cooldownDays;
+  const relief = clamp01(overdue / 14);
+  const relaxed = p.noveltyBase * (1 - 0.7 * relief);
+  return Math.max(relaxed, p.noveltyFloor);
+}
+
+/**
+ * 是否允许「打破冷却」（高重要性突发事件）。
+ *
+ * 三类放行：
+ *  1. 命中评分器硬规则（override，如房贷40年这类必然置顶的条目）
+ *  2. 档位 must_read 且相关性分 ≥ 80（重大事件）
+ *  3. 风险板块：出现了新事实（风险不因「说过」而消失，有新证据就要继续预警）
+ * 且统一要求 novelty ≥ 0.25 —— 纯重复不构成「突发」。
+ */
+export function canBreakCooldown(
+  cand: MemoryCandidate,
+  section: MemorySection,
+  novelty: number,
+  newFactsCount: number,
+): boolean {
+  if (novelty < 0.25) return false;
+  if (cand.override === true) return true;
+  if (cand.tier === "must_read" && (cand.score ?? 0) >= 80) return true;
+  if (section === "risk" && newFactsCount > 0) return true;
+  return false;
+}
+
+// ---------------------------------------------------------------------------
+// 7) 角度轮换（要求 4）
+// ---------------------------------------------------------------------------
+
+/**
+ * 选择下一个切入角度：优先取「尚未用过」的角度（按 ANGLE_ORDER）；
+ * 全部用完后，从最早使用的角度重新开始第二轮（避免永久封死）。
+ */
+export function nextAngle(record: EventRecord): EventAngle {
+  const used = new Set(record.anglesUsed ?? []);
+  for (const a of ANGLE_ORDER) if (!used.has(a)) return a;
+  // 全部用过 → 重新从最早使用的开始轮
+  const first = (record.anglesUsed ?? [])[0];
+  return first ?? ANGLE_ORDER[0];
+}
+
+// ---------------------------------------------------------------------------
+// 8) 核心判定流程（要求 2/3/4）
+// ---------------------------------------------------------------------------
+
+/*
+ * 完整判定流程（伪代码）：
+ *
+ *   function evaluateCandidate(cand, section, today, store):
+ *     match = findMatchingEvent(cand, store)
+ *     if match == null:
+ *         return { verdict: "new", allow: true }              # 记忆库没有 → 放行
+ *
+ *     n = computeNovelty(cand, match.record)                  # 信息增量
+ *     daysSince = today - record.lastBroadcastAt
+ *     cooldown = effectiveCooldownDays(record, section)       # 类型 × 板块 × 次数
+ *     policy   = SECTION_POLICY[section]
+ *
+ *     # ① 次数上限：同一板块说得太多，必须有重大进展才能再说
+ *     sectionCount = 该事件在本板块的历史播报次数
+ *     if sectionCount >= policy.maxRepeat and n.novelty < policy.noveltyToBreak:
+ *         return { verdict: "exhausted", allow: false }
+ *
+ *     # ② 当日已播（跨板块共享）：定调与必读常常指向同一事件，
+ *     #    这是合理呈现（一句话定调 + 展开说为什么重要），不按冷却处理；
+ *     #    只要求有基本增量，否则判为同一天内的重复表述
+ *     if daysSince == 0:
+ *         if n.novelty >= policy.noveltyBase:
+ *             return { verdict: "progress", allow: true, requiredAngle: nextAngle }
+ *         if n.novelty >= policy.noveltyFloor and policy.allowRefresh:
+ *             return { verdict: "refresh", allow: true, requiredAngle: nextAngle }
+ *         return { verdict: "duplicate", allow: false }
+ *
+ *     # ③ 冷却期内：需打破冷却
+ *     if daysSince < cooldown:
+ *         if canBreakCooldown(cand, section, n.novelty, n.newFacts.length):
+ *             return { verdict: "progress", allow: true, brokeCooldown: true }
+ *         threshold = policy.noveltyToBreak
+ *         if n.novelty >= threshold:
+ *             return { verdict: "progress", allow: true }
+ *         if n.novelty < policy.noveltyFloor:
+ *             return { verdict: "duplicate", allow: false }
+ *         return { verdict: "cooldown", allow: false }
+ *
+ *     # ④ 冷却已结束：门槛随时间衰减
+ *     threshold = decayedThreshold(section, daysSince, cooldown)
+ *     if n.novelty >= policy.noveltyBase:
+ *         return { verdict: "progress", allow: true }         # 有实质进展
+ *     if n.novelty >= threshold:
+ *         if not policy.allowRefresh:
+ *             return { verdict: "cooldown", allow: false }    # 定调不接受"换角度重播"
+ *         return { verdict: "refresh", allow: true, requiredAngle: nextAngle(record) }
+ *     if n.novelty < policy.noveltyFloor:
+ *         return { verdict: "duplicate", allow: false }
+ *     return { verdict: "cooldown", allow: false }
+ */
+
+export function evaluateCandidate(opts: {
+  cand: MemoryCandidate;
+  section: MemorySection;
+  /** 今天 YYYY-MM-DD。 */
+  today: string;
+  store: EventMemoryStore;
+}): MemoryDecision {
+  const { cand, section, today, store } = opts;
+  const policy = SECTION_POLICY[section];
+  const match = findMatchingEvent(cand, store);
+
+  if (!match) {
+    return {
+      section,
+      title: cand.title,
+      verdict: "new",
+      allow: true,
+      novelty: 1,
+      reason: "记忆库中无匹配事件（新事件）",
+    };
+  }
+
+  const rec = match.record;
+  const n = computeNovelty(cand, rec);
+  const daysSince = diffDays(rec.lastBroadcastAt, today);
+  const cooldownDays = effectiveCooldownDays(rec, section);
+  const sectionCount = (rec.samples ?? []).filter((s) => s.section === section).length;
+
+  // ① 板块内播报次数上限
+  if (sectionCount >= policy.maxRepeat && n.novelty < policy.noveltyToBreak) {
+    return {
+      section,
+      title: cand.title,
+      verdict: "exhausted",
+      allow: false,
+      novelty: n.novelty,
+      daysSince,
+      cooldownDays,
+      eventId: match.id,
+      broadcastCount: rec.broadcastCount,
+      reason: `该事件在本板块已播报 ${sectionCount} 次（上限 ${policy.maxRepeat}），增量 ${fmt(n.novelty)} 未达重大进展线 ${fmt(policy.noveltyToBreak)}`,
+    };
+  }
+
+  // ② 当日已播（跨板块共享）：定调与必读指向同一事件属合理呈现
+  //    （一句话定调 + 展开讲为什么重要），不按冷却处理，只要求基本增量。
+  if (daysSince <= 0) {
+    const angle = nextAngle(rec);
+    if (n.novelty >= policy.noveltyBase) {
+      return {
+        section,
+        title: cand.title,
+        verdict: "progress",
+        allow: true,
+        novelty: n.novelty,
+        daysSince: 0,
+        cooldownDays,
+        threshold: policy.noveltyBase,
+        eventId: match.id,
+        broadcastCount: rec.broadcastCount,
+        requiredAngle: angle,
+        reason: `当日已播（跨板块），增量 ${fmt(n.novelty)} ≥ 基础线 ${fmt(policy.noveltyBase)} → 换角度「${angle}」呈现`,
+      };
+    }
+    if (n.novelty >= policy.noveltyFloor && policy.allowRefresh) {
+      return {
+        section,
+        title: cand.title,
+        verdict: "refresh",
+        allow: true,
+        novelty: n.novelty,
+        daysSince: 0,
+        cooldownDays,
+        threshold: policy.noveltyFloor,
+        eventId: match.id,
+        broadcastCount: rec.broadcastCount,
+        requiredAngle: angle,
+        reason: `当日已播（跨板块），增量有限（${fmt(n.novelty)}）→ 强制换角度「${angle}」`,
+      };
+    }
+    return {
+      section,
+      title: cand.title,
+      verdict: "duplicate",
+      allow: false,
+      novelty: n.novelty,
+      daysSince: 0,
+      cooldownDays,
+      eventId: match.id,
+      broadcastCount: rec.broadcastCount,
+      reason: `当日已播且增量 ${fmt(n.novelty)} < 下限 ${fmt(policy.noveltyFloor)}（同一天内的重复表述）`,
+    };
+  }
+
+  // ③ 冷却期内
+  if (daysSince < cooldownDays) {
+    if (canBreakCooldown(cand, section, n.novelty, n.newFacts.length)) {
+      return {
+        section,
+        title: cand.title,
+        verdict: "progress",
+        allow: true,
+        novelty: n.novelty,
+        daysSince,
+        cooldownDays,
+        threshold: policy.noveltyToBreak,
+        eventId: match.id,
+        broadcastCount: rec.broadcastCount,
+        requiredAngle: nextAngle(rec),
+        brokeCooldown: true,
+        reason: `重大事件打破冷却（${daysSince}/${cooldownDays} 天，增量 ${fmt(n.novelty)}，新事实 ${n.newFacts.length} 项）`,
+      };
+    }
+    if (n.novelty >= policy.noveltyToBreak) {
+      return {
+        section,
+        title: cand.title,
+        verdict: "progress",
+        allow: true,
+        novelty: n.novelty,
+        daysSince,
+        cooldownDays,
+        threshold: policy.noveltyToBreak,
+        eventId: match.id,
+        broadcastCount: rec.broadcastCount,
+        requiredAngle: nextAngle(rec),
+        reason: `冷却期内但增量 ${fmt(n.novelty)} ≥ 打破线 ${fmt(policy.noveltyToBreak)}（有实质进展）`,
+      };
+    }
+    if (n.novelty < policy.noveltyFloor) {
+      return {
+        section,
+        title: cand.title,
+        verdict: "duplicate",
+        allow: false,
+        novelty: n.novelty,
+        daysSince,
+        cooldownDays,
+        eventId: match.id,
+        broadcastCount: rec.broadcastCount,
+        reason: `冷却期内（${daysSince}/${cooldownDays} 天）且增量 ${fmt(n.novelty)} < 下限 ${fmt(policy.noveltyFloor)}（重复表述）`,
+      };
+    }
+    return {
+      section,
+      title: cand.title,
+      verdict: "cooldown",
+      allow: false,
+      novelty: n.novelty,
+      daysSince,
+      cooldownDays,
+      threshold: policy.noveltyToBreak,
+      eventId: match.id,
+      broadcastCount: rec.broadcastCount,
+      reason: `冷却期内（${daysSince}/${cooldownDays} 天），增量 ${fmt(n.novelty)} 不足以打破（需 ≥ ${fmt(policy.noveltyToBreak)}）`,
+    };
+  }
+
+  // ③ 冷却已结束：门槛随时间衰减
+  const threshold = decayedThreshold(section, daysSince, cooldownDays);
+  if (n.novelty >= policy.noveltyBase) {
+    return {
+      section,
+      title: cand.title,
+      verdict: "progress",
+      allow: true,
+      novelty: n.novelty,
+      daysSince,
+      cooldownDays,
+      threshold,
+      eventId: match.id,
+      broadcastCount: rec.broadcastCount,
+      requiredAngle: nextAngle(rec),
+      reason: `冷却结束（${daysSince} 天）且增量 ${fmt(n.novelty)} ≥ 基础线 ${fmt(policy.noveltyBase)}（新进展）`,
+    };
+  }
+  if (n.novelty >= threshold) {
+    if (!policy.allowRefresh) {
+      return {
+        section,
+        title: cand.title,
+        verdict: "cooldown",
+        allow: false,
+        novelty: n.novelty,
+        daysSince,
+        cooldownDays,
+        threshold,
+        eventId: match.id,
+        broadcastCount: rec.broadcastCount,
+        reason: `板块不接受「换角度重播」（增量 ${fmt(n.novelty)} 仅达刷新线 ${fmt(threshold)}，未达基础线 ${fmt(policy.noveltyBase)}）`,
+      };
+    }
+    return {
+      section,
+      title: cand.title,
+      verdict: "refresh",
+      allow: true,
+      novelty: n.novelty,
+      daysSince,
+      cooldownDays,
+      threshold,
+      eventId: match.id,
+      broadcastCount: rec.broadcastCount,
+      requiredAngle: nextAngle(rec),
+      reason: `冷却结束（${daysSince} 天）但增量有限（${fmt(n.novelty)} ≥ 衰减门槛 ${fmt(threshold)}）→ 强制换角度「${nextAngle(rec)}」`,
+    };
+  }
+  if (n.novelty < policy.noveltyFloor) {
+    return {
+      section,
+      title: cand.title,
+      verdict: "duplicate",
+      allow: false,
+      novelty: n.novelty,
+      daysSince,
+      cooldownDays,
+      threshold,
+      eventId: match.id,
+      broadcastCount: rec.broadcastCount,
+      reason: `增量 ${fmt(n.novelty)} < 下限 ${fmt(policy.noveltyFloor)}（重复表述）`,
+    };
+  }
+  return {
+    section,
+    title: cand.title,
+    verdict: "cooldown",
+    allow: false,
+    novelty: n.novelty,
+    daysSince,
+    cooldownDays,
+    threshold,
+    eventId: match.id,
+    broadcastCount: rec.broadcastCount,
+    reason: `增量 ${fmt(n.novelty)} < 衰减门槛 ${fmt(threshold)}（距上次 ${daysSince} 天）`,
+  };
+}
+
+function fmt(n: number): string {
+  return (Math.round(n * 100) / 100).toFixed(2);
+}
+
+// ---------------------------------------------------------------------------
+// 9) 记忆写入（纯函数，返回新 store）
+// ---------------------------------------------------------------------------
+
+/**
+ * 开启新的一天：先把「昨天及更早」的暂存播报结算进长期记忆，再清空当天暂存区。
+ *
+ * 必须在每次判定前调用一次。幂等的关键：
+ *  - 同一天重复运行 → 暂存区被清空重写，长期记忆不变 → 判定结果完全一致；
+ *  - 跨天 → 昨天的播报结算进长期记忆 → 冷却期开始生效。
+ */
+/**
+ * 结算闸门判定（2026-09-03，取代 9:00 启发式）：
+ *  - 昨天**有人工确认推送**（deliveries 含昨天）→ 昨天的播报是客户真正收到的
+ *    版本 → 全量结算进长期记忆（broadcastAt 仅溯源，不再按 9 点过滤——9 点前
+ *    的测试重试与 9 点后的人工补发都可能是正式，时刻无法证伪）。
+ *  - 昨天无交付记录 → 昨天从未正式交付（纯 build/测试/忘了推）→ 不结算，
+ *    宁漏勿误：次日同源新闻允许重播，也不让没发出去的内容冷却掉真实发布。
+ *  - 版本指纹校验（2026-09-03 补严）：deliveries.reportRunId（被推送版本的
+ *    gh-pages 发布 run）与 today.runId（暂存区落盘 run）双侧都有且不一致 →
+ *    推送的版本 ≠ 将结算的暂存内容 → 不结算（宁漏勿误）。任一侧缺指纹
+ *    （旧记录 / mark-delivered 反查失败）→ 无法证伪，按信任交付结算。
+ *
+ * 必须在 beginDay 重置 today **之前**调用（依赖 store.today 仍是「昨天」）。
+ */
+export function deliverySettlementGate(
+  store: EventMemoryStore,
+  prevDate: string,
+): { settle: boolean; reason: "delivered" | "no-delivery" | "fingerprint-mismatch" } {
+  const rec = (store.deliveries ?? []).find((d) => d && d.date === prevDate);
+  if (!rec) return { settle: false, reason: "no-delivery" };
+  const pushedRun = rec.reportRunId;
+  const stagedRun = store.today && store.today.date === prevDate ? store.today.runId : undefined;
+  if (pushedRun && stagedRun && pushedRun !== stagedRun) {
+    return { settle: false, reason: "fingerprint-mismatch" };
+  }
+  return { settle: true, reason: "delivered" };
+}
+
+export function beginDay(store: EventMemoryStore, today: string): EventMemoryStore {
+  let events = { ...(store.events ?? {}) };
+  const prev = store.today;
+  if (prev && prev.date && prev.date !== today && prev.entries.length > 0) {
+    const gate = deliverySettlementGate(store, prev.date);
+    if (gate.settle) events = settleIntoEvents(events, prev.entries);
+  }
+  return {
+    version: 1,
+    updatedAt: today,
+    events,
+    today: { date: today, entries: [] },
+    ...(store.deliveries ? { deliveries: store.deliveries } : {}),
+    ...(store.ipoVoicing ? { ipoVoicing: store.ipoVoicing } : {}),
+  };
+}
+
+/**
+ * 把当日「暂存区」直接结算进长期记忆（Fix A，2026-09-10）。
+ *
+ * 取代「次日跨天 beginDay + deliverySettlementGate 指纹对账」旧链路：旧链路在
+ * 「同日重推终版」这种正常操作下，会因暂存 runId ≠ 推送 runId 而误杀已发微信内容
+ * （2026-09-09 / 09-10 复盘：这两天口播因此从未进长期记忆，09-08 已彻底丢失）。
+ *
+ * 新语义：**微信推送成功即结算**——发微信本身就是最权威的「已交付」信号，
+ * 不再做二次版本对账。结算后清空当日暂存区，避免次日 beginDay 重复结算
+ * （beginDay 仍保留为兜底：若某天跳过了 mark-delivered，次日 run 的 beginDay
+ * 仍会按 deliveries 闸门结算）。
+ *
+ * @param store 当前记忆库
+ * @param date  目标日期（默认取 store.today.date）。仅当 store.today.date === date 时才结算。
+ * @returns 新 store；无可结算内容时返回原引用（便于调用方用 `===` 判等跳过写盘）。
+ */
+export function settleTodayIntoEvents(
+  store: EventMemoryStore,
+  date?: string,
+): EventMemoryStore {
+  const today = store.today;
+  if (!today || today.entries.length === 0) return store;
+  if (date && today.date !== date) return store;
+  const events = settleIntoEvents(store.events ?? {}, today.entries);
+  return {
+    ...store,
+    events,
+    today: { date: today.date, entries: [] },
+  };
+}
+
+/** 把一批播报留痕结算进长期记忆（跨天时调用，亦供 reconcile 复用）。 */
+export function settleIntoEvents(
+  events: Record<string, EventRecord>,
+  entries: BroadcastSample[],
+): Record<string, EventRecord> {
+  let out = events;
+  for (const s of entries) {
+    const cand: MemoryCandidate = {
+      title: s.title,
+      text: s.text ?? "",
+      ...(s.url ? { url: s.url } : {}),
+      ...(s.score !== undefined ? { score: s.score } : {}),
+    };
+    out = upsertEvent(out, cand, s);
+  }
+  return out;
+}
+
+/** 把一条播报合并进长期记忆（存在则更新，不存在则新建）。 */
+function upsertEvent(
+  events: Record<string, EventRecord>,
+  cand: MemoryCandidate,
+  sample: BroadcastSample,
+): Record<string, EventRecord> {
+  const text = candidateText(cand);
+  const anchors = candidateAnchors(cand);
+  const tags = extractTopicTags(text);
+  const facts = extractFacts(text);
+  const angle = sample.angle;
+  const match = findMatchingEvent(cand, { version: 1, events });
+  const out = { ...events };
+
+  const merge = (rec: EventRecord): EventRecord => {
+    // 同一天的多次呈现（跨板块 / 换角度）不重复计数 —— broadcastCount 语义是
+    // 「播报天数」，否则定调 + 必读 + 商机都指向同一事件会让冷却期无谓暴涨。
+    const sameDay = rec.lastBroadcastAt === sample.date;
+    return {
+      ...rec,
+      // 锚点/标签/事实取并集，让后续同类报道更容易匹配到本事件
+      anchors: [...new Set([...rec.anchors, ...anchors])],
+      topicTags: [...new Set([...rec.topicTags, ...tags])],
+      broadcastedTexts: [...(rec.broadcastedTexts ?? []), text].slice(-MAX_TEXTS),
+      broadcastedFacts: [...new Set([...(rec.broadcastedFacts ?? []), ...facts])],
+      lastBroadcastAt: sample.date,
+      broadcastCount: (rec.broadcastCount ?? 0) + (sameDay ? 0 : 1),
+      sections: [...new Set([...(rec.sections ?? []), sample.section])],
+      anglesUsed: angle ? [...new Set([...(rec.anglesUsed ?? []), angle])] : rec.anglesUsed ?? [],
+      samples: [...(rec.samples ?? []), sample].slice(-MAX_SAMPLES),
+      peakScore: Math.max(rec.peakScore ?? 0, cand.score ?? 0),
+    };
+  };
+
+  if (match) {
+    out[match.id] = merge(match.record);
+    return out;
+  }
+  const id = makeEventId(anchors) || `ev-${hash(normText(cand.title))}`;
+  out[id] = events[id]
+    ? merge(events[id])
+    : {
+        id,
+        topicTags: tags,
+        anchors,
+        kind: classifyKind(text),
+        firstBroadcastAt: sample.date,
+        lastBroadcastAt: sample.date,
+        broadcastCount: 1,
+        sections: [sample.section],
+        anglesUsed: angle ? [angle] : [],
+        samples: [sample],
+        broadcastedTexts: [text],
+        broadcastedFacts: facts,
+        peakScore: cand.score ?? 0,
+      };
+  return out;
+}
+
+/**
+ * 记录一次播报 → 写入**当天暂存区**（不直接进长期记忆，跨天才结算）。
+ *
+ * 为什么分两层：见 EventMemoryStore.today 的说明（保证同一天多次运行的幂等性）。
+ * 存 text / facts 是为了让「同一次运行内」的第二条同事件报道也能算出信息增量
+ * （例如 LLM 把同一事件拆成两条必读，第二条需要被识别为重复）。
+ */
+export function rememberBroadcast(
+  store: EventMemoryStore,
+  input: {
+    cand: MemoryCandidate;
+    section: MemorySection;
+    date: string;
+    angle?: EventAngle;
+    novelty?: number;
+    /**
+     * 播报时刻（ISO 8601 带时区）。测试注入 9:00 前的正式时刻用；
+     * 生产缺省取当前时刻（≈ 报告生成时刻），见下方 broadcastAt 注释。
+     */
+    broadcastAt?: string;
+  },
+): EventMemoryStore {
+  const { cand, section, date, angle, novelty, broadcastAt } = input;
+  const text = candidateText(cand);
+  const sample: BroadcastSample = {
+    date,
+    section,
+    title: cand.title,
+    text,
+    facts: extractFacts(text),
+    // 播报时刻：播报与展示绑定、几乎同时产生，故默认以当前时刻（≈ 报告页面生成时刻）为准。
+    // 用于以 9:00 为界区分客户演示数据与测试重跑数据，并支持按时间段筛选/清理。
+    // 测试可注入固定时刻（见 input.broadcastAt），避免用例结果随真实时钟漂移。
+    broadcastAt: broadcastAt ?? formatBroadcastAt(),
+  };
+  if (cand.url) sample.url = cand.url;
+  if (cand.score !== undefined) sample.score = cand.score;
+  if (novelty !== undefined) sample.novelty = novelty;
+  if (angle) sample.angle = angle;
+
+  const prev = store.today && store.today.date === date ? store.today.entries : [];
+  // runId 透传（2026-09-03）：runId 由 persistMemory 注入后，同日内的多次
+  // rememberBroadcast 不得把它丢掉——否则 beginDay 结算指纹校验
+  // （deliverySettlementGate）会因暂存侧缺指纹而退化为「无指纹信任结算」，
+  // 拦不住「推送版本 ≠ 落盘版本」的场景。beginDay 推进到新一天时才显式清空。
+  const today: { date: string; entries: BroadcastSample[]; runId?: string } = {
+    date,
+    entries: [...prev, sample],
+    ...(store.today?.date === date && store.today.runId ? { runId: store.today.runId } : {}),
+  };
+  return {
+    version: 1,
+    updatedAt: date,
+    events: store.events ?? {},
+    today,
+    // 交付记录随库透传：不得在写入链路上丢失（否则 mark-delivered 的记录会被覆盖）
+    ...(store.deliveries ? { deliveries: store.deliveries } : {}),
+  };
+}
+
+/**
+ * 记录一次「人工确认交付」——notify workflow 微信推送成功后调用（mark-delivered）。
+ *
+ * 同日重复推送 → 覆盖 pushedAt（以最后一次成功推送为准）；跨日 → 追加。
+ * 返回新 store，不改入参。deliveries 是 beginDay 的结算闸门，见 EventMemoryStore.deliveries。
+ */
+export function appendDelivery(
+  store: EventMemoryStore,
+  rec: DeliveryRecord,
+): EventMemoryStore {
+  const list = store.deliveries ?? [];
+  const exists = list.some((d) => d && d.date === rec.date);
+  const deliveries = exists
+    ? list.map((d) => (d && d.date === rec.date ? rec : d))
+    : [...list, rec];
+  return { ...store, deliveries };
+}
+
+// ---------------------------------------------------------------------------
+// 11) IPO 口播去重命名空间（与 events 隔离，2026-09-09）
+// ---------------------------------------------------------------------------
+
+/**
+ * 记录若干企业今日被口播（追加日期到各自数组，并裁剪超期条目）。
+ * 返回新 store，不改入参。受 PUBLISH_RUN 闸门约束的写盘见 store.saveEventMemory。
+ */
+export function recordIpoVoicing(
+  store: EventMemoryStore,
+  companies: string[],
+  date: string,
+): EventMemoryStore {
+  if (companies.length === 0) return store;
+  const prev = store.ipoVoicing ?? {};
+  const next: Record<string, string[]> = {};
+  for (const [c, ds] of Object.entries(prev)) {
+    const kept = (ds ?? []).filter((d) => diffDays(d, date) <= IPO_VOICE_PRUNE_DAYS);
+    if (kept.length > 0) next[c] = kept;
+  }
+  for (const c of companies) {
+    if (!c) continue;
+    const arr = next[c] ?? [];
+    if (!arr.includes(date)) arr.push(date);
+    arr.sort();
+    next[c] = arr;
+  }
+  return { ...store, ipoVoicing: next };
+}
+
+/**
+ * 该企业今天是否应跳过口播：滚动窗口（最近 IPO_VOICE_WINDOW_DAYS 天，含今天）
+ * 内已口播天数 ≥ IPO_VOICE_MAX_IN_WINDOW → 跳过。
+ */
+export function ipoShouldSkip(
+  store: EventMemoryStore,
+  company: string,
+  today: string,
+): boolean {
+  const ds = store.ipoVoicing?.[company];
+  if (!ds || ds.length === 0) return false;
+  const recent = ds.filter((d) => diffDays(d, today) >= 0 && diffDays(d, today) <= IPO_VOICE_WINDOW_DAYS);
+  return recent.length >= IPO_VOICE_MAX_IN_WINDOW;
+}
+
+/** 简易字符串 hash（事件 id 兜底，无锚点时使用）。 */
+function hash(s: string): string {
+  let h = 0;
+  for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) | 0;
+  return Math.abs(h).toString(36);
+}
+
+// ---------------------------------------------------------------------------
+// 10) 记忆库维护
+// ---------------------------------------------------------------------------
+
+/**
+ * 清理过期事件。
+ *
+ * 与展示层 2 天窗口不同，记忆库必须活得久（否则「上周播过」无从知晓）；
+ * 但也不能无限膨胀。保留策略：
+ *  - 最近 retainDays（默认 45）天内播报过的保留；
+ *  - 峰值分 ≥ 60 的重大事件额外延长到 retainDays × 2（重大政策值得长期记住）；
+ *  - 总量超过 maxEvents（默认 400）时，按 lastBroadcastAt 淘汰最旧的。
+ */
+export function pruneMemory(
+  store: EventMemoryStore,
+  today: string,
+  opts: { retainDays?: number; maxEvents?: number } = {},
+): EventMemoryStore {
+  const retainDays = opts.retainDays ?? 45;
+  const maxEvents = opts.maxEvents ?? 400;
+  // 落盘前统一清洗：损坏记录在此丢弃、数值/日期类型在此归一化。
+  // pruneMemory 是写入前必经路径（store.ts:saveEventMemory），在此兜底可确保
+  // 即使调用方传入被污染的 store，落盘内容也是干净的 → 自愈。
+  const src = sanitizeEvents(store.events ?? {});
+  const events: Record<string, EventRecord> = {};
+  for (const [id, rec] of Object.entries(src)) {
+    // 日期缺失/非法时按「今天」处理（宁可保留，不误删记忆）
+    const lastAt = rec.lastBroadcastAt ? rec.lastBroadcastAt : today;
+    const age = Number.isFinite(diffDays(lastAt, today)) ? diffDays(lastAt, today) : 0;
+    const keepFor = (rec.peakScore ?? 0) >= 60 ? retainDays * 2 : retainDays;
+    if (age <= keepFor) events[id] = rec;
+  }
+  const list = Object.entries(events).sort(
+    (a, b) => (a[1].lastBroadcastAt < b[1].lastBroadcastAt ? -1 : 1),
+  );
+  if (list.length > maxEvents) {
+    const trimmed: Record<string, EventRecord> = {};
+    for (const [id, rec] of list.slice(list.length - maxEvents)) trimmed[id] = rec;
+    return { version: 1, updatedAt: today, events: trimmed, ...(store.today ? { today: store.today } : {}), ...(store.deliveries ? { deliveries: store.deliveries } : {}), ...(store.ipoVoicing ? { ipoVoicing: store.ipoVoicing } : {}) };
+  }
+  return { version: 1, updatedAt: today, events, ...(store.today ? { today: store.today } : {}), ...(store.deliveries ? { deliveries: store.deliveries } : {}), ...(store.ipoVoicing ? { ipoVoicing: store.ipoVoicing } : {}) };
+}
+
+/** 空记忆库。 */
+export function emptyMemory(): EventMemoryStore {
+  return { version: 1, events: {} };
+}
+
+/**
+ * 生成给 LLM 的「记忆提示」：近期已播报事件清单 + 若必须重播应切换的角度。
+ * 只取最近 lookbackDays 天内播报过的事件，按最近播报时间倒序。
+ */
+export function buildMemoryBrief(
+  store: EventMemoryStore,
+  today: string,
+  opts: { lookbackDays?: number; limit?: number } = {},
+): Array<{
+  title: string;
+  lastBroadcast: string;
+  daysSince: number;
+  count: number;
+  suggestedAngle: EventAngle;
+  angleGuide: string;
+}> {
+  const lookback = opts.lookbackDays ?? 10;
+  const limit = opts.limit ?? 8;
+  const out: Array<{
+    title: string;
+    lastBroadcast: string;
+    daysSince: number;
+    count: number;
+    suggestedAngle: EventAngle;
+    angleGuide: string;
+  }> = [];
+  for (const rec of Object.values(store.events ?? {})) {
+    if (!isUsableRecord(rec)) continue;
+    const lastAt = typeof rec.lastBroadcastAt === "string" ? rec.lastBroadcastAt : today;
+    const days = diffDays(lastAt, today);
+    if (days < 0 || days > lookback) continue;
+    const last = rec.samples.filter((s) => s && s.date === lastAt)[0]
+      ?? rec.samples[rec.samples.length - 1];
+    if (!last) continue;
+    const angle = nextAngle(rec);
+    out.push({
+      title: last.title,
+      lastBroadcast: rec.lastBroadcastAt,
+      daysSince: days,
+      count: rec.broadcastCount ?? 1,
+      suggestedAngle: angle,
+      angleGuide: ANGLE_GUIDE[angle],
+    });
+  }
+  out.sort((a, b) => a.daysSince - b.daysSince);
+  return out.slice(0, limit);
+}
+
+/**
+ * 把记忆提示渲染成注入 LLM 提示词的文本块。
+ *
+ * 给模型的指令是「优先选新事件；若某事件确实仍是今天最值得说的，
+ * 必须换一个切入角度」——而不是「禁止提及」。
+ * 硬禁会让模型在只有旧事件可说时编造内容（历史教训：LLM 宁可编也不留空），
+ * 因此保留「换角度重说」的合法出口。
+ */
+export function formatMemoryBrief(
+  brief: Array<{
+    title: string;
+    lastBroadcast: string;
+    daysSince: number;
+    count: number;
+    suggestedAngle: EventAngle;
+    angleGuide: string;
+  }>,
+): string {
+  if (brief.length === 0) return "";
+  const lines = brief.map((b) => {
+    const when = b.daysSince === 0 ? "今天已播报过" : `${b.daysSince} 天前播报过`;
+    return `- 「${b.title.slice(0, 40)}」（${when}，累计 ${b.count} 次）→ 如需再讲，请改从「${b.suggestedAngle}」切入：${b.angleGuide}`;
+  });
+  return [
+    "",
+    "【内容记忆·去重约束】以下是近期已播报过的事件，行长已经听过：",
+    ...lines,
+    "- 优先选择上述之外的新事件；",
+    "- 若某事件确实仍是今天最值得说的（如出现实质新进展），可以再讲，但**必须换成上面指定的切入角度**，用新事实、新数据或新主体展开，严禁换汤不换药地复述；",
+    "- 严禁编造新事件来规避本约束。",
+  ].join("\n");
+}

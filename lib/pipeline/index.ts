@@ -2,8 +2,10 @@
  * 管道编排（C1→C9 顺序）：把各服务按阶段串起来。
  *
  * 编排层只「调用服务 + 传递 deps」，不实现业务逻辑；业务规则全在各 lib/services/*。
- * 红线贯穿：C2 丢弃无发布时间 → C3 漏斗只看内容 → C4 相关性回检+板块归属确定性 → C6 定档。
- * 历史库闭环：select 之后、enrich 之前回放去重（先读），管线尾部 saveHistory（后写，单一写者）。
+ * B3 起编排顺序与 gzinfo 对齐（lib/pipeline/ai.ts + history-step + side-outputs）：
+ *   采集 → 归一化 → 过滤 → AI 两阶段 → 组装 → 历史回流+滚动并入 → 旁路（必读/商机/广东IPO）
+ *   → 口播稿/TTS → 渲染 → 发布。
+ * 历史库：管线开头 load（跨天判重/prefill 用），history-step 中 merge+persist（gzinfo 同位）。
  */
 import type { DailyReport } from "../contracts/report";
 import type { PipelineContext, PipelineDeps } from "../contracts/pipeline";
@@ -12,10 +14,15 @@ import { normalize } from "../services/normalize";
 import { select } from "../services/select";
 import { enrich } from "../services/enrich";
 import { assembleReport } from "../services/assemble";
+import { mergeRollingAndSaveHistory } from "./history-step";
+import { buildSideOutputs } from "./side-outputs/side-outputs";
 import { renderHtml, renderMarkdown } from "../services/render";
 import { assembleBriefingScript, type AudioMeta } from "../services/voice";
 import { publishReport } from "../services/publish";
-import { loadHistory, saveHistory } from "../services/memory";
+import { companyNameOf } from "../services/classify/gd-ipo-spoken";
+import { loadHistoryStore, loadExecStore, loadEventMemory, saveEventMemory } from "../adapters/persistence";
+import { recordIpoVoicing, ipoShouldSkip } from "../services/memory/event-memory";
+import { isEventMemoryEnabled } from "../services/memory/store";
 
 export interface RunOutput {
   report: DailyReport;
@@ -27,7 +34,7 @@ export interface RunOutput {
   paths: { reportPath: string; htmlPath: string; mdPath: string };
 }
 
-/** 完整管线：采集 → 归一化 → 漏斗 → 历史去重 → 富集 → 组装 → 口播稿/TTS → 渲染 → 记忆 → 发布。 */
+/** 完整管线：采集 → 归一化 → 漏斗 → 富集 → 组装 → 历史回流/滚动并入 → 旁路 → 口播/TTS → 渲染 → 发布。 */
 export async function runPipeline(
   ctx: PipelineContext,
   deps: PipelineDeps,
@@ -35,30 +42,61 @@ export async function runPipeline(
   const ingest = await ingestAll(ctx, { http: deps.http, crawlers: deps.crawlers });
   const { articles, dropped } = normalize(ingest.articles, ctx);
 
-  // 历史库先读（跨天标题判重 stage 6 需要；先读后写都在 memory 单一写者内）
-  const history = await loadHistory({ fs: deps.fs });
-  const selected = await select(articles, ctx, {
-    fs: deps.fs,
-    history: history.items.map((it) => ({
-      title: it.title,
-      url: it.url,
-      sourceId: it.sourceId,
-      publishedAt: it.publishedAt,
-    })),
-  });
+  // 历史库先读（跨天标题判重 stage6 / prefillCache / exec 两天池共用同一份）
+  const history = loadHistoryStore();
+  const selected = await select(articles, ctx, { fs: deps.fs, history });
 
-  const enriched = await enrich(selected.articles, ctx, {
-    llm: deps.llm,
-    history: history.items.map((it) => ({
-      url: it.url,
-      summary: it.summary,
-      publishedAt: it.publishedAt,
-    })),
-  });
+  const enriched = await enrich(selected.articles, ctx, { llm: deps.llm, history });
   const report = assembleReport(enriched, ctx);
 
-  // —— C8 语音：口播稿拼装（纯函数）→ TTS 合成（AUDIO_ENABLED 门控；失败降级为无播放器）——
-  const briefing = assembleBriefingScript(report);
+  // —— gzinfo history-step：PASS2 摘要回流 → merge+persist → buildRolling → 滚动并入 ——
+  const histStep = mergeRollingAndSaveHistory(report, selected.articles, history, ctx);
+
+  // —— gzinfo side-outputs：必读/商机/风险旁路（2 日窗口）+ 广东IPO 板块（绕过相关性 LLM）——
+  // 股市复盘三卡 / 股市消息清单随 B4 接入。
+  const withSides = await buildSideOutputs(
+    histStep.report,
+    histStep.history,
+    selected.articles,
+    articles,
+    ingest.crawled,
+    ctx,
+    selected.filterResults,
+    { llm: deps.llm },
+  );
+
+  // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——
+  // → TTS 合成（AUDIO_ENABLED 门控；失败降级为无播放器）
+  const exec = loadExecStore(ctx.date);
+  // IPO 口播事件记忆（gzinfo ipoVoicing）：读库算今日应跳过的企业；写回仅正式发布 run
+  const memoryOn = isEventMemoryEnabled();
+  const ipoMem = memoryOn ? loadEventMemory() : null;
+  const ipoSkip = new Set<string>();
+  if (ipoMem) {
+    for (const it of withSides.sections.ipo ?? []) {
+      const c = companyNameOf(it.title_cn || "");
+      if (c && ipoShouldSkip(ipoMem, c, ctx.date)) ipoSkip.add(c);
+    }
+  }
+  const briefing = exec
+    ? await assembleBriefingScript(withSides, {
+        exec,
+        ipoMemory: ipoMem
+          ? {
+              skip: ipoSkip,
+              onVoiced: (companies) => {
+                if (process.env.PUBLISH_RUN === "true") {
+                  saveEventMemory(recordIpoVoicing(ipoMem, companies, ctx.date), { today: ctx.date });
+                  ctx.log.info("voice", `IPO 口播记忆写回：${companies.join("、")}`);
+                }
+              },
+            }
+          : undefined,
+      })
+    : null;
+  if (!exec) {
+    ctx.log.info("voice", "无执行摘要（store.json 缺失），跳过语音播报生成（gzinfo 同款降级）");
+  }
   const speech = briefing?.script ?? "";
   let audio: AudioMeta | undefined;
   if (deps.tts && briefing) {
@@ -83,21 +121,19 @@ export async function runPipeline(
     });
   }
 
-  const html = renderHtml(report, { audio });
-  const markdown = renderMarkdown(report);
-
-  await saveHistory(report, selected.articles, ctx, { fs: deps.fs });
-  const paths = await publishReport({ report, html, markdown }, ctx, { fs: deps.fs });
+  const html = renderHtml(withSides, { audio });
+  const markdown = renderMarkdown(withSides);
+  const paths = await publishReport({ report: withSides, html, markdown }, ctx, { fs: deps.fs });
 
   ctx.log.info(
     "pipeline",
-    `完成：原始 ${ingest.articles.length} / 归一化 ${articles.length}（丢 ${dropped}）/ 漏斗 ${selected.articles.length} → 发布 ${paths.htmlPath}${audio ? " + audio" : ""}`,
+    `完成：原始 ${ingest.articles.length} / 归一化 ${articles.length}（丢 ${dropped}）/ 漏斗 ${selected.articles.length} / 历史库 ${Object.keys(histStep.history).length} → 发布 ${paths.htmlPath}${audio ? " + audio" : ""}`,
   );
   ctx.log.info(
     "pipeline",
-    `观测汇总：LLM 调用 ${ctx.stats.llmCalls ?? 0} 次（失败 ${ctx.stats.llmFailures ?? 0}），相关性回检丢弃 ${ctx.stats.recheckDropped ?? 0} 条`,
+    `观测汇总：LLM 调用 ${ctx.stats.llmCalls ?? 0} 次（失败 ${ctx.stats.llmFailures ?? 0}）`,
   );
-  return { report, html, markdown, speech, audio, paths };
+  return { report: withSides, html, markdown, speech, audio, paths };
 }
 
 /** 时长文案（gzinfo formatDuration 同口径；独立小函数避免跨服务导出耦合）。 */

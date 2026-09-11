@@ -23,8 +23,8 @@ function report(over: Partial<DailyReport> = {}): DailyReport {
   } as DailyReport;
 }
 
-test("口播稿：章节引导语 + 收尾语 + 段落时序（gzinfo 口径）", () => {
-  const b = assembleBriefingScript(report());
+test("口播稿：章节引导语 + 收尾语 + 段落时序（gzinfo 口径）", async () => {
+  const b = await assembleBriefingScript(report());
   assert.ok(b);
   assert.ok(b.script.startsWith("早上好。"), "开场白");
   assert.ok(b.script.includes("先看今日定调。"));
@@ -38,22 +38,22 @@ test("口播稿：章节引导语 + 收尾语 + 段落时序（gzinfo 口径）"
   }
 });
 
-test("口播稿：全部章节缺失 → null（降级为无播放器，不阻断发布）", () => {
+test("口播稿：全部章节缺失 → null（降级为无播放器，不阻断发布）", async () => {
   const empty = report({ hero_line: undefined, must_read: [], insights: [] });
-  assert.equal(assembleBriefingScript(empty), null);
+  assert.equal(await assembleBriefingScript(empty), null);
 });
 
-test("口播稿：无 TTS 内容但 hero 存在 → 有稿；risk 段接入", () => {
+test("口播稿：无 TTS 内容但 hero 存在 → 有稿；risk 段接入", async () => {
   const withRisk = report({
     risk: { topic: "模型风险", evidence: "治理不足", impact: "合规压力", action: "加强内控" },
   });
-  const b = assembleBriefingScript(withRisk);
+  const b = await assembleBriefingScript(withRisk);
   assert.ok(b);
   assert.ok(b.script.includes("接下去是风险预警。"));
   assert.ok(b.parts.risk);
 });
 
-test("口径锁定：章节预算与总时长上限为 gzinfo 2026-09-11 版（4 分 10 秒）", () => {
+test("口径锁定：章节预算与总时长上限为 gzinfo 2026-09-11 版（4 分 10 秒）", async () => {
   assert.equal(AUDIO_SPEAK_LIMITS.hero, 90);
   assert.equal(AUDIO_SPEAK_LIMITS.must_read, 250);
   assert.equal(AUDIO_SPEAK_LIMITS.insights, 520);
@@ -63,19 +63,19 @@ test("口径锁定：章节预算与总时长上限为 gzinfo 2026-09-11 版（4
   assert.equal(SCRIPT_MAX_CHARS, 1300); // 250s × 5.2
 });
 
-test("sanitize：URL / 易碎符号 / 句界粘连清理（gzinfo 原版行为）", () => {
+test("sanitize：URL / 易碎符号 / 句界粘连清理（gzinfo 原版行为）", async () => {
   assert.equal(sanitize("详见 https://x.com/a 的报道"), "详见  的报道");
   assert.equal(sanitize("# 标题 *重点*"), "标题 重点");
   assert.equal(sanitize("客户。；第二，。第三"), "客户。第二。第三");
 });
 
-test("truncateAtSentence：句界截断不念半句", () => {
+test("truncateAtSentence：句界截断不念半句", async () => {
   const t = "第一句。第二句。第三句。";
   assert.equal(truncateAtSentence(t, 6), "第一句。");
   assert.equal(truncateAtSentence(t, 60), t, "不超限不截断");
 });
 
-test("detectGdIpo：「粤」标优先 + 进度词表 × 注册表双层判定", () => {
+test("detectGdIpo：「粤」标优先 + 进度词表 × 注册表双层判定", async () => {
   const items = [
     { title_cn: "粤芯半导体：注册申请材料已受理", summary: "", tags: ["粤"], url: "u1", rank: 1, source: "s", source_type: "official", date: "09/11", summary2: "", importance: 2 as const, tags2: undefined },
   ] as unknown as Parameters<typeof detectGdIpo>[0];

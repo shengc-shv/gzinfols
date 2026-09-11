@@ -1,7 +1,9 @@
 # gzinfo → gzinfols 全量功能移植与重构方案（核对基线 v1）
 
 > 日期：2026-09-11 ｜ 基线：gzinfo @ /Users/shengc/ccworkstaion/gzinfo（main 最新）
-> 进度：**B1 已完成（2026-09-11，commit 4203846..16bacf2 已推送）**；B2-B6 待执行。
+> 进度：**B1 ✅（4203846..16bacf2）、B2 ✅（5615b6d）、B3 ✅（本轮）已完成并推送（2026-09-11）**；B4-B6 待执行。
+> B2 说明：AI 相关性回检（2.0 自创）已按 gzinfo 对齐移除——PASS1 keep 判定即相关性闸门。
+> B3 说明：executive-summary 旁路 + event-memory 全家 + history 重构 + gd-ipo 侧栏已落地；select-top/assets 经裁决不移植（见核对报告「不移植项」）；股市两旁路（stock-recap/stock-news）随 B4。
 > 原则：**功能一致性优先**（业务规则/输入输出/边界/异常行为逐项对齐），架构重构只改「代码放哪、怎么组织」，不改「做什么」。
 > 改进方案一律先报备确认（本文件 §4），确认后写入对应批次实施。
 

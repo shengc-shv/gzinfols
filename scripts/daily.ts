@@ -6,7 +6,7 @@ import "./_env";
 import { bootstrap } from "../lib/orchestrator";
 import { runPipeline } from "../lib/pipeline";
 import { NodeFsAdapter, SystemClock } from "../lib/adapters";
-import { loadHistory } from "../lib/services/memory";
+import { loadHistoryStore } from "../lib/adapters/persistence";
 import type { RunMode } from "../lib/contracts/pipeline";
 
 async function main() {
@@ -17,12 +17,12 @@ async function main() {
   const mode: RunMode = await (async () => {
     if (process.env.SKIP_AI !== "1") return { kind: "ai" as const };
     const fs = new NodeFsAdapter();
-    const hist = await loadHistory({ fs });
+    const hist = loadHistoryStore();
     const summaryCache = new Map<string, string>();
     const relevantUrls = new Set<string>();
-    for (const it of hist.items) {
-      relevantUrls.add(it.url);
-      if (it.summary?.trim()) summaryCache.set(it.url, it.summary.trim());
+    for (const [url, e] of Object.entries(hist)) {
+      relevantUrls.add(url);
+      if (e.summary?.trim()) summaryCache.set(url, e.summary.trim());
     }
     return { kind: "skip-ai" as const, summaryCache, relevantUrls };
   })();

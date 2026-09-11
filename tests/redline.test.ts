@@ -8,6 +8,10 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import fsSync from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { setPersistenceBaseDir } from "../lib/adapters/persistence";
 import { runPipeline } from "../lib/pipeline";
 import { createContext } from "../lib/orchestrator";
 import { generateDaily } from "../lib/services/enrich/pipeline";
@@ -69,6 +73,8 @@ test("红线① e2e：缺失 pubDate 的条目被丢弃，不进板块/HTML/历�
 </item>
 </channel></rss>`;
 
+  const tmp = fsSync.mkdtempSync(path.join(os.tmpdir(), "gzinfols-redline-"));
+  setPersistenceBaseDir(tmp);
   const fs = new MemFs();
   fs.setJson("sources.config.json", { sources });
   fs.setJson("sources.keywords.json", KEYWORDS);
@@ -86,7 +92,12 @@ test("红线① e2e：缺失 pubDate 的条目被丢弃，不进板块/HTML/历�
     startTime: NOW,
   });
 
-  const out = await runPipeline(ctx, deps);
+  let out;
+  try {
+    out = await runPipeline(ctx, deps);
+  } finally {
+    setPersistenceBaseDir(undefined);
+  }
 
   const allTitles = Object.values(out.report.sections)
     .flat()
@@ -95,16 +106,23 @@ test("红线① e2e：缺失 pubDate 的条目被丢弃，不进板块/HTML/历�
   assert.ok(!allTitles.includes("无时间戳的神秘条目"), "无发布时间条目不得进任何板块");
   assert.ok(!out.html.includes("无时间戳的神秘条目"), "无发布时间条目不得进 HTML");
   assert.ok(!out.markdown.includes("无时间戳的神秘条目"), "无发布时间条目不得进 Markdown");
-  const hist = await fs.readJson<{ items: Array<{ url: string }> }>("data/history.json");
+  const histPath = path.join(tmp, "data", "article-history.json");
+  const hist = JSON.parse(fsSync.readFileSync(histPath, "utf8")) as Record<string, { url: string }>;
   assert.ok(
-    hist && hist.items.every((it) => it.url !== "https://example.com/no-date"),
+    Object.values(hist).every((it) => it.url !== "https://example.com/no-date"),
     "无发布时间条目不得进历史库",
   );
-  // 对照组：有效条目正常上榜
+  // 对照组：有效条目正常上榜（板块或必读——gzinfo 跨层级去重语义：
+  // 必读涵盖的事件会从资讯板块收编，故两个位置命中其一即为「上榜」）
+  const inSections = Object.values(out.report.sections)
+    .flat()
+    .some((it) => it.url === "https://example.com/valid");
+  const inMustRead = out.report.must_read.some((m) => m.url === "https://example.com/valid");
   assert.ok(
-    Object.values(out.report.sections).flat().some((it) => it.url === "https://example.com/valid"),
-    "有效条目应正常上榜",
+    inSections || inMustRead,
+    "有效条目应上榜（板块或必读其一）",
   );
+  fsSync.rmSync(tmp, { recursive: true, force: true });
 });
 
 test("红线① 单元：Invalid Date 与缺失 publishedAt 均被 normalize 丢弃", () => {
