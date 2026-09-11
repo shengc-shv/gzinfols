@@ -65,7 +65,7 @@ test("口径锁定：章节预算与总时长上限为 gzinfo 2026-09-11 版（4
 
 test("sanitize：URL / 易碎符号 / 句界粘连清理（gzinfo 原版行为）", () => {
   assert.equal(sanitize("详见 https://x.com/a 的报道"), "详见  的报道");
-  assert.equal(sanitize("# 标题 *重点*"), " 标题 重点");
+  assert.equal(sanitize("# 标题 *重点*"), "标题 重点");
   assert.equal(sanitize("客户。；第二，。第三"), "客户。第二。第三");
 });
 
