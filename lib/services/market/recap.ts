@@ -1,0 +1,514 @@
+import { extractJson } from "../enrich/json-util";
+import { anchorRecapCard, pickRecapAnchor } from "./recap-anchor";
+import type { MarketCard, StockRecap } from "../../contracts/report";
+import type { IndexQuote, QuoteResult, StockItem } from "../../contracts/market";
+
+/** StockItem 已上移契约层（lib/contracts/market.ts，逐字同形）；此处 re-export 兼容既有引用。 */
+export type { StockItem };
+
+/**
+ * LLM runner（组合根把 LlmPort 适配成此签名；gzinfo 为 runLlm 直连）。
+ */
+export type MarketLlmRunner = (systemPrompt: string, userPrompt: string) => Promise<string>;
+
+/**
+ * 「股市解读」AI 层（2026-08-25 用户确认实施）
+ *
+ * 每天一次 LLM 调用，基于当日「美股 / A股 / 港股」三组原始新闻条目，
+ * 产出 3 张复盘卡（每卡 = 涨跌概况 overview + 关键板块 sectors），
+ * 并附每卡口播稿 spoken（纯口语，可直接朗读）。
+ *
+ * 设计红线（用户 2026-08-25 拍板）：
+ *  - 只做市场事实性概述，**严禁引申到银行零售/对公业务、投资建议、获客动作**；
+ *  - 因要转口播，三卡内容须口播友好（spoken 纯文本、无 Markdown/链接/emoji）；
+ *  - 指数点位/涨跌幅只基于输入，缺失则用定性描述，绝不臆造精确数字。
+ *
+ * 持久化与 lib/ai/executive-summary.ts 同机制：归档到 history/<date>/store.json
+ * 的 stock_recap 字段（与 executive 共存于同一文件），SKIP_AI 重跑/发布复用零 LLM。
+ */
+
+/** 单条市场输入（标题 + 摘要 + 源链接 + 发布日期）。 */
+
+export interface StockRecapInput {
+  /** 报告日期 YYYY-MM-DD */
+  date: string;
+  /** 美股原始条目（cnbc-top / investing-news 等） */
+  us: StockItem[];
+  /** A股原始条目（东方财富爬虫） */
+  aShare: StockItem[];
+  /** 港股原始条目（新浪港股 / 披露易） */
+  hk: StockItem[];
+}
+
+const SYSTEM_PROMPT =
+  "你是证券市场播报编辑。基于当日美股/A股/港股三组新闻条目，分别为三个市场生成「股市解读」复盘卡，面向资讯听众，客观、精炼、口播友好。严格按用户要求输出 JSON。";
+
+/**
+ * 三市场通用规则（2026-09-05 压缩：原版 2.8k 字且对三个市场重复同一套说明，
+ * 输出占比过高易触发截断 #147；现改为「一次说清 + 港股附加」，约 900 字）。
+ */
+const RULES = `你是证券市场播报编辑。听众为分行内部资讯用户（非投资建议），只用最短篇幅讲清「市场怎么走、什么板块强/弱」。
+
+输入：三组原始新闻条目（可为空）+ 当日指数收盘（权威核验值）。为美股/A股/港股**各**生成一张卡，三市场同规则，每卡含：
+- overview：单句 ≤35 字，指数涨跌方向+幅度 + 最关键 1 个驱动（美联储/地缘/重磅个股/政策）；无指数数据则据条目客观描述强弱。不多句、不与 sectors 重复。
+- sectors：3-5 条，按「重要性+市场关注度」降序。① 优先资金流向（主力/北向/南向净买卖）与领涨领跌方向；② 每条必须点明异动原因（财报/政策/地缘/供需/利率/事件），讲不出原因的不写；③ 一句话 ≤40 字，只留关键数字；④ 数据不足直接不写，宁缺毋滥；⑤ 避免与 overview 重复，可换角度。
+- spoken：≤120 字纯口语，先概况再板块，句号收尾可直接朗读；无 Markdown/链接/emoji/# * | \`。**口播只说收盘涨跌（涨跌幅），不读具体收盘点位**（如说「恒指跌0.62%」「纳指跌0.29%」，不要说「收报18234点」）；点位留给视觉卡片展示，口播不必念数字。
+
+港股附加规则：
+- overview 须锚定输入中的「收评/综述/复盘」类条目（若有），直接提炼其大盘结论，不得凭零散个股另起炉灶。
+- 严禁「多家公司披露年报」「密集披露」「年报季扎堆」「市场整体平稳」「情绪谨慎观望」等无信息量套话（输入尾部的披露类标题仅参考，不得汇总成套话）。必须写具体数据：优先引指数收盘（如恒指收报18234点、跌0.62%），无指数则写具体板块/个股（如内房股走弱、龙湖跌3%）。
+
+硬性要求（三市场通用）：
+- 有输入必出卡，绝不空卡；条目稀薄时据指数+板块印象补一句，宁短勿空。
+- 只基于输入，严禁编造点位/涨跌幅；无数字时用「走强/走弱/涨跌互现/集体收跌」定性。
+- 只做盘面事实概述，严禁引申到银行零售/对公业务、投资建议、获客动作、风险提示。
+- overview/sectors 必须承载具体信息（指数数字/具体板块/公司/事件），严禁空话凑数。
+
+输出 STRICTLY 一个 JSON 对象（无 markdown 代码块）：
+{"us":{"overview":"...","sectors":["..."],"spoken":"..."},"aShare":{...},"hk":{...}}
+字符串内引号用单引号或中文引号，禁止裸双引号。任一市场至少 overview 非空。`;
+
+/** 导出供测试锁定长度上限（2026-09-05 压缩：防止后续补丁再加回重复表述而膨胀）。 */
+export const RECAP_RULES = RULES;
+
+function toPayloadItems(items: StockItem[]): Array<{ title: string; summary: string; source: string }> {
+  return items.slice(0, 12).map((it) => ({
+    title: it.title,
+    summary: it.summary ?? "",
+    source: it.source ?? "",
+  }));
+}
+
+/** 公告流源（无恒指/板块等综合盘面数据，不能充当股市解读主源或交叉验证源，仅作补充）。
+ *  2026-08-25 用户拍板：披露易是公司级公告流，不应出现在卡脚 source/crossCheck 主位。 */
+const ANNOUNCEMENT_SOURCES = ["港交所披露易"];
+
+/**
+ * 港股条目排序（2026-08-31 用户：港股口播充斥「多家公司披露年报」「密集披露」等空话，
+ * 与美股/A股质量差距明显）。排序目标：让 LLM 优先看到有信息量的条目——
+ * ① 收评/综述/复盘/大势研判类（大盘综合报道，信息密度最高）→ 最前；
+ * ② 具体公司/板块/资金动态类 → 其次；
+ * ③ 空泛披露类（标题命中「多家/密集/多股/集体/陆续/扎堆/披露季/年报季」等栏目级套话）
+ *    与公告流（港交所披露易，公司级英文公告）→ 压到最后。
+ * 同类内按 publishedAt 降序（最新在前）。仅排序不删除，避免丢信息。
+ */
+const HK_BLURB_RE = /多家|密集|多股|集体|陆续|批量|扎堆|相继|纷纷|披露季|年报季|业绩集中|集中披露/;
+export function rankHkStockItems(items: StockItem[]): StockItem[] {
+  const score = (it: StockItem): number => {
+    const t = it.title ?? "";
+    const s = it.source ?? "";
+    if (HK_RECAP_RE.test(t)) return 3; // 收评/综述/复盘类：大盘综合报道优先
+    if (HK_BLURB_RE.test(t) || ANNOUNCEMENT_SOURCES.includes(s)) return 1; // 空泛披露/公告流压后
+    return 2; // 具体公司/板块/资金动态
+  };
+  return [...items]
+    .map((it) => ({ it, sc: score(it) }))
+    .sort(
+      (a, b) => b.sc - a.sc || (b.it.publishedAt ?? "").localeCompare(a.it.publishedAt ?? ""),
+    )
+    .map((x) => x.it);
+}
+
+/** 卡脚小字备注：来源网站（新闻综合主源）+ 交叉验证网站（指数核验源）+ 数据时间（条目最新日期）。
+ *  - source：取首个「非公告流」源（真正贡献盘面解读素材的综合新闻源，如港股=新浪港股）；
+ *  - crossCheck：统一取指数核验源 indexChannel（= 新浪行情 API，恒指/道指等点位由它独立核验）；
+ *  - 全部取自真实字段，非 LLM 生成。 */
+function buildMeta(
+  items: StockItem[],
+  indexChannel?: string,
+): { source: string; date: string; crossCheck: string } {
+  const allSrcs = [...new Set(items.map((i) => (i.source ?? "").trim()).filter(Boolean))];
+  const newsSrcs = allSrcs.filter((s) => !ANNOUNCEMENT_SOURCES.includes(s));
+  const dates = items
+    .map((i) => i.publishedAt ?? "")
+    .filter((d) => /^\d{4}-\d{2}-\d{2}/.test(d))
+    .sort()
+    .reverse();
+  return {
+    // 优先取新闻综合主源；若该市场只有公告流（极端），fallback 取首个源，避免空白
+    source: newsSrcs[0] ?? allSrcs[0] ?? "",
+    // 交叉验证 = 指数核验源（新浪行情）；无行情兜底时退回「第二个新闻源」保持旧行为
+    crossCheck: indexChannel ?? newsSrcs[1] ?? allSrcs[1] ?? "",
+    date: dates[0] ?? "",
+  };
+}
+
+function normalizeCard(parsed: unknown): MarketCard {
+  const p = (parsed ?? {}) as Partial<MarketCard>;
+  const overview = typeof p.overview === "string" ? p.overview.trim() : "";
+  const sectors = Array.isArray(p.sectors)
+    ? p.sectors.filter((s) => typeof s === "string" && s.trim()).map((s) => s.trim()).slice(0, 5)
+    : [];
+  const spoken = typeof p.spoken === "string" && p.spoken.trim() ? p.spoken.trim() : undefined;
+  return { overview, sectors, spoken };
+}
+
+/**
+ * 港股大盘解读权威源：从输入港股条目中挑「收评/综述/复盘」类（标题命中 RECAP 关键词、
+ * 且有 url）最新一条，作为 HK 卡「直接看原报告」入口；并作为 LLM 生成 overview 的基准。
+ * 2026-08-29 用户：港股大盘解读应锚定新浪财经等权威收评，而非凭零散个股新闻拼凑。
+ */
+const HK_RECAP_RE = /收评|综述|盘点|盘后|复盘|收市|收盘点评|港股收评|市场总结|港股分析|大势研判/;
+export function findHkRecapReport(items: StockItem[]): { title: string; url: string } | undefined {
+  const cands = items
+    .filter((it) => it.url && HK_RECAP_RE.test(it.title))
+    .sort((a, b) => (b.publishedAt ?? "").localeCompare(a.publishedAt ?? ""));
+  const best = cands[0];
+  return best ? { title: best.title, url: best.url! } : undefined;
+}
+
+/**
+ * 收评兜底（2026-08-26 港股空卡修复）：
+ *   LLM 仍返回空卡（罕见，但可能因输入极少 / 模型抽风）→ 用指数点位合成最小复盘，
+ *   保证「有输入必出卡，绝不空卡」。
+ *   - 若 LLM 已给出非空 overview/spoken → 不覆盖（保留 LLM 质量）
+ *   - 若 LLM 给出空 → 用 quotes 合成："{name}收报{value}点（{changePct}）。" 拼成单句
+ *   - 若 LLM 给出空 + 无 quotes → 返回 undefined（无法兜底，仍按"全空"视为生成失败）
+ */
+function synthesizeFallbackCardInternal(
+  llmCard: MarketCard,
+  quotes: IndexQuote[] | undefined,
+): MarketCard | undefined {
+  if (llmCard.overview || llmCard.spoken) return llmCard;  // LLM 给了就不覆盖
+  if (!quotes || quotes.length === 0) return undefined;
+  const lines = quotes.map((q) => {
+    const valueStr = q.value ?? "";
+    const pctStr = q.changePct ? `（${q.changePct}）` : "";
+    return `${q.name}收报${valueStr}点${pctStr}`;
+  });
+  const spokenLines = quotes.map((q) => `${q.name}${q.changePct ? `（${q.changePct}）` : ""}`);
+  const sentence = lines.join("；") + "。";
+  const spoken = spokenLines.join("；") + "。";
+  return { overview: sentence, sectors: [], spoken };
+}
+
+/** 导出供 side-outputs/stock-recap.ts 复用：对 selectStockRecap 返回的空卡**始终**用指数兜底 */
+export function synthesizeFallbackCard(
+  llmCard: MarketCard,
+  quotes: IndexQuote[] | undefined,
+): MarketCard | undefined {
+  return synthesizeFallbackCardInternal(llmCard, quotes);
+}
+
+/**
+ * 无 AI 产物时的最小复盘合成（2026-09-01 修：股市板块初始化失败根因）。
+ * - SKIP_AI 当日首次运行无 store.json（persisted=undefined）→ selectStockRecap 返回 null；
+ * - AI 模式下 generateStockRecap 内 LLM 失败也返回 null。
+ * 两者均导致股市解读区整区不渲染。本函数用已成功拉取的行情指数合成最小复盘三卡
+ * （overview=指数点位+涨跌幅，纯事实，无投资建议），保证「收盘点位+涨跌幅」筹码
+ * 在 SKIP_AI 无缓存 / AI 失败两种场景下都展示完整。
+ * 若某市场无指数（quotes 数组空），该卡为空卡（overview=""）——由渲染层显示「暂无数据」，
+ * 不再整区跳过。
+ */
+export function synthesizeRecapFromQuotes(quotes: QuoteResult): StockRecap {
+  const emptyCard = (): MarketCard => ({ overview: "", sectors: [] });
+  return {
+    us: synthesizeFallbackCard(emptyCard(), quotes.quotes.us) ?? emptyCard(),
+    aShare: synthesizeFallbackCard(emptyCard(), quotes.quotes.aShare) ?? emptyCard(),
+    hk: synthesizeFallbackCard(emptyCard(), quotes.quotes.hk) ?? emptyCard(),
+    quoteChannel: quotes.channel,
+    quoteDate: quotes.date,
+  };
+}
+
+/* ------------------------------------------------------------------ *
+ * 分级解析降级（2026-09-05 #147 实锤）：
+ * LLM 输出被截断/结构损坏时，原实现整体 JSON.parse → jsonrepair → 一失败就
+ * return null，导致**已完整生成的市场（含板块 sectors）一起丢弃**，页面只剩
+ * 指数合成的 overview（用户看到「板块没数据」）。现分四级抢救：
+ *   ① 整体 JSON.parse  ② jsonrepair 整体修复
+ *   ③ 逐市场花括号平衡提取（救回未被截断的市场）
+ *   ④ 逐市场字段正则（救回截断市场中已产出的 overview/sectors/spoken）
+ * 全失败才降级为行情指数合成三卡（保 overview + 指数，不空区）。
+ * ------------------------------------------------------------------ */
+
+const MARKET_KEYS = ["us", "aShare", "hk"] as const;
+type RecapRaw = { us?: unknown; aShare?: unknown; hk?: unknown };
+
+function tryJsonObject(s: string): Record<string, unknown> | null {
+  try {
+    const v = JSON.parse(s);
+    return v && typeof v === "object" && !Array.isArray(v) ? (v as Record<string, unknown>) : null;
+  } catch {
+    return null;
+  }
+}
+
+/** 从文本中按 key 抓一个花括号平衡的对象片段（其他位置截断不影响本 key）。 */
+export function extractBalancedObject(text: string, key: string): string | null {
+  const m = new RegExp(`["']?${key}["']?\\s*:\\s*\\{`).exec(text);
+  if (!m) return null;
+  const start = m.index + m[0].length - 1; // 指向 '{'
+  let depth = 0;
+  let inStr = false;
+  let esc = false;
+  for (let i = start; i < text.length; i++) {
+    const ch = text[i];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (ch === "\\") esc = true;
+      else if (ch === '"') inStr = false;
+      continue;
+    }
+    if (ch === '"') {
+      inStr = true;
+      continue;
+    }
+    if (ch === "{") depth++;
+    else if (ch === "}" && --depth === 0) return text.slice(start, i + 1);
+  }
+  return null; // 括号未闭合 = 该市场正好被截断
+}
+
+function unescapeStr(s: string): string {
+  return s.replace(/\\(["\\/nrt])/g, (_m, c: string) =>
+    c === "n" ? "\n" : c === "r" ? "" : c === "t" ? "" : c,
+  );
+}
+
+function matchStrField(seg: string, field: string): string | undefined {
+  const m = new RegExp(`["']?${field}["']?\\s*:\\s*"((?:[^"\\\\]|\\\\.)*)"`).exec(seg);
+  return m ? unescapeStr(m[1]) : undefined;
+}
+
+function matchStrArray(seg: string, field: string): string[] {
+  const m = new RegExp(`["']?${field}["']?\\s*:\\s*\\[([\\s\\S]*?)\\]`).exec(seg);
+  if (!m) return [];
+  return [...m[1].matchAll(/"((?:[^"\\]|\\.)*)"/g)].map((x) => unescapeStr(x[1])).filter(Boolean);
+}
+
+/** 截取某市场所属片段：从 `"key":` 起到下一个市场 key（或文本结尾）止。 */
+function sliceMarketSegment(text: string, key: string): string {
+  const m = new RegExp(`["']?${key}["']?\\s*:`).exec(text);
+  if (!m) return "";
+  const start = m.index + m[0].length;
+  let end = text.length;
+  for (const other of MARKET_KEYS) {
+    if (other === key) continue;
+    const mm = new RegExp(`["']?${other}["']?\\s*:`).exec(text.slice(start));
+    if (mm) end = Math.min(end, start + mm.index);
+  }
+  return text.slice(start, end);
+}
+
+/** ④ 字段级抢救：整体/平衡括号都不可修时，逐市场正则抓三字段。 */
+export function salvageMarketByFields(text: string, key: string): Record<string, unknown> | null {
+  const seg = sliceMarketSegment(text, key);
+  if (!seg) return null;
+  const overview = matchStrField(seg, "overview");
+  const spoken = matchStrField(seg, "spoken");
+  const sectors = matchStrArray(seg, "sectors");
+  if (!overview && !spoken && sectors.length === 0) return null;
+  return { overview: overview ?? "", sectors, spoken };
+}
+
+async function repairJson(s: string): Promise<Record<string, unknown> | null> {
+  try {
+    const { jsonrepair } = await import("jsonrepair");
+    return tryJsonObject(jsonrepair(s));
+  } catch {
+    return null;
+  }
+}
+
+/** 四级解析入口；返回 null 表示彻底无法解析。 */
+export async function parseRecapLoose(text: string): Promise<RecapRaw | null> {
+  const cleaned = extractJson(text);
+  const whole = tryJsonObject(cleaned) ?? (await repairJson(cleaned));
+  if (whole && MARKET_KEYS.some((k) => k in whole)) return whole as RecapRaw;
+  const out: RecapRaw = {};
+  let hit = false;
+  for (const key of MARKET_KEYS) {
+    const balanced = extractBalancedObject(cleaned, key);
+    const obj = balanced ? (tryJsonObject(balanced) ?? (await repairJson(balanced))) : null;
+    if (obj) {
+      out[key] = obj;
+      hit = true;
+      continue;
+    }
+    const fields = salvageMarketByFields(cleaned, key);
+    if (fields) {
+      out[key] = fields;
+      hit = true;
+    }
+  }
+  return hit ? out : null;
+}
+
+/** 收尾：补 meta / 港股收评入口 / 指数块；三卡全空视为生成失败返回 null。 */
+function finalizeRecap(
+  recap: StockRecap,
+  input: StockRecapInput,
+  quotes?: QuoteResult | null,
+): StockRecap | null {
+  // 卡脚小字备注（来源网站/交叉验证网站/数据时间取自输入条目真实字段，非 LLM 臆造；SKIP_AI 复用 store 时一并带回）
+  // crossCheck 统一为指数核验源「新浪行情」（quotes.channel），披露易等公告流不进主位
+  recap.us.meta = buildMeta(input.us, quotes?.channel);
+  recap.aShare.meta = buildMeta(input.aShare, quotes?.channel);
+  recap.hk.meta = buildMeta(input.hk, quotes?.channel);
+  // 港股大盘解读权威源：优先锚定的那条收评（与行情取值日绑定），否则取最新收评类条目
+  const hkAnchor = pickRecapAnchor(input.hk, quotes?.date);
+  recap.hk.sourceReport =
+    hkAnchor?.url ? { title: hkAnchor.title, url: hkAnchor.url } : findHkRecapReport(input.hk);
+  // 行情指数（新浪行情 API，非 LLM）：挂到三卡 + 顶层来源/取值日，随 store 持久化、SKIP_AI 复用
+  if (quotes) {
+    recap.aShare.indices = quotes.quotes.aShare;
+    recap.hk.indices = quotes.quotes.hk;
+    recap.us.indices = quotes.quotes.us;
+    recap.quoteChannel = quotes.channel;
+    recap.quoteDate = quotes.date;
+  }
+  // 三卡全空（极少：三市场均无输入且无 quotes）→ 视为生成失败，页面不渲染该区
+  const isEmpty = (c: StockRecap["us"]) => !c.overview && !c.spoken && c.sectors.length === 0;
+  if (isEmpty(recap.us) && isEmpty(recap.aShare) && isEmpty(recap.hk)) return null;
+  return recap;
+}
+
+/**
+ * 生成股市复盘三卡（2026-09-05 改：A股/港股优先「收评锚定」，不再一律交给 LLM）。
+ *
+ * 原实现把三市场各 12 条标题一次性塞给 LLM，实测两个问题：
+ *  ① 标题池混着 pub=取值日 与 pub=抓取日 两种条目，LLM 分不清哪些是收盘数据；
+ *  ② 三组市场同处一个 prompt → A股卡曾写出「特斯拉跌近6%」这类跨市场串味。
+ * 现改为：A股/港股若在条目中找到「发布日 == 行情取值日」的收评，就用确定性解析出卡
+ * （零 LLM、数字来自行情 API），**且不再进入 prompt** —— 串味根除、输入更小。
+ * 锚定失败（周末/节假日无收评、收评被噪声过滤）才回退 LLM，行为与改动前一致。
+ *
+ * 美股无中文收评源（8 天实测 0 条），仍走 LLM；条目为空时直接指数合成，不浪费调用。
+ */
+export async function generateStockRecap(
+  input: StockRecapInput,
+  quotes: QuoteResult | null,
+  runner: MarketLlmRunner,
+): Promise<StockRecap | null> {
+  // ① 收评锚定（A股/港股）：与行情取值日强绑定，命中即确定性出卡
+  const aCard = anchorRecapCard(input.aShare, {
+    date: quotes?.date,
+    list: quotes?.quotes.aShare,
+  });
+  const hkCard = anchorRecapCard(input.hk, { date: quotes?.date, list: quotes?.quotes.hk });
+  if (aCard) console.log(`[recap] 📌 A股锚定收评（${quotes?.date ?? "无行情日"}），跳过 LLM`);
+  if (hkCard) console.log(`[recap] 📌 港股锚定收评（${quotes?.date ?? "无行情日"}），跳过 LLM`);
+
+  // ② 需要 LLM 的市场（美股始终在列——除非条目为空）
+  type LlmMarket = { key: (typeof MARKET_KEYS)[number]; label: string; items: StockItem[] };
+  const llmMarkets: LlmMarket[] = [];
+  if (!aCard) llmMarkets.push({ key: "aShare", label: "A股", items: input.aShare });
+  if (!hkCard) llmMarkets.push({ key: "hk", label: "港股", items: rankHkStockItems(input.hk) });
+  if (input.us.length) llmMarkets.push({ key: "us", label: "美股", items: input.us });
+
+  /** 用行情指数合成某市场的最小卡（锚定/LLM 都无产物时的保底，保证不空卡）。 */
+  const synth = (key: (typeof MARKET_KEYS)[number]): MarketCard => {
+    const list =
+      key === "us" ? quotes?.quotes.us : key === "aShare" ? quotes?.quotes.aShare : quotes?.quotes.hk;
+    return synthesizeFallbackCard({ overview: "", sectors: [] }, list) ?? { overview: "", sectors: [] };
+  };
+
+  // ③ 无需 LLM（A股/港股均锚定 且 美股无条目）→ 直接出卡，零调用
+  if (llmMarkets.length === 0) {
+    const recap: StockRecap = {
+      us: synth("us"),
+      aShare: aCard ?? synth("aShare"),
+      hk: hkCard ?? synth("hk"),
+    };
+    return finalizeRecap(recap, input, quotes);
+  }
+
+  // ④ 组装 prompt：只含未锚定的市场，并显式禁止写入其他市场
+  const payload: Record<string, unknown> = {};
+  for (const m of llmMarkets) payload[m.key] = toPayloadItems(m.items);
+  const indexLines: string[] = [];
+  if (quotes) {
+    const groups: Array<[string, IndexQuote[], LlmMarket["key"]]> = [
+      ["A股", quotes.quotes.aShare, "aShare"],
+      ["港股", quotes.quotes.hk, "hk"],
+      ["美股", quotes.quotes.us, "us"],
+    ];
+    for (const [label, qs, key] of groups) {
+      // 只注入本轮要生成（或需兜底）的市场指数：已锚定的市场不占 prompt
+      if (!qs.length) continue;
+      if (key !== "us" && !llmMarkets.some((m) => m.key === key)) continue;
+      indexLines.push(
+        `${label}：${qs.map((q) => `${q.name} ${q.value}点${q.changePct ? `（${q.changePct}）` : ""}`).join("、")}`,
+      );
+    }
+  }
+  const userPrompt = [
+    RULES,
+    "",
+    `本轮只需生成：${llmMarkets.map((m) => m.label).join("、")}。` +
+      `只输出这些市场的卡，**严禁写入未列出市场的内容**（跨市场混淆为严重错误）。`,
+    `以下为 ${input.date} 收盘行情。条目（${llmMarkets.map((m) => m.key).join("/")}）：`,
+    JSON.stringify(payload),
+    "",
+    `指数收盘（权威核验，写大盘涨跌优先引用）：`,
+    ...(indexLines.length ? indexLines : ["（本轮无指数，据条目定性描述）"]),
+  ].join("\n");
+  try {
+    const text = await runner(SYSTEM_PROMPT, userPrompt);
+    const parsed = await parseRecapLoose(text);
+    if (!parsed) {
+      // 四级抢救全失败（LLM 输出结构损坏）→ 已锚定的卡保留，其余用指数合成最小卡，
+      // 保住「overview + 指数点位块」，不再整区只剩空壳（#147 用户看到的现象）。
+      console.warn(
+        `[recap] LLM 输出无法解析为 JSON（已试 jsonrepair/逐市场/字段级抢救），降级为行情指数合成`,
+      );
+      const recap: StockRecap = {
+        us: synth("us"),
+        aShare: aCard ?? synth("aShare"),
+        hk: hkCard ?? synth("hk"),
+      };
+      return finalizeRecap(recap, input, quotes);
+    }
+    // 锚定卡优先，未锚定的市场用 LLM 产物；LLM 仍空 → 指数点位合成最小复盘
+    const merge = (key: (typeof MARKET_KEYS)[number]): MarketCard => {
+      const anchored = key === "aShare" ? aCard : key === "hk" ? hkCard : null;
+      if (anchored) return anchored;
+      const llmCard = normalizeCard(parsed[key]);
+      if (llmCard.overview || llmCard.sectors.length) {
+        return synthesizeFallbackCard(llmCard, quotes?.quotes[key]) ?? llmCard;
+      }
+      // 该市场本轮未进 prompt（如美股无条目）或 LLM 空卡 → 指数合成
+      return synth(key);
+    };
+    const recap: StockRecap = { us: merge("us"), aShare: merge("aShare"), hk: merge("hk") };
+    return finalizeRecap(recap, input, quotes);
+  } catch (e) {
+    // 2026-09-03 修复（#133 实锤）：原来 catch{} 静默吞错——LLM 失败后股市区退化为纯指数
+    // 合成口播（0 板块/时长不合格），CI 日志却无任何 [llm]/[recap] 失败行，无法定位根因。
+    // 此处补一条带 stage + 错误摘要的 warn（runLlm 内部已有 3 次指数退避重试，不在此叠加）。
+    const msg = (e as Error)?.message ?? String(e);
+    console.warn(
+      `[recap] stock-recap 生成失败，回退行情指数合成最小复盘三卡: ${msg.slice(0, 200)}`,
+    );
+    // 2026-09-05：锚定卡不依赖 LLM，失败时仍应保住（否则一次网络抖动就丢掉权威收评内容）
+    if (aCard || hkCard) {
+      const recap: StockRecap = {
+        us: synth("us"),
+        aShare: aCard ?? synth("aShare"),
+        hk: hkCard ?? synth("hk"),
+      };
+      return finalizeRecap(recap, input, quotes);
+    }
+    return null;
+  }
+}
+
+
+
+/**
+ * 解析当日股市复盘（与 selectExecutiveSummary 同语义）：
+ * - SKIP_AI：仅复用持久化资产（history/<date>/store.json 的 stock_recap），绝不调 LLM。
+ * - forceRegen：忽略已存在归档，强制调 generate。
+ * - 正常（无 forceRegen）：优先复用持久化，缺失才回退 generate。
+ */
+export async function selectStockRecap(opts: {
+  skipAi: boolean;
+  persisted: StockRecap | undefined;
+  generate: () => Promise<StockRecap | null>;
+  forceRegen?: boolean;
+}): Promise<StockRecap | null> {
+  if (opts.skipAi) return opts.persisted ?? null;
+  if (opts.forceRegen) return await opts.generate();
+  return opts.persisted ?? (await opts.generate());
+}

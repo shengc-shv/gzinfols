@@ -19,7 +19,9 @@ import type { FilterResult, PipelineContext, PipelineDeps } from "../../contract
 import type { IngestResult } from "../../contracts/pipeline";
 
 import { buildExecutiveSummary } from "./side-exec-summary";
-// 股市复盘三卡 / 股市消息清单：B4 接入（依赖 trading 模块移植）
+import { buildStockRecap } from "./side-stock-recap";
+import { buildStockNews } from "./side-stock-news";
+// 股市复盘三卡 / 股市消息清单：B4 已接入（gzinfo 顺序：exec → recap → news → gd-ipo）
 
 import { buildGdIpo } from "./side-gd-ipo";
 
@@ -36,12 +38,14 @@ export async function buildSideOutputs(
   crawled: IngestResult["crawled"],
   ctx: PipelineContext,
   filterResults: Map<string, FilterResult> | undefined,
-  deps?: Pick<PipelineDeps, "llm">,
+  deps?: Pick<PipelineDeps, "llm" | "http">,
 ): Promise<DailyReport> {
   // 1. 必读 / 商机
   let report = await buildExecutiveSummary(mergedReport, history, filteredArticles, ctx, filterResults, deps);
-  // 2. 股市复盘三卡（B4：buildStockRecap）
-  // 3. 股市消息清单（B4：buildStockNews）
+  // 2. 股市复盘三卡（美股/A股/港股；行情 API + 收评锚定 + LLM 兜底）
+  report = await buildStockRecap(report, rawArticles, crawled, ctx, deps as Pick<PipelineDeps, "http" | "llm">);
+  // 3. 股市消息清单（底部「股市动态」面板；AI 逐条归纳 + store 复用 + 主板块去重）
+  report = await buildStockNews(report, rawArticles, crawled, ctx, deps as Pick<PipelineDeps, "llm">);
   // 4. 广东地区IPO（绕过相关性 LLM，直接从 filteredArticles 构建，gzinfo 2026-08-30 实跑修复）
   report = buildGdIpo(report, filteredArticles, ctx);
   return report;

@@ -1,0 +1,207 @@
+/**
+ * 行情 API 抓取（2026-08-27 升级：A 股 K 线改回新浪 + 港股改读 f[6]）
+ *
+ * 数据源：
+ *  - A股：新浪 K线接口（money.finance.sina.com.cn）按目标交易日精确匹配，
+ *    点位+涨跌幅一律走日K线 → 与抓取时刻彻底解耦，绝不错日
+ *    （原计划用东方财富 push2his，CI/GA 跑出 Empty reply，放弃）
+ *  - 港股：新浪 hq.sinajs.cn f[6]=收盘（盘后/盘前均为收盘价）、f[3]=昨收；涨跌幅 = (f[6]-f[3])/f[3]
+ *    **f[6] 仅在交易时段内才是实时价；CI 须盘前/盘后跑，取到的才是真实收盘**（用户 6-8 点跑恰好为收盘）
+ *  - 美股：新浪 hq.sinajs.cn f[1]=最新收盘、f[2]=涨跌幅（北京时间白天稳定 = 上一美股交易日）
+ *
+ * 任何一步失败均优雅降级（该市场/该卡缺字段，不阻断整页）。
+ * 卡脚备注「数据来源：新浪行情 · 取值于 <目标交易日>」即用户要的「精准日期 + 渠道」。
+ */
+
+import type { HttpClient } from "../../contracts/pipeline";
+import type { IndexQuote, MarketQuotes, QuoteResult } from "../../contracts/market";
+
+const A_SHARE_DEFS = [
+  { code: "sh000001", name: "上证指数", kline: "sh000001" },
+  { code: "sz399001", name: "深证成指", kline: "sz399001" },
+  { code: "sz399006", name: "创业板指", kline: "sz399006" },
+];
+const HK_DEFS = [
+  { code: "hkHSI", name: "恒生指数" },
+  { code: "hkHSTECH", name: "恒生科技" },
+];
+const US_DEFS = [
+  { code: "gb_dji", name: "道琼斯" },
+  { code: "gb_ixic", name: "纳斯达克" },
+  { code: "gb_inx", name: "标普500" },
+];
+
+const QUOTE_API = "http://hq.sinajs.cn/list=";
+/** 新浪 K线接口（2026-08-27 改回：东财 push2his CI 不可达）：按 symbol + scale=240(日线) + datalen=N。 */
+const KLINE_API =
+  "https://money.finance.sina.com.cn/quotes_service/api/json_v2.php/CN_MarketData.getKLineData";
+
+/** 本地格式化年月日（避免 toISOString 的 UTC 偏移导致跨时区少算一天）。 */
+function fmtLocal(d: Date): string {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  return `${y}-${m}-${day}`;
+}
+
+/** 上一交易日（跳过周末；不含法定节假日，足够日常使用）。
+ *  用本地构造 + 本地格式化，规避 toISOString() 在 GMT+8 下少算一天（曾导致取值日错成周日、A股涨跌幅缺失）。 */
+export function prevTradingDay(dateStr: string): string {
+  const [y, m, d] = dateStr.split("-").map(Number);
+  if (!y || !m || !d) return dateStr;
+  const dt = new Date(y, m - 1, d);
+  do {
+    dt.setDate(dt.getDate() - 1);
+  } while (dt.getDay() === 0 || dt.getDay() === 6);
+  return fmtLocal(dt);
+}
+
+function fmtNum(v: string): string {
+  const n = parseFloat(v);
+  if (Number.isNaN(n)) return v;
+  return n.toFixed(2);
+}
+function fmtPct(v: string): string {
+  const n = parseFloat(v);
+  if (Number.isNaN(n)) return "";
+  return (n >= 0 ? "+" : "") + n.toFixed(2) + "%";
+}
+
+/** 网络瞬时抖动重试（2026-09-05 #148 实锤：hq.sinajs.cn 单次 fetch 报 `fetch failed`
+ *  → 港股/美股指数整组丢失，页面只能退化成「新浪K线」且无港股美股）。
+ *  仅对网络错误 / 5xx / 429 重试，4xx（除 429）立即放弃（配置类错误重试无意义）。 */
+const FETCH_RETRIES = 3; // 总尝试次数（首次 + 2 次重试）
+const FETCH_BASE_DELAY_MS = 600; // 600ms → 1.2s 指数退避
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
+async function fetchText(
+  http: HttpClient,
+  url: string,
+  referer = "https://finance.sina.com.cn/",
+): Promise<string | null> {
+  let lastMsg = "";
+  for (let attempt = 0; attempt < FETCH_RETRIES; attempt++) {
+    try {
+      // 契约端口（适配器侧 fetch / curl 兜底二选一）；失败抛错，与 gzinfo 的
+      // 「非 ok 走 lastMsg」语义等价（适配器错误串形如 `HTTP 404 for <url>`）。
+      const body = await http.getText(url, { headers: { Referer: referer } });
+      if (body && body.trim()) return body;
+      lastMsg = "empty body";
+    } catch (e) {
+      lastMsg = (e as Error).message;
+    }
+    // 4xx（429 除外）不重试：URL/权限问题重试也必然失败
+    if (/^HTTP 4\d\d/.test(lastMsg) && !lastMsg.includes("429")) break;
+    if (attempt < FETCH_RETRIES - 1) {
+      await sleep(FETCH_BASE_DELAY_MS * 2 ** attempt);
+    }
+  }
+  console.warn(`[quote] 抓取失败（已重试 ${FETCH_RETRIES} 次）${url}: ${lastMsg}`);
+  return null;
+}
+
+/**
+ * A股：新浪 K线取点位 + 涨跌幅（v2 升级：两者都走日K线）
+ * kline 格式："YYYY-MM-DD,open,close,high,low,volume"
+ *   - index 0: date
+ *   - index 2: close
+ * 涨跌幅 = (close - prev_close) / prev_close
+ */
+async function aShareFromKline(
+  http: HttpClient,
+  klineSymbol: string,
+  targetDay: string,
+): Promise<{ value: string; changePct?: string } | null> {
+  const text = await fetchText(http, `${KLINE_API}?symbol=${klineSymbol}&scale=240&ma=no&datalen=8`);
+  if (!text) return null;
+  try {
+    const arr = JSON.parse(text) as Array<{ day: string; close: string }>;
+    const idx = arr.findIndex((k) => k.day === targetDay);
+    if (idx <= 0) return null;
+    const yest = parseFloat(arr[idx].close);
+    const prev = parseFloat(arr[idx - 1].close);
+    if (!yest || !prev) return null;
+    const changePct = (((yest - prev) / prev) * 100).toFixed(2);
+    return { value: yest.toFixed(2), changePct: fmtPct(changePct) };
+  } catch {
+    return null;
+  }
+}
+
+export async function fetchMarketQuotes(
+  quoteDate: string,
+  http: HttpClient,
+): Promise<QuoteResult | null> {
+  const allCodes = [...A_SHARE_DEFS, ...HK_DEFS, ...US_DEFS].map((d) => d.code).join(",");
+  const text = await fetchText(http, QUOTE_API + allCodes);
+  if (!text) {
+    // 即使新浪 hq 接口失败，也尝试 K 线（仅 A股）：K 线接口有自己独立的请求，
+    // 至少 A股数据还能 fallback；港股/美股没 K 线 fallback → 返回 null
+    const aShareKlineOnly: IndexQuote[] = [];
+    for (const d of A_SHARE_DEFS) {
+      const k = await aShareFromKline(http, d.kline, quoteDate);
+      if (k) aShareKlineOnly.push({ name: d.name, value: k.value, changePct: k.changePct });
+    }
+    if (aShareKlineOnly.length) {
+      console.log(`[quote] 仅 A股 K线 fallback：${aShareKlineOnly.length} 条（港股/美股无 fallback）`);
+      return { quotes: { aShare: aShareKlineOnly, hk: [], us: [] }, channel: "新浪K线", date: quoteDate };
+    }
+    return null;
+  }
+
+  const parseOne = (code: string): string[] | null => {
+    const m = text.match(new RegExp(`hq_str_${code}="([^"]*)"`));
+    return m ? m[1].split(",") : null;
+  };
+
+  const aShare: IndexQuote[] = [];
+  for (const d of A_SHARE_DEFS) {
+    // A股：点位 + 涨跌幅一律走新浪日 K 线（按 targetDay 精确匹配，绝不错日）
+    const k = await aShareFromKline(http, d.kline, quoteDate);
+    if (k) aShare.push({ name: d.name, value: k.value, changePct: k.changePct });
+  }
+  const hk: IndexQuote[] = [];
+  for (const d of HK_DEFS) {
+    const f = parseOne(d.code);
+    // 港股 hq 字段顺序（2026-08-29 实测 hq.sinajs.cn，港股与 A股字段顺序不同）：
+    //   f[0]=symbol  f[1]=name  f[2]=今开  f[3]=昨收  f[4]=最高  f[5]=最低
+    //   f[6]=现价/收盘（盘后=收盘价）  f[7]=涨跌点  f[8]=涨跌%  f[17]=日期  f[18]=时间
+    // 收盘复盘：点位取 f[6]（收盘），涨跌幅自 (f[6]-f[3])/f[3] 计算——
+    // 保证「点位」与「涨跌幅」同源（都基于 收盘 vs 昨收），不再出现
+    // 「点位=昨收、涨跌幅=收盘vs昨收」的错配（2026-08-29 用户实测：原 f[3] 当点位导致涨跌幅不是收盘时点值）。
+    // 盘后/盘前 f[6] 即收盘价，与 A股 K线口径一致；f[8] 作为兜底（实测两者一致）。
+    if (f && f[6] && f[3]) {
+      const close = parseFloat(f[6]);
+      const prevClose = parseFloat(f[3]);
+      if (close && prevClose) {
+        const chg = ((close - prevClose) / prevClose) * 100;
+        const changePct = Number.isFinite(chg) ? chg : parseFloat(f[8]);
+        if (Number.isFinite(changePct)) {
+          hk.push({
+            name: d.name,
+            value: close.toFixed(2),
+            changePct: fmtPct(changePct.toFixed(2)),
+          });
+        }
+      }
+    }
+  }
+  const us: IndexQuote[] = [];
+  for (const d of US_DEFS) {
+    const f = parseOne(d.code);
+    // 美股：f[1] = 最新收盘；f[2] = 涨跌幅（北京时间白天稳定 = 上一美股交易日）
+    if (f && f[1]) us.push({ name: d.name, value: fmtNum(f[1]), changePct: f[2] ? fmtPct(f[2]) : undefined });
+  }
+
+  if (!aShare.length && !hk.length && !us.length) {
+    console.warn(`[quote] 行情 API 未解析到任何指数`);
+    return null;
+  }
+  console.log(
+    `[quote] 行情 API 抓取成功：A股 ${aShare.length} / 港股 ${hk.length} / 美股 ${us.length}（取值日 ${quoteDate}）`,
+  );
+  return { quotes: { aShare, hk, us }, channel: "新浪行情", date: quoteDate };
+}

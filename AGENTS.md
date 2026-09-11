@@ -18,7 +18,7 @@
 
 ```
 lib/contracts/    # 契约：article / report / source / pipeline（端口+上下文）
-lib/services/     # 每阶段一个目录；enrich/relevance.ts 为 AI 相关性回检
+lib/services/     # 每阶段一个目录（enrich AI 两阶段管线 / market 股市 / voice 口播 / memory 记忆）
 lib/adapters/     # 副作用实现；llm.ts 按 LLM_BACKEND 切后端
 lib/orchestrator/ # 组合根（createContext / bootstrap）
 lib/pipeline/     # runPipeline / runDryRun
@@ -34,8 +34,8 @@ sources.config.json / sources.keywords.json  # 源与关键词唯一真源
 2. **板块归属由内容判定**（assignSection 打分）：不读 sourceId/category 字符串做一般归属。
    category 仅可作为 IPO 内容态来源（ipo/gd-ipo）与参考区豁免判断（select/funnel）。
 3. **业务相关性**：条目必须与 客群/财富/私人银行/信贷 相关，或是国家/省/市级商机政策。
-   漏斗只做硬排除，准度由 enrich 的 AI 相关性回检（relevance.ts）终审；商机/风险追踪器
-   命中与参考区条目豁免 AI。
+   漏斗只做硬排除（keyword-funnel L0 + 维度匹配），准度由 enrich 的两阶段 AI 管线终审：
+   PASS1 的 keep 判定即相关性闸门（gzinfo 语义）；商机/风险追踪器命中与参考区条目豁免。
 
 ## 命令表
 
@@ -44,6 +44,7 @@ sources.config.json / sources.keywords.json  # 源与关键词唯一真源
 | `npm run daily` | 完整管线：采集→…→发布（env：REPORT_TZ / REPORT_DATE / SKIP_AI=1 / LLM_BACKEND） |
 | `npm run dry-run` | 仅采集+归一化+漏斗，不调 LLM、不落盘 |
 | `npm run render` | 用已落盘的报告 JSON 重渲染产物 |
+| `npm run ipo:local` | 本地抓两个 WAF 拦源的 IPO 数据并提交 `data/local-ipo.json`（`--dry-run`/`--no-push`） |
 | `npm run architecture:check` | 架构门禁（服务层/契约层依赖约束） |
 | `npm run typecheck` | tsc --noEmit |
 | `npm test` | node --test 全量离线测试 |
@@ -61,4 +62,6 @@ sources.config.json / sources.keywords.json  # 源与关键词唯一真源
 - **契约层零逻辑**：`lib/contracts/**` 只放类型 / 端口 / 常量，不写函数逻辑与副作用。
 - **LLM 调用要批量 + 计数**：富集走批量（每批 20 条）+ 并发池（≤4 在飞）；
   `must_read.url` 必须校验 ∈ 今日条目集合；失败降级要写 ctx.errors 与 ctx.stats。
-- **历史库单一写者**：只有 `lib/services/memory` 写 history；管线内先回放去重、尾部回写。
+- **历史库单一写者**：只有 `lib/services/memory` 负责 merge（纯函数），落盘统一走
+  `lib/adapters/persistence`；管线下载入历史供 select 的 stage6 跨天判重与 PASS2 prefill 复用，
+  在 history-step（PASS2 摘要回流 → merge+persist → buildRolling → 近 7 天并入）中回写。

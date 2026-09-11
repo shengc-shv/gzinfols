@@ -53,6 +53,29 @@ export function isWithinCalendarDays(
 }
 
 /**
+ * 自然日差（gzinfo lib/sources/crawlers/sources/staleness.ts dayGap 同款）：
+ * 两个 YYYY-MM-DD 之间的天数差（b - a）。用于时效哨兵与广东IPO 健康度检查。
+ */
+export function dayGap(a: string, b: string): number {
+  const ta = new Date(`${a}T00:00:00`).getTime();
+  const tb = new Date(`${b}T00:00:00`).getTime();
+  if (Number.isNaN(ta) || Number.isNaN(tb)) return 0;
+  return Math.round((tb - ta) / 86_400_000);
+}
+
+/**
+ * 窗口过滤（gzinfo lib/ingest/merge.ts filterByWindow 同款）：只保留发布日期
+ * （报告时区）落在最近 days 个日历日内的条目。时间红线：无真实发布时间 → 丢弃
+ * （isWithinCalendarDays 内部已处理，绝不用抓取时间兜底）。
+ */
+export function filterByWindow<T extends { publishedAt?: Date | string }>(
+  articles: T[],
+  days = 7,
+): T[] {
+  return articles.filter((a) => isWithinCalendarDays(a.publishedAt, days));
+}
+
+/**
  * 从 URL 路径提取发布日期（YYYY-MM-DD）。支持 20260820 / 2026-08-20 / 2026/08/20
  * 等常见形态；无日期或非法日期返回 undefined。
  */

@@ -17,6 +17,8 @@
  */
 import type { DailyReport, ReportItem, StockRecap } from "../../contracts/report";
 import type { ExecutiveSummary } from "../enrich/executive-summary";
+import { buildStockSpoken } from "./stock-spoken";
+import { formatCnDate, formatCnDateShort } from "../market/market-status";
 import { ipoShouldSkip } from "../memory/event-memory";
 import { buildGdIpoSpoken, pickGdIpoCompanies, companyNameOf } from "../classify/gd-ipo-spoken";
 // 广东企业注册表（纯数据模块，与卡面判定同源；类型由 lib/guangdong.d.mts 提供）
@@ -173,8 +175,9 @@ export async function assembleBriefingScript(
 
   segments.push({ id: "intro", startSec: 0, durationSec: cursor, refs: [], text: OPENER });
 
-  // —— 今日定调（exec.spoken_hero 优先；gzinfo：与 hero_line 结论一致的主播解读感口语）——
-  const hero = sanitize(exec?.spoken_hero ?? report.hero_line ?? "");
+  // —— 今日定调：只读 exec.spoken_hero（gzinfo 口径——口播稿的唯一来源是执行摘要的
+  // spoken_* 字段，由 LLM 产出或 syncNarration 由卡面 1:1 确定性派生；不读 report.hero_line）——
+  const hero = sanitize(exec?.spoken_hero ?? "");
   if (hero) {
     const t = truncateAtSentence(hero, AUDIO_SPEAK_LIMITS.hero);
     const segText = `先看今日定调。${t}`;
@@ -189,23 +192,6 @@ export async function assembleBriefingScript(
   // —— 今日必读（exec.spoken_must_read 优先：syncNarration 1:1 由卡面派生）——
   if (exec?.spoken_must_read) {
     const t = truncateAtSentence(sanitize(exec.spoken_must_read), AUDIO_SPEAK_LIMITS.must_read);
-    const segText = `接下去看今日必读。${t}`;
-    parts.push(segText);
-    partMap.must_read = t;
-    const dur = estimateDurationSec(segText.length);
-    const mrUrls = (report.must_read ?? []).map((m) => m.url).filter(Boolean);
-    segments.push({ id: "must", startSec: cursor, durationSec: dur, refs: mrUrls, text: segText });
-    cursor += dur;
-    found++;
-  }
-  const mrTexts = exec?.spoken_must_read
-    ? []
-    : (report.must_read ?? [])
-    .map((m) => sanitize(`${m.title ?? ""}。${m.why}`.replace(/^。/, "")))
-    .filter(Boolean)
-    .map((t) => truncateAtSentence(t, 70));
-  if (mrTexts.length) {
-    const t = truncateAtSentence(mrTexts.join(""), AUDIO_SPEAK_LIMITS.must_read);
     const segText = `接下去看今日必读。${t}`;
     parts.push(segText);
     partMap.must_read = t;
@@ -230,45 +216,10 @@ export async function assembleBriefingScript(
     cursor += dur;
     found++;
   }
-  const insTexts = exec?.spoken_insights
-    ? []
-    : (report.insights ?? [])
-    .map((i) => sanitize(`${i.topic}。${i.impact}。${i.action}`))
-    .filter(Boolean)
-    .map((t) => truncateAtSentence(t, 80));
-  if (insTexts.length) {
-    const t = truncateAtSentence(insTexts.join(""), AUDIO_SPEAK_LIMITS.insights);
-    const segText = `接下去是商机洞察。${t}`;
-    parts.push(segText);
-    partMap.insights = t;
-    const dur = estimateDurationSec(segText.length);
-    const insightUrls = (report.insights ?? [])
-      .flatMap((i) => (i.sources ?? []).map((s) => s.url))
-      .filter(Boolean);
-    segments.push({ id: "insight", startSec: cursor, durationSec: dur, refs: insightUrls, text: segText });
-    cursor += dur;
-    found++;
-  }
 
   // —— 风险预警（exec.spoken_risk 优先；M 层，30s 预算；当日无风险 → 跳过）——
   if (exec?.spoken_risk) {
     const t = truncateAtSentence(sanitize(exec.spoken_risk), AUDIO_SPEAK_LIMITS.risk);
-    const segText = `接下去是风险预警。${t}`;
-    parts.push(segText);
-    partMap.risk = t;
-    const dur = estimateDurationSec(segText.length);
-    const riskUrls = (report.risk?.sources ?? []).map((s) => s.url).filter(Boolean);
-    segments.push({ id: "risk", startSec: cursor, durationSec: dur, refs: riskUrls, text: segText });
-    cursor += dur;
-    found++;
-  }
-  const riskRaw = exec?.spoken_risk
-    ? ""
-    : report.risk
-    ? sanitize(`${report.risk.topic}。${report.risk.impact}。${report.risk.action}`)
-    : "";
-  if (riskRaw) {
-    const t = truncateAtSentence(riskRaw, AUDIO_SPEAK_LIMITS.risk);
     const segText = `接下去是风险预警。${t}`;
     parts.push(segText);
     partMap.risk = t;
@@ -341,32 +292,56 @@ export async function assembleBriefingScript(
     cursor += dur;
   }
 
-  // —— 股市解读（挂钩 StockRecap；C10 落地后自动接入，未产出时跳过——gzinfo 同款降级）——
+  // —— 股市解读（gzinfo 口径：整体行情 → 结构分化 → 重点板块，跨市场预算轮转）——
+  // 2026-08-30 用户（tz）：美股标「美东时间」、A股/港股标「北京时间」；
+  // 同时说清是「上个交易日 X月X日」收盘（听众所处时间不确定，只说"昨日"无法定位）。
   const stockRecap = opts.stockRecap ?? report.stock_recap ?? null;
   if (stockRecap) {
     const ms = stockRecap.marketStatus;
+    // gzinfo 2026-09-03 修：旧 store.json 里没有 marketStatus 时退回 quoteDate（行情取值日）
     const dataDate = ms?.dataDate || stockRecap.quoteDate || "";
-    const stockIntro = dataDate ? `下面是${dataDate}股市收盘信息。` : "下面是股市收盘信息。";
-    // 预算：最后一个内容段吃「总上限 − 已拼 − 收尾」的剩余额度（gzinfo 同款自适应让位）。
+    const cnDate = dataDate ? formatCnDate(dataDate) : "";
+    // 2026-08-31 用户：口播须点明具体交易日，且作为 IPO→股市 的链接词
+    const stockIntro = dataDate
+      ? `下面是${formatCnDateShort(dataDate)}股市收盘信息。`
+      : "下面是股市收盘信息。";
+
+    // 预算：股市段吃「总上限 − 已拼内容 − 收尾语」的剩余额度，但不超过 AUDIO_SPEAK_LIMITS.stock。
+    // 非股市内容饱满时股市自动让位，整稿始终 ≤4 分 10 秒（2026-09-11 上限扩至 4:10）。
     const usedChars = parts.join("").length + stockIntro.length;
     const stockBudget = Math.max(
       0,
       Math.min(AUDIO_SPEAK_LIMITS.stock, SCRIPT_MAX_CHARS - usedChars - CLOSER.length),
     );
-    const markets: Array<{ key: "us" | "aShare" | "hk"; label: string }> = [
-      { key: "us", label: "美股" },
-      { key: "aShare", label: "A股" },
-      { key: "hk", label: "港股" },
+
+    // 口播顺序 A股 → 港股 → 美股（与 buildStockSpoken 的 MARKET_ORDER 一致）
+    const markets: Array<{ key: "aShare" | "hk" | "us"; label: string; tz: string }> = [
+      { key: "aShare", label: "A股", tz: "北京" },
+      { key: "hk", label: "港股", tz: "北京" },
+      { key: "us", label: "美股", tz: "美东" },
     ];
+    const prefixOf = (m: { label: string; tz: string }) =>
+      `${m.label}${cnDate ? `（${m.tz}时间${cnDate}收盘）` : ""}：`;
+    const labelChars: Partial<Record<"aShare" | "hk" | "us", number>> = {};
+    for (const m of markets) labelChars[m.key] = prefixOf(m).length;
+
+    // maxSectors: 2 = gzinfo 2026-09-03 晚间拍板：股市口播压缩 ~30%，每市场只详述打分最高 2 板块
+    const built = buildStockSpoken(stockRecap, { budget: stockBudget, labelChars, maxSectors: 2 });
+
     const segs: string[] = [];
     for (const m of markets) {
-      const body = sanitize(stockRecap[m.key]?.spoken ?? "");
+      let body = built.texts[m.key];
+      if (!body) {
+        // 兜底：overview/sectors 都缺（如纯指数合成的卡）时退回 LLM 的 spoken
+        const sp = sanitize(stockRecap[m.key]?.spoken ?? "");
+        if (sp) body = truncateAtSentence(sp.replace(/[。.]+$/, ""), 140);
+      }
       if (!body) continue;
-      const prefixed = `${m.label}：${body.replace(/[。.]+$/, "")}`;
-      segs.push(truncateAtSentence(prefixed, Math.floor(stockBudget / 3)));
+      segs.push(`${prefixOf(m)}${body.replace(/[。.]+$/, "")}`);
     }
     if (segs.length) {
-      const combined = truncateAtSentence(segs.join("。"), stockBudget) + "。";
+      // 三市场以「。」连接，末尾补「。」收句（buildStockSpoken 已按预算控制总量）
+      const combined = truncateAtSentence(segs.join("。"), AUDIO_SPEAK_LIMITS.stock + 40) + "。";
       const segText = `${stockIntro}${combined}`;
       parts.push(segText);
       partMap.stock_recap = combined;
@@ -374,6 +349,11 @@ export async function assembleBriefingScript(
       segments.push({ id: "stock", startSec: cursor, durationSec: dur, refs: [], text: segText });
       cursor += dur;
       found++;
+      console.log(
+        `📊 股市口播：A股 ${built.sectorCounts.aShare} / 港股 ${built.sectorCounts.hk} / 美股 ${built.sectorCounts.us} 个板块要点，合计 ${combined.length} 字（预算 ${stockBudget}）`,
+      );
+    } else {
+      console.warn("⚠️ 章节「昨日股市解读」三市场口播稿均缺失，跳过");
     }
   }
 

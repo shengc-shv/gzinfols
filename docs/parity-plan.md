@@ -1,9 +1,12 @@
 # gzinfo → gzinfols 全量功能移植与重构方案（核对基线 v1）
 
 > 日期：2026-09-11 ｜ 基线：gzinfo @ /Users/shengc/ccworkstaion/gzinfo（main 最新）
-> 进度：**B1 ✅（4203846..16bacf2）、B2 ✅（5615b6d）、B3 ✅（本轮）已完成并推送（2026-09-11）**；B4-B6 待执行。
+> 进度：**B1 ✅、B2 ✅、B3 ✅、B4 ✅（2026-09-11，见 docs/parity-B4-report.md）**；B5-B6 待执行。
 > B2 说明：AI 相关性回检（2.0 自创）已按 gzinfo 对齐移除——PASS1 keep 判定即相关性闸门。
-> B3 说明：executive-summary 旁路 + event-memory 全家 + history 重构 + gd-ipo 侧栏已落地；select-top/assets 经裁决不移植（见核对报告「不移植项」）；股市两旁路（stock-recap/stock-news）随 B4。
+> B3 说明：executive-summary 旁路 + event-memory 全家 + history 重构 + gd-ipo 侧栏已落地；select-top/assets 经裁决不移植。
+> B4 说明（用户拍板）：**按实测切分**——trading 交易面板/commentary/regen-trading 不在 gzinfo 主链（daily.ts 不产出 report.trading），
+> 顺延 B6 运维批次；加密模块（coingecko/fear-greed，92 行）按 D4 裁决不移植（契约不引入 crypto_fear_greed、B6 渲染不做加密）。
+> 主链股市链路（quote-api/stock-recap/anchor/news-analysis/stock-spoken + 两个 side-output + P5 健康度）已全部落地。
 > 原则：**功能一致性优先**（业务规则/输入输出/边界/异常行为逐项对齐），架构重构只改「代码放哪、怎么组织」，不改「做什么」。
 > 改进方案一律先报备确认（本文件 §4），确认后写入对应批次实施。
 

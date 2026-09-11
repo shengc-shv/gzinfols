@@ -6,6 +6,7 @@
  */
 
 /** 地域标记（gzinfo types.ts Locale 同名）：gz=广州辖区 / national=全国 / overseas=海外。 */
+import type { IndexQuote } from "./market";
 export type Locale = "gz" | "national" | "overseas";
 
 /** 报告板块键（5 个 tab）。 */
@@ -89,7 +90,7 @@ export interface MarketCard {
   overview: string;
   sectors: string[];
   spoken?: string;
-  indices?: { name: string; value: string; changePct?: string }[];
+  indices?: IndexQuote[];
   meta?: { source: string; date: string; crossCheck: string };
   sourceReport?: { title: string; url: string };
 }
@@ -105,6 +106,9 @@ export interface StockRecap {
     isMarketClosed: boolean;
     reportDate: string;
     dataDate: string;
+    /** 页面展示文案（仅非交易日有值：橙字警示「周末及周一休市时段…」）。 */
+    note?: string;
+    /** 口播专用文案（交易日也带日期：「以下行情为上一交易日，X月X日 周X的收盘情况」）。 */
     spokenNote?: string;
   };
 }

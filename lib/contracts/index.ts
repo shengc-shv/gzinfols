@@ -5,4 +5,5 @@
 export * from "./article";
 export * from "./source";
 export * from "./report";
+export * from "./market";
 export * from "./pipeline";

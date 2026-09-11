@@ -17,6 +17,7 @@ import type { HistoryStore } from "../services/memory/history";
 import { reviveEventMemory, prepareEventMemory, MEMORY_RETAIN_DAYS } from "../services/memory/store";
 import { emptyMemory, type EventMemoryStore } from "../services/memory/event-memory";
 import type { ExecutiveSummary } from "../services/enrich/executive-summary";
+import type { StockRecap, StockNewsItem } from "../contracts/report";
 
 /**
  * 根目录覆盖（测试隔离用）：默认 process.cwd()（与 gzinfo 行为一致）；
@@ -163,6 +164,85 @@ export function loadExecStore(
     }
   }
   return undefined;
+}
+
+// ---------- 股市复盘 / 股市清单归档（history/<date>/store.json 的字段级读写） ----------
+
+/**
+ * 读改写 history/<date>/store.json：保留 executive 等既有字段，写入 stock_recap。
+ * 与 writeExecStore 互补——两者都对该文件做 read-modify-write，调用顺序无关
+ * （谁先谁后都不会覆盖对方的字段）。gzinfo ai/stock-recap.ts 同款。
+ */
+export function writeStockRecapStore(
+  date: string,
+  recap: StockRecap,
+  opts: { baseDir?: string } = {},
+): void {
+  modifyStoreField(date, "stock_recap", recap, opts);
+}
+
+/** 读取 history/<date>/store.json 的 stock_recap 字段；缺失或损坏返回 undefined。 */
+export function loadStockRecapStore(
+  date: string,
+  opts: { baseDir?: string } = {},
+): StockRecap | undefined {
+  const obj = readStoreObject(date, opts);
+  const r = obj?.stock_recap as StockRecap | undefined;
+  if (r && r.us && r.aShare && r.hk) return r;
+  return undefined;
+}
+
+/** 读改写 store.json：写入 stock_news（AI 归纳结果），随 SKIP_AI 复用。 */
+export function writeStockNewsStore(
+  date: string,
+  items: StockNewsItem[],
+  opts: { baseDir?: string } = {},
+): void {
+  modifyStoreField(date, "stock_news", items, opts);
+}
+
+/** 读取 history/<date>/store.json 的 stock_news；缺失/损坏返回 undefined。 */
+export function loadStockNewsStore(
+  date: string,
+  opts: { baseDir?: string } = {},
+): StockNewsItem[] | undefined {
+  const obj = readStoreObject(date, opts);
+  const arr = obj?.stock_news;
+  if (Array.isArray(arr) && arr.length > 0) return arr as StockNewsItem[];
+  return undefined;
+}
+
+function storeJsonPath(date: string, opts: { baseDir?: string }): string {
+  return path.resolve(opts.baseDir ?? root(), "history", date, "store.json");
+}
+
+/** 读取 store.json 为对象（缺失/损坏 → undefined）；不抛错（归档层不阻断主流程）。 */
+function readStoreObject(date: string, opts: { baseDir?: string }): Record<string, unknown> | undefined {
+  try {
+    const raw = readJsonSync(storeJsonPath(date, opts));
+    if (raw && typeof raw === "object" && !Array.isArray(raw)) return raw as Record<string, unknown>;
+  } catch {
+    // 忽略损坏
+  }
+  return undefined;
+}
+
+/** 字段级写回（read-modify-write；写盘失败静默忽略）。 */
+function modifyStoreField(
+  date: string,
+  key: string,
+  value: unknown,
+  opts: { baseDir?: string },
+): void {
+  try {
+    const obj: Record<string, unknown> = readStoreObject(date, opts) ?? {};
+    obj.date = date;
+    obj.updatedAt = new Date().toISOString();
+    obj[key] = value;
+    writeJsonSync(storeJsonPath(date, opts), obj);
+  } catch {
+    // 归档失败不打断主流程
+  }
 }
 
 /** 测试/工具用：确保空库形状可得（与 gzinfo emptyMemory 对齐的导出转发）。 */

@@ -21,6 +21,7 @@ import { assembleBriefingScript, type AudioMeta } from "../services/voice";
 import { publishReport } from "../services/publish";
 import { companyNameOf } from "../services/classify/gd-ipo-spoken";
 import { loadHistoryStore, loadExecStore, loadEventMemory, saveEventMemory } from "../adapters/persistence";
+import { dayGap } from "../utils/time";
 import { recordIpoVoicing, ipoShouldSkip } from "../services/memory/event-memory";
 import { isEventMemoryEnabled } from "../services/memory/store";
 
@@ -62,7 +63,7 @@ export async function runPipeline(
     ingest.crawled,
     ctx,
     selected.filterResults,
-    { llm: deps.llm },
+    { llm: deps.llm, http: deps.http },
   );
 
   // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——
@@ -134,6 +135,50 @@ export async function runPipeline(
     `观测汇总：LLM 调用 ${ctx.stats.llmCalls ?? 0} 次（失败 ${ctx.stats.llmFailures ?? 0}）`,
   );
   return { report: withSides, html, markdown, speech, audio, paths };
+}
+
+/**
+ * 广东IPO 健康度检查（gzinfo scripts/daily.ts ⑦.5 同款）：
+ *  - 打印分类计数 + 每源条数（一眼看出哪个源当天是暗的）；
+ *  - 广东条目 0 条 / 最新条目滞后 > 3 天 → ::warning::（GitHub Actions 高亮 + 注解区展示）。
+ * 用 console 直写（非 ctx.log）：`::warning::` 必须位于行首才会被 Actions 识别为注解。
+ */
+function checkIpoHealth(report: DailyReport, ctx: PipelineContext): void {
+  try {
+    const ipoItems = report.sections?.ipo ?? [];
+    const gdItems = ipoItems.filter((it) => (it.tags ?? []).includes("粤"));
+    const bySource = new Map<string, number>();
+    for (const it of gdItems) {
+      const k = it.source || "未知源";
+      bySource.set(k, (bySource.get(k) ?? 0) + 1);
+    }
+    const breakdown = [...bySource.entries()].map(([s, n]) => `${s} ${n}`).join(" / ") || "（无）";
+    ctx.log.info(
+      "ipo-health",
+      `🏦 广东IPO：板块 ${ipoItems.length} 条 → 广东 ${gdItems.length} 条（${breakdown}）`,
+    );
+    if (gdItems.length === 0) {
+      console.warn(
+        "::warning:: [daily] 广东IPO 今日 0 条（7 天窗口）：可能确无动态，也可能是源抓取失败/字段改版 —— " +
+          "请对照各源输出的「新鲜度告警」定位",
+      );
+    } else {
+      const newest = gdItems.reduce((a, b) => (b.date > a ? b.date : a), "");
+      if (/^\d{2}\/\d{2}$/.test(newest)) {
+        const year = ctx.date.slice(0, 4);
+        const gap = dayGap(`${year}-${newest.replace("/", "-")}`, ctx.date);
+        if (gap > 3) {
+          console.warn(
+            `::warning:: [daily] 广东IPO 最新条目 ${newest} 已滞后 ${gap} 天：窗口内可能只剩历史存量，建议核查各源`,
+          );
+        }
+      }
+    }
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    ctx.errors.push({ stage: "ipo-health", message: msg });
+    ctx.log.warn("ipo-health", `健康度检查异常（不阻断）：${msg}`);
+  }
 }
 
 /** 时长文案（gzinfo formatDuration 同口径；独立小函数避免跨服务导出耦合）。 */

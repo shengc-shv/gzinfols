@@ -8,7 +8,7 @@
 `gzinfols` 是 `gzinfo`（/Users/shengc/ccworkstaion/gzinfo，招行广州分行每日资信简报生成器）的 **2.0 独立重写版**：功能与 gzinfo 完全一致（业务规则/输入输出/边界/异常行为），但技术架构按「契约层(contracts) / 服务层(services) / 适配器层(adapters) / 编排层(pipeline+orchestrator)」的端口-适配器架构重构。
 
 - 仓库：`/Users/shengc/ccworkstaion/gzinfo` = **移植基准（只读参考，功能一致性唯一对照源）**
-- 仓库：`/Users/shengc/ccworkstaion/gzinfols` = **工作仓库**（独立 git，远端 `shengc-shv/gzinfols`，main 已推送至 `b093ac8`）
+- 仓库：`/Users/shengc/ccworkstaion/gzinfols` = **工作仓库**（独立 git，远端 `shengc-shv/gzinfols`，main 已推送至 B4 收尾 commit）
 - Node 22 + tsx + TypeScript strict ESM，无框架；`sources.config.json` / `sources.keywords.json` 两份业务数据从 gzinfo 逐字拷贝（不得改内容）
 
 ## 2. 用户已拍板的裁决（不要重新讨论）
@@ -26,9 +26,10 @@
 | B1 | 7 道过滤链 + 相似度判重 + 分行相关性评分（gzinfo 官方测试 530 行移植全过） | ✅ `16bacf2` |
 | B2 | PASS1/PASS2 两阶段 AI 管线 + 13 条校验回炉 + 降级路径 + LLM 重试 | ✅ `5615b6d` |
 | B3 | executive-summary 旁路 + event-memory 全家（~2500 行）+ 历史库 gzinfo 同构重构 + gd-ipo 侧栏 + 口播 exec 驱动 | ✅ `b093ac8` |
-| **B4** | **股市三卡**：`lib/trading/`（~628 行）+ `lib/pipeline/side-outputs/stock-recap.ts`（189）+ `stock-news.ts`（146）+ `lib/audio/stock-spoken.ts`（423）→ 2.0 对应位置；接 `buildSideOutputs` 里留好的两个占位注释；voice 股市段已留挂点（`opts.stockRecap`） | ⬜ 下一步 |
+| B4 | 股市三卡主链：quote-api + stock-recap(+anchor) + stock-news(+analysis) + stock-spoken + 两个 side-output 接线 + P5 广东IPO健康度（详见 docs/parity-B4-report.md） | ✅ `本轮` |
+| **B5** | **发布链路**：publish-state 状态机（final/test 双轨）、历史归档回 main、cleanup-history、deliverySettlementGate（`extractReportRunId` 已就位）、regen-trading 等运维脚本 | ⬜ 下一步 |
 | B5 | 发布链路：publish-state 状态机（final/test 双轨）、历史归档回 main、cleanup-history、deliverySettlementGate（publish-run-id 已移植好 `extractReportRunId`）、regen-trading/ipo-local 等运维脚本补齐 | ⬜ |
-| B6 | 渲染对齐：gzinfo render.ts（~2116 行）的完整卡面/横滑卡/播放器段落联动高亮/renderArticleHtml 徽章体系；build-site | ⬜ |
+| B6 | 渲染对齐 + 运维：gzinfo render.ts（~2116 行）完整卡面/横滑卡/播放器段落联动高亮/徽章体系；build-site；**交易面板（trading/* + trading-commentary + regen-trading，B4 顺延项）** | ⬜ |
 
 ## 4. 每次动手前/后的固定动作
 
@@ -68,4 +69,5 @@ npm test                      # 当前 105/105，任何批次完成后不得减�
 
 1. 跑一遍三件套验证，确认 105/105 基线成立；
 2. 读 `docs/parity-plan.md` 的 B4 行 + gzinfo 的 `lib/trading/`、`lib/pipeline/side-outputs/stock-*.ts`、`lib/audio/stock-spoken.ts`，评估后向用户确认 B4 方案再动手；
-3. B4 完成后：`buildSideOutputs` 的两个占位注释处接入 `buildStockRecap` / `buildStockNews`，voice 的 `opts.stockRecap` 已留好。
+3. B5 起：发布链路（publish-state 状态机 / 历史归档回 main / cleanup-history / deliverySettlementGate）。
+   B6 起：渲染对齐 + 交易面板（含加密剔除口径确认）。
