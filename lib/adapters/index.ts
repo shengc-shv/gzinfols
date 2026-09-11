@@ -8,6 +8,7 @@ import { SystemClock } from "./clock";
 import { FetchAdapter } from "./http";
 import { LlmAdapter } from "./llm";
 import { ConsoleLogger } from "./logger";
+import { TtsAdapter } from "./tts";
 import { fetchCrawledArticles } from "./crawlers";
 import type {
   Clock,
@@ -17,6 +18,7 @@ import type {
   Logger,
   LlmPort,
   PipelineDeps,
+  TtsPort,
 } from "../contracts/pipeline";
 
 export interface AdapterOverrides {
@@ -26,6 +28,8 @@ export interface AdapterOverrides {
   http?: HttpClient;
   /** 爬虫注册表（默认装配真实爬虫；测试传 null 显式关闭，或不传 = 真实爬虫）。 */
   crawlers?: CrawlerRegistry | null;
+  /** 语音合成（默认按 AUDIO_ENABLED === "true" 装配；测试传 null 显式关闭）。 */
+  tts?: TtsPort | null;
 }
 
 export function createAdapters(overrides: AdapterOverrides = {}): PipelineDeps {
@@ -37,7 +41,9 @@ export function createAdapters(overrides: AdapterOverrides = {}): PipelineDeps {
     http: overrides.http ?? new FetchAdapter(),
     // 默认装配真实爬虫；测试注入 overrides.crawlers === null 显式关闭（不传 = 真实爬虫）。
     crawlers: overrides.crawlers === null ? undefined : (overrides.crawlers ?? crawlers),
+    // TTS：AUDIO_ENABLED === "true" 才装配（CI Generate 步骤显式注入；本地默认关闭）。
+    tts: overrides.tts === null ? undefined : (overrides.tts ?? (process.env.AUDIO_ENABLED === "true" ? new TtsAdapter() : undefined)),
   };
 }
 
-export { NodeFsAdapter, SystemClock, FetchAdapter, LlmAdapter, ConsoleLogger };
+export { NodeFsAdapter, SystemClock, FetchAdapter, LlmAdapter, ConsoleLogger, TtsAdapter };

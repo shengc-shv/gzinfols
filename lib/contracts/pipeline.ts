@@ -55,6 +55,18 @@ export interface HttpClient {
   getText(url: string, opts?: { useCurl?: boolean; headers?: Record<string, string> }): Promise<string>;
 }
 
+/**
+ * 语音合成端口（唯一 TTS 出口）。
+ * 组合根按 AUDIO_ENABLED === "true" 装配；失败抛错，由管线 catch 降级为「页面无播放器」（不阻断发布）。
+ * 落盘由适配器负责（双路径：daily_reports/<date>/audio/ 归档 + site/audio/ 站点）。
+ */
+export interface TtsPort {
+  synthesize(
+    script: string,
+    date: string,
+  ): Promise<{ backend: "tencent" | "piper"; bytes: number; durationSec: number }>;
+}
+
 /** 日志端口。 */
 export interface Logger {
   info(stage: string, msg: string, meta?: Record<string, unknown>): void;
@@ -99,6 +111,8 @@ export interface PipelineDeps {
   http: HttpClient;
   /** 可选爬虫注册表（IPO 六源 + 广州商机三源接入通道；缺省不装配）。 */
   crawlers?: CrawlerRegistry;
+  /** 可选语音合成（AUDIO_ENABLED 门控；缺省不装配 = 页面无播放器）。 */
+  tts?: TtsPort;
 }
 
 /** 爬虫注册表端口（TS 爬虫产物接入通道；契约层只定义形状，实现由组合根装配）。 */

@@ -22,6 +22,8 @@ export interface RenderOptions {
   title?: string;
   /** 站点根（用于 latest 链接，可选）。 */
   siteRoot?: string;
+  /** 音频元数据（TTS 成功时注入 sticky 播放器；缺省无播放器）。 */
+  audio?: { src: string; duration: string; backend?: string };
 }
 
 /** tab 顺序与标签由契约层常量派生（单一真源，不重复定义）。 */
@@ -165,6 +167,10 @@ header .hero{font-size:20px;font-weight:600;margin-top:6px;}
 .badge.na{background:#eef2f7;color:#475569;}
 .badge.ov{background:#f3e8ff;color:#7e22ce;}
 .date{font-variant-numeric:tabular-nums;}
+.audio-bar{position:fixed;bottom:0;left:0;right:0;display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.96);border-top:1px solid var(--line);padding:8px 16px;z-index:20;backdrop-filter:blur(4px);}
+.audio-label{font-size:13px;color:var(--muted);white-space:nowrap;}
+.audio-bar audio{flex:1;height:32px;}
+.wrap{padding-bottom:80px !important;}
 `;
 
 /** 渲染单文件 HTML 报告。 */
@@ -210,9 +216,21 @@ export function renderHtml(report: DailyReport, opts: RenderOptions = {}): strin
   ${panels}
   ${riskBlock(report.risk)}
 </div>
+${audioBar(opts.audio)}
 <script>${js}</script>
 </body>
 </html>`;
+}
+
+/** sticky 音频播放器条（TTS 成功时注入；gzinfo 播放器口径的轻量版，段落联动高亮待 render 对齐时移植）。 */
+function audioBar(audio?: { src: string; duration: string; backend?: string }): string {
+  if (!audio) return "";
+  const badge = audio.backend ? `（${esc(audio.backend === "tencent" ? "腾讯云" : "本地合成")}）` : "";
+  return `
+<div class="audio-bar">
+  <span class="audio-label">🔊 语音播报 ${esc(audio.duration)}${badge}</span>
+  <audio controls preload="none" src="${esc(audio.src)}"></audio>
+</div>`;
 }
 
 /** 渲染 Markdown 报告（便于归档 / 公众号 / 邮件）。 */

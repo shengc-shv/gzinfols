@@ -1,13 +1,32 @@
 name: daily
 
+# 每日资信简报：构建（架构门禁 → 类型 → 测试 → 全 AI 管线 → TTS）→ GitHub Pages 发布。
+#
+# 发布门控（gzinfo 口径简化版）：一天只发一次正式版 —— schedule 触发时若 gh-pages 上
+# 已存在当日 <date>.html 则整个 run 跳过（不重复跑全 AI / 不重复 TTS / 不重复发布）；
+# workflow_dispatch 手动触发永远跑（用户选择优先）。三个 cron 时间点互为冗余，
+# 抗 GitHub schedule 约 70% 的丢触发率。
+#
+# 音频：AUDIO_ENABLED=true → 腾讯云 TTS（TENCENTCLOUD_* secrets）+ 分片 ffmpeg 拼接；
+#       腾讯失败 → 本轮降级为无播放器（不阻断发布；Piper 兜底为本地能力，CI 不预装）。
+#       audio input=false 或 SKIP_TTS=true 可跳过合成（省 TTS 成本，仍拼口播稿）。
+
 on:
   schedule:
-    # 工作日三次，对应北京时间（CST = UTC+8）：
-    # 06:30 CST → UTC 22:30（前一日，周日~周四）；12:00 CST → UTC 04:00；17:30 CST → UTC 09:30
-    - cron: "30 22 * * 0-4" # 周一至周五 06:30 北京时间
-    - cron: "0 4 * * 1-5"   # 周一至周五 12:00 北京时间
-    - cron: "30 9 * * 1-5"  # 周一至周五 17:30 北京时间
+    # 工作日 6:30 / 12:00 / 17:30（北京时间）= UTC 22:30(前日) / 04:00 / 09:30
+    - cron: "30 22 * * 0-4"
+    - cron: "0 4 * * 1-5"
+    - cron: "30 9 * * 1-5"
   workflow_dispatch:
+    inputs:
+      audio:
+        description: "生成语音播报（腾讯云 TTS）；取消勾选 = 只拼口播稿不合成"
+        type: boolean
+        default: true
+      publish:
+        description: "发布到 GitHub Pages（取消勾选 = 仅构建 + 上传 artifact 验证）"
+        type: boolean
+        default: true
 
 permissions:
   contents: read
@@ -19,8 +38,44 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  gate:
+    name: 当日已发布检查
     runs-on: ubuntu-latest
+    outputs:
+      should-run: ${{ steps.check.outputs.should-run }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check today's report on gh-pages
+        id: check
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          set -euo pipefail
+          # 手动触发永远跑（用户选择 = 最高优先级）
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "Manual trigger — proceeding"
+            echo "should-run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          TODAY=$(TZ="${REPORT_TZ:-Asia/Shanghai}" date +%Y-%m-%d)
+          echo "Report date (tz=${REPORT_TZ:-Asia/Shanghai}): ${TODAY}"
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git fetch origin gh-pages --depth=1
+            if git cat-file -e "origin/gh-pages:${TODAY}.html" 2>/dev/null; then
+              echo "→ 今日 ${TODAY} 正式版已发布，跳过（gzinfo 口径：一天一次正式发布）"
+              echo "should-run=false" >> "$GITHUB_OUTPUT"
+              exit 0
+            fi
+          fi
+          echo "→ 今日尚未发布 — proceeding"
+          echo "should-run=true" >> "$GITHUB_OUTPUT"
+
+  build:
+    needs: gate
+    if: needs.gate.outputs.should-run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -34,14 +89,60 @@ jobs:
         run: npm run typecheck
       - name: 单元测试
         run: npm test
+
+      # 探测腾讯密钥（step 级 if 不支持 secrets 上下文，先转输出）
+      - name: Detect Tencent TTS secret
+        id: tencent-check
+        env:
+          TENCENTCLOUD_SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
+        run: |
+          if [ -n "${TENCENTCLOUD_SECRET_ID}" ]; then
+            echo "has=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "has=false" >> "$GITHUB_OUTPUT"
+            echo "::warning::未配置 TENCENTCLOUD_SECRET_ID — 语音播报将降级（无音频）"
+          fi
+
+      # ---------- ffmpeg（腾讯分片重编码 concat 必需，始终安装）----------
+      - name: Install ffmpeg
+        run: |
+          if command -v ffmpeg >/dev/null 2>&1; then
+            echo "ffmpeg already present: $(ffmpeg -version 2>/dev/null | head -1)"
+          else
+            sudo apt-get update && sudo apt-get install -y ffmpeg
+          fi
+          command -v ffmpeg >/dev/null 2>&1 || { echo "::error::ffmpeg 安装失败"; exit 1; }
+
+      # ---------- 恢复 gh-pages 历史到 site/（防 deploy-pages 全量替换清掉历史报告）----------
+      - name: Restore existing reports from gh-pages
+        run: |
+          mkdir -p site
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
+            git fetch origin gh-pages --depth=1
+            git archive origin/gh-pages | tar -x -C site
+            restored=$(ls -1 site/*.html 2>/dev/null | wc -l | tr -d ' ')
+            echo "Restored site files: ${restored}"
+          else
+            echo "gh-pages doesn't exist yet — first run"
+          fi
+
       - name: 生成每日简报
         run: npm run daily
         env:
-          # CI 统一用 deepseek 账号跑（Actions 环境没有已登录的 claude CLI）
           LLM_BACKEND: deepseek
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-          REPORT_TZ: Asia/Shanghai
-          REPORT_LOCALE: zh
+          DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
+          REPORT_TZ: ${{ vars.REPORT_TZ }}
+          REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
+          # —— 语音播报（腾讯云 TTS 主用）——
+          AUDIO_ENABLED: ${{ (github.event_name == 'schedule' || inputs.audio) && 'true' || 'false' }}
+          SKIP_TTS: ${{ vars.SKIP_TTS }}
+          TENCENTCLOUD_SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
+          TENCENTCLOUD_SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
+          TENCENTCLOUD_REGION: ${{ vars.TENCENTCLOUD_REGION }}
+          TTS_VOICE_TYPE: ${{ vars.TTS_VOICE_TYPE }}
+          TTS_SPEED: ${{ vars.TTS_SPEED }}
+          TTS_PRONOUNCE: ${{ vars.TTS_PRONOUNCE }}
       - name: 上传产物（Pages）
         uses: actions/upload-pages-artifact@v3
         with:
@@ -55,6 +156,7 @@ jobs:
 
   deploy:
     needs: build
+    if: ${{ github.event_name == 'schedule' || inputs.publish == true }}
     runs-on: ubuntu-latest
     environment:
       name: github-pages

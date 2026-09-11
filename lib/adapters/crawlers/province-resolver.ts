@@ -1,4 +1,4 @@
-import { lookupByCode } from "../guangdong.mjs";
+import { lookupByCode } from "../../guangdong.mjs";
 
 /**
  * 股票代码 -> 注册省份 解析器（共享模块）
