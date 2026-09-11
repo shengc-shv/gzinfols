@@ -2,10 +2,13 @@ name: daily
 
 # 每日资信简报：构建（架构门禁 → 类型 → 测试 → 全 AI 管线 → TTS）→ GitHub Pages 发布。
 #
-# 发布门控（gzinfo 口径简化版）：一天只发一次正式版 —— schedule 触发时若 gh-pages 上
-# 已存在当日 <date>.html 则整个 run 跳过（不重复跑全 AI / 不重复 TTS / 不重复发布）；
-# workflow_dispatch 手动触发永远跑（用户选择优先）。三个 cron 时间点互为冗余，
-# 抗 GitHub schedule 约 70% 的丢触发率。
+# 发布门控（对齐 gzinfo 口径，2026-09-11 B5）：一天只发一次**正式版**。
+#   - gate 读 main 的 data/publish-state.json，判据 =「当天是否已正式生效」
+#     （source=schedule 或 manual-final）；是则整个 run 跳过（不重复跑全 AI / TTS / 发布）。
+#     manual-test（验证抢跑）不阻断；workflow_dispatch 手动触发永远跑（用户选择优先）。
+#   - 发布成功后部署 job 之后的 record job 才写 publish-state.json（先发后记）；
+#     次日/后续 schedule 据此跳过，凌晨 dispatch 测试不再吞掉当天正式首发。
+#   三个 cron 时间点互为冗余，抗 GitHub schedule 约 70% 的丢触发率。
 #
 # 音频：AUDIO_ENABLED=true → 腾讯云 TTS（TENCENTCLOUD_* secrets）+ 分片 ffmpeg 拼接；
 #       腾讯失败 → 本轮降级为无播放器（不阻断发布；Piper 兜底为本地能力，CI 不预装）。
@@ -27,9 +30,16 @@ on:
         description: "发布到 GitHub Pages（取消勾选 = 仅构建 + 上传 artifact 验证）"
         type: boolean
         default: true
+      release_mode:
+        description: "手动发布性质：final=当天正式终版（阻断同日 cron 重复发布）；test=验证抢跑（不阻断 cron 首发）"
+        type: choice
+        options:
+          - final
+          - test
+        default: final
 
 permissions:
-  contents: read
+  contents: write   # 归档历史库 / 记账 publish-state 需 push main（2026-09-11 B5）
   pages: write
   id-token: write
 
@@ -45,7 +55,7 @@ jobs:
       should-run: ${{ steps.check.outputs.should-run }}
     steps:
       - uses: actions/checkout@v4
-      - name: Check today's report on gh-pages
+      - name: Check publish state (today already in effect?)
         id: check
         env:
           REPORT_TZ: ${{ vars.REPORT_TZ }}
@@ -58,18 +68,25 @@ jobs:
             echo "should-run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          # 注意：TZ 必须**双引号**展开（单引号不展开 → date 退回 UTC → 取到前一天，
+          # 定时任务会永远跳过；2026-09-02 gzinfo 修复）。
           TODAY=$(TZ="${REPORT_TZ:-Asia/Shanghai}" date +%Y-%m-%d)
           echo "Report date (tz=${REPORT_TZ:-Asia/Shanghai}): ${TODAY}"
-          if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
-            git fetch origin gh-pages --depth=1
-            if git cat-file -e "origin/gh-pages:${TODAY}.html" 2>/dev/null; then
-              echo "→ 今日 ${TODAY} 正式版已发布，跳过（gzinfo 口径：一天一次正式发布）"
-              echo "should-run=false" >> "$GITHUB_OUTPUT"
-              exit 0
-            fi
+          # 判据改为「当天是否已正式生效」：读 main 的 data/publish-state.json。
+          # 只认 source=schedule 或 manual-final；manual-test / 裸 manual / 无记录 / 损坏 → 未发布。
+          if [ -f data/publish-state.json ]; then
+            IN_EFFECT=$(node -e "const s=JSON.parse(require('fs').readFileSync('data/publish-state.json','utf8'));const e=(s.reports||{})[process.argv[1]];process.stdout.write(e&&(e.source==='schedule'||e.source==='manual-final')?'yes':'no')" "$TODAY" 2>/dev/null || echo no)
+          else
+            IN_EFFECT=no
           fi
-          echo "→ 今日尚未发布 — proceeding"
-          echo "should-run=true" >> "$GITHUB_OUTPUT"
+          echo "publish-state in-effect=${IN_EFFECT}"
+          if [ "$IN_EFFECT" = "yes" ]; then
+            echo "→ 今日正式版已生效（publish-state: schedule/manual-final），跳过（gzinfo 口径：一天一次正式发布）"
+            echo "should-run=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "→ 今日尚未正式发布 — proceeding"
+            echo "should-run=true" >> "$GITHUB_OUTPUT"
+          fi
 
   build:
     needs: gate
@@ -126,6 +143,11 @@ jobs:
             echo "gh-pages doesn't exist yet — first run"
           fi
 
+      # 生成当日报告（全 AI 流程）。
+      # PUBLISH_RUN：本 run 是否上线（schedule 首发 / dispatch publish=true）→ 内容记忆
+      #   （side-exec-summary 的 persistMemory）与 IPO 口播记忆（pipeline/index.ts）只在此落盘。
+      #   2026-09-11 B5 补齐（此前 workflow 从未设置 → 记忆永不落盘，CI 每日从零开始）：
+      #   schedule 依赖 gate 判定（should-run=true 即首发）；dispatch 用 inputs.publish。
       - name: 生成每日简报
         run: npm run daily
         env:
@@ -134,6 +156,7 @@ jobs:
           DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
           REPORT_TZ: ${{ vars.REPORT_TZ }}
           REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
+          PUBLISH_RUN: ${{ (github.event_name == 'schedule' && needs.gate.outputs.should-run == 'true') || (github.event_name == 'workflow_dispatch' && inputs.publish == true) }}
           # —— 语音播报（腾讯云 TTS 主用）——
           AUDIO_ENABLED: ${{ (github.event_name == 'schedule' || inputs.audio) && 'true' || 'false' }}
           SKIP_TTS: ${{ vars.SKIP_TTS }}
@@ -143,6 +166,51 @@ jobs:
           TTS_VOICE_TYPE: ${{ vars.TTS_VOICE_TYPE }}
           TTS_SPEED: ${{ vars.TTS_SPEED }}
           TTS_PRONOUNCE: ${{ vars.TTS_PRONOUNCE }}
+
+      # ---------- 历史库裁剪（近 N 天保留 + 累积备份，2026-09-11 B5 补齐）----------
+      # daily 会重写 data/article-history.json（含当日 + 被灌入的旧缓存）。先裁到最近 N 天
+      # （默认 7），被移除数据累积写入 data/article-history-backup.json（不丢弃）。
+      - name: Trim history to recent N days (keep backup)
+        run: node scripts/cleanup-history.mjs
+
+      # ---------- 归档报告到 main/history/ + 提交滚动历史库（2026-09-11 B5 补齐）----------
+      # 此前完全缺失 → CI 每次 runner 从零开始（历史库/记忆库不回流 main）。
+      # 逐字对齐 gzinfo daily.yml 的归档步骤（2026-09-10 #201 并发教训）。
+      - name: Archive reports to history/ + commit rolling history
+        run: |
+          # 1) 归档唯一存储里的报告到 main/history/（gzinfo 产物 data/history/reports/<date>/）
+          mkdir -p history
+          for d in data/history/reports/20*/; do
+            [ -d "$d" ] && cp -r "$d" history/
+          done
+          # 2) 提交历史库 + 报告归档（存在才 add —— 首次运行可选文件可能尚未生成）
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add history/
+          for f in data/article-history.json data/article-history-backup.json data/event-memory.json; do
+            [ -f "$f" ] && git add "$f" || true
+          done
+          if git diff --cached --quiet; then
+            echo "历史文件与报告归档无变化，跳过提交"
+          else
+            git commit -m "chore: 更新历史缓存并归档报告 ($(date -u +%Y-%m-%d))"
+            # 3) 推送（免疫并发，2026-09-10 #201 教训）：运行期间远端可能被人工 push
+            #    或其他 workflow 推进，checkout 是 fetch-depth: 1 → 裸 push 必被拒。
+            #    先 fetch + merge -X ours（冲突时保住本 run 生成的新产物），失败重试 3 次。
+            pushed=0
+            for i in 1 2 3; do
+              git fetch origin main --depth=200 || true
+              git merge -X ours --no-edit -m "chore: 合并远端 main（CI 收尾）" origin/main || true
+              if git push; then pushed=1; break; fi
+              echo "::warning::归档 push 第 $i 次失败，3s 后重试"
+              sleep 3
+            done
+            if [ "$pushed" != "1" ]; then
+              echo "::error::归档 push 连续 3 次失败"
+              exit 1
+            fi
+          fi
+
       - name: 上传产物（Pages）
         uses: actions/upload-pages-artifact@v3
         with:
@@ -165,3 +233,46 @@ jobs:
       - name: 部署到 GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # ---------- 发布来源记账（2026-09-11 B5；对齐 gzinfo「先发后记」）----------
+  # 独立 job，needs: deploy → 只有在 Pages 部署**成功后**才记账（因果序：先发布成功，后记账），
+  # 避免「记了没发」导致次日误判已发布。SOURCE 由触发方式计算：
+  #   schedule → schedule；dispatch + release_mode=test → manual-test；否则 → manual-final。
+  record:
+    needs: deploy
+    if: ${{ github.event_name == 'schedule' || inputs.publish == true }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Record publish source (publish-state.json)
+        env:
+          REPORT_TZ: ${{ vars.REPORT_TZ }}
+          SOURCE: ${{ github.event_name == 'schedule' && 'schedule' || (inputs.release_mode == 'test' && 'manual-test' || 'manual-final') }}
+        run: |
+          npm run record-publish --silent
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/publish-state.json
+          if git diff --cached --quiet; then
+            echo "publish-state 无变化，跳过提交"
+          else
+            git commit -m "chore: 记录发布来源 (publish-state.json)"
+            # 与归档步骤同样的并发免疫：先 fetch + merge -X ours，再 push，失败重试 3 次。
+            pushed=0
+            for i in 1 2 3; do
+              git fetch origin main --depth=200 || true
+              git merge -X ours --no-edit -m "chore: 合并远端 main（CI 收尾）" origin/main || true
+              if git push; then pushed=1; break; fi
+              echo "::warning::publish-state push 第 $i 次失败，3s 后重试"
+              sleep 3
+            done
+            if [ "$pushed" != "1" ]; then
+              echo "::error::publish-state push 连续 3 次失败"
+              exit 1
+            fi
+          fi

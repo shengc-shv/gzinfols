@@ -1,12 +1,16 @@
 # gzinfo → gzinfols 全量功能移植与重构方案（核对基线 v1）
 
 > 日期：2026-09-11 ｜ 基线：gzinfo @ /Users/shengc/ccworkstaion/gzinfo（main 最新）
-> 进度：**B1 ✅、B2 ✅、B3 ✅、B4 ✅（2026-09-11，见 docs/parity-B4-report.md）**；B5-B6 待执行。
+> 进度：**B1 ✅、B2 ✅、B3 ✅、B4 ✅、B5 ✅（2026-09-11，见 docs/parity-B4-report.md / docs/parity-B5-report.md）**；B6 待执行。
 > B2 说明：AI 相关性回检（2.0 自创）已按 gzinfo 对齐移除——PASS1 keep 判定即相关性闸门。
 > B3 说明：executive-summary 旁路 + event-memory 全家 + history 重构 + gd-ipo 侧栏已落地；select-top/assets 经裁决不移植。
 > B4 说明（用户拍板）：**按实测切分**——trading 交易面板/commentary/regen-trading 不在 gzinfo 主链（daily.ts 不产出 report.trading），
 > 顺延 B6 运维批次；加密模块（coingecko/fear-greed，92 行）按 D4 裁决不移植（契约不引入 crypto_fear_greed、B6 渲染不做加密）。
 > 主链股市链路（quote-api/stock-recap/anchor/news-analysis/stock-spoken + 两个 side-output + P5 健康度）已全部落地。
+> B5 说明（发布链路移植）：publish-state 状态机（schedule/manual/manual-final/manual-test 四来源 + cron 跳过判据）
+> 落地 `lib/services/publish/publish-state.ts`；IO 归 `lib/adapters/persistence.ts`；`scripts/record-publish.ts` 先发后记；
+> `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs` 历史裁剪（近 7 天 + backup）；daily.yml 门控改读
+> publish-state、补 release_mode/PUBLISH_RUN、补「归档历史库回 main」与「记账」两步；详见 docs/parity-B5-report.md。
 > 原则：**功能一致性优先**（业务规则/输入输出/边界/异常行为逐项对齐），架构重构只改「代码放哪、怎么组织」，不改「做什么」。
 > 改进方案一律先报备确认（本文件 §4），确认后写入对应批次实施。
 
@@ -70,9 +74,9 @@
 | R1 | output/render.ts + render/* | 完整版面（5 tab/股市三卡/横滑卡/播放器v2联动/主题） | ~4k | ⚠️ 2.0 简版版面 | B6 |
 | R2 | output/report-from-articles + paths | 由全量池重渲染/路径 | ~500 | ⚠️ 简版 | B6 |
 | R3 | pipeline/render-and-write | 唯一存储（daily_reports/<date>/ 全产物）+ sidecar + 全量池导出 | ~400 | ⚠️ publish 简版 | B6 |
-| P1 | publish-state.ts + scripts/record-publish-state | 发布来源记账（schedule/manual-final/test） | ~200 | ❌（CI gate 是简版日期检查） | B5 |
+| P1 | publish-state.ts + scripts/record-publish-state | 发布来源记账（schedule/manual-final/test） | ~200 | ✅ `services/publish/publish-state.ts` + `scripts/record-publish.ts` + persistence 适配器 | B5 ✅ |
 | P2 | scripts/build-site.mjs | index.html + archive.html 站点聚合 | ~300 | ❌ | B6 |
-| P3 | scripts/cleanup-history.mjs + workflow | 历史裁剪（近 N 天 + backup） | ~200 | ❌ | B6 |
+| P3 | scripts/cleanup-history.mjs + workflow | 历史裁剪（近 N 天 + backup） | ~200 | ✅ `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs`（随 B5 提前落地） | B5 ✅ |
 | P4 | pipeline/bootstrap + context | 凭证校验/模式构建/tier 索引/aiAssets 装配 | ~500 | ⚠️ orchestrator 简版（缺凭证校验+aiAssets） | B2 |
 | P5 | 广东IPO健康度检查（daily.ts ⑦.5） | 0 条/滞后告警 | ~40 | ❌ | B3 |
 
@@ -131,7 +135,7 @@
 | B2 AI 管线 | A1-A6 + P4：pass1/pass2 结构、exec-pool、validator、aiAssets | 同一 prompt/输入 → 输出 JSON 结构一致；重试/失败降级行为一致 |
 | B3 旁路+口播 | S1/S2/A7/H1/P5 + V2 收口 | 同一 report → 口播稿逐字 diff；必读/商机/风险结构与 gzinfo store.json 结构一致 |
 | B4 股市 | S3-S7（D4 裁决后） | 三卡字段/时区口径/板块压缩(maxSectors=2)一致 |
-| B5 记忆与发布 | H2/H3/P1 | 事件指纹去重行为一致；publish-state 判据一致 |
+| B5 记忆与发布 | H2/H3（B3 已覆盖）、P1、P3、daily.yml 发布链路 | publish-state 判据一致（schedule/manual-final 跳过，manual-test 不阻断）；gate 读 publish-state 而非 gh-pages；PUBLISH_RUN 注入；先发后记 |
 | B6 渲染与运维 | R1-R3/P2/P3/V3/O1/O2/O6/O7 | HTML 版式对齐 gzinfo（golden diff）；index/archive 结构一致 |
 
 每批交付：代码 + 移植测试（gzinfo 对应 tests 同步）+ 行为核对报告（逐项 ✅/差异说明）。

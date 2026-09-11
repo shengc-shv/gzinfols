@@ -3,9 +3,12 @@ node_modules/
 
 # 运行时产物（每次运行重新生成，不入库）
 daily_reports/
-history/
+data/history/
 data/cache/
 data/local-acquired.json
+# 注意：根 history/ **必须入库**——CI 每日「Archive reports to history/」把报告归档到
+# main 的 history/<date>/（含 store.json），供 SKIP_AI 复用与历史追溯；与 gzinfo 口径一致
+# （gzinfo 忽略 /data/history/ 但提交根 /history/）。此处只忽略 data/history/，勿改回 history/。
 # 注意：data/local-ipo.json **必须入库**——本地 ipo:local 产出后提交推送，
 # 远端 CI 读取补数（本地/远端唯一衔接文件），见 lib/adapters/local-ipo.ts
 *.log

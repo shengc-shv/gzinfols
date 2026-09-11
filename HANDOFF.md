@@ -19,7 +19,7 @@
 4. **不移植项（已裁决）**：`lib/ai/assets.ts`（L2 账本，summary 回流后冗余）、`lib/ai/select-top.ts`（主链无消费）。
 5. 口播基准 = gzinfo（不是 gzcmbdf3）；腾讯 TTS 已移植完成。
 
-## 3. 当前进度（B1-B3 已完成，B4-B6 待做）
+## 3. 当前进度（B1-B5 已完成，B6 待做）
 
 | 批次 | 内容 | 状态 |
 |---|---|---|
@@ -27,9 +27,9 @@
 | B2 | PASS1/PASS2 两阶段 AI 管线 + 13 条校验回炉 + 降级路径 + LLM 重试 | ✅ `5615b6d` |
 | B3 | executive-summary 旁路 + event-memory 全家（~2500 行）+ 历史库 gzinfo 同构重构 + gd-ipo 侧栏 + 口播 exec 驱动 | ✅ `b093ac8` |
 | B4 | 股市三卡主链：quote-api + stock-recap(+anchor) + stock-news(+analysis) + stock-spoken + 两个 side-output 接线 + P5 广东IPO健康度（详见 docs/parity-B4-report.md） | ✅ `本轮` |
-| **B5** | **发布链路**：publish-state 状态机（final/test 双轨）、历史归档回 main、cleanup-history、deliverySettlementGate（`extractReportRunId` 已就位）、regen-trading 等运维脚本 | ⬜ 下一步 |
-| B5 | 发布链路：publish-state 状态机（final/test 双轨）、历史归档回 main、cleanup-history、deliverySettlementGate（publish-run-id 已移植好 `extractReportRunId`）、regen-trading/ipo-local 等运维脚本补齐 | ⬜ |
-| B6 | 渲染对齐 + 运维：gzinfo render.ts（~2116 行）完整卡面/横滑卡/播放器段落联动高亮/徽章体系；build-site；**交易面板（trading/* + trading-commentary + regen-trading，B4 顺延项）** | ⬜ |
+| B5 | 发布链路：publish-state 状态机（schedule/manual/manual-final/manual-test 四来源）+ 先发后记脚本 + cleanup-history 历史裁剪 + daily.yml 门控改造（读 publish-state / release_mode / PUBLISH_RUN / 归档回 main）（详见 docs/parity-B5-report.md） | ✅ `本轮` |
+| B5 | deliverySettlementGate（`extractReportRunId` 已就位）与 regen-trading/ipo-local 等运维脚本 | ⬜ 顺延 B6（本次 B5 未含，见 parity-B5-report §6） |
+| B6 | 渲染对齐 + 运维：gzinfo render.ts（~2116 行）完整卡面/横滑卡/播放器段落联动高亮/徽章体系；build-site；**交易面板（trading/* + trading-commentary + regen-trading，B4 顺延项）**；deliverySettlementGate | ⬜ 下一步 |
 
 ## 4. 每次动手前/后的固定动作
 
@@ -69,5 +69,5 @@ npm test                      # 当前 105/105，任何批次完成后不得减�
 
 1. 跑一遍三件套验证，确认 105/105 基线成立；
 2. 读 `docs/parity-plan.md` 的 B4 行 + gzinfo 的 `lib/trading/`、`lib/pipeline/side-outputs/stock-*.ts`、`lib/audio/stock-spoken.ts`，评估后向用户确认 B4 方案再动手；
-3. B5 起：发布链路（publish-state 状态机 / 历史归档回 main / cleanup-history / deliverySettlementGate）。
-   B6 起：渲染对齐 + 交易面板（含加密剔除口径确认）。
+3. B5 已完成：发布链路（publish-state 状态机 / 历史归档回 main / cleanup-history / daily.yml 门控与记账）。
+   B6 起：渲染对齐 + 交易面板（含加密剔除口径确认）+ deliverySettlementGate。

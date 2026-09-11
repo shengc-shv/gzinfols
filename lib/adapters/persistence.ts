@@ -18,6 +18,7 @@ import { reviveEventMemory, prepareEventMemory, MEMORY_RETAIN_DAYS } from "../se
 import { emptyMemory, type EventMemoryStore } from "../services/memory/event-memory";
 import type { ExecutiveSummary } from "../services/enrich/executive-summary";
 import type { StockRecap, StockNewsItem } from "../contracts/report";
+import { emptyPublishState, type PublishState } from "../services/publish/publish-state";
 
 /**
  * 根目录覆盖（测试隔离用）：默认 process.cwd()（与 gzinfo 行为一致）；
@@ -66,6 +67,51 @@ export function loadHistoryStore(): HistoryStore {
 export function persistHistoryStore(store: HistoryStore): void {
   try {
     writeJsonSync(historyPath(), store);
+  } catch {
+    // ignore
+  }
+}
+
+// ---------- 发布来源记账（data/publish-state.json） ----------
+
+export interface PublishStateOpts {
+  /** 便于单测隔离；默认 process.cwd()。 */
+  baseDir?: string;
+}
+
+function publishStatePath(opts: PublishStateOpts): string {
+  return path.resolve(opts.baseDir ?? root(), "data/publish-state.json");
+}
+
+/**
+ * 读取发布来源记账；文件缺失/损坏/结构不符一律返回空库（不打断主流程）。
+ * 容错口径与 gzinfo `scripts/record-publish-state.ts` 的 loadState 一致：
+ * reports 缺失/非对象 → 空库重建；updatedAt 非字符串 → 空串。
+ */
+export function loadPublishState(opts: PublishStateOpts = {}): PublishState {
+  const raw = readJsonSync(publishStatePath(opts));
+  if (raw && typeof raw === "object" && !Array.isArray(raw)) {
+    const r = raw as Partial<PublishState>;
+    if (r.reports && typeof r.reports === "object" && !Array.isArray(r.reports)) {
+      return {
+        version: 1,
+        updatedAt: typeof r.updatedAt === "string" ? r.updatedAt : "",
+        reports: r.reports as PublishState["reports"],
+      };
+    }
+  }
+  return emptyPublishState();
+}
+
+/**
+ * 写入发布来源记账（2 空格缩进 + 结尾换行，与 gzinfo record-publish-state 落盘格式一致）。
+ * 写盘失败静默忽略——记账失败不阻断主流程（随后 git 提交会显式失败）。
+ */
+export function persistPublishState(state: PublishState, opts: PublishStateOpts = {}): void {
+  try {
+    const p = publishStatePath(opts);
+    fs.mkdirSync(path.dirname(p), { recursive: true });
+    fs.writeFileSync(p, JSON.stringify(state, null, 2) + "\n", "utf8");
   } catch {
     // ignore
   }
