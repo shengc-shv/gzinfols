@@ -47,8 +47,13 @@ export async function runPipeline(
     })),
   });
 
-  const enriched = await enrich(selected.articles, ctx, { llm: deps.llm }, {
-    filterResults: selected.filterResults,
+  const enriched = await enrich(selected.articles, ctx, {
+    llm: deps.llm,
+    history: history.items.map((it) => ({
+      url: it.url,
+      summary: it.summary,
+      publishedAt: it.publishedAt,
+    })),
   });
   const report = assembleReport(enriched, ctx);
 

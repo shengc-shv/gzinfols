@@ -1,319 +1,110 @@
 /**
- * 富集服务 C4（AI 唯一落点）。
+ * 富集服务 C4（AI 管线入口）——对齐 gzinfo lib/pipeline/ai.ts + lib/ai/pipeline.ts。
  *
- * 红线 #2 落地：板块归属由「确定性内容打分」决定，绝不读 sourceId/category 字符串。
- * AI 职责：① 相关性回检（红线 #3 防线，见 ./relevance）；② 外文中文化、≤90字摘要、
- * 标签（批量）；③ 报告级 hero_line/insights/must_read/risk（喂真实条目，must_read.url
- * 必须校验 ∈ 今日条目集合，杜绝幻觉死链）。
- * LLM 调用批量化：富集每批 20 条一次调用，自写并发池同时最多 4 批在飞；
- * 失败批次整批降级用原文标题/摘要，并计入 ctx.errors 与 ctx.stats（llmCalls/llmFailures）。
- * SKIP_AI 模式：跳过全部 LLM，用标题/摘要直接成稿（保证管线可降级跑通）。
+ * 两阶段管线：PASS1（AI 筛选分类，批 30/失败重试+拆半递归隔离毒丸）→ PASS2（总编辑成稿，
+ * 单次全量 + 13 条校验回炉 ≤2 次 → 降级路径）。SKIP_AI 模式由 makeSkipAiRunner 零 LLM 合成。
+ *
+ * 必读/商机在本阶段**恒为空**（gzinfo 语义：由主编层 executive-summary 旁路基于
+ * 「今天+昨天」两日窗口统一生成，B3 批次接入）；本阶段只产出 hero_line + sections。
+ *
+ * 与 gzinfo 的刻意差异（改进项，见核对报告）：
+ *  - prefillCache 的 ai_relevant 判定：gzinfo 读历史库 ai_relevant 字段；2.0 历史库暂无
+ *    该字段（H1 批次对齐存储），近似为「历史上榜条目」= ai_relevant（上榜即通过全管线）。
+ *  - 2.0 早期自创的「AI 相关性回检」已移除：PASS1 的 keep 判定（保留标准 1-4 条）即
+ *    gzinfo 的相关性闸门，功能覆盖相同且省一半 LLM 调用。
  */
 import type { ArticleInput } from "../../contracts/article";
-import type {
-  DailyReport,
-  ReportItem,
-  ReportSectionKey,
-} from "../../contracts/report";
-import type { FilterResult, LlmPort, PipelineContext } from "../../contracts/pipeline";
-import { SECTION_LABELS as LABELS, SECTION_ORDER as ORDER } from "../../contracts/report";
-import { relevanceCheck } from "./relevance";
+import type { DailyReport } from "../../contracts/report";
+import type { LlmPort, PipelineContext } from "../../contracts/pipeline";
+import { isWithinCalendarDays } from "../../utils/time";
+import { generateDaily, makeSkipAiRunner } from "./pipeline";
+import type { LlmRunner } from "./pass1";
+import { toPass1Input } from "./pass1-input";
 
 export interface EnrichDeps {
   llm: LlmPort;
-}
-
-export interface EnrichOpts {
-  /** 漏斗结果：商机/风险追踪器命中的条目在相关性回检中豁免 AI。 */
-  filterResults?: Map<string, FilterResult>;
-}
-
-/** 每批富集条目数（一次 LLM 调用处理的条目数）。 */
-const ENRICH_BATCH_SIZE = 20;
-/** 并发池宽度：同时在飞的富集批次数上限。 */
-const ENRICH_CONCURRENCY = 4;
-/** 报告级调用：每板块喂给 LLM 的选材条数。 */
-const REPORT_TOP_PER_SECTION = 8;
-/** 摘要在报告级 prompt 中的截断长度。 */
-const REPORT_SUMMARY_SNIPPET = 60;
-
-/**
- * 板块关键词词表（Q2 数据化：运营调词只改这里，不必动函数逻辑）。
- * 红线 #2：归属由标题/摘要与词表打分决定。
- */
-export const SECTION_KEYWORD_GROUPS: Record<ReportSectionKey, string[]> = {
-  gz_local: ["广州", "广东", "深圳", "大湾区", "南沙", "黄埔", "天河", "营商环境", "招商引资"],
-  policy_market: ["央行", "人民银行", "金融监管", "国务院", "政策", "宏观", "降准", "降息", "货币", "财政"],
-  biz_insight: ["银行", "信贷", "理财", "财富", "私行", "零售", "普惠", "小微", "AUM", "净值", "存款", "贷款"],
-  tech: ["AI", "大模型", "人工智能", "算力", "算法", "芯片", "金融科技", "区块链"],
-  ipo: [],
-};
-
-/**
- * 确定性板块归属（红线 #2：内容判定）。
- *
- * 红线 #2 的精确边界：category 仅可作为 IPO 内容态来源（ipo/gd-ipo → ipo 板块）
- * 与参考区豁免判断（见 select/funnel），不参与一般板块归属；
- * 一般归属只由标题/摘要内容与 SECTION_KEYWORD_GROUPS 打分决定，无命中回退 policy_market。
- */
-export function assignSection(a: ArticleInput): ReportSectionKey {
-  const text = `${a.title}\n${a.excerpt}`;
-  if (a.isIpo || a.category === "ipo" || a.category === "gd-ipo") return "ipo";
-  let best: ReportSectionKey = "policy_market";
-  let bestScore = 0;
-  for (const [key, words] of Object.entries(SECTION_KEYWORD_GROUPS)) {
-    const s = words.reduce((acc, w) => acc + (text.includes(w) ? 1 : 0), 0);
-    if (s > bestScore) {
-      bestScore = s;
-      best = key as ReportSectionKey;
-    }
-  }
-  return best;
-}
-
-function toDateStr(d: Date): string {
-  const p = d.toISOString().slice(0, 10);
-  return `${p.slice(5, 7)}/${p.slice(8, 10)}`;
-}
-
-/** 极简 Promise worker 池：同时最多 limit 个任务在飞，结果保序返回（约 20 行，零依赖）。 */
-async function runPool<T, R>(
-  items: T[],
-  limit: number,
-  worker: (item: T, index: number) => Promise<R>,
-): Promise<R[]> {
-  const results = new Array<R>(items.length);
-  let next = 0;
-  async function lane(): Promise<void> {
-    while (true) {
-      const i = next++;
-      if (i >= items.length) return;
-      results[i] = await worker(items[i], i);
-    }
-  }
-  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, () => lane()));
-  return results;
-}
-
-/** 构造降级兜底卡（原文标题/摘要，无 AI 参与）。 */
-function buildFallbackItem(a: ArticleInput, section: ReportSectionKey): ReportItem {
-  let locale: ReportItem["locale"] = "national";
-  let locale_evidence: string | undefined;
-  if (section === "gz_local") {
-    const m = a.title.match(/(广州|广东|深圳|大湾区|南沙|黄埔|天河)/);
-    if (m) {
-      locale = "gz";
-      locale_evidence = m[0];
-    }
-  }
-  return {
-    url: a.url,
-    title_cn: a.title,
-    source: a.source,
-    source_type: a.tier === "T1" ? "official" : "media",
-    date: toDateStr(a.publishedAt),
-    published_at: a.publishedAt.toISOString(),
-    summary: a.excerpt.slice(0, 90),
-    importance: a.tier === "T1" ? 3 : 2,
-    rank: 0,
-    tags: [],
-    locale,
-    locale_evidence,
-    tier: a.tier,
-    ipoStage: a.ipoStage,
-    listedDate: a.listedDate,
-    officialUrl: a.officialUrl,
-    officialLabel: a.officialLabel,
-    gdBasis: a.gdBasis,
-  };
-}
-
-interface TaggedArticle {
-  a: ArticleInput;
-  section: ReportSectionKey;
-}
-
-/** 富集 prompt 的单条输入行（i = 批内下标，从 0 开始）。 */
-function batchPromptLine(t: TaggedArticle, i: number): string {
-  return `${i}. 标题：${t.a.title}\n   摘要：${t.a.excerpt}\n   板块：${t.section}`;
-}
-
-/** AI 改写字段（部分失败允许逐字段回退兜底值）。 */
-interface BatchRewrite {
-  i?: number;
-  title_cn?: string;
-  summary?: string;
-  tags?: string[];
-  importance?: number;
+  /** 跨天 prefill 历史条目（pipeline 从记忆服务加载后传入）。 */
+  history?: Array<{ url: string; summary?: string; publishedAt?: string }>;
 }
 
 /**
- * 批量富集一批：一次 LLM 调用改写整批；失败整批降级并计入观测。
- * 返回「板块归属 + ReportItem」对，由主流程按板块落位。
+ * 把 LlmPort 适配成 gzinfo 的 LlmRunner（(system, user) → text）。
+ * 模型覆盖：PASS1_MODEL / PASS2_MODEL 环境变量（stage 由调用方传入）。
  */
-async function enrichBatch(
-  batch: TaggedArticle[],
-  ctx: PipelineContext,
-  deps: EnrichDeps,
-): Promise<Array<{ section: ReportSectionKey; item: ReportItem }>> {
-  const fallback = batch.map((t) => ({ section: t.section, item: buildFallbackItem(t.a, t.section) }));
-  ctx.stats.llmCalls = (ctx.stats.llmCalls ?? 0) + 1;
-  try {
-    const json = await deps.llm.complete({
-      system:
-        "你是招行广州分行零售分管行长的每日简报编辑。把给定新闻逐条改写成简报卡。" +
-        "返回JSON数组，每项包含：i(条目序号,从0开始)、title_cn(中文标题,<=30字)、" +
-        "summary(<=90字,结构=发生了什么+关键数字+所以呢)、tags(2-4个中文标签)、importance(1|2|3)。只返回JSON。",
-      prompt: batch.map((t, i) => batchPromptLine(t, i)).join("\n"),
-      expectJson: true,
-      temperature: 0.2,
-    });
-    const parsed = JSON.parse(json) as BatchRewrite[];
-    if (!Array.isArray(parsed)) throw new Error("富集返回非数组");
-    const byIndex = new Map<number, BatchRewrite>();
-    for (const p of parsed) {
-      if (p && typeof p.i === "number") byIndex.set(p.i, p);
-    }
-    return fallback.map((f, i) => {
-      const p = byIndex.get(i);
-      if (!p) return f; // 该条 AI 缺答 → 保留兜底
-      const item = { ...f.item };
-      if (typeof p.title_cn === "string" && p.title_cn) {
-        item.title_orig = item.title_cn !== p.title_cn ? item.title_cn : undefined;
-        item.title_cn = p.title_cn;
-      }
-      if (typeof p.summary === "string" && p.summary) item.summary = p.summary;
-      if (Array.isArray(p.tags)) item.tags = p.tags.map(String);
-      if (p.importance === 1 || p.importance === 2 || p.importance === 3) item.importance = p.importance;
-      return { section: f.section, item };
-    });
-  } catch (e) {
-    ctx.stats.llmFailures = (ctx.stats.llmFailures ?? 0) + 1;
-    const msg = e instanceof Error ? e.message : String(e);
-    ctx.errors.push({
-      stage: "enrich",
-      message: `富集批次失败（${batch.length} 条），整批降级为原文：${msg}`,
-    });
-    return fallback;
-  }
+export function makeLlmRunner(
+  llm: LlmPort,
+  stage: "pass1" | "pass2",
+): LlmRunner {
+  const modelEnv = stage === "pass1" ? process.env.PASS1_MODEL : process.env.PASS2_MODEL;
+  const model = modelEnv?.trim() || undefined;
+  return (systemPrompt, userPrompt) =>
+    llm.complete({ system: systemPrompt, prompt: userPrompt, model }).then((r) => r);
 }
 
-/** 报告级调用：喂真实条目选材，产出 hero_line/insights/must_read/risk。 */
-async function enrichReportLevel(
-  sections: Record<ReportSectionKey, ReportItem[]>,
-  urlSet: Set<string>,
-  ctx: PipelineContext,
-  deps: EnrichDeps,
-): Promise<Pick<DailyReport, "hero_line" | "insights" | "must_read" | "risk">> {
-  try {
-    // 每板块取前 N 条真实条目喂给模型（title + url + 摘要截断），杜绝凭空编造
-    const parts = ORDER.map((key) => {
-      const items = sections[key].slice(0, REPORT_TOP_PER_SECTION);
-      if (items.length === 0) return null;
-      const lines = items
-        .map((it) => `- ${it.title_cn} | ${it.url} | ${it.summary.slice(0, REPORT_SUMMARY_SNIPPET)}`)
-        .join("\n");
-      return `【${LABELS[key]}】\n${lines}`;
-    }).filter((p): p is string => p !== null);
-    if (parts.length === 0) return { hero_line: undefined, insights: [], must_read: [], risk: undefined };
-
-    ctx.stats.llmCalls = (ctx.stats.llmCalls ?? 0) + 1;
-    const json = await deps.llm.complete({
-      system:
-        "你是招行广州分行零售分管行长的决策参谋。基于今日新闻，产出JSON：" +
-        "hero_line(今日定调一句话,15-70字)、insights(2-4条商机洞察,每条topic/impact/action/segments)、" +
-        "must_read(1-3条必读,url+why；url 只能从所给条目中选取,禁止编造)、" +
-        "risk(1条今日风险,topic/evidence/impact/action)。只返回JSON。",
-      prompt: `今日各板块条目（供选材）：\n\n${parts.join("\n\n")}`,
-      expectJson: true,
-      temperature: 0.3,
-    });
-    const parsed = JSON.parse(json) as {
-      hero_line?: string;
-      insights?: DailyReport["insights"];
-      must_read?: DailyReport["must_read"];
-      risk?: DailyReport["risk"];
-    };
-    // must_read 校验：url 必须 ∈ 今日全部条目集合；过滤后为空则置空（assemble 有兜底回填）
-    const mustRead = (parsed.must_read ?? []).filter(
-      (m) => m && typeof m.url === "string" && urlSet.has(m.url),
-    );
-    return {
-      hero_line: parsed.hero_line,
-      insights: parsed.insights ?? [],
-      must_read: mustRead,
-      risk: parsed.risk,
-    };
-  } catch (e) {
-    ctx.stats.llmFailures = (ctx.stats.llmFailures ?? 0) + 1;
-    const msg = e instanceof Error ? e.message : String(e);
-    ctx.errors.push({ stage: "enrich", message: `报告级 AI 调用失败，降级为无 hero/insights：${msg}` });
-    return { hero_line: undefined, insights: [], must_read: [], risk: undefined };
+/**
+ * 从历史条目构建 prefillCache（url→summary），供全 AI 模式 PASS2 确定性复用。
+ * gzinfo 口径：ai_relevant===true + 非空 summary + 发布时间落在抓取窗口内（最近 2 天）。
+ * 2.0 近似：历史上榜条目即通过全管线（等价 ai_relevant=true）；存储字段对齐在 H1 批次。
+ */
+function buildPrefillCache(
+  history: Array<{ url: string; summary?: string; publishedAt?: string }> | undefined,
+  now: Date,
+  windowDays: number,
+): Map<string, string> {
+  const cache = new Map<string, string>();
+  for (const e of history ?? []) {
+    const s = e.summary?.trim();
+    if (!s) continue;
+    if (!e.publishedAt) continue;
+    if (!isWithinCalendarDays(e.publishedAt, windowDays, now)) continue;
+    cache.set(e.url, s);
   }
+  return cache;
 }
 
-/** 富集入口：相关性回检过滤 → 批量改写（并发池）→ 报告级选材。 */
+/** C4 入口：执行两阶段 AI 管线，产出 DailyReport（must_read/insights 留空待 B3 旁路）。 */
 export async function enrich(
   articles: ArticleInput[],
   ctx: PipelineContext,
   deps: EnrichDeps,
-  opts?: EnrichOpts,
 ): Promise<DailyReport> {
-  const skipAi = ctx.mode.kind === "skip-ai";
+  const inputs = articles.map(toPass1Input);
+  ctx.log.info(
+    "ai",
+    `进入两阶段 AI 管线：${inputs.length} 条（PASS1 筛选 + PASS2 成稿 + 校验回炉/降级）`,
+  );
 
-  // 红线 #3 防线：AI 相关性回检（skip-ai 模式整段跳过，不做任何 LLM 调用）
-  let working = articles;
-  if (!skipAi) {
-    const rc = await relevanceCheck(articles, ctx, deps, opts?.filterResults);
-    working = rc.kept;
-    ctx.stats.recheckDropped = (ctx.stats.recheckDropped ?? 0) + rc.dropped;
-    if (rc.dropped > 0) {
-      ctx.log.info("enrich", `相关性回检（红线 #3）丢弃 ${rc.dropped} 条不相关条目`);
+  const runner: LlmRunner = makeLlmRunner(deps.llm, "pass1");
+  // PASS2 用独立模型覆盖（PASS2_MODEL）；runner 内按 system prompt 无法区分阶段，
+  // 故管线以 runner 参数区分：generateDaily 内部 PASS2 仍调同一 runner —— gzinfo 用
+  // PASS1_MODEL/PASS2_MODEL 区分默认 runner，这里统一注入「按 stage 选择模型」的组合 runner。
+  const runner2: LlmRunner = makeLlmRunner(deps.llm, "pass2");
+  const combined: LlmRunner = (system, user) =>
+    system.includes("总编辑") ? runner2(system, user) : runner(system, user);
+
+  if (ctx.mode.kind === "skip-ai") {
+    const skipRunner = makeSkipAiRunner(ctx.mode.summaryCache, ctx.mode.relevantUrls);
+    try {
+      const report = await generateDaily(inputs, ctx.date, { runner: skipRunner });
+      return report;
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      throw new Error(`[daily] 管线生成失败：${msg}`);
     }
   }
 
-  const sections: Record<ReportSectionKey, ReportItem[]> = {
-    gz_local: [],
-    biz_insight: [],
-    policy_market: [],
-    tech: [],
-    ipo: [],
-  };
-
-  // 批量富集：每批 20 条一次调用，并发池最多 4 批在飞；
-  // skip-ai 模式（契约：不调用任何 LLM）在池内短路，直接用兜底卡，不发起调用
-  const tagged = working.map((a) => ({ a, section: assignSection(a) }));
-  const batches: TaggedArticle[][] = [];
-  for (let i = 0; i < tagged.length; i += ENRICH_BATCH_SIZE) {
-    batches.push(tagged.slice(i, i + ENRICH_BATCH_SIZE));
+  try {
+    // 全 AI 模式：从历史构建 prefillCache（预分析复用，命中条目 PASS2 不进 payload）
+    const prefillCache = buildPrefillCache(deps.history, ctx.startTime, ctx.config.windowDays);
+    const report = await generateDaily(inputs, ctx.date, { runner: combined, prefillCache });
+    const totalKept = Object.values(report.sections).reduce((n, s) => n + s.length, 0) as number;
+    ctx.log.info(
+      "ai",
+      `管线产出：必读 ${report.must_read.length} 条 / 商机 ${report.insights.length} 条 / 正文 ${totalKept} 条（预分析复用 ${prefillCache.size} 条 summary）`,
+    );
+    return report;
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    throw new Error(`[daily] 管线生成失败：${msg}`);
   }
-  const batched = await runPool(batches, ENRICH_CONCURRENCY, (b) =>
-    skipAi
-      ? Promise.resolve(
-          b.map((t) => ({ section: t.section, item: buildFallbackItem(t.a, t.section) })),
-        )
-      : enrichBatch(b, ctx, deps),
-  );
-  for (const group of batched) {
-    for (const { section, item } of group) sections[section].push(item);
-  }
-
-  const report: DailyReport = {
-    date: ctx.date,
-    must_read: [],
-    insights: [],
-    sections,
-  };
-
-  if (!skipAi) {
-    const urlSet = new Set(working.map((a) => a.url));
-    const extras = await enrichReportLevel(sections, urlSet, ctx, deps);
-    report.hero_line = extras.hero_line;
-    report.insights = extras.insights;
-    report.must_read = extras.must_read;
-    report.risk = extras.risk;
-  }
-
-  ctx.log.info("enrich", `AI 富集完成：5 板块共 ${Object.values(sections).flat().length} 条`);
-  return report;
 }

@@ -1,6 +1,7 @@
 # gzinfo → gzinfols 全量功能移植与重构方案（核对基线 v1）
 
 > 日期：2026-09-11 ｜ 基线：gzinfo @ /Users/shengc/ccworkstaion/gzinfo（main 最新）
+> 进度：**B1 已完成（2026-09-11，commit 4203846..16bacf2 已推送）**；B2-B6 待执行。
 > 原则：**功能一致性优先**（业务规则/输入输出/边界/异常行为逐项对齐），架构重构只改「代码放哪、怎么组织」，不改「做什么」。
 > 改进方案一律先报备确认（本文件 §4），确认后写入对应批次实施。
 
@@ -23,7 +24,7 @@
 ### 2.1 采集与过滤（漏斗一/二）
 | # | gzinfo 模块 | 功能 | 规模 | 2.0 现状 | 批次 |
 |---|---|---|---|---|---|
-| F1 | sources/rss+api+通用抓取 | RSS/API/Scrape 拉取 | ~2k | ⚠️ providers 简版（缺 per-source 定制与 useCurl 细节） | B1 |
+| F1 | sources/rss+api+通用抓取 | RSS/API/Scrape 拉取 | ~2k | ⚠️ providers 简版（缺 per-source 定制与 useCurl 细节）； sources.config 中 role:crawled-input 的 32 源不走 providers | B2 |
 | F2 | pipeline/filter 7 道 | pre-window-2d | ~40 | ⚠️ select 内有窗口但口径需对齐（FETCH_WINDOW_DAYS=2, IPO 7 天例外） | B1 |
 | F3 | filters/single-institution | 单家非白名单金融机构新闻过滤 | ~150 | ❌ | B1 |
 | F4 | filters/stock-single | 股市单股新闻过滤（非巨头/非广州） | ~120 | ❌ | B1 |

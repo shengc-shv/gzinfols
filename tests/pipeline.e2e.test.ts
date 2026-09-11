@@ -57,13 +57,13 @@ test("runPipeline 端到端（注入内存适配器，不联网/不调真实 LLM
   // C2/C3：tech 参考区条目应穿过漏斗并进入 tech 板块
   assert.ok(out.report.sections.tech.length >= 1, "tech 板块应有 ≥1 条");
   // C7：HTML 含中文标题与口播友好的内容
-  assert.ok(out.html.includes("AI 大模型驱动银行金融科技升级"), "HTML 应含条目标题");
+  assert.ok(out.html.includes("AI 大模型驱动金融科技升级"), "HTML 应含条目标题");
   assert.ok(out.html.includes("今日必读"), "HTML 应含必读区");
   // C8：口播稿非空
   assert.ok(out.speech.length > 0, "口播稿应非空");
   // C9：产物路径正确落盘
   assert.ok(out.paths.htmlPath.endsWith(".html"));
-  assert.ok((fs.getText(out.paths.htmlPath) ?? "").includes("AI 大模型驱动银行金融科技升级"));
+  assert.ok((fs.getText(out.paths.htmlPath) ?? "").includes("AI 大模型驱动金融科技升级"));
   // C5：历史库已写入
   const hist = await fs.readJson<{ items: unknown[] }>("data/history.json");
   assert.ok(hist && hist.items.length >= 1, "历史库应记录本次条目");

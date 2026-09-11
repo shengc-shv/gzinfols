@@ -5,13 +5,27 @@
 import "./_env";
 import { bootstrap } from "../lib/orchestrator";
 import { runPipeline } from "../lib/pipeline";
-import { SystemClock } from "../lib/adapters";
+import { NodeFsAdapter, SystemClock } from "../lib/adapters";
+import { loadHistory } from "../lib/services/memory";
 import type { RunMode } from "../lib/contracts/pipeline";
 
 async function main() {
   const clock = new SystemClock();
   const date = process.env.REPORT_DATE || clock.todayKey(process.env.REPORT_TZ);
-  const mode: RunMode = process.env.SKIP_AI === "1" ? { kind: "skip-ai" } : { kind: "ai" };
+  // SKIP_AI 模式（gzinfo 语义）：summaryCache=url→历史摘要（PASS2 确定性复用）；
+  // relevantUrls=历史库已上榜条目（PASS1 只保留其中条目，防新抓垃圾混入板块）。
+  const mode: RunMode = await (async () => {
+    if (process.env.SKIP_AI !== "1") return { kind: "ai" as const };
+    const fs = new NodeFsAdapter();
+    const hist = await loadHistory({ fs });
+    const summaryCache = new Map<string, string>();
+    const relevantUrls = new Set<string>();
+    for (const it of hist.items) {
+      relevantUrls.add(it.url);
+      if (it.summary?.trim()) summaryCache.set(it.url, it.summary.trim());
+    }
+    return { kind: "skip-ai" as const, summaryCache, relevantUrls };
+  })();
 
   const { ctx, deps } = await bootstrap({ date, mode });
   const out = await runPipeline(ctx, deps);

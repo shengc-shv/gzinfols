@@ -18,11 +18,11 @@ class CountingLlm implements LlmPort {
 function article(url: string): ArticleInput {
   return {
     sourceId: "s",
-    title: "央行降准释放流动性，银行信贷与财富管理受益",
+    title: url === "u1" ? "央行降准释放流动性，银行信贷与财富管理受益" : "普惠小微贷款贴息政策出台",
     url,
     category: "finance",
     publishedAt: new Date("2026-09-11T08:00:00Z"),
-    excerpt: "央行宣布降准，普惠小微与零售信贷投放有望扩大。",
+    excerpt: url === "u1" ? "央行宣布降准，普惠小微与零售信贷投放有望扩大。" : "小微企业融资成本下降，覆盖面持续扩大。",
     isIpo: false,
     tier: "T1",
     source: "源",
@@ -33,7 +33,7 @@ test("skip-ai 模式：全流程零 LLM 调用（llmCalls===0），条目走兜�
   const llm = new CountingLlm();
   const ctx = createContext({
     date: "2026-09-11",
-    mode: { kind: "skip-ai" },
+    mode: { kind: "skip-ai", summaryCache: new Map(), relevantUrls: undefined },
     sources: [],
     log: new SilentLog(),
   });
@@ -42,9 +42,9 @@ test("skip-ai 模式：全流程零 LLM 调用（llmCalls===0），条目走兜�
   assert.equal(llm.calls, 0, "skip-ai 下不得触碰 LLM 端口");
   assert.equal(ctx.stats.llmCalls ?? 0, 0, "llmCalls 计数应为 0");
   assert.equal(ctx.stats.llmFailures ?? 0, 0, "不应产生失败观测");
-  // 兜底卡：原文标题直接成稿
+  // 兜底卡：原文标题直接成稿（两个不同事件都保留；gzinfo SKIP_AI 卡无 published_at 字段）
   assert.ok(Object.values(report.sections).flat().length === 2, "2 条都应有兜底卡");
   const all = Object.values(report.sections).flat();
-  assert.ok(all.every((it) => it.title_cn.startsWith("央行降准")), "应保留原文标题");
-  assert.ok(all.every((it) => it.published_at?.length), "兜底卡也应带完整 ISO 时间");
+  assert.ok(all.some((it) => it.title_cn.startsWith("央行降准")), "原文标题保留（u1）");
+  assert.ok(all.some((it) => it.title_cn.includes("普惠小微贷款贴息")), "原文标题保留（u2）");
 });

@@ -1,22 +1,24 @@
 /**
- * 红线回归测试（三条业务红线，QA 独立验证用）。
+ * 红线回归测试（三条业务红线）。
  *
  * 红线①：无真实 publishedAt 一律丢弃，绝不用抓取时间兜底（normalize 唯一裁决点）。
- * 红线②：板块归属由内容判定，不读 sourceId/category 字符串做一般归属
- *        （category 仅限 IPO 内容态与参考区豁免）。
- * 红线③：业务相关性——与客群/财富/私人银行/信贷无关且非商机政策的条目，
- *        在 ai 模式相关性回检中被丢弃（仅显式 relevant=false 才丢）。
+ * 红线②：板块归属由内容判定（gzinfo categoryToSection：内容判定 + tech/ipo 栏目例外）。
+ * 红线③：业务相关性——PASS1 keep=false 丢弃无关条目（gzinfo 保留标准 1-4 条，
+ *        由 scripted runner 模拟 AI 判定；2.0 早期自创回检已退役，由 PASS1 承担）。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { runPipeline } from "../lib/pipeline";
 import { createContext } from "../lib/orchestrator";
-import { enrich, assignSection } from "../lib/services/enrich";
+import { generateDaily } from "../lib/services/enrich/pipeline";
+import { extractJson } from "../lib/services/enrich/json-util";
+import { toPass1Input } from "../lib/services/enrich/pass1-input";
+import type { LlmRunner } from "../lib/services/enrich/pass1";
 import { normalize } from "../lib/services/normalize";
 import type { PipelineDeps, LlmPort } from "../lib/contracts/pipeline";
 import type { SourceDef } from "../lib/contracts/source";
 import type { ArticleInput } from "../lib/contracts/article";
-import { MemFs, FakeHttp, FakeClock, SilentLog } from "./helpers";
+import { MemFs, FakeHttp, FakeClock, SilentLog, FakeLlm } from "./helpers";
 
 const sources: SourceDef[] = [
   {
@@ -49,36 +51,6 @@ function articleInput(over: Partial<ArticleInput>): ArticleInput {
   } as ArticleInput;
 }
 
-/** 可编排 LLM：按 system 关键词分流；相关性判定结果由用例注入。 */
-class ScriptedLlm implements LlmPort {
-  calls = 0;
-  /** url → relevant 映射（相关性回检用）。 */
-  verdicts: Array<{ url: string; relevant: boolean }> = [];
-  /** 相关性回检返回的原始 JSON（用于幻觉 url 用例直接注入）。 */
-  relevanceJson?: string;
-
-  async complete(opts: { system?: string; prompt: string }): Promise<string> {
-    this.calls++;
-    const sys = opts.system ?? "";
-    if (sys.includes("相关性")) {
-      if (this.relevanceJson !== undefined) return this.relevanceJson;
-      return JSON.stringify(this.verdicts);
-    }
-    if (sys.includes("简报编辑")) {
-      const items = [...opts.prompt.matchAll(/(\d+)\. 标题：/g)].map((m) => ({
-        i: Number(m[1]),
-        title_cn: "改写标题",
-        summary: "改写摘要。",
-        tags: ["标签"],
-        importance: 2,
-      }));
-      return JSON.stringify(items);
-    }
-    // 报告级
-    return JSON.stringify({ hero_line: "定调", insights: [], must_read: [], risk: undefined });
-  }
-}
-
 // ————— 红线①：无真实 publishedAt 一律丢弃，不进任何下游 —————
 
 test("红线① e2e：缺失 pubDate 的条目被丢弃，不进板块/HTML/历史库", async () => {
@@ -103,7 +75,7 @@ test("红线① e2e：缺失 pubDate 的条目被丢弃，不进板块/HTML/历�
   const deps: PipelineDeps = {
     fs,
     clock: new FakeClock(),
-    llm: new FakeLlmForRedline(),
+    llm: new FakeLlm(),
     http: new FakeHttp(rss),
   };
   const ctx = createContext({
@@ -155,134 +127,97 @@ test("红线① 单元：Invalid Date 与缺失 publishedAt 均被 normalize 丢
   assert.deepEqual(r.articles.map((a) => (a as { url: string }).url), ["ok"]);
 });
 
-// ————— 红线②：板块归属由内容判定，不读 category 字符串 —————
+// ————— 红线②：板块归属由内容判定（tests/assignSection.test.ts 详细覆盖）—————
 
-test("红线②：category=finance 且标题含「广州」→ gz_local", () => {
-  const a = articleInput({
-    category: "finance",
-    title: "广州出台营商环境改革新举措",
-    excerpt: "面向企业的惠企政策发布。",
-  });
-  assert.equal(assignSection(a), "gz_local");
-});
+// ————— 红线③：PASS1 keep=false 丢弃无关条目（gzinfo 保留标准语义）—————
 
-test("红线②：category=tech 但标题纯金融词 → 不得进 tech（归 biz_insight/policy_market）", () => {
-  const biz = articleInput({
-    category: "tech",
-    title: "银行信贷理财业务规模再创新高",
-    excerpt: "财富管理需求旺盛。",
-  });
-  const s1 = assignSection(biz);
-  assert.notEqual(s1, "tech", "不得因 category=tech 进入 tech 板块");
-  assert.ok(s1 === "biz_insight" || s1 === "policy_market", `应归业务/政策板块，实际 ${s1}`);
+/** 构造 scripted runner：PASS1 按 url→keep 决定保留；PASS2 回显成稿。 */
+function scriptedRunner(keepMap: Map<string, boolean>): LlmRunner {
+  return async (system, user) => {
+    const slice = (p: string) => {
+      try {
+        const parsed = JSON.parse(extractJson(p));
+        return Array.isArray(parsed) ? parsed : (parsed?.items ?? []);
+      } catch {
+        return [];
+      }
+    };
+    if (system.includes("资讯筛选编辑")) {
+      const arr = slice(user) as Array<{ url: string; title: string; category?: string }>;
+      return JSON.stringify({
+        items: arr.map((it) => ({
+          url: it.url,
+          keep: keepMap.get(it.url) ?? true,
+          section: "biz_insight",
+          source_type: "media",
+          locale: "national",
+          locale_evidence: "",
+          tags: ["市场"],
+          title_cn: it.title,
+          title_orig: "",
+          importance_candidate: 2,
+        })),
+      });
+    }
+    // PASS2：回显
+    const arr = slice(user) as Array<{
+      url: string; title_cn: string; source: string; source_type: string; date: string;
+      tags: string[]; locale: string; locale_evidence?: string; section: string; raw_text?: string;
+    }>;
+    const sections: Record<string, unknown[]> = { gz_local: [], biz_insight: [], policy_market: [], tech: [], ipo: [] };
+    for (const it of arr) {
+      (sections[it.section] ?? sections.biz_insight).push({
+        url: it.url,
+        title_cn: it.title_cn,
+        title_orig: "",
+        source: it.source,
+        source_type: it.source_type,
+        date: it.date,
+        summary: "信贷投放数据更新，关注客群影响。",
+        importance: 2,
+        tags: it.tags ?? [],
+        locale: it.locale,
+        locale_evidence: it.locale_evidence ?? "",
+      });
+    }
+    return JSON.stringify({
+      hero_line: "今日关注：信贷与财富条线动态，详见各板块提示。",
+      must_read: [],
+      insights: [],
+      sections,
+    });
+  };
+}
 
-  const policy = articleInput({
-    category: "tech",
-    title: "央行降准释放流动性支持实体经济",
-    excerpt: "宏观政策动态。",
-  });
-  const s2 = assignSection(policy);
-  assert.notEqual(s2, "tech");
-  assert.equal(s2, "policy_market");
-});
-
-// ————— 红线③：ai 模式相关性回检确实丢弃 relevant=false 的无关条目 —————
-
-test("红线③：与银行业务无关的 finance 条目（娱乐八卦）被回检丢弃", async () => {
-  const gossip = articleInput({
-    url: "https://example.com/gossip",
-    title: "某明星离婚案庭审细节曝光",
-    excerpt: "娱乐圈八卦新闻，与金融业务无关。",
-  });
-  const relevant = articleInput({
-    url: "https://example.com/bank",
-    title: "银行小微企业信贷投放创新高",
-    excerpt: "普惠信贷政策带动投放增长。",
-  });
-
-  const ctx = createContext({
-    date: "2026-09-11",
-    mode: { kind: "ai" },
-    sources,
-    log: new SilentLog(),
-    startTime: NOW,
-  });
-  const llm = new ScriptedLlm();
-  llm.verdicts = [
-    { url: "https://example.com/gossip", relevant: false },
-    { url: "https://example.com/bank", relevant: true },
+test("红线③：与银行业务无关的条目（娱乐八卦）PASS1 keep=false 被丢弃", async () => {
+  const gossipUrl = "https://example.com/gossip";
+  const bankUrl = "https://example.com/bank";
+  const inputs = [
+    toPass1Input(articleInput({ url: gossipUrl, title: "某明星离婚案庭审细节曝光", excerpt: "娱乐圈八卦新闻。" })),
+    toPass1Input(articleInput({ url: bankUrl, title: "银行小微企业信贷投放创新高", excerpt: "普惠信贷政策带动投放增长。" })),
   ];
-
-  const report = await enrich([gossip, relevant], ctx, { llm });
-
+  const runner = scriptedRunner(
+    new Map([
+      [gossipUrl, false],
+      [bankUrl, true],
+    ]),
+  );
+  const report = await generateDaily(inputs, "2026-09-11", { runner });
   const allTitles = Object.values(report.sections)
     .flat()
     .map((it) => it.title_cn)
     .join("|");
-  assert.ok(!allTitles.includes("某明星离婚案庭审细节曝光"), "relevant=false 的无关条目应被丢弃");
+  assert.ok(!allTitles.includes("某明星离婚案庭审细节曝光"), "keep=false 的无关条目应被丢弃");
   assert.ok(
-    Object.values(report.sections).flat().some((it) => it.url === "https://example.com/bank"),
-    "relevant=true 的相关条目应保留",
+    Object.values(report.sections).flat().some((it) => it.url === bankUrl),
+    "keep=true 的相关条目应保留",
   );
-  assert.equal(ctx.stats.recheckDropped, 1, "回检丢弃计数应为 1");
-  assert.ok(ctx.stats.llmCalls && ctx.stats.llmCalls >= 1, "ai 模式应发生 LLM 调用");
 });
 
-test("红线③ 补充：LLM 幻觉 url（不在输入集合）不得误伤任何真实条目", async () => {
-  const a = articleInput({ url: "https://example.com/real", title: "银行信贷政策落地" });
-  const ctx = createContext({
-    date: "2026-09-11",
-    mode: { kind: "ai" },
-    sources,
-    log: new SilentLog(),
-    startTime: NOW,
-  });
-  const llm = new ScriptedLlm();
-  // 模型幻觉：只返回一条不存在的 url，且判 false
-  llm.relevanceJson = JSON.stringify([{ url: "https://hallucinated.example/x", relevant: false }]);
-
-  const report = await enrich([a], ctx, { llm });
-  const total = Object.values(report.sections).flat().length;
-  assert.equal(total, 1, "幻觉 url 不得导致真实条目被丢弃");
-  assert.equal(ctx.stats.recheckDropped ?? 0, 0);
+test("红线③ 补充：PASS1 整批丢弃 → 合法空报告（不抛异常，gzinfo 同款）", async () => {
+  const inputs = [toPass1Input(articleInput({ url: "u1", title: "无关条目一" }))];
+  const runner = scriptedRunner(new Map([["u1", false]]));
+  const report = await generateDaily(inputs, "2026-09-11", { runner });
+  assert.equal(report.hero_line, "今日暂无可推送重点，详见各板块资讯。", "gzinfo HERO_FALLBACK");
+  assert.equal(Object.values(report.sections).flat().length, 0);
 });
-
-test("红线③ 补充：相关性回检解析失败时整批保留（宁误放不误杀）", async () => {
-  const a = articleInput({ url: "https://example.com/real2", title: "财富管理客户活动" });
-  const ctx = createContext({
-    date: "2026-09-11",
-    mode: { kind: "ai" },
-    sources,
-    log: new SilentLog(),
-    startTime: NOW,
-  });
-  const llm = new ScriptedLlm();
-  llm.relevanceJson = "这不是JSON{{{";
-
-  const report = await enrich([a], ctx, { llm });
-  const total = Object.values(report.sections).flat().length;
-  assert.equal(total, 1, "解析失败批次应整批保留");
-  assert.equal(ctx.stats.llmFailures, 1, "应计入失败观测");
-});
-
-/** 红线① e2e 用的最小 FakeLlm（与 helpers.FakeLlm 同协议，本地独立避免耦合）。 */
-class FakeLlmForRedline {
-  async complete(opts: { system?: string; prompt: string }): Promise<string> {
-    const sys = opts.system ?? "";
-    if (sys.includes("相关性")) {
-      const urls = [...opts.prompt.matchAll(/https?:\/\/\S+/g)].map((m) => m[0]);
-      return JSON.stringify(urls.map((u) => ({ url: u, relevant: true })));
-    }
-    if (sys.includes("简报编辑")) {
-      const items = [...opts.prompt.matchAll(/(\d+)\. 标题：/g)].map((m) => ({
-        i: Number(m[1]),
-        title_cn: "改写后的条目标题",
-        summary: "改写后的摘要。",
-        tags: ["标签"],
-        importance: 2,
-      }));
-      return JSON.stringify(items);
-    }
-    return JSON.stringify({ hero_line: "定调", insights: [], must_read: [], risk: undefined });
-  }
-}

@@ -13,6 +13,14 @@ const execFileP = promisify(execFile);
 
 type Backend = "claude-cli" | "anthropic" | "openai" | "deepseek";
 
+/** transient 错误判定（gzinfo 同款）：5xx/429/超时/网络可重试；4xx 配置类不重试。 */
+function isTransientLlmError(e: unknown): boolean {
+  const msg = e instanceof Error ? e.message : String(e);
+  const status = (e as { status?: number }).status;
+  if (status !== undefined) return status === 429 || status >= 500;
+  return /timeout|timed out|network|ECONNRESET|ECONNREFUSED|fetch failed|429|\b5\d\d\b/.test(msg);
+}
+
 export class LlmAdapter implements LlmPort {
   private readonly backend: Backend;
 
@@ -20,8 +28,36 @@ export class LlmAdapter implements LlmPort {
     this.backend = backend;
   }
 
+  /**
+   * 重试语义（gzinfo lib/ai/llm.ts 2026-08-27 对齐）：
+   * 3 次尝试 + 指数退避（1.5s/3s/6s）；仅 transient 错误（5xx/429/超时/网络）重试，
+   * 4xx 配置类错误立即抛。HTTP 成功但空文本 → 打告警（下游解析将失败，可观测）。
+   */
   async complete(req: LlmRequest): Promise<string> {
-    const text = await this.dispatch(req);
+    const MAX_RETRIES = 3;
+    const BASE_DELAY_MS = 1500;
+    let lastErr: unknown;
+    for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+      try {
+        const text = await this.dispatch(req);
+        if (attempt > 0) console.warn(`[llm] ${req.model ?? "default"} 成功（重试 ${attempt} 次后）`);
+        if (!text.trim()) {
+          console.warn("[llm] ⚠️ 返回空文本（HTTP 成功但 content 为空，下游解析将失败）");
+        }
+        return this.postProcess(text, req);
+      } catch (e) {
+        lastErr = e;
+        const transient = isTransientLlmError(e);
+        if (!transient || attempt === MAX_RETRIES - 1) throw e;
+        const delay = BASE_DELAY_MS * Math.pow(2, attempt);
+        console.warn(`[llm] 第 ${attempt + 1} 次失败（${transient ? "transient" : "非 transient"}），${delay}ms 后重试: ${e instanceof Error ? e.message : e}`);
+        await new Promise((r) => setTimeout(r, delay));
+      }
+    }
+    throw lastErr;
+  }
+
+  private postProcess(text: string, req: LlmRequest): string {
     if (req.expectJson) {
       try {
         return JSON.stringify(JSON.parse(jsonrepair(text)));
@@ -33,6 +69,8 @@ export class LlmAdapter implements LlmPort {
   }
 
   private async dispatch(req: LlmRequest): Promise<string> {
+    // 模型覆盖（gzinfo PASS1_MODEL/PASS2_MODEL 语义）：请求级 model 优先于后端默认
+    if (req.model) (req as { modelOverride?: string }).modelOverride = req.model;
     switch (this.backend) {
       case "claude-cli":
         return this.viaClaudeCli(req);
@@ -64,7 +102,7 @@ export class LlmAdapter implements LlmPort {
     const { default: Anthropic } = await import("@anthropic-ai/sdk");
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     const msg = await client.messages.create({
-      model: process.env.ANTHROPIC_MODEL || "claude-sonnet-4-6",
+      model: req.model || process.env.ANTHROPIC_MODEL || "claude-sonnet-4-6",
       max_tokens: req.maxTokens ?? 4096,
       system: req.system,
       temperature: req.temperature ?? 0.2,
@@ -79,7 +117,7 @@ export class LlmAdapter implements LlmPort {
     const { default: OpenAI } = await import("openai");
     const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const chat = await client.chat.completions.create({
-      model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+      model: req.model || process.env.OPENAI_MODEL || "gpt-4o-mini",
       temperature: req.temperature ?? 0.2,
       max_tokens: req.maxTokens ?? 4096,
       messages: [
@@ -98,7 +136,7 @@ export class LlmAdapter implements LlmPort {
       apiKey: process.env.DEEPSEEK_API_KEY,
     });
     const chat = await client.chat.completions.create({
-      model: process.env.DEEPSEEK_MODEL || "deepseek-chat",
+      model: req.model || process.env.DEEPSEEK_MODEL || "deepseek-chat",
       temperature: req.temperature ?? 0.2,
       max_tokens: req.maxTokens ?? 4096,
       messages: [

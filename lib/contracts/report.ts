@@ -5,6 +5,9 @@
  * 5 个板块对应 5 个 tab（红线 #2：最终归属由内容判定，不由 sourceId/category 决定）。
  */
 
+/** 地域标记（gzinfo types.ts Locale 同名）：gz=广州辖区 / national=全国 / overseas=海外。 */
+export type Locale = "gz" | "national" | "overseas";
+
 /** 报告板块键（5 个 tab）。 */
 export type ReportSectionKey =
   | "gz_local"

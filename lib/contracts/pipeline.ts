@@ -48,6 +48,8 @@ export interface LlmRequest {
   expectJson?: boolean;
   temperature?: number;
   maxTokens?: number;
+  /** 模型覆盖（gzinfo PASS1_MODEL / PASS2_MODEL 语义）。 */
+  model?: string;
 }
 
 /** HTTP 端口（唯一网络出口，除采集专用 fetch 外）。 */
@@ -74,8 +76,20 @@ export interface Logger {
   error(stage: string, msg: string, meta?: Record<string, unknown>): void;
 }
 
-/** 运行模式：AI 正常 / 跳过 AI（skip-ai 用原文标题/摘要直接成稿，不调用任何 LLM）。 */
-export type RunMode = { kind: "ai" } | { kind: "skip-ai" };
+/**
+ * 运行模式（gzinfo ai/mode.ts 语义对齐）：
+ *  - ai：全量 LLM 管线（PASS1→PASS2，全 AI 模式内部构建 prefillCache 复用历史摘要）
+ *  - skip-ai：零 LLM 本地合成（CI 失败恢复/预分析复用）。summaryCache=url→已分析摘要
+ *    （SKIP_AI PASS2 确定性复用）；relevantUrls=历史库已判定相关条目（SKIP_AI PASS1 只保留其中条目，
+ *    防止今日新抓的非 L0 垃圾混入板块；缺省 = 全 keep 供无缓存兜底/测试）。
+ */
+export type RunMode =
+  | { kind: "ai" }
+  | {
+      kind: "skip-ai";
+      summaryCache: Map<string, string>;
+      relevantUrls?: Set<string>;
+    };
 
 /** 运行配置（由组合根从环境变量注入，服务层禁止直读 process.env）。 */
 export interface PipelineConfig {

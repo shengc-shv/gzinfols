@@ -9,6 +9,7 @@ import type {
   Logger,
   LlmPort,
 } from "../lib/contracts/pipeline";
+import { extractJson } from "../lib/services/enrich/json-util";
 
 export class MemFs implements FileStore {
   private json = new Map<string, unknown>();
@@ -60,43 +61,71 @@ export class FakeHttp implements HttpClient {
  *  3. 报告级调用 → 返回 hero/insights/must_read/risk（must_read.url 用 e2e 真实条目 url）。
  */
 export class FakeLlm implements LlmPort {
-  /** 调用次数（供观测断言）。 */
   calls = 0;
+  /** PASS1 keep 覆盖：url → keep（默认 true）。 */
+  keepOverrides = new Map<string, boolean>();
 
-  async complete(opts: {
-    system?: string;
-    prompt: string;
-    expectJson?: boolean;
-  }): Promise<string> {
+  async complete(opts: { system?: string; prompt: string }): Promise<string> {
     this.calls++;
     const sys = opts.system ?? "";
-    if (sys.includes("相关性")) {
-      const urls = [...opts.prompt.matchAll(/https?:\/\/\S+/g)].map((m) => m[0]);
-      return JSON.stringify(urls.map((u) => ({ url: u, relevant: true })));
+    const slice = (p: string) => {
+      try {
+        // extractJson：从首个 {/[ 起括号平衡扫描（正确处理模板尾部的示例 JSON 文本）
+        const cleaned = extractJson(p);
+        const parsed = JSON.parse(cleaned);
+        return Array.isArray(parsed) ? parsed : (parsed?.items ?? []);
+      } catch {
+        return [];
+      }
+    };
+    if (sys.includes("资讯筛选编辑")) {
+      // PASS1 协议：items=[{url,keep,section,source_type,locale,locale_evidence,tags,title_cn,title_orig,importance_candidate}]
+      const arr = slice(opts.prompt) as Array<{ url: string; title?: string; category?: string }>;
+      return JSON.stringify({
+        items: arr.map((it) => ({
+          url: it.url,
+          keep: this.keepOverrides.get(it.url) ?? true,
+          section: it.category === "tech" ? "tech" : it.category === "ipo" || it.category === "gd-ipo" ? "ipo" : "biz_insight",
+          source_type: "media",
+          locale: "national",
+          locale_evidence: "",
+          tags: ["市场"],
+          title_cn: it.title ?? "",
+          title_orig: "",
+          importance_candidate: 2,
+        })),
+      });
     }
-    if (sys.includes("简报编辑")) {
-      const items = [...opts.prompt.matchAll(/(\d+)\. 标题：/g)].map((m) => ({
-        i: Number(m[1]),
-        title_cn: "AI 大模型驱动银行金融科技升级",
-        summary: "某行发布 AI 中台，理财与风控效率显著提升。",
-        tags: ["AI", "金融科技"],
-        importance: 3,
-      }));
-      return JSON.stringify(items);
+    if (sys.includes("总编辑")) {
+      // PASS2 协议：hero_line + sections（must_read/insights 恒空，B3 旁路产出）
+      const arr = slice(opts.prompt) as Array<{
+        url: string; title_cn: string; title_orig?: string; source: string; source_type: string;
+        date: string; tags: string[]; locale: string; locale_evidence?: string; section: string; raw_text?: string;
+      }>;
+      const sections: Record<string, unknown[]> = { gz_local: [], biz_insight: [], policy_market: [], tech: [], ipo: [] };
+      for (const it of arr) {
+        (sections[it.section] ?? sections.biz_insight).push({
+          url: it.url,
+          title_cn: it.title_cn,
+          title_orig: it.title_orig ?? "",
+          source: it.source,
+          source_type: it.source_type,
+          date: it.date,
+          summary: `【改写】${(it.raw_text ?? "").slice(0, 40)}`,
+          importance: 2,
+          tags: it.tags ?? [],
+          locale: it.locale,
+          locale_evidence: it.locale_evidence ?? "",
+        });
+      }
+      return JSON.stringify({
+        hero_line: "今日关注：金融科技与财富管理动态，详见各板块。",
+        must_read: [],
+        insights: [],
+        sections,
+      });
     }
-    return JSON.stringify({
-      hero_line: "今日科技主线：AI 重塑银行中后台。",
-      insights: [
-        { topic: "AI 中台", impact: "提升运营效率", action: "关注相关标的机会", segments: ["零售AUM"] },
-      ],
-      must_read: [{ url: "https://example.com/a", why: "头部条目" }],
-      risk: {
-        topic: "模型风险",
-        evidence: "数据治理不足",
-        impact: "合规压力上升",
-        action: "加强内控",
-      },
-    });
+    return JSON.stringify({ hero_line: "", must_read: [], insights: [], sections: {} });
   }
 }
 
