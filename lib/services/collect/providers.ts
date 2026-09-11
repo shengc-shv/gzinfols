@@ -1,0 +1,97 @@
+/**
+ * 采集提供者（C1 内部子模块）：按 SourceDef.type 分派抓取。
+ *
+ * 只通过注入的 HttpClient / FileStore 端口访问外部，不直接 import 网络库。
+ * 红线 #1（无 publishedAt 丢弃）不在此层做 —— 留给归一化 C2 集中裁决。
+ */
+import Parser from "rss-parser";
+import * as cheerio from "cheerio";
+import type { CrawledArticle, RawArticle } from "../../contracts/article";
+import type { SourceDef } from "../../contracts/source";
+import type { HttpClient } from "../../contracts/pipeline";
+
+export interface CrawlerRegistry {
+  /** 返回爬虫产物（IPO / 广州商机 / 昨日股市）。无爬虫源时返回空。 */
+  fetchCrawledArticles(): Promise<{
+    ipo: CrawledArticle[];
+    gz: CrawledArticle[];
+    stocks: CrawledArticle[];
+  }>;
+}
+
+/** RSS 源：标准 RSS/Atom 解析。 */
+export async function fetchRss(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {
+  const xml = await http.getText(source.url, { useCurl: source.useCurl });
+  const parser = new Parser();
+  const feed = await parser.parseString(xml);
+  return (feed.items ?? []).map((it) => ({
+    sourceId: source.id,
+    title: it.title ?? "(无标题)",
+    url: it.link ?? "",
+    excerpt: it.contentSnippet ?? it.content?.slice(0, 200) ?? "",
+    publishedAt: it.isoDate ? new Date(it.isoDate) : undefined,
+    fetchedAt: new Date(),
+    category: source.category,
+    summary: it.contentSnippet ?? "",
+  }));
+}
+
+/** 列表页抓取：通用 cheerio 解析（标题 + 链接 + 可选时间）。具体站点选择器可在此注册。 */
+export async function fetchScrape(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {
+  const html = await http.getText(source.url, { useCurl: source.useCurl });
+  const $ = cheerio.load(html);
+  const out: RawArticle[] = [];
+  $("a[href]").each((_, el) => {
+    const title = $(el).text().trim();
+    const href = $(el).attr("href") ?? "";
+    if (!title || title.length < 6) return;
+    const abs = href.startsWith("http") ? href : new URL(href, source.url).toString();
+    const timeSel = $(el).closest("li,div").find("time").attr("datetime");
+    const publishedAt = timeSel ? new Date(timeSel) : undefined;
+    out.push({
+      sourceId: source.id,
+      title,
+      url: abs,
+      excerpt: title,
+      publishedAt,
+      fetchedAt: new Date(),
+      category: source.category,
+    });
+  });
+  return out.slice(0, 50);
+}
+
+/** API 源：拉 JSON 后由调用方按字段映射；此处做最小通用提取。 */
+export async function fetchApi(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {
+  const text = await http.getText(source.url);
+  try {
+    const json = JSON.parse(text);
+    const items = Array.isArray(json) ? json : json.items ?? json.data ?? [];
+    return (items as any[]).slice(0, 50).map((it) => ({
+      sourceId: source.id,
+      title: String(it.title ?? it.name ?? "(无标题)"),
+      url: String(it.url ?? it.link ?? ""),
+      excerpt: String(it.summary ?? it.description ?? it.title ?? ""),
+      publishedAt: it.date ? new Date(it.date) : undefined,
+      fetchedAt: new Date(),
+      category: source.category,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+/** 单源分派。 */
+export async function fetchOne(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {
+  if (source.role === "crawled-input") return []; // 爬虫源由 CrawlerRegistry 提供，普通抓取跳过
+  switch (source.type) {
+    case "rss":
+      return fetchRss(source, http);
+    case "scrape":
+      return fetchScrape(source, http);
+    case "api":
+      return fetchApi(source, http);
+    default:
+      return [];
+  }
+}

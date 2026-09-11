@@ -1,0 +1,1097 @@
+[
+  {
+    "id": "openai-news",
+    "tier": "T1.5",
+    "name": "OpenAI News",
+    "type": "rss",
+    "url": "https://openai.com/news/rss.xml",
+    "category": "tech",
+    "subcategory": "ai-news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "disabledReason": "停更于 2018-10（OpenAI 已废弃该 RSS），禁用"
+  },
+  {
+    "id": "deepmind-blog",
+    "tier": "T1.5",
+    "name": "DeepMind Blog",
+    "type": "rss",
+    "url": "https://deepmind.google/blog/rss.xml",
+    "category": "tech",
+    "subcategory": "ai-news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "disabledReason": "国外技术数据源清理(2026-08-20)：AI 媒体类不再接入"
+  },
+  {
+    "id": "huggingface-blog",
+    "tier": "T1.5",
+    "name": "Hugging Face Blog",
+    "type": "rss",
+    "url": "https://huggingface.co/blog/feed.xml",
+    "category": "tech",
+    "subcategory": "ai-news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "disabledReason": "国外技术数据源清理(2026-08-20)：AI 媒体类不再接入"
+  },
+  {
+    "id": "huggingface-papers",
+    "tier": "T1.5",
+    "name": "HuggingFace Trending Papers",
+    "type": "api",
+    "url": "https://huggingface.co/api/daily_papers",
+    "category": "tech",
+    "subcategory": "trending-papers",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "keywords": [
+      "LLM",
+      "agent",
+      "RAG",
+      "reasoning",
+      "coding"
+    ],
+    "disabledReason": "国外技术数据源清理(2026-08-20)：论文类不再接入（国外技术仅保留 arXiv 金融科技过滤流）"
+  },
+  {
+    "id": "tldr-ai",
+    "tier": "T2",
+    "name": "TLDR AI",
+    "type": "rss",
+    "url": "https://tldr.tech/api/rss/ai",
+    "category": "tech",
+    "subcategory": "ai-news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "disabledReason": "国外技术数据源清理(2026-08-20)：AI 媒体类不再接入"
+  },
+  {
+    "id": "smol-ai-news",
+    "tier": "T2",
+    "name": "Smol AI News",
+    "type": "rss",
+    "url": "https://news.smol.ai/rss.xml",
+    "category": "tech",
+    "subcategory": "ai-news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "disabledReason": "停更于 2024-07，禁用"
+  },
+  {
+    "id": "latent-space",
+    "tier": "T2",
+    "name": "Latent Space",
+    "type": "rss",
+    "url": "https://www.latent.space/feed",
+    "category": "tech",
+    "subcategory": "ai-news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "disabledReason": "国外技术数据源清理(2026-08-20)：AI 媒体类不再接入"
+  },
+  {
+    "id": "mit-tech-review-ai",
+    "tier": "T2",
+    "name": "MIT Tech Review AI",
+    "type": "rss",
+    "url": "https://www.technologyreview.com/topic/artificial-intelligence/feed/",
+    "category": "tech",
+    "subcategory": "overseas-tech",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "disabledReason": "结构失衡清理(2026-08-21)：7天存量5条全部 relevant:false（0% 有效），纯吃 PASS1 token 产出为零；海外 tech 已由 arxiv-fintech 关键词过滤流覆盖"
+  },
+  {
+    "id": "attentionvc-ai",
+    "tier": "T2",
+    "name": "X 推文 (AttentionVC)",
+    "type": "api",
+    "url": "https://reply-vc-90459984647.us-central1.run.app/v1/articles/leaderboard?window=3d&category=ai&lang=en&limit=30",
+    "category": "tech",
+    "subcategory": "x-viral",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "disabledReason": "国外技术数据源清理(2026-08-20)：X 推文类不再接入"
+  },
+  {
+    "id": "bloomberg-markets",
+    "tier": "T2",
+    "name": "Bloomberg Markets",
+    "type": "rss",
+    "url": "https://feeds.bloomberg.com/markets/news.rss",
+    "category": "finance",
+    "subcategory": "news",
+    "keywords": [
+      "China",
+      "Chinese",
+      "央行",
+      "人民银行",
+      "人民币",
+      "港股",
+      "中概",
+      "bank",
+      "banking",
+      "利率",
+      "美联储",
+      "降息",
+      "降准",
+      "汇率",
+      "黄金",
+      "理财",
+      "信贷",
+      "美元",
+      "trade",
+      "tariff"
+    ],
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "notes": "CI 沙箱实测可获取（非 403 拦截）",
+    "disabledReason": "结构失衡清理(2026-08-21)：7天存量12条仅4条相关(33%)，且8条无 summary（标题关键词未命中/被窗口滤掉）；海外财经保留 Guardian/Economist/Yahoo 即可，同类内容重复"
+  },
+  {
+    "id": "wsj-markets",
+    "tier": "T2",
+    "name": "WSJ Markets",
+    "type": "rss",
+    "url": "https://feeds.a.dj.com/rss/RSSMarketsMain.xml",
+    "category": "finance",
+    "subcategory": "news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "disabledReason": "停更于 2025-01（WSJ RSS 已废弃），禁用"
+  },
+  {
+    "id": "ft-companies",
+    "tier": "T2",
+    "name": "Financial Times",
+    "type": "rss",
+    "url": "https://www.ft.com/companies?format=rss",
+    "category": "finance",
+    "subcategory": "news",
+    "keywords": [
+      "China",
+      "Chinese",
+      "央行",
+      "人民银行",
+      "人民币",
+      "港股",
+      "中概",
+      "bank",
+      "banking",
+      "利率",
+      "美联储",
+      "降息",
+      "降准",
+      "汇率",
+      "黄金",
+      "理财",
+      "信贷",
+      "美元",
+      "trade",
+      "tariff"
+    ],
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "notes": "CI 沙箱实测可获取（非 403 拦截）",
+    "disabledReason": "结构失衡清理(2026-08-21)：7天存量14条仅3条相关(21%)，有效产出过低；海外财经保留 Guardian/Economist/Yahoo 即可"
+  },
+  {
+    "id": "bbc-business",
+    "tier": "T2",
+    "name": "BBC Business",
+    "type": "rss",
+    "url": "https://feeds.bbci.co.uk/news/business/rss.xml",
+    "category": "finance",
+    "subcategory": "news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "notes": "CI 沙箱实测可获取（非 403 拦截）",
+    "disabledReason": "结构失衡清理(2026-08-21)：7天存量20条仅5条相关(25%)，且多为英国本地/欧洲商业新闻与分行无关联；海外财经保留 Guardian/Economist/Yahoo 即可"
+  },
+  {
+    "id": "economist-finance",
+    "tier": "T2",
+    "name": "The Economist Finance",
+    "type": "rss",
+    "url": "https://www.economist.com/finance-and-economics/rss.xml",
+    "category": "finance",
+    "subcategory": "news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "notes": "CI 沙箱实测可获取（非 403 拦截）",
+    "disabledReason": "命中率过低(可用率33.3%，n=3)：采集3条仅1条相关，低于50%阈值依规关闭"
+  },
+  {
+    "id": "cnbc-top",
+    "tier": "T2",
+    "name": "CNBC Top Stories",
+    "type": "rss",
+    "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+    "category": "stocks",
+    "subcategory": "us",
+    "keywords": [],
+    "enabled": true,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "notes": "昨日股市·美股信息源（2026-08-25 启用，复用现成 RSS）：CNBC 美股/科技个股动态，路由 stocks/us；清空原中国/银行关键词避免误杀，喂 LLM 生成中文美股口播卡。CI 沙箱实测可获取（非 403 拦截）。",
+    "disabledReason": null
+  },
+  {
+    "id": "yahoo-finance",
+    "tier": "T2",
+    "name": "Yahoo Finance",
+    "type": "rss",
+    "url": "https://finance.yahoo.com/news/rssindex",
+    "category": "finance",
+    "subcategory": "news",
+    "keywords": [
+      "China",
+      "Chinese",
+      "央行",
+      "人民银行",
+      "人民币",
+      "港股",
+      "中概",
+      "bank",
+      "banking",
+      "利率",
+      "美联储",
+      "降息",
+      "降准",
+      "汇率",
+      "黄金",
+      "理财",
+      "信贷",
+      "美元",
+      "trade",
+      "tariff"
+    ],
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "disabledReason": "命中率过低(可用率0%，n=2)：采集2条0条相关，低于50%阈值依规关闭",
+    "notes": "CI 沙箱实测可获取（非 403 拦截）"
+  },
+  {
+    "id": "investing-news",
+    "tier": "T2",
+    "name": "Investing.com News",
+    "type": "rss",
+    "url": "https://www.investing.com/rss/news.rss",
+    "category": "stocks",
+    "subcategory": "us",
+    "keywords": [],
+    "enabled": true,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "notes": "昨日股市·美股信息源（2026-08-25 启用）：CI 沙箱实测可获取（本地 403 因 Cloudflare，CI IP 可达）。RSS 综合市场新闻（investing.com/rss/news.rss），subcategory=us 归「美股」分组；PER_SOURCE_FETCH_CAP 每源限 10 条。2026-08-25 修：移除原中国/银行/零售关键词（与美股市场新闻不匹配，导致被滤到 1 条），改空数组不过滤，先全量进 10 条观察真实内容（美股收盘≈北京时间凌晨，看 RSS 是否含收盘/解读稿），后续视噪声再加美股市场关键词。",
+    "lang": "en"
+  },
+  {
+    "id": "nbd",
+    "tier": "T2",
+    "name": "每日经济新闻",
+    "type": "scrape",
+    "url": "https://www.nbd.com.cn/",
+    "category": "finance",
+    "subcategory": "cn-finance",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "全国权威财经媒体（2026-08-21 接入）：深度报道银行/科技金融/产业动态，算力贷/Token贷/词元贷等热点报道主力；首页服务端渲染可静态抓（articles/YYYY-MM-DD/<id>.html），频道页有 302 反爬 v1 只抓首页",
+    "disabledReason": "命中率过低(可用率27.3%，n=11)：每经采集11条仅3条相关，低于50%阈值依规关闭（注：原为补足国内源接入，按规则一并关闭，需恢复请手动启用）"
+  },
+  {
+    "id": "sina-finance",
+    "tier": "T2",
+    "name": "新浪财经",
+    "type": "scrape",
+    "url": "https://finance.sina.com.cn/roll/index.shtml",
+    "category": "finance",
+    "subcategory": "cn-finance",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "人民网财经 RSS 停滞于 2025-06，改用新浪财经滚动新闻页（服务端渲染，实时）",
+    "disabledReason": "命中率过低(可用率32.9%，n=70)：新浪财经采集70条仅23条相关，低于50%阈值依规关闭"
+  },
+  {
+    "id": "cctv-finance",
+    "tier": "T1.5",
+    "name": "央视财经",
+    "type": "scrape",
+    "url": "https://finance.cctv.com/",
+    "category": "finance",
+    "subcategory": "cn-finance",
+    "enabled": true,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "新华网财经 RSS(news_finance.xml)停滞于 2022-12、新华网主站为 SPA 无法静态抓取，改用央视财经首页（服务端渲染，实时）"
+  },
+  {
+    "id": "govcn-policy",
+    "tier": "T1",
+    "name": "中国政府网·国务院政策",
+    "type": "scrape",
+    "url": "https://www.gov.cn/zhengce/",
+    "category": "finance",
+    "subcategory": "cn-policy",
+    "enabled": true,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "国家级宏观政策权威源：国务院政策文件/批复/条例（服务端渲染列表，标题+日期+链接可稳定解析）。央行/金监总局/统计局官网为 JS/模板渲染不可静态抓，其权威动态由新浪/央视媒体解读在同子标签覆盖"
+  },
+  {
+    "id": "nfra",
+    "tier": "T1",
+    "name": "国家金融监督管理总局",
+    "type": "scrape",
+    "url": "https://www.nfra.gov.cn/cn/view/pages/index/index.html",
+    "category": "finance",
+    "subcategory": "cn-policy",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "⚠️ 已本地化停用（2026-08-20）：WAF 拦截 GitHub 托管 runner 国外出口 IP（CI 下 403/0 条），改由本地 skill（local-acquire → data/local-acquired.json）抓取后由 daily 读取并入，经 SOURCE_ROUTE 路由 finance/cn-policy；本条仅保留占位（tier/knownSourceIds 识别 + local-acquired 路由），远程不再抓取"
+  },
+  {
+    "id": "pbc",
+    "tier": "T1",
+    "name": "中国人民银行",
+    "type": "scrape",
+    "url": "http://www.pbc.gov.cn",
+    "category": "finance",
+    "subcategory": "cn-policy",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "⚠️ 已本地化停用（2026-08-20）：站点对 GitHub 托管 runner 出口 IP 连接失败（CI 下 fetch failed/0 条），改由本地 skill（local-acquire → data/local-acquired.json）抓取后由 daily 读取并入，经 SOURCE_ROUTE 路由 finance/cn-policy；本条仅保留占位（tier/knownSourceIds 识别 + local-acquired 路由），远程不再抓取"
+  },
+  {
+    "id": "cnfin",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "新华财经",
+    "type": "scrape",
+    "url": "https://www.cnfin.com",
+    "category": "finance",
+    "subcategory": "cn-finance",
+    "enabled": false,
+    "lightAi": true,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "综合财经媒体（爬虫产物）：由 lib/sources/crawlers/sources/cnfin-web.ts 抓静态列表页（要闻 /news + 宏观 /macro + 区域 /local + 产业 /industry），解析 <a> 包裹的 detail 链接、日期由路径前8位推导，经 SOURCE_ROUTE 路由 finance/cn-finance（国内财经新闻标签）；config 仅供 tier/knownSourceIds 识别，不直接 scrape（首页为导航壳，真实内容在栏目静态列表页）。股市/债市/汇市/货币/大宗/快讯 v1 已排除，后续可单独扩展"
+  },
+  {
+    "id": "stcn",
+    "role": "crawled-input",
+    "tier": "T2",
+    "name": "证券时报",
+    "type": "scrape",
+    "url": "https://www.stcn.com",
+    "category": "finance",
+    "subcategory": "cn-finance",
+    "enabled": false,
+    "lightAi": true,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "财经媒体（爬虫产物）：由 lib/sources/crawlers/sources/stcn-web.ts 抓静态列表页（新闻 /article/list/xw.html + 地方·广东 /article/list/area.html?subType=粤 + 投资 /article/list/investment.html），解析 <div class=\"tt\"><a href=\"/article/detail/<id>.html\"> 列表项；列表页与分页接口均无发布日期字段（ID 为纯数字），publishedAt 用抓取当天近似；经 SOURCE_ROUTE 路由 finance/cn-finance（国内财经新闻标签）。config 仅供 tier/knownSourceIds 识别，不直接 scrape（首页为导航壳，真实内容在栏目静态列表页）。快讯/专题 v1 已排除，后续可单独扩展"
+  },
+  {
+    "id": "sina-bank",
+    "role": "crawled-input",
+    "tier": "T2",
+    "name": "新浪财经·银行频道",
+    "type": "scrape",
+    "url": "https://finance.sina.com.cn/money/bank/",
+    "category": "finance",
+    "subcategory": "cn-finance",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "银行业财经媒体（爬虫产物）：由 lib/sources/crawlers/sources/sina-bank-web.ts 抓 SSR 列表页（/money/bank/），匹配 doc-xxx.shtml 文章链接（路径 /YYYY-MM-DD/ 推导日期），经 SOURCE_ROUTE 路由 finance/cn-finance。config 仅供 tier/knownSourceIds 识别，不直接 scrape（频道页混导航/专题链接，需按 doc+日期精确过滤）。与 sina-money(理财保险) 同域独立频道，单独接入"
+  },
+  {
+    "id": "cls",
+    "tier": "T2",
+    "name": "财联社金融",
+    "type": "api",
+    "url": "https://www.cls.cn/depth?id=1032",
+    "category": "finance",
+    "subcategory": "cn-finance",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "⚠️ 已本地化停用（2026-08-20）：站点对 GitHub 托管 runner 出口 IP 连接失败（CI 下 fetch failed/0 条），改由本地 skill（local-acquire → data/local-acquired.json）抓取后由 daily 读取并入，经 SOURCE_ROUTE 路由 finance/cn-finance；本条仅保留占位（tier/knownSourceIds 识别 + local-acquired 路由），远程不再抓取"
+  },
+  {
+    "id": "guancha",
+    "role": "crawled-input",
+    "tier": "T2",
+    "name": "观察者网·金融",
+    "type": "scrape",
+    "url": "https://www.guancha.cn/GuanJinRong",
+    "category": "finance",
+    "subcategory": "cn-finance",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "金融评论/深度媒体（爬虫产物）：由 lib/sources/crawlers/sources/guancha-web.ts 抓 SSR 列表页（/GuanJinRong），匹配 /GuanJinRong/<YYYY>_<MM>_<DD>_<id>.shtml 文章链接（日期由链接推导，标题取 <h1>），经 SOURCE_ROUTE 路由 finance/cn-finance。config 仅供 tier/knownSourceIds 识别，不直接 scrape（频道页混 politics 等其他栏目链接，按前缀精确过滤）。?page=N 实测不生效，v1 只抓首页"
+  },
+  {
+    "id": "dayoo-gz",
+    "role": "crawled-input",
+    "tier": "T2",
+    "name": "广州日报·大洋网(广州频道)",
+    "type": "scrape",
+    "url": "https://news.dayoo.com/guangzhou/",
+    "category": "gz",
+    "subcategory": "gz-media",
+    "enabled": false,
+    "lightAi": true,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "广州本地媒体（爬虫产物，2026-08-21 第一梯队接入）：lib/sources/crawlers/sources/dayoo-gz.ts 抓 news.dayoo.com/guangzhou/ 静态列表页（/YYYYMM/DD/ 路径推导日期），归 gz 面板 gz-all 合并流（subcategory=gz-media）；config 仅供 tier/knownSourceIds 识别，不直接 scrape。广州本地政企发布第一落点（词元贷 8-15 凌晨首发）"
+  },
+  {
+    "id": "southcn",
+    "role": "crawled-input",
+    "tier": "T2",
+    "name": "南方网·南方经济",
+    "type": "scrape",
+    "url": "https://economy.southcn.com/",
+    "category": "gz",
+    "subcategory": "gz-media",
+    "enabled": false,
+    "lightAi": true,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "广州本地媒体（爬虫产物，2026-08-21 第一梯队接入）：lib/sources/crawlers/sources/southcn-economy.ts 抓 economy.southcn.com 经济频道（正文列表 <li><a href=news.southcn.com/node_*/<hash>.shtml>，URL 无日期→publishedAt 用抓取当天近似）；实测广州频道 dishi.southcn.com 内容偏政务科普改用经济频道（含 Token贷/金饰/广州写字楼）；归 gz 面板 gz-all（subcategory=gz-media）。南方日报 8-17 有广州深度稿"
+  },
+  {
+    "id": "cnr-gd",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "央广网·广东频道",
+    "type": "scrape",
+    "url": "https://www.cnr.cn/gd/",
+    "category": "gz",
+    "subcategory": "gz-media",
+    "enabled": false,
+    "lightAi": true,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "广州本地媒体（爬虫产物，2026-08-21 第一梯队接入）：lib/sources/crawlers/sources/cnr-gd.ts 抓 www.cnr.cn/gd/ 频道页（/YYYYMMDD/tYYYYMMDD_*.shtml 路径推导日期），归 gz 面板 gz-all（subcategory=gz-media）。央媒省级频道 T+0 跟进"
+  },
+  {
+    "id": "sina-money",
+    "tier": "T2",
+    "name": "新浪财经·理财保险",
+    "type": "scrape",
+    "url": "https://finance.sina.com.cn/money/",
+    "category": "finance",
+    "enabled": true,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "财富管理资讯源（全国）：新浪 money 频道，理财/保险/基金/黄金/存款利率。全国性资讯，归宏观政策·国内财经，不作广州商机（广州商机只收广州本地可落地商机）",
+    "subcategory": "cn-finance"
+  },
+  {
+    "id": "21jingji-finance",
+    "tier": "T2",
+    "name": "21世纪经济报道·金融",
+    "type": "scrape",
+    "url": "https://www.21jingji.com/channel/finance",
+    "category": "finance",
+    "enabled": true,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "信贷/银行资讯源（全国）：21财经金融频道，房贷/消费贷/普惠/银行动态。全国性资讯，归宏观政策·国内财经，不作广州商机",
+    "subcategory": "cn-finance"
+  },
+  {
+    "id": "gd-local-scraper",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "广东本地企业动态",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "news",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ]
+  },
+  {
+    "id": "gd-szse",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "深交所IPO公告(历史兼容)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "szse",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "note": "旧管线预过滤的广东深交所公告，保留以兼容历史侧车数据；分发由分类器按文章决定。"
+  },
+  {
+    "id": "gd-hkex",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "港交所IPO公告(历史兼容)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "hkex",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ]
+  },
+  {
+    "id": "gd-em-ipo",
+    "role": "crawled-input",
+    "tier": "T2",
+    "name": "东方财富IPO辅导(历史兼容)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "ipo-tutoring",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ]
+  },
+  {
+    "id": "simonwillison",
+    "tier": "T2",
+    "name": "Simon Willison's Weblog",
+    "type": "rss",
+    "url": "https://simonwillison.net/atom/everything/",
+    "category": "tech",
+    "subcategory": "ai-news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "note": "独立开发者视角的 AI 工具评测与 LLM 进展，更新极高频。",
+    "disabledReason": "国外技术数据源清理(2026-08-20)：AI 媒体类不再接入"
+  },
+  {
+    "id": "infoq-cn",
+    "tier": "T2",
+    "name": "InfoQ 中国",
+    "type": "rss",
+    "url": "https://www.infoq.cn/feed",
+    "category": "tech",
+    "subcategory": "cn-tech",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "lang": "zh",
+    "useCurl": true,
+    "note": "国内权威的软件开发/架构/工程实践媒体，已验证 RSS 可用。",
+    "disabledReason": "命中率过低(可用率16.7%，n=24)：InfoQ采集24条仅4条相关，低于50%阈值依规关闭"
+  },
+  {
+    "id": "qbitai",
+    "tier": "T2",
+    "name": "量子位",
+    "type": "rss",
+    "url": "https://www.qbitai.com/feed",
+    "category": "tech",
+    "subcategory": "cn-tech",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "lang": "zh",
+    "useCurl": true,
+    "note": "国内权威 AI/前沿科技媒体，已验证 RSS 可用。",
+    "disabledReason": "命中率过低(可用率15.8%，n=19)：量子位采集19条仅3条相关，低于50%阈值依规关闭"
+  },
+  {
+    "id": "sspai",
+    "tier": "T2",
+    "name": "少数派",
+    "type": "rss",
+    "url": "https://sspai.com/feed",
+    "category": "tech",
+    "subcategory": "cn-tech",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "lang": "zh",
+    "useCurl": true,
+    "note": "数字工具/效率/软件评测类中文社区媒体，已验证 RSS 可用。",
+    "disabledReason": "结构失衡清理(2026-08-21)：7天存量12条全部 relevant:false（0% 有效）——数字工具/效率评测与银行零售业务无关联，纯吃 PASS1 token；tech 板块保留 qbitai/infoq-cn 即可"
+  },
+  {
+    "id": "guardian-business",
+    "tier": "T2",
+    "name": "The Guardian Business",
+    "type": "rss",
+    "url": "https://www.theguardian.com/business/rss",
+    "category": "finance",
+    "subcategory": "news",
+    "enabled": false,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "note": "已验证可用。英美市场与经济新闻，无付费墙。",
+    "notes": "CI 沙箱实测可获取（非 403 拦截）",
+    "disabledReason": "命中率过低(可用率33.3%，n=6)：卫报商业采集6条仅2条相关，低于50%阈值依规关闭"
+  },
+  {
+    "id": "fed-press",
+    "tier": "T1",
+    "name": "Federal Reserve Press Releases",
+    "type": "rss",
+    "url": "https://www.federalreserve.gov/feeds/press_all.xml",
+    "category": "finance",
+    "subcategory": "news",
+    "enabled": true,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "note": "已验证可用。美联储全部公告（FOMC 声明、纪要、监管），宏观信号第一手来源。",
+    "notes": "CI 沙箱实测可获取（非 403 拦截）"
+  },
+  {
+    "id": "ftchinese",
+    "tier": "T2",
+    "name": "FT中文网",
+    "type": "rss",
+    "url": "https://www.ftchinese.com/rss/news",
+    "category": "finance",
+    "subcategory": "news",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "note": "已验证可用。FT 中文版综合新闻，全球宏观+中国市场视角。已按用户要求从「国内财经」移至「国际财经」。",
+    "lang": "zh",
+    "notes": "CI 沙箱实测可获取（非 403 拦截）",
+    "disabledReason": "结构失衡清理(2026-08-21)：7天存量10条仅3条相关(30%)；海外财经保留 Guardian/Economist/Yahoo 即可，FT中文与 Yahoo/Guardian 内容重叠"
+  },
+  {
+    "id": "crunchbase-news",
+    "tier": "T2",
+    "name": "Crunchbase News",
+    "type": "rss",
+    "url": "https://news.crunchbase.com/feed/",
+    "category": "gd-ipo",
+    "subcategory": "overseas",
+    "enabled": true,
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "note": "已验证可用。全球私募市场/融资轮次/IPO 与上市动态；仅广东企业出海上市（境外子标签）才进广东IPO，其余丢弃。",
+    "disabledReason": "恢复：#45 CI 实测拉到 1 条（沙箱403仅为环境拦截，非源失效）"
+  },
+  {
+    "type": "api",
+    "category": "gd-ipo",
+    "enabled": false,
+    "url": "file://./data/crawled-articles.json",
+    "notes": "爬虫兼容占位源：上交所/北交所IPO公告由 TS 爬虫 lib/sources/crawlers 产出（fetchCrawledArticles 进程内调用）（sourceId=gd-sse/gd-bse），此条目仅用于 registry 识别，不直接抓取",
+    "id": "gd-sse",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "上交所IPO公告(历史兼容)",
+    "subcategory": "sse"
+  },
+  {
+    "type": "api",
+    "category": "gd-ipo",
+    "enabled": false,
+    "url": "file://./data/crawled-articles.json",
+    "notes": "爬虫兼容占位源：上交所/北交所IPO公告由 TS 爬虫 lib/sources/crawlers 产出（fetchCrawledArticles 进程内调用）（sourceId=gd-sse/gd-bse），此条目仅用于 registry 识别，不直接抓取",
+    "id": "gd-bse",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "北交所IPO公告(历史兼容)",
+    "subcategory": "bse"
+  },
+  {
+    "type": "scrape",
+    "category": "gz",
+    "enabled": false,
+    "url": "file://./data/crawled-gz.json",
+    "notes": "广州商机爬虫兼容占位源：由 TS 爬虫 lib/sources/crawlers 产出（fetchCrawledArticles 进程内调用）（sourceId=gz-stats/gz-nansha），此条目仅用于 registry 识别（subcatOf 路由）与 knownSourceIds 防丢弃，不直接抓取",
+    "id": "gz-stats",
+    "role": "crawled-input",
+    "tier": "T1",
+    "name": "广州市统计局(爬虫产物)",
+    "subcategory": "gz-customer"
+  },
+  {
+    "type": "scrape",
+    "category": "finance",
+    "enabled": false,
+    "url": "file://./data/crawled-gz.json",
+    "notes": "广州商机爬虫兼容占位源：由 TS 爬虫 lib/sources/crawlers 产出（fetchCrawledArticles 进程内调用）（sourceId=gz-gov），已从广州商机迁入宏观政策·广州政策子标签",
+    "id": "gz-gov",
+    "role": "crawled-input",
+    "tier": "T1",
+    "name": "广州市政府(爬虫产物)",
+    "subcategory": "gz-policy"
+  },
+  {
+    "type": "api",
+    "category": "gz",
+    "enabled": false,
+    "url": "file://./data/crawled-articles.json",
+    "notes": "广州辖区 IPO 兼容占位源：daily 分流将 region=gz 的交易所公告 sourceId 改写为 gz-* 前缀（gd-sse→gz-sse 等），供 subcatOf 路由到广州商机·企业融资",
+    "id": "gz-sse",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "广州辖区上交所IPO(分流改写)",
+    "subcategory": "gz-ipo"
+  },
+  {
+    "type": "api",
+    "category": "gz",
+    "enabled": false,
+    "url": "file://./data/crawled-articles.json",
+    "notes": "广州辖区 IPO 兼容占位源：见 gz-sse",
+    "id": "gz-szse",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "广州辖区深交所IPO(分流改写)",
+    "subcategory": "gz-ipo"
+  },
+  {
+    "type": "api",
+    "category": "gz",
+    "enabled": false,
+    "url": "file://./data/crawled-articles.json",
+    "notes": "广州辖区 IPO 兼容占位源：见 gz-sse",
+    "id": "gz-bse",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "广州辖区北交所IPO(分流改写)",
+    "subcategory": "gz-ipo"
+  },
+  {
+    "type": "api",
+    "category": "gz",
+    "enabled": false,
+    "url": "file://./data/crawled-articles.json",
+    "notes": "广州辖区 IPO 兼容占位源：见 gz-sse",
+    "id": "gz-hkex",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "广州辖区港交所(分流改写)",
+    "subcategory": "gz-ipo"
+  },
+  {
+    "type": "api",
+    "category": "gz",
+    "enabled": false,
+    "url": "file://./data/crawled-articles.json",
+    "notes": "广州辖区 IPO 兼容占位源：见 gz-sse",
+    "id": "gz-em-ipo",
+    "role": "crawled-input",
+    "tier": "T2",
+    "name": "广州辖区东财辅导(分流改写)",
+    "subcategory": "gz-ipo"
+  },
+  {
+    "id": "arxiv-fintech",
+    "tier": "T2",
+    "name": "arXiv 金融科技论文 (cs.AI·cs.LG·q-fin)",
+    "type": "rss",
+    "url": "https://rss.arxiv.org/rss/cs.AI+cs.LG+q-fin",
+    "category": "tech",
+    "subcategory": "overseas-tech",
+    "enabled": true,
+    "lang": "en",
+    "locales": [
+      "zh",
+      "en"
+    ],
+    "keywords": [
+      "banking",
+      "financial services",
+      "credit risk",
+      "compliance"
+    ],
+    "notes": "用户指定(2026-08-20)：q-fin/cs.AI/cs.LG 三分类，按关键词过滤只留金融科技相关"
+  },
+  {
+    "id": "eastmoney-stock",
+    "role": "crawled-input",
+    "tier": "T2",
+    "name": "东方财富·A股股市新闻",
+    "type": "scrape",
+    "url": "https://stock.eastmoney.com/a/cgsxw.html",
+    "category": "stocks",
+    "subcategory": "a-share",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "昨日股市·A股信息源（2026-08-25 新增）：lib/sources/crawlers/sources/eastmoney-stock.ts 抓 stock.eastmoney.com/a/cgsxw.html 列表页，URL /a/YYYYMMDDxxxx.html 推导日期；config 仅供 tier/knownSourceIds 识别，不直接 scrape。"
+  },
+  {
+    "id": "hkex-stock",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "港交所披露易·最新公告",
+    "type": "api",
+    "url": "https://www1.hkexnews.hk/ncms/json/eds/lcisehk7relsde_1.json",
+    "category": "stocks",
+    "subcategory": "hk",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "昨日股市·港股信息源（2026-08-25 新增）：lib/sources/crawlers/sources/hkex-stock.ts 抓披露易最新公告 JSON（过滤 IPO 关键词、2天窗口、上限40条）；config 仅供 tier/knownSourceIds 识别。"
+  },
+  {
+    "id": "sina-hk-stock",
+    "role": "crawled-input",
+    "tier": "T2",
+    "name": "新浪财经·港股频道",
+    "type": "scrape",
+    "url": "https://finance.sina.com.cn/stock/hkstock/",
+    "category": "stocks",
+    "subcategory": "hk",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "昨日股市·港股市场新闻源（2026-08-25 新增）：lib/sources/crawlers/sources/sina-hk-stock.ts 抓新浪港股频道列表页，匹配 dated doc 链接 + 港股相关性过滤（标题含港股关键词或港股代码(0XXXX)）+ 2天窗口；补足 hkex-stock 披露易公告偏英文公司级、对收盘解读支撑弱的问题。config 仅供 tier/knownSourceIds 识别，不直接 scrape。"
+  },
+  {
+    "id": "sina-a-stock",
+    "role": "crawled-input",
+    "tier": "T2",
+    "name": "新浪财经·A股频道",
+    "type": "scrape",
+    "url": "https://finance.sina.com.cn/stock/",
+    "category": "stocks",
+    "subcategory": "a-share",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "昨日股市·A股交叉验证源（2026-08-25 新增）：lib/sources/crawlers/sources/sina-a-stock.ts 抓新浪财经A股频道列表页，匹配 dated doc 链接 + A股相关性过滤（标题含A股关键词或6位A股代码，排除港股/美股标记）+ 3天窗口；与 eastmoney-stock 构成 A股双源独立验证。config 仅供 tier/knownSourceIds 识别，不直接 scrape。"
+  },
+  {
+    "id": "em-declare",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "东财IPO在审(广东)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "ipo-tutoring",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "notes": "2026-08-30 重新激活 gd-ipo：东财在审企业表 RPT_IPO_DECORGNEWEST（REG_ADDRESS=广东 660家）爬虫产物路由源；覆盖受理→问询→过会→提交注册→注册生效整段在审生命周期（旧源漏网）。"
+  },
+  {
+    "id": "gd-csrc-tutoring",
+    "role": "crawled-input",
+    "tier": "T1",
+    "name": "证监会辅导备案(官方csrcfd)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "ipo-tutoring",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "note": "官方权威辅导库 csrcfd 爬虫产物注册源（2026-09-09 IPO 体系重设计：替代东财辅导代理 em-ipo，修复 render 白名单静默丢弃）。category/subcategory 仅采集元数据，渲染归属经内容判定。⚠️ 2026-09-11：站点 CDN/WAF（阿里云 Tengine）拦 GitHub runner 海外 IP → **CI 恒 405、仅本地可达**；改由本地 skill local-ipo-sync（npm run ipo:local）抓取写入 data/local-ipo.json，远端经 selectLocalIpoItems() 补数，CI 侧跳过该源（selectIpoCrawlersForRun）。"
+  },
+  {
+    "id": "gd-sse-audit",
+    "role": "crawled-input",
+    "tier": "T1",
+    "name": "上交所审核项目动态(官方)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "ipo-audit",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "note": "上交所 IPO 审核项目动态（commonSoaQuery.do，currStatus 1~9 分批）官方源注册（IPO 体系重设计）。category/subcategory 仅采集元数据。"
+  },
+  {
+    "id": "gd-szse-audit",
+    "role": "crawled-input",
+    "tier": "T1",
+    "name": "深交所审核项目动态(官方)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "ipo-audit",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "note": "深交所 IPO 审核项目动态（projectrends/query，GET + 倒序早停）官方源注册（IPO 体系重设计）。category/subcategory 仅采集元数据。⚠️ 2026-09-11：www.szse.cn 域级拦 GitHub runner 海外 IP → **CI 恒 fetch failed、仅本地可达**（listed-check 的 B2 深交所腿同域同样挂）；改由本地 skill local-ipo-sync 抓取写入 data/local-ipo.json，远端经 selectLocalIpoItems() 补数。"
+  },
+  {
+    "id": "gd-bse-audit",
+    "role": "crawled-input",
+    "tier": "T1",
+    "name": "北交所审核项目动态(官方)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "ipo-audit",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "note": "北交所 IPO 审核项目动态（projectNewsController，C3VK cookie）官方源注册（IPO 体系重设计）。category/subcategory 仅采集元数据。"
+  },
+  {
+    "id": "gd-listed-check",
+    "role": "crawled-input",
+    "tier": "T1.5",
+    "name": "上市日期复核(候选复核)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "stage-listed",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "note": "上市日期候选复核产出（B1~B3 点查 LIST_DATE，注册生效候选→确认已上市，归 stage-listed）。不拉全量。"
+  },
+  {
+    "id": "hk-filing",
+    "role": "crawled-input",
+    "tier": "T1",
+    "name": "港交所新股递表(主板/GEM·全国参考)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "ipo",
+    "subcategory": "hkex",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "note": "港交所披露易「处理中申请」JSON 接口（主板 appactive_app_sehk_c / GEM appactive_app_gem_c），与官网综合索引 xlsx 同源。全国参考递表，归 ipo/hkex。"
+  },
+  {
+    "id": "hk-filing-gd",
+    "role": "crawled-input",
+    "tier": "T1",
+    "name": "港交所新股递表(广东企业赴港)",
+    "type": "api",
+    "url": "file://./data/crawled-articles.json",
+    "category": "gd-ipo",
+    "subcategory": "ipo-hk",
+    "enabled": false,
+    "locales": [
+      "zh"
+    ],
+    "note": "同上接口，按繁体申请人名识别广东企业（廣東/深圳/廣州/東莞等），归 gd-ipo 作为跨境融资商机。category/subcategory 仅采集元数据，渲染归属经内容判定。"
+  }
+]

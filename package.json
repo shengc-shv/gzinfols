@@ -1,0 +1,28 @@
+{
+  "name": "gzinfols",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "招行广州分行每日资信简报生成器 2.0 —— gzinfo 的独立升级版本（逻辑微服务 + 端口适配器架构）",
+  "scripts": {
+    "daily": "tsx scripts/daily.ts",
+    "dry-run": "tsx scripts/dry-run.ts",
+    "render": "tsx scripts/render.ts",
+    "architecture:check": "tsx scripts/architecture-check.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --import tsx --test \"tests/**/*.test.ts\""
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.96.0",
+    "cheerio": "^1.2.0",
+    "jsonrepair": "^3.15.0",
+    "openai": "^6.49.0",
+    "rss-parser": "^3.13.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "dotenv": "^17.4.2",
+    "tsx": "^4.23.12",
+    "typescript": "^5"
+  }
+}

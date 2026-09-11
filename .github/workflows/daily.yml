@@ -1,0 +1,63 @@
+name: daily
+
+on:
+  schedule:
+    # 每 15 分钟跑一次（覆盖交易时段）；实际是否出刊由窗口参数控制
+    - cron: "*/15 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: 架构门禁
+        run: npm run architecture:check
+      - name: 类型检查
+        run: npm run typecheck
+      - name: 单元测试
+        run: npm test
+      - name: 生成每日简报
+        run: npm run daily
+        env:
+          LLM_BACKEND: ${{ secrets.LLM_BACKEND || 'claude-cli' }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          REPORT_TZ: Asia/Shanghai
+          REPORT_LOCALE: zh
+      - name: 上传产物（Pages）
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - name: 存档 daily_reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-reports-${{ github.run_id }}
+          path: daily_reports
+          retention-days: 30
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
