@@ -364,6 +364,21 @@ export async function synthesizeAudio(date: string, script: string): Promise<Tts
 
     // —— Piper 兜底（仅在腾讯失败/未配置时走到这里；CI 未预装 Piper 则降级为无播放器）——
     if (!piperAvailable()) {
+      // 腾讯失败且本机无 Piper：写「待兜底」标记，供 workflow 安装 Piper 后
+      // 调 `npm run tts:fallback` 补合成（gzinfo 同款标记机制，见 scripts/tts-fallback.ts）。
+      if (TCE_SECRET_ID && TCE_SECRET_KEY) {
+        try {
+          const dir = path.resolve(process.cwd(), "daily_reports", date);
+          fs.mkdirSync(dir, { recursive: true });
+          fs.writeFileSync(
+            path.join(dir, "tts-fallback-needed.txt"),
+            `${new Date().toISOString()} 腾讯云合成失败且无 Piper，待兜底补合成\n`,
+            "utf-8",
+          );
+        } catch {
+          // 写标记失败不影响主流程（照常抛错降级为无播放器）
+        }
+      }
       throw new Error(
         TCE_SECRET_ID && TCE_SECRET_KEY
           ? "腾讯云合成失败且 CI 未安装 Piper（降级：本轮无音频，不阻断发布）"

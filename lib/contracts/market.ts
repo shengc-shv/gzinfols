@@ -42,3 +42,91 @@ export interface StockItem {
   /** 发布日期 YYYY-MM-DD（A股/港股=爬虫标注；美股=RSS pubDate 归一化） */
   publishedAt?: string;
 }
+
+/* ───────── 交易面板（trading）契约 ─────────
+ * 移植自 gzinfo lib/trading/*（2026-09-12，B6 批次）。
+ * 加密资产（加密分组 / 两类加密行情指标源）按硬性规定**永久剔除**，
+ * 故 AssetGroup 不含加密分组，也不引入任何加密相关类型。
+ */
+
+/** Yahoo Finance 日 K（ oldest first）。 */
+export interface OHLC {
+  date: Date;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+}
+
+/** Yahoo Finance 标的原始数据包。 */
+export interface TickerRawData {
+  symbol: string;
+  currency: string;
+  exchangeName: string;
+  regularMarketPrice: number;
+  fiftyTwoWeekHigh: number;
+  fiftyTwoWeekLow: number;
+  /** 最近约 1 年的日 OHLCV，oldest first。 */
+  candles: OHLC[];
+}
+
+/** 资产分组（注意：无 crypto —— 加密永久剔除）。 */
+export type AssetGroup =
+  | "us-equity" // 美股蓝筹 + ETF
+  | "china-equity" // 中概股 / 港股
+  | "commodity-fx" // 商品 + 外汇
+  | "macro"; // 宏观信号（恐慌指数 / 利率 / 美元指数）
+
+/** 监控标的（Yahoo symbol + 展示名 + 分组）。 */
+export interface TickerDef {
+  symbol: string;
+  displayName: string;
+  displayNameEn?: string;
+  group: AssetGroup;
+}
+
+export type SignalType =
+  | "golden-cross"
+  | "death-cross"
+  | "macd-bull-cross"
+  | "macd-bear-cross"
+  | "rsi-overbought"
+  | "rsi-oversold"
+  | "near-52w-high"
+  | "near-52w-low"
+  | "above-sma50-sma200"
+  | "below-sma50-sma200";
+
+export interface Signal {
+  type: SignalType;
+  /** 中文可读标签。 */
+  label: string;
+  /** 交叉类信号的发生天数。 */
+  daysAgo?: number;
+}
+
+export interface TickerAnalysis {
+  symbol: string;
+  displayName: string;
+  group: string;
+  currency: string;
+  exchangeName: string;
+  currentPrice: number;
+  pct1Day: number;
+  pct5Day: number;
+  /** 距 52 周高（负数=低于高点，如 -2.3 表示低 2.3%）。 */
+  pct52WeekHigh: number;
+  /** 距 52 周低（正数=高于低点）。 */
+  pct52WeekLow: number;
+  sma20: number | null;
+  sma50: number | null;
+  sma200: number | null;
+  rsi14: number | null;
+  macd: number | null;
+  macdSignal: number | null;
+  macdHistogram: number | null;
+  trend: "bullish" | "bearish" | "neutral";
+  rsiState: "overbought" | "oversold" | "normal";
+  signals: Signal[];
+}
