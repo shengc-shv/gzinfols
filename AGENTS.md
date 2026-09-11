@@ -2,7 +2,7 @@
 
 ## 项目是什么
 
-招行广州分行**每日资信简报生成器 2.0**：gzinfo 的独立升级版。每日从多源抓取资讯 →
+某股分行**每日资信简报生成器 2.0**：gzinfo 的独立升级版。每日从多源抓取资讯 →
 归一化 → 关键词漏斗 → AI 富集 → 组装定档 → 渲染单页 HTML / Markdown / 口播稿 → 发布，
 并维护 30 天滚动历史库。
 
@@ -32,6 +32,14 @@ sources.config.json / sources.keywords.json  # 源与关键词唯一真源
 - **时区只认北京时间**：全项目统一 `Asia/Shanghai`（常量 `REPORT_TZ`，见 `lib/utils/time.ts`），
   **不接受 env 覆盖、不回落系统时区**。任何日期键、窗口、交易日计算都必须走该常量，
   禁止 `process.env.REPORT_TZ`、`Intl` 无 `timeZone` 的隐式系统时区、`new Date()` 直接取日历日。
+- **加密板块零容忍（2026-09-12 用户拍板，永久）**：加密资产内容**不合规**，任何形态都不得出现——
+  不移植 `trading/coingecko`、`fear-greed`；契约不引入 `crypto_fear_greed`；渲染不做加密段。
+  内容侧双重拦截：`lib/services/enrich/validator.ts` 的 `BANNED_WORDS`（R6 违禁词）+ `prompts.ts` 的
+  PASS1 合规红线（涉虚拟货币一律 `keep=false`）。**两处防线不得削弱，新增加密变体词须同步补进 `BANNED_WORDS`**。
+  注：`sources.config.json` 里的「Token贷/词元贷」是银行信贷产品，与加密资产无关，属正常业务词。
+- **不得出现可定位到具体银行的信息（2026-09-12 用户明令）**：全项目（代码注释、文档、产出物标题、
+  README、package.json、记忆文件）禁止出现可反查具体银行主体的字样（行名全称 / 简称 / 英文缩写 / 内部项目代号），
+  一律改写为「某股分行」或「本行」。业务词表与代码标识符中的历史遗留另行登记，见交付报告待确认项。
 
 ## 三条业务红线（不可回退）
 

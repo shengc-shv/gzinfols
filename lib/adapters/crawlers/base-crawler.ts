@@ -1,5 +1,5 @@
 /**
- * 通用爬虫基类 - 专门为 gzcmbdf3 格式设计
+ * 通用爬虫基类 - 面向下游管线的统一条目格式
  * 每个子类只需实现 getUrls() 和 parseArticle() 两个方法。
  *
  * M3-A 移植说明：原 scripts/crawlers/base-crawler.mjs 的逐字移植。
@@ -190,9 +190,9 @@ export class BaseCrawler {
   }
 
   /**
-   * 转换格式供 gzcmbdf3 使用（IPO 源走此路径）
+   * 转换为下游管线统一格式（IPO 源走此路径）
    */
-  toGzcmbdf3Format() {
+  toCrawledFormat() {
     return this.results.map((item) => ({
       title: item.title || "无标题",
       url: item.url || "",

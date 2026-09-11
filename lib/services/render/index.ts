@@ -175,7 +175,7 @@ header .hero{font-size:20px;font-weight:600;margin-top:6px;}
 
 /** 渲染单文件 HTML 报告。 */
 export function renderHtml(report: DailyReport, opts: RenderOptions = {}): string {
-  const title = opts.title ?? `招行广州分行每日资信简报 · ${report.date}`;
+  const title = opts.title ?? `某股分行每日资信简报 · ${report.date}`;
   const tabsNav = SECTION_META.map(
     (s, i) =>
       `<button class="tab${i === 0 ? " active" : ""}" data-tab="${s.key}">${s.label}</button>`,
@@ -236,7 +236,7 @@ function audioBar(audio?: { src: string; duration: string; backend?: string }): 
 /** 渲染 Markdown 报告（便于归档 / 公众号 / 邮件）。 */
 export function renderMarkdown(report: DailyReport): string {
   const out: string[] = [];
-  out.push(`# 招行广州分行每日资信简报 · ${report.date}`);
+  out.push(`# 某股分行每日资信简报 · ${report.date}`);
   if (report.hero_line) out.push(`> ${report.hero_line}`);
   out.push("");
 

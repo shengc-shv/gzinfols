@@ -5,7 +5,7 @@
 
 ## 1. 项目是什么
 
-`gzinfols` 是 `gzinfo`（/Users/shengc/ccworkstaion/gzinfo，招行广州分行每日资信简报生成器）的 **2.0 独立重写版**：功能与 gzinfo 完全一致（业务规则/输入输出/边界/异常行为），但技术架构按「契约层(contracts) / 服务层(services) / 适配器层(adapters) / 编排层(pipeline+orchestrator)」的端口-适配器架构重构。
+`gzinfols` 是 `gzinfo`（/Users/shengc/ccworkstaion/gzinfo，某股分行每日资信简报生成器）的 **2.0 独立重写版**：功能与 gzinfo 完全一致（业务规则/输入输出/边界/异常行为），但技术架构按「契约层(contracts) / 服务层(services) / 适配器层(adapters) / 编排层(pipeline+orchestrator)」的端口-适配器架构重构。
 
 - 仓库：`/Users/shengc/ccworkstaion/gzinfo` = **移植基准（只读参考，功能一致性唯一对照源）**
 - 仓库：`/Users/shengc/ccworkstaion/gzinfols` = **工作仓库**（独立 git，远端 `shengc-shv/gzinfols`，main 已推送至 B4 收尾 commit）
@@ -17,7 +17,7 @@
 2. **D1**：2.0 优于 gzinfo 的改进项**保留**（LLM 批量化+并发池、架构门禁、DeepSeek CI 后端），最终交付报告中逐项说明解决了什么问题。
 3. **D2-D4**：feedback 点赞点踩、notify 微信推送、加密货币指标——**暂不处理、维持未移植待定**（用户此前已有移除/放弃意向，但未最终拍板）。
 4. **不移植项（已裁决）**：`lib/ai/assets.ts`（L2 账本，summary 回流后冗余）、`lib/ai/select-top.ts`（主链无消费）。
-5. 口播基准 = gzinfo（不是 gzcmbdf3）；腾讯 TTS 已移植完成。
+5. 口播基准 = gzinfo（不是旧版广州日报仓库）；腾讯 TTS 已移植完成。
 
 ## 3. 当前进度（B1-B5 已完成，B6 待做）
 

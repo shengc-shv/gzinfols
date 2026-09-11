@@ -7,6 +7,9 @@
 > B4 说明（用户拍板）：**按实测切分**——trading 交易面板/commentary/regen-trading 不在 gzinfo 主链（daily.ts 不产出 report.trading），
 > 顺延 B6 运维批次；加密模块（coingecko/fear-greed，92 行）按 D4 裁决不移植（契约不引入 crypto_fear_greed、B6 渲染不做加密）。
 > 主链股市链路（quote-api/stock-recap/anchor/news-analysis/stock-spoken + 两个 side-output + P5 健康度）已全部落地。
+> B6-进度（2026-09-12）：交易面板（trading/* + commentary + regen-trading）已移植并剔除加密；
+> 运维脚本 build-site / tts-fallback / tts-probe / seed-registry / regen-trading 已落地；
+> cleanup-history.yml / weekly-registry.yml 定时工作流已建；**渲染全量对齐（R1）尚未开始**。
 > B5 说明（发布链路移植）：publish-state 状态机（schedule/manual/manual-final/manual-test 四来源 + cron 跳过判据）
 > 落地 `lib/services/publish/publish-state.ts`；IO 归 `lib/adapters/persistence.ts`；`scripts/record-publish.ts` 先发后记；
 > `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs` 历史裁剪（近 7 天 + backup）；daily.yml 门控改读
@@ -63,7 +66,7 @@
 | S4 | ai/stock-news-analysis + trading/* | 股市新闻挑选 + Yahoo 行情/指标/信号/watchlist | ~1.4k | ❌（C10） | B4 |
 | S5 | pipeline/side-outputs/stock-news | 股市清单（三市场新闻条目） | ~150 | ❌ | B4 |
 | S6 | audio/stock-spoken | 股市口播确定性拼装（整体行情—结构分化—重点板块） | 423 | ❌（voice 已留挂钩） | B4 |
-| S7 | ai/trading-commentary | watchlist 信号解读（LLM） | 307 | ❌ | B4 |
+| S7 | ai/trading-commentary | watchlist 信号解读（LLM） | 307 | ✅ `services/market/commentary.ts`（剥离加密输入） | B6 |
 
 ### 2.4 历史 / 记忆 / 渲染 / 发布
 | # | gzinfo 模块 | 功能 | 规模 | 2.0 现状 | 批次 |
@@ -75,7 +78,7 @@
 | R2 | output/report-from-articles + paths | 由全量池重渲染/路径 | ~500 | ⚠️ 简版 | B6 |
 | R3 | pipeline/render-and-write | 唯一存储（daily_reports/<date>/ 全产物）+ sidecar + 全量池导出 | ~400 | ⚠️ publish 简版 | B6 |
 | P1 | publish-state.ts + scripts/record-publish-state | 发布来源记账（schedule/manual-final/test） | ~200 | ✅ `services/publish/publish-state.ts` + `scripts/record-publish.ts` + persistence 适配器 | B5 ✅ |
-| P2 | scripts/build-site.mjs | index.html + archive.html 站点聚合 | ~300 | ❌ | B6 |
+| P2 | scripts/build-site.mjs | index.html + archive.html 站点聚合 | ~300 | ✅ `scripts/build-site.mjs`（按 2.0 唯一存储适配） | B6 |
 | P3 | scripts/cleanup-history.mjs + workflow | 历史裁剪（近 N 天 + backup） | ~200 | ✅ `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs`（随 B5 提前落地） | B5 ✅ |
 | P4 | pipeline/bootstrap + context | 凭证校验/模式构建/tier 索引/aiAssets 装配 | ~500 | ⚠️ orchestrator 简版（缺凭证校验+aiAssets） | B2 |
 | P5 | 广东IPO健康度检查（daily.ts ⑦.5） | 0 条/滞后告警 | ~40 | ❌ | B3 |
@@ -90,8 +93,8 @@
 | O2 | regen-trading / regen-enrich / render / analyze-* / retag-* | 运维再生成脚本 | ❌（render 有） | B6 |
 | O3 | notify/* + notify.yml | 微信推送 | 🚫 用户已裁决放弃 | — |
 | O4 | feedback/* + render 反馈 UI | 点赞点踩 | 🚫 用户已裁决移除 | — |
-| O5 | trading/coingecko + fear-greed | 加密恐惧贪婪指数 | 🚫 用户红线（加密资产剔除）→ **待确认是否随股市段整体剔除** | B4 |
-| O6 | cleanup-history.yml / weekly-registry.yml | 定时维护工作流 | ❌ | B6 |
+| O5 | trading/coingecko + fear-greed | 加密恐惧贪婪指数 | 🚫 **永久剔除（2026-09-12 用户拍板）**：加密板块不合规，任何形式均不得出现——不移植、不渲染、不进契约；交易面板（trading/*）若日后移植，必须剥离加密段 | 已裁决 |
+| O6 | cleanup-history.yml / weekly-registry.yml | 定时维护工作流 | ✅ 已建（B6） | B6 |
 | O7 | deploy.mjs / run-daily.mjs / open-report.mjs | 本地调度/部署 | ❌（低优先） | B6 |
 
 ### 2.6 测试
@@ -124,7 +127,7 @@
 | D1 | 「AI 相关性回检」去留 | 2.0 自创（gzinfo 无此独立 pass，相关性由 pass1 标记+relevance-score 承担）。功能一致性要求下应**回退**，改由 B2 的 pass1 结构覆盖 | 回退对齐 gzinfo |
 | D2 | feedback 点赞点踩 | gzinfo 有；你此前拍板「B2 取消移除」 | 跳过不移植 |
 | D3 | notify 微信推送 | gzinfo 有 notify.yml + lib/notify | 跳过（你已裁决放弃） |
-| D4 | coingecko/fear-greed 加密指标 | gzinfo trading 段在用；你的红线是内容剔除加密资产 | 随 B4 一起**不移植**（若 gzinfo 股市卡实际引用该数据则移除该引用并记录行为差异） |
+| D4 | coingecko/fear-greed 加密指标 | gzinfo trading 段在用；用户红线：加密板块不合规 | ✅ **已裁决：永久剔除**。不移植、契约不引入 `crypto_fear_greed`、渲染不做加密段；内容侧由 `BANNED_WORDS` + PASS1 合规红线双重拦截 |
 | D5 | 执行方式 | 全部 6 批连续做完再一次核对 vs 每批完成即报告待确认 | 分批交付（B1/B3/B4 体量大，逐批可核对） |
 
 ## 5. 批次划分与验收口径

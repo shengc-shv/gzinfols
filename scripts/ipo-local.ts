@@ -6,7 +6,7 @@
  * 远端次日 cron 读取该文件与在线数据拼成完整全貌。
  *
  * 设计纪律：不自己实现任何过滤/归一去重逻辑，一律调用共享函数
- * （采集 run() → toGzcmbdf3Format() 与 fetchCrawledArticles() 逐步一致；
+ * （采集 run() → toCrawledFormat() 与 fetchCrawledArticles() 逐步一致；
  * 归一化 normalizeLocalIpoItems() 是本地写入与远端读取的同一份实现）。
  * 唯一差异是源集合（--sources），默认只跑 buildLocalOnlyIpoCrawlers()。
  *
@@ -103,13 +103,13 @@ function isoWithOffset(d: Date, tz = REPORT_TZ): string {
   return `${g("year")}-${g("month")}-${g("day")}T${g("hour")}:${g("minute")}:${g("second")}${suffix}`;
 }
 
-/** 与 fetchCrawledArticles() 中 IPO 批次完全相同的采集路径（run → toGzcmbdf3Format）。 */
+/** 与 fetchCrawledArticles() 中 IPO 批次完全相同的采集路径（run → toCrawledFormat）。 */
 async function crawlIpo(crawlers: BaseCrawler[]): Promise<CrawledArticle[]> {
   const out: CrawledArticle[] = [];
   for (const crawler of crawlers) {
     try {
       await crawler.run();
-      out.push(...(crawler.toGzcmbdf3Format() as CrawledArticle[]));
+      out.push(...(crawler.toCrawledFormat() as CrawledArticle[]));
     } catch (err) {
       console.error(`[ipo:local] [${crawler.name}] 爬虫异常: ${(err as Error).message}`);
     }

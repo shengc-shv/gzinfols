@@ -96,7 +96,7 @@ export async function fetchCrawledArticles(): Promise<CrawledBundle> {
   for (const crawler of ipoCrawlers) {
     try {
       await crawler.run();
-      ipo.push(...(crawler.toGzcmbdf3Format() as CrawledArticle[]));
+      ipo.push(...(crawler.toCrawledFormat() as CrawledArticle[]));
     } catch (err) {
       console.error(`[${crawler.name}] 爬虫异常:`, (err as Error).message);
     }
