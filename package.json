@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "private": true,
   "type": "module",
-  "description": "招行广州分行每日资信简报生成器 2.0 —— gzinfo 的独立升级版本（逻辑微服务 + 端口适配器架构）",
+  "description": "某股分行每日资信简报生成器 2.0 —— gzinfo 的独立升级版本（逻辑微服务 + 端口适配器架构）",
   "scripts": {
     "daily": "tsx scripts/daily.ts",
     "dry-run": "tsx scripts/dry-run.ts",
@@ -12,7 +12,12 @@
     "record-publish": "tsx scripts/record-publish.ts",
     "architecture:check": "tsx scripts/architecture-check.ts",
     "typecheck": "tsc --noEmit",
-    "test": "node --import tsx --test \"tests/**/*.test.ts\""
+    "test": "node --import tsx --test \"tests/**/*.test.ts\"",
+    "build-site": "node scripts/build-site.mjs",
+    "tts:fallback": "tsx scripts/tts-fallback.ts",
+    "tts:probe": "tsx scripts/tts-probe.ts",
+    "seed:registry": "node scripts/seed-guangdong-registry.mjs",
+    "regen:trading": "tsx scripts/regen-trading.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.96.0",
