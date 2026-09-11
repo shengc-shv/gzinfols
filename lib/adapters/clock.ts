@@ -4,13 +4,14 @@
  * 测试可注入固定时间的 Clock 实现；生产用本实现。
  */
 import type { Clock } from "../contracts/pipeline";
+import { REPORT_TZ } from "../utils/time";
 
 export class SystemClock implements Clock {
   now(): Date {
     return new Date();
   }
 
-  todayKey(tz: string = process.env.REPORT_TZ || "Asia/Shanghai"): string {
+  todayKey(tz: string = REPORT_TZ): string {
     const parts = new Intl.DateTimeFormat("en-CA", {
       timeZone: tz,
       year: "numeric",

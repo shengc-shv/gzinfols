@@ -9,7 +9,7 @@ import { SystemClock } from "../lib/adapters";
 
 async function main() {
   const clock = new SystemClock();
-  const date = process.env.REPORT_DATE || clock.todayKey(process.env.REPORT_TZ);
+  const date = process.env.REPORT_DATE || clock.todayKey();
   const { ctx, deps } = await bootstrap({ date, mode: { kind: "ai" } });
   const r = await runDryRun(ctx, deps);
   ctx.log.info(

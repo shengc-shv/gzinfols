@@ -16,6 +16,7 @@ import path from "node:path";
 import type { HistoryStore } from "../services/memory/history";
 import { reviveEventMemory, prepareEventMemory, MEMORY_RETAIN_DAYS } from "../services/memory/store";
 import { emptyMemory, type EventMemoryStore } from "../services/memory/event-memory";
+import { REPORT_TZ } from "../utils/time";
 import type { ExecutiveSummary } from "../services/enrich/executive-summary";
 import type { StockRecap, StockNewsItem } from "../contracts/report";
 import { emptyPublishState, type PublishState } from "../services/publish/publish-state";
@@ -148,7 +149,7 @@ export function saveEventMemory(
     const today =
       opts.today ??
       new Intl.DateTimeFormat("en-CA", {
-        timeZone: process.env.REPORT_TZ || "Asia/Shanghai",
+        timeZone: REPORT_TZ,
         year: "numeric",
         month: "2-digit",
         day: "2-digit",

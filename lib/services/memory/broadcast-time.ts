@@ -17,15 +17,16 @@
  * 依赖方向：本文件只 `import type` 自 event-memory（编译期），避免运行时循环依赖。
  */
 
+import { REPORT_TZ } from "../../utils/time";
 import type {
   BroadcastSample,
   EventMemoryStore,
   EventRecord,
 } from "./event-memory";
 
-/** 记忆时间戳所用时区（MEMORY_TZ 优先，其次 REPORT_TZ，兜底北京时间）。 */
+/** 记忆时间戳所用时区（全项目统一北京时间，不接受 env 覆盖）。 */
 export function memoryTimeZone(): string {
-  return process.env.MEMORY_TZ || process.env.REPORT_TZ || "Asia/Shanghai";
+  return REPORT_TZ;
 }
 
 /** 某时刻在指定时区的「墙上时间」各部分（自动处理夏令时）。 */

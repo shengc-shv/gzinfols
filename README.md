@@ -53,7 +53,7 @@ gzinfols/
 ├── scripts/              # 入口：daily / dry-run / render / architecture-check
 ├── tests/                # 架构门禁 + 单元测试
 ├── sources.config.json   # 数据源唯一真源（SOURCE OF TRUTH）
-├── .env.example          # REPORT_TZ / REPORT_LOCALE / LLM_BACKEND / *API_KEY
+├── .env.example          # REPORT_LOCALE / LLM_BACKEND / *API_KEY（时区固定 Asia/Shanghai）
 ├── AGENTS.md             # 给 AI 协作代理的操作知识
 └── .github/workflows/    # 自有 CI
 ```

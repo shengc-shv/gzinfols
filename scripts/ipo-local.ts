@@ -16,6 +16,7 @@
  *   npm run ipo:local -- --no-push     # 写盘但不提交推送
  *   npm run ipo:local -- --sources=all # 用全量 IPO 源跑（本地网络都能到）
  */
+import { REPORT_TZ } from "../lib/utils/time";
 import "./_env";
 import { spawnSync } from "node:child_process";
 import { buildIpoCrawlers, buildLocalOnlyIpoCrawlers } from "../lib/adapters/crawlers";
@@ -81,7 +82,7 @@ function parseArgs(argv: string[]): Args {
 }
 
 /** 本地时区的 ISO 8601（含偏移），让文件里的 fetchedAt 人类可读、机器可解析。 */
-function isoWithOffset(d: Date, tz = process.env.REPORT_TZ?.trim() || "Asia/Shanghai"): string {
+function isoWithOffset(d: Date, tz = REPORT_TZ): string {
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone: tz,
     year: "numeric",

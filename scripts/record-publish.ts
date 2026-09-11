@@ -15,7 +15,7 @@
  * 先发后记：gh-pages push 成功才记账，避免「记了没发」导致次日误判已发布。
  *
  * env：
- *   REPORT_TZ      可选 报告时区（默认 Asia/Shanghai，决定「今天」是哪一天）
+ *   时区固定 Asia/Shanghai（项目硬性规定，不可配置）
  *   SOURCE         必填 schedule | manual | manual-final | manual-test（发布来源）
  *   GITHUB_RUN_ID  可选 发布 run id（溯源，与 gh-pages commit message 同源）
  *
@@ -32,6 +32,7 @@ import {
   type PublishState,
 } from "../lib/services/publish/publish-state";
 import { formatBroadcastAt, memoryTimeZone } from "../lib/services/memory/broadcast-time";
+import { REPORT_TZ } from "../lib/utils/time";
 
 /** 保留最近 N 天（与 gzinfo 一致）。 */
 export const KEEP_DAYS = 7;
@@ -121,7 +122,7 @@ export function runRecordPublish(input: RecordPublishInput): PublishState | unde
 
 /** 从 env 取参数并记账（进程入口逻辑）。 */
 function main(): void {
-  const tz = process.env.REPORT_TZ || "Asia/Shanghai";
+  const tz = REPORT_TZ;
   const dateStr = reportDate(tz);
 
   const raw = process.env.SOURCE;

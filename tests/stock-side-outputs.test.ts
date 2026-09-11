@@ -104,7 +104,9 @@ function mkCtx(date = REPORT_DAY, mode: "ai" | "skip-ai" = "ai") {
     mode: mode === "ai" ? { kind: "ai" } : { kind: "skip-ai", summaryCache: new Map() },
     sources: [],
     log: new SilentLog(),
-    startTime: new Date(`${date}T06:30:00+08:00`),
+    // startTime 取「UTC 正午」：使其在 UTC 与 Asia/Shanghai 下日历日键都稳落在 date，
+    // 避免固定 date + 依赖系统时区的时刻组合在跨时区 CI（UTC）下窗口/日期键漂移。
+    startTime: new Date(`${date}T12:00:00Z`),
   });
 }
 

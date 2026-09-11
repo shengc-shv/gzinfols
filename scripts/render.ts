@@ -9,7 +9,7 @@ import type { DailyReport } from "../lib/contracts/report";
 
 async function main() {
   const clock = new SystemClock();
-  const date = process.env.REPORT_DATE || clock.todayKey(process.env.REPORT_TZ);
+  const date = process.env.REPORT_DATE || clock.todayKey();
   const fs = new NodeFsAdapter();
   const report = await fs.readJson<DailyReport>(`daily_reports/${date}/${date}.json`);
   if (!report) {

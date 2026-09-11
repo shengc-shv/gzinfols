@@ -21,6 +21,11 @@ import { MemFs, FakeLlm, SilentLog } from "./helpers";
 
 const REPORT_DAY = "2026-09-11"; // 周五
 const QUOTE_DAY = "2026-09-10";
+// ⚠️ 运行时刻必须取「UTC 正午」：使 UTC 与 Asia/Shanghai（及西半球时区）下
+// startTime 的日历日键都稳落在 REPORT_DAY，避免 UTC 下退化为前一天 →
+// select 的 pre-window（todayKey 取系统时区）误滤当日条目 → 口播各段全缺。
+// 与 tests/pipeline.e2e.test.ts 的固定时钟写法一致。
+const RUN_AT = new Date(`${REPORT_DAY}T12:00:00Z`);
 
 const RSS = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel><title>测试频道</title>
@@ -88,7 +93,7 @@ const crawlers: CrawlerRegistry = {
 };
 
 const clock: Clock = {
-  now: () => new Date(`${REPORT_DAY}T06:30:00+08:00`),
+  now: () => new Date(RUN_AT),
   todayKey: () => REPORT_DAY,
 };
 
@@ -115,7 +120,7 @@ test("runPipeline 主链：股市复盘三卡 + 股市消息清单真实产出�
       mode: { kind: "ai" },
       sources,
       log,
-      startTime: new Date(`${REPORT_DAY}T06:30:00+08:00`),
+      startTime: new Date(RUN_AT),
     });
 
     const out = await runPipeline(ctx, deps);
@@ -167,7 +172,7 @@ test("runPipeline 主链：无爬虫端口时股市旁路优雅降级（不阻�
       mode: { kind: "ai" },
       sources,
       log,
-      startTime: new Date(`${REPORT_DAY}T06:30:00+08:00`),
+      startTime: new Date(RUN_AT),
     });
 
     const out = await runPipeline(ctx, deps);

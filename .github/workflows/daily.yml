@@ -58,7 +58,6 @@ jobs:
       - name: Check publish state (today already in effect?)
         id: check
         env:
-          REPORT_TZ: ${{ vars.REPORT_TZ }}
           EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
@@ -70,7 +69,7 @@ jobs:
           fi
           # 注意：TZ 必须**双引号**展开（单引号不展开 → date 退回 UTC → 取到前一天，
           # 定时任务会永远跳过；2026-09-02 gzinfo 修复）。
-          TODAY=$(TZ="${REPORT_TZ:-Asia/Shanghai}" date +%Y-%m-%d)
+          TODAY=$(TZ="Asia/Shanghai" date +%Y-%m-%d)
           echo "Report date (tz=${REPORT_TZ:-Asia/Shanghai}): ${TODAY}"
           # 判据改为「当天是否已正式生效」：读 main 的 data/publish-state.json。
           # 只认 source=schedule 或 manual-final；manual-test / 裸 manual / 无记录 / 损坏 → 未发布。
@@ -154,7 +153,6 @@ jobs:
           LLM_BACKEND: deepseek
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
-          REPORT_TZ: ${{ vars.REPORT_TZ }}
           REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
           PUBLISH_RUN: ${{ (github.event_name == 'schedule' && needs.gate.outputs.should-run == 'true') || (github.event_name == 'workflow_dispatch' && inputs.publish == true) }}
           # —— 语音播报（腾讯云 TTS 主用）——

@@ -27,6 +27,12 @@ tests/            # node:test + MemFs/FakeHttp/FakeLlm 离线测试
 sources.config.json / sources.keywords.json  # 源与关键词唯一真源
 ```
 
+## 硬性规定
+
+- **时区只认北京时间**：全项目统一 `Asia/Shanghai`（常量 `REPORT_TZ`，见 `lib/utils/time.ts`），
+  **不接受 env 覆盖、不回落系统时区**。任何日期键、窗口、交易日计算都必须走该常量，
+  禁止 `process.env.REPORT_TZ`、`Intl` 无 `timeZone` 的隐式系统时区、`new Date()` 直接取日历日。
+
 ## 三条业务红线（不可回退）
 
 1. **时间真实性**：无真实 `publishedAt` 一律丢弃。normalize（C2）是唯一裁决点，
@@ -41,7 +47,7 @@ sources.config.json / sources.keywords.json  # 源与关键词唯一真源
 
 | 命令 | 作用 |
 |---|---|
-| `npm run daily` | 完整管线：采集→…→发布（env：REPORT_TZ / REPORT_DATE / SKIP_AI=1 / LLM_BACKEND） |
+| `npm run daily` | 完整管线：采集→…→发布（env：REPORT_DATE / SKIP_AI=1 / LLM_BACKEND） |
 | `npm run dry-run` | 仅采集+归一化+漏斗，不调 LLM、不落盘 |
 | `npm run render` | 用已落盘的报告 JSON 重渲染产物 |
 | `npm run ipo:local` | 本地抓两个 WAF 拦源的 IPO 数据并提交 `data/local-ipo.json`（`--dry-run`/`--no-push`） |

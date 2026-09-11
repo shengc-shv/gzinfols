@@ -11,7 +11,7 @@ import type { RunMode } from "../lib/contracts/pipeline";
 
 async function main() {
   const clock = new SystemClock();
-  const date = process.env.REPORT_DATE || clock.todayKey(process.env.REPORT_TZ);
+  const date = process.env.REPORT_DATE || clock.todayKey();
   // SKIP_AI 模式（gzinfo 语义）：summaryCache=url→历史摘要（PASS2 确定性复用）；
   // relevantUrls=历史库已上榜条目（PASS1 只保留其中条目，防新抓垃圾混入板块）。
   const mode: RunMode = await (async () => {

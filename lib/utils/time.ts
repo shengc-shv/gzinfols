@@ -9,9 +9,18 @@
  *   URL 日期是真实发布时间的载体，不是抓取时间——不违反红线 #1）。
  */
 
-/** 报告时区（懒读取，避免模块加载期固化早于 dotenv 的值）。 */
-export function getReportTz(): string | undefined {
-  return process.env.REPORT_TZ?.trim() || undefined;
+/**
+ * 全项目唯一时区（**硬性规定**）：北京时间 Asia/Shanghai。
+ *
+ * 为什么是常量而不是可配置项：项目只认北京时间，任何 env 覆盖或系统时区回落
+ * 都会让「今天是哪一天」在不同机器/CI runner（默认 UTC）上得出不同结果——
+ * 历史窗口、跨天判重、交易日计算全部会错日。故**不接受配置**，单一真源。
+ */
+export const REPORT_TZ = "Asia/Shanghai";
+
+/** 报告时区（保留函数形态以兼容既有调用点）。 */
+export function getReportTz(): string {
+  return REPORT_TZ;
 }
 
 /** 日期 → 报告时区下的 YYYY-MM-DD 键。 */
