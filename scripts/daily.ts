@@ -6,18 +6,12 @@ import "./_env";
 import { bootstrap } from "../lib/orchestrator";
 import { runPipeline } from "../lib/pipeline";
 import { SystemClock } from "../lib/adapters";
+import type { RunMode } from "../lib/contracts/pipeline";
 
 async function main() {
   const clock = new SystemClock();
   const date = process.env.REPORT_DATE || clock.todayKey(process.env.REPORT_TZ);
-  const mode =
-    process.env.SKIP_AI === "1"
-      ? ({
-          kind: "skip-ai" as const,
-          summaryCache: new Map<string, string>(),
-          relevantUrls: new Set<string>(),
-        })
-      : ({ kind: "ai" as const });
+  const mode: RunMode = process.env.SKIP_AI === "1" ? { kind: "skip-ai" } : { kind: "ai" };
 
   const { ctx, deps } = await bootstrap({ date, mode });
   const out = await runPipeline(ctx, deps);

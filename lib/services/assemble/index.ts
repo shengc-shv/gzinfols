@@ -3,10 +3,11 @@
  *
  * 职责：
  *  1. 每个板块内按「重要性 → 源等级 → 时效性」排序并赋 rank。
- *  2. 控源：单板块内单源上限，避免一个源刷屏；单板块总上限。
- *  3. 必读兜底：skip-ai 模式下 enrich 未产出必读时，用各板块头部条目回填。
+ *  2. 控源：单板块内单源上限，避免一个源刷屏；单板块总上限（配额读 ctx.config）。
+ *  3. 必读兜底：enrich 未产出必读（skip-ai 或 AI 失败/校验过滤后为空）时，用各板块头部条目回填。
  *
  * 不读 sourceId/category 决定归属（归属已在 C4 确定性完成），只做排序与配额。
+ * 板块标签/等级权重一律消费契约层常量（SECTION_LABELS / SOURCE_TIER_ORDER），不重复定义。
  */
 import type {
   AssembledResult,
@@ -16,84 +17,59 @@ import type {
   DailyReport,
   ReportItem,
   ReportMustRead,
-  ReportSectionKey,
 } from "../../contracts/report";
-import type { SourceTier } from "../../contracts/source";
+import { SECTION_LABELS, SECTION_ORDER } from "../../contracts/report";
+import { SOURCE_TIER_ORDER, type SourceTier } from "../../contracts/source";
 
-const TIER_WEIGHT: Record<SourceTier, number> = { T1: 3, "T1.5": 2, T2: 1 };
-
-/** 板块顺序即 tab 顺序；兜底必读按此优先级抽取。 */
-const SECTION_PRIORITY: ReportSectionKey[] = [
-  "gz_local",
-  "biz_insight",
-  "policy_market",
-  "ipo",
-  "tech",
-];
-
-const MAX_PER_SECTION = Number(process.env.MAX_PER_SECTION ?? 18);
-const MAX_PER_SOURCE_PER_SECTION = Number(process.env.MAX_PER_SOURCE_PER_SECTION ?? 4);
 const MAX_MUST_READ = 3;
 
 function compareItems(a: ReportItem, b: ReportItem): number {
   if (a.importance !== b.importance) return b.importance - a.importance;
-  const tw = (t?: SourceTier) => (t ? TIER_WEIGHT[t] : 1);
+  const tw = (t?: SourceTier) => (t ? SOURCE_TIER_ORDER[t] : 1);
   if (tw(a.tier) !== tw(b.tier)) return tw(b.tier) - tw(a.tier);
   return a.title_cn.localeCompare(b.title_cn);
 }
 
-/** 单板块排序 + 配额（板块内单源上限 + 总上限）。 */
-function rankSection(items: ReportItem[]): ReportItem[] {
+/** 单板块排序 + 配额（板块内单源上限 + 总上限，均来自 ctx.config）。 */
+function rankSection(items: ReportItem[], ctx: PipelineContext): ReportItem[] {
   const sorted = [...items].sort(compareItems);
   const perSource = new Map<string, number>();
   const out: ReportItem[] = [];
   for (const it of sorted) {
-    if (out.length >= MAX_PER_SECTION) break;
+    if (out.length >= ctx.config.maxPerSection) break;
     const used = perSource.get(it.source) ?? 0;
-    if (used >= MAX_PER_SOURCE_PER_SECTION) continue;
+    if (used >= ctx.config.maxPerSourcePerSection) continue;
     perSource.set(it.source, used + 1);
     out.push({ ...it, rank: out.length + 1 });
   }
   return out;
 }
 
-/** skip-ai 兜底必读：每板块取头部一条，最多 MAX_MUST_READ。 */
+/** 必读兜底：must_read 为空时，按板块顺序取各板块头部一条，最多 MAX_MUST_READ。 */
 function backfillMustRead(report: DailyReport): ReportMustRead[] {
   if (report.must_read && report.must_read.length > 0) return report.must_read;
   const out: ReportMustRead[] = [];
-  for (const key of SECTION_PRIORITY) {
+  for (const key of SECTION_ORDER) {
     if (out.length >= MAX_MUST_READ) break;
     const top = report.sections[key]?.[0];
     if (!top) continue;
     out.push({
       url: top.url,
       title: top.title_cn,
-      why: `本板块最高优先级（${sectionLabel(key)}）：${top.summary.slice(0, 40)}`,
+      why: `本板块最高优先级（${SECTION_LABELS[key]}）：${top.summary.slice(0, 40)}`,
     });
   }
   return out;
 }
 
-function sectionLabel(key: ReportSectionKey): string {
-  return (
-    {
-      gz_local: "广州本地",
-      biz_insight: "业务启示",
-      policy_market: "政策与市场",
-      tech: "科技前沿",
-      ipo: "IPO 动态",
-    } as Record<ReportSectionKey, string>
-  )[key];
-}
-
 /** 组装入口：排序定档 → 必读兜底 → 收口。 */
 export function assemble(report: DailyReport, _ctx: PipelineContext): AssembledResult {
   const sections = {
-    gz_local: rankSection(report.sections.gz_local),
-    biz_insight: rankSection(report.sections.biz_insight),
-    policy_market: rankSection(report.sections.policy_market),
-    tech: rankSection(report.sections.tech),
-    ipo: rankSection(report.sections.ipo),
+    gz_local: rankSection(report.sections.gz_local, _ctx),
+    biz_insight: rankSection(report.sections.biz_insight, _ctx),
+    policy_market: rankSection(report.sections.policy_market, _ctx),
+    tech: rankSection(report.sections.tech, _ctx),
+    ipo: rankSection(report.sections.ipo, _ctx),
   };
 
   const total = Object.values(sections).reduce((n, arr) => n + arr.length, 0);

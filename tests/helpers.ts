@@ -53,19 +53,36 @@ export class FakeHttp implements HttpClient {
   }
 }
 
+/**
+ * 假 LLM：按 system 关键词分流三类调用（顺序即优先级）：
+ *  1. 相关性回检（system 含「相关性」）→ 从 prompt 提取 url，全部判 relevant=true；
+ *  2. 批量富集（system 含「简报编辑」）→ 解析批内序号，返回逐条改写 JSON 数组；
+ *  3. 报告级调用 → 返回 hero/insights/must_read/risk（must_read.url 用 e2e 真实条目 url）。
+ */
 export class FakeLlm implements LlmPort {
+  /** 调用次数（供观测断言）。 */
+  calls = 0;
+
   async complete(opts: {
     system?: string;
     prompt: string;
     expectJson?: boolean;
   }): Promise<string> {
-    if (opts.system?.includes("简报编辑")) {
-      return JSON.stringify({
+    this.calls++;
+    const sys = opts.system ?? "";
+    if (sys.includes("相关性")) {
+      const urls = [...opts.prompt.matchAll(/https?:\/\/\S+/g)].map((m) => m[0]);
+      return JSON.stringify(urls.map((u) => ({ url: u, relevant: true })));
+    }
+    if (sys.includes("简报编辑")) {
+      const items = [...opts.prompt.matchAll(/(\d+)\. 标题：/g)].map((m) => ({
+        i: Number(m[1]),
         title_cn: "AI 大模型驱动银行金融科技升级",
         summary: "某行发布 AI 中台，理财与风控效率显著提升。",
         tags: ["AI", "金融科技"],
         importance: 3,
-      });
+      }));
+      return JSON.stringify(items);
     }
     return JSON.stringify({
       hero_line: "今日科技主线：AI 重塑银行中后台。",

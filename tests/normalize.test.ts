@@ -28,6 +28,7 @@ test("红线#1：有发布时间的条目转入 NormalizedArticle 且 publishedA
 test("normalize 批量：统计丢弃数且透传 source 展示名", () => {
   const ctx = {
     sources: [{ id: "s", name: "源S" }],
+    tierBySource: new Map(),
     log: new SilentLog(),
   } as unknown as Parameters<typeof normalize>[1];
   const { articles, dropped } = normalize(

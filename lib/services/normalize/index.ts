@@ -24,7 +24,11 @@ export function normalizeOne(raw: RawArticle): NormalizedArticle | null {
   };
 }
 
-/** 批量归一化：丢弃无发布时间条目，并透传 source 展示名。 */
+/**
+ * 批量归一化：丢弃无发布时间条目，补 tier（ctx.tierBySource 兜底，C1 采集层不再加工），
+ * 并透传 source 展示名。C1 → C2 的职责收敛点：source 名映射 / tier 兜底 / excerpt 兜底 /
+ * isIpo 推导全部在此一次性完成。
+ */
 export function normalize(
   articles: RawArticle[],
   ctx: PipelineContext,
@@ -33,7 +37,12 @@ export function normalize(
   const out: ArticleInput[] = [];
   let dropped = 0;
   for (const a of articles) {
-    const n = normalizeOne(a);
+    // tier 兜底：采集层缺省时用 ctx.tierBySource（sources.config.json 唯一真源）
+    const raw: RawArticle =
+      a.tier === undefined && ctx.tierBySource.has(a.sourceId)
+        ? { ...a, tier: ctx.tierBySource.get(a.sourceId) }
+        : a;
+    const n = normalizeOne(raw);
     if (!n) {
       dropped++;
       continue;

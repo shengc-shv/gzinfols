@@ -13,6 +13,24 @@ export type ReportSectionKey =
   | "tech"
   | "ipo";
 
+/** 板块顺序即 tab 顺序（渲染 tab / 口播 / 兜底必读统一消费此常量，禁止各处重复定义）。 */
+export const SECTION_ORDER: ReportSectionKey[] = [
+  "gz_local",
+  "biz_insight",
+  "policy_market",
+  "tech",
+  "ipo",
+];
+
+/** 板块中文标签（契约层单一真源）。 */
+export const SECTION_LABELS: Record<ReportSectionKey, string> = {
+  gz_local: "广州本地",
+  biz_insight: "业务启示",
+  policy_market: "政策与市场",
+  tech: "科技前沿",
+  ipo: "IPO 动态",
+};
+
 /** 业务红线 #2/#3 的落地：板块归属、客户群、风险全部由内容判定产出。 */
 
 export interface ReportItem {
@@ -21,8 +39,10 @@ export interface ReportItem {
   title_orig?: string;
   source: string;
   source_type: "official" | "media";
-  /** MM/DD。 */
+  /** MM/DD（展示格式）。 */
   date: string;
+  /** 完整 ISO 发布时间（enrich 期填充；展示层继续用 MM/DD）。 */
+  published_at?: string;
   /** ≤90 字，结构 = 发生了什么 + 关键数字 + 所以呢。 */
   summary: string;
   /** 3=今日必知 / 2=默认 / 1=折叠。 */

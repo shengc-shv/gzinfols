@@ -3,6 +3,7 @@
  *
  * 红线 #2（无状态源）：漏斗只看标题/正文内容，不读 sourceId/category 决定去留
  * （参考区豁免是「展示窗口」判断，非地域/相关性过滤）。
+ * 时间与配置经 ctx 注入（startTime / config.windowDays），服务层不直读 process.env。
  */
 import type { ArticleInput } from "../../contracts/article";
 import type { FilterResult, PipelineContext, SelectResult } from "../../contracts/pipeline";
@@ -13,10 +14,9 @@ export interface SelectDeps {
   fs: FileStore;
 }
 
-function withinWindow(publishedAt: Date, windowDays: number, ctx: PipelineContext): boolean {
-  const now = ctx ? Date.now() : Date.now();
-  const diffDays = (now - publishedAt.getTime()) / 86_400_000;
-  return diffDays <= windowDays + 1; // 含边界
+function withinWindow(publishedAt: Date, ctx: PipelineContext): boolean {
+  const diffDays = (ctx.startTime.getTime() - publishedAt.getTime()) / 86_400_000;
+  return diffDays <= ctx.config.windowDays + 1; // 含边界
 }
 
 /** 确定性价值评分（替代 gzinfo ai/relevance-score）：tier 权重 + 商机/风险命中 + 地域。 */
@@ -49,8 +49,7 @@ export async function select(
     return fr.pass;
   });
 
-  const windowDays = Number(process.env.FETCH_WINDOW_DAYS || 2);
-  const windowed = passed.filter((a) => withinWindow(a.publishedAt, windowDays, ctx));
+  const windowed = passed.filter((a) => withinWindow(a.publishedAt, ctx));
 
   // 价值取前：按 scoreValue 降序，保留 Top N（每源/每板块上限交由 assemble 阶段控）
   const ranked = windowed

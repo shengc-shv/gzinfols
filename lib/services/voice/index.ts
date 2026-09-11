@@ -4,15 +4,8 @@
  * 仅负责把 DailyReport 拼成一段可直接念的文稿；真正的 TTS 合成（若启用）
  * 由部署侧调用，不在核心管线内（去掉非必要的外部依赖与网络耦合）。
  */
-import type { DailyReport, ReportSectionKey } from "../../contracts/report";
-
-const SECTION_LABEL: Record<ReportSectionKey, string> = {
-  gz_local: "广州本地",
-  biz_insight: "业务启示",
-  policy_market: "政策与市场",
-  tech: "科技前沿",
-  ipo: "IPO 动态",
-};
+import type { DailyReport } from "../../contracts/report";
+import { SECTION_LABELS, SECTION_ORDER } from "../../contracts/report";
 
 /** 生成口播稿文本。 */
 export function buildSpeechScript(report: DailyReport): string {
@@ -28,10 +21,10 @@ export function buildSpeechScript(report: DailyReport): string {
     for (const ins of report.insights)
       lines.push(`洞察：${ins.topic}。影响，${ins.impact}。建议，${ins.action}。`);
   }
-  for (const key of Object.keys(SECTION_LABEL) as ReportSectionKey[]) {
+  for (const key of SECTION_ORDER) {
     const items = report.sections[key];
     if (!items?.length) continue;
-    lines.push(`${SECTION_LABEL[key]}。`);
+    lines.push(`${SECTION_LABELS[key]}。`);
     for (const it of items.slice(0, 5)) lines.push(`${it.title_cn}。${it.summary}`);
   }
   if (report.risk) lines.push(`风险提示：${report.risk.topic}。${report.risk.action}`);

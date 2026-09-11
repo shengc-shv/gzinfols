@@ -40,9 +40,11 @@ export class LlmAdapter implements LlmPort {
         return this.viaAnthropic(req);
       case "openai":
         return this.viaOpenAi(req);
+      case "deepseek":
+        return this.viaDeepSeek(req);
       default:
         throw new Error(
-          `LLM backend "${this.backend}" 未实现，请设 LLM_BACKEND=claude-cli|anthropic|openai`,
+          `LLM backend "${this.backend}" 未实现，请设 LLM_BACKEND=claude-cli|anthropic|openai|deepseek`,
         );
     }
   }
@@ -78,6 +80,25 @@ export class LlmAdapter implements LlmPort {
     const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const chat = await client.chat.completions.create({
       model: process.env.OPENAI_MODEL || "gpt-4o-mini",
+      temperature: req.temperature ?? 0.2,
+      max_tokens: req.maxTokens ?? 4096,
+      messages: [
+        ...(req.system ? [{ role: "system" as const, content: req.system }] : []),
+        { role: "user", content: req.prompt },
+      ],
+    });
+    return chat.choices[0]?.message?.content ?? "";
+  }
+
+  /** DeepSeek 后端（CI 默认，openai 兼容协议；动态 import 与 viaOpenAi 同风格）。 */
+  private async viaDeepSeek(req: LlmRequest): Promise<string> {
+    const { default: OpenAI } = await import("openai");
+    const client = new OpenAI({
+      baseURL: process.env.DEEPSEEK_BASE_URL || "https://api.deepseek.com/v1",
+      apiKey: process.env.DEEPSEEK_API_KEY,
+    });
+    const chat = await client.chat.completions.create({
+      model: process.env.DEEPSEEK_MODEL || "deepseek-chat",
       temperature: req.temperature ?? 0.2,
       max_tokens: req.maxTokens ?? 4096,
       messages: [

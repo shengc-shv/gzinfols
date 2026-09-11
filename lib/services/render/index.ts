@@ -15,6 +15,7 @@ import type {
   ReportSectionKey,
   RiskItem,
 } from "../../contracts/report";
+import { SECTION_LABELS, SECTION_ORDER } from "../../contracts/report";
 import type { SourceTier } from "../../contracts/source";
 
 export interface RenderOptions {
@@ -23,13 +24,10 @@ export interface RenderOptions {
   siteRoot?: string;
 }
 
-const SECTION_META: Array<{ key: ReportSectionKey; label: string }> = [
-  { key: "gz_local", label: "广州本地" },
-  { key: "biz_insight", label: "业务启示" },
-  { key: "policy_market", label: "政策与市场" },
-  { key: "tech", label: "科技前沿" },
-  { key: "ipo", label: "IPO 动态" },
-];
+/** tab 顺序与标签由契约层常量派生（单一真源，不重复定义）。 */
+const SECTION_META: Array<{ key: ReportSectionKey; label: string }> = SECTION_ORDER.map(
+  (key) => ({ key, label: SECTION_LABELS[key] }),
+);
 
 function esc(s: unknown): string {
   return String(s ?? "")

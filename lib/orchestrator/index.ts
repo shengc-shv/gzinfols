@@ -10,6 +10,7 @@ import type { SourceDef, SourceTier } from "../contracts/source";
 import type {
   FileStore,
   Logger,
+  PipelineConfig,
   PipelineContext,
   PipelineDeps,
   RunMode,
@@ -29,21 +30,38 @@ function buildTierMap(sources: SourceDef[]): Map<string, SourceTier> {
   return new Map(sources.map((s) => [s.id, s.tier ?? "T2"]));
 }
 
+/** 默认运行配置：组合根从环境变量读取（服务层不直读 env）。 */
+function defaultConfig(): PipelineConfig {
+  return {
+    windowDays: Number(process.env.FETCH_WINDOW_DAYS || 2),
+    maxPerSection: Number(process.env.MAX_PER_SECTION || 18),
+    maxPerSourcePerSection: Number(process.env.MAX_PER_SOURCE_PER_SECTION || 4),
+  };
+}
+
 export interface ContextOpts {
   date: string;
   mode: RunMode;
   sources: SourceDef[];
   log?: Logger;
+  /** 覆盖默认运行配置（窗口/配额；测试注入用）。 */
+  config?: Partial<PipelineConfig>;
+  /** 覆盖运行起始时间（测试注入固定时钟用）。 */
+  startTime?: Date;
+  /** 覆盖初始 stats 计数（测试注入用）。 */
+  stats?: Record<string, number>;
 }
 
 /** 构造跨阶段共享上下文。 */
 export function createContext(opts: ContextOpts): PipelineContext {
   return {
-    startTime: new Date(),
+    startTime: opts.startTime ?? new Date(),
     date: opts.date,
     mode: opts.mode,
     sources: opts.sources,
     tierBySource: buildTierMap(opts.sources),
+    config: { ...defaultConfig(), ...opts.config },
+    stats: { ...opts.stats },
     errors: [],
     log: opts.log ?? new ConsoleLogger(),
   };

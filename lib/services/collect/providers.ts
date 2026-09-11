@@ -6,18 +6,9 @@
  */
 import Parser from "rss-parser";
 import * as cheerio from "cheerio";
-import type { CrawledArticle, RawArticle } from "../../contracts/article";
+import type { RawArticle } from "../../contracts/article";
 import type { SourceDef } from "../../contracts/source";
 import type { HttpClient } from "../../contracts/pipeline";
-
-export interface CrawlerRegistry {
-  /** 返回爬虫产物（IPO / 广州商机 / 昨日股市）。无爬虫源时返回空。 */
-  fetchCrawledArticles(): Promise<{
-    ipo: CrawledArticle[];
-    gz: CrawledArticle[];
-    stocks: CrawledArticle[];
-  }>;
-}
 
 /** RSS 源：标准 RSS/Atom 解析。 */
 export async function fetchRss(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {

@@ -62,14 +62,18 @@ export interface Logger {
   error(stage: string, msg: string, meta?: Record<string, unknown>): void;
 }
 
-/** 运行模式：AI 正常 / 跳过 AI（复用缓存）。 */
-export type RunMode =
-  | { kind: "ai" }
-  | {
-      kind: "skip-ai";
-      summaryCache: Map<string, string>;
-      relevantUrls: Set<string>;
-    };
+/** 运行模式：AI 正常 / 跳过 AI（skip-ai 用原文标题/摘要直接成稿，不调用任何 LLM）。 */
+export type RunMode = { kind: "ai" } | { kind: "skip-ai" };
+
+/** 运行配置（由组合根从环境变量注入，服务层禁止直读 process.env）。 */
+export interface PipelineConfig {
+  /** 采集窗口（天）：仅取该窗口内发布的条目。 */
+  windowDays: number;
+  /** 单板块展示条数上限。 */
+  maxPerSection: number;
+  /** 单板块内单源条数上限。 */
+  maxPerSourcePerSection: number;
+}
 
 /** 管道运行上下文（跨阶段共享的只读环境）。 */
 export interface PipelineContext {
@@ -78,6 +82,10 @@ export interface PipelineContext {
   mode: RunMode;
   sources: SourceDef[];
   tierBySource: Map<string, SourceTier>;
+  /** 运行配置（窗口 / 配额），由组合根注入。 */
+  config: PipelineConfig;
+  /** 阶段观测计数：llmCalls / llmFailures / recheckDropped 等，管线末尾汇总打日志。 */
+  stats: Record<string, number>;
   /** 错误聚合：每阶段 push 一条，末尾统一汇总。 */
   errors: Array<{ stage: string; source?: string; message: string; ts?: string }>;
   log: Logger;
@@ -89,6 +97,18 @@ export interface PipelineDeps {
   clock: Clock;
   llm: LlmPort;
   http: HttpClient;
+  /** 可选爬虫注册表（IPO 六源 + 广州商机三源接入通道；缺省不装配）。 */
+  crawlers?: CrawlerRegistry;
+}
+
+/** 爬虫注册表端口（TS 爬虫产物接入通道；契约层只定义形状，实现由组合根装配）。 */
+export interface CrawlerRegistry {
+  /** 返回爬虫产物（IPO / 广州商机 / 昨日股市）。无爬虫源时返回空。 */
+  fetchCrawledArticles(): Promise<{
+    ipo: CrawledArticle[];
+    gz: CrawledArticle[];
+    stocks: CrawledArticle[];
+  }>;
 }
 
 /** 采集阶段产物。C1 只产出 RawArticle（publishedAt 可能缺失），红线 #1 由 C2 裁决。 */
