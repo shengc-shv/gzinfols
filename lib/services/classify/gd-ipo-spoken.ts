@@ -159,11 +159,18 @@ export function buildGdIpoSpoken(
 
 /**
  * IPO 阶段 → 商机价值权重（任务六·广东IPO商机优先排序）：
- * 辅导备案/Pre-IPO（最佳商机）> 注册生效/过会 > 在审/受理 > 已上市（已兑现，商机偏后）。
+ * 辅导备案/Pre-IPO（最佳商机）> 辅导完成/已验收（临近申报，授信落地窗口）> 注册生效/过会 >
+ * 在审/受理 > 已上市（已兑现，商机偏后）。
  * render 横滑卡与 audio 口播共用此序，确保「展示卡片」与「口播」完全一致。
+ *
+ * 2026-09-11 新增 `stage-coach-done`（辅导完成·已验收）。**必须与
+ * `gd-ipo.IPO_STAGE_ORDER` 同序**（gzinfo 明确设计约束）：本表降序 = 展示顺序。
+ * 整表平移后插入新键——既有条目相对次序不变。gzinfo 本次遗漏本表，新阶段无键→比较产生
+ * `NaN` → 商机排序未定义，故 2.0 补齐。
  */
 export const BIZ_VALUE_RANK: Record<string, number> = {
-  "stage-tutoring": 4,
+  "stage-tutoring": 5,
+  "stage-coach-done": 4,
   "stage-registered": 3,
   "stage-reviewing": 2,
   "stage-listed": 1,

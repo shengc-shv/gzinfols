@@ -140,11 +140,16 @@ export function classifyGdIpo(
  * 上市阶段推断（2026-08-21 任务二）：把广东 IPO 企业按「上市进度」归栏，
  * 对齐用户"看最近有哪些 IPO 企业（已上市）/ 最近有哪些准备 IPO 的企业（拟上市）"需求。
  *
- * 四阶段（展示顺序即进度由后往前）：
+ * 五阶段（展示顺序即进度由后往前）：
  *  - stage-listed     已上市·新股（打新/员工持股/股权激励理财商机）
  *  - stage-registered 注册生效·过会（即将发行，募资入账机构合作商机）
  *  - stage-reviewing  在审·已受理（Pre-IPO 授信/投贷联动储备商机）
+ *  - stage-coach-done 辅导完成·已验收（临近申报：授信落地窗口 / 股权激励托管）
  *  - stage-tutoring   辅导备案·Pre-IPO（最佳商机：Pre-IPO 授信/投贷联动/代发工资/高管私行/员工持股托管）
+ *
+ * 2026-09-11 新增 `stage-coach-done`：证监会辅导库列4「辅导状态」实测含「辅导验收 /
+ * 辅导工作完成」，与「辅导备案」是**两个进程节点**（刚起步 vs 已完成，距上市差约 12 个月），
+ * 此前 csrcfd 源一律硬编码 stage-tutoring 把二者抹平 → 商机分级失真。
  *
  * 判定优先级：未上市信号（注册生效 > 过会/核准 > 在审/受理 > 辅导备案）先于「已上市」，
  * 避免"注册生效 即将上市"这类标题被误判为已上市；无阶段词兜底归 Pre-IPO（预备上市）。
@@ -153,6 +158,7 @@ export type GdStage =
   | "stage-listed"
   | "stage-registered"
   | "stage-reviewing"
+  | "stage-coach-done"
   | "stage-tutoring";
 
 /**
@@ -167,6 +173,7 @@ export const GD_STAGES: ReadonlySet<string> = new Set<GdStage>([
   "stage-listed",
   "stage-registered",
   "stage-reviewing",
+  "stage-coach-done",
   "stage-tutoring",
 ]);
 
@@ -174,6 +181,32 @@ export const GD_STAGES: ReadonlySet<string> = new Set<GdStage>([
 export function isGdStage(v: unknown): v is GdStage {
   return typeof v === "string" && GD_STAGES.has(v);
 }
+
+/**
+ * 广东 IPO 阶段展示顺序 —— 与 `BIZ_VALUE_RANK`（商机价值优先）**同序**：
+ * 辅导备案（Pre-IPO，最佳商机）→ 辅导完成（临近申报）→ 注册发行（募资在即）→ 在审 → 已上市（已兑现）。
+ * 刻意与顶部横滑卡保持同一顺序，避免同一份数据在页面里出现两种读法。
+ *
+ * 2026-09-11：与 GdStage/GD_STAGES/GD_IPO_STAGE_LABEL 收在同一文件，供「枚举四处同步」单一真源
+ * （防止 gzinfo 那样新增阶段漏改某一处）。横滑卡排序链路（gd-ipo-spoken.BIZ_VALUE_RANK）与本序同源。
+ */
+export const IPO_STAGE_ORDER: GdStage[] = [
+  "stage-tutoring",
+  "stage-coach-done",
+  "stage-registered",
+  "stage-reviewing",
+  "stage-listed",
+];
+
+/** 阶段展示标签（徽章 / 分栏标题 / 筛选条共用；`""` = 无阶段信号的待定组）。 */
+export const GD_IPO_STAGE_LABEL: Record<string, string> = {
+  "stage-tutoring": "辅导备案",
+  "stage-coach-done": "辅导完成",
+  "stage-registered": "注册发行",
+  "stage-reviewing": "在审",
+  "stage-listed": "已上市",
+  "": "IPO",
+};
 
 /**
  * 阶段词表（**唯一**实现，P0-1 收敛）。

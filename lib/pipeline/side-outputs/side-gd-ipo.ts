@@ -142,12 +142,19 @@ function dateValue(it: ReportItem): number {
 /**
  * IPO 阶段**进度**排序权重（P4-④）：越接近上市越靠前（与 BIZ_VALUE_RANK 的商机优先序相反）。
  * 阶段值一律经 `gdIpoStageOf` / `inferStage` 单一判定取得，本表只做权重映射。
+ *
+ * 2026-09-11 新增 `stage-coach-done`（辅导完成·已验收）：进度序
+ * tutoring(1) < coach-done(2) < reviewing(3) < registered(4) < listed(5)。
+ * 整表按现相对序平移后插入新键——既有条目相对次序不变。gzinfo 本次遗漏本表，
+ * 新阶段无键会回退 `?? 0`，把「辅导完成」排到比「辅导备案」还靠后（与业务相反），故 2.0 补齐。
+ * 导出供枚举一致性测试校验「每个合法阶段都有键」。
  */
-const STAGE_RANK: Record<string, number> = {
-  "stage-listed": 4,
-  "stage-registered": 3,
-  "stage-reviewing": 2,
+export const STAGE_RANK: Record<string, number> = {
   "stage-tutoring": 1,
+  "stage-coach-done": 2,
+  "stage-reviewing": 3,
+  "stage-registered": 4,
+  "stage-listed": 5,
 };
 
 /** ArticleInput 的阶段进度权重（结构化字段优先，回退 inferStage 单一词表）。 */

@@ -2,6 +2,9 @@ import { BaseCrawler, CrawlerResult } from "../base-crawler";
 import { warnIfStale } from "./staleness";
 // P2-3 收敛（2026-09-10）：早停窗口改引全链路唯一来源 lib/ipo-config.ts。
 import { IPO_SOURCE_WINDOW_DAYS } from "../../../ipo-config";
+// 2026-09-11：阶段枚举单一真源在服务层（adapters→services 方向被架构门禁允许；本 import 为
+// type-only，运行期无依赖、无环）。csrcfd 按列4「辅导状态」映射阶段，不再硬编码 stage-tutoring。
+import type { GdStage } from "../../../services/classify/gd-ipo";
 
 /**
  * 证监会资本市场电子化信息披露平台 —— 辅导企业（csrcfd）爬虫
@@ -92,6 +95,32 @@ export function isGuangdong(row: CoachRow): boolean {
 }
 
 /**
+ * 辅导状态（列4）→ 上市阶段。
+ *
+ * ⚠️ 列4 是**企业当前状态**（同一企业所有报告行同值），列6 才是「本份报告类型」——
+ * 二者不可混用。实测「辅导验收 / 辅导工作完成」恒与列6「辅导工作完成报告」同现，
+ * 故用列4 判断企业处在辅导期哪个节点更准。
+ *
+ * 实测枚举（2026-09-11 采样 120 行）：辅导备案 101 / 撤回辅导备案 17 /
+ * 辅导验收 1 / 辅导工作完成 1。未知状态回退 stage-tutoring（保守，不丢条目）。
+ */
+const COACH_STAGE_BY_STATUS: Record<string, GdStage> = {
+  辅导备案: "stage-tutoring",
+  辅导验收: "stage-coach-done",
+  辅导工作完成: "stage-coach-done",
+};
+
+/** 是否已撤回辅导备案：企业终止本次 IPO 进程，不再具备商机（实测约占 14%，须丢弃）。 */
+export function isWithdrawn(row: CoachRow): boolean {
+  return (row.status || "").includes("撤回");
+}
+
+/** 阶段：已知状态按表映射，未知回退 stage-tutoring。 */
+export function coachStageOf(row: CoachRow): GdStage {
+  return COACH_STAGE_BY_STATUS[row.status] ?? "stage-tutoring";
+}
+
+/**
  * 单页早停决策（纯函数，便于测试）：
  *   - 取页内**最后一个有效披露日期**作为该页最早边界（倒序，最后一行最早；容忍末几行无 PDF 路径）。
  *   - 早于 floor（近 7 天窗下界）→ 停止；无有效日期 → 记一次 stale（交由连续 stale 计数兜底）；否则继续。
@@ -167,6 +196,7 @@ export class CsrcCoachCrawler extends BaseCrawler {
     const floor = windowFloorStr();
     let page = 1;
     let consecutiveStale = 0;
+    let withdrawn = 0; // 「撤回辅导备案」计数（非商机，丢弃后仅进日志，便于观测）
     const allDates: string[] = []; // 新鲜度哨兵输入（含窗口外日期）
 
     while (page <= MAX_PAGES) {
@@ -187,6 +217,12 @@ export class CsrcCoachCrawler extends BaseCrawler {
         const rowDate = extractDisclosureDate(r) || r.recordDate;
         if (rowDate) allDates.push(rowDate);
         if (!isGuangdong(r)) continue;
+        // 已撤回辅导备案 = 企业终止本次 IPO 进程，推给业务方是负价值 → 丢弃。
+        // 实测占比约 14%（120 行采样 17 条），不过滤会持续污染商机列表。
+        if (isWithdrawn(r)) {
+          withdrawn++;
+          continue;
+        }
         // 时间真实性红线：优先披露日期，次选备案时间（源真实字段，非伪造）；皆无则废弃。
         const disclosure = extractDisclosureDate(r) || r.recordDate;
         if (!disclosure) continue;
@@ -208,8 +244,10 @@ export class CsrcCoachCrawler extends BaseCrawler {
           // 弃用 em-ipo（config 未注册 em-ipo → render knownSourceIds 白名单静默丢弃 → 历史 em-ipo=0 条铁证）。
           region: "gd",
           registeredProvince: "广东",
-          // P4 结构化旁路：本源全部为「辅导备案 / 辅导验收」阶段（回检 P0-1 补齐——此前完全没给）
-          ipoStage: "stage-tutoring",
+          // 阶段按列4「辅导状态」映射（2026-09-11 修正）：辅导备案→stage-tutoring、
+          // 辅导验收 / 辅导工作完成→stage-coach-done。此前无条件写死 stage-tutoring，
+          // 把「刚起步」与「已完成辅导」抹成同一栏，商机分级失真（二者距上市差约 12 个月）。
+          ipoStage: coachStageOf(r),
         });
       }
 
@@ -232,6 +270,11 @@ export class CsrcCoachCrawler extends BaseCrawler {
 
     warnIfStale(this, allDates);
     console.log(`[${this.name}] 完成，抓取 ${page - 1} 页，广东企业 ${this.results.length} 条`);
+    if (withdrawn > 0) {
+      console.log(
+        `[${this.name}] 已丢弃「撤回辅导备案」${withdrawn} 条（企业终止本次 IPO，非商机）`,
+      );
+    }
     return this.results;
   }
 }
