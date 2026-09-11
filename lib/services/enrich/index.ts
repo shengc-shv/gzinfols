@@ -205,7 +205,6 @@ async function enrichReportLevel(
   ctx: PipelineContext,
   deps: EnrichDeps,
 ): Promise<Pick<DailyReport, "hero_line" | "insights" | "must_read" | "risk">> {
-  ctx.stats.llmCalls = (ctx.stats.llmCalls ?? 0) + 1;
   try {
     // 每板块取前 N 条真实条目喂给模型（title + url + 摘要截断），杜绝凭空编造
     const parts = ORDER.map((key) => {
@@ -218,6 +217,7 @@ async function enrichReportLevel(
     }).filter((p): p is string => p !== null);
     if (parts.length === 0) return { hero_line: undefined, insights: [], must_read: [], risk: undefined };
 
+    ctx.stats.llmCalls = (ctx.stats.llmCalls ?? 0) + 1;
     const json = await deps.llm.complete({
       system:
         "你是招行广州分行零售分管行长的决策参谋。基于今日新闻，产出JSON：" +
@@ -280,13 +280,20 @@ export async function enrich(
     ipo: [],
   };
 
-  // 批量富集：每批 20 条一次调用，并发池最多 4 批在飞
+  // 批量富集：每批 20 条一次调用，并发池最多 4 批在飞；
+  // skip-ai 模式（契约：不调用任何 LLM）在池内短路，直接用兜底卡，不发起调用
   const tagged = working.map((a) => ({ a, section: assignSection(a) }));
   const batches: TaggedArticle[][] = [];
   for (let i = 0; i < tagged.length; i += ENRICH_BATCH_SIZE) {
     batches.push(tagged.slice(i, i + ENRICH_BATCH_SIZE));
   }
-  const batched = await runPool(batches, ENRICH_CONCURRENCY, (b) => enrichBatch(b, ctx, deps));
+  const batched = await runPool(batches, ENRICH_CONCURRENCY, (b) =>
+    skipAi
+      ? Promise.resolve(
+          b.map((t) => ({ section: t.section, item: buildFallbackItem(t.a, t.section) })),
+        )
+      : enrichBatch(b, ctx, deps),
+  );
   for (const group of batched) {
     for (const { section, item } of group) sections[section].push(item);
   }
