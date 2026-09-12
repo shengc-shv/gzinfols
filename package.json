@@ -17,7 +17,8 @@
     "tts:fallback": "tsx scripts/tts-fallback.ts",
     "tts:probe": "tsx scripts/tts-probe.ts",
     "seed:registry": "node scripts/seed-guangdong-registry.mjs",
-    "regen:trading": "tsx scripts/regen-trading.ts"
+    "regen:trading": "tsx scripts/regen-trading.ts",
+    "quota-report": "tsx scripts/quota-report.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.96.0",

@@ -8,6 +8,8 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import type { LlmPort, LlmRequest } from "../contracts/pipeline";
 import { jsonrepair } from "jsonrepair";
+import { logLlmCall } from "./llm-log";
+import { classifyError } from "../services/metrics";
 
 const execFileP = promisify(execFile);
 
@@ -19,6 +21,20 @@ function isTransientLlmError(e: unknown): boolean {
   const status = (e as { status?: number }).status;
   if (status !== undefined) return status === 429 || status >= 500;
   return /timeout|timed out|network|ECONNRESET|ECONNREFUSED|fetch failed|429|\b5\d\d\b/.test(msg);
+}
+
+/** 各后端默认模型（埋点与请求共用同一真源，避免漂移）。 */
+function defaultModelFor(backend: string): string {
+  switch (backend) {
+    case "anthropic":
+      return process.env.ANTHROPIC_MODEL || "claude-sonnet-4-6";
+    case "openai":
+      return process.env.OPENAI_MODEL || "gpt-4o-mini";
+    case "deepseek":
+      return process.env.DEEPSEEK_MODEL || "deepseek-chat";
+    default:
+      return "claude-cli";
+  }
 }
 
 export class LlmAdapter implements LlmPort {
@@ -37,6 +53,11 @@ export class LlmAdapter implements LlmPort {
     const MAX_RETRIES = 3;
     const BASE_DELAY_MS = 1500;
     let lastErr: unknown;
+    // 埋点：字符级明细写入 logs/llm-calls.jsonl（quota-report 数据源）。
+    // 重试算一次调用（durationMs 含重试等待），失败以最终错误归类。
+    const t0 = Date.now();
+    const inputChars = (req.system?.length ?? 0) + (req.prompt?.length ?? 0);
+    const model = req.model || defaultModelFor(this.backend);
     for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
       try {
         const text = await this.dispatch(req);
@@ -44,11 +65,36 @@ export class LlmAdapter implements LlmPort {
         if (!text.trim()) {
           console.warn("[llm] ⚠️ 返回空文本（HTTP 成功但 content 为空，下游解析将失败）");
         }
+        logLlmCall({
+          ts: new Date().toISOString(),
+          backend: this.backend,
+          model,
+          durationMs: Date.now() - t0,
+          success: true,
+          inputChars,
+          outputChars: text.length,
+          errorCategory: null,
+          errorSnippet: null,
+        });
         return this.postProcess(text, req);
       } catch (e) {
         lastErr = e;
         const transient = isTransientLlmError(e);
-        if (!transient || attempt === MAX_RETRIES - 1) throw e;
+        if (!transient || attempt === MAX_RETRIES - 1) {
+          const msg = e instanceof Error ? e.message : String(e);
+          logLlmCall({
+            ts: new Date().toISOString(),
+            backend: this.backend,
+            model,
+            durationMs: Date.now() - t0,
+            success: false,
+            inputChars,
+            outputChars: 0,
+            errorCategory: classifyError(msg),
+            errorSnippet: msg.slice(0, 300),
+          });
+          throw e;
+        }
         const delay = BASE_DELAY_MS * Math.pow(2, attempt);
         console.warn(`[llm] 第 ${attempt + 1} 次失败（${transient ? "transient" : "非 transient"}），${delay}ms 后重试: ${e instanceof Error ? e.message : e}`);
         await new Promise((r) => setTimeout(r, delay));
@@ -102,7 +148,7 @@ export class LlmAdapter implements LlmPort {
     const { default: Anthropic } = await import("@anthropic-ai/sdk");
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
     const msg = await client.messages.create({
-      model: req.model || process.env.ANTHROPIC_MODEL || "claude-sonnet-4-6",
+      model: req.model || defaultModelFor("anthropic"),
       max_tokens: req.maxTokens ?? 4096,
       system: req.system,
       temperature: req.temperature ?? 0.2,
@@ -117,7 +163,7 @@ export class LlmAdapter implements LlmPort {
     const { default: OpenAI } = await import("openai");
     const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
     const chat = await client.chat.completions.create({
-      model: req.model || process.env.OPENAI_MODEL || "gpt-4o-mini",
+      model: req.model || defaultModelFor("openai"),
       temperature: req.temperature ?? 0.2,
       max_tokens: req.maxTokens ?? 4096,
       messages: [
@@ -136,7 +182,7 @@ export class LlmAdapter implements LlmPort {
       apiKey: process.env.DEEPSEEK_API_KEY,
     });
     const chat = await client.chat.completions.create({
-      model: req.model || process.env.DEEPSEEK_MODEL || "deepseek-chat",
+      model: req.model || defaultModelFor("deepseek"),
       temperature: req.temperature ?? 0.2,
       max_tokens: req.maxTokens ?? 4096,
       messages: [

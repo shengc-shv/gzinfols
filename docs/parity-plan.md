@@ -89,7 +89,7 @@
 | V1 | audio/tts + pronounce | 腾讯 TTS + SSML 发音 | ✅ 本轮移植 | — |
 | V2 | audio/audio.ts 口播组装 | 章节预算/消毒/句界截断/段落时序 | ✅ 口径移植（内容源待 A7/S6 接入） | B3/B4 |
 | V3 | scripts/tts-fallback + tts-probe | Piper 兜底链 + 探针 | ❌ | B6 |
-| O1 | scripts/quota-report + ai/metrics | LLM 用量报表 | ❌（ctx.stats 简版） | B6 |
+| O1 | scripts/quota-report + ai/metrics | LLM 用量报表 | ✅ `scripts/quota-report.ts` + `adapters/llm-log.ts` + `services/metrics`（2026-09-12） | B6 |
 | O2 | regen-trading / regen-enrich / render / analyze-* / retag-* | 运维再生成脚本 | ❌（render 有） | B6 |
 | O3 | notify/* + notify.yml | 微信推送 | 🚫 用户已裁决放弃 | — |
 | O4 | feedback/* + render 反馈 UI | 点赞点踩 | 🚫 用户已裁决移除 | — |

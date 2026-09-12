@@ -3,6 +3,8 @@ node_modules/
 
 # 运行时产物（每次运行重新生成，不入库）
 daily_reports/
+# LLM 调用埋点（logs/llm-calls.jsonl，quota-report 数据源；本机/每次运行累积，不入库）
+logs/
 data/history/
 data/cache/
 data/local-acquired.json

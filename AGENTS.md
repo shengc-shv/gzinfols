@@ -59,6 +59,9 @@ sources.config.json / sources.keywords.json  # 源与关键词唯一真源
 | `npm run dry-run` | 仅采集+归一化+漏斗，不调 LLM、不落盘 |
 | `npm run render` | 用已落盘的报告 JSON 重渲染产物 |
 | `npm run ipo:local` | 本地抓两个 WAF 拦源的 IPO 数据并提交 `data/local-ipo.json`（`--dry-run`/`--no-push`） |
+| `npm run build-site` | 站点聚合：生成 index.html / archive.html（跑在 daily 之后） |
+| `npm run regen:trading` | 只重跑交易面板并打补丁回当日报告 JSON |
+| `npm run quota-report` | LLM 用量报表（读 logs/llm-calls.jsonl；claude-cli 看 5h 窗口，API 后端看 24h） |
 | `npm run architecture:check` | 架构门禁（服务层/契约层依赖约束） |
 | `npm run typecheck` | tsc --noEmit |
 | `npm test` | node --test 全量离线测试 |
@@ -74,6 +77,9 @@ sources.config.json / sources.keywords.json  # 源与关键词唯一真源
 - **服务层不碰 node: 与 adapters**：副作用全走契约端口；时间用 `ctx.startTime`，
   配置用 `ctx.config`，禁止服务层直读 `process.env`（组合根 orchestrator 负责读）。
 - **契约层零逻辑**：`lib/contracts/**` 只放类型 / 端口 / 常量，不写函数逻辑与副作用。
+- **LLM 调用要埋点**：每次 `LlmPort.complete()` 出口由 `lib/adapters/llm.ts` 写一条明细到
+  `logs/llm-calls.jsonl`（backend / model / 耗时 / 字符数 / 错误归类），旁路开关 `LLM_TELEMETRY=off`；
+  纯聚合在 `lib/services/metrics`，报表看 `npm run quota-report`。埋点失败绝不影响主流程。
 - **LLM 调用要批量 + 计数**：富集走批量（每批 20 条）+ 并发池（≤4 在飞）；
   `must_read.url` 必须校验 ∈ 今日条目集合；失败降级要写 ctx.errors 与 ctx.stats。
 - **历史库单一写者**：只有 `lib/services/memory` 负责 merge（纯函数），落盘统一走
