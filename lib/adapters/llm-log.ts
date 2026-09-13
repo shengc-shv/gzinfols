@@ -62,3 +62,31 @@ export function readLlmCallLog(): LlmCallRecord[] {
   }
   return out;
 }
+
+/**
+ * 富集「少回」诊断转储（gzinfo ai/enrich.ts 内嵌 fs 写法外移至此）：
+ * LLM 返回条目数远少于请求时，落盘原始输出供定位（截断/拒答/URL 改写）。
+ */
+export function dumpEnrichUndercount(
+  scope: string,
+  rawText: string,
+  requested: number,
+  returned: number,
+): void {
+  try {
+    const p = path.resolve(overrideDir ?? process.cwd(), "logs");
+    fs.mkdirSync(p, { recursive: true });
+    const ts = new Date().toISOString().replace(/[:.]/g, "-");
+    const tag = scope.replace(/[^a-z0-9]/gi, "-");
+    fs.writeFileSync(
+      path.join(p, `enrich-undercount-${tag}-${ts}.txt`),
+      `scope=${scope}\nrequested=${requested}\nreturned=${returned}\n\n--- raw LLM output ---\n${rawText}`,
+      "utf-8",
+    );
+    console.warn(
+      `[enrich] ${scope}: undercount ${returned}/${requested} — raw dumped to logs/enrich-undercount-${tag}-${ts}.txt`,
+    );
+  } catch {
+    // 诊断落盘失败不影响主流程
+  }
+}

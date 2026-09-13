@@ -23,6 +23,43 @@ function isTransientLlmError(e: unknown): boolean {
   return /timeout|timed out|network|ECONNRESET|ECONNREFUSED|fetch failed|429|\b5\d\d\b/.test(msg);
 }
 
+/**
+ * 凭证校验（gzinfo lib/ai/llm.ts validateBackendCredentials 移植，P4 缺口补齐）：
+ * AI 模式启动即校验当前后端所需密钥，缺密钥**立即报错并给出可执行的修复提示**，
+ * 而不是跑到第一次 LLM 调用才炸（CI 上常见错误：配了 DEEPSEEK_API_KEY 却忘配 LLM_BACKEND）。
+ */
+export function validateBackendCredentials(backend: Backend = (process.env.LLM_BACKEND as Backend) || "claude-cli"): void {
+  if (backend === "claude-cli") return; // 本地 CLI 无需密钥
+
+  const required: Record<Exclude<Backend, "claude-cli">, string> = {
+    anthropic: "ANTHROPIC_API_KEY",
+    openai: "OPENAI_API_KEY",
+    deepseek: "DEEPSEEK_API_KEY",
+  };
+  const requiredVar = required[backend];
+  if (!requiredVar) {
+    throw new Error(`LLM backend "${backend}" 未实现，请设 LLM_BACKEND=claude-cli|anthropic|openai|deepseek`);
+  }
+  if (process.env[requiredVar] || process.env.LLM_API_KEY) return;
+
+  const otherKeys = Object.entries(required)
+    .filter(([b, v]) => b !== backend && !!process.env[v])
+    .map(([b, v]) => ({ backend: b, varName: v }));
+
+  const lines: string[] = [
+    `LLM_BACKEND=${backend} 但 ${requiredVar}（与通用 LLM_API_KEY）均未设置。`,
+  ];
+  if (otherKeys.length > 0) {
+    lines.push(
+      "",
+      "环境中存在其他后端的密钥——你可能想用的是其中之一：",
+      ...otherKeys.map((k) => `  - ${k.backend}：改设 LLM_BACKEND=${k.backend}（密钥 ${k.varName} 已就位）`),
+    );
+  }
+  lines.push("", "修复：在 GitHub Secrets / 本地 .env 配好对应密钥，或改用 LLM_BACKEND=claude-cli。");
+  throw new Error(lines.join("\n"));
+}
+
 /** 各后端默认模型（埋点与请求共用同一真源，避免漂移）。 */
 function defaultModelFor(backend: string): string {
   switch (backend) {

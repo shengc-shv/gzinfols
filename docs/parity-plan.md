@@ -15,7 +15,9 @@
 > 2026-09-13 **R1 渲染全量对齐完成**：render.ts(2117)+cards+sections+theme+i18n 逐字移植，
 > REPORT_LOCALE 经 locale 模块注入、gd-issuers/knownSourceIds 两处 IO 外移、加密面板剔除；
 > select-top（渲染必读选择需用）随批移植——HANDOFF「select-top 不移植」裁决就此更新。
-> 待办仅剩 R2 report-from-articles + metrics stage 层 + 测试面补齐。
+> 2026-09-13 **R2 完成**：report-from-articles + batch-summaries(enrich) + render-preview/
+> render-live/regen-enrich 三脚本 + P4 validateBackendCredentials 凭证校验；paths.ts 不移植
+> （2.0 无双写过渡期）。待办仅剩 metrics stage 层 + 测试面补齐。
 > B5 说明（发布链路移植）：publish-state 状态机（schedule/manual/manual-final/manual-test 四来源 + cron 跳过判据）
 > 落地 `lib/services/publish/publish-state.ts`；IO 归 `lib/adapters/persistence.ts`；`scripts/record-publish.ts` 先发后记；
 > `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs` 历史裁剪（近 7 天 + backup）；daily.yml 门控改读
@@ -81,12 +83,12 @@
 | H2 | memory/event-memory | 事件指纹去重（洞察/必读/风险/IPO口播 2 天去重）+ 交付信号 | ~2k | ❌ | B5 |
 | H3 | memory/store + exec-guard + broadcast-time + publish-run-id | 记忆库读写闸门 | ~3k | ❌（部分随 H2） | B5 |
 | R1 | output/render.ts + render/* | 完整版面（5 tab/股市三卡/横滑卡/播放器v2联动/主题） | ~4k | ✅ `services/render/full.ts` + theme/i18n/cards/sections（2026-09-13 逐字移植） | B6 |
-| R2 | output/report-from-articles + paths | 由全量池重渲染/路径 | ~500 | ⚠️ 简版 | B6 |
+| R2 | output/report-from-articles + paths | 由全量池重渲染/路径 | ~500 | ✅ `services/render/report-from-articles.ts`（paths.ts 不移植：2.0 无双写） | B6 |
 | R3 | pipeline/render-and-write | 唯一存储（daily_reports/<date>/ 全产物）+ sidecar + 全量池导出 | ~400 | ✅ publishReport 已含 sidecar/全量池（09-13 P1 批次） | B6 |
 | P1 | publish-state.ts + scripts/record-publish-state | 发布来源记账（schedule/manual-final/test） | ~200 | ✅ `services/publish/publish-state.ts` + `scripts/record-publish.ts` + persistence 适配器 | B5 ✅ |
 | P2 | scripts/build-site.mjs | index.html + archive.html 站点聚合 | ~300 | ✅ `scripts/build-site.mjs`（按 2.0 唯一存储适配） | B6 |
 | P3 | scripts/cleanup-history.mjs + workflow | 历史裁剪（近 N 天 + backup） | ~200 | ✅ `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs`（随 B5 提前落地） | B5 ✅ |
-| P4 | pipeline/bootstrap + context | 凭证校验/模式构建/tier 索引/aiAssets 装配 | ~500 | ⚠️ orchestrator 简版（缺凭证校验+aiAssets） | B2 |
+| P4 | pipeline/bootstrap + context | 凭证校验/模式构建/tier 索引/aiAssets 装配 | ~500 | ✅ validateBackendCredentials 已补（09-13）；aiAssets 经裁决不移植 | 已收口 |
 | P5 | 广东IPO健康度检查（daily.ts ⑦.5） | 0 条/滞后告警 | ~40 | ✅（09-13 修复漏接线——函数已定义但管线未调用） | B3 |
 
 ### 2.5 语音 / 运维 / 工作流
@@ -96,7 +98,7 @@
 | V2 | audio/audio.ts 口播组装 | 章节预算/消毒/句界截断/段落时序 | ✅ 口径移植（内容源待 A7/S6 接入） | B3/B4 |
 | V3 | scripts/tts-fallback + tts-probe | Piper 兜底链 + 探针 | ❌ | B6 |
 | O1 | scripts/quota-report + ai/metrics | LLM 用量报表 | ✅ `scripts/quota-report.ts` + `adapters/llm-log.ts` + `services/metrics`（2026-09-12） | B6 |
-| O2 | regen-trading / regen-enrich / render / analyze-* / retag-* | 运维再生成脚本 | ❌（render 有） | B6 |
+| O2 | regen-trading / regen-enrich / render / analyze-* / retag-* | 运维再生成脚本 | ✅ regen-trading/regen-enrich/render/render-preview/render-live 已落地；analyze-*/retag-*/backfill-* 为一次性运维工具（按需再移植） | B6 |
 | O3 | notify/* + notify.yml | 微信推送 | 🚫 用户已裁决放弃 | — |
 | O4 | feedback/* + render 反馈 UI | 点赞点踩 | 🚫 用户已裁决移除 | — |
 | O5 | trading/coingecko + fear-greed | 加密恐惧贪婪指数 | 🚫 **永久剔除（2026-09-12 用户拍板）**：加密板块不合规，任何形式均不得出现——不移植、不渲染、不进契约；交易面板（trading/*）若日后移植，必须剥离加密段 | 已裁决 |

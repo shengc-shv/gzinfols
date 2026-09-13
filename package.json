@@ -18,7 +18,10 @@
     "tts:probe": "tsx scripts/tts-probe.ts",
     "seed:registry": "node scripts/seed-guangdong-registry.mjs",
     "regen:trading": "tsx scripts/regen-trading.ts",
-    "quota-report": "tsx scripts/quota-report.ts"
+    "quota-report": "tsx scripts/quota-report.ts",
+    "render:preview": "tsx scripts/render-preview.ts",
+    "render:live": "tsx scripts/render-live.ts",
+    "regen:enrich": "tsx scripts/regen-enrich.ts"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.96.0",
