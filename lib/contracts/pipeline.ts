@@ -26,6 +26,12 @@ export interface FileStore {
   exists(path: string): Promise<boolean>;
   list(dir: string): Promise<string[]>;
   appendJsonl(path: string, obj: unknown): Promise<void>;
+  /**
+   * 原子写 JSON（可选能力）：先写 `${path}.tmp` 再 rename。
+   * gzinfo render-and-write 同款，避免写大文件中途崩溃留下「半个报告」。
+   * 未实现该能力的 FileStore（测试 MemFs）由调用方回退普通 writeJson。
+   */
+  writeJsonAtomic?(path: string, data: unknown): Promise<void>;
 }
 
 /** 时钟端口（测试可注入固定时间）。 */

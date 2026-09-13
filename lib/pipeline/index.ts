@@ -14,6 +14,7 @@ import { normalize } from "../services/normalize";
 import { select } from "../services/select";
 import { enrich } from "../services/enrich";
 import { assembleReport } from "../services/assemble";
+import { applyDisplayCaps } from "../services/assemble/display-cap";
 import { mergeRollingAndSaveHistory } from "./history-step";
 import { buildSideOutputs } from "./side-outputs/side-outputs";
 import { renderHtml, renderMarkdown } from "../services/render";
@@ -65,6 +66,13 @@ export async function runPipeline(
     { llm: deps.llm, http: deps.http },
   );
 
+  // —— ⑦ 展示限额（gzinfo daily.ts 第⑦步）：每源≤4 按价值排序、板块上限、gz 保底 ——
+  // 位置与 gzinfo 一致：side outputs 之后（exec 池不受影响）、语音/渲染之前。
+  const capped = applyDisplayCaps(withSides, ctx);
+
+  // —— ⑦.5 广东IPO 健康度（gzinfo 同位；此前函数已定义但漏接线，2026-09-13 修复）——
+  checkIpoHealth(capped, ctx);
+
   // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——
   // → TTS 合成（AUDIO_ENABLED 门控；失败降级为无播放器）
   const exec = loadExecStore(ctx.date);
@@ -74,13 +82,13 @@ export async function runPipeline(
   const ipoMem = memoryOn ? loadEventMemory() : null;
   const ipoSkip = new Set<string>();
   if (ipoMem) {
-    for (const it of withSides.sections.ipo ?? []) {
+    for (const it of capped.sections.ipo ?? []) {
       const c = companyNameOf(it.title_cn || "");
       if (c && ipoShouldSkip(ipoMem, c, ctx.date)) ipoSkip.add(c);
     }
   }
   const briefing = exec
-    ? await assembleBriefingScript(withSides, {
+    ? await assembleBriefingScript(capped, {
         exec,
         ipoMemory: ipoMem
           ? {
@@ -122,9 +130,20 @@ export async function runPipeline(
     });
   }
 
-  const html = renderHtml(withSides, { audio });
-  const markdown = renderMarkdown(withSides);
-  const paths = await publishReport({ report: withSides, html, markdown }, ctx, { fs: deps.fs });
+  const html = renderHtml(capped, { audio });
+  const markdown = renderMarkdown(capped);
+  // gzinfo render-and-write ②③：sidecar（滚动列表）+ 全量池导出（漏斗后条目）
+  const paths = await publishReport(
+    {
+      report: capped,
+      html,
+      markdown,
+      rolling: histStep.rolling,
+      pool: selected.articles,
+    },
+    ctx,
+    { fs: deps.fs },
+  );
 
   ctx.log.info(
     "pipeline",
@@ -134,7 +153,7 @@ export async function runPipeline(
     "pipeline",
     `观测汇总：LLM 调用 ${ctx.stats.llmCalls ?? 0} 次（失败 ${ctx.stats.llmFailures ?? 0}）`,
   );
-  return { report: withSides, html, markdown, speech, audio, paths };
+  return { report: capped, html, markdown, speech, audio, paths };
 }
 
 /**

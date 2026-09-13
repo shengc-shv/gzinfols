@@ -79,9 +79,12 @@ export function dayGap(a: string, b: string): number {
  */
 export function filterByWindow<T extends { publishedAt?: Date | string }>(
   articles: T[],
-  days = 7,
+  days: number,
+  now: Date,
 ): T[] {
-  return articles.filter((a) => isWithinCalendarDays(a.publishedAt, days));
+  // now 必填：窗口必须锚定报告时间（ctx.startTime），否则真实日期跨天后
+  // 窗口漂移、测试与生产口径不一致（2026-09-13 修复：股市清单 3/4 天窗因此空窗）。
+  return articles.filter((a) => isWithinCalendarDays(a.publishedAt, days, now));
 }
 
 /**

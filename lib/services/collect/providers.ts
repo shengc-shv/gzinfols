@@ -9,6 +9,7 @@ import * as cheerio from "cheerio";
 import type { RawArticle } from "../../contracts/article";
 import type { SourceDef } from "../../contracts/source";
 import type { HttpClient } from "../../contracts/pipeline";
+import { SITE_PLANS } from "./site-parsers";
 
 /** RSS 源：标准 RSS/Atom 解析。 */
 export async function fetchRss(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {
@@ -29,6 +30,25 @@ export async function fetchRss(source: SourceDef, http: HttpClient): Promise<Raw
 
 /** 列表页抓取：通用 cheerio 解析（标题 + 链接 + 可选时间）。具体站点选择器可在此注册。 */
 export async function fetchScrape(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {
+  // 站点专用解析（gzinfo per-source provider 移植）：命中计划 → 按计划的多 URL
+  // 逐个抓取 + 专用正则解析（能从 URL/页面提取真实发布时间）；未命中 → 通用 cheerio。
+  const plan = SITE_PLANS[source.id];
+  if (plan) {
+    const out: RawArticle[] = [];
+    for (const url of plan.urls) {
+      try {
+        const html = await http.getText(url, {
+          useCurl: plan.useCurl ?? source.useCurl,
+          headers: plan.headers,
+        });
+        out.push(...plan.parse(html, url, source));
+      } catch (e) {
+        // 单频道失败不拖垮整源（gzinfo fetch21jingji 双频道同语义）
+        console.warn(`[scrape] ${source.id} ${url} 抓取失败: ${e instanceof Error ? e.message : e}`);
+      }
+    }
+    return out;
+  }
   const html = await http.getText(source.url, { useCurl: source.useCurl });
   const $ = cheerio.load(html);
   const out: RawArticle[] = [];

@@ -60,8 +60,9 @@ function collect(
   market: "a-share" | "hk" | "us",
   win: number,
   cap: number,
+  now: Date,
 ): StockNewsItem[] {
-  return filterByWindow(items, win)
+  return filterByWindow(items, win, now)
     .map((a) => toNewsItem(a, market))
     .slice(0, cap);
 }
@@ -99,14 +100,16 @@ export async function buildStockNews(
   deps: Pick<PipelineDeps, "llm">,
 ): Promise<DailyReport> {
   const PER_MARKET_CAP = 12;
+  const now = ctx.startTime; // 窗口锚定报告起始时间（不读隐式时钟）
   const rawNews: StockNewsItem[] = [
-    ...collect(crawled.stocks.filter((a) => a.subcategory === "a-share"), "a-share", 3, PER_MARKET_CAP),
-    ...collect(crawled.stocks.filter((a) => a.subcategory === "hk"), "hk", 3, PER_MARKET_CAP),
+    ...collect(crawled.stocks.filter((a) => a.subcategory === "a-share"), "a-share", 3, PER_MARKET_CAP, now),
+    ...collect(crawled.stocks.filter((a) => a.subcategory === "hk"), "hk", 3, PER_MARKET_CAP, now),
     ...collect(
       rawArticles.filter((a) => a.category === "stocks" && a.subcategory === "us"),
       "us",
       4,
       PER_MARKET_CAP,
+      now,
     ),
   ];
   if (rawNews.length === 0) return report;

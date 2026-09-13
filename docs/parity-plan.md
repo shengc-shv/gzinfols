@@ -10,6 +10,8 @@
 > B6-进度（2026-09-12）：交易面板（trading/* + commentary + regen-trading）已移植并剔除加密；
 > 运维脚本 build-site / tts-fallback / tts-probe / seed-registry / regen-trading 已落地；
 > cleanup-history.yml / weekly-registry.yml 定时工作流已建；**渲染全量对齐（R1）尚未开始**。
+> 2026-09-13 P1 批次：⑦ applyDisplayCaps 移植接线 + 4 个 scrape 源专用解析（修复产出≈0）+
+> R3 sidecar/全量池导出 + checkIpoHealth 漏接线修复 + filterByWindow 隐式时钟修复。
 > B5 说明（发布链路移植）：publish-state 状态机（schedule/manual/manual-final/manual-test 四来源 + cron 跳过判据）
 > 落地 `lib/services/publish/publish-state.ts`；IO 归 `lib/adapters/persistence.ts`；`scripts/record-publish.ts` 先发后记；
 > `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs` 历史裁剪（近 7 天 + backup）；daily.yml 门控改读
@@ -36,7 +38,7 @@
 ### 2.1 采集与过滤（漏斗一/二）
 | # | gzinfo 模块 | 功能 | 规模 | 2.0 现状 | 批次 |
 |---|---|---|---|---|---|
-| F1 | sources/rss+api+通用抓取 | RSS/API/Scrape 拉取 | ~2k | ⚠️ providers 简版（缺 per-source 定制与 useCurl 细节）； sources.config 中 role:crawled-input 的 32 源不走 providers | B2 |
+| F1 | sources/rss+api+通用抓取 | RSS/API/Scrape 拉取 | ~2k | ✅ enabled 的 4 个 scrape 源已有站点专用解析（site-parsers.ts，2026-09-13）；api 源 config 中全部 disabled | 已收口 |
 | F2 | pipeline/filter 7 道 | pre-window-2d | ~40 | ⚠️ select 内有窗口但口径需对齐（FETCH_WINDOW_DAYS=2, IPO 7 天例外） | B1 |
 | F3 | filters/single-institution | 单家非白名单金融机构新闻过滤 | ~150 | ❌ | B1 |
 | F4 | filters/stock-single | 股市单股新闻过滤（非巨头/非广州） | ~120 | ❌ | B1 |

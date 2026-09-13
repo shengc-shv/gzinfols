@@ -30,6 +30,15 @@ export class NodeFsAdapter implements FileStore {
     await fsp.writeFile(a, JSON.stringify(data, null, 2), "utf8");
   }
 
+  /** 原子写：先落 `${p}.tmp` 再 rename（同一文件系统上 rename 原子）。 */
+  async writeJsonAtomic(p: string, data: unknown): Promise<void> {
+    const a = this.abs(p);
+    await fsp.mkdir(path.dirname(a), { recursive: true });
+    const tmp = `${a}.tmp`;
+    await fsp.writeFile(tmp, JSON.stringify(data, null, 2), "utf8");
+    await fsp.rename(tmp, a);
+  }
+
   async readText(p: string): Promise<string | null> {
     try {
       return await fsp.readFile(this.abs(p), "utf8");

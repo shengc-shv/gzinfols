@@ -96,5 +96,14 @@ test("runPipeline 端到端（注入内存适配器，不联网/不调真实 LLM
   assert.ok(fsSync.existsSync(histPath), "article-history.json 应落盘");
   const hist = JSON.parse(fsSync.readFileSync(histPath, "utf8")) as Record<string, { url: string; summary?: string }>;
   assert.ok(Object.keys(hist).length >= 1, "历史库应记录本次条目");
+  // gzinfo render-and-write ②③：sidecar（滚动列表）+ 归一化全量池导出（2026-09-13 补齐）
+  const sidecarRel = out.paths.htmlPath.replace(/\.html$/, "-articles.json");
+  const sidecar = await fs.readJson<{ date: string; articles: unknown[] }>(sidecarRel);
+  assert.ok(sidecar, `sidecar ${sidecarRel} 应落盘`);
+  assert.ok(Array.isArray(sidecar!.articles), `sidecar 应含滚动列表数组，实际：${JSON.stringify(sidecar)?.slice(0, 200)}`);
+  // 全量池经 FileStore（MemFs）落盘，走 readJson 断言
+  const pool = await fs.readJson<unknown[]>("data/fetched-articles.json");
+  assert.ok(Array.isArray(pool), "data/fetched-articles.json 全量池应导出（FileStore 落盘）");
+  assert.ok(pool.length >= 1, "全量池应含漏斗后条目");
   }
 });

@@ -74,6 +74,7 @@ export async function buildStockRecap(
   const usItems: StockItem[] = filterByWindow(
     rawArticles.filter((a) => a.category === "stocks" && a.subcategory === "us"),
     4,
+    ctx.startTime,
   ).map(toStockItem);
   const aShareItems: StockItem[] = crawled.stocks
     .filter((a) => a.subcategory === "a-share")
