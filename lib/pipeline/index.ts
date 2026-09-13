@@ -111,7 +111,12 @@ export async function runPipeline(
   if (deps.tts && briefing) {
     try {
       const r = await deps.tts.synthesize(briefing.script, ctx.date);
-      audio = { src: `audio/briefing-${ctx.date}.mp3`, duration: formatDurationLabel(r.durationSec), backend: r.backend };
+      audio = {
+        src: `audio/briefing-${ctx.date}.mp3`,
+        duration: formatDurationLabel(r.durationSec),
+        backend: r.backend,
+        segments: briefing.segments,
+      };
       ctx.log.info("voice", `TTS 完成（${r.backend}）：${r.bytes} bytes`);
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);

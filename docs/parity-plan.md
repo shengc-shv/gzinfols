@@ -12,6 +12,10 @@
 > cleanup-history.yml / weekly-registry.yml 定时工作流已建；**渲染全量对齐（R1）尚未开始**。
 > 2026-09-13 P1 批次：⑦ applyDisplayCaps 移植接线 + 4 个 scrape 源专用解析（修复产出≈0）+
 > R3 sidecar/全量池导出 + checkIpoHealth 漏接线修复 + filterByWindow 隐式时钟修复。
+> 2026-09-13 **R1 渲染全量对齐完成**：render.ts(2117)+cards+sections+theme+i18n 逐字移植，
+> REPORT_LOCALE 经 locale 模块注入、gd-issuers/knownSourceIds 两处 IO 外移、加密面板剔除；
+> select-top（渲染必读选择需用）随批移植——HANDOFF「select-top 不移植」裁决就此更新。
+> 待办仅剩 R2 report-from-articles + metrics stage 层 + 测试面补齐。
 > B5 说明（发布链路移植）：publish-state 状态机（schedule/manual/manual-final/manual-test 四来源 + cron 跳过判据）
 > 落地 `lib/services/publish/publish-state.ts`；IO 归 `lib/adapters/persistence.ts`；`scripts/record-publish.ts` 先发后记；
 > `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs` 历史裁剪（近 7 天 + backup）；daily.yml 门控改读
@@ -76,9 +80,9 @@
 | H1 | output/history + pipeline/history-step | 历史库滚动合并（近7天并入 report + FETCH_WINDOW_DAYS 常量） | ~600 | ⚠️ 2.0 简版（无滚动并入 report） | B3 |
 | H2 | memory/event-memory | 事件指纹去重（洞察/必读/风险/IPO口播 2 天去重）+ 交付信号 | ~2k | ❌ | B5 |
 | H3 | memory/store + exec-guard + broadcast-time + publish-run-id | 记忆库读写闸门 | ~3k | ❌（部分随 H2） | B5 |
-| R1 | output/render.ts + render/* | 完整版面（5 tab/股市三卡/横滑卡/播放器v2联动/主题） | ~4k | ⚠️ 2.0 简版版面 | B6 |
+| R1 | output/render.ts + render/* | 完整版面（5 tab/股市三卡/横滑卡/播放器v2联动/主题） | ~4k | ✅ `services/render/full.ts` + theme/i18n/cards/sections（2026-09-13 逐字移植） | B6 |
 | R2 | output/report-from-articles + paths | 由全量池重渲染/路径 | ~500 | ⚠️ 简版 | B6 |
-| R3 | pipeline/render-and-write | 唯一存储（daily_reports/<date>/ 全产物）+ sidecar + 全量池导出 | ~400 | ⚠️ publish 简版 | B6 |
+| R3 | pipeline/render-and-write | 唯一存储（daily_reports/<date>/ 全产物）+ sidecar + 全量池导出 | ~400 | ✅ publishReport 已含 sidecar/全量池（09-13 P1 批次） | B6 |
 | P1 | publish-state.ts + scripts/record-publish-state | 发布来源记账（schedule/manual-final/test） | ~200 | ✅ `services/publish/publish-state.ts` + `scripts/record-publish.ts` + persistence 适配器 | B5 ✅ |
 | P2 | scripts/build-site.mjs | index.html + archive.html 站点聚合 | ~300 | ✅ `scripts/build-site.mjs`（按 2.0 唯一存储适配） | B6 |
 | P3 | scripts/cleanup-history.mjs + workflow | 历史裁剪（近 N 天 + backup） | ~200 | ✅ `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs`（随 B5 提前落地） | B5 ✅ |

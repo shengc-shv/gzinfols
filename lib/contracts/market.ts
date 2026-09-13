@@ -130,3 +130,24 @@ export interface TickerAnalysis {
   rsiState: "overbought" | "oversold" | "normal";
   signals: Signal[];
 }
+
+/** LLM 交易解读中的单标的观点（原 gzinfo ai/trading-commentary 内定义；契约化供渲染层共用）。 */
+export interface WatchlistPick {
+  symbol: string;
+  display_name: string;
+  /**
+   * 当前技术面方向的标签（非价格预测）。中性技术词汇（偏上行/偏下行/中性）用于
+   * 规避「不得提供投资建议」护栏误触发；旧值保留向后兼容。
+   */
+  stance:
+    | "偏上行"
+    | "偏下行"
+    | "中性"
+    | "看多"
+    | "看空"
+    | "Bullish"
+    | "Bearish"
+    | "Neutral";
+  rationale: string;
+}
+

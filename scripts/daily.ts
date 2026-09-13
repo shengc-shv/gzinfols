@@ -8,6 +8,7 @@ import { runPipeline } from "../lib/pipeline";
 import { NodeFsAdapter, SystemClock } from "../lib/adapters";
 import { loadHistoryStore } from "../lib/adapters/persistence";
 import type { RunMode } from "../lib/contracts/pipeline";
+import { setReportLocale } from "../lib/services/render/locale";
 
 async function main() {
   const clock = new SystemClock();

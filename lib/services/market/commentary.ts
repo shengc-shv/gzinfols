@@ -1,6 +1,8 @@
 import { jsonrepair } from "jsonrepair";
 import { extractJson } from "../enrich/json-util";
-import type { TickerAnalysis } from "../../contracts/market";
+import type { TickerAnalysis, WatchlistPick } from "../../contracts/market";
+
+export type { WatchlistPick };
 
 /**
  * 2.0 适配：
@@ -11,28 +13,6 @@ import type { TickerAnalysis } from "../../contracts/market";
  */
 export type TradingLlmRunner = (system: string, user: string) => Promise<string>;
 const DEFAULT_LOCALE: "zh" | "en" = "zh";
-
-export interface WatchlistPick {
-  symbol: string;
-  display_name: string;
-  /**
-   * Direction label of the current technical setup (NOT a price prediction).
-   * Original "看多/看空" wording occasionally tripped Sonnet's "no investment
-   * advice" guardrail into returning an empty array; the neutral technical
-   * vocabulary "偏上行/偏下行/中性" (and "Bullish/Bearish/Neutral" for en
-   * mode) avoids the trigger. Legacy values are kept for backwards-compat.
-   */
-  stance:
-    | "偏上行"
-    | "偏下行"
-    | "中性"
-    | "看多"
-    | "看空"
-    | "Bullish"
-    | "Bearish"
-    | "Neutral";
-  rationale: string;
-}
 
 export interface TradingCommentary {
   market_overview: string;

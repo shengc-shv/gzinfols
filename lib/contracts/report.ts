@@ -6,7 +6,7 @@
  */
 
 /** 地域标记（gzinfo types.ts Locale 同名）：gz=广州辖区 / national=全国 / overseas=海外。 */
-import type { IndexQuote } from "./market";
+import type { IndexQuote, TickerAnalysis, WatchlistPick } from "./market";
 export type Locale = "gz" | "national" | "overseas";
 
 /** 报告板块键（5 个 tab）。 */
@@ -157,11 +157,12 @@ export interface ValueTag {
 }
 
 export interface TradingSection {
+  // SKIP_AI / LLM 失败恢复路径下字段可缺省（gzinfo types.ts 逐字；加密两字段按硬性规定不引入）
   market_overview?: string;
-  watchlist?: Array<{ symbol: string; note: string }>;
+  watchlist?: WatchlistPick[];
   risk_caveat?: string;
   generated_at: string;
-  tickers: unknown[];
+  tickers: TickerAnalysis[];
 }
 
 export interface DailyReport {

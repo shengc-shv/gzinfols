@@ -25,6 +25,18 @@ import { buildGdIpoSpoken, pickGdIpoCompanies, companyNameOf } from "../classify
 import { isGuangdongEnterprise } from "../../guangdong.mjs";
 
 /** 播放器元数据：renderHtml 注入 sticky 播放器时使用。 */
+/** 音频段落（gzinfo AudioSegment 逐字）：与 HTML 卡片 data-audio-section 匹配，timeupdate 驱动高亮。 */
+export interface AudioSegment {
+  id: string;
+  /** 段落在脚本中的起止秒（估算） */
+  startSec: number;
+  durationSec: number;
+  /** 该段提到的文章 URL 列表（关联卡片的 data-audio-section） */
+  refs: string[];
+  /** 段落纯文本（调试用） */
+  text: string;
+}
+
 export interface AudioMeta {
   /** 站点相对路径（site/audio/briefing-<date>.mp3） */
   src: string;
@@ -32,6 +44,8 @@ export interface AudioMeta {
   duration: string;
   /** 合成后端：tencent=腾讯云合成，piper=开源 Piper 本地合成 */
   backend?: "tencent" | "piper";
+  /** v2 段落信息：用于 HTML timeupdate 联动高亮（播放器段落联动） */
+  segments?: AudioSegment[];
 }
 
 /** 音频段落：与 HTML 卡片 data-audio-ref 对应，timeupdate 驱动高亮（v2 联动的数据基座）。 */

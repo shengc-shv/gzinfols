@@ -51,3 +51,28 @@ export interface SourceDef {
   tier?: SourceTier;
   notes?: string;
 }
+
+/* ───────── 分类常量（gzinfo lib/sources/constants.ts 移植，2026-09-13 渲染对齐） ───────── */
+
+/** 内容分类（与 ArticleCategory 同域；gzinfo 渲染层使用名）。 */
+export type Category = ArticleCategory;
+
+export const GD_PREFIX = "gd-";
+export const GZ_PREFIX = "gz-";
+export const DEFAULT_SCRAPER_SOURCE_ID = "gd-local-scraper";
+export const DEFAULT_GZ_SOURCE_ID = "gz-local";
+
+export const REGION_GZ: Category = "gz";
+export const REGION_GD_IPO: Category = "gd-ipo";
+export const REGION_IPO: Category = "ipo";
+
+/** 分类渲染/处理顺序（与渲染面板顺序一致，gzinfo 逐字）。 */
+export const CATEGORY_ORDER: Category[] = [
+  "tech",
+  "finance",
+  "gd-ipo",
+  "ipo",
+  "gz",
+  // 昨日股市（2026-08-25 新增）：A股/美股/港股信息，置于「广州本地」之后
+  "stocks",
+];

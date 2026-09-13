@@ -48,6 +48,8 @@ export interface RawArticle {
   stockCode?: string;
   /** 条目级子标签（昨日股市 a-share/hk/us；广州媒体 gz-media 等），采集元数据透传。 */
   subcategory?: string;
+  /** 渲染层注记（gzinfo 同款）：同文多源合并时记录「另见来源」名。 */
+  alsoFrom?: string[];
 }
 
 /** 归一化后条目：已通过时间红线，publishedAt 必填。 */

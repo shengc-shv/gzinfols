@@ -6,6 +6,7 @@ import "./_env";
 import { NodeFsAdapter, SystemClock } from "../lib/adapters";
 import { renderHtml, renderMarkdown } from "../lib/services/render";
 import type { DailyReport } from "../lib/contracts/report";
+import { setReportLocale } from "../lib/services/render/locale";
 
 async function main() {
   const clock = new SystemClock();
