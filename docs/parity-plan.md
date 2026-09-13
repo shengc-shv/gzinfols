@@ -83,7 +83,7 @@
 | P2 | scripts/build-site.mjs | index.html + archive.html 站点聚合 | ~300 | ✅ `scripts/build-site.mjs`（按 2.0 唯一存储适配） | B6 |
 | P3 | scripts/cleanup-history.mjs + workflow | 历史裁剪（近 N 天 + backup） | ~200 | ✅ `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs`（随 B5 提前落地） | B5 ✅ |
 | P4 | pipeline/bootstrap + context | 凭证校验/模式构建/tier 索引/aiAssets 装配 | ~500 | ⚠️ orchestrator 简版（缺凭证校验+aiAssets） | B2 |
-| P5 | 广东IPO健康度检查（daily.ts ⑦.5） | 0 条/滞后告警 | ~40 | ❌ | B3 |
+| P5 | 广东IPO健康度检查（daily.ts ⑦.5） | 0 条/滞后告警 | ~40 | ✅（09-13 修复漏接线——函数已定义但管线未调用） | B3 |
 
 ### 2.5 语音 / 运维 / 工作流
 | # | gzinfo 模块 | 功能 | 2.0 现状 | 批次 |
