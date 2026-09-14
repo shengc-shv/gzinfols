@@ -79,14 +79,28 @@
 
 ---
 
-## D. 既有疑点（需要你确认我的处置是否可接受）
+## D. 既有疑点 —— ✅ 已全部裁决并执行（2026-09-14）
 
-| # | 事项 | 我做了什么 | 需要你确认 |
+| # | 事项 | 裁决 | 执行结果 |
 |---|---|---|---|
-| D-1 | 历史产物 `history/2026-09-14/2026-09-14.html` | 按命名脱敏把其中的 `--accent-cmb` 一并改名（保持文件自洽） | 是否接受**改写已归档的历史产物**？如不接受我回滚该文件（则该期产物仍含旧变量名） |
-| D-2 | `data/article-history.json` | 人工判定后删除 **10 条** cnbc-top 噪音（政治/地缘/生活类），126→116，保留 4 条股市相关 | 是否接受动历史缓存？（这些条目本来也会被相关性评分 drop、7 天后自然过期） |
-| D-3 | `REPORT_BASE_URL` 默认值 | 在 `daily.yml` 里默认填了 `https://shengc-shv.github.io/gzinfols` | 确认这个就是线上 Pages 地址？若不是请给正确值（og:image 依赖它） |
-| D-4 | `data/publish-state.json` | 本地不存在（仅 CI 生成），我未改动 | 是否需要本地留档以便离线核对"今天是否已发布"？ |
+| D-1 | 历史产物 `history/2026-09-14/2026-09-14.html` | **改写** | ✅ 已改：`--accent-cmb`→`--accent-brand`（44 处）、`var(--cmb, …)`→`var(--brand, …)`（2 处），**色值一字未动**；并**顺带修正** `og:image`/`twitter:image` 的外域指向（原指向旧仓 `shengc-shv.github.io/gzinfo/`，正是 P1-2 那个 bug 被冻结在产物里的形态）。commit `4d249b4` |
+| D-2 | `data/article-history.json` | **清理** | ✅ 已清：287 → **274** 条（−13），删除的均为 `cnbc-top` 的非金融题材（政治 4 / 地缘冲突 4 / 选举体育 2 / 生活方式 2 / 美国科技政策 1）；保留 14 条股市/公司/基金/利率题材。格式（缩进/中文/尾换行）保持字节一致。commit `4d249b4` |
+| D-3 | `REPORT_BASE_URL` 默认值 | **确认** | ⚠️ 确认过程中发现**更重要的事实**：地址形式正确，但**站点此前从未上线** —— 见下方「D-3 衍生」。地址已随本次修复生效（实测 HTTP 200） |
+| D-4 | `data/publish-state.json` | 待定 | 仍无本地副本（仅 CI 生成），未改动 |
+
+### D-3 衍生：**发布链路此前从未跑通**（本轮最重要的发现，已修复）
+
+确认 D-3 时按线上地址探活，得到的是 `Site not found · GitHub Pages`（HTTP 404）。
+追查结论与处置：
+
+| 项 | 实测事实 |
+|---|---|
+| 线上站点 | `https://shengc-shv.github.io/gzinfols/` 建仓（2026-09-11）起一直 404 |
+| daily 运行史 | 仅 3 次（09-11 / 09-14×2），**结论全为 failure**，失败点固定为 `deploy` job 的 `deploy-pages@v4`（`build` 成功、报告已归档回 main） |
+| 根因 | 仓库 Pages 本源配置是**分支式**（`build_type: legacy`、`source: {branch: gh-pages}`，与 gzinfo 同构），而工作流用 **artifact 式**部署（`upload-pages-artifact` + `deploy-pages`）→ 机制不兼容，deploy 必失败；且仓库**没有 gh-pages 分支**，分支式配置也无内容可发 |
+| 旁证 | 工作流里一直留着 `Restore existing reports from gh-pages` 步骤 —— 原始设计就是分支式，中途被半迁移成 artifact 式，留下两套机制混用 |
+| 处置 | 已改为 `peaceiris/actions-gh-pages@v4` 推送 `gh-pages` 分支；建分支并首推；修正恢复步的失效判据（`ls site/*.html` 是扁平布局残留，恒为 0）并加恢复失败保护；删除 `deploy` job、`record` 改 `needs: build`、permissions 收敛为 `contents: write`。commit `92324b3` |
+| 验证 | Pages `status: building → built`；站点及 `index.html` / `archive.html` / `og-image.png` / `.nojekyll` / `2026-09-14/2026-09-14.html` **全部 HTTP 200**；首页 `og:image` 指向本仓；线上已无旧 CSS 变量名 |
 
 ---
 
@@ -135,9 +149,10 @@ P1-1 CNBC 换股市频道 · P1-2 og:image 修复 · P1-3 命名脱敏 —— **
 **测试测的不是生产代码**。已收敛（删副本 −249 行 + 测试改指 + 加「render 侧不得再导出」断言）。
 教训已记入审计报告：查重复须逐声明比对，且必须确认「生产 import 的是哪一份」。
 
-**D 类现状（延后，供你决定时参考最新数字）**：
-- D-1：`history/2026-09-14/2026-09-14.html` 仍含 **33 处**旧变量名（该期由 CI 在我改名前归档；
-  未来各期不会再出现）。是否改写这份已归档产物？
-- D-2：历史库现 **287 条**，其中 `cnbc-top` 27 条、**13 条明显噪音**（心理学/NFL/BRICS/
-  Strait of Hormuz/LA Clippers 等）。源已修 → 新跑不会再进；存量是否手工清？
-  （我原先基于旧快照做的清理因 CI 重写该文件而作废，已随 rebase 丢弃。）
+**D 类：已裁决并执行完毕**（详见上文 D 段与「D-3 衍生」）
+- D-1 ✅ 归档产物已改写（44 处变量名 + 2 处外域 og:image）
+- D-2 ✅ 历史库 287 → 274 条（删 13 条非金融噪音）
+- D-3 ✅ 地址已确认；**并由此发现站点此前从未上线**（Pages 分支式配置 vs 工作流 artifact 式部署不兼容），已改为 `peaceiris` 推 `gh-pages` 分支并验证上线
+- D-4 ⏸️ `data/publish-state.json` 本地留档与否，待定
+
+**C 类**：执行计划与预期效果见 `docs/plan-c-2026-09-14.md`（尚未动手）。
