@@ -40,8 +40,9 @@ on:
 
 permissions:
   contents: write   # 归档历史库 / 记账 publish-state 需 push main（2026-09-11 B5）
-  pages: write
-  id-token: write
+                    # 2026-09-14：发布改为推送 gh-pages 分支（peaceiris 用 GITHUB_TOKEN push），
+                    # 仍只需 contents: write；已移除 pages: write / id-token: write
+                    # （artifact 式部署 upload-pages-artifact + deploy-pages 已删除）。
 
 concurrency:
   group: pages
@@ -129,17 +130,27 @@ jobs:
           fi
           command -v ffmpeg >/dev/null 2>&1 || { echo "::error::ffmpeg 安装失败"; exit 1; }
 
-      # ---------- 恢复 gh-pages 历史到 site/（防 deploy-pages 全量替换清掉历史报告）----------
+      # ---------- 恢复 gh-pages 历史到 site/（发布根只保留最近 7 天 history/ 之外的长期归档）----------
+      # gh-pages 分支是**长期归档**：history/ 只留 7 天，靠本步把更早期的报告带进发布根，
+      # build-site 再以「gh-pages ∪ history ∪ 当日」重建 —— 故 gh-pages 事实上是无限期归档。
+      # 2026-09-14 修正：原判据 `ls site/*.html` 是**扁平布局时代的残留**，子目录布局下恒为 0；
+      # 且原实现无失败保护。现改为按期次计数，并在「分支存在却恢复出 0 期」时**中止**，
+      # 因为后续 peaceiris 是整树替换 —— 恢复失败会让已发布历史被清空。
       - name: Restore existing reports from gh-pages
         run: |
+          set -euo pipefail
           mkdir -p site
           if git ls-remote --exit-code --heads origin gh-pages >/dev/null 2>&1; then
             git fetch origin gh-pages --depth=1
             git archive origin/gh-pages | tar -x -C site
-            restored=$(ls -1 site/*.html 2>/dev/null | wc -l | tr -d ' ')
-            echo "Restored site files: ${restored}"
+            restored=$(find site -mindepth 2 -maxdepth 2 -name '*.html' | wc -l | tr -d ' ')
+            echo "Restored ${restored} 期 from gh-pages"
+            if [ "$restored" = "0" ]; then
+              echo "::error::gh-pages 分支存在但未恢复出任何期次 —— 中止，以免清空已发布历史"
+              exit 1
+            fi
           else
-            echo "gh-pages doesn't exist yet — first run"
+            echo "gh-pages 分支不存在 — 首次发布"
           fi
 
       # 生成当日报告（全 AI 流程）。
@@ -232,10 +243,26 @@ jobs:
       - name: 站点聚合（build-site：汇集各期 + index/archive/.nojekyll/og-image）
         run: npm run build-site
 
-      - name: 上传产物（Pages）
-        uses: actions/upload-pages-artifact@v3
+      # ---------- 发布到 gh-pages 分支（2026-09-14：修复「Pages 从未启用」）----------
+      # 根因实测：本仓库 GitHub Pages **从未启用**（GET /repos/shengc-shv/gzinfols/pages → 404），
+      # 而此前工作流用的是 artifact 式部署（upload-pages-artifact + deploy-pages），
+      # 在站点未启用时必然失败（「Get Pages site failed」）→ 4 次 daily 运行**全部**卡在
+      # deploy 步骤失败，线上 https://shengc-shv.github.io/gzinfols/ 一直是
+      # 「Site not found · GitHub Pages」——即发布链路从未真正跑通。
+      # 现改为与 gzinfo 同款**分支式发布**（peaceiris → gh-pages 分支；
+      # Pages 源 = Deploy from a branch: gh-pages / ，build_type=legacy），
+      # 该机制在本账号已验证可用（gzinfo 站点 build_type=legacy / status=built）。
+      # keep_files 取默认 false（整树替换）：site/ 已由「gh-pages 恢复 + history/ + 当日」
+      # 重建为完整快照，整树替换因此是自愈的（前一步已加恢复失败保护，不会清空历史）。
+      - name: 发布到 gh-pages
+        if: ${{ github.event_name == 'schedule' || inputs.publish == true }}
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: site
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
+          publish_branch: gh-pages
+          commit_message: "publish: 站点快照 ${{ github.run_id }}"
+
       - name: 存档 daily_reports
         uses: actions/upload-artifact@v4
         with:
@@ -243,24 +270,13 @@ jobs:
           path: daily_reports
           retention-days: 30
 
-  deploy:
-    needs: build
-    if: ${{ github.event_name == 'schedule' || inputs.publish == true }}
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: 部署到 GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
-
   # ---------- 发布来源记账（2026-09-11 B5；对齐 gzinfo「先发后记」）----------
-  # 独立 job，needs: deploy → 只有在 Pages 部署**成功后**才记账（因果序：先发布成功，后记账），
+  # 独立 job，needs: build → 发布已改为 build job 内的「发布到 gh-pages」步骤，
+  # 该步骤失败则 build 整体失败 → 本 job 不运行，因果序「先发布成功、后记账」依然成立。
   # 避免「记了没发」导致次日误判已发布。SOURCE 由触发方式计算：
   #   schedule → schedule；dispatch + release_mode=test → manual-test；否则 → manual-final。
   record:
-    needs: deploy
+    needs: build
     if: ${{ github.event_name == 'schedule' || inputs.publish == true }}
     runs-on: ubuntu-latest
     steps:
