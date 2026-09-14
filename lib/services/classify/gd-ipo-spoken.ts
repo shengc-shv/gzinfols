@@ -35,7 +35,10 @@ function recentMmddSet(days: number, today: string): Set<string> {
 
 /** ReportItem 发布时间戳（排序用；缺失排最后）。 */
 function dateValue(it: ReportItem): number {
-  return it.published_at ? new Date(it.published_at).getTime() : 0;
+  // gzinfo 逐字（lib/pipeline/side-outputs/gd-ipo.ts）：MM/DD → MM*100+DD。
+  // 此前误写为不存在的 it.published_at → 恒 0 → 同阶段排序退化为原序（官方测试 gd-ipo-side-output 抓出）。
+  const m = it.date.match(/^(\d{2})\/(\d{2})$/);
+  return m ? Number(m[1]) * 100 + Number(m[2]) : 0;
 }
 
 export function companyNameOf(title: string): string {
