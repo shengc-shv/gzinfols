@@ -259,6 +259,14 @@ jobs:
           path: data/llm-dump/
           if-no-files-found: warn
 
+      - name: 上传 LLM 调用上下文（dump）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: llm-dump-${{ github.run_id }}
+          path: data/llm-dump/
+          if-no-files-found: warn
+
       # ---------- 发布到 gh-pages 分支（2026-09-14：修复「Pages 从未启用」）----------
       # 根因实测：本仓库 GitHub Pages **从未启用**（GET /repos/shengc-shv/gzinfols/pages → 404），
       # 而此前工作流用的是 artifact 式部署（upload-pages-artifact + deploy-pages），
