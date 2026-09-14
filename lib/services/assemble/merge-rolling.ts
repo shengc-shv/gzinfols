@@ -7,8 +7,11 @@
  *  3. 未打标 → 需过「分行相关性」门槛（scoreBranchRelevance tier!=="drop"）才并入。
  * 背景：历史库 96% 未打标，裸放行会把个股财报/外文股市噪声灌满板块，
  * 违反「宁缺毋滥」与业务相关性红线。
+ *
+ * 2026-09-14（P0-3 收敛）：本函数此前在 `services/render/full.ts` 另有一份**逐字副本**
+ * （生产走本文件、测试走那份）——两份同时存在，改一处不生效，属「单一真源」失效的典型。
+ * 现 render 侧副本已删除，本文件为**唯一实现**；`full.ts` 不再导出该函数。
  */
-
 import type { ArticleInput } from "../../contracts/article";
 import type { DailyReport, ReportItem, ReportSectionKey } from "../../contracts/report";
 import type { SourceTier } from "../../contracts/source";
@@ -29,18 +32,78 @@ import { SECTIONS } from "../enrich/validator";
 const GD_ENTERPRISE_RE =
   /(广东|广州)(省|市)?[一-鿿]{0,3}(企业|公司|科技|集团)/;
 
+/**
+ * 滚动并入的逐闸门统计（2026-09-14 B-1 新增）。
+ *
+ * 背景：本函数有多道「宁缺毋滥」闸门，任何一道过严都会让主板块**静默变空**
+ * （实测归档某期 114 条滚动池仅并入 1 条：**63 条卡在「摘要≠标题复读」守卫**上，
+ *  因为历史库无 AI 摘要时 `excerpt` 回退成了标题 → summary 与 title 相同）。
+ *
+ * 处置口径（用户 2026-09-14 拍板）：**守卫不放宽**（信息密度原则），
+ * 但必须把每条被丢弃的原因计数暴露给调用方打日志 —— 空板块不能再静默。
+ */
+export interface MergeRollingStats {
+  /** 滚动池总数 */
+  considered: number;
+  /** 实际并入条数 */
+  merged: number;
+  /** 无 url */
+  droppedNoUrl: number;
+  /** 今日已展示（url 去重） */
+  droppedSeen: number;
+  /** AI 显式判无关（relevant === false） */
+  droppedRelevantFalse: number;
+  /** 未打标且相关性评分判 drop */
+  droppedByScore: number;
+  /** 内容判定无板块归属（或命中资本运作公告分流） */
+  droppedNoSection: number;
+  /** 无摘要可用 */
+  droppedNoSummary: number;
+  /** 「摘要 ≠ 标题复读」守卫 */
+  droppedDegenerate: number;
+}
+
+/** 归零的滚动并入统计（调用方构造后传入本函数的 stats 参数）。 */
+export function makeMergeRollingStats(): MergeRollingStats {
+  return {
+    considered: 0,
+    merged: 0,
+    droppedNoUrl: 0,
+    droppedSeen: 0,
+    droppedRelevantFalse: 0,
+    droppedByScore: 0,
+    droppedNoSection: 0,
+    droppedNoSummary: 0,
+    droppedDegenerate: 0,
+  };
+}
+
 export function mergeRollingIntoReport(
   report: DailyReport,
   rolling: ArticleInput[],
   tierBySource: Map<string, SourceTier | undefined>,
+  stats?: MergeRollingStats,
 ): DailyReport {
+  const bump = (k: keyof MergeRollingStats): void => {
+    if (stats) stats[k] += 1;
+  };
   const sectionOf = (a: ArticleInput): ReportSectionKey | null => {
     const title = a.title_cn || a.title || "";
     // 无状态源架构红线（2026-08-29 用户）：最终板块归属一律由**内容判定**，
     // 数据源的 category/subcategory 只是采集元数据，不得决定渲染分类。
     // tech/ipo 是独立内容栏目（科技前沿/IPO 动态），按内容类别归栏，其余全走内容判定。
     if (a.category === "tech") return "tech";
-    if (a.category === "ipo" || a.category === "gd-ipo") {
+    // IPO：结构化 IPO 记录（爬虫透传 ipoStage/gdBasis）+ 结构化发出源类目
+    // （category ∈ {ipo, gd-ipo} 仅允许给结构化 IPO 采集源使用——不变量由
+    //  tests/source-category-invariant.test.ts 机械校验；通用 RSS 配成这两类会绕过
+    //  内容判定直通本板块，2026-09-14 crunchbase 事故即此）。
+    // 历史库不保留 ipoStage/gdBasis，故滚动并入的条目仍主要靠 category 识别。
+    if (
+      a.category === "ipo" ||
+      a.category === "gd-ipo" ||
+      a.ipoStage ||
+      a.gdBasis
+    ) {
       // gzinfo 2026-08-23：已上市公司资本运作公告（定增/审核问询/购买资产/解禁等）
       // 不进 IPO 动态，与 PASS1/groupRaw 分流口径一致。
       if (
@@ -76,9 +139,20 @@ export function mergeRollingIntoReport(
     ipo: [],
   };
   const rankKey = new Map<string, number>(); // url → 发布时间戳，用于板块内排序
+  if (stats) stats.considered = rolling.length;
   for (const a of rolling) {
-    if (!a.url || seen.has(a.url)) continue; // 今日已展示 → 跳过
-    if (a.relevant === false) continue;
+    if (!a.url) {
+      bump("droppedNoUrl");
+      continue;
+    }
+    if (seen.has(a.url)) {
+      bump("droppedSeen"); // 今日已展示 → 跳过
+      continue;
+    }
+    if (a.relevant === false) {
+      bump("droppedRelevantFalse");
+      continue;
+    }
     if (a.relevant !== true) {
       const rel = scoreBranchRelevance({
         title: a.title_cn || a.title || "",
@@ -87,10 +161,16 @@ export function mergeRollingIntoReport(
         sourceId: a.sourceId,
         summary: a.summary,
       });
-      if (rel.tier === "drop") continue;
+      if (rel.tier === "drop") {
+        bump("droppedByScore");
+        continue;
+      }
     }
     const sec = sectionOf(a);
-    if (!sec) continue;
+    if (!sec) {
+      bump("droppedNoSection");
+      continue;
+    }
     const d = a.publishedAt ?? a.fetchedAt;
     // 卡片日期与窗口判定同口径（报告时区），避免 UTC 下跨日错位
     // （如北京时间 08-30 02:00 存为 08-29 18:00Z → UTC getDate 误显 08/29）。
@@ -108,18 +188,27 @@ export function mergeRollingIntoReport(
       summary = (a.excerpt || "").slice(0, 90).trim();
     }
     if (!summary) summary = (a.excerpt || "").slice(0, 90).trim();
-    if (!summary) continue; // 无摘要且无正文 → 跳过（避免空卡片）
+    if (!summary) {
+      bump("droppedNoSummary"); // 无摘要且无正文 → 跳过（避免空卡片）
+      continue;
+    }
     // 退化卡片守卫（gzinfo 2026-08-29）：有效摘要若与标题**实质相同** → 只是标题复读，跳过。
     // 比较前先剥离开头的【栏目/业务线】标签前缀：历史库里大量条目的 summary 是
     // 「【财富管理】+ 原标题」，若只做严格相等比较会被标签前缀绕过。
+    //
+    // B-1（2026-09-14）：本守卫**刻意保留**（信息密度原则，用户拍板不放宽），
+    // 但必须计数——历史库无 AI 摘要时 excerpt 回退成标题，会让这里成批吞掉条目
+    // （实测某期 114 条滚动池在此丢掉 63 条 → 主板块近乎全空）。计数交由调用方打日志。
     const stripTagPrefix = (s: string) => s.replace(/^(\s*【[^】]*】\s*)+/, "").trim();
     const titleText = stripTagPrefix(a.title_cn || a.title || "");
     const summaryText = stripTagPrefix(summary);
     if (
       titleText &&
       (summaryText === titleText || summaryText === titleText.slice(0, 90))
-    )
+    ) {
+      bump("droppedDegenerate");
       continue;
+    }
     extra[sec].push({
       url: a.url,
       title_cn: a.title_cn || a.title || "",
@@ -135,6 +224,7 @@ export function mergeRollingIntoReport(
       // 无状态源架构红线（2026-08-29 用户）：locale 由内容判定（广州锚），不依赖采集分类。
       locale: isGzLocalCandidate(a.title_cn || a.title || "") ? "gz" : "national",
     });
+    bump("merged");
     rankKey.set(a.url, (a.publishedAt ?? a.fetchedAt)?.getTime() ?? 0);
     seen.add(a.url);
   }

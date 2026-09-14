@@ -14,6 +14,7 @@
     "typecheck": "tsc --noEmit",
     "test": "node --import tsx --test \"tests/**/*.test.ts\"",
     "build-site": "node scripts/build-site.mjs",
+    "og:image": "node scripts/make-og-image.mjs",
     "tts:fallback": "tsx scripts/tts-fallback.ts",
     "tts:probe": "tsx scripts/tts-probe.ts",
     "seed:registry": "node scripts/seed-guangdong-registry.mjs",

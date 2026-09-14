@@ -1,6 +1,7 @@
 import type {
   DailyReport,
   MarketCard,
+  RenderInjection,
   ReportInsight,
   ReportItem,
   ReportMustRead,
@@ -61,9 +62,15 @@ import {
   classifyGdIpo,
   inferStage,
   isGdStage,
+  IPO_STAGE_ORDER,
+  GD_IPO_STAGE_LABEL,
   type GdIssuerRegistry,
   type GdStage,
 } from "../classify/gd-ipo";
+// 阶段枚举（GdStage / GD_STAGES / IPO_STAGE_ORDER / GD_IPO_STAGE_LABEL）**单一真源**
+// 在 services/classify/gd-ipo.ts。渲染层此前各留一份私有副本（2026-09-14 P0-3 修复），
+// 与「新增阶段漏改某一处」的风险同构；此处 re-export 保持既有 import 路径可用。
+export { IPO_STAGE_ORDER };
 import { topGdIpo, gdIpoStageOf, companyNameOf } from "../classify/gd-ipo-spoken";
 import { IPO_LIST_WINDOW_DAYS } from "../../ipo-config";
 
@@ -1060,15 +1067,9 @@ export function renderStockFilterBar(): string {
  * 广东 IPO 阶段展示顺序 —— 与 `BIZ_VALUE_RANK`（商机价值优先）**同序**：
  * 辅导备案（Pre-IPO，最佳商机）→ 辅导完成（临近申报）→ 注册发行（募资在即）→ 在审 → 已上市（已兑现）。
  * 刻意与顶部横滑卡保持同一顺序，避免同一份数据在页面里出现两种读法。
+ *
+ * 2026-09-14（P0-3）：本文件此前的私有副本已删除，改由 `services/classify/gd-ipo.ts` 导入。
  */
-export const IPO_STAGE_ORDER: GdStage[] = [
-  "stage-tutoring",
-  "stage-coach-done",
-  "stage-registered",
-  "stage-reviewing",
-  "stage-listed",
-];
-
 /** 阶段组标题（「阶段待定」= 无阶段信号的条目，有数据才渲染）。 */
 function ipoStageGroupLabel(s: GdStage | ""): string {
   return s === "" ? "阶段待定" : GD_IPO_STAGE_LABEL[s] || "IPO";
@@ -1413,20 +1414,15 @@ function renderStockRecap(report: DailyReport): string {
 }
 
 /**
- * 广东 IPO 阶段 → 展示文案（**唯一**来源：横滑徽章、底部四阶段分栏组头、筛选条 chips 共用）。
+ * 广东 IPO 阶段 → 展示文案（横滑徽章、底部四阶段分栏组头、筛选条 chips 共用）。
  *
  * ⚠️ 2026-09-10 用户拍板口径：**「注册生效」归「注册发行」**，不归「已上市」
  * （注册生效 = 待发行，语义上未必已挂牌）。此前官方源把它判 stage-listed、
  * 关键词表判 stage-registered → 同卡分栏与徽章自相矛盾（P0-1），现已统一。
+ *
+ * 2026-09-14（P0-3）：本文件此前的私有副本（注释还误称「唯一来源」）已删除，
+ * 改由 `services/classify/gd-ipo.ts` 导入 —— 阶段枚举单一真源。
  */
-const GD_IPO_STAGE_LABEL: Record<string, string> = {
-  "stage-tutoring": "辅导备案",
-  "stage-coach-done": "辅导完成",
-  "stage-registered": "注册发行",
-  "stage-reviewing": "在审",
-  "stage-listed": "已上市",
-  "": "IPO",
-};
 
 /**
  * 广东 IPO 横滑卡（任务六）：在「今日必读」与「股市播报」各插一行，最多 3 条最有机会
@@ -1477,170 +1473,6 @@ export function renderGdIpoStrip(items: ReportItem[], opts?: { section?: "must" 
 const FOREIGN_REGION_RE =
   /上海|北京|深圳|江苏|浙江|南京|苏州|杭州|宁波|成都|重庆|天津|武汉|长沙|合肥|青岛|济南|福州|厦门|昆明|西安|郑州|东莞|佛山|珠海|中山|惠州|汕头|湛江|茂名|肇庆|江门|清远|韶关|梅州|河源|阳江|揭阳|汕尾|潮州|云浮|广东/;
 
-/** 摘要地域一致性兜底（2026-08-23 R3 扩展）：摘要声称「广东/广州…企业」的写法。 */
-const GD_ENTERPRISE_RE =
-  /(广东|广州)(省|市)?[一-鿿]{0,3}(企业|公司|科技|集团)/;
-
-/**
- * 已上市公司资本运作公告词 / IPO 流程词已上移至 `lib/output/render/cards.ts`
- * （2026-09-10 P0-1 同源治理：render 的板块分流与 side-output 的入池判定必须共用
- * 同一份词表，否则同一篇稿子在两处的归属会不一致）。
- * 本文件经顶部 import 使用 `IPO_CAPITAL_ACT_RE` / `IPO_FLOW_RE`。
- */
-
-/**
- * subcategory → 部门中文 tag 的双标构造已统一移至 lib/classify/tag-rollup.ts 的
- * rollUpTags()（2026-08-24）：同时消费 subcategory 与自由标签，确保每张卡必带 ≥1 个
- * 业务线部门标签。下方 mergeRollingIntoReport 的标签即调用 rollUpTags。
- */
-
-/**
- * 把滚动历史（报告时区**日历日** 今天+昨天，buildRolling 产物——buildRolling 按
- * FETCH_WINDOW_DAYS=2 取发布日期 ∈ {今天,昨天} 的历史条目；2026-08-25 核实修正原
- * 误写"近 7 天"，2026-08-31 由 48h 滑动窗口改为日历日窗口，避免前天信息混入）中
- * 「符合要求」的条目并入 report.sections，
- * 使渲染展示过去符合要求的资讯（有摘要用摘要、无则摘录原文前 90 字），而非仅今日 AI 成稿。
- * （2026-08-21 用户：过去符合要求的都展示 + 区分零售各部门呈现。）
- *
- * 规则：
- * - 与今日成稿 URL 去重（今日优先）；
- * - 历史条目按发布时间倒序追加到板块末尾（今日 AI 条目保持 rank 在前）；
- * - ai_relevant===false（AI 判无关）的历史条目不并入；ai_relevant===null（未打标，retag-fill 覆盖低）的历史条目需过分行相关性门槛（评分器 tier!=="drop"）才并入（2026-08-29 方案③ 放宽，救 gz_local 空/板块偏薄，同时挡住个股财报类噪声）；
- * - summary 优先取历史库缓存摘要（预分析回填），否则摘录 excerpt；
- * - source_type 按源等级 tier 推断（T1/T1.5 → official，其余 → media）；
- * - tags 由 subcategory 映射为中文部门 tag（财富/信贷/私行/客群）。
- */
-export function mergeRollingIntoReport(
-  report: DailyReport,
-  rolling: ArticleInput[],
-  tierBySource: Map<string, SourceTier | undefined>,
-): DailyReport {
-  const sectionOf = (a: ArticleInput): ReportSectionKey | null => {
-    const title = a.title_cn || a.title || "";
-    // 无状态源架构红线（2026-08-29 用户）：最终板块归属一律由**内容判定**，
-    // 数据源的 category/subcategory 只是采集元数据，不得决定渲染分类。
-    // tech/ipo 是独立内容栏目（科技前沿/IPO 动态），按内容类别归栏，其余全走内容判定。
-    if (a.category === "tech") return "tech";
-    if (a.category === "ipo" || a.category === "gd-ipo") {
-      // 2026-08-23：已上市公司资本运作公告（定增/审核问询/购买资产/解禁等）不进 IPO 动态，
-      // 与 PASS1/groupRaw 分流口径一致（诺思兰德「审核问询函」等不再污染 IPO 板块）。
-      if (
-        IPO_CAPITAL_ACT_RE.test(`${title} ${a.excerpt || ""}`) &&
-        !IPO_FLOW_RE.test(`${title} ${a.excerpt || ""}`)
-      ) {
-        return null;
-      }
-      return "ipo";
-    }
-    // 2026-08-30：媒体源报道的广东企业 IPO 动态（注册生效/辅导备案/过会等，
-    // 东财在审表状态滞后时由媒体报道补位）→ 内容判定归 IPO 动态板块。
-    if (isGdIpoCandidate(title, a.excerpt || "")) return "ipo";
-    // 广州本地：只看标题内容（广州锚 + 银行业务线），与采集分类无关——
-    // 广州市政府批复（SOURCE_ROUTE 归 finance）标题含「广州」→ 进 gz_local。
-    // 摘要里的「广州」是 AI 解读视角（「分行应跟踪广州房贷…」），不代表事件在广州。
-    if (isGzLocalCandidate(title)) return "gz_local";
-    // 政策与市场：内容判定（外地地名/政策动作/全国市场信号）→ 政策与市场；否则业务启示。
-    if (isPolicyMarketCandidate(title, a.excerpt || "")) return "policy_market";
-    return "biz_insight";
-  };
-  const seen = new Set<string>();
-  for (const sec of SECTIONS) {
-    for (const it of report.sections[sec] ?? []) {
-      if (it.url) seen.add(it.url);
-    }
-  }
-  const extra: Record<ReportSectionKey, ReportItem[]> = {
-    gz_local: [],
-    biz_insight: [],
-    policy_market: [],
-    tech: [],
-    ipo: [],
-  };
-  const rankKey = new Map<string, number>(); // url → 发布时间戳，用于板块内排序
-  for (const a of rolling) {
-    if (!a.url || seen.has(a.url)) continue; // 今日已展示 → 跳过
-    // 「符合要求」三态（2026-08-29 方案③，放宽覆盖但守业务相关性）：
-    //  1. ai_relevant===true  → 无条件并入（与放宽前一致）；
-    //  2. ai_relevant===false → 排除（AI 明确判无关，始终是硬门槛）；
-    //  3. ai_relevant===null（未打标）→ 需过「分行相关性」门槛才并入（下方评分判定）。
-    // 背景：历史库 96% 未打标，放宽前条目池仅 25 条 → 板块几乎只含今日新条目、gz_local 常空。
-    // 但不能裸放行：实测 305 条未打标条目里 156 条是个股财报（九毛九/周六福/东方盛虹半年报）
-    // 与外文股市噪声，裸放行会把它们灌满政策与市场/业务启示，违反 08-21「宁缺毋滥」
-    // 与「业务启示必须能挂钩客群/财富/私行/信贷」的业务相关性红线。
-    // 故未打标条目卡 tier!=="drop"（实测：挡掉 156 条噪声，放行 149 条带业务线标签的相关条目）。
-    if (a.relevant === false) continue;
-    if (a.relevant !== true) {
-      const rel = scoreBranchRelevance({
-        title: a.title_cn || a.title || "",
-        category: a.category,
-        subcategory: a.subcategory,
-        sourceId: a.sourceId,
-        summary: a.summary,
-      });
-      if (rel.tier === "drop") continue;
-    }
-    const sec = sectionOf(a);
-    if (!sec) continue;
-    const d = a.publishedAt ?? a.fetchedAt;
-    // 卡片日期与窗口判定同口径（报告时区 Asia/Shanghai），避免 UTC 下跨日错位
-    // （如北京时间 08-30 02:00 存为 08-29 18:00Z → UTC getDate 误显 08/29）。
-    const mmdd = d ? todayKey(d).slice(5).replace("-", "/") : "";
-    const tier = a.tier ?? tierBySource.get(a.sourceId);
-    // 2026-08-23：历史缓存摘要地域一致性兜底（R3 扩展）——标题无粤地名但摘要声称
-    // 「广东/广州…企业」（如北交所全国公告被模板标成「广东企业」）→ 摘要疑误，
-    // 降级用原文摘录，避免错误地域信息进报告。
-    let summary = (a.summary || "").trim();
-    if (
-      summary &&
-      GD_ENTERPRISE_RE.test(summary) &&
-      !FOREIGN_REGION_RE.test(a.title_cn || a.title || "")
-    ) {
-      summary = (a.excerpt || "").slice(0, 90).trim();
-    }
-    if (!summary) summary = (a.excerpt || "").slice(0, 90).trim();
-    if (!summary) continue; // 无摘要且无正文 → 跳过（避免空卡片）
-    // 退化卡片守卫（2026-08-29）：有效摘要若与标题**实质相同** → 只是标题复读，跳过。
-    // 比较前先剥离开头的【栏目/业务线】标签前缀：历史库里大量条目的 summary 是
-    // 「【财富管理】+ 原标题」（如「【财富管理】深夜，利空突袭，黄金直线跳水！…」），
-    // 若只做严格相等比较会被标签前缀绕过（2026-08-29 实跑实测：biz_insight 20 条全是此类）。
-    // 来源：lib/ingest/merge.ts 的 excerpt fallback（无 excerpt 时用 title 前 90 字符占位）。
-    // 实测方案A 下新并入的 149 条中 96 条（64.4%）属此类，占满板块上限会稀释有效信息，
-    // 违反 PRINCIPLES 原则 2（信息密度）。
-    const stripTagPrefix = (s: string) => s.replace(/^(\s*【[^】]*】\s*)+/, "").trim();
-    const titleText = stripTagPrefix(a.title_cn || a.title || "");
-    const summaryText = stripTagPrefix(summary);
-    if (
-      titleText &&
-      (summaryText === titleText || summaryText === titleText.slice(0, 90))
-    )
-      continue;
-    extra[sec].push({
-      url: a.url,
-      title_cn: a.title_cn || a.title || "",
-      title_orig: a.title_cn ? a.title : undefined,
-      source: a.source || "",
-      source_type: tier === "T1" || tier === "T1.5" ? "official" : "media",
-      tier,
-      date: mmdd,
-      summary,
-      importance: 2,
-      rank: 0,
-      tags: rollUpTags(a),
-      // 无状态源架构红线（2026-08-29 用户）：locale 由内容判定（广州锚），不依赖采集分类。
-      locale: isGzLocalCandidate(a.title_cn || a.title || "") ? "gz" : "national",
-    });
-    rankKey.set(a.url, (a.publishedAt ?? a.fetchedAt)?.getTime() ?? 0);
-    seen.add(a.url);
-  }
-  // 板块内历史条目按发布时间倒序追加（今日 AI 条目已在数组头部保持 rank）
-  for (const sec of SECTIONS) {
-    extra[sec].sort((x, y) => (rankKey.get(y.url) ?? 0) - (rankKey.get(x.url) ?? 0));
-    report.sections[sec] = [...report.sections[sec], ...extra[sec]];
-    // 重排 rank（今日条目已由 finalizeRanks 生成，历史追加后统一重编号）
-    report.sections[sec].forEach((it, i) => (it.rank = i + 1));
-  }
-  return report;
-}
 
 /**
  * SKIP_AI 模式执行摘要回填（2026-08-21 修复：store.json 复用断链）。
@@ -1775,7 +1607,7 @@ export function mergeStoredExecutive(
 export function renderHtml(
   report: DailyReport,
   date: string,
-  opts: { audio?: AudioMeta } = {},
+  opts: RenderInjection & { audio?: AudioMeta } = {},
 ): string {
   // 跨板块去重（一文一卡）：同一 URL 只展示一次，优先级
   // 广州本地 > 业务启示 > 政策与市场 > 科技前沿 > IPO。
@@ -1851,20 +1683,43 @@ export function renderHtml(
   ].filter((t) => t.count > 0 || t.alwaysShow);
 
   const totalItems = gzLocal.length + bizInsight.length + policyMarket.length + techAll.length;
-  // 数据截止时间用北京时间（Asia/Shanghai，UTC+8 无夏令时）。此前 toTimeString()
-  // 在 CI（ubuntu=UTC）下显示 UTC 时间（如 11:14 实为北京 19:14），误导读者。
-  const nowHm = new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Asia/Shanghai",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }).format(new Date());
+  // 数据截止时间（2026-09-14 P0-4）：由调用方注入 `opts.now`（管线传 ctx.startTime），
+  // 服务层**不再回落 `new Date()`** —— 隐式时钟会让同一天两次渲染结果不同（破坏可复现性），
+  // 也让「渲染时刻」绕过注入。缺省则不显示时刻（宁缺毋滥，不编造时间）。
+  // 时区固定北京时间（Asia/Shanghai，UTC+8 无夏令时）：此前 toTimeString() 在 CI(UTC)
+  // 下显示 UTC 时间（11:14 实为北京 19:14），误导读者。
+  const nowHm = opts.now
+    ? new Intl.DateTimeFormat("en-GB", {
+        timeZone: "Asia/Shanghai",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+      }).format(opts.now)
+    : "";
   const hero = report.hero_line?.trim();
-  // 微信/QQ/推特 等转发卡片元信息：默认 gh-pages 根，可用 REPORT_BASE_URL 覆盖。
-  // 2026-09-01 修复：fallback 曾为旧仓库名 gzcmbdf3（该 repo 已不存在）→ og-image.png
-  // 404 → 转发卡片缩略图不显示（只剩标题/描述文字）。改为 gzinfo，与 notify-daily.ts、
-  // daily.yml 健康检查的 fallback 保持一致。
-  const shareBase = process.env.REPORT_BASE_URL || "https://shengc-shv.github.io/gzinfo";
+  // 微信/QQ/推特 等转发卡片元信息（2026-09-14 P1-2 + P0-4）：基址由调用方注入
+  // （REPORT_BASE_URL → ctx.config.reportBaseUrl）。
+  // 此前硬编码 fallback 指向**旧仓库** gzinfo 的 gh-pages 域，且本仓库不存在
+  // og-image.png → 每次发布都带一个必然 404 的外域缩略图。
+  // 现在的口径：baseUrl 为空则**完全不输出** og:image / twitter:image
+  // （宁可无缩略图，也不指向他仓 404；同时 warn 提示配置缺失）。
+  const shareBase = (opts.baseUrl ?? "").replace(/\/+$/, "");
+  if (!shareBase) {
+    console.warn(
+      "[render] 未提供 baseUrl（REPORT_BASE_URL）→ 输出不含 og:image/twitter:image；" +
+        "转发卡片将无缩略图。请在 CI/本地注入 REPORT_BASE_URL 指向本仓 Pages 根。",
+    );
+  }
+  const shareImageTags = shareBase
+    ? `<meta property="og:image" content="${shareBase}/og-image.png">
+<meta property="og:image:width" content="240">
+<meta property="og:image:height" content="240">
+`
+    : "";
+  const shareTwitterImage = shareBase
+    ? `<meta name="twitter:image" content="${shareBase}/og-image.png">
+`
+    : "";
   const shareTitle = `${STR.siteTitle} · ${date}`;
   const shareDesc = hero
     ? `今日定调：${hero}`
@@ -1880,14 +1735,10 @@ export function renderHtml(
 <meta property="og:type" content="website">
 <meta property="og:title" content="${escapeHtml(shareTitle)}">
 <meta property="og:description" content="${escapeHtml(shareDesc)}">
-<meta property="og:image" content="${shareBase}/og-image.png">
-<meta property="og:image:width" content="240">
-<meta property="og:image:height" content="240">
-<meta name="twitter:card" content="summary_large_image">
+${shareImageTags}<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${escapeHtml(shareTitle)}">
 <meta name="twitter:description" content="${escapeHtml(shareDesc)}">
-<meta name="twitter:image" content="${shareBase}/og-image.png">
-<style>
+${shareTwitterImage}<style>
 ${THEME_CSS}
 ${AUDIO_HIGHLIGHT_CSS}
   /* 商机洞察客户客群标签 (2026-09-08) */
@@ -1911,7 +1762,7 @@ ${AUDIO_HIGHLIGHT_CSS}
     <div class="eyebrow">广州地区 · 零售业务每日资信（个人整理，非本行立场）</div>
     <h1>${zhDate}</h1>
     ${hero ? `<p class="hero-line">今日定调：${escapeHtml(hero)}</p>` : ""}
-    <p class="meta-line">数据截至 ${nowHm} · 去重后资讯 ${totalItems} 条 · 商机 ${report.insights?.length ?? 0} 条${process.env.WEB_MODE === "true" ? ` · <a class="archive" href="../archive.html">${STR.archiveLink}</a>` : ""}</p>
+    <p class="meta-line">${nowHm ? `数据截至 ${nowHm} · ` : ""}去重后资讯 ${totalItems} 条 · 商机 ${report.insights?.length ?? 0} 条${opts.webMode === true ? ` · <a class="archive" href="../archive.html">${STR.archiveLink}</a>` : ""}</p>
   </header>
 
   ${renderReportExec(report)}
@@ -1942,7 +1793,7 @@ ${AUDIO_HIGHLIGHT_CSS}
 
   <footer>
     <p>免责声明：本页面为个人学习项目，内容基于公开信息整理，不代表任何机构立场；市场信息不构成投资建议。页面面向内部参考，请勿外传。</p>
-    ${process.env.WEB_MODE === "true" ? `<p><a class="archive" href="../archive.html">${STR.archiveLink}（8月20日 / 8月19日 / 更多 →）</a></p>` : ""}
+    ${opts.webMode === true ? `<p><a class="archive" href="../archive.html">${STR.archiveLink}（8月20日 / 8月19日 / 更多 →）</a></p>` : ""}
   </footer>
 </main>
 <script>

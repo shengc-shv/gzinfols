@@ -12,7 +12,10 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { mergeRollingIntoReport } from "../lib/services/render";
+// 2026-09-14（P0-3 收敛）：本函数唯一实现在 services/assemble/merge-rolling.ts，
+// render/full.ts 的逐字副本已删除。此前本测试 import 的是那份**副本**，
+// 而生产走 assemble —— 测试与生产各测一份，是「单一真源」失效的典型。
+import { mergeRollingIntoReport, makeMergeRollingStats } from "../lib/services/assemble/merge-rolling";
 import type { ArticleInput } from "../lib/contracts/article";
 import type { DailyReport, ReportItem } from "../lib/contracts/report";
 import type { SourceTier } from "../lib/contracts/source";
@@ -322,4 +325,65 @@ test("已上市公司资本运作公告（审核问询/定增）不进 IPO 板�
   // R3 兜底：诺思兰德若误入，摘要也不该是「广东企业」模板（此处已被分流，直接断言无模板残留）
   const all = JSON.stringify(report.sections);
   assert.ok(!all.includes("广东企业"), "模板错误摘要不应进报告");
+});
+
+/**
+ * B-1（2026-09-14 用户拍板）：退化卡片守卫**不放宽**，但每一道闸门丢弃的数量必须可见。
+ *
+ * 背景：实测某期 114 条滚动池仅并入 1 条 —— **63 条卡在「摘要≠标题复读」守卫**上
+ * （历史库无 AI 摘要时 excerpt 回退成标题 → summary 与 title 相同），而这个过程此前**完全静默**。
+ * 本测试锁定：stats 参数必须逐闸门如实计数，供调用方打日志。
+ */
+test("B-1：stats 逐闸门计数（摘要复读 / 无摘要 / 今日已展示 / 相关性评分）", () => {
+  const report = {
+    ...emptyReport,
+    sections: { ...emptyReport.sections, biz_insight: [] as ReportItem[] },
+  };
+  const rolling: ArticleInput[] = [
+    // ① 正常并入
+    mkArticle({ url: "https://s/ok", title: "央行降准释放流动性", summary: "历史摘要：降准 0.5 个百分点。" }),
+    // ② 摘要与标题复读（无 AI 摘要 → excerpt 回退成标题）
+    mkArticle({ url: "https://s/dup", title: "某地楼市新政落地", summary: "", excerpt: "某地楼市新政落地" }),
+    // ③ 无摘要且无正文
+    mkArticle({ url: "https://s/nosum", title: "无摘要条目", summary: "", excerpt: "" }),
+    // ④ AI 显式判无关
+    mkArticle({ url: "https://s/irrelevant", title: "无关条目", summary: "摘要内容足够长以避免复读判定。", relevant: false }),
+    // ⑤ 无 url
+    mkArticle({ url: "", title: "无 url 条目", summary: "摘要内容足够长以避免复读判定。" }),
+  ];
+  const stats = makeMergeRollingStats();
+  mergeRollingIntoReport(report, rolling, tierMap, stats);
+
+  assert.equal(stats.considered, 5, "滚动池总数应为 5");
+  assert.equal(stats.merged, 1, "仅第 ① 条应并入");
+  assert.equal(stats.droppedDegenerate, 1, "摘要复读守卫应计 1 条（B-1 关键观测点）");
+  assert.equal(stats.droppedNoSummary, 1, "无摘要应计 1 条");
+  assert.equal(stats.droppedRelevantFalse, 1, "AI 判无关应计 1 条");
+  assert.equal(stats.droppedNoUrl, 1, "无 url 应计 1 条");
+  assert.equal(
+    stats.merged +
+      stats.droppedNoUrl +
+      stats.droppedSeen +
+      stats.droppedRelevantFalse +
+      stats.droppedByScore +
+      stats.droppedNoSection +
+      stats.droppedNoSummary +
+      stats.droppedDegenerate,
+    stats.considered,
+    "各闸门计数之和必须等于滚动池总数（不得有静默丢弃）",
+  );
+});
+
+/**
+ * 单一真源锁定（2026-09-14 P0-3）：本函数此前在 services/render/full.ts 另有一份逐字副本，
+ * 生产走 assemble、测试走 render —— 改一处不生效。现副本已删除；
+ * 若有人再复制一份并导出，本测试即红。
+ */
+test("mergeRollingIntoReport 单一真源：render 侧不再导出副本", async () => {
+  const render = (await import("../lib/services/render")) as Record<string, unknown>;
+  assert.equal(
+    render.mergeRollingIntoReport,
+    undefined,
+    "services/render 不得再导出 mergeRollingIntoReport（唯一实现在 services/assemble/merge-rolling.ts）",
+  );
 });

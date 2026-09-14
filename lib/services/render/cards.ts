@@ -9,8 +9,6 @@ import { TIER_COLORS } from "./theme";
 import { SOURCE_TIER_LABELS, SOURCE_TIER_ORDER, type SourceTier } from "../../contracts/source";
 import { REPORT_LOCALE } from "./locale";
 import { getReportTz, isWithinCalendarDays } from "../../utils/time";
-// 2026-08-30：广东企业判定（名单公司名/城市/代码三层），用于媒体源报道的广东企业 IPO 动态路由
-import { isGuangdongEnterprise } from "../../guangdong.mjs";
 
 // ----- types -----
 export type SourceGroup = {
@@ -124,87 +122,28 @@ export function formatDate(d: Date | undefined): string {
 
 // ----- raw article renderers -----
 
-/** 广州严格锚（2026-08-21 重构 #9：「广州本地」板块严格过滤，宁缺毋滥） */
-export const GZ_ANCHOR_RE =
-  /广州|穗|天河|海珠|越秀|荔湾|白云|黄埔|番禺|南沙|增城|从化|花都|琶洲|珠江新城|白鹅潭|广州开发区|中新知识城/;
-
 /**
- * 广州本地业务相关性红线（2026-08-29 用户拍板：广州本地板块须与客群/财富/私行/信贷挂钩）。
- * 「广州本地」是稀缺位，植物园志愿者、公安暂停服务、学校上新这类本地生活政务
- * 虽含广州锚，但与零售银行业务无关，不应占用该板块（宁缺毋滥的补充门槛）。
+ * 内容判定词表与候选函数 —— **单一真源**在 `services/enrich/heuristics.ts`。
+ *
+ * 2026-09-14（P0-3）：本文件此前逐字复制了该模块的全部词表与 3 个候选函数
+ * （8 个正则 + isGzLocalCandidate / isPolicyMarketCandidate / isGdIpoCandidate），
+ * 与 enrich 侧共用却各存一份 —— 调一处不生效的典型隐患（同日实测两份逐字相同，
+ * 靠人工比对才能发现）。现统一从此处 re-export，保持既有 import 路径可用；
+ * 词表修改只需改 heuristics.ts 一处。
  */
-export const GZ_BUSINESS_RE =
-  /银行|信贷|房贷|按揭|消费|理财|财富|私行|基金|保险|投资|金融|楼市|购房|房地产|房价|IPO|上市|融资|企业|商户|就业|消费券|补贴|利率|存款|黄金|代发|客群|公积金|税务|社保|外贸|出口|制造|经济|项目|商圈/;
-
-/** 是否为「广州本地板块」候选：内容含广州锚 + 与银行业务相关（两个条件都按内容判定）。 */
-export function isGzLocalCandidate(title: string, excerpt = ""): boolean {
-  const text = `${title} ${excerpt}`;
-  return GZ_ANCHOR_RE.test(text) && GZ_BUSINESS_RE.test(text);
-}
-
-/**
- * 政策与市场板块的内容判定（2026-08-29 无状态源架构红线：板块归属由内容判定，
- * 不依赖数据源分类）。标题/摘要命中任一：
- *  - 外地地名锚（FOREIGN_REGION 语义：全国性政策/事件）
- *  - 政策动作词（发文/办法/通知/实施/监管…）
- *  - 全国市场词（利率/楼市/股市/债市…）
- * 即归「政策与市场」；否则归「业务启示」。
- */
-export function isPolicyMarketCandidate(title: string, excerpt = ""): boolean {
-  const text = `${title} ${excerpt}`;
-  return (
-    FOREIGN_REGION_RE.test(text) ||
-    POLICY_ACTION_RE.test(text) ||
-    MARKET_SIGNAL_RE.test(text)
-  );
-}
-
-/** 外地地名锚（广州本地严格过滤用）：命中任一 → 全国/外地政策，归政策与市场。 */
-export const FOREIGN_REGION_RE =
-  /上海|北京|深圳|江苏|浙江|南京|苏州|杭州|宁波|成都|重庆|天津|武汉|长沙|合肥|青岛|济南|福州|厦门|昆明|西安|郑州|东莞|佛山|珠海|中山|惠州|汕头|湛江|茂名|肇庆|江门|清远|韶关|梅州|河源|阳江|揭阳|汕尾|潮州|云浮|广东/;
-
-/** 政策动作词（内容判定：发文/新规/实施类） */
-export const POLICY_ACTION_RE =
-  /新规|发文|意见|办法|通知|印发|出台|发布|实施|监管|政策|方案|规划|指引|细则|试点|扩容|放宽|收紧|下调|上调|降息|降准|贴息|重组|调整|落地|延长|推出|宣布|要求|规定|条例|法规/;
-
-/** 全国市场信号词（内容判定：政策敏感的市场/信贷类词；不含纯行情词——
- *  黄金/理财/基金/股市涨跌等属「业务启示」软资讯，不吸走 policy_market 稀缺位） */
-export const MARKET_SIGNAL_RE =
-  /利率|LPR|房贷|按揭|楼市|房价|购房|房地产|贷款|信贷|降息|降准|贴息|存款准备金|汇率|外汇|宏观|稳增长|扩内需|消费贷|经营贷|普惠|减税|退税|专项债|国债发行|万亿|基准利率/;
-
-/**
- * IPO 阶段强词（内容判定用，2026-08-30 新增）：仅「企业 IPO 进展类」事件。
- * 刻意不含泛化词「上市/IPO」裸词，避免「上市培育计划」「IPO 培训」类政务/活动新闻
- * 被拉进 IPO 动态板块；须与名单企业名/城市判定（isGuangdongEnterprise）组合使用。
- */
-// 2026-08-30 补 IPO受理 / IPO问询：东财在审表这两种状态最高频（「已受理」「已问询」），
-// 原强词表只覆盖 过会/提交注册/注册生效，导致 60%+ 在审动态落不进板块与口播。
-// 用 IPO 前缀限定，避免裸「受理」「问询」误伤（投诉受理 / 监管问询函）。
-export const IPO_PROGRESS_RE =
-  /注册生效|同意注册|IPO注册|首次公开发行|过会|上会|上市委|提交注册|注册申请|辅导备案|IPO辅导|辅导验收|招股|申购|路演|敲钟|新股上市|递表|拟上市|发行审核|发行注册|注册制上市|IPO已?受理|IPO已?问询/;
-
-/**
- * 已上市公司资本运作公告词（2026-08-23 IPO 桶分流；2026-09-10 由 render.ts 上移至此，
- * 供 render 分流与 side-output 入池**共用同一份词表**，避免两处漂移）。
- * 命中且非 IPO 流程词 → 转财经要点，避免定增/审核问询/购买资产/解禁等污染 IPO 板块。
- */
-export const IPO_CAPITAL_ACT_RE =
-  /(定增|增发|可转债|解禁|限售|回购|减持|增持|特定对象|发行股份购买资产|重大资产重组|资产重组|并购|审核问询|问询函|问询回复|年报|中报|季报|财报|分红|派息|业绩快报|澄清|停牌|复牌|诉讼|质押|担保|员工持股)/i;
-/** IPO 流程词（与 IPO_CAPITAL_ACT_RE 组合使用：有资本运作词但命中本词 → 仍属 IPO 流程）。 */
-export const IPO_FLOW_RE =
-  /(受理|辅导|备案|招股|过会|上市委|注册生效|提交注册|询价|申购|路演|拟登陆|pre-?ipo|新股上市|上市公告|发行结果|中签|已受理)/i;
-
-/**
- * 「广东企业 IPO 动态」内容判定（2026-08-30，无状态源红线合规：纯内容判定）：
- * 媒体源（证券时报/财联社等）会即时报道「证监会同意粤芯半导体IPO注册」这类注册生效事件
- * ——东财在审表状态滞后（实测粤芯 08-28 批复，表里还停在 08-20），需要媒体报道补位。
- * 判定：① 广东企业（名单公司名/别名/广东城市词，三层识别）② 标题/摘要含 IPO 阶段强词。
- * 命中 → 归「IPO 动态」板块（sectionOf / categoryToSection 在 policy_market 判定前调用）。
- */
-export function isGdIpoCandidate(title: string, excerpt = ""): boolean {
-  const text = `${title} ${excerpt}`;
-  return IPO_PROGRESS_RE.test(text) && isGuangdongEnterprise(text);
-}
+export {
+  GZ_ANCHOR_RE,
+  GZ_BUSINESS_RE,
+  isGzLocalCandidate,
+  isPolicyMarketCandidate,
+  FOREIGN_REGION_RE,
+  POLICY_ACTION_RE,
+  MARKET_SIGNAL_RE,
+  IPO_PROGRESS_RE,
+  IPO_CAPITAL_ACT_RE,
+  IPO_FLOW_RE,
+  isGdIpoCandidate,
+} from "../enrich/heuristics";
 
 /** 来源徽章（2026-08-21 重构 #12：来源降级为卡片左上角徽章，扫一眼即知可信度） */
 export function srcBadgeOf(a: ArticleInput): { label: string; cls: string } {

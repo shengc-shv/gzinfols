@@ -8,7 +8,7 @@
  *
  * REPORT_LOCALE：默认 zh；如需 en，由入口脚本调 `setReportLocale(env.REPORT_LOCALE)`。
  */
-import type { DailyReport } from "../../contracts/report";
+import type { DailyReport, RenderInjection } from "../../contracts/report";
 import type { AudioMeta } from "../voice";
 import {
   renderHtml as renderHtmlFull,
@@ -18,9 +18,15 @@ import {
 export * from "./full";
 export { setReportLocale, REPORT_LOCALE } from "./locale";
 
+/**
+ * 渲染入口（兼容包装）。
+ *
+ * 2026-09-14 P0-4：分享基址 / Web 模式 / 渲染时刻改为**注入**（服务层不读 env、不读隐式时钟）。
+ * 缺省时：不输出 og:image、不渲染归档链接、不显示「数据截至 时刻」——宁可缺项，不误导。
+ */
 export function renderHtml(
   report: DailyReport,
-  opts: { audio?: AudioMeta } = {},
+  opts: RenderInjection & { audio?: AudioMeta } = {},
 ): string {
   return renderHtmlFull(report, report.date, opts);
 }

@@ -89,3 +89,39 @@ describe("IPO 阶段枚举一致性（stage-coach-done 细分）", () => {
     }
   });
 });
+
+/**
+ * 单一真源断言（2026-09-14 P0-3）。
+ *
+ * 此前渲染层 `services/render/full.ts` 另有两份**未导入的私有副本**
+ * （`IPO_STAGE_ORDER` 与 `GD_IPO_STAGE_LABEL`），且后者注释自称「唯一来源」——
+ * 与 classify 侧真源同时存在，新增阶段时两处可同时漂移而只靠「长度相等」的旧断言
+ * 无法发现（旧断言 import 的还是渲染侧副本，保护是假的）。
+ *
+ * 现改为断言**引用同一对象**（strictEqual）：只要有人再复制一份，本测试即红。
+ */
+describe("IPO 阶段枚举单一真源（渲染层不得另存副本）", () => {
+  test("渲染层 re-export 的 IPO_STAGE_ORDER 与 classify 真源是同一对象", async () => {
+    const render = await import("../lib/services/render");
+    assert.strictEqual(
+      render.IPO_STAGE_ORDER,
+      IPO_STAGE_ORDER,
+      "services/render 的 IPO_STAGE_ORDER 必须与 services/classify/gd-ipo 同一引用（禁止副本）",
+    );
+    assert.deepEqual(
+      [...render.IPO_STAGE_ORDER],
+      [...IPO_STAGE_ORDER],
+      "顺序与内容需完全一致",
+    );
+  });
+
+  test("阶段标签真源唯一（classify 导出；渲染层不再声明私有副本）", () => {
+    for (const s of GD_STAGES) {
+      assert.ok(
+        typeof GD_IPO_STAGE_LABEL[s] === "string" && GD_IPO_STAGE_LABEL[s].length > 0,
+        `阶段 ${s} 必须有展示标签`,
+      );
+    }
+    assert.equal(Object.keys(GD_IPO_STAGE_LABEL).length, GD_STAGES.size + 1, "含「无阶段」键");
+  });
+});

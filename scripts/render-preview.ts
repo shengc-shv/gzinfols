@@ -11,6 +11,7 @@ import fsSync from "node:fs";
 import path from "node:path";
 import { loadHistoryStore } from "../lib/adapters/persistence";
 import { renderHtml, renderMarkdown, setReportLocale } from "../lib/services/render";
+import { renderInjectionFromEnv } from "../lib/orchestrator";
 import { buildNoAiReport } from "../lib/services/render/report-from-articles";
 import { todayKey } from "../lib/utils/time";
 import type { ArticleInput } from "../lib/contracts/article";
@@ -72,7 +73,7 @@ function main() {
   const report = buildNoAiReport(articles);
 
   // 3) 渲染 HTML / Markdown（项目同款完整版面）。
-  const html = renderHtml(report);
+  const html = renderHtml(report, renderInjectionFromEnv());
   const md = renderMarkdown(report);
 
   const dateDir = path.join(OUTPUT_DIR, date);

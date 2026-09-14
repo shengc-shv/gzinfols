@@ -73,6 +73,9 @@ export async function runPipeline(
   // —— ⑦.5 广东IPO 健康度（gzinfo 同位；此前函数已定义但漏接线，2026-09-13 修复）——
   checkIpoHealth(capped, ctx);
 
+  // —— ⑦.6 主板块覆盖度（2026-09-14 P0-2）：四主板块合计为 0 → 显式告警 ——
+  checkSectionCoverage(capped, ctx);
+
   // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——
   // → TTS 合成（AUDIO_ENABLED 门控；失败降级为无播放器）
   const exec = loadExecStore(ctx.date);
@@ -135,7 +138,14 @@ export async function runPipeline(
     });
   }
 
-  const html = renderHtml(capped, { audio });
+  // 渲染注入（P0-4）：分享基址 / Web 模式取自 ctx.config，渲染时刻取 ctx.startTime
+  // （服务层不读 env、不读隐式时钟）。
+  const html = renderHtml(capped, {
+    audio,
+    baseUrl: ctx.config.reportBaseUrl,
+    webMode: ctx.config.webMode,
+    now: ctx.startTime,
+  });
   const markdown = renderMarkdown(capped);
   // gzinfo render-and-write ②③：sidecar（滚动列表）+ 全量池导出（漏斗后条目）
   const paths = await publishReport(
@@ -202,6 +212,39 @@ function checkIpoHealth(report: DailyReport, ctx: PipelineContext): void {
     const msg = e instanceof Error ? e.message : String(e);
     ctx.errors.push({ stage: "ipo-health", message: msg });
     ctx.log.warn("ipo-health", `健康度检查异常（不阻断）：${msg}`);
+  }
+}
+
+/**
+ * 主板块覆盖度检查（2026-09-14 P0-2 新增）。
+ *
+ * 动机：归档 2026-09-14 报告时，`sections` 的 gz_local / biz_insight / policy_market / tech
+ * **全部为 0 条**（产物 HTML 只剩 3 个 tab），但当时没有任何告警——静默归档到次日才被人工发现。
+ * 「四个主板块合计为 0」意味着这期简报的主体是空的，必须显式可见。
+ *
+ * 根因（已修）：SKIP_AI 的 PASS1 allow-list 为空集时旧实现判为「全部无关」→ 一条不留。
+ * 本检查作为**兜底观测**保留：无论未来何种原因导致主体为空，都必须在 CI 日志亮出来。
+ *
+ * 用 console 直写（非 ctx.log）：`::warning::` 必须位于行首才会被 GitHub Actions 识别为注解。
+ */
+function checkSectionCoverage(report: DailyReport, ctx: PipelineContext): void {
+  try {
+    const MAIN = ["gz_local", "biz_insight", "policy_market", "tech"] as const;
+    const counts = MAIN.map((k) => ({ k, n: report.sections?.[k]?.length ?? 0 }));
+    const total = counts.reduce((s, c) => s + c.n, 0);
+    const breakdown = counts.map((c) => `${c.k} ${c.n}`).join(" / ");
+    ctx.log.info("coverage", `📄 主板块覆盖：合计 ${total} 条（${breakdown}）`);
+    if (total === 0) {
+      console.warn(
+        "::warning:: [daily] 四个主板块合计 0 条 —— 本期简报主体为空（只剩股市/IPO tab）。" +
+          "请检查：① SKIP_AI 的 PASS1 allow-list 是否为空集（历史库 ai_relevant 是否已打标）；" +
+          "② 全 AI 模式下 PASS1 是否整体 drop / LLM 是否降级；③ 采集与漏斗是否异常。详阅 docs/review-2026-09-14-arch.md P0-2",
+      );
+    }
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    ctx.errors.push({ stage: "coverage", message: msg });
+    ctx.log.warn("coverage", `主板块覆盖度检查异常（不阻断）：${msg}`);
   }
 }
 

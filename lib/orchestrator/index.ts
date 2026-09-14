@@ -7,6 +7,7 @@
  * 固定时钟）只改这里。
  */
 import type { SourceDef, SourceTier } from "../contracts/source";
+import type { RenderInjection } from "../contracts/report";
 import type {
   FileStore,
   Logger,
@@ -55,6 +56,24 @@ function defaultConfig(): PipelineConfig {
       pass1: process.env.PASS1_MODEL?.trim() || undefined,
       pass2: process.env.PASS2_MODEL?.trim() || undefined,
     },
+    // 渲染注入（2026-09-14 P0-4）：服务层不读 env —— 由本组合根读入。
+    // reportBaseUrl 缺省为空串（渲染层据此**不输出** og:image，而不是回落他仓地址）。
+    reportBaseUrl: process.env.REPORT_BASE_URL?.trim() || "",
+    webMode: process.env.WEB_MODE === "true",
+  };
+}
+
+/**
+ * 渲染注入项（脚本入口用，2026-09-14 P0-4）。
+ *
+ * `scripts/` 属允许直读 env 的边界（无 ctx 可传），故在此集中一次，避免每个渲染脚本
+ * 各写一遍 env 解析。`now` 由调用方显式给出（服务层禁止隐式时钟）。
+ */
+export function renderInjectionFromEnv(now: Date = new Date()): RenderInjection {
+  return {
+    baseUrl: process.env.REPORT_BASE_URL?.trim() || "",
+    webMode: process.env.WEB_MODE === "true",
+    now,
   };
 }
 

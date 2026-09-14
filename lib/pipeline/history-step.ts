@@ -17,9 +17,9 @@ import {
   type HistoryStore,
 } from "../services/memory/history";
 import { persistHistoryStore } from "../adapters/persistence";
-import { mergeRollingIntoReport } from "../services/assemble/merge-rolling";
+import { mergeRollingIntoReport, makeMergeRollingStats } from "../services/assemble/merge-rolling";
 import type { ArticleInput } from "../contracts/article";
-import type { DailyReport, ReportItem } from "../contracts/report";
+import type { DailyReport, ReportItem, ReportSectionKey } from "../contracts/report";
 import type { PipelineContext } from "../contracts/pipeline";
 
 export interface HistoryStepResult {
@@ -108,7 +108,10 @@ export function mergeRollingAndSaveHistory(
     );
   }
 
-  const mergedReport = mergeRollingIntoReport(report, rolling, ctx.tierBySource);
+  // B-1（2026-09-14 用户拍板）：退化卡片守卫**不放宽**（信息密度原则），
+  // 但每一道闸门丢弃了多少必须可见 —— 此前 114 条滚动池只并入 1 条是**静默**的。
+  const mergeStats = makeMergeRollingStats();
+  const mergedReport = mergeRollingIntoReport(report, rolling, ctx.tierBySource, mergeStats);
   const totalKept = (Object.values(report.sections) as ReportItem[][]).reduce(
     (n, s) => n + s.length,
     0,
@@ -117,11 +120,33 @@ export function mergeRollingAndSaveHistory(
     (n, s) => n + s.length,
     0,
   );
-  if (mergedCount !== totalKept) {
+  ctx.log.info(
+    "history",
+    `🕘 近7天滚动并入：滚动池 ${mergeStats.considered} 条 → 并入 ${mergeStats.merged} 条` +
+      `（板块合计 ${totalKept} → ${mergedCount}）；逐闸门丢弃：` +
+      `摘要复读 ${mergeStats.droppedDegenerate} / 相关性评分 ${mergeStats.droppedByScore} / ` +
+      `今日已展示 ${mergeStats.droppedSeen} / AI判无关 ${mergeStats.droppedRelevantFalse} / ` +
+      `无板块归属 ${mergeStats.droppedNoSection} / 无摘要 ${mergeStats.droppedNoSummary} / ` +
+      `无url ${mergeStats.droppedNoUrl}`,
+  );
+  if (mergeStats.droppedDegenerate > 0) {
+    // 这条最容易被误读为「兜底失效」：历史库无 AI 摘要时 excerpt 回退成标题 → 命中该守卫。
+    // 如需提升兜底覆盖，正确做法是补齐历史库摘要（预分析），而不是放宽本守卫。
     ctx.log.info(
       "history",
-      `🕘 近7天历史并入: ${totalKept} → ${mergedCount} 条（追加 ${mergedCount - totalKept} 条历史符合要求条目）`,
+      `ℹ️ 其中 ${mergeStats.droppedDegenerate} 条因「摘要与标题复读」被丢弃（历史库多数条目无 AI 摘要，` +
+        `excerpt 回退成标题所致）—— 属既定口径，如需提高兜底覆盖请补齐历史库摘要`,
     );
+  }
+  // 空板块可见（B-1）：主板块并入后仍为 0 → 明确告警，不再静默
+  const MAIN_SECTIONS: ReportSectionKey[] = ["gz_local", "biz_insight", "policy_market", "tech"];
+  for (const sec of MAIN_SECTIONS) {
+    if ((mergedReport.sections[sec]?.length ?? 0) === 0) {
+      ctx.log.warn(
+        "history",
+        `⚠️ 主板块「${sec}」并入后仍为 0 条：今日 AI 未产出 + 历史兜底未命中（见上方逐闸门计数）`,
+      );
+    }
   }
 
   return { history: nextHistory, rolling, report: mergedReport, nowIso };

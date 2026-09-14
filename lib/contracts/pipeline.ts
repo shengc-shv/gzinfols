@@ -69,7 +69,7 @@ export interface HttpClient {
 /**
  * 语音合成端口（唯一 TTS 出口）。
  * 组合根按 AUDIO_ENABLED === "true" 装配；失败抛错，由管线 catch 降级为「页面无播放器」（不阻断发布）。
- * 落盘由适配器负责（双路径：daily_reports/<date>/audio/ 归档 + site/audio/ 站点）。
+ * 落盘由适配器负责（双路径：daily_reports/<date>/audio/ 归档 + site/<date>/audio/ 站点）。
  */
 export interface TtsPort {
   synthesize(
@@ -124,6 +124,13 @@ export interface PipelineConfig {
   filters: FilterFlags;
   /** LLM 模型覆盖（PASS1_MODEL / PASS2_MODEL；空则走后端默认）。 */
   models: { pass1?: string; pass2?: string };
+  /**
+   * 分享卡片基址（REPORT_BASE_URL；渲染 og:image 用）。空 = 不输出 og:image
+   * （2026-09-14 P1-2：不再回落到他仓硬编码地址，避免必然 404 的外域缩略图）。
+   */
+  reportBaseUrl: string;
+  /** Web 模式（WEB_MODE=true → 渲染「归档」链接）。 */
+  webMode: boolean;
 }
 
 /** 管道运行上下文（跨阶段共享的只读环境）。 */

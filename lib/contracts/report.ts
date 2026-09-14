@@ -176,3 +176,23 @@ export interface DailyReport {
   stock_news?: StockNewsItem[];
   risk?: RiskItem;
 }
+
+/**
+ * 渲染注入项（2026-09-14 P0-4）。
+ *
+ * 服务层**不得**直读 `process.env` 与隐式时钟（架构红线）：渲染所需的分享基址、
+ * Web 模式、渲染时刻一律由调用方注入 —— 管线从 `ctx.config` / `ctx.startTime` 取，
+ * 脚本入口由组合根 helper 从 env 取。
+ */
+export interface RenderInjection {
+  /**
+   * 分享卡片基址（REPORT_BASE_URL），如 `https://<user>.github.io/<repo>`。
+   * **空值不再回落到任何硬编码仓库地址**：缺失时直接不输出 og:image / twitter:image
+   * （宁可不显示缩略图，也不指向别的仓库的 404 资源），同时记一条警告。
+   */
+  baseUrl?: string;
+  /** Web 模式（WEB_MODE=true → 渲染「归档」链接）。缺省 = 不渲染。 */
+  webMode?: boolean;
+  /** 渲染时刻（页面「数据截至 HH:mm」）。缺省 = 不显示时刻，禁止服务层回落到 `new Date()`。 */
+  now?: Date;
+}

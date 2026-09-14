@@ -20,6 +20,7 @@ import { ingestAll } from "../lib/services/collect";
 import { normalize } from "../lib/services/normalize";
 import { buildNoAiReport } from "../lib/services/render/report-from-articles";
 import { renderHtml, renderMarkdown } from "../lib/services/render";
+import { renderInjectionFromEnv } from "../lib/orchestrator";
 
 async function main() {
   setReportLocale(process.env.REPORT_LOCALE); // 渲染语言注入（服务层不读 env）
@@ -36,7 +37,7 @@ async function main() {
   );
 
   const report = buildNoAiReport(articles);
-  const html = renderHtml(report);
+  const html = renderHtml(report, renderInjectionFromEnv());
   const md = renderMarkdown(report);
 
   await deps.fs.writeText(`daily_reports/${date}/${date}.html`, html);
