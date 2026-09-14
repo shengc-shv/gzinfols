@@ -10,7 +10,19 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { mergeStoredExecutive } from "../lib/services/render";
+// 2026-09-14（C-1 Phase3）：本函数唯一实现在 services/assemble/merge-executive.ts（生产
+// 由 side-exec-summary 调用）；此前 render/full.ts 另有一份仅格式不同的副本，而本测试
+// import 的是 render 那份 ——「测试测的不是生产代码」第三例，已收敛为纯 re-export。
+import { mergeStoredExecutive } from "../lib/services/assemble/merge-executive";
+import * as renderBarrel from "../lib/services/render";
+
+test("单一真源：render barrel 导出的 mergeStoredExecutive 与 assemble 实现是同一引用", () => {
+  assert.strictEqual(
+    (renderBarrel as Record<string, unknown>).mergeStoredExecutive,
+    mergeStoredExecutive,
+    "render 侧不得再持有独立实现（只能 re-export assemble 的唯一实现）",
+  );
+});
 import type { DailyReport } from "../lib/contracts/report";
 
 const emptyReport: DailyReport = {
