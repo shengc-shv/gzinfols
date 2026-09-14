@@ -17,7 +17,11 @@
 > select-top（渲染必读选择需用）随批移植——HANDOFF「select-top 不移植」裁决就此更新。
 > 2026-09-13 **R2 完成**：report-from-articles + batch-summaries(enrich) + render-preview/
 > render-live/regen-enrich 三脚本 + P4 validateBackendCredentials 凭证校验；paths.ts 不移植
-> （2.0 无双写过渡期）。待办仅剩 metrics stage 层 + 测试面补齐。
+> （2.0 无双写过渡期）。
+> 2026-09-14 测试面定盘（用户：非主干不要）：gzinfo 70 测试中约 20 个明确不移植
+> （停用源爬虫/notify 微信/aiAssets/render-en/value-top/一次性工具等）；
+> 主干候选约 25 个（~5600 行）待逐个核对 2.0 现有 35 个测试文件的等价覆盖后定缺口清单；
+> metrics stage 层（data/metrics 按 stage×backend 按日聚合）待用户拍板是否移植。
 > B5 说明（发布链路移植）：publish-state 状态机（schedule/manual/manual-final/manual-test 四来源 + cron 跳过判据）
 > 落地 `lib/services/publish/publish-state.ts`；IO 归 `lib/adapters/persistence.ts`；`scripts/record-publish.ts` 先发后记；
 > `scripts/cleanup-history.mjs` + `scripts/history-retention.mjs` 历史裁剪（近 7 天 + backup）；daily.yml 门控改读
