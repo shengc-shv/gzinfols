@@ -25,6 +25,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { renderRedchipPage } from "./lib/redchip-page.mjs";
 
 /** 汇集来源（按优先级：前一个命中即不再看后面的）。 */
 const SRC_DIRS = ["daily_reports", "history"];
@@ -189,6 +190,37 @@ ${rows}
 `;
 fs.writeFileSync(path.join(OUT, "archive.html"), archiveHtml, "utf8");
 console.log(`[build-site] archive.html (${dates.length} 期)`);
+
+// ---------- 5.5) 红筹监测展示页：site/redchip/index.html ----------
+// 数据源为红筹监测产出的快照与变更日志（data/redchip/）；缺失时产出空态页而不报错。
+try {
+  const rcDir = path.join(process.cwd(), "data", "redchip");
+  const rcLatestPath = path.join(rcDir, "latest.json");
+  const rcChangePath = path.join(rcDir, "changelog.jsonl");
+  let rcSnap = null;
+  let rcChanges = [];
+  if (fs.existsSync(rcLatestPath)) {
+    try { rcSnap = JSON.parse(fs.readFileSync(rcLatestPath, "utf8")); } catch { rcSnap = null; }
+  }
+  if (fs.existsSync(rcChangePath)) {
+    rcChanges = fs
+      .readFileSync(rcChangePath, "utf8")
+      .split("\n")
+      .filter((l) => l.trim())
+      .map((l) => { try { return JSON.parse(l); } catch { return null; } })
+      .filter(Boolean);
+  }
+  const rcOutDir = path.join(OUT, "redchip");
+  fs.mkdirSync(rcOutDir, { recursive: true });
+  fs.writeFileSync(
+    path.join(rcOutDir, "index.html"),
+    renderRedchipPage({ snapshot: rcSnap, changes: rcChanges }),
+    "utf8",
+  );
+  console.log(`[build-site] redchip/index.html (${rcSnap ? rcSnap.count : 0} 家 / ${rcChanges.length} 条变更)`);
+} catch (e) {
+  console.log(`[build-site] 红筹展示页跳过：${e && e.message ? e.message : e}`);
+}
 
 // ---------- 6) .nojekyll：阻止 GitHub Pages 跑 Jekyll（否则下划线开头的目录会被吞）----------
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "", "utf8");
