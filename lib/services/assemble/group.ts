@@ -20,12 +20,16 @@ import {
   type GdStage,
 } from "../classify/gd-ipo";
 import { gdIpoStageOf } from "../classify/gd-ipo-spoken";
-// 共享词表（Phase 2b 待下沉）：类型只在编译期存在（import type 会被擦除），
-// 运行时依赖仅 CATEGORY_LABELS / sortByTierAndTime / SUBCATEGORY_LABELS / SUBCATEGORY_ORDER / V2EX_OFF_TOPIC_RE。
+// 共享词表（2026-09-14 Phase 2b 已下沉至 services/vocab，解开 assemble → render 反向依赖）：
+// 运行时词表/排序全部从 vocab 引入；渲染层类型只在编译期存在（import type 会被擦除）。
 import type { RawByCategory, SourceGroup, SubGroup } from "../render/cards";
-import { CATEGORY_LABELS, sortByTierAndTime } from "../render/cards";
-import { SUBCATEGORY_LABELS, SUBCATEGORY_ORDER } from "../render/i18n";
-import { V2EX_OFF_TOPIC_RE } from "../render/site-filters";
+import {
+  CATEGORY_LABELS,
+  sortByTierAndTime,
+  SUBCATEGORY_LABELS,
+  SUBCATEGORY_ORDER,
+  V2EX_OFF_TOPIC_RE,
+} from "../vocab";
 import {
   MERGE_PER_SOURCE_CAP,
   PRESERVE_FETCH_ORDER_SOURCES,
