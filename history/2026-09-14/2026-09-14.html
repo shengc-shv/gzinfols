@@ -8,13 +8,13 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="每日简报 · 2026-09-14">
 <meta property="og:description" content="今日定调：今日分行焦点：授信80亿元！农行广州分行与杰创智能达成战略合作">
-<meta property="og:image" content="https://shengc-shv.github.io/gzinfo/og-image.png">
+<meta property="og:image" content="https://shengc-shv.github.io/gzinfols/og-image.png">
 <meta property="og:image:width" content="240">
 <meta property="og:image:height" content="240">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="每日简报 · 2026-09-14">
 <meta name="twitter:description" content="今日定调：今日分行焦点：授信80亿元！农行广州分行与杰创智能达成战略合作">
-<meta name="twitter:image" content="https://shengc-shv.github.io/gzinfo/og-image.png">
+<meta name="twitter:image" content="https://shengc-shv.github.io/gzinfols/og-image.png">
 <style>
 
   :root {
@@ -29,7 +29,7 @@
     --link: #2f4cdd;
     --accent: #1a1a1f;
     --accent-fg: #ffffff;
-    --accent-cmb: #e60012;
+    --accent-brand: #e60012;
     --rank-high-bg: #fde8e8;
     --rank-high-fg: #c01c1c;
     --rank-mid-bg: #fdf0d9;
@@ -65,7 +65,7 @@
       --link: #8aa0ff;
     --accent: #f3f4f6;
     --accent-fg: #0b0d11;
-    --accent-cmb: #ff5a5f;
+    --accent-brand: #ff5a5f;
       --rank-high-bg: rgba(239, 68, 68, 0.16);
       --rank-high-fg: #fca5a5;
       --rank-mid-bg: rgba(245, 158, 11, 0.16);
@@ -189,11 +189,11 @@
   /* ===== 执行摘要板块（今日必读 + 商机提示，移动端优先折叠）===== */
   .exec-summary {
     margin: 1rem 0 0.4rem;
-    border: 1px solid color-mix(in srgb, var(--accent-cmb) 22%, transparent);
-    border-left: 4px solid var(--accent-cmb);
+    border: 1px solid color-mix(in srgb, var(--accent-brand) 22%, transparent);
+    border-left: 4px solid var(--accent-brand);
     border-radius: 14px;
     padding: 0.85rem 1rem;
-    background: color-mix(in srgb, var(--accent-cmb) 5%, var(--bg));
+    background: color-mix(in srgb, var(--accent-brand) 5%, var(--bg));
     box-shadow: var(--shadow-md);
   }
   .exec-head { display: flex; align-items: baseline; gap: 0.6rem; margin-bottom: 0.55rem; }
@@ -218,13 +218,13 @@
   }
   /* N 层：top 3 必读卡片 — "今日三件事" 视觉强调（行长音频重点） */
   .must-card.must-top {
-    background: color-mix(in srgb, var(--accent-cmb) 6%, var(--card));
-    border-left: 3px solid var(--accent-cmb);
+    background: color-mix(in srgb, var(--accent-brand) 6%, var(--card));
+    border-left: 3px solid var(--accent-brand);
   }
   .must-top-badge {
     display: inline-block; margin-left: 0.4rem; padding: 1px 6px;
     font-size: 0.66rem; font-weight: 700; color: white;
-    background: var(--accent-cmb); border-radius: 3px;
+    background: var(--accent-brand); border-radius: 3px;
     vertical-align: middle;
   }
     border: 1px solid var(--rule); border-radius: 12px;
@@ -235,22 +235,22 @@
   .exec-must::after {
     content: ""; position: absolute; top: 1.7rem; right: 0; bottom: 0.5rem;
     width: 3.25rem; pointer-events: none; z-index: 3;
-    background: linear-gradient(to left, color-mix(in srgb, var(--accent-cmb) 16%, var(--bg)) 0%, color-mix(in srgb, var(--accent-cmb) 4%, transparent) 55%, transparent 100%);
+    background: linear-gradient(to left, color-mix(in srgb, var(--accent-brand) 16%, var(--bg)) 0%, color-mix(in srgb, var(--accent-brand) 4%, transparent) 55%, transparent 100%);
   }
   /* 今日必读标题旁的滑动提示（移动端横向滑动时可见；桌面网格下隐藏） */
   .must-hint-inline {
     display: inline-block; margin-left: 0.45rem; vertical-align: middle;
-    font-size: 0.68rem; font-weight: 500; color: var(--accent-cmb);
+    font-size: 0.68rem; font-weight: 500; color: var(--accent-brand);
     white-space: nowrap;
   }
   .must-hint-inline .hint-arrow { display: inline-block; animation: nudge 1.1s ease-in-out infinite; }
   @keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
   .must-link { text-decoration: none; color: inherit; border-radius: 8px; transition: border-color 0.15s ease; }
-  .must-link:hover strong { color: var(--accent-cmb); }
-  .must-card:hover { border-color: color-mix(in srgb, var(--accent-cmb) 40%, var(--rule)); }
+  .must-link:hover strong { color: var(--accent-brand); }
+  .must-card:hover { border-color: color-mix(in srgb, var(--accent-brand) 40%, var(--rule)); }
   .must-index {
     flex: none; width: 1.2rem; height: 1.2rem; border-radius: 50%;
-    background: var(--accent-cmb); color: #fff; font-size: 0.72rem; font-weight: 700;
+    background: var(--accent-brand); color: #fff; font-size: 0.72rem; font-weight: 700;
     display: inline-flex; align-items: center; justify-content: center; margin-top: 0.05rem;
   }
   .must-body { display: flex; flex-direction: column; min-width: 0; }
@@ -272,7 +272,7 @@
   .exec-insights { position: relative; margin-top: 0.2rem; }
   .insight-hint-inline {
     display: inline-block; margin-left: 0.45rem; vertical-align: middle;
-    font-size: 0.68rem; font-weight: 500; color: var(--accent-cmb);
+    font-size: 0.68rem; font-weight: 500; color: var(--accent-brand);
     white-space: nowrap;
   }
   .insight-hint-inline .hint-arrow { display: inline-block; animation: nudge 1.1s ease-in-out infinite; }
@@ -293,7 +293,7 @@
   .exec-insights::after {
     content: ""; position: absolute; top: 1.7rem; right: 0; bottom: 0.5rem;
     width: 3.25rem; pointer-events: none; z-index: 3;
-    background: linear-gradient(to left, color-mix(in srgb, var(--accent-cmb) 16%, var(--bg)) 0%, color-mix(in srgb, var(--accent-cmb) 4%, transparent) 55%, transparent 100%);
+    background: linear-gradient(to left, color-mix(in srgb, var(--accent-brand) 16%, var(--bg)) 0%, color-mix(in srgb, var(--accent-brand) 4%, transparent) 55%, transparent 100%);
   }
   .insight-topic { margin: 0 0 0.3rem; font-size: 0.85rem; color: var(--c-finance); font-weight: 700; }
   .insight-impact, .insight-action { margin: 0.2rem 0 0; font-size: 0.78rem; color: var(--fg-soft); line-height: 1.55; }
@@ -487,11 +487,11 @@
   .stock-must::after {
     content: ""; position: absolute; top: 1.7rem; right: 0; bottom: 0.5rem;
     width: 3.25rem; pointer-events: none; z-index: 3;
-    background: linear-gradient(to left, color-mix(in srgb, var(--accent-cmb) 16%, var(--bg)) 0%, color-mix(in srgb, var(--accent-cmb) 4%, transparent) 55%, transparent 100%);
+    background: linear-gradient(to left, color-mix(in srgb, var(--accent-brand) 16%, var(--bg)) 0%, color-mix(in srgb, var(--accent-brand) 4%, transparent) 55%, transparent 100%);
   }
   .stock-hint-inline {
     display: inline-block; margin-left: 0.45rem; vertical-align: middle;
-    font-size: 0.68rem; font-weight: 500; color: var(--accent-cmb);
+    font-size: 0.68rem; font-weight: 500; color: var(--accent-brand);
     white-space: nowrap;
   }
   .stock-hint-inline .hint-arrow { display: inline-block; animation: nudge 1.1s ease-in-out infinite; }
@@ -508,16 +508,16 @@
     display: inline-flex; align-items: center; justify-content: center;
     min-width: 1.65rem; min-height: 1.65rem; padding: 0 0.22rem;
     font-size: 0.92rem; font-weight: 700; line-height: 1; text-decoration: none;
-    color: var(--accent-cmb);
-    border: 1px solid color-mix(in srgb, var(--accent-cmb) 40%, transparent);
-    border-radius: 7px; background: color-mix(in srgb, var(--accent-cmb) 8%, transparent);
+    color: var(--accent-brand);
+    border: 1px solid color-mix(in srgb, var(--accent-brand) 40%, transparent);
+    border-radius: 7px; background: color-mix(in srgb, var(--accent-brand) 8%, transparent);
     -webkit-tap-highlight-color: transparent; transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
   }
-  .insight-src:active { background: color-mix(in srgb, var(--accent-cmb) 26%, transparent); transform: scale(0.94); }
-  .insight-src:hover { background: color-mix(in srgb, var(--accent-cmb) 16%, transparent); border-color: color-mix(in srgb, var(--accent-cmb) 60%, transparent); }
+  .insight-src:active { background: color-mix(in srgb, var(--accent-brand) 26%, transparent); transform: scale(0.94); }
+  .insight-src:hover { background: color-mix(in srgb, var(--accent-brand) 16%, transparent); border-color: color-mix(in srgb, var(--accent-brand) 60%, transparent); }
   .tag {
-    display: inline-block; font-size: 0.66rem; font-weight: 700; color: var(--accent-cmb);
-    background: color-mix(in srgb, var(--accent-cmb) 11%, transparent);
+    display: inline-block; font-size: 0.66rem; font-weight: 700; color: var(--accent-brand);
+    background: color-mix(in srgb, var(--accent-brand) 11%, transparent);
     border-radius: 5px; padding: 0.08rem 0.4rem; margin-right: 0.35rem; vertical-align: 0.08em; letter-spacing: 0.02em;
   }
   .tag-action { color: var(--c-gdipo); background: color-mix(in srgb, var(--c-gdipo) 12%, transparent); }
@@ -726,7 +726,7 @@
   .biz-tip {
     margin: 0 0 0.7rem;
     padding: 0.5rem 0.7rem;
-    border-left: 3px solid var(--accent-cmb);
+    border-left: 3px solid var(--accent-brand);
     border-radius: 6px;
     background: var(--bg-elevated);
     font-size: 0.78rem;
@@ -850,7 +850,7 @@
     font-family: inherit; transition: all 0.15s ease;
   }
   .band-tab:hover { border-color: var(--muted); color: var(--fg); transform: translateY(-1px); }
-  .band-tab.active { background: var(--accent-cmb); border-color: var(--accent-cmb); color: #fff; }
+  .band-tab.active { background: var(--accent-brand); border-color: var(--accent-brand); color: #fff; }
   .band-tab .count { font-size: 0.7rem; opacity: 0.85; }
   .band-panel { display: none; }
   .band-panel.active { display: block; }
@@ -1124,7 +1124,7 @@
   .masthead { border-bottom: 1px solid var(--rule); padding-bottom: 1.1rem; }
   .masthead .eyebrow { font-size: 0.72rem; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; font-weight: 600; }
   .masthead h1 { font-family: Georgia, "Songti SC", "Noto Serif CJK SC", serif; font-size: 2rem; margin: 0.35rem 0 0.1rem; letter-spacing: -0.01em; }
-  .hero-line { margin: 0.7rem 0 0; font-size: 1.02rem; line-height: 1.7; border-left: 3px solid var(--cmb, #e60012); padding-left: 0.8rem; }
+  .hero-line { margin: 0.7rem 0 0; font-size: 1.02rem; line-height: 1.7; border-left: 3px solid var(--brand, #e60012); padding-left: 0.8rem; }
   .meta-line { margin: 0.6rem 0 0; font-size: 0.82rem; color: var(--muted); }
   .meta-line .archive { color: var(--muted); }
 
@@ -1132,8 +1132,8 @@
   .player-card {
     position: sticky; top: 0; z-index: 30;
     margin: 0 0 1.4rem; padding: 0.85rem 1.05rem;
-    background: color-mix(in srgb, var(--accent-cmb) 7%, var(--bg));
-    border: 1px solid color-mix(in srgb, var(--accent-cmb) 30%, var(--rule));
+    background: color-mix(in srgb, var(--accent-brand) 7%, var(--bg));
+    border: 1px solid color-mix(in srgb, var(--accent-brand) 30%, var(--rule));
     border-radius: var(--r-lg);
     box-shadow: var(--shadow-sm);
     backdrop-filter: saturate(180%) blur(8px);
@@ -1173,12 +1173,12 @@
   .insight p { margin: 0.25rem 0 0; font-size: 0.9rem; color: var(--fg-soft); line-height: 1.6; }
   .insight p b { color: var(--fg); }
   .insight-tags { margin-bottom: 0.1rem; }
-  .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; border-radius: 4px; padding: 0.08rem 0.42rem; margin-right: 0.35rem; color: var(--cmb, #e60012); background: rgba(230, 0, 18, 0.1); }
+  .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; border-radius: 4px; padding: 0.08rem 0.42rem; margin-right: 0.35rem; color: var(--brand, #e60012); background: rgba(230, 0, 18, 0.1); }
   .tag.t-wealth { color: #7c3aed; background: rgba(124, 58, 237, 0.12); }
   .tag.t-mass { color: #059669; background: rgba(5, 150, 105, 0.12); }
   .tag.t-policy { color: #b45309; background: rgba(180, 83, 9, 0.12); }
   /* 粤标签（2026-08-23）：广东企业/事件地域标记，品牌红描边胶囊，区别于业务线彩底 */
-  .tag.t-gd { color: var(--accent-cmb, #e60012); background: color-mix(in srgb, var(--accent-cmb, #e60012) 8%, transparent); border: 1px solid color-mix(in srgb, var(--accent-cmb, #e60012) 45%, transparent); font-weight: 800; }
+  .tag.t-gd { color: var(--accent-brand, #e60012); background: color-mix(in srgb, var(--accent-brand, #e60012) 8%, transparent); border: 1px solid color-mix(in srgb, var(--accent-brand, #e60012) 45%, transparent); font-weight: 800; }
 
   /* 单层 tab：横滑不折行（#11） */
   .tabs { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 0.1rem; margin: 1.4rem 0 0; padding: 0.6rem 0 0; border-bottom: 1px solid var(--rule); background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
@@ -1204,7 +1204,7 @@
   .brief .sum b { color: var(--fg); }
   /* 2026-09-07 IPO 双链接：主链接（东财列表）+ 交易所官方源入口（人工核查） */
   .brief .official-src { margin: 0.3rem 0 0; font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
-  .brief .official-src a { color: var(--accent-cmb, #b45309); text-decoration: none; border-bottom: 1px dashed currentColor; }
+  .brief .official-src a { color: var(--accent-brand, #b45309); text-decoration: none; border-bottom: 1px dashed currentColor; }
   .brief .official-src a:hover { color: var(--fg); }
   .brief.more { display: none; }
   .panel.expanded .brief.more { display: block; }
@@ -1217,10 +1217,10 @@
   .filter-group + .filter-group { padding-left: 0.7rem; margin-left: 0.35rem; border-left: 1px solid var(--rule); }
   .filter-gtitle { font-size: 0.8rem; color: var(--fg-soft, var(--muted)); }
   .filter-chip { border: 1px solid var(--rule); background: var(--bg, var(--card)); color: var(--fg-soft, var(--muted)); border-radius: 999px; padding: 0.28rem 0.8rem; font-size: 0.84rem; cursor: pointer; user-select: none; transition: all 0.15s; font-family: inherit; }
-  .filter-chip:hover { border-color: var(--accent-cmb); color: var(--accent-cmb); }
-  .filter-chip.active { background: var(--accent-cmb); border-color: var(--accent-cmb); color: #fff; font-weight: 600; box-shadow: 0 2px 8px color-mix(in srgb, var(--accent-cmb) 38%, transparent); }
+  .filter-chip:hover { border-color: var(--accent-brand); color: var(--accent-brand); }
+  .filter-chip.active { background: var(--accent-brand); border-color: var(--accent-brand); color: #fff; font-weight: 600; box-shadow: 0 2px 8px color-mix(in srgb, var(--accent-brand) 38%, transparent); }
   .filter-reset { margin-left: auto; border: 1px solid var(--rule); background: transparent; color: var(--fg-soft, var(--muted)); border-radius: 999px; padding: 0.28rem 0.8rem; font-size: 0.84rem; cursor: pointer; font-family: inherit; }
-  .filter-reset:hover { border-color: var(--accent-cmb); color: var(--accent-cmb); }
+  .filter-reset:hover { border-color: var(--accent-brand); color: var(--accent-brand); }
   .brief.filtered-out { display: none !important; }
   /* 广东IPO 四阶段分栏（2026-09-10 用户决策③）：组头带阶段色点 + 家数，空组整组隐藏 */
   .ipo-group { margin: 0 0 0.9rem; }
