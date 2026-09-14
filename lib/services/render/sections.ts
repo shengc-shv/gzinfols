@@ -108,7 +108,7 @@ export function fmtBigUsd(n: number): string {
 // 加密恐惧贪婪/总市值小组件按硬性规定（加密板块永久剔除）整体不移植，
 // gzinfo 的 renderCryptoWidgets / fearGreedTone 在 2.0 中不存在。
 
-/** 商机 tag 色系（2026-08-21 重构 #6：统一 cmb 红及衍生色系，业务线可辨识） */
+/** 商机 tag 色系（2026-08-21 重构 #6：统一 品牌红及衍生色系，业务线可辨识） */
 function tagClsOf(tag: string): string {
   if (/财富|私行/.test(tag)) return "t-wealth";
   if (/代发|客群/.test(tag)) return "t-mass";

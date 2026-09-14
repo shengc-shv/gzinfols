@@ -17,7 +17,7 @@ function mkDateDir(root: string, name: string) {
 }
 
 test("pruneHistoryDirs：仅删早于保留窗口的日期目录，非日期目录保留", () => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "gzcmbdf3-ret-"));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "gzinfols-ret-"));
   const now = Date.parse("2026-08-20T00:00:00Z"); // 午夜对齐，cutoff=08-13T00:00
   mkDateDir(root, "2026-08-10"); // < 7 天前 → 删
   mkDateDir(root, "2026-08-13"); // == cutoff（午夜）→ 保留
@@ -38,7 +38,7 @@ test("pruneHistoryDirs：仅删早于保留窗口的日期目录，非日期目�
 });
 
 test("pruneHistoryDirs：保留窗口可调（RETENTION_DAYS=3）", () => {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "gzcmbdf3-ret-"));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "gzinfols-ret-"));
   const now = Date.parse("2026-08-20T00:00:00Z"); // cutoff=08-17T00:00
   mkDateDir(root, "2026-08-17"); // 3 天前 == cutoff → 保留
   mkDateDir(root, "2026-08-16"); // < cutoff → 删
@@ -51,6 +51,6 @@ test("pruneHistoryDirs：保留窗口可调（RETENTION_DAYS=3）", () => {
 });
 
 test("pruneHistoryDirs：根目录不存在时返回空、不报错", () => {
-  const removed = pruneHistoryDirs("/nonexistent/gzcmbdf3/history", 7);
+  const removed = pruneHistoryDirs("/nonexistent/gzinfols/history", 7);
   assert.deepEqual(removed, []);
 });
