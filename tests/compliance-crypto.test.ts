@@ -68,6 +68,48 @@ test("② 词表：BANNED_WORDS 覆盖全部加密变体", () => {
   }
 });
 
+test("④ 静态（补强）：加密实现的**变体命名**残留 —— 驼峰键名 / CSS 类名 / i18n 文案", () => {
+  // 为什么补这一条：2026-09-14 实测发现 `i18n.ts` 仍有 5 条加密 widget 文案
+  // （`widgetCryptoFearGreed`「加密恐慌贪婪」/ `widgetBtcDom`「BTC 主导率」…），
+  // `theme.ts` 仍有 `.crypto-widget.fg-fear*` 整块「恐慌贪婪」样式 —— 而 ① 的标记词
+  // （coingecko / fear-greed / fear_greed / crypto_fear_greed）**恰好扫不到**驼峰与类名，
+  // 于是这批残留长期潜伏。本用例用「实现面精确标记 + 剥离注释」把这类变体一并锁死。
+  //
+  // 剥离注释是必要的：说明「此处已移除 .crypto-widget」的注释本身含敏感词，
+  // 不剥离会误报（与 lib/architecture/check.ts 同一教训）。
+  const stripComments = (src: string): string =>
+    src.replace(/\/\*[\s\S]*?\*\//g, "").replace(/(^|[^:])\/\/[^\n]*/g, "$1");
+
+  /** 只列「实现残留」特征词：不含 BANNED_WORDS / prompts 合规防线里的正当词（比特币、虚拟货币…）。 */
+  const RESIDUE_MARKERS = [
+    "crypto-widget",
+    "crypto_widget",
+    "widgetcrypto",
+    "btcdom",
+    "feargreed",
+    "fear-greed",
+    "coingecko",
+    "crypto_fear_greed",
+    "fg-fear",
+    "fg-greed",
+    "加密恐慌",
+    "加密总市值",
+    "恐慌贪婪",
+    "活跃币",
+    "BTC 主导率",
+  ];
+
+  const roots = ["lib", "scripts"].map((d) => path.join(ROOT, d)).filter((d) => fsSync.existsSync(d));
+  const hits: string[] = [];
+  for (const f of roots.flatMap((d) => walk(d))) {
+    const code = stripComments(fsSync.readFileSync(f, "utf-8"));
+    for (const m of RESIDUE_MARKERS) {
+      if (code.includes(m)) hits.push(`${path.relative(ROOT, f)} → ${m}`);
+    }
+  }
+  assert.deepEqual(hits, [], `发现加密实现残留（变体命名）：\n${hits.join("\n")}`);
+});
+
 test("③ 行为：命中违禁词的必读/洞察在回流时被丢弃", () => {
   const base: DailyReport = {
     date: "2026-09-12",

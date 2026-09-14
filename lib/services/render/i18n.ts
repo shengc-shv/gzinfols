@@ -44,11 +44,9 @@ const TEXTS_ZH = {
   tradingTodayFocus: "今日关注",
   tradingAllAssets: "全部资产",
   tradingRiskCaveat: "风险提示",
-  widgetCryptoFearGreed: "加密恐慌贪婪",
-  widgetCryptoCap: "加密总市值",
-  widgetBtcDom: "BTC 主导率",
-  widgetVolume24h: "24h 成交量",
-  widgetActiveCoins: "活跃币",
+  // 2026-09-14 移除 5 条加密 widget 死键（widgetCryptoFearGreed / widgetCryptoCap /
+  // widgetBtcDom / widgetVolume24h / widgetActiveCoins）—— 加密资产零容忍（2026-09-12
+  // 用户拍板，永久），且这 5 条在本仓无任何引用。静态断言见 tests/compliance-crypto.test.ts。
   ticker5d: "5 日",
   tickerVs52wHigh: "距 52w 高",
   tickerTrend: "趋势",
@@ -106,11 +104,6 @@ const TEXTS_EN: typeof TEXTS_ZH = {
   tradingTodayFocus: "Today's Focus",
   tradingAllAssets: "All Assets",
   tradingRiskCaveat: "Risk Disclaimer",
-  widgetCryptoFearGreed: "Crypto Fear/Greed",
-  widgetCryptoCap: "Crypto Market Cap",
-  widgetBtcDom: "BTC Dominance",
-  widgetVolume24h: "24h Volume",
-  widgetActiveCoins: "Active coins",
   ticker5d: "5d",
   tickerVs52wHigh: "vs 52w High",
   tickerTrend: "Trend",

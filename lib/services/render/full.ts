@@ -1604,6 +1604,20 @@ export function mergeStoredExecutive(
   return out;
 }
 
+/**
+ * 发布前剥离 CSS 注释（2026-09-14）。
+ *
+ * 为什么必须做：`THEME_CSS` / `AUDIO_HIGHLIGHT_CSS` 是模板字符串，其中的注释会
+ * **原样进入公开页面**。清理加密残留时实测到：新增的说明性注释（提到已移除的加密
+ * widget 样式组、失效的阴影变量名）被直接渲染进产物 —— 既把内部笔记发布出去，
+ * 又让合规断言（tests/compliance-crypto.test.ts）与 CSS 自洽断言
+ * （tests/render-invariants.test.ts）误报。CSS 注释对渲染零影响，故统一在注入点剥离；
+ * 源码内的注释保留给维护者。
+ */
+function stripCssComments(css: string): string {
+  return css.replace(/\/\*[\s\S]*?\*\//g, "");
+}
+
 export function renderHtml(
   report: DailyReport,
   date: string,
@@ -1739,8 +1753,8 @@ ${shareImageTags}<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="${escapeHtml(shareTitle)}">
 <meta name="twitter:description" content="${escapeHtml(shareDesc)}">
 ${shareTwitterImage}<style>
-${THEME_CSS}
-${AUDIO_HIGHLIGHT_CSS}
+${stripCssComments(THEME_CSS)}
+${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
   /* 商机洞察客户客群标签 (2026-09-08) */
   .insight-segs { margin: 4px 0 6px; display: flex; flex-wrap: wrap; gap: 5px; }
   .seg-chip { font-size: 11px; font-weight: 600; border-radius: 9px; padding: 1px 8px; line-height: 1.7; white-space: nowrap; }

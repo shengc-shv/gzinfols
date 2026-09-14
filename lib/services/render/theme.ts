@@ -851,65 +851,11 @@ export const THEME_CSS = `
   .band-panel.active { display: block; }
 
   /* ===== trading panel ===== */
-  .crypto-widgets {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.6rem;
-    margin: 0.4rem 0 1.3rem;
-  }
-  @media (min-width: 720px) {
-    .crypto-widgets { grid-template-columns: repeat(4, 1fr); }
-  }
-  .crypto-widget {
-    background: var(--card);
-    border: 1px solid var(--rule);
-    border-radius: var(--r-md);
-    padding: 0.8rem 0.9rem;
-    text-align: center;
-    box-shadow: var(--shadow-sm);
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .crypto-widget:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-  .widget-label {
-    font-size: 0.7rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 0.3rem;
-  }
-  .widget-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    color: var(--fg);
-    line-height: 1.1;
-  }
-  .widget-sub {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-top: 0.25rem;
-  }
-  .widget-sub.positive { color: #16a34a; }
-  .widget-sub.negative { color: #dc2626; }
-  @media (prefers-color-scheme: dark) {
-    .widget-sub.positive { color: #4ade80; }
-    .widget-sub.negative { color: #fca5a5; }
-  }
-  .crypto-widget.fg-fear-extreme { border-left: 4px solid #b91c1c; }
-  .crypto-widget.fg-fear-extreme .widget-value { color: #b91c1c; }
-  .crypto-widget.fg-fear { border-left: 4px solid #d97706; }
-  .crypto-widget.fg-fear .widget-value { color: #d97706; }
-  .crypto-widget.fg-neutral { border-left: 4px solid var(--muted); }
-  .crypto-widget.fg-greed { border-left: 4px solid #65a30d; }
-  .crypto-widget.fg-greed .widget-value { color: #65a30d; }
-  .crypto-widget.fg-greed-extreme { border-left: 4px solid #16a34a; }
-  .crypto-widget.fg-greed-extreme .widget-value { color: #16a34a; }
-  @media (prefers-color-scheme: dark) {
-    .crypto-widget.fg-fear-extreme .widget-value,
-    .crypto-widget.fg-fear .widget-value { color: #fca5a5; }
-    .crypto-widget.fg-greed .widget-value,
-    .crypto-widget.fg-greed-extreme .widget-value { color: #4ade80; }
-  }
+  /* 2026-09-14：移除此处的加密 widget 样式与无引用副作用 ——
+     原块含 .crypto-widgets / .crypto-widget / .widget-label / .widget-value / .widget-sub，
+     其中 .crypto-widget.fg-fear*「恐慌贪婪」系列直接违反「加密资产零容忍」
+     （2026-09-12 用户拍板，永久）；且整组样式在本仓**无任何渲染方调用**
+     （gzinfo 移植残留的死 CSS）。新增静态断言见 tests/compliance-crypto.test.ts。 */
 
   .trading-overview-card {
     margin: 0 0 1.6rem;
@@ -1184,7 +1130,12 @@ export const THEME_CSS = `
   .panel.active { display: block; }
 
   /* 卡片：来源徽章 + 摘要平铺（#12/#15） */
-  .brief { background: var(--card); border: 1px solid var(--rule); border-radius: 12px; padding: 0.8rem 0.95rem; margin-bottom: 0.55rem; box-shadow: var(--shadow); }
+  /* 2026-09-14 修正：box-shadow 原写 var(--shadow) → 改 var(--shadow-sm)。
+     --shadow 【从未定义】（主题只定义 --shadow-sm/md/lg）→ 该声明整体失效（卡片无阴影）。
+     改用 --shadow-sm，与本文件其余 20 余处卡片规则一致。
+     由 tests/render-invariants.test.ts 的「CSS 变量自洽」断言发现并锁死。
+     注：本文件是模板字符串，注释内**不可使用反引号**（会截断模板）。 */
+  .brief { background: var(--card); border: 1px solid var(--rule); border-radius: 12px; padding: 0.8rem 0.95rem; margin-bottom: 0.55rem; box-shadow: var(--shadow-sm); }
   .brief .bm { display: flex; align-items: center; gap: 0.45rem; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.25rem; flex-wrap: wrap; }
   .src-badge { font-size: 0.66rem; font-weight: 700; border-radius: 4px; padding: 0.06rem 0.35rem; }
   .src-official { color: #b45309; background: rgba(217, 119, 6, 0.14); }
