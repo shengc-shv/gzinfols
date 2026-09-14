@@ -67,8 +67,9 @@
 
 - **频率（2026-09-15 用户澄清）**：**随每次 CI 运行执行**——即接入现有日管线 / `daily.yml`，
   每次 CI 跑（含 cron 与手动 dispatch）都跑一次红筹监测；**不另起独立定时 workflow**。
-- **抓取日期（2026-09-15 用户澄清）**：**按当次 CI 运行的日期抓取**（北京时间 / `REPORT_TZ` 当日），
-  **不是抓昨天**；日期路径由运行当日决定，可用 `--date YYYY-MM-DD` 覆盖以便补跑/重跑。
+- **抓取日期（2026-09-15 用户最终确认）**：**抓「北京时间昨天」**——每天只跑一次（早 7:30），
+  此时当天数据尚未发布/完整，故目标日期 = `REPORT_TZ` 昨日；可用 `--date YYYY-MM-DD` 覆盖补跑。
+  ⚠️ 不可用 `Date.toISOString()` 取日期（那是 UTC 日期，12:00 北京跑会错成"今天"）。
 - **增量**：每次先拉列表 JSON → 与最新快照比对 → **只对新增/变更的申请编号**下载并解析 PDF。
   存量项目不重复下载（省钱省时，PDF 解析是主要成本）。
 - **幂等**：同一申请编号重复跑不会产生重复记录；PDF 解析结果随快照固化。
@@ -140,10 +141,10 @@
 | `lib/contracts/redchip.ts`（契约：类型 + 离岸法域表 + 广东城市表 + VIE 词表 + 阈值） | ✅ 已建 |
 | `lib/services/redchip/classify.ts`（判定纯函数） | ✅ 已建 |
 | `lib/services/redchip/diff.ts`（快照比对） | ✅ 已建 |
-| `lib/adapters/redchip/*`（HTTP 抓取 / PDF 抽取 / 快照存储） | ⬜ 待建 |
-| `scripts/redchip-monitor.ts`（CI 入口：抓取→判定→diff→写快照+changelog） | ⬜ 待建 |
+| `lib/adapters/redchip/*`（抓取 / PDF 抽取 / 快照存储） | ✅ 已建 |
+| `scripts/redchip-monitor.ts`（CI 入口：抓取→判定→diff→写快照+changelog） | ✅ 已建（**样本模式跑通**，未启用真实抓取） |
 | `lib/services/render/redchip-page.ts` + `build-site.mjs` 接入（展示页） | ⬜ 待建 |
-| 测试用例（判定 / diff / 快照读写） | ⬜ 待建 |
+| 测试用例（判定 / 词表阈值 / diff 幂等 / 存储读写） | ✅ 已建 4 例全过 |
 | `.github/workflows/daily.yml` 增加红筹监测步骤 | ⬜ 待建 |
 | `docs/redchip.md` 使用说明 | ⬜ 待建 |
 
