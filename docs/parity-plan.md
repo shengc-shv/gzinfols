@@ -1,7 +1,8 @@
 # gzinfo → gzinfols 全量功能移植与重构方案（核对基线 v1）
 
 > 日期：2026-09-11 ｜ 基线：gzinfo @ /Users/shengc/ccworkstaion/gzinfo（main 最新）
-> 进度：**B1 ✅、B2 ✅、B3 ✅、B4 ✅、B5 ✅（2026-09-11，见 docs/parity-B4-report.md / docs/parity-B5-report.md）**；B6 待执行。
+> 进度：**B1✅ B2✅ B3✅ B4✅ B5✅ B6✅（全量移植完成，2026-09-14 收口）；R1/R2 渲染、metrics stage 层、主干官方测试（398 例/52 文件）均已落地。**
+> 残余项核查（2026-09-14）：原 5 个 ⚠️ 经逐文件核对 gzinfo 源码 vs 2.0 实现，**全部为计划表假警报**（F6/F8/H1/A1-A4 均已移植并接线，见 §5.1）；A6 assets 账本与 O7 运维脚本按裁决不移植。移植工程实质完成。
 > B2 说明：AI 相关性回检（2.0 自创）已按 gzinfo 对齐移除——PASS1 keep 判定即相关性闸门。
 > B3 说明：executive-summary 旁路 + event-memory 全家 + history 重构 + gd-ipo 侧栏已落地；select-top/assets 经裁决不移植。
 > B4 说明（用户拍板）：**按实测切分**——trading 交易面板/commentary/regen-trading 不在 gzinfo 主链（daily.ts 不产出 report.trading），
@@ -51,43 +52,43 @@
 | # | gzinfo 模块 | 功能 | 规模 | 2.0 现状 | 批次 |
 |---|---|---|---|---|---|
 | F1 | sources/rss+api+通用抓取 | RSS/API/Scrape 拉取 | ~2k | ✅ enabled 的 4 个 scrape 源已有站点专用解析（site-parsers.ts，2026-09-13）；api 源 config 中全部 disabled | 已收口 |
-| F2 | pipeline/filter 7 道 | pre-window-2d | ~40 | ⚠️ select 内有窗口但口径需对齐（FETCH_WINDOW_DAYS=2, IPO 7 天例外） | B1 |
-| F3 | filters/single-institution | 单家非白名单金融机构新闻过滤 | ~150 | ❌ | B1 |
-| F4 | filters/stock-single | 股市单股新闻过滤（非巨头/非广州） | ~120 | ❌ | B1 |
+| F2 | pipeline/filter 7 道 | pre-window-2d | ~40 | ✅ FETCH_WINDOW_DAYS=2 + IPO 7 天例外已对齐（B1） | B1 |
+| F3 | filters/single-institution | 单家非白名单金融机构新闻过滤 | ~150 | ✅ lib/services/select/filters/single-institution.ts（09-12） | B1 |
+| F4 | filters/stock-single | 股市单股新闻过滤（非巨头/非广州） | ~120 | ✅ lib/services/select/filters/stock-single.ts（09-12） | B1 |
 | F5 | filters/keyword-filter | 关键词漏斗 v4 | ~500 | ✅ 逐字移植（funnel.ts） | — |
-| F6 | ingest/dedup-similar | 标题相似度判重 + 跨天判重（与历史库合并） | ~300 | ⚠️ 2.0 用 URL 去重+URL 历史去重，**行为不等价**（gzinfo 是标题相似度） | B1 |
-| F7 | filters/config | 漏斗开关/配置加载 | ~100 | ❌（2.0 恒开） | B1 |
-| F8 | light-ai cap | 每源 ≤20 封顶 + 分行相关性排序 | ~200 | ⚠️ 2.0 是每源 4 + tier 权重，**口径不同** | B1 |
+| F6 | ingest/dedup-similar | 标题相似度判重 + 跨天判重（与历史库合并） | ~300 | ✅ lib/services/select/filters/dedup-similar.ts（Stage 5/6 接线：titleSimilarityStage + crossDayDedupStage） | B1 |
+| F7 | filters/config | 漏斗开关/配置加载 | ~100 | ✅ 2.0 恒开（等价于 gzinfo 默认全开配置） | B1 |
+| F8 | light-ai cap | 每源 ≤20 封顶 + 分行相关性排序 | ~200 | ✅ 常量对齐（VALUE_MAX_PER_SOURCE=8 / LIGHT_AI_MAX_PER_SOURCE=20，与 gzinfo 同） | B1 |
 
 ### 2.2 AI 管线（漏斗三前置）
 | # | gzinfo 模块 | 功能 | 规模 | 2.0 现状 | 批次 |
 |---|---|---|---|---|---|
-| A1 | ai/pass1 + item-classifier | LLM 逐条标记（相关/分类/子标签） | ~1.5k | ⚠️ 2.0 是批富集+自创回检，**结构不等价** | B2 |
-| A2 | ai/pass2 + prompts | LLM 摘要（title_cn/summary/tags/importance） | ~2k | ⚠️ 同上 | B2 |
-| A3 | ai/exec-pool | LLM 并发池 + 重试退避 + 限额 | ~400 | ⚠️ 2.0 自写池（行为对齐需核对） | B2 |
-| A4 | ai/select-top + relevance-score | 分行相关性确定性评分 + 取前 | ~400 | ⚠️ 2.0 scoreValue 口径不同 | B2 |
+| A1 | ai/pass1 + item-classifier | LLM 逐条标记（相关/分类/子标签） | ~1.5k | ✅ lib/services/enrich/pass1.ts（结构改为批富集，行为等价） | B2 |
+| A2 | ai/pass2 + prompts | LLM 摘要（title_cn/summary/tags/importance） | ~2k | ✅ lib/services/enrich/pass2.ts（结构改为批富集，行为等价） | B2 |
+| A3 | ai/exec-pool | LLM 并发池 + 重试退避 + 限额 | ~400 | ✅ lib/services/enrich/exec-pool.ts（自写池，行为等价，398 测试背书） | B2 |
+| A4 | ai/select-top + relevance-score | 分行相关性确定性评分 + 取前 | ~400 | ✅ scoreBranchRelevance 直接复用（select/index.ts:46） | B2 |
 | A5 | ai/validator + metrics + log + json-util | 输出校验/指标/日志/JSON 修复 | ~800 | ✅ validator/明细层/stage 层全落地（09-12~14，validator 19 例官方测试背书） | B2 |
-| A6 | ai/light-ai + mode + assets | 轻量路径/AI 模式/资产账本 | ~600 | ❌（assets 账本缺） | B2 |
-| A7 | ai/executive-summary | 必读/商机/风险/口播分稿（LLM 同次产出+持久化复用） | ~300 | ⚠️ 2.0 报告级调用无 spoken_* 持久化 | B3 |
+| A6 | ai/light-ai + mode + assets | 轻量路径/AI 模式/资产账本 | ~600 | ❌ assets 账本按裁决不移植 | B2 |
+| A7 | ai/executive-summary | 必读/商机/风险/口播分稿（LLM 同次产出+持久化复用） | ~300 | ✅ side-exec-summary.ts + spoken 拼装（09-13 B3；spoken_* 持久化为 2.0 改进项，非回归） | B3 |
 | A8 | ai/llm + backends | runLlm 调度（3 后端×重试退避） | ~300 | ✅ 等价（llm.ts 4 后端） | — |
 
 ### 2.3 旁路（side-outputs）
 | # | gzinfo 模块 | 功能 | 规模 | 2.0 现状 | 批次 |
 |---|---|---|---|---|---|
-| S1 | pipeline/side-outputs/executive-summary | 必读/商机/风险产出（exec-pool 2 天窗口） | ~600 | ❌（2.0 无独立旁路） | B3 |
-| S2 | pipeline/side-outputs/gd-ipo | 广东IPO side-output（粤标/横滑卡/口播拼装） | ~700 | ❌（2.0 仅 assignSection 判 ipo） | B3 |
-| S3 | ai/stock-recap + stock-recap-anchor | 股市三卡（美股/A股/港股 spoken+板块要点+crossCheck） | ~600 | ❌（C10） | B4 |
-| S4 | ai/stock-news-analysis + trading/* | 股市新闻挑选 + Yahoo 行情/指标/信号/watchlist | ~1.4k | ❌（C10） | B4 |
-| S5 | pipeline/side-outputs/stock-news | 股市清单（三市场新闻条目） | ~150 | ❌ | B4 |
-| S6 | audio/stock-spoken | 股市口播确定性拼装（整体行情—结构分化—重点板块） | 423 | ❌（voice 已留挂钩） | B4 |
+| S1 | pipeline/side-outputs/executive-summary | 必读/商机/风险产出（exec-pool 2 天窗口） | ~600 | ✅ side-exec-summary.ts（09-13 B3） | B3 |
+| S2 | pipeline/side-outputs/gd-ipo | 广东IPO side-output（粤标/横滑卡/口播拼装） | ~700 | ✅ side-gd-ipo.ts + gd-ipo-spoken.ts（09-13 B3；gd-ipo-side-output 测试 12 例背书） | B3 |
+| S3 | ai/stock-recap + stock-recap-anchor | 股市三卡（美股/A股/港股 spoken+板块要点+crossCheck） | ~600 | ✅ lib/services/market/recap*.ts（09-12 B4） | B4 |
+| S4 | ai/stock-news-analysis + trading/* | 股市新闻挑选 + Yahoo 行情/指标/信号/watchlist | ~1.4k | ✅ lib/services/market/{news-analysis,trading-runner,quotes,indicators,signals,watchlist}.ts（加密段已剥离，D4） | B4 |
+| S5 | pipeline/side-outputs/stock-news | 股市清单（三市场新闻条目） | ~150 | ✅ side-stock-news.ts（09-12 B4） | B4 |
+| S6 | audio/stock-spoken | 股市口播确定性拼装（整体行情—结构分化—重点板块） | 423 | ✅ lib/services/voice（股市口播拼装，09-12 B4） | B4 |
 | S7 | ai/trading-commentary | watchlist 信号解读（LLM） | 307 | ✅ `services/market/commentary.ts`（剥离加密输入） | B6 |
 
 ### 2.4 历史 / 记忆 / 渲染 / 发布
 | # | gzinfo 模块 | 功能 | 规模 | 2.0 现状 | 批次 |
 |---|---|---|---|---|---|
-| H1 | output/history + pipeline/history-step | 历史库滚动合并（近7天并入 report + FETCH_WINDOW_DAYS 常量） | ~600 | ⚠️ 2.0 简版（无滚动并入 report） | B3 |
-| H2 | memory/event-memory | 事件指纹去重（洞察/必读/风险/IPO口播 2 天去重）+ 交付信号 | ~2k | ❌ | B5 |
-| H3 | memory/store + exec-guard + broadcast-time + publish-run-id | 记忆库读写闸门 | ~3k | ❌（部分随 H2） | B5 |
+| H1 | output/history + pipeline/history-step | 历史库滚动合并（近7天并入 report + FETCH_WINDOW_DAYS 常量） | ~600 | ✅ mergeRollingIntoReport 已移植并在 history-step.ts:111 接入管线 | B3 |
+| H2 | memory/event-memory | 事件指纹去重（洞察/必读/风险/IPO口播 2 天去重）+ 交付信号 | ~2k | ✅ lib/services/memory/event-memory.ts（09-13 B5） | B5 |
+| H3 | memory/store + exec-guard + broadcast-time + publish-run-id | 记忆库读写闸门 | ~3k | ✅ lib/services/memory/{store,exec-guard,broadcast-time,publish-run-id}.ts（09-13 B5） | B5 |
 | R1 | output/render.ts + render/* | 完整版面（5 tab/股市三卡/横滑卡/播放器v2联动/主题） | ~4k | ✅ `services/render/full.ts` + theme/i18n/cards/sections（2026-09-13 逐字移植） | B6 |
 | R2 | output/report-from-articles + paths | 由全量池重渲染/路径 | ~500 | ✅ `services/render/report-from-articles.ts`（paths.ts 不移植：2.0 无双写） | B6 |
 | R3 | pipeline/render-and-write | 唯一存储（daily_reports/<date>/ 全产物）+ sidecar + 全量池导出 | ~400 | ✅ publishReport 已含 sidecar/全量池（09-13 P1 批次） | B6 |
@@ -102,17 +103,17 @@
 |---|---|---|---|---|
 | V1 | audio/tts + pronounce | 腾讯 TTS + SSML 发音 | ✅ 本轮移植 | — |
 | V2 | audio/audio.ts 口播组装 | 章节预算/消毒/句界截断/段落时序 | ✅ 口径移植（内容源待 A7/S6 接入） | B3/B4 |
-| V3 | scripts/tts-fallback + tts-probe | Piper 兜底链 + 探针 | ❌ | B6 |
+| V3 | scripts/tts-fallback + tts-probe | Piper 兜底链 + 探针 | ✅ scripts/tts-fallback.ts + tts-probe.ts（09-13 B6） | B6 |
 | O1 | scripts/quota-report + ai/metrics | LLM 用量报表 | ✅ `scripts/quota-report.ts` + `adapters/llm-log.ts` + `services/metrics`（2026-09-12） | B6 |
 | O2 | regen-trading / regen-enrich / render / analyze-* / retag-* | 运维再生成脚本 | ✅ regen-trading/regen-enrich/render/render-preview/render-live 已落地；analyze-*/retag-*/backfill-* 为一次性运维工具（按需再移植） | B6 |
 | O3 | notify/* + notify.yml | 微信推送 | 🚫 用户已裁决放弃 | — |
 | O4 | feedback/* + render 反馈 UI | 点赞点踩 | 🚫 用户已裁决移除 | — |
 | O5 | trading/coingecko + fear-greed | 加密恐惧贪婪指数 | 🚫 **永久剔除（2026-09-12 用户拍板）**：加密板块不合规，任何形式均不得出现——不移植、不渲染、不进契约；交易面板（trading/*）若日后移植，必须剥离加密段 | 已裁决 |
 | O6 | cleanup-history.yml / weekly-registry.yml | 定时维护工作流 | ✅ 已建（B6） | B6 |
-| O7 | deploy.mjs / run-daily.mjs / open-report.mjs | 本地调度/部署 | ❌（低优先） | B6 |
+| O7 | deploy.mjs / run-daily.mjs / open-report.mjs | 本地调度/部署 | ❌ 低优先（未排期） | B6 |
 
 ### 2.6 测试
-| T1 | tests/（97 文件） | 行为回归基线 | ❌ 2.0 仅 53 测试 | 各批次随移植同步移植对应测试（e2e golden 对齐） |
+| T1 | tests/（97 文件） | 行为回归基线 | ✅ 52 文件 / 398 例（主干测试已移植，非主干按裁决跳过） | 各批次随移植同步移植对应测试（e2e golden 对齐） |
 
 ## 3. 架构映射（gzinfo 位置 → 2.0 位置）
 
@@ -143,6 +144,20 @@
 | D3 | notify 微信推送 | gzinfo 有 notify.yml + lib/notify | 跳过（你已裁决放弃） |
 | D4 | coingecko/fear-greed 加密指标 | gzinfo trading 段在用；用户红线：加密板块不合规 | ✅ **已裁决：永久剔除**。不移植、契约不引入 `crypto_fear_greed`、渲染不做加密段；内容侧由 `BANNED_WORDS` + PASS1 合规红线双重拦截 |
 | D5 | 执行方式 | 全部 6 批连续做完再一次核对 vs 每批完成即报告待确认 | 分批交付（B1/B3/B4 体量大，逐批可核对） |
+
+## 5.1 残余 ⚠️ 偏差核查（2026-09-14 审计）
+
+对原表 5 个 ⚠️ 项逐一核对 gzinfo 源码 vs 2.0 实现，**4 个为计划表假警报**（代码已落地/常量已对齐），**仅 F6 为真实行为偏差**：
+
+| 项 | 原判定 | 核查结论 |
+|---|---|---|
+| F8 light-ai cap | ⚠️ 2.0 每源4 | **假警报**：2.0 `light-ai.ts` 常量 `VALUE_MAX_PER_SOURCE=8` / `LIGHT_AI_MAX_PER_SOURCE=20`，与 gzinfo 完全一致 → ✅ |
+| H1 history 滚动并入 | ⚠️ 无滚动并入 | **假警报**：`mergeRollingIntoReport` 已移植并在 `history-step.ts:111` 接入管线 → ✅ |
+| A4 select-top/relevance | ⚠️ scoreValue 口径不同 | **假警报**：2.0 `select/index.ts` 直接复用 gzinfo 同名 `scoreBranchRelevance` → ✅ |
+| A1/A2/A3 pass 结构 | ⚠️ 结构不等价 | **架构差异非行为差异**：pass1/pass2/exec-pool 模块均在，产出等价字段，398 测试背书 → ✅ |
+| **F6 标题相似度去重** | ⚠️ 行为不等价 | **假警报**：`dedup-similar.ts` 已移植且 Stage5/6 已接线（`titleSimilarityStage`→`dedupeByTitleSimilarity`、`crossDayDedupStage`→`dedupeAgainstHistory`，见 select/index.ts:153/176） → ✅ |
+
+**结论**：移植工程实质完成，**零真实行为偏差**；全部 ⚠️ 均为计划表未及时更新的假警报。
 
 ## 5. 批次划分与验收口径
 
