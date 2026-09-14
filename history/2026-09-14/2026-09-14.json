@@ -1,26 +1,26 @@
 {
   "date": "2026-09-14",
-  "hero_line": "今日分行焦点：授信80亿元！农行广州分行与杰创智能达成战略合作",
+  "hero_line": "今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获",
   "must_read": [
-    {
-      "title": "美联储9月加息概率逼近90%！特朗普再度施压：美国利率应全球最低",
-      "why": "国家核心监管新政（信贷）：直击信贷业务",
-      "url": "https://finance.eastmoney.com/a/202609143872953521.html"
-    },
     {
       "title": "核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务",
       "why": "国家核心监管新政（监管合规）：直击监管合规业务",
       "url": "https://www.stcn.com/article/detail/4184345.html"
     },
     {
+      "title": "【信报】信披新规覆盖23类机构，信托等非银机构迎合规大考",
+      "why": "市场信号（信贷）：直击信贷业务",
+      "url": "https://finance.sina.com.cn/trust/2026-09-14/doc-inirveas7267226.shtml"
+    },
+    {
+      "title": "@新就业群体，广州为你送上“权益礼包”",
+      "why": "市场信号（客群）：直击客群业务",
+      "url": "https://news.dayoo.com/guangzhou/202609/14/139995_55003502.htm"
+    },
+    {
       "title": "多家银行收紧个人贵金属业务 原因何在？",
       "why": "市场信号（财富）：直击财富业务",
       "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-14/doc-inirtwih7360540.shtml"
-    },
-    {
-      "title": "力合科创对子公司财务资助逾期 公司称风险可控",
-      "why": "市场信号（监管合规）：直击监管合规业务",
-      "url": "https://www.stcn.com/article/detail/4183819.html"
     }
   ],
   "insights": [
@@ -34,25 +34,34 @@
       ]
     },
     {
-      "topic": "央行：前八个月社会融资规模增量",
+      "topic": "上半年股份行零售贷款全面退潮：",
       "tags": [],
-      "impact": "对广州分行信贷业务有潜在影响",
+      "impact": "对广州分行信贷/客群/竞对动态业务有潜在影响",
       "action": "建议分行关注信贷动向并评估动作",
       "segments": [
         "其他业务线"
       ]
     },
     {
-      "topic": "看！广州外销工艺品的“黄金时代",
+      "topic": "授信80亿元！农行广州分行与杰",
       "tags": [],
-      "impact": "对广州分行财富业务有潜在影响",
-      "action": "建议分行关注财富动向并评估动作",
+      "impact": "对广州分行信贷/竞对动态业务有潜在影响",
+      "action": "建议分行关注信贷动向并评估动作",
       "segments": [
-        "零售AUM"
+        "其他业务线"
       ]
     },
     {
-      "topic": "年内近20家信托公司换帅 内部",
+      "topic": "力合科创对子公司财务资助逾期 ",
+      "tags": [],
+      "impact": "对广州分行监管合规业务有潜在影响",
+      "action": "建议分行关注监管合规动向并评估动作",
+      "segments": [
+        "其他业务线"
+      ]
+    },
+    {
+      "topic": "市场认定美联储加息已成定局，但",
       "tags": [],
       "impact": "对广州分行信贷业务有潜在影响",
       "action": "建议分行关注信贷动向并评估动作",
@@ -112,136 +121,17 @@
     ],
     "ipo": [
       {
-        "url": "https://news.crunchbase.com/venture/biggest-funding-rounds-boring-co-cognition-massive-week/",
-        "title_cn": "The Week’s 10 Biggest Funding Rounds: The Boring Co., Cognition And Motive Lead A Massive Week",
-        "source": "Crunchbase News",
+        "url": "https://www.stcn.com/article/detail/4184784.html",
+        "title_cn": "粤芯半导体：初步询价日为9月18日 网下申购日为9月24日",
+        "source": "证券时报",
         "source_type": "media",
         "tier": "T2",
-        "date": "09/11",
-        "summary": "It was a monster week for U.S. startup funding, with four companies each raising $1 billio",
+        "date": "09/14",
+        "summary": "粤芯半导体：初步询价日为9月18日 网下申购日为9月24日",
         "ipoMeta": "",
         "ipoCity": "广东",
         "importance": 2,
         "rank": 1,
-        "tags": [
-          "粤"
-        ],
-        "locale": "national"
-      },
-      {
-        "url": "https://news.crunchbase.com/ai/moats-that-actually-work-moatti-mighty-capital/",
-        "title_cn": "The Only 2 Moats That Actually Work In The AI Era",
-        "source": "Crunchbase News",
-        "source_type": "media",
-        "tier": "T2",
-        "date": "09/11",
-        "summary": "AI itself is no longer a durable differentiator, argues guest author SC Moatti of Mighty C",
-        "ipoMeta": "",
-        "ipoCity": "广东",
-        "importance": 2,
-        "rank": 2,
-        "tags": [
-          "粤"
-        ],
-        "locale": "national"
-      },
-      {
-        "url": "https://news.crunchbase.com/venture/doctor-turned-startup-founder-healthcare-staffing-crunch-abuzeid-incredible/",
-        "title_cn": "How This Doctor-Turned-Startup-Founder Decided To Fix The Healthcare Staffing Crunch: Make Employers Apply ",
-        "source": "Crunchbase News",
-        "source_type": "media",
-        "tier": "T2",
-        "date": "09/11",
-        "summary": "Iman Abuzeid left clinical medicine to tackle healthcare problems at scale, co-founding In",
-        "ipoMeta": "",
-        "ipoCity": "广东",
-        "importance": 2,
-        "rank": 3,
-        "tags": [
-          "粤"
-        ],
-        "locale": "national"
-      },
-      {
-        "url": "https://news.crunchbase.com/venture/measure-innovation-ecosystem-south-korea-onetti-mind-the-bridge/",
-        "title_cn": "How To Measure An Innovation Economy: South Korea",
-        "source": "Crunchbase News",
-        "source_type": "media",
-        "tier": "T2",
-        "date": "09/10",
-        "summary": "Guest author Alberto Onetti, chairman of Mind the Bridge, shares how South Korea’s rise to",
-        "ipoMeta": "",
-        "ipoCity": "广东",
-        "importance": 2,
-        "rank": 4,
-        "tags": [
-          "粤"
-        ],
-        "locale": "national"
-      },
-      {
-        "url": "https://news.crunchbase.com/venture/august-2026-new-unicorns-ai-robotics-semiconductors-xpeng-lumilens-river-source/",
-        "title_cn": "29 Companies Joined The Unicorn Board In August, Led By AI Software And Semiconductors",
-        "source": "Crunchbase News",
-        "source_type": "media",
-        "tier": "T2",
-        "date": "09/10",
-        "summary": "A total of 29 companies joined The Crunchbase Unicorn Board in August, adding around $63 b",
-        "ipoMeta": "",
-        "ipoCity": "广东",
-        "importance": 2,
-        "rank": 5,
-        "tags": [
-          "粤"
-        ],
-        "locale": "national"
-      },
-      {
-        "url": "https://news.crunchbase.com/startups/tech-layoffs/",
-        "title_cn": "The Crunchbase Tech Layoffs Tracker",
-        "source": "Crunchbase News",
-        "source_type": "media",
-        "tier": "T2",
-        "date": "09/09",
-        "summary": "Over 127,000 workers at U.S.-based tech companies were laid off in mass job cuts in 2025,",
-        "ipoMeta": "",
-        "ipoCity": "广东",
-        "importance": 2,
-        "rank": 6,
-        "tags": [
-          "粤"
-        ],
-        "locale": "national"
-      },
-      {
-        "url": "https://news.crunchbase.com/venture/startup-investment-qa-ai-hr-fintech-jacobsohn-norwest/",
-        "title_cn": "The Sales Test This Norwest Partner Gives Founders Before He’ll Invest",
-        "source": "Crunchbase News",
-        "source_type": "media",
-        "tier": "T2",
-        "date": "09/09",
-        "summary": "In an interview with Crunchbase News, Sean Jacobsohn, a partner at venture firm Norwest, d",
-        "ipoMeta": "",
-        "ipoCity": "广东",
-        "importance": 2,
-        "rank": 7,
-        "tags": [
-          "粤"
-        ],
-        "locale": "national"
-      },
-      {
-        "url": "https://news.crunchbase.com/venture/europe-record-setting-mistral-ai-raise/",
-        "title_cn": "Mistral AI Raises $3.5B At $24B Valuation In Another Record European AI Round",
-        "source": "Crunchbase News",
-        "source_type": "media",
-        "tier": "T2",
-        "date": "09/08",
-        "summary": "Paris-based generative AI startup Mistral AI said Tuesday that it has nearly doubled its v",
-        "ipoMeta": "",
-        "ipoCity": "广东",
-        "importance": 2,
-        "rank": 8,
         "tags": [
           "粤"
         ],
@@ -260,7 +150,7 @@
         "officialLabel": "申請版本（第一次呈交）",
         "ipoMeta": "",
         "importance": 2,
-        "rank": 9,
+        "rank": 2,
         "tags": [],
         "locale": "national"
       },
@@ -277,7 +167,7 @@
         "officialLabel": "申請版本（第一次呈交）",
         "ipoMeta": "",
         "importance": 2,
-        "rank": 10,
+        "rank": 3,
         "tags": [],
         "locale": "national"
       },
@@ -295,7 +185,7 @@
         "ipoMeta": "",
         "ipoCity": "广东",
         "importance": 2,
-        "rank": 11,
+        "rank": 4,
         "tags": [
           "粤"
         ],
@@ -314,7 +204,7 @@
         "officialLabel": "申請版本（第一次呈交）",
         "ipoMeta": "",
         "importance": 2,
-        "rank": 12,
+        "rank": 5,
         "tags": [],
         "locale": "national"
       },
@@ -327,7 +217,7 @@
         "date": "09/13",
         "summary": "市场：主板｜递表日：2026-09-13｜广东企业赴港上市，可跟进跨境融资商机",
         "importance": 2,
-        "rank": 13,
+        "rank": 6,
         "tags": [],
         "locale": "national"
       }
@@ -335,24 +225,24 @@
   },
   "stock_recap": {
     "us": {
-      "overview": "道琼斯收报52573.29点（+0.98%）；纳斯达克收报26333.04点（+0.96%）；标普500收报7656.98点（+0.86%）。",
+      "overview": "道琼斯收报52505.45点（-0.13%）；纳斯达克收报26224.28点（-0.41%）；标普500收报7631.33点（-0.33%）。",
       "sectors": [],
-      "spoken": "道琼斯（+0.98%）；纳斯达克（+0.96%）；标普500（+0.86%）。",
+      "spoken": "道琼斯（-0.13%）；纳斯达克（-0.41%）；标普500（-0.33%）。",
       "indices": [
         {
           "name": "道琼斯",
-          "value": "52573.29",
-          "changePct": "+0.98%"
+          "value": "52505.45",
+          "changePct": "-0.13%"
         },
         {
           "name": "纳斯达克",
-          "value": "26333.04",
-          "changePct": "+0.96%"
+          "value": "26224.28",
+          "changePct": "-0.41%"
         },
         {
           "name": "标普500",
-          "value": "7656.98",
-          "changePct": "+0.86%"
+          "value": "7631.33",
+          "changePct": "-0.33%"
         }
       ]
     },
@@ -450,12 +340,12 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609133872852575.html",
-      "title_cn": "9月13日晚间沪深上市公司重大事项公告最新快递",
+      "url": "https://finance.eastmoney.com/a/202609143873370592.html",
+      "title_cn": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
       "source": "东方财富",
       "source_type": "media",
-      "date": "09/13",
-      "summary": "9月13日晚间沪深上市公司重大事项公告最新快递",
+      "date": "09/14",
+      "summary": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
       "importance": 2,
       "rank": 0,
       "tags": [],
