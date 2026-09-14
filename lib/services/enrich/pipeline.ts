@@ -77,10 +77,25 @@ export function makeSkipAiRunner(
       // 「未打标/无关一律不并入」口径一致，防止今天新抓的非 L0 垃圾（绿色算力/
       // 银行中报/科技公司业绩）在预览/发布时混入板块。未提供时保持旧行为（全 keep，
       // 供无缓存兜底/测试）。
-      const keepAll = !relevantUrls;
+      //
+      // 2026-09-14 修复（P0-2）：**空 allow-list ≠「全部无关」**。历史库 `ai_relevant`
+      // 字段当前全库缺失（实测 data/article-history.json 126 条无一为 true）→
+      // `relevantUrls` 恒为空 Set → 旧写法 `!relevantUrls` 为 false → 「只保留空集里的
+      // 条目」= 一条不留 → PASS1 返回 0 条 → generateDaily 直接返回空报告，
+      // **四个主板块恒空**（归档 2026-09-14 报告 sections 全 0 即此）。
+      // 语义修正：allow-list 为空 = 「尚无已判定相关的条目」，退化为全量保留 +
+      // 内容判定归栏（垃圾由 PASS2 摘要质量与 mergeRolling 评分器把关），
+      // 而不是产出一份空简报。只有 allow-list **非空** 时才按其过滤（保留 08-22 防垃圾行为）。
+      const hasAllowList = Boolean(relevantUrls && relevantUrls.size > 0);
+      if (!hasAllowList && relevantUrls) {
+        console.warn(
+          "[pipeline] SKIP_AI：历史库 related 集合为空（ai_relevant 全库未打标）→ 退化为全量保留 + 内容判定归栏；" +
+            "如需按相关性收窄，请先补齐历史库 ai_relevant",
+        );
+      }
       return JSON.stringify({
         items: arr
-          .filter((it: any) => keepAll || relevantUrls.has(it.url))
+          .filter((it: any) => !hasAllowList || relevantUrls!.has(it.url))
           .map((it: any) => ({
             url: it.url,
             keep: true,

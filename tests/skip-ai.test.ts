@@ -48,3 +48,43 @@ test("skip-ai 模式：全流程零 LLM 调用（llmCalls===0），条目走兜�
   assert.ok(all.some((it) => it.title_cn.startsWith("央行降准")), "原文标题保留（u1）");
   assert.ok(all.some((it) => it.title_cn.includes("普惠小微贷款贴息")), "原文标题保留（u2）");
 });
+
+/**
+ * 回归：空 allow-list 不得等价于「全部无关」。
+ *
+ * 背景（P0-2，2026-09-14）：历史库 `ai_relevant` 全库未打标（实测 126 条无一为 true），
+ * 于是 SKIP_AI 传入的 `relevantUrls` 恒为**空 Set**。旧实现 `keepAll = !relevantUrls`
+ * 对空集判为 false → 「只保留空集里的条目」→ PASS1 返回 0 条 → 报告四个主板块全空
+ * （归档 2026-09-14 报告 sections 全 0 即此）。空集合语义应为「尚无已判定相关的条目」，
+ * 退化为全量保留；只有**非空** allow-list 才按其过滤。
+ */
+test("skip-ai：空 relevantUrls（历史库未打标）退化为全量保留，不产出空简报", async () => {
+  const llm = new CountingLlm();
+  const ctx = createContext({
+    date: "2026-09-11",
+    mode: { kind: "skip-ai", summaryCache: new Map(), relevantUrls: new Set<string>() },
+    sources: [],
+    log: new SilentLog(),
+  });
+  const report = await enrich([article("u1"), article("u2")], ctx, { llm });
+  assert.equal(llm.calls, 0, "skip-ai 下不得触碰 LLM 端口");
+  assert.equal(
+    Object.values(report.sections).flat().length,
+    2,
+    "空 allow-list 必须退化为全量保留（否则四主板块恒空）",
+  );
+});
+
+test("skip-ai：非空 relevantUrls 仍按其过滤（08-22 防垃圾行为不回退）", async () => {
+  const llm = new CountingLlm();
+  const ctx = createContext({
+    date: "2026-09-11",
+    mode: { kind: "skip-ai", summaryCache: new Map(), relevantUrls: new Set(["u1"]) },
+    sources: [],
+    log: new SilentLog(),
+  });
+  const report = await enrich([article("u1"), article("u2")], ctx, { llm });
+  const all = Object.values(report.sections).flat();
+  assert.equal(all.length, 1, "有 allow-list 时只保留其中的条目");
+  assert.ok(all[0].title_cn.startsWith("央行降准"), "保留的是 allow-list 命中的 u1");
+});
