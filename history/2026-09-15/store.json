@@ -1,6 +1,6 @@
 {
   "date": "2026-09-15",
-  "updatedAt": "2026-09-14T22:18:57.329Z",
+  "updatedAt": "2026-09-14T23:35:21.641Z",
   "executive": {
     "hero_line": "今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获",
     "must_read": [
@@ -138,7 +138,7 @@
       "meta": {
         "source": "新浪财经·港股",
         "crossCheck": "新浪行情",
-        "date": "2026-09-14"
+        "date": "2026-09-15"
       },
       "sourceReport": {
         "title": "港股收评：恒指涨0.45% 科指跌0.06% 创新药概念股大涨 存储概念股下挫",
@@ -260,19 +260,6 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143872935579.html",
-      "title_cn": "IPO周报｜4.26元！年内最便宜新股来了周一打新",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "IPO周报｜4.26元！年内最便宜新股来了周一打新",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
       "url": "https://finance.eastmoney.com/a/202609143872947024.html",
       "title_cn": "两只PCB大牛股双双澄清：未向英伟达供货无业务合作",
       "source": "东方财富",
@@ -292,6 +279,19 @@
       "source_type": "media",
       "date": "09/14",
       "summary": "AI需求虹吸产能！MLCC迎“量价齐升”融资客提前布局这8股(名单)",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609143873351697.html",
+      "title_cn": "商务部等8部门印发《促进智能家居消费行动方案》",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/14",
+      "summary": "商务部等8部门印发《促进智能家居消费行动方案》",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -331,6 +331,58 @@
       "source_type": "media",
       "date": "09/14",
       "summary": "港股收评：恒指涨0.45% 科指跌0.06% 创新药概念股大涨 存储概念股下挫",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3658888.shtml",
+      "title_cn": "阳光纸业获王东兴增持36.2万股 每股作价约1.13港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "阳光纸业获王东兴增持36.2万股 每股作价约1.13港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6885887.shtml",
+      "title_cn": "银诺医药-B获黄冰增持2400股 每股作价3.89港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "银诺医药-B获黄冰增持2400股 每股作价3.89港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3659329.shtml",
+      "title_cn": "汉港控股集团获董事会主席汪林冰增持768.4万股 每股作价0.062港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "汉港控股集团获董事会主席汪林冰增持768.4万股 每股作价0.062港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3657919.shtml",
+      "title_cn": "远东宏信遭UBS Group AG减持68.9万股 每股作价约6.99港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "远东宏信遭UBS Group AG减持68.9万股 每股作价约6.99港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -422,58 +474,6 @@
       "source_type": "media",
       "date": "09/14",
       "summary": "港股IPO火爆背后：香港证监会加强突击搜查，指导投行如何配合",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-14/doc-iniruxus9348073.shtml",
-      "title_cn": "花旗：泰格医药(03347)监管不确定性消除 重申“买入”评级及首选股地位",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "花旗：泰格医药(03347)监管不确定性消除 重申“买入”评级及首选股地位",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-14/doc-inirutnw7334435.shtml",
-      "title_cn": "花旗：重申鸣鸣很忙(01768)“买入”评级 目标价555.9港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "花旗：重申鸣鸣很忙(01768)“买入”评级 目标价555.9港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-14/doc-inirutny4047385.shtml",
-      "title_cn": "小摩：康方生物(09926)HARMONi-2总生存期数据强劲 维持“增持”评级",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "小摩：康方生物(09926)HARMONi-2总生存期数据强劲 维持“增持”评级",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-14/doc-inirutny4005844.shtml",
-      "title_cn": "花旗：康方生物(09926)HARMONi-2总生存期优效强化ivonescimab差异化优势 维持“买入”评级",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "花旗：康方生物(09926)HARMONi-2总生存期优效强化ivonescimab差异化优势 维持“买入”评级",
       "importance": 2,
       "rank": 0,
       "tags": [],
