@@ -34,6 +34,22 @@ jobs:
           RETENTION_DAYS: ${{ github.event.inputs.retention_days || '7' }}
         run: node scripts/cleanup-history.mjs
 
+      # 体积监控（2026-09-14 C-4-5）：只告警不阻断。
+      # 背景：审计 P2-4 记录的「126 条 / 82KB」已过时，2026-09-14 实测为 274 条 / 约 231KB
+      # （+13 条噪音清理后）—— 随源扩增会继续增长，需要一个可见的阈值哨兵，
+      # 避免再次「没人发现它膨胀到多大」。
+      - name: 体积检查（超阈值告警，不阻断）
+        run: |
+          set -euo pipefail
+          f=data/article-history.json
+          if [ ! -f "$f" ]; then echo "::warning::$f 不存在，跳过体积检查"; exit 0; fi
+          kb=$(( $(wc -c < "$f" | tr -d ' ') / 1024 ))
+          count=$(node -e "console.log(Object.keys(require('./data/article-history.json')).length)")
+          echo "article-history.json：${count} 条 / ${kb} KB（阈值 400 KB）"
+          if [ "$kb" -gt 400 ]; then
+            echo "::warning::article-history.json 已达 ${kb} KB / ${count} 条（阈值 400 KB）——请检查保留窗口与源噪音，参见 docs/review-2026-09-14-arch.md P2-4"
+          fi
+
       - name: Commit if changed
         run: |
           git config user.name "github-actions[bot]"

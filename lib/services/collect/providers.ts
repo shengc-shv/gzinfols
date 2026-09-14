@@ -72,21 +72,35 @@ export async function fetchScrape(source: SourceDef, http: HttpClient, now: Date
   return out.slice(0, 50);
 }
 
+/** 未知 JSON 形状的窄化守卫（替代 `as any[]`，2026-09-14 C-4-2）。 */
+function isRecord(v: unknown): v is Record<string, unknown> {
+  return typeof v === "object" && v !== null && !Array.isArray(v);
+}
+
 /** API 源：拉 JSON 后由调用方按字段映射；此处做最小通用提取。 */
 export async function fetchApi(source: SourceDef, http: HttpClient, now: Date): Promise<RawArticle[]> {
   const text = await http.getText(source.url);
   try {
-    const json = JSON.parse(text);
-    const items = Array.isArray(json) ? json : json.items ?? json.data ?? [];
-    return (items as any[]).slice(0, 50).map((it) => ({
-      sourceId: source.id,
-      title: String(it.title ?? it.name ?? "(无标题)"),
-      url: String(it.url ?? it.link ?? ""),
-      excerpt: String(it.summary ?? it.description ?? it.title ?? ""),
-      publishedAt: it.date ? new Date(it.date) : undefined,
-      fetchedAt: now,
-      category: source.category,
-    }));
+    const json: unknown = JSON.parse(text);
+    // 结构未知（可能是数组 / {items} / {data} / 其他）→ 一律显式窄化，不做 `as any` 逃逸
+    const container: unknown = Array.isArray(json)
+      ? json
+      : isRecord(json)
+        ? (json.items ?? json.data ?? [])
+        : [];
+    const items: unknown[] = Array.isArray(container) ? container : [];
+    return items.slice(0, 50).map((it) => {
+      const o = isRecord(it) ? it : {};
+      return {
+        sourceId: source.id,
+        title: String(o.title ?? o.name ?? "(无标题)"),
+        url: String(o.url ?? o.link ?? ""),
+        excerpt: String(o.summary ?? o.description ?? o.title ?? ""),
+        publishedAt: o.date ? new Date(String(o.date)) : undefined,
+        fetchedAt: now,
+        category: source.category,
+      };
+    });
   } catch {
     return [];
   }

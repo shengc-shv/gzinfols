@@ -105,6 +105,13 @@ export function classifyGdIpo(
     FINANCE_ONLY_RE.test(text) && !isTutoring && !isExchangeEvent;
 
   const basis = gdRes.basis;
+  // ⚠️ 口径澄清（2026-09-14 C-4-3）：下面两处 `*_SOURCE_RE.test(a.sourceId)` **只用于决定
+  // **市场子标签**（overseas / hkex），**不参与地域判定** —— 广东身份已由上面的
+  // `isGuangdong()`（结构化省份 → 注册表代码 → 地名）单独裁决完毕，与源 ID 无关。
+  // 故本用法**不违反**「无状态源架构红线」（红线禁止的是用 sourceId/category 决定
+  // 最终渲染归属，例：`category==="gd-ipo" → 进 IPO 板块`，见 2026-09-14 P0-1）。
+  // 历史注记：2026-08-23 移除的是「sourceId 的 `gd-` 前缀作为广东判定依据」，
+  // 因为前缀与实际覆盖范围脱节，曾把北交所全国公告误判为广东。
   // 境外源：广东企业出海上市
   if (OVERSEAS_SOURCE_RE.test(a.sourceId)) {
     if (isTutoring) return { action: "keep", sub: "ipo-tutoring", basis };

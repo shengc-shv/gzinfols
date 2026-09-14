@@ -17,7 +17,15 @@ export type ReportSectionKey =
   | "tech"
   | "ipo";
 
-/** 板块顺序即 tab 顺序（渲染 tab / 口播 / 兜底必读统一消费此常量，禁止各处重复定义）。 */
+/**
+ * 板块顺序即 tab 顺序（渲染 tab / 口播 / 兜底必读统一消费此常量，禁止各处重复定义）。
+ *
+ * ⚠️ 渲染契约：**空板块自动隐藏**（`full.ts` 的 tab 过滤为 `count > 0 || alwaysShow`，
+ * 仅 `gz_local` 为 alwaysShow —— 即使 0 条也常驻并显示「今日暂无…」以免被误判为漏采）。
+ * 即 tab 数 = 非空板块数 + 1。2026-09-14 审计 P0-2（四主板块全空、产物只剩 3 个 tab）
+ * 曾被误读为「渲染退化」—— 实为**上游数据为空**，本常量与渲染过滤本身无问题。
+ * 该契约现由 tests/render-invariants.test.ts ①②③ 锁定。
+ */
 export const SECTION_ORDER: ReportSectionKey[] = [
   "gz_local",
   "biz_insight",
