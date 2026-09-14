@@ -240,6 +240,10 @@ jobs:
       #   ① og-image.png 不在发布根 → og:image 404；② 无 .nojekyll（Pages 会跑 Jekyll）；
       #   ③ 无 archive.html → 报告页里的「归档」链接（WEB_MODE）落空。
       # 同时它也是 publishReport 扁平站点布局与归档链接不兼容问题的收敛点（现统一为子目录布局）。
+      - name: 红筹监测（抓取→判定→存储）
+        run: npx tsx scripts/redchip-monitor.ts --live --limit 20
+        continue-on-error: true
+
       - name: 站点聚合（build-site：汇集各期 + index/archive/.nojekyll/og-image）
         run: npm run build-site
 

@@ -15,6 +15,8 @@ export interface ListingRecord {
   /** 公司名（披露易 a 字段）。 */
   a?: string;
   aEn?: string;
+  st?: string;
+  board?: string;
   /** 状态。 */
   s?: string;
   /** 板块。 */
@@ -28,7 +30,27 @@ export interface ListingRecord {
   docText?: string;
 }
 
+const APP_BASE = "https://www1.hkexnews.hk/app/";
 const EDS_BASE = "https://www1.hkexnews.hk/ncms/json/eds/";
+
+/** 申请版本文件地址（w 字段是相对路径，如 sehk/2013/2013101501/documents/xxx_c.pdf）。 */
+export function docUrlOf(r: ListingRecord): string | undefined {
+  return r.w ? APP_BASE + r.w : undefined;
+}
+
+/** d 字段 "DD/MM/YYYY" → "YYYY-MM-DD"（用于按目标日期筛选）。 */
+export function recordDateKey(r: ListingRecord): string | undefined {
+  const m = String(r.d ?? "").match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
+  return m ? m[3] + "-" + m[2] + "-" + m[1] : undefined;
+}
+
+/** 板块（由文件路径前缀判定）。 */
+export function boardOf(r: ListingRecord): string {
+  const w = String(r.w ?? "").toLowerCase();
+  if (w.startsWith("gem")) return "GEM";
+  if (w.startsWith("sehk")) return "主板";
+  return "";
+}
 const EDS_FILES = [
   "appactive_app_sehk_c.json",
   "appactive_app_gem_c.json",

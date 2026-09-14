@@ -13,7 +13,15 @@
  *
  * 产出：data/redchip/latest.json、snapshots/<date>.json、changelog.jsonl
  */
-import { loadSampleListing } from "../lib/adapters/redchip/hkex-client";
+import {
+  boardOf,
+  docUrlOf,
+  fetchListingLive,
+  loadSampleListing,
+  recordDateKey,
+  type ListingRecord,
+} from "../lib/adapters/redchip/hkex-client";
+import { extractPdfText } from "../lib/adapters/redchip/pdf-text";
 import {
   appendChanges,
   readLatest,
@@ -49,12 +57,31 @@ function arg(name: string, def: string): string {
   return i >= 0 && process.argv[i + 1] ? process.argv[i + 1] : def;
 }
 
-function main(): void {
+async function main(): Promise<void> {
   const samplePath = arg("--sample", "fixtures/redchip-sample.json");
   const date = arg("--date", yesterdayKey());
   const dryRun = process.argv.includes("--dry-run");
 
-  const records = loadSampleListing(samplePath);
+  const live = process.argv.includes("--live");
+  const limit = Number(arg("--limit", "5"));
+  let records: ListingRecord[];
+
+  if (live) {
+    // 实网模式：拉披露易 AP&PHIP 静态 JSON → 按目标日期（北京时间昨天）筛选 → 抽 PDF 文本
+    const all = await fetchListingLive();
+    const hit = all.filter((r) => recordDateKey(r) === date);
+    console.log("[redchip] 实网：总 " + all.length + " 条，目标日 " + date + " 命中 " + hit.length + " 条");
+    const enriched: ListingRecord[] = [];
+    for (const r of hit.slice(0, limit)) {
+      const docUrl = docUrlOf(r);
+      enriched.push({ ...r, docUrl, docText: docUrl ? await extractPdfText(docUrl) : "" });
+    }
+    console.log("[redchip] 实网：已抽取 PDF 文本 " + enriched.length + " 条（--limit " + limit + "）");
+    records = enriched;
+  } else {
+    records = loadSampleListing(samplePath);
+  }
+
   const prev = readLatest();
   const prevMap = new Map((prev?.projects ?? []).map((p) => [p.appId, p]));
   const nowIso = beijingNowIso();
@@ -65,9 +92,10 @@ function main(): void {
       appId,
       nameCn: r.a,
       nameEn: r.aEn,
-      board: r.w,
+      board: r.board ?? boardOf(r),
       status: r.s,
-      submitDate: r.sD ?? r.d,
+      stockCode: r.st,
+      submitDate: recordDateKey(r) ?? r.d,
       docText: r.docText,
       sourceUrl: r.docUrl,
       discoveredAt: prevMap.get(appId)?.discoveredAt ?? nowIso,
@@ -78,7 +106,7 @@ function main(): void {
   const changes = diffSnapshots(prev, snap);
 
   console.log("[redchip] 目标日期：" + date + "（北京时间昨天；时区 " + REPORT_TZ + "）");
-  console.log("[redchip] 来源：样本 " + samplePath + "（未发起网络请求）");
+  console.log("[redchip] 来源：" + (live ? "实网（披露易 AP&PHIP）" : "样本 " + samplePath + "（未发起网络请求）"));
   for (const p of projects) {
     console.log("  · " + p.appId + " " + p.nameCn + " | 离岸=" + p.isOffshore +
       " | 广东词频=" + p.gdCityHits + " | 判定=" + p.verdict);
