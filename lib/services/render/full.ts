@@ -74,6 +74,34 @@ export { IPO_STAGE_ORDER };
 import { topGdIpo, gdIpoStageOf, companyNameOf } from "../classify/gd-ipo-spoken";
 import { IPO_LIST_WINDOW_DAYS } from "../../ipo-config";
 
+// ----- C-1 Phase1：纯展示函数已外移到独立模块（纯搬移，行为零变化）-----
+// 这里**import 供本文件内部使用** + **re-export 保持对外 API 不变**（render/index.ts 的
+// `export * from "./full"` 与 scripts/regen-enrich.ts 的直接 import 路径均不受影响）。
+import { tagClsOf, MARKET_BADGE, capSummary, relativeDayLabel } from "./atoms";
+import { renderReportItemHtml, DEPT_TAGS, renderReportCardList } from "./report-item";
+import {
+  type FilterChipDef,
+  type FilterGroupDef,
+  DEFAULT_FILTER_GROUPS,
+  renderFilterBar,
+  renderFilterBarForPanel,
+  renderStockFilterBar,
+} from "./filter-bar";
+import {
+  ipoStageGroupLabel,
+  renderIpoFilterBar,
+  renderIpoProgress,
+  renderIpoPanelHtml,
+} from "./ipo-panel";
+import { SIGNAL_TONE, renderMarkdown } from "./markdown";
+
+export * from "./atoms";
+export * from "./report-item";
+export * from "./filter-bar";
+export * from "./ipo-panel";
+export * from "./markdown";
+
+
 
 // ----- types -----
 
@@ -817,56 +845,6 @@ export function groupRaw(
 
 // ----- report-item card renderer（新管线 schema: ReportItem）-----
 
-/** 商机 tag 色系（与 sections.ts 保持一致） */
-function tagClsOf(tag: string): string {
-  if (/财富|私行/.test(tag)) return "t-wealth";
-  if (/代发|客群/.test(tag)) return "t-mass";
-  if (/政银|住房|监管|政策/.test(tag)) return "t-policy";
-  if (tag === "粤") return "t-gd";
-  return "";
-}
-
-/** 股市动态面板：卡片市场徽标（A股/港股/美股）。 */
-const MARKET_BADGE: Record<string, { label: string; cls: string }> = {
-  "a-share": { label: "A股", cls: "mkt-a" },
-  hk: { label: "港股", cls: "mkt-hk" },
-  us: { label: "美股", cls: "mkt-us" },
-};
-
-
-/** P2⑤ 板块卡「所以呢」摘要上限 50 字（首句即结论/落点，截断优先保留首句完整）。
- * 仅作用于板块卡（gz_local/biz/policy/tech/ipo），必读/商机/风险走其他渲染路径，不受影响。 */
-function capSummary(s: string, max = 50): string {
-  const t = (s || "").trim();
-  if (t.length <= max) return t;
-  const cut = t.slice(0, max);
-  const lastPunct = Math.max(
-    cut.lastIndexOf("。"),
-    cut.lastIndexOf("！"),
-    cut.lastIndexOf("？"),
-    cut.lastIndexOf("；"),
-  );
-  return (lastPunct > 4 ? cut.slice(0, lastPunct + 1) : cut) + "…";
-}
-
-/**
- * MM/DD → 「今天 / 昨天 / N 天前」（报告时区；P2 呈现）。
- *
- * 动机：卡片只印 `09/03`，读者容易把 7 天窗里的旧条目读成「今日动态」。
- * 跨年边界按「今年 → 去年」两次尝试（MM/DD 无年份）；>30 天或无法解析返回空串。
- */
-export function relativeDayLabel(mmdd: string, today: string = todayKey()): string {
-  const m = /^(\d{2})\/(\d{2})$/.exec(mmdd || "");
-  if (!m) return "";
-  const [ty, tm, td] = today.split("-").map(Number);
-  if (!ty || !tm || !td) return "";
-  const base = Date.UTC(ty, tm - 1, td);
-  for (const y of [ty, ty - 1]) {
-    const gap = Math.round((base - Date.UTC(y, Number(m[1]) - 1, Number(m[2]))) / 86400000);
-    if (gap >= 0 && gap <= 30) return gap === 0 ? "今天" : gap === 1 ? "昨天" : `${gap} 天前`;
-  }
-  return "";
-}
 
 /**
  * 板块卡渲染。
@@ -876,192 +854,7 @@ export function relativeDayLabel(mmdd: string, today: string = todayKey()): stri
  *   （保荐/拟板块/受理日，避免被 50 字通用截断吞掉）、相对时距、交易所官方源双链接。
  * @param progressHtml 可选：同企业阶段进展条（P2-6），仅 IPO 面板对该企业最新一条传入。
  */
-export function renderReportItemHtml(
-  item: ReportItem,
-  showSource = true,
-  stage?: string,
-  progressHtml?: string,
-): string {
-  const title = escapeHtml(item.title_cn || item.title_orig || "");
-  const url = escapeHtml(item.url);
-  const isIpo = stage !== undefined;
-  // IPO 卡优先用结构化 ipoMeta（爬虫字段平铺），其余卡片沿用「摘要首句 ≤50 字」
-  const bodyText = isIpo && item.ipoMeta ? item.ipoMeta : item.summary || "";
-  const summary = bodyText ? escapeHtml(isIpo && item.ipoMeta ? bodyText : capSummary(bodyText)) : "";
-  const rel = isIpo ? relativeDayLabel(item.date) : "";
-  const time = item.date ? escapeHtml(rel ? `${item.date} · ${rel}` : item.date) : "";
-  const official = item.source_type === "official";
-  const badge = official ? { label: "官方", cls: "src-official" } : { label: "媒体", cls: "src-media" };
-  const tags = (item.tags ?? [])
-    .map((t) => {
-      // IPO 卡片：把「粤」地域标记的显示文案替换为注册城市（ipoCity），保留 t-gd 样式；
-      // 其它板块（gz_local 等）的「粤」标无 ipoCity 字段，原样展示，不受影响。
-      const label = t === "粤" && item.ipoCity ? item.ipoCity : t;
-      return `<span class="tag ${tagClsOf(t)}">${escapeHtml(label)}</span>`;
-    })
-    .join("");
-  const mkt = item.market ? MARKET_BADGE[item.market] : undefined;
-  const mktBadge = mkt ? `<span class="mkt-badge ${mkt.cls}">${mkt.label}</span>` : "";
-  // P2-2 双链接：主链接（列表页）+ 交易所/监管官方源入口（人工核查用）
-  const officialSrc =
-    isIpo && item.officialUrl
-      ? `<p class="official-src">官方源：<a href="${escapeHtml(item.officialUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.officialLabel || item.officialUrl)}</a></p>`
-      : "";
-  return `<article class="brief${item.importance === 3 ? " must" : ""}" data-source="${item.source_type}" data-tags="${(item.tags ?? []).join(" ")}" data-market="${escapeHtml(item.market ?? "")}" data-stage="${escapeHtml(stage ?? "")}">
-  <div class="bm">${mktBadge}<span class="src-badge ${badge.cls}">${badge.label}</span>${showSource && item.source ? `<span>${escapeHtml(item.source)}</span>` : ""}${time ? `<span>${time}</span>` : ""}${item.importance === 3 ? `<span class="imp-badge">必知</span>` : ""}</div>
-  <h3><a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a></h3>
-  ${summary ? `<p class="sum">${summary}</p>` : ""}
-  ${progressHtml ?? ""}
-  ${officialSrc}
-  ${tags ? `<div class="tags">${tags}</div>` : ""}
-</article>`;
-}
-
-/** 4 大零售部门标签（2026-08-22 用户：无这 4 个标签的条目排最后，优先展示带标签的）。 */
-const DEPT_TAGS = new Set(["财富", "私行", "客群", "信贷"]);
-
-export function renderReportCardList(
-  items: ReportItem[],
-  showSource = true,
-): string {
-  if (items.length === 0) return `<p class="empty">${STR.emptySource}</p>`;
-  // 稳定排序：带 4 部门零售标签的排前，无标签的沉底（同组内保持原顺序：今日 rank / 时间）。
-  const hasTag = (it: ReportItem): number =>
-    (it.tags ?? []).some((t) => DEPT_TAGS.has(t)) ? 0 : 1;
-  const sorted = [...items].sort((a, b) => hasTag(a) - hasTag(b));
-  const top = sorted.slice(0, 5);
-  const more = sorted.slice(5);
-  let html = top.map((a) => renderReportItemHtml(a, showSource)).join("\n");
-  if (more.length > 0) {
-    html +=
-      more
-        .map((a) => renderReportItemHtml(a, showSource).replace('<article class="brief', '<article class="brief more'))
-        .join("\n") +
-      `<button class="expand-btn" type="button">展开其余 ${more.length} 条</button>`;
-  }
-  return html;
-}
-
 /** 筛选维度定义：供「板块内筛选条」复用。 */
-export interface FilterChipDef {
-  /** 展示文案 */
-  label: string;
-  /** 与卡片 data-source / data-tags 对应的匹配值 */
-  value: string;
-  /** 维度分组键（同组 OR，不同组 AND） */
-  group: string;
-}
-export interface FilterGroupDef {
-  /** 维度标题（仅在 UI 展示，如「来源」「业务线」） */
-  title: string;
-  chips: FilterChipDef[];
-}
-
-/**
- * 默认筛选维度（业务资讯板块统一复用，2026-08-22 用户规则）：
- * - 第一维度「来源」：官方 / 媒体 —— 组内 OR；
- * - 第二维度「业务线」：客群 / 私行 / 财富 / 信贷 —— 组内 OR；
- * - 两维度之间取交集（AND）；无任何选中或全选 → 全部显示。
- */
-export const DEFAULT_FILTER_GROUPS: FilterGroupDef[] = [
-  {
-    title: "来源",
-    chips: [
-      { label: "官方", value: "official", group: "src" },
-      { label: "媒体", value: "media", group: "src" },
-    ],
-  },
-  {
-    title: "业务线",
-    chips: [
-      { label: "客群", value: "客群", group: "tag" },
-      { label: "私行", value: "私行", group: "tag" },
-      { label: "财富", value: "财富", group: "tag" },
-      { label: "信贷", value: "信贷", group: "tag" },
-      // 「其他」= 未命中 4 部门零售标签的条目（2026-08-22 用户：无标签信息放队列
-      // 最后，想看才通过此选项查看）。
-      { label: "其他", value: "__none__", group: "tag" },
-    ],
-  },
-];
-
-/**
- * 渲染板块内筛选条（可复用组件：传入自定义 groups 即可用于其它板块）。
- * 默认渲染 DEFAULT_FILTER_GROUPS；维度内 OR、维度间 AND；全空 / 全选 → 全部显示。
- */
-export function renderFilterBar(groups: FilterGroupDef[] = DEFAULT_FILTER_GROUPS): string {
-  const groupsHtml = groups
-    .map((g) => {
-      const chips = g.chips
-        .map(
-          (c) =>
-            `<button type="button" class="filter-chip" data-group="${c.group}" data-filter="${escapeHtml(c.value)}">${escapeHtml(c.label)}</button>`,
-        )
-        .join("");
-      return `<div class="filter-group">
-        <span class="filter-gtitle">${escapeHtml(g.title)}</span>
-        ${chips}
-      </div>`;
-    })
-    .join("");
-  return `<div class="filter-bar">
-    <span class="filter-label">筛选</span>
-    ${groupsHtml}
-    <button type="button" class="filter-reset">重置</button>
-  </div>`;
-}
-
-/**
- * 面板级筛选条（2026-08-23 用户）：来源维度（官方/媒体）固定保留；
- * 业务线维度**动态**——只渲染当前面板实际存在数据的部门标签
- * （客群/私行/财富/信贷 无数据则不出现），有非部门标签或无标签卡片才追加「其他」；
- * 全无业务线数据时整个业务线维度不渲染。
- */
-export function renderFilterBarForPanel(items: ReportItem[]): string {
-  const srcChips: FilterChipDef[] = [
-    { label: "官方", value: "official", group: "src" },
-    { label: "媒体", value: "media", group: "src" },
-  ];
-  const presentDepts = new Set<string>();
-  let hasOther = false;
-  for (const it of items) {
-    const tags = it.tags ?? [];
-    const deptHit = tags.find((t) => DEPT_TAGS.has(t));
-    if (deptHit) presentDepts.add(deptHit);
-    else hasOther = true;
-  }
-  const groups: FilterGroupDef[] = [{ title: "来源", chips: srcChips }];
-  const tagChips: FilterChipDef[] = [];
-  // 固定展示顺序：客群 / 私行 / 财富 / 信贷，仅保留有数据的
-  for (const d of ["客群", "私行", "财富", "信贷"]) {
-    if (presentDepts.has(d)) tagChips.push({ label: d, value: d, group: "tag" });
-  }
-  if (hasOther) tagChips.push({ label: "其他", value: "__none__", group: "tag" });
-  if (tagChips.length > 0) groups.push({ title: "业务线", chips: tagChips });
-  return renderFilterBar(groups);
-}
-
-/**
- * 股市动态面板筛选条（2026-08-25 用户）：单一「市场」维度，按 A股 / 港股 / 美股 过滤。
- * 维度内 OR（选中多个市场取并集）；全选或全不选 → 全部显示（复用 renderFilterBar 交互）。
- */
-export function renderStockFilterBar(): string {
-  const chips = [
-    { label: "A股", value: "a-share" },
-    { label: "港股", value: "hk" },
-    { label: "美股", value: "us" },
-  ]
-    .map(
-      (c) =>
-        `<button type="button" class="filter-chip" data-group="market" data-filter="${c.value}">${c.label}</button>`,
-    )
-    .join("");
-  return `<div class="filter-bar">
-    <span class="filter-label">市场</span>
-    ${chips}
-    <button type="button" class="filter-reset">重置</button>
-  </div>`;
-}
 
 /**
  * 广东 IPO 阶段展示顺序 —— 与 `BIZ_VALUE_RANK`（商机价值优先）**同序**：
@@ -1070,111 +863,6 @@ export function renderStockFilterBar(): string {
  *
  * 2026-09-14（P0-3）：本文件此前的私有副本已删除，改由 `services/classify/gd-ipo.ts` 导入。
  */
-/** 阶段组标题（「阶段待定」= 无阶段信号的条目，有数据才渲染）。 */
-function ipoStageGroupLabel(s: GdStage | ""): string {
-  return s === "" ? "阶段待定" : GD_IPO_STAGE_LABEL[s] || "IPO";
-}
-
-/**
- * 广东IPO 面板筛选条（2026-09-10 用户）——**复用同级板块既有过滤机制**
- * （`renderFilterBar` + 卡片 `data-*` 属性 + 客户端 `applyFilter`）：
- *   - 维度「来源」：官方 / 媒体（与业务板块完全一致）；
- *   - 维度「阶段」：四阶段 + 阶段待定，**只渲染当前面板实际有数据的阶段**；
- *   - 维度内 OR、维度间 AND；全不选/全选 = 全部显示（既有语义）。
- */
-export function renderIpoFilterBar(items: ReportItem[]): string {
-  const groups: FilterGroupDef[] = [
-    {
-      title: "来源",
-      chips: [
-        { label: "官方", value: "official", group: "src" },
-        { label: "媒体", value: "media", group: "src" },
-      ],
-    },
-  ];
-  const present = new Set<string>(items.map((it) => gdIpoStageOf(it)));
-  const stageChips: FilterChipDef[] = IPO_STAGE_ORDER.filter((s) => present.has(s)).map((s) => ({
-    label: GD_IPO_STAGE_LABEL[s],
-    value: s,
-    group: "stage",
-  }));
-  if (present.has("")) stageChips.push({ label: "阶段待定", value: "__none__", group: "stage" });
-  if (stageChips.length > 0) groups.push({ title: "阶段", chips: stageChips });
-  return renderFilterBar(groups);
-}
-
-/**
- * 广东IPO 面板正文：**四阶段分栏**（2026-09-10 用户决策③落地）。
- *
- * - 组顺序 = `IPO_STAGE_ORDER`（商机价值优先，与横滑同序）；
- * - 空阶段整组不渲染（不出现「辅导备案 0 家」这类空标题）；
- * - 组内卡片由 `renderReportItemHtml(it, true, stage)` 渲染，带 `data-stage` 供筛选条过滤；
- * - 组头带阶段色点 + 家数，便于「哪家在哪个阶段」一眼可读。
- */
-/**
- * 同企业阶段进展链（P2-6，2026-09-10 回检收尾）。
- *
- * 底部列表用 `uniqueCompany:false` 刻意保留了同企业的多阶段条目（「已问询」与
- * 「注册生效」各占一条 URL），但此前只是各渲染一张卡，读者看不出这是**同一家的推进过程**。
- * 此处把同企业条目按日期升序连成「09/03 在审 → 09/07 注册发行」，只在**该企业最新一条**
- * 卡上渲染（避免每张卡重复整条链）；同阶段多次更新合并为一步（保留最新日期）。
- *
- * 少于 2 个不同阶段 → 返回空串（单阶段企业不显示进展条）。
- */
-export function renderIpoProgress(item: ReportItem, all: ReportItem[]): string {
-  const company = companyNameOf(item.title_cn || "");
-  if (!company) return "";
-  const chain = all
-    .filter((it) => companyNameOf(it.title_cn || "") === company)
-    .map((it) => ({ date: it.date, stage: gdIpoStageOf(it) }))
-    .sort((a, b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
-  const steps: Array<{ date: string; stage: GdStage | "" }> = [];
-  for (const c of chain) {
-    const last = steps[steps.length - 1];
-    if (last && last.stage === c.stage) {
-      last.date = c.date; // 同阶段多次更新 → 合并为一步，保留最新日期
-      continue;
-    }
-    steps.push({ ...c });
-  }
-  if (steps.length < 2) return "";
-  const latest = steps[steps.length - 1];
-  // 仅最新一条卡承载进展条（stage+date 双匹配，避免同日多条重复渲染）
-  if (item.date !== latest.date || gdIpoStageOf(item) !== latest.stage) return "";
-  const body = steps
-    .map((s, i) => {
-      const label = s.stage === "" ? "阶段待定" : GD_IPO_STAGE_LABEL[s.stage] || "IPO";
-      const cls =
-        i === steps.length - 1 ? "ipo-progress-step ipo-progress-step--cur" : "ipo-progress-step";
-      const d = s.date ? `${escapeHtml(s.date)} ` : "";
-      return `<span class="${cls}">${d}${escapeHtml(label)}</span>`;
-    })
-    .join('<span class="ipo-progress-arrow">→</span>');
-  return `<div class="ipo-progress"><span class="ipo-progress-label">进展</span>${body}</div>`;
-}
-
-export function renderIpoPanelHtml(items: ReportItem[]): string {
-  const byStage = new Map<string, ReportItem[]>();
-  for (const it of items) {
-    const s = gdIpoStageOf(it);
-    const arr = byStage.get(s);
-    if (arr) arr.push(it);
-    else byStage.set(s, [it]);
-  }
-  const order: Array<GdStage | ""> = [...IPO_STAGE_ORDER, ""];
-  return order
-    .filter((s) => (byStage.get(s)?.length ?? 0) > 0)
-    .map((s) => {
-      const list = byStage.get(s)!;
-      return `<section class="ipo-group" data-stage="${s}">
-    <h4 class="ipo-group-head"><span class="ipo-group-dot ipo-stage--${s || "none"}"></span>${escapeHtml(
-      ipoStageGroupLabel(s),
-    )}<span class="ipo-group-n">${list.length}</span></h4>
-    ${list.map((it) => renderReportItemHtml(it, true, s, renderIpoProgress(it, items))).join("\n")}
-  </section>`;
-    })
-    .join("\n");
-}
 
 /** 构造 url → 中文标题 映射（供 must_read 回写标题）。 */
 function resolveTitleMap(report: DailyReport): Map<string, string> {
@@ -1918,65 +1606,4 @@ ${generateAudioHighlightScript()}
 </script>` : ""}
 </body>
 </html>`;
-}
-
-// ----- trading panel -----
-
-const SIGNAL_TONE: Record<string, "bull" | "bear" | "caution"> = {
-  "golden-cross": "bull",
-  "macd-bull-cross": "bull",
-  "above-sma50-sma200": "bull",
-  "near-52w-high": "bull",
-  "death-cross": "bear",
-  "macd-bear-cross": "bear",
-  "below-sma50-sma200": "bear",
-  "near-52w-low": "bear",
-  "rsi-overbought": "caution",
-  "rsi-oversold": "caution",
-};
-
-// ----- markdown（新管线 schema: report.sections）-----
-
-export function renderMarkdown(report: DailyReport, date: string): string {
-  const blocks: string[] = [];
-  blocks.push(`# ${STR.siteTitle} · ${date}\n`);
-  if (report.hero_line) blocks.push(`> ${report.hero_line}\n`);
-
-  const secMap: [string, ReportSectionKey][] = [
-    ["广州本地", "gz_local"],
-    ["业务启示", "biz_insight"],
-    ["政策与市场", "policy_market"],
-    ["科技前沿", "tech"],
-    ["广东IPO动态", "ipo"],
-  ];
-  for (const [label, key] of secMap) {
-    const items = report.sections?.[key] ?? [];
-    if (items.length === 0) {
-      if (key === "gz_local") blocks.push(`## 广州本地\n\n（今日无广州本地要闻）\n`);
-      continue;
-    }
-    const body = items
-      .map(
-        (it) =>
-          `### [${it.title_cn || it.title_orig || ""}](${it.url})\n${it.source} · ${it.source_type === "official" ? "官方" : "媒体"} · 重要度 ${it.importance}/3\n\n${it.summary}\n`,
-      )
-      .join("\n");
-    blocks.push(`## ${label}\n\n${body}\n`);
-  }
-
-  if (report.must_read.length > 0) {
-    blocks.push(
-      `## 今日必读\n\n${report.must_read
-        .map((m, i) => `${i + 1}. ${m.url}${m.why ? ` — ${m.why}` : ""}`)
-        .join("\n")}\n`,
-    );
-  }
-  if (report.insights.length > 0) {
-    blocks.push(
-      `## 商机洞察\n\n${report.insights
-        .map((it) => `- **${it.topic}**${it.impact ? `：影响 ${it.impact}` : ""}${it.action ? ` → 动作 ${it.action}` : ""}`)
-        .join("\n")}\n`,
-    );
-  }
-  return blocks.filter(Boolean).join("\n");
 }
