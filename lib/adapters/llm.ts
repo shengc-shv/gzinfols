@@ -14,7 +14,7 @@ import { todayKey } from "../utils/time";
 
 const execFileP = promisify(execFile);
 
-type Backend = "claude-cli" | "anthropic" | "openai" | "deepseek";
+type Backend = "claude-cli" | "anthropic" | "openai" | "deepseek" | "dump";
 
 /** transient 错误判定（gzinfo 同款）：5xx/429/超时/网络可重试；4xx 配置类不重试。 */
 function isTransientLlmError(e: unknown): boolean {
@@ -31,8 +31,9 @@ function isTransientLlmError(e: unknown): boolean {
  */
 export function validateBackendCredentials(backend: Backend = (process.env.LLM_BACKEND as Backend) || "claude-cli"): void {
   if (backend === "claude-cli") return; // 本地 CLI 无需密钥
+  if (backend === "dump") return; // dump 后端不发真实请求，无需密钥
 
-  const required: Record<Exclude<Backend, "claude-cli">, string> = {
+  const required: Record<Exclude<Backend, "claude-cli" | "dump">, string> = {
     anthropic: "ANTHROPIC_API_KEY",
     openai: "OPENAI_API_KEY",
     deepseek: "DEEPSEEK_API_KEY",
@@ -75,6 +76,47 @@ function defaultModelFor(backend: string): string {
   }
 }
 
+/**
+ * dump 后端（**不发起任何真实 LLM 调用**）：把完整调用上下文落盘，供本地/离线分析消费。
+ * 目录：LLM_DUMP_DIR（默认 data/llm-dump）/<runId>/<stage>-<seq>.json
+ */
+let _dumpSeq = 0;
+function dumpLlmContext(req: LlmRequest, model: string, backend: string): void {
+  try {
+    const fs = require("node:fs") as typeof import("node:fs");
+    const path = require("node:path") as typeof import("node:path");
+    const runId =
+      process.env.GITHUB_RUN_ID || process.env.REPORT_RUN_ID || "local-" + Date.now();
+    const dir = path.resolve(process.env.LLM_DUMP_DIR || "data/llm-dump", String(runId));
+    fs.mkdirSync(dir, { recursive: true });
+    const stage = (req.stage ?? "other").replace(/[^a-z0-9-]/gi, "-");
+    const seq = String(++_dumpSeq).padStart(3, "0");
+    const file = path.join(dir, stage + "-" + seq + ".json");
+    fs.writeFileSync(
+      file,
+      JSON.stringify(
+        {
+          runId: String(runId),
+          stage: req.stage ?? "other",
+          seq: _dumpSeq,
+          backend,
+          model,
+          expectJson: Boolean((req as { expectJson?: boolean }).expectJson),
+          system: req.system ?? "",
+          prompt: req.prompt,
+          ts: new Date().toISOString(),
+        },
+        null,
+        2,
+      ) + "\n",
+      "utf8",
+    );
+    console.log(`[llm] dump ${stage} #${seq} → ${file}`);
+  } catch (e) {
+    console.warn("[llm] dump 落盘失败：", e instanceof Error ? e.message : String(e));
+  }
+}
+
 export class LlmAdapter implements LlmPort {
   private readonly backend: Backend;
 
@@ -88,6 +130,11 @@ export class LlmAdapter implements LlmPort {
    * 4xx 配置类错误立即抛。HTTP 成功但空文本 → 打告警（下游解析将失败，可观测）。
    */
   async complete(req: LlmRequest): Promise<string> {
+    // dump 后端：落盘后返回空串（下游按“解析失败”走既有降级），绝不发起真实调用。
+    if (this.backend === "dump") {
+      dumpLlmContext(req, req.model || defaultModelFor(this.backend), this.backend);
+      return "";
+    }
     const MAX_RETRIES = 3;
     const BASE_DELAY_MS = 1500;
     let lastErr: unknown;
