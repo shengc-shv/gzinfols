@@ -19,6 +19,7 @@
 import type { ExecutiveSummary, ExecInsight, ExecRisk } from "../enrich/executive-summary";
 import { synthMustReadWhy } from "../enrich/executive-summary";
 import { scoreBranchRelevance, type BranchRelevance } from "../select/filters/relevance-score";
+import { formatBroadcastAt } from "./broadcast-time";
 import {
   beginDay,
   deliverySettlementGate,
@@ -53,6 +54,11 @@ export interface GuardInput {
   today: string;
   /** 兜底补位池（两天可评分池）。为空则跳过 L2 补位。 */
   pool?: GuardPoolItem[];
+  /**
+   * 参照时刻（**必填**，2026-09-14 C-3）。由编排层注入 `ctx.startTime`：
+   * 用于计算记忆库的播报时刻 `broadcastAt`（服务层不隐式读系统时钟）。
+   */
+  now: Date;
 }
 
 export interface GuardOutput {
@@ -129,7 +135,7 @@ function pickFreshFromPool(
   today: string,
   excludeUrls: Set<string>,
   limit: number,
-  out: { picked: MemoryCandidate[]; store: EventMemoryStore },
+  out: { picked: MemoryCandidate[]; store: EventMemoryStore; broadcastAt: string },
 ): number {
   if (limit <= 0) return 0;
   const scored = pool
@@ -165,6 +171,7 @@ function pickFreshFromPool(
       section,
       date: today,
       novelty: d.novelty,
+      broadcastAt: out.broadcastAt,
     });
     if (p.url) excludeUrls.add(p.url);
     n++;
@@ -207,6 +214,8 @@ function toInsight(cand: MemoryCandidate): ExecInsight {
  */
 export function applyMemoryGuard(input: GuardInput): GuardOutput {
   const { exec, today, pool = [] } = input;
+  // 播报时刻：由注入的 now 显式换算（不再回落 new Date()）
+  const broadcastAt = formatBroadcastAt(input.now);
   const log: string[] = [];
   // 结算指纹预检（2026-09-03）：昨天有暂存播报但「人工推送的版本 ≠ 落盘版本」
   // （deliveries.reportRunId ≠ today.runId）时，beginDay 将按 deliverySettlementGate
@@ -246,12 +255,13 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
         section: "hero",
         date: today,
         novelty: d.novelty,
+        broadcastAt,
         ...(d.requiredAngle ? { angle: d.requiredAngle } : {}),
       });
       log.push(`🧠 定调：${d.verdict}（增量 ${d.novelty.toFixed(2)}）— ${d.reason}`);
     } else {
       // 定调被去重 → 必须补一条新的（红线：定调永不空）
-      const box = { picked: [] as MemoryCandidate[], store };
+      const box = { picked: [] as MemoryCandidate[], store, broadcastAt };
       const n = pickFreshFromPool(pool, store, "hero", today, new Set(), 1, box);
       store = box.store;
       if (n > 0) {
@@ -296,6 +306,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
           section: "must_read",
           date: today,
           novelty: d.novelty,
+          broadcastAt,
           ...(d.requiredAngle ? { angle: d.requiredAngle } : {}),
         });
       }
@@ -308,7 +319,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     if (kept.length < SECTION_POLICY.must_read.minKeep && pool.length > 0) {
       const exclude = new Set<string>();
       for (const k of kept) if (k.item.url) exclude.add(k.item.url);
-      const box = { picked: [] as MemoryCandidate[], store };
+      const box = { picked: [] as MemoryCandidate[], store, broadcastAt };
       const n = pickFreshFromPool(
         pool,
         store,
@@ -359,6 +370,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
           section: "insights",
           date: today,
           novelty: d.novelty,
+          broadcastAt,
           ...(d.requiredAngle ? { angle: d.requiredAngle } : {}),
         });
       }
@@ -373,7 +385,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
         const u = k.item.sources?.[0]?.url;
         if (u) exclude.add(u);
       }
-      const box = { picked: [] as MemoryCandidate[], store };
+      const box = { picked: [] as MemoryCandidate[], store, broadcastAt };
       const n = pickFreshFromPool(
         pool,
         store,
@@ -433,6 +445,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
         section: "risk",
         date: today,
         novelty: d.novelty,
+        broadcastAt,
         ...(d.requiredAngle ? { angle: d.requiredAngle } : {}),
       });
       log.push(`🧠 风险：${d.verdict}（增量 ${d.novelty.toFixed(2)}）— ${d.reason}`);

@@ -72,7 +72,7 @@ const articles = [
 
 test("2天窗口：纳入今+昨，排除前天/无关/无摘要", () => {
   process.env.REPORT_TZ = "Asia/Shanghai";
-  const res = buildTwoDayExecPool({ history: mkHistory(), articles, report: mkReport(), today: TODAY });
+  const res = buildTwoDayExecPool({ history: mkHistory(), articles, report: mkReport(), today: TODAY, now: new Date() });
   const finUrls = res.finance.map((i) => i.url).sort();
   const gzUrls = res.gz.map((i) => i.url).sort();
   // finance：今日 tf + 昨日 yf，排除前天 of、无关 nr
@@ -83,7 +83,7 @@ test("2天窗口：纳入今+昨，排除前天/无关/无摘要", () => {
 
 test("2天窗口：前天条目整体排除", () => {
   process.env.REPORT_TZ = "Asia/Shanghai";
-  const res = buildTwoDayExecPool({ history: mkHistory(), articles, report: mkReport(), today: TODAY });
+  const res = buildTwoDayExecPool({ history: mkHistory(), articles, report: mkReport(), today: TODAY, now: new Date() });
   const all = [...res.finance, ...res.gz].map((i) => i.url);
   assert.ok(!all.includes("of"), "前天条目不应纳入");
   assert.ok(!all.includes("nr"), "不相关条目不应纳入");
@@ -147,6 +147,7 @@ test("IPO 池：7 天窗口，且不被并入 finance/gz", () => {
     ],
     report,
     today: TODAY,
+    now: new Date(),
   });
   const ipoUrls = res.ipo.map((i) => i.url).sort();
   assert.deepEqual(ipoUrls, ["ipo-a", "ipo-b"], "7 天窗口内的 gd-ipo 都应纳入，9 天前排除");
@@ -166,6 +167,7 @@ test("IPO 池：无 IPO 条目时返回空数组（不报错）", () => {
     articles,
     report: mkReport(),
     today: TODAY,
+    now: new Date(),
   });
   assert.deepEqual(res.ipo, []);
 });
@@ -181,7 +183,7 @@ test("无 publishedAt 的条目被跳过", () => {
     { url: "tf", publishedAt: `${TODAY}T09:00:00+08:00`, category: "finance" },
     { url: "tg", publishedAt: `${TODAY}T09:30:00+08:00`, category: "gz" },
   ];
-  const res = buildTwoDayExecPool({ history: hist, articles: todayArts, report: mkReport(), today: TODAY });
+  const res = buildTwoDayExecPool({ history: hist, articles: todayArts, report: mkReport(), today: TODAY, now: new Date() });
   assert.equal(res.finance.length, 1, "今日 report.sections 的 tf 带发布时间，仍贡献");
   assert.ok(!res.finance.map((i) => i.url).includes("noDate"), "无发布时间的 noDate 必须被跳过");
 });

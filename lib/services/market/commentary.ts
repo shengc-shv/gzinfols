@@ -22,6 +22,8 @@ export interface TradingCommentary {
 
 export interface TradingCommentaryInput {
   tickers: TickerAnalysis[];
+  /** 参照时刻（**必填**，2026-09-14 C-3）：用于 LLM 原始输出 dump 的文件名时戳。 */
+  now: Date;
 }
 
 const SYSTEM_PROMPT_ZH = `你是一名专业、克制、中性的中文技术指标解读员。你的任务是基于公开行情数据计算出的技术指标，写一份**客观的技术状态描述报告**——你不是投顾，不预测涨跌，只复述指标读数和走势形态。任何使用本报告的读者都已经知道并接受这一定位。
@@ -182,7 +184,7 @@ export async function generateTradingCommentary(
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
     const promptForAttempt = attempt === 1 ? userPrompt : userPrompt + RETRY_HINT;
     try {
-      return await callOnce(runner, locale, promptForAttempt, fallback);
+      return await callOnce(runner, locale, promptForAttempt, fallback, input.now);
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
       if (attempt < MAX_ATTEMPTS) {
@@ -204,6 +206,8 @@ async function callOnce(
   locale: "zh" | "en",
   userPrompt: string,
   fallback: TradingCommentary,
+  /** 参照时刻（由输入注入）——仅用于失败时 dump 原始输出的文件名时戳。 */
+  now: Date,
 ): Promise<TradingCommentary> {
   // 2.0：runner 注入（组合根装配），替代 gzinfo 的 runLlm 直连
   const text = await runner(systemPromptOf(locale), userPrompt);
@@ -220,7 +224,7 @@ async function callOnce(
       try {
         const fs = await import("node:fs");
         fs.mkdirSync("logs", { recursive: true });
-        const ts = new Date().toISOString().replace(/[:.]/g, "-");
+        const ts = now.toISOString().replace(/[:.]/g, "-");
         fs.writeFileSync(`logs/trading-raw-${ts}.txt`, text, "utf8");
         fs.writeFileSync(`logs/trading-cleaned-${ts}.txt`, cleaned, "utf8");
         console.warn(

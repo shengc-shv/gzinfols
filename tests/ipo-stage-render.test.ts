@@ -284,7 +284,8 @@ test("buildIpoPool（经 buildTwoDayExecPool）：港交所全国递表（外省
     history: {},
     articles: [],
     report,
-    today: new Date().toISOString().slice(0, 10) });
+    today: new Date().toISOString().slice(0, 10),
+    now: new Date() });
   const urls = res.ipo.map((i) => i.url);
   assert.ok(urls.includes("gd-1"), "广东条目应进池");
   assert.ok(!urls.includes("cn-1"), "外省条目不得进「广东IPO」口播素材池");

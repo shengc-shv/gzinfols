@@ -1370,10 +1370,11 @@ export function rememberBroadcast(
     angle?: EventAngle;
     novelty?: number;
     /**
-     * 播报时刻（ISO 8601 带时区）。测试注入 9:00 前的正式时刻用；
-     * 生产缺省取当前时刻（≈ 报告生成时刻），见下方 broadcastAt 注释。
+     * 播报时刻（ISO 8601 带时区）。**必填、由调用方注入**（2026-09-14 C-3）：
+     * 生产由 exec-guard 用 `formatBroadcastAt(input.now)` 计算（now 来自 ctx.startTime），
+     * 测试注入固定时刻 —— 服务层不再隐式读系统时钟。
      */
-    broadcastAt?: string;
+    broadcastAt: string;
   },
 ): EventMemoryStore {
   const { cand, section, date, angle, novelty, broadcastAt } = input;
@@ -1387,7 +1388,7 @@ export function rememberBroadcast(
     // 播报时刻：播报与展示绑定、几乎同时产生，故默认以当前时刻（≈ 报告页面生成时刻）为准。
     // 用于以 9:00 为界区分客户演示数据与测试重跑数据，并支持按时间段筛选/清理。
     // 测试可注入固定时刻（见 input.broadcastAt），避免用例结果随真实时钟漂移。
-    broadcastAt: broadcastAt ?? formatBroadcastAt(),
+    broadcastAt,
   };
   if (cand.url) sample.url = cand.url;
   if (cand.score !== undefined) sample.score = cand.score;

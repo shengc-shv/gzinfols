@@ -234,17 +234,25 @@ test("beginDay 结算：无交付信号 → 昨天播报一律不结算（9:00 �
   assert.equal(out.today!.entries.length, 0);
 });
 
-test("rememberBroadcast 集成：新播报自动记录 broadcastAt（≈当前时刻）", () => {
+test("rememberBroadcast 集成：调用方注入的 broadcastAt 被原样记录（服务层不隐式读时钟）", () => {
   const store = emptyMemory();
+  // 2026-09-14（C-3）：broadcastAt 由调用方注入（生产为 exec-guard 用 ctx.startTime 换算）。
+  // 本用例仍传"当前时刻"，以保留原有「记录值 ≈ 播报时刻」的语义断言。
+  const injected = formatBroadcastAt(new Date());
   const out = rememberBroadcast(store, {
     cand: { title: "今日定调：六大行息差企稳" },
     section: "hero",
     date: "2026-09-02",
+    broadcastAt: injected,
   });
   const entry = out.today?.entries[0];
   assert.ok(entry, "today.entries 应有新播报");
   const t = parseBroadcastAt(entry?.broadcastAt);
-  assert.ok(t !== null, "broadcastAt 应被自动写入且可解析");
+  assert.ok(t !== null, "broadcastAt 应被写入且可解析");
+  assert.ok(
+    entry?.broadcastAt?.startsWith(injected.slice(0, 16)),
+    `注入的时刻应原样落地，实际 ${entry?.broadcastAt}`,
+  );
   // 与当前时刻相差应小于 5 分钟（自动记录 ≈ 播报时刻）
   assert.ok(Math.abs(t - Date.now()) < 5 * 60_000, `broadcastAt 应接近当前时刻，实际 ${entry?.broadcastAt}`);
   // 保留既有字段结构不变（date/section/title）

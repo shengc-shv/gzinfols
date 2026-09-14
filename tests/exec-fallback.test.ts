@@ -283,7 +283,7 @@ test("buildTwoDayExecPool：今天/昨天窗口内（含真实 publishedAt）的
   // 窗口外旧闻混入，验证其被排除（时间红线：发布时间超 2 天不进今日两天池）
   const articles = [...ARTICLES, OUT_OF_WINDOW_ARTICLE];
   const { buildTwoDayExecPool } = await import("../lib/services/enrich/exec-pool");
-  const pool = buildTwoDayExecPool({ history: HISTORY, articles, report: thinReport, today: DATE });
+  const pool = buildTwoDayExecPool({ history: HISTORY, articles, report: thinReport, today: DATE, now: new Date() });
   assert.ok(pool.finance.length > 0, "窗口内 finance 条目应纳入");
   assert.ok(pool.gz.length > 0, "窗口内 gz 条目应纳入");
   assert.ok(

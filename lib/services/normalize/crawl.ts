@@ -155,7 +155,7 @@ export function crawledToRaw(
  */
 export function normalizeLocalIpoItems(
   items: CrawledArticle[],
-  opts: { windowDays?: number; now?: Date } = {},
+  opts: { windowDays?: number; now: Date },
 ): {
   items: CrawledArticle[];
   droppedNoDate: number;
@@ -163,7 +163,7 @@ export function normalizeLocalIpoItems(
   droppedDuplicate: number;
 } {
   const days = opts.windowDays ?? IPO_SOURCE_WINDOW_DAYS;
-  const now = opts.now ?? new Date();
+  const now = opts.now;
   let droppedNoDate = 0;
   let droppedOutOfWindow = 0;
   let droppedDuplicate = 0;

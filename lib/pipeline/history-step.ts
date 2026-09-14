@@ -88,15 +88,23 @@ export function mergeRollingAndSaveHistory(
   filteredArticles: ArticleInput[],
   history: HistoryStore,
   ctx: PipelineContext,
-  nowIso: string = new Date().toISOString(),
 ): HistoryStepResult {
+  // 2026-09-14（C-3）：时间一律取 `ctx.startTime`（组合根注入），**不再用 `new Date()` 默认参数**
+  // —— 隐式时钟会让「同一天跑两次」产出不同的 lastSeenAt/日期键，破坏可复现性。
+  const nowIso = ctx.startTime.toISOString();
   // 0. PASS2 摘要回流：今日被 AI 解读过的条目带摘要入历史库，供次日两天池 / 滚动并入复用
   const backfill = backfillAiSummary(report, filteredArticles);
   const articlesForHistory = backfill.articles;
 
-  const nextHistory = mergeHistory(articlesForHistory, history, nowIso, buildSubcatIndex(ctx.sources));
+  const nextHistory = mergeHistory(
+    articlesForHistory,
+    history,
+    nowIso,
+    buildSubcatIndex(ctx.sources),
+    ctx.startTime,
+  );
   persistHistoryStore(nextHistory);
-  const rolling = buildRolling(articlesForHistory, nextHistory);
+  const rolling = buildRolling(articlesForHistory, nextHistory, ctx.startTime);
   ctx.log.info(
     "history",
     `历史缓存已更新: ${Object.keys(nextHistory).length} 条（含今日 ${filteredArticles.length} 条）；渲染滚动列表 ${rolling.length} 条`,

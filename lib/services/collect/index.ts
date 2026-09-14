@@ -25,7 +25,7 @@ async function fetchAllSources(
   if (enabled.length === 0) return [];
 
   const settled = await Promise.allSettled(
-    enabled.map((s) => fetchOne(s, deps.http)),
+    enabled.map((s) => fetchOne(s, deps.http, ctx.startTime)),
   );
 
   const out: RawArticle[] = [];

@@ -75,7 +75,7 @@ const pad = (n: number): string => String(n).padStart(2, "0");
  * 无法据此判断「是不是 9 点前播的」。
  */
 export function formatBroadcastAt(
-  d: Date = new Date(),
+  d: Date,
   tz: string = memoryTimeZone(),
 ): string {
   const p = tzParts(d, tz);

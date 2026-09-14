@@ -12,7 +12,7 @@ import type { HttpClient } from "../../contracts/pipeline";
 import { SITE_PLANS } from "./site-parsers";
 
 /** RSS 源：标准 RSS/Atom 解析。 */
-export async function fetchRss(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {
+export async function fetchRss(source: SourceDef, http: HttpClient, now: Date): Promise<RawArticle[]> {
   const xml = await http.getText(source.url, { useCurl: source.useCurl });
   const parser = new Parser();
   const feed = await parser.parseString(xml);
@@ -22,14 +22,14 @@ export async function fetchRss(source: SourceDef, http: HttpClient): Promise<Raw
     url: it.link ?? "",
     excerpt: it.contentSnippet ?? it.content?.slice(0, 200) ?? "",
     publishedAt: it.isoDate ? new Date(it.isoDate) : undefined,
-    fetchedAt: new Date(),
+    fetchedAt: now,
     category: source.category,
     summary: it.contentSnippet ?? "",
   }));
 }
 
 /** 列表页抓取：通用 cheerio 解析（标题 + 链接 + 可选时间）。具体站点选择器可在此注册。 */
-export async function fetchScrape(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {
+export async function fetchScrape(source: SourceDef, http: HttpClient, now: Date): Promise<RawArticle[]> {
   // 站点专用解析（gzinfo per-source provider 移植）：命中计划 → 按计划的多 URL
   // 逐个抓取 + 专用正则解析（能从 URL/页面提取真实发布时间）；未命中 → 通用 cheerio。
   const plan = SITE_PLANS[source.id];
@@ -65,7 +65,7 @@ export async function fetchScrape(source: SourceDef, http: HttpClient): Promise<
       url: abs,
       excerpt: title,
       publishedAt,
-      fetchedAt: new Date(),
+      fetchedAt: now,
       category: source.category,
     });
   });
@@ -73,7 +73,7 @@ export async function fetchScrape(source: SourceDef, http: HttpClient): Promise<
 }
 
 /** API 源：拉 JSON 后由调用方按字段映射；此处做最小通用提取。 */
-export async function fetchApi(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {
+export async function fetchApi(source: SourceDef, http: HttpClient, now: Date): Promise<RawArticle[]> {
   const text = await http.getText(source.url);
   try {
     const json = JSON.parse(text);
@@ -84,7 +84,7 @@ export async function fetchApi(source: SourceDef, http: HttpClient): Promise<Raw
       url: String(it.url ?? it.link ?? ""),
       excerpt: String(it.summary ?? it.description ?? it.title ?? ""),
       publishedAt: it.date ? new Date(it.date) : undefined,
-      fetchedAt: new Date(),
+      fetchedAt: now,
       category: source.category,
     }));
   } catch {
@@ -93,15 +93,15 @@ export async function fetchApi(source: SourceDef, http: HttpClient): Promise<Raw
 }
 
 /** 单源分派。 */
-export async function fetchOne(source: SourceDef, http: HttpClient): Promise<RawArticle[]> {
+export async function fetchOne(source: SourceDef, http: HttpClient, now: Date): Promise<RawArticle[]> {
   if (source.role === "crawled-input") return []; // 爬虫源由 CrawlerRegistry 提供，普通抓取跳过
   switch (source.type) {
     case "rss":
-      return fetchRss(source, http);
+      return fetchRss(source, http, now);
     case "scrape":
-      return fetchScrape(source, http);
+      return fetchScrape(source, http, now);
     case "api":
-      return fetchApi(source, http);
+      return fetchApi(source, http, now);
     default:
       return [];
   }

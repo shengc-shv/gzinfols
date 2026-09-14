@@ -51,11 +51,11 @@ test("架构门禁：服务层隐式时钟（Date.now / 裸 new Date）被判违
   }
 });
 
-test("架构门禁：裸 new Date() 超基线才违规（棘轮只挡增长）", () => {
+test("架构门禁：裸 new Date() 为硬禁（2026-09-14 C-3 后基线归零，棘轮已升为绝对禁止）", () => {
   const dir = mkdtempSync(join(tmpdir(), "arch-gate-"));
   try {
     mkdirSync(join(dir, "lib/services/demo"), { recursive: true });
-    // 低于/等于基线：不报违规
+    // 基线已归零 → 出现 1 处即违规（不再是「只挡增长」的棘轮语义）
     writeFileSync(
       join(dir, "lib/services/demo/z.ts"),
       "export const d = () => new Date();\n",
@@ -63,17 +63,27 @@ test("架构门禁：裸 new Date() 超基线才违规（棘轮只挡增长）",
     );
     const one = checkArchitectureDetailed(dir);
     assert.equal(one.newDateCount, 1, "应统计到 1 处裸 new Date()");
-    assert.equal(one.violations.length, 0, "未超基线不报违规");
+    assert.equal(one.violations.length, 1, "基线为 0 时出现 1 处即应报违规");
+    assert.match(one.violations[0], /基线/, "应提示基线");
 
-    // 超基线：报违规
+    // 多处：仍只报 1 条聚合违规（逐处报会淹没输出）
     const many = Array.from({ length: 12 }, (_, i) => `export const d${i} = () => new Date();`).join(
       "\n",
     );
     writeFileSync(join(dir, "lib/services/demo/z.ts"), many + "\n", "utf8");
     const over = checkArchitectureDetailed(dir);
-    assert.ok(over.newDateCount > 11, "应统计到超基线数量");
-    assert.equal(over.violations.length, 1, "超基线应报 1 处违规");
-    assert.match(over.violations[0], /基线/, "应提示基线");
+    assert.equal(over.newDateCount, 12, "应统计到全部 12 处");
+    assert.equal(over.violations.length, 1, "应聚合为 1 处违规");
+
+    // 显式注入（参数 / ctx.startTime）不算违规 —— 这正是本规则鼓励的写法
+    writeFileSync(
+      join(dir, "lib/services/demo/z.ts"),
+      "export const d = (now: Date) => new Date(now.getTime());\nexport const t = (ctx: { startTime: Date }) => ctx.startTime;\n",
+      "utf8",
+    );
+    const ok = checkArchitectureDetailed(dir);
+    assert.equal(ok.newDateCount, 0, "带参数的 new Date(x) 不是裸调用，不应统计");
+    assert.equal(ok.violations.length, 0, "注入式写法不应违规");
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }

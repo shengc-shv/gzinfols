@@ -66,7 +66,7 @@ function isFreshEntry(e: HistoryEntry, now: Date): boolean {
 }
 
 /** Drop entries outside the rolling window — measured by occurrence time (publishedAt). */
-export function pruneHistory(store: HistoryStore, now: Date = new Date()): HistoryStore {
+export function pruneHistory(store: HistoryStore, now: Date): HistoryStore {
   const out: HistoryStore = {};
   for (const [url, e] of Object.entries(store)) {
     if (isFreshEntry(e, now)) out[url] = e;
@@ -103,7 +103,7 @@ function entryToArticle(e: HistoryEntry, fetchedToday: boolean): ArticleInput {
 export function buildRolling(
   today: ArticleInput[],
   history: HistoryStore,
-  now: Date = new Date(),
+  now: Date,
 ): ArticleInput[] {
   const map = new Map<string, ArticleInput>();
   // 当天已处理的内容（lastSeenAt=今天，含预 AI 分析写入的当日条目）标记为
@@ -151,7 +151,7 @@ export function mergeHistory(
   history: HistoryStore,
   nowIso: string,
   subcatBySource: Map<string, string | undefined> = new Map(),
-  now: Date = new Date(),
+  now: Date,
 ): HistoryStore {
   const store = pruneHistory(history, now);
   for (const a of today) {

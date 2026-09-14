@@ -20,16 +20,19 @@ import { readdirSync, readFileSync, statSync } from "node:fs";
 import { join, relative } from "node:path";
 
 /**
- * 服务层裸 `new Date()` 存量基线（棘轮）。
+ * 服务层裸 `new Date()` 允许量（2026-09-14 C-3 起为 **0 = 绝对禁止**，棘轮已升为硬禁）。
  *
- * 语义：**不允许增加**。新增服务层代码必须把时间从 `ctx.startTime` / 参数注入；
- * 若需要「可注入默认参数」（如纯函数 `now: Date = new Date()`），应优先改为必填参数。
+ * 语义：服务层**不得**隐式读系统时钟。时间一律由调用方注入
+ * （`ctx.startTime` / 显式参数）；「可注入默认参数」（如 `now: Date = new Date()`）
+ * 同样不允许 —— 默认值就是隐式时钟，会让「同一输入跑两次」产出不同结果。
  *
- * 2026-09-14 统计（供后续收敛参考）：
- *   collect/providers.ts×3（fetchedAt）· memory/history.ts×3 · memory/broadcast-time.ts×1
+ * 收敛记录（2026-09-14 C-3，原存量 11 处全部归零）：
+ *   collect/providers.ts×3（fetchedAt，改由 `collect` 从 `ctx.startTime` 注入）
+ *   memory/history.ts×3 · memory/broadcast-time.ts×1 · memory/event-memory.ts×1
+ *   （`broadcastAt` 改必填，由 exec-guard 用注入时刻换算）
  *   normalize/crawl.ts×1 · enrich/exec-pool.ts×2 · market/commentary.ts×1
  */
-const NEW_DATE_BASELINE = 11;
+const NEW_DATE_BASELINE = 0;
 
 function walk(dir: string): string[] {
   const out: string[] = [];

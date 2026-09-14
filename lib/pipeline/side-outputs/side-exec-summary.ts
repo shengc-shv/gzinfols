@@ -184,6 +184,8 @@ export async function buildExecutiveSummary(
         store: memStore,
         today: date,
         pool: twoDayPool,
+        // 2026-09-14（C-3）：播报时刻由组合根注入的时刻显式换算（服务层不隐式读时钟）
+        now: ctx.startTime,
       });
       memStore = g.store;
       for (const line of g.log) ctx.log.info("exec", line);
