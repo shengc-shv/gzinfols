@@ -1,0 +1,54 @@
+{
+  "source": "sample",
+  "note": "固定样本数据（非真实抓取）。字段对齐披露易 app[] 结构：id/d/a/s/w/sD/postingDate，另加 docUrl/docText 模拟 PDF 抽取结果。",
+  "app": [
+    {
+      "id": "SAMPLE-001",
+      "d": "2026-09-14",
+      "a": "样例红筹控股有限公司",
+      "aEn": "Sample Redchip Holdings Limited",
+      "s": "处理中",
+      "w": "主板",
+      "sD": "2026-09-10",
+      "postingDate": "2026-09-14",
+      "docUrl": "https://example.invalid/app/sehk/2026/SAMPLE-001/cover.pdf",
+      "docText": "This company is Incorporated in the Cayman Islands with limited liability. 本集团于广州设立主要运营实体，并在广州、广州设有生产基地，另于深圳设有研发中心。"
+    },
+    {
+      "id": "SAMPLE-002",
+      "d": "2026-09-14",
+      "a": "境内注册样例股份有限公司",
+      "aEn": "Domestic Sample Co., Ltd.",
+      "s": "处理中",
+      "w": "主板",
+      "sD": "2026-09-11",
+      "postingDate": "2026-09-14",
+      "docUrl": "https://example.invalid/app/sehk/2026/SAMPLE-002/cover.pdf",
+      "docText": "A joint stock company incorporated in the People's Republic of China with limited liability. 公司位于广州，主要业务覆盖广州与深圳。"
+    },
+    {
+      "id": "SAMPLE-003",
+      "d": "2026-09-14",
+      "a": "离岸低词频样例有限公司",
+      "aEn": "Offshore LowHits Limited",
+      "s": "处理中",
+      "w": "GEM",
+      "sD": "2026-09-12",
+      "postingDate": "2026-09-14",
+      "docUrl": "https://example.invalid/app/gem/2026/SAMPLE-003/cover.pdf",
+      "docText": "Incorporated in Bermuda with limited liability. 公司业务以海外市场为主，仅在广州设有联络处。"
+    },
+    {
+      "id": "SAMPLE-004",
+      "d": "2026-09-14",
+      "a": "无文档样例有限公司",
+      "aEn": "NoDoc Sample Limited",
+      "s": "处理中",
+      "w": "主板",
+      "sD": "2026-09-13",
+      "postingDate": "2026-09-14",
+      "docUrl": "https://example.invalid/app/sehk/2026/SAMPLE-004/cover.pdf",
+      "docText": ""
+    }
+  ]
+}
