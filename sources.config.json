@@ -267,9 +267,9 @@
   {
     "id": "cnbc-top",
     "tier": "T2",
-    "name": "CNBC Top Stories",
+    "name": "CNBC Investing",
     "type": "rss",
-    "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+    "url": "https://www.cnbc.com/id/15839069/device/rss/rss.html",
     "category": "stocks",
     "subcategory": "us",
     "keywords": [],
@@ -278,7 +278,7 @@
       "zh",
       "en"
     ],
-    "notes": "昨日股市·美股信息源（2026-08-25 启用，复用现成 RSS）：CNBC 美股/科技个股动态，路由 stocks/us；清空原中国/银行关键词避免误杀，喂 LLM 生成中文美股口播卡。CI 沙箱实测可获取（非 403 拦截）。",
+    "notes": "昨日股市·美股信息源（2026-08-25 启用）。【2026-09-14 换频道】原 URL 是 id/100003114 = CNBC **Top News 通用头条**，实测混入大量与股市无关的英文内容（\"I'm a psychologist who studies couples\"、\"NFL and midterm elections set up prediction markets\"、\"Washington scrambles to meet calls for AI guardrails\"），污染滚动池与历史库。现改 id/15839069 = CNBC **Investing**（专家分析/选股/投资策略），实测抓取内容全部为股市投资主题、无生活方式噪音。路由 stocks/us；keywords 保持空数组（历史上加词表曾把该源压到 1 条，口径交给内容判定与相关性评分）。CI 沙箱实测可获取（非 403 拦截）。",
     "disabledReason": null
   },
   {
@@ -770,14 +770,14 @@
     "name": "Crunchbase News",
     "type": "rss",
     "url": "https://news.crunchbase.com/feed/",
-    "category": "gd-ipo",
+    "category": "finance",
     "subcategory": "overseas",
     "enabled": true,
     "locales": [
       "zh",
       "en"
     ],
-    "note": "已验证可用。全球私募市场/融资轮次/IPO 与上市动态；仅广东企业出海上市（境外子标签）才进广东IPO，其余丢弃。",
+    "note": "已验证可用。全球私募市场/融资轮次/IPO 与上市动态；仅广东企业出海上市才进广东IPO，其余由内容判定分流（默认归业务启示，再经 PASS1 相关性终审）。【2026-09-14 修复】原 category 配为 gd-ipo：该 category 是「结构化 IPO 采集源」专用标记（会让条目豁免内容判定直通 IPO 板块并打粤标），而本源源为通用创投 RSS，实测 8 条美国创投新闻（The Crunchbase Tech Layoffs Tracker / Mistral AI 等）因此被渲染进「广东IPO动态」并标 ipoCity=广东。改回 finance 后本源不再享有 IPO 直通，归属一律由内容判定（isGdIpoCandidate）。不变量见 tests/source-category-invariant.test.ts。",
     "disabledReason": "恢复：#45 CI 实测拉到 1 条（沙箱403仅为环境拦截，非源失效）"
   },
   {
