@@ -14,7 +14,7 @@
  * Usage:
  *   npm run quota-report
  */
-import { readLlmCallLog, setLlmLogDir } from "../lib/adapters/llm-log";
+import { loadStageCalls, readLlmCallLog, setLlmLogDir } from "../lib/adapters/llm-log";
 import {
   CHARS_PER_TOKEN,
   fmtTokens,
@@ -165,7 +165,38 @@ function main() {
   }
 
   reportByDay(calls, now);
+  reportByStage(loadStageCalls());
   console.log("");
+}
+
+/** 按日+阶段+backend 汇总（gzinfo reportMetricsByStage 移植；stage 层 data/metrics 数据源）。 */
+function reportByStage(calls: import("../lib/contracts/metrics").AiCallMetric[]): void {
+  if (calls.length === 0) {
+    console.log("■ 按日+阶段汇总 — 无 stage 埋点数据（LLM_TELEMETRY=off 或尚无 AI 运行）");
+    return;
+  }
+  console.log(`■ 按日+阶段汇总（data/metrics/，共 ${calls.length} 次）`);
+  const byDayStage = new Map<string, Map<string, { n: number; ok: number; ms: number }>>();
+  for (const c of calls) {
+    const day = c.date ?? c.ts.slice(0, 10);
+    if (!byDayStage.has(day)) byDayStage.set(day, new Map());
+    const m = byDayStage.get(day)!;
+    const key = `${c.stage}/${c.backend}`;
+    const e = m.get(key) ?? { n: 0, ok: 0, ms: 0 };
+    e.n++;
+    if (c.ok) e.ok++;
+    e.ms += c.ms;
+    m.set(key, e);
+  }
+  for (const [day, stages] of [...byDayStage.entries()].sort()) {
+    console.log(`  ${day}:`);
+    for (const [key, e] of [...stages.entries()].sort()) {
+      const rate = e.n ? Math.round((e.ok / e.n) * 100) : 0;
+      console.log(
+        `    ${key.padEnd(26)} ${String(e.n).padStart(4)} 次  ok ${rate}%  累计 ${(e.ms / 1000).toFixed(1)}s`,
+      );
+    }
+  }
 }
 
 main();

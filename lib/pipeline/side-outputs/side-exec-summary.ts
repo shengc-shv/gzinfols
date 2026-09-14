@@ -282,7 +282,7 @@ export async function buildExecutiveSummary(
     }
     if (!deps?.llm) throw new Error("AI 模式缺少 LLM 端口（deps.llm 未注入），走评分兜底");
     const execRunner = (systemPrompt: string, userPrompt: string) =>
-      deps.llm.complete({ system: systemPrompt, prompt: userPrompt });
+      deps.llm.complete({ system: systemPrompt, prompt: userPrompt, stage: "executive" });
     let exec = await generateExecutiveSummary(
       {
         date,

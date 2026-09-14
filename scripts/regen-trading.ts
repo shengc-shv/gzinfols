@@ -47,7 +47,7 @@ async function main() {
   console.log("[regen-trading] 生成交易解读…");
   const llm = new LlmAdapter();
   // LlmPort.complete 直接返回文本（契约：Promise<string>）
-  const runner = (system: string, user: string) => llm.complete({ system, prompt: user });
+  const runner = (system: string, user: string) => llm.complete({ system, prompt: user, stage: "trading" });
   const commentary = await generateTradingCommentary({ tickers }, runner);
 
   // 打补丁：交易段整体替换（技术面 + LLM 解读），其余字段不动

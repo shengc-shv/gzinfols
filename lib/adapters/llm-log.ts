@@ -11,7 +11,7 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import type { LlmCallRecord } from "../contracts/metrics";
+import type { AiCallMetric, LlmCallRecord } from "../contracts/metrics";
 
 const LOG_REL = path.join("logs", "llm-calls.jsonl");
 
@@ -89,4 +89,49 @@ export function dumpEnrichUndercount(
   } catch {
     // 诊断落盘失败不影响主流程
   }
+}
+
+/* ───────── stage 层（gzinfo lib/ai/metrics.ts 移植，2026-09-14）───────── */
+
+const METRICS_DIR = path.join("data", "metrics");
+
+/**
+ * 阶段维度计数（append-only，按日一份 ai-calls-<date>.jsonl）。
+ * 与明细层并存：本函数管 stage 维度与按日聚合，quota-report 按阶段汇总用。
+ * 埋点失败绝不影响 LLM 主流程；LLM_TELEMETRY=off 一并关闭。
+ */
+export function recordAiCall(m: AiCallMetric): void {
+  if (!llmTelemetryEnabled()) return;
+  try {
+    const dir = path.resolve(overrideDir ?? process.cwd(), METRICS_DIR);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.appendFileSync(path.join(dir, `ai-calls-${m.date}.jsonl`), JSON.stringify(m) + "\n", "utf8");
+  } catch {
+    // 埋点失败不得影响 LLM 主流程
+  }
+}
+
+/** 读取 stage 层埋点（缺省读全部日期；传 date 只读当日）。 */
+export function loadStageCalls(date?: string): AiCallMetric[] {
+  const dir = path.resolve(overrideDir ?? process.cwd(), METRICS_DIR);
+  if (!fs.existsSync(dir)) return [];
+  const files = date
+    ? [path.join(dir, `ai-calls-${date}.jsonl`)]
+    : fs
+        .readdirSync(dir)
+        .filter((f) => /^ai-calls-\d{4}-\d{2}-\d{2}\.jsonl$/.test(f))
+        .map((f) => path.join(dir, f));
+  const out: AiCallMetric[] = [];
+  for (const f of files) {
+    if (!fs.existsSync(f)) continue;
+    for (const line of fs.readFileSync(f, "utf8").split("\n")) {
+      if (!line.trim()) continue;
+      try {
+        out.push(JSON.parse(line) as AiCallMetric);
+      } catch {
+        // 跳过损坏行
+      }
+    }
+  }
+  return out;
 }

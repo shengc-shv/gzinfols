@@ -24,3 +24,31 @@ export interface LlmCallRecord {
   errorCategory: LlmErrorCategory;
   errorSnippet: string | null;
 }
+
+/* ───────── stage 层埋点（gzinfo lib/ai/metrics.ts 移植，2026-09-14）───────── */
+
+/** 业务阶段（gzinfo ai/mode.ts AiStage 逐字；credentials 阶段不适用 2.0 校验函数故不列）。 */
+export type AiStage =
+  | "enrich" // 富集摘要（GitHub/X/论文/finance/politics/gd-ipo）
+  | "classify" // 条目级 LLM 分类
+  | "executive" // 执行摘要
+  | "stock-recap" // 股市解读三卡
+  | "stock-news" // 股市消息清单逐条归纳
+  | "trading" // 交易点评
+  | "pass1" // 两阶段管线：PASS1 筛选分类
+  | "pass2" // 两阶段管线：PASS2 总编辑成稿
+  | "other";
+
+/** 阶段维度调用计数（append-only，按日一份 data/metrics/ai-calls-<date>.jsonl）。 */
+export interface AiCallMetric {
+  ts: string;
+  /** 北京时间日历日键（报告时区口径）。 */
+  date: string;
+  backend: string;
+  stage: AiStage;
+  ok: boolean;
+  ms: number;
+  /** token 估算：claude-cli（Max 订阅）无计量恒 0；API 后端按 3 字符≈1token 估算。 */
+  tokens: number;
+  modelTag: string;
+}

@@ -8,8 +8,9 @@ import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import type { LlmPort, LlmRequest } from "../contracts/pipeline";
 import { jsonrepair } from "jsonrepair";
-import { logLlmCall } from "./llm-log";
+import { logLlmCall, recordAiCall } from "./llm-log";
 import { classifyError } from "../services/metrics";
+import { todayKey } from "../utils/time";
 
 const execFileP = promisify(execFile);
 
@@ -113,6 +114,17 @@ export class LlmAdapter implements LlmPort {
           errorCategory: null,
           errorSnippet: null,
         });
+        // stage 层：按业务阶段聚合（claude-cli 无 token 计量恒 0，API 后端按 3 字符≈1token 估算）
+        recordAiCall({
+          ts: new Date().toISOString(),
+          date: todayKey(),
+          backend: this.backend,
+          stage: req.stage ?? "other",
+          ok: true,
+          ms: Date.now() - t0,
+          tokens: this.backend === "claude-cli" ? 0 : Math.round((inputChars + text.length) / 3),
+          modelTag: model,
+        });
         return this.postProcess(text, req);
       } catch (e) {
         lastErr = e;
@@ -129,6 +141,16 @@ export class LlmAdapter implements LlmPort {
             outputChars: 0,
             errorCategory: classifyError(msg),
             errorSnippet: msg.slice(0, 300),
+          });
+          recordAiCall({
+            ts: new Date().toISOString(),
+            date: todayKey(),
+            backend: this.backend,
+            stage: req.stage ?? "other",
+            ok: false,
+            ms: Date.now() - t0,
+            tokens: 0,
+            modelTag: model,
           });
           throw e;
         }

@@ -9,7 +9,8 @@ import fsSync from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { classifyError, fmtTokens, groupByBackend, sumChars, summarize, withinDays, withinHours } from "../lib/services/metrics";
-import { logLlmCall, readLlmCallLog, setLlmLogDir } from "../lib/adapters/llm-log";
+import { loadStageCalls, logLlmCall, readLlmCallLog, recordAiCall, setLlmLogDir } from "../lib/adapters/llm-log";
+import type { AiCallMetric } from "../lib/contracts/metrics";
 import type { LlmCallRecord } from "../lib/contracts/metrics";
 
 function rec(over: Partial<LlmCallRecord> = {}): LlmCallRecord {
@@ -103,6 +104,46 @@ test("落盘往返：写入 → 读回（含开关与损坏行）", () => {
     } finally {
       if (prev === undefined) delete process.env.LLM_TELEMETRY;
       else process.env.LLM_TELEMETRY = prev;
+    }
+  } finally {
+    setLlmLogDir(undefined);
+    fsSync.rmSync(tmp, { recursive: true, force: true });
+  }
+});
+
+
+test("stage 层：recordAiCall 落盘按日文件 + loadStageCalls 读回（含损坏行容错）", () => {
+  const tmp = fsSync.mkdtempSync(path.join(os.tmpdir(), "stage-metrics-"));
+  setLlmLogDir(tmp);
+  try {
+    assert.deepEqual(loadStageCalls(), []); // 空目录
+    const m = (over: Partial<AiCallMetric> = {}): AiCallMetric => ({
+      ts: "2026-09-14T10:00:00+08:00",
+      date: "2026-09-14",
+      backend: "deepseek",
+      stage: "pass1",
+      ok: true,
+      ms: 800,
+      tokens: 0,
+      modelTag: "deepseek-chat",
+      ...over,
+    });
+    recordAiCall(m());
+    recordAiCall(m({ stage: "pass2", ok: false, ms: 1200 }));
+    fsSync.appendFileSync(path.join(tmp, "data", "metrics", "ai-calls-2026-09-14.jsonl"), "{broken}\n", "utf8");
+    const calls = loadStageCalls();
+    assert.equal(calls.length, 2, "损坏行应被跳过");
+    assert.equal(calls.filter((c) => c.stage === "pass1").length, 1);
+    assert.equal(loadStageCalls("2026-09-14").length, 2, "按日过滤");
+
+    // LLM_TELEMETRY=off 一并关闭 stage 层
+    const prev = process.env.LLM_TELEMETRY;
+    try {
+      process.env.LLM_TELEMETRY = "off";
+      recordAiCall(m({ stage: "executive" }));
+      assert.equal(loadStageCalls().length, 2, "off 时不应写入");
+    } finally {
+      if (prev === undefined) delete process.env.LLM_TELEMETRY; else process.env.LLM_TELEMETRY = prev;
     }
   } finally {
     setLlmLogDir(undefined);

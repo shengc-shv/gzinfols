@@ -16,6 +16,7 @@ import type {
   RiskItem,
 } from "./report";
 import type { ArticleInput, CrawledArticle, RawArticle } from "./article";
+import type { AiStage } from "./metrics";
 
 /** 文件系统端口（唯一磁盘出口）。 */
 export interface FileStore {
@@ -56,6 +57,8 @@ export interface LlmRequest {
   maxTokens?: number;
   /** 模型覆盖（gzinfo PASS1_MODEL / PASS2_MODEL 语义）。 */
   model?: string;
+  /** 业务阶段（stage 层埋点用；缺省记 "other"，见 contracts/metrics.ts AiStage）。 */
+  stage?: AiStage;
 }
 
 /** HTTP 端口（唯一网络出口，除采集专用 fetch 外）。 */

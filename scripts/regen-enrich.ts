@@ -86,7 +86,7 @@ async function main() {
 
   const t0 = Date.now();
   const llm = new LlmAdapter();
-  const runner = (system: string, user: string) => llm.complete({ system, prompt: user });
+  const runner = (system: string, user: string) => llm.complete({ system, prompt: user, stage: "enrich" });
   const summaries = await enrichFinanceNewsSummaries(
     missing.map((a) => ({ url: a.url, title: a.title, excerpt: a.excerpt, source: a.source })),
     runner,
