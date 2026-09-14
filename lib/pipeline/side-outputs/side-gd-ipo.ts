@@ -24,26 +24,45 @@ import { todayKey } from "../../utils/time";
 // memory/event-memory.ts 各定义一份 IPO_VOICE_WINDOW_DAYS，改一处不生效）。
 import { IPO_VOICE_WINDOW_DAYS, IPO_LIST_WINDOW_DAYS } from "../../ipo-config";
 
-/** IPO 类目（结构化爬虫产物：东财在审表 → gd-ipo；辅导备案/交易所权威源 → ipo）。 */
-const IPO_CAT = new Set(["gd-ipo", "ipo"]);
+/** 结构化 IPO 信号：爬虫透传的阶段/地域字段（非 category 字符串，红线 #2）。 */
+function hasStructuredIpoSignal(a: ArticleInput): boolean {
+  return Boolean(a.ipoStage || a.gdBasis);
+}
+
+/** 结构化广东信号：爬虫已判定注册地在粤（hk-filing 仅在 gd=true 时透传注册省份）。 */
+function hasStructuredGdSignal(a: ArticleInput): boolean {
+  if (a.gdBasis) return true;
+  return Boolean(a.registeredProvince && /广东|GD|guangdong/i.test(a.registeredProvince));
+}
 
 /**
- * 是否属于「广东 IPO 事件」——本板块的**内容判定**入口（无状态源红线）：
- *  ① 结构化类目命中（官方爬虫产物）；或
- *  ② 内容判定命中（媒体源即时报道的「证监会同意粤芯半导体IPO注册」等，官方源漏抓时补位）。
- * 两种来源都必须排除「已上市公司资本运作公告」（定增/解禁/回购…），否则会污染 IPO 板块。
+ * 是否属于「IPO 事件」——本板块的**内容判定**入口（无状态源红线）。
+ *
+ * 2026-09-14 修复：此前用 `IPO_CAT.has(category)`（category ∈ {gd-ipo, ipo}）直通，
+ * 使「category 配错」的通用 RSS 可绕过全部内容判定进入本板块。实锤：crunchbase-news
+ * 被配成 gd-ipo → 8 条美国创投新闻（The Crunchbase Tech Layoffs Tracker 等）
+ * 进入「广东IPO动态」。现改为**结构化信号或内容判定**：
+ *  ① 结构化 IPO 记录（爬虫透传 ipoStage / gdBasis，仍保留港交所「全国参考」条目）；或
+ *  ② 内容判定命中（媒体源即时报道「证监会同意粤芯半导体IPO注册」等，官方源漏抓时补位）。
+ * 两者都排除「已上市公司资本运作公告」（定增/解禁/回购…），否则会污染 IPO 板块。
  */
 function isIpoArticle(a: ArticleInput): boolean {
   const title = a.title_cn || a.title || "";
   const text = `${title} ${a.excerpt || ""}`;
   if (IPO_CAPITAL_ACT_RE.test(text) && !IPO_FLOW_RE.test(text)) return false;
-  if (IPO_CAT.has(a.category ?? "")) return true;
-  return isGdIpoCandidate(title, a.excerpt || "");
+  return hasStructuredIpoSignal(a) || isGdIpoCandidate(title, a.excerpt || "");
 }
 
-/** 本条是否应打「粤」标（广东商机身份；口播识别与横滑候选依赖它）。 */
+/**
+ * 本条是否应打「粤」标（广东商机身份；渲染徽章 / 口播识别 / 横滑候选依赖它）。
+ *
+ * 2026-09-14 修复：此前 `category === "gd-ipo"` 直通 → 打标取决于源配置而非内容。
+ * 实测两个方向都错：8 条美国创投新闻被标「粤」+ `ipoCity=广东`；而真粤企
+ * 「深圳市海柔創新智能科技集團股份有限公司（主板递表·广东企业）」走滚动并入路径
+ * 反而漏标。现改为结构化广东信号或内容判定，两个方向都回到正确。
+ */
 function isGdIpoArticle(a: ArticleInput): boolean {
-  if (a.category === "gd-ipo") return true; // 官方广东源（region=gd 路由产物）
+  if (hasStructuredGdSignal(a)) return true;
   return isGdIpoCandidate(a.title_cn || a.title || "", a.excerpt || "");
 }
 
