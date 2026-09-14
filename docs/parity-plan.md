@@ -66,7 +66,7 @@
 | A2 | ai/pass2 + prompts | LLM 摘要（title_cn/summary/tags/importance） | ~2k | ⚠️ 同上 | B2 |
 | A3 | ai/exec-pool | LLM 并发池 + 重试退避 + 限额 | ~400 | ⚠️ 2.0 自写池（行为对齐需核对） | B2 |
 | A4 | ai/select-top + relevance-score | 分行相关性确定性评分 + 取前 | ~400 | ⚠️ 2.0 scoreValue 口径不同 | B2 |
-| A5 | ai/validator + metrics + log + json-util | 输出校验/指标/日志/JSON 修复 | ~800 | ❌（validator/metrics 缺） | B2 |
+| A5 | ai/validator + metrics + log + json-util | 输出校验/指标/日志/JSON 修复 | ~800 | ✅ validator/明细层/stage 层全落地（09-12~14，validator 19 例官方测试背书） | B2 |
 | A6 | ai/light-ai + mode + assets | 轻量路径/AI 模式/资产账本 | ~600 | ❌（assets 账本缺） | B2 |
 | A7 | ai/executive-summary | 必读/商机/风险/口播分稿（LLM 同次产出+持久化复用） | ~300 | ⚠️ 2.0 报告级调用无 spoken_* 持久化 | B3 |
 | A8 | ai/llm + backends | runLlm 调度（3 后端×重试退避） | ~300 | ✅ 等价（llm.ts 4 后端） | — |
