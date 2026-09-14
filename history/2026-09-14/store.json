@@ -1,28 +1,28 @@
 {
   "date": "2026-09-14",
-  "updatedAt": "2026-09-14T09:28:46.066Z",
+  "updatedAt": "2026-09-14T15:59:49.963Z",
   "executive": {
-    "hero_line": "今日分行焦点：授信80亿元！农行广州分行与杰创智能达成战略合作",
+    "hero_line": "今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获",
     "must_read": [
-      {
-        "title": "美联储9月加息概率逼近90%！特朗普再度施压：美国利率应全球最低",
-        "why": "国家核心监管新政（信贷）：直击信贷业务",
-        "url": "https://finance.eastmoney.com/a/202609143872953521.html"
-      },
       {
         "title": "核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务",
         "why": "国家核心监管新政（监管合规）：直击监管合规业务",
         "url": "https://www.stcn.com/article/detail/4184345.html"
       },
       {
+        "title": "【信报】信披新规覆盖23类机构，信托等非银机构迎合规大考",
+        "why": "市场信号（信贷）：直击信贷业务",
+        "url": "https://finance.sina.com.cn/trust/2026-09-14/doc-inirveas7267226.shtml"
+      },
+      {
+        "title": "@新就业群体，广州为你送上“权益礼包”",
+        "why": "市场信号（客群）：直击客群业务",
+        "url": "https://news.dayoo.com/guangzhou/202609/14/139995_55003502.htm"
+      },
+      {
         "title": "多家银行收紧个人贵金属业务 原因何在？",
         "why": "市场信号（财富）：直击财富业务",
         "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-14/doc-inirtwih7360540.shtml"
-      },
-      {
-        "title": "力合科创对子公司财务资助逾期 公司称风险可控",
-        "why": "市场信号（监管合规）：直击监管合规业务",
-        "url": "https://www.stcn.com/article/detail/4183819.html"
       }
     ],
     "insights": [
@@ -35,23 +35,31 @@
         ]
       },
       {
-        "topic": "央行：前八个月社会融资规模增量",
-        "impact": "对广州分行信贷业务有潜在影响",
+        "topic": "上半年股份行零售贷款全面退潮：",
+        "impact": "对广州分行信贷/客群/竞对动态业务有潜在影响",
         "action": "建议分行关注信贷动向并评估动作",
         "segments": [
           "其他业务线"
         ]
       },
       {
-        "topic": "看！广州外销工艺品的“黄金时代",
-        "impact": "对广州分行财富业务有潜在影响",
-        "action": "建议分行关注财富动向并评估动作",
+        "topic": "授信80亿元！农行广州分行与杰",
+        "impact": "对广州分行信贷/竞对动态业务有潜在影响",
+        "action": "建议分行关注信贷动向并评估动作",
         "segments": [
-          "零售AUM"
+          "其他业务线"
         ]
       },
       {
-        "topic": "年内近20家信托公司换帅 内部",
+        "topic": "力合科创对子公司财务资助逾期 ",
+        "impact": "对广州分行监管合规业务有潜在影响",
+        "action": "建议分行关注监管合规动向并评估动作",
+        "segments": [
+          "其他业务线"
+        ]
+      },
+      {
+        "topic": "市场认定美联储加息已成定局，但",
         "impact": "对广州分行信贷业务有潜在影响",
         "action": "建议分行关注信贷动向并评估动作",
         "segments": [
@@ -59,29 +67,29 @@
         ]
       }
     ],
-    "spoken_insights": "具备其他业务线商机的，港股IPO火爆背后：香港证监会，对广州分行财富业务有潜在影响。建议分行关注财富动向并评估动作。此外，具备其他业务线商机的，央行：前八个月社会融资规模增量，对广州分行信贷业务有潜在影响。建议分行关注信贷动向并评估动作。同时，具备零售 A U M商机的，看！广州外销工艺品的“黄金时代，对广州分行财富业务有潜在影响。建议分行关注财富动向并评估动作。最后，具备其他业务线商机的，年内近20家信托公司换帅 内部，对广州分行信贷业务有潜在影响。建议分行关注信贷动向并评估动作。",
-    "spoken_must_read": "美联储9月加息概率逼近90%！特朗普再度施压：美国利率应全球最低。国家核心监管新政（信贷）：直击信贷业务。其次，核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务。国家核心监管新政（监管合规）：直击监管合规业务。此外，多家银行收紧个人贵金属业务 原因何在？。市场信号（财富）：直击财富业务。还有，力合科创对子公司财务资助逾期 公司称风险可控。市场信号（监管合规）：直击监管合规业务。"
+    "spoken_insights": "具备其他业务线商机的，港股IPO火爆背后：香港证监会，对广州分行财富业务有潜在影响。建议分行关注财富动向并评估动作。此外，具备其他业务线商机的，上半年股份行零售贷款全面退潮：，对广州分行信贷/客群/竞对动态业务有潜在影响。建议分行关注信贷动向并评估动作。同时，具备其他业务线商机的，授信80亿元！农行广州分行与杰，对广州分行信贷/竞对动态业务有潜在影响。建议分行关注信贷动向并评估动作。另一条值得关注，具备其他业务线商机的，力合科创对子公司财务资助逾期 ，对广州分行监管合规业务有潜在影响。建议分行关注监管合规动向并评估动作。最后，具备其他业务线商机的，市场认定美联储加息已成定局，但，对广州分行信贷业务有潜在影响。建议分行关注信贷动向并评估动作。",
+    "spoken_must_read": "核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务。国家核心监管新政（监管合规）：直击监管合规业务。其次，【信报】信披新规覆盖23类机构，信托等非银机构迎合规大考。市场信号（信贷）：直击信贷业务。此外，@新就业群体，广州为你送上“权益礼包”。市场信号（客群）：直击客群业务。还有，多家银行收紧个人贵金属业务 原因何在？。市场信号（财富）：直击财富业务。"
   },
   "stock_recap": {
     "us": {
-      "overview": "道琼斯收报52573.29点（+0.98%）；纳斯达克收报26333.04点（+0.96%）；标普500收报7656.98点（+0.86%）。",
+      "overview": "道琼斯收报52505.45点（-0.13%）；纳斯达克收报26224.28点（-0.41%）；标普500收报7631.33点（-0.33%）。",
       "sectors": [],
-      "spoken": "道琼斯（+0.98%）；纳斯达克（+0.96%）；标普500（+0.86%）。",
+      "spoken": "道琼斯（-0.13%）；纳斯达克（-0.41%）；标普500（-0.33%）。",
       "indices": [
         {
           "name": "道琼斯",
-          "value": "52573.29",
-          "changePct": "+0.98%"
+          "value": "52505.45",
+          "changePct": "-0.13%"
         },
         {
           "name": "纳斯达克",
-          "value": "26333.04",
-          "changePct": "+0.96%"
+          "value": "26224.28",
+          "changePct": "-0.41%"
         },
         {
           "name": "标普500",
-          "value": "7656.98",
-          "changePct": "+0.86%"
+          "value": "7631.33",
+          "changePct": "-0.33%"
         }
       ]
     },
@@ -179,12 +187,12 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609133872852575.html",
-      "title_cn": "9月13日晚间沪深上市公司重大事项公告最新快递",
+      "url": "https://finance.eastmoney.com/a/202609143873370592.html",
+      "title_cn": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
       "source": "东方财富",
       "source_type": "media",
-      "date": "09/13",
-      "summary": "9月13日晚间沪深上市公司重大事项公告最新快递",
+      "date": "09/14",
+      "summary": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -198,6 +206,19 @@
       "source_type": "media",
       "date": "09/14",
       "summary": "美联储9月加息概率逼近90%！特朗普再度施压：美国利率应全球最低",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609143873379367.html",
+      "title_cn": "二十年一遇！美欧日三大央行将同步加息这意味着什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/14",
+      "summary": "二十年一遇！美欧日三大央行将同步加息这意味着什么？",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -231,19 +252,6 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143873370592.html",
-      "title_cn": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
       "url": "https://finance.eastmoney.com/a/202609143872935579.html",
       "title_cn": "IPO周报｜4.26元！年内最便宜新股来了周一打新",
       "source": "东方财富",
@@ -257,12 +265,12 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143872947024.html",
-      "title_cn": "两只PCB大牛股双双澄清：未向英伟达供货无业务合作",
+      "url": "https://finance.eastmoney.com/a/202609143873569882.html",
+      "title_cn": "9月14日晚间沪深上市公司重大事项公告最新快递",
       "source": "东方财富",
       "source_type": "media",
       "date": "09/14",
-      "summary": "两只PCB大牛股双双澄清：未向英伟达供货无业务合作",
+      "summary": "9月14日晚间沪深上市公司重大事项公告最新快递",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -283,12 +291,12 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143873301688.html",
-      "title_cn": "经济学家震撼预言：2027年美经济、股市“双崩”纳指跌回“万点大关”！",
+      "url": "https://finance.eastmoney.com/a/202609143873594412.html",
+      "title_cn": "事关下半年A股韧性五大券商首席发声",
       "source": "东方财富",
       "source_type": "media",
       "date": "09/14",
-      "summary": "经济学家震撼预言：2027年美经济、股市“双崩”纳指跌回“万点大关”！",
+      "summary": "事关下半年A股韧性五大券商首席发声",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -400,6 +408,32 @@
       "market": "hk"
     },
     {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-14/doc-iniruxus9348073.shtml",
+      "title_cn": "花旗：泰格医药(03347)监管不确定性消除 重申“买入”评级及首选股地位",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/14",
+      "summary": "花旗：泰格医药(03347)监管不确定性消除 重申“买入”评级及首选股地位",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-14/doc-inirutnw7334435.shtml",
+      "title_cn": "花旗：重申鸣鸣很忙(01768)“买入”评级 目标价555.9港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/14",
+      "summary": "花旗：重申鸣鸣很忙(01768)“买入”评级 目标价555.9港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
       "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-14/doc-inirutny4047385.shtml",
       "title_cn": "小摩：康方生物(09926)HARMONi-2总生存期数据强劲 维持“增持”评级",
       "source": "新浪财经·港股",
@@ -419,32 +453,6 @@
       "source_type": "media",
       "date": "09/14",
       "summary": "花旗：康方生物(09926)HARMONi-2总生存期优效强化ivonescimab差异化优势 维持“买入”评级",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-14/doc-inirutnu9420008.shtml",
-      "title_cn": "高盛：上调中国生物制药(01177)目标价至9.07港元 重申“买入”评级",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "高盛：上调中国生物制药(01177)目标价至9.07港元 重申“买入”评级",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-14/doc-inirupfe4698124.shtml",
-      "title_cn": "小摩：翰森制药(03692)靶向B7-H3 ADC产品治疗肺癌数据正面 维持“增持”评级",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "小摩：翰森制药(03692)靶向B7-H3 ADC产品治疗肺癌数据正面 维持“增持”评级",
       "importance": 2,
       "rank": 0,
       "tags": [],
