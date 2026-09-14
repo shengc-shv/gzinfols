@@ -38,7 +38,7 @@ export interface AudioSegment {
 }
 
 export interface AudioMeta {
-  /** 站点相对路径（site/audio/briefing-<date>.mp3） */
+  /** 报告页相对路径（`audio/briefing-<date>.mp3`）→ 实际落在 `site/<date>/audio/`（B-3 子目录布局） */
   src: string;
   /** 展示用时长文案（如「约 2 分 0 秒」） */
   duration: string;

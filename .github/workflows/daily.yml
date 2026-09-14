@@ -154,6 +154,15 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
           REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
+          # 分享卡片基址（2026-09-14 P1-2）：渲染 og:image 的绝对地址前缀。
+          # 此前 full.ts 硬编码回落到**旧仓库** gzinfo 的 gh-pages 域，而本仓库没有
+          # og-image.png → 每次发布的转发缩略图都是外域 404。现改为显式注入；
+          # 留空则渲染层不输出 og:image（宁可无缩略图也不指向他仓）。
+          REPORT_BASE_URL: ${{ vars.REPORT_BASE_URL || 'https://shengc-shv.github.io/gzinfols' }}
+          # Web 模式（2026-09-14 B-4 用户拍板开启）：渲染页面内的「归档」链接。
+          # 依赖 archive.html —— 由 build-site 生成，且它会从 history/（CI 每期归档回 main）
+          # 汇集历史各期，故归档页会有多期而不是只有当天一期。
+          WEB_MODE: 'true'
           PUBLISH_RUN: ${{ (github.event_name == 'schedule' && needs.gate.outputs.should-run == 'true') || (github.event_name == 'workflow_dispatch' && inputs.publish == true) }}
           # —— 语音播报（腾讯云 TTS 主用）——
           AUDIO_ENABLED: ${{ (github.event_name == 'schedule' || inputs.audio) && 'true' || 'false' }}
@@ -212,6 +221,16 @@ jobs:
               exit 1
             fi
           fi
+
+      # ---------- 站点聚合（2026-09-14 B-3 接线）----------
+      # 位置必须在「归档到 history/」之后：build-site 从 daily_reports/（当日）+ history/（历史各期）
+      # 汇集到发布根 site/<date>/，并生成 index.html / archive.html / .nojekyll / og-image.png。
+      # 此前 `npm run build-site` **从未在 CI 执行**（直接上传 site/），导致：
+      #   ① og-image.png 不在发布根 → og:image 404；② 无 .nojekyll（Pages 会跑 Jekyll）；
+      #   ③ 无 archive.html → 报告页里的「归档」链接（WEB_MODE）落空。
+      # 同时它也是 publishReport 扁平站点布局与归档链接不兼容问题的收敛点（现统一为子目录布局）。
+      - name: 站点聚合（build-site：汇集各期 + index/archive/.nojekyll/og-image）
+        run: npm run build-site
 
       - name: 上传产物（Pages）
         uses: actions/upload-pages-artifact@v3

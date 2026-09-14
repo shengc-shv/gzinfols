@@ -31,7 +31,7 @@ export interface PublishDeps {
   fs: FileStore;
 }
 
-/** 把日报产物写入 daily_reports/<date>/ 与站点根（site/）。 */
+/** 把日报产物写入 daily_reports/<date>/ 与站点目录（site/<date>/，2026-09-14 B-3 子目录布局）。 */
 export async function publishReport(
   input: PublishInput,
   ctx: PipelineContext,
@@ -60,11 +60,15 @@ export async function publishReport(
     ctx.log.info("publish", `📤 归一化全量池导出: ${input.pool.length} 条 → data/fetched-articles.json`);
   }
 
-  // 站点根：latest 指针 + 复制一份到 site/（供静态托管 / gh-pages 直接发布）。
-  await deps.fs.writeText("site/index.html", input.html);
+  // 站点产物（2026-09-14 B-3）：改**子目录布局** `site/<date>/<date>.html`。
+  // 原扁平 `site/<date>.html` 与归档页 `../archive.html`、音频相对路径、
+  // 以及 scripts/build-site.mjs 假设的 `<date>/<date>.html` 结构互不兼容。
+  // `site/index.html`（最新一期）与 `archive.html` / `.nojekyll` / `og-image.png`
+  // 由 build-site 生成（它是发布根的唯一写者）；此处只落当期的报告页，
+  // 使本地「只跑 daily」时也能直接从 site/<date>/ 打开报告。
+  await deps.fs.writeText(`site/${date}/${date}.html`, input.html);
   await deps.fs.writeJson("site/latest.json", { date, report: input.report });
-  await deps.fs.writeText(`site/${date}.html`, input.html);
 
-  ctx.log.info("publish", `产物已落盘：${base}.html / .json / .md + site/`);
+  ctx.log.info("publish", `产物已落盘：${base}.html / .json / .md + site/${date}/`);
   return { reportPath: `${base}.json`, htmlPath: `${base}.html`, mdPath: `${base}.md` };
 }

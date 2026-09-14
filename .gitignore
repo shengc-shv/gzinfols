@@ -3,6 +3,9 @@ node_modules/
 
 # 运行时产物（每次运行重新生成，不入库）
 daily_reports/
+# 站点发布根（2026-09-14 B-3）：由 publishReport 写当期页、build-site 汇集并生成
+# index/archive/.nojekyll/og-image；CI 以它为 Pages artifact，属构建产物不入库。
+site/
 # 归一化全量池导出（gzinfo data/fetched-articles.json 同位；运行时产物不入库）
 data/fetched-articles.json
 

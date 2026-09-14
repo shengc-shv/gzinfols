@@ -17,7 +17,7 @@
  *  - 兜底：腾讯连续失败（3 次重试）自动切换 Piper 本地 onnx 合成（本地可用；
  *    CI 不预装 Piper → 腾讯失败时本轮降级为无播放器，不阻断发布）。
  *  - 输出（双路径）：daily_reports/<date>/audio/briefing-<date>.mp3（归档）
- *    + site/audio/briefing-<date>.mp3（静态站点播放器引用）。
+ *    + site/<date>/audio/briefing-<date>.mp3（静态站点播放器引用）。
  *  - 失败策略（用户约定）：所有后端均失败则抛错，由调用方 catch 降级
  *    （打 warning、页面不出播放器、不阻断发布）。
  *
@@ -332,12 +332,14 @@ function piperAvailable(): boolean {
   return r.status === 0;
 }
 
-/** 双路径落盘：归档（daily_reports）+ 站点（site，播放器引用）。 */
+/** 双路径落盘：归档（daily_reports/<date>/audio）+ 站点（site/<date>/audio，2026-09-14 B-3 子目录布局）。 */
 function writeMp3Both(src: string, date: string): void {
   const archiveDir = path.resolve(process.cwd(), "daily_reports", date, "audio");
   fs.mkdirSync(archiveDir, { recursive: true });
   fs.copyFileSync(src, path.join(archiveDir, path.basename(src)));
-  const siteDir = path.resolve(process.cwd(), "site", "audio");
+  // 报告页位于 site/<date>/<date>.html，其中播放器引用相对路径 `audio/briefing-<date>.mp3`
+  // → 必须落在 site/<date>/audio/ 才解析得到（此前写 site/audio/ 是扁平布局的遗留）。
+  const siteDir = path.resolve(process.cwd(), "site", date, "audio");
   fs.mkdirSync(siteDir, { recursive: true });
   fs.copyFileSync(src, path.join(siteDir, path.basename(src)));
 }
