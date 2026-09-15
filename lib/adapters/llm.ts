@@ -16,7 +16,7 @@ import { todayKey } from "../utils/time";
 
 const execFileP = promisify(execFile);
 
-type Backend = "claude-cli" | "anthropic" | "openai" | "deepseek" | "dump";
+type Backend = "claude-cli" | "anthropic" | "openai" | "deepseek" | "dump" | "replay";
 
 /** transient 错误判定（gzinfo 同款）：5xx/429/超时/网络可重试；4xx 配置类不重试。 */
 function isTransientLlmError(e: unknown): boolean {
@@ -34,6 +34,7 @@ function isTransientLlmError(e: unknown): boolean {
 export function validateBackendCredentials(backend: Backend = (process.env.LLM_BACKEND as Backend) || "claude-cli"): void {
   if (backend === "claude-cli") return; // 本地 CLI 无需密钥
   if (backend === "dump") return; // dump 后端不发真实请求，无需密钥
+  if (backend === "replay") return; // replay 后端只读本地分析文件，无需密钥
 
   const required: Record<Exclude<Backend, "claude-cli" | "dump">, string> = {
     anthropic: "ANTHROPIC_API_KEY",
@@ -184,6 +185,32 @@ function dumpPass1Placeholder(prompt: string): string {
   }
 }
 
+/**
+ * replay 后端（本地回填分析消费）：读取 LLM_REPLAY_DIR 下 `<stage>.response.txt`
+ * 作为 LLM 输出，缺失则返空串（走管线既有降级/兜底）。
+ *
+ * 设计用途：CI 用 dump 后端落盘全部 LLM 调用上下文 → 本地由 WorkBuddy 逐份撰写分析
+ * （PASS1 取舍/归栏 + PASS2 摘要成稿）→ 本后端消费这些分析文件，本地跑全管线产出
+ * 真实报告。文件命名：pass1.response.txt / pass2.response.txt / executive.response.txt；
+ * 若该阶段无需人工干预（走确定性兜底），直接不写文件即可（返空 → 兜底）。
+ */
+function readReplayResponse(stage: string): string {
+  const dir = path.resolve(process.env.LLM_REPLAY_DIR || "data/llm-replay");
+  const key = stage.replace(/[^a-z0-9-]/gi, "-");
+  const candidates = [
+    path.join(dir, `${key}.response.txt`),
+    path.join(dir, `${key}.1.response.txt`),
+  ];
+  for (const f of candidates) {
+    try {
+      if (fs.existsSync(f)) return fs.readFileSync(f, "utf8").trim();
+    } catch {
+      /* ignore */
+    }
+  }
+  return "";
+}
+
 export class LlmAdapter implements LlmPort {
   private readonly backend: Backend;
 
@@ -204,6 +231,11 @@ export class LlmAdapter implements LlmPort {
       dumpLlmContext(req, req.model || defaultModelFor(this.backend), this.backend);
       if (req.stage === "pass1") return dumpPass1Placeholder(req.prompt);
       return "";
+    }
+    // replay 后端：读取本地撰写的阶段分析文件（LLM_REPLAY_DIR/<stage>.response.txt）。
+    // 缺失则返空串，由管线既有降级/兜底处理（executive/market 有确定性兜底）。
+    if (this.backend === "replay") {
+      return this.postProcess(readReplayResponse(req.stage ?? "other"), req);
     }
     const MAX_RETRIES = 3;
     const BASE_DELAY_MS = 1500;

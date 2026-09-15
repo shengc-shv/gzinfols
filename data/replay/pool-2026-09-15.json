@@ -1,0 +1,220 @@
+{
+  "ipo": [
+    {
+      "sourceId": "hk-filing-gd",
+      "title": "深圳市海柔創新智能科技集團股份有限公司 - W（主板递表·广东企业）",
+      "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm",
+      "excerpt": "市场：主板｜递表日：2026-09-13｜广东企业赴港上市，可跟进跨境融资商机",
+      "publishedAt": "2026-09-13T09:00:00+08:00",
+      "region": "gd"
+    },
+    {
+      "sourceId": "hk-filing-gd",
+      "title": "廣東微電新能源股份有限公司（主板递表·广东企业）",
+      "url": "https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm",
+      "excerpt": "市场：主板｜递表日：2026-09-10｜广东企业赴港上市，可跟进跨境融资商机",
+      "publishedAt": "2026-09-10T09:00:00+08:00",
+      "region": "gd"
+    },
+    {
+      "sourceId": "hk-filing",
+      "title": "翱捷科技股份有限公司（主板递表）",
+      "url": "https://www1.hkexnews.hk/app/sehk/2026/108868/2026091101554_c.htm",
+      "excerpt": "市场：主板｜递表日：2026-09-11｜港股在审（全国参考）",
+      "publishedAt": "2026-09-11T09:00:00+08:00"
+    },
+    {
+      "sourceId": "hk-filing",
+      "title": "浙江和夏科技股份有限公司（GEM递表）",
+      "url": "https://www1.hkexnews.hk/app/gem/2026/108869/2026091101852_c.htm",
+      "excerpt": "市场：GEM｜递表日：2026-09-11｜港股在审（全国参考）",
+      "publishedAt": "2026-09-11T09:00:00+08:00"
+    },
+    {
+      "sourceId": "hk-filing",
+      "title": "河北聯吉啟成產業園區運營管理股份有限公司（GEM递表）",
+      "url": "https://www1.hkexnews.hk/app/gem/2026/108866/2026091000823_c.htm",
+      "excerpt": "市场：GEM｜递表日：2026-09-10｜港股在审（全国参考）",
+      "publishedAt": "2026-09-10T09:00:00+08:00"
+    }
+  ],
+  "gz": [
+    {
+      "sourceId": "sina-money",
+      "title": "“保险＋信托”双擎护航，“六维一体”守护特殊家庭——中诚信托落地人保集团首单养老服务信托项目",
+      "url": "https://finance.sina.com.cn/trust/2026-09-15/doc-inirwfqh3722226.shtml",
+      "excerpt": "【财富管理】“保险＋信托”双擎护航，“六维一体”守护特殊家庭——中诚信托落地人保集团首单养老服务信托项目",
+      "publishedAt": "2026-09-15T09:00:00+08:00"
+    },
+    {
+      "sourceId": "sina-money",
+      "title": "ETF资金流向观察｜宽基ETF净流入居首，黄金E",
+      "url": "https://finance.sina.com.cn/stock/bxjj/2026-09-15/doc-inirwfqe6946962.shtml",
+      "excerpt": "【财富管理】ETF资金流向观察｜宽基ETF净流入居首，黄金E",
+      "publishedAt": "2026-09-15T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Robust Policy Optimization via Adversarial Importance Sampling",
+      "url": "https://arxiv.org/abs/2609.13044",
+      "excerpt": "arXiv:2609.13044v1 Announce Type: new \nAbstract: Significant progress has been made in safeguarding deep reinforcement learning (DRL) policies against input perturbations. Developing robust DRL involves three main stages: algorithm design, implementation, and evaluation. In this work, we identify and address a key limitation at each stage. First, we introduce Adversarial Importance Sampling (Advis), a method that uses importance sampling over tra",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Diffusion Models and Concept Formation",
+      "url": "https://arxiv.org/abs/2609.13047",
+      "excerpt": "arXiv:2609.13047v1 Announce Type: new \nAbstract: Humans organize knowledge into a taxonomy of concepts with nested levels of abstraction and a \\emph{basic level} at which people recognize and name objects with the least cognitive effort. Cobweb is a classic cognitive account of this ability, an incremental learner that builds a probabilistic concept hierarchy by maximizing category utility. We argue that diffusion models, although designed for im",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "MCRL2: Multi-resource Cross-attention-based Representation Learning-augmented Reinforcement Learning for Cloud Microservice Scheduling",
+      "url": "https://arxiv.org/abs/2609.13048",
+      "excerpt": "arXiv:2609.13048v1 Announce Type: new \nAbstract: Efficient microservice scheduling is crucial for maintaining load balance across nodes in data centers and ensuring high quality of service. However, achieving this in practice remains challenging due to dynamic resource imbalance under fluctuating workloads, nonlinear coupling across multiple resource dimensions, and the heterogeneity of microservice resource demands. While reinforcement learning-",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Benign Loss Landscapes Can Coexist with Worst-Case Hardness",
+      "url": "https://arxiv.org/abs/2609.13057",
+      "excerpt": "arXiv:2609.13057v1 Announce Type: new \nAbstract: Deep neural networks are expressive enough to contain worst-case targets that can be evaluated in polynomial time but cannot be learned in polynomial time by gradient descent. For practical tasks they nonetheless learn well, raising the question of what non-generic structure of real-world targets enables this. Existing surrogate models cannot pose this question because they either lack hard-to-lear",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "CanvasAnneal: Curriculum Reinforcement Learning for Diffusion Language Models",
+      "url": "https://arxiv.org/abs/2609.13060",
+      "excerpt": "arXiv:2609.13060v1 Announce Type: new \nAbstract: Diffusion Language Models (DLMs) offer promising parallel generation capabilities but lag behind autoregressive models in complex reasoning and tool-use tasks. While Reinforcement Learning (RL) has recently been applied to enhance DLMs, standard RL approaches suffer from an exploration bottleneck. To address this, we inject reasoning priors from a stronger teacher model to guide RL exploration. In ",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Anchoring Clinical Events in Time: UID-Preserving Multimodal Reconstruction and Source-Grounded Adjudication",
+      "url": "https://arxiv.org/abs/2609.13062",
+      "excerpt": "arXiv:2609.13062v1 Announce Type: new \nAbstract: Clinical timelines support treatment-window analysis and leakage-free modeling, but discharge summaries often obscure chronology and structured EHR tables describe only part of the patient course. We present a UID-preserving framework that links each narrative event occurrence to its source span and retains that identity through text-only estimation, structured-evidence retrieval, timestamped sourc",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Policy Targeting with Binary Classification Trees: an Application to Rural Hospital Closures",
+      "url": "https://arxiv.org/abs/2609.13068",
+      "excerpt": "arXiv:2609.13068v1 Announce Type: new \nAbstract: Empirical researchers often use binary classification trees to identify subgroups at risk of adverse outcomes. We compare two classification tree algorithms in this policy-targeting context: classical classification and regression trees (CART) and the maximizing-distance final-split approach (MDFS). We establish a theoretical setting in which MDFS identifies a high-risk subgroup while CART identifi",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "MAxBench: A Multinomial Concept Recovery Benchmark",
+      "url": "https://arxiv.org/abs/2609.13072",
+      "excerpt": "arXiv:2609.13072v1 Announce Type: new \nAbstract: Fine-grained control of language model behaviors (e.g., steering) is among the more actionable outcomes of interpretability research. For binary concepts such as refusal, a single direction in activation space often suffices for steering. However, many concepts are not binary: Animals and Countries contain many subcategories, each with multiple instances. For these concepts, the search space over p",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Autonomous Research for Open-Ended Problems: A Case Study on Telecom Ticket Retrieval",
+      "url": "https://arxiv.org/abs/2609.13073",
+      "excerpt": "arXiv:2609.13073v1 Announce Type: new \nAbstract: Recent breakthroughs in LLM-based systems and their abilities in problem solving and coding have allowed progress in the AI for Science paradigm, potentially replacing human roles in machine learning (ML) research. However, while several frameworks of fully autonomous end-to-end ML research have been proposed, successful implementations of them are often limited to problems with narrow search space",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Embodied-BenchForge: A Closed-Loop Agentic Workflow for Embodied Benchmark Construction",
+      "url": "https://arxiv.org/abs/2609.13082",
+      "excerpt": "arXiv:2609.13082v1 Announce Type: new \nAbstract: Agentic systems offer a promising way to automate embodied benchmark construction, but existing approaches typically cover isolated stages or remain specialized to predefined environments and task families. More importantly, multi-step construction produces dependent intermediate artifacts that are often passed downstream without artifact-specific verification, allowing local defects to propagate i",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "CMA-OT: Hierarchical Expert Supervision for Dance-to-Music Generation",
+      "url": "https://arxiv.org/abs/2609.13118",
+      "excerpt": "arXiv:2609.13118v1 Announce Type: new \nAbstract: Dance-to-music (D2M) generation aims to synthesize music that is rhythmically and stylistically aligned with dance videos. A key challenge arises from the semantic mismatch between sparse dance cues, such as rhythm and style, and the dense information required for music composition, including structure, instrumentation, and expressive dynamics. Existing methods typically rely on these sparse cues a",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "A Hybrid LSTM-XGBoost Framework for Multi-Horizon Stock Return Prediction Across Diversified Equity Portfolios",
+      "url": "https://arxiv.org/abs/2609.13125",
+      "excerpt": "arXiv:2609.13125v1 Announce Type: new \nAbstract: Accurate prediction of equity returns remains a major challenge in computational finance due to the non-stationary, nonlinear, and low signal-to-noise ratio nature of financial time series. This paper proposes a hybrid two-stage architecture that combines a long short-term memory (LSTM) network with an XGBoost gradient-boosted regressor for multi-horizon stock return prediction across a diversified",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Rethinking Heterogeneous System Disaggregation for Subquadratic Attention",
+      "url": "https://arxiv.org/abs/2609.13134",
+      "excerpt": "arXiv:2609.13134v1 Announce Type: new \nAbstract: Frontier language models are more aggressively using subquadratic attention to reduce the memory footprint and compute requirements during inference while still delivering frontier accuracy. While existing systems make dense attention-centric disaggregated serving decisions, we show that disaggregating inference around the unique arithmetic intensity and memory footprint of subquadratic attention L",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Robust Trust",
+      "url": "https://arxiv.org/abs/2602.09490",
+      "excerpt": "arXiv:2602.09490v2 Announce Type: cross \nAbstract: An agent chooses an action based on her private information and a recommendation from an informed but potentially misaligned adviser. With a known probability, the adviser truthfully reports his signal; with the remaining probability, he can send any message. We characterize optimal robust decision rules that maximize the agent's worst-case expected payoff. Every optimal rule is equivalent to a t",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Evidence-Aligned Local Composition of Discrete Experts for Sequence Restoration",
+      "url": "https://arxiv.org/abs/2609.05801",
+      "excerpt": "arXiv:2609.05801v1 Announce Type: cross \nAbstract: A document modeled as a discrete sequence of tokens can be thought of as being generated from a composition of texts from different domains; a README file, for example, moves between prose, code, and configuration. When such a document is corrupted and only frozen domain experts are available, restoring it requires deciding both what is missing and which expert to trust at each position, at test ",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "AI Safety: Not Optional, Not Later",
+      "url": "https://arxiv.org/abs/2609.10630",
+      "excerpt": "arXiv:2609.10630v1 Announce Type: cross \nAbstract: Incidents show that AI safety failures often arise across multiple layers. We present a safety-by-design assurance architecture combining model-level supervision, such as Scientist AI, with system-level controls over scaffolds and harnesses, independent verification, monitoring, and evidence infrastructure, supported by governance for accountability and evidence interoperability.",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "SoulAuth: An Actor-native Identity Architecture and Rust Reference Implementation for Humans and Long-lived AI Actors",
+      "url": "https://arxiv.org/abs/2609.11258",
+      "excerpt": "arXiv:2609.11258v1 Announce Type: cross \nAbstract: As AI systems move from transient model invocations toward long-lived actors that persist across credentials, clients, sessions, and runtime instances, identity infrastructure must answer a basic question: where should the canonical continuity boundary be placed? This paper introduces Actor-native Identity and presents SoulAuth, an open-source Rust reference implementation for Humans and long-liv",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "PRISMA-LLM: An Empirical Reporting Framework for AI-Assisted Systematic Reviews",
+      "url": "https://arxiv.org/abs/2609.11559",
+      "excerpt": "arXiv:2609.11559v1 Announce Type: cross \nAbstract: Large language models (LLMs) and AI-enabled software increasingly participate in systematic-review decisions, yet the information needed to audit these workflows is reported inconsistently. We analyze SciLitBench, a corpus of 888 review-automation papers with 14,726 annotations, to characterize changes in methods, review-stage use, evaluation and reported limitations. Automation has shifted towar",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Towards Sustainable Hydrogen Systems: Supply Chain Optimization with Model Predictive Control and Reinforcement Learning",
+      "url": "https://arxiv.org/abs/2609.11933",
+      "excerpt": "arXiv:2609.11933v1 Announce Type: cross \nAbstract: Hydrogen supply chains are expected to play a central role in future low-carbon energy systems by enabling renewable energy integration, long-duration storage, and decarbonization of industrial and transportation sectors. However, their operation is challenged by renewable generation variability, electricity price fluctuations, uncertain hydrogen demand, and engineering constraints associated wit",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "One Simple Trick for Improving the Performance of Energy-Limited Local Inference and Training",
+      "url": "https://arxiv.org/abs/2609.11936",
+      "excerpt": "arXiv:2609.11936v1 Announce Type: cross \nAbstract: Energy supply and heat dissipation are two of the main challenges with modern GPU deployments. While typically discussed in the context of new datacenter constructions, the same constraints also apply to small form-factor consumer devices, such as the DGX spark. In workloads characterized by alternating compute-intensive tasks such as matmuls with memory-bound operations such as norms or cross-en",
+      "publishedAt": "2026-09-14T09:00:00+08:00"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "广汽牵手一汽 汽车业资产整合升级",
+      "url": "https://www.cnfin.com/yw-lb/detail/20260915/4469836_1.html",
+      "excerpt": "广汽牵手一汽 汽车业资产整合升级",
+      "publishedAt": "2026-09-15T09:00:00+08:00"
+    },
+    {
+      "sourceId": "stcn",
+      "title": "明阳集团董事长张传卫拜会中国海洋石油集团有限公司董事长张传江",
+      "url": "https://www.stcn.com/article/detail/4185056.html",
+      "excerpt": "明阳集团董事长张传卫拜会中国海洋石油集团有限公司董事长张传江",
+      "publishedAt": "2026-09-15T09:00:00+08:00"
+    }
+  ],
+  "stocks": [
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "中信建投：当前行业处于三重共振放量期继续看好液冷板块配置价值",
+      "url": "https://finance.eastmoney.com/a/202609153874019577.html",
+      "excerpt": "中信建投：当前行业处于三重共振放量期继续看好液冷板块配置价值",
+      "publishedAt": "2026-09-15T09:00:00+08:00"
+    }
+  ]
+}

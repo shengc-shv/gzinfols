@@ -1,0 +1,212 @@
+{
+  "items": [
+    {
+      "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm",
+      "keep": true,
+      "section": "ipo",
+      "source_type": "official",
+      "locale": "national",
+      "locale_evidence": "",
+      "tags": [
+        "粤"
+      ],
+      "title_cn": "深圳市海柔创新智能科技集团（主板递表·广东企业）",
+      "title_orig": "",
+      "importance_candidate": 3
+    },
+    {
+      "url": "https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm",
+      "keep": true,
+      "section": "ipo",
+      "source_type": "official",
+      "locale": "national",
+      "locale_evidence": "",
+      "tags": [
+        "粤"
+      ],
+      "title_cn": "广东微电新能源（主板递表·广东企业）",
+      "title_orig": "",
+      "importance_candidate": 2
+    },
+    {
+      "url": "https://www1.hkexnews.hk/app/sehk/2026/108868/2026091101554_c.htm",
+      "keep": true,
+      "section": "ipo",
+      "source_type": "official",
+      "locale": "national",
+      "locale_evidence": "",
+      "tags": [],
+      "title_cn": "翱捷科技（主板递表）",
+      "title_orig": "",
+      "importance_candidate": 2
+    },
+    {
+      "url": "https://www1.hkexnews.hk/app/gem/2026/108869/2026091101852_c.htm",
+      "keep": true,
+      "section": "ipo",
+      "source_type": "official",
+      "locale": "national",
+      "locale_evidence": "",
+      "tags": [],
+      "title_cn": "浙江和夏科技（GEM递表）",
+      "title_orig": "",
+      "importance_candidate": 2
+    },
+    {
+      "url": "https://www1.hkexnews.hk/app/gem/2026/108866/2026091000823_c.htm",
+      "keep": true,
+      "section": "ipo",
+      "source_type": "official",
+      "locale": "national",
+      "locale_evidence": "",
+      "tags": [],
+      "title_cn": "河北联吉启成产业园区运营（GEM递表）",
+      "title_orig": "",
+      "importance_candidate": 1
+    },
+    {
+      "url": "https://finance.sina.com.cn/trust/2026-09-15/doc-inirwfqh3722226.shtml",
+      "keep": true,
+      "section": "biz_insight",
+      "source_type": "media",
+      "locale": "national",
+      "locale_evidence": "",
+      "tags": [
+        "养老",
+        "财富"
+      ],
+      "title_cn": "中诚信托落地人保集团首单养老服务信托",
+      "title_orig": "",
+      "importance_candidate": 3
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/bxjj/2026-09-15/doc-inirwfqe6946962.shtml",
+      "keep": true,
+      "section": "biz_insight",
+      "source_type": "media",
+      "locale": "national",
+      "locale_evidence": "",
+      "tags": [
+        "财富",
+        "市场"
+      ],
+      "title_cn": "ETF资金流向观察：宽基净流入居首、黄金受关注",
+      "title_orig": "",
+      "importance_candidate": 2
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13044",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13047",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13048",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13057",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13060",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13062",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13068",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13072",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13073",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13082",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13118",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13125",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.13134",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2602.09490",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.05801",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.10630",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.11258",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.11559",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.11933",
+      "keep": false
+    },
+    {
+      "url": "https://arxiv.org/abs/2609.11936",
+      "keep": false
+    },
+    {
+      "url": "https://www.cnfin.com/yw-lb/detail/20260915/4469836_1.html",
+      "keep": true,
+      "section": "biz_insight",
+      "source_type": "media",
+      "locale": "national",
+      "locale_evidence": "",
+      "tags": [
+        "市场",
+        "竞对动态"
+      ],
+      "title_cn": "广汽牵手一汽 汽车业资产整合升级",
+      "title_orig": "",
+      "importance_candidate": 2
+    },
+    {
+      "url": "https://www.stcn.com/article/detail/4185056.html",
+      "keep": false
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609153874019577.html",
+      "keep": true,
+      "section": "biz_insight",
+      "source_type": "media",
+      "locale": "national",
+      "locale_evidence": "",
+      "tags": [
+        "市场",
+        "科技金融"
+      ],
+      "title_cn": "中信建投：继续看好液冷板块配置价值",
+      "title_orig": "",
+      "importance_candidate": 2
+    }
+  ]
+}

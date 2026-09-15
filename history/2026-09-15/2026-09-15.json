@@ -1,69 +1,136 @@
 {
   "date": "2026-09-15",
-  "hero_line": "今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获",
+  "hero_line": "粤企赴港上市活跃、养老信托落地、液冷板块获看好，建议分行跟进跨境融资、养老客群与科技金融机会。",
   "must_read": [
     {
-      "title": "核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务",
-      "why": "国家核心监管新政（监管合规）：直击监管合规业务",
-      "url": "https://www.stcn.com/article/detail/4184345.html"
+      "title": "养老金融服务信托首单落地",
+      "why": "“保险＋信托”拓宽养老金融供给，养老客群资产保全与传承需求值得跟进。",
+      "url": "https://finance.sina.com.cn/trust/2026-09-15/doc-inirwfqh3722226.shtml"
     },
     {
-      "title": "【信报】信披新规覆盖23类机构，信托等非银机构迎合规大考",
-      "why": "市场信号（信贷）：直击信贷业务",
-      "url": "https://finance.sina.com.cn/trust/2026-09-14/doc-inirveas7267226.shtml"
+      "title": "广汽一汽推进资产整合升级",
+      "why": "汽车业整合升级带动产业链格局调整，汽车金融与消费贷场景值得关注。",
+      "url": "https://www.cnfin.com/yw-lb/detail/20260915/4469836_1.html"
     },
     {
-      "title": "@新就业群体，广州为你送上“权益礼包”",
-      "why": "市场信号（客群）：直击客群业务",
-      "url": "https://news.dayoo.com/guangzhou/202609/14/139995_55003502.htm"
+      "title": "粤企赴港上市活跃",
+      "why": "广东企业接连递表港交所，跨境融资需求升温，私行跨境与家族传承客群有直接商机。",
+      "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm"
     },
     {
-      "title": "多家银行收紧个人贵金属业务 原因何在？",
-      "why": "市场信号（财富）：直击财富业务",
-      "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-14/doc-inirtwih7360540.shtml"
+      "title": "液冷板块配置价值获看好",
+      "why": "算力基建带动液冷放量，科技金融与专精特新客群迎来景气窗口。",
+      "url": "https://finance.eastmoney.com/a/202609153874019577.html"
+    },
+    {
+      "title": "宽基ETF净流入居首、黄金受关注",
+      "why": "客户避险与多元化配置需求升温，财富配置窗口值得向客群提示。",
+      "url": "https://finance.sina.com.cn/stock/bxjj/2026-09-15/doc-inirwfqe6946962.shtml"
     }
   ],
   "insights": [
     {
-      "topic": "“保险＋信托”双擎护航，“六维",
-      "tags": [],
-      "impact": "对广州分行信贷/财富/养老业务有潜在影响",
-      "action": "建议分行关注信贷动向并评估动作",
-      "segments": [
-        "零售AUM"
+      "topic": "跨境融资商机",
+      "tags": [
+        "私行",
+        "财富"
+      ],
+      "impact": "海柔创新、微电新能源等广东企业递表港交所主板，上市前后存在跨境结算、外币配置与私行传承需求。",
+      "action": "本周梳理辖内拟赴港上市与出海企业名单，联动跨境团队备妥开户与结售汇服务方案。",
+      "sources": [
+        {
+          "title": "深圳市海柔創新智能科技集團股份有限公司 - W（主板递表·广东企业）",
+          "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm"
+        },
+        {
+          "title": "廣東微電新能源股份有限公司（主板递表·广东企业）",
+          "url": "https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm"
+        }
       ]
     },
     {
-      "topic": "上半年股份行零售贷款全面退潮：",
-      "tags": [],
-      "impact": "对广州分行信贷/客群/竞对动态业务有潜在影响",
-      "action": "建议分行关注信贷动向并评估动作",
-      "segments": [
-        "其他业务线"
+      "topic": "养老客群经营",
+      "tags": [
+        "财富",
+        "客群"
+      ],
+      "impact": "养老服务信托项目落地，养老金融供给进一步丰富，老年客群资产保全意识提升。",
+      "action": "面向养老年金与代发客群推送信托加保险组合方案，并组织网点养老金融话术培训。",
+      "sources": [
+        {
+          "title": "“保险＋信托”双擎护航，“六维一体”守护特殊家庭——中诚信托落地人保集团首单养老服务信托项目",
+          "url": "https://finance.sina.com.cn/trust/2026-09-15/doc-inirwfqh3722226.shtml"
+        }
       ]
     },
     {
-      "topic": "力合科创对子公司财务资助逾期 ",
-      "tags": [],
-      "impact": "对广州分行监管合规业务有潜在影响",
-      "action": "建议分行关注监管合规动向并评估动作",
-      "segments": [
-        "其他业务线"
+      "topic": "科技金融客群",
+      "tags": [
+        "科技金融",
+        "信贷"
+      ],
+      "impact": "中信建投认为液冷行业处于三重共振放量期，算力产业链景气度上行。",
+      "action": "摸排辖内液冷及算力产业链企业，评估信贷与代发业务合作切入点。",
+      "sources": [
+        {
+          "title": "中信建投：当前行业处于三重共振放量期继续看好液冷板块配置价值",
+          "url": "https://finance.eastmoney.com/a/202609153874019577.html"
+        }
       ]
     },
     {
-      "topic": "美联储9月加息概率逼近90%！",
-      "tags": [],
-      "impact": "对广州分行信贷业务有潜在影响",
-      "action": "建议分行关注信贷动向并评估动作",
-      "segments": [
-        "其他业务线"
+      "topic": "汽车产业链动态",
+      "tags": [
+        "信贷",
+        "竞对动态"
+      ],
+      "impact": "广汽与一汽携手推进资产整合升级，产业链格局调整带来结算与消费场景机会。",
+      "action": "留意整车及零部件企业资金沉淀动向，适时推介对公结算与消费贷合作。",
+      "sources": [
+        {
+          "title": "广汽牵手一汽 汽车业资产整合升级",
+          "url": "https://www.cnfin.com/yw-lb/detail/20260915/4469836_1.html"
+        }
       ]
     }
   ],
   "sections": {
     "gz_local": [],
     "biz_insight": [
+      {
+        "url": "https://finance.eastmoney.com/a/202609153874019577.html",
+        "title_cn": "中信建投：继续看好液冷板块配置价值",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "09/15",
+        "summary": "中信建投认为液冷行业处于三重共振放量期、继续看好板块配置价值，可关注科技金融客群。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "市场",
+          "科技金融",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnfin.com/yw-lb/detail/20260915/4469836_1.html",
+        "title_cn": "广汽牵手一汽 汽车业资产整合升级",
+        "title_orig": "",
+        "source": "新华财经",
+        "source_type": "media",
+        "date": "09/15",
+        "summary": "广汽与一汽携手推进汽车业资产整合升级，值得关注产业链金融与汽车消费贷客群机会。",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "市场",
+          "竞对动态",
+          "客群"
+        ],
+        "locale": "national"
+      },
       {
         "url": "https://www.cnbc.com/2026/09/12/anthropics-amodei-proposes-plan-to-slow-the-pace-of-advancing-ai-capabilities.html",
         "title_cn": "OpenAI rules out IPO this year as Altman, Musk & Amodei warn AI is moving too fast",
@@ -73,7 +140,7 @@
         "date": "09/14",
         "summary": "Altman's IPO comments and Amodei's public call for more careful pacing of AI development cap a week of loud AI warnings.",
         "importance": 2,
-        "rank": 1,
+        "rank": 5,
         "tags": [],
         "locale": "national"
       }
@@ -112,20 +179,41 @@
     ],
     "ipo": [
       {
-        "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm",
-        "title_cn": "深圳市海柔創新智能科技集團股份有限公司 - W（主板递表·广东企业）",
-        "source": "港交所新股递表(广东企业赴港)",
+        "url": "https://www1.hkexnews.hk/app/gem/2026/108869/2026091101852_c.htm",
+        "title_cn": "浙江和夏科技（GEM递表）",
+        "title_orig": "",
+        "source": "港交所新股递表(主板/GEM·全国参考)",
         "source_type": "official",
-        "tier": "T1",
-        "date": "09/13",
-        "summary": "市场：主板｜递表日：2026-09-13｜广东企业赴港上市，可跟进跨境融资商机",
-        "ipoStage": "stage-reviewing",
-        "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm",
-        "officialLabel": "申請版本（第一次呈交）",
-        "ipoMeta": "",
-        "ipoCity": "广东",
+        "date": "09/11",
+        "summary": "浙江和夏科技递表港交所GEM，港股在审全国参考。",
         "importance": 2,
         "rank": 1,
+        "tags": [],
+        "locale": "national"
+      },
+      {
+        "url": "https://www1.hkexnews.hk/app/gem/2026/108866/2026091000823_c.htm",
+        "title_cn": "河北联吉启成产业园区运营（GEM递表）",
+        "title_orig": "",
+        "source": "港交所新股递表(主板/GEM·全国参考)",
+        "source_type": "official",
+        "date": "09/10",
+        "summary": "河北联吉启成产业园区运营企业递表港交所GEM，港股在审全国参考。",
+        "importance": 1,
+        "rank": 2,
+        "tags": [],
+        "locale": "national"
+      },
+      {
+        "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm",
+        "title_cn": "深圳市海柔创新智能科技集团（主板递表·广东企业）",
+        "title_orig": "",
+        "source": "港交所新股递表(广东企业赴港)",
+        "source_type": "official",
+        "date": "09/13",
+        "summary": "深圳市海柔创新智能科技集团递表港交所主板，粤企赴港上市新案例，可跟进跨境融资商机。",
+        "importance": 3,
+        "rank": 3,
         "tags": [
           "粤"
         ],
@@ -133,73 +221,30 @@
       },
       {
         "url": "https://www1.hkexnews.hk/app/sehk/2026/108868/2026091101554_c.htm",
-        "title_cn": "翱捷科技股份有限公司（主板递表）",
+        "title_cn": "翱捷科技（主板递表）",
+        "title_orig": "",
         "source": "港交所新股递表(主板/GEM·全国参考)",
         "source_type": "official",
-        "tier": "T1",
         "date": "09/11",
-        "summary": "市场：主板｜递表日：2026-09-11｜港股在审（全国参考）",
-        "ipoStage": "stage-reviewing",
-        "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108868/2026091101554_c.htm",
-        "officialLabel": "申請版本（第一次呈交）",
-        "ipoMeta": "",
+        "summary": "翱捷科技递表港交所主板，港股在审全国参考，可关注企业上市融资动向。",
         "importance": 2,
-        "rank": 2,
-        "tags": [],
-        "locale": "national"
-      },
-      {
-        "url": "https://www1.hkexnews.hk/app/gem/2026/108869/2026091101852_c.htm",
-        "title_cn": "浙江和夏科技股份有限公司（GEM递表）",
-        "source": "港交所新股递表(主板/GEM·全国参考)",
-        "source_type": "official",
-        "tier": "T1",
-        "date": "09/11",
-        "summary": "市场：GEM｜递表日：2026-09-11｜港股在审（全国参考）",
-        "ipoStage": "stage-reviewing",
-        "officialUrl": "https://www1.hkexnews.hk/app/gem/2026/108869/2026091101852_c.htm",
-        "officialLabel": "申請版本（第一次呈交）",
-        "ipoMeta": "",
-        "importance": 2,
-        "rank": 3,
+        "rank": 4,
         "tags": [],
         "locale": "national"
       },
       {
         "url": "https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm",
-        "title_cn": "廣東微電新能源股份有限公司（主板递表·广东企业）",
+        "title_cn": "广东微电新能源（主板递表·广东企业）",
+        "title_orig": "",
         "source": "港交所新股递表(广东企业赴港)",
         "source_type": "official",
-        "tier": "T1",
         "date": "09/10",
-        "summary": "市场：主板｜递表日：2026-09-10｜广东企业赴港上市，可跟进跨境融资商机",
-        "ipoStage": "stage-reviewing",
-        "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm",
-        "officialLabel": "申請版本（第一次呈交）",
-        "ipoMeta": "",
-        "ipoCity": "广东",
+        "summary": "广东微电新能源递表港交所主板，粤企赴港上市延续活跃，可关注跨境融资与高净值客群机会。",
         "importance": 2,
-        "rank": 4,
+        "rank": 5,
         "tags": [
           "粤"
         ],
-        "locale": "national"
-      },
-      {
-        "url": "https://www1.hkexnews.hk/app/gem/2026/108866/2026091000823_c.htm",
-        "title_cn": "河北聯吉啟成產業園區運營管理股份有限公司（GEM递表）",
-        "source": "港交所新股递表(主板/GEM·全国参考)",
-        "source_type": "official",
-        "tier": "T1",
-        "date": "09/10",
-        "summary": "市场：GEM｜递表日：2026-09-10｜港股在审（全国参考）",
-        "ipoStage": "stage-reviewing",
-        "officialUrl": "https://www1.hkexnews.hk/app/gem/2026/108866/2026091000823_c.htm",
-        "officialLabel": "申請版本（第一次呈交）",
-        "ipoMeta": "",
-        "importance": 2,
-        "rank": 5,
-        "tags": [],
         "locale": "national"
       }
     ]
@@ -237,9 +282,9 @@
       "sectors": [],
       "spoken": "上证指数（-0.07%）；深证成指（-0.64%）；创业板指（-1.10%）。",
       "meta": {
-        "source": "东方财富",
+        "source": "",
         "crossCheck": "新浪行情",
-        "date": "2026-09-15"
+        "date": ""
       },
       "indices": [
         {
@@ -260,24 +305,24 @@
       ]
     },
     "hk": {
-      "overview": "恒生指数收报24917.60点（+0.45%）；恒生科技收报4317.94点（-0.06%）。",
+      "overview": "恒生指数收报24847.95点（-0.28%）；恒生科技收报4342.56点（+0.57%）。",
       "sectors": [],
-      "spoken": "恒生指数（+0.45%）；恒生科技（-0.06%）。",
+      "spoken": "恒生指数（-0.28%）；恒生科技（+0.57%）。",
       "meta": {
-        "source": "新浪财经·港股",
+        "source": "",
         "crossCheck": "新浪行情",
-        "date": "2026-09-15"
+        "date": ""
       },
       "indices": [
         {
           "name": "恒生指数",
-          "value": "24917.60",
-          "changePct": "+0.45%"
+          "value": "24847.95",
+          "changePct": "-0.28%"
         },
         {
           "name": "恒生科技",
-          "value": "4317.94",
-          "changePct": "-0.06%"
+          "value": "4342.56",
+          "changePct": "+0.57%"
         }
       ]
     },
@@ -290,137 +335,5 @@
       "note": "",
       "spokenNote": "以下行情为上一交易日，9月14日 周一的收盘情况"
     }
-  },
-  "stock_news": [
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873268388.html",
-      "title_cn": "重磅利好启动！10分钟直线涨停！两大引擎发起“反攻”",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "重磅利好启动！10分钟直线涨停！两大引擎发起“反攻”",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873370592.html",
-      "title_cn": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873379367.html",
-      "title_cn": "二十年一遇！美欧日三大央行将同步加息这意味着什么？",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "二十年一遇！美欧日三大央行将同步加息这意味着什么？",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873569882.html",
-      "title_cn": "9月14日晚间沪深上市公司重大事项公告最新快递",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "9月14日晚间沪深上市公司重大事项公告最新快递",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873236839.html",
-      "title_cn": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6952475.shtml",
-      "title_cn": "同源康医药-B获董事长兼总裁吴豫生增持17万股 每股作价约2.7港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "同源康医药-B获董事长兼总裁吴豫生增持17万股 每股作价约2.7港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6951792.shtml",
-      "title_cn": "晶科电子股份获董事长肖国伟增持1.8万股 每股作价约1.56港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "晶科电子股份获董事长肖国伟增持1.8万股 每股作价约1.56港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3723510.shtml",
-      "title_cn": "中国建筑国际遭执行董事孔祥兆减持12万股 每股作价8.6港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "中国建筑国际遭执行董事孔祥兆减持12万股 每股作价8.6港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6950202.shtml",
-      "title_cn": "云顶新耀获董事会主席吴以芳增持8000股 每股作价26.9港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "云顶新耀获董事会主席吴以芳增持8000股 每股作价26.9港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8839077.shtml",
-      "title_cn": "金山软件获董事会主席雷军增持104.7万股 每股作价24.29港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "金山软件获董事会主席雷军增持104.7万股 每股作价24.29港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    }
-  ]
+  }
 }

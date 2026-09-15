@@ -1,0 +1,147 @@
+{
+  "hero_line": "粤企赴港上市活跃（海柔、微电新能源递表），叠加养老信托与液冷板块热点，建议分行跟进跨境融资、养老客群与科技金融机会。",
+  "must_read": [],
+  "insights": [],
+  "sections": {
+    "gz_local": [],
+    "biz_insight": [
+      {
+        "url": "https://finance.sina.com.cn/trust/2026-09-15/doc-inirwfqh3722226.shtml",
+        "title_cn": "中诚信托落地人保集团首单养老服务信托",
+        "title_orig": "",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "09/15",
+        "summary": "中诚信托落地人保集团首单养老服务信托项目，“保险＋信托”双擎拓宽养老金融供给，可关注养老客群经营。",
+        "importance": 3,
+        "tags": [
+          "养老",
+          "财富"
+        ],
+        "locale": "national",
+        "locale_evidence": ""
+      },
+      {
+        "url": "https://finance.sina.com.cn/stock/bxjj/2026-09-15/doc-inirwfqe6946962.shtml",
+        "title_cn": "ETF资金流向观察：宽基净流入居首、黄金受关注",
+        "title_orig": "",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "09/15",
+        "summary": "ETF资金流向观察显示宽基ETF净流入居首、黄金ETF受关注，可提示客户关注大类资产配置动向。",
+        "importance": 2,
+        "tags": [
+          "财富",
+          "市场"
+        ],
+        "locale": "national",
+        "locale_evidence": ""
+      },
+      {
+        "url": "https://www.cnfin.com/yw-lb/detail/20260915/4469836_1.html",
+        "title_cn": "广汽牵手一汽 汽车业资产整合升级",
+        "title_orig": "",
+        "source": "新华财经",
+        "source_type": "media",
+        "date": "09/15",
+        "summary": "广汽与一汽携手推进汽车业资产整合升级，值得关注产业链金融与汽车消费贷客群机会。",
+        "importance": 2,
+        "tags": [
+          "市场",
+          "竞对动态"
+        ],
+        "locale": "national",
+        "locale_evidence": ""
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202609153874019577.html",
+        "title_cn": "中信建投：继续看好液冷板块配置价值",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "09/15",
+        "summary": "中信建投认为液冷行业处于三重共振放量期、继续看好板块配置价值，可关注科技金融客群。",
+        "importance": 2,
+        "tags": [
+          "市场",
+          "科技金融"
+        ],
+        "locale": "national",
+        "locale_evidence": ""
+      }
+    ],
+    "policy_market": [],
+    "tech": [],
+    "ipo": [
+      {
+        "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm",
+        "title_cn": "深圳市海柔创新智能科技集团（主板递表·广东企业）",
+        "title_orig": "",
+        "source": "港交所新股递表(广东企业赴港)",
+        "source_type": "official",
+        "date": "09/13",
+        "summary": "深圳市海柔创新智能科技集团递表港交所主板，粤企赴港上市新案例，可跟进跨境融资商机。",
+        "importance": 3,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national",
+        "locale_evidence": ""
+      },
+      {
+        "url": "https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm",
+        "title_cn": "广东微电新能源（主板递表·广东企业）",
+        "title_orig": "",
+        "source": "港交所新股递表(广东企业赴港)",
+        "source_type": "official",
+        "date": "09/10",
+        "summary": "广东微电新能源递表港交所主板，粤企赴港上市延续活跃，可关注跨境融资与高净值客群机会。",
+        "importance": 2,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national",
+        "locale_evidence": ""
+      },
+      {
+        "url": "https://www1.hkexnews.hk/app/sehk/2026/108868/2026091101554_c.htm",
+        "title_cn": "翱捷科技（主板递表）",
+        "title_orig": "",
+        "source": "港交所新股递表(主板/GEM·全国参考)",
+        "source_type": "official",
+        "date": "09/11",
+        "summary": "翱捷科技递表港交所主板，港股在审全国参考，可关注企业上市融资动向。",
+        "importance": 2,
+        "tags": [],
+        "locale": "national",
+        "locale_evidence": ""
+      },
+      {
+        "url": "https://www1.hkexnews.hk/app/gem/2026/108869/2026091101852_c.htm",
+        "title_cn": "浙江和夏科技（GEM递表）",
+        "title_orig": "",
+        "source": "港交所新股递表(主板/GEM·全国参考)",
+        "source_type": "official",
+        "date": "09/11",
+        "summary": "浙江和夏科技递表港交所GEM，港股在审全国参考。",
+        "importance": 2,
+        "tags": [],
+        "locale": "national",
+        "locale_evidence": ""
+      },
+      {
+        "url": "https://www1.hkexnews.hk/app/gem/2026/108866/2026091000823_c.htm",
+        "title_cn": "河北联吉启成产业园区运营（GEM递表）",
+        "title_orig": "",
+        "source": "港交所新股递表(主板/GEM·全国参考)",
+        "source_type": "official",
+        "date": "09/10",
+        "summary": "河北联吉启成产业园区运营企业递表港交所GEM，港股在审全国参考。",
+        "importance": 1,
+        "tags": [],
+        "locale": "national",
+        "locale_evidence": ""
+      }
+    ]
+  }
+}

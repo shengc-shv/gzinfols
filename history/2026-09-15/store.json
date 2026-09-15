@@ -1,66 +1,106 @@
 {
   "date": "2026-09-15",
-  "updatedAt": "2026-09-15T00:47:07.502Z",
+  "updatedAt": "2026-09-15T03:41:19.382Z",
   "executive": {
-    "hero_line": "今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获",
+    "hero_line": "粤企赴港上市活跃、养老信托落地、液冷板块获看好，建议分行跟进跨境融资、养老客群与科技金融机会。",
     "must_read": [
       {
-        "title": "核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务",
-        "why": "国家核心监管新政（监管合规）：直击监管合规业务",
-        "url": "https://www.stcn.com/article/detail/4184345.html"
+        "title": "养老金融服务信托首单落地",
+        "why": "“保险＋信托”拓宽养老金融供给，养老客群资产保全与传承需求值得跟进。",
+        "url": "https://finance.sina.com.cn/trust/2026-09-15/doc-inirwfqh3722226.shtml"
       },
       {
-        "title": "【信报】信披新规覆盖23类机构，信托等非银机构迎合规大考",
-        "why": "市场信号（信贷）：直击信贷业务",
-        "url": "https://finance.sina.com.cn/trust/2026-09-14/doc-inirveas7267226.shtml"
+        "title": "广汽一汽推进资产整合升级",
+        "why": "汽车业整合升级带动产业链格局调整，汽车金融与消费贷场景值得关注。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20260915/4469836_1.html"
       },
       {
-        "title": "@新就业群体，广州为你送上“权益礼包”",
-        "why": "市场信号（客群）：直击客群业务",
-        "url": "https://news.dayoo.com/guangzhou/202609/14/139995_55003502.htm"
+        "title": "粤企赴港上市活跃",
+        "why": "广东企业接连递表港交所，跨境融资需求升温，私行跨境与家族传承客群有直接商机。",
+        "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm"
       },
       {
-        "title": "多家银行收紧个人贵金属业务 原因何在？",
-        "why": "市场信号（财富）：直击财富业务",
-        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-14/doc-inirtwih7360540.shtml"
+        "title": "液冷板块配置价值获看好",
+        "why": "算力基建带动液冷放量，科技金融与专精特新客群迎来景气窗口。",
+        "url": "https://finance.eastmoney.com/a/202609153874019577.html"
+      },
+      {
+        "title": "宽基ETF净流入居首、黄金受关注",
+        "why": "客户避险与多元化配置需求升温，财富配置窗口值得向客群提示。",
+        "url": "https://finance.sina.com.cn/stock/bxjj/2026-09-15/doc-inirwfqe6946962.shtml"
       }
     ],
+    "spoken_must_read": "养老金融服务信托首单落地。“保险＋信托”拓宽养老金融供给，养老客群资产保全与传承需求值得跟进。。其次，广汽一汽推进资产整合升级。汽车业整合升级带动产业链格局调整，汽车金融与消费贷场景值得关注。。此外，粤企赴港上市活跃。广东企业接连递表港交所，跨境融资需求升温，私行跨境与家族传承客群有直接商机。。还有，液冷板块配置价值获看好。算力基建带动液冷放量，科技金融与专精特新客群迎来景气窗口。。另外，宽基ETF净流入居首、黄金受关注。客户避险与多元化配置需求升温，财富配置窗口值得向客群提示。。",
     "insights": [
       {
-        "topic": "“保险＋信托”双擎护航，“六维",
-        "impact": "对广州分行信贷/财富/养老业务有潜在影响",
-        "action": "建议分行关注信贷动向并评估动作",
-        "segments": [
-          "零售AUM"
+        "topic": "跨境融资商机",
+        "impact": "海柔创新、微电新能源等广东企业递表港交所主板，上市前后存在跨境结算、外币配置与私行传承需求。",
+        "action": "本周梳理辖内拟赴港上市与出海企业名单，联动跨境团队备妥开户与结售汇服务方案。",
+        "tag": [
+          "私行",
+          "财富"
+        ],
+        "sources": [
+          {
+            "title": "深圳市海柔創新智能科技集團股份有限公司 - W（主板递表·广东企业）",
+            "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm"
+          },
+          {
+            "title": "廣東微電新能源股份有限公司（主板递表·广东企业）",
+            "url": "https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm"
+          }
         ]
       },
       {
-        "topic": "上半年股份行零售贷款全面退潮：",
-        "impact": "对广州分行信贷/客群/竞对动态业务有潜在影响",
-        "action": "建议分行关注信贷动向并评估动作",
-        "segments": [
-          "其他业务线"
+        "topic": "养老客群经营",
+        "impact": "养老服务信托项目落地，养老金融供给进一步丰富，老年客群资产保全意识提升。",
+        "action": "面向养老年金与代发客群推送信托加保险组合方案，并组织网点养老金融话术培训。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "sources": [
+          {
+            "title": "“保险＋信托”双擎护航，“六维一体”守护特殊家庭——中诚信托落地人保集团首单养老服务信托项目",
+            "url": "https://finance.sina.com.cn/trust/2026-09-15/doc-inirwfqh3722226.shtml"
+          }
         ]
       },
       {
-        "topic": "力合科创对子公司财务资助逾期 ",
-        "impact": "对广州分行监管合规业务有潜在影响",
-        "action": "建议分行关注监管合规动向并评估动作",
-        "segments": [
-          "其他业务线"
+        "topic": "科技金融客群",
+        "impact": "中信建投认为液冷行业处于三重共振放量期，算力产业链景气度上行。",
+        "action": "摸排辖内液冷及算力产业链企业，评估信贷与代发业务合作切入点。",
+        "tag": [
+          "科技金融",
+          "信贷"
+        ],
+        "sources": [
+          {
+            "title": "中信建投：当前行业处于三重共振放量期继续看好液冷板块配置价值",
+            "url": "https://finance.eastmoney.com/a/202609153874019577.html"
+          }
         ]
       },
       {
-        "topic": "美联储9月加息概率逼近90%！",
-        "impact": "对广州分行信贷业务有潜在影响",
-        "action": "建议分行关注信贷动向并评估动作",
-        "segments": [
-          "其他业务线"
+        "topic": "汽车产业链动态",
+        "impact": "广汽与一汽携手推进资产整合升级，产业链格局调整带来结算与消费场景机会。",
+        "action": "留意整车及零部件企业资金沉淀动向，适时推介对公结算与消费贷合作。",
+        "tag": [
+          "信贷",
+          "竞对动态"
+        ],
+        "sources": [
+          {
+            "title": "广汽牵手一汽 汽车业资产整合升级",
+            "url": "https://www.cnfin.com/yw-lb/detail/20260915/4469836_1.html"
+          }
         ]
       }
     ],
-    "spoken_insights": "具备零售 A U M商机的，“保险＋信托”双擎护航，“六维，对广州分行信贷/财富/养老业务有潜在影响。建议分行关注信贷动向并评估动作。此外，具备其他业务线商机的，上半年股份行零售贷款全面退潮：，对广州分行信贷/客群/竞对动态业务有潜在影响。建议分行关注信贷动向并评估动作。同时，具备其他业务线商机的，力合科创对子公司财务资助逾期 ，对广州分行监管合规业务有潜在影响。建议分行关注监管合规动向并评估动作。最后，具备其他业务线商机的，美联储9月加息概率逼近90%！，对广州分行信贷业务有潜在影响。建议分行关注信贷动向并评估动作。",
-    "spoken_must_read": "核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务。国家核心监管新政（监管合规）：直击监管合规业务。其次，【信报】信披新规覆盖23类机构，信托等非银机构迎合规大考。市场信号（信贷）：直击信贷业务。此外，@新就业群体，广州为你送上“权益礼包”。市场信号（客群）：直击客群业务。还有，多家银行收紧个人贵金属业务 原因何在？。市场信号（财富）：直击财富业务。"
+    "spoken_insights": "跨境融资商机，海柔创新、微电新能源等广东企业递表港交所主板，上市前后存在跨境结算、外币配置与私行传承需求。。本周梳理辖内拟赴港上市与出海企业名单，联动跨境团队备妥开户与结售汇服务方案。。此外，养老客群经营，养老服务信托项目落地，养老金融供给进一步丰富，老年客群资产保全意识提升。。面向养老年金与代发客群推送信托加保险组合方案，并组织网点养老金融话术培训。。同时，科技金融客群，中信建投认为液冷行业处于三重共振放量期，算力产业链景气度上行。。摸排辖内液冷及算力产业链企业，评估信贷与代发业务合作切入点。。最后，汽车产业链动态，广汽与一汽携手推进资产整合升级，产业链格局调整带来结算与消费场景机会。。留意整车及零部件企业资金沉淀动向，适时推介对公结算与消费贷合作。。",
+    "guangdong_ipo": {
+      "spoken": "广东企业海柔创新（深圳）与微电新能源近日递表港交所主板，均处上市申请阶段，可跟进跨境金融服务。"
+    }
   },
   "stock_recap": {
     "us": {
@@ -95,9 +135,9 @@
       "sectors": [],
       "spoken": "上证指数（-0.07%）；深证成指（-0.64%）；创业板指（-1.10%）。",
       "meta": {
-        "source": "东方财富",
+        "source": "",
         "crossCheck": "新浪行情",
-        "date": "2026-09-15"
+        "date": ""
       },
       "indices": [
         {
@@ -118,24 +158,24 @@
       ]
     },
     "hk": {
-      "overview": "恒生指数收报24917.60点（+0.45%）；恒生科技收报4317.94点（-0.06%）。",
+      "overview": "恒生指数收报24847.95点（-0.28%）；恒生科技收报4342.56点（+0.57%）。",
       "sectors": [],
-      "spoken": "恒生指数（+0.45%）；恒生科技（-0.06%）。",
+      "spoken": "恒生指数（-0.28%）；恒生科技（+0.57%）。",
       "meta": {
-        "source": "新浪财经·港股",
+        "source": "",
         "crossCheck": "新浪行情",
-        "date": "2026-09-15"
+        "date": ""
       },
       "indices": [
         {
           "name": "恒生指数",
-          "value": "24917.60",
-          "changePct": "+0.45%"
+          "value": "24847.95",
+          "changePct": "-0.28%"
         },
         {
           "name": "恒生科技",
-          "value": "4317.94",
-          "changePct": "-0.06%"
+          "value": "4342.56",
+          "changePct": "+0.57%"
         }
       ]
     },
@@ -148,319 +188,5 @@
       "note": "",
       "spokenNote": "以下行情为上一交易日，9月14日 周一的收盘情况"
     }
-  },
-  "stock_news": [
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873268388.html",
-      "title_cn": "重磅利好启动！10分钟直线涨停！两大引擎发起“反攻”",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "重磅利好启动！10分钟直线涨停！两大引擎发起“反攻”",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873370592.html",
-      "title_cn": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873379367.html",
-      "title_cn": "二十年一遇！美欧日三大央行将同步加息这意味着什么？",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "二十年一遇！美欧日三大央行将同步加息这意味着什么？",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873569882.html",
-      "title_cn": "9月14日晚间沪深上市公司重大事项公告最新快递",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "9月14日晚间沪深上市公司重大事项公告最新快递",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873236839.html",
-      "title_cn": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873264272.html",
-      "title_cn": "AI需求虹吸产能！MLCC迎“量价齐升”融资客提前布局这8股(名单)",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "AI需求虹吸产能！MLCC迎“量价齐升”融资客提前布局这8股(名单)",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873351697.html",
-      "title_cn": "商务部等8部门印发《促进智能家居消费行动方案》",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "商务部等8部门印发《促进智能家居消费行动方案》",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873187663.html",
-      "title_cn": "全球陷入“抢钨大战”：美国、英国、津巴布韦、越南全有动作",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "全球陷入“抢钨大战”：美国、英国、津巴布韦、越南全有动作",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609143873289532.html",
-      "title_cn": "史上首次升破900元/桶！原油期货飙涨",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "史上首次升破900元/桶！原油期货飙涨",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609153873819060.html",
-      "title_cn": "全球市场：美股三大指数收跌费城半导体指数跌近6%网络安全概念股大涨",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "全球市场：美股三大指数收跌费城半导体指数跌近6%网络安全概念股大涨",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609153874059447.html",
-      "title_cn": "中信证券：洁净室头部企业半导体相关订单大幅放量半导体设备需求有望跟进",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "中信证券：洁净室头部企业半导体相关订单大幅放量半导体设备需求有望跟进",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609153874037785.html",
-      "title_cn": "中信证券：金属业绩增长继续提速估值修复值得关注",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "中信证券：金属业绩增长继续提速估值修复值得关注",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-09-15/doc-inirwfqa8827721.shtml",
-      "title_cn": "全球箱式仓储机器人龙头，海柔创新冲击港股“ACR第一股”，今年上半年收入11.18亿元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "全球箱式仓储机器人龙头，海柔创新冲击港股“ACR第一股”，今年上半年收入11.18亿元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-09-15/doc-inirwfqe6917638.shtml",
-      "title_cn": "港股概念追踪 | 智能家居迎政策“组合拳”!机构看好家居企业估值修复(附概念股)",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "港股概念追踪 | 智能家居迎政策“组合拳”!机构看好家居企业估值修复(附概念股)",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6952475.shtml",
-      "title_cn": "同源康医药-B获董事长兼总裁吴豫生增持17万股 每股作价约2.7港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "同源康医药-B获董事长兼总裁吴豫生增持17万股 每股作价约2.7港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6951792.shtml",
-      "title_cn": "晶科电子股份获董事长肖国伟增持1.8万股 每股作价约1.56港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "晶科电子股份获董事长肖国伟增持1.8万股 每股作价约1.56港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3723510.shtml",
-      "title_cn": "中国建筑国际遭执行董事孔祥兆减持12万股 每股作价8.6港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "中国建筑国际遭执行董事孔祥兆减持12万股 每股作价8.6港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6950202.shtml",
-      "title_cn": "云顶新耀获董事会主席吴以芳增持8000股 每股作价26.9港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "云顶新耀获董事会主席吴以芳增持8000股 每股作价26.9港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8839077.shtml",
-      "title_cn": "金山软件获董事会主席雷军增持104.7万股 每股作价24.29港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "金山软件获董事会主席雷军增持104.7万股 每股作价24.29港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3720928.shtml",
-      "title_cn": "长城汽车获贝莱德增持约521.38万股 每股作价约7.63港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "长城汽车获贝莱德增持约521.38万股 每股作价约7.63港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3720193.shtml",
-      "title_cn": "煜荣集团遭Colour Shine Investments Limited减持8万股 每股作价0.5319港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "煜荣集团遭Colour Shine Investments Limited减持8万股 每股作价0.5319港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3719080.shtml",
-      "title_cn": "大金重工获Morgan Stanley增持5.96万股 每股作价约27.22港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "大金重工获Morgan Stanley增持5.96万股 每股作价约27.22港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-15/doc-inirwfqa8820286.shtml",
-      "title_cn": "港股概念追踪 | 欧洲天然气面临供需两端重压 补库压力或抬升气价中枢(附概念股)",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "港股概念追踪 | 欧洲天然气面临供需两端重压 补库压力或抬升气价中枢(附概念股)",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-09-14/doc-inirtwih7318353.shtml",
-      "title_cn": "华泰 | 港股策略：控制美债波动率敏感敞口",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "华泰 | 港股策略：控制美债波动率敏感敞口",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    }
-  ]
+  }
 }
