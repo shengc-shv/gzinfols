@@ -36,7 +36,7 @@ export function validateBackendCredentials(backend: Backend = (process.env.LLM_B
   if (backend === "dump") return; // dump 后端不发真实请求，无需密钥
   if (backend === "replay") return; // replay 后端只读本地分析文件，无需密钥
 
-  const required: Record<Exclude<Backend, "claude-cli" | "dump">, string> = {
+  const required: Record<Exclude<Backend, "claude-cli" | "dump" | "replay">, string> = {
     anthropic: "ANTHROPIC_API_KEY",
     openai: "OPENAI_API_KEY",
     deepseek: "DEEPSEEK_API_KEY",
