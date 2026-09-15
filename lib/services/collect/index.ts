@@ -98,7 +98,11 @@ export async function ingestAll(
   if (articles.length === 0) throw new Error("no articles fetched — aborting");
   ctx.log.info(
     "collect",
-    `采集合计 ${articles.length} 条（RSS/API/Scrape ${fetched.length} + 爬虫 ${crawledRaw.length}）`,
+    `采集合计 ${articles.length} 条（RSS/API/Scrape ${fetched.length} + 爬虫 ${crawledRaw.length}）` +
+      // 明确这是**原始清单量**：列表类源不带逐条发布时间，只能先全量取回，
+      // 待归一化拿到 publishedAt 再由「源层前置窗口过滤」按窗口裁剪
+      // （2026-09-15 用户看到本行数字误以为「没按两天窗口抓」）。
+      `— 原始清单量，尚未过时间窗（后续「源层前置窗口过滤」按 FETCH_WINDOW_DAYS 裁剪）`,
   );
   return { articles, crawled };
 }

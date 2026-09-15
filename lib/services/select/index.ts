@@ -88,10 +88,13 @@ const preWindowStage: FilterStage = {
     const ipo = articles.filter((a) => a.isIpo === true);
     const others = articles.filter((a) => a.isIpo !== true);
     const out = [...filterByWindow(ipo, 7, ctx.startTime()), ...filterByWindow(others, ctx.windowDays, ctx.startTime())];
+    // 日志里写明**窗口天数**：此前只写「超窗旧文」，读日志的人无法判断窗口到底是几天
+    // （2026-09-15 用户据此误以为「采集 1503 条 = 没按两天窗口抓」）。
+    const winLabel = ctx.windowDays === 2 ? "今天+昨天" : `含今天共 ${ctx.windowDays} 个日历日`;
     if (out.length !== before) {
       ctx.log.info(
         "filter",
-        `🧹 源层前置窗口过滤: ${before} → ${out.length} 条（移除 ${before - out.length} 条超窗旧文；IPO 类按 7 天窗口豁免）`,
+        `🧹 源层前置窗口过滤（非 IPO 类 ${winLabel} / IPO 类 7 天窗豁免）: ${before} → ${out.length} 条（移除 ${before - out.length} 条超窗旧文）`,
       );
     }
     return out;
