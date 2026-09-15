@@ -325,19 +325,6 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143872945253.html",
-      "title_cn": "AI利空突袭！三大巨头罕见联手呼吁：放缓！",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "AI利空突袭！三大巨头罕见联手呼吁：放缓！",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
       "url": "https://finance.eastmoney.com/a/202609143873370592.html",
       "title_cn": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
       "source": "东方财富",
@@ -377,6 +364,19 @@
       "market": "a-share"
     },
     {
+      "url": "https://finance.eastmoney.com/a/202609143873236839.html",
+      "title_cn": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/14",
+      "summary": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
       "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-14/doc-inirutny4042987.shtml",
       "title_cn": "港股收评：恒指涨0.45% 科指跌0.06% 创新药概念股大涨 存储概念股下挫",
       "source": "新浪财经·港股",
@@ -390,12 +390,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3658888.shtml",
-      "title_cn": "阳光纸业获王东兴增持36.2万股 每股作价约1.13港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8827776.shtml",
+      "title_cn": "威华达控股遭SHOG Creation Limited减持1387.5万股 每股作价约2.78港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "阳光纸业获王东兴增持36.2万股 每股作价约1.13港元",
+      "summary": "威华达控股遭SHOG Creation Limited减持1387.5万股 每股作价约2.78港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -403,12 +403,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6885887.shtml",
-      "title_cn": "银诺医药-B获黄冰增持2400股 每股作价3.89港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3694447.shtml",
+      "title_cn": "神冠控股获董事会主席周亚仙增持429.4万股 每股作价约0.23港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "银诺医药-B获黄冰增持2400股 每股作价3.89港元",
+      "summary": "神冠控股获董事会主席周亚仙增持429.4万股 每股作价约0.23港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -416,12 +416,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3659329.shtml",
-      "title_cn": "汉港控股集团获董事会主席汪林冰增持768.4万股 每股作价0.062港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6927991.shtml",
+      "title_cn": "海螺水泥获The Capital Group Companies,Inc.增持312.35万股 每股作价约16.69港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "汉港控股集团获董事会主席汪林冰增持768.4万股 每股作价0.062港元",
+      "summary": "海螺水泥获The Capital Group Companies,Inc.增持312.35万股 每股作价约16.69港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -429,12 +429,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3657919.shtml",
-      "title_cn": "远东宏信遭UBS Group AG减持68.9万股 每股作价约6.99港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6926879.shtml",
+      "title_cn": "贝克微获RAYS Capital Partners Limited增持26.464万股 每股作价29.52港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "远东宏信遭UBS Group AG减持68.9万股 每股作价约6.99港元",
+      "summary": "贝克微获RAYS Capital Partners Limited增持26.464万股 每股作价29.52港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
