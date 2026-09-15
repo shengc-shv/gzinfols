@@ -8,18 +8,14 @@ name: daily
 #     manual-test（验证抢跑）不阻断；workflow_dispatch 手动触发永远跑（用户选择优先）。
 #   - 发布成功后部署 job 之后的 record job 才写 publish-state.json（先发后记）；
 #     次日/后续 schedule 据此跳过，凌晨 dispatch 测试不再吞掉当天正式首发。
-#   三个 cron 时间点互为冗余，抗 GitHub schedule 约 70% 的丢触发率。
+#   定时调度已移除（2026-09-15）：本 workflow 仅由 workflow_dispatch 手动触发，不自动运行。
 #
 # 音频：AUDIO_ENABLED=true → 腾讯云 TTS（TENCENTCLOUD_* secrets）+ 分片 ffmpeg 拼接；
 #       腾讯失败 → 本轮降级为无播放器（不阻断发布；Piper 兜底为本地能力，CI 不预装）。
 #       audio input=false 或 SKIP_TTS=true 可跳过合成（省 TTS 成本，仍拼口播稿）。
 
 on:
-  schedule:
-    # 工作日 6:30 / 12:00 / 17:30（北京时间）= UTC 22:30(前日) / 04:00 / 09:30
-    - cron: "30 22 * * 0-4"
-    - cron: "0 4 * * 1-5"
-    - cron: "30 9 * * 1-5"
+  # 仅手动触发：已移除定时调度（2026-09-15），避免自动发布；由用户在 GitHub 上点 Run workflow 启动。
   workflow_dispatch:
     inputs:
       audio:
@@ -49,8 +45,9 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # 验证用：让所有 LLM 调用改为落盘（dump 后端），不发真实请求
-  LLM_BACKEND: dump
+  # 后端由 repo 变量 LLM_BACKEND 控制（默认回落 dump）：仓库 Settings→Variables 设 LLM_BACKEND=deepseek 即线上直跑；
+  # 未配 secrets.DEEPSEEK_API_KEY 时启动校验会失败（预期行为，等用户填 key）。
+  LLM_BACKEND: ${{ vars.LLM_BACKEND || 'dump' }}
 
 jobs:
   gate:
@@ -165,7 +162,7 @@ jobs:
       - name: 生成每日简报
         run: npm run daily
         env:
-          LLM_BACKEND: dump
+          LLM_BACKEND: ${{ vars.LLM_BACKEND || 'dump' }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
           DEEPSEEK_BASE_URL: ${{ vars.DEEPSEEK_BASE_URL }}
           REPORT_LOCALE: ${{ vars.REPORT_LOCALE || 'zh' }}
@@ -251,13 +248,7 @@ jobs:
       - name: 站点聚合（build-site：汇集各期 + index/archive/.nojekyll/og-image）
         run: npm run build-site
 
-      - name: 上传 LLM 调用上下文（dump）
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: llm-dump-${{ github.run_id }}
-          path: data/llm-dump/
-          if-no-files-found: warn
+      # （dump 后端已弃用：线上直跑 DeepSeek，不再产生 data/llm-dump/，对应 artifact 上传已移除）
 
       # ---------- 发布到 gh-pages 分支（2026-09-14：修复「Pages 从未启用」）----------
       # 根因实测：本仓库 GitHub Pages **从未启用**（GET /repos/shengc-shv/gzinfols/pages → 404），

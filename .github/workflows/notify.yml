@@ -2,11 +2,11 @@ name: WeChat & WeCom Notify (Manual)
 
 # 简报外发工作流（自 gzinfo .github/workflows/notify.yml 移植，2026-09-15）。
 #
-# 为什么是人工触发：内容由本地 AI 撰写（CI 无 LLM key，走 dump → 本地 replay），
-# 发布后需人工核对内容无误，再手动点「Run workflow」推送。
+# 为什么是人工触发：线上简报由 CI 调 DeepSeek 直跑生成（daily.yml；后端已翻回 deepseek，
+# 且 daily.yml 仅手动触发、无定时调度），发布后需人工核对内容无误，再手动点「Run workflow」推送。
 #
 # 流程：
-#   1. daily.yml 每早（schedule 窗口）自动 build + 发布 gh-pages（并归档
+#   1. daily.yml（手动触发，无定时调度）build + 发布 gh-pages（并归档
 #      data/event-memory.json，含当日「暂存区 today」口播）；
 #   2. 用户打开报告 URL 人工核对内容无误；
 #   3. 手动 Run this workflow → 合并推送：① 公众号（微信测试号模板消息）
