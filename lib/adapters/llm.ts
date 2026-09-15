@@ -117,6 +117,50 @@ function dumpLlmContext(req: LlmRequest, model: string, backend: string): void {
   }
 }
 
+/**
+ * dump 后端专用：从 PASS1 的 userPrompt（含文章 JSON 数组）抽取文章，返回
+ * 「全部 keep + 启发式归栏」的有效响应，让管线能流到 PASS2 / 下游 side-outputs，
+ * 从而把这些阶段的真实 LLM 上下文也落盘（其余阶段返回空串，仅落盘不走真实调用）。
+ * 启发式仅用于「让管线流动 + 捕获上下文」，最终内容由本地/离线分析回填，不进正式稿。
+ */
+function dumpPass1Placeholder(prompt: string): string {
+  try {
+    // 极简 JSON 数组提取（不依赖 services 的 extractJson，避免反向依赖）
+    const start = prompt.indexOf("[");
+    const end = prompt.lastIndexOf("]");
+    if (start < 0 || end < start) return "";
+    const arr = JSON.parse(prompt.slice(start, end + 1));
+    if (!Array.isArray(arr)) return "";
+    const GZ_ANCHOR = /广州|穗|天河|海珠|琶洲/;
+    const items = arr.map((it: any) => {
+      const title = String(it?.title ?? "");
+      const cat = String(it?.category ?? "");
+      let section = "biz_insight";
+      if (cat === "tech") section = "tech";
+      else if (cat === "ipo" || cat === "gd-ipo") section = "ipo";
+      else if (GZ_ANCHOR.test(title)) section = "gz_local";
+      const locale = section === "gz_local" ? "gz" : "national";
+      const localeEvidence =
+        section === "gz_local" ? (title.match(GZ_ANCHOR)?.[0] ?? "") : "";
+      return {
+        url: String(it?.url ?? ""),
+        keep: true,
+        section,
+        source_type: "media",
+        locale,
+        locale_evidence: localeEvidence,
+        tags: [],
+        title_cn: title,
+        title_orig: "",
+        importance_candidate: 2,
+      };
+    });
+    return JSON.stringify({ items });
+  } catch {
+    return "";
+  }
+}
+
 export class LlmAdapter implements LlmPort {
   private readonly backend: Backend;
 
@@ -130,9 +174,12 @@ export class LlmAdapter implements LlmPort {
    * 4xx 配置类错误立即抛。HTTP 成功但空文本 → 打告警（下游解析将失败，可观测）。
    */
   async complete(req: LlmRequest): Promise<string> {
-    // dump 后端：落盘后返回空串（下游按“解析失败”走既有降级），绝不发起真实调用。
+    // dump 后端：落盘后按阶段返回占位（绝不发起真实调用）。
+    // - PASS1：返回「全保留 + 启发式归栏」让管线流动，从而捕获 PASS2/下游上下文；
+    // - 其余阶段：返回空串（落盘 + 走既有降级），留待本地/离线回填分析。
     if (this.backend === "dump") {
       dumpLlmContext(req, req.model || defaultModelFor(this.backend), this.backend);
+      if (req.stage === "pass1") return dumpPass1Placeholder(req.prompt);
       return "";
     }
     const MAX_RETRIES = 3;
