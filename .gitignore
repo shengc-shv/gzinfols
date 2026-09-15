@@ -19,6 +19,11 @@ data/local-acquired.json
 # （gzinfo 忽略 /data/history/ 但提交根 /history/）。此处只忽略 data/history/，勿改回 history/。
 # 注意：data/local-ipo.json **必须入库**——本地 ipo:local 产出后提交推送，
 # 远端 CI 读取补数（本地/远端唯一衔接文件），见 lib/adapters/local-ipo.ts
+# 红筹监测运行时产物（每次运行重新抓取生成；**data/redchip/leads.json 是人工冻结快照，
+# 必须入库**，故只忽略下列三条、勿整目录忽略——见 docs/plan-redchip-crawl-push.md §6）
+data/redchip/latest.json
+data/redchip/snapshots/
+data/redchip/changelog.jsonl
 *.log
 
 # WorkBuddy 工作区数据（项目代码仓库不携带）
