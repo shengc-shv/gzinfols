@@ -13,6 +13,7 @@
 import "./_env";
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
+import { selectLocalIpoItems } from "../lib/adapters/local-ipo";
 import { bootstrap } from "../lib/orchestrator";
 import { runPipeline } from "../lib/pipeline";
 import type { CrawlerRegistry } from "../lib/contracts/pipeline";
@@ -36,8 +37,34 @@ async function main() {
   console.log(
     `[replay] 冻结池: ${poolPath}（ipo=${pool.ipo.length} gz=${pool.gz.length} stocks=${pool.stocks.length}）`,
   );
+  // 撰写规范校验：exec 产物的 insights[].segments 必填（商机洞察三维客群标签：
+  // 零售AUM / 中高端客群(过亿资产) / 普惠小微贷款客户）。缺失会导致线上报告
+  // 「业务启示」板块丢失 AUM/高端客户/普惠小微标签（2026-09-15 实测教训）。
+  try {
+    const exec = JSON.parse(
+      readFileSync(resolve(process.cwd(), "data/replay", date, "executive.response.txt"), "utf8"),
+    ) as { insights?: Array<{ topic?: string; segments?: unknown }> };
+    const missing = (exec.insights ?? [])
+      .filter((it) => !Array.isArray(it.segments) || it.segments.length === 0)
+      .map((it) => it.topic ?? "(无 topic)");
+    if (missing.length > 0) {
+      console.warn(
+        `[replay] ⚠️ executive.response.txt 有 ${missing.length} 条 insights 缺 segments 字段：` +
+          `${missing.join("、")}。渲染将丢失三维客群标签（零售AUM/高端客户/普惠小微），` +
+          `请按 mapTagsToSegments(tag, topic) 补齐后重放。`,
+      );
+    }
+  } catch {
+    // exec response 不存在时由 replay 后端自行报错，这里不处理
+  }
+  // 合并本地 IPO 补数（对齐 CI 行为：crawlers/index.ts 同样调 selectLocalIpoItems）
+  // ——CI 读 data/local-ipo.json（本地 npm run ipo:local 产出）拼进抓取结果，
+  //   重放必须复现同一输入，否则当期报告的辅导/审核条目会比线上 gzinfo 少。
+  const localIpo = selectLocalIpoItems(pool.ipo as never);
+  console.log(`[replay] 本地 IPO 补数并入: ${localIpo.length} 条（csrcfd 辅导 / szse 审核）`);
   const crawlers: CrawlerRegistry = {
-    fetchCrawledArticles: async () => pool as never,
+    fetchCrawledArticles: async () =>
+      ({ ...pool, ipo: [...pool.ipo, ...localIpo] }) as never,
   };
 
   const { ctx, deps } = await bootstrap({

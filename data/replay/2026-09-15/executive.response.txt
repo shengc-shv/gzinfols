@@ -45,6 +45,10 @@
           "title": "廣東微電新能源股份有限公司（主板递表·广东企业）",
           "url": "https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm"
         }
+      ],
+      "segments": [
+        "零售AUM",
+        "中高端客群(过亿资产)"
       ]
     },
     {
@@ -60,6 +64,9 @@
           "title": "“保险＋信托”双擎护航，“六维一体”守护特殊家庭——中诚信托落地人保集团首单养老服务信托项目",
           "url": "https://finance.sina.com.cn/trust/2026-09-15/doc-inirwfqh3722226.shtml"
         }
+      ],
+      "segments": [
+        "零售AUM"
       ]
     },
     {
@@ -74,6 +81,9 @@
           "title": "ETF资金流向观察｜宽基ETF净流入居首，黄金E",
           "url": "https://finance.sina.com.cn/stock/bxjj/2026-09-15/doc-inirwfqe6946962.shtml"
         }
+      ],
+      "segments": [
+        "零售AUM"
       ]
     },
     {
@@ -89,6 +99,9 @@
           "title": "中信建投：当前行业处于三重共振放量期继续看好液冷板块配置价值",
           "url": "https://finance.eastmoney.com/a/202609153874019577.html"
         }
+      ],
+      "segments": [
+        "零售AUM"
       ]
     },
     {
@@ -104,6 +117,9 @@
           "title": "广汽牵手一汽 汽车业资产整合升级",
           "url": "https://www.cnfin.com/yw-lb/detail/20260915/4469836_1.html"
         }
+      ],
+      "segments": [
+        "零售AUM"
       ]
     }
   ],
