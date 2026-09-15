@@ -136,3 +136,106 @@ export const COVER_DOMICILE_PATTERNS: readonly RegExp[] = [
 export const REDCHIP_DIR = "data/redchip";
 export const REDCHIP_LATEST_PATH = "data/redchip/latest.json";
 export const REDCHIP_CHANGELOG_PATH = "data/redchip/changelog.jsonl";
+/** 线索库（**须入库**：人工冻结快照，供渲染读取；运行时产物另三条见 .gitignore）。 */
+export const REDCHIP_LEADS_PATH = "data/redchip/leads.json";
+
+// ---------- 展示侧契约（2026-09-15 · plan-redchip-crawl-push §2）----------
+
+/**
+ * 可访问的红筹报告引用（会前版本 / L1 深度 / L2 人工）。
+ * 由 `adapters/redchip/report-resolver` 探测站点目录得出。
+ */
+export interface RedchipReportRef {
+  kind: "pre-meeting" | "deep" | "manual";
+  /** 站内相对路径（如 `redchip/r/108804.html`）。 */
+  url: string;
+  title: string;
+  /** 生成时刻（北京时间 ISO）。 */
+  generatedAt: string;
+}
+
+/**
+ * 线索级模型 = `RedchipProject` + 展示侧补充字段（写入 `leads.json`，**入库**）。
+ *
+ * ⚠️ 与 `RedchipProject` 的关系：判定字段全部沿用，**不再复制一份**（防两套口径漂移）；
+ * 展示侧只追加「报告引用 / 时间线 / 证据摘录」这类派生数据。
+ */
+export interface RedchipLead extends RedchipProject {
+  /** = `appId`，全链路唯一标识（显式字段便于展示侧阅读）。 */
+  leadId: string;
+  /** 最近一次字段变更时间（由 changelog 归并，北京时间 ISO）。 */
+  lastChangedAt?: string;
+  /** 广东连接原文摘录（1–3 条，供报告页「证据」版块）。 */
+  gdEvidence?: Array<{ text: string; page?: number }>;
+  /** 架构要点（离岸地 / 持股路径 / VIE 安排，供报告页）。 */
+  archNotes?: string[];
+  /** 可访问报告（会前/深度/人工）。 */
+  reports?: RedchipReportRef[];
+}
+
+/** 徽章文案（红线「线索 ≠ 结论」：一律用「线索」口径）。 */
+export const REDCHIP_LABELS = {
+  redchip: "红筹线索",
+  unverified: "红筹线索·待核",
+} as const;
+
+/**
+ * 红筹展示面板条目（页面「红筹线索」面板；不入库，渲染期派生）。
+ *
+ * 与徽章的区别：徽章挂在**已匹配到 IPO 条目**的卡片上（T2）；面板额外收录
+ * **匹配失败**的线索（T7：不进 IPO 卡片，但要在红筹展示页可见，否则线索会静默消失）。
+ */
+export interface RedchipPanelEntry {
+  leadId: string;
+  nameCn: string;
+  nameEn: string;
+  board: string;
+  status: string;
+  verdict: RedchipVerdict;
+  /** 徽章文案（与卡片一致，避免两处口径漂移）。 */
+  label: (typeof REDCHIP_LABELS)[keyof typeof REDCHIP_LABELS];
+  domicile?: string;
+  gdCityHits: number;
+  vie: RedchipVie;
+  submitDate?: string;
+  /** 本次 `added` → 「新」角标。 */
+  isNew: boolean;
+  changedFields?: string[];
+  /** 是否已匹配到 IPO 卡片（匹配失败者仅供展示，不参与卡片/口播）。 */
+  matched: boolean;
+  reportUrl?: string;
+  sourceUrl?: string;
+}
+
+/** 红筹面板（`DailyReport.redchipPanel`）。 */
+export interface RedchipPanel {
+  entries: RedchipPanelEntry[];
+  /** 快照抓取时刻（北京时间 ISO）；缺省 = 未取到快照。 */
+  capturedAt?: string;
+}
+
+/**
+ * 卡片级徽章（`ReportItem.redchip`）。
+ *
+ * 只放渲染与口播**当场需要**的字段；判定明细（domicile 原文、vie、证据）留在 lead/report 层。
+ */
+export interface RedchipBadge {
+  /** 港交所申请编号（= lead.leadId，便于卡片直接回链）。 */
+  leadId: string;
+  label: (typeof REDCHIP_LABELS)[keyof typeof REDCHIP_LABELS];
+  verdict: RedchipVerdict;
+  /** 本次 `added` → 角标「新」。 */
+  isNew: boolean;
+  /** 本次 `changed` 的字段标签（如「状态」「注册地」）。 */
+  changedFields?: string[];
+  /** 站内相对路径：`redchip/r/<leadId>.html`（深度版存在时指向深度版）。 */
+  reportUrl?: string;
+  reportKind?: RedchipReportRef["kind"];
+  // —— 以下为口播拼装所需的最小结构化数据（免 LLM）——
+  /** 注册地标签（如「开曼群岛」）。 */
+  domicile?: string;
+  /** 广东运营命中数（实体语境计数）。 */
+  gdCityHits?: number;
+  /** `changed` 时的人话摘要（如「状态 处理中→已受理」）。 */
+  changeSummary?: string;
+}

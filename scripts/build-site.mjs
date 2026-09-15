@@ -26,6 +26,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { renderRedchipPage } from "./lib/redchip-page.mjs";
+import { renderRedchipReport } from "./lib/redchip-report.mjs";
 
 /** 汇集来源（按优先级：前一个命中即不再看后面的）。 */
 const SRC_DIRS = ["daily_reports", "history"];
@@ -218,6 +219,34 @@ try {
     "utf8",
   );
   console.log(`[build-site] redchip/index.html (${rcSnap ? rcSnap.count : 0} 家 / ${rcChanges.length} 条变更)`);
+
+  // ---------- 5.5b) 每条线索一份「会前版本」穿透报告：site/redchip/r/<leadId>.html ----------
+  // T5：自动生成（**零 LLM**、字符串拼接、覆盖率 100%）——解决「点开是空的」。
+  // 只对 verdict ≠ non-redchip 产页（与徽章口径 §3.1 一致）；深度/人工版（deep/、manual/）
+  // 由人工产出，卡片入口优先指向它们（T6），但会前版本仍生成，保持「每条线索都有页」。
+  const rcLeadsPath = path.join(rcDir, "leads.json");
+  let rcLeads = [];
+  if (fs.existsSync(rcLeadsPath)) {
+    try {
+      const parsed = JSON.parse(fs.readFileSync(rcLeadsPath, "utf8"));
+      rcLeads = Array.isArray(parsed) ? parsed : (parsed && parsed.leads) || [];
+    } catch { rcLeads = []; }
+  }
+  const rcReportDir = path.join(rcOutDir, "r");
+  fs.mkdirSync(rcReportDir, { recursive: true });
+  let rcPages = 0;
+  for (const lead of rcLeads) {
+    const leadId = String((lead && lead.leadId) || "");
+    if (!/^[A-Za-z0-9_-]{1,64}$/.test(leadId)) continue; // 防目录穿越 + 缺标识
+    if (!lead || lead.verdict === "non-redchip") continue;
+    fs.writeFileSync(
+      path.join(rcReportDir, `${leadId}.html`),
+      renderRedchipReport({ ...lead, leadId }, { changes: rcChanges, capturedAt: rcSnap ? rcSnap.capturedAt : "" }),
+      "utf8",
+    );
+    rcPages++;
+  }
+  console.log(`[build-site] redchip/r/*.html（${rcPages} 页 / 线索 ${rcLeads.length} 条，零 LLM）`);
 } catch (e) {
   console.log(`[build-site] 红筹展示页跳过：${e && e.message ? e.message : e}`);
 }

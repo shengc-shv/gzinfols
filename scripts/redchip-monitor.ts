@@ -24,12 +24,15 @@ import {
 import { extractPdfText } from "../lib/adapters/redchip/pdf-text";
 import {
   appendChanges,
+  readChanges,
   readLatest,
   writeDatedSnapshot,
   writeLatest,
+  writeLeads,
 } from "../lib/adapters/redchip/snapshot-store";
 import { classifyProject } from "../lib/services/redchip/classify";
 import { diffSnapshots } from "../lib/services/redchip/diff";
+import { toLeads } from "../lib/services/redchip/leads";
 import type { RedchipProject, RedchipSnapshot } from "../lib/contracts/redchip";
 import { REPORT_TZ, todayKey } from "../lib/utils/time";
 
@@ -139,7 +142,10 @@ async function main(): Promise<void> {
   writeLatest(snap);
   writeDatedSnapshot(snap, dataDate);
   appendChanges(changes);
-  console.log("[redchip] 已写入 data/redchip/{latest.json, snapshots/" + date + ".json, changelog.jsonl}");
+  // 线索库（**入库**）：渲染侧（side-redchip）唯一读方。含全部判定字段 + 由 changelog
+  // 归并的 lastChangedAt（展示/口播的「更新」标记依据）。与快照同源，故紧随其后写。
+  writeLeads(toLeads(projects, readChanges()));
+  console.log("[redchip] 已写入 data/redchip/{leads.json, latest.json, snapshots/" + dataDate + ".json, changelog.jsonl}");
 }
 
 main();

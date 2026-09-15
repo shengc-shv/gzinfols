@@ -9,9 +9,14 @@
 import type { ArticleInput } from "../../contracts/article";
 import type { ReportItem } from "../../contracts/report";
 import { inferStage, isGdStage, type GdStage } from "./gd-ipo";
+import { hkexAppIdOf } from "./redchip";
 import { isGdIpoCandidate } from "../enrich/heuristics";
 import { todayKey } from "../../utils/time";
-import { IPO_VOICE_WINDOW_DAYS } from "../../ipo-config";
+import {
+  IPO_VOICE_WINDOW_DAYS,
+  REDCHIP_VOICE_BOOST,
+  REDCHIP_VOICE_WINDOW_DAYS,
+} from "../../ipo-config";
 
 /**
  * 近 N 天的 MM/DD 集合（报告时区日历日口径；与 side-output 展示窗口同源）。
@@ -125,47 +130,127 @@ function progressOf(title: string, summary: string): string {
   return s ? s[1].trim() : "";
 }
 
+/** 常规 IPO 口播句（原 buildGdIpoSpoken 内联逻辑抽出，逐字保留口径）。 */function regularClauseOf(it: ReportItem): string {
+  const title = it.title_cn || "";
+  const summary = it.summary || "";
+  const company = companyNameOf(title);
+  const prov = parseRegisteredProvince(summary);
+  const exchange = mapBoardToExchange(parseBoard(title));
+  const industry = inferIndustry(company);
+  const progress = progressOf(title, summary);
+  const parts = [company];
+  if (prov) parts.push(`注册地${prov}`);
+  if (industry) parts.push(`${industry}行业`);
+  if (exchange) parts.push(`拟在${exchange}IPO`);
+  if (progress) parts.push(`目前${progress}`);
+  return parts.join("，");
+}
+
+/** 是否港交所条目（URL 含申请编号）：红筹线索恒来自披露易，据此兜底交易所名。 */
+function isHkexItem(it: ReportItem): boolean {
+  return hkexAppIdOf(it) !== undefined;
+}
+
 /**
- * 确定性口播稿（免 LLM）：从 IPO 板块条目中挑广东企业（「粤」标或 isGdIpoCandidate），
- * 取前 3 条（商机价值优先，与展示横滑卡同序同量），每条带出 注册地 / 行业 / 上市地 / 最新进展，拼成口播。
- * 口播字数上限交由 audio.ts 的 AUDIO_SPEAK_LIMITS.ipo 统一截断（含属性后放宽到 ~100 字）。
- * audio.ts 在 exec.guangdong_ipo.spoken 缺失时调用，保证 AI / SKIP_AI 两种模式口播都能覆盖。
+ * 红筹线索句（T3，确定性、免 LLM；§5.2 模板）。
  *
- * @param opts.skipCompanies 同一企业口播去重（2026-09-09）：命中者跳过，
- *   由 audio.ts 从事件记忆库（ipoVoicing）按「2 天窗口」算出。展示卡面不受影响。
- * @param opts.withinDays 口播候选窗口（日历日，含今天），默认 `IPO_VOICE_WINDOW_DAYS`=2
- *   （用户 2026-09-10：进入口播只播 2 天内）。
+ * ⚠️ 与方案模板的**一处刻意偏差**：模板写「广东运营<N>处」，但 `gdCityHits` 是
+ * **实体语境提及次数**、不等于实体个数（同一主体可能被多次提及）→ 口播说「N 处」会失真。
+ * 故口播只说「含广东运营实体」，**计数只在卡片/报告页出现**（那里配原文可核对）。
+ */
+function redchipClauseOf(it: ReportItem): string {
+  const rc = it.redchip;
+  if (!rc) return "";
+  const title = it.title_cn || "";
+  const company = companyNameOf(title);
+  if (rc.changeSummary) return `${company}红筹线索有更新：${rc.changeSummary}`;
+  const marks: string[] = [];
+  if (rc.domicile) marks.push(`${rc.domicile}注册`);
+  if ((rc.gdCityHits ?? 0) > 0) marks.push("含广东运营实体");
+  const inner = marks.length ? `（${marks.join("、")}）` : "";
+  // 交易所：优先沿用标题「（拟XX）」推导；港交所条目标题里没有该字样（只有「主板递表」），
+  // 故用申请编号判定来源为港交所 —— 红筹线索恒来自披露易，这一路兜底更准。
+  const exchange = mapBoardToExchange(parseBoard(title)) || (isHkexItem(it) ? "港交所" : "");
+  const progress = progressOf(title, it.summary || "");
+  const tail = [exchange ? `拟在${exchange}IPO` : "", progress ? `目前${progress}` : ""].filter(Boolean);
+  const prefix = rc.isNew ? "新增红筹线索：" : "";
+  return `${prefix}${company}为红筹线索${inner}${tail.length ? "，" + tail.join("，") : ""}`;
+}
+
+/**
+ * 红筹口播候选（T3）：`verdict=redchip` ∧ 口播窗内 ∧ 未被跨天去重（`skipCompanies`）。
+ *
+ * 窗口取 `REDCHIP_VOICE_WINDOW_DAYS`（独立常量，§2.4）；本文件 `recentMmddSet` 是
+ * 「含今天共 N 日」口径，而常量语义是「日差 ≤ N」→ 传 `N+1` 对齐。
+ * 卡片展示**不受**此窗影响（沿用 `REDCHIP_LIST_WINDOW_DAYS`）。
+ */
+export function redchipVoiceItems(
+  items: ReportItem[],
+  skip?: Set<string>,
+  today?: string,
+): ReportItem[] {
+  const allowed = recentMmddSet(REDCHIP_VOICE_WINDOW_DAYS + 1, today ?? todayKey());
+  const seen = new Set<string>();
+  return items
+    .filter(
+      (it) =>
+        it.redchip?.verdict === "redchip" &&
+        allowed.has(it.date) &&
+        !(skip && skip.has(companyNameOf(it.title_cn || ""))),
+    )
+    .sort((x, y) => dateValue(y) - dateValue(x))
+    .filter((it) => {
+      const key = companyNameOf(it.title_cn || "") || it.url;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    });
+}
+
+/**
+ * 口播实际选中的条目（**唯一选择口径**）：红筹句**置前**，常规 IPO 句其后，共用 3 席。
+ *
+ * 展示横滑 / 口播 / 事件记忆写回三处共用本函数，保证「看到的就是听到的」。
+ */
+export function pickSpokenItems(
+  items: ReportItem[],
+  opts?: { skipCompanies?: Set<string>; withinDays?: number; today?: string },
+): { redchip: ReportItem[]; regular: ReportItem[]; selected: ReportItem[]; totalCandidates: number } {
+  const redchip = redchipVoiceItems(items, opts?.skipCompanies, opts?.today);
+  const rcCompanies = new Set(redchip.map((it) => companyNameOf(it.title_cn || "")));
+  const regular = gdIpoCandidates(items, opts?.skipCompanies, opts?.withinDays ?? IPO_VOICE_WINDOW_DAYS, {
+    uniqueCompany: true, // 口播不把同一家企业念两遍（P1-4）
+    today: opts?.today,
+  }).filter((it) => !rcCompanies.has(companyNameOf(it.title_cn || "")));
+  const seats = Math.max(0, 3 - redchip.length);
+  return {
+    redchip,
+    regular,
+    selected: [...redchip, ...regular.slice(0, seats)],
+    totalCandidates: redchip.length + regular.length,
+  };
+}
+
+/**
+ * 确定性口播稿（免 LLM）：**红筹线索句置段首**（T3），其后接常规广东 IPO 句，
+ * 共 3 席；截断由 `AUDIO_SPEAK_LIMITS.ipo` 统一处理 —— 因红筹在前，**截断时红筹优先保留**。
+ *
+ * @param opts.skipCompanies 同一企业口播去重（命中者跳过，由事件记忆 `ipoVoicing` 算出）。
+ * @param opts.withinDays 常规 IPO 口播窗（日历日，含今天），默认 `IPO_VOICE_WINDOW_DAYS`。
+ *   红筹窗独立，不受此参数影响（取 `REDCHIP_VOICE_WINDOW_DAYS`）。
  */
 export function buildGdIpoSpoken(
   items: ReportItem[],
   opts?: { skipCompanies?: Set<string>; withinDays?: number; today?: string },
 ): string {
-  const cand = gdIpoCandidates(
-    items,
-    opts?.skipCompanies,
-    opts?.withinDays ?? IPO_VOICE_WINDOW_DAYS,
-    { uniqueCompany: true, today: opts?.today }, // 口播不把同一家企业念两遍（P1-4）
-  );
-  if (cand.length === 0) return "";
-  const head = cand.slice(0, 3);
-  const clauses = head.map((it) => {
-    const title = it.title_cn || "";
-    const summary = it.summary || "";
-    const company = companyNameOf(title);
-    const prov = parseRegisteredProvince(summary);
-    const exchange = mapBoardToExchange(parseBoard(title));
-    const industry = inferIndustry(company);
-    const progress = progressOf(title, summary);
-    const parts = [company];
-    if (prov) parts.push(`注册地${prov}`);
-    if (industry) parts.push(`${industry}行业`);
-    if (exchange) parts.push(`拟在${exchange}IPO`);
-    if (progress) parts.push(`目前${progress}`);
-    return parts.join("，");
-  });
+  const { selected, totalCandidates } = pickSpokenItems(items, opts);
+  const clauses = selected
+    .map((it) => (it.redchip ? redchipClauseOf(it) : regularClauseOf(it)))
+    .filter((s) => s.length > 0);
+  if (clauses.length === 0) return "";
   let s = clauses.join("；");
-  // 多于 3 家时收尾「等N家」，避免口播听起来像只有这 3 家
-  if (cand.length > 3) s += `；等${cand.length}家`;
+  // 候选多于席位时收尾「等N家」，避免口播听起来像只有这几家
+  if (totalCandidates > clauses.length) s += `；等${totalCandidates}家`;
   return s;
 }
 
@@ -234,12 +319,16 @@ export function gdIpoCandidates(
   const sorted = items
     .filter(
       (it) =>
-        (it.tags?.includes("粤") || isGdIpoCandidate(it.title_cn || "", it.summary || "")) &&
+        (it.tags?.includes("粤") ||
+          isGdIpoCandidate(it.title_cn || "", it.summary || "") ||
+          // 红筹线索（T2 已实体匹配）同样进池：其广东相关性由判定链给出，不依赖标题词表。
+          // 注意「不额外占名额」——只放宽入池，不抬高下面的 n / 名额上限。
+          Boolean(it.redchip)) &&
         !(skip && skip.has(companyNameOf(it.title_cn || ""))) &&
         (!allowed || allowed.has(it.date)),
     )
     .sort((x, y) => {
-      const bx = BIZ_VALUE_RANK[gdIpoStageOf(y)] - BIZ_VALUE_RANK[gdIpoStageOf(x)];
+      const bx = candidateScore(y) - candidateScore(x);
       return bx !== 0 ? bx : dateValue(y) - dateValue(x);
     });
   if (!opts?.uniqueCompany) return sorted;
@@ -250,6 +339,17 @@ export function gdIpoCandidates(
     seenCompany.add(key);
     return true;
   });
+}
+
+/**
+ * 候选池排序键（T4）：商机价值 + **红筹提权**。
+ *
+ * 提权（`REDCHIP_VOICE_BOOST`，默认 2）只**前移**红筹条目，不增加名额上限
+ * —— 用户 2026-09-15 拍板「不占额外名额，但红筹要优先播报」。
+ * 调 0 即完全退回与普通 IPO 同序（由单测锁定）。
+ */
+function candidateScore(it: ReportItem): number {
+  return BIZ_VALUE_RANK[gdIpoStageOf(it)] + (it.redchip ? REDCHIP_VOICE_BOOST : 0);
 }
 
 /**
@@ -271,14 +371,15 @@ export function topGdIpo(
 }
 
 /**
- * 口播实际选中的企业名（前 3 家广东企业，经 skipCompanies 过滤后）。
+ * 口播实际选中的企业名（红筹置前 + 常规其后，共 3 席，经 skipCompanies 过滤后）。
  * 供 audio.ts 把「今日已口播企业」写回事件记忆库（ipoVoicing），实现跨天去重。
+ *
+ * ⚠️ 必须与 `buildGdIpoSpoken` 共用 `pickSpokenItems`：否则「写回记忆的企业」与
+ * 「真正播出的企业」不一致 → 跨天去重会错杀或漏杀。
  */
 export function pickGdIpoCompanies(
   items: ReportItem[],
   opts?: { skipCompanies?: Set<string>; withinDays?: number; today?: string },
 ): string[] {
-  return topGdIpo(items, opts?.skipCompanies, 3, opts?.withinDays ?? IPO_VOICE_WINDOW_DAYS, {
-    today: opts?.today,
-  }).map((it) => companyNameOf(it.title_cn || ""));
+  return pickSpokenItems(items, opts).selected.map((it) => companyNameOf(it.title_cn || ""));
 }

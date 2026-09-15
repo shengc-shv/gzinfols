@@ -204,6 +204,35 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
   .ipo-foot { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; font-size: 0.68rem; color: var(--muted); }
   .ipo-src { color: var(--c-gdipo); text-decoration: none; }
   .ipo-src:hover { text-decoration: underline; }
+  /* 红筹线索标识（2026-09-15）：徽章 + 「新」角标 + 变更小字 + 报告入口。
+     红线「线索 ≠ 结论」：文案恒为「…线索」，不得显示为已确认结论。 */
+  .ipo-card--redchip { border-color: color-mix(in srgb, var(--c-redchip) 34%, var(--rule)); border-left-color: var(--c-redchip); background: color-mix(in srgb, var(--c-redchip) 5%, var(--card)); }
+  .ipo-redchip {
+    flex: none; font-size: 0.64rem; font-weight: 600; padding: 1px 6px; border-radius: 3px;
+    color: #fff; background: var(--c-redchip);
+  }
+  .ipo-redchip--unverified { color: var(--c-redchip); background: transparent; border: 1px solid color-mix(in srgb, var(--c-redchip) 55%, transparent); }
+  .ipo-new { flex: none; font-size: 0.6rem; font-weight: 700; line-height: 1; padding: 2px 4px; border-radius: 3px; color: #fff; background: var(--c-redchip-new); }
+  .ipo-rc-changed { flex: none; font-size: 0.62rem; color: var(--c-redchip); }
+  .ipo-report { display: inline-block; margin-top: 0.3rem; font-size: 0.7rem; color: var(--c-redchip); text-decoration: none; }
+  .ipo-report:hover { text-decoration: underline; }
+  /* 红筹线索面板（2026-09-15 §5.1）：常驻区块，独立于五板块 tab */
+  .redchip-panel { margin: 1.25rem 0 0; padding: 0.9rem 1rem; border: 1px solid color-mix(in srgb, var(--c-redchip) 26%, var(--rule)); border-radius: 12px; background: color-mix(in srgb, var(--c-redchip) 4%, var(--card)); }
+  .redchip-title { display: flex; align-items: center; gap: 0.4rem; font-size: 0.95rem; font-weight: 700; color: var(--fg); margin: 0 0 0.6rem; }
+  .redchip-count { font-size: 0.7rem; font-weight: 600; padding: 1px 6px; border-radius: 10px; color: #fff; background: var(--c-redchip); }
+  .redchip-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  @media (min-width: 720px) { .redchip-list { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } }
+  .redchip-item { border: 1px solid color-mix(in srgb, var(--c-redchip) 22%, var(--rule)); border-left: 3px solid var(--c-redchip); border-radius: 10px; padding: 0.55rem 0.7rem; background: var(--card); }
+  .redchip-item--unverified { border-left-style: dashed; }
+  .redchip-head { display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 0.3rem; }
+  .redchip-name { font-size: 0.84rem; font-weight: 700; color: var(--fg); }
+  .redchip-unmatched { font-size: 0.62rem; color: var(--muted); border: 1px dashed var(--rule); border-radius: 3px; padding: 0 4px; }
+  .redchip-facts { margin: 0 0 0.25rem; font-size: 0.72rem; color: var(--fg-soft); }
+  .redchip-evid { margin: 0; font-size: 0.7rem; color: var(--muted); }
+  .redchip-changed { margin: 0.25rem 0 0; font-size: 0.7rem; color: var(--c-redchip); }
+  .redchip-foot { display: flex; gap: 0.8rem; margin-top: 0.35rem; }
+  .redchip-foot .ipo-report { margin-top: 0; }
+  .redchip-note { margin: 0.6rem 0 0; font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
   .exec-ipo::after {
     content: ""; position: absolute; top: 1.7rem; right: 0; bottom: 0.5rem;
     width: 3.25rem; pointer-events: none; z-index: 3;

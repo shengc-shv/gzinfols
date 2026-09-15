@@ -24,6 +24,7 @@ import { buildStockNews } from "./side-stock-news";
 // 股市复盘三卡 / 股市消息清单：B4 已接入（gzinfo 顺序：exec → recap → news → gd-ipo）
 
 import { buildGdIpo } from "./side-gd-ipo";
+import { buildRedchipFromStore } from "./side-redchip";
 
 /**
  * 执行三个旁路，返回最终 report。
@@ -48,5 +49,9 @@ export async function buildSideOutputs(
   report = await buildStockNews(report, rawArticles, crawled, ctx, deps as Pick<PipelineDeps, "llm">);
   // 4. 广东地区IPO（绕过相关性 LLM，直接从 filteredArticles 构建，gzinfo 2026-08-30 实跑修复）
   report = buildGdIpo(report, filteredArticles, ctx);
+  // 5. 红筹线索（plan-redchip-crawl-push T2/T7）：读 leads.json → 实体匹配挂徽章 + 产面板。
+  //    必须排在 gd-ipo 之后：只能给「已存在的 IPO 条目」挂标，绝不反过来凭空造条目
+  //    （无状态源红线）；匹配失败 → 不打标（T7）。
+  report = buildRedchipFromStore(report, ctx);
   return report;
 }

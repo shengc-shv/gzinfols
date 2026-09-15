@@ -393,6 +393,34 @@ export const REDCHIP_VOICE_BOOST = 2;
 **入库约定**：`data/redchip/leads.json` **必须入库**（冻结快照，与 `data/local-ipo.json` 同模式）；
 `latest.json` / `snapshots/` / `changelog.jsonl` 为运行时产物，**不入库**（建议加精确 gitignore 三条，勿整目录忽略）。
 
+### 6.1 完成情况（2026-09-15 夜，一轮落地）
+
+| # | 状态 | 落点与说明 |
+|---|---|---|
+| 1 | ✅ | `contracts/redchip.ts`：`RedchipLead`（extends `RedchipProject`）/`RedchipReportRef`/`RedchipBadge`/`RedchipPanel`/`REDCHIP_LABELS` |
+| 2 | ✅ | `contracts/report.ts`：`ReportItem.redchip` + `DailyReport.redchipPanel` |
+| 3 | ✅ | `ipo-config.ts`：`REDCHIP_VOICE_WINDOW_DAYS=2` / `REDCHIP_LIST_WINDOW_DAYS=7` / `REDCHIP_VOICE_BOOST=2` |
+| 4 | ✅ | **归并逻辑放在 `services/redchip/leads.ts`（纯函数，可测）**；`snapshot-store` 只做 IO（`readLeads`/`writeLeads`）——比原计划更严格地守「服务层不碰 IO」 |
+| 5 | ✅ | `adapters/redchip/report-resolver.ts`（`manual > deep > r`，含目录穿越防护） |
+| 6 | ✅ | `services/classify/redchip.ts`：`matchRedchipLead`（编号→代码→企业名）/`redchipLabelOf`/`redchipBadgeOf`/窗口判定 |
+| 7 | ✅ | `gd-ipo-spoken.ts`：`candidateScore` 加 `REDCHIP_VOICE_BOOST`；`pickSpokenItems` 红筹置前（口播与记忆写回同源） |
+| 8 | ✅ | `pipeline/side-outputs/side-redchip.ts`（纯 `buildRedchip` + IO 包装 `buildRedchipFromStore`） |
+| 9 | ✅ | 接在 `side-outputs.ts` 第 5 步（`buildGdIpo` 之后） |
+| 10 | ✅ | 徽章加在 `render/stock-block.ts::renderGdIpoStrip`（IPO 卡实际渲染处，非 `ipo-panel.ts`）；新增 `render/redchip-panel.ts`，接线于 `full.ts` 五板块之后 |
+| 11 | ⚠️ 部分 | `scripts/lib/redchip-report.mjs` 已建；**`redchip-page.mjs` 首页表格尚未加「报告」入口链接** |
+| 12 | ✅ | `build-site.mjs` §5.5b 生成 `site/redchip/r/<leadId>.html`（`verdict ≠ non-redchip`，零 LLM） |
+| 13 | ✅ | `redchip-monitor.ts` 产出 `leads.json`（同源写盘，紧随快照之后） |
+| 14 | ✅ | 新增 5 个测试文件：`redchip-lead` / `redchip-badge` / `redchip-panel` / `redchip-spoken` / `redchip-report`（含子进程端到端） |
+| 15 | ⬜ | `docs/redchip.md` 文档未补（窗口/徽章/报告路径/提权常量） |
+
+**与方案的三处刻意偏差（均已在上文注明）**：
+1. **口播不播「广东运营 N 处」**：`gdCityHits` 是**实体语境提及次数**、不等于实体个数 → 口播只说「含广东运营实体」，计数只出现在卡片/报告页（`§5.2` 已注）。
+2. **归并逻辑下沉到 services**（见 #4），IO 只在 adapter。
+3. **徽章渲染点**在 `stock-block.ts`（真实卡片处），未改 `ipo-panel.ts`（该文件是分栏/筛选，不产卡片）。
+
+**顺带修的一个真实缺陷**：港交所条目标题不含「（拟XX）」字样 → 交易所推导为空；现以「URL 含申请编号」兜底判为**港交所**（`isHkexItem`），红筹句才能说清「拟在港交所 IPO」。
+
+
 ---
 
 ## 7. 验收与测试要点

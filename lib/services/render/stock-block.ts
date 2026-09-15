@@ -141,13 +141,30 @@ export function renderGdIpoStrip(items: ReportItem[], opts?: { section?: "must" 
       const link = url
         ? `<a class="ipo-src" href="${escapeHtml(url)}" target="_blank" rel="noopener">来源 · ${src}</a>`
         : `<span class="ipo-src">${src}</span>`;
-      return `<li class="ipo-card" data-audio-section="ipo">
+      // 红筹线索（plan-redchip-crawl-push §5.1）：徽章 + 「新」角标 + 变更小字 + 报告入口。
+      // 徽章文案来自判定档（服务层已定），渲染层不重新判定（防两处口径漂移）。
+      const rc = it.redchip;
+      const rcBadge = rc
+        ? `<span class="ipo-redchip ipo-redchip--${rc.verdict}">${escapeHtml(rc.label)}</span>` +
+          (rc.isNew ? `<span class="ipo-new">新</span>` : "") +
+          (rc.changedFields?.length
+            ? `<span class="ipo-rc-changed">↑${escapeHtml(rc.changedFields.join("/"))}</span>`
+            : "")
+        : "";
+      const reportKindLabel =
+        rc?.reportKind === "deep" ? "深度" : rc?.reportKind === "manual" ? "人工" : "会前";
+      const reportLink = rc?.reportUrl
+        ? `<a class="ipo-report" href="${escapeHtml(rc.reportUrl)}" target="_blank" rel="noopener">穿透分析报告（${reportKindLabel}） →</a>`
+        : "";
+      return `<li class="ipo-card${rc ? " ipo-card--redchip" : ""}" data-audio-section="ipo">
         <div class="ipo-card-head">
+          ${rcBadge}
           <span class="ipo-name">${escapeHtml(company)}</span>
           <span class="ipo-stage ipo-stage--${stage}">${escapeHtml(GD_IPO_STAGE_LABEL[stage] || "IPO")}</span>
         </div>
         ${biz ? `<p class="ipo-biz">${escapeHtml(biz)}</p>` : ""}
         <div class="ipo-foot"><span class="ipo-date">${date}</span>${link}</div>
+        ${reportLink}
       </li>`;
     })
     .join("");

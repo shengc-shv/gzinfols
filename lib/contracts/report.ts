@@ -7,6 +7,7 @@
 
 /** 地域标记（gzinfo types.ts Locale 同名）：gz=广州辖区 / national=全国 / overseas=海外。 */
 import type { IndexQuote, TickerAnalysis, WatchlistPick } from "./market";
+import type { RedchipBadge, RedchipPanel } from "./redchip";
 export type Locale = "gz" | "national" | "overseas";
 
 /** 报告板块键（5 个 tab）。 */
@@ -74,6 +75,13 @@ export interface ReportItem {
   gdBasis?: string;
   ipoMeta?: string;
   ipoCity?: string;
+  /**
+   * 红筹线索徽章（2026-09-15 · plan-redchip-crawl-push §2.2）。
+   *
+   * ⚠️ 无状态源红线：**只由实体匹配产出**（港交所申请编号 / 归一化企业名 / 股票代码），
+   * 绝不因为「条目来自红筹数据源」而打标；匹配失败则不打标（T7）。
+   */
+  redchip?: RedchipBadge;
 }
 
 export interface ReportInsight {
@@ -183,6 +191,8 @@ export interface DailyReport {
   stock_recap?: StockRecap;
   stock_news?: StockNewsItem[];
   risk?: RiskItem;
+  /** 红筹线索面板（plan-redchip-crawl-push §5.1；渲染期派生，不入库）。 */
+  redchipPanel?: RedchipPanel;
 }
 
 /**

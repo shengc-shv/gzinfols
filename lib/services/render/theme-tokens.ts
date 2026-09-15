@@ -29,6 +29,9 @@ export const THEME_TOKENS_CSS = `
     --c-finance: #d97706;
     --c-gdipo: #e11d48;
     --c-ipo: #7c3aed;
+    /* 红筹线索（2026-09-15）：与广东IPO 的 --c-gdipo 区分开（同屏共存） */
+    --c-redchip: #b91c1c;
+    --c-redchip-new: #ea580c;
     --c-gz: #059669;
     --c-pol: #2f6fed;
     --hero-grad-from: #f6f5f3;
@@ -64,6 +67,8 @@ export const THEME_TOKENS_CSS = `
       --c-trading: #2dd4bf;
       --c-finance: #fbbf24;
       --c-gdipo: #fb7185;
+      --c-redchip: #f87171;
+      --c-redchip-new: #fb923c;
       --c-ipo: #a78bfa;
       --c-gz: #34d399;
       --c-pol: #5b8def;

@@ -126,6 +126,7 @@ import {
   renderIpoProgress,
   renderIpoPanelHtml,
 } from "./ipo-panel";
+import { renderRedchipPanel } from "./redchip-panel";
 import { SIGNAL_TONE, renderMarkdown } from "./markdown";
 
 export * from "./atoms";
@@ -355,6 +356,8 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
         : `<p class="empty-hint">${escapeHtml(t.emptyHint || "今日暂无相关内容")}</p>`
     }
   </section>`).join("")}
+
+  ${renderRedchipPanel(report.redchipPanel)}
 
   <footer>
     <p>免责声明：本页面为个人学习项目，内容基于公开信息整理，不代表任何机构立场；市场信息不构成投资建议。页面面向内部参考，请勿外传。</p>
