@@ -1,0 +1,103 @@
+name: WeChat & WeCom Notify (Manual)
+
+# 简报外发工作流（自 gzinfo .github/workflows/notify.yml 移植，2026-09-15）。
+#
+# 为什么是人工触发：内容由本地 AI 撰写（CI 无 LLM key，走 dump → 本地 replay），
+# 发布后需人工核对内容无误，再手动点「Run workflow」推送。
+#
+# 流程：
+#   1. daily.yml 每早（schedule 窗口）自动 build + 发布 gh-pages（并归档
+#      data/event-memory.json，含当日「暂存区 today」口播）；
+#   2. 用户打开报告 URL 人工核对内容无误；
+#   3. 手动 Run this workflow → 合并推送：① 公众号（微信测试号模板消息）
+#      ② 企业号（企业微信，群机器人 Webhook 优先；否则自建应用）。两渠道各自缺配置则跳过，
+#      任一成功即交付；
+#   4. 推送真正送达（notify 退出 0）→ mark-delivered 写当日「交付信号」(deliveries) 并
+#      **立即把当日暂存区结算进长期记忆 (events)**，提交 main。
+#      ⚠️ 生效判据 = 触达即生效：渠道无「客户已读」回执，已读不可观测，
+#      以「推送全量送达」为正式生效判据（未送达/无目标不算交付）。
+#      语义：**只有发送成功的才算入记忆**（代表客户已经看过这些数据）。
+#
+# 并发：concurrency 串行化本 workflow，避免同一天多次手动触发（公众号 / 企业号各跑一次）
+# 的 git commit+push 相互覆盖冲突。
+# 失败语义：两渠道均未送达 → 步骤红 → 不写交付信号（不算交付），用户处理后重试即可；
+# 重复触发会重复推送 + 重复打标（微信侧无去重，deliveries 覆盖 pushedAt），请确认后再点。
+
+on:
+  # 无输入参数：推送目标 = 北京时间「今天」的报告
+  workflow_dispatch: {}
+
+# 串行化：避免同一天多次手动触发的 commit+push 相互覆盖冲突。
+concurrency:
+  group: notify-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write # mark-delivered 需把 event-memory.json 提交回 main
+
+jobs:
+  notify:
+    name: Push WeChat & WeCom & mark delivered
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # 保险确认：当天 store.json 已被 build run 归档到 main（用户核对 gh-pages 时
+      # 必然已归档，此处仅防「当天 build 失败就手动推」的误操作）。
+      # 时区固定北京时间（全项目口径，不接受 vars 覆盖）。
+      - name: Verify today's store.json archived
+        run: |
+          TODAY=$(TZ="Asia/Shanghai" date +%Y-%m-%d)
+          if [ ! -f "history/${TODAY}/store.json" ]; then
+            echo "::error::history/${TODAY}/store.json 不存在 —— 当天 build 尚未归档；如确需推送请先跑 daily.yml（publish=true）"
+            exit 1
+          fi
+          echo "store.json 已就绪: history/${TODAY}/store.json"
+
+      # 合并推送：公众号 + 企业号（notify-daily.ts 内部按「先公众号后企业号」顺序，
+      # 任一成功即 exit 0）。真正送达（目标 ≥1 且全成功）→ exit 0；两渠道均失败/无目标 → exit 1。
+      - name: Push notifications (WeChat + WeCom)
+        id: push
+        env:
+          WX_APP_ID: ${{ secrets.WX_APP_ID }}
+          WX_APP_SECRET: ${{ secrets.WX_APP_SECRET }}
+          WX_USER_ID: ${{ secrets.WX_USER_ID }}
+          WX_TEMPLATE_ID: ${{ secrets.WX_TEMPLATE_ID }}
+          WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
+          WECOM_CORP_ID: ${{ secrets.WECOM_CORP_ID }}
+          WECOM_AGENT_ID: ${{ secrets.WECOM_AGENT_ID }}
+          WECOM_CORP_SECRET: ${{ secrets.WECOM_CORP_SECRET }}
+          WECOM_USER_IDS: ${{ secrets.WECOM_USER_IDS }}
+          REPORT_BASE_URL: ${{ vars.REPORT_BASE_URL || 'https://shengc-shv.github.io/gzinfols' }}
+        run: npm run notify
+
+      # 推送成功 → 记录当日交付信号（deliveries）并**立即结算**当日暂存进长期记忆，
+      # 提交 main。mark-delivered 会用 GH_TOKEN 反查 gh-pages 当天 commit，把被推送版本的
+      # 发布 run/commit（reportRunId/reportSha）一并写入 deliveries 仅供溯源。
+      - name: Mark today as delivered (settle into long-term memory)
+        if: steps.push.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          npm run mark-delivered
+          TODAY=$(TZ="Asia/Shanghai" date +%Y-%m-%d)
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/event-memory.json
+          if git diff --cached --quiet; then
+            echo "event-memory.json 无变化（同日已记录过交付），跳过提交"
+          else
+            git commit -m "chore: mark delivered ${TODAY}"
+            git push
+          fi

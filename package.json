@@ -9,6 +9,8 @@
     "dry-run": "tsx scripts/dry-run.ts",
     "render": "tsx scripts/render.ts",
     "ipo:local": "tsx scripts/ipo-local.ts",
+    "notify": "tsx scripts/notify-daily.ts",
+    "mark-delivered": "tsx scripts/mark-delivered.ts",
     "record-publish": "tsx scripts/record-publish.ts",
     "architecture:check": "tsx scripts/architecture-check.ts",
     "typecheck": "tsc --noEmit",
