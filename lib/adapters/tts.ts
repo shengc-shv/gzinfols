@@ -90,6 +90,11 @@ const MIN_BYTES = 10_000; // 异常偏小校验（空音频防护）
 const MIN_MODEL_BYTES = 10_000_000; // 中文 medium 模型应 >10MB，偏小说明下载到 404 错误页
 
 export interface TtsResult {
+  /**
+   * mp3 **归档后的持久路径**（`daily_reports/<date>/audio/briefing-<date>.mp3`）。
+   * ⚠️ 不是合成时用的临时路径：临时目录在 `synthesizeAudio` 返回前就会被 finally 清理，
+   * 下游若对它 `stat` 会 ENOENT（2026-09-15 线上事故：播放器元数据整段丢失、页面无播放器）。
+   */
   mp3Path: string;
   /** 估算时长（秒）；避免引入 mp3 解析依赖，使用字数估算 */
   durationSec: number;
@@ -332,16 +337,24 @@ function piperAvailable(): boolean {
   return r.status === 0;
 }
 
-/** 双路径落盘：归档（daily_reports/<date>/audio）+ 站点（site/<date>/audio，2026-09-14 B-3 子目录布局）。 */
-function writeMp3Both(src: string, date: string): void {
-  const archiveDir = path.resolve(process.cwd(), "daily_reports", date, "audio");
+/**
+ * 双路径落盘：归档（daily_reports/<date>/audio）+ 站点（site/<date>/audio，2026-09-14 B-3 子目录布局）。
+ *
+ * @returns 归档后的**持久路径** —— 必须把此路径交回调用方（而非合成用的临时路径）：
+ *   临时目录随后会被 `synthesizeAudio` 的 finally 清理，交回临时路径必致下游 `stat` ENOENT。
+ * @param baseDir 仅测试注入用（默认进程工作目录）。
+ */
+export function writeMp3Both(src: string, date: string, baseDir: string = process.cwd()): string {
+  const archiveDir = path.resolve(baseDir, "daily_reports", date, "audio");
   fs.mkdirSync(archiveDir, { recursive: true });
-  fs.copyFileSync(src, path.join(archiveDir, path.basename(src)));
+  const archived = path.join(archiveDir, path.basename(src));
+  fs.copyFileSync(src, archived);
   // 报告页位于 site/<date>/<date>.html，其中播放器引用相对路径 `audio/briefing-<date>.mp3`
   // → 必须落在 site/<date>/audio/ 才解析得到（此前写 site/audio/ 是扁平布局的遗留）。
-  const siteDir = path.resolve(process.cwd(), "site", date, "audio");
+  const siteDir = path.resolve(baseDir, "site", date, "audio");
   fs.mkdirSync(siteDir, { recursive: true });
   fs.copyFileSync(src, path.join(siteDir, path.basename(src)));
+  return archived;
 }
 
 export async function synthesizeAudio(date: string, script: string): Promise<TtsResult> {
@@ -356,8 +369,8 @@ export async function synthesizeAudio(date: string, script: string): Promise<Tts
     // —— 主用腾讯云 ——
     if (TCE_SECRET_ID && TCE_SECRET_KEY) {
       if (await runBackend("tencent", (t, o) => synthTencent(t, o, date), script, out)) {
-        writeMp3Both(out, date);
-        return { mp3Path: out, durationSec, backend: "tencent" };
+        const archived = writeMp3Both(out, date);
+        return { mp3Path: archived, durationSec, backend: "tencent" };
       }
       console.warn("⚠️ 腾讯云连续失败，尝试 Piper 本地兜底……");
     } else {
@@ -390,8 +403,8 @@ export async function synthesizeAudio(date: string, script: string): Promise<Tts
 
     if (await runBackend("piper", synthPiper, script, out)) {
       console.warn("::warning::今日音频由 Piper 兜底生成，请检查腾讯云 TTS 状态与额度");
-      writeMp3Both(out, date);
-      return { mp3Path: out, durationSec, backend: "piper" };
+      const archived = writeMp3Both(out, date);
+      return { mp3Path: archived, durationSec, backend: "piper" };
     }
 
     throw new Error("所有 TTS 后端均失败");
@@ -408,6 +421,15 @@ export async function synthesizeAudio(date: string, script: string): Promise<Tts
 export class TtsAdapter implements TtsPort {
   async synthesize(script: string, date: string): Promise<TtsResult & { bytes: number }> {
     const r = await synthesizeAudio(date, script);
-    return { ...r, bytes: fs.statSync(r.mp3Path).size };
+    // mp3Path 此时已是**归档持久路径**（临时目录在 synthesizeAudio 返回前清理），可安全 stat。
+    // 仍留兜底：bytes 只用于日志，任何 stat 异常都不该连带丢掉「音频元数据」
+    // —— 2026-09-15 线上事故即因 stat 临时路径抛 ENOENT，被管线 catch 后整页无播放器。
+    let bytes = 0;
+    try {
+      bytes = fs.statSync(r.mp3Path).size;
+    } catch {
+      console.warn(`⚠️ 音频已归档但 stat 失败（bytes 记 0，不阻断播放器渲染）：${r.mp3Path}`);
+    }
+    return { ...r, bytes };
   }
 }

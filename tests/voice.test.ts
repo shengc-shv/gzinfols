@@ -1,5 +1,8 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
+import fsSync from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import {
   assembleBriefingScript,
   sanitize,
@@ -8,6 +11,7 @@ import {
   AUDIO_SPEAK_LIMITS,
   SCRIPT_MAX_CHARS,
 } from "../lib/services/voice";
+import { writeMp3Both } from "../lib/adapters/tts";
 import type { DailyReport } from "../lib/contracts/report";
 import type { ExecutiveSummary } from "../lib/services/enrich/executive-summary";
 
@@ -101,4 +105,33 @@ test("detectGdIpo：「粤」标优先 + 进度词表 × 注册表双层判定",
   ] as unknown as Parameters<typeof detectGdIpo>[0];
   assert.equal(detectGdIpo(items).length, 1, "粤标直接命中（标题无地域字样也不漏）");
   assert.equal(detectGdIpo([{ title_cn: "外地企业新股上市", summary: "", tags: [], url: "u2" } as never]).length, 0);
+});
+
+test("TTS 归档：返回的路径必须是持久路径且文件存在（回归 2026-09-15「页面无播放器」事故）", () => {
+  // 事故根因：synthesizeAudio 返回合成用的**临时路径**，而临时目录在返回前已由 finally 清理，
+  // 下游 TtsAdapter 对它 statSync → ENOENT → 被管线 catch → audio 元数据为空 → 整页无播放器。
+  const base = fsSync.mkdtempSync(path.join(os.tmpdir(), "tts-arch-"));
+  try {
+    const src = path.join(base, "briefing-2026-09-15.mp3");
+    fsSync.writeFileSync(src, Buffer.alloc(20_000, 1));
+
+    const archived = writeMp3Both(src, "2026-09-15", base);
+
+    assert.ok(fsSync.existsSync(archived), "返回路径必须真实存在（下游要 stat 它）");
+    assert.equal(
+      archived,
+      path.join(base, "daily_reports", "2026-09-15", "audio", "briefing-2026-09-15.mp3"),
+      "必须是归档持久路径，不是临时路径",
+    );
+    // 播放器引用相对路径 audio/briefing-<date>.mp3 → 站点副本必须落在 site/<date>/audio/
+    assert.ok(
+      fsSync.existsSync(path.join(base, "site", "2026-09-15", "audio", "briefing-2026-09-15.mp3")),
+      "site/<date>/audio/ 副本必须存在（播放器相对路径解析依赖它）",
+    );
+    // 合成临时文件被清理后，归档路径仍必须可用
+    fsSync.rmSync(src, { force: true });
+    assert.ok(fsSync.existsSync(archived), "源临时文件删除后归档仍应存在");
+  } finally {
+    fsSync.rmSync(base, { recursive: true, force: true });
+  }
 });
