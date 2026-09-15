@@ -1,6 +1,6 @@
 {
   "date": "2026-09-15",
-  "updatedAt": "2026-09-15T00:38:31.437Z",
+  "updatedAt": "2026-09-15T00:47:07.502Z",
   "executive": {
     "hero_line": "今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获",
     "must_read": [
@@ -27,11 +27,11 @@
     ],
     "insights": [
       {
-        "topic": "港股IPO火爆背后：香港证监会",
-        "impact": "对广州分行财富业务有潜在影响",
-        "action": "建议分行关注财富动向并评估动作",
+        "topic": "“保险＋信托”双擎护航，“六维",
+        "impact": "对广州分行信贷/财富/养老业务有潜在影响",
+        "action": "建议分行关注信贷动向并评估动作",
         "segments": [
-          "其他业务线"
+          "零售AUM"
         ]
       },
       {
@@ -59,7 +59,7 @@
         ]
       }
     ],
-    "spoken_insights": "具备其他业务线商机的，港股IPO火爆背后：香港证监会，对广州分行财富业务有潜在影响。建议分行关注财富动向并评估动作。此外，具备其他业务线商机的，上半年股份行零售贷款全面退潮：，对广州分行信贷/客群/竞对动态业务有潜在影响。建议分行关注信贷动向并评估动作。同时，具备其他业务线商机的，力合科创对子公司财务资助逾期 ，对广州分行监管合规业务有潜在影响。建议分行关注监管合规动向并评估动作。最后，具备其他业务线商机的，美联储9月加息概率逼近90%！，对广州分行信贷业务有潜在影响。建议分行关注信贷动向并评估动作。",
+    "spoken_insights": "具备零售 A U M商机的，“保险＋信托”双擎护航，“六维，对广州分行信贷/财富/养老业务有潜在影响。建议分行关注信贷动向并评估动作。此外，具备其他业务线商机的，上半年股份行零售贷款全面退潮：，对广州分行信贷/客群/竞对动态业务有潜在影响。建议分行关注信贷动向并评估动作。同时，具备其他业务线商机的，力合科创对子公司财务资助逾期 ，对广州分行监管合规业务有潜在影响。建议分行关注监管合规动向并评估动作。最后，具备其他业务线商机的，美联储9月加息概率逼近90%！，对广州分行信贷业务有潜在影响。建议分行关注信贷动向并评估动作。",
     "spoken_must_read": "核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务。国家核心监管新政（监管合规）：直击监管合规业务。其次，【信报】信披新规覆盖23类机构，信托等非银机构迎合规大考。市场信号（信贷）：直击信贷业务。此外，@新就业群体，广州为你送上“权益礼包”。市场信号（客群）：直击客群业务。还有，多家银行收紧个人贵金属业务 原因何在？。市场信号（财富）：直击财富业务。"
   },
   "stock_recap": {
@@ -91,11 +91,9 @@
       ]
     },
     "aShare": {
-      "overview": "双创业板指数均跌超1%。",
-      "sectors": [
-        "双创业板指数均跌超1%",
-        "A股成交额续创年内次低记录"
-      ],
+      "overview": "上证指数收报3885.33点（-0.07%）；深证成指收报13384.57点（-0.64%）；创业板指收报3285.58点（-1.10%）。",
+      "sectors": [],
+      "spoken": "上证指数（-0.07%）；深证成指（-0.64%）；创业板指（-1.10%）。",
       "meta": {
         "source": "东方财富",
         "crossCheck": "新浪行情",
@@ -192,12 +190,12 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143873236839.html",
-      "title_cn": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
+      "url": "https://finance.eastmoney.com/a/202609143873569882.html",
+      "title_cn": "9月14日晚间沪深上市公司重大事项公告最新快递",
       "source": "东方财富",
       "source_type": "media",
       "date": "09/14",
-      "summary": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
+      "summary": "9月14日晚间沪深上市公司重大事项公告最新快递",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -205,12 +203,12 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143873569882.html",
-      "title_cn": "9月14日晚间沪深上市公司重大事项公告最新快递",
+      "url": "https://finance.eastmoney.com/a/202609143873236839.html",
+      "title_cn": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
       "source": "东方财富",
       "source_type": "media",
       "date": "09/14",
-      "summary": "9月14日晚间沪深上市公司重大事项公告最新快递",
+      "summary": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -270,12 +268,25 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143872971550.html",
-      "title_cn": "A股热点前瞻丨1.6T光模块站上光博会“C位”；光储龙头将全线提价5%至15%",
+      "url": "https://finance.eastmoney.com/a/202609153873819060.html",
+      "title_cn": "全球市场：美股三大指数收跌费城半导体指数跌近6%网络安全概念股大涨",
       "source": "东方财富",
       "source_type": "media",
-      "date": "09/14",
-      "summary": "A股热点前瞻丨1.6T光模块站上光博会“C位”；光储龙头将全线提价5%至15%",
+      "date": "09/15",
+      "summary": "全球市场：美股三大指数收跌费城半导体指数跌近6%网络安全概念股大涨",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609153874059447.html",
+      "title_cn": "中信证券：洁净室头部企业半导体相关订单大幅放量半导体设备需求有望跟进",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "中信证券：洁净室头部企业半导体相关订单大幅放量半导体设备需求有望跟进",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -289,19 +300,6 @@
       "source_type": "media",
       "date": "09/15",
       "summary": "中信证券：金属业绩增长继续提速估值修复值得关注",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609153873970138.html",
-      "title_cn": "中信建投：政策加码产业治理央地重组同步推进",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "中信建投：政策加码产业治理央地重组同步推进",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -335,12 +333,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6937107.shtml",
-      "title_cn": "澜起科技获小摩增持约10万股 每股作价约277.86港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6952475.shtml",
+      "title_cn": "同源康医药-B获董事长兼总裁吴豫生增持17万股 每股作价约2.7港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "澜起科技获小摩增持约10万股 每股作价约277.86港元",
+      "summary": "同源康医药-B获董事长兼总裁吴豫生增持17万股 每股作价约2.7港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -348,12 +346,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6936147.shtml",
-      "title_cn": "上善黄金获非执行董事李杰峰增持1500万股 每股作价0.377港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6951792.shtml",
+      "title_cn": "晶科电子股份获董事长肖国伟增持1.8万股 每股作价约1.56港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "上善黄金获非执行董事李杰峰增持1500万股 每股作价0.377港元",
+      "summary": "晶科电子股份获董事长肖国伟增持1.8万股 每股作价约1.56港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -361,12 +359,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3707483.shtml",
-      "title_cn": "先导智能获贝莱德增持12.6万股 每股作价约27.97港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3723510.shtml",
+      "title_cn": "中国建筑国际遭执行董事孔祥兆减持12万股 每股作价8.6港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "先导智能获贝莱德增持12.6万股 每股作价约27.97港元",
+      "summary": "中国建筑国际遭执行董事孔祥兆减持12万股 每股作价8.6港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -374,12 +372,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6933933.shtml",
-      "title_cn": "中粮家佳康遭上海宁泉资产管理有限公司减持214.9万股 每股作价1.16港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6950202.shtml",
+      "title_cn": "云顶新耀获董事会主席吴以芳增持8000股 每股作价26.9港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "中粮家佳康遭上海宁泉资产管理有限公司减持214.9万股 每股作价1.16港元",
+      "summary": "云顶新耀获董事会主席吴以芳增持8000股 每股作价26.9港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -387,12 +385,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8831465.shtml",
-      "title_cn": "嘉兴燃气获柳松增持125.8万股 每股作价8.70港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8839077.shtml",
+      "title_cn": "金山软件获董事会主席雷军增持104.7万股 每股作价24.29港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "嘉兴燃气获柳松增持125.8万股 每股作价8.70港元",
+      "summary": "金山软件获董事会主席雷军增持104.7万股 每股作价24.29港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -400,12 +398,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8830775.shtml",
-      "title_cn": "信义玻璃获施丹红增持41.7万股 每股作价约8.77港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3720928.shtml",
+      "title_cn": "长城汽车获贝莱德增持约521.38万股 每股作价约7.63港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "信义玻璃获施丹红增持41.7万股 每股作价约8.77港元",
+      "summary": "长城汽车获贝莱德增持约521.38万股 每股作价约7.63港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -413,12 +411,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8830219.shtml",
-      "title_cn": "亿腾嘉和获董事会主席兼首席执行官倪昕增持20万股 每股作价约1.74港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3720193.shtml",
+      "title_cn": "煜荣集团遭Colour Shine Investments Limited减持8万股 每股作价0.5319港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "亿腾嘉和获董事会主席兼首席执行官倪昕增持20万股 每股作价约1.74港元",
+      "summary": "煜荣集团遭Colour Shine Investments Limited减持8万股 每股作价0.5319港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -426,12 +424,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqk3992839.shtml",
-      "title_cn": "京信通信获Prime Choice Investments Limited增持83万股 每股作价0.713港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3719080.shtml",
+      "title_cn": "大金重工获Morgan Stanley增持5.96万股 每股作价约27.22港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "京信通信获Prime Choice Investments Limited增持83万股 每股作价0.713港元",
+      "summary": "大金重工获Morgan Stanley增持5.96万股 每股作价约27.22港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -439,12 +437,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqk3992464.shtml",
-      "title_cn": "佳兆业集团遭Elliott Investment Management GP LLC减持873.3万股 每股作价0.036港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-15/doc-inirwfqa8820286.shtml",
+      "title_cn": "港股概念追踪 | 欧洲天然气面临供需两端重压 补库压力或抬升气价中枢(附概念股)",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "佳兆业集团遭Elliott Investment Management GP LLC减持873.3万股 每股作价0.036港元",
+      "summary": "港股概念追踪 | 欧洲天然气面临供需两端重压 补库压力或抬升气价中枢(附概念股)",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -452,12 +450,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6927991.shtml",
-      "title_cn": "海螺水泥获The Capital Group Companies,Inc.增持312.35万股 每股作价约16.69港元",
+      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-09-14/doc-inirtwih7318353.shtml",
+      "title_cn": "华泰 | 港股策略：控制美债波动率敏感敞口",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/15",
-      "summary": "海螺水泥获The Capital Group Companies,Inc.增持312.35万股 每股作价约16.69港元",
+      "date": "09/14",
+      "summary": "华泰 | 港股策略：控制美债波动率敏感敞口",
       "importance": 2,
       "rank": 0,
       "tags": [],
