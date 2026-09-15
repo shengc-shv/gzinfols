@@ -1,6 +1,6 @@
 {
   "date": "2026-09-15",
-  "updatedAt": "2026-09-15T00:23:01.884Z",
+  "updatedAt": "2026-09-15T00:28:24.176Z",
   "executive": {
     "hero_line": "今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获",
     "must_read": [
@@ -43,14 +43,6 @@
         ]
       },
       {
-        "topic": "美联储9月加息概率逼近90%！",
-        "impact": "对广州分行信贷业务有潜在影响",
-        "action": "建议分行关注信贷动向并评估动作",
-        "segments": [
-          "其他业务线"
-        ]
-      },
-      {
         "topic": "力合科创对子公司财务资助逾期 ",
         "impact": "对广州分行监管合规业务有潜在影响",
         "action": "建议分行关注监管合规动向并评估动作",
@@ -59,7 +51,7 @@
         ]
       },
       {
-        "topic": "央行：前八个月社会融资规模增量",
+        "topic": "美联储9月加息概率逼近90%！",
         "impact": "对广州分行信贷业务有潜在影响",
         "action": "建议分行关注信贷动向并评估动作",
         "segments": [
@@ -67,7 +59,7 @@
         ]
       }
     ],
-    "spoken_insights": "具备其他业务线商机的，港股IPO火爆背后：香港证监会，对广州分行财富业务有潜在影响。建议分行关注财富动向并评估动作。此外，具备其他业务线商机的，上半年股份行零售贷款全面退潮：，对广州分行信贷/客群/竞对动态业务有潜在影响。建议分行关注信贷动向并评估动作。同时，具备其他业务线商机的，美联储9月加息概率逼近90%！，对广州分行信贷业务有潜在影响。建议分行关注信贷动向并评估动作。另一条值得关注，具备其他业务线商机的，力合科创对子公司财务资助逾期 ，对广州分行监管合规业务有潜在影响。建议分行关注监管合规动向并评估动作。最后，具备其他业务线商机的，央行：前八个月社会融资规模增量，对广州分行信贷业务有潜在影响。建议分行关注信贷动向并评估动作。",
+    "spoken_insights": "具备其他业务线商机的，港股IPO火爆背后：香港证监会，对广州分行财富业务有潜在影响。建议分行关注财富动向并评估动作。此外，具备其他业务线商机的，上半年股份行零售贷款全面退潮：，对广州分行信贷/客群/竞对动态业务有潜在影响。建议分行关注信贷动向并评估动作。同时，具备其他业务线商机的，力合科创对子公司财务资助逾期 ，对广州分行监管合规业务有潜在影响。建议分行关注监管合规动向并评估动作。最后，具备其他业务线商机的，美联储9月加息概率逼近90%！，对广州分行信贷业务有潜在影响。建议分行关注信贷动向并评估动作。",
     "spoken_must_read": "核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务。国家核心监管新政（监管合规）：直击监管合规业务。其次，【信报】信披新规覆盖23类机构，信托等非银机构迎合规大考。市场信号（信贷）：直击信贷业务。此外，@新就业群体，广州为你送上“权益礼包”。市场信号（客群）：直击客群业务。还有，多家银行收紧个人贵金属业务 原因何在？。市场信号（财富）：直击财富业务。"
   },
   "stock_recap": {
@@ -221,12 +213,12 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143873236839.html",
-      "title_cn": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
+      "url": "https://finance.eastmoney.com/a/202609143873569882.html",
+      "title_cn": "9月14日晚间沪深上市公司重大事项公告最新快递",
       "source": "东方财富",
       "source_type": "media",
       "date": "09/14",
-      "summary": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
+      "summary": "9月14日晚间沪深上市公司重大事项公告最新快递",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -234,12 +226,12 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143873569882.html",
-      "title_cn": "9月14日晚间沪深上市公司重大事项公告最新快递",
+      "url": "https://finance.eastmoney.com/a/202609143873236839.html",
+      "title_cn": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
       "source": "东方财富",
       "source_type": "media",
       "date": "09/14",
-      "summary": "9月14日晚间沪深上市公司重大事项公告最新快递",
+      "summary": "AI巨头罕见达成共识！网络安全“应声大涨”最新高增长潜力股名单出炉",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -338,12 +330,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8827776.shtml",
-      "title_cn": "威华达控股遭SHOG Creation Limited减持1387.5万股 每股作价约2.78港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8831465.shtml",
+      "title_cn": "嘉兴燃气获柳松增持125.8万股 每股作价8.70港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "威华达控股遭SHOG Creation Limited减持1387.5万股 每股作价约2.78港元",
+      "summary": "嘉兴燃气获柳松增持125.8万股 每股作价8.70港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -351,12 +343,51 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3694447.shtml",
-      "title_cn": "神冠控股获董事会主席周亚仙增持429.4万股 每股作价约0.23港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8830775.shtml",
+      "title_cn": "信义玻璃获施丹红增持41.7万股 每股作价约8.77港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "神冠控股获董事会主席周亚仙增持429.4万股 每股作价约0.23港元",
+      "summary": "信义玻璃获施丹红增持41.7万股 每股作价约8.77港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8830219.shtml",
+      "title_cn": "亿腾嘉和获董事会主席兼首席执行官倪昕增持20万股 每股作价约1.74港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "亿腾嘉和获董事会主席兼首席执行官倪昕增持20万股 每股作价约1.74港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqk3992839.shtml",
+      "title_cn": "京信通信获Prime Choice Investments Limited增持83万股 每股作价0.713港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "京信通信获Prime Choice Investments Limited增持83万股 每股作价0.713港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqk3992464.shtml",
+      "title_cn": "佳兆业集团遭Elliott Investment Management GP LLC减持873.3万股 每股作价0.036港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "佳兆业集团遭Elliott Investment Management GP LLC减持873.3万股 每股作价0.036港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -390,6 +421,32 @@
       "market": "hk"
     },
     {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8827776.shtml",
+      "title_cn": "威华达控股遭SHOG Creation Limited减持1387.5万股 每股作价约2.78港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "威华达控股遭SHOG Creation Limited减持1387.5万股 每股作价约2.78港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3694447.shtml",
+      "title_cn": "神冠控股获董事会主席周亚仙增持429.4万股 每股作价约0.23港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "神冠控股获董事会主席周亚仙增持429.4万股 每股作价约0.23港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
       "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqk3988804.shtml",
       "title_cn": "知行科技获卢玉坤增持2.18万股 每股作价约2.21港元",
       "source": "新浪财经·港股",
@@ -403,77 +460,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqk3988383.shtml",
-      "title_cn": "福田实业遭夏松芳减持626.8万股 每股作价约0.6599港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "福田实业遭夏松芳减持626.8万股 每股作价约0.6599港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3691456.shtml",
-      "title_cn": "深圳国际获利安人寿保险增持135.15万股 每股作价约5.18港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "深圳国际获利安人寿保险增持135.15万股 每股作价约5.18港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6916750.shtml",
-      "title_cn": "中聚投资遭莫铭东减持2550万股 每股作价1.90港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "中聚投资遭莫铭东减持2550万股 每股作价1.90港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3688134.shtml",
-      "title_cn": "CMON遭非执行董事蔡稳健减持550万股 每股作价约1港元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "CMON遭非执行董事蔡稳健减持550万股 每股作价约1港元",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
       "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-15/doc-inirwfqa8820286.shtml",
       "title_cn": "港股概念追踪 | 欧洲天然气面临供需两端重压 补库压力或抬升气价中枢(附概念股)",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
       "summary": "港股概念追踪 | 欧洲天然气面临供需两端重压 补库压力或抬升气价中枢(附概念股)",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-09-15/doc-inirwfqa8827721.shtml",
-      "title_cn": "全球箱式仓储机器人龙头，海柔创新冲击港股“ACR第一股”，今年上半年收入11.18亿元",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/15",
-      "summary": "全球箱式仓储机器人龙头，海柔创新冲击港股“ACR第一股”，今年上半年收入11.18亿元",
       "importance": 2,
       "rank": 0,
       "tags": [],
