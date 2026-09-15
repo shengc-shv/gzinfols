@@ -6,9 +6,9 @@
  *
  * 骨架阶段：**只跑固定样本，不发起真实网络请求**。
  *
- * ⏰ 日期口径（重要）：
- *   用户在**北京时间早上 7:30** 跑 CI，此时"当天"数据尚未发布/完整，
- *   故**默认抓取「北京时间昨天」**的数据（可用 --date 覆盖补跑）。
+ * ⏰ 日期口径（2026-09-15 修正，对齐用户口径 + 短板②）：
+ *   默认按**当次 CI 运行的当日**（北京时间 REPORT_TZ）抓取；若该日无数据（披露易发布
+ *   有 1~2 天滞后）**自动回退到最近有数据的日期**，避免恒空。可用 --date 覆盖补跑。
  *   —— 不可用 Date.toISOString() 取日期（那是 UTC 日期，会在 12:00 北京跑时错成"今天"）。
  *
  * 产出：data/redchip/latest.json、snapshots/<date>.json、changelog.jsonl
@@ -33,13 +33,6 @@ import { diffSnapshots } from "../lib/services/redchip/diff";
 import type { RedchipProject, RedchipSnapshot } from "../lib/contracts/redchip";
 import { REPORT_TZ, todayKey } from "../lib/utils/time";
 
-/** 北京时间（REPORT_TZ）的「昨天」日期键。 */
-function yesterdayKey(): string {
-  const d = new Date(todayKey() + "T00:00:00Z");
-  d.setUTCDate(d.getUTCDate() - 1);
-  return d.toISOString().slice(0, 10);
-}
-
 /** 当前北京时间的 ISO 串（Asia/Shanghai 无夏令时，固定 +08:00）。 */
 function beijingNowIso(): string {
   const fmt = new Intl.DateTimeFormat("en-CA", {
@@ -59,24 +52,49 @@ function arg(name: string, def: string): string {
 
 async function main(): Promise<void> {
   const samplePath = arg("--sample", "fixtures/redchip-sample.json");
-  const date = arg("--date", yesterdayKey());
+  const date = arg("--date", todayKey());
   const dryRun = process.argv.includes("--dry-run");
 
   const live = process.argv.includes("--live");
   const limit = Number(arg("--limit", "5"));
   let records: ListingRecord[];
 
+  // 采信日期（= 实际命中数据的日期）：目标日无数据时回退到「最近有数据日」。
+  let dataDate = date;
+
   if (live) {
-    // 实网模式：拉披露易 AP&PHIP 静态 JSON → 按目标日期（北京时间昨天）筛选 → 抽 PDF 文本
+    // 实网模式：拉披露易 AP&PHIP **英文**清单 → 按日期筛选 → 抽「申请版本」PDF 文本
     const all = await fetchListingLive();
-    const hit = all.filter((r) => recordDateKey(r) === date);
-    console.log("[redchip] 实网：总 " + all.length + " 条，目标日 " + date + " 命中 " + hit.length + " 条");
+    const onDate = (ds: string) => all.filter((r) => recordDateKey(r) === ds);
+    let hit = onDate(date);
+    if (hit.length === 0) {
+      // 2026-09-15（短板②）：披露易发布有 1~2 天滞后 → 目标日为空时回退到最近有数据的日期，
+      // 否则「抓当天/昨天」在无递表日会恒空（实测 appactive 最新 09-13、目标日 09-14 命中 0）。
+      const dates = Array.from(
+        new Set(all.map((r) => recordDateKey(r)).filter((x): x is string => Boolean(x))),
+      )
+        .filter((d) => d <= date)
+        .sort();
+      const latest = dates[dates.length - 1];
+      if (latest) {
+        console.log(
+          "[redchip] 目标日 " + date + " 无数据（披露易通常滞后 1~2 天）→ 回退到最近有数据日 " + latest,
+        );
+        dataDate = latest;
+        hit = onDate(latest);
+      }
+    }
+    console.log("[redchip] 实网：总 " + all.length + " 条，采信日期 " + dataDate + " 命中 " + hit.length + " 条");
     const enriched: ListingRecord[] = [];
     for (const r of hit.slice(0, limit)) {
+      // 文档选取：ls[] 的「申请版本」（**不再用 w** —— 那是 1 页「警告聲明」，判不出注册地）
       const docUrl = docUrlOf(r);
+      if (!docUrl) {
+        console.log("[redchip] ⚠️ " + String(r.id) + " ls 里无 Application Proof 条目 → 不抽文本（宁缺毋滥）");
+      }
       enriched.push({ ...r, docUrl, docText: docUrl ? await extractPdfText(docUrl) : "" });
     }
-    console.log("[redchip] 实网：已抽取 PDF 文本 " + enriched.length + " 条（--limit " + limit + "）");
+    console.log("[redchip] 实网：已抽取申请版本文本 " + enriched.length + " 条（--limit " + limit + "）");
     records = enriched;
   } else {
     records = loadSampleListing(samplePath);
@@ -105,7 +123,7 @@ async function main(): Promise<void> {
   const snap: RedchipSnapshot = { capturedAt: nowIso, count: projects.length, projects };
   const changes = diffSnapshots(prev, snap);
 
-  console.log("[redchip] 目标日期：" + date + "（北京时间昨天；时区 " + REPORT_TZ + "）");
+  console.log("[redchip] 采信日期：" + dataDate + "（目标日 " + date + "；时区 " + REPORT_TZ + "）");
   console.log("[redchip] 来源：" + (live ? "实网（披露易 AP&PHIP）" : "样本 " + samplePath + "（未发起网络请求）"));
   for (const p of projects) {
     console.log("  · " + p.appId + " " + p.nameCn + " | 离岸=" + p.isOffshore +
@@ -119,7 +137,7 @@ async function main(): Promise<void> {
     return;
   }
   writeLatest(snap);
-  writeDatedSnapshot(snap, date);
+  writeDatedSnapshot(snap, dataDate);
   appendChanges(changes);
   console.log("[redchip] 已写入 data/redchip/{latest.json, snapshots/" + date + ".json, changelog.jsonl}");
 }

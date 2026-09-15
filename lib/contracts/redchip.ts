@@ -5,6 +5,9 @@
  *   红筹 = 境外注册 ∧ 广东运营实体词频 ≥ 3
  *   · 境外注册：申请版本封面页固定句式 → 注册地 ∈ 离岸法域集合
  *   · 广东连接：招股书文本中广东城市词频 ≥ GD_CITY_HIT_THRESHOLD（3）
+ *     ⚠️ 词频**只统计「集团实体语境」句**内的命中（见 `classify.ts` 的 `countGdCityHits`）：
+ *     裸提及会把「董事住址」「中介地址」「深交所名称」都算进来（实测单册 127 次里仅 10 次属实体语境），
+ *     导致阈值恒成立、判定退化为「只看是否离岸」。裸提计数保留在 `gdCityMentions` 供展示/追溯。
  *   · VIE：仅作展示画像字段，**不参与判定**
  * 数据源：港交所披露易「新上市申請版本及相關資料」公开静态地址（免鉴权；red 已验证路径）。
  *
@@ -28,8 +31,10 @@ export interface RedchipProject {
   domicile?: string;
   /** 境外注册（离岸法域）——红筹必要条件之一。 */
   isOffshore: boolean;
-  /** 广东城市词频（gd_opco_count 同款统计）。 */
+  /** 广东城市词频 —— **仅统计「集团实体语境」句**内的命中（判定输入）。 */
   gdCityHits: number;
+  /** 广东城市**裸提及**总数（不设语境门槛，仅供展示/追溯；恒 ≥ gdCityHits）。 */
+  gdCityMentions?: number;
   /** 广东连接达标（gdCityHits ≥ 阈值）——红筹必要条件之一。 */
   isGdConnected: boolean;
   /** VIE 安排（仅画像，不参与判定）。 */
