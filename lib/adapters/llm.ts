@@ -6,6 +6,8 @@
  */
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
+import * as fs from "node:fs";
+import * as path from "node:path";
 import type { LlmPort, LlmRequest } from "../contracts/pipeline";
 import { jsonrepair } from "jsonrepair";
 import { logLlmCall, recordAiCall } from "./llm-log";
@@ -83,8 +85,6 @@ function defaultModelFor(backend: string): string {
 let _dumpSeq = 0;
 function dumpLlmContext(req: LlmRequest, model: string, backend: string): void {
   try {
-    const fs = require("node:fs") as typeof import("node:fs");
-    const path = require("node:path") as typeof import("node:path");
     const runId =
       process.env.GITHUB_RUN_ID || process.env.REPORT_RUN_ID || "local-" + Date.now();
     const dir = path.resolve(process.env.LLM_DUMP_DIR || "data/llm-dump", String(runId));
