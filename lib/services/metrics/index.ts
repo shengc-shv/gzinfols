@@ -117,8 +117,43 @@ export function summarize(calls: LlmCallRecord[]): BackendSummary[] {
   return out.sort((a, b) => b.calls - a.calls);
 }
 
-/** 字符数 → token 估算（gzinfo 口径：3 字符 ≈ 1 token）。 */
-export const CHARS_PER_TOKEN = 3;
+/**
+ * 字符数 → token 的**聚合**换算比（只在「拿不到原文、只有字符数」的场景用，如读历史埋点）。
+ *
+ * 2026-09-15 校准（Token 优化）：原值 3 是**英文**经验值（cl100k ≈ 4 字符/token），
+ * 对中文严重低估——中文（CJK）实际约 1 字符 ≈ 1 token，本项目产出物以中文为主
+ * （混少量 ASCII 链接/数字），综合约 1.5 字符 ≈ 1 token。改用它可避免用量账单
+ * 失真 2 倍以上，是「先能测准、再谈优化」的前提。
+ * 逐条调用有原文时，用下面的 estimateTokens(text) 做更精确的分段估算。
+ */
+export const CHARS_PER_TOKEN = 1.5;
+
+/** 是否 CJK 字符（含常见全角/中文标点；用于中文感知的 token 估算）。 */
+function isCjkCodePoint(cp: number): boolean {
+  return (
+    (cp >= 0x3000 && cp <= 0x303f) || // CJK 标点
+    (cp >= 0x3400 && cp <= 0x4dbf) || // 扩展 A
+    (cp >= 0x4e00 && cp <= 0x9fff) || // 基本区
+    (cp >= 0xf900 && cp <= 0xfaff) || // 兼容表意
+    (cp >= 0xff00 && cp <= 0xffef) || // 全角字符
+    (cp >= 0x20000 && cp <= 0x2ebef) // 扩展 B~F
+  );
+}
+
+/**
+ * 中文感知的 token 估算（启发式）：CJK ≈ 1 token/字，其余（ASCII/数字/空白）≈ 1 token/4 字符。
+ * 与原「字符数/3」相比，中文场景准 2~3 倍。纯函数，供适配器埋点（llm.complete）使用。
+ */
+export function estimateTokens(text: string): number {
+  if (!text) return 0;
+  let cjk = 0;
+  let other = 0;
+  for (const ch of text) {
+    if (isCjkCodePoint(ch.codePointAt(0) ?? 0)) cjk++;
+    else other++;
+  }
+  return cjk + Math.ceil(other / 4);
+}
 
 /** token 数格式化（1.2M / 34.5K / 789）。 */
 export function fmtTokens(chars: number): string {

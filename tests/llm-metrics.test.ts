@@ -8,7 +8,7 @@ import assert from "node:assert/strict";
 import fsSync from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { classifyError, fmtTokens, groupByBackend, sumChars, summarize, withinDays, withinHours } from "../lib/services/metrics";
+import { classifyError, estimateTokens, fmtTokens, groupByBackend, sumChars, summarize, withinDays, withinHours } from "../lib/services/metrics";
 import { loadStageCalls, logLlmCall, readLlmCallLog, recordAiCall, setLlmLogDir } from "../lib/adapters/llm-log";
 import type { AiCallMetric } from "../lib/contracts/metrics";
 import type { LlmCallRecord } from "../lib/contracts/metrics";
@@ -71,10 +71,18 @@ test("统计：时间窗口 / 字符累计 / 按后端分组 / 汇总", () => {
   assert.equal(cc.avgDurationMs, Math.round((3000 + 1200) / 2));
 });
 
-test("fmtTokens：3 字符 ≈ 1 token", () => {
-  assert.equal(fmtTokens(300), "100");
-  assert.equal(fmtTokens(30_000), "10.0K");
-  assert.equal(fmtTokens(6_000_000), "2.00M");
+test("fmtTokens：中文口径 1.5 字符 ≈ 1 token", () => {
+  assert.equal(fmtTokens(300), "200");
+  assert.equal(fmtTokens(30_000), "20.0K");
+  assert.equal(fmtTokens(6_000_000), "4.00M");
+});
+
+test("estimateTokens：CJK ≈ 1/字、ASCII ≈ 1/4（中文感知，修正旧口径 /3 的低估）", () => {
+  assert.equal(estimateTokens(""), 0);
+  assert.equal(estimateTokens("今日简报"), 4, "4 个汉字 = 4 token（旧口径只得 1）");
+  assert.equal(estimateTokens("abcdefgh"), 2, "8 个 ASCII → ceil(8/4)=2");
+  assert.equal(estimateTokens("广州ABCD"), 3, "2 CJK + 4 ASCII → 2 + 1");
+  assert.equal(estimateTokens("，。"), 2, "中文/全角标点按 CJK 计 1 token/字");
 });
 
 test("落盘往返：写入 → 读回（含开关与损坏行）", () => {

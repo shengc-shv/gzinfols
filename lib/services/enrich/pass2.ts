@@ -20,8 +20,15 @@ import type {
   ReportSectionKey,
 } from "../../contracts/report";
 
-/** Pass 2 输入条目回传（含 AI 在 PASS1 已判定的字段，供其照抄）。 */
-const PASS2_INPUT_TRUNCATE = 600;
+/**
+ * Pass2 输入 raw_text 截断上限。
+ * 2026-09-15（Token 优化 · 死配置对齐）：原值 600 恒不生效——PASS1 已把 raw_text
+ * 截到 ≤PASS1_RAW_CAP（450→300），二次截断到 600 永不触发，原注释「上下文过长是二次
+ * 截断到 600 字」误导。现改为 200 使其真正生效：PASS1 已通读全文并给出标题/标签/属地，
+ * PASS2 只写 ≤50 字摘要，200 字作事实锚足够；每条约省 100~250 字，且不再与 PASS1
+ * 重复传同一段正文。
+ */
+const PASS2_INPUT_TRUNCATE = 200;
 
 let injectedRunner2: LlmRunner | undefined;
 /** 组合根注入默认 runner（PASS2_MODEL 覆盖在适配器侧处理）。 */
@@ -132,23 +139,30 @@ export async function runPass2(
     };
   }
 
-  const payload = fresh.map((k) => ({
-    url: k.url,
-    title_cn: k.title_cn,
-    title_orig: k.title_orig,
-    source: k.source,
-    source_type: k.source_type,
-    date: k.date,
-    tags: k.tags,
-    locale: k.locale,
-    locale_evidence: k.locale_evidence,
-    section: k.section,
-    raw_text: k.raw_text.slice(0, PASS2_INPUT_TRUNCATE),
-  }));
+  // 短 id 替代长 url（2026-09-15 Token 优化，与 PASS1 同思路）：payload 用 id、响应按 id 回填，
+  // 由 ctx.resolveUrl 解析回 url（url 仍是唯一真源，业务字段一律以池为准）。
+  const idToUrl = new Map<string, string>();
+  const payload = fresh.map((k, i) => {
+    const id = `b${i + 1}`;
+    idToUrl.set(id, k.url);
+    return {
+      id,
+      title_cn: k.title_cn,
+      title_orig: k.title_orig,
+      source: k.source,
+      source_type: k.source_type,
+      date: k.date,
+      tags: k.tags,
+      locale: k.locale,
+      locale_evidence: k.locale_evidence,
+      section: k.section,
+      raw_text: k.raw_text.slice(0, PASS2_INPUT_TRUNCATE),
+    };
+  });
   const userPrompt = buildPass2User(JSON.stringify(payload), feedback);
   let parsed: any = {};
   try {
-    const raw = await runner(PASS2_SYSTEM, userPrompt);
+    const raw = await runner(PASS2_SYSTEM, userPrompt, { resolveUrl: (key) => idToUrl.get(key) });
     const cleaned = extractJson(raw);
     try {
       parsed = JSON.parse(cleaned);
@@ -174,9 +188,16 @@ export async function runPass2(
     const arr = parsed?.sections?.[sec];
     if (!Array.isArray(arr)) continue;
     for (const ai of arr) {
-      if (!ai || typeof ai.url !== "string") continue;
-      if (cachedUrls.has(ai.url)) continue; // 防御：LLM 不应返回缓存命中条目
-      const base = byUrl.get(ai.url);
+      // key 解析：优先 id（新格式），回退 url（旧格式 / replay 夹具 / dump 占位）
+      const url =
+        ai && typeof ai.id === "string" && ai.id
+          ? idToUrl.get(ai.id)
+          : ai && typeof ai.url === "string"
+            ? ai.url
+            : undefined;
+      if (!url) continue;
+      if (cachedUrls.has(url)) continue; // 防御：LLM 不应返回缓存命中条目
+      const base = byUrl.get(url);
       if (!base) continue; // 池外 url 不纳入（R1 兜底）
       sections[sec].push(assembleItem({ base }, ai));
     }

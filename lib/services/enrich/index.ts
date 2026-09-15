@@ -76,8 +76,8 @@ export async function enrich(
   // 故管线以 runner 参数区分：generateDaily 内部 PASS2 仍调同一 runner —— gzinfo 用
   // PASS1_MODEL/PASS2_MODEL 区分默认 runner，这里统一注入「按 stage 选择模型」的组合 runner。
   const runner2: LlmRunner = makeLlmRunner(deps.llm, ctx.config.models.pass2, "pass2");
-  const combined: LlmRunner = (system, user) =>
-    system.includes("总编辑") ? runner2(system, user) : runner(system, user);
+  const combined: LlmRunner = (system, user, runCtx) =>
+    system.includes("总编辑") ? runner2(system, user, runCtx) : runner(system, user, runCtx);
 
   if (ctx.mode.kind === "skip-ai") {
     const skipRunner = makeSkipAiRunner(ctx.mode.summaryCache, ctx.mode.relevantUrls);

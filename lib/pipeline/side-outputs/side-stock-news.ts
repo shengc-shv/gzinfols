@@ -125,7 +125,7 @@ export async function buildStockNews(
     }
   } else {
     // 与其它板块同逻辑：线上由 LLM 逐条归纳（中性事实，禁业务引申），并持久化供 SKIP_AI 复用
-    news = await analyzeStockNews(rawNews, makeMarketRunner(deps.llm));
+    news = await analyzeStockNews(rawNews, makeMarketRunner(deps.llm, { stage: "stock-news" }));
     writeStockNewsStore(ctx.date, news);
   }
   // 2026-08-29 用户：房贷40年出现在「股市动态」很奇怪。

@@ -70,8 +70,8 @@ export const PASS2_SYSTEM = `你是股份行广州分行零售条线每日资讯
  "insights": [],
  "sections": {"gz_local": [Item...], "biz_insight": [Item...], "policy_market": [Item...], "tech": [Item...], "ipo": [Item...]}
 }
-Item = {"url","title_cn","title_orig","source","source_type","date","summary","importance","tags","locale","locale_evidence"}
-其中 url/title_cn/title_orig/source/source_type/date/tags/locale/locale_evidence 及板块归属必须照抄输入条目，你只新增 summary 和 importance。
+Item = {"id","title_cn","title_orig","source","source_type","date","summary","importance","tags","locale","locale_evidence"}
+其中 id/title_cn/title_orig/source/source_type/date/tags/locale/locale_evidence 及板块归属必须照抄输入条目（id 原样回填），你只新增 summary 和 importance。
 
 【铁律】
 - 事实只许来自输入材料，禁止补充任何外部知识（尤其企业注册地、财务数据）
@@ -85,7 +85,7 @@ export const PASS2_USER = `以下是今日通过初筛的文章（JSON数组）�
 
 __ITEMS_JSON__
 
-请输出终稿JSON。`;
+请输出终稿JSON（id 原样回填输入值）。`;
 
 /** 安全注入：用函数式替换，避免 JSON 中的 `$` 触发 replace 特殊模式。 */
 function inject(template: string, placeholder: string, value: string): string {

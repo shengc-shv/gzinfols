@@ -12,9 +12,11 @@ import {
 } from "./heuristics";
 import { LIGHT_AI_SOURCES, LIGHT_AI_RAW_CAP } from "../select/filters/light-ai";
 
-/** Pass1 输入 raw_text 截断上限（2026-09-05 优化：原 1200 字远超分类判断所需，
- *  且下游 Pass 2 还会二次截断到 600 字，多出部分纯浪费 token 且增大 JSON 断裂概率）。 */
-export const PASS1_RAW_CAP = 450;
+/** Pass1 输入 raw_text 截断上限。
+ *  2026-09-05：1200 → 450（远超分类判断所需，且下游 PASS2 会二次截断）。
+ *  2026-09-15 Token 优化：450 → 300——分类主要靠标题 + 首段，300 字足够；
+ *  每条约省 150 字 × 全量条目，是 PASS1 输入的最大头。 */
+export const PASS1_RAW_CAP = 300;
 
 /** 归一化 ArticleInput → Pass1Input：raw_text 截断 + date MM/DD + gz_hint 提权。 */
 export function toPass1Input(a: ArticleInput): Pass1Input {

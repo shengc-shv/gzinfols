@@ -151,7 +151,10 @@ test("红线① 单元：Invalid Date 与缺失 publishedAt 均被 normalize 丢
 
 /** 构造 scripted runner：PASS1 按 url→keep 决定保留；PASS2 回显成稿。 */
 function scriptedRunner(keepMap: Map<string, boolean>): LlmRunner {
-  return async (system, user) => {
+  return async (system, user, ctx) => {
+    // payload 自 2026-09-15 起用短 id 替代 url：经 ctx 反查真实 url（旧格式回退 url 字段）
+    const urlOf = (it: { id?: string; url?: string }): string | undefined =>
+      (it.id && ctx?.resolveUrl ? ctx.resolveUrl(it.id) : undefined) ?? it.url;
     const slice = (p: string) => {
       try {
         const parsed = JSON.parse(extractJson(p));
@@ -161,11 +164,12 @@ function scriptedRunner(keepMap: Map<string, boolean>): LlmRunner {
       }
     };
     if (system.includes("资讯筛选编辑")) {
-      const arr = slice(user) as Array<{ url: string; title: string; category?: string }>;
+      const arr = slice(user) as Array<{ id?: string; url?: string; title: string; category?: string }>;
       return JSON.stringify({
         items: arr.map((it) => ({
-          url: it.url,
-          keep: keepMap.get(it.url) ?? true,
+          id: it.id ?? "",
+          url: urlOf(it) ?? "",
+          keep: keepMap.get(urlOf(it) ?? "") ?? true,
           section: "biz_insight",
           source_type: "media",
           locale: "national",
@@ -179,13 +183,14 @@ function scriptedRunner(keepMap: Map<string, boolean>): LlmRunner {
     }
     // PASS2：回显
     const arr = slice(user) as Array<{
-      url: string; title_cn: string; source: string; source_type: string; date: string;
+      id?: string; url?: string; title_cn: string; source: string; source_type: string; date: string;
       tags: string[]; locale: string; locale_evidence?: string; section: string; raw_text?: string;
     }>;
     const sections: Record<string, unknown[]> = { gz_local: [], biz_insight: [], policy_market: [], tech: [], ipo: [] };
     for (const it of arr) {
       (sections[it.section] ?? sections.biz_insight).push({
-        url: it.url,
+        id: it.id ?? "",
+        url: urlOf(it) ?? "",
         title_cn: it.title_cn,
         title_orig: "",
         source: it.source,

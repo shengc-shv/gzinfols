@@ -98,7 +98,7 @@ export async function buildStockRecap(
         generateStockRecap(
           { date, us: usItems, aShare: aShareItems, hk: hkItems },
           quotes,
-          makeMarketRunner(deps.llm),
+          makeMarketRunner(deps.llm, { stage: "stock-recap" }),
         ),
     });
     // 2026-09-01 修（股市板块初始化失败根因）：

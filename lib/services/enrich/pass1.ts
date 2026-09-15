@@ -61,10 +61,22 @@ export interface Pass1Item {
   raw_text: string;
 }
 
-/** LLM 调用封装（可注入 mock 便于测试）。 */
+/**
+ * LLM 一次调用的旁路上下文（可选，第三参）。
+ * 用途：PASS1/PASS2 payload 已用**短 id** 替代长 url 省 token，响应按 id 回填；
+ * skip-ai / dump 这类「替换 runner」需要按 id 找回 url 才能做过滤 / 缓存查询，
+ * 故由调用方通过本 ctx 注入 id→url 解析。
+ */
+export interface LlmRunCtx {
+  /** id → 原文 url；未命中返回 undefined。 */
+  resolveUrl?(key: string): string | undefined;
+}
+
+/** LLM 调用封装（可注入 mock 便于测试）。第三参 ctx 可选，向后兼容。 */
 export type LlmRunner = (
   systemPrompt: string,
   userPrompt: string,
+  ctx?: LlmRunCtx,
 ) => Promise<string>;
 
 /** 默认 runner 由管线注入（组合根把 LlmPort 适配成 LlmRunner，含 PASS1_MODEL 覆盖）。 */
@@ -122,7 +134,13 @@ const PASS1_BATCH_RETRY = 1;
 /** 拆半递归最大深度：30→15→7→3→1，约 5 层封顶，防极端全毒场景烧穿成本 */
 const PASS1_MAX_SPLIT_DEPTH = 5;
 
-/** 单次调用：构造 payload → LLM → extractJson → JSON.parse(+jsonrepair) → Map。失败抛错。 */
+/**
+ * PASS1 payload **仍用真实 url** 作条目标识（不换短 id）。
+ * 原因：该 payload 同时也是 CI dump 的落盘内容——本地 replay 的冻结池
+ * （scripts/_build-pool.mjs → data/replay/pool-*.json）依赖其中的 url 重建文章身份与链接，
+ * 换成短 id 会静默破坏 dump→replay 链路。PASS2 payload 不参与池重建，故 PASS2 已改用短 id。
+ */
+/** 单次调用：构造 payload → LLM → extractJson → JSON.parse(+jsonrepair) → Map（按 url 键）。失败抛错。 */
 async function callPass1Once(
   batch: Pass1Input[],
   runner: LlmRunner,

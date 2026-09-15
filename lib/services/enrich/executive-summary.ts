@@ -103,7 +103,7 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 1. must_read（今日必读，3-5 条）— **偏宏观、市场级大信号**：央行/金融监管总局等全国性政策转向、市场重大变化、行业性新趋势、新产品新玩法。答"今天/本周市场可能怎么走"。**只放宏观，不放具体获客动作**（具体动作归 insights）。
    - title：事件标题（15 字内，中文，可精简）
    - why：为什么重要——对广州分行经营规划/战略意味着什么（30-50 字）
-   - url：源链接，从下方输入对应条目的 url 字段原样复制（若对不上可省略，留空）
+   - id：源条目标识，从下方输入对应条目的 id 字段原样回填（若对不上可省略，留空；禁止编造）
 
   **客户客群聚焦（极重要）**：分行当前最关注的三类客群商机须优先覆盖——① 零售AUM（财富管理/理财/基金/存款/资产配置等零售管理资产）；② 中高端客群(过亿资产)（私行/家族信托/企业主/超高净值）；③ 普惠小微贷款客户（普惠金融/小微企业/个体工商户/经营贷）。生成 insights 时，若输入中存在这三类客群的高信号，应优先选取并分别打上对应 segments 标签，确保三条客群线索在「商机洞察」中都有呈现；不要只堆房贷/宏观而漏掉普惠小微与私行客群。
 2. insights（商机提示，5-8 条）— **偏落地、可执行**：具体可落地的获客/产品/客户线索（"哪个客户/产品/动作该做"）。**不放宏观大信号**（宏观归 must_read）；**不放监管威胁**（威胁归 risk）。每条：
@@ -112,7 +112,7 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
    - action：建议动作——具体可执行、带时限感（获客方向/产品配置/风险提示，40-60 字），如"本周走访医疗企业客群、今日起推荐放开限购绩优基金"
    - tag：业务线标签数组，从词表选 1-2 个（词表：竞对动态/信贷/代发/私行/政银合作/住房金融/财富/客群/监管/科技金融）
    - segments：客户客群段数组，从固定集合选（可多段）："零售AUM" / "中高端客群(过亿资产)" / "普惠小微贷款客户"。**配额（极重要）**：零售AUM、中高端客群(过亿资产)、普惠小微贷款客户 三类**各最多出现 2 条**，其余（未命中优先段的"其他业务线"）最多 1 条；请在生成 insights 时主动控制数量，同类商机不要堆超过 2 条（必要时合并）。一条商机同时利好多类客群时各填其一（多标签按其优先级归口、各标签配额独立计数，互不挤占）；若都沾不上则省略本字段（渲染时作为"其他业务线"处理）。可参考输入条目的 subcategory 作先验：gz-wealth/cn-wealth 偏零售AUM，gz-private/cn-private 偏中高端客群(过亿资产)，gz-credit 中普惠/小微/经营贷类偏普惠小微贷款客户。
-   - sources：来源链接数组（1-3 条，必填优先）。每条为输入中直接支撑该洞察的源文章，原样复制其 {title,url}（url 从输入对应条目复制，不得编造）。若洞察由多条输入综合得出，列最权威的 1-3 条；若确实无任何输入支撑则该字段省略。
+   - sources：来源数组（1-3 条，必填优先）。每条为输入中直接支撑该洞察的源文章，原样复制其 {title,id}（id 从输入对应条目回填，不得编造）。若洞察由多条输入综合得出，列最权威的 1-3 条；若确实无任何输入支撑则该字段省略。
 
 3. risk（M 层：今日风险，1 条或 null）— **偏监管/合规威胁**：今天最值得警惕的 1 件事。**与 must_read/insights 严格错开**：
    - must_read 是宏观机会/趋势，insights 是落地动作，**risk 是"威胁/红线"**（监管处罚/合规风险/系统性风险事件/窗口指导等）
@@ -125,7 +125,7 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
    - impact：对广州分行零售/对公业务的影响（40-60 字，**按部门拆解**：个贷/财富/私行/公司/风控 受影响的方式）
    - action：建议动作（40-60 字，具体可执行，**带部门**："公司部应…/风控部应…"）
    - source：来源权威等级（T1=央妈/金融监管总局/国务院 / T1.5=交易所/行业协会 / T2=媒体智库）
-   - sources：来源链接数组（1-3 条，evidence 依据的输入条目，原样复制 {title,url}）
+   - sources：来源数组（1-3 条，evidence 依据的输入条目，原样复制 {title,id}）
    ；当日无突出风险时，risk 设为 null（不要硬编）。
 
 4. guangdong_ipo（广东/广州企业 IPO 动态，1 条或 null）：若输入 ipo 条目中存在"广东/广州企业"的 IPO 相关进展，则产出 guangdong_ipo.spoken（≤90字，说清企业名称、注册地、所属行业、上市地（深交/北交/上交/境外）、最新进展，一两句话）；若无广东/广州 IPO 动态，则 guangdong_ipo 设为 null（不要编造）。
@@ -136,19 +136,11 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 - 只基于输入信息，不要编造
 - 广州本地信息（南沙/广州企业/广州政策）优先于泛全国信息
 - 语言精炼，站在分行行长视角，不写空话套话
-- 措辞语气（2026-08-27 用户反馈：口播每条都说"建议分行"太死板）：凡涉及"建议分行开展动作"的表达，**措辞灵活、多样化**，避免每条都用"建议分行"开头：
-  - 柔软建议式（不固定句式）：
-    - 「建议分行…」（如"建议分行统一口径抢抓窗口"）
-    - 「可考虑…」「值得关注…」「下一步观察…」
-    - 「提示…」「可能影响…」「需注意…」
-    - 直接陈述事实 + 隐含行动（"今日贴息提至 5000，财富部可考虑调整产品结构"）
-  - **严禁**「分行应该/分行应/须尽快/需尽快/务必」等强硬祈使语气
-  - 适用于 hero_line、spoken_hero、insights.action、risk.action
-  - 目标：行长听口播时不会觉得"每条都是"建议分行""这种机械感
-- **你只需写一个口播稿 spoken_hero**：必读 / 商机 / 风险三段的口播由系统确定性地从去重后的卡面数组派生（1:1 对齐），**不要再输出 spoken_must_read / spoken_insights / spoken_risk**（输出也会被覆盖）。spoken_hero 为纯文本：无 Markdown、无链接、无 emoji，可直接朗读；严禁照读 hero_line 原文，要浓缩成「事件 + 应对建议」式口语完整句。
+- 措辞语气：凡涉及"建议分行开展动作"的表达，**措辞灵活、多样化**，避免每条都用"建议分行"开头（可换用「可考虑…」「值得关注…」「下一步观察…」「提示…」「可能影响…」「需注意…」，或直接陈述事实+隐含行动）；**严禁**「分行应该/分行应/须尽快/需尽快/务必」等强硬祈使语气。适用于 hero_line、spoken_hero、insights.action、risk.action。
+- **只写一个口播稿 spoken_hero**：必读/商机/风险三段口播由系统确定性地从去重后的卡面数组派生（1:1 对齐），**不要再输出 spoken_must_read / spoken_insights / spoken_risk**（输出也会被覆盖）。spoken_hero 为纯文本（无 Markdown/链接/emoji，可直接朗读），严禁照读 hero_line 原文，要浓缩成「事件 + 应对建议」式口语完整句。
 - 输出 STRICTLY 一个 JSON 对象（无 markdown 代码块）：
-{"hero_line":"...","spoken_hero":"...","must_read":[{"title":"...","why":"...","url":"..."}],"insights":[{"topic":"...","impact":"...","action":"...","tag":["..."],"segments":["零售AUM"],"sources":[{"title":"...","url":"..."}]}],"risk":{"topic":"...","evidence":"...","impact":"...","action":"...","source":"T1","sources":[{"title":"...","url":"..."}]} 或 null,"guangdong_ipo":{"spoken":"..."} 或 null}
-注意：字符串内引号用单引号或中文引号，禁止裸双引号；url 字段原样复制输入中的链接。`;
+{"hero_line":"...","spoken_hero":"...","must_read":[{"title":"...","why":"...","id":"..."}],"insights":[{"topic":"...","impact":"...","action":"...","tag":["..."],"segments":["零售AUM"],"sources":[{"title":"...","id":"..."}]}],"risk":{"topic":"...","evidence":"...","impact":"...","action":"...","source":"T1","sources":[{"title":"...","id":"..."}]} 或 null,"guangdong_ipo":{"spoken":"..."} 或 null}
+注意：字符串内引号用单引号或中文引号，禁止裸双引号；id 字段原样回填输入中的标识，不要输出 url。`;
 
 /**
  * 商机洞察回链来源：insights 为 AI 综合而成，未必带 sources 字段。
@@ -230,20 +222,71 @@ export function dedupeExecutiveCrossSection(exec: ExecutiveSummary): ExecutiveSu
 /** LLM runner 类型（组合根把 LlmPort 适配成此签名；gzinfo 为 runLlm 直连）。 */
 export type ExecLlmRunner = (systemPrompt: string, userPrompt: string) => Promise<string>;
 
+/**
+ * 按分行相关性取前 N（2026-09-15 Token 优化）。
+ * 原实现直接 `slice(0, N)` —— 取的是数组前 N 条（严格池按板块顺序、非全局相关性）。
+ * 改为按 `scoreBranchRelevance` 排序后取 Top-K，进入 exec 提示词的条目「更该给分行看」，
+ * 也让限流（动态 Top-K）更安全。稳定排序：同分保持原顺序。
+ */
+function topByRelevance<
+  T extends { title?: string; summary?: string; subcategory?: string; url?: string },
+>(items: T[], n: number): T[] {
+  if (items.length <= n) return items;
+  const order = items
+    .map((it, i) => ({
+      i,
+      score: scoreBranchRelevance({
+        title: it.title ?? "",
+        summary: it.summary,
+        subcategory: it.subcategory,
+        url: it.url,
+      }).score,
+    }))
+    .sort((a, b) => b.score - a.score);
+  return order.slice(0, n).map((o) => items[o.i]);
+}
+
 export async function generateExecutiveSummary(
   input: ExecSummaryInput,
   runner: ExecLlmRunner,
 ): Promise<ExecutiveSummary | null> {
+  // 短 id 替代长 url（2026-09-15 Token 优化）：payload 只带 id（省下每条 ~80 字符的 url），
+  // 响应按 id 回填、代码解析回真实 url。url 仍是唯一真源（由 input 提供，模型不得编造）。
+  const idToUrl = new Map<string, string>();
+  const knownUrls = new Set<string>();
+  for (const it of [...input.finance, ...input.gz, ...(input.ipo ?? [])]) {
+    if (it.url) knownUrls.add(it.url);
+  }
+  /** id → url（仅接受本次 payload 里真实存在过的 id）。 */
+  const urlById = (id: unknown): string | undefined =>
+    typeof id === "string" && id ? idToUrl.get(id) : undefined;
+  /** 仅接受「输入池中真实存在」的 url（防模型编造链接）。 */
+  const knownUrl = (u: unknown): string | undefined =>
+    typeof u === "string" && knownUrls.has(u) ? u : undefined;
+  const enc = <
+    T extends { title?: string; summary?: string; subcategory?: string; url?: string },
+  >(
+    items: T[],
+    prefix: string,
+    n: number,
+  ) =>
+    topByRelevance(items, n).map((it, i) => {
+      const id = `${prefix}${i + 1}`;
+      if (it.url) idToUrl.set(id, it.url);
+      return {
+        id,
+        title: it.title ?? "",
+        summary: it.summary ?? "",
+        ...(it.subcategory ? { subcategory: it.subcategory } : {}),
+      };
+    });
+
   const payload = {
     date: input.date,
     market_overview: input.marketOverview ?? "",
-    finance: input.finance.slice(0, 12),
-    gz: input.gz.slice(0, 12),
-    ipo: (input.ipo ?? []).slice(0, 20).map((it) => ({
-      title: it.title ?? "",
-      summary: it.summary ?? "",
-      url: it.url ?? "",
-    })),
+    finance: enc(input.finance, "f", 12),
+    gz: enc(input.gz, "g", 12),
+    ipo: enc(input.ipo ?? [], "i", 20),
     // B-1：关键词层 risk_tracker 已识别的风险候选，LLM 优先从这里选 1 条作为今日风险
     ...(input.riskCandidates && input.riskCandidates.length > 0
       ? { risk_candidates: input.riskCandidates }
@@ -257,7 +300,7 @@ export async function generateExecutiveSummary(
     `当日信息（JSON）：`,
     JSON.stringify(payload),
     "",
-    '请输出 {"hero_line":"...","spoken_hero":"...","must_read":[...],"insights":[...],"risk":{...} 或 null,"guangdong_ipo":{...} 或 null}，hero_line 1 句、must_read 3-5 条、insights 5-8 条；spoken_hero 与 guangdong_ipo.spoken 为纯口语文本（不要输出 spoken_must_read / spoken_insights / spoken_risk）。',
+    '请输出 {"hero_line":"...","spoken_hero":"...","must_read":[...],"insights":[...],"risk":{...} 或 null,"guangdong_ipo":{...} 或 null}，hero_line 1 句、must_read 3-5 条、insights 5-8 条；spoken_hero 与 guangdong_ipo.spoken 为纯口语文本（不要输出 spoken_must_read / spoken_insights / spoken_risk）；must_read / insights.sources / risk.sources 的 id 必须从输入条目原样回填，不得编造，也不要输出 url。',
   ].join("\n");
   try {
     const text = await runner(SYSTEM_PROMPT, userPrompt);
@@ -302,10 +345,13 @@ export async function generateExecutiveSummary(
         ? (() => {
             const r = rawRisk as unknown as Record<string, unknown>;
             const explicit = Array.isArray(r.sources) && (r.sources as unknown[]).length > 0
-              ? (r.sources as Array<{ title?: string; url?: string }>)
+              ? (r.sources as Array<{ title?: string; url?: string; id?: string }>)
                   .slice(0, 3)
-                  .filter((s) => s && s.url)
-                  .map((s) => ({ title: s.title || "", url: s.url as string }))
+                  .map((s) => {
+                    const url = urlById(s?.id) ?? knownUrl(s?.url);
+                    return url ? { title: s.title || "", url } : undefined;
+                  })
+                  .filter((s): s is { title: string; url: string } => Boolean(s))
               : [];
             const sources = explicit.length > 0
               ? explicit
@@ -335,14 +381,21 @@ export async function generateExecutiveSummary(
       must_read: parsed.must_read.slice(0, 5).map((m) => ({
         title: m.title,
         why: m.why,
-        url: m.url || resolveUrl(m.title),
+        // id 优先（新格式）→ 旧格式 url（白名单校验）→ 按标题回链
+        url: urlById((m as { id?: unknown }).id) ?? knownUrl(m.url) ?? resolveUrl(m.title),
       })),
       spoken_must_read: typeof parsed.spoken_must_read === "string" && parsed.spoken_must_read.trim() ? parsed.spoken_must_read.trim() : undefined,
       insights: parsed.insights.slice(0, 8).map((it) => {
         // sources：优先用 LLM 显式引源；否则用生成时看到的 inputs（finance+gz，含真实 URL）
         // 按相似度回链 1-3 条来源，保证「商机洞察」卡片有可信溯源入口（不依赖 LLM 吐 url 格式）。
         const explicit = Array.isArray(it.sources) && it.sources.length > 0
-          ? it.sources.slice(0, 3).filter((s) => s && s.url).map((s) => ({ title: s.title || "", url: s.url }))
+          ? it.sources
+              .slice(0, 3)
+              .map((s: { title?: string; url?: string; id?: string }) => {
+                const url = urlById(s?.id) ?? knownUrl(s?.url);
+                return url ? { title: s.title || "", url } : undefined;
+              })
+              .filter((s): s is { title: string; url: string } => Boolean(s))
           : [];
         const sources = explicit.length > 0 ? explicit : resolveInsightSources(it.topic, it.impact, it.action, [...input.finance, ...input.gz]);
         return {

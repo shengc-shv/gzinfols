@@ -57,7 +57,16 @@ export function makeSkipAiRunner(
   cache: Map<string, string> = new Map(),
   relevantUrls?: Set<string>,
 ): LlmRunner {
-  return async (_system, userPrompt) => {
+  return async (_system, userPrompt, ctx) => {
+    // 解析 payload 条目对应的真实 url：新格式 payload 用短 id（经 ctx.resolveUrl 反查），
+    // 旧格式直接用 url 字段（replay 夹具 / 测试）。2026-09-15 Token 优化引入 id。
+    const urlOf = (it: any): string | undefined => {
+      if (it && typeof it.id === "string" && it.id && ctx?.resolveUrl) {
+        const u = ctx.resolveUrl(it.id);
+        if (u) return u;
+      }
+      return it && typeof it.url === "string" && it.url ? it.url : undefined;
+    };
     let arr: any[] = [];
     try {
       const parsed = JSON.parse(extractJson(userPrompt));
@@ -72,20 +81,12 @@ export function makeSkipAiRunner(
     const isPass2 = arr[0]?.section !== undefined;
     if (!isPass2) {
       // PASS1：元素含 category，无 section。
-      // 2026-08-22 修复：SKIP_AI 不再「全部 keep」——若提供了 relevantUrls（历史库
-      // ai_relevant=true 的 url 集合），只保留其中的条目，与 render mergeRolling 的
-      // 「未打标/无关一律不并入」口径一致，防止今天新抓的非 L0 垃圾（绿色算力/
-      // 银行中报/科技公司业绩）在预览/发布时混入板块。未提供时保持旧行为（全 keep，
-      // 供无缓存兜底/测试）。
-      //
-      // 2026-09-14 修复（P0-2）：**空 allow-list ≠「全部无关」**。历史库 `ai_relevant`
-      // 字段当前全库缺失（实测 data/article-history.json 126 条无一为 true）→
-      // `relevantUrls` 恒为空 Set → 旧写法 `!relevantUrls` 为 false → 「只保留空集里的
-      // 条目」= 一条不留 → PASS1 返回 0 条 → generateDaily 直接返回空报告，
-      // **四个主板块恒空**（归档 2026-09-14 报告 sections 全 0 即此）。
-      // 语义修正：allow-list 为空 = 「尚无已判定相关的条目」，退化为全量保留 +
-      // 内容判定归栏（垃圾由 PASS2 摘要质量与 mergeRolling 评分器把关），
-      // 而不是产出一份空简报。只有 allow-list **非空** 时才按其过滤（保留 08-22 防垃圾行为）。
+      // 2026-08-22：SKIP_AI 不再「全部 keep」——若提供 relevantUrls（历史库 ai_relevant=true
+      // 的 url 集合），只保留其中的条目，防止今日新抓的非 L0 垃圾混入板块。
+      // 2026-09-14（P0-2）：**空 allow-list ≠「全部无关」**——历史库 ai_relevant 全缺时
+      // relevantUrls 恒空，旧写法 `!relevantUrls` 为 false → 一条不留 → 四板块恒空。
+      // 语义修正：allow-list 为空 = 「尚无已判定相关的条目」，退化为全量保留 + 内容判定
+      // 归栏；仅当 allow-list **非空** 时才按其过滤（保留 08-22 防垃圾行为）。
       const hasAllowList = Boolean(relevantUrls && relevantUrls.size > 0);
       if (!hasAllowList && relevantUrls) {
         console.warn(
@@ -95,9 +96,15 @@ export function makeSkipAiRunner(
       }
       return JSON.stringify({
         items: arr
-          .filter((it: any) => !hasAllowList || relevantUrls!.has(it.url))
+          .filter((it: any) => {
+            if (!hasAllowList) return true;
+            const u = urlOf(it);
+            return Boolean(u && relevantUrls!.has(u));
+          })
           .map((it: any) => ({
-            url: it.url,
+            // 原样回填 id（新格式）；同时带 url 以兼容 resolver 回退
+            id: typeof it.id === "string" ? it.id : "",
+            url: urlOf(it) ?? "",
             keep: true,
             // 无状态源架构红线（2026-08-29 用户）：板块归属由内容判定——
             // gz_hint（标题广州锚+业务线）→ 广州本地；否则内容判定（广州锚/政策词/市场信号），
@@ -126,9 +133,11 @@ export function makeSkipAiRunner(
     };
     for (const it of arr) {
       const sec: ReportSectionKey = SECTIONS.includes(it.section) ? it.section : "biz_insight";
-      const cached = cache.get(it.url);
+      const url = urlOf(it) ?? "";
+      const cached = url ? cache.get(url) : undefined;
       sections[sec].push({
-        url: it.url,
+        id: typeof it.id === "string" ? it.id : "",
+        url,
         title_cn: it.title_cn || "",
         title_orig: it.title_orig || "",
         source: it.source || "",

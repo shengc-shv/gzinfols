@@ -11,7 +11,7 @@ import * as path from "node:path";
 import type { LlmPort, LlmRequest } from "../contracts/pipeline";
 import { jsonrepair } from "jsonrepair";
 import { logLlmCall, recordAiCall } from "./llm-log";
-import { classifyError } from "../services/metrics";
+import { classifyError, estimateTokens } from "../services/metrics";
 import { todayKey } from "../utils/time";
 
 const execFileP = promisify(execFile);
@@ -263,7 +263,7 @@ export class LlmAdapter implements LlmPort {
           errorCategory: null,
           errorSnippet: null,
         });
-        // stage 层：按业务阶段聚合（claude-cli 无 token 计量恒 0，API 后端按 3 字符≈1token 估算）
+        // stage 层：按业务阶段聚合（claude-cli 无 token 计量恒 0；API 后端中文感知估算：CJK≈1/字、其余≈1/4）
         recordAiCall({
           ts: new Date().toISOString(),
           date: todayKey(),
@@ -271,7 +271,7 @@ export class LlmAdapter implements LlmPort {
           stage: req.stage ?? "other",
           ok: true,
           ms: Date.now() - t0,
-          tokens: this.backend === "claude-cli" ? 0 : Math.round((inputChars + text.length) / 3),
+          tokens: this.backend === "claude-cli" ? 0 : estimateTokens((req.system ?? "") + req.prompt) + estimateTokens(text),
           modelTag: model,
         });
         return this.postProcess(text, req);
