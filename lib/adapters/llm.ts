@@ -125,9 +125,32 @@ function dumpLlmContext(req: LlmRequest, model: string, backend: string): void {
  */
 function dumpPass1Placeholder(prompt: string): string {
   try {
-    // 极简 JSON 数组提取（不依赖 services 的 extractJson，避免反向依赖）
-    const start = prompt.indexOf("[");
-    const end = prompt.lastIndexOf("]");
+    // 括号配平提取：prompt 在 JSON 数组之后常跟一句说明（如『输出 {"items":[...]}』），
+    // 用 lastIndexOf("]") 会把这段尾巴一起包进去导致解析失败。改为从首个 '[' 起按
+    // 深度配平取回对应的 ']'，只截出数组本身（字符串内的括号已被忽略）。
+    let depth = 0;
+    let inStr = false;
+    let start = -1;
+    let end = -1;
+    for (let i = 0; i < prompt.length; i++) {
+      const c = prompt[i];
+      if (inStr) {
+        if (c === "\\") i++;
+        else if (c === '"') inStr = false;
+        continue;
+      }
+      if (c === '"') inStr = true;
+      else if (c === "[") {
+        if (start < 0) start = i;
+        depth++;
+      } else if (c === "]") {
+        depth--;
+        if (depth === 0) {
+          end = i;
+          break;
+        }
+      }
+    }
     if (start < 0 || end < start) return "";
     const arr = JSON.parse(prompt.slice(start, end + 1));
     if (!Array.isArray(arr)) return "";
