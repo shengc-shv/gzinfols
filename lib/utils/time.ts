@@ -101,3 +101,18 @@ export function extractDateFromUrl(url?: string): string | undefined {
   if (y < 2000 || y > 2100 || mo < 1 || mo > 12 || d < 1 || d > 31) return undefined;
   return `${y}-${String(mo).padStart(2, "0")}-${String(d).padStart(2, "0")}`;
 }
+
+/**
+ * 前 n 个自然日（`YYYY-MM-DD` → 更早的日期键）。
+ *
+ * 纯日期运算，以 UTC 零点为锚（**不涉及时区换算**）：输入的键本身已是报告时区的日历日，
+ * 减整天不会跨时区漂移。非法输入原样返回（宁可不改，也不编造日期）。
+ *
+ * 用途：抓取窗口「今天 + 昨天」等**多日窗口**构造
+ * （如 `scripts/redchip-monitor` 的默认采信窗口，用户 2026-09-15 口径）。
+ */
+export function prevDateKey(key: string, n = 1): string {
+  const t = Date.parse(`${key}T00:00:00Z`);
+  if (Number.isNaN(t) || !Number.isFinite(n)) return key;
+  return new Date(t - Math.trunc(n) * 86_400_000).toISOString().slice(0, 10);
+}

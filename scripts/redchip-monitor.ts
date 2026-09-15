@@ -4,14 +4,16 @@
  * 用法：
  *   tsx scripts/redchip-monitor.ts [--sample fixtures/redchip-sample.json] [--date YYYY-MM-DD] [--dry-run]
  *
- * 骨架阶段：**只跑固定样本，不发起真实网络请求**。
- *
- * ⏰ 日期口径（2026-09-15 修正，对齐用户口径 + 短板②）：
- *   默认按**当次 CI 运行的当日**（北京时间 REPORT_TZ）抓取；若该日无数据（披露易发布
- *   有 1~2 天滞后）**自动回退到最近有数据的日期**，避免恒空。可用 --date 覆盖补跑。
+ * ⏰ 日期口径（2026-09-15 用户口径：**只抓「今天 + 昨天」两天**）：
+ *   默认窗口 = [今天, 昨天]（北京时间 REPORT_TZ 日历日），两天合并后按申请编号去重；
+ *   两天都无数据（披露易发布滞后 1~2 天）→ **自动回退到最近有数据日**，避免恒空；
+ *   显式 `--date X`（补跑）→ 只取 X 单日，精确复现历史某天。
  *   —— 不可用 Date.toISOString() 取日期（那是 UTC 日期，会在 12:00 北京跑时错成"今天"）。
  *
- * 产出：data/redchip/latest.json、snapshots/<date>.json、changelog.jsonl
+ * 📊 日志里「清单总量 N 条」是**源清单本身的条数**（披露易 AP&PHIP 全部在册申请），
+ *    与实际抓取量无关：过滤后只对窗口命中的记录下载申请版本 PDF，且受 --limit 上限约束。
+ *
+ * 产出：data/redchip/latest.json、snapshots/<date>.json、changelog.jsonl、leads.json
  */
 import {
   boardOf,
@@ -34,7 +36,7 @@ import { classifyProject } from "../lib/services/redchip/classify";
 import { diffSnapshots } from "../lib/services/redchip/diff";
 import { toLeads } from "../lib/services/redchip/leads";
 import type { RedchipProject, RedchipSnapshot } from "../lib/contracts/redchip";
-import { REPORT_TZ, todayKey } from "../lib/utils/time";
+import { REPORT_TZ, prevDateKey, todayKey } from "../lib/utils/time";
 
 /** 当前北京时间的 ISO 串（Asia/Shanghai 无夏令时，固定 +08:00）。 */
 function beijingNowIso(): string {
@@ -55,6 +57,7 @@ function arg(name: string, def: string): string {
 
 async function main(): Promise<void> {
   const samplePath = arg("--sample", "fixtures/redchip-sample.json");
+  const explicitDate = process.argv.includes("--date");
   const date = arg("--date", todayKey());
   const dryRun = process.argv.includes("--dry-run");
 
@@ -62,17 +65,33 @@ async function main(): Promise<void> {
   const limit = Number(arg("--limit", "5"));
   let records: ListingRecord[];
 
-  // 采信日期（= 实际命中数据的日期）：目标日无数据时回退到「最近有数据日」。
+  // 采信窗口（**用户 2026-09-15 口径：只抓「今天 + 昨天」两天**）。
+  //   · 默认（无 --date）→ 窗口 = [今天, 昨天]，两天合并去重；
+  //   · 显式 `--date X`（补跑用）→ 只取 X 单日，精确复现历史某天。
+  // 另加「窗口全空 → 回退最近有数据日」的安全网（披露易滞后 1~2 天，见短板②）。
+  let windowDates: string[] = [date];
   let dataDate = date;
 
   if (live) {
-    // 实网模式：拉披露易 AP&PHIP **英文**清单 → 按日期筛选 → 抽「申请版本」PDF 文本
+    // 实网模式：拉披露易 AP&PHIP **英文**清单 → 按日期窗口筛选 → 抽「申请版本」PDF 文本
     const all = await fetchListingLive();
     const onDate = (ds: string) => all.filter((r) => recordDateKey(r) === ds);
-    let hit = onDate(date);
-    if (hit.length === 0) {
-      // 2026-09-15（短板②）：披露易发布有 1~2 天滞后 → 目标日为空时回退到最近有数据的日期，
-      // 否则「抓当天/昨天」在无递表日会恒空（实测 appactive 最新 09-13、目标日 09-14 命中 0）。
+    // 去重主键 = 申请编号（同一条可能同时出现在 appactive / applisted / gem 等多份清单里）
+    const dedupe = (rs: ListingRecord[]): ListingRecord[] => {
+      const seen = new Set<string>();
+      return rs.filter((r) => {
+        const k = String(r.id ?? "");
+        if (!k || seen.has(k)) return false;
+        seen.add(k);
+        return true;
+      });
+    };
+
+    windowDates = explicitDate ? [date] : [date, prevDateKey(date)];
+    let hit = dedupe(windowDates.flatMap(onDate));
+    if (hit.length === 0 && !explicitDate) {
+      // 短板②：披露易发布有 1~2 天滞后 → 两天窗口都空时，回退到「最近有数据日」，
+      // 否则无递表的日子会恒空（实测 appactive 最新 09-13、目标日 09-14 命中 0）。
       const dates = Array.from(
         new Set(all.map((r) => recordDateKey(r)).filter((x): x is string => Boolean(x))),
       )
@@ -81,13 +100,18 @@ async function main(): Promise<void> {
       const latest = dates[dates.length - 1];
       if (latest) {
         console.log(
-          "[redchip] 目标日 " + date + " 无数据（披露易通常滞后 1~2 天）→ 回退到最近有数据日 " + latest,
+          "[redchip] 窗口 " + windowDates.join("~") + " 无数据（披露易通常滞后 1~2 天）→ 回退到最近有数据日 " + latest,
         );
+        windowDates = [latest];
         dataDate = latest;
-        hit = onDate(latest);
+        hit = dedupe(onDate(latest));
       }
     }
-    console.log("[redchip] 实网：总 " + all.length + " 条，采信日期 " + dataDate + " 命中 " + hit.length + " 条");
+    console.log(
+      "[redchip] 实网：清单总量 " + all.length + " 条（**源清单总量，不是抓取量**）→ 采信窗口 " +
+        windowDates.join(" ~ ") + " 命中 " + hit.length + " 条，实际下载申请版本 PDF " +
+        Math.min(hit.length, limit) + " 个（--limit " + limit + "）",
+    );
     const enriched: ListingRecord[] = [];
     for (const r of hit.slice(0, limit)) {
       // 文档选取：ls[] 的「申请版本」（**不再用 w** —— 那是 1 页「警告聲明」，判不出注册地）
@@ -126,7 +150,7 @@ async function main(): Promise<void> {
   const snap: RedchipSnapshot = { capturedAt: nowIso, count: projects.length, projects };
   const changes = diffSnapshots(prev, snap);
 
-  console.log("[redchip] 采信日期：" + dataDate + "（目标日 " + date + "；时区 " + REPORT_TZ + "）");
+  console.log("[redchip] 采信窗口：" + windowDates.join(" ~ ") + "（目标日 " + date + (explicitDate ? "，--date 显式指定单日" : "，默认今天+昨天") + "；时区 " + REPORT_TZ + "）");
   console.log("[redchip] 来源：" + (live ? "实网（披露易 AP&PHIP）" : "样本 " + samplePath + "（未发起网络请求）"));
   for (const p of projects) {
     console.log("  · " + p.appId + " " + p.nameCn + " | 离岸=" + p.isOffshore +
