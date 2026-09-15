@@ -1,191 +1,520 @@
 {
   "version": 1,
   "updatedAt": "2026-09-16",
-  "events": {},
+  "events": {
+    "信贷|利率|客群": {
+      "id": "信贷|利率|客群",
+      "topicTags": [
+        "利率流动性",
+        "私行客群",
+        "消费信贷"
+      ],
+      "anchors": [
+        "经营贷",
+        "信贷",
+        "利率",
+        "客群",
+        "发改委",
+        "代发"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "hero",
+        "must_read",
+        "insights"
+      ],
+      "anglesUsed": [
+        "政策变化",
+        "市场反应"
+      ],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "hero",
+          "title": "8月信贷结构生变、对公强零售弱，叠加经营贷利率上行，零售投放节奏与客群结构需重新校准。",
+          "text": "8月信贷结构生变、对公强零售弱，叠加经营贷利率上行，零售投放节奏与客群结构需重新校准。",
+          "facts": [
+            "#8月"
+          ],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "score": 66,
+          "novelty": 1
+        },
+        {
+          "date": "2026-09-16",
+          "section": "must_read",
+          "title": "经营贷利率悄然上行",
+          "text": "经营贷利率悄然上行 同业主动缩规模、贸易类准入收紧，我行同类客群敞口与定价空间值得重新测算，防范风险与机会并存。",
+          "facts": [],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://finance.sina.com.cn/roll/2026-09-15/doc-inirxhzs6918539.shtml",
+          "score": 74,
+          "novelty": 0.3,
+          "angle": "政策变化"
+        },
+        {
+          "date": "2026-09-16",
+          "section": "insights",
+          "title": "民企座谈释放服务空间",
+          "text": "民企座谈释放服务空间 发改委围绕优化发展环境、拓展投资空间听取民企意见，政银合作与民企客群服务方向可跟进。 可考虑本月对接本地工商联与园区，梳理民企名单，配套经营贷与代发综合服务方案。",
+          "facts": [
+            "@发改委"
+          ],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20260915/4470263_1.html",
+          "novelty": 0.781578947368421,
+          "angle": "市场反应"
+        }
+      ],
+      "broadcastedTexts": [
+        "8月信贷结构生变、对公强零售弱，叠加经营贷利率上行，零售投放节奏与客群结构需重新校准。 8月信贷结构生变、对公强零售弱，叠加经营贷利率上行，零售投放节奏与客群结构需重新校准。",
+        "经营贷利率悄然上行 经营贷利率悄然上行 同业主动缩规模、贸易类准入收紧，我行同类客群敞口与定价空间值得重新测算，防范风险与机会并存。",
+        "民企座谈释放服务空间 民企座谈释放服务空间 发改委围绕优化发展环境、拓展投资空间听取民企意见，政银合作与民企客群服务方向可跟进。 可考虑本月对接本地工商联与园区，梳理民企名单，配套经营贷与代发综合服务方案。"
+      ],
+      "broadcastedFacts": [
+        "#8月",
+        "@发改委"
+      ],
+      "peakScore": 74
+    },
+    "信贷|按揭|消费贷": {
+      "id": "信贷|按揭|消费贷",
+      "topicTags": [
+        "住房金融",
+        "消费信贷"
+      ],
+      "anchors": [
+        "按揭",
+        "消费贷",
+        "信贷"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "must_read",
+          "title": "8月信贷结构生变",
+          "text": "8月信贷结构生变 对公强、零售弱格局延续，零售条线需重估按揭与消费贷增长动能，调整投放节奏与资源配置。",
+          "facts": [
+            "#8月"
+          ],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20260916/4470387_1.html",
+          "score": 66,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "8月信贷结构生变 8月信贷结构生变 对公强、零售弱格局延续，零售条线需重估按揭与消费贷增长动能，调整投放节奏与资源配置。"
+      ],
+      "broadcastedFacts": [
+        "#8月"
+      ],
+      "peakScore": 66
+    },
+    "养老|普惠": {
+      "id": "养老|普惠",
+      "topicTags": [
+        "消费信贷"
+      ],
+      "anchors": [
+        "普惠",
+        "养老"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "must_read",
+          "title": "五篇大文章增量超七成",
+          "text": "五篇大文章增量超七成 科技、绿色、普惠、养老投放权重上升，零售条线可对照自身结构找差距，争取政策资源倾斜。",
+          "facts": [],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-15/doc-inirwfqk3988152.shtml",
+          "score": 66,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "五篇大文章增量超七成 五篇大文章增量超七成 科技、绿色、普惠、养老投放权重上升，零售条线可对照自身结构找差距，争取政策资源倾斜。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 66
+    },
+    "#23.91万亿|信贷": {
+      "id": "#23.91万亿|信贷",
+      "topicTags": [],
+      "anchors": [
+        "信贷",
+        "#23.91万亿"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "must_read",
+          "title": "8月金融数据出炉",
+          "text": "8月金融数据出炉 社融累计23.91万亿，信贷结构变化直接影响零售信贷投放节奏与全年目标达成路径。",
+          "facts": [
+            "#8月",
+            "#23.91万亿"
+          ],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://m.21jingji.com/article/20260915/herald/553d69ea5589874a691faa799067d4f7.html",
+          "score": 64,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "8月金融数据出炉 8月金融数据出炉 社融累计23.91万亿，信贷结构变化直接影响零售信贷投放节奏与全年目标达成路径。"
+      ],
+      "broadcastedFacts": [
+        "#8月",
+        "#23.91万亿"
+      ],
+      "peakScore": 64
+    },
+    "按揭": {
+      "id": "按揭",
+      "topicTags": [
+        "住房金融"
+      ],
+      "anchors": [
+        "按揭"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "must_read",
+          "title": "多地房地产政策优化见效",
+          "text": "多地房地产政策优化见效 房价同比降幅收窄、政策效果显现，住房金融条线可按揭投放与客户沟通口径可微调。",
+          "facts": [],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://www.cnfin.com/hg-lb/detail/20260916/4470375_1.html",
+          "score": 74,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "多地房地产政策优化见效 多地房地产政策优化见效 房价同比降幅收窄、政策效果显现，住房金融条线可按揭投放与客户沟通口径可微调。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 74
+    },
+    "基金|高净值": {
+      "id": "基金|高净值",
+      "topicTags": [
+        "财富管理",
+        "私行客群"
+      ],
+      "anchors": [
+        "基金",
+        "高净值"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "insights",
+          "title": "基金代销格局重塑",
+          "text": "基金代销格局重塑 第三方机构份额提升挤压银行渠道，财富条线客户留存与费率策略承压，需强化投顾服务差异化。 可考虑本周梳理代销产品货架，对高净值客户加推组合投顾服务，稳住存量AUM。",
+          "facts": [],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://www.stcn.com/article/detail/4186642.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "基金代销格局重塑 基金代销格局重塑 第三方机构份额提升挤压银行渠道，财富条线客户留存与费率策略承压，需强化投顾服务差异化。 可考虑本周梳理代销产品货架，对高净值客户加推组合投顾服务，稳住存量AUM。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ETF|黄金": {
+      "id": "ETF|黄金",
+      "topicTags": [
+        "财富管理"
+      ],
+      "anchors": [
+        "黄金",
+        "ETF"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "insights",
+          "title": "贵金属代理退场承接",
+          "text": "贵金属代理退场承接 多家银行收缩个人贵金属代理，存量客户面临迁移，是财富条线承接他行客户与替代配置的窗口。 提示财富团队梳理贵金属存量客户名单，本周内推送黄金ETF等替代方案承接需求。",
+          "facts": [],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20260916/4470382_1.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "贵金属代理退场承接 贵金属代理退场承接 多家银行收缩个人贵金属代理，存量客户面临迁移，是财富条线承接他行客户与替代配置的窗口。 提示财富团队梳理贵金属存量客户名单，本周内推送黄金ETF等替代方案承接需求。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "保险|客群|私行": {
+      "id": "保险|客群|私行",
+      "topicTags": [
+        "财富管理",
+        "私行客群"
+      ],
+      "anchors": [
+        "保险",
+        "私行",
+        "客群"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [
+        "政策变化"
+      ],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "insights",
+          "title": "健康险转型配置窗口",
+          "text": "健康险转型配置窗口 健康险从赔付型转向健康管理型，财富与客群条线可据此调整保险配置话术，提升中高端客户黏性。 可考虑联合保险合作方更新健康管理型产品话术，本月内对私行客户做一轮配置回访。",
+          "facts": [],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://finance.cctv.com/2026/09/15/ARTISUWEFYDWtdFGUyHcJpRV260915.shtml",
+          "novelty": 1
+        },
+        {
+          "date": "2026-09-16",
+          "section": "insights",
+          "title": "跨境资金净流入窗口",
+          "text": "跨境资金净流入窗口 8月跨境收支增长、资金净流入，叠加美债收益率破5，跨境与外币资产配置客户沟通窗口打开。 值得关注跨境客群结售汇与资金归集需求，本周对私行客户提示汇率波动与外币配置机会。",
+          "facts": [
+            "#8月"
+          ],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20260915/4470157_1.html",
+          "novelty": 0.5409722222222222,
+          "angle": "政策变化"
+        }
+      ],
+      "broadcastedTexts": [
+        "健康险转型配置窗口 健康险转型配置窗口 健康险从赔付型转向健康管理型，财富与客群条线可据此调整保险配置话术，提升中高端客户黏性。 可考虑联合保险合作方更新健康管理型产品话术，本月内对私行客户做一轮配置回访。",
+        "跨境资金净流入窗口 跨境资金净流入窗口 8月跨境收支增长、资金净流入，叠加美债收益率破5，跨境与外币资产配置客户沟通窗口打开。 值得关注跨境客群结售汇与资金归集需求，本周对私行客户提示汇率波动与外币配置机会。"
+      ],
+      "broadcastedFacts": [
+        "#8月"
+      ],
+      "peakScore": 0
+    },
+    "客群": {
+      "id": "客群",
+      "topicTags": [
+        "私行客群",
+        "科技金融"
+      ],
+      "anchors": [
+        "客群",
+        "信贷"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [
+        "市场反应"
+      ],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "insights",
+          "title": "科创企业全周期服务",
+          "text": "科创企业全周期服务 长三角科技金融投贷联动模式可参照，本地科创客群全生命周期服务与授信归类需提前适配。 下一步观察科技贷款统计口径落地节奏，可先梳理本地科创企业名单做服务预案。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://m.21jingji.com/article/20260915/herald/4faaedfa6d92d05bc537a0677ab0561a.html",
+          "novelty": 1
+        },
+        {
+          "date": "2026-09-16",
+          "section": "insights",
+          "title": "消费信贷需求结构变化",
+          "text": "消费信贷需求结构变化 8月经济三稳两快、新动能凸显，消费与投资客群信贷需求结构变化，零售投放方向可微调。 提示消费信贷团队关注新动能行业客群，本月内做一轮存量客户提额与场景营销。",
+          "facts": [
+            "#8月"
+          ],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20260916/4470368_1.html",
+          "novelty": 0.31287878787878787,
+          "angle": "市场反应"
+        }
+      ],
+      "broadcastedTexts": [
+        "科创企业全周期服务 科创企业全周期服务 长三角科技金融投贷联动模式可参照，本地科创客群全生命周期服务与授信归类需提前适配。 下一步观察科技贷款统计口径落地节奏，可先梳理本地科创企业名单做服务预案。",
+        "消费信贷需求结构变化 消费信贷需求结构变化 8月经济三稳两快、新动能凸显，消费与投资客群信贷需求结构变化，零售投放方向可微调。 提示消费信贷团队关注新动能行业客群，本月内做一轮存量客户提额与场景营销。"
+      ],
+      "broadcastedFacts": [
+        "!落地",
+        "#8月"
+      ],
+      "peakScore": 0
+    },
+    "广州|按揭|楼市": {
+      "id": "广州|按揭|楼市",
+      "topicTags": [
+        "住房金融",
+        "广州本地"
+      ],
+      "anchors": [
+        "按揭",
+        "楼市",
+        "广州"
+      ],
+      "kind": "local",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "insights",
+          "title": "核心城市按揭差异化",
+          "text": "核心城市按揭差异化 上海楼市量价齐升、一线分化延续，广州按揭投放可参考核心区域需求节奏做差异化安排。 可考虑对核心区域楼盘加大按揭资源倾斜，本周跟进金九银十客户咨询转化。",
+          "facts": [
+            "@广州"
+          ],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20260915/4470320_1.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "核心城市按揭差异化 核心城市按揭差异化 上海楼市量价齐升、一线分化延续，广州按揭投放可参考核心区域需求节奏做差异化安排。 可考虑对核心区域楼盘加大按揭资源倾斜，本周跟进金九银十客户咨询转化。"
+      ],
+      "broadcastedFacts": [
+        "@广州"
+      ],
+      "peakScore": 0
+    },
+    "#5%|不良|个贷|信用卡": {
+      "id": "#5%|不良|个贷|信用卡",
+      "topicTags": [
+        "监管合规",
+        "私行客群",
+        "消费信贷"
+      ],
+      "anchors": [
+        "个贷",
+        "消费贷",
+        "新客",
+        "信用卡",
+        "不良",
+        "#5%"
+      ],
+      "kind": "enforcement",
+      "firstBroadcastAt": "2026-09-16",
+      "lastBroadcastAt": "2026-09-16",
+      "broadcastCount": 1,
+      "sections": [
+        "risk"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-16",
+          "section": "risk",
+          "title": "个贷不良与信用卡承压",
+          "text": "个贷不良与信用卡承压 银行个贷不良继续承压，有大行信用卡不良率升至5%。 个贷与信用卡存量资产质量承压，风控条线催收与准入压力上升，财富条线客户资质审查也需同步收紧。 风控部应加强信用卡与消费贷存量排查，个贷团队对新客准入提高资质门槛，本月内完成一轮风险名单复核。",
+          "facts": [
+            "#5%"
+          ],
+          "broadcastAt": "2026-09-16T07:31:08+08:00",
+          "score": 74,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "个贷不良与信用卡承压 个贷不良与信用卡承压 银行个贷不良继续承压，有大行信用卡不良率升至5%。 个贷与信用卡存量资产质量承压，风控条线催收与准入压力上升，财富条线客户资质审查也需同步收紧。 风控部应加强信用卡与消费贷存量排查，个贷团队对新客准入提高资质门槛，本月内完成一轮风险名单复核。"
+      ],
+      "broadcastedFacts": [
+        "#5%"
+      ],
+      "peakScore": 74
+    }
+  },
   "today": {
     "date": "2026-09-16",
-    "entries": [
-      {
-        "date": "2026-09-16",
-        "section": "hero",
-        "title": "8月信贷结构生变、对公强零售弱，叠加经营贷利率上行，零售投放节奏与客群结构需重新校准。",
-        "text": "8月信贷结构生变、对公强零售弱，叠加经营贷利率上行，零售投放节奏与客群结构需重新校准。",
-        "facts": [
-          "#8月"
-        ],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "score": 66,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-16",
-        "section": "must_read",
-        "title": "8月信贷结构生变",
-        "text": "8月信贷结构生变 对公强、零售弱格局延续，零售条线需重估按揭与消费贷增长动能，调整投放节奏与资源配置。",
-        "facts": [
-          "#8月"
-        ],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20260916/4470387_1.html",
-        "score": 66,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-16",
-        "section": "must_read",
-        "title": "经营贷利率悄然上行",
-        "text": "经营贷利率悄然上行 同业主动缩规模、贸易类准入收紧，我行同类客群敞口与定价空间值得重新测算，防范风险与机会并存。",
-        "facts": [],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://finance.sina.com.cn/roll/2026-09-15/doc-inirxhzs6918539.shtml",
-        "score": 74,
-        "novelty": 0.3,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-09-16",
-        "section": "must_read",
-        "title": "五篇大文章增量超七成",
-        "text": "五篇大文章增量超七成 科技、绿色、普惠、养老投放权重上升，零售条线可对照自身结构找差距，争取政策资源倾斜。",
-        "facts": [],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-15/doc-inirwfqk3988152.shtml",
-        "score": 66,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-16",
-        "section": "must_read",
-        "title": "8月金融数据出炉",
-        "text": "8月金融数据出炉 社融累计23.91万亿，信贷结构变化直接影响零售信贷投放节奏与全年目标达成路径。",
-        "facts": [
-          "#8月",
-          "#23.91万亿"
-        ],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://m.21jingji.com/article/20260915/herald/553d69ea5589874a691faa799067d4f7.html",
-        "score": 64,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-16",
-        "section": "must_read",
-        "title": "多地房地产政策优化见效",
-        "text": "多地房地产政策优化见效 房价同比降幅收窄、政策效果显现，住房金融条线可按揭投放与客户沟通口径可微调。",
-        "facts": [],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://www.cnfin.com/hg-lb/detail/20260916/4470375_1.html",
-        "score": 74,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-16",
-        "section": "insights",
-        "title": "基金代销格局重塑",
-        "text": "基金代销格局重塑 第三方机构份额提升挤压银行渠道，财富条线客户留存与费率策略承压，需强化投顾服务差异化。 可考虑本周梳理代销产品货架，对高净值客户加推组合投顾服务，稳住存量AUM。",
-        "facts": [],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://www.stcn.com/article/detail/4186642.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-16",
-        "section": "insights",
-        "title": "贵金属代理退场承接",
-        "text": "贵金属代理退场承接 多家银行收缩个人贵金属代理，存量客户面临迁移，是财富条线承接他行客户与替代配置的窗口。 提示财富团队梳理贵金属存量客户名单，本周内推送黄金ETF等替代方案承接需求。",
-        "facts": [],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20260916/4470382_1.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-16",
-        "section": "insights",
-        "title": "健康险转型配置窗口",
-        "text": "健康险转型配置窗口 健康险从赔付型转向健康管理型，财富与客群条线可据此调整保险配置话术，提升中高端客户黏性。 可考虑联合保险合作方更新健康管理型产品话术，本月内对私行客户做一轮配置回访。",
-        "facts": [],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://finance.cctv.com/2026/09/15/ARTISUWEFYDWtdFGUyHcJpRV260915.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-16",
-        "section": "insights",
-        "title": "跨境资金净流入窗口",
-        "text": "跨境资金净流入窗口 8月跨境收支增长、资金净流入，叠加美债收益率破5，跨境与外币资产配置客户沟通窗口打开。 值得关注跨境客群结售汇与资金归集需求，本周对私行客户提示汇率波动与外币配置机会。",
-        "facts": [
-          "#8月"
-        ],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20260915/4470157_1.html",
-        "novelty": 0.5409722222222222,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-09-16",
-        "section": "insights",
-        "title": "民企座谈释放服务空间",
-        "text": "民企座谈释放服务空间 发改委围绕优化发展环境、拓展投资空间听取民企意见，政银合作与民企客群服务方向可跟进。 可考虑本月对接本地工商联与园区，梳理民企名单，配套经营贷与代发综合服务方案。",
-        "facts": [
-          "@发改委"
-        ],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20260915/4470263_1.html",
-        "novelty": 0.781578947368421,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-09-16",
-        "section": "insights",
-        "title": "科创企业全周期服务",
-        "text": "科创企业全周期服务 长三角科技金融投贷联动模式可参照，本地科创客群全生命周期服务与授信归类需提前适配。 下一步观察科技贷款统计口径落地节奏，可先梳理本地科创企业名单做服务预案。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://m.21jingji.com/article/20260915/herald/4faaedfa6d92d05bc537a0677ab0561a.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-16",
-        "section": "insights",
-        "title": "核心城市按揭差异化",
-        "text": "核心城市按揭差异化 上海楼市量价齐升、一线分化延续，广州按揭投放可参考核心区域需求节奏做差异化安排。 可考虑对核心区域楼盘加大按揭资源倾斜，本周跟进金九银十客户咨询转化。",
-        "facts": [
-          "@广州"
-        ],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20260915/4470320_1.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-16",
-        "section": "insights",
-        "title": "消费信贷需求结构变化",
-        "text": "消费信贷需求结构变化 8月经济三稳两快、新动能凸显，消费与投资客群信贷需求结构变化，零售投放方向可微调。 提示消费信贷团队关注新动能行业客群，本月内做一轮存量客户提额与场景营销。",
-        "facts": [
-          "#8月"
-        ],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20260916/4470368_1.html",
-        "novelty": 0.31287878787878787,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-09-16",
-        "section": "risk",
-        "title": "个贷不良与信用卡承压",
-        "text": "个贷不良与信用卡承压 银行个贷不良继续承压，有大行信用卡不良率升至5%。 个贷与信用卡存量资产质量承压，风控条线催收与准入压力上升，财富条线客户资质审查也需同步收紧。 风控部应加强信用卡与消费贷存量排查，个贷团队对新客准入提高资质门槛，本月内完成一轮风险名单复核。",
-        "facts": [
-          "#5%"
-        ],
-        "broadcastAt": "2026-09-16T07:31:08+08:00",
-        "score": 74,
-        "novelty": 1
-      }
-    ],
-    "runId": "35035930087"
+    "entries": []
   },
+  "deliveries": [
+    {
+      "date": "2026-09-16",
+      "pushedAt": "2026-09-16T07:44:56+08:00",
+      "runId": "35037024758",
+      "reportSha": "efc4718eb8d0a87ce7178bc94216f8cb04d503b5"
+    }
+  ],
   "ipoVoicing": {
     "优邦科技": [
       "2026-09-16"
