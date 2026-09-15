@@ -1,6 +1,6 @@
 {
   "date": "2026-09-15",
-  "updatedAt": "2026-09-14T23:38:23.995Z",
+  "updatedAt": "2026-09-15T00:23:01.884Z",
   "executive": {
     "hero_line": "今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获",
     "must_read": [
@@ -182,19 +182,6 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143872945253.html",
-      "title_cn": "AI利空突袭！三大巨头罕见联手呼吁：放缓！",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "AI利空突袭！三大巨头罕见联手呼吁：放缓！",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
       "url": "https://finance.eastmoney.com/a/202609143873370592.html",
       "title_cn": "沪指震荡整理三市成交额1.64万亿医疗服务板块大涨",
       "source": "东方财富",
@@ -260,19 +247,6 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143872947024.html",
-      "title_cn": "两只PCB大牛股双双澄清：未向英伟达供货无业务合作",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/14",
-      "summary": "两只PCB大牛股双双澄清：未向英伟达供货无业务合作",
-      "importance": 2,
-      "rank": 0,
-      "tags": [],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
       "url": "https://finance.eastmoney.com/a/202609143873264272.html",
       "title_cn": "AI需求虹吸产能！MLCC迎“量价齐升”融资客提前布局这8股(名单)",
       "source": "东方财富",
@@ -299,12 +273,12 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143873298860.html",
-      "title_cn": "科技业锐评四巨头放缓AI发展言论：恐怕是为了垄断和卖货",
+      "url": "https://finance.eastmoney.com/a/202609143873187663.html",
+      "title_cn": "全球陷入“抢钨大战”：美国、英国、津巴布韦、越南全有动作",
       "source": "东方财富",
       "source_type": "media",
       "date": "09/14",
-      "summary": "科技业锐评四巨头放缓AI发展言论：恐怕是为了垄断和卖货",
+      "summary": "全球陷入“抢钨大战”：美国、英国、津巴布韦、越南全有动作",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -312,12 +286,38 @@
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609143873594412.html",
-      "title_cn": "事关下半年A股韧性五大券商首席发声",
+      "url": "https://finance.eastmoney.com/a/202609143873289532.html",
+      "title_cn": "史上首次升破900元/桶！原油期货飙涨",
       "source": "东方财富",
       "source_type": "media",
       "date": "09/14",
-      "summary": "事关下半年A股韧性五大券商首席发声",
+      "summary": "史上首次升破900元/桶！原油期货飙涨",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609153874037785.html",
+      "title_cn": "中信证券：金属业绩增长继续提速估值修复值得关注",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "中信证券：金属业绩增长继续提速估值修复值得关注",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609153873970138.html",
+      "title_cn": "中信建投：政策加码产业治理央地重组同步推进",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/15",
+      "summary": "中信建投：政策加码产业治理央地重组同步推进",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -338,12 +338,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3658888.shtml",
-      "title_cn": "阳光纸业获王东兴增持36.2万股 每股作价约1.13港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqa8827776.shtml",
+      "title_cn": "威华达控股遭SHOG Creation Limited减持1387.5万股 每股作价约2.78港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "阳光纸业获王东兴增持36.2万股 每股作价约1.13港元",
+      "summary": "威华达控股遭SHOG Creation Limited减持1387.5万股 每股作价约2.78港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -351,12 +351,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6885887.shtml",
-      "title_cn": "银诺医药-B获黄冰增持2400股 每股作价3.89港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3694447.shtml",
+      "title_cn": "神冠控股获董事会主席周亚仙增持429.4万股 每股作价约0.23港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "银诺医药-B获黄冰增持2400股 每股作价3.89港元",
+      "summary": "神冠控股获董事会主席周亚仙增持429.4万股 每股作价约0.23港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -364,12 +364,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3659329.shtml",
-      "title_cn": "汉港控股集团获董事会主席汪林冰增持768.4万股 每股作价0.062港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6927991.shtml",
+      "title_cn": "海螺水泥获The Capital Group Companies,Inc.增持312.35万股 每股作价约16.69港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "汉港控股集团获董事会主席汪林冰增持768.4万股 每股作价0.062港元",
+      "summary": "海螺水泥获The Capital Group Companies,Inc.增持312.35万股 每股作价约16.69港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -377,12 +377,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3657919.shtml",
-      "title_cn": "远东宏信遭UBS Group AG减持68.9万股 每股作价约6.99港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6926879.shtml",
+      "title_cn": "贝克微获RAYS Capital Partners Limited增持26.464万股 每股作价29.52港元",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/15",
-      "summary": "远东宏信遭UBS Group AG减持68.9万股 每股作价约6.99港元",
+      "summary": "贝克微获RAYS Capital Partners Limited增持26.464万股 每股作价29.52港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -390,12 +390,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/zqgd/2026-09-14/doc-inirtwie9744093.shtml",
-      "title_cn": "A股、港股，重要调整！今日生效",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqk3988804.shtml",
+      "title_cn": "知行科技获卢玉坤增持2.18万股 每股作价约2.21港元",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/14",
-      "summary": "A股、港股，重要调整！今日生效",
+      "date": "09/15",
+      "summary": "知行科技获卢玉坤增持2.18万股 每股作价约2.21港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -403,12 +403,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-14/doc-iniruark4825868.shtml",
-      "title_cn": "智谱港股盘中跌幅扩大逾10%，以零息+溢价转股形式融资50亿美元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqk3988383.shtml",
+      "title_cn": "福田实业遭夏松芳减持626.8万股 每股作价约0.6599港元",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/14",
-      "summary": "智谱港股盘中跌幅扩大逾10%，以零息+溢价转股形式融资50亿美元",
+      "date": "09/15",
+      "summary": "福田实业遭夏松芳减持626.8万股 每股作价约0.6599港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -416,12 +416,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-09-14/doc-inirtwih7343009.shtml",
-      "title_cn": "【中国银河策略】美联储加息预期升温，港股下一轮行情的主线何在？",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3691456.shtml",
+      "title_cn": "深圳国际获利安人寿保险增持135.15万股 每股作价约5.18港元",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/14",
-      "summary": "【中国银河策略】美联储加息预期升温，港股下一轮行情的主线何在？",
+      "date": "09/15",
+      "summary": "深圳国际获利安人寿保险增持135.15万股 每股作价约5.18港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -429,12 +429,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-14/doc-iniruarh4056350.shtml",
-      "title_cn": "快讯：恒指低开0.42% 科指跌0.69% 科网股低迷 存储概念股低开",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqe6916750.shtml",
+      "title_cn": "中聚投资遭莫铭东减持2550万股 每股作价1.90港元",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/14",
-      "summary": "快讯：恒指低开0.42% 科指跌0.69% 科网股低迷 存储概念股低开",
+      "date": "09/15",
+      "summary": "中聚投资遭莫铭东减持2550万股 每股作价1.90港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -442,12 +442,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-09-14/doc-inirtwih7318353.shtml",
-      "title_cn": "华泰 | 港股策略：控制美债波动率敏感敞口",
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-15/doc-inirwfqh3688134.shtml",
+      "title_cn": "CMON遭非执行董事蔡稳健减持550万股 每股作价约1港元",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/14",
-      "summary": "华泰 | 港股策略：控制美债波动率敏感敞口",
+      "date": "09/15",
+      "summary": "CMON遭非执行董事蔡稳健减持550万股 每股作价约1港元",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -455,12 +455,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/jjxw/2026-09-14/doc-inirtmtn7485456.shtml",
-      "title_cn": "深耕港股市场 “左手红利、右手成长”捕捉机遇",
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-15/doc-inirwfqa8820286.shtml",
+      "title_cn": "港股概念追踪 | 欧洲天然气面临供需两端重压 补库压力或抬升气价中枢(附概念股)",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/14",
-      "summary": "深耕港股市场 “左手红利、右手成长”捕捉机遇",
+      "date": "09/15",
+      "summary": "港股概念追踪 | 欧洲天然气面临供需两端重压 补库压力或抬升气价中枢(附概念股)",
       "importance": 2,
       "rank": 0,
       "tags": [],
@@ -468,12 +468,12 @@
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-14/doc-inirutny4103145.shtml",
-      "title_cn": "港股IPO火爆背后：香港证监会加强突击搜查，指导投行如何配合",
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-09-15/doc-inirwfqa8827721.shtml",
+      "title_cn": "全球箱式仓储机器人龙头，海柔创新冲击港股“ACR第一股”，今年上半年收入11.18亿元",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/14",
-      "summary": "港股IPO火爆背后：香港证监会加强突击搜查，指导投行如何配合",
+      "date": "09/15",
+      "summary": "全球箱式仓储机器人龙头，海柔创新冲击港股“ACR第一股”，今年上半年收入11.18亿元",
       "importance": 2,
       "rank": 0,
       "tags": [],
