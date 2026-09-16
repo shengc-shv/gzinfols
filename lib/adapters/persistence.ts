@@ -140,12 +140,38 @@ export function loadEventMemory(opts: EventMemoryStoreOpts = {}): EventMemorySto
   return reviveEventMemory(raw);
 }
 
-/** 写入记忆库（先清理再落盘；写盘失败静默忽略）。 */
+/**
+ * ipoVoicing「并集写」防丢更新（2026-09-16）。
+ *
+ * 背景：`ipoVoicing`（企业 → 已口播日期数组）是**只增日志**（超期项由 recordIpoVoicing 按
+ * IPO_VOICE_PRUNE_DAYS 裁剪），但写盘是「读旧文件 → 内存里追加 → 整体覆盖」。
+ * 在「同一天有多个 run 写同一份记忆」时，后写的会抹掉先写的（实证：09-15 20:32 记录的
+ * 优邦科技 09-15，37 秒后被另一条线覆盖成缺失，仅靠 git 合并侥幸救回；后续该企业的
+ * 窗口计数从 2 掉到 1 → 本该跳过却重复口播）。
+ *
+ * 修法：落盘前把**磁盘上已有的日期做并集**再写 —— 任何写者都不可能再抹掉别人记录的日期。
+ * 并集对「只增日志」语义完全等价（幂等、与写入顺序无关），且不需要额外裁剪：
+ * 超窗日期不参与 `ipoShouldSkip` 判定，且会在该企业下次 recordIpoVoicing 时被正常裁掉。
+ * 注意：`events`（最新状态语义）/`today`（本次运行真相）/`deliveries`（按日唯一）**不参与**并集。
+ */
+function unionIpoVoicingWithDisk(store: EventMemoryStore, memoryPath: string): EventMemoryStore {
+  const onDisk = reviveEventMemory(readJsonSync(memoryPath)).ipoVoicing ?? {};
+  const companies = Object.keys(onDisk);
+  if (companies.length === 0) return store;
+  const merged: Record<string, string[]> = { ...(store.ipoVoicing ?? {}) };
+  for (const company of companies) {
+    merged[company] = [...new Set([...(merged[company] ?? []), ...onDisk[company]])].sort();
+  }
+  return { ...store, ipoVoicing: merged };
+}
+
+/** 写入记忆库（先并集 ipoVoicing、再清理、后落盘；写盘失败静默忽略）。 */
 export function saveEventMemory(
   store: EventMemoryStore,
   opts: EventMemoryStoreOpts = {},
 ): void {
   try {
+    const memoryPath = resolveMemoryPath(opts);
     const today =
       opts.today ??
       new Intl.DateTimeFormat("en-CA", {
@@ -154,8 +180,9 @@ export function saveEventMemory(
         month: "2-digit",
         day: "2-digit",
       }).format(new Date());
-    const cleaned = prepareEventMemory(store, today, MEMORY_RETAIN_DAYS);
-    writeJsonSync(resolveMemoryPath(opts), cleaned);
+    const unioned = unionIpoVoicingWithDisk(store, memoryPath);
+    const cleaned = prepareEventMemory(unioned, today, MEMORY_RETAIN_DAYS);
+    writeJsonSync(memoryPath, cleaned);
   } catch {
     // 归档失败不打断主流程
   }

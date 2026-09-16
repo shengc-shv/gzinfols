@@ -155,8 +155,8 @@ jobs:
           fi
 
       # 生成当日报告（全 AI 流程）。
-      # PUBLISH_RUN：本 run 是否上线（schedule 首发 / dispatch publish=true）→ 内容记忆
-      #   （side-exec-summary 的 persistMemory）与 IPO 口播记忆（pipeline/index.ts）只在此落盘。
+      # PUBLISH_RUN：本 run 的内容是否算「正式交付口径」→ 内容记忆（side-exec-summary 的
+      #   persistMemory）与 IPO 口播记忆（pipeline/index.ts）只在此为 true 时落盘。
       #   2026-09-11 B5 补齐（此前 workflow 从未设置 → 记忆永不落盘，CI 每日从零开始）：
       #   schedule 依赖 gate 判定（should-run=true 即首发）；dispatch 用 inputs.publish。
       - name: 生成每日简报
@@ -175,7 +175,11 @@ jobs:
           # 依赖 archive.html —— 由 build-site 生成，且它会从 history/（CI 每期归档回 main）
           # 汇集历史各期，故归档页会有多期而不是只有当天一期。
           WEB_MODE: 'true'
-          PUBLISH_RUN: ${{ (github.event_name == 'schedule' && needs.gate.outputs.should-run == 'true') || (github.event_name == 'workflow_dispatch' && inputs.publish == true) }}
+          # 2026-09-16 修：**release_mode=test（验证抢跑）不写记忆**——test run 发布 gh-pages
+          # 但不推微信；若写暂存区，次日 beginDay 会按「该日已有交付记录」把它结算进长期记忆，
+          # 使从未送达客户的内容被误判「已播」而在次日被去重（实证：09-16 晚间 test run 写入
+          # 15 条暂存 + 交付记录指纹缺失 → 次日本会误结算）。发布行为不受此开关影响。
+          PUBLISH_RUN: ${{ (github.event_name == 'schedule' && needs.gate.outputs.should-run == 'true') || (github.event_name == 'workflow_dispatch' && inputs.publish == true && inputs.release_mode != 'test') }}
           # —— 语音播报（腾讯云 TTS 主用）——
           AUDIO_ENABLED: ${{ (github.event_name == 'schedule' || inputs.audio) && 'true' || 'false' }}
           SKIP_TTS: ${{ vars.SKIP_TTS }}

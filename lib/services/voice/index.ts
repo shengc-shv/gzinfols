@@ -20,7 +20,7 @@ import type { ExecutiveSummary } from "../enrich/executive-summary";
 import { buildStockSpoken } from "./stock-spoken";
 import { formatCnDate, formatCnDateShort } from "../market/market-status";
 import { ipoShouldSkip } from "../memory/event-memory";
-import { buildGdIpoSpoken, pickGdIpoCompanies, companyNameOf } from "../classify/gd-ipo-spoken";
+import { buildGdIpoSpoken, pickGdIpoCompanies, companyNameOf, pickSpokenItems } from "../classify/gd-ipo-spoken";
 // 广东企业注册表（纯数据模块，与卡面判定同源；类型由 lib/guangdong.d.mts 提供）
 import { isGuangdongEnterprise } from "../../guangdong.mjs";
 
@@ -253,43 +253,65 @@ export async function assembleBriefingScript(
   const ipoItems = report.sections.ipo ?? [];
   const llmIpo = exec?.guangdong_ipo?.spoken ? sanitize(exec.guangdong_ipo.spoken) : "";
   let ipo = "";
+  let ipoRefs: string[] = [];
   const skipCompanies = opts.ipoMemory?.skip ?? new Set<string>();
   const voicedCompanies: string[] = [];
-  // ① 确定性拼装（免 LLM，AI / SKIP_AI 双模式可用；同一企业 2 天去重由 skipCompanies 承担）
-  // 窗口以「报告日」为基准（不读隐式时钟），与渲染横滑卡同口径
-  const spokenIpo = buildGdIpoSpoken(ipoItems, { skipCompanies, today: report.date });
-  if (spokenIpo) {
-    ipo = sanitize(spokenIpo);
-    voicedCompanies.push(
-      ...pickGdIpoCompanies(ipoItems, { skipCompanies, today: report.date }),
-    );
-  } else {
-    // ② 媒体源线索 → LLM 兜底（仅在确实有线索且提供 runner 时）
-    const clues = detectGdIpo(ipoItems);
-    if (clues.length && opts.llmRunner) {
-      try {
-        const fb = await opts.llmRunner(
-          "你是中文新闻播报员。只输出纯口播文本：无 Markdown、无 URL、无 emoji，不超60字，直接输出正文。",
-          "以下是今日简报中与广东IPO相关的原文片段。请改写为不超过60字的中文口播稿：说清企业名称、上市板块与最新进展，一两句话即可，不要念链接。\n\n" +
-            clues.join("\n"),
-        );
-        const t = fb.trim();
-        if (t.length >= 8) {
-          ipo = sanitize(t);
-          voicedCompanies.push(
-      ...pickGdIpoCompanies(ipoItems, { skipCompanies, today: report.date }),
-    );
+  // 窗口内候选 = 唯一选择口径（与渲染横滑卡同源）。**口播 IPO 段的存在性门槛**（2026-09-16 修复）：
+  // 窗口内 0 候选就整段不播 —— 杜绝「上游 exec 槽位（IPO 池为 7 天窗口）的内容被塞进 2 日窗口的
+  // 口播」造成「播了 IPO、却没有对应卡片」（用户实证：优邦科技卡面为 09/14，2 日窗口内无卡仍被播）。
+  const ipoPick = pickSpokenItems(ipoItems, { skipCompanies, today: report.date });
+  const ipoWindowItems = [...ipoPick.redchip, ...ipoPick.regular];
+  if (ipoPick.totalCandidates > 0) {
+    // ① 确定性拼装（免 LLM，AI / SKIP_AI 双模式可用；同一企业 2 天去重由 skipCompanies 承担）
+    // 窗口以「报告日」为基准（不读隐式时钟），与渲染横滑卡同口径
+    const spokenIpo = buildGdIpoSpoken(ipoItems, { skipCompanies, today: report.date });
+    if (spokenIpo) {
+      ipo = sanitize(spokenIpo);
+      ipoRefs = ipoPick.selected.map((it) => it.url).filter((u): u is string => Boolean(u));
+      voicedCompanies.push(
+        ...pickGdIpoCompanies(ipoItems, { skipCompanies, today: report.date }),
+      );
+    } else {
+      // ② 媒体源线索 → LLM 兜底（仅在确实有线索且提供 runner 时）
+      // 线索取自**窗口内候选**（不再用全量 ipoItems），保证兜底稿不离窗口。
+      const clues = detectGdIpo(ipoWindowItems);
+      if (clues.length && opts.llmRunner) {
+        try {
+          const fb = await opts.llmRunner(
+            "你是中文新闻播报员。只输出纯口播文本：无 Markdown、无 URL、无 emoji，不超60字，直接输出正文。",
+            "以下是今日简报中与广东IPO相关的原文片段。请改写为不超过60字的中文口播稿：说清企业名称、上市板块与最新进展，一两句话即可，不要念链接。\n\n" +
+              clues.join("\n"),
+          );
+          const t = fb.trim();
+          if (t.length >= 8) {
+            ipo = sanitize(t);
+            ipoRefs = ipoWindowItems.map((it) => it.url).filter((u): u is string => Boolean(u));
+            voicedCompanies.push(
+              ...pickGdIpoCompanies(ipoItems, { skipCompanies, today: report.date }),
+            );
+          }
+        } catch {
+          // 兜底生成失败，跳过该语块（不阻断）
         }
-      } catch {
-        // 兜底生成失败，跳过该语块（不阻断）
       }
-    }
-    // ③ 最后兜底：exec 的上游 LLM 槽位（仅 ①② 皆空时使用，罕见路径）
-    if (!ipo && llmIpo) {
-      ipo = llmIpo;
-      for (const it of ipoItems) {
-        const c = companyNameOf(it.title_cn || "");
-        if (c && ipo.includes(c)) voicedCompanies.push(c);
+      // ③ 最后兜底：exec 的上游 LLM 槽位（仅 ①② 皆空时使用，罕见路径）。
+      // 双闸门：窗口内确有候选（外层已保证）**且**稿子里点到的企业全部落在窗口内候选里
+      // —— 只要提到窗口外的企业就整段丢弃（否则又会播「没有卡片」的内容）。
+      if (!ipo && llmIpo) {
+        const inWindow = new Set(
+          ipoWindowItems.map((it) => companyNameOf(it.title_cn || "")).filter(Boolean),
+        );
+        const mentioned = ipoItems
+          .map((it) => companyNameOf(it.title_cn || ""))
+          .filter((c) => c && llmIpo.includes(c));
+        if (mentioned.length > 0 && mentioned.every((c) => inWindow.has(c))) {
+          ipo = llmIpo;
+          ipoRefs = ipoItems
+            .filter((it) => mentioned.includes(companyNameOf(it.title_cn || "")))
+            .map((it) => it.url)
+            .filter((u): u is string => Boolean(u));
+          voicedCompanies.push(...mentioned);
+        }
       }
     }
   }
@@ -307,7 +329,7 @@ export async function assembleBriefingScript(
     parts.push(segText);
     partMap.guangdong_ipo = ipo;
     const dur = estimateDurationSec(segText.length);
-    segments.push({ id: "ipo", startSec: cursor, durationSec: dur, refs: [], text: segText });
+    segments.push({ id: "ipo", startSec: cursor, durationSec: dur, refs: ipoRefs, text: segText });
     cursor += dur;
   }
 
