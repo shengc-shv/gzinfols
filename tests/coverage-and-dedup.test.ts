@@ -8,6 +8,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 
 import { renderReportExec } from "../lib/services/render/exec-block";
+import { itemAnchorId } from "../lib/services/render/atoms";
 import { renderCoverage } from "../lib/services/render/coverage";
 import type { DailyReport, ReportItem } from "../lib/contracts/report";
 
@@ -84,7 +85,7 @@ test("F2②：洞察/风险的来源标记只保留「正文未覆盖」的来�
   assert.ok(!html.includes(`href="${BODY_URL}"`), "正文已覆盖的来源应剔除");
 });
 
-test("F2③：全部来源都被正文覆盖 → 不渲染来源标记（不留空壳）", () => {
+test("F2③（修正 2026-09-16 用户反馈）：来源全在正文 → 仍渲染站内锚点，不再删空", () => {
   const r = report({
     sections: { gz_local: [], biz_insight: [], policy_market: [item({ url: BODY_URL })], tech: [], ipo: [] },
     insights: [
@@ -92,8 +93,45 @@ test("F2③：全部来源都被正文覆盖 → 不渲染来源标记（不留�
     ],
   });
   const html = renderReportExec(r);
-  assert.ok(!html.includes("insight-srcs"), "来源标记整体不渲染");
-  assert.ok(html.includes("insight"), "洞察卡片本身仍渲染");
+  assert.ok(html.includes("insight-srcs"), "来源标记区块仍应渲染（不再整条剔除）");
+  assert.ok(html.includes("insight-src-inbody"), "已在正文的来源应为站内锚点标记");
+  assert.ok(html.includes(`href="#${itemAnchorId(BODY_URL)}"`), "锚点必须指向正文卡片 id");
+  assert.ok(!html.includes(`href="${BODY_URL}"`), "仍不给重复外链");
+});
+
+test("F2④（用户反馈修正）：必读的「见正文」必须是**可点击锚点**", () => {
+  const r = report({
+    sections: { gz_local: [], biz_insight: [], policy_market: [item({ url: BODY_URL })], tech: [], ipo: [] },
+    must_read: [{ url: BODY_URL, why: "增量" }],
+  });
+  const html = renderReportExec(r);
+  assert.ok(
+    html.includes(`<a class="must-inbody" href="#${itemAnchorId(BODY_URL)}">见正文</a>`),
+    "「见正文」必须是 a[href=#itm-…]，而不是纯文本（此前点不动）",
+  );
+});
+
+test("F2⑤：来源标记带条目日期（陈旧来源可见）", () => {
+  const r = report({
+    sections: {
+      gz_local: [],
+      biz_insight: [],
+      policy_market: [item({ url: BODY_URL, date: "09/14" })],
+      tech: [],
+      ipo: [],
+    },
+    insights: [
+      { topic: "t", tags: [], impact: "i", action: "a", sources: [{ title: "旧闻", url: BODY_URL }] },
+    ],
+  });
+  const html = renderReportExec(r);
+  assert.ok(html.includes("09/14"), "来源标记应带日期，便于判断新旧");
+});
+
+test("F2⑥ itemAnchorId：同 url 稳定、不同 url 不同（跨渲染可对齐）", () => {
+  assert.equal(itemAnchorId(BODY_URL), itemAnchorId(BODY_URL));
+  assert.notEqual(itemAnchorId(BODY_URL), itemAnchorId(FRESH_URL));
+  assert.ok(/^itm-[0-9a-z]+$/.test(itemAnchorId(BODY_URL)), "形如 itm-<base36>");
 });
 
 test("A5①：来源分布按「抓取 → 收录」渲染，缺失源显式列出", () => {

@@ -68,8 +68,11 @@ export const THEME_INTERACTIVE_CSS = `  /* ===== 2026-08-21 交互重构（demo 
   .cov-zero .cov-v { color: var(--c-finance); }
   .cov-note { margin: 0.35rem 0 0; font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
   .cov-missing { color: var(--c-finance); }
-  /* F2 摘要去重：已在正文的条目不再给第二遍外链，改标「见正文」 */
-  .must-inbody { margin-left: 0.4rem; font-size: 0.62rem; color: var(--muted); border: 1px solid var(--rule); border-radius: 3px; padding: 0 4px; white-space: nowrap; }
+  /* F2 摘要去重：已在正文的条目/来源改为站内锚点（可点、跳正文），并高亮目标卡片 */
+  .must-inbody { display: inline-block; margin-left: 0.4rem; font-size: 0.66rem; color: var(--c-pol); border: 1px solid color-mix(in srgb, var(--c-pol) 45%, transparent); border-radius: 3px; padding: 0 5px; white-space: nowrap; text-decoration: none; }
+  .must-inbody:hover { background: color-mix(in srgb, var(--c-pol) 10%, transparent); }
+  .insight-src-inbody, .risk-src-inbody { border-bottom: 1px dashed currentColor; }
+  .brief.flash, .ipo-card.flash { outline: 3px solid color-mix(in srgb, var(--c-pol) 55%, transparent); outline-offset: 2px; border-radius: 8px; transition: outline-color 0.2s; }
 
   /* 商机洞察卡片（横向滑动，桌面转网格；tag 中文见下方） */
   .insight-card, .insight { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 0.7rem 0.85rem; }

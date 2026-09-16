@@ -8,8 +8,20 @@ import { escapeHtml } from "./cards";
 import { todayKey } from "../../utils/time";
 
 /** 商机 tag 色系（与 sections.ts 保持一致） */
-export function tagClsOf(tag: string): string {
-  if (/财富|私行/.test(tag)) return "t-wealth";
+/**
+ * 条目站内锚点 id（2026-09-16）：「摘要 → 正文」跳转用。
+ *
+ * 为什么需要：F2 把「已在正文」的必读条目与来源标记降级为站内引用后，必须**真的能跳过去**
+ * （此前只写了「见正文」文本、点不动 —— 用户实测反馈）。同一条目在两次渲染中 id 必须一致，
+ * 故用 url 的**纯函数哈希**（djb2 → base36），不依赖渲染顺序、不用 node:crypto（服务层禁 node:）。
+ */
+export function itemAnchorId(url: string): string {
+  let h = 5381;
+  for (let i = 0; i < url.length; i++) h = ((h << 5) + h + url.charCodeAt(i)) | 0;
+  return `itm-${(h >>> 0).toString(36)}`;
+}
+
+export function tagClsOf(tag: string): string {  if (/财富|私行/.test(tag)) return "t-wealth";
   if (/代发|客群/.test(tag)) return "t-mass";
   if (/政银|住房|监管|政策/.test(tag)) return "t-policy";
   if (tag === "粤") return "t-gd";

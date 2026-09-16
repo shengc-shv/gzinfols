@@ -127,7 +127,7 @@ test("F3（2026-09-16）：股市面板每市场上限可配（ctx.config.maxSto
   }
   // 缺失/非法配置 → 回落默认 5（向后兼容：老 ctx 不崩）
   const fallback = applyDisplayCaps(r, { log: new SilentLog() } as any);
-  assert.equal(fallback.stock_news!.length, 15, "无 config 时回落默认 5");
+  assert.equal(fallback.stock_news!.length, 9, "无 config 时回落默认 3（三市场合计 ≤9）");
 });
 
 test("不 mutate 入参", () => {

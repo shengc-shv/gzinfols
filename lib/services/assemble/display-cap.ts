@@ -77,6 +77,12 @@ function capSrc(items: ReportItem[], perSrc: number, maxTotal: number): ReportIt
 /**
  * 应用展示限额并返回新 report（gzinfo daily.ts 第 ⑦ 步，行为逐字对齐）。
  */
+/**
+ * 股市动态面板「每市场」条数默认上限（F3，2026-09-16 用户反馈「占比太高」后由 5 降到 3）。
+ * 每市场 3 条 → 三市场合计 ≤9 条；env `MAX_STOCK_NEWS_PER_MARKET` 可覆盖。
+ */
+export const DEFAULT_MAX_STOCK_NEWS_PER_MARKET = 3;
+
 export function applyDisplayCaps(report: DailyReport, ctx: PipelineContext): DailyReport {
   const sec = report.sections as unknown as Record<string, ReportItem[]>;
   const cappedGz = capSrc(sec.gz_local ?? [], 4, 10);
@@ -114,9 +120,12 @@ export function applyDisplayCaps(report: DailyReport, ctx: PipelineContext): Dai
       if (!byMkt.has(m)) byMkt.set(m, []);
       byMkt.get(m)!.push(n);
     }
-    // 股市新闻面板：每市场 ≤ ctx.config.maxStockNewsPerMarket（F3：默认 5，可经 env 调整）
+    // 股市新闻面板：每市场 ≤ ctx.config.maxStockNewsPerMarket（F3：默认 3，可经 env 调整）
     const configured = ctx.config?.maxStockNewsPerMarket;
-    const perMarket = Number.isFinite(configured) && (configured as number) >= 1 ? (configured as number) : 5;
+    const perMarket =
+      Number.isFinite(configured) && (configured as number) >= 1
+        ? (configured as number)
+        : DEFAULT_MAX_STOCK_NEWS_PER_MARKET;
     const cappedNews: NonNullable<typeof report.stock_news> = [];
     for (const list of byMkt.values()) cappedNews.push(...list.slice(0, perMarket));
     newStockNews = cappedNews;

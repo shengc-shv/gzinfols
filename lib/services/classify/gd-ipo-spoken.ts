@@ -152,6 +152,18 @@ function isHkexItem(it: ReportItem): boolean {
 }
 
 /**
+ * 「单纯赴港上市」条目（2026-09-16 用户口径）：港交所递表/上市（URL 带申请编号）
+ * 且**不是红筹线索**。
+ *
+ * 为什么排除：港股通道已由红筹对接（红筹线索另有徽章 + 穿透报告页 + 播报提权），
+ * 非红筹的港股递表对分行零售条线没有可执行价值 → **不进口播与顶部横滑**。
+ * 底部「广东IPO动态」完整列表**不受影响**（仍保留 7 天窗全量，供参考与红筹页回溯）。
+ */
+export function isPlainHkListing(it: ReportItem): boolean {
+  return hkexAppIdOf(it) !== undefined && it.redchip?.verdict !== "redchip";
+}
+
+/**
  * 红筹线索句（T3，确定性、免 LLM；§5.2 模板）。
  *
  * ⚠️ 与方案模板的**一处刻意偏差**：模板写「广东运营<N>处」，但 `gdCityHits` 是
@@ -221,6 +233,7 @@ export function pickSpokenItems(
   const regular = gdIpoCandidates(items, opts?.skipCompanies, opts?.withinDays ?? IPO_VOICE_WINDOW_DAYS, {
     uniqueCompany: true, // 口播不把同一家企业念两遍（P1-4）
     today: opts?.today,
+    excludePlainHk: true, // 单纯赴港上市不播（2026-09-16 用户口径）
   }).filter((it) => !rcCompanies.has(companyNameOf(it.title_cn || "")));
   const seats = Math.max(0, 3 - redchip.length);
   return {
@@ -312,13 +325,15 @@ export function gdIpoCandidates(
   items: ReportItem[],
   skip?: Set<string>,
   withinDays?: number,
-  opts?: { uniqueCompany?: boolean; today?: string },
+  opts?: { uniqueCompany?: boolean; today?: string; excludePlainHk?: boolean },
 ): ReportItem[] {
   const allowed =
     withinDays && withinDays > 0 ? recentMmddSet(withinDays, opts?.today ?? todayKey()) : null;
   const sorted = items
     .filter(
       (it) =>
+        // 单纯赴港上市（非红筹）不进口播/横滑（2026-09-16 用户口径；底部列表直调本函数时传 false）
+        !(opts?.excludePlainHk === true && isPlainHkListing(it)) &&
         (it.tags?.includes("粤") ||
           isGdIpoCandidate(it.title_cn || "", it.summary || "") ||
           // 红筹线索（T2 已实体匹配）同样进池：其广东相关性由判定链给出，不依赖标题词表。
@@ -362,11 +377,12 @@ export function topGdIpo(
   skip?: Set<string>,
   n = 3,
   withinDays: number = IPO_VOICE_WINDOW_DAYS,
-  opts?: { uniqueCompany?: boolean; today?: string },
+  opts?: { uniqueCompany?: boolean; today?: string; excludePlainHk?: boolean },
 ): ReportItem[] {
   return gdIpoCandidates(items, skip, withinDays, {
     uniqueCompany: opts?.uniqueCompany ?? true,
     today: opts?.today,
+    excludePlainHk: opts?.excludePlainHk,
   }).slice(0, n);
 }
 

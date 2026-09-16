@@ -20,7 +20,7 @@ import { OTHER_SEGMENT, PRIORITY_SEGMENTS } from "../classify/customer-segment";
 import { STR } from "./i18n";
 import { escapeHtml } from "./cards";
 import { renderStockIndexBlock, renderStockRecap, renderGdIpoStrip } from "./stock-block";
-import { tagClsOf } from "./atoms";
+import { tagClsOf, itemAnchorId } from "./atoms";
 
 /** 构造 url → 中文标题 映射（供 must_read 回写标题）。 */
 export function resolveTitleMap(report: DailyReport): Map<string, string> {
@@ -43,31 +43,42 @@ export function renderReportExec(report: DailyReport): string {
   // N 层：选 top 3（音频核心）+ 数据化"三件事"标识
   const sourceItems: ReportItem[] = SECTIONS.flatMap((s) => report.sections[s] ?? []);
   /**
-   * F2 摘要信息密度治理（2026-09-16，用户批准）：**摘要区不再重复正文已覆盖的来源链接**。
+   * F2 摘要信息密度治理（2026-09-16 用户批准；同日按用户实测反馈修正）：
+   * **不重复外链，但必须保留能真正跳转的溯源路径**。
    *
-   * 实测（PRD §5.2 #2）：摘要层 9 行中 7 行的源 URL 已在正文出现 → 独立信息密度仅 22%。
-   * 处置口径：摘要保留**决策增量**（为什么重要 / 影响 / 建议），来源入口交给正文；
-   *   · 必读行：条目已在正文 → 降级为站内提示（「见正文」），不再给第二遍外链；
-   *   · 洞察/风险的来源标记 ①②③：剔除已在正文的来源，只留**正文未覆盖**的增量来源。
+   * 实测（PRD §5.2 #2）：摘要层 7/9 行的源 URL 已在正文出现 → 独立信息密度仅 22%。
+   * 处置口径：
+   *   · 必读条目已在正文 → 不再是外链，改为「见正文」**站内锚点**（点击跳到正文卡片）；
+   *   · 洞察/风险的来源标记 ①②③：正文已收录 → 站内锚点；正文未收录 → 外链。
+   *     ⚠️ **任一来源都不删除** —— 此前把「已在正文」的来源整条剔除，导致两张洞察卡片
+   *     连一个溯源入口都没有（用户实测反馈），此错已修正。
+   *   · 每个来源标记带条目日期（MM/DD）：陈旧来源（如两天前的 IPO）在 UI 上可见、可判断。
    */
   const bodyUrls = new Set(sourceItems.map((i) => i.url).filter(Boolean));
-  const dedup = { mustInBody: 0, mustTotal: 0, srcCut: 0, srcTotal: 0 };
-  /** 过滤来源标记：只保留正文未收录的来源（去重后可空 → 不渲染）。 */
-  const incrementalSources = (
+  const urlDate = new Map(sourceItems.map((i) => [i.url, i.date] as const));
+  const dedup = { mustInBody: 0, mustTotal: 0, srcTotal: 0, srcAnchored: 0 };
+  /** 来源标记：正文已收录 → 站内锚点；未收录 → 外链（两类都渲染）。 */
+  const sourceMarks = (
     sources: Array<{ title?: string; url: string }> | undefined,
     markClass: string,
   ): string => {
-    const list = sources ?? [];
+    const list = (sources ?? []).filter((s) => s.url).slice(0, 3);
     if (list.length === 0) return "";
-    dedup.srcTotal += Math.min(list.length, 3);
-    const fresh = list.filter((s) => !bodyUrls.has(s.url)).slice(0, 3);
-    dedup.srcCut += Math.min(list.length, 3) - fresh.length;
-    if (fresh.length === 0) return "";
-    return ` <span class="${markClass}">${fresh
-      .map((s, i) =>
-        `<a class="${markClass.replace("-srcs", "-src")}" href="${escapeHtml(s.url)}" target="_blank" rel="noopener" title="${escapeHtml(s.title || "来源" + (i + 1))}" aria-label="来源${i + 1}">${["①", "②", "③"][i]}</a>`,
-      )
-      .join("")}</span>`;
+    dedup.srcTotal += list.length;
+    const anchorCls = markClass.replace("-srcs", "-src");
+    const marks = list
+      .map((s, i) => {
+        const inBody = bodyUrls.has(s.url);
+        if (inBody) dedup.srcAnchored++;
+        const d = urlDate.get(s.url);
+        const hint = `${inBody ? "跳转正文" : "打开原文"}${d ? ` · ${d}` : ""}${s.title ? ` · ${s.title}` : ""}`;
+        const glyph = ["①", "②", "③"][i];
+        return inBody
+          ? `<a class="${anchorCls} ${anchorCls}-inbody" href="#${itemAnchorId(s.url)}" title="${escapeHtml(hint)}" aria-label="${escapeHtml(hint)}">${glyph}</a>`
+          : `<a class="${anchorCls}" href="${escapeHtml(s.url)}" target="_blank" rel="noopener" title="${escapeHtml(hint)}" aria-label="${escapeHtml(hint)}">${glyph}</a>`;
+      })
+      .join("");
+    return ` <span class="${markClass}">${marks}</span>`;
   };
   const { top: topMust, rationale: topRationale } = selectTopMustRead(
     report.must_read,
@@ -81,10 +92,12 @@ export function renderReportExec(report: DailyReport): string {
       dedup.mustTotal++;
       const inBody = Boolean(m.url && bodyUrls.has(m.url));
       if (inBody) dedup.mustInBody++;
-      // 已在正文的条目：不再给第二遍外链，改标「见正文」（正文卡片即其入口）
+      // 已在正文的条目：不再给第二遍外链，改为「见正文」站内锚点（点击跳到正文卡片）
       const inner = m.url && !inBody
         ? `<a class="must-body must-link" href="${escapeHtml(m.url)}" target="_blank" rel="noopener">${body}</a>`
-        : `<div class="must-body">${body}${inBody ? `<span class="must-inbody">见正文</span>` : ""}</div>`;
+        : `<div class="must-body">${body}${
+            inBody ? `<a class="must-inbody" href="#${itemAnchorId(m.url!)}">见正文</a>` : ""
+          }</div>`;
       const isTop = m.url && topMustUrls.has(m.url);
       const topBadge = isTop ? `<span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span>` : "";
       const cls = isTop ? "must-card must-top" : "must-card";
@@ -92,7 +105,7 @@ export function renderReportExec(report: DailyReport): string {
     })
     .join("");
   const renderInsightCard = (it: ReportInsight): string => {
-    const srcMarks = incrementalSources(it.sources, "insight-srcs");
+    const srcMarks = sourceMarks(it.sources, "insight-srcs");
     const segs = it.segments && it.segments.length ? it.segments : [OTHER_SEGMENT];
     const segChips = `<div class="insight-segs">${segs
       .map((s) => `<span class="seg-chip seg-${SEG_KEY[s] ?? "other"}">${escapeHtml(SEG_SHORT[s] ?? s)}</span>`)
@@ -162,7 +175,7 @@ export function renderReportExec(report: DailyReport): string {
   const riskCard = (() => {
     const r = report.risk;
     if (!r) return "";
-    const srcMarks = incrementalSources(r.sources, "risk-srcs");
+    const srcMarks = sourceMarks(r.sources, "risk-srcs");
     const sourceBadge = r.source
       ? `<span class="risk-source-badge risk-source-${r.source.toLowerCase()}">${r.source === "T1" ? "官方" : r.source === "T1.5" ? "准官方" : "媒体"}</span>`
       : "";
@@ -178,8 +191,8 @@ export function renderReportExec(report: DailyReport): string {
   // 可观测（F2 验收依据）：摘要去重结果逐次打印，PRD 指标「摘要与正文重复项 ≤20%」可据此核对
   if (dedup.mustTotal > 0 || dedup.srcTotal > 0) {
     console.info(
-      `[render] 摘要去重（F2）：必读 ${dedup.mustTotal} 条中 ${dedup.mustInBody} 条已在正文（降级为「见正文」）；` +
-        `来源标记 ${dedup.srcTotal} 个中剔除 ${dedup.srcCut} 个（正文已覆盖）`,
+      `[render] 摘要去重（F2）：必读 ${dedup.mustTotal} 条中 ${dedup.mustInBody} 条已在正文（改为「见正文」站内锚点）；` +
+        `来源标记 ${dedup.srcTotal} 个中 ${dedup.srcAnchored} 个转为站内锚点（不重复外链，均可溯源）`,
     );
   }
   return `<section class="exec-summary">

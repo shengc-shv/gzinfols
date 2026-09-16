@@ -9,6 +9,7 @@ import { escapeHtml, GD_IPO_STAGE_BIZ } from "./cards";
 import { GD_IPO_STAGE_LABEL } from "../classify/gd-ipo";
 import { companyNameOf } from "../classify/gd-ipo-spoken";
 import { relativeDayLabel } from "./atoms";
+import { itemAnchorId } from "./atoms";
 import { tagClsOf } from "./atoms";
 import { gdIpoStageOf, topGdIpo } from "../classify/gd-ipo-spoken";
 import { renderReportItemHtml } from "./report-item";
@@ -126,7 +127,8 @@ export function renderStockRecap(report: DailyReport): string {
  * 无广东 IPO 命中（report.sections.ipo 无「粤」标条目）→ 返回空串，不渲染。
  */
 export function renderGdIpoStrip(items: ReportItem[], opts?: { section?: "must" | "stock" }): string {
-  const picks = topGdIpo(items, undefined, 3, undefined, { uniqueCompany: true });
+  // 顶部横滑＝口播同源池：同样排除「单纯赴港上市」（非红筹），与 pickSpokenItems 口径一致
+  const picks = topGdIpo(items, undefined, 3, undefined, { uniqueCompany: true, excludePlainHk: true });
   if (picks.length === 0) return "";
   const cards = picks
     .map((it) => {
@@ -156,7 +158,7 @@ export function renderGdIpoStrip(items: ReportItem[], opts?: { section?: "must" 
       const reportLink = rc?.reportUrl
         ? `<a class="ipo-report" href="${escapeHtml(rc.reportUrl)}" target="_blank" rel="noopener">穿透分析报告（${reportKindLabel}） →</a>`
         : "";
-      return `<li class="ipo-card${rc ? " ipo-card--redchip" : ""}" data-audio-section="ipo">
+      return `<li class="ipo-card${rc ? " ipo-card--redchip" : ""}" id="${it.url ? itemAnchorId(it.url) : ""}" data-audio-section="ipo">
         <div class="ipo-card-head">
           ${rcBadge}
           <span class="ipo-name">${escapeHtml(company)}</span>

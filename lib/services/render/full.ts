@@ -402,6 +402,27 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
       btn.remove();
     });
   });
+  // 摘要 → 正文 站内跳转（F2，2026-09-16）：目标卡片常位于**未激活**的 tab 面板内，
+  // 故需先切到该面板再滚动，否则锚点跳过去也看不见（用户实测反馈过这个问题）。
+  document.querySelectorAll('a[href^="#itm-"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var el = document.getElementById(a.getAttribute('href').slice(1));
+      if (!el) return; // 目标不在本页 → 交回浏览器默认行为
+      e.preventDefault();
+      var panel = el.closest('.panel');
+      if (panel) {
+        document.querySelectorAll('.tabs > .tab').forEach(function (b) {
+          b.classList.toggle('active', b.dataset.target === panel.id);
+        });
+        document.querySelectorAll('.panel').forEach(function (p) {
+          p.classList.toggle('active', p.id === panel.id);
+        });
+      }
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('flash');
+      setTimeout(function () { el.classList.remove('flash'); }, 1800);
+    });
+  });
   // 板块内标签筛选（两维度：来源 OR、业务线 OR；维度间 AND；全不选 / 全选 = 全部显示）
   document.querySelectorAll('.filter-bar').forEach(function (bar) {
     var panel = bar.closest('.panel');

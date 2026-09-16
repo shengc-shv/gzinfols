@@ -18,6 +18,7 @@ import type {
 } from "../contracts/pipeline";
 import { createAdapters, type AdapterOverrides } from "../adapters";
 import { ConsoleLogger } from "../adapters/logger";
+import { DEFAULT_MAX_STOCK_NEWS_PER_MARKET } from "../services/assemble/display-cap";
 
 /** 从 sources.config.json 载入源注册表（唯一真源）。兼容顶层数组与 {sources:[...]} 两种形状。 */
 export async function loadSources(fs: FileStore): Promise<SourceDef[]> {
@@ -46,8 +47,8 @@ function defaultConfig(): PipelineConfig {
     windowDays: Number(process.env.FETCH_WINDOW_DAYS || 2),
     maxPerSection: Number(process.env.MAX_PER_SECTION || 18),
     maxPerSourcePerSection: Number(process.env.MAX_PER_SOURCE_PER_SECTION || 4),
-    // F3（2026-09-16）：股市面板每市场条数上限，默认 5 = 保持原行为；调小即给主板块让版面。
-    maxStockNewsPerMarket: Number(process.env.MAX_STOCK_NEWS_PER_MARKET || 5),
+    // F3（2026-09-16 用户反馈「占比太高」）：股市面板每市场口径由 5 收到 3（三市场合计 ≤9）。
+    maxStockNewsPerMarket: Number(process.env.MAX_STOCK_NEWS_PER_MARKET || DEFAULT_MAX_STOCK_NEWS_PER_MARKET),
     eventMemory: (process.env.EVENT_MEMORY ?? "1") !== "0",
     filters: {
       keyword: envFlag("KEYWORD_FILTER"),
