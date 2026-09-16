@@ -2788,30 +2788,26 @@
       "title": "摩根大通：美联储若维持利率不变，有可能对市场造成“冲击”",
       "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-16/doc-inirzshx3775887.shtml",
       "excerpt": "【财富管理】摩根大通：美联储若维持利率不变，有可能对市场造成“冲击”",
-      "category": "gz",
       "publishedAt": "2026-09-16T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "新浪财经·理财保险",
+      "category": "gz",
       "summary": "机构提示美联储按兵不动或引发市场冲击，客户对汇率与海外资产波动的咨询可能上升，需备好沟通口径。",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "source": "新浪财经·理财保险",
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "sina-money",
       "title": "美联储决议倒计时，芯片股、光通信股大涨，英特尔飙涨7%，SpaceX涨超4%，黄金白银反弹",
       "url": "https://finance.sina.com.cn/stock/t/2026-09-17/doc-inisaawr4525063.shtml",
       "excerpt": "【财富管理】美联储决议倒计时，芯片股、光通信股大涨，英特尔飙涨7%，SpaceX涨超4%，黄金白银反弹",
-      "category": "gz",
       "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "新浪财经·理财保险",
+      "category": "gz",
       "summary": "决议前芯片、光通信股大涨，黄金白银反弹，客户对贵金属与科技类资产的关注度提升，可做好产品适配说明。",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "source": "新浪财经·理财保险",
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "dayoo-gz",
@@ -2820,11 +2816,8 @@
       "excerpt": "南方医科大学发布情况通报",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -2832,15 +2825,13 @@
       "title": "金融发展转向结构优化，信贷增速不是单一标尺！潘功胜最新定调",
       "url": "https://m.21jingji.com/article/20260916/herald/f43cc69a26a9462c2ebd9b5a86f80fd6.html",
       "excerpt": "【21财经·金融】金融发展转向结构优化，信贷增速不是单一标尺！潘功胜最新定调",
-      "category": "gz",
       "publishedAt": "2026-09-16T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "21世纪经济报道·金融",
+      "category": "gz",
       "summary": "信贷增速不再作单一标尺，结构优化成主线，零售信贷考核与投放节奏可能相应调整，值得提前研判。",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "source": "21世纪经济报道·金融",
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "sina-a-stock",
@@ -2849,27 +2840,22 @@
       "excerpt": "贝斯特：毛利率两年下滑20个百分点，超额分红",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·A股频道",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "sina-money",
       "title": "莫让“固收+”基金稳健底色褪成“固收-”",
       "url": "https://finance.sina.com.cn/jjxw/2026-09-17/doc-inisaawr4525912.shtml",
       "excerpt": "【财富管理】莫让“固收+”基金稳健底色褪成“固收-”",
-      "category": "gz",
       "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "新浪财经·理财保险",
+      "category": "gz",
       "summary": "“固收+”产品稳健定位受关注，提示理财经理在客户回访中重点说明回撤与波动来源，避免收益预期错配。",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "source": "新浪财经·理财保险",
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "stcn",
@@ -2878,11 +2864,8 @@
       "excerpt": "机构密集“打卡”北交所上市公司！次新股、硬科技标的是大热门",
       "publishedAt": "2026-09-16T14:31:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -2892,11 +2875,8 @@
       "excerpt": "第九届进博会上海市合作交流采购团开团路演",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -2906,12 +2886,9 @@
       "excerpt": "朗高科技创业板IPO将于9月22日上会",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·A股频道",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "stcn",
@@ -2920,11 +2897,8 @@
       "excerpt": "【财闻联播】交易员下调英国央行加息押注！伊利股份：拟10亿至20亿元回购股份并注销减资",
       "publishedAt": "2026-09-16T14:38:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -2934,11 +2908,8 @@
       "excerpt": "首家国际五星级酒店落地！皇冠假日入驻白云湖数字科技城",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -2948,11 +2919,8 @@
       "excerpt": "事关中秋、国庆、广交会......广州发布价格提醒告诫",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -2962,11 +2930,8 @@
       "excerpt": "晴热接棒雷雨，未来三天广州将可能有35℃高温",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -2976,11 +2941,8 @@
       "excerpt": "越秀区连续三年入榜“中国楼宇经济（总部经济）标杆城区”前十",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -2990,11 +2952,8 @@
       "excerpt": "刷新白云新城CBD封面！粤海云港城230米甲级写字楼封顶",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -3004,11 +2963,8 @@
       "excerpt": "王彤：来到南沙，面试有交通补贴，入职有人才公寓，落户有生活补贴，追梦之行一路无忧｜百万英才汇南粤",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -3018,11 +2974,8 @@
       "excerpt": "前8月广州市对东盟进出口超1400亿元",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -3032,12 +2985,9 @@
       "excerpt": "硬科技再添配置利器 创业板首只算力ETF上市",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·A股频道",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "cnbc-top",
@@ -3045,13 +2995,10 @@
       "url": "https://www.cnbc.com/2026/09/16/hyperscaler-debt-signals-warning-sign-apollo-cautions.html",
       "excerpt": "Credit default swaps for companies building data centers are getting pricier, and it's not because banks are hedging more of their bets.",
       "publishedAt": "2026-09-16T16:48:04.000Z",
-      "fetchedAt": "2026-09-16T16:50:18.704Z",
       "category": "stocks",
       "summary": "Credit default swaps for companies building data centers are getting pricier, and it's not because banks are hedging more of their bets.",
-      "tier": "T2",
-      "isIpo": false,
       "source": "CNBC Investing",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "us"
     },
     {
@@ -3060,13 +3007,9 @@
       "url": "https://www.investing.com/news/stock-market-news/us-senate-panel-approves-bill-to-bar-government-officials-from-pressuring-networks-on-free-speech-4904046",
       "excerpt": "US Senate panel approves bill to bar government officials from pressuring networks on free",
       "publishedAt": "2026-09-16T16:43:32.000Z",
-      "fetchedAt": "2026-09-16T16:50:18.704Z",
       "category": "stocks",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "us"
     },
     {
@@ -3075,13 +3018,9 @@
       "url": "https://www.investing.com/news/company-news/medical-properties-trust-stock-hits-52week-low-at-35-usd-93CH-4904182",
       "excerpt": "Medical Properties Trust stock hits 52-week low at 3.5 USD",
       "publishedAt": "2026-09-16T16:41:41.000Z",
-      "fetchedAt": "2026-09-16T16:50:18.704Z",
       "category": "stocks",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "us"
     },
     {
@@ -3090,13 +3029,9 @@
       "url": "https://www.investing.com/news/stock-market-news/ad-agency-sector-outlook-publicis-leads-as-wpp-retreats-and-omnicom-integrates-ipg-93CH-4904181",
       "excerpt": "Ad agency sector outlook: Publicis leads as WPP retreats and Omnicom integrates IPG",
       "publishedAt": "2026-09-16T16:40:55.000Z",
-      "fetchedAt": "2026-09-16T16:50:18.704Z",
       "category": "stocks",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "us"
     },
     {
@@ -3105,13 +3040,9 @@
       "url": "https://www.investing.com/news/economy-news/calls-to-slow-down-ai-development-serve-the-interests-of-us-ai-leaders-says-french-finance-minister-4904096",
       "excerpt": "Calls to slow AI benefit US sector leaders, says French finance minister",
       "publishedAt": "2026-09-16T16:37:14.000Z",
-      "fetchedAt": "2026-09-16T16:50:18.704Z",
       "category": "stocks",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "us"
     },
     {
@@ -3120,13 +3051,9 @@
       "url": "https://www.investing.com/news/stock-market-news/gehc-vs-syk-pairs-trade-valuation-gap-and-relative-value-case-93CH-4904179",
       "excerpt": "GEHC vs. SYK pairs trade: valuation gap and relative value case",
       "publishedAt": "2026-09-16T16:36:56.000Z",
-      "fetchedAt": "2026-09-16T16:50:18.704Z",
       "category": "stocks",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "us"
     },
     {
@@ -3135,13 +3062,9 @@
       "url": "https://www.investing.com/news/transcripts/walmart-at-piper-sandler-conference-marketplace-growth-accelerates-93CH-4904177",
       "excerpt": "Walmart at Piper Sandler conference: marketplace growth accelerates",
       "publishedAt": "2026-09-16T16:35:37.000Z",
-      "fetchedAt": "2026-09-16T16:50:18.704Z",
       "category": "stocks",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "us"
     },
     {
@@ -3150,13 +3073,10 @@
       "url": "https://news.crunchbase.com/startups/tech-layoffs/",
       "excerpt": "Over 127,000 workers at U.S.-based tech companies were laid off in mass job cuts in 2025, per a Crunchbase News tally, and the layoffs have continued into 2026. See the latest companies to cut roles.",
       "publishedAt": "2026-09-16T16:28:30.000Z",
-      "fetchedAt": "2026-09-16T16:50:18.704Z",
       "category": "finance",
       "summary": "Over 127,000 workers at U.S.-based tech companies were laid off in mass job cuts in 2025, per a Crunchbase News tally, and the layoffs have continued into 2026. See the latest companies to cut roles.",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Crunchbase News",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "overseas"
     },
     {
@@ -3166,11 +3086,8 @@
       "excerpt": "贵州证监局召开2026年贵州资本市场新闻媒体座谈会",
       "publishedAt": "2026-09-16T14:55:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -3180,11 +3097,8 @@
       "excerpt": "2连板北自科技：电子布织布机处于生产验证阶段 不涉及电子布的生产及销售",
       "publishedAt": "2026-09-16T14:41:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -3194,11 +3108,8 @@
       "excerpt": "康惠股份，签署17.2亿元算力大单",
       "publishedAt": "2026-09-16T14:40:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -3208,11 +3119,8 @@
       "excerpt": "黑天鹅突袭！土耳其股市触发熔断，发生了什么？",
       "publishedAt": "2026-09-16T14:37:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -3222,11 +3130,8 @@
       "excerpt": "上游原料价格暴涨 染料行业掀起涨价潮",
       "publishedAt": "2026-09-16T14:28:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -3236,11 +3141,8 @@
       "excerpt": "“毫克级”油气回收技术亮相中国国际化工展",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -3250,11 +3152,8 @@
       "excerpt": "网络谣言欠南方医科大学和当事人一个道歉",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -3264,11 +3163,8 @@
       "excerpt": "南方医科大学学生坠亡，造谣“导师只批三天假”无良无德无底线",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -3279,12 +3175,10 @@
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "gz",
       "summary": "空港新城TOD项目开工、总投资约26.2亿元，可关注片区按揭与开发贷配套机会，跟进政银合作切入点。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "gz-media"
+      "fetchedToday": false,
+      "subcategory": "gz-media",
+      "relevant": true
     },
     {
       "sourceId": "eastmoney-stock",
@@ -3293,12 +3187,9 @@
       "excerpt": "9月16日晚间沪深上市公司重大事项公告最新快递",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "eastmoney-stock",
@@ -3307,12 +3198,188 @@
       "excerpt": "今夜揭晓！一图看懂美国加息后A股怎么走",
       "publishedAt": "2026-09-16T00:00:00.000Z",
       "category": "stocks",
+      "source": "东方财富·A股股市新闻",
+      "fetchedToday": false,
+      "subcategory": "a-share"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Dollar holds near two-week high ahead of Fed decision",
+      "url": "https://www.investing.com/news/economy-news/dollar-girded-by-bets-on-a-us-hiking-cycle-4902809",
+      "excerpt": "Dollar holds near two-week high ahead of Fed decision",
+      "publishedAt": "2026-09-16T17:00:33.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "stocks",
       "summary": "",
-      "subcategory": "a-share",
       "tier": "T2",
       "isIpo": false,
-      "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Meloni says she plans to stay in office until term ends",
+      "url": "https://www.investing.com/news/economy-news/meloni-says-she-plans-to-stay-in-office-until-term-ends-93CH-4904195",
+      "excerpt": "Meloni says she plans to stay in office until term ends",
+      "publishedAt": "2026-09-16T16:55:08.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Joby Aviation stock hits 52-week low at 6.05 USD",
+      "url": "https://www.investing.com/news/company-news/joby-aviation-stock-hits-52week-low-at-605-usd-93CH-4904194",
+      "excerpt": "Joby Aviation stock hits 52-week low at 6.05 USD",
+      "publishedAt": "2026-09-16T16:55:00.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Cboe at Barclays conference: focus shifts to derivatives and data",
+      "url": "https://www.investing.com/news/transcripts/cboe-at-barclays-conference-focus-shifts-to-derivatives-and-data-93CH-4904193",
+      "excerpt": "Cboe at Barclays conference: focus shifts to derivatives and data",
+      "publishedAt": "2026-09-16T16:53:08.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "National Bank of Canada at Barclays conference: CWB deal fuels growth",
+      "url": "https://www.investing.com/news/transcripts/national-bank-of-canada-at-barclays-conference-cwb-deal-fuels-growth-93CH-4904192",
+      "excerpt": "National Bank of Canada at Barclays conference: CWB deal fuels growth",
+      "publishedAt": "2026-09-16T16:52:41.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Tenable at Piper sandler growth frontiers: ai fuels growth",
+      "url": "https://www.investing.com/news/transcripts/tenable-at-piper-sandler-growth-frontiers-ai-fuels-growth-93CH-4904191",
+      "excerpt": "Tenable at Piper sandler growth frontiers: ai fuels growth",
+      "publishedAt": "2026-09-16T16:51:21.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Nike stock outlook: trading at 12-year lows with turnaround unlikely before 2027",
+      "url": "https://www.investing.com/news/stock-market-news/nike-stock-outlook-trading-at-12year-lows-with-turnaround-unlikely-before-2027-93CH-4904189",
+      "excerpt": "Nike stock outlook: trading at 12-year lows with turnaround unlikely before 2027",
+      "publishedAt": "2026-09-16T16:51:00.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Capital One at Barclays conference: growth bets stay on track",
+      "url": "https://www.investing.com/news/transcripts/capital-one-at-barclays-conference-growth-bets-stay-on-track-93CH-4904188",
+      "excerpt": "Capital One at Barclays conference: growth bets stay on track",
+      "publishedAt": "2026-09-16T16:50:52.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Dollar rises ahead of pivotal Fed rate decision, sterling slips as UK CPI heats up",
+      "url": "https://www.investing.com/news/forex-news/asian-currencies-mixed-as-dollar-holds-gains-yen-slips-to-oneweek-low-4902879",
+      "excerpt": "Dollar rises ahead of pivotal Fed rate decision, sterling slips as UK CPI heats up",
+      "publishedAt": "2026-09-16T16:49:53.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "SEC proposes to end shareholder vote oversight, a blow to reformers",
+      "url": "https://www.investing.com/news/economy-news/sec-proposes-to-end-shareholder-vote-oversight-a-blow-to-reformers-4904187",
+      "excerpt": "SEC proposes to end shareholder vote oversight, a blow to reformers",
+      "publishedAt": "2026-09-16T16:49:18.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "title": "Diffusion models for dynamic volatility surface generation and data-driven hedging",
+      "url": "https://arxiv.org/abs/2609.13402",
+      "excerpt": "arXiv:2609.13402v2 Announce Type: replace-cross \nAbstract: We develop a diffusion-model framework for dynamic implied-volatility surface generation and evaluate its economic usefulness through data-driven hedging. The framework consists of two models. AD-Seq-Vol jointly learns the conditional evolution of the underlying asset return and the high-dimensional implied-volatility surface, generating adapted multi-period scenarios by sequentially updating the realized market history. AD-Seq-Vol-FT further incorporates option-market structure through post-training penalties for violations of static no-arbitrage conditions. Using daily SPX option data from 2000 to 2023, we show that the proposed models generate coherent surface trajectories while capturing both cross-sectional and temporal dependence. AD-Seq-Vol produces fewer and less severe static-arbitrage violations than the training data and the GAN-based benchmark, while AD-Seq-Vol-FT reduces these violations to nearly zero. We then integrate the generated conditional scenarios into an optimization-based hedging framework. Compared to a range of classical and data-driven benchmarks, the diffusion-based hedges maintain tracking errors near zero, substantially reduce tail risk, and exhibit particularly stable performance during the COVID-19 market disruption. These results establish Adaptive Sequential Diffusion Models as a promising class of market-consistent and economically useful financial scenario generators. Our code is available at: https://github.com/yinbinhan/volatility-surface-simulation.",
+      "publishedAt": "2026-09-16T04:00:00.000Z",
+      "fetchedAt": "2026-09-16T17:12:01.867Z",
+      "category": "tech",
+      "summary": "arXiv:2609.13402v2 Announce Type: replace-cross \nAbstract: We develop a diffusion-model framework for dynamic implied-volatility surface generation and evaluate its economic usefulness through data-driven hedging. The framework consists of two models. AD-Seq-Vol jointly learns the conditional evolution of the underlying asset return and the high-dimensional implied-volatility surface, generating adapted multi-period scenarios by sequentially updating the realized market history. AD-Seq-Vol-FT further incorporates option-market structure through post-training penalties for violations of static no-arbitrage conditions. Using daily SPX option data from 2000 to 2023, we show that the proposed models generate coherent surface trajectories while capturing both cross-sectional and temporal dependence. AD-Seq-Vol produces fewer and less severe static-arbitrage violations than the training data and the GAN-based benchmark, while AD-Seq-Vol-FT reduces these violations to nearly zero. We then integrate the generated conditional scenarios into an optimization-based hedging framework. Compared to a range of classical and data-driven benchmarks, the diffusion-based hedges maintain tracking errors near zero, substantially reduce tail risk, and exhibit particularly stable performance during the COVID-19 market disruption. These results establish Adaptive Sequential Diffusion Models as a promising class of market-consistent and economically useful financial scenario generators. Our code is available at: https://github.com/yinbinhan/volatility-surface-simulation.",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "arXiv 量化金融论文 (q-fin.PM·RM·GN)",
+      "fetchedToday": true,
+      "subcategory": "overseas-tech"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "新华指数监测：中国能化现货估价指数续涨",
+      "url": "https://www.cnfin.com/cy-lb/detail/20260916/4470849_1.html",
+      "excerpt": "新华指数监测：中国能化现货估价指数续涨",
+      "publishedAt": "2026-09-16T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
     }
   ]
 }

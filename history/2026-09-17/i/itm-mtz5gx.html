@@ -543,26 +543,8 @@
   .tag-action { color: var(--c-gdipo); background: color-mix(in srgb, var(--c-gdipo) 12%, transparent); }
 
   
-  .must-scroller, .insight-scroller, .risk-scroller, .ipo-scroller, .stock-scroller {
-    display: grid; grid-template-columns: 1fr;
-    overflow: visible; padding-bottom: 0; padding-right: 0; scroll-snap-type: none;
-  }
-  
-  .must-scroller > *, .insight-scroller > *, .risk-scroller > *, .ipo-scroller > *, .stock-scroller > * {
-    width: auto; max-width: none;
-  }
-  
-  .must-hint-inline, .insight-hint-inline, .ipo-hint-inline, .stock-hint-inline { display: none; }
-  .exec-must::after, .exec-insights::after, .exec-ipo::after, .exec-stock::after { display: none; }
-  
   .must-card.must-more { display: none; }
   .exec-must.expanded .must-card.must-more { display: flex; }
-  
-  @media (min-width: 720px) {
-    .must-scroller { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-    .insight-scroller, .risk-scroller, .ipo-scroller { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-    .stock-scroller { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-  }
 
   
   .tabs {
@@ -1282,7 +1264,7 @@
   
   <p class="summary">“固收+”产品稳健定位受关注，提示理财经理在客户回访中重点说明回撤与波动来源，避免收益预期错配。</p>
   <dl class="kv">
-      <div class="kv-row"><dt>来源</dt><dd>新浪财经·理财保险</dd></div>
+      <div class="kv-row"><dt>来源</dt><dd>新浪财经·理财保险 · T2</dd></div>
       <div class="kv-row"><dt>发布</dt><dd>09/17</dd></div>
       <div class="kv-row"><dt>板块</dt><dd>业务启示</dd></div>
       <div class="kv-row"><dt>重要度</dt><dd>默认</dd></div>
