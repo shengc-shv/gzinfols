@@ -57,6 +57,15 @@ const LEAD_NON = {
   discoveredAt: "2026-09-15T08:00:00+08:00",
 };
 
+/** 注入防护夹具：名称里带标签，必须被转义。 */
+const LEAD_INJECTED = {
+  ...LEAD_RED,
+  leadId: "108999",
+  appId: "108999",
+  nameCn: "<script>alert(1)</script>",
+  verdict: "unverified",
+};
+
 function makeFixture(): string {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "redchip-report-"));
   const write = (rel: string, content: string) => {
@@ -73,8 +82,7 @@ function makeFixture(): string {
       [
         LEAD_RED,
         LEAD_NON,
-        // 注入防护夹具：名称里带标签，必须被转义
-        { ...LEAD_RED, leadId: "108999", appId: "108999", nameCn: "<script>alert(1)</script>", verdict: "unverified" },
+        LEAD_INJECTED,
       ],
       null,
       2,
@@ -87,7 +95,15 @@ function makeFixture(): string {
       JSON.stringify({ at: "2026-09-15T09:00:00+08:00", type: "changed", appId: "108870", field: "状态", from: "处理中", to: "已受理" }),
     ].join("\n") + "\n",
   );
-  write("data/redchip/latest.json", JSON.stringify({ capturedAt: "2026-09-15T08:30:00+08:00", count: 3, projects: [] }));
+  // projects 必须非空：总览页据此渲染清单与「报告」列（空数组 → 空态页，验证不到链接）
+  write(
+    "data/redchip/latest.json",
+    JSON.stringify({
+      capturedAt: "2026-09-15T08:30:00+08:00",
+      count: 3,
+      projects: [LEAD_RED, LEAD_NON, LEAD_INJECTED],
+    }),
+  );
   write("daily_reports/2026-09-15/2026-09-15.html", "<!doctype html><html><body><p>x</p></body></html>");
   return dir;
 }
@@ -130,6 +146,16 @@ test("会前报告页：逐条产出（T5）+ 深度版共存（T6）+ 字段转
     assert.ok(!injected.includes("<script>alert(1)</script>"), "用户可控字段必须被转义");
     assert.ok(injected.includes("&lt;script&gt;"), "应转义为 HTML 实体");
 
+    // ④ 总览页「报告」列：只链接**确实生成了页面**的线索（防死链）
+    const index = read("site/redchip/index.html");
+    assert.ok(index.includes("<th>报告</th>"), "总览页应有「报告」列");
+    assert.ok(index.includes('href="r/108870.html"'), "红筹线索应链接到会前版本报告");
+    assert.ok(
+      !index.includes('href="r/555555.html"'),
+      "non-redchip 不产页 → 总览页不得给出指向它的链接（否则死链）",
+    );
+    assert.ok(!index.includes("<script>alert(1)</script>"), "总览页同样必须转义用户可控字段");
+
     // ② T6：预置人工深度版 —— 会前版本仍存在，且入口由 resolver 决定（此处仅验证共存）
     const deepDir = path.join(dir, "site", "redchip", "deep");
     fs.mkdirSync(deepDir, { recursive: true });
@@ -138,6 +164,14 @@ test("会前报告页：逐条产出（T5）+ 深度版共存（T6）+ 字段转
     assert.equal(r2.status, 0);
     assert.ok(exists("site/redchip/deep/108870.html"), "人工深度版不得被构建覆盖");
     assert.ok(exists("site/redchip/r/108870.html"), "会前版本与会前/深度版共存");
+
+    // ⑤ 入口优先级：深度版存在时，总览页「报告」列应指向 deep（manual > deep > r）
+    const index2 = read("site/redchip/index.html");
+    assert.ok(
+      index2.includes('href="deep/108870.html"'),
+      "深度版存在时入口优先指向 deep（与 report-resolver 同口径 manual > deep > r）",
+    );
+    assert.ok(!index2.includes('href="r/108870.html"'), "存在深度版时不应再指向会前版本");
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

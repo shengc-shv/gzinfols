@@ -36,11 +36,20 @@ function changeTypeLabel(t) {
   return t === "added" ? "新增" : t === "removed" ? "移除" : "变更";
 }
 
-function rowOf(p) {
+/**
+ * 单行。
+ *
+ * @param p 快照条目
+ * @param reportHrefs `leadId|appId → 报告页相对路径`；**只含确实生成了页面**的线索
+ *   （由 build-site 在生成报告页后回填）——避免总览页出现指向不存在文件的死链。
+ */
+function rowOf(p, reportHrefs) {
   const verdict = VERDICT_LABEL[p.verdict] ?? p.verdict;
   const proof = p.sourceUrl
     ? `<a href="${esc(p.sourceUrl)}" target="_blank" rel="noopener noreferrer">原文</a>`
     : "—";
+  const href = reportHrefs?.get(String(p.leadId ?? "")) ?? reportHrefs?.get(String(p.appId ?? ""));
+  const report = href ? `<a class="rpt" href="${esc(href)}">报告</a>` : "—";
   return `      <tr data-verdict="${esc(p.verdict)}" data-board="${esc(p.board)}" data-offshore="${esc(
     String(p.isOffshore),
   )}" data-gd="${esc(String(p.isGdConnected))}" data-name="${esc(p.nameCn || p.nameEn)}" data-discovered="${esc(
@@ -56,16 +65,20 @@ function rowOf(p) {
         <td><span class="tag t-${esc(p.verdict)}">${esc(verdict)}</span></td>
         <td class="dt">${esc(String(p.discoveredAt).slice(0, 10))}</td>
         <td>${proof}</td>
+        <td>${report}</td>
       </tr>`;
 }
 
 /**
- * @param {{snapshot: {capturedAt:string,count:number,projects:Array}|null, changes: Array}} input
+ * @param {{snapshot: {capturedAt:string,count:number,projects:Array}|null, changes: Array,
+ *          reportHrefs?: Map<string,string>}} input
+ *   reportHrefs：`leadId|appId → 报告页相对路径`（build-site 生成报告页后回填；
+ *   缺失时「报告」列一律显示 —，不臆造链接）
  * @returns {string} HTML
  */
-export function renderRedchipPage({ snapshot, changes }) {
+export function renderRedchipPage({ snapshot, changes, reportHrefs }) {
   const projects = snapshot?.projects ?? [];
-  const rows = projects.map(rowOf).join("\n");
+  const rows = projects.map((p) => rowOf(p, reportHrefs)).join("\n");
   const changeRows = (changes ?? [])
     .slice()
     .reverse()
@@ -134,7 +147,7 @@ ${
     : `<table id="tbl">
   <thead><tr>
     <th data-k="name">企业名称</th><th>板块</th><th>状态</th><th data-k="submit">递表日</th>
-    <th>注册地</th><th>广东词频</th><th>VIE</th><th>判定</th><th data-k="discovered">发现时间</th><th>来源</th>
+    <th>注册地</th><th>广东词频</th><th>VIE</th><th>判定</th><th data-k="discovered">发现时间</th><th>来源</th><th>报告</th>
   </tr></thead>
   <tbody>
 ${rows}

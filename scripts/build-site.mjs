@@ -213,17 +213,14 @@ try {
   }
   const rcOutDir = path.join(OUT, "redchip");
   fs.mkdirSync(rcOutDir, { recursive: true });
-  fs.writeFileSync(
-    path.join(rcOutDir, "index.html"),
-    renderRedchipPage({ snapshot: rcSnap, changes: rcChanges }),
-    "utf8",
-  );
-  console.log(`[build-site] redchip/index.html (${rcSnap ? rcSnap.count : 0} 家 / ${rcChanges.length} 条变更)`);
 
-  // ---------- 5.5b) 每条线索一份「会前版本」穿透报告：site/redchip/r/<leadId>.html ----------
+  // ---------- 5.5a) 每条线索一份「会前版本」穿透报告：site/redchip/r/<leadId>.html ----------
   // T5：自动生成（**零 LLM**、字符串拼接、覆盖率 100%）——解决「点开是空的」。
   // 只对 verdict ≠ non-redchip 产页（与徽章口径 §3.1 一致）；深度/人工版（deep/、manual/）
-  // 由人工产出，卡片入口优先指向它们（T6），但会前版本仍生成，保持「每条线索都有页」。
+  // 由人工产出，入口优先指向它们（T6），但会前版本仍生成，保持「每条线索都有页」。
+  //
+  // ⚠️ 顺序：本段**必须先于总览页**执行——总览页的「报告」列只包含这里确实写出过的
+  // 页面（reportHrefs 回填），否则会出现指向不存在文件的死链。
   const rcLeadsPath = path.join(rcDir, "leads.json");
   let rcLeads = [];
   if (fs.existsSync(rcLeadsPath)) {
@@ -234,6 +231,10 @@ try {
   }
   const rcReportDir = path.join(rcOutDir, "r");
   fs.mkdirSync(rcReportDir, { recursive: true });
+  const deepDir = path.join(rcOutDir, "deep");
+  const manualDir = path.join(rcOutDir, "manual");
+  /** leadId|appId → 报告页相对路径（供总览页「报告」列使用）。 */
+  const rcReportHrefs = new Map();
   let rcPages = 0;
   for (const lead of rcLeads) {
     const leadId = String((lead && lead.leadId) || "");
@@ -245,8 +246,22 @@ try {
       "utf8",
     );
     rcPages++;
+    // 入口优先级 manual > deep > r（与 lib/adapters/redchip/report-resolver 同口径）
+    let href = `r/${leadId}.html`;
+    if (fs.existsSync(path.join(manualDir, `${leadId}.html`))) href = `manual/${leadId}.html`;
+    else if (fs.existsSync(path.join(deepDir, `${leadId}.html`))) href = `deep/${leadId}.html`;
+    rcReportHrefs.set(leadId, href);
+    if (lead.appId) rcReportHrefs.set(String(lead.appId), href);
   }
   console.log(`[build-site] redchip/r/*.html（${rcPages} 页 / 线索 ${rcLeads.length} 条，零 LLM）`);
+
+  // ---------- 5.5b) 红筹监测总览页：site/redchip/index.html ----------
+  fs.writeFileSync(
+    path.join(rcOutDir, "index.html"),
+    renderRedchipPage({ snapshot: rcSnap, changes: rcChanges, reportHrefs: rcReportHrefs }),
+    "utf8",
+  );
+  console.log(`[build-site] redchip/index.html (${rcSnap ? rcSnap.count : 0} 家 / ${rcChanges.length} 条变更 / ${rcPages} 份报告)`);
 } catch (e) {
   console.log(`[build-site] 红筹展示页跳过：${e && e.message ? e.message : e}`);
 }
