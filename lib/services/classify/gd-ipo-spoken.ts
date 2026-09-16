@@ -176,8 +176,10 @@ function redchipClauseOf(it: ReportItem): string {
 /**
  * 红筹口播候选（T3）：`verdict=redchip` ∧ 口播窗内 ∧ 未被跨天去重（`skipCompanies`）。
  *
- * 窗口取 `REDCHIP_VOICE_WINDOW_DAYS`（独立常量，§2.4）；本文件 `recentMmddSet` 是
- * 「含今天共 N 日」口径，而常量语义是「日差 ≤ N」→ 传 `N+1` 对齐。
+ * 窗口取 `REDCHIP_VOICE_WINDOW_DAYS`（独立常量，§2.4）；`recentMmddSet`（已下沉到
+ * `utils/time.ts`）是「含今天共 N 个日历日」口径，而**红筹**常量语义是「日差 ≤ N」
+ * （与 `classify/redchip.ts::inRedchipWindow` 的 dayGap 实现一致）→ 传 `N+1` 对齐。
+ * 注：IPO 自己的 `IPO_VOICE_WINDOW_DAYS` **不加 1**（用户口径「2 天窗」= 今天+昨天）。
  * 卡片展示**不受**此窗影响（沿用 `REDCHIP_LIST_WINDOW_DAYS`）。
  */
 export function redchipVoiceItems(

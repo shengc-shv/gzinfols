@@ -70,14 +70,17 @@ function pad(n: number): string {
 }
 
 /**
- * 展示/口播窗口（日差，含今天）——2026-09-10 用户拍板口径：
- *   - **口播 + 今日必读横滑 = 2 天**（`IPO_VOICE_WINDOW_DAYS`）：只播最新动向；
- *   - **底部「广东IPO动态」列表 = 7 天**（`IPO_LIST_WINDOW_DAYS`）：与源层 7 天窗对齐
- *     （szse-audit.IPO_SOURCE_WINDOW_DAYS / csrcfd.CSRC_WINDOW_DAYS / sse-audit）。
+ * 展示/口播窗口（**含今天共 N 个日历日**）——2026-09-10 用户拍板、2026-09-16 校正口径：
+ *   - **口播 + 今日必读横滑 = 2 天**（`IPO_VOICE_WINDOW_DAYS`）：今天 + 昨天；
+ *   - **底部「广东IPO动态」列表 = 7 天**（`IPO_LIST_WINDOW_DAYS`）：今天起 7 个日历日。
  *
- * 口径 = **日差 ≤ N**（今天往前 N 天，即今天-N ~ 今天）。用户实锤：上交所主板
- * 「广东龙行天下」（updateDate 09-03，相对 09-10 日差恰为 7）必须在列表内 —— 旧的
- * 「含今天共 N 个日历日」（今天-N+1 起）会把它卡在窗外。
+ * 口径 = **含今天共 N 个日历日**（今天 ~ 今天-(N-1)），由 `utils/time.ts` 的
+ * `recentMmddSet` 统一提供（口播/横滑/exec 池共用同一实现，勿在别处另起一份）。
+ *
+ * ⚠️ 与**源层抓取窗**口径不同：源层（szse/bse/csrcfd/hk-filing）是「日差 ≤ N」
+ * （今天-N ~ 今天，共 N+1 个日历日），本文件的渲染窗口是「N 个日历日」→ **边界差 1 天**。
+ * 后果：源层抓回的日差恰为 7 的条目（如 09-10 报告里的 09-03）不出现在底部列表。
+ * 用户 2026-09-16 确认接受现状（口径与差异的完整说明见 `lib/ipo-config.ts` 文件头）。
  */
 // 常量定义已迁至 lib/ipo-config.ts（P2-3 收敛）；此处 re-export 保持既有 import 路径可用。
 export { IPO_VOICE_WINDOW_DAYS, IPO_LIST_WINDOW_DAYS };
