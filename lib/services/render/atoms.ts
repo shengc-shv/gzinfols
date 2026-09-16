@@ -15,11 +15,9 @@ import { todayKey } from "../../utils/time";
  * （此前只写了「见正文」文本、点不动 —— 用户实测反馈）。同一条目在两次渲染中 id 必须一致，
  * 故用 url 的**纯函数哈希**（djb2 → base36），不依赖渲染顺序、不用 node:crypto（服务层禁 node:）。
  */
-export function itemAnchorId(url: string): string {
-  let h = 5381;
-  for (let i = 0; i < url.length; i++) h = ((h << 5) + h + url.charCodeAt(i)) | 0;
-  return `itm-${(h >>> 0).toString(36)}`;
-}
+// 条目 ID / 锚点已下沉到 `utils/item-id.ts`（A2 地基）：组装期与渲染期必须同源，
+// 否则「详情页链接」与「见正文锚点」会指向不同目标。此处 re-export 保持既有调用点可用。
+export { itemAnchorId, itemIdOf } from "../../utils/item-id";
 
 export function tagClsOf(tag: string): string {  if (/财富|私行/.test(tag)) return "t-wealth";
   if (/代发|客群/.test(tag)) return "t-mass";

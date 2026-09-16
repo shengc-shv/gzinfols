@@ -47,6 +47,13 @@ export const SECTION_LABELS: Record<ReportSectionKey, string> = {
 /** 业务红线 #2/#3 的落地：板块归属、客户群、风险全部由内容判定产出。 */
 
 export interface ReportItem {
+  /**
+   * 稳定条目 ID（A2 地基，**跨期可比、可寻址**）。
+   * 由 url 确定性派生（`utils/item-id.ts::itemIdOf`），同一 url 在任何一期得到同一值。
+   * 二期依赖它的能力：B1 检索落点 / A3 增量三态 / B2 主题时间线 / C1 客群视图 / E2 导出。
+   * 老报告（无此字段）在渲染前由 `assemble/item-id.assignItemIds` 补齐，幂等。
+   */
+  id?: string;
   url: string;
   title_cn: string;
   title_orig?: string;

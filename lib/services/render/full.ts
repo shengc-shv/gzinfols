@@ -167,7 +167,8 @@ export * from "./markdown";
  * （tests/render-invariants.test.ts）误报。CSS 注释对渲染零影响，故统一在注入点剥离；
  * 源码内的注释保留给维护者。
  */
-function stripCssComments(css: string): string {
+/** 剥离 CSS 块注释——源码注释安全，但**产物是公开页面**，不应把注释发上去。 */
+export function stripCssComments(css: string): string {
   return css.replace(/\/\*[\s\S]*?\*\//g, "");
 }
 
