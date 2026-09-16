@@ -424,27 +424,52 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
       }
     } catch (e) {}
   })();
-  // 摘要 → 正文 站内跳转（F2，2026-09-16）：目标卡片常位于**未激活**的 tab 面板内，
-  // 故需先切到该面板再滚动，否则锚点跳过去也看不见（用户实测反馈过这个问题）。
-  document.querySelectorAll('a[href^="#itm-"]').forEach(function (a) {
-    a.addEventListener('click', function (e) {
-      var el = document.getElementById(a.getAttribute('href').slice(1));
-      if (!el) return; // 目标不在本页 → 交回浏览器默认行为
-      e.preventDefault();
-      var panel = el.closest('.panel');
-      if (panel) {
-        document.querySelectorAll('.tabs > .tab').forEach(function (b) {
-          b.classList.toggle('active', b.dataset.target === panel.id);
-        });
-        document.querySelectorAll('.panel').forEach(function (p) {
-          p.classList.toggle('active', p.id === panel.id);
-        });
+  // —— 摘要 → 正文 站内跳转（F2）——
+  // ⚠️ 目标卡片有**两重隐藏**，只处理「切 tab」是不够的（2026-09-17 用户实测「点了没反应」）：
+  //   ① 常在**未激活**的 tab 面板内（.panel 非 active → display:none）；
+  //   ② 还可能落在**折叠区**（.brief.more / A1a 的 .exec-must .must-more）→ 同样 display:none。
+  //   对 display:none 的元素 scrollIntoView **不产生任何滚动**，故必须先「切面板 + 展开折叠」
+  //   再滚动，否则表现为点了完全没反应。
+  // 同一函数也用于「从详情页返回」——返回链接带 #itm-xxx，加载时同样需要这套前置动作。
+  function gotoItem(id) {
+    var el = document.getElementById(id);
+    if (!el) return false;
+    var panel = el.closest('.panel');
+    if (panel) {
+      document.querySelectorAll('.tabs > .tab').forEach(function (b) {
+        b.classList.toggle('active', b.dataset.target === panel.id);
+      });
+      document.querySelectorAll('.panel').forEach(function (p) {
+        p.classList.toggle('active', p.id === panel.id);
+      });
+      // ② 落在折叠区 → 先展开（与「展开其余 N 条」按钮同效，按钮同时移除避免错位）
+      if (el.classList.contains('more')) {
+        panel.classList.add('expanded');
+        var eb = panel.querySelector('.expand-btn');
+        if (eb) eb.remove();
       }
-      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      el.classList.add('flash');
-      setTimeout(function () { el.classList.remove('flash'); }, 1800);
-    });
+    }
+    // A1a：今日必读的折叠区（摘要内跳转时可能出现）
+    var mustBox = el.closest('.exec-must');
+    if (mustBox && el.classList.contains('must-more')) mustBox.classList.add('expanded');
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    el.classList.add('flash');
+    setTimeout(function () { el.classList.remove('flash'); }, 1800);
+    return true;
+  }
+  // 事件委托：动态内容也覆盖，且无需逐个绑定
+  document.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest ? e.target.closest('a[href^="#itm-"]') : null;
+    if (!a) return;
+    if (gotoItem(a.getAttribute('href').slice(1))) e.preventDefault();
   });
+  // 进来就带锚点（详情页返回 / 分享链接带 #）→ 同样定位
+  function onHash() {
+    var m = /^#(itm-[A-Za-z0-9_-]+)$/.exec(location.hash || '');
+    if (m) setTimeout(function () { gotoItem(m[1]); }, 60);
+  }
+  window.addEventListener('hashchange', onHash);
+  onHash();
   // 板块内标签筛选（两维度：来源 OR、业务线 OR；维度间 AND；全不选 / 全选 = 全部显示）
   document.querySelectorAll('.filter-bar').forEach(function (bar) {
     var panel = bar.closest('.panel');
