@@ -17,6 +17,13 @@ import {
 import type { ReportItem } from "../lib/contracts/report";
 import type { RedchipBadge } from "../lib/contracts/redchip";
 
+/**
+ * 固定「今天」：**必须与夹具 date（09/15）配套**。
+ * ⚠️ 不可省略 today 让实现去读真实时钟——那样跨过午夜后窗口变成 {09/17,09/16}，
+ * 夹具的 09/15 会掉出窗外，测试在每天 00:00 后集体变红（2026-09-17 实测踩到）。
+ */
+const TODAY = "2026-09-16";
+
 function hkItem(title: string, appId: string, over: Partial<ReportItem> = {}): ReportItem {
   const url = `https://www1.hkexnews.hk/app/sehk/2026/${appId}/2026091300120_c.htm`;
   return {
@@ -91,16 +98,16 @@ test("③ 口播：红筹港股仍在播，单纯赴港被剔除", () => {
 
 test("④ 横滑（excludePlainHk: true）同口径剔除；底部列表（缺省 false）保留", () => {
   const items = [hkItem("翱捷科技（主板递表）", "108868"), aShareItem("云英谷科技：IPO辅导备案")];
-  const slide = topGdIpo(items, undefined, 3, undefined, { uniqueCompany: true, excludePlainHk: true });
+  const slide = topGdIpo(items, undefined, 3, undefined, { uniqueCompany: true, excludePlainHk: true, today: TODAY });
   assert.deepEqual(slide.map((i) => i.title_cn), ["云英谷科技：IPO辅导备案"]);
-  const list = topGdIpo(items, undefined, 9999, 7, { uniqueCompany: false });
+  const list = topGdIpo(items, undefined, 9999, 7, { uniqueCompany: false, today: TODAY });
   assert.equal(list.length, 2, "底部完整列表不受影响（仍列赴港条目）");
-  assert.equal(gdIpoCandidates(items, undefined, 7).length, 2, "未显式排除时保持原行为");
+  assert.equal(gdIpoCandidates(items, undefined, 7, { today: TODAY }).length, 2, "未显式排除时保持原行为");
 });
 
 test("⑤ 红筹条目仍受提权（与已实现的 T4 一致）：同一池内红筹排前", () => {
   const rc = hkItem("海柔创新（主板递表）", "108870", { redchip: redchipBadge, ipoStage: "stage-reviewing" });
   const normal = aShareItem("某公司：IPO注册生效");
-  const out = gdIpoCandidates([normal, rc], undefined, undefined, { excludePlainHk: true });
+  const out = gdIpoCandidates([normal, rc], undefined, undefined, { excludePlainHk: true, today: TODAY });
   assert.equal(out[0].title_cn, "海柔创新（主板递表）", "红筹（在审+提权）应越过非红筹（注册生效）");
 });

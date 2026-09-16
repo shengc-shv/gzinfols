@@ -284,7 +284,7 @@ test("buildIpoPool（经 buildTwoDayExecPool）：港交所全国递表（外省
     history: {},
     articles: [],
     report,
-    today: new Date().toISOString().slice(0, 10),
+    today: todayKey(), // ⚠️ 必须是北京日历日：toISOString() 是 UTC，跨 08:00 会错位一天
     now: new Date() });
   const urls = res.ipo.map((i) => i.url);
   assert.ok(urls.includes("gd-1"), "广东条目应进池");
