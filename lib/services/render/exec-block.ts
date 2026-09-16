@@ -209,7 +209,7 @@ export function renderReportExec(report: DailyReport): string {
       <h2 class="exec-title">执行摘要</h2>
       <span class="exec-sub">今日必读 · 商机洞察 · 风险预警（AI 生成）· 广东IPO（交易所/证监会官方源）</span>
     </div>
-    ${must ? `<div class="exec-must"><h3 class="exec-col-title">📌 今日必读</h3><ul class="must-scroller">${must}</ul>${
+    ${must ? `<div class="exec-must"><h3 class="exec-col-title">📌 今日必读<span class="must-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><ul class="must-scroller">${must}</ul>${
       report.must_read.length > MUST_HEAD_COUNT
         ? `<button class="expand-btn" type="button">展开其余 ${report.must_read.length - MUST_HEAD_COUNT} 条</button>`
         : ""

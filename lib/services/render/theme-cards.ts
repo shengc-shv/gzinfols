@@ -369,33 +369,11 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
   }
   .tag-action { color: var(--c-gdipo); background: color-mix(in srgb, var(--c-gdipo) 12%, transparent); }
 
-  /* —— A1a（2026-09-16）：摘要区「横滑」→ 纵向优先级流 ——
-     原实现：默认横向滑动（overflow-x + scroll-snap），**仅 ≥720px 才转网格**；
-     而读者的主场景是微信内置浏览器（窄屏），横滑易误触、卡片被裁切、Top3 无法完整可见。
-     现改为：**默认单列纵向流**（无横滑），桌面（≥720px）再转多列网格。
-     放在本段末尾：其后定义覆盖前面的默认规则与旧媒体查询（同特异性，后者胜）。 */
-  .must-scroller, .insight-scroller, .risk-scroller, .ipo-scroller, .stock-scroller {
-    display: grid; grid-template-columns: 1fr;
-    overflow: visible; padding-bottom: 0; padding-right: 0; scroll-snap-type: none;
-  }
-  /* 卡片固定宽度（横滑时代遗留）会让纵向流出现留白/溢出 → 交给 grid 控制宽度。
-     用 > * 通配，避免遗漏某个卡片 class 名。 */
-  .must-scroller > *, .insight-scroller > *, .risk-scroller > *, .ipo-scroller > *, .stock-scroller > * {
-    width: auto; max-width: none;
-  }
-  /* 无横滑后，「右滑查看更多」提示与右侧渐隐遮罩均无意义 → 隐藏 */
-  .must-hint-inline, .insight-hint-inline, .ipo-hint-inline, .stock-hint-inline { display: none; }
-  .exec-must::after, .exec-insights::after, .exec-ipo::after, .exec-stock::after { display: none; }
   /* A1a：Top3 之后的必读卡片默认折叠（首屏只留 Top3），点「展开其余 N 条」后显示。
-     恢复态必须写回 flex（.must-card 原为 display:flex），否则内部序号与正文会错位。 */
+     恢复态必须写回 flex（.must-card 原为 display:flex），否则内部序号与正文会错位。
+     ⚠️ 2026-09-17 用户实测反馈：**手机上横滑比竖版好** → 纵向流样式已回退，
+     此处只保留「折叠」这一项（横滑容器里被折叠的卡片 display:none，不占位）。 */
   .must-card.must-more { display: none; }
   .exec-must.expanded .must-card.must-more { display: flex; }
-  /* 桌面（≥720px）恢复多列网格：宽屏留白多，单列反而拉长滚动距离。
-     列宽沿用原桌面口径（必读 160px / 洞察·风险·IPO 300px / 股市 220px）。 */
-  @media (min-width: 720px) {
-    .must-scroller { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
-    .insight-scroller, .risk-scroller, .ipo-scroller { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-    .stock-scroller { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-  }
 
 `;
