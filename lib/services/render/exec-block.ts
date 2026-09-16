@@ -38,6 +38,13 @@ export function resolveTitleMap(report: DailyReport): Map<string, string> {
  * 顶部执行摘要：今日定调 + 今日必读 + 商机洞察（消费新 report 结构：
  * hero_line / must_read / insights）。must_read 仅含 url+why，按 url 回写标题。
  */
+/**
+ * A1a：今日必读**首屏**展示条数，其余折叠（「展开其余 N 条」）。
+ * 依据 PRD：读者在微信内置浏览器里首屏应只看到 Top3，避免摘要区过长挤掉下方板块。
+ * 注意与音频侧的「三件事」（selectTopMustRead 取 3）口径一致，避免首屏与口播不符。
+ */
+const MUST_HEAD_COUNT = 3;
+
 export function renderReportExec(report: DailyReport): string {
   const titleMap = resolveTitleMap(report);
   // N 层：选 top 3（音频核心）+ 数据化"三件事"标识
@@ -100,7 +107,9 @@ export function renderReportExec(report: DailyReport): string {
           }</div>`;
       const isTop = m.url && topMustUrls.has(m.url);
       const topBadge = isTop ? `<span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span>` : "";
-      const cls = isTop ? "must-card must-top" : "must-card";
+      // A1a：首屏只留 Top3，其余按序下沉（折叠），避免摘要区过长挤掉下方板块
+      const moreCls = i >= MUST_HEAD_COUNT ? " must-more" : "";
+      const cls = (isTop ? "must-card must-top" : "must-card") + moreCls;
       return `<li class="${cls}" data-audio-section="must" ${isTop ? 'data-top-must="true"' : ""}><span class="must-index">${i + 1}</span>${inner}${topBadge}</li>`;
     })
     .join("");
@@ -200,7 +209,11 @@ export function renderReportExec(report: DailyReport): string {
       <h2 class="exec-title">执行摘要</h2>
       <span class="exec-sub">今日必读 · 商机洞察 · 风险预警（AI 生成）· 广东IPO（交易所/证监会官方源）</span>
     </div>
-    ${must ? `<div class="exec-must"><h3 class="exec-col-title">📌 今日必读<span class="must-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><ul class="must-scroller">${must}</ul></div>` : ""}
+    ${must ? `<div class="exec-must"><h3 class="exec-col-title">📌 今日必读</h3><ul class="must-scroller">${must}</ul>${
+      report.must_read.length > MUST_HEAD_COUNT
+        ? `<button class="expand-btn" type="button">展开其余 ${report.must_read.length - MUST_HEAD_COUNT} 条</button>`
+        : ""
+    }</div>` : ""}
     ${insightsHtml ? `<div class="exec-insights"><h3 class="exec-col-title">💡 商机洞察<span class="insight-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><div class="insight-scroller">${insightsHtml}</div></div>` : ""}
     ${riskCard ? `<div class="exec-risk"><h3 class="exec-col-title">⚠️ 风险预警<span class="risk-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><div class="risk-scroller">${riskCard}</div></div>` : ""}
     ${renderGdIpoStrip(report.sections?.ipo ?? [], { section: "must" })}

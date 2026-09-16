@@ -398,7 +398,8 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
   // 展开其余 N 条
   document.querySelectorAll('.expand-btn').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var panel = btn.closest('.panel');
+      // A1a：今日必读的「展开其余 N 条」也复用本按钮（容器为 .exec-must）
+      var panel = btn.closest('.panel, .exec-must');
       if (panel) panel.classList.add('expanded');
       btn.remove();
     });
