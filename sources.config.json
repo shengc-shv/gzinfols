@@ -891,9 +891,9 @@
   {
     "id": "arxiv-fintech",
     "tier": "T2",
-    "name": "arXiv 金融科技论文 (cs.AI·cs.LG·q-fin)",
+    "name": "arXiv 量化金融论文 (q-fin.PM·RM·GN)",
     "type": "rss",
-    "url": "https://rss.arxiv.org/rss/cs.AI+cs.LG+q-fin",
+    "url": "https://rss.arxiv.org/rss/q-fin.PM+q-fin.RM+q-fin.GN",
     "category": "tech",
     "subcategory": "overseas-tech",
     "enabled": true,
@@ -908,7 +908,7 @@
       "credit risk",
       "compliance"
     ],
-    "notes": "用户指定(2026-08-20)：q-fin/cs.AI/cs.LG 三分类，按关键词过滤只留金融科技相关"
+    "notes": "用户指定(2026-08-20)：q-fin/cs.AI/cs.LG 三分类，按关键词过滤只留金融科技相关。⚠️ 该 keywords 字段**当前无实现**（全项目无消费点），实际未按词过滤。2026-09-16 用户收口：原三分类合并 feed 单日实测 1025 条、其中真·q-fin 仅 15 条(1.5%)、cs.AI/cs.LG 是超级大分类导致万物 cross-list（连 gr-qc/astro-ph 都进来）→ 改为 q-fin 三个子类，实测 12 条/日；不再另设 fetch 上限，与其它源一致受「全局 Top200 + 每源软上限 20」约束"
   },
   {
     "id": "eastmoney-stock",

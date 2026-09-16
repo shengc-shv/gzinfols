@@ -169,7 +169,7 @@ test("Stage6 跨天判重：历史库已有相似标题（先来后到），新�
   assert.deepEqual(r.articles.map((a) => a.url), [], "历史先来者占同 tier 位 → 新条目被丢");
 });
 
-test("Stage7 每源限额：同一源超过 20 条被截断（源内按相关性降序）", async () => {
+test("Stage7 全局相关性 Top200 + 每源软上限 20：同一源超过 20 条被截断", async () => {
   process.env.DEDUP_SIMILAR = "off"; // 隔离 Stage5/6（本测试只验证 Stage7 配额）
   try {
     const now = new Date("2026-09-11T08:00:00Z");
@@ -185,7 +185,7 @@ test("Stage7 每源限额：同一源超过 20 条被截断（源内按相关性
       article({ url: `p${i}`, title: t, publishedAt: new Date(now.getTime() - i * 60_000) }),
     );
     const r = await runSelect(items, makeCtx());
-    assert.equal(r.articles.length, 20, "每源 ≤ LIGHT_AI_MAX_PER_SOURCE=20");
+    assert.equal(r.articles.length, 20, "每源软上限 20（全局 Top200 不构成约束）");
   } finally {
     delete process.env.DEDUP_SIMILAR;
   }

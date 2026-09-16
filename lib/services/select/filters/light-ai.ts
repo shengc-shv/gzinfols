@@ -121,3 +121,49 @@ export function capLightAiSources<T extends LightAiArticle>(
   }
   return [...others, ...capped];
 }
+
+// --- 全局相关性取 Top N（2026-09-16 用户口径，取代上面的「每源等额配额」）------
+// 旧口径（capLightAiSources：每源各自排序、各留 20）是**等额配额** —— 大源的第 21 名
+// （分数更高）会被砍，小源的第 1 名（分数更低）反而保留。实测：被删的 1193 条里
+// **1161 条（97%）的分数高于保留组的最低分**，即绝大多数被删条目并非「最差的」，
+// 而是「大源的中间层」。新口径把全部候选**打通按分排名**，逐条收录，
+// 同源超过软上限则跳过，直到底层配额填满 —— 让分数而非源身份决定去留。
+
+/** 全局保留总量（用户 2026-09-16 拍板：总数依然是 200）。 */
+export const GLOBAL_TOP_N = 200;
+
+/** 每源软上限（避免单一源霸榜；与旧口径的 20 一致，可调）。 */
+export const PER_SOURCE_SOFT_CAP = 20;
+
+/**
+ * 全局按分行相关性取 Top N + 每源软上限（新口径）。
+ *
+ * 排序：相关性分降序，同分按发布时间倒序（与候选池其它排序同口径）。
+ * 收录：自上而下逐条收取；某源已达软上限则**跳过该条**（不影响后续其它源），
+ * 直到收满 `totalN` 或遍历完。软上限传 0/负数 = 不限制。
+ */
+export function takeGlobalTopByValue<T extends LightAiArticle>(
+  articles: T[],
+  totalN: number,
+  perSourceSoft: number,
+  scorer?: (a: T) => number,
+): T[] {
+  const scored = articles.map((a) => ({
+    a,
+    score: scorer ? scorer(a) : 0,
+    time: a.publishedAt?.getTime() ?? 0,
+  }));
+  scored.sort((x, y) => (y.score !== x.score ? y.score - x.score : y.time - x.time));
+
+  const used = new Map<string, number>();
+  const kept: T[] = [];
+  for (const s of scored) {
+    if (kept.length >= totalN) break;
+    const sid = s.a.sourceId ?? "";
+    const n = used.get(sid) ?? 0;
+    if (perSourceSoft > 0 && n >= perSourceSoft) continue;
+    used.set(sid, n + 1);
+    kept.push(s.a);
+  }
+  return kept;
+}

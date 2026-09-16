@@ -3,6 +3,7 @@ import { test } from "node:test";
 import {
   capLightAiSources,
   LIGHT_AI_SOURCES,
+  takeGlobalTopByValue,
 } from "../lib/services/select/filters/light-ai";
 
 interface FakeArticle {
@@ -50,4 +51,55 @@ test("capLightAiSources：多 lightAi 源各自独立限流", () => {
 
 test("capLightAiSources：空输入安全返回空", () => {
   assert.deepEqual(capLightAiSources([], LIGHT_AI_SOURCES, 6), []);
+});
+
+// ---------- 全局相关性取 Top N（2026-09-16 用户口径，取代每源等额配额）----------
+
+interface ScoredFake extends FakeArticle {
+  score: number;
+}
+
+function mkScored(url: string, sourceId: string, score: number): ScoredFake {
+  return { url, sourceId, publishedAt: new Date(0), score };
+}
+
+test("takeGlobalTopByValue：打通排名 —— 大源高分条目挤掉小源低分条目（旧口径做不到）", () => {
+  // 旧口径（每源等额 1）：A90/A85 + B60/B20 全保留（4 条）
+  // 新口径（总量 3 + 每源软上限 1）：按分取 A90 → B60（A 已满、B20 分低被跳过）
+  const arts = [mkScored("a1", "A", 90), mkScored("a2", "A", 85), mkScored("b1", "B", 60), mkScored("b2", "B", 20)];
+  const out = takeGlobalTopByValue(arts, 3, 1, (a) => (a as ScoredFake).score);
+  assert.deepEqual(
+    out.map((a) => a.url),
+    ["a1", "b1"],
+    "软上限 1 时：A 只留最高分的 a1，b2（20 分）不应因「小源」而保留",
+  );
+});
+
+test("takeGlobalTopByValue：总量 topN 生效（软上限允许时也最多取 totalN 条）", () => {
+  const arts = [
+    mkScored("a1", "A", 90), mkScored("a2", "A", 85), mkScored("a3", "A", 80),
+    mkScored("b1", "B", 70), mkScored("b2", "B", 60),
+  ];
+  const out = takeGlobalTopByValue(arts, 3, 2, (a) => (a as ScoredFake).score);
+  assert.equal(out.length, 3);
+  assert.deepEqual(out.map((a) => a.url), ["a1", "a2", "b1"], "按分降序收满 3 条（A 软上限 2）");
+});
+
+test("takeGlobalTopByValue：软上限传 0 = 不限制单源（纯全局 topN）", () => {
+  const arts = [mkScored("a1", "A", 90), mkScored("a2", "A", 85), mkScored("a3", "A", 80)];
+  const out = takeGlobalTopByValue(arts, 3, 0, (a) => (a as ScoredFake).score);
+  assert.deepEqual(out.map((a) => a.url), ["a1", "a2", "a3"], "软上限 0 → 单源可占满");
+});
+
+test("takeGlobalTopByValue：同分按发布时间倒序（与候选池其它排序同口径）", () => {
+  const mkT = (url: string, sourceId: string, score: number, ts: number): ScoredFake => ({
+    url, sourceId, score, publishedAt: new Date(ts),
+  });
+  const t0 = Date.parse("2026-09-16T00:00:00Z");
+  const arts = [
+    mkT("old", "A", 50, t0),
+    mkT("new", "B", 50, t0 + 60_000),
+  ];
+  const out = takeGlobalTopByValue(arts, 1, 1, (a) => (a as ScoredFake).score);
+  assert.deepEqual(out.map((a) => a.url), ["new"], "同分取更新者");
 });

@@ -3,9 +3,9 @@
  *
  * 三漏斗结构（gzinfo 2026-08-31 整改定案）：
  *  - 漏斗一 业务相关性（今日新增）：single-institution + stock-single + keyword-funnel
- *  - 漏斗二 时效+去重（今日新增）：pre-window-2d(IPO 7 天豁免) + title-similarity + cross-day-dedup + per-source-cap-20
+ *  - 漏斗二 时效+去重（今日新增）：pre-window-2d(IPO 7 天豁免) + title-similarity + cross-day-dedup + global-value-cap
  *  - 漏斗三 业务价值（全窗口）：滚动并入 + execPool + applyDisplayCaps —— **不在本链**（B3 批次对齐），
- *    本链收尾的 per-source-cap 只保来源多样性，绝不是漏斗三（gzinfo stages.ts 头部红线）。
+ *    本链收尾的 global-value-cap 只做「打通分数排名的总量控制」，绝不是漏斗三（gzinfo stages.ts 头部红线）。
  *
  * 顺序（与 gzinfo FILTER_STAGES 一致）：
  *   1. pre-window-2d       源层前置窗口（IPO 类 7 天豁免）
@@ -14,7 +14,9 @@
  *   4. keyword-funnel      关键词漏斗（L0 硬排除；全量误杀回退保底；KEYWORD_FILTER=off 旁路）
  *   5. title-similarity    标题相似度判重（IPO 豁免；DEDUP_SIMILAR=off 旁路）
  *   6. cross-day-dedup     跨天标题判重（历史先来后到；IPO 豁免）
- *   7. per-source-cap-20   每源 ≤20 多样性封顶 + 源内分行相关性降序
+ *   7. global-value-cap    全部候选**打通分数排名**取 Top200 + 每源软上限 20
+ *      （2026-09-16 用户口径，取代旧「每源等额配额 20」—— 旧口径实测被删条目中 97%
+ *        的分数高于保留组最低分，即砍的不是「最差」而是「大源的中间层」）
  *
  * B-1 语义保留：跑完 stage 链后单独再跑一次 keyword 过滤，为 pass=true 的条目建
  * url→FilterResult 表（含 opportunities/risks），供 enrich 相关性回检与 side-outputs 提取风险候选。
@@ -44,7 +46,23 @@ import {
   type HistorySimilarEntry,
 } from "./filters/dedup-similar";
 import { scoreBranchRelevance } from "./filters/relevance-score";
-import { capLightAiSources, LIGHT_AI_MAX_PER_SOURCE } from "./filters/light-ai";
+import { GLOBAL_TOP_N, PER_SOURCE_SOFT_CAP, takeGlobalTopByValue } from "./filters/light-ai";
+
+/**
+ * 分行相关性评分（本文件统一出口）：
+ * ⚠️ `sourceId` 传 `a.source` —— 与 select 原实现逐字一致（relevance-score 内部按源名归类），
+ * 改动会影响排序结果，需连带核对 tests/select 与 light-ai 测试。
+ */
+function relevanceScoreOf(a: ArticleInput): number {
+  return scoreBranchRelevance({
+    title: a.title_cn ?? a.title ?? "",
+    summary: a.summary ?? "",
+    sourceId: a.source,
+    category: a.category,
+    subcategory: a.subcategory,
+    url: a.url,
+  }).score;
+}
 
 export interface SelectDeps {
   fs: FileStore;
@@ -220,29 +238,22 @@ const crossDayDedupStage: FilterStage = {
   },
 };
 
-/** 收尾：每源 ≤20 多样性封顶 + 源内分行相关性降序（⚠️ 漏斗一/二收尾，非漏斗三）。 */
-const perSourceCapStage: FilterStage = {
-  name: "per-source-cap-20",
+/**
+ * 收尾：**全局按分行相关性取 Top N + 每源软上限**（2026-09-16 用户口径，取代旧「每源等额配额」）。
+ *
+ * 旧口径（capLightAiSources）每源各自排序各留 20 —— 大源的第 21 名（分更高）被砍、
+ * 小源的第 1 名（分更低）却保留，实测被删条目中 97% 的分数高于保留组最低分。
+ * 新口径打通分数排名后收满 `GLOBAL_TOP_N`，让**分数**而非**源身份**决定去留。
+ */
+const globalValueCapStage: FilterStage = {
+  name: "global-value-cap",
   apply: (articles, ctx) => {
     const before = articles.length;
-    const out = capLightAiSources(
-      articles,
-      ctx.allSourceIds,
-      LIGHT_AI_MAX_PER_SOURCE,
-      (a) =>
-        scoreBranchRelevance({
-          title: a.title_cn ?? a.title ?? "",
-          summary: a.summary ?? "",
-          sourceId: a.source,
-          category: a.category,
-          subcategory: a.subcategory,
-          url: a.url,
-        }).score,
-    );
+    const out = takeGlobalTopByValue(articles, GLOBAL_TOP_N, PER_SOURCE_SOFT_CAP, relevanceScoreOf);
     if (out.length < before) {
       ctx.log.info(
         "filter",
-        `🔻 每源限额: 移除 ${before - out.length} 条（全部媒体源每源≤${LIGHT_AI_MAX_PER_SOURCE} 条进 LLM 分析/展示）`,
+        `🔻 全局相关性取 Top${GLOBAL_TOP_N}（每源软上限 ${PER_SOURCE_SOFT_CAP}）: 移除 ${before - out.length} 条（${before} → ${out.length}）`,
       );
     }
     return out;
@@ -256,7 +267,7 @@ const FILTER_STAGES: FilterStage[] = [
   keywordFunnelStage,
   titleSimilarityStage,
   crossDayDedupStage,
-  perSourceCapStage,
+  globalValueCapStage,
 ];
 
 /**
@@ -294,6 +305,13 @@ export async function select(
   };
 
   let cur = articles;
+  // 每源存活率观测（2026-09-16 用户需求）：以**进入漏斗时**的每源条数为分母，
+  // 漏斗全部跑完后统计每源保留量，用于评估「哪个源噪声大 / 哪个源被窗口或限额压制」。
+  const inflow = new Map<string, number>();
+  for (const a of articles) {
+    const k = a.sourceId || "(无源)";
+    inflow.set(k, (inflow.get(k) ?? 0) + 1);
+  }
   for (const stage of FILTER_STAGES) {
     if (stage.enabled && !stage.enabled(fctx)) {
       ctx.log.info("filter", `⏭ ${stage.name} (disabled)`);
@@ -321,5 +339,47 @@ export async function select(
   }
 
   ctx.log.info("select", `过滤链完成：${articles.length} → ${cur.length} 条（7 道）`);
+
+  // 每源存活率报告（进入 → 保留；供数据源质量观测与后续调参）
+  logPerSourceYield(ctx, inflow, cur);
+
   return { articles: cur, filterResults };
+}
+
+/**
+ * 每源存活率日志（plan-redchip 之外的**通用观测**，2026-09-16 用户需求）：
+ * 每源「进入漏斗 N 条 → 保留 M 条（比例）+ 保留条目的平均相关性分」，
+ * 按进入量降序 —— 一眼看出「哪个源贡献量大、哪个源存活率高、哪个源被压制」。
+ */
+function logPerSourceYield(
+  ctx: PipelineContext,
+  inflow: Map<string, number>,
+  survivors: ArticleInput[],
+): void {
+  const kept = new Map<string, number[]>();
+  for (const a of survivors) {
+    const k = a.sourceId || "(无源)";
+    const arr = kept.get(k) ?? [];
+    arr.push(relevanceScoreOf(a));
+    kept.set(k, arr);
+  }
+  const rows = [...inflow.entries()]
+    .map(([sid, n]) => {
+      const scores = kept.get(sid) ?? [];
+      const avg = scores.length
+        ? (scores.reduce((x, y) => x + y, 0) / scores.length).toFixed(0)
+        : "-";
+      return { sid, n, m: scores.length, ratio: n ? scores.length / n : 0, avg };
+    })
+    .sort((a, b) => b.n - a.n);
+
+  const lines = rows.slice(0, 20).map((r) => {
+    const pct = `${Math.round(r.ratio * 100)}%`;
+    return `  ${r.sid.padEnd(22)} ${String(r.n).padStart(5)} → ${String(r.m).padStart(4)}（${pct.padStart(4)}）均分 ${r.avg}`;
+  });
+  if (rows.length > 20) lines.push(`  … 其余 ${rows.length - 20} 个源`);
+  ctx.log.info(
+    "filter",
+    `📊 每源存活率（进入 → 保留，按进入量降序；观察数据源质量用）：\n${lines.join("\n")}`,
+  );
 }
