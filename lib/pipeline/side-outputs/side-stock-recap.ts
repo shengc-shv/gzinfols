@@ -13,6 +13,7 @@
  * 失败优雅降级（无 recap → 页面不渲染该区，不阻断整页）。
  */
 
+import { todayKeyOf } from "../../utils/time";
 import type { ArticleInput } from "../../contracts/article";
 import type { DailyReport } from "../../contracts/report";
 import type { CrawledArticle } from "../../contracts/article";
@@ -47,10 +48,12 @@ function toStockItem(it: {
     summary: it.summary || "",
     url: it.url || "",
     source: it.source || "",
+    // ⚠️ 必须按**报告时区（北京）**取日期键：`toISOString()` 是 UTC，北京 00:00~08:00
+    // 会算成前一天（2026-09-17 修复）。
     publishedAt: it.publishedAt
       ? typeof it.publishedAt === "string"
         ? it.publishedAt.slice(0, 10)
-        : new Date(it.publishedAt).toISOString().slice(0, 10)
+        : todayKeyOf(new Date(it.publishedAt))
       : undefined,
   };
 }

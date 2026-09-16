@@ -1,4 +1,5 @@
 import type { CrawledArticle } from "../../../contracts/article";
+import { todayKeyOf } from "../../../utils/time";
 
 /**
  * 上市复核（候选复核，不拉全量）—— P3（2026-09-10 用户决策②：本期做、不拉全量、批量复核）。
@@ -73,7 +74,9 @@ function stripJsonp(text: string): string {
 /** "2019-07-22" / "2019-07-22 00:00:00" / "20020409"(8位) / 数字毫秒 → YYYY-MM-DD；无日期返回空。 */
 export function parseListedDate(v: unknown): string {
   if (!v) return "";
-  if (typeof v === "number") return new Date(v).toISOString().slice(0, 10);
+  // ⚠️ 按报告时区（北京）取日期键：交易所给的是中国日期语义的时间戳，
+  // 用 toISOString()（UTC）在北京 00:00~08:00 会算成前一天（2026-09-17 修复）。
+  if (typeof v === "number") return todayKeyOf(new Date(v));
   const s = String(v).trim();
   let m = s.match(/(\d{4})[-/](\d{2})[-/](\d{2})/);
   if (m) return `${m[1]}-${m[2]}-${m[3]}`;

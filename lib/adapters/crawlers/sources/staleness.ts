@@ -12,13 +12,26 @@
  */
 
 import { BaseCrawler } from "../base-crawler";
+// 报告时区（北京时间）日期键：项目硬性规定「只认 Asia/Shanghai，不回落系统时区」。
+import { todayKeyOf } from "../../../utils/time";
 
 /** 新鲜度阈值（天）：最新数据滞后今天超过该值即告警。 */
 export const STALE_LAG_DAYS = 3;
 
-/** 本地日期串 YYYY-MM-DD（与 szse-audit.windowFloor 同一时区口径，供哨兵比对）。 */
-export function localDay(d: Date = new Date()): string {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+/**
+ * 报告时区（北京时间）日期串 YYYY-MM-DD，供哨兵比对。
+ *
+ * 原名 `localDay`，2026-09-17 **改名**：旧名暗示"运行环境本地时区"，而原实现确实用了
+ * `getFullYear()/getMonth()/getDate()`（系统时区）—— CI runner 默认 **UTC**，于是同一份
+ * 代码在本地（北京）与 CI 上得出**不同日期**（北京 00:00~08:00 差一天），违反项目硬性
+ * 规定「时区只认北京时间、不回落系统时区」。现实现走 `todayKeyOf`（REPORT_TZ 单一真源），
+ * 名字同步改为 `reportDay` 以消除歧义。
+ *
+ * 影响面：`checkStale` / `warnIfStale` → 三所审核 + 证监会辅导 + 港交所递表 + listed-check
+ * 共 6 个 IPO 源的新鲜度告警阈值（STALE_LAG_DAYS=3），偏差 1 天足以造成误报/漏报。
+ */
+export function reportDay(d: Date = new Date()): string {
+  return todayKeyOf(d);
 }
 
 /** 两个 YYYY-MM-DD 的自然日差（b - a，天）。 */
@@ -43,7 +56,7 @@ export function checkStale(
     return true;
   }
   const newest = dates.reduce((a, b) => (b > a ? b : a));
-  const lag = dayGap(newest, localDay());
+  const lag = dayGap(newest, reportDay());
   if (lag > lagDays) {
     console.warn(
       `::warning:: [${name}] ⚠️ 新鲜度告警：最新日期 ${newest} 滞后 ${lag} 天（阈值 ${lagDays}），` +

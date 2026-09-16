@@ -1,9 +1,10 @@
 import { BaseCrawler, CrawlerResult } from "../base-crawler";
 import { windowFloor, shortName, GD_CITIES } from "./ipo-shared";
-import { localDay, dayGap, STALE_LAG_DAYS } from "./staleness";
+import { reportDay, dayGap, STALE_LAG_DAYS } from "./staleness";
+import { todayKeyOf } from "../../../utils/time";
 
 /** 哨兵时区工具改由共享模块提供（2026-09-10 P0-3），此处再导出保持既有导入路径可用。 */
-export { localDay, dayGap, STALE_LAG_DAYS } from "./staleness";
+export { reportDay, dayGap, STALE_LAG_DAYS } from "./staleness";
 
 /**
  * 北交所 —— IPO 审核项目动态爬虫（官方权威源，A3）
@@ -127,11 +128,13 @@ function stripJsonp(text: string): string {
 /** BSE 日期：{time:毫秒} / 数字毫秒 / 字符串 YYYYMMDD → YYYY-MM-DD；无日期返回空。 */
 export function parseBseDate(v: unknown): string {
   if (!v) return "";
+  // ⚠️ 毫秒 → 日期键**必须按报告时区（北京）**：北交所给的是中国日期语义的时间戳，
+  // 用 toISOString()（UTC）在北京 00:00~08:00 会算成前一天（2026-09-17 修复）。
   if (typeof v === "object" && "time" in (v as Record<string, unknown>)) {
     const t = (v as { time?: number }).time;
-    if (typeof t === "number") return new Date(t).toISOString().slice(0, 10);
+    if (typeof t === "number") return todayKeyOf(new Date(t));
   }
-  if (typeof v === "number") return new Date(v).toISOString().slice(0, 10);
+  if (typeof v === "number") return todayKeyOf(new Date(v));
   const s = String(v).trim();
   const m = s.match(/(\d{4})(\d{2})(\d{2})/);
   return m ? `${m[1]}-${m[2]}-${m[3]}` : "";
@@ -298,7 +301,7 @@ export class BseAuditCrawler extends BaseCrawler {
       return;
     }
     const newest = allDates.reduce((a, b) => (b > a ? b : a));
-    const lag = dayGap(newest, localDay());
+    const lag = dayGap(newest, reportDay());
     if (lag > STALE_LAG_DAYS) {
       console.warn(
         `[${this.name}] ⚠️ 新鲜度告警：最新更新日 ${newest} 滞后 ${lag} 天（阈值 ${STALE_LAG_DAYS}），` +
