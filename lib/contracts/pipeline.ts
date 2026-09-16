@@ -118,6 +118,13 @@ export interface PipelineConfig {
   maxPerSection: number;
   /** 单板块内单源条数上限。 */
   maxPerSourcePerSection: number;
+  /**
+   * 股市动态面板「每市场」条数上限（F3 板块权重治理，2026-09-16）。
+   * 此前硬编码 5 → 源稳定供 20 条时面板恒为固定条数、权重显得偏高；
+   * 提升为配置项（env `MAX_STOCK_NEWS_PER_MARKET`，缺省 5 = 保持原行为），
+   * 使「股市占版面多少」可调而无需改代码。
+   */
+  maxStockNewsPerMarket: number;
   /** 事件记忆总开关（EVENT_MEMORY=0 关闭，回滚/A-B 用）。 */
   eventMemory: boolean;
   /** 过滤链旁路开关。 */
@@ -186,6 +193,11 @@ export interface NormalizedResult {
 export interface SelectResult {
   articles: ArticleInput[];
   filterResults: Map<string, FilterResult>;
+  /**
+   * 每源存活统计（A5 数据戳颗粒度用）：进入漏斗 → 保留 的条数与均分。
+   * 与 select 的漏斗同一次计算，口径一致；缺省表示未统计（渲染层需容错）。
+   */
+  sourceStats?: import("./report").SourceStat[];
 }
 
 /** 富集阶段产物。 */

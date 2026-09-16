@@ -193,6 +193,24 @@ export interface DailyReport {
   risk?: RiskItem;
   /** 红筹线索面板（plan-redchip-crawl-push §5.1；渲染期派生，不入库）。 */
   redchipPanel?: RedchipPanel;
+  /**
+   * 每源存活统计（2026-09-16 A5：数据戳颗粒度与覆盖度透明）。
+   *
+   * 由 select 的漏斗一次算出（进入 → 保留 + 均分），随报告落盘，供页面「数据戳」
+   * 展开显示「各源抓取/收录条数」，让读者能判断内容覆盖是否完整、哪个源本期偏弱。
+   */
+  sourceStats?: SourceStat[];
+}
+
+/** 单源存活统计（A5）。 */
+export interface SourceStat {
+  sourceId: string;
+  /** 进入漏斗时的条数。 */
+  inflow: number;
+  /** 漏斗结束后保留的条数（渲染可见口径）。 */
+  kept: number;
+  /** 保留条目的平均分行相关性分（保留数为 0 时为 null）。 */
+  avgScore: number | null;
 }
 
 /**

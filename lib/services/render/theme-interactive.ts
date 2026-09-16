@@ -54,6 +54,22 @@ export const THEME_INTERACTIVE_CSS = `  /* ===== 2026-08-21 交互重构（demo 
   /* 今日必读字号加大（#7） */
   .must-card strong { font-size: 0.92rem; }
   .must-card .must-why { font-size: 0.85rem; }
+  /* A5/F3 覆盖度与来源分布（2026-09-16）：折叠在数据戳下，默认收起 */
+  .coverage { margin: 0.45rem 0 0; font-size: 0.72rem; color: var(--muted); }
+  .coverage > summary { cursor: pointer; color: var(--muted); font-size: 0.72rem; }
+  .coverage > summary:hover { color: var(--fg-soft); }
+  .cov-grid { display: grid; gap: 0.5rem 1.2rem; margin: 0.5rem 0 0.25rem; }
+  @media (min-width: 720px) { .cov-grid { grid-template-columns: 1fr 1fr; } }
+  .cov-col h4 { margin: 0 0 0.25rem; font-size: 0.72rem; color: var(--fg-soft); font-weight: 600; }
+  .cov-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+  .cov-col li { display: flex; align-items: baseline; gap: 0.45rem; }
+  .cov-k { color: var(--fg-soft); }
+  .cov-v { color: var(--muted); }
+  .cov-zero .cov-v { color: var(--c-finance); }
+  .cov-note { margin: 0.35rem 0 0; font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
+  .cov-missing { color: var(--c-finance); }
+  /* F2 摘要去重：已在正文的条目不再给第二遍外链，改标「见正文」 */
+  .must-inbody { margin-left: 0.4rem; font-size: 0.62rem; color: var(--muted); border: 1px solid var(--rule); border-radius: 3px; padding: 0 4px; white-space: nowrap; }
 
   /* 商机洞察卡片（横向滑动，桌面转网格；tag 中文见下方） */
   .insight-card, .insight { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 0.7rem 0.85rem; }

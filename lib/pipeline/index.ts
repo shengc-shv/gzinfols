@@ -69,6 +69,9 @@ export async function runPipeline(
   // —— ⑦ 展示限额（gzinfo daily.ts 第⑦步）：每源≤4 按价值排序、板块上限、gz 保底 ——
   // 位置与 gzinfo 一致：side outputs 之后（exec 池不受影响）、语音/渲染之前。
   const capped = applyDisplayCaps(withSides, ctx);
+  // A5（2026-09-16 数据戳颗粒度）：把 select 算出的「每源 抓取 → 收录」带进报告，
+  // 供渲染层透明展示覆盖度（复用同一次漏斗统计，口径一致，不额外计算）。
+  if (selected.sourceStats?.length) capped.sourceStats = selected.sourceStats;
 
   // —— ⑦.5 广东IPO 健康度（gzinfo 同位；此前函数已定义但漏接线，2026-09-13 修复）——
   checkIpoHealth(capped, ctx);

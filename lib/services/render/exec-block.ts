@@ -42,6 +42,33 @@ export function renderReportExec(report: DailyReport): string {
   const titleMap = resolveTitleMap(report);
   // N 层：选 top 3（音频核心）+ 数据化"三件事"标识
   const sourceItems: ReportItem[] = SECTIONS.flatMap((s) => report.sections[s] ?? []);
+  /**
+   * F2 摘要信息密度治理（2026-09-16，用户批准）：**摘要区不再重复正文已覆盖的来源链接**。
+   *
+   * 实测（PRD §5.2 #2）：摘要层 9 行中 7 行的源 URL 已在正文出现 → 独立信息密度仅 22%。
+   * 处置口径：摘要保留**决策增量**（为什么重要 / 影响 / 建议），来源入口交给正文；
+   *   · 必读行：条目已在正文 → 降级为站内提示（「见正文」），不再给第二遍外链；
+   *   · 洞察/风险的来源标记 ①②③：剔除已在正文的来源，只留**正文未覆盖**的增量来源。
+   */
+  const bodyUrls = new Set(sourceItems.map((i) => i.url).filter(Boolean));
+  const dedup = { mustInBody: 0, mustTotal: 0, srcCut: 0, srcTotal: 0 };
+  /** 过滤来源标记：只保留正文未收录的来源（去重后可空 → 不渲染）。 */
+  const incrementalSources = (
+    sources: Array<{ title?: string; url: string }> | undefined,
+    markClass: string,
+  ): string => {
+    const list = sources ?? [];
+    if (list.length === 0) return "";
+    dedup.srcTotal += Math.min(list.length, 3);
+    const fresh = list.filter((s) => !bodyUrls.has(s.url)).slice(0, 3);
+    dedup.srcCut += Math.min(list.length, 3) - fresh.length;
+    if (fresh.length === 0) return "";
+    return ` <span class="${markClass}">${fresh
+      .map((s, i) =>
+        `<a class="${markClass.replace("-srcs", "-src")}" href="${escapeHtml(s.url)}" target="_blank" rel="noopener" title="${escapeHtml(s.title || "来源" + (i + 1))}" aria-label="来源${i + 1}">${["①", "②", "③"][i]}</a>`,
+      )
+      .join("")}</span>`;
+  };
   const { top: topMust, rationale: topRationale } = selectTopMustRead(
     report.must_read,
     sourceItems,
@@ -51,9 +78,13 @@ export function renderReportExec(report: DailyReport): string {
     .map((m, i) => {
       const title = m.title || titleMap.get(m.url) || m.url;
       const body = `<strong>${escapeHtml(title)}</strong><span class="must-why">${escapeHtml(m.why)}</span>`;
-      const inner = m.url
+      dedup.mustTotal++;
+      const inBody = Boolean(m.url && bodyUrls.has(m.url));
+      if (inBody) dedup.mustInBody++;
+      // 已在正文的条目：不再给第二遍外链，改标「见正文」（正文卡片即其入口）
+      const inner = m.url && !inBody
         ? `<a class="must-body must-link" href="${escapeHtml(m.url)}" target="_blank" rel="noopener">${body}</a>`
-        : `<div class="must-body">${body}</div>`;
+        : `<div class="must-body">${body}${inBody ? `<span class="must-inbody">见正文</span>` : ""}</div>`;
       const isTop = m.url && topMustUrls.has(m.url);
       const topBadge = isTop ? `<span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span>` : "";
       const cls = isTop ? "must-card must-top" : "must-card";
@@ -61,11 +92,7 @@ export function renderReportExec(report: DailyReport): string {
     })
     .join("");
   const renderInsightCard = (it: ReportInsight): string => {
-    const srcMarks = (it.sources && it.sources.length > 0)
-      ? ` <span class="insight-srcs">${it.sources.slice(0, 3).map((s, i) =>
-          `<a class="insight-src" href="${escapeHtml(s.url)}" target="_blank" rel="noopener" title="${escapeHtml(s.title || "来源" + (i + 1))}" aria-label="来源${i + 1}">${["①","②","③","④","⑤"][i]}</a>`
-        ).join("")}</span>`
-      : "";
+    const srcMarks = incrementalSources(it.sources, "insight-srcs");
     const segs = it.segments && it.segments.length ? it.segments : [OTHER_SEGMENT];
     const segChips = `<div class="insight-segs">${segs
       .map((s) => `<span class="seg-chip seg-${SEG_KEY[s] ?? "other"}">${escapeHtml(SEG_SHORT[s] ?? s)}</span>`)
@@ -135,11 +162,7 @@ export function renderReportExec(report: DailyReport): string {
   const riskCard = (() => {
     const r = report.risk;
     if (!r) return "";
-    const srcMarks = (r.sources && r.sources.length > 0)
-      ? ` <span class="risk-srcs">${r.sources.slice(0, 3).map((s, i) =>
-          `<a class="risk-src" href="${escapeHtml(s.url)}" target="_blank" rel="noopener" title="${escapeHtml(s.title || "来源" + (i + 1))}" aria-label="来源${i + 1}">${["①","②","③","④","⑤"][i]}</a>`
-        ).join("")}</span>`
-      : "";
+    const srcMarks = incrementalSources(r.sources, "risk-srcs");
     const sourceBadge = r.source
       ? `<span class="risk-source-badge risk-source-${r.source.toLowerCase()}">${r.source === "T1" ? "官方" : r.source === "T1.5" ? "准官方" : "媒体"}</span>`
       : "";
@@ -152,6 +175,13 @@ export function renderReportExec(report: DailyReport): string {
         ${r.action ? `<p><b>建议：</b>${escapeHtml(r.action)}</p>` : ""}
       </article>`;
   })();
+  // 可观测（F2 验收依据）：摘要去重结果逐次打印，PRD 指标「摘要与正文重复项 ≤20%」可据此核对
+  if (dedup.mustTotal > 0 || dedup.srcTotal > 0) {
+    console.info(
+      `[render] 摘要去重（F2）：必读 ${dedup.mustTotal} 条中 ${dedup.mustInBody} 条已在正文（降级为「见正文」）；` +
+        `来源标记 ${dedup.srcTotal} 个中剔除 ${dedup.srcCut} 个（正文已覆盖）`,
+    );
+  }
   return `<section class="exec-summary">
     <div class="exec-head">
       <h2 class="exec-title">执行摘要</h2>

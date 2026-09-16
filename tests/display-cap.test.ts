@@ -44,7 +44,7 @@ function mkReport(sections: Record<string, ReportItem[]>, stockNews?: ReportItem
   } as DailyReport;
 }
 
-const ctx = { log: new SilentLog() } as any;
+const ctx = { log: new SilentLog(), config: { maxStockNewsPerMarket: 5 } } as any;
 
 test("每源 ≤4：同源 6 条只留 4 条（按价值排序），板块总量 ≤ 上限", () => {
   const six = [1, 2, 3, 4, 5, 6].map((i) =>
@@ -111,6 +111,23 @@ test("stock_news 每市场 ≤5", () => {
     assert.ok(n <= 5, `${m} 应 ≤5，实际 ${n}`);
   }
   assert.equal(out.stock_news!.length, 15);
+});
+
+test("F3（2026-09-16）：股市面板每市场上限可配（ctx.config.maxStockNewsPerMarket）", () => {
+  const news = [
+    ...["a-share", "hk", "us"].flatMap((m) =>
+      Array.from({ length: 8 }, (_, i) => ({ market: m, url: `${m}-${i}`, title_cn: `t${i}` })),
+    ),
+  ] as any[];
+  const r = mkReport({}, news);
+  // 调小到 2 → 每市场 2 条（给主板块让版面）；≤ 源可用量时自然浮动
+  const out = applyDisplayCaps(r, { log: new SilentLog(), config: { maxStockNewsPerMarket: 2 } } as any);
+  for (const m of ["a-share", "hk", "us"]) {
+    assert.equal(out.stock_news!.filter((x) => x.market === m).length, 2, `${m} 应恰为 2 条`);
+  }
+  // 缺失/非法配置 → 回落默认 5（向后兼容：老 ctx 不崩）
+  const fallback = applyDisplayCaps(r, { log: new SilentLog() } as any);
+  assert.equal(fallback.stock_news!.length, 15, "无 config 时回落默认 5");
 });
 
 test("不 mutate 入参", () => {

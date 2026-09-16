@@ -114,8 +114,11 @@ export function applyDisplayCaps(report: DailyReport, ctx: PipelineContext): Dai
       if (!byMkt.has(m)) byMkt.set(m, []);
       byMkt.get(m)!.push(n);
     }
+    // 股市新闻面板：每市场 ≤ ctx.config.maxStockNewsPerMarket（F3：默认 5，可经 env 调整）
+    const configured = ctx.config?.maxStockNewsPerMarket;
+    const perMarket = Number.isFinite(configured) && (configured as number) >= 1 ? (configured as number) : 5;
     const cappedNews: NonNullable<typeof report.stock_news> = [];
-    for (const list of byMkt.values()) cappedNews.push(...list.slice(0, 5));
+    for (const list of byMkt.values()) cappedNews.push(...list.slice(0, perMarket));
     newStockNews = cappedNews;
   }
 

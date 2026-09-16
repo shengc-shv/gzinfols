@@ -46,6 +46,8 @@ function defaultConfig(): PipelineConfig {
     windowDays: Number(process.env.FETCH_WINDOW_DAYS || 2),
     maxPerSection: Number(process.env.MAX_PER_SECTION || 18),
     maxPerSourcePerSection: Number(process.env.MAX_PER_SOURCE_PER_SECTION || 4),
+    // F3（2026-09-16）：股市面板每市场条数上限，默认 5 = 保持原行为；调小即给主板块让版面。
+    maxStockNewsPerMarket: Number(process.env.MAX_STOCK_NEWS_PER_MARKET || 5),
     eventMemory: (process.env.EVENT_MEMORY ?? "1") !== "0",
     filters: {
       keyword: envFlag("KEYWORD_FILTER"),

@@ -30,6 +30,7 @@ import type {
   SelectResult,
 } from "../../contracts/pipeline";
 import type { FileStore, Logger } from "../../contracts/pipeline";
+import type { SourceStat } from "../../contracts/report";
 import { isWithinCalendarDays } from "../../utils/time";
 import { applyKeywordFilter, type KeywordConfig } from "./funnel";
 import { filterSingleInstitution } from "./filters/single-institution";
@@ -341,21 +342,30 @@ export async function select(
   ctx.log.info("select", `过滤链完成：${articles.length} → ${cur.length} 条（7 道）`);
 
   // 每源存活率报告（进入 → 保留；供数据源质量观测与后续调参）
-  logPerSourceYield(ctx, inflow, cur);
+  const sourceStats = logPerSourceYield(ctx, inflow, cur);
 
-  return { articles: cur, filterResults };
+  // A5：补齐「本期抓取 0 条的已启用源」——缺失源要在数据戳里可见（否则读者无法判断是否漏采）。
+  const seen = new Set(sourceStats.map((s) => s.sourceId));
+  for (const s of ctx.sources) {
+    if (s.enabled === false || seen.has(s.id)) continue;
+    sourceStats.push({ sourceId: s.id, inflow: 0, kept: 0, avgScore: null });
+  }
+
+  return { articles: cur, filterResults, sourceStats };
 }
 
 /**
- * 每源存活率日志（plan-redchip 之外的**通用观测**，2026-09-16 用户需求）：
+ * 每源存活率日志 + 统计（plan-redchip 之外的**通用观测**，2026-09-16 用户需求）：
  * 每源「进入漏斗 N 条 → 保留 M 条（比例）+ 保留条目的平均相关性分」，
  * 按进入量降序 —— 一眼看出「哪个源贡献量大、哪个源存活率高、哪个源被压制」。
+ *
+ * @returns 统计数组（A5 数据戳颗粒度会带进报告落盘并渲染给读者）
  */
 function logPerSourceYield(
   ctx: PipelineContext,
   inflow: Map<string, number>,
   survivors: ArticleInput[],
-): void {
+): SourceStat[] {
   const kept = new Map<string, number[]>();
   for (const a of survivors) {
     const k = a.sourceId || "(无源)";
@@ -366,20 +376,24 @@ function logPerSourceYield(
   const rows = [...inflow.entries()]
     .map(([sid, n]) => {
       const scores = kept.get(sid) ?? [];
-      const avg = scores.length
-        ? (scores.reduce((x, y) => x + y, 0) / scores.length).toFixed(0)
-        : "-";
+      const avg = scores.length ? scores.reduce((x, y) => x + y, 0) / scores.length : null;
       return { sid, n, m: scores.length, ratio: n ? scores.length / n : 0, avg };
     })
     .sort((a, b) => b.n - a.n);
 
   const lines = rows.slice(0, 20).map((r) => {
     const pct = `${Math.round(r.ratio * 100)}%`;
-    return `  ${r.sid.padEnd(22)} ${String(r.n).padStart(5)} → ${String(r.m).padStart(4)}（${pct.padStart(4)}）均分 ${r.avg}`;
+    return `  ${r.sid.padEnd(22)} ${String(r.n).padStart(5)} → ${String(r.m).padStart(4)}（${pct.padStart(4)}）均分 ${r.avg === null ? "-" : r.avg.toFixed(0)}`;
   });
   if (rows.length > 20) lines.push(`  … 其余 ${rows.length - 20} 个源`);
   ctx.log.info(
     "filter",
     `📊 每源存活率（进入 → 保留，按进入量降序；观察数据源质量用）：\n${lines.join("\n")}`,
   );
+  return rows.map((r) => ({
+    sourceId: r.sid,
+    inflow: r.n,
+    kept: r.m,
+    avgScore: r.avg === null ? null : Math.round(r.avg),
+  }));
 }

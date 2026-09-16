@@ -127,6 +127,7 @@ import {
   renderIpoPanelHtml,
 } from "./ipo-panel";
 import { renderRedchipPanel } from "./redchip-panel";
+import { renderCoverage } from "./coverage";
 import { SIGNAL_TONE, renderMarkdown } from "./markdown";
 
 export * from "./atoms";
@@ -329,6 +330,14 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
     <h1>${zhDate}</h1>
     ${hero ? `<p class="hero-line">今日定调：${escapeHtml(hero)}</p>` : ""}
     <p class="meta-line">${nowHm ? `数据截至 ${nowHm} · ` : ""}去重后资讯 ${totalItems} 条 · 商机 ${report.insights?.length ?? 0} 条${opts.webMode === true ? ` · <a class="archive" href="../archive.html">${STR.archiveLink}</a>` : ""}</p>
+    ${renderCoverage(report, [
+      ["广州本地", gzLocal.length],
+      ["业务启示", bizInsight.length],
+      ["政策与市场", policyMarket.length],
+      ["科技前沿", techAll.length],
+      ["广东IPO", ipoAll.length],
+      ["股市动态", stockNews.length],
+    ])}
   </header>
 
   ${renderReportExec(report)}
