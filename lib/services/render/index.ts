@@ -16,6 +16,7 @@ import {
 } from "./full";
 import { assignItemIds } from "../assemble/item-id";
 import { stripCryptoNews } from "../assemble/safety";
+import { recalibrateImportance } from "../assemble/importance";
 
 export * from "./full";
 // A2 站内详情页（renderDetailPage / detailPagesOf / detailHrefOf）
@@ -36,8 +37,10 @@ export function renderHtml(
   // 放在这里而不是各个入口脚本，是为了让所有渲染路径（管线 / scripts/render.ts /
   // render-live.ts / 测试）都拿到 id —— 卡片据此链到站内详情页 `i/<id>.html`。
   // 老报告（JSON 无 id）重渲染时会被补上；已有 id 的一律保留（链接不变）。
-  // 顺序：先做红线过滤（加密零容忍，含 stock_news 这条漏网路径），再补条目 ID。
-  return renderHtmlFull(assignItemIds(stripCryptoNews(report)), report.date, opts);
+  // 顺序：红线过滤（加密零容忍）→ A1b 重要度重标定 → 补条目 ID。
+  // 三者都是幂等纯函数，放在渲染入口可覆盖「本次渲染」与「老报告重渲染」两条路径。
+  const prepared = assignItemIds(recalibrateImportance(stripCryptoNews(report)));
+  return renderHtmlFull(prepared, report.date, opts);
 }
 
 export function renderMarkdown(report: DailyReport): string {
