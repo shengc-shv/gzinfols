@@ -33,9 +33,15 @@ export const ALLOWED_TAGS = [
 ] as const;
 export type AllowedTag = (typeof ALLOWED_TAGS)[number];
 
-/** 违禁词（R6）：全文禁止出现。含加密类变体（2026-08-21 补：P0 合规——
- * 「加密资产疯涨」此前未被「加密货币」覆盖，store.json 里真实 AI 产物漏网）。 */
-export const BANNED_WORDS = [
+/**
+ * **加密资产**类违禁词（红线 2026-09-12 用户拍板，永久）：不移植、不渲染、不进契约。
+ *
+ * 单列一份的原因（2026-09-16 实锤修复）：`BANNED_WORDS` 里还混有「偏上行/偏下行」等
+ * 非加密话术词，若整表拿去过滤**股市新闻**会误伤正常行情表述；而加密拦截必须覆盖
+ * `stock_news` —— 该字段由 market 服务独立构建，**不走 enrich 管线**，此前是漏网区
+ * （实证：2026-09-16 报告 stock_news 出现「加密货币市场遭遇重大利空」并已渲染上线）。
+ */
+export const CRYPTO_WORDS = [
   "比特币",
   "BTC",
   "ETH",
@@ -46,9 +52,11 @@ export const BANNED_WORDS = [
   "加密市场",
   "币圈",
   "加密行情",
-  "偏上行",
-  "偏下行",
 ];
+
+/** 违禁词（R6）：全文禁止出现。含加密类变体（2026-08-21 补：P0 合规——
+ * 「加密资产疯涨」此前未被「加密货币」覆盖，store.json 里真实 AI 产物漏网）。 */
+export const BANNED_WORDS = [...CRYPTO_WORDS, "偏上行", "偏下行"];
 
 /** 五个板块键。 */
 export const SECTIONS: ReportSectionKey[] = [

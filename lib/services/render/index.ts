@@ -14,8 +14,12 @@ import {
   renderHtml as renderHtmlFull,
   renderMarkdown as renderMarkdownFull,
 } from "./full";
+import { assignItemIds } from "../assemble/item-id";
+import { stripCryptoNews } from "../assemble/safety";
 
 export * from "./full";
+// A2 站内详情页（renderDetailPage / detailPagesOf / detailHrefOf）
+export * from "./detail";
 export { setReportLocale, REPORT_LOCALE } from "./locale";
 
 /**
@@ -28,7 +32,12 @@ export function renderHtml(
   report: DailyReport,
   opts: RenderInjection & { audio?: AudioMeta } = {},
 ): string {
-  return renderHtmlFull(report, report.date, opts);
+  // A2（2026-09-16）：渲染前**统一**补齐条目 ID（幂等、不 mutate 入参）。
+  // 放在这里而不是各个入口脚本，是为了让所有渲染路径（管线 / scripts/render.ts /
+  // render-live.ts / 测试）都拿到 id —— 卡片据此链到站内详情页 `i/<id>.html`。
+  // 老报告（JSON 无 id）重渲染时会被补上；已有 id 的一律保留（链接不变）。
+  // 顺序：先做红线过滤（加密零容忍，含 stock_news 这条漏网路径），再补条目 ID。
+  return renderHtmlFull(assignItemIds(stripCryptoNews(report)), report.date, opts);
 }
 
 export function renderMarkdown(report: DailyReport): string {
