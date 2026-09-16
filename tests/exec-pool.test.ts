@@ -101,63 +101,89 @@ test("时区：UTC 凌晨时间戳在 Asia/Shanghai 下日期键正确", () => {
 });
 
 /**
- * 广东 IPO 池（2026-08-31 新增）。
+ * 广东 IPO 池（2026-08-31 新增；窗口于 2026-09-16 按用户口径修正为 **2 天**）。
  * 背景：exec 提示词有 guangdong_ipo 槽位且要求「无则 null、不要编造」，但 ipo 入参
  * 从未被传入 → LLM 恒回 null，口播只能靠 audio.ts 确定性兜底。本测试锁住该通路。
- * 要点：IPO 用 7 天窗口（在审企业更新稀疏），且绝不并入 finance/gz 池。
+ *
+ * 要点（用户 2026-09-16 原话：「所有要变成口播的，全部是 2 天窗，保持一致。
+ * 只有最下面的信息清单，IPO 是 7 天。」）：
+ *  - 该槽位的产出**会变成口播**（spoken）+ 被引用的条目会进商机洞察 → 必须与
+ *    口播/横滑同窗（`IPO_VOICE_WINDOW_DAYS` = 2 天）；
+ *  - `sections.ipo` 分支原实现**无任何时间过滤**（7 天窗形同虚设）→ 09/14 的
+ *    「优邦科技注册生效」曾被写成「今日商机洞察」，而当天 2 天窗内根本没有这张卡
+ *    （用户实证）→ 现按 `it.date` 走 2 天窗；
+ *  - 底部「广东IPO动态」完整列表仍是 7 天，本池不承担该职责。
  */
-test("IPO 池：7 天窗口，且不被并入 finance/gz", () => {
+test("IPO 池：2 天窗（与口播同窗），7 天内的过期条目必须排除", () => {
   process.env.REPORT_TZ = "Asia/Shanghai";
-  const DAY = 86_400_000;
   const report = mkReport();
   report.sections.ipo = [
-    mkReportItem("ipo-a", "尚睿科技：IPO问询中（拟北交所）", "注册地：广东｜更新：2026-08-27"),
+    // 今天（mkReportItem 默认 date = 08/23 = TODAY）→ 纳入
+    mkReportItem("ipo-today", "粤芯半导体：注册生效（拟深交所）", "注册地：广东"),
+    // 昨天 → 纳入
+    { ...mkReportItem("ipo-yest", "尚睿科技：IPO问询中（拟北交所）", "注册地：广东"), date: "08/22" },
+    // 4 天前：仍在「底部列表 7 天窗」内，但**不是口播素材** → 必须排除（新口径核心锁）
+    { ...mkReportItem("ipo-4d", "腾信精密：IPO已受理（拟北交所）", "注册地：广东"), date: "08/19" },
+    // 8 天前：连 7 天窗都超了
+    { ...mkReportItem("ipo-8d", "某旧企业：IPO过会（拟创业板）", "注册地：广东"), date: "08/15" },
   ];
   const arts = [
     {
-      url: "ipo-a",
-      publishedAt: new Date(Date.now() - 3 * DAY), // 与 sections 同 url → 不重复
+      url: "ipo-arts-today",
+      publishedAt: `${TODAY}T09:10:00+08:00`, // 今天 → 纳入
       category: "gd-ipo",
-      title: "尚睿科技：IPO问询中（拟北交所）",
-      summary: "注册地：广东",
-    },
-    {
-      url: "ipo-b",
-      publishedAt: new Date(Date.now() - 5 * DAY), // 5 天前：超 2 天但仍在 7 天内 → 应纳入
-      category: "gd-ipo",
-      title: "腾信精密：IPO已受理（拟北交所）",
-      excerpt: "注册地：广东｜保荐：国泰海通",
-    },
-    {
-      url: "ipo-c",
-      publishedAt: new Date(Date.now() - 9 * DAY), // 9 天前：超 7 天 → 排除
-      category: "gd-ipo",
-      title: "某旧企业：IPO过会（拟创业板）",
+      title: "珠江啤酒：IPO辅导备案（拟上交所）",
       excerpt: "注册地：广东",
     },
+    {
+      url: "ipo-arts-3d",
+      publishedAt: "2026-08-20T10:00:00+08:00", // 3 天前 → 排除
+      category: "gd-ipo",
+      title: "东莞某精密：IPO已受理（拟北交所）",
+      excerpt: "注册地：广东",
+    },
+    { url: "tf", publishedAt: `${TODAY}T09:00:00+08:00`, category: "finance" },
+    { url: "tg", publishedAt: `${TODAY}T09:30:00+08:00`, category: "gz" },
   ];
   const res = buildTwoDayExecPool({
     history: mkHistory(),
-    // 生产实况：articles 包含 report.sections 的 tf/tg 来源条目（均带真实发布时间），
-    // 此处一并补齐，避免依赖已移除的 todayUrls 旁路。
-    articles: [
-      ...arts,
-      { url: "tf", publishedAt: `${TODAY}T09:00:00+08:00`, category: "finance" },
-      { url: "tg", publishedAt: `${TODAY}T09:30:00+08:00`, category: "gz" },
-    ],
+    articles: arts,
     report,
     today: TODAY,
     now: new Date(),
   });
-  const ipoUrls = res.ipo.map((i) => i.url).sort();
-  assert.deepEqual(ipoUrls, ["ipo-a", "ipo-b"], "7 天窗口内的 gd-ipo 都应纳入，9 天前排除");
+  assert.deepEqual(
+    res.ipo.map((i) => i.url).sort(),
+    ["ipo-arts-today", "ipo-today", "ipo-yest"],
+    "2 天窗内纳入；4 天前 / 3 天前 / 8 天前一律排除",
+  );
 
   // 关键：IPO 绝不能污染必读/商机池
-  const finGz = [...res.finance, ...res.gz].map((i) => i.url);
-  assert.ok(!finGz.includes("ipo-a") && !finGz.includes("ipo-b"), "IPO 条目不得进入 finance/gz 池");
+  const finGz = [...res.finance, ...res.gz].map((i) => i.url ?? "");
+  assert.ok(
+    finGz.every((u) => !u.startsWith("ipo-")),
+    "IPO 条目不得进入 finance/gz 池",
+  );
   // 原有的 finance/gz 结果不受影响
   assert.deepEqual(res.finance.map((i) => i.url).sort(), ["tf", "yf"]);
   assert.deepEqual(res.gz.map((i) => i.url).sort(), ["tg", "yg"]);
+});
+
+test("IPO 池：缺发布时间的条目一律排除（时间红线）", () => {
+  process.env.REPORT_TZ = "Asia/Shanghai";
+  const report = mkReport();
+  // date 非 MM/DD（无法判定窗口）→ 不得进池
+  report.sections.ipo = [
+    { ...mkReportItem("ipo-nodate", "某粤企：IPO获受理（拟北交所）", "注册地：广东"), date: "" },
+  ];
+  const res = buildTwoDayExecPool({
+    history: mkHistory(),
+    articles,
+    report,
+    today: TODAY,
+    now: new Date(),
+  });
+  assert.deepEqual(res.ipo, [], "无有效日期 → 不进池，绝不用抓取时间兜底");
 });
 
 test("IPO 池：无 IPO 条目时返回空数组（不报错）", () => {

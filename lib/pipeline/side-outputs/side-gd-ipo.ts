@@ -19,7 +19,6 @@ import type { PipelineContext } from "../../contracts/pipeline";
 // 复用渲染侧广东IPO 内容判定（单一口径，避免两套正则漂移）
 import { isGdIpoCandidate, IPO_CAPITAL_ACT_RE, IPO_FLOW_RE } from "../../services/enrich/heuristics";
 import { inferStage, isGdStage, type GdStage } from "../../services/classify/gd-ipo";
-import { todayKey } from "../../utils/time";
 // P2-3 收敛（2026-09-10）：窗口常量统一来自 lib/ipo-config.ts（此前本文件与
 // memory/event-memory.ts 各定义一份 IPO_VOICE_WINDOW_DAYS，改一处不生效）。
 import { IPO_VOICE_WINDOW_DAYS, IPO_LIST_WINDOW_DAYS } from "../../ipo-config";
@@ -83,20 +82,11 @@ function pad(n: number): string {
 // 常量定义已迁至 lib/ipo-config.ts（P2-3 收敛）；此处 re-export 保持既有 import 路径可用。
 export { IPO_VOICE_WINDOW_DAYS, IPO_LIST_WINDOW_DAYS };
 
-/**
- * 近 N 天（日差 ≤ N，含今天，按报告时区 REPORT_TZ）的 MM/DD 集合 → N+1 个日历日。
- * ReportItem.date 只有 MM/DD（无年份），故按 MM/DD 判定；跨元旦的边界日可能多算 1 天，
- * 属可接受近似（与既有 dateValue 排序同源口径）。
- */
-function recentMmddSet(days: number): Set<string> {
-  const out = new Set<string>();
-  const base = new Date(`${todayKey()}T00:00:00Z`);
-  for (let i = 0; i <= days; i++) {
-    const d = new Date(base.getTime() - i * 86_400_000);
-    out.add(`${pad(d.getUTCMonth() + 1)}/${pad(d.getUTCDate())}`);
-  }
-  return out;
-}
+// ⚠️ 本文件曾有一份同名 `recentMmddSet`（2026-09-16 删除）。
+// 它是**死代码**（未导出、本文件无调用点），且语义与现役实现不同：这里是「日差 ≤ N」
+// （N+1 个日历日），现役 `utils/time.ts` 的是「N 个日历日」（days=2 → 今天+昨天）。
+// 保留它会成为窗口漂移的隐患——用户 2026-09-16 口径要求「所有进播报的窗口一致」，
+// 故窗口口径统一从 `utils/time.ts` 取（`gdIpoCandidates` 内部调用），勿在此另起一份。
 
 /**
  * IPO 卡结构化副信息（P2-5）：保荐 / 拟上市板块 / 受理日。

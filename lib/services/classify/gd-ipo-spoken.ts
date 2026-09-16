@@ -11,32 +11,16 @@ import type { ReportItem } from "../../contracts/report";
 import { inferStage, isGdStage, type GdStage } from "./gd-ipo";
 import { hkexAppIdOf } from "./redchip";
 import { isGdIpoCandidate } from "../enrich/heuristics";
-import { todayKey } from "../../utils/time";
+import { recentMmddSet, todayKey } from "../../utils/time";
 import {
   IPO_VOICE_WINDOW_DAYS,
   REDCHIP_VOICE_BOOST,
   REDCHIP_VOICE_WINDOW_DAYS,
 } from "../../ipo-config";
 
-/**
- * 近 N 天的 MM/DD 集合（报告时区日历日口径；与 side-output 展示窗口同源）。
- *
- * 以**报告日**（`ctx.date` / `report.date`，北京时间日历日键）为基准做纯日期推算，
- * 不读 `Date.now()`：服务层禁止隐式时钟，窗口口径因此完全确定、可注入、跨时区一致。
- */
-function recentMmddSet(days: number, today: string): Set<string> {
-  const out = new Set<string>();
-  // 仅做「减整天」的纯日期运算，故以 UTC 零点为锚（不涉及时区换算）
-  const base = Date.parse(`${today}T00:00:00Z`);
-  if (Number.isNaN(base)) return out;
-  for (let i = 0; i < days; i++) {
-    const d = new Date(base - i * 86_400_000);
-    out.add(
-      `${String(d.getUTCMonth() + 1).padStart(2, "0")}/${String(d.getUTCDate()).padStart(2, "0")}`,
-    );
-  }
-  return out;
-}
+// 窗口口径（近 N 天的 MM/DD 集合）已下沉到 `utils/time.ts`——口播/横滑与 exec 的
+// guangdong_ipo 池必须共用同一实现，否则「要变成口播的内容」窗口口径会漂移
+// （用户 2026-09-16 口径：所有进播报的 = 2 天窗；仅底部信息清单的 IPO = 7 天）。
 
 /** ReportItem 发布时间戳（排序用；缺失排最后）。 */
 function dateValue(it: ReportItem): number {

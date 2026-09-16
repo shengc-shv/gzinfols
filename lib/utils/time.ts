@@ -116,3 +116,31 @@ export function prevDateKey(key: string, n = 1): string {
   if (Number.isNaN(t) || !Number.isFinite(n)) return key;
   return new Date(t - Math.trunc(n) * 86_400_000).toISOString().slice(0, 10);
 }
+
+/**
+ * 近 N 天的 MM/DD 集合（`ReportItem.date` 的口径）——**内容条目窗口的单一真源**。
+ *
+ * 以**报告日**（北京时间日历日键）为基准做纯日期推算，不读 `Date.now()`：服务层禁止
+ * 隐式时钟，窗口口径因此完全确定、可注入、跨时区一致。
+ *
+ * 为什么放在这里（2026-09-16 用户口径「所有要变成口播的，全部是 2 天窗，保持一致；
+ * 只有最下面的信息清单，IPO 是 7 天」）：消费方有三处，必须共用同一实现，否则改一处
+ * 不生效、口径漂移（历史教训：`IPO_VOICE_WINDOW_DAYS` 曾两处重复定义）——
+ *   1. 口播 / 顶部横滑候选：`classify/gd-ipo-spoken.gdIpoCandidates`；
+ *   2. exec 的 `guangdong_ipo` 输入池：`enrich/exec-pool.buildIpoPool`；
+ *   3. 底部「广东IPO动态」完整列表：同一函数传 `IPO_LIST_WINDOW_DAYS`（7 天）。
+ * 注意入参是「含今天往前数 N 天」，`days=2` 即「今天 + 昨天」。
+ */
+export function recentMmddSet(days: number, today: string): Set<string> {
+  const out = new Set<string>();
+  // 仅做「减整天」的纯日期运算，故以 UTC 零点为锚（不涉及时区换算）
+  const base = Date.parse(`${today}T00:00:00Z`);
+  if (Number.isNaN(base)) return out;
+  for (let i = 0; i < days; i++) {
+    const d = new Date(base - i * 86_400_000);
+    out.add(
+      `${String(d.getUTCMonth() + 1).padStart(2, "0")}/${String(d.getUTCDate()).padStart(2, "0")}`,
+    );
+  }
+  return out;
+}

@@ -14,11 +14,12 @@
  *
  * 纯函数，便于单测；daily.ts 在生成报告后调用，结果喂 generateExecutiveSummary。
  */
-import { getReportTz, todayKey } from "../../utils/time";
+import { getReportTz, recentMmddSet, todayKey } from "../../utils/time";
 import type { DailyReport, ReportSectionKey } from "../../contracts/report";
 import { scoreBranchRelevance } from "../select/filters/relevance-score";
 // 广东 IPO 内容判定（与渲染/side-output 同一口径，避免三处判定漂移）
 import { isGdIpoCandidate } from "./heuristics";
+import { IPO_VOICE_WINDOW_DAYS } from "../../ipo-config";
 
 /** 持久化历史库条目（article-history.json 单条子集）。 */
 export interface ExecPoolHistoryEntry {
@@ -58,9 +59,9 @@ export interface ExecPoolResult {
   gz: ExecPoolItem[];
   /**
    * 广东地区 IPO 动态（2026-08-31 新增）。
-   * 单独一路：IPO 在审企业状态更新稀疏（几天一更），用 7 天窗口而非 finance/gz 的 2 天。
-   * 喂给 exec 提示词的 guangdong_ipo 槽位（该槽位此前从未拿到过输入 → LLM 恒回 null，
-   * 口播只能靠 audio.ts 的确定性兜底）。
+   * 单独一路（不并入 finance/gz），窗口与口播一致 = `IPO_VOICE_WINDOW_DAYS`（2 天）。
+   * 喂给 exec 提示词的 guangdong_ipo 槽位——该槽位的产出**会变成口播**（spoken），
+   * 被引用的条目也会出现在商机洞察里，故必须与口播/横滑同窗（用户 2026-09-16 口径）。
    */
   ipo: ExecPoolItem[];
 }
@@ -334,24 +335,37 @@ function buildRelaxedTwoDayPool(
 }
 
 /**
- * 广东地区 IPO 池（7 天窗口，独立于 finance/gz 的 2 天窗口）。
+ * 广东地区 IPO 池（**2 天窗口**，与 finance/gz 池、口播/横滑同窗）。
  *
- * 为什么单独一路（2026-08-31）：
- *  - IPO 在审企业状态更新稀疏（东财在审表实测几天一更），2 天窗口会把绝大多数
- *    在审动态滤掉 —— 与过滤层「gd-ipo 按 7 天窗口豁免」同一理由。
- *  - `SECTION_TO_CAT.ipo = null`：IPO 不是必读/商机素材，只是口播 guangdong_ipo 段
- *    与板块展示用，因此不并入 finance/gz，避免污染必读/商机。
+ * 2026-09-16 用户口径修正（原为 7 天窗）：
+ *   用户原话「所有要变成口播的，全部是 2 天窗，保持一致。只有最下面的信息清单，IPO 是 7 天。」
+ *   本池喂给 exec 提示词的 `guangdong_ipo` 槽位 → 其产出（`spoken`）直接进口播，
+ *   被引用的条目还会被写进商机洞察 → **属于「要变成口播的」**，必须同窗。
+ *   实证（用户手动跑后反馈）：7 天窗让 09/14 的「优邦科技注册生效」被 LLM 写成
+ *   「今日商机洞察」，而当天 2 天窗口内的口播/横滑根本没有这张卡 —— 播报与卡面不同源。
+ *   底部「广东IPO动态」完整列表仍为 7 天（`IPO_LIST_WINDOW_DAYS`，由 side-gd-ipo 构建），
+ *   与本池互不影响。
+ *
+ * ⚠️ 窗口判定用 `recentMmddSet`（与口播/横滑**同一实现**，见 `utils/time.ts`）：
+ *   - `sections.ipo` 分支**必须**按 `it.date` 过滤 —— 原实现该分支无任何时间过滤
+ *     （7 天窗形同虚设），这是 09/14 旧数据能进池的直接原因；
+ *   - `articles` 分支把 `publishedAt` 在报告时区下归一到 MM/DD 再比。
+ *   缺日期一律排除（时间真实性红线：绝不用抓取时间兜底）。
+ *
+ * `SECTION_TO_CAT.ipo = null`：IPO 不是必读/商机素材，只是口播 guangdong_ipo 段
+ * 与板块展示用，因此不并入 finance/gz，避免污染必读/商机。
  *
  * 来源（按优先级）：report.sections.ipo（今日 side-output 构建 + 历史滚动并入）
  * → 不足时补 opts.articles 里的 gd-ipo/ipo 条目（摘要可能为空，用 excerpt 兜底）。
  */
 function buildIpoPool(opts: BuildTwoDayExecPoolOpts): ExecPoolItem[] {
-  const cutoff = opts.now.getTime() - 7 * 86_400_000;
-  const inIpoWindow = (iso: string | Date | undefined): boolean => {
-    if (!iso) return false; // 无发布时间：遵守时间红线，一律排除
-    const t = new Date(iso).getTime();
-    if (Number.isNaN(t)) return false; // 无效日期排除
-    return t >= cutoff;
+  const tz = getReportTz();
+  const today = opts.today ?? todayKey(opts.now);
+  const allowed = recentMmddSet(IPO_VOICE_WINDOW_DAYS, today);
+  /** publishedAt（任意形态）→ 报告时区下的 MM/DD；缺/非法 → undefined（红线：不兜底）。 */
+  const mmddOf = (iso: string | Date | undefined): string | undefined => {
+    const k = dateKeyOf(iso, tz);
+    return k ? `${k.slice(5, 7)}/${k.slice(8, 10)}` : undefined;
   };
   const out = new Map<string, ExecPoolItem>();
   /** 广东口径（P1-1）：横滑/口播只面向广东企业，外省 IPO 不得进 LLM 的 guangdong_ipo 槽位。 */
@@ -362,6 +376,7 @@ function buildIpoPool(opts: BuildTwoDayExecPoolOpts): ExecPoolItem[] {
     if (!it.url) continue;
     const summary = (it.summary || "").trim();
     if (!summary) continue;
+    if (!allowed.has(it.date)) continue; // 2 天窗（与口播/横滑同窗）
     const title = it.title_cn || it.title_orig || "";
     // ⚠️ 2026-09-10 回检 P1-1：此前把 sections.ipo **不预过滤**整块喂 LLM，而
     // sections.ipo 里含港交所「全国递表」条目（外省企业）→ 可能被写进「广东IPO」口播。
@@ -373,7 +388,8 @@ function buildIpoPool(opts: BuildTwoDayExecPoolOpts): ExecPoolItem[] {
     const cat = a.category ?? "";
     if (cat !== "gd-ipo" && cat !== "ipo") continue;
     if (!a.url || out.has(a.url)) continue;
-    if (!inIpoWindow(a.publishedAt)) continue;
+    const mmdd = mmddOf(a.publishedAt);
+    if (!mmdd || !allowed.has(mmdd)) continue; // 2 天窗；缺发布时间 → 排除
     const title = a.title_cn || a.title || "";
     const summary = (a.summary || a.excerpt || "").slice(0, 120);
     if (!isGd(title, summary)) continue; // 同上：全国 ipo 条目不进广东IPO 口播
