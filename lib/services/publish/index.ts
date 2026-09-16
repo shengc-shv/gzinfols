@@ -8,6 +8,8 @@
 import type { DailyReport } from "../../contracts/report";
 import type { ArticleInput } from "../../contracts/article";
 import type { FileStore, PipelineContext } from "../../contracts/pipeline";
+import { assignItemIds } from "../assemble/item-id";
+import { detailPagesOf } from "../render/detail";
 
 export interface PublishInput {
   report: DailyReport;
@@ -69,6 +71,20 @@ export async function publishReport(
   await deps.fs.writeText(`site/${date}/${date}.html`, input.html);
   await deps.fs.writeJson("site/latest.json", { date, report: input.report });
 
-  ctx.log.info("publish", `产物已落盘：${base}.html / .json / .md + site/${date}/`);
+  // A2（2026-09-16）站内详情页：每条条目一页 `i/<itemId>.html`（零 LLM、纯字符串）。
+  // 与报告页卡片链接同源（卡片 → i/<id>.html → 原文外链），外链因此降为次级出口。
+  // 站点目录同时落一份，使本地「只跑 daily」也能点开；build-site 会再搬运一次（幂等）。
+  const withIds = assignItemIds(input.report);
+  const detailPages = detailPagesOf(withIds);
+  for (const p of detailPages) {
+    await deps.fs.writeText(`${dir}/i/${p.id}.html`, p.html);
+    await deps.fs.writeText(`site/${date}/i/${p.id}.html`, p.html);
+  }
+
+  ctx.log.info(
+    "publish",
+    `产物已落盘：${base}.html / .json / .md + site/${date}/` +
+      (detailPages.length ? `（含站内详情页 ${detailPages.length} 份 → i/）` : ""),
+  );
   return { reportPath: `${base}.json`, htmlPath: `${base}.html`, mdPath: `${base}.md` };
 }

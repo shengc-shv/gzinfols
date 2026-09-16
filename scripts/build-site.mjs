@@ -84,6 +84,12 @@ for (const [d, src] of [...picked.entries()].sort((a, b) => b[0].localeCompare(a
   if (fs.existsSync(audioSrc)) {
     fs.cpSync(audioSrc, path.join(destDir, "audio"), { recursive: true });
   }
+  // A2 站内详情页 `i/<itemId>.html`：报告页卡片的链接目标，**不搬运即成死链**。
+  // 纯静态、零 LLM；缺失时静默跳过（老期次尚无此目录）。
+  const detailSrc = path.join(src, d, "i");
+  if (fs.existsSync(detailSrc)) {
+    fs.cpSync(detailSrc, path.join(destDir, "i"), { recursive: true });
+  }
   copied++;
 }
 const dates = datesIn(OUT); // 以发布根为准（汇集后）

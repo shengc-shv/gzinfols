@@ -14,7 +14,7 @@ import type { DailyReport, ReportItem, ReportSectionKey } from "../../contracts/
 import { itemIdOf } from "../../utils/item-id";
 import { escapeHtml } from "./cards";
 import { THEME_CSS } from "./theme";
-import { stripCssComments } from "./full";
+import { stripCssComments } from "./css";
 
 /** 板块中文名（与报告页筛选栏同款文案）。 */
 const SECTION_LABEL: Record<ReportSectionKey, string> = {

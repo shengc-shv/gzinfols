@@ -7,6 +7,7 @@
 import { escapeHtml } from "./cards";
 import { STR } from "./i18n";
 import { tagClsOf, MARKET_BADGE, capSummary, relativeDayLabel, itemAnchorId } from "./atoms";
+import { detailHrefOf } from "./detail";
 import type { ReportItem } from "../../contracts/report";
 
 export function renderReportItemHtml(
@@ -40,9 +41,16 @@ export function renderReportItemHtml(
     isIpo && item.officialUrl
       ? `<p class="official-src">官方源：<a href="${escapeHtml(item.officialUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(item.officialLabel || item.officialUrl)}</a></p>`
       : "";
+  // A2（2026-09-16）：标题进**站内详情页**（保留上下文、可寻址），外链降为次级出口
+  // ——原文链接只在详情页内出现（二次点击）。无 id（老报告未补齐）时安全退回外链，
+  // 绝不产生指向不存在文件的死链。
+  const detailHref = item.id ? detailHrefOf(item) : "";
+  const titleLink = detailHref
+    ? `<a class="to-detail" href="${escapeHtml(detailHref)}">${title}</a>`
+    : `<a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`;
   return `<article class="brief${item.importance === 3 ? " must" : ""}" id="${item.url ? itemAnchorId(item.url) : ""}" data-source="${item.source_type}" data-tags="${(item.tags ?? []).join(" ")}" data-market="${escapeHtml(item.market ?? "")}" data-stage="${escapeHtml(stage ?? "")}">
   <div class="bm">${mktBadge}<span class="src-badge ${badge.cls}">${badge.label}</span>${showSource && item.source ? `<span>${escapeHtml(item.source)}</span>` : ""}${time ? `<span>${time}</span>` : ""}${item.importance === 3 ? `<span class="imp-badge">必知</span>` : ""}</div>
-  <h3><a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a></h3>
+  <h3>${titleLink}</h3>
   ${summary ? `<p class="sum">${summary}</p>` : ""}
   ${progressHtml ?? ""}
   ${officialSrc}

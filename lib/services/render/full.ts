@@ -42,6 +42,7 @@ import {
 } from "./sections";
 export type { SourceGroup, SubGroup, RawByCategory } from "./cards";
 import { TIER_COLORS, THEME_CSS } from "./theme";
+import { stripCssComments } from "./css";
 import type { AudioMeta } from "../voice";
 import { selectTopMustRead } from "../enrich/select-top";
 // 分行相关性评分器（纯函数、不调 LLM）：用于「未打标历史条目」的并入门槛（2026-08-29 方案③）
@@ -167,10 +168,9 @@ export * from "./markdown";
  * （tests/render-invariants.test.ts）误报。CSS 注释对渲染零影响，故统一在注入点剥离；
  * 源码内的注释保留给维护者。
  */
-/** 剥离 CSS 块注释——源码注释安全，但**产物是公开页面**，不应把注释发上去。 */
-export function stripCssComments(css: string): string {
-  return css.replace(/\/\*[\s\S]*?\*\//g, "");
-}
+// 已迁至 render/css.ts（A2：避免 full → report-item → detail → full 循环依赖），
+// 此处 re-export 保持既有调用点可用。
+export { stripCssComments } from "./css";
 
 export function renderHtml(
   report: DailyReport,
@@ -403,6 +403,26 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
       btn.remove();
     });
   });
+
+  // A2 阅读位置：进详情页前记住滚动位置，返回时精确还原。
+  // 详情页返回链接带 #<itemId>，浏览器会先定位到该卡片，随后这里再还原到离开时的
+  // 精确位置（验收要求「返回后滚动位置一致」）。
+  document.querySelectorAll('a.to-detail').forEach(function (a) {
+    a.addEventListener('click', function () {
+      try { sessionStorage.setItem('gz_scroll_' + location.pathname, String(window.scrollY || 0)); } catch (e) {}
+    });
+  });
+  (function () {
+    try {
+      var k = 'gz_scroll_' + location.pathname;
+      var v = sessionStorage.getItem(k);
+      if (v !== null) {
+        sessionStorage.removeItem(k);
+        var y = parseInt(v, 10);
+        if (!isNaN(y) && y > 0) window.scrollTo(0, y);
+      }
+    } catch (e) {}
+  })();
   // 摘要 → 正文 站内跳转（F2，2026-09-16）：目标卡片常位于**未激活**的 tab 面板内，
   // 故需先切到该面板再滚动，否则锚点跳过去也看不见（用户实测反馈过这个问题）。
   document.querySelectorAll('a[href^="#itm-"]').forEach(function (a) {
