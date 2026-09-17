@@ -98,7 +98,7 @@ test("④ 角色视图：五类条线预设，tags 与筛选条业务线口径�
     assert.ok(bar.includes(`data-role="${r.id}"`), `须有角色 chip：${r.label}`);
     assert.ok(bar.includes(r.label));
   }
-  assert.equal(ROLE_VIEWS[0].tags.length, 0, "行长 = 全部（无预设筛选）");
+  assert.equal(ROLE_VIEWS[0].tags.length, 0, "行领导 = 全部（无预设筛选）");
   assert.deepEqual(ROLE_VIEWS.find((r) => r.id === "credit")?.tags, ["信贷"]);
   // 预设的 tags 必须是筛选条认得的业务线值（否则点了没效果）
   const bar2 = renderFilterBarForPanel([WEALTH, PRIVATE, PUHUI, item({ tags: ["信贷", "客群"] })]);
@@ -109,4 +109,40 @@ test("④ 角色视图：五类条线预设，tags 与筛选条业务线口径�
   }
   // 角色条内联的 JSON 不得被 HTML 解析（XSS/破坏结构）
   assert.ok(!bar.includes('</script><script>'), "内联 JSON 不得逃逸出 script 标签");
+});
+
+test("⑤ 筛选 chip 带数量，且初始计数与面板数据一致（2026-09-17 用户要求联动刷新）", () => {
+  const bar = renderFilterBarForPanel([
+    WEALTH, PRIVATE, PUHUI,
+    item({ tags: ["信贷", "客群"] }),
+    item({ title_cn: "无部门标签", tags: [] }), // 让「其他」chip 出现
+  ]);
+  // 数量渲染为 chip-n：财富 1 / 私行 1 / 信贷 2（多归属条目两边都算）/ 其他 1
+  const num = (chip: string) => {
+    const m = new RegExp(`data-filter="${chip}">[^<]*<span class="chip-n">(\\d+)</span>`).exec(bar);
+    return m ? Number(m[1]) : null;
+  };
+  assert.equal(num("财富"), 1, "财富 1");
+  assert.equal(num("私行"), 1, "私行 1");
+  assert.equal(num("信贷"), 2, "信贷 2（[\"信贷\",\"客群\"] 多归属两侧都计）");
+  assert.equal(num("__none__"), 1, "其他 1（无部门标签的那条）");
+  // 来源维度同样带数量
+  assert.ok(/data-group="src" data-filter="media">[^<]*<span class="chip-n">5<\/span>/.test(bar), "媒体 5");
+});
+
+test("⑥ 角色视图：文案「行领导」；联动脚本须含 chips 显隐与数量刷新", () => {
+  assert.equal(ROLE_VIEWS.find((r) => r.id === "exec")?.label, "行领导");
+  const page = renderHtml({
+    date: "2026-09-17",
+    hero_line: "",
+    must_read: [],
+    insights: [],
+    sections: { gz_local: [WEALTH], biz_insight: [PRIVATE], policy_market: [], tech: [], ipo: [] },
+  } as unknown as DailyReport);
+  // 联动三要素（在主脚本里）：显隐 / 分面计数 / 零计数降权
+  assert.ok(page.includes("role-hidden"), "须有「随角色隐藏 chip」的机制");
+  assert.ok(page.includes("recountChips"), "须有数量联动刷新");
+  assert.ok(page.includes("chip-zero"), "数量为 0 须降权显示");
+  // 「全选 = 全部显示」的判定必须只数可见 chips（否则角色过滤会被误清）
+  assert.ok(page.includes("role-hidden')) visibleCount++"), "全选判定须排除被角色隐藏的 chip");
 });
