@@ -140,6 +140,8 @@ const latestHtml = fs
   // 红筹台账入口同理：报告页里写 `../redchip/index.html`，搬到发布根后 `..` 越界 →
   // 必须改写成 `./redchip/index.html`（与上面两条同源事故；站内链接自检会兜住漏改）。
   .replace(/href="\.\.\/redchip\//g, 'href="./redchip/')
+  // 搜索入口同理（2026-09-17）：报告页写 `../search.html`，发布根副本须改为 `./search.html`。
+  .replace(/href="\.\.\/search\.html"/g, 'href="./search.html"')
   // B1：最新一期的「归档」旁补一个「检索」入口（检索页只对发布根的相对路径成立）
   .replace(
     /(<a class="archive" href="\.\/archive\.html">[^<]*<\/a>)/,

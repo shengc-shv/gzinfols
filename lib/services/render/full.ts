@@ -52,6 +52,7 @@ import {
   AUDIO_HIGHLIGHT_CSS,
   renderAudioNowHint,
 } from "./inline-player";
+import { renderSearchEntry, SEARCH_ENTRY_CSS } from "./search-entry";
 import { itemIdOf } from "../../utils/item-id";
 import { renderDeltaBadge } from "./delta-badge";
 import { MATURITY_CSS } from "./maturity-badge";
@@ -361,6 +362,7 @@ ${stripCssComments(PAGE_ACTIONS_CSS)}
   .delta-changed { color: #fff; background: #d97706; }
   .delta-followup { color: #5b6472; background: #eceef1; }
 ${stripCssComments(MATURITY_CSS)}
+${stripCssComments(SEARCH_ENTRY_CSS)}
   /* 商机洞察客户客群标签 (2026-09-08) */
   .insight-segs { margin: 4px 0 6px; display: flex; flex-wrap: wrap; gap: 5px; }
   .seg-chip { font-size: 11px; font-weight: 600; border-radius: 9px; padding: 1px 8px; line-height: 1.7; white-space: nowrap; }
@@ -378,6 +380,9 @@ ${stripCssComments(MATURITY_CSS)}
     ${renderAudioNowHint()}
     ${opts.audio.segments && opts.audio.segments.length ? `<script type="application/json" id="audio-segments">${escapeHtml(JSON.stringify(opts.audio.segments))}</script>` : ""}
   </div>` : ""}
+  <!-- 搜索入口（2026-09-17 用户需求）：语音播报正下方，收听时可快速点开检索；
+       无音频的日子出现在页面最顶部，依然是第一眼可见的入口 -->
+  ${renderSearchEntry()}
   <!-- 报头：今日定调 + 数据截至 -->
   <header class="masthead">
     <div class="eyebrow">广州地区 · 零售业务每日资信（个人整理，非本行立场）</div>
