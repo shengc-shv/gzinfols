@@ -15,6 +15,7 @@ import { select } from "../services/select";
 import { enrich } from "../services/enrich";
 import { assembleReport } from "../services/assemble";
 import { applyDisplayCaps } from "../services/assemble/display-cap";
+import { annotateDeltas } from "../services/assemble/delta";
 import { mergeRollingAndSaveHistory } from "./history-step";
 import { buildSideOutputs } from "./side-outputs/side-outputs";
 import { renderHtml, renderMarkdown } from "../services/render";
@@ -78,6 +79,26 @@ export async function runPipeline(
 
   // —— ⑦.6 主板块覆盖度（2026-09-14 P0-2）：四主板块合计为 0 → 显式告警 ——
   checkSectionCoverage(capped, ctx);
+
+  // —— ⑦.7 A3 增量三态（2026-09-17）：标注「新增 / 有进展 / 续报」——
+  // 复用**同一份事件记忆判重链**（findMatchingEvent + computeNovelty），不另立规则；
+  // 记忆开关由组合根注入 ctx.config.eventMemory（服务层不直读 env）。关时跳过（页面不显示徽章）。
+  const deltaStore = ctx.config.eventMemory ? loadEventMemory() : null;
+  const annotated = deltaStore ? annotateDeltas(capped, deltaStore) : capped;
+  if (deltaStore) {
+    const tally: Record<string, number> = { new: 0, changed: 0, followup: 0 };
+    const marks = [
+      annotated.heroDelta,
+      ...annotated.must_read.map((m) => m.delta),
+      ...annotated.insights.map((i) => i.delta),
+      annotated.risk?.delta,
+    ];
+    for (const d of marks) if (d) tally[d.state] = (tally[d.state] ?? 0) + 1;
+    ctx.log.info(
+      "delta",
+      `A3 增量三态：新增 ${tally.new} / 有进展 ${tally.changed} / 续报 ${tally.followup}（未命中记忆库→新增）`,
+    );
+  }
 
   // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——
   // → TTS 合成（AUDIO_ENABLED 门控；失败降级为无播放器）
@@ -143,17 +164,17 @@ export async function runPipeline(
 
   // 渲染注入（P0-4）：分享基址 / Web 模式取自 ctx.config，渲染时刻取 ctx.startTime
   // （服务层不读 env、不读隐式时钟）。
-  const html = renderHtml(capped, {
+  const html = renderHtml(annotated, {
     audio,
     baseUrl: ctx.config.reportBaseUrl,
     webMode: ctx.config.webMode,
     now: ctx.startTime,
   });
-  const markdown = renderMarkdown(capped);
+  const markdown = renderMarkdown(annotated);
   // gzinfo render-and-write ②③：sidecar（滚动列表）+ 全量池导出（漏斗后条目）
   const paths = await publishReport(
     {
-      report: capped,
+      report: annotated,
       html,
       markdown,
       rolling: histStep.rolling,
@@ -171,7 +192,7 @@ export async function runPipeline(
     "pipeline",
     `观测汇总：LLM 调用 ${ctx.stats.llmCalls ?? 0} 次（失败 ${ctx.stats.llmFailures ?? 0}）`,
   );
-  return { report: capped, html, markdown, speech, audio, paths };
+  return { report: annotated, html, markdown, speech, audio, paths };
 }
 
 /**

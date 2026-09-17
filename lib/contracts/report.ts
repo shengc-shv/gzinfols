@@ -100,12 +100,32 @@ export interface ReportInsight {
   segments?: string[];
   sources?: Array<{ title: string; url: string }>;
   related_url?: string;
+  /** A3 增量三态标注。 */
+  delta?: DeltaMark;
+}
+
+/**
+ * 增量三态（A3，2026-09-17）：这条内容相对**昨日及更早**是新增、续报还是有了新进展。
+ *
+ * 由 `services/assemble/delta.ts` 复用**事件记忆判重链**（`findMatchingEvent` +
+ * `computeNovelty`）算出并写进契约；渲染层只读不判定（保持渲染零业务判定）。
+ */
+export type DeltaState = "new" | "followup" | "changed";
+
+export interface DeltaMark {
+  state: DeltaState;
+  /** 续报时为「第几期」（= 历史播报次数 + 1）；新增时不填。 */
+  issueNo?: number;
+  /** 变更时列出的新进展锚点（≤2 个，让读者一眼看出「新在哪」）。 */
+  highlights?: string[];
 }
 
 export interface ReportMustRead {
   url: string;
   why: string;
   title?: string;
+  /** A3 增量三态标注（渲染为卡片上的小徽章）。 */
+  delta?: DeltaMark;
 }
 
 /** 股市解读单卡（口播友好）。 */
@@ -149,6 +169,8 @@ export interface RiskItem {
   url?: string;
   source?: "T1" | "T1.5" | "T2";
   sources?: Array<{ title: string; url: string }>;
+  /** A3 增量三态标注。 */
+  delta?: DeltaMark;
 }
 
 export interface ReportSections {
@@ -191,6 +213,8 @@ export interface TradingSection {
 export interface DailyReport {
   date: string;
   hero_line?: string;
+  /** 今日定调的增量三态（A3；hero 是字符串字段，故单列）。 */
+  heroDelta?: DeltaMark;
   must_read: ReportMustRead[];
   insights: ReportInsight[];
   sections: ReportSections;

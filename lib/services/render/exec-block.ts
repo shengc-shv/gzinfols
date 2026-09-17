@@ -21,6 +21,7 @@ import { STR } from "./i18n";
 import { escapeHtml } from "./cards";
 import { renderStockIndexBlock, renderStockRecap, renderGdIpoStrip } from "./stock-block";
 import { tagClsOf, itemAnchorId } from "./atoms";
+import { renderDeltaBadge } from "./delta-badge";
 
 /** 构造 url → 中文标题 映射（供 must_read 回写标题）。 */
 export function resolveTitleMap(report: DailyReport): Map<string, string> {
@@ -110,14 +111,19 @@ export function renderReportExec(report: DailyReport): string {
       // A1a：首屏只留 Top3，其余按序下沉（折叠），避免摘要区过长挤掉下方板块
       const moreCls = i >= MUST_HEAD_COUNT ? " must-more" : "";
       const cls = (isTop ? "must-card must-top" : "must-card") + moreCls;
-      return `<li class="${cls}" data-audio-section="must" ${isTop ? 'data-top-must="true"' : ""}><span class="must-index">${i + 1}</span>${inner}${topBadge}</li>`;
+      return `<li class="${cls}" data-audio-section="must" ${isTop ? 'data-top-must="true"' : ""}><span class="must-index">${i + 1}</span>${inner}${topBadge}${renderDeltaBadge(m.delta)}</li>`;
     })
     .join("");
   const renderInsightCard = (it: ReportInsight): string => {
     const srcMarks = sourceMarks(it.sources, "insight-srcs");
     const segs = it.segments && it.segments.length ? it.segments : [OTHER_SEGMENT];
+    // C1（2026-09-17）：客群标签**可点** —— 点一下即按该客群筛选下方板块并滚动过去。
+    // 从 span 改成 button：此前只展示、没有入口，AI 的客群打标成果读者用不上。
     const segChips = `<div class="insight-segs">${segs
-      .map((s) => `<span class="seg-chip seg-${SEG_KEY[s] ?? "other"}">${escapeHtml(SEG_SHORT[s] ?? s)}</span>`)
+      .map(
+        (s) =>
+          `<button type="button" class="seg-chip seg-${SEG_KEY[s] ?? "other"}" data-seg="${escapeHtml(s)}" title="按「${escapeHtml(SEG_SHORT[s] ?? s)}」筛选下方板块">${escapeHtml(SEG_SHORT[s] ?? s)}</button>`,
+      )
       .join("")}</div>`;
     return `<article class="insight" data-audio-section="insight">
       ${(it.tags ?? []).length > 0
@@ -126,7 +132,7 @@ export function renderReportExec(report: DailyReport): string {
             .join("")}</div>`
         : ""}
       ${segChips}
-      <h3>${escapeHtml(it.topic)}${srcMarks}</h3>
+      <h3>${escapeHtml(it.topic)}${renderDeltaBadge(it.delta)}${srcMarks}</h3>
       ${it.impact ? `<p><b>影响：</b>${escapeHtml(it.impact)}</p>` : ""}
       ${it.action ? `<p><b>建议：</b>${escapeHtml(it.action)}</p>` : ""}
     </article>`;
@@ -190,7 +196,7 @@ export function renderReportExec(report: DailyReport): string {
       : "";
     const fbKey = (r.sources && r.sources[0]?.url) || r.url || `risk:${r.topic}`;
     return `<article class="risk-card" data-audio-section="risk">
-        <div class="risk-header">⚠️ 风险预警${sourceBadge}${srcMarks}</div>
+        <div class="risk-header">⚠️ 风险预警${sourceBadge}${renderDeltaBadge(r.delta)}${srcMarks}</div>
         <h3>${escapeHtml(r.topic)}</h3>
         ${r.evidence ? `<p><b>依据：</b>${escapeHtml(r.evidence)}</p>` : ""}
         ${r.impact ? `<p><b>影响：</b>${escapeHtml(r.impact)}</p>` : ""}
