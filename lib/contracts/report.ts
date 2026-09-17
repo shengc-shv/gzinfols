@@ -102,6 +102,8 @@ export interface ReportInsight {
   related_url?: string;
   /** A3 增量三态标注。 */
   delta?: DeltaMark;
+  /** C2 商机成熟度（阶段 + 依据词 + 按阶段给出的下一步动作）。 */
+  maturity?: MaturityMark;
 }
 
 /**
@@ -118,6 +120,30 @@ export interface DeltaMark {
   issueNo?: number;
   /** 变更时列出的新进展锚点（≤2 个，让读者一眼看出「新在哪」）。 */
   highlights?: string[];
+}
+
+/**
+ * 商机成熟度（C2，2026-09-17）—— 公开信息的**演进阶段**，不是行内跟进状态。
+ *
+ * 三档：`clue` 线索（仅规划/意向）→ `progress` 推进（已进入程序：招标/获批/签约/开工）
+ * → `landed` 落地（已完成：开业/投产/上线/竣工/交付）。
+ *
+ * ⚠️ 「落地」只表示**公开信息显示动作已完成**，不代表本行已介入 ——
+ * 行内跟进状态属另外的合规议题，本项目不采集、不呈现。
+ */
+export type MaturityStage = "clue" | "progress" | "landed";
+
+export interface MaturityMark {
+  stage: MaturityStage;
+  /** 判定依据词（命中的原词，供读者回原文核对；无把握时缺省）。 */
+  evidence?: string;
+  /**
+   * 下一步动作（确定性「阶段 × 客群」动作库给出，零 LLM、可测、可追溯）。
+   *
+   * 与 LLM 写的 `action` **并列而非替代**：`action` 是业务建议（面向机会本身），
+   * 本字段是按阶段推进的**即时可执行动作**（面向「现在该做什么」）。
+   */
+  nextStep?: string;
 }
 
 export interface ReportMustRead {

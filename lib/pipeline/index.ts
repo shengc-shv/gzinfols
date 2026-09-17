@@ -16,6 +16,7 @@ import { enrich } from "../services/enrich";
 import { assembleReport } from "../services/assemble";
 import { applyDisplayCaps } from "../services/assemble/display-cap";
 import { annotateDeltas } from "../services/assemble/delta";
+import { annotateMaturity } from "../services/assemble/maturity";
 import { productCoverageOf, productCoverageSummary } from "../services/assemble/product-coverage";
 import { mergeRollingAndSaveHistory } from "./history-step";
 import { buildSideOutputs } from "./side-outputs/side-outputs";
@@ -105,6 +106,24 @@ export async function runPipeline(
   // 纯函数统计（零 LLM），页面把「本期无」显式标注出来；**不为了凑覆盖而补内容**（相关性红线）。
   annotated.productCoverage = productCoverageOf(annotated);
   ctx.log.info("coverage", `C4 产品条线覆盖：${productCoverageSummary(annotated.productCoverage)}`);
+
+  // —— ⑦.9 C2 商机成熟度（2026-09-17）：线索 / 推进 / 落地 + 按阶段给出的下一步 ——
+  // **零 LLM**：阶段由确定性词表判定（可核对），下一步走「阶段 × 客群」动作库。
+  // 之所以不让 LLM 写：成熟度必须可追溯（读者要能回原文验证），而 LLM 看不到行内状态。
+  const withMaturity = annotateMaturity(annotated);
+  // 就地更新（与上方 productCoverage 同风格）：后续渲染/发布/口播读的都是同一个 annotated。
+  annotated.insights = withMaturity.insights;
+  {
+    const tally: Record<string, number> = { clue: 0, progress: 0, landed: 0 };
+    for (const it of withMaturity.insights) {
+      const s = it.maturity?.stage;
+      if (s) tally[s] = (tally[s] ?? 0) + 1;
+    }
+    ctx.log.info(
+      "maturity",
+      `C2 商机成熟度：线索 ${tally.clue} / 推进 ${tally.progress} / 落地 ${tally.landed}（零 LLM 词表判定）`,
+    );
+  }
 
   // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——
   // → TTS 合成（AUDIO_ENABLED 门控；失败降级为无播放器）

@@ -22,6 +22,7 @@ import { escapeHtml } from "./cards";
 import { renderStockIndexBlock, renderStockRecap, renderGdIpoStrip } from "./stock-block";
 import { tagClsOf, itemAnchorId } from "./atoms";
 import { renderDeltaBadge } from "./delta-badge";
+import { renderMaturityBadge, renderNextStep } from "./maturity-badge";
 import type { ProductLineCoverage } from "../../contracts/report";
 
 /** 构造 url → 中文标题 映射（供 must_read 回写标题）。 */
@@ -133,9 +134,10 @@ export function renderReportExec(report: DailyReport): string {
             .join("")}</div>`
         : ""}
       ${segChips}
-      <h3>${escapeHtml(it.topic)}${renderDeltaBadge(it.delta)}${srcMarks}</h3>
+      <h3>${escapeHtml(it.topic)}${renderDeltaBadge(it.delta)}${renderMaturityBadge(it.maturity)}${srcMarks}</h3>
       ${it.impact ? `<p><b>影响：</b>${escapeHtml(it.impact)}</p>` : ""}
       ${it.action ? `<p><b>建议：</b>${escapeHtml(it.action)}</p>` : ""}
+      ${renderNextStep(it.maturity)}
     </article>`;
   };
   // 商机洞察：单板块（恢复原始模式），客户客群标签打在具体信息卡片上；

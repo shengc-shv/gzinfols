@@ -55,6 +55,7 @@ import {
 } from "./inline-player";
 import { itemIdOf } from "../../utils/item-id";
 import { renderDeltaBadge } from "./delta-badge";
+import { MATURITY_CSS } from "./maturity-badge";
 import { PAGE_ACTIONS_CSS, generatePageActionsScript, renderFavBar, renderReportDateMeta } from "./page-actions";
 import { getReportTz, todayKey } from "../../utils/time";
 import type { Category, SourceDef } from "../../contracts/source";
@@ -353,6 +354,7 @@ ${stripCssComments(PAGE_ACTIONS_CSS)}
   .delta-new { color: #fff; background: #1e7e34; }
   .delta-changed { color: #fff; background: #d97706; }
   .delta-followup { color: #5b6472; background: #eceef1; }
+${stripCssComments(MATURITY_CSS)}
   /* 商机洞察客户客群标签 (2026-09-08) */
   .insight-segs { margin: 4px 0 6px; display: flex; flex-wrap: wrap; gap: 5px; }
   .seg-chip { font-size: 11px; font-weight: 600; border-radius: 9px; padding: 1px 8px; line-height: 1.7; white-space: nowrap; }
