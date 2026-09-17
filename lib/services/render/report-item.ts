@@ -9,6 +9,7 @@ import { STR } from "./i18n";
 import { tagClsOf, MARKET_BADGE, capSummary, relativeDayLabel, itemAnchorId } from "./atoms";
 import { detailHrefOf } from "./detail";
 import type { ReportItem } from "../../contracts/report";
+import { mapTagsToSegments } from "../classify/customer-segment";
 
 export function renderReportItemHtml(
   item: ReportItem,
@@ -34,6 +35,9 @@ export function renderReportItemHtml(
       return `<span class="tag ${tagClsOf(t)}">${escapeHtml(label)}</span>`;
     })
     .join("");
+  // C1（2026-09-17）：客群段位写进 data-segs，供「客群」筛选轴与卡片标签联动使用。
+  // 与商机洞察的 seg-chip 同源（mapTagsToSegments），保证同一份判定、不两处漂移。
+  const segs = mapTagsToSegments(item.tags, item.title_cn || item.title_orig || "");
   const mkt = item.market ? MARKET_BADGE[item.market] : undefined;
   const mktBadge = mkt ? `<span class="mkt-badge ${mkt.cls}">${mkt.label}</span>` : "";
   // P2-2 双链接：主链接（列表页）+ 交易所/监管官方源入口（人工核查用）
@@ -48,7 +52,7 @@ export function renderReportItemHtml(
   const titleLink = detailHref
     ? `<a class="to-detail" href="${escapeHtml(detailHref)}">${title}</a>`
     : `<a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a>`;
-  return `<article class="brief${item.importance === 3 ? " must" : ""}" id="${item.url ? itemAnchorId(item.url) : ""}" data-source="${item.source_type}" data-tags="${(item.tags ?? []).join(" ")}" data-market="${escapeHtml(item.market ?? "")}" data-stage="${escapeHtml(stage ?? "")}">
+  return `<article class="brief${item.importance === 3 ? " must" : ""}" id="${item.url ? itemAnchorId(item.url) : ""}" data-source="${item.source_type}" data-tags="${(item.tags ?? []).join(" ")}" data-market="${escapeHtml(item.market ?? "")}" data-stage="${escapeHtml(stage ?? "")}" data-segs="${escapeHtml(segs.join(" "))}">
   <div class="bm">${mktBadge}<span class="src-badge ${badge.cls}">${badge.label}</span>${showSource && item.source ? `<span>${escapeHtml(item.source)}</span>` : ""}${time ? `<span>${time}</span>` : ""}${item.importance === 3 ? `<span class="imp-badge">必知</span>` : ""}</div>
   <h3>${titleLink}</h3>
   ${summary ? `<p class="sum">${summary}</p>` : ""}

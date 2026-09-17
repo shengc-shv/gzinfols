@@ -5,6 +5,7 @@
  */
 import { escapeHtml } from "./cards";
 import { DEPT_TAGS } from "./report-item";
+import { mapTagsToSegments, PRIORITY_SEGMENTS, OTHER_SEGMENT } from "../classify/customer-segment";
 import type { ReportItem } from "../../contracts/report";
 
 export interface FilterChipDef {
@@ -90,9 +91,18 @@ export function renderFilterBarForPanel(items: ReportItem[]): string {
   let hasOther = false;
   for (const it of items) {
     const tags = it.tags ?? [];
-    const deptHit = tags.find((t) => DEPT_TAGS.has(t));
-    if (deptHit) presentDepts.add(deptHit);
-    else hasOther = true;
+    // C1（2026-09-17）修正：原实现只取**第一个**命中的部门标签（`tags.find`），
+    // 于是 `["信贷","客群"]` 这样的多归属条目只贡献「信贷」—— 业务线筛选条缺项，
+    // 角色视图（私行部/零售银行部…）就会点到不存在的 chip。
+    // 现收集**全部**命中标签：与 applyFilter 的「维度内 OR（命中其一即满足）」语义一致。
+    let deptHit = false;
+    for (const t of tags) {
+      if (DEPT_TAGS.has(t)) {
+        presentDepts.add(t);
+        deptHit = true;
+      }
+    }
+    if (!deptHit) hasOther = true;
   }
   const groups: FilterGroupDef[] = [{ title: "来源", chips: srcChips }];
   const tagChips: FilterChipDef[] = [];
@@ -102,7 +112,61 @@ export function renderFilterBarForPanel(items: ReportItem[]): string {
   }
   if (hasOther) tagChips.push({ label: "其他", value: "__none__", group: "tag" });
   if (tagChips.length > 0) groups.push({ title: "业务线", chips: tagChips });
+
+  // C1（2026-09-17）：客群升为**一等筛选轴**（与来源/业务线并列）。
+  // 只渲染本面板实际有数据的客群段位；段位判定与卡片 data-segs 同源（mapTagsToSegments）。
+  const presentSegs = new Set<string>();
+  for (const it of items) {
+    for (const s of mapTagsToSegments(it.tags, it.title_cn || it.title_orig || "")) presentSegs.add(s);
+  }
+  const segChips: FilterChipDef[] = [];
+  for (const s of PRIORITY_SEGMENTS) {
+    if (presentSegs.has(s)) segChips.push({ label: SEG_FILTER_LABEL[s] ?? s, value: s, group: "seg" });
+  }
+  if (presentSegs.has(OTHER_SEGMENT)) {
+    segChips.push({ label: "其他客群", value: OTHER_SEGMENT, group: "seg" });
+  }
+  // 客群轴只在「确实有多个段位可区分」时出现（单一段位没有筛选价值，徒增噪声）
+  if (segChips.length > 1) groups.push({ title: "客群", chips: segChips });
+
   return renderFilterBar(groups);
+}
+
+/** 客群段位 → 筛选 chip 短文案（与商机洞察卡片上的 seg-chip 同口径）。 */
+export const SEG_FILTER_LABEL: Record<string, string> = {
+  "零售AUM": "零售AUM",
+  "中高端客群(过亿资产)": "高端客户",
+  "普惠小微贷款客户": "普惠小微",
+  [OTHER_SEGMENT]: "其他",
+};
+
+/**
+ * 「角色视图」预设（C1，2026-09-17）。
+ *
+ * 让 AI 打标的**业务线归属**直接变成「谁该看什么」：读者按自己所在条线一键切换，
+ * 不必手工勾选筛选条。`tags` 对应卡片 `data-tags` 的业务线维度（与筛选条同一套匹配）。
+ */
+export const ROLE_VIEWS: Array<{ id: string; label: string; tags: string[] }> = [
+  { id: "exec", label: "行长", tags: [] },
+  { id: "biz", label: "零售银行部", tags: ["客群"] },
+  { id: "private", label: "私行部", tags: ["私行"] },
+  { id: "wealth", label: "财富管理部", tags: ["财富"] },
+  { id: "credit", label: "零售信贷部", tags: ["信贷"] },
+];
+
+/** 渲染角色视图条（数据内联成 JSON 供脚本消费，避免两处维护预设）。 */
+export function renderRoleBar(): string {
+  const chips = ROLE_VIEWS.map(
+    (r) =>
+      `<button type="button" class="role-chip" data-role="${escapeHtml(r.id)}">${escapeHtml(r.label)}</button>`,
+  ).join("");
+  const data = JSON.stringify(ROLE_VIEWS).replace(/</g, "\\u003c");
+  return `<div class="role-bar" id="role-bar">
+  <span class="role-label">角色视图</span>
+  ${chips}
+  <span class="role-hint" id="role-hint">按条线一键筛选（再点一次取消）</span>
+  <script type="application/json" id="role-views">${data}</script>
+</div>`;
 }
 
 /**

@@ -54,6 +54,8 @@ import {
   renderAudioNowHint,
 } from "./inline-player";
 import { itemIdOf } from "../../utils/item-id";
+import { renderDeltaBadge } from "./delta-badge";
+import { PAGE_ACTIONS_CSS, generatePageActionsScript, renderFavBar, renderReportDateMeta } from "./page-actions";
 import { getReportTz, todayKey } from "../../utils/time";
 import type { Category, SourceDef } from "../../contracts/source";
 import { SOURCE_TIER_LABELS, type SourceTier } from "../../contracts/source";
@@ -126,6 +128,7 @@ import {
   renderFilterBar,
   renderFilterBarForPanel,
   renderStockFilterBar,
+  renderRoleBar,
 } from "./filter-bar";
 import {
   ipoStageGroupLabel,
@@ -309,6 +312,7 @@ export function renderHtml(
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${shareTitle}</title>
+${renderReportDateMeta(date)}
 <meta name="description" content="${escapeHtml(shareDesc)}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${escapeHtml(shareTitle)}">
@@ -319,6 +323,23 @@ ${shareImageTags}<meta name="twitter:card" content="summary_large_image">
 ${shareTwitterImage}<style>
 ${stripCssComments(THEME_CSS)}
 ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
+${stripCssComments(PAGE_ACTIONS_CSS)}
+  /* C1 角色视图条 (2026-09-17)：按条线一键筛选 */
+  .role-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.85rem 0 0; }
+  .role-label { font-size: 0.78rem; color: var(--muted); }
+  .role-chip { font: inherit; font-size: 0.78rem; line-height: 1.9; padding: 0 0.55rem;
+    border: 1px solid var(--rule); border-radius: 999px; background: var(--bg-elevated); color: var(--fg); cursor: pointer; }
+  .role-chip.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+  .role-hint { font-size: 0.72rem; color: var(--muted); }
+  /* C1 客群标签可点（原为纯展示 span） */
+  button.seg-chip { font-family: inherit; cursor: pointer; border: none; }
+  button.seg-chip:hover { filter: brightness(0.94); }
+  /* A3 增量三态徽章 (2026-09-17)：新增 / 有进展 / 续报 */
+  .delta-badge { display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 8px;
+    font-size: 10px; font-weight: 700; line-height: 1.7; vertical-align: middle; white-space: nowrap; }
+  .delta-new { color: #fff; background: #1e7e34; }
+  .delta-changed { color: #fff; background: #d97706; }
+  .delta-followup { color: #5b6472; background: #eceef1; }
   /* 商机洞察客户客群标签 (2026-09-08) */
   .insight-segs { margin: 4px 0 6px; display: flex; flex-wrap: wrap; gap: 5px; }
   .seg-chip { font-size: 11px; font-weight: 600; border-radius: 9px; padding: 1px 8px; line-height: 1.7; white-space: nowrap; }
@@ -341,7 +362,7 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
   <header class="masthead">
     <div class="eyebrow">广州地区 · 零售业务每日资信（个人整理，非本行立场）</div>
     <h1>${zhDate}</h1>
-    ${hero ? `<p class="hero-line">今日定调：${escapeHtml(hero)}</p>` : ""}
+    ${hero ? `<p class="hero-line">今日定调：${escapeHtml(hero)}${renderDeltaBadge(report.heroDelta)}</p>` : ""}
     <p class="meta-line">${nowHm ? `数据截至 ${nowHm} · ` : ""}去重后资讯 ${totalItems} 条 · 商机 ${report.insights?.length ?? 0} 条${opts.webMode === true ? ` · <a class="archive" href="../archive.html">${STR.archiveLink}</a>` : ""}</p>
     ${renderCoverage(report, [
       ["广州本地", gzLocal.length],
@@ -356,6 +377,12 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
   ${renderReportExec(report)}
 
   ${renderStockRecap(report)}
+
+  <!-- C1 角色视图：按条线一键筛选下方板块（再点一次取消） -->
+  ${renderRoleBar()}
+
+  <!-- E2 收藏栏（localStorage，纯前端；无收藏时只显示说明） -->
+  ${renderFavBar()}
 
   <!-- 板块导航：单层 tab，移动端横滑不折行 -->
   <nav class="tabs">
@@ -482,6 +509,83 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
   }
   window.addEventListener('hashchange', onHash);
   onHash();
+  // —— C1 客群切分轴 + 角色视图（2026-09-17）——
+  // 与筛选条复用同一套 applyFilter：角色 = 预设一组业务线；客群标签 = 预设一个段位。
+  // 都是「设置选中态 → 应用」，不新增匹配规则（避免两套判定漂移）。
+  var ROLE_VIEWS = [];
+  try { ROLE_VIEWS = JSON.parse((document.getElementById('role-views') || {}).textContent || '[]'); } catch (e) { ROLE_VIEWS = []; }
+  var roleBar = document.getElementById('role-bar');
+  var roleHint = document.getElementById('role-hint');
+  var currentRole = null;
+  var ROLE_HINT_DEFAULT = roleHint ? roleHint.textContent : '';
+  function activatePanel(pid) {
+    document.querySelectorAll('.tabs > .tab').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-target') === pid);
+    });
+    document.querySelectorAll('.panel').forEach(function (p) {
+      p.classList.toggle('active', p.id === pid);
+    });
+  }
+  // 按 { 维度: [值...] } 设置某面板筛选条选中态，并立即应用；返回是否有筛选条
+  function setChips(panel, activeMap) {
+    var bar = panel.querySelector('.filter-bar');
+    if (!bar) return false;
+    bar.querySelectorAll('.filter-chip').forEach(function (c) {
+      var g = c.getAttribute('data-group');
+      var v = c.getAttribute('data-filter');
+      var want = activeMap[g];
+      c.classList.toggle('active', !!want && want.indexOf(v) >= 0);
+    });
+    applyFilter(panel, bar);
+    return true;
+  }
+  function applyRole(id) {
+    var role = null;
+    for (var i = 0; i < ROLE_VIEWS.length; i++) if (ROLE_VIEWS[i].id === id) role = ROLE_VIEWS[i];
+    currentRole = role ? role.id : null;
+    if (roleBar) {
+      roleBar.querySelectorAll('.role-chip').forEach(function (c) {
+        c.classList.toggle('active', !!role && c.getAttribute('data-role') === role.id);
+      });
+    }
+    if (roleHint) {
+      roleHint.textContent = role
+        ? '当前视图：' + role.label + (role.tags.length ? '（' + role.tags.join('/') + '）' : '（全部）')
+        : ROLE_HINT_DEFAULT;
+    }
+    document.querySelectorAll('.panel').forEach(function (panel) {
+      setChips(panel, role && role.tags.length ? { tag: role.tags } : {});
+    });
+  }
+  if (roleBar) {
+    roleBar.addEventListener('click', function (e) {
+      var chip = e.target && e.target.closest ? e.target.closest('.role-chip') : null;
+      if (!chip) return;
+      var id = chip.getAttribute('data-role');
+      applyRole(currentRole === id ? null : id); // 再点一次 = 取消
+    });
+  }
+  // 客群标签（商机洞察卡上）点击 → 按该客群筛选所有板块，并跳到第一个有命中的面板
+  function applySegFilter(value) {
+    var target = null;
+    document.querySelectorAll('.panel').forEach(function (panel) {
+      if (!setChips(panel, { seg: [value] })) return;
+      if (!target && panel.querySelectorAll('.brief:not(.filtered-out)').length > 0) target = panel;
+    });
+    if (roleBar) roleBar.querySelectorAll('.role-chip').forEach(function (c) { c.classList.remove('active'); });
+    currentRole = null;
+    if (roleHint) roleHint.textContent = '已按客群筛选：' + value + '（点筛选条「重置」可清除）';
+    if (target) {
+      activatePanel(target.id);
+      try { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (err) { target.scrollIntoView(); }
+    }
+  }
+  document.addEventListener('click', function (e) {
+    var chip = e.target && e.target.closest ? e.target.closest('button.seg-chip[data-seg]') : null;
+    if (!chip) return;
+    applySegFilter(chip.getAttribute('data-seg'));
+  });
+
   // 板块内标签筛选（两维度：来源 OR、业务线 OR；维度间 AND；全不选 / 全选 = 全部显示）
   document.querySelectorAll('.filter-bar').forEach(function (bar) {
     var panel = bar.closest('.panel');
@@ -538,6 +642,13 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
         } else if (g === 'market') {
           // 股市动态面板：按 A股 / 港股 / 美股 过滤（维度内 OR）
           if (sel.indexOf(market) < 0) { ok = false; break; }
+        } else if (g === 'seg') {
+          // C1 客群轴：卡片 data-segs（空格分隔）与选中段位有交集即满足；维度内 OR
+          var segs = (card.getAttribute('data-segs') || '').split(' ').filter(Boolean);
+          var segHit = sel.some(function (f) {
+            return f === '__none__' ? segs.length === 0 : segs.indexOf(f) >= 0;
+          });
+          if (!segHit) { ok = false; break; }
         } else if (g === 'stage') {
           // 广东IPO 面板：按四阶段过滤（维度内 OR）；「__none__」= 阶段待定（无阶段信号）
           var stageHit = sel.some(function (f) { return f === '__none__' ? stage === '' : stage === f; });
@@ -555,6 +666,9 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
     });
     syncGroups();
   }
+</script>
+<script>
+${generatePageActionsScript()}
 </script>
 ${opts.audio?.segments && opts.audio.segments.length ? `<script>
 ${generateAudioHighlightScript()}
