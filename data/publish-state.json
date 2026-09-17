@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-17",
+  "updatedAt": "2026-09-18",
   "reports": {
     "2026-09-15": {
       "source": "manual-test",
@@ -16,6 +16,11 @@
       "source": "manual-final",
       "runId": "35238479982",
       "publishedAt": "2026-09-17T23:15:17+08:00"
+    },
+    "2026-09-18": {
+      "source": "manual-final",
+      "runId": "35287398122",
+      "publishedAt": "2026-09-18T07:38:16+08:00"
     }
   }
 }
