@@ -1,5 +1,24 @@
 [
   {
+    "appId": "108870",
+    "nameCn": "Hai Robotics Innovation Group Co., Ltd. - W",
+    "nameEn": "",
+    "board": "主板",
+    "status": "A",
+    "submitDate": "2026-09-13",
+    "domicile": "中国(境内)",
+    "isOffshore": false,
+    "gdCityHits": 4,
+    "gdCityMentions": 119,
+    "isGdConnected": true,
+    "vie": "historical",
+    "verdict": "non-redchip",
+    "discoveredAt": "2026-09-17T13:13:27+08:00",
+    "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108870/documents/sehk26091300124.pdf",
+    "leadId": "108870",
+    "lastChangedAt": "2026-09-17T13:13:27+08:00"
+  },
+  {
     "appId": "108832",
     "nameCn": "Exegenesis Bio Inc. - B",
     "nameEn": "Exegenesis Bio Inc. - B",
