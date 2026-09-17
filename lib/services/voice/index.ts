@@ -48,15 +48,9 @@ export interface AudioMeta {
   segments?: AudioSegment[];
 }
 
-/** 音频段落：与 HTML 卡片 data-audio-ref 对应，timeupdate 驱动高亮（v2 联动的数据基座）。 */
-export interface AudioSegment {
-  id: string;
-  startSec: number;
-  durationSec: number;
-  /** 该段提到的文章 URL 列表（供关联卡片） */
-  refs: string[];
-  text: string;
-}
+// （2026-09-17 清理）此处原本重复声明了一份 AudioSegment，与上方第 29 行的定义逐字相同。
+// TS 接口合并使其不报错，但注释里写着已废弃的 data-audio-ref（实际用的是 data-audio-section），
+// 属误导性死代码，已删除；类型以第 29 行的定义为准。
 
 export interface AudioBuildResult {
   script: string;

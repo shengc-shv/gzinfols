@@ -47,7 +47,13 @@ import type { AudioMeta } from "../voice";
 import { selectTopMustRead } from "../enrich/select-top";
 // 分行相关性评分器（纯函数、不调 LLM）：用于「未打标历史条目」的并入门槛（2026-08-29 方案③）
 import { scoreBranchRelevance } from "../select/filters/relevance-score";
-import { generateAudioHighlightScript, AUDIO_HIGHLIGHT_CSS } from "./inline-player";
+import {
+  generateAudioHighlightScript,
+  AUDIO_HIGHLIGHT_CSS,
+  renderAudioChapters,
+  renderAudioNowHint,
+} from "./inline-player";
+import { itemIdOf } from "../../utils/item-id";
 import { getReportTz, todayKey } from "../../utils/time";
 import type { Category, SourceDef } from "../../contracts/source";
 import { SOURCE_TIER_LABELS, type SourceTier } from "../../contracts/source";
@@ -226,8 +232,12 @@ export function renderHtml(
   const ipoAll = topGdIpo(report.sections?.ipo ?? [], undefined, 9999, IPO_LIST_WINDOW_DAYS, {
     uniqueCompany: false,
   });
-  // 股市动态（底部消息清单，非 AI 生成）：直接来自 report.stock_news（三市场原始新闻）
-  const stockNews = (report.stock_news ?? []).filter((it) => it.url);
+  // 股市动态（底部消息清单，非 AI 生成）：直接来自 report.stock_news（三市场原始新闻）。
+  // 补 id（A2）：卡片标题才能链到**站内详情页**而不是直链外链（与正文口径一致）；
+  // id 由 url 派生，与 detailPagesOf 同源 → 详情页必然存在，不会是死链。
+  const stockNews = (report.stock_news ?? [])
+    .filter((it) => it.url)
+    .map((it) => ({ ...it, id: it.id ?? itemIdOf(it.url) }));
 
   // 中文日期「8月22日 星期六」：用 UTC 解析避免 CI(UTC) runner 的本地时区偏移
   // 导致 getDay() 算错一天（例：2026-08-22 在 UTC 下被当作 8/21 星期五）。
@@ -323,6 +333,8 @@ ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
     ${opts.audio ? `<div class="player-card">
     <div class="player-title"><span class="ic">🎧</span> 今日语音简报 <span class="player-dur">${escapeHtml(opts.audio.duration)}</span>${opts.audio.backend ? `<span class="player-badge player-badge-${opts.audio.backend}">${opts.audio.backend === "tencent" ? "腾讯合成" : "开源合成"}</span>` : ""}</div>
     <audio controls preload="none" src="${escapeHtml(opts.audio.src)}" id="audio-player"></audio>
+    ${renderAudioNowHint()}
+    ${renderAudioChapters(opts.audio.segments ?? [])}
     ${opts.audio.segments && opts.audio.segments.length ? `<script type="application/json" id="audio-segments">${escapeHtml(JSON.stringify(opts.audio.segments))}</script>` : ""}
   </div>` : ""}
   <!-- 报头：今日定调 + 数据截至 -->
