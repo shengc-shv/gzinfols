@@ -25,8 +25,10 @@
  */
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
 import { renderRedchipPage } from "./lib/redchip-page.mjs";
 import { renderRedchipReport } from "./lib/redchip-report.mjs";
+import { renderSearchPage } from "./lib/search-page.mjs";
 
 /** 汇集来源（按优先级：前一个命中即不再看后面的）。 */
 const SRC_DIRS = ["daily_reports", "history"];
@@ -129,7 +131,16 @@ const latest = dates[0];
 const latestHtml = fs
   .readFileSync(path.join(OUT, latest, `${latest}.html`), "utf8")
   .replace(/href="\.\.\/archive\.html"/g, 'href="./archive.html"')
-  .replace(/src="audio\//g, `src="${latest}/audio/`);
+  .replace(/src="audio\//g, `src="${latest}/audio/`)
+  // 🔴 A2 详情页链接必须跟着「搬家」：报告页在 `<date>/` 内，链接写成 `i/<id>.html`；
+  // 首页是它的**副本**（放在发布根），同样的相对路径会被解析成 `/i/<id>.html` → **全部 404**
+  // （2026-09-17 用户实测：底部分区卡片点开大部分 404）。故首页须补上期次前缀。
+  .replace(/href="i\//g, `href="${latest}/i/`)
+  // B1：最新一期的「归档」旁补一个「检索」入口（检索页只对发布根的相对路径成立）
+  .replace(
+    /(<a class="archive" href="\.\/archive\.html">[^<]*<\/a>)/,
+    '$1 · <a class="archive" href="./search.html">检索</a>',
+  );
 fs.writeFileSync(path.join(OUT, "index.html"), latestHtml, "utf8");
 console.log(`[build-site] index.html  ← ${latest}/${latest}.html`);
 
@@ -187,7 +198,7 @@ const archiveHtml = `<!doctype html>
   <h1>每日资信简报 — 归档</h1>
   <p class="meta">共 ${dates.length} 期 · 最新在前 · 生成于 ${todayInReportTz()}</p>
   <div class="top">
-    <a href="./index.html">→ 最新一期（${latest}）</a>
+    <a href="./index.html">→ 最新一期（${latest}）</a> · <a href="./search.html">🔍 检索与主题归档</a>
   </div>
   <ul>
 ${rows}
@@ -272,6 +283,95 @@ try {
   console.log(`[build-site] 红筹展示页跳过：${e && e.message ? e.message : e}`);
 }
 
+// ---------- 5.8) 检索索引 + 静态检索页（B1） ----------
+// 索引由 TS 脚本产出（需复用渲染同源的「红线过滤 → 重要度重标定 → 条目 ID」纯函数链，
+// 保证索引里的 id 与页面锚点 itm-xxx 逐字一致）；本脚本只做「搬运 + 渲染页面」，
+// 以维持「build-site 是 site/ 的唯一写者」。
+const IDX_SRC = "build/search-index";
+if (!fs.existsSync(path.join(IDX_SRC, "manifest.json"))) {
+  console.log(`[build-site] 未找到 ${IDX_SRC}/manifest.json → 尝试现跑 build-search-index（缺 tsx 则跳过检索）`);
+  const r = spawnSync("npx", ["tsx", "scripts/build-search-index.ts"], { stdio: "inherit" });
+  if (r.status !== 0) console.warn("[build-site] ⚠️ 检索索引生成失败 → 本次不产出 search.html");
+}
+try {
+  const manifest = JSON.parse(fs.readFileSync(path.join(IDX_SRC, "manifest.json"), "utf8"));
+  const days = [];
+  for (const d of manifest.dates || []) {
+    const f = path.join(IDX_SRC, `${d}.json`);
+    if (!fs.existsSync(f)) continue;
+    // 只发布**发布根里确实存在**的期次（老期次可能已被清理，避免检索结果指向死页）
+    if (!fs.existsSync(path.join(OUT, d, `${d}.html`))) continue;
+    days.push(JSON.parse(fs.readFileSync(f, "utf8")));
+  }
+  // 索引 JSON 也搬到发布根（供后续增量加载 / 外部复用）；检索页本身内联数据，不依赖 fetch
+  const dataDir = path.join(OUT, "data");
+  fs.mkdirSync(dataDir, { recursive: true });
+  for (const d of days) {
+    fs.writeFileSync(path.join(dataDir, `${d.date}.json`), JSON.stringify(d, null, 0), "utf8");
+  }
+  fs.writeFileSync(
+    path.join(dataDir, "manifest.json"),
+    JSON.stringify({ ...manifest, dates: days.map((d) => d.date) }, null, 0),
+    "utf8",
+  );
+  fs.writeFileSync(
+    path.join(OUT, "search.html"),
+    renderSearchPage({ days, generatedAt: manifest.generatedAt, latest }),
+    "utf8",
+  );
+  console.log(
+    `[build-site] search.html（${days.length} 期 / ${days.reduce((n, d) => n + d.items.length, 0)} 条可检索）`,
+  );
+} catch (e) {
+  console.log(`[build-site] 检索页跳过：${e && e.message ? e.message : e}`);
+}
+
 // ---------- 6) .nojekyll：阻止 GitHub Pages 跑 Jekyll（否则下划线开头的目录会被吞）----------
 fs.writeFileSync(path.join(OUT, ".nojekyll"), "", "utf8");
 console.log(`[build-site] .nojekyll`);
+
+// ---------- 7) 站内相对链接自检（防「链接解析错一层」类回归）----------
+// 2026-09-17 实锤：首页（发布根副本）里的 `i/<id>.html` 会被解析成 `/i/<id>.html` ——
+// **所有详情页链接 404**，而归档页里是好的（用户实测「底部分区卡片大部分 404」）。
+// 这类 bug 不会让构建失败、也不报错，只有真机点开才发现 → 必须在构建期扫一遍。
+// 策略：默认只告警（不阻断发布，避免误报导致读者收不到简报），缺失清单打 GitHub 注解。
+(function verifyLocalLinks() {
+  const htmls = [];
+  (function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const p = path.join(dir, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (/\.html?$/.test(e.name)) htmls.push(p);
+    }
+  })(OUT);
+
+  const missing = new Map(); // key: 目标相对路径 → 计数
+  const detail = [];
+  for (const file of htmls) {
+    const dir = path.dirname(file);
+    const html = fs.readFileSync(file, "utf8");
+    const re = /(?:href|src)="([^"]+)"/g;
+    let m;
+    while ((m = re.exec(html)) !== null) {
+      let u = m[1];
+      if (!u || u.startsWith("#") || u.startsWith("//") || /^[a-z][a-z0-9+.-]*:/i.test(u)) continue;
+      u = u.split("#")[0].split("?")[0];
+      if (!u) continue;
+      const target = u.startsWith("/") ? path.join(OUT, u) : path.resolve(dir, u);
+      if (fs.existsSync(target)) continue;
+      missing.set(u, (missing.get(u) || 0) + 1);
+      if (detail.length < 5) detail.push(`${path.relative(OUT, file)} → ${u}`);
+    }
+  }
+  const total = [...missing.values()].reduce((a, b) => a + b, 0);
+  if (total === 0) {
+    console.log(`[build-site] 站内链接自检：${htmls.length} 个页面全部可达 ✓`);
+    return;
+  }
+  const top = [...missing.entries()].sort((a, b) => b[1] - a[1]).slice(0, 5);
+  console.log(
+    `::warning:: [build-site] ⚠️ 站内链接自检发现 ${total} 处死链（${missing.size} 个不同目标）：` +
+      top.map(([k, v]) => `${k}×${v}`).join(" / "),
+  );
+  for (const d of detail) console.log(`[build-site]   例：${d}`);
+})();

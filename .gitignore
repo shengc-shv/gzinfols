@@ -44,3 +44,6 @@ dist/
 
 # 测试覆盖率
 coverage/
+
+# 构建期中间产物（检索索引；由 npm run build:index 生成，build-site 搬进 site/data）
+build/

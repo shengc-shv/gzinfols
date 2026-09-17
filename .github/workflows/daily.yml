@@ -257,7 +257,13 @@ jobs:
         run: npx tsx scripts/redchip-monitor.ts --live --limit 20
         continue-on-error: true
 
-      - name: 站点聚合（build-site：汇集各期 + index/archive/.nojekyll/og-image）
+      # B1 检索索引（2026-09-17）：必须在 build-site **之前**跑 —— build-site 只读现成索引
+      # 并据此生成 site/search.html（缺索引时会现跑一次兜底，但显式跑更可控、日志更清楚）。
+      - name: 检索索引（build:index → build/search-index/）
+        run: npm run build:index
+        continue-on-error: true
+
+      - name: 站点聚合（build-site：汇集各期 + index/archive/.nojekyll/og-image/search）
         run: npm run build-site
 
       # （dump 后端已弃用：线上直跑 DeepSeek，不再产生 data/llm-dump/，对应 artifact 上传已移除）
