@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>检索 · 每日资信简报</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { color-scheme: light dark; --bg:#f6f5f3; --card:#fff; --fg:#1a1a1a; --muted:#888; --rule:#e6e4e0; --brand:#2563eb; }
+  body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    max-width:760px; margin:0 auto; padding:1.2rem 1rem 4rem; line-height:1.6; background:var(--bg); color:var(--fg); }
+  h1 { font-size:1.3rem; margin:0 0 .2rem; }
+  .meta { color:var(--muted); font-size:.82rem; margin-bottom:1rem; }
+  .meta a { color:var(--brand); }
+  input[type=search] { width:100%; box-sizing:border-box; font-size:1rem; padding:.6rem .7rem;
+    border:1px solid var(--rule); border-radius:10px; background:var(--card); color:var(--fg); }
+  .chips { display:flex; flex-wrap:wrap; gap:.35rem; margin:.6rem 0 .2rem; }
+  .chip { font-size:.78rem; line-height:1.9; padding:0 .55rem; border:1px solid var(--rule); border-radius:999px;
+    background:var(--card); color:var(--fg); cursor:pointer; }
+  .chip.on { background:var(--brand); border-color:var(--brand); color:#fff; }
+  .rowlabel { font-size:.76rem; color:var(--muted); margin:.7rem 0 .2rem; }
+  .count { font-size:.82rem; color:var(--muted); margin:.8rem 0 .4rem; }
+  ul { list-style:none; padding:0; margin:0; }
+  li { background:var(--card); border:1px solid var(--rule); border-radius:10px; padding:.6rem .75rem; margin-bottom:.5rem; }
+  .t { font-size:.98rem; font-weight:600; }
+  .t a { color:inherit; text-decoration:none; }
+  .t a:hover { color:var(--brand); text-decoration:underline; }
+  .sub { font-size:.76rem; color:var(--muted); margin-top:.15rem; }
+  .x { font-size:.85rem; margin-top:.3rem; }
+  mark { background:rgba(250,204,21,.55); color:inherit; border-radius:2px; }
+  .empty { color:var(--muted); font-size:.9rem; padding:1rem 0; }
+  /* B1 两期对比（2026-09-17） */
+  .modes { display:flex; gap:.35rem; margin:.9rem 0 .2rem; }
+  .mode { font:inherit; font-size:.85rem; line-height:2; padding:0 .8rem; border:1px solid var(--rule);
+    border-radius:999px; background:var(--card); color:var(--fg); cursor:pointer; }
+  .mode.on { background:var(--brand); border-color:var(--brand); color:#fff; font-weight:600; }
+  .cmp-controls { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.7rem 0 .2rem; font-size:.85rem; }
+  .cmp-controls select { font:inherit; font-size:.85rem; padding:.25rem .4rem; border:1px solid var(--rule);
+    border-radius:8px; background:var(--card); color:var(--fg); }
+  .cmp-sum { font-size:.82rem; color:var(--muted); margin:.5rem 0 .2rem; }
+  .cmp-group { margin:.7rem 0 0; }
+  .cmp-group h3 { font-size:.9rem; margin:0 0 .35rem; }
+  .cmp-badge { display:inline-block; margin-left:.35rem; padding:0 .4rem; border-radius:8px;
+    font-size:.68rem; font-weight:700; line-height:1.7; }
+  .cmp-new { background:#1e7e34; color:#fff; }
+  .cmp-gone { background:#b02a37; color:#fff; }
+  .cmp-both { background:#eceef1; color:#5b6472; }
+  .cmp-col { font-size:.78rem; color:var(--muted); }
+  @media (prefers-color-scheme: dark) { :root { --bg:#141414; --card:#1e1e1e; --fg:#e8e8e8; --rule:#2e2e2e; } }
+</style>
+</head>
+<body>
+  <h1>🔍 检索与主题归档</h1>
+  <p class="meta">共 4 期 / 171 条 · 索引生成于 2026-09-17T13:13:30 · <a href="./index.html">最新一期（2026-09-17）</a> · <a href="./topics.html">🧭 主题跟踪</a> · <a href="./archive.html">归档</a></p>
+  <div class="modes">
+    <button type="button" class="mode on" data-mode="search">🔍 检索</button>
+    <button type="button" class="mode" data-mode="compare">⇄ 两期对比</button>
+  </div>
+
+  <div id="search-pane">
+    <input type="search" id="q" placeholder="输入关键词（标题 / 摘要 / 来源 / 标签）" autocomplete="off">
+    <div class="rowlabel">板块</div>
+    <div class="chips" id="sec-chips"></div>
+    <div class="rowlabel">主题（客群 · 业务线 · 标签）</div>
+    <div class="chips" id="tag-chips"></div>
+    <div class="count" id="count"></div>
+    <ul id="list"></ul>
+    <div class="empty" id="empty" hidden>没有匹配结果。试试更短的关键词，或点「全部」清空筛选。</div>
+  </div>
+
+  <div id="compare-pane" hidden>
+    <div class="cmp-controls">
+      <label>对照 A（较早）<select id="cmp-a"></select></label>
+      <label>对照 B（较新）<select id="cmp-b"></select></label>
+    </div>
+    <div class="cmp-sum" id="cmp-sum"></div>
+    <div id="cmp-result"></div>
+  </div>
+
+<script type="application/json" id="search-data">{"days":[{"date":"2026-09-17","hero":"美联储今夜议息叠加营销9·30新规临近，跨境资产与合规整改双线并进，零售条线宜提前布防。","items":[{"i":"itm-pztdza","t":"广州东部汽车产业延链补链强链 两大汽车零部件项目落地黄埔","s":"广州日报·大洋网(广州频道)","d":"09/17","m":3,"k":"gz_local","g":["客群","政银合作"],"x":"黄埔再落两个汽车零部件项目，广州东部汽车产业链延链补链提速，汽车产业链上下游对公客群与园区政银合作值得关注。","u":"https://news.dayoo.com/guangzhou/202609/17/139995_55004542.htm"},{"i":"itm-8xzg1r","t":"利率优势消退 大行大额存单向普通定存靠拢","s":"证券时报","d":"09/17","m":1,"k":"biz_insight","g":["财富","市场","客群"],"x":"大额存单利率优势消退、向普通定存靠拢，存款价格竞争空间收窄，可考虑把客户维护重心从价格转向期限与综合服务。","u":"https://www.stcn.com/article/detail/4188425.html"},{"i":"itm-4gkcd0","t":"平台支付月付仍在，页面分家","s":"新浪财经·银行频道","d":"09/17","m":3,"k":"biz_insight","g":["信用卡","消费贷","监管合规","竞对动态","客群","信贷"],"x":"平台月付功能仍在、仅页面分家，支付与信贷展示规则调整落地，信用卡与消费贷条线可关注绑卡与分期入口的流量变化。","u":"https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-17/doc-inisatuq9447220.shtml"},{"i":"itm-11gvvha","t":"抖音出手！一次清退6888名“理财师”","s":"证券时报","d":"09/17","m":1,"k":"biz_insight","g":["财富","监管合规"],"x":"抖音一次清退6888名理财师，互联网平台财经内容整治加码，提示关注员工自媒体展业合规与客户触达渠道的替代安排。","u":"https://www.stcn.com/article/detail/4188640.html"},{"i":"itm-28y1f5","t":"调查！资方停摆、现金流承压，助贷行业深度出清","s":"新浪财经·银行频道","d":"09/17","m":1,"k":"biz_insight","g":["消费贷","信贷","监管合规","竞对动态"],"x":"助贷行业深度出清、资方停摆，合作机构现金流风险上升，消费贷条线值得关注存量合作方准入与贷后管理压力。","u":"https://finance.sina.com.cn/roll/2026-09-17/doc-inisatum3513293.shtml"},{"i":"itm-1v221v1","t":"超500亿新钱涌入“固收+”，策略标签化、赛道化争议升温","s":"央视财经","d":"09/17","m":1,"k":"biz_insight","g":["财富","市场","客群"],"x":"超500亿新钱涌入固收+，策略标签化争议升温，提示代销准入与产品标签审核需更细，避免客户预期与实际策略错配。","u":"https://finance.cctv.com/2026/09/17/ARTIH8vrz0V4nCUL8f8F83dO260917.shtml"},{"i":"itm-os5fo8","t":"银行理财规模8月再创新高，“含权”产品年内增量突出","s":"新浪财经·银行频道","d":"09/17","m":2,"k":"biz_insight","g":["财富","市场","客群"],"x":"理财规模8月再创新高、含权产品增量突出，客户对净值波动的接受度在变，财富条线可考虑同步调整含权产品配置话术。","u":"https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-17/doc-inisatui4286974.shtml"},{"i":"itm-nzy28i","t":"美联储决议倒计时，芯片股、光通信股大涨，英特尔飙涨7%，SpaceX涨超4%，黄金白银反弹","s":"新浪财经·理财保险","d":"09/17","m":2,"k":"biz_insight","g":["财富"],"x":"决议前芯片、光通信股大涨，黄金白银反弹，客户对贵金属与科技类资产的关注度提升，可做好产品适配说明。","u":"https://finance.sina.com.cn/stock/t/2026-09-17/doc-inisaawr4525063.shtml"},{"i":"itm-mtz5gx","t":"莫让“固收+”基金稳健底色褪成“固收-”","s":"新浪财经·理财保险","d":"09/17","m":1,"k":"biz_insight","g":["财富"],"x":"“固收+”产品稳健定位受关注，提示理财经理在客户回访中重点说明回撤与波动来源，避免收益预期错配。","u":"https://finance.sina.com.cn/jjxw/2026-09-17/doc-inisaawr4525912.shtml"},{"i":"itm-1si4pdy","t":"美联储三年来首次加息，点阵图暗示年内或再加一次","s":"观察者网·金融","d":"09/17","m":1,"k":"policy_market","g":["市场","客群"],"x":"美联储三年来首次加息、点阵图暗示年内或再加一次，美元与跨境资金成本预期生变，结售汇窗口与外币资产配置值得提示客户。","u":"https://www.guancha.cn/GuanJinRong/2026_09_17_900949.shtml"},{"i":"itm-1larznw","t":"三年首次加息！香港金管局总裁余伟文：公众需注意利率风险","s":"21世纪经济报道·金融","d":"09/17","m":1,"k":"policy_market","g":["市场","跨境","客群","财富"],"x":"香港金管局三年首次加息并提示公众注意利率风险，跨境按揭与港元负债客户月供压力上升，可考虑提前做客户分层提示。","u":"https://m.21jingji.com/article/20260917/herald/83eb3283c187ce48d8feefb5128be686.html"},{"i":"itm-m4uwod","t":"美联储加息压制金价 多只黄金类ETF跌逾5%","s":"新浪财经·理财保险","d":"09/17","m":2,"k":"policy_market","g":["财富","市场","客群"],"x":"加息压制金价，多只黄金类ETF跌逾5%，持有黄金主题产品的客户净值波动放大，财富条线需准备安抚与再平衡沟通口径。","u":"https://finance.sina.com.cn/roll/2026-09-17/doc-inisayan9408735.shtml"},{"i":"itm-heipcf","t":"金融营销“9·30”新规落地将近","s":"新浪财经·银行频道","d":"09/16","m":2,"k":"policy_market","g":["监管合规","财富","信用卡","客群"],"x":"金融营销9·30新规落地将近，宣传话术、展示规则与第三方合作素材面临整改，财富与信用卡条线需倒排自查时间表。","u":"https://finance.sina.com.cn/roll/2026-09-16/doc-inirzshv4689713.shtml"},{"i":"itm-wjqh3c","t":"9月金融债提速！740亿集中落地，银行加快补充中长期负债","s":"新浪财经·银行频道","d":"09/16","m":2,"k":"policy_market","g":["市场","客群"],"x":"9月金融债提速、740亿集中落地，银行加快补充中长期负债，负债成本与期限结构变化可能影响后续存款定价策略。","u":"https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzmyz3773279.shtml"},{"i":"itm-jwvtis","t":"美国金融机构上调贷款参考利率至7%","s":"新浪财经·理财保险","d":"09/17","m":3,"k":"policy_market","g":["信贷"],"x":"美国贷款参考利率升至7%，美元融资成本上行，有美元负债或跨境融资需求的客户可考虑提前锁定成本。","u":"https://finance.sina.com.cn/roll/2026-09-17/doc-inisatup0253673.shtml"},{"i":"itm-16px0fc","t":"【前8个月上线微短剧中AI剧超九成】广电总局网络视听节目管理司司长王小亮17日在国新办举行的“开局起步‘十五五’”系列主题新闻发布会上介绍，今年前8个月，全国上线微短剧43万部，是去年全年的13倍，其中AI剧超九成。","s":"新华财经","d":"09/17","m":1,"k":"policy_market","g":[],"x":"【前8个月上线微短剧中AI剧超九成】广电总局网络视听节目管理司司长王小亮17日在国新办举行的“开局起步‘十五五’”系列主题新闻发布会上介绍，今年前8个月，全国上线微短剧43万部，是","u":"https://www.cnfin.com/yw-lb/detail/20260917/4471101_1.html"},{"i":"itm-yhhvod","t":"8月政府债券净融资1.01万亿元，在当月社融中占比超过60%","s":"证券时报","d":"09/17","m":1,"k":"policy_market","g":[],"x":"8月政府债券净融资1.01万亿元、占当月社融超60%，财政发力支撑社融，可关注配套项目与机构资金流向。","u":"https://www.stcn.com/article/detail/4188333.html"},{"i":"itm-zs3hsv","t":"国家统计局8月最新数据：一线城市二手房价格连涨6月，上海新房继续领涨","s":"证券时报","d":"09/17","m":1,"k":"policy_market","g":[],"x":"8月一线城市二手房价格连涨6月、上海新房领涨，按揭与置换需求或有回暖，可关注相关客群跟进节奏。","u":"https://www.stcn.com/article/detail/4188335.html"},{"i":"itm-9v0xr4","t":"集中推盘 “金九银十”深圳好房嘉年华举行","s":"证券时报","d":"09/16","m":1,"k":"policy_market","g":[],"x":"深圳金九银十集中推盘，按揭与住房金融需求阶段性释放，相关客群服务窗口值得关注。","u":"https://www.stcn.com/article/detail/4187715.html"},{"i":"itm-y0jxw6","t":"香港首个五年规划：巩固提升“深圳—香港—广州”全球创新集群领先地位","s":"证券时报","d":"09/16","m":2,"k":"policy_market","g":[],"x":"香港五年规划提出巩固深港穗全球创新集群领先地位，跨境科创金融与湾区客群服务窗口打开。","u":"https://www.stcn.com/article/detail/4187210.html"},{"i":"itm-1dn9aj6","t":"国家统计局：多地调整优化房地产政策 效果正逐步显现","s":"新华财经","d":"09/16","m":2,"k":"policy_market","g":[],"x":"多地房地产政策优化效果逐步显现，住房金融条线可关注按揭投放节奏与区域政策落地差异带来的客户咨询变化。","u":"https://www.cnfin.com/hg-lb/detail/20260916/4470375_1.html"},{"i":"itm-1bxgrz8","t":"深圳硕日新能科技股份有限公司 (辅导备案) [深圳证监局]","s":"证监会辅导备案(官方csrcfd)","d":"09/11","m":1,"k":"ipo","g":["粤"],"x":"IPO辅导备案 | 辅导机构: 国泰海通证券股份有限公司 | 备案时间: 2026-01-23 | 状态: 辅导备案 | 报告: 辅导备案报告 | 披露: 2026-09-11","u":"http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/11/PREIPO_F0101_V01_20260911_36475_Q/DD35B58BBA0C480484A834CBEF8E3C9A/关于深圳硕日新能科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf"},{"i":"itm-1dhjqx5","t":"云英谷科技股份有限公司 (辅导备案) [深圳证监局]","s":"证监会辅导备案(官方csrcfd)","d":"09/11","m":1,"k":"ipo","g":["粤"],"x":"IPO辅导备案 | 辅导机构: 广发证券股份有限公司 | 备案时间: 2026-09-10 | 状态: 辅导备案 | 报告: 辅导备案报告 | 披露: 2026-09-11","u":"http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/11/PREIPO_F0101_V01_20260911_36477_Q/EEACC7A920D84847AAF437EAF633DEA6/关于云英谷科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf"},{"i":"itm-1o56h01","t":"深圳市楠菲微电子股份有限公司 (辅导验收) [深圳证监局]","s":"证监会辅导备案(官方csrcfd)","d":"09/12","m":1,"k":"ipo","g":["粤"],"x":"IPO辅导备案 | 辅导机构: 中信建投证券股份有限公司 | 备案时间: 2026-02-09 | 状态: 辅导验收 | 报告: 辅导工作完成报告 | 披露: 2026-09-12","u":"http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/12/PREIPO_F0101_V01_20260912_36481_Q/7915790F23BE4FB5A28AF6780C8AE295/关于深圳市楠菲微电子股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf"},{"i":"itm-1bqiqy1","t":"优邦科技：IPO注册生效（拟创业板）","s":"深交所审核项目动态(官方)","d":"09/14","m":1,"k":"ipo","g":["粤","市场","客群"],"x":"优邦科技创业板IPO注册生效，保荐为申万宏源承销保荐，注册生效后进入发行窗口，可关注其募资与员工持股相关金融需求。","u":"https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004225"},{"i":"itm-2lu926","t":"海柔创新智能科技集团递表港交所主板","s":"港交所新股递表(广东企业赴港)","d":"09/13","m":1,"k":"ipo","g":["跨境","粤","财富"],"x":"海柔创新递表港交所主板，赴港上市路径延续，跨境融资与上市前后资金安排值得关注，可跟进相关企业金融需求。","u":"https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm"},{"i":"itm-1dn9aj6","t":"多地房地产政策优化见效","s":"今日必读","d":"09/17","m":3,"k":"must","g":[],"x":"统计局称多地政策优化效果逐步显现，叠加70城房价新指标发布，住房金融投放节奏与区域差异值得跟踪。","u":"https://www.cnfin.com/hg-lb/detail/20260916/4470375_1.html"},{"i":"itm-heipcf","t":"金融营销9·30新规将近","s":"今日必读","d":"09/17","m":3,"k":"must","g":[],"x":"宣传话术、展示规则与第三方合作素材面临整改，财富与信用卡条线需倒排自查时间表，避免合规敞口。","u":"https://finance.sina.com.cn/roll/2026-09-16/doc-inirzshv4689713.shtml"},{"i":"itm-wjqh3c","t":"9月金融债提速740亿","s":"今日必读","d":"09/17","m":3,"k":"must","g":[],"x":"银行加快补充中长期负债，负债成本与期限结构变化可能传导至存款定价策略，影响零售AUM产品布局。","u":"https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzmyz3773279.shtml"},{"i":"itm-1mj32ks","t":"时隔三年多！美联储重启加息25个基点内部预计年内还会升息一次","s":"东方财富","d":"09/17","m":1,"k":"stock","g":[],"x":"美联储时隔三年多重启加息，本次加息25个基点，内部预计年内还会再升息一次。","u":"https://finance.eastmoney.com/a/202609173876448964.html"},{"i":"itm-23es4g","t":"就在今晚！美联储“加息之锤”即将落下？","s":"东方财富","d":"09/16","m":1,"k":"stock","g":[],"x":"市场关注美联储即将公布的加息决定，等待\"加息之锤\"落地。","u":"https://finance.eastmoney.com/a/202609163876026493.html"},{"i":"itm-14gwc3d","t":"创业板指涨近2%科创50指数涨超4%半导体板块爆发","s":"东方财富","d":"09/16","m":1,"k":"stock","g":[],"x":"创业板指涨近2%，科创50指数涨超4%，半导体板块集体爆发。","u":"https://finance.eastmoney.com/a/202609163876004139.html"},{"i":"itm-32e5j2","t":"港股午评：恒指跌0.73% 科指跌0.76% 科网股低迷 黄金股下挫","s":"新浪财经·港股","d":"09/17","m":1,"k":"stock","g":[],"x":"港股午间收盘，恒指跌0.73%，科指跌0.76%，科网股低迷，黄金股下挫。","u":"https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-17/doc-iniscekc4135543.shtml"},{"i":"itm-17m5pbd","t":"香港金管局：加息25个基点","s":"新浪财经·港股","d":"09/17","m":1,"k":"stock","g":[],"x":"香港金管局宣布加息25个基点。","u":"https://finance.sina.com.cn/wm/2026-09-17/doc-inisatuq9436256.shtml"},{"i":"itm-b6jmqf","t":"立讯精密获Mitsubishi UFJ Financial Group, Inc.增持75.62万股 每股作价约57港元","s":"新浪财经·港股","d":"09/17","m":1,"k":"stock","g":[],"x":"立讯精密获三菱日联金融集团增持75.62万股，每股作价约57港元。","u":"https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-17/doc-inisatup0256834.shtml"},{"i":"itm-1mj32ks","t":"跨境客群结售汇窗口","s":"商机洞察","d":"09/17","m":3,"k":"insight","g":["财富","客群","零售AUM"],"x":"美联储加息落地后美元利率中枢抬升，广州有美元资产或跨境收付需求的客户换汇与外币配置意愿上升，结售汇与外币存款咨询量预计走高。","u":"https://finance.eastmoney.com/a/202609173876448964.html"},{"i":"itm-os5fo8","t":"含权理财配置话术调整","s":"商机洞察","d":"09/17","m":3,"k":"insight","g":["财富","零售AUM"],"x":"8月理财规模再创新高、含权产品增量突出，客户对净值波动接受度在变，叠加信披统一进入实操，财富端沟通口径需同步更新。","u":"https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-17/doc-inisatui4286974.shtml"},{"i":"itm-pztdza","t":"汽车零部件产业链小微客群","s":"商机洞察","d":"09/17","m":3,"k":"insight","g":["信贷","代发","普惠小微贷款客户"],"x":"黄埔再落两个汽车零部件项目，广州东部汽车产业链延链补链提速，上下游小微供应商与个体工商户的经营贷、代发需求同步上升。","u":"https://news.dayoo.com/guangzhou/202609/17/139995_55004542.htm"}],"anchored":true},{"date":"2026-09-16","hero":"美联储今夜议息叠加香港五年规划专章支持南沙，跨境资产与湾区科创客群窗口同步打开。","items":[{"i":"itm-yr32ly","t":"穗港科技和产业融合创新中心（广州）揭牌启用","s":"央广网·广东频道","d":"09/16","m":3,"k":"gz_local","g":["政银合作","跨境","科技金融","客群","财富"],"x":"穗港科技产业融合平台落地，跨境科创客群的账户、结算与融资需求可提前对接，关注港资科研机构与穗企联合项目的开户及跨境资金通道。","u":"https://www.cnr.cn/gd/meiliguangdong/20260916/t20260916_527815797.shtml"},{"i":"itm-vs3zep","t":"全国首个“政务+”词元服务专区在越秀区政务服务中心启用","s":"广州日报·大洋网(广州频道)","d":"09/16","m":3,"k":"gz_local","g":["政银合作","科技金融","客群"],"x":"全国首个“政务+”词元服务专区落地越秀，政务场景与AI服务结合提速，可关注其对政银合作入口、科创企业开户与结算的引流价值。","u":"https://news.dayoo.com/guangzhou/202609/16/139995_55004340.htm"},{"i":"itm-1508ccf","t":"又有两家出手，消金机构个贷利率上限向20%靠拢？","s":"新浪财经·理财保险","d":"09/16","m":2,"k":"biz_insight","g":["消费贷","信贷","竞对动态"],"x":"消金个贷利率上限向20%靠拢，价格战向头部集中，可关注我行消费贷定价与客群分层的相对位置，评估优质客群留存压力。","u":"https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-16/doc-inirzwqy9773294.shtml"},{"i":"itm-1ufhy6u","t":"部分大额存单利率已低于普通定存","s":"21世纪经济报道·金融","d":"09/16","m":2,"k":"biz_insight","g":["财富","市场","客群"],"x":"大额存单利率倒挂普通定存，存款产品比价逻辑生变，提示理财经理调整客户资产配置话术，关注到期资金向理财、保险的迁移。","u":"https://m.21jingji.com/article/20260916/herald/55d33592173c7762b790768c6ff6c2d0.html"},{"i":"itm-1gabp3h","t":"两家机构拿走九成份额 理财公司IPO“打新”为何冷热不均？","s":"新浪财经·理财保险","d":"09/16","m":1,"k":"biz_insight","g":["财富","市场","客群"],"x":"理财公司打新份额高度集中于两家，产品收益分化加剧，可关注我行代销理财在权益增强类产品上的筛选与客户预期管理。","u":"https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzshx3751260.shtml"},{"i":"itm-15mfehw","t":"顺丰控股离岸人民币债券即将于香港交易所上市","s":"证券时报","d":"09/16","m":1,"k":"biz_insight","g":[],"x":"顺丰控股离岸人民币债券将登陆港交所，离岸人民币融资活跃，跨境债券承销与投资机会可关注。","u":"https://www.stcn.com/article/detail/4187935.html"},{"i":"itm-f3xqcu","t":"A Hard Year For Software IPOs","s":"Crunchbase News","d":"09/16","m":1,"k":"biz_insight","g":[],"x":"U.S. venture-backed technology companies have secured around $90 billion in domestic publi…","u":"https://news.crunchbase.com/public/energy-ai-defense-saas-ipos-2026/"},{"i":"itm-18kfgj5","t":"银行个人贵金属代理业务密集“退场”","s":"新华财经","d":"09/16","m":1,"k":"biz_insight","g":["财富"],"x":"多家银行收缩个人贵金属代理业务，存量客户面临迁移，财富条线可关注承接窗口与替代产品配置需求。","u":"https://www.cnfin.com/yw-lb/detail/20260916/4470382_1.html"},{"i":"itm-1eyg48f","t":"8月我国跨境资金净流入环比增长4%","s":"新华财经","d":"09/16","m":1,"k":"biz_insight","g":[],"x":"8月跨境资金净流入环比增长4%，结售汇与跨境收付窗口值得提示客户，跨境客群资金安排需求可能上升。","u":"https://www.cnfin.com/yw-lb/detail/20260916/4470362_1.html"},{"i":"itm-i37o39","t":"8月经济运行呈现“三稳两快”特点","s":"新华财经","d":"09/16","m":2,"k":"biz_insight","g":[],"x":"8月经济运行呈“三稳两快”，新动能支撑力凸显，零售条线可关注消费与投资相关客群的信贷需求结构性变化。","u":"https://www.cnfin.com/yw-lb/detail/20260916/4470368_1.html"},{"i":"itm-1najwu5","t":"美联储是否加息，今夜揭晓！美债收益率狂飙，房贷利率已突破7.2%","s":"新浪财经·理财保险","d":"09/16","m":3,"k":"policy_market","g":["市场","住房金融","客群","信贷"],"x":"美联储议息今夜落地，美债收益率狂飙、美国房贷利率破7.2%，跨境资产波动加大，结售汇与外币理财窗口值得提示客户。","u":"https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzwqv3656432.shtml"},{"i":"itm-1vvtj08","t":"美联储政策悬念即将揭晓 沃什表态或比加息本身更关键","s":"新华财经","d":"09/16","m":1,"k":"policy_market","g":["市场","客群"],"x":"沃什表态或比加息本身更关键，政策路径指引影响美元与港股节奏，可提示有跨境配置需求的客户关注后续措辞变化。","u":"https://www.cnfin.com/yw-lb/detail/20260916/4470857_1.html"},{"i":"itm-1h4j2qa","t":"中金：美债息对资产市场影响力下降 偏鸽加息对港股影响短暂","s":"新浪财经·港股频道","d":"09/16","m":1,"k":"policy_market","g":["市场","跨境","客群","财富"],"x":"中金认为美债息对资产市场影响力下降、偏鸽加息对港股影响短暂，可关注港股相关代销产品客户的情绪安抚与持仓沟通。","u":"https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-16/doc-inirzshv4696492.shtml"},{"i":"itm-9v0xr4","t":"集中推盘 “金九银十”深圳好房嘉年华举行","s":"证券时报","d":"09/16","m":2,"k":"policy_market","g":[],"x":"深圳金九银十集中推盘，按揭与住房金融需求阶段性释放，相关客群服务窗口值得关注。","u":"https://www.stcn.com/article/detail/4187715.html"},{"i":"itm-y0jxw6","t":"香港首个五年规划：巩固提升“深圳—香港—广州”全球创新集群领先地位","s":"证券时报","d":"09/16","m":2,"k":"policy_market","g":[],"x":"香港五年规划提出巩固深港穗全球创新集群领先地位，跨境科创金融与湾区客群服务窗口打开。","u":"https://www.stcn.com/article/detail/4187210.html"},{"i":"itm-1dn9aj6","t":"国家统计局：多地调整优化房地产政策 效果正逐步显现","s":"新华财经","d":"09/16","m":2,"k":"policy_market","g":[],"x":"多地房地产政策优化效果逐步显现，住房金融条线可关注按揭投放节奏与区域政策落地差异带来的客户咨询变化。","u":"https://www.cnfin.com/hg-lb/detail/20260916/4470375_1.html"},{"i":"itm-h6ef2u","t":"对公高歌 零售褪色——银行信贷业务格局生变","s":"新华财经","d":"09/16","m":1,"k":"policy_market","g":["信贷","客群"],"x":"对公信贷走强、零售信贷走弱格局延续，零售条线需重新审视客群结构与投放节奏，关注按揭、消费贷增长动能变化。","u":"https://www.cnfin.com/yw-lb/detail/20260916/4470387_1.html"},{"i":"itm-1l5xluu","t":"极致内卷撞上美债高利率，ETF怎么配？","s":"新浪财经·理财保险","d":"09/16","m":2,"k":"policy_market","g":["财富","信贷"],"x":"美债高利率叠加ETF内卷，客户海外资产配置需求上升，跨境理财与ETF配置服务值得关注。","u":"https://finance.sina.com.cn/roll/2026-09-16/doc-inirzshv4687121.shtml"},{"i":"itm-5r5l5x","t":"如何看待8月新增贷款同比少增？","s":"新浪财经·银行频道","d":"09/16","m":1,"k":"policy_market","g":["信贷"],"x":"8月新增贷款同比少增，信贷需求偏弱，对公与零售投放节奏可关注后续政策与需求变化。","u":"https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirykpe6585543.shtml"},{"i":"itm-2mtv8a","t":"8月银行理财规模达35.8万亿创历史新高，增量资金配向何处？","s":"新浪财经·理财保险","d":"09/16","m":1,"k":"policy_market","g":["财富"],"x":"8月理财规模35.8万亿创历史新高，增量资金流向决定财富产品布局，可关注客户资产配置迁移方向。","u":"https://finance.sina.com.cn/money/lcxqs/2026-09-16/doc-inirzmyw2840095.shtml"},{"i":"itm-1nmgprb","t":"香港五年规划专章聚焦大湾区，支持南沙对外开放门户作用","s":"广州日报·大洋网(广州频道)","d":"09/16","m":2,"k":"policy_market","g":[],"x":"香港首份五年规划设大湾区专章，明确支持南沙对外开放门户作用，跨境金融与南沙客群服务窗口值得关注。","u":"https://news.dayoo.com/guangzhou/202609/16/139995_55004139.htm"},{"i":"itm-1fwykpw","t":"本月底起《金融产品网络营销管理办法》正式实施 部分平台已开始排查","s":"央视财经","d":"09/16","m":1,"k":"policy_market","g":[],"x":"金融产品网络营销新规本月底实施，部分平台已排查，线上营销合规与第三方合作需提前梳理。","u":"https://finance.cctv.com/2026/09/16/ARTInvhk3n5KA1iZgyy79yCO260916.shtml"},{"i":"itm-1o56h01","t":"楠菲微电子（深圳）IPO辅导验收完成","s":"证监会辅导备案(官方csrcfd)","d":"09/12","m":1,"k":"ipo","g":["科技金融"],"x":"楠菲微电子IPO辅导验收完成，辅导机构中信建投，可关注其申报前账户结算、募投项目融资及股东个人金融需求。","u":"http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/12/PREIPO_F0101_V01_20260912_36481_Q/7915790F23BE4FB5A28AF6780C8AE295/关于深圳市楠菲微电子股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf"},{"i":"itm-1dhjqx5","t":"云英谷科技IPO辅导备案","s":"证监会辅导备案(官方csrcfd)","d":"09/11","m":1,"k":"ipo","g":["科技金融"],"x":"云英谷科技IPO辅导备案，辅导机构广发证券，可关注其上市筹备期的资金结算与员工金融服务机会。","u":"http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/11/PREIPO_F0101_V01_20260911_36477_Q/EEACC7A920D84847AAF437EAF633DEA6/关于云英谷科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf"},{"i":"itm-1bxgrz8","t":"硕日新能（深圳）IPO辅导备案","s":"证监会辅导备案(官方csrcfd)","d":"09/11","m":1,"k":"ipo","g":["科技金融"],"x":"硕日新能IPO辅导备案，辅导机构国泰海通，可关注新能源赛道拟上市企业的早期账户与融资服务切入。","u":"http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/11/PREIPO_F0101_V01_20260911_36475_Q/DD35B58BBA0C480484A834CBEF8E3C9A/关于深圳硕日新能科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf"},{"i":"itm-oy135r","t":"浙江和夏科技股份有限公司（GEM递表）","s":"港交所新股递表(主板/GEM·全国参考)","d":"09/11","m":1,"k":"ipo","g":[],"x":"市场：GEM｜递表日：2026-09-11｜港股在审（全国参考）","u":"https://www1.hkexnews.hk/app/gem/2026/108869/2026091101852_c.htm"},{"i":"itm-1flkeoo","t":"河北聯吉啟成產業園區運營管理股份有限公司（GEM递表）","s":"港交所新股递表(主板/GEM·全国参考)","d":"09/10","m":1,"k":"ipo","g":[],"x":"市场：GEM｜递表日：2026-09-10｜港股在审（全国参考）","u":"https://www1.hkexnews.hk/app/gem/2026/108866/2026091000823_c.htm"},{"i":"itm-1bqiqy1","t":"优邦科技：IPO注册生效（拟创业板）","s":"深交所审核项目动态(官方)","d":"09/14","m":1,"k":"ipo","g":["粤"],"x":"优邦科技创业板IPO注册生效，注册地在广东，可跟进其上市前募资账户、员工持股及后续市值管理相关服务机会。","u":"https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004225"},{"i":"itm-2lu926","t":"海柔创新智能科技集团：港交所主板递表","s":"港交所新股递表(广东企业赴港)","d":"09/13","m":1,"k":"ipo","g":["粤","跨境","财富"],"x":"海柔创新港交所主板递表，注册地在广东，可跟进其跨境融资、外汇结算与上市前后资金归集需求。","u":"https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm"},{"i":"itm-12tcogf","t":"翱捷科技（主板递表）","s":"港交所新股递表(主板/GEM·全国参考)","d":"09/11","m":1,"k":"ipo","g":["科技金融"],"x":"翱捷科技港交所主板递表，处于在审阶段，可关注其上市进程对科技类客户跨境融资需求的带动。","u":"https://www1.hkexnews.hk/app/sehk/2026/108868/2026091101554_c.htm"},{"i":"itm-153pbka","t":"广东微电新能源：港交所主板递表","s":"港交所新股递表(广东企业赴港)","d":"09/10","m":1,"k":"ipo","g":["粤","跨境","财富"],"x":"广东微电新能源港交所主板递表，注册地在广东，可关注其跨境融资与外汇避险需求，衔接赴港上市配套服务。","u":"https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm"},{"i":"itm-1najwu5","t":"美联储今夜议息落地","s":"今日必读","d":"09/16","m":3,"k":"must","g":[],"x":"美债收益率狂飙、美国房贷利率破7.2%，跨境资产波动加大，广州跨境客群结售汇与外币理财需求或集中释放。","u":"https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzwqv3656432.shtml"},{"i":"itm-m5vcvn","t":"40年房贷落地节奏分化","s":"今日必读","d":"09/16","m":3,"k":"must","g":[],"x":"新房贷可申请、存量延期节奏分化，按揭产品期限与客户还款安排出现新变量，住房金融条线需同步调整。","u":"https://finance.sina.com.cn/jjxw/2026-09-15/doc-inirxhzq8473227.shtml"},{"i":"itm-y8usnx","t":"支付页面藏贷新规将落地","s":"今日必读","d":"09/16","m":3,"k":"must","g":[],"x":"9月30日支付场景信贷展示受限，消费贷线上获客入口与合规流程面临调整，需提前评估渠道结构。","u":"https://finance.sina.com.cn/roll/2026-09-15/doc-inirwwmw6977791.shtml"},{"i":"itm-1nmgprb","t":"香港五年规划设大湾区专章","s":"今日必读","d":"09/16","m":3,"k":"must","g":[],"x":"明确支持南沙对外开放门户作用，巩固深港穗创新集群，为南沙跨境金融与科创客群服务打开政策窗口。","u":"https://news.dayoo.com/guangzhou/202609/16/139995_55004139.htm"},{"i":"itm-fr4fzq","t":"个贷与信用卡不良承压","s":"风险提示","d":"09/16","m":3,"k":"risk","g":[],"x":"信用卡与消费贷存量资产质量承压，个贷审批与贷后管理压力上升，财富端客户风险偏好也可能同步走低。","u":"https://finance.sina.com.cn/roll/2026-09-15/doc-inirwmwa7020893.shtml"},{"i":"itm-xw069z","t":"朱雀、引力接连发射成功千帆星座组网提速多股获融资客抢筹(名单)","s":"东方财富","d":"09/16","m":1,"k":"stock","g":[],"x":"朱雀、引力系列火箭接连发射成功，千帆星座组网提速，相关概念股获融资客抢筹。","u":"https://finance.eastmoney.com/a/202609163875348467.html"},{"i":"itm-mu8h9g","t":"美联储加息风暴倒计时！白宫高官：我和特朗普将尊重沃什的决定","s":"东方财富","d":"09/16","m":1,"k":"stock","g":[],"x":"美联储议息临近，白宫高官表示将与特朗普尊重沃什的决定，市场关注加息动向。","u":"https://finance.eastmoney.com/a/202609163875860735.html"},{"i":"itm-cbmbfv","t":"“牛周期”来了？进口量大降价格走高概念股稀缺","s":"东方财富","d":"09/16","m":1,"k":"stock","g":[],"x":"进口量大幅下降、价格走高，市场关注相关'牛周期'概念股，相关标的较为稀缺。","u":"https://finance.eastmoney.com/a/202609163875344997.html"},{"i":"itm-23es4g","t":"就在今晚！美联储“加息之锤”即将落下？","s":"东方财富","d":"09/16","m":1,"k":"stock","g":[],"x":"市场聚焦美联储即将公布的利率决议，关注'加息之锤'是否落地。","u":"https://finance.eastmoney.com/a/202609163876026493.html"},{"i":"itm-1ai9wae","t":"港股收评：恒指涨0.19% 科指涨0.79% 黄金股、半导体板块走强","s":"新浪财经·港股","d":"09/16","m":1,"k":"stock","g":[],"x":"港股收评：恒指涨0.19%，科指涨0.79%，黄金股、半导体板块走强。","u":"https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-16/doc-inirzfsu6652365.shtml"},{"i":"itm-11ct75o","t":"年内港股再融资超3000亿港元","s":"新浪财经·港股","d":"09/16","m":1,"k":"stock","g":[],"x":"年内港股再融资规模超3000亿港元。","u":"https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirxtrs3490298.shtml"},{"i":"itm-tjat3u","t":"港股IPO市场火热 今年以来募资额超3600亿港元","s":"新浪财经·港股","d":"09/16","m":1,"k":"stock","g":[],"x":"港股IPO市场火热，今年以来募资额超3600亿港元。","u":"https://finance.sina.com.cn/jjxw/2026-09-16/doc-iniryefk3435758.shtml"},{"i":"itm-1ws27wv","t":"华泰 | 策略：盈利回暖下的结构分化——上半年港股财报分析","s":"新浪财经·港股","d":"09/16","m":1,"k":"stock","g":[],"x":"华泰策略分析上半年港股财报，指出盈利回暖下呈现结构分化。","u":"https://finance.sina.com.cn/stock/stockzmt/2026-09-16/doc-inirykpe6635407.shtml"},{"i":"itm-1h4j2qa","t":"中金：美债息对资产市场影响力下降 偏鸽加息对港股影响短暂","s":"新浪财经·港股","d":"09/16","m":1,"k":"stock","g":[],"x":"中金指出美债息对资产市场影响力下降，偏鸽加息对港股影响短暂。","u":"https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-16/doc-inirzshv4696492.shtml"},{"i":"itm-1ufhy6u","t":"大额存单利率倒挂","s":"商机洞察","d":"09/16","m":3,"k":"insight","g":["财富","客群","零售AUM"],"x":"部分大额存单利率已低于普通定存，存款比价逻辑生变，到期资金存在向理财、保险迁移的可能，零售AUM结构面临再平衡。","u":"https://m.21jingji.com/article/20260916/herald/55d33592173c7762b790768c6ff6c2d0.html"},{"i":"itm-1bimkm5","t":"理财信披实操启动","s":"商机洞察","d":"09/16","m":3,"k":"insight","g":["财富","监管","零售AUM"],"x":"理财统一信披进入实操、存量产品业绩基准分批调整，客户对净值波动的敏感度上升，财富端沟通与留存压力加大。","u":"https://finance.sina.com.cn/roll/2026-09-16/doc-inirxxxq3375587.shtml"},{"i":"itm-153pbka","t":"粤企赴港上市提速","s":"商机洞察","d":"09/16","m":3,"k":"insight","g":["私行","科技金融","中高端客群(过亿资产)"],"x":"广东微电新能源、海柔创新智能科技同日递表港交所，跨境融资、外汇结算与上市前后资金归集需求集中释放。","u":"https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm"},{"i":"itm-1bqiqy1","t":"优邦科技注册生效","s":"商机洞察","d":"09/16","m":3,"k":"insight","g":["私行","代发","中高端客群(过亿资产)"],"x":"优邦科技创业板IPO注册生效，注册地在广东，上市前募资账户、员工持股及后续市值管理服务机会临近。","u":"https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004225"},{"i":"itm-13dzh8z","t":"经营贷利率上行收紧","s":"商机洞察","d":"09/16","m":3,"k":"insight","g":["信贷","客群","普惠小微贷款客户"],"x":"同业经营贷主动缩规模、利率上行，贸易类申请人准入收紧，普惠小微客群融资可得性下降，存在他行客户外溢机会。","u":"https://finance.sina.com.cn/roll/2026-09-15/doc-inirxhzs6918539.shtml"},{"i":"itm-zcjh7k","t":"跨境电商海外仓融资","s":"商机洞察","d":"09/16","m":3,"k":"insight","g":["信贷","政银合作","普惠小微贷款客户"],"x":"广州推动跨境电商海外仓高质量发展，海外仓企业融资与跨境结算需求或上升，普惠小微与跨境客群叠加。","u":"https://www.cnr.cn/gd/fxgz/20260916/t20260916_527815570.shtml"},{"i":"itm-yr32ly","t":"穗港科创平台揭牌","s":"商机洞察","d":"09/16","m":3,"k":"insight","g":["科技金融","政银合作"],"x":"穗港科技和产业融合创新中心揭牌启用，港资科研机构与穗企联合项目的开户、结算与融资需求可提前对接。","u":"https://www.cnr.cn/gd/meiliguangdong/20260916/t20260916_527815797.shtml"},{"i":"itm-vs3zep","t":"越秀政务词元专区","s":"商机洞察","d":"09/16","m":3,"k":"insight","g":["政银合作","科技金融"],"x":"全国首个政务+词元服务专区落地越秀，政务场景与AI服务结合提速，政银合作入口与科创企业开户引流价值上升。","u":"https://news.dayoo.com/guangzhou/202609/16/139995_55004340.htm"}],"anchored":false},{"date":"2026-09-15","hero":"8月社融23.91万亿、直接融资首超信贷，零售资产配置与对公融资方案需同步切换思路。","items":[{"i":"itm-1twyplr","t":"广汽公告：一汽将成第二大战略股东","s":"南方网·南方经济","d":"09/14","m":1,"k":"gz_local","g":["市场","粤","客群"],"x":"广汽公告一汽将成第二大战略股东，本地汽车产业链股权与融资安排变化，值得关注相关客户动向。","u":"https://news.southcn.com/node_812903b83a/e4cb321827.shtml"},{"i":"itm-hg83gr","t":"大额存单也“分人”了！银行不再统一定价，教师、新客等各有专属利率","s":"新浪财经·银行频道","d":"09/15","m":2,"k":"biz_insight","g":["财富","客群","代发"],"x":"大额存单转向分客群定价，教师、新客各有专属利率，代发与获客场景的差异化定价值得关注。","u":"https://finance.sina.com.cn/jinrong/yh/2026-09-15/doc-inirxatu6982050.shtml"},{"i":"itm-13dzh8z","t":"经营贷利率悄然上行！银行主动缩规模，贸易类申请人被收紧","s":"新浪财经·理财保险","d":"09/15","m":2,"k":"biz_insight","g":["信贷","消费贷","竞对动态"],"x":"同业经营贷主动缩规模、利率上行，贸易类申请人准入收紧，可考虑排查我行同类客群敞口与定价空间。","u":"https://finance.sina.com.cn/roll/2026-09-15/doc-inirxhzs6918539.shtml"},{"i":"itm-fr4fzq","t":"银行个贷不良继续承压，有大行信用卡不良率升至5%","s":"新浪财经·银行频道","d":"09/15","m":2,"k":"biz_insight","g":["信用卡","消费贷","信贷","客群"],"x":"个贷不良继续承压，有大行信用卡不良率升至5%，提示关注我行信用卡与消费贷存量资产质量走势。","u":"https://finance.sina.com.cn/roll/2026-09-15/doc-inirwmwa7020893.shtml"},{"i":"itm-5yfo27","t":"AI造富速度超过财富管理适配能力","s":"Crunchbase News","d":"09/15","m":1,"k":"biz_insight","g":["财富","私行","客群"],"x":"AI创业公司估值与流动性事件提速，年轻创始人财富管理需求前置，私行客群获取窗口值得关注。","u":"https://news.crunchbase.com/startups/ai-creating-wealth-fast-honig-from-honig/"},{"i":"itm-6v2iwv","t":"健康险如何实现提质扩面？专家：从赔付型保险向健康管理型保险转变","s":"央视财经","d":"09/15","m":2,"k":"biz_insight","g":["财富","客群"],"x":"健康险被建议从赔付型转向健康管理型，财富与客群条线可考虑据此调整保险产品配置话术。","u":"https://finance.cctv.com/2026/09/15/ARTISUWEFYDWtdFGUyHcJpRV260915.shtml"},{"i":"itm-xoraum","t":"小摩：中国银行业8月信贷数据逊预期，首选中国银行、建设银行","s":"新浪财经·港股频道","d":"09/15","m":2,"k":"biz_insight","g":["信贷","市场","竞对动态","客群"],"x":"小摩指8月信贷数据逊预期，首选中国银行、建设银行，提示关注同业信贷投放节奏与结构变化。","u":"https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-15/doc-inirwwmw6950406.shtml"},{"i":"itm-1n2g028","t":"OpenAI rules out IPO this year as Altman, Musk & Amodei warn AI is moving too fast","s":"CNBC Top Stories","d":"09/14","m":1,"k":"biz_insight","g":[],"x":"Altman's IPO comments and Amodei's public call for more careful pacing of AI development c…","u":"https://www.cnbc.com/2026/09/12/anthropics-amodei-proposes-plan-to-slow-the-pace-of-advancing-ai-capabilities.html"},{"i":"itm-obeoze","t":"8月金融数据出炉，释放哪些信息","s":"21世纪经济报道·金融","d":"09/15","m":1,"k":"policy_market","g":["市场","客群"],"x":"8月金融数据出炉，社融增量累计23.91万亿，信贷结构变化值得关注，可对照我行投放节奏。","u":"https://m.21jingji.com/article/20260915/herald/553d69ea5589874a691faa799067d4f7.html"},{"i":"itm-kiupcu","t":"商业银行科技贷款统计口径面临收紧 新框架望年底落地","s":"东方财富·A股股市新闻","d":"09/15","m":3,"k":"policy_market","g":["监管合规","科技金融"],"x":"科技贷款统计口径拟收紧、新框架望年底落地，科技金融客群的授信归类与台账口径需提前梳理。","u":"https://finance.eastmoney.com/a/202609153874763711.html"},{"i":"itm-14yxphq","t":"国家发改委主任郑栅洁主持召开民营企业座谈会","s":"新华财经","d":"09/15","m":3,"k":"policy_market","g":["客群","政银合作"],"x":"发改委围绕优化发展环境、拓展投资空间听取民企意见，政银合作与民企客群服务方向可跟进。","u":"https://www.cnfin.com/yw-lb/detail/20260915/4470263_1.html"},{"i":"itm-1knb7ow","t":"国家外汇局：8月跨境收支规模持续增长，跨境资金保持净流入","s":"新华财经","d":"09/15","m":2,"k":"policy_market","g":["跨境","市场","财富","客群"],"x":"8月跨境收支规模持续增长、资金保持净流入，跨境客群的结售汇与资金归集窗口值得提示客户。","u":"https://www.cnfin.com/yw-lb/detail/20260915/4470157_1.html"},{"i":"itm-11v1jty","t":"10年期美债收益率“破5”意味着什么","s":"新华财经","d":"09/15","m":2,"k":"policy_market","g":["市场","客群"],"x":"10年期美债收益率“破5”，海外利率中枢上移，跨境与外币资产配置客户的沟通窗口值得提示。","u":"https://www.cnfin.com/yw-lb/detail/20260915/4470210_1.html"},{"i":"itm-18najq4","t":"8月份各线城市商品住宅销售价格同比降幅继续收窄，专家解读","s":"南方网·南方经济","d":"09/15","m":1,"k":"policy_market","g":["住房金融","市场","信贷","客群"],"x":"8月各线城市商品住宅销售价格同比降幅继续收窄，房价预期边际企稳，按揭客群沟通口径可微调。","u":"https://news.southcn.com/node_812903b83a/f4fa88f920.shtml"},{"i":"itm-tlnq62","t":"一线城市二手房价连涨6个月","s":"南方网·南方经济","d":"09/15","m":1,"k":"policy_market","g":["住房金融","市场","信贷","客群"],"x":"一线城市二手房价连涨6个月，住房金融需求边际改善，按揭与房抵客群的营销节奏可留意。","u":"https://news.southcn.com/node_812903b83a/215a504a7f.shtml"},{"i":"itm-7cna53","t":"五篇大文章贷款增量占比超七成","s":"新浪财经·银行频道","d":"09/15","m":1,"k":"policy_market","g":["信贷","科技金融","养老","客群"],"x":"五篇大文章贷款增量占比超七成，科技、绿色、普惠、养老等领域投放权重上升，可对照我行结构。","u":"https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-15/doc-inirwfqk3988152.shtml"},{"i":"itm-1ncgw87","t":"前八月直接融资占比超过信贷","s":"新浪财经·银行频道","d":"09/14","m":2,"k":"policy_market","g":["市场","信贷","客群"],"x":"前八月直接融资占比超过信贷，企业融资渠道切换，对公客户综合融资方案设计需相应调整。","u":"https://finance.sina.com.cn/roll/2026-09-14/doc-inirveas7251049.shtml"},{"i":"itm-1qivd9d","t":"国家统计局：8月份国民经济运行平稳、发展向新向优","s":"南方网·南方经济","d":"09/15","m":1,"k":"policy_market","g":["市场","客群"],"x":"统计局称8月国民经济运行平稳、发展向新向优，宏观基本面定调稳定，零售客群经营环境总体平稳。","u":"https://news.southcn.com/node_812903b83a/042e86d36a.shtml"},{"i":"itm-1eeewl4","t":"央行定调“回款难”：向中小企业转嫁融资成本","s":"新浪财经·银行频道","d":"09/14","m":3,"k":"policy_market","g":["监管合规","信贷"],"x":"央行定调“回款难”，指向向中小企业转嫁融资成本，供应链与普惠客群的账期管理值得关注。","u":"https://finance.sina.com.cn/jjxw/2026-09-14/doc-iniruxuw4056316.shtml"},{"i":"itm-1x3u3xg","t":"Creating an Atomic User Model for Personality-Aware Large Language Model Interaction","s":"arXiv 金融科技论文 (cs.AI·cs.LG·q-fin)","d":"09/14","m":1,"k":"tech","g":[],"x":"arXiv:2609.12086v1 Announce Type: cross Abstract: Assistants built on large language model…","u":"https://arxiv.org/abs/2609.12086"},{"i":"itm-1o56h01","t":"楠菲微电子IPO辅导验收完成","s":"证监会辅导备案(官方csrcfd)","d":"09/12","m":1,"k":"ipo","g":["粤"],"x":"深圳楠菲微电子辅导验收完成，辅导机构中信建投，IPO推进进入下一阶段，可关注其综合金融需求。","u":"http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/12/PREIPO_F0101_V01_20260912_36481_Q/7915790F23BE4FB5A28AF6780C8AE295/关于深圳市楠菲微电子股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf"},{"i":"itm-1dhjqx5","t":"云英谷科技IPO辅导备案","s":"证监会辅导备案(官方csrcfd)","d":"09/11","m":1,"k":"ipo","g":["粤"],"x":"云英谷科技IPO辅导备案，辅导机构广发证券，处于早期辅导阶段，可纳入科创客群长期跟踪。","u":"http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/11/PREIPO_F0101_V01_20260911_36477_Q/EEACC7A920D84847AAF437EAF633DEA6/关于云英谷科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf"},{"i":"itm-1bxgrz8","t":"硕日新能IPO辅导备案","s":"证监会辅导备案(官方csrcfd)","d":"09/11","m":1,"k":"ipo","g":["粤"],"x":"深圳硕日新能IPO辅导备案，辅导机构国泰海通，处于早期辅导阶段，可纳入科创客群长期跟踪。","u":"http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/11/PREIPO_F0101_V01_20260911_36475_Q/DD35B58BBA0C480484A834CBEF8E3C9A/关于深圳硕日新能科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf"},{"i":"itm-2lu926","t":"深圳市海柔創新智能科技集團股份有限公司 - W（主板递表·广东企业）","s":"港交所新股递表(广东企业赴港)","d":"09/13","m":1,"k":"ipo","g":["粤"],"x":"市场：主板｜递表日：2026-09-13｜广东企业赴港上市，可跟进跨境融资商机","u":"https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm"},{"i":"itm-12tcogf","t":"翱捷科技股份有限公司（主板递表）","s":"港交所新股递表(主板/GEM·全国参考)","d":"09/11","m":1,"k":"ipo","g":[],"x":"市场：主板｜递表日：2026-09-11｜港股在审（全国参考）","u":"https://www1.hkexnews.hk/app/sehk/2026/108868/2026091101554_c.htm"},{"i":"itm-oy135r","t":"浙江和夏科技股份有限公司（GEM递表）","s":"港交所新股递表(主板/GEM·全国参考)","d":"09/11","m":1,"k":"ipo","g":[],"x":"市场：GEM｜递表日：2026-09-11｜港股在审（全国参考）","u":"https://www1.hkexnews.hk/app/gem/2026/108869/2026091101852_c.htm"},{"i":"itm-1flkeoo","t":"河北聯吉啟成產業園區運營管理股份有限公司（GEM递表）","s":"港交所新股递表(主板/GEM·全国参考)","d":"09/10","m":1,"k":"ipo","g":[],"x":"市场：GEM｜递表日：2026-09-10｜港股在审（全国参考）","u":"https://www1.hkexnews.hk/app/gem/2026/108866/2026091000823_c.htm"},{"i":"itm-1bqiqxz","t":"博迈医疗：IPO问询中（拟创业板）","s":"深交所审核项目动态(官方)","d":"09/09","m":1,"k":"ipo","g":["粤"],"x":"注册地：广东｜保荐：中金公司｜受理：2025-12-24｜状态：已问询｜更新：2026-09-09","u":"https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004223"},{"i":"itm-1bqiqy1","t":"优邦科技：IPO注册生效（拟创业板）","s":"深交所审核项目动态(官方)","d":"09/14","m":1,"k":"ipo","g":[],"x":"注册地：广东｜保荐：申万宏源承销保荐｜受理：2025-12-27｜状态：注册生效｜更新：2026-09-14","u":"https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004225"},{"i":"itm-153pbka","t":"广东微电新能源股份有限公司递表港交所主板","s":"港交所新股递表(广东企业赴港)","d":"09/10","m":1,"k":"ipo","g":["跨境","粤","财富"],"x":"广东微电新能源9月10日递表港交所主板，赴港上市推进中，跨境融资与外汇服务机会可跟进。","u":"https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm"},{"i":"itm-kiupcu","t":"科技贷款统计口径拟收紧","s":"今日必读","d":"09/15","m":3,"k":"must","g":[],"x":"新框架望年底落地，科技金融客群授信归类与台账口径需提前梳理，避免年末被动调整。","u":"https://finance.eastmoney.com/a/202609153874763711.html"},{"i":"itm-1ncgw87","t":"直接融资占比首超信贷","s":"今日必读","d":"09/15","m":3,"k":"must","g":[],"x":"企业融资渠道由信贷转向债券股权，对公综合融资方案与零售代发、财富承接节奏需相应切换。","u":"https://finance.sina.com.cn/roll/2026-09-14/doc-inirveas7251049.shtml"},{"i":"itm-7cna53","t":"五篇大文章贷款增量超七成","s":"今日必读","d":"09/15","m":3,"k":"must","g":[],"x":"科技、绿色、普惠、养老投放权重上升，可对照我行结构找零售与普惠发力缺口。","u":"https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-15/doc-inirwfqk3988152.shtml"},{"i":"itm-tlnq62","t":"一线二手房价连涨6个月","s":"今日必读","d":"09/15","m":3,"k":"must","g":[],"x":"房价预期边际企稳，按揭与房抵客群营销节奏可留意，区域投放策略可差异化。","u":"https://news.southcn.com/node_812903b83a/215a504a7f.shtml"},{"i":"itm-1e8f6lx","t":"30万亿利好！两部门重磅发布！推动集成电路全链条攻关","s":"东方财富","d":"09/15","m":1,"k":"stock","g":[],"x":"两部门发布重磅政策文件，提出推动集成电路全链条攻关，相关表述涉及约30万亿元规模的利好预期。","u":"https://finance.eastmoney.com/a/202609153874411640.html"},{"i":"itm-1k3gxuv","t":"特朗普称愿与伊朗谈判提出美方要收“护航补偿”","s":"东方财富","d":"09/15","m":1,"k":"stock","g":[],"x":"特朗普表示愿意与伊朗谈判，同时提出美方要收取“护航补偿”。","u":"https://finance.eastmoney.com/a/202609153873817559.html"},{"i":"itm-ue5yh","t":"血流成河！芯片产业链蒸发超5000亿美元特朗普大怒AI“刹车”风暴如何演绎","s":"东方财富","d":"09/15","m":1,"k":"stock","g":[],"x":"芯片产业链市值蒸发超5000亿美元，市场关注特朗普对AI“刹车”风暴的后续演绎。","u":"https://finance.eastmoney.com/a/202609153873899254.html"},{"i":"itm-ct4wg3","t":"华为、赛力斯合作生变赛力斯将全面主导问界汽车","s":"东方财富","d":"09/15","m":1,"k":"stock","g":[],"x":"华为与赛力斯合作模式生变，赛力斯将全面主导问界汽车业务。","u":"https://finance.eastmoney.com/a/202609153874526188.html"},{"i":"itm-11mxnsu","t":"沪指跌0.54%科创50指数涨1.55%成交额仅1.62万亿","s":"东方财富","d":"09/15","m":1,"k":"stock","g":[],"x":"沪指跌0.54%，科创50指数涨1.55%，两市成交额仅1.62万亿元。","u":"https://finance.eastmoney.com/a/202609153874652822.html"},{"i":"itm-t9qxr3","t":"港股收评：恒指跌1% 科指跌0.62% 汽车股、锂电池股下挫","s":"新浪财经·港股","d":"09/15","m":1,"k":"stock","g":[],"x":"港股收评：恒指跌1%，科指跌0.62%，汽车股与锂电池股下挫。","u":"https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-15/doc-inirwwmu8656280.shtml"},{"i":"itm-5nztg2","t":"赛力斯H股午后跳水，盘中跌超7%，华为合作模式调整引发市场担忧","s":"新浪财经·港股","d":"09/15","m":1,"k":"stock","g":[],"x":"赛力斯H股午后跳水，盘中跌超7%，市场对华为合作模式调整表示担忧。","u":"https://finance.sina.com.cn/stock/hkstock/2026-09-15/doc-inirwwmy3677889.shtml"},{"i":"itm-1f546p1","t":"核心客户加速“去宁德化”？宁德时代AH股双双大跌创阶段新低","s":"新浪财经·港股","d":"09/15","m":1,"k":"stock","g":[],"x":"市场关注核心客户加速“去宁德化”，宁德时代AH股双双大跌并创阶段新低。","u":"https://finance.sina.com.cn/stock/hkstock/2026-09-15/doc-inirwwmy3689054.shtml"},{"i":"itm-1uvgsfi","t":"广汽集团H股复牌大涨近16%，一汽拟入股成第二大股东","s":"新浪财经·港股","d":"09/15","m":1,"k":"stock","g":[],"x":"广汽集团H股复牌大涨近16%，因一汽拟入股成为其第二大股东。","u":"https://finance.sina.com.cn/stock/hkstock/2026-09-15/doc-inirwmvy8736597.shtml"},{"i":"itm-cw1l24","t":"交银国际：维持德琪医药(06996)“买入”评级 目标价10港元","s":"新浪财经·港股","d":"09/15","m":1,"k":"stock","g":[],"x":"交银国际维持德琪医药“买入”评级，目标价10港元。","u":"https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-15/doc-inirxaty3719211.shtml"},{"i":"itm-hg83gr","t":"大额存单分客群定价","s":"商机洞察","d":"09/15","m":3,"k":"insight","g":["代发","财富","零售AUM"],"x":"同业大额存单转向分客群定价，教师、新客各有专属利率，代发与获客场景的差异化定价空间打开。","u":"https://finance.sina.com.cn/jinrong/yh/2026-09-15/doc-inirxatu6982050.shtml"},{"i":"itm-5yfo27","t":"AI造富客群前置获客","s":"商机洞察","d":"09/15","m":3,"k":"insight","g":["私行","科技金融","中高端客群(过亿资产)"],"x":"AI创业公司估值与流动性事件提速，年轻创始人财富管理需求前置，私行客群获取窗口值得关注。","u":"https://news.crunchbase.com/startups/ai-creating-wealth-fast-honig-from-honig/"},{"i":"itm-13dzh8z","t":"经营贷缩量下的敞口排查","s":"商机洞察","d":"09/15","m":3,"k":"insight","g":["信贷","普惠小微贷款客户"],"x":"同业经营贷主动缩规模、利率上行，贸易类申请人准入收紧，我行同类客群敞口与定价空间需重新评估。","u":"https://finance.sina.com.cn/roll/2026-09-15/doc-inirxhzs6918539.shtml"},{"i":"itm-14yxphq","t":"民企座谈与政银合作","s":"商机洞察","d":"09/15","m":3,"k":"insight","g":["政银合作","客群","普惠小微贷款客户"],"x":"发改委围绕优化发展环境、拓展投资空间听取民企意见，政银合作与民企客群服务方向可跟进。","u":"https://www.cnfin.com/yw-lb/detail/20260915/4470263_1.html"},{"i":"itm-1knb7ow","t":"跨境资金净流入窗口","s":"商机洞察","d":"09/15","m":3,"k":"insight","g":["财富","客群","零售AUM"],"x":"8月跨境收支规模持续增长、资金保持净流入，跨境客群结售汇与资金归集需求上升。","u":"https://www.cnfin.com/yw-lb/detail/20260915/4470157_1.html"},{"i":"itm-6v2iwv","t":"健康险转向健康管理","s":"商机洞察","d":"09/15","m":3,"k":"insight","g":["财富","客群","中高端客群(过亿资产)"],"x":"健康险被建议从赔付型转向健康管理型，财富与客群条线保险配置话术需相应调整。","u":"https://finance.cctv.com/2026/09/15/ARTISUWEFYDWtdFGUyHcJpRV260915.shtml"},{"i":"itm-fr4fzq","t":"信用卡不良率攀升","s":"商机洞察","d":"09/15","m":3,"k":"insight","g":["信贷","监管"],"x":"有大行信用卡不良率升至5%，个贷不良继续承压，我行信用卡与消费贷存量资产质量走势需盯紧。","u":"https://finance.sina.com.cn/roll/2026-09-15/doc-inirwmwa7020893.shtml"},{"i":"itm-11rcpmt","t":"上海楼市独立行情","s":"商机洞察","d":"09/15","m":3,"k":"insight","g":["住房金融"],"x":"上海一二手房独立行情强化、金九银十可期，一线楼市分化延续，按揭投放区域策略可差异化。","u":"https://www.cnfin.com/qy-lb/detail/20260915/4470233_1.html"}],"anchored":false},{"date":"2026-09-14","hero":"今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获","items":[{"i":"itm-1n2g028","t":"OpenAI rules out IPO this year as Altman, Musk & Amodei warn AI is moving too fast","s":"CNBC Top Stories","d":"09/14","m":3,"k":"biz_insight","g":[],"x":"Altman's IPO comments and Amodei's public call for more careful pacing of AI development c…","u":"https://www.cnbc.com/2026/09/12/anthropics-amodei-proposes-plan-to-slow-the-pace-of-advancing-ai-capabilities.html"},{"i":"itm-1h8k55n","t":"【国务院国资委：中央企业带头及时支付账款】国务院国资委财管运行局负责人裴仁佺14日在国新办举行的国务院政策例行吹风会上说，《关于加强中小企业回款难问题治理有关工作的通知》对央企发挥表率作用提出专门要求。接下来，中央企业将积极筹措资金，确保及时支付；今后更要把对中小企业现金支付作为一条“硬杠杠”坚持好，同时结合自身实际对大型企业保持合理现金支付比例，推动沿业务链条传导，并严格“票证”使用，严禁新开6个月以上“票证”；将督促央企带头遵守所在行业领域规定，率先在合同中明确四项关键要素，率先响应并践行行业及时支付倡议等。","s":"新华财经","d":"09/14","m":1,"k":"policy_market","g":["客群"],"x":"【国务院国资委：中央企业带头及时支付账款】国务院国资委财管运行局负责人裴仁佺14日在国新办举行的国务院政策例行吹风会上说，《关于加强中小企业回款难问题治理有关工作的通知》对央企发挥","u":"https://www.cnfin.com/yw-lb/detail/20260914/4469467_1.html"},{"i":"itm-1x3u3xg","t":"Creating an Atomic User Model for Personality-Aware Large Language Model Interaction","s":"arXiv 金融科技论文 (cs.AI·cs.LG·q-fin)","d":"09/14","m":3,"k":"tech","g":[],"x":"arXiv:2609.12086v1 Announce Type: cross Abstract: Assistants built on large language model…","u":"https://arxiv.org/abs/2609.12086"},{"i":"itm-1prfipv","t":"粤芯半导体：初步询价日为9月18日 网下申购日为9月24日","s":"证券时报","d":"09/14","m":3,"k":"ipo","g":["粤"],"x":"粤芯半导体：初步询价日为9月18日 网下申购日为9月24日","u":"https://www.stcn.com/article/detail/4184784.html"},{"i":"itm-12tcogf","t":"翱捷科技股份有限公司（主板递表）","s":"港交所新股递表(主板/GEM·全国参考)","d":"09/11","m":1,"k":"ipo","g":[],"x":"市场：主板｜递表日：2026-09-11｜港股在审（全国参考）","u":"https://www1.hkexnews.hk/app/sehk/2026/108868/2026091101554_c.htm"},{"i":"itm-oy135r","t":"浙江和夏科技股份有限公司（GEM递表）","s":"港交所新股递表(主板/GEM·全国参考)","d":"09/11","m":1,"k":"ipo","g":[],"x":"市场：GEM｜递表日：2026-09-11｜港股在审（全国参考）","u":"https://www1.hkexnews.hk/app/gem/2026/108869/2026091101852_c.htm"},{"i":"itm-153pbka","t":"廣東微電新能源股份有限公司（主板递表·广东企业）","s":"港交所新股递表(广东企业赴港)","d":"09/10","m":2,"k":"ipo","g":["粤"],"x":"市场：主板｜递表日：2026-09-10｜广东企业赴港上市，可跟进跨境融资商机","u":"https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm"},{"i":"itm-1flkeoo","t":"河北聯吉啟成產業園區運營管理股份有限公司（GEM递表）","s":"港交所新股递表(主板/GEM·全国参考)","d":"09/10","m":1,"k":"ipo","g":[],"x":"市场：GEM｜递表日：2026-09-10｜港股在审（全国参考）","u":"https://www1.hkexnews.hk/app/gem/2026/108866/2026091000823_c.htm"},{"i":"itm-2lu926","t":"深圳市海柔創新智能科技集團股份有限公司 - W（主板递表·广东企业）","s":"港交所新股递表(广东企业赴港)","d":"09/13","m":1,"k":"ipo","g":[],"x":"市场：主板｜递表日：2026-09-13｜广东企业赴港上市，可跟进跨境融资商机","u":"https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm"},{"i":"itm-1xx1g9o","t":"核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务","s":"今日必读","d":"09/14","m":3,"k":"must","g":[],"x":"国家核心监管新政（监管合规）：直击监管合规业务","u":"https://www.stcn.com/article/detail/4184345.html"},{"i":"itm-1nlxtx0","t":"【信报】信披新规覆盖23类机构，信托等非银机构迎合规大考","s":"今日必读","d":"09/14","m":3,"k":"must","g":[],"x":"市场信号（信贷）：直击信贷业务","u":"https://finance.sina.com.cn/trust/2026-09-14/doc-inirveas7267226.shtml"},{"i":"itm-wg5li6","t":"@新就业群体，广州为你送上“权益礼包”","s":"今日必读","d":"09/14","m":3,"k":"must","g":[],"x":"市场信号（客群）：直击客群业务","u":"https://news.dayoo.com/guangzhou/202609/14/139995_55003502.htm"},{"i":"itm-12f5kmm","t":"多家银行收紧个人贵金属业务 原因何在？","s":"今日必读","d":"09/14","m":3,"k":"must","g":[],"x":"市场信号（财富）：直击财富业务","u":"https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-14/doc-inirtwih7360540.shtml"},{"i":"itm-reinvi","t":"AI利空突袭！三大巨头罕见联手呼吁：放缓！","s":"东方财富","d":"09/14","m":1,"k":"stock","g":[],"x":"AI利空突袭！三大巨头罕见联手呼吁：放缓！","u":"https://finance.eastmoney.com/a/202609143872945253.html"},{"i":"itm-e15lza","t":"重磅利好启动！10分钟直线涨停！两大引擎发起“反攻”","s":"东方财富","d":"09/14","m":1,"k":"stock","g":[],"x":"重磅利好启动！10分钟直线涨停！两大引擎发起“反攻”","u":"https://finance.eastmoney.com/a/202609143873268388.html"},{"i":"itm-roig01","t":"十大券商策略：迎接关键时刻！加息“靴子”将落地A股或迎反攻行情","s":"东方财富","d":"09/13","m":1,"k":"stock","g":[],"x":"十大券商策略：迎接关键时刻！加息“靴子”将落地A股或迎反攻行情","u":"https://finance.eastmoney.com/a/202609133872891743.html"},{"i":"itm-d7aly5","t":"沪指震荡整理三市成交额1.64万亿医疗服务板块大涨","s":"东方财富","d":"09/14","m":1,"k":"stock","g":[],"x":"沪指震荡整理三市成交额1.64万亿医疗服务板块大涨","u":"https://finance.eastmoney.com/a/202609143873370592.html"},{"i":"itm-o52u1n","t":"美联储9月加息概率逼近90%！特朗普再度施压：美国利率应全球最低","s":"东方财富","d":"09/14","m":1,"k":"stock","g":[],"x":"美联储9月加息概率逼近90%！特朗普再度施压：美国利率应全球最低","u":"https://finance.eastmoney.com/a/202609143872953521.html"},{"i":"itm-1twe7lp","t":"港股收评：恒指涨0.45% 科指跌0.06% 创新药概念股大涨 存储概念股下挫","s":"新浪财经·港股","d":"09/14","m":1,"k":"stock","g":[],"x":"港股收评：恒指涨0.45% 科指跌0.06% 创新药概念股大涨 存储概念股下挫","u":"https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-14/doc-inirutny4042987.shtml"},{"i":"itm-1bakui1","t":"智谱港股盘中跌幅扩大逾10%，以零息+溢价转股形式融资50亿美元","s":"新浪财经·港股","d":"09/14","m":1,"k":"stock","g":[],"x":"智谱港股盘中跌幅扩大逾10%，以零息+溢价转股形式融资50亿美元","u":"https://finance.sina.com.cn/stock/hkstock/2026-09-14/doc-iniruark4825868.shtml"},{"i":"itm-1hrnqiz","t":"【中国银河策略】美联储加息预期升温，港股下一轮行情的主线何在？","s":"新浪财经·港股","d":"09/14","m":1,"k":"stock","g":[],"x":"【中国银河策略】美联储加息预期升温，港股下一轮行情的主线何在？","u":"https://finance.sina.com.cn/stock/stockzmt/2026-09-14/doc-inirtwih7343009.shtml"},{"i":"itm-17ybipe","t":"快讯：恒指低开0.42% 科指跌0.69% 科网股低迷 存储概念股低开","s":"新浪财经·港股","d":"09/14","m":1,"k":"stock","g":[],"x":"快讯：恒指低开0.42% 科指跌0.69% 科网股低迷 存储概念股低开","u":"https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-14/doc-iniruarh4056350.shtml"},{"i":"itm-vujhlb","t":"华泰 | 港股策略：控制美债波动率敏感敞口","s":"新浪财经·港股","d":"09/14","m":1,"k":"stock","g":[],"x":"华泰 | 港股策略：控制美债波动率敏感敞口","u":"https://finance.sina.com.cn/stock/stockzmt/2026-09-14/doc-inirtwih7318353.shtml"},{"i":"itm-0","t":"港股IPO火爆背后：香港证监会","s":"商机洞察","d":"09/14","m":3,"k":"insight","g":["其他业务线"],"x":"对广州分行财富业务有潜在影响","u":""},{"i":"itm-0","t":"上半年股份行零售贷款全面退潮：","s":"商机洞察","d":"09/14","m":3,"k":"insight","g":["其他业务线"],"x":"对广州分行信贷/客群/竞对动态业务有潜在影响","u":""},{"i":"itm-0","t":"授信80亿元！农行广州分行与杰","s":"商机洞察","d":"09/14","m":3,"k":"insight","g":["其他业务线"],"x":"对广州分行信贷/竞对动态业务有潜在影响","u":""},{"i":"itm-0","t":"力合科创对子公司财务资助逾期 ","s":"商机洞察","d":"09/14","m":3,"k":"insight","g":["其他业务线"],"x":"对广州分行监管合规业务有潜在影响","u":""},{"i":"itm-0","t":"市场认定美联储加息已成定局，但","s":"商机洞察","d":"09/14","m":3,"k":"insight","g":["其他业务线"],"x":"对广州分行信贷业务有潜在影响","u":""}],"anchored":false}],"sections":{"gz_local":"广州本地","biz_insight":"业务启示","policy_market":"政策与市场","tech":"科技前沿","ipo":"广东IPO","must":"今日必读","insight":"商机洞察","risk":"风险提示","stock":"股市动态"}}</script>
+<script>
+(function(){
+  var el = document.getElementById('search-data');
+  var DATA;
+  try { DATA = JSON.parse(el.textContent || '{}'); } catch(e) { DATA = {}; }
+  var days = DATA.days || [], SECTIONS = DATA.sections || {};
+  var q = document.getElementById('q');
+  var list = document.getElementById('list');
+  var emptyBox = document.getElementById('empty');
+  var countBox = document.getElementById('count');
+  var secBox = document.getElementById('sec-chips');
+  var tagBox = document.getElementById('tag-chips');
+  var state = { sec: '', tag: '' };
+
+  function makeChip(box, label, value, group, extra) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'chip';
+    b.textContent = extra ? label + ' ' + extra : label;
+    b.addEventListener('click', function () {
+      state[group] = (state[group] === value) ? '' : value;
+      syncChips(); render();
+    });
+    b.dataset.group = group; b.dataset.value = value;
+    box.appendChild(b);
+  }
+  function syncChips() {
+    [secBox, tagBox].forEach(function (box) {
+      box.querySelectorAll('.chip').forEach(function (c) {
+        c.classList.toggle('on', state[c.dataset.group] === c.dataset.value);
+      });
+    });
+  }
+  makeChip(secBox, '全部', '', 'sec');
+  Object.keys(SECTIONS).forEach(function (k) {
+    makeChip(secBox, SECTIONS[k], k, 'sec');
+  });
+  makeChip(tagBox, '全部', '', 'tag');
+  [["客群",41],["财富",31],["市场",22],["信贷",21],["粤",17],["科技金融",12],["政银合作",8],["跨境",8],["监管合规",6],["零售AUM",6],["其他业务线",5],["普惠小微贷款客户",5],["消费贷",5],["竞对动态",5],["中高端客群(过亿资产)",4],["代发",4],["住房金融",4],["私行",4],["信用卡",3],["监管",2],["养老",1]].forEach(function (p) {
+    makeChip(tagBox, p[0], p[0], 'tag', '(' + p[1] + ')');
+  });
+
+  function hit(it, kw) {
+    if (!kw) return true;
+    var hay = (it.t || '') + ' ' + (it.x || '') + ' ' + (it.s || '') + ' ' + (it.g || []).join(' ');
+    return hay.toLowerCase().indexOf(kw) >= 0;
+  }
+  // 用 textContent 渲染（绝不拼 innerHTML——标题摘要来自外部源，拼串即 XSS）
+  function markInto(node, text, kw) {
+    if (!kw) { node.appendChild(document.createTextNode(text)); return; }
+    var lower = text.toLowerCase(), i = 0, idx;
+    while ((idx = lower.indexOf(kw, i)) >= 0) {
+      if (idx > i) node.appendChild(document.createTextNode(text.slice(i, idx)));
+      var m = document.createElement('mark');
+      m.textContent = text.slice(idx, idx + kw.length);
+      node.appendChild(m);
+      i = idx + kw.length;
+    }
+    if (i < text.length) node.appendChild(document.createTextNode(text.slice(i)));
+  }
+  function render() {
+    var kw = (q.value || '').trim().toLowerCase();
+    var out = 0;
+    list.innerHTML = '';
+    for (var di = 0; di < days.length; di++) {
+      var day = days[di];
+      var items = day.items || [];
+      for (var ii = 0; ii < items.length; ii++) {
+        var it = items[ii];
+        if (state.sec && it.k !== state.sec) continue;
+        if (state.tag && (it.g || []).indexOf(state.tag) < 0) continue;
+        if (!hit(it, kw)) continue;
+        out++;
+        var li = document.createElement('li');
+        var t = document.createElement('div'); t.className = 't';
+        var a = document.createElement('a');
+        // 深链到当天页面的卡片锚点（页面加载时会切面板 + 展开折叠并定位）；
+        // 老页面（A2 前生成）没有锚点 → 只链到当期页，避免死链
+        a.href = './' + day.date + '/' + day.date + '.html' +
+          (day.anchored === false ? '' : '#itm-' + String(it.i || '').replace(/^itm-/, ''));
+        markInto(a, it.t || '(无标题)', kw);
+        t.appendChild(a);
+        var sub = document.createElement('div'); sub.className = 'sub';
+        sub.textContent = day.date + ' · ' + (SECTIONS[it.k] || it.k) + (it.s ? ' · ' + it.s : '') + (it.d ? ' · ' + it.d : '');
+        var x = document.createElement('div'); x.className = 'x';
+        markInto(x, it.x || '', kw);
+        li.appendChild(t); li.appendChild(sub); if (it.x) li.appendChild(x);
+        list.appendChild(li);
+      }
+    }
+    countBox.textContent = out ? ('命中 ' + out + ' 条' + (kw ? '（关键词：' + kw + '）' : '') + ' · 点标题直达当期卡片') : '';
+    emptyBox.hidden = out > 0;
+  }
+  q.addEventListener('input', render);
+
+  // ---------- 两期对比（B1，2026-09-17）----------
+  // 目的：把「这一期和上一期到底差在哪」变成两次点击。判定「同一主题」用
+  // 条目 ID（同 URL 跨期稳定）→ 主题标签交集 ≥2 → 标题前 12 字相同，逐级放宽。
+  // 全部 DOM 渲染（textContent），不拼 innerHTML。
+  var modeBtns = document.querySelectorAll('.mode');
+  var searchPane = document.getElementById('search-pane');
+  var comparePane = document.getElementById('compare-pane');
+  var selA = document.getElementById('cmp-a');
+  var selB = document.getElementById('cmp-b');
+  var cmpSum = document.getElementById('cmp-sum');
+  var cmpResult = document.getElementById('cmp-result');
+
+  function fillSelect(sel, defIdx) {
+    days.forEach(function (d) {
+      var o = document.createElement('option');
+      o.value = d.date;
+      o.textContent = d.date + '（' + (d.items || []).length + ' 条）';
+      sel.appendChild(o);
+    });
+    if (days[defIdx]) sel.value = days[defIdx].date;
+  }
+  if (selA && selB && days.length) {
+    fillSelect(selA, Math.min(1, days.length - 1)); // A 默认「上一期」
+    fillSelect(selB, 0); // B 默认「最新一期」
+    if (days.length === 1) {
+      cmpSum.textContent = '当前索引只有 1 期，暂无可对比对象（等下一期发布后即可对比）。';
+    }
+  }
+  function normTitle(t) { return String(t || '').replace(/\s+/g, '').slice(0, 12); }
+  function sameTopic(a, b) {
+    if (a.i && b.i && a.i === b.i) return true;
+    var ga = a.g || [], gb = b.g || [];
+    var inter = 0;
+    for (var i = 0; i < ga.length; i++) if (gb.indexOf(ga[i]) >= 0) inter++;
+    if (inter >= 2) return true;
+    return normTitle(a.t) !== '' && normTitle(a.t) === normTitle(b.t);
+  }
+  function dayByDate(date) {
+    for (var i = 0; i < days.length; i++) if (days[i].date === date) return days[i];
+    return null;
+  }
+  function itemLink(it, date) {
+    var a = document.createElement('a');
+    a.href = './' + date + '/' + date + '.html' +
+      (dayByDate(date) && dayByDate(date).anchored === false ? '' : '#itm-' + String(it.i || '').replace(/^itm-/, ''));
+    a.textContent = it.t || '(无标题)';
+    return a;
+  }
+  function groupsHtml(title, cls, rows) {
+    var box = document.createElement('div');
+    box.className = 'cmp-group';
+    var h = document.createElement('h3');
+    h.appendChild(document.createTextNode(title));
+    var badge = document.createElement('span');
+    badge.className = 'cmp-badge ' + cls;
+    badge.textContent = String(rows.length);
+    h.appendChild(badge);
+    box.appendChild(h);
+    if (!rows.length) {
+      var p = document.createElement('div');
+      p.className = 'empty';
+      p.textContent = '（无）';
+      box.appendChild(p);
+      return box;
+    }
+    var ul = document.createElement('ul');
+    rows.forEach(function (r) {
+      var li = document.createElement('li');
+      var t = document.createElement('div');
+      t.className = 't';
+      t.appendChild(itemLink(r.it, r.date));
+      li.appendChild(t);
+      var sub = document.createElement('div');
+      sub.className = 'sub';
+      sub.textContent = r.date + ' · ' + (SECTIONS[r.it.k] || r.it.k) + (r.it.s ? ' · ' + r.it.s : '');
+      li.appendChild(sub);
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+    return box;
+  }
+  function renderCompare() {
+    if (!cmpResult || !selA || !selB) return;
+    var A = dayByDate(selA.value), B = dayByDate(selB.value);
+    while (cmpResult.firstChild) cmpResult.removeChild(cmpResult.firstChild);
+    if (!A || !B) return;
+    // 让 A 永远是「较早」的那期（用户选反了就自动换位，避免「新增/消失」语义倒挂）
+    if (A.date > B.date) { var tmp = A; A = B; B = tmp; }
+    var matchedB = {};
+    var both = [];
+    (A.items || []).forEach(function (ia) {
+      var hit = null;
+      (B.items || []).forEach(function (ib, j) {
+        if (matchedB[j]) return;
+        if (!hit && sameTopic(ia, ib)) { hit = { j: j, it: ib }; }
+      });
+      if (hit) { matchedB[hit.j] = true; both.push({ date: A.date, it: ia, newer: hit.it }); }
+    });
+    var gone = (A.items || []).filter(function (ia) {
+      return !(B.items || []).some(function (ib) { return sameTopic(ia, ib); });
+    }).map(function (ia) { return { date: A.date, it: ia }; });
+    var added = (B.items || []).filter(function (ib, j) { return !matchedB[j]; })
+      .map(function (ib) { return { date: B.date, it: ib }; });
+
+    cmpSum.textContent = 'A（较早）= ' + A.date + ' · ' + (A.items || []).length + ' 条 ／ B（较新）= ' +
+      B.date + ' · ' + (B.items || []).length + ' 条 ／ 同主题 ' + both.length + ' 条';
+    cmpResult.appendChild(groupsHtml('B 相对 A 新增', 'cmp-new', added));
+    cmpResult.appendChild(groupsHtml('A 有、B 没有', 'cmp-gone', gone));
+    cmpResult.appendChild(groupsHtml('两期延续的同一主题', 'cmp-both', both.map(function (r) {
+      return { date: r.date + ' → ' + B.date, it: r.newer || r.it };
+    })));
+  }
+  if (selA && selB) {
+    selA.addEventListener('change', renderCompare);
+    selB.addEventListener('change', renderCompare);
+  }
+  for (var mi = 0; mi < modeBtns.length; mi++) {
+    (function (btn) {
+      btn.addEventListener('click', function () {
+        var mode = btn.getAttribute('data-mode');
+        for (var k = 0; k < modeBtns.length; k++) modeBtns[k].classList.toggle('on', modeBtns[k] === btn);
+        searchPane.hidden = mode !== 'search';
+        comparePane.hidden = mode !== 'compare';
+        if (mode === 'compare') renderCompare();
+      });
+    })(modeBtns[mi]);
+  }
+
+  syncChips(); render();
+})();
+</script>
+</body>
+</html>
