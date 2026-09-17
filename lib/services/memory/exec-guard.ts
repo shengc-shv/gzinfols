@@ -27,6 +27,7 @@ import {
   rememberBroadcast,
   nextAngle,
   SECTION_POLICY,
+  MUST_READ_PLAY_TARGET,
   type EventMemoryStore,
   type EventRecord,
   type MemoryCandidate,
@@ -209,6 +210,54 @@ function toInsight(cand: MemoryCandidate): ExecInsight {
 }
 
 /**
+ * 顺序判重选单（2026-09-18 新口径）：按候选顺序（调用方保证已按「分行关联度」降序）
+ * 依次判重 —— 未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延到下一条候补，
+ * 直到选满 `target` 即停（其后候选留作备用）。
+ *
+ * ⚠️ 判重依据**完全复用** `evaluateCandidate`（事件指纹匹配：锚点 Jaccard / 标题 Dice /
+ * 主题标签辅助 + 冷却期）。本函数**不改动任何判定规则**，只负责「选谁 / 跳过谁 /
+ * 何时停」—— 判重口径与历史保持一致，且与板块策略解耦、可单独测试。
+ *
+ * 边界（规则 4）：候补用尽仍不足 `target` → 按实际剩余返回，**不强行补位**（宁缺勿滥）。
+ */
+export function pickUntilTarget<T>(opts: {
+  items: T[];
+  toCandidate: (item: T) => MemoryCandidate;
+  section: MemorySection;
+  today: string;
+  broadcastAt: string;
+  target: number;
+  store: EventMemoryStore;
+}): {
+  chosen: Array<{ item: T; decision: MemoryDecision }>;
+  skipped: MemoryDecision[];
+  store: EventMemoryStore;
+} {
+  let store = opts.store;
+  const chosen: Array<{ item: T; decision: MemoryDecision }> = [];
+  const skipped: MemoryDecision[] = [];
+  for (const item of opts.items) {
+    const cand = opts.toCandidate(item);
+    const d = evaluateCandidate({ cand, section: opts.section, today: opts.today, store });
+    if (d.allow) {
+      chosen.push({ item, decision: d });
+      store = rememberBroadcast(store, {
+        cand,
+        section: opts.section,
+        date: opts.today,
+        novelty: d.novelty,
+        broadcastAt: opts.broadcastAt,
+        ...(d.requiredAngle ? { angle: d.requiredAngle } : {}),
+      });
+      if (chosen.length >= opts.target) break; // 选满即停，其后候选留作备用候补
+    } else {
+      skipped.push(d); // 命中重复 → 跳过，继续顺延下一条候补
+    }
+  }
+  return { chosen, skipped, store };
+}
+
+/**
  * 主入口：对四大板块执行记忆去重 + 兜底补齐。
  * 纯函数（不改入参），返回新 exec 与更新后的记忆库。
  */
@@ -279,78 +328,55 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
 
   // ---- 2) must_read（今日必读）----
   {
-    const paired: Paired<{ title: string; why: string; url?: string }>[] = [];
-    for (const m of exec.must_read ?? []) {
+    // ① 构造候选：补「与广州分行的关联度」分。池内有对应条目时取其完整 summary 打分
+    //    （更准，且用于「重大事件打破冷却」），池内没有则用标题+why 兜底 —— 口径统一。
+    const cands: Array<{
+      m: { title: string; why: string; url?: string };
+      cand: MemoryCandidate;
+    }> = (exec.must_read ?? []).map((m) => {
       const cand: MemoryCandidate = {
         title: m.title,
         text: m.why,
         ...(m.url ? { url: m.url } : {}),
       };
-      // 补 meta：从补位池按 url 取分行相关性分（用于「重大事件打破冷却」）
       const meta = m.url ? pool.find((p) => p.url === m.url) : undefined;
-      if (meta) {
-        const rel = scoreBranchRelevance({
-          title: meta.title,
-          ...(meta.summary ? { summary: meta.summary } : {}),
-        });
-        cand.score = rel.score;
-        cand.tier = rel.tier;
-        if (rel.override) cand.override = true;
-      }
-      const d = evaluateCandidate({ cand, section: "must_read", today, store });
-      paired.push({ item: m, decision: d });
-      // 通过才写记忆：保证同一板块内同事件只留第一条
-      if (d.allow) {
-        store = rememberBroadcast(store, {
-          cand,
-          section: "must_read",
-          date: today,
-          novelty: d.novelty,
-          broadcastAt,
-          ...(d.requiredAngle ? { angle: d.requiredAngle } : {}),
-        });
-      }
-    }
-    decisions.push(...paired.map((p) => p.decision));
-    let kept = releaseToMin(paired, SECTION_POLICY.must_read.minKeep);
-    kept = demoteRefresh(kept, SECTION_POLICY.must_read.minKeep);
+      const rel = meta
+        ? scoreBranchRelevance({
+            title: meta.title,
+            ...(meta.summary ? { summary: meta.summary } : {}),
+          })
+        : scoreBranchRelevance({ title: m.title, summary: m.why });
+      cand.score = rel.score;
+      cand.tier = rel.tier;
+      if (rel.override) cand.override = true;
+      return { m, cand };
+    });
 
-    // L2 补位：必读仍不足 → 从两天池挑「记忆库没有」的高分条目
-    if (kept.length < SECTION_POLICY.must_read.minKeep && pool.length > 0) {
-      const exclude = new Set<string>();
-      for (const k of kept) if (k.item.url) exclude.add(k.item.url);
-      const box = { picked: [] as MemoryCandidate[], store, broadcastAt };
-      const n = pickFreshFromPool(
-        pool,
-        store,
-        "must_read",
-        today,
-        exclude,
-        SECTION_POLICY.must_read.minKeep - kept.length,
-        box,
-      );
-      store = box.store;
-      for (const c of box.picked) kept.push({ item: toMustRead(c), decision: {
-        section: "must_read",
-        title: c.title,
-        verdict: "new",
-        allow: true,
-        novelty: 1,
-        reason: "L2 兜底补位（池内新事件）",
-      } });
-      if (n > 0) log.push(`🧠 必读去重后不足 ${SECTION_POLICY.must_read.minKeep} 条 → 池内补位 ${n} 条`);
-    }
+    // ② 按「与广州分行的关联度」从高到低排序（规则 2）
+    cands.sort((a, b) => (b.cand.score ?? 0) - (a.cand.score ?? 0));
 
-    const filtered = (exec.must_read ?? []).length - kept.length;
-    if (filtered > 0) {
+    // ③ 顺序判重：依次取，未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延下一条候补，
+    //    直到选满 MUST_READ_PLAY_TARGET（规则 3）。候补用尽仍不足 → 按实际剩余（规则 4），
+    //    不强拉池内条目凑数 —— 宁缺勿滥。
+    const r = pickUntilTarget({
+      items: cands,
+      toCandidate: (c) => c.cand,
+      section: "must_read",
+      today,
+      broadcastAt,
+      target: MUST_READ_PLAY_TARGET,
+      store,
+    });
+    store = r.store;
+    decisions.push(...r.chosen.map((c) => c.decision), ...r.skipped);
+    if (r.chosen.length > 0) next.must_read = r.chosen.map((c) => c.item.m);
+
+    if (r.skipped.length > 0 || r.chosen.length < MUST_READ_PLAY_TARGET) {
       log.push(
-        `🧠 必读：${(exec.must_read ?? []).length} → ${kept.length} 条（去重 ${filtered} 条：${paired
-          .filter((p) => !kept.includes(p))
-          .map((p) => p.decision.verdict)
-          .join(",")}）`,
+        `🧠 必读：候选 ${cands.length} 条（按关联度降序）→ 播出 ${r.chosen.length}/${MUST_READ_PLAY_TARGET} 条` +
+          `（命中重复跳过 ${r.skipped.length} 条：${r.skipped.map((d) => d.verdict).join(",") || "无"}）`,
       );
     }
-    if (kept.length > 0) next.must_read = kept.map((k) => k.item);
   }
 
   // ---- 3) insights（商机洞察）----

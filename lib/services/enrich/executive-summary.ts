@@ -7,6 +7,8 @@ import {
   type BranchRelevance,
   type ScorableArticle,
 } from "../select/filters/relevance-score";
+// 必读候选池条数（单一真源，禁止就地写死数字）
+import { MUST_READ_CANDIDATE_POOL } from "../memory/event-types";
 
 /**
  * 「执行摘要 / 商机提示」AI 层（用户 2026-08-19 确认实施）
@@ -100,7 +102,7 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 
 0. hero_line（今日定调，1 句话）：以"总编辑"视角提炼今天最值得分行领导关注的一件事，50 字以内，一句话讲清"今天主题是什么、对分行意味着什么"。例："中行'算力Token贷'在穗抢跑落地，同业以新风控逻辑圈占科创轻资产客群，建议分行尽快评估应对。" 若当日无突出主题可省略（输出空字符串）；并为该定调配套口播稿 spoken_hero（"主播解读感"：60 字左右完整句，先讲事件再给应对建议，如"消费贷贴息集体扩围，价格战升级，建议分行统一口径抢抓窗口"，与 hero_line 结论一致；纯口语、无链接/无Markdown/无emoji，可直接朗读，严禁照读 hero_line 原文）。
 
-1. must_read（今日必读，3-5 条）— **偏宏观、市场级大信号**：央行/金融监管总局等全国性政策转向、市场重大变化、行业性新趋势、新产品新玩法。答"今天/本周市场可能怎么走"。**只放宏观，不放具体获客动作**（具体动作归 insights）。
+1. must_read（今日必读，8-10 条）— **偏宏观、市场级大信号**：央行/金融监管总局等全国性政策转向、市场重大变化、行业性新趋势、新产品新玩法。答"今天/本周市场可能怎么走"。**只放宏观，不放具体获客动作**（具体动作归 insights）。
    - title：事件标题（15 字内，中文，可精简）
    - why：为什么重要——对广州分行经营规划/战略意味着什么（30-50 字）
    - id：源条目标识，从下方输入对应条目的 id 字段原样回填（若对不上可省略，留空；禁止编造）
@@ -300,7 +302,7 @@ export async function generateExecutiveSummary(
     `当日信息（JSON）：`,
     JSON.stringify(payload),
     "",
-    '请输出 {"hero_line":"...","spoken_hero":"...","must_read":[...],"insights":[...],"risk":{...} 或 null,"guangdong_ipo":{...} 或 null}，hero_line 1 句、must_read 3-5 条、insights 5-8 条；spoken_hero 与 guangdong_ipo.spoken 为纯口语文本（不要输出 spoken_must_read / spoken_insights / spoken_risk）；must_read / insights.sources / risk.sources 的 id 必须从输入条目原样回填，不得编造，也不要输出 url。',
+    '请输出 {"hero_line":"...","spoken_hero":"...","must_read":[...],"insights":[...],"risk":{...} 或 null,"guangdong_ipo":{...} 或 null}，hero_line 1 句、must_read 8-10 条、insights 5-8 条；spoken_hero 与 guangdong_ipo.spoken 为纯口语文本（不要输出 spoken_must_read / spoken_insights / spoken_risk）；must_read / insights.sources / risk.sources 的 id 必须从输入条目原样回填，不得编造，也不要输出 url。',
   ].join("\n");
   try {
     const text = await runner(SYSTEM_PROMPT, userPrompt);
@@ -378,7 +380,8 @@ export async function generateExecutiveSummary(
     return {
       hero_line: typeof parsed.hero_line === "string" ? parsed.hero_line : "",
       spoken_hero: typeof parsed.spoken_hero === "string" && parsed.spoken_hero.trim() ? parsed.spoken_hero.trim() : undefined,
-      must_read: parsed.must_read.slice(0, 5).map((m) => ({
+      // 候选池（不再截断到 5）：多留出候补，供下游去重命中时顺延取用
+      must_read: parsed.must_read.slice(0, MUST_READ_CANDIDATE_POOL).map((m) => ({
         title: m.title,
         why: m.why,
         // id 优先（新格式）→ 旧格式 url（白名单校验）→ 按标题回链
@@ -666,7 +669,7 @@ export function applyRelevanceGuardrail(
   for (const s of scored) covered.add(s.m.url ?? s.m.title);
   const forced: Array<{ title: string; why: string; url?: string }> = [];
   for (const a of pool) {
-    if (forced.length + scored.length >= 5) break;
+    if (forced.length + scored.length >= MUST_READ_CANDIDATE_POOL) break;
     const rel = scoreBranchRelevance(a);
     if (
       rel.tier === "must_read" &&
@@ -694,7 +697,8 @@ export function applyRelevanceGuardrail(
     scoreBranchRelevance({ title: m.title, summary: m.why, url: m.url }).score;
   dedup.sort((a, b) => scoreOf(b) - scoreOf(a));
 
-  return { ...exec, must_read: dedup.slice(0, 5) };
+  // 保留完整候选池（按关联度降序），截断到「播出目标」由下游 exec-guard 顺序判重时决定
+  return { ...exec, must_read: dedup.slice(0, MUST_READ_CANDIDATE_POOL) };
 }
 
 export async function selectExecutiveSummary(opts: {

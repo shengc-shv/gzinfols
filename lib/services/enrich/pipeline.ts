@@ -19,6 +19,8 @@ import {
 import { extractJson } from "./json-util";
 import type { DailyReport, ReportItem, ReportSectionKey } from "../../contracts/report";
 import { titleSimilarity } from "../select/filters/dedup-similar";
+// 必读候选池条数（单一真源，禁止就地写死数字）
+import { MUST_READ_CANDIDATE_POOL } from "../memory/event-types";
 
 const MAX_PASS2_RETRY = 2;
 const R9_THRESHOLD = 0.8;
@@ -350,11 +352,12 @@ export function degrade(report: DailyReport, blockers: Issue[]): DailyReport {
       report.hero_line = HERO_FALLBACK;
     }
   }
-  // ⑧ must_read 兜底：剔除指向已删除条目的引用，截断至 5
+  // ⑧ must_read 兜底：剔除指向已删除条目的引用，截断至候选池条数（不再截到 5，
+  //    多出的候补供下游去重命中时顺延取用）
   const urls = allUrls(report);
   report.must_read = report.must_read
     .filter((m) => !m.url || urls.has(m.url))
-    .slice(0, 5);
+    .slice(0, MUST_READ_CANDIDATE_POOL);
   return report;
 }
 

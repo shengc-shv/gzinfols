@@ -338,6 +338,19 @@ export const SECTION_POLICY: Record<MemorySection, SectionPolicy> = {
   },
 };
 
+/**
+ * 今日必读「候选池 / 播出目标」条数（2026-09-18 新口径）。
+ *
+ * - `MUST_READ_CANDIDATE_POOL`：上游（enrich / pipeline）产出的**候选条数**；
+ *   自第 `MUST_READ_PLAY_TARGET + 1` 条起即备用候补，供去重命中时顺延取用。
+ * - `MUST_READ_PLAY_TARGET`：实际**播出条数**（顺序判重，选满即停）。
+ *
+ * ⚠️ 单一真源：消费方一律从这里导入，**禁止就地写死数字** —— 历史教训
+ *    `IPO_VOICE_WINDOW_DAYS` 曾在两处重复定义，改一处不生效。
+ */
+export const MUST_READ_CANDIDATE_POOL = 10;
+export const MUST_READ_PLAY_TARGET = 5;
+
 /** 事件类型 → 基础冷却期（天）。重大政策类最长。 */
 export const BASE_COOLDOWN_DAYS: Record<EventKind, number> = {
   policy: 6,
