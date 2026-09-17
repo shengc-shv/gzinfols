@@ -20,6 +20,7 @@ import {
   type GdStage,
 } from "../classify/gd-ipo";
 import { gdIpoStageOf } from "../classify/gd-ipo-spoken";
+import { todayKeyOf } from "../../utils/time";
 // 共享词表（2026-09-14 Phase 2b 已下沉至 services/vocab，解开 assemble → render 反向依赖）：
 // 运行时词表/排序全部从 vocab 引入；渲染层类型只在编译期存在（import type 会被擦除）。
 import type { RawByCategory, SourceGroup, SubGroup } from "../render/cards";
@@ -108,11 +109,34 @@ export function capByThemeAndTier<T extends ArticleInput>(
   maxPerTheme = 2,
   sub?: string,
 ): T[] {
+  // 单一实现：接在带折叠的版本上，避免两套聚类逻辑各自漂移（F1，2026-09-17）。
+  return capByThemeAndTierWithFold(items, maxPerTheme, sub).kept;
+}
+
+/**
+ * F1（2026-09-17 用户拍板「上限 4 + 合并块保留全部进展节点」）。
+ *
+ * 与 `capByThemeAndTier` 的 **kept 完全一致**（同 tier 只留 1、簇上限 maxPerTheme、
+ * tier 高者替换簇内最低者），差别只在于：**被裁剪的同主题条目不再丢弃**，
+ * 而是作为「进展节点」挂到该簇的主卡上（渲染为卡片内折叠列表）。
+ *
+ * 收纳上限 `THEME_MAX_ITEMS`（=4）作用于「主卡 + 节点」的合计，超出才真正截断。
+ * 为何不直接放宽主卡数：同主题平铺多张卡会刷屏（用户 2026-08-19 规则），
+ * 折叠成节点则「不刷屏但要找得到」。
+ *
+ * @returns kept：可独立成卡的条目；nodesByUrl：主卡 url → 其进展节点（保持传入顺序）
+ */
+export function capByThemeAndTierWithFold<T extends ArticleInput>(
+  items: T[],
+  maxPerTheme = 2,
+  sub?: string,
+): { kept: T[]; nodesByUrl: Map<string, T[]> } {
   // 快路径仅对 1 条成立：2 条同主题也可能同 tier（不合规），必须走聚类检查。
-  if (items.length <= 1) return items;
+  if (items.length <= 1) return { kept: items, nodesByUrl: new Map() };
   const tierRank = (t?: SourceTier): number =>
     t === "T1" ? 3 : t === "T1.5" ? 2 : t === "T2" ? 1 : 0;
   const kept: T[] = [];
+  const pending: T[] = []; // 被裁剪的同主题条目（候选进展节点）
   for (const a of items) {
     const aKeys = themeKeysOf(a.title, sub);
     if (aKeys.length === 0) {
@@ -126,24 +150,65 @@ export function capByThemeAndTier<T extends ArticleInput>(
       kept.push(a);
       continue;
     }
-    // 同簇：同一 tier 只留 1 条
-    if (cluster.some((k) => k.tier === a.tier)) continue;
+    // 同簇：同一 tier 只留 1 条（主卡规则不变）→ 多余者降级为进展节点
+    if (cluster.some((k) => k.tier === a.tier)) {
+      pending.push(a);
+      continue;
+    }
     // 簇未满 → 加入
     if (cluster.length < maxPerTheme) {
       kept.push(a);
       continue;
     }
     // 簇已满：tier 高的优先（T1 > T1.5 > T2），用更高 tier 的新条目替换簇内最低者
-    // （避免时间优先把 T1 官方原文挤掉、只留 T2 媒体转载）。
+    // （避免时间优先把 T1 官方原文挤掉、只留 T2 媒体转载）；被替换下来的也保留为节点。
     const lowest = cluster.reduce(
       (m, k) => (tierRank(k.tier) < tierRank(m.tier) ? k : m),
       cluster[0]!,
     );
     if (tierRank(a.tier) > tierRank(lowest.tier)) {
       kept.splice(kept.indexOf(lowest), 1, a);
+      pending.push(lowest);
+    } else {
+      pending.push(a);
     }
   }
-  return kept;
+  // 分配节点：每个主题簇「主卡 + 节点」合计不超过 THEME_MAX_ITEMS，超出才真正丢弃
+  const nodesByUrl = new Map<string, T[]>();
+  for (const p of pending) {
+    const pKeys = themeKeysOf(p.title, sub);
+    const owners = kept.filter((k) =>
+      themeKeysOf(k.title, sub).some((kw) => pKeys.includes(kw)),
+    );
+    const owner = owners[0];
+    if (!owner) continue; // 该簇无主卡（理论上不可达）→ 丢弃而不是造出无主节点
+    const assigned = nodesByUrl.get(owner.url) ?? [];
+    if (owners.length + assigned.length >= THEME_MAX_ITEMS) continue;
+    nodesByUrl.set(owner.url, [...assigned, p]);
+  }
+  return { kept, nodesByUrl };
+}
+
+/**
+ * 每主题收纳上限（主卡 + 进展节点合计）。用户 2026-09-17 拍板取 4：
+ * 既高于原「≤2 条」的硬裁，又不至于让同一主题堆成一条长列表。
+ */
+export const THEME_MAX_ITEMS = 4;
+
+/**
+ * 展示用日期 MM/DD；取不到 → 空串（**不兜底抓取时间** —— 时间真实性红线）。
+ *
+ * ⚠️ Date 一律走 `todayKeyOf`（北京时间单一真源）：裸 `toISOString()` 是 UTC，
+ * 在北京 00:00~08:00 会算成前一天（本项目已因此踩过多次）。
+ */
+function mmddOf(publishedAt?: string | Date): string {
+  if (!publishedAt) return "";
+  const key =
+    publishedAt instanceof Date
+      ? todayKeyOf(publishedAt)
+      : /(\d{4})-(\d{2})-(\d{2})/.exec(publishedAt)?.[0] ?? "";
+  const m = /^\d{4}-(\d{2})-(\d{2})$/.exec(key);
+  return m ? `${m[1]}/${m[2]}` : "";
 }
 function normalizeTitleForDedup(t: string): string {
   return (t ?? "")
@@ -595,10 +660,25 @@ export function groupRaw(
       const all = sortByTierAndTime(
         [...perSourceMap.values()].flatMap((g) => g.items),
       );
-      const keepUrls = new Set(capByThemeAndTier(all, 2).map((a) => a.url));
+      // F1（2026-09-17 用户拍板）：主卡规则不变（防刷屏），但被裁剪的**同主题报道不再丢弃**，
+      // 改为挂到该簇主卡的 progressNodes（渲染为卡片内折叠的「同主题另有 N 条进展」）。
+      // 收纳上限 THEME_MAX_ITEMS=4（主卡+节点合计），超出才真正截断。
+      const capRes = capByThemeAndTierWithFold(all, 2);
+      const keepUrls = new Set(capRes.kept.map((a) => a.url));
       // 3) 合并输出（2026-08-21 用户要求：渲染只到子标签，去掉 L3 信息源 tabs）：
       //    保留被裁剪后的条目为单一时间流（merged），来源降级为卡片上的来源小字。
       const kept = all.filter((a) => keepUrls.has(a.url));
+      for (const a of kept) {
+        const nodes = capRes.nodesByUrl.get(a.url);
+        if (nodes && nodes.length) {
+          a.progressNodes = nodes.map((n) => ({
+            title: n.title_cn || n.title,
+            url: n.url,
+            source: n.source,
+            date: mmddOf(n.publishedAt),
+          }));
+        }
+      }
       // 财经要点 / 广州商机 的二级标签始终渲染，即使当天为空也保留
       // 标签 + “暂无内容”占位，保证结构稳定可见（不折叠成单子标签）。
       // （gd-ipo/ipo 已在循环开头 continue 单独构建，此处不可达，不重复判断）

@@ -149,10 +149,26 @@ export function renderArticleHtml(a: ArticleInput, showSource = false): string {
     a.officialUrl && (a.category === "ipo" || a.category === "gd-ipo")
       ? `<p class="official-src">交易所官方源：<a href="${escapeHtml(a.officialUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(a.officialLabel || a.officialUrl)}</a></p>`
       : "";
+  // F1（2026-09-17）：同主题被裁剪的报道不再是「丢失」，而是折叠成「进展节点」，
+  // 读者按需展开 —— 关键节点全保留，版面也不被同主题刷屏。
+  const nodes = a.progressNodes ?? [];
+  const progress =
+    nodes.length > 0
+      ? `<details class="progress-nodes">
+    <summary>同主题另有 ${nodes.length} 条进展</summary>
+    <ul>${nodes
+      .map(
+        (n) =>
+          `<li>${n.date ? `<span class="pn-date">${escapeHtml(n.date)}</span>` : ""}<a href="${escapeHtml(n.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(n.title)}</a>${n.source ? `<span class="pn-src">${escapeHtml(n.source)}</span>` : ""}</li>`,
+      )
+      .join("")}</ul>
+  </details>`
+      : "";
   return `<article class="brief">
   <div class="bm"><span class="src-badge ${badge.cls}">${badge.label}</span>${srcName ? `<span>${srcName}</span>` : ""}${time ? `<span>${time}</span>` : ""}</div>
   <h3><a href="${url}" target="_blank" rel="noopener noreferrer">${title}</a></h3>
   ${summary ? `<p class="sum">${summary}</p>` : ""}
+  ${progress}
   ${official}
 </article>`;
 }

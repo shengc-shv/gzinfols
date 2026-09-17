@@ -324,6 +324,19 @@ ${shareTwitterImage}<style>
 ${stripCssComments(THEME_CSS)}
 ${stripCssComments(AUDIO_HIGHLIGHT_CSS)}
 ${stripCssComments(PAGE_ACTIONS_CSS)}
+  /* C4 产品条线覆盖 (2026-09-17)：按揭 / 信用卡 / 代发 —— 未命中显式标「本期无」 */
+  .product-coverage { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.5rem 0 0; font-size: 0.76rem; }
+  .product-coverage .pc-label { color: var(--muted); }
+  .pc-chip { padding: 0 0.45rem; border-radius: 999px; line-height: 1.8; white-space: nowrap; }
+  .pc-hit { background: #e8f2ff; color: #1f4e9c; border: 1px solid #c3daf7; font-weight: 600; }
+  .pc-none { background: var(--bg); color: var(--muted); border: 1px dashed var(--rule); }
+  /* F1 同主题进展节点 (2026-09-17)：同主题被裁剪的报道折叠在卡片内 */
+  .progress-nodes { margin: 0.4rem 0 0; font-size: 0.78rem; }
+  .progress-nodes > summary { cursor: pointer; color: var(--muted); }
+  .progress-nodes ul { margin: 0.3rem 0 0; padding-left: 1.1rem; line-height: 1.8; }
+  .progress-nodes li { margin: 0.15rem 0; }
+  .progress-nodes .pn-date { color: var(--muted); margin-right: 0.35rem; font-variant-numeric: tabular-nums; }
+  .progress-nodes .pn-src { color: var(--muted); margin-left: 0.35rem; font-size: 0.72rem; }
   /* C1 角色视图条 (2026-09-17)：按条线一键筛选 */
   .role-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.85rem 0 0; }
   .role-label { font-size: 0.78rem; color: var(--muted); }

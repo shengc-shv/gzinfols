@@ -67,6 +67,22 @@ export interface NormalizedArticle extends RawArticle {
 }
 
 /** 贯穿管道下游的运行时条目。 */
+/**
+ * 同主题「进展节点」（F1，2026-09-17 用户拍板：上限 4 + 合并块保留全部进展节点）。
+ *
+ * 背景：同一事件常有多家媒体/多个阶段的报道。原实现按「同主题 ≤2 条、同 tier 只留 1」
+ * 直接**丢弃**多余报道，导致同主题信息损失 40–50%（读者看不到「后来怎么样了」）。
+ * 现改为：主卡仍按原规则（防刷屏），其余同主题报道**保留为该卡的进展节点**，
+ * 折叠展示 —— 关键节点不丢，版面也不被刷屏。
+ */
+export interface ProgressNode {
+  title: string;
+  url: string;
+  source?: string;
+  /** 展示用日期 MM/DD（无真实发布时间则留空，不兜底抓取时间）。 */
+  date?: string;
+}
+
 export interface ArticleInput extends NormalizedArticle {
   /** 展示用来源名（来自 SourceDef.name）。 */
   source: string;
@@ -82,6 +98,8 @@ export interface ArticleInput extends NormalizedArticle {
   relevant?: boolean;
   /** 滚动并入标记：true=当日已处理（buildRolling 标注），渲染按「当天」视图归组。 */
   fetchedToday?: boolean;
+  /** F1 同主题进展节点（被裁剪但保留的其他报道；渲染为卡片内的折叠列表）。 */
+  progressNodes?: ProgressNode[];
 }
 
 /**
