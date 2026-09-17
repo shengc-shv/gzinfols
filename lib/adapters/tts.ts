@@ -46,8 +46,8 @@ const TCE_HOST = "tts.tencentcloudapi.com";
 const TCE_SERVICE = "tts";
 const TCE_ACTION = "TextToVoice";
 const TCE_VERSION = "2019-08-23";
-const VOICE_TYPE = parseInt(process.env.TTS_VOICE_TYPE || "501001", 10);
-const SPEED = parseInt(process.env.TTS_SPEED || "1", 10);
+const VOICE_TYPE = parseInt(process.env.TTS_VOICE_TYPE || "101011", 10);
+const SPEED = parseInt(process.env.TTS_SPEED || "1.2", 10);
 const CHUNK_LIMIT = 120; // 腾讯单次上限 150 个汉字，按 120 字分片留余量
 
 /**
