@@ -1,7 +1,7 @@
 import { BaseCrawler, CrawlerResult } from "../base-crawler";
 import { windowFloor } from "./ipo-shared";
 import { IPO_SOURCE_WINDOW_DAYS } from "../../../ipo-config";
-import { warnIfStale } from "./staleness";
+import { warnIfStale, STALE_LAG_DAYS_IPO } from "./staleness";
 
 /**
  * 港交所（HKEX）新股递表爬虫 —— IPO 体系重设计 batch 5「港股递表」。
@@ -251,7 +251,7 @@ export class HkFilingCrawler extends BaseCrawler {
     this.results.push(...out);
 
     const gdCount = out.filter((r) => r.region === "gd").length;
-    warnIfStale(this, allDates);
+    warnIfStale(this, allDates, STALE_LAG_DAYS_IPO);
     console.log(
       `[${this.name}] 完成，共 ${out.length} 条（广东 ${gdCount} / 全国 ${out.length - gdCount}）`,
     );

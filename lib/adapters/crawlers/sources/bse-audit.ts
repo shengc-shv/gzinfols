@@ -1,10 +1,12 @@
 import { BaseCrawler, CrawlerResult } from "../base-crawler";
 import { windowFloor, shortName, GD_CITIES } from "./ipo-shared";
-import { reportDay, dayGap, STALE_LAG_DAYS } from "./staleness";
+import { reportDay, dayGap, STALE_LAG_DAYS_IPO } from "./staleness";
 import { todayKeyOf } from "../../../utils/time";
 
 /** 哨兵时区工具改由共享模块提供（2026-09-10 P0-3），此处再导出保持既有导入路径可用。 */
 export { reportDay, dayGap, STALE_LAG_DAYS } from "./staleness";
+// IPO 类源改用宽松阈值（天然稀疏，3 天必然天天误报）；旧名随 staleness 保留导出。
+export { STALE_LAG_DAYS_IPO } from "./staleness";
 
 /**
  * 北交所 —— IPO 审核项目动态爬虫（官方权威源，A3）
@@ -302,9 +304,9 @@ export class BseAuditCrawler extends BaseCrawler {
     }
     const newest = allDates.reduce((a, b) => (b > a ? b : a));
     const lag = dayGap(newest, reportDay());
-    if (lag > STALE_LAG_DAYS) {
+    if (lag > STALE_LAG_DAYS_IPO) {
       console.warn(
-        `[${this.name}] ⚠️ 新鲜度告警：最新更新日 ${newest} 滞后 ${lag} 天（阈值 ${STALE_LAG_DAYS}），` +
+        `[${this.name}] ⚠️ 新鲜度告警：最新更新日 ${newest} 滞后 ${lag} 天（阈值 ${STALE_LAG_DAYS_IPO}），` +
           `大概率 pageSize 分桶缓存策略已变化，请核查接口`,
       );
     }

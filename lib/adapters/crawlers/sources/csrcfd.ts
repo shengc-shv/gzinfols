@@ -1,5 +1,5 @@
 import { BaseCrawler, CrawlerResult } from "../base-crawler";
-import { warnIfStale } from "./staleness";
+import { warnIfStale, STALE_LAG_DAYS_IPO } from "./staleness";
 // P2-3 收敛（2026-09-10）：早停窗口改引全链路唯一来源 lib/ipo-config.ts。
 import { IPO_SOURCE_WINDOW_DAYS } from "../../../ipo-config";
 // 2026-09-11：阶段枚举单一真源在服务层（adapters→services 方向被架构门禁允许；本 import 为
@@ -268,7 +268,7 @@ export class CsrcCoachCrawler extends BaseCrawler {
       page++;
     }
 
-    warnIfStale(this, allDates);
+    warnIfStale(this, allDates, STALE_LAG_DAYS_IPO);
     console.log(`[${this.name}] 完成，抓取 ${page - 1} 页，广东企业 ${this.results.length} 条`);
     if (withdrawn > 0) {
       console.log(

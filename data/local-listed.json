@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "fetchedAt": "2026-09-17T01:41:33+08:00",
+  "generator": "local-listed-sync",
+  "windowDays": 7,
+  "counts": {
+    "SZSE": 1
+  },
+  "listings": [
+    {
+      "code": "301689",
+      "name": "C电科思仪",
+      "listedDate": "2026-09-10",
+      "exchange": "SZSE"
+    }
+  ]
+}

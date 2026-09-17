@@ -1,6 +1,6 @@
 import { BaseCrawler, CrawlerResult } from "../base-crawler";
 import { windowFloor, shortName, GD_CITIES } from "./ipo-shared";
-import { warnIfStale } from "./staleness";
+import { warnIfStale, STALE_LAG_DAYS_IPO } from "./staleness";
 
 /**
  * 上交所 —— IPO 审核项目动态爬虫（官方权威源，A1）
@@ -260,7 +260,7 @@ export class SseAuditCrawler extends BaseCrawler {
     });
 
     // 新鲜度哨兵（P0-3）：抓成功但数据变旧（接口行为变化/分桶/被反爬）时显式告警
-    warnIfStale(this, allDates);
+    warnIfStale(this, allDates, STALE_LAG_DAYS_IPO);
 
     console.log(`[${this.name}] 完成，共 ${this.results.length} 条（窗口内广东动态，含主板+科创板）`);
     return this.results;

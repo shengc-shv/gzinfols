@@ -1,5 +1,6 @@
 import type { CrawledArticle } from "../../../contracts/article";
-import { todayKeyOf } from "../../../utils/time";
+import { todayKeyOf, prevDateKey } from "../../../utils/time";
+import { LOCAL_LISTED_STALE_DAYS, LOCAL_LISTED_PATH, mergeLocalListings } from "../../local-listed";
 
 /**
  * 上市复核（候选复核，不拉全量）—— P3（2026-09-10 用户决策②：本期做、不拉全量、批量复核）。
@@ -38,7 +39,7 @@ const MAX_PAGES = 4; // 每源最多翻 4 页（有界，不拉全量）。SSE 1
  * 原为 120 天）。理由：超过展示窗的上市记录既不展示、也不会被复核命中（候选的审核
  * updateDate 必在 7 天窗内），120 天只会把大量「4 个月前上市」的广东企业灌进 pool。
  */
-const WINDOW_DAYS = 7;
+export const WINDOW_DAYS = 7;
 
 /** 广东地区词（AREA_NAME_DESC / registerAddress 命中）。 */
 export const GD_AREA =
@@ -219,6 +220,15 @@ export class ListedChecker {
 
   private cookie = ""; // BSE 预热后捕获的 cookie
 
+  /** 是否启用本地冻结快照补位（深交所在 CI 上不可达时的兜底）；测试可关。 */
+  useLocalSnapshot = true;
+  /** 快照路径（默认 data/local-listed.json；测试可指向临时文件）。 */
+  localSnapshotPath: string | undefined = undefined;
+  /** 快照过期阈值（天），与 local-listed 模块同口径。 */
+  readonly localSnapshotStaleDays = LOCAL_LISTED_STALE_DAYS;
+  /** 默认快照路径常量（供脚本复用）。 */
+  static readonly DEFAULT_SNAPSHOT_PATH = LOCAL_LISTED_PATH;
+
   /** 有界拉取三所近期上市 → 广东上市字典（code → Listing）。 */
   async buildListingMap(cutoff: string): Promise<Map<string, Listing>> {
     const map = new Map<string, Listing>();
@@ -279,9 +289,42 @@ export class ListedChecker {
    * @returns 新发现的广东已上市企业（stage-listed 卡片，带 listedDate）
    *          同时**就地**把 ipo 中命中上市字典的候选升级为 stage-listed + listedDate。
    */
-  async run(ipo: CrawledArticle[]): Promise<CrawledArticle[]> {
-    const cutoff = this.cutoffDate();
+  async run(ipo: CrawledArticle[], now: Date = new Date()): Promise<CrawledArticle[]> {
+    const cutoff = this.cutoffDate(now);
     const map = await this.buildListingMap(cutoff);
+    const onlineCount = map.size; // 合并本地快照**之前**的在线条数（用于区分「真故障」与「已知降级」）
+
+    // —— 深交所（B2）在 GitHub 海外 runner 上恒 `fetch failed`（2026-09-17 实测）——
+    // 在线字典缺的部分用本地冻结快照 `data/local-listed.json` 补位（在线优先）。
+    // 快照由 `npm run listed:local` 本地每日抓取产出并入库；文件缺失时保持原有告警。
+    let localAdded = 0;
+    let localStale: number | null = null;
+    let localReason: string | undefined;
+    if (this.useLocalSnapshot) {
+      const merged = mergeLocalListings(map, {
+        cutoff,
+        now,
+        filePath: this.localSnapshotPath,
+      });
+      localAdded = merged.added;
+      localStale = merged.staleDays;
+      localReason = merged.reason;
+      if (localAdded > 0) {
+        console.log(
+          `[listed-check] 本地冻结快照补位 ${localAdded} 条（在线字典 ${map.size - localAdded} 条）` +
+            `${localStale !== null ? `；快照抓取于 ${localStale} 天前` : ""}`,
+        );
+      }
+      if (localStale !== null && localStale > LOCAL_LISTED_STALE_DAYS) {
+        console.warn(
+          `::warning:: [listed-check] ⚠️ 本地上市快照已 ${localStale} 天未更新（>${LOCAL_LISTED_STALE_DAYS} 天）` +
+            `→ 本地同步可能已中断；请跑 \`npm run listed:local\``,
+        );
+      }
+      if (localAdded === 0 && localReason && localReason !== "文件不存在") {
+        console.warn(`[listed-check] 本地快照不可用（${localReason}）`);
+      }
+    }
 
     // 复核：今日候选按代码命中 → 升级
     for (const a of ipo) {
@@ -305,6 +348,12 @@ export class ListedChecker {
     }
     console.log(`[listed-check] 上市字典 ${map.size} 条；新发现广东已上市 ${discovered.size} 条`);
     // 新鲜度哨兵（P0-3）：字典为空 = 三所接口全失败或字段改版 → 显式告警（否则静默无产出）
+    if (map.size > 0 && onlineCount === 0 && localAdded > 0) {
+      // 在线全挂但本地快照成功补位 → 属**已知降级**（深交所海外不可达），不按故障刷告警
+      console.log(
+        `[listed-check] ℹ️ 在线上市字典为空，已由本地冻结快照补位 ${localAdded} 条（降级运行，非故障）`,
+      );
+    }
     if (map.size === 0) {
       console.warn(
         `::warning:: [listed-check] ⚠️ 上市字典为空（近 ${WINDOW_DAYS} 天窗口内 0 条），三所接口可能已改版或被拦`,
@@ -313,10 +362,17 @@ export class ListedChecker {
     return [...discovered.values()];
   }
 
-  /** 近 WINDOW_DAYS 天的下界（YYYY-MM-DD）。 */
+  /**
+   * 近 WINDOW_DAYS 天的下界（YYYY-MM-DD）。
+   *
+   * ⚠️ 2026-09-17 修复（同 `reportDay` 那次改名的同源 bug）：原实现用
+   * `getFullYear()/getMonth()/getDate()` 取**运行环境本地时区**的日期，而 CI runner 默认
+   * **UTC** —— CI 定时在北京 07:30 跑（UTC 为前一日 23:30），算出的 cutoff 会**早一天**，
+   * 与「报告时区」口径不一致。现改为 `todayKeyOf`（北京时间单一真源）+ `prevDateKey`
+   * 纯日期推算，跨时区结果一致。
+   */
   cutoffDate(now: Date = new Date()): string {
-    const d = new Date(now.getTime() - WINDOW_DAYS * 86400000);
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+    return prevDateKey(todayKeyOf(now), WINDOW_DAYS);
   }
 
   // —— 各源抓取（protected 便于测试 mock）——

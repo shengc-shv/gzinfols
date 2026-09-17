@@ -1,5 +1,5 @@
 import { BaseCrawler, CrawlerResult } from "../base-crawler";
-import { warnIfStale } from "./staleness";
+import { warnIfStale, STALE_LAG_DAYS_IPO } from "./staleness";
 // P2-3 收敛（2026-09-10）：共享工具（windowFloor/shortName/GD_CITIES）
 // → ./ipo-shared（此前定义在本文件，被 sse/bse/hk-filing 跨源 import，
 // 本文件事实上成了共享工具模块）；窗口常量 → lib/ipo-config.ts。
@@ -225,7 +225,7 @@ export class SzseAuditCrawler extends BaseCrawler {
       await new Promise((r) => setTimeout(r, 800 + Math.random() * 800));
     }
 
-    warnIfStale(this, allDates);
+    warnIfStale(this, allDates, STALE_LAG_DAYS_IPO);
     console.log(`[${this.name}] 完成，共 ${this.results.length} 条（窗口内广东动态）`);
     return this.results;
   }
