@@ -1,0 +1,689 @@
+{
+  "date": "2026-09-18",
+  "updatedAt": "2026-09-17T23:37:10.168Z",
+  "executive": {
+    "hero_line": "住建部今晨发布会叠加广深二手房全款化，按揭逻辑生变，住房金融与财富配置需同步调仓。",
+    "spoken_hero": "今天上午十点住建部开重要发布会，同时广深二手房已成主流、全款买家越来越多，按揭投放逻辑在变。建议住房金融和财富条线同步调整话术，把重心往二手房交易资金监管、赎楼和家装分期上挪。",
+    "must_read": [
+      {
+        "title": "广深二手房全款化",
+        "why": "广深二手房成主流且全款比例上升，按揭投放承压，住房金融需从新增按揭转向交易场景与存量客户经营。",
+        "url": "https://news.southcn.com/node_812903b83a/8e93dca01f.shtml"
+      },
+      {
+        "title": "美国贷款参考利率升至7%",
+        "why": "美元融资成本上行，有美元负债或跨境融资需求的客户提前锁定成本意愿增强，是切入跨境客群的时机。",
+        "url": "https://finance.sina.com.cn/roll/2026-09-17/doc-inisatup0253673.shtml"
+      },
+      {
+        "title": "全球金融中心指数发布",
+        "why": "香港稳居亚洲之首、深圳进入前八，大湾区跨境金融与财富管理客群沟通可借势，私行条线有话题抓手。",
+        "url": "https://news.southcn.com/node_de9aedeec1/1dd07b4e10.shtml"
+      },
+      {
+        "title": "金融业AI落地转向生产",
+        "why": "头部机构组团接入，零售智能客服与营销工具选型窗口打开，信息技术部需提前对标同业落地节奏。",
+        "url": "https://m.21jingji.com/article/20260917/herald/af7e0cf1c2bc595d2ead93e29ec0e0d2.html"
+      },
+      {
+        "title": "香港金管局三年首次加息",
+        "why": "港元负债客户月供压力上升，跨境按揭与港元负债客群需提前分层提示，避免被动应对投诉。",
+        "url": "https://m.21jingji.com/article/20260917/herald/83eb3283c187ce48d8feefb5128be686.html"
+      }
+    ],
+    "spoken_must_read": "广深二手房全款化。广深二手房成主流且全款比例上升，按揭投放承压，住房金融需从新增按揭转向交易场景与存量客户经营。。其次，美国贷款参考利率升至7%。美元融资成本上行，有美元负债或跨境融资需求的客户提前锁定成本意愿增强，是切入跨境客群的时机。。此外，全球金融中心指数发布。香港稳居亚洲之首、深圳进入前八，大湾区跨境金融与财富管理客群沟通可借势，私行条线有话题抓手。。还有，金融业AI落地转向生产。头部机构组团接入，零售智能客服与营销工具选型窗口打开，信息技术部需提前对标同业落地节奏。。另外，香港金管局三年首次加息。港元负债客户月供压力上升，跨境按揭与港元负债客群需提前分层提示，避免被动应对投诉。。",
+    "insights": [
+      {
+        "topic": "二手房交易场景切入",
+        "impact": "广深二手房成主流且全款比例上升，按揭新增承压，但交易资金监管、赎楼与家装分期场景需求同步放大。",
+        "action": "可考虑本周联合中介机构梳理二手房交易资金监管与赎楼垫资流程，把家装分期嵌入过户后环节，抢抓存量房交易客群。",
+        "tag": [
+          "住房金融",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "二手房成广州、深圳市场主流选择，全款买房的人越来越多",
+            "url": "https://news.southcn.com/node_812903b83a/8e93dca01f.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "私行客群黄金再平衡",
+        "impact": "加息压制金价、黄金类ETF跌逾5%，持有贵金属的私行与高净值客户净值波动放大，需及时安抚与再平衡。",
+        "action": "可考虑本周对贵金属持仓超百万的客户逐一电话沟通，提供仓位再平衡与黄金定投替代方案，避免客户自行赎回流失。",
+        "tag": [
+          "私行",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "美联储加息压制金价 多只黄金类ETF跌逾5%",
+            "url": "https://finance.sina.com.cn/roll/2026-09-17/doc-inisayan9408735.shtml"
+          },
+          {
+            "title": "美联储加息砸出130美元深坑 但现货黄金的“骨架”没散",
+            "url": "https://finance.sina.com.cn/money/nmetal/hjzx/2026-09-17/doc-iniscekf3605149.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "含权理财配置话术调整",
+        "impact": "理财规模8月再创新高、含权产品增量突出，客户对净值波动接受度在变，是提升AUM与中收的配置窗口。",
+        "action": "值得关注本周更新含权产品配置话术，对风险等级匹配客户做分批建仓建议，同步准备波动期客户沟通口径。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "银行理财规模8月再创新高，“含权”产品年内增量突",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-17/doc-inisatui4286974.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "汽车产业链普惠客群",
+        "impact": "黄埔再落两个汽车零部件项目，广州东部汽车产业链延链补链提速，上下游小微与园区客群融资需求上升。",
+        "action": "可考虑本周对接黄埔园区管委会，梳理新落地项目上下游小微名单，配套经营贷与代发工资一揽子方案。",
+        "tag": [
+          "政银合作",
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "sources": [
+          {
+            "title": "广州东部汽车产业延链补链强链 两大汽车零部件项目落地黄埔",
+            "url": "https://news.dayoo.com/guangzhou/202609/17/139995_55004542.htm"
+          }
+        ]
+      },
+      {
+        "topic": "商超场景消费信贷联动",
+        "impact": "永辉广州两家调改门店近期开业，商超客流回升，门店周边收单、商户结算与消费信贷联动机会显现。",
+        "action": "提示本周走访新开门店周边商户，打包收单结算与消费分期方案，同步争取门店内信用卡绑卡与分期入口。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "sources": [
+          {
+            "title": "永辉超市：广州两家调改门店将于近期开业",
+            "url": "https://www.stcn.com/article/detail/4189472.html"
+          }
+        ]
+      },
+      {
+        "topic": "平台月付入口流量变化",
+        "impact": "平台月付功能仍在、仅页面分家，支付与信贷展示规则调整落地，信用卡绑卡与分期入口流量结构将生变。",
+        "action": "可考虑本周监测主流平台绑卡与分期转化数据，及时调整信用卡分期投放位与权益配置，抢占迁移期流量。",
+        "tag": [
+          "信贷",
+          "竞对动态"
+        ],
+        "sources": [
+          {
+            "title": "平台支付月付仍在，页面分家",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-17/doc-inisatuq9447220.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "AI助手客群经营落地",
+        "impact": "有银行日均Token消耗破百亿，AI助手已进入客户经理日常作业，客群经营与话术支持效率差距将拉大。",
+        "action": "值得关注信息技术部本月评估智能助手在客群分层与话术支持上的试点场景，先选一个支行做小范围验证。",
+        "tag": [
+          "科技金融",
+          "客群"
+        ],
+        "sources": [
+          {
+            "title": "有银行日均Token消耗量破百亿 客户经理有了“外挂”",
+            "url": "https://www.cnfin.com/yw-lb/detail/20260917/4470937_1.html"
+          },
+          {
+            "title": "头部机构组团接入，金融业的AI落地这次来真的了",
+            "url": "https://m.21jingji.com/article/20260917/herald/af7e0cf1c2bc595d2ead93e29ec0e0d2.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "具备零售 A U M商机的，二手房交易场景切入，广深二手房成主流且全款比例上升，按揭新增承压，但交易资金监管、赎楼与家装分期场景需求同步放大。。可考虑本周联合中介机构梳理二手房交易资金监管与赎楼垫资流程，把家装分期嵌入过户后环节，抢抓存量房交易客群。。此外，具备高端客户商机的，私行客群黄金再平衡，加息压制金价、黄金类ETF跌逾5%，持有贵金属的私行与高净值客户净值波动放大，需及时安抚与再平衡。。可考虑本周对贵金属持仓超百万的客户逐一电话沟通，提供仓位再平衡与黄金定投替代方案，避免客户自行赎回流失。。同时，具备零售 A U M商机的，含权理财配置话术调整，理财规模8月再创新高、含权产品增量突出，客户对净值波动接受度在变，是提升AUM与中收的配置窗口。。值得关注本周更新含权产品配置话术，对风险等级匹配客户做分批建仓建议，同步准备波动期客户沟通口径。。另一条值得关注，具备普惠小微商机的，汽车产业链普惠客群，黄埔再落两个汽车零部件项目，广州东部汽车产业链延链补链提速，上下游小微与园区客群融资需求上升。。可考虑本周对接黄埔园区管委会，梳理新落地项目上下游小微名单，配套经营贷与代发工资一揽子方案。。另外，具备普惠小微商机的，商超场景消费信贷联动，永辉广州两家调改门店近期开业，商超客流回升，门店周边收单、商户结算与消费信贷联动机会显现。。提示本周走访新开门店周边商户，打包收单结算与消费分期方案，同步争取门店内信用卡绑卡与分期入口。。此外，平台月付入口流量变化，平台月付功能仍在、仅页面分家，支付与信贷展示规则调整落地，信用卡绑卡与分期入口流量结构将生变。。可考虑本周监测主流平台绑卡与分期转化数据，及时调整信用卡分期投放位与权益配置，抢占迁移期流量。。最后，AI助手客群经营落地，有银行日均Token消耗破百亿，AI助手已进入客户经理日常作业，客群经营与话术支持效率差距将拉大。。值得关注信息技术部本月评估智能助手在客群分层与话术支持上的试点场景，先选一个支行做小范围验证。。",
+    "risk": {
+      "topic": "资本市场执法趋严",
+      "evidence": "监管持续强化资本市场执法，'监管亮剑'护航资本市场高质量前行，投资者适当性管理要求同步收紧。",
+      "impact": "财富条线代销产品适当性留痕与双录环节承压，私行高净值客户风险揭示不足易引发投诉，风控部需前置排查。",
+      "action": "财富部应本月完成代销产品适当性留痕自查，风控部对高风险等级产品双录做抽查，私行客户经理同步更新风险揭示话术。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "“监管亮剑”护航资本市场高质量前行",
+          "url": "https://www.stcn.com/article/detail/4189826.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：资本市场执法趋严，财富条线代销产品适当性留痕与双录环节承压，私行高净值客户风险揭示不足易引发投诉，风控部需前置排查。。财富部应本月完成代销产品适当性留痕自查，风控部对高风险等级产品双录做抽查，私行客户经理同步更新风险揭示话术。。",
+    "guangdong_ipo": {
+      "spoken": "广东企业万力轮胎正在冲刺主板IPO，注册地在广东，由国泰海通保荐，今年6月23日获受理，目前处于已问询状态，9月17日刚更新进展，轮胎制造板块的上市进程值得持续跟踪。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "道琼斯收报51778.04点（+0.61%）；纳斯达克收报26418.30点（+1.69%）；标普500收报7637.76点（+1.14%）。",
+      "sectors": [],
+      "spoken": "道琼斯（+0.61%）；纳斯达克（+1.69%）；标普500（+1.14%）。",
+      "meta": {
+        "source": "",
+        "crossCheck": "新浪行情",
+        "date": ""
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51778.04",
+          "changePct": "+0.61%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26418.30",
+          "changePct": "+1.69%"
+        },
+        {
+          "name": "标普500",
+          "value": "7637.76",
+          "changePct": "+1.14%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "A股三大指数小幅收跌，沪指跌0.41%，美联储重启加息扰动情绪。",
+      "sectors": [
+        "粮食概念股逆市大涨，资金避险与涨价预期共振。",
+        "CRO概念大涨，BD高增叠加AI制药消息，机构看好量价齐升。",
+        "文旅发展五年规划出炉，政策红利释放，多股获融资客逆势押注。",
+        "华为新款AI芯片提前推出，AI算力与光通信概念受关注。",
+        "美众议院授权对俄油气买家征最高100%关税，外交部回应。"
+      ],
+      "spoken": "A股三大指数小幅收跌，沪指跌百分之零点四一，深成指跌百分之零点三三，创业板指跌百分之零点四。盘面上，粮食概念股逆市大涨，CRO概念受BD高增和AI制药消息带动走强，文旅板块迎五年规划政策红利。华为新款AI芯片提前推出，AI算力方向受关注。美联储重启加息扰动市场情绪。",
+      "meta": {
+        "source": "东方财富",
+        "crossCheck": "新浪行情",
+        "date": "2026-09-18"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3875.60",
+          "changePct": "-0.41%"
+        },
+        {
+          "name": "深证成指",
+          "value": "13409.91",
+          "changePct": "-0.33%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3298.31",
+          "changePct": "-0.40%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24604.29点（-0.44%）；恒生科技收报4310.74点（-0.34%）。",
+      "sectors": [
+        "恒生指数跌0.44%",
+        "恒生科技指数跌0.34%",
+        "黄金股、石油股同步下挫",
+        "汽车股逆势活跃"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "crossCheck": "新浪行情",
+        "date": "2026-09-18"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.44% 科指跌0.34% 黄金股、石油股同步下挫 汽车股逆势活跃",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-17/doc-iniscqyc0291472.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24604.29",
+          "changePct": "-0.44%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4310.74",
+          "changePct": "-0.34%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-09-17",
+    "marketStatus": {
+      "isMarketClosed": false,
+      "reportDate": "2026-09-18",
+      "dataDate": "2026-09-17",
+      "note": "",
+      "spokenNote": "以下行情为上一交易日，9月17日 周四的收盘情况"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202609173876682543.html",
+      "title_cn": "文旅发展五年规划出炉政策红利密集释放多股获融资客逆势押注(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "文旅发展五年规划出炉，政策红利密集释放，多只相关个股获融资客逆势押注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "文旅",
+        "融资"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173877264816.html",
+      "title_cn": "A股三大指数小幅收跌粮食概念股逆市大涨",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "A股三大指数小幅收跌，粮食概念股逆市大涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "农业"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173877460739.html",
+      "title_cn": "9月17日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "9月17日晚间，沪深两市多家上市公司发布重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173877009666.html",
+      "title_cn": "全球首款AI智能体手机发售！赛道加速扩容这3股业绩倍增可期(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "全球首款AI智能体手机发售，赛道加速扩容，报道提及3只相关个股业绩倍增预期。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "消费电子",
+        "手机"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173877277637.html",
+      "title_cn": "美众议院授权特朗普对俄罗斯油气的主要买家征收高达100%的关税外交部回应",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "美国众议院授权特朗普对俄罗斯油气主要买家征收高达100%关税，中国外交部作出回应。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "能源",
+        "地缘政治"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173877156836.html",
+      "title_cn": "BD高增叠加AI制药大消息！CRO概念大涨机构看好行业“量价齐升”(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "BD高增叠加AI制药消息，CRO概念大涨，机构看好行业量价齐升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "AI",
+        "CRO"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173877337075.html",
+      "title_cn": "机构调研丨磷化铟+光通信这家公司深度布局AI算力金属6英寸磷化铟衬底已获全球头部客户订单",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "机构调研显示，一家深度布局AI算力金属的公司6英寸磷化铟衬底已获全球头部客户订单。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "AI算力",
+        "机构调研"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173877219267.html",
+      "title_cn": "突发！3家科技巨头被查！美国再度启动337调查",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "美国再度启动337调查，3家科技巨头被查。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "科技",
+        "贸易调查",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173877410881.html",
+      "title_cn": "华为新款AI芯片提前推出！相关概念股梳理",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "华为新款AI芯片提前推出，相关概念股受到关注。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "AI",
+        "华为"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173877270419.html",
+      "title_cn": "问界品牌将“专属专营”华为经销商可自主选择是否经营",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "问界品牌将实行专属专营，华为经销商可自主选择是否经营。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "汽车",
+        "华为",
+        "渠道"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173877086275.html",
+      "title_cn": "美联储重启加息如何影响市场？六大券商首席发声",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "针对美联储重启加息对市场的影响，六大券商首席发表看法。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "宏观",
+        "券商"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609173876892634.html",
+      "title_cn": "中金：美加息对A股能否有持续影响尚待观察",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "中金公司表示，美加息对A股能否有持续影响尚待观察。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "A股",
+        "券商"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-17/doc-iniscqyc0291472.shtml",
+      "title_cn": "港股收评：恒指跌0.44% 科指跌0.34% 黄金股、石油股同步下挫 汽车股逆势活跃",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "港股收评：恒指跌0.44%，科指跌0.34%，黄金股、石油股同步下挫，汽车股逆势活跃。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "黄金",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-18/doc-inisewtm3439818.shtml",
+      "title_cn": "同源康医药-B获董事长兼总裁吴豫生增持12万股 每股作价3.486港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "同源康医药-B获董事长兼总裁吴豫生增持12万股，每股作价3.486港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "股东增持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-18/doc-inisewtm3439290.shtml",
+      "title_cn": "国富量子获柳志伟增持174万股 每股作价约1.63港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "国富量子获柳志伟增持174万股，每股作价约1.63港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "股东增持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-18/doc-inisewtm3438798.shtml",
+      "title_cn": "达利国际获Hinton Company Limited增持2000股 每股作价1.095港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "达利国际获Hinton Company Limited增持2000股，每股作价1.095港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "股东增持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-18/doc-inisewtq8739685.shtml",
+      "title_cn": "归创通桥获AIH Capital Group Limited增持11.8万股 每股作价约20.50港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "归创通桥获AIH Capital Group Limited增持11.8万股，每股作价约20.50港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "股东增持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-18/doc-inisewtp0210240.shtml",
+      "title_cn": "建滔集团获Hallgain Management Limited增持20万股 每股作价约53.98港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "建滔集团获Hallgain Management Limited增持20万股，每股作价约53.98港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "股东增持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-18/doc-inisewtm3437066.shtml",
+      "title_cn": "晶科电子股份获董事长肖国伟增持13.9万股 每股作价约1.60港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "晶科电子股份获董事长肖国伟增持13.9万股，每股作价约1.60港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "股东增持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-18/doc-inisewtm3436554.shtml",
+      "title_cn": "建滔积层板获Hallgain Management Limited增持30万股 每股作价47.70港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "建滔积层板获Hallgain Management Limited增持30万股，每股作价47.70港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "股东增持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/wm/2026-09-17/doc-inisatuq9436256.shtml",
+      "title_cn": "香港金管局：加息25个基点",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "香港金管局宣布加息25个基点。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "货币政策",
+        "利率"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-17/doc-iniscekf3624449.shtml",
+      "title_cn": "香港上市将进一步改革，18C重检、招股书简化、T+1结算、REIT松绑等多线并进",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "香港上市制度将进一步改革，涉及18C重检、招股书简化、T+1结算、REIT松绑等多线并进。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "政策",
+        "IPO",
+        "REIT"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-17/doc-iniscekk9341387.shtml",
+      "title_cn": "交通银行港股创历史新高 月内多次刷新记录 机构看高至8.7港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "交通银行港股创历史新高，月内多次刷新记录，机构看高至8.7港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "银行",
+        "股价"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-17/doc-inisatup0282145.shtml",
+      "title_cn": "社评：香港当前正迎来最好的发展时期",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/17",
+      "summary": "社评称香港当前正迎来最好的发展时期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "hk"
+    }
+  ]
+}
