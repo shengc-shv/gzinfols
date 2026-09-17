@@ -22,6 +22,7 @@ import { escapeHtml } from "./cards";
 import { renderStockIndexBlock, renderStockRecap, renderGdIpoStrip } from "./stock-block";
 import { tagClsOf, itemAnchorId } from "./atoms";
 import { renderDeltaBadge } from "./delta-badge";
+import type { ProductLineCoverage } from "../../contracts/report";
 
 /** 构造 url → 中文标题 映射（供 must_read 回写标题）。 */
 export function resolveTitleMap(report: DailyReport): Map<string, string> {
@@ -203,6 +204,24 @@ export function renderReportExec(report: DailyReport): string {
         ${r.action ? `<p><b>建议：</b>${escapeHtml(r.action)}</p>` : ""}
       </article>`;
   })();
+  /**
+   * C4（2026-09-17）产品条线覆盖：按揭 / 信用卡 / 代发 三条线各有多少商机。
+   *
+   * 未命中**显式标「本期无」**而不是留白 —— 让读者（尤其零售信贷部）能区分
+   * 「确实没有相关商机」与「系统漏打标」。数据由装配期算出（本层只读，零判定）。
+   */
+  function renderProductCoverage(cov?: ProductLineCoverage[]): string {
+    if (!cov || cov.length === 0) return "";
+    const chips = cov
+      .map((c) =>
+        c.count > 0
+          ? `<span class="pc-chip pc-hit" title="${escapeHtml(c.examples.join("；"))}">${escapeHtml(c.line)} ${c.count}</span>`
+          : `<span class="pc-chip pc-none" title="本期确无该条线相关商机（不凑数，也不代表系统漏采）">${escapeHtml(c.line)} 本期无</span>`,
+      )
+      .join("");
+    return `<p class="product-coverage"><span class="pc-label">产品条线覆盖</span>${chips}</p>`;
+  }
+
   // 可观测（F2 验收依据）：摘要去重结果逐次打印，PRD 指标「摘要与正文重复项 ≤20%」可据此核对
   if (dedup.mustTotal > 0 || dedup.srcTotal > 0) {
     console.info(
@@ -221,6 +240,7 @@ export function renderReportExec(report: DailyReport): string {
         : ""
     }</div>` : ""}
     ${insightsHtml ? `<div class="exec-insights"><h3 class="exec-col-title">💡 商机洞察<span class="insight-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><div class="insight-scroller">${insightsHtml}</div></div>` : ""}
+    ${renderProductCoverage(report.productCoverage)}
     ${riskCard ? `<div class="exec-risk"><h3 class="exec-col-title">⚠️ 风险预警<span class="risk-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><div class="risk-scroller">${riskCard}</div></div>` : ""}
     ${renderGdIpoStrip(report.sections?.ipo ?? [], { section: "must" })}
   </section>`;

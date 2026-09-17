@@ -225,12 +225,30 @@ export interface DailyReport {
   /** 红筹线索面板（plan-redchip-crawl-push §5.1；渲染期派生，不入库）。 */
   redchipPanel?: RedchipPanel;
   /**
+   * 产品条线覆盖（C4，2026-09-17）：按揭 / 信用卡 / 代发 三条线的命中情况。
+   * 由 `assemble/product-coverage.ts` 纯函数统计（零 LLM）；`count = 0` 即「本期无」，
+   * 页面显式标注而不是留白 —— 让读者知道是「真没有」而非「系统漏了」。
+   */
+  productCoverage?: ProductLineCoverage[];
+  /**
    * 每源存活统计（2026-09-16 A5：数据戳颗粒度与覆盖度透明）。
    *
    * 由 select 的漏斗一次算出（进入 → 保留 + 均分），随报告落盘，供页面「数据戳」
    * 展开显示「各源抓取/收录条数」，让读者能判断内容覆盖是否完整、哪个源本期偏弱。
    */
   sourceStats?: SourceStat[];
+}
+
+/**
+ * 产品条线覆盖（C4）。
+ * 与客群段位（零售AUM / 中高端 / 普惠小微）**正交**：段位答「服务谁」，产品线答「卖什么」。
+ */
+export interface ProductLineCoverage {
+  line: "按揭" | "信用卡" | "代发";
+  /** 命中条数（0 = 本期无，页面须显式标注） */
+  count: number;
+  /** 命中的前 2 条标题（读者可快速核对覆盖到了什么） */
+  examples: string[];
 }
 
 /** 单源存活统计（A5）。 */

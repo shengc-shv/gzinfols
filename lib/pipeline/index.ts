@@ -16,6 +16,7 @@ import { enrich } from "../services/enrich";
 import { assembleReport } from "../services/assemble";
 import { applyDisplayCaps } from "../services/assemble/display-cap";
 import { annotateDeltas } from "../services/assemble/delta";
+import { productCoverageOf, productCoverageSummary } from "../services/assemble/product-coverage";
 import { mergeRollingAndSaveHistory } from "./history-step";
 import { buildSideOutputs } from "./side-outputs/side-outputs";
 import { renderHtml, renderMarkdown } from "../services/render";
@@ -99,6 +100,11 @@ export async function runPipeline(
       `A3 增量三态：新增 ${tally.new} / 有进展 ${tally.changed} / 续报 ${tally.followup}（未命中记忆库→新增）`,
     );
   }
+
+  // —— ⑦.8 C4 产品条线覆盖（2026-09-17）：按揭 / 信用卡 / 代发 三条线的命中情况 ——
+  // 纯函数统计（零 LLM），页面把「本期无」显式标注出来；**不为了凑覆盖而补内容**（相关性红线）。
+  annotated.productCoverage = productCoverageOf(annotated);
+  ctx.log.info("coverage", `C4 产品条线覆盖：${productCoverageSummary(annotated.productCoverage)}`);
 
   // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——
   // → TTS 合成（AUDIO_ENABLED 门控；失败降级为无播放器）
