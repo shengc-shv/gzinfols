@@ -29,6 +29,7 @@ import { spawnSync } from "node:child_process";
 import { renderRedchipPage } from "./lib/redchip-page.mjs";
 import { renderRedchipReport } from "./lib/redchip-report.mjs";
 import { renderSearchPage } from "./lib/search-page.mjs";
+import { renderTopicsPage } from "./lib/topics-page.mjs";
 
 /** 汇集来源（按优先级：前一个命中即不再看后面的）。 */
 const SRC_DIRS = ["daily_reports", "history"];
@@ -198,7 +199,7 @@ const archiveHtml = `<!doctype html>
   <h1>每日资信简报 — 归档</h1>
   <p class="meta">共 ${dates.length} 期 · 最新在前 · 生成于 ${todayInReportTz()}</p>
   <div class="top">
-    <a href="./index.html">→ 最新一期（${latest}）</a> · <a href="./search.html">🔍 检索与主题归档</a>
+    <a href="./index.html">→ 最新一期（${latest}）</a> · <a href="./search.html">🔍 检索与两期对比</a> · <a href="./topics.html">🧭 主题跟踪</a>
   </div>
   <ul>
 ${rows}
@@ -322,6 +323,33 @@ try {
   console.log(
     `[build-site] search.html（${days.length} 期 / ${days.reduce((n, d) => n + d.items.length, 0)} 条可检索）`,
   );
+
+  // ---------- 5.8b) 主题跟踪时间线页（B2）：site/topics.html ----------
+  // 主题由构建期跨期聚类产出（零 LLM）；缺 topics.json 时跳过而不报错（老产物兼容）。
+  try {
+    const topicsPath = path.join(IDX_SRC, "topics.json");
+    if (fs.existsSync(topicsPath)) {
+      const bundle = JSON.parse(fs.readFileSync(topicsPath, "utf8"));
+      // 只保留主题节点指向的期次确实存在的（防老期次被清理后留下死链）
+      const known = new Set(days.map((d) => d.date));
+      const topics = (bundle.topics || [])
+        .map((t) => ({ ...t, nodes: (t.nodes || []).filter((n) => known.has(n.date)) }))
+        .filter((t) => t.nodes.length >= 2);
+      fs.writeFileSync(path.join(dataDir, "topics.json"), JSON.stringify(bundle, null, 0), "utf8");
+      fs.writeFileSync(
+        path.join(OUT, "topics.html"),
+        renderTopicsPage({ topics, generatedAt: bundle.generatedAt, latest }),
+        "utf8",
+      );
+      console.log(
+        `[build-site] topics.html（${topics.length} 个跨期主题 / ${topics.reduce((n, t) => n + t.nodes.length, 0)} 个节点）`,
+      );
+    } else {
+      console.log("[build-site] 无 topics.json → 跳过主题跟踪页");
+    }
+  } catch (e) {
+    console.log(`[build-site] 主题跟踪页跳过：${e && e.message ? e.message : e}`);
+  }
 } catch (e) {
   console.log(`[build-site] 检索页跳过：${e && e.message ? e.message : e}`);
 }

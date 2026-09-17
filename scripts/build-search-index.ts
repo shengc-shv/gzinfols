@@ -85,6 +85,214 @@ export interface SlimDay {
   anchored?: boolean;
 }
 
+/**
+ * 主题跟踪时间线（B2，2026-09-17）。
+ *
+ * 行长要的不是「今天有哪些条」，而是「**这件事后来怎么样了**」。事件记忆库只覆盖
+ * 4 个播报板块（hero/must/insight/risk），正文条目不在其中 —— 故在**构建期**用
+ * 跨期条目的主题标签聚类，得到主题级时间线（零 LLM、零后端，纯静态）。
+ *
+ * 聚类规则（保守，宁可主题少而准）：
+ *  - **泛标签先剔除**：出现率 ≥ `commonRatio` 的标签（如「客群」「市场」）不参与建主题，
+ *    否则半个版面会被聚成一个巨型主题；
+ *  - 两个条目同主题 ⟺ 特征标签交集 ≥2（或一方只有 1 个特征标签且相同，或标题前 12 字相同）；
+ *  - **只保留跨 ≥2 期的主题**（单期出现谈不上「跟踪」），节点按日期升序（= 进展顺序）。
+ */
+export interface TopicNode {
+  date: string;
+  i: string;
+  t: string;
+  s?: string;
+  k: string;
+  x?: string;
+  /** 同一标题共出现几期（>1 即「持续跟踪中」；时间线只保留最早一条）。 */
+  repeat?: number;
+}
+
+export interface Topic {
+  id: string;
+  label: string;
+  tags: string[];
+  /** 出现过的期次（升序）。 */
+  dates: string[];
+  /** 跨度天数（含首尾；构建期算好，页面不再解析日期 —— 与项目时间口径纪律一致）。 */
+  spanDays: number;
+  /** 进展节点（按日期升序 = 时间线顺序）。 */
+  nodes: TopicNode[];
+}
+
+export interface ClusterOpts {
+  /** 至少跨几期才算「跟踪中」的主题（默认 2）。 */
+  minDates?: number;
+  /** 最多输出多少个主题（默认 30）。 */
+  maxTopics?: number;
+  /** 每个主题最多保留多少节点（默认 12）。 */
+  maxNodes?: number;
+  /** 标签出现率超过该比例即视为泛标签，不参与聚类（默认 0.35）。 */
+  commonRatio?: number;
+}
+
+/** 主题标签 → 读者可读名称（标签是机器口径，个别需要改写才好读）。 */
+const LABEL_ALIAS: Record<string, string> = {
+  粤: "广东IPO动态",
+  零售AUM: "零售AUM客群",
+  "中高端客群(过亿资产)": "中高端客群",
+};
+
+/**
+ * 两个 YYYY-MM-DD 的自然日差（纯字符串运算，不涉时区换算 —— 与 `prevDateKey` 同口径）。
+ * 放在构建期算，页面只显示结果，避免前端再解析日期。
+ */
+function dayGapKey(a: string, b: string): number {
+  const pa = Date.parse(`${a}T00:00:00Z`);
+  const pb = Date.parse(`${b}T00:00:00Z`);
+  if (Number.isNaN(pa) || Number.isNaN(pb)) return 0;
+  return Math.max(0, Math.round((pb - pa) / 86_400_000));
+}
+
+/** 标题归一（取前 12 字，去空白）——聚类兜底信号。 */
+function titleKeyOf(t: string): string {
+  return String(t ?? "").replace(/\s+/g, "").slice(0, 12);
+}
+
+/** 稳定短哈希（djb2 → base36），保证主题 id 跨构建不变（与条目 ID 同源思路）。 */
+function topicIdOf(label: string): string {
+  let h = 5381;
+  for (let i = 0; i < label.length; i++) h = ((h << 5) + h + label.charCodeAt(i)) | 0;
+  return `tp-${(h >>> 0).toString(36)}`;
+}
+
+/**
+ * 节点按标题去重（导出以便单测）：同一条新闻跨期重复出现 → 只留**最早**一条，
+ * 并在 `repeat` 上记下共出现几期（时间线读起来是「进展」，不是「同一行刷两遍」）。
+ */
+export function dedupeNodesByTitle(
+  nodes: Array<TopicNode & { repeat?: number }>,
+): Array<TopicNode & { repeat?: number }> {
+  const byTitle = new Map<string, TopicNode & { repeat?: number }>();
+  for (const n of nodes) {
+    const key = titleKeyOf(n.t);
+    const prev = byTitle.get(key);
+    if (prev) {
+      prev.repeat = (prev.repeat ?? 1) + 1;
+      continue;
+    }
+    byTitle.set(key, { date: n.date, i: n.i, t: n.t, s: n.s, k: n.k, x: n.x });
+  }
+  return [...byTitle.values()];
+}
+
+/** 跨期主题聚类（纯函数，可测）。 */
+export function clusterTopics(days: SlimDay[], opts: ClusterOpts = {}): Topic[] {
+  const minDates = opts.minDates ?? 2;
+  const maxTopics = opts.maxTopics ?? 30;
+  const maxNodes = opts.maxNodes ?? 12;
+  const commonRatio = opts.commonRatio ?? 0.35;
+
+  type RawNode = TopicNode & { tags: string[] };
+  const all: RawNode[] = [];
+  for (const d of [...days].sort((a, b) => a.date.localeCompare(b.date))) {
+    for (const it of d.items ?? []) {
+      all.push({ date: d.date, i: it.i, t: it.t, s: it.s, k: it.k, x: it.x, tags: it.g ?? [] });
+    }
+  }
+  if (all.length === 0) return [];
+
+  // 泛标签识别（出现率过高 → 不参与建主题，避免「客群」吞掉半个版面）
+  const tagFreq = new Map<string, number>();
+  for (const n of all) for (const g of n.tags) tagFreq.set(g, (tagFreq.get(g) ?? 0) + 1);
+  const common = new Set<string>();
+  for (const [g, n] of tagFreq) {
+    // 双条件：**出现 ≥3 次**且比例超阈值。只看比例会在小样本期（刚上线 1~2 期）把
+    // 真正有区分度的标签误判为泛标签 —— 那样反而会聚不出任何主题。
+    if (n >= 3 && n / all.length >= commonRatio) common.add(g);
+  }
+
+  const clusters: Array<{ feats: string[]; nodes: RawNode[] }> = [];
+  for (const n of all) {
+    const feats = n.tags.filter((g) => !common.has(g));
+    if (feats.length === 0) continue; // 只有泛标签 → 不成主题（宁缺毋滥）
+    // ⚠️ 簇的特征标签**不再吸收新标签**：早期版本边聚边扩，会让「财富」这类高频标签
+    // 滚雪球式吞掉半个版面（实测把国资委支付账款、养老客群都吸进「财富」主题）。
+    // 阈值取 **交集 ≥3**（而非 2）：索引里的标签是「业务线 + 客群 + 主题词」混装，
+    // 交集 2 太容易命中（实测把理财打新、美债和信贷格局混成一个「客群」主题）。
+    const hit = clusters.find((c) => {
+      const overlap = c.feats.filter((f) => feats.includes(f)).length;
+      if (overlap >= 3) return true;
+      return Boolean(c.nodes[0] && titleKeyOf(c.nodes[0].t) === titleKeyOf(n.t));
+    });
+    if (!hit) {
+      clusters.push({ feats: feats.slice(0, 6), nodes: [n] });
+      continue;
+    }
+    hit.nodes.push(n);
+  }
+
+  // 同名主题合并（不同簇常落到同一高频标签 → 否则页面上会出现三个「客群」主题卡）
+  const merged = new Map<string, { feats: string[]; nodes: RawNode[] }>();
+  for (const c of clusters) {
+    const key = [...c.feats].sort().join("|");
+    const prev = merged.get(key);
+    if (prev) prev.nodes.push(...c.nodes);
+    else merged.set(key, { feats: [...c.feats], nodes: [...c.nodes] });
+  }
+  clusters.length = 0;
+  clusters.push(...merged.values());
+
+  const built: Topic[] = [];
+  for (const c of clusters) {
+    const dates = [...new Set(c.nodes.map((n) => n.date))].sort();
+    // ⚠️ 节点**先去重再判数量**：两条同标题的跨期新闻去重后只剩 1 个节点，
+    // 那不是「主题跟踪」而是一条新闻的重复（实测会产出「信贷」×3 这种单节点主题）。
+    const rawNodes = [...c.nodes].sort((a, b) => a.date.localeCompare(b.date) || a.t.localeCompare(b.t));
+    const deduped = dedupeNodesByTitle(rawNodes);
+    if (dates.length < minDates || deduped.length < 2) continue;
+    const inCluster = new Map<string, number>();
+    for (const n of c.nodes) for (const f of c.feats) if (n.tags.includes(f)) inCluster.set(f, (inCluster.get(f) ?? 0) + 1);
+    const tags = [...c.feats].sort(
+      (a, b) => (inCluster.get(b) ?? 0) - (inCluster.get(a) ?? 0) || a.localeCompare(b),
+    );
+    // 主题名取**区分度最高**的标签（全局出现率最低），而不是簇内最高频的：
+    // 「客群」「财富」这类高频标签当标题毫无信息量（实测出现三个「客群」主题卡）。
+    const distinctive = [...tags].sort(
+      (a, b) => (tagFreq.get(a) ?? 0) - (tagFreq.get(b) ?? 0) || a.localeCompare(b),
+    );
+    const label = LABEL_ALIAS[distinctive[0] ?? ""] ?? distinctive[0] ?? "（未命名主题）";
+    const first = deduped[0];
+    built.push({
+      // id 掺入首节点：跨构建稳定（与条目 ID 同源思路），也保证同名主题合并前各自可寻址。
+      id: topicIdOf(`${label}|${first?.i ?? first?.t ?? ""}`),
+      label,
+      tags,
+      dates,
+      spanDays: dayGapKey(dates[0] ?? "", dates[dates.length - 1] ?? "") + 1,
+      nodes: deduped.slice(0, maxNodes),
+    });
+  }
+
+  // 同名主题合并：读者视角里「同名 = 同一个主题」，页面上出现两个「信贷」只会让人困惑。
+  const byLabel = new Map<string, Topic>();
+  for (const t of built) {
+    const prev = byLabel.get(t.label);
+    if (!prev) {
+      byLabel.set(t.label, t);
+      continue;
+    }
+    prev.nodes = dedupeNodesByTitle([...prev.nodes, ...t.nodes]).slice(0, maxNodes);
+    prev.dates = [...new Set([...prev.dates, ...t.dates])].sort();
+    prev.spanDays = dayGapKey(prev.dates[0] ?? "", prev.dates[prev.dates.length - 1] ?? "") + 1;
+    prev.tags = [...new Set([...prev.tags, ...t.tags])].slice(0, 6);
+  }
+  const topics = [...byLabel.values()];
+  for (const t of topics) {
+    const first = t.nodes[0];
+    t.id = topicIdOf(`${t.label}|${first?.i ?? first?.t ?? ""}`);
+  }
+  return topics
+    .sort((a, b) => b.nodes.length - a.nodes.length || a.label.localeCompare(b.label))
+    .slice(0, maxTopics);
+}
+
 export interface SearchManifest {
   version: number;
   /** 生成时刻（报告时区，北京时间）。 */
@@ -238,6 +446,7 @@ function main(): number {
 
   const tagCount = new Map<string, number>();
   const dates: string[] = [];
+  const slimDays: SlimDay[] = []; // 供 B2 主题聚类（保留锚点过滤后的条目）
   let total = 0;
   for (const [date, file] of [...picked.entries()].sort((a, b) => b[0].localeCompare(a[0]))) {
     let report: DailyReport;
@@ -268,6 +477,7 @@ function main(): number {
     );
     dates.push(date);
     total += items.length;
+    slimDays.push({ date, hero: slim.hero, items, anchored });
   }
 
   const manifest: SearchManifest = {
@@ -295,8 +505,16 @@ function main(): number {
     JSON.stringify(manifest, null, 0) + "\n",
     "utf8",
   );
+  // —— B2 主题跟踪时间线：跨期聚类（依赖 B1 索引与 F1 的节点保留）——
+  const topics = clusterTopics(slimDays);
+  fs.writeFileSync(
+    path.join(out, "topics.json"),
+    JSON.stringify({ version: 1, generatedAt: manifest.generatedAt, topics }, null, 0) + "\n",
+    "utf8",
+  );
   console.log(
-    `[search-index] ✅ ${dates.length} 期 / ${total} 条 / ${manifest.tags.length} 个标签 → ${out}/`,
+    `[search-index] ✅ ${dates.length} 期 / ${total} 条 / ${manifest.tags.length} 个标签 → ${out}/` +
+      `；主题时间线 ${topics.length} 个（跨期）`,
   );
   return 0;
 }

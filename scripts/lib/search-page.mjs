@@ -93,7 +93,7 @@ export function renderSearchPage({ days, generatedAt, latest }) {
 </head>
 <body>
   <h1>🔍 检索与主题归档</h1>
-  <p class="meta">共 ${kept.length} 期 / ${total} 条${generatedAt ? ` · 索引生成于 ${esc(generatedAt)}` : ""} · <a href="./index.html">最新一期（${esc(latest)}）</a> · <a href="./archive.html">归档</a></p>
+  <p class="meta">共 ${kept.length} 期 / ${total} 条${generatedAt ? ` · 索引生成于 ${esc(generatedAt)}` : ""} · <a href="./index.html">最新一期（${esc(latest)}）</a> · <a href="./topics.html">🧭 主题跟踪</a> · <a href="./archive.html">归档</a></p>
   <div class="modes">
     <button type="button" class="mode on" data-mode="search">🔍 检索</button>
     <button type="button" class="mode" data-mode="compare">⇄ 两期对比</button>
