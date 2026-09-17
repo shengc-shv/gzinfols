@@ -137,6 +137,9 @@ const latestHtml = fs
   // 首页是它的**副本**（放在发布根），同样的相对路径会被解析成 `/i/<id>.html` → **全部 404**
   // （2026-09-17 用户实测：底部分区卡片点开大部分 404）。故首页须补上期次前缀。
   .replace(/href="i\//g, `href="${latest}/i/`)
+  // 红筹台账入口同理：报告页里写 `../redchip/index.html`，搬到发布根后 `..` 越界 →
+  // 必须改写成 `./redchip/index.html`（与上面两条同源事故；站内链接自检会兜住漏改）。
+  .replace(/href="\.\.\/redchip\//g, 'href="./redchip/')
   // B1：最新一期的「归档」旁补一个「检索」入口（检索页只对发布根的相对路径成立）
   .replace(
     /(<a class="archive" href="\.\/archive\.html">[^<]*<\/a>)/,
