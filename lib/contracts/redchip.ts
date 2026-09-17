@@ -212,6 +212,14 @@ export interface RedchipPanel {
   entries: RedchipPanelEntry[];
   /** 快照抓取时刻（北京时间 ISO）；缺省 = 未取到快照。 */
   capturedAt?: string;
+  /**
+   * **台账总数**（含展示窗口外的在册线索）。
+   *
+   * 与 `entries.length` 的区别：`entries` 只放「窗口内」的近期动向（避免每天重复列全量），
+   * 而台账（`data/redchip/leads.json`）是全量在册清单。没有这个数字，读者会以为
+   * 「面板里没有 = 没有红筹商机」—— 而事实可能是「有 30 多家在册，只是近期无新动向」。
+   */
+  ledgerCount?: number;
 }
 
 /**

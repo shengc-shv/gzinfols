@@ -129,11 +129,15 @@ export function renderRedchipReport(lead, opts = {}) {
   .cta { display:inline-block; margin-top:.4rem; margin-right:1rem; color:var(--red); text-decoration:none; font-size:.86rem; }
   .cta:hover { text-decoration:underline; }
   .muted { color:var(--muted); }
+  .topnav { margin:0 0 .5rem; font-size:.82rem; }
+  .topnav a { color:var(--muted); text-decoration:none; }
+  .topnav a:hover { text-decoration:underline; }
   footer { color:var(--muted); font-size:.74rem; line-height:1.6; }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <p class="topnav"><a href="../index.html">← 红筹台账</a> · <a href="../../index.html">最新一期简报</a></p>
   <div class="top">
     <span class="badge ${badgeCls}">${esc(label)}</span>
     <span class="wm">会前版本 · 待深度核验</span>

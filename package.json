@@ -10,6 +10,7 @@
     "render": "tsx scripts/render.ts",
     "ipo:local": "tsx scripts/ipo-local.ts",
     "listed:local": "tsx scripts/listed-local.ts",
+    "redchip:backfill": "tsx scripts/redchip-backfill.ts",
     "notify": "tsx scripts/notify-daily.ts",
     "mark-delivered": "tsx scripts/mark-delivered.ts",
     "record-publish": "tsx scripts/record-publish.ts",

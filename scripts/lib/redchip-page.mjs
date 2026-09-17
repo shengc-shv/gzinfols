@@ -127,8 +127,11 @@ th:hover{background:#f2f0ec}
 .t-changed{background:#e6e9fd;color:#3b36a8}
 .empty{padding:1.2rem;color:#797986;font-size:.9rem}
 .warn{margin-top:1.5rem;padding:.8rem 1rem;background:#fdf0d9;border-radius:.5rem;color:#9a5b09;font-size:.85rem}
+.topnav{margin:0 0 .6rem;font-size:.85rem}
+.topnav a{text-decoration:none}
 a{color:#2f4cdd}
 </style></head><body>
+<p class="topnav"><a href="../index.html">← 返回最新一期简报</a></p>
 <h1>红筹项目监测</h1>
 <div class="sub">快照时间 ${esc(snapshot?.capturedAt ?? "—")} · 共 ${projects.length} 家（红筹 ${redchipCount}）· 口径：境外注册 ∧ 广东运营实体词频 ≥ 3</div>
 

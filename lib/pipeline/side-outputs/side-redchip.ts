@@ -92,7 +92,12 @@ function panelEntryOf(
   };
 }
 
-/** 面板：窗口内的红筹/待核线索（含未匹配到卡片的，T7），按递表日倒序。 */
+/**
+ * 面板：窗口内的红筹/待核线索（含未匹配到卡片的，T7），按递表日倒序。
+ *
+ * `ledgerCount` = **全量台账**里可展示的线索数（含窗口外）。窗口只约束「近期动向」的罗列，
+ * 不该让读者以为「面板空 = 没有红筹商机」—— 故把台账总数一并给出，渲染层据此给台账入口。
+ */
 export function buildRedchipPanel(
   inputs: RedchipInputs,
   matchedIds: Set<string>,
@@ -101,9 +106,11 @@ export function buildRedchipPanel(
     .map((l) => panelEntryOf(l, inputs, matchedIds))
     .filter((e): e is RedchipPanelEntry => Boolean(e))
     .sort((a, b) => (a.submitDate ?? "") < (b.submitDate ?? "") ? 1 : -1);
+  const ledgerCount = inputs.leads.filter((l) => redchipLabelOf(l)).length;
   return {
     entries,
     ...(inputs.capturedAt ? { capturedAt: inputs.capturedAt } : {}),
+    ...(ledgerCount ? { ledgerCount } : {}),
   };
 }
 
@@ -143,11 +150,14 @@ export function applyRedchip(
   return { report: { ...report, sections: { ...report.sections, ipo: next } }, matchedIds };
 }
 
-/** 纯函数总入口：挂徽章 + 面板（面板为空则不写字段，避免产出空面板）。 */
+/** 纯函数总入口：挂徽章 + 面板（面板无内容才不写字段，避免产出空面板）。 */
 export function buildRedchip(report: DailyReport, inputs: RedchipInputs): DailyReport {
   const { report: withBadges, matchedIds } = applyRedchip(report, inputs);
   const panel = buildRedchipPanel(inputs, matchedIds);
-  if (panel.entries.length === 0) return withBadges;
+  // 窗口内无动向**但台账有在册线索** → 仍写面板（渲染为「只列台账入口」的安静态）。
+  // 整块消失会让读者把「近期无新动向」误读成「没有红筹商机」—— 这正是回填前线上
+  // 页面一个「红筹」字样都没有的原因（38 家在册，却因为无窗口内动向而不可见）。
+  if (panel.entries.length === 0 && !panel.ledgerCount) return withBadges;
   return { ...withBadges, redchipPanel: panel };
 }
 

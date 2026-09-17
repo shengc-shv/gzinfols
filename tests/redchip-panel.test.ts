@@ -13,6 +13,7 @@ import { resolveReports } from "../lib/adapters/redchip/report-resolver";
 import { applyRedchip, buildRedchip, buildRedchipPanel } from "../lib/pipeline/side-outputs/side-redchip";
 import type { DailyReport, ReportItem } from "../lib/contracts/report";
 import type { RedchipChange, RedchipLead } from "../lib/contracts/redchip";
+import { renderRedchipPanel } from "../lib/services/render/redchip-panel";
 
 function lead(over: Partial<RedchipLead> = {}): RedchipLead {
   return {
@@ -222,4 +223,43 @@ test("⑧ added/changed 标记透传到徽章与面板", () => {
   assert.deepEqual(out.sections.ipo[0].redchip?.changedFields, ["状态"]);
   assert.equal(out.redchipPanel?.entries[0].isNew, true);
   assert.deepEqual(out.redchipPanel?.entries[0].changedFields, ["状态"]);
+});
+
+test("⑨ 台账入口：窗口内无动向时，面板转为「安静态」但必须给出台账计数与入口", () => {
+  // 回填基线后的真实形态：台账有在册线索，但都不在 7 天展示窗口内。
+  // 此时若整块消失，读者会把「近期无新动向」误读成「没有红筹商机」。
+  const archived = lead({
+    leadId: "108804",
+    appId: "108804",
+    nameCn: "錢大媽國際控股有限公司",
+    submitDate: "2026-08-21",
+  });
+  const out = buildRedchip(report([]), {
+    leads: [archived],
+    changes: [],
+    reports: new Map(),
+    today: TODAY,
+  });
+  assert.equal(out.redchipPanel?.entries.length, 0, "窗口外线索不进列表（避免每天重复罗列）");
+  assert.equal(out.redchipPanel?.ledgerCount, 1, "台账总数必须给出，否则等于「静默消失」");
+
+  const html = renderRedchipPanel(out.redchipPanel);
+  assert.ok(html.includes("redchip-ledger"), "安静态须渲染台账入口");
+  assert.ok(html.includes("红筹商机台账"), "入口文案须点明是台账");
+  assert.ok(html.includes("../redchip/index.html"), "入口须指向站点红筹总览页");
+  assert.ok(!html.includes("redchip-list"), "安静态不得渲染空列表");
+  assert.ok(html.includes("非结论"), "红线文案（线索 ≠ 结论）不得丢");
+});
+
+test("⑩ 台账为空 → 不渲染任何红筹区块（与「空板块自动隐藏」口径一致）", () => {
+  const out = buildRedchip(report([]), {
+    leads: [],
+    changes: [],
+    reports: new Map(),
+    today: TODAY,
+  });
+  assert.equal(out.redchipPanel, undefined, "无线索时不写字段");
+  assert.equal(renderRedchipPanel(undefined), "");
+  assert.equal(renderRedchipPanel({ entries: [] }), "");
+  assert.equal(renderRedchipPanel({ entries: [], ledgerCount: 0 }), "");
 });

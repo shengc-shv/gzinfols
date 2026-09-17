@@ -233,6 +233,11 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
   .redchip-foot { display: flex; gap: 0.8rem; margin-top: 0.35rem; }
   .redchip-foot .ipo-report { margin-top: 0; }
   .redchip-note { margin: 0.6rem 0 0; font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
+  /* 红筹台账入口（2026-09-17）：窗口内无动向时面板只留这一行，避免「近期无新动向」被误读成「没有商机」 */
+  .redchip-ledger { margin: 0.55rem 0 0; font-size: 0.75rem; line-height: 1.6; }
+  .redchip-ledger a { color: var(--c-redchip); font-weight: 600; text-decoration: none; }
+  .redchip-ledger a:hover { text-decoration: underline; }
+  .redchip-ledger-hint { margin-left: 0.5rem; color: var(--muted); font-size: 0.68rem; }
   .exec-ipo::after {
     content: ""; position: absolute; top: 1.7rem; right: 0; bottom: 0.5rem;
     width: 3.25rem; pointer-events: none; z-index: 3;

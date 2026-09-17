@@ -48,15 +48,53 @@ function itemHtml(e: RedchipPanelEntry): string {
     </li>`;
 }
 
-/** 空面板 / 未启用 → 空串（不渲染空区块，与「空板块自动隐藏」口径一致）。 */
+/**
+ * 台账入口链接（**站点相对路径**）。
+ *
+ * 报告页固定位于 `site/<date>/<date>.html`，台账总览页在 `site/redchip/index.html`，
+ * 故用 `../redchip/index.html`。⚠️ 发布根副本（`site/index.html`）里这个相对路径会被解析成
+ * `/../redchip/…`，`build-site` 必须同步改写（与 `../archive.html` 同款处理）——
+ * 实测漏改会让整片 404（2026-09-17 首页详情链接事故同源）。
+ */
+const LEDGER_HREF = "../redchip/index.html";
+
+function ledgerHtml(panel: RedchipPanel): string {
+  const n = panel.ledgerCount ?? 0;
+  if (!n) return "";
+  const windowed = panel.entries.length;
+  const hint =
+    windowed > 0
+      ? `本期新增动向 ${windowed} 家`
+      : "本期无新动向";
+  return `<p class="redchip-ledger"><a href="${LEDGER_HREF}">📋 红筹商机台账（在册 ${n} 家）→</a><span class="redchip-ledger-hint">${hint} · 台账为全量在册线索，面板只列近期动向</span></p>`;
+}
+
+/**
+ * 面板渲染。
+ *
+ * 三态：
+ * - 有近期动向 → 完整面板（列表 + 台账入口）
+ * - **窗口内无动向但台账有在册线索** → 只渲染台账入口一行（不能整块消失，
+ *   否则读者会把「近期无新动向」误读成「没有红筹商机」）
+ * - 台账也为空 → 空串（不渲染空区块，与「空板块自动隐藏」口径一致）
+ */
 export function renderRedchipPanel(panel: RedchipPanel | undefined): string {
-  if (!panel || panel.entries.length === 0) return "";
+  if (!panel) return "";
+  if (panel.entries.length === 0 && !panel.ledgerCount) return "";
   const captured = panel.capturedAt
     ? `数据截至 ${escapeHtml(panel.capturedAt.slice(0, 16).replace("T", " "))}`
     : "";
+  if (panel.entries.length === 0) {
+    return `<section class="redchip-panel redchip-panel--quiet" aria-labelledby="redchip-title">
+    <h2 class="redchip-title" id="redchip-title">🚩 红筹线索</h2>
+    ${ledgerHtml(panel)}
+    <p class="redchip-note">「线索」为机器判定（离岸注册 ∧ 广东运营实体语境命中），<strong>非结论</strong>。${captured}</p>
+  </section>`;
+  }
   return `<section class="redchip-panel" aria-labelledby="redchip-title">
     <h2 class="redchip-title" id="redchip-title">🚩 红筹线索<span class="redchip-count">${panel.entries.length}</span></h2>
     <ul class="redchip-list">${panel.entries.map(itemHtml).join("")}</ul>
+    ${ledgerHtml(panel)}
     <p class="redchip-note">「线索」为机器判定（离岸注册 ∧ 广东运营实体语境命中），<strong>非结论</strong>；点击可查看穿透分析报告（会前版本）。${captured}</p>
   </section>`;
 }

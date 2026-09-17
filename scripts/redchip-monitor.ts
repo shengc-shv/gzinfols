@@ -28,6 +28,7 @@ import {
   appendChanges,
   readChanges,
   readLatest,
+  readLeads,
   writeDatedSnapshot,
   writeLatest,
   writeLeads,
@@ -35,6 +36,7 @@ import {
 import { classifyProject } from "../lib/services/redchip/classify";
 import { diffSnapshots } from "../lib/services/redchip/diff";
 import { toLeads } from "../lib/services/redchip/leads";
+import { mergeProjects } from "../lib/services/redchip/backfill";
 import type { RedchipProject, RedchipSnapshot } from "../lib/contracts/redchip";
 import { REPORT_TZ, prevDateKey, todayKey } from "../lib/utils/time";
 
@@ -168,7 +170,18 @@ async function main(): Promise<void> {
   appendChanges(changes);
   // 线索库（**入库**）：渲染侧（side-redchip）唯一读方。含全部判定字段 + 由 changelog
   // 归并的 lastChangedAt（展示/口播的「更新」标记依据）。与快照同源，故紧随其后写。
-  writeLeads(toLeads(projects, readChanges()));
+  //
+  // ⚠️ 2026-09-17 修：必须**累积合并**（`mergeProjects`），不能直接用当日窗口覆盖 ——
+  // 采信窗口只有「今天 + 昨天」，覆盖写入会把窗口外的在册线索（含基线）静默抹掉，
+  // 这正是线上面板长期「共 1 家（红筹 0）」的直接根因。台账语义 = 在册状态的累积，
+  // 不是每日快照；同日重复抓取时同 appId 覆盖、discoveredAt 保留最早值。
+  const prevLeads = readLeads();
+  const merged = mergeProjects(prevLeads, projects);
+  writeLeads(toLeads(merged, readChanges()));
+  console.log(
+    "[redchip] 线索库累积：" + prevLeads.length + " → 合并后 " + merged.length +
+      " 条（本次窗口 " + projects.length + " 条）",
+  );
   console.log("[redchip] 已写入 data/redchip/{leads.json, latest.json, snapshots/" + dataDate + ".json, changelog.jsonl}");
 }
 
