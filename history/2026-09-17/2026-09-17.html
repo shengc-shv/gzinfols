@@ -4,16 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>每日简报 · 2026-09-17</title>
-<meta name="description" content="今日定调：美联储重启加息25基点，美元利率中枢抬升，跨境客群结售汇与外币配置窗口打开。">
+<meta name="report-date" content="2026-09-17">
+<meta name="description" content="今日定调：美联储今夜议息叠加营销9·30新规临近，跨境资产与合规整改双线并进，零售条线宜提前布防。">
 <meta property="og:type" content="website">
 <meta property="og:title" content="每日简报 · 2026-09-17">
-<meta property="og:description" content="今日定调：美联储重启加息25基点，美元利率中枢抬升，跨境客群结售汇与外币配置窗口打开。">
+<meta property="og:description" content="今日定调：美联储今夜议息叠加营销9·30新规临近，跨境资产与合规整改双线并进，零售条线宜提前布防。">
 <meta property="og:image" content="https://shengc-shv.github.io/gzinfols/og-image.png">
 <meta property="og:image:width" content="240">
 <meta property="og:image:height" content="240">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="每日简报 · 2026-09-17">
-<meta name="twitter:description" content="今日定调：美联储重启加息25基点，美元利率中枢抬升，跨境客群结售汇与外币配置窗口打开。">
+<meta name="twitter:description" content="今日定调：美联储今夜议息叠加营销9·30新规临近，跨境资产与合规整改双线并进，零售条线宜提前布防。">
 <meta name="twitter:image" content="https://shengc-shv.github.io/gzinfols/og-image.png">
 <style>
 
@@ -418,6 +419,11 @@
   .redchip-foot { display: flex; gap: 0.8rem; margin-top: 0.35rem; }
   .redchip-foot .ipo-report { margin-top: 0; }
   .redchip-note { margin: 0.6rem 0 0; font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
+  
+  .redchip-ledger { margin: 0.55rem 0 0; font-size: 0.75rem; line-height: 1.6; }
+  .redchip-ledger a { color: var(--c-redchip); font-weight: 600; text-decoration: none; }
+  .redchip-ledger a:hover { text-decoration: underline; }
+  .redchip-ledger-hint { margin-left: 0.5rem; color: var(--muted); font-size: 0.68rem; }
   .exec-ipo::after {
     content: ""; position: absolute; top: 1.7rem; right: 0; bottom: 0.5rem;
     width: 3.25rem; pointer-events: none; z-index: 3;
@@ -1261,18 +1267,135 @@
   0%, 100% { box-shadow: 0 0 0 4px rgba(64,158,255,0.95), 0 0 16px 3px rgba(64,158,255,0.55); background: rgba(64,158,255,0.20); }
   50% { box-shadow: 0 0 0 13px rgba(64,158,255,0.10), 0 0 4px 0 rgba(64,158,255,0.10); background: rgba(64,158,255,0.03); }
 }
+
+@keyframes gz-audio-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(64,158,255,0.85), 0 0 16px 3px rgba(64,158,255,0.45); }
+  50% { box-shadow: 0 0 0 7px rgba(64,158,255,0.40), 0 0 24px 7px rgba(64,158,255,0.28); }
+}
 .audio-highlight {
+  position: relative;
   border-radius: 8px;
   box-shadow: 0 0 0 4px rgba(64,158,255,0.85), 0 0 16px 3px rgba(64,158,255,0.45);
   background: rgba(64,158,255,0.16);
-  animation: gz-audio-flash 0.55s ease-in-out 3;
+  animation: gz-audio-flash 0.55s ease-in-out 3, gz-audio-pulse 2.6s ease-in-out 1.7s infinite;
   transition: background 0.25s, box-shadow 0.25s;
+}
+
+.must-card.audio-highlight, .insight.audio-highlight, .insight-card.audio-highlight,
+.risk-card.audio-highlight, .stock-card.audio-highlight, .brief.audio-highlight {
+  background: rgba(64,158,255,0.16);
+}
+
+.must-card.audio-highlight, .insight.audio-highlight, .insight-card.audio-highlight,
+.risk-card.audio-highlight, .stock-card.audio-highlight, .brief.audio-highlight {
+  outline: 3px solid rgba(37,99,235,0.95);
+  outline-offset: -3px;
 }
 .must-card.audio-highlight, .insight.audio-highlight, .stock-card.audio-highlight { transform: translateZ(0); }
 
+.audio-now-badge {
+  position: absolute; top: 4px; right: 6px; z-index: 3;
+  font-size: 0.66rem; font-weight: 700; line-height: 1.6;
+  padding: 0 0.32rem; border-radius: 6px;
+  background: #2563eb; color: #fff; white-space: nowrap;
+  box-shadow: none; animation: none;
+}
+
+.audio-now-hint {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem;
+  margin: 0.5rem 0 0; font-size: 0.8rem; line-height: 1.7;
+}
+.audio-now-hint[hidden] { display: none; }
+.audio-now-hint .an-dot { width: 0.5rem; height: 0.5rem; border-radius: 50%; background: #2563eb; flex: none; }
+.audio-now-hint .an-txt { font-weight: 600; }
+.audio-now-hint .an-note { color: var(--muted, #888); }
+.audio-now-hint .an-go {
+  font: inherit; font-size: 0.78rem; line-height: 1.9; padding: 0 0.6rem;
+  border: 1px solid rgba(37,99,235,0.9); border-radius: 999px;
+  background: #2563eb; color: #fff; cursor: pointer;
+}
+.audio-now-hint .an-go[hidden] { display: none; }
+
+.audio-chapters { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.5rem 0 0; }
+.audio-chapter {
+  font: inherit; font-size: 0.78rem; line-height: 1.9;
+  padding: 0 0.5rem; border: 1px solid var(--rule, #ddd); border-radius: 999px;
+  background: var(--bg-elevated, #fff); color: var(--fg, #1a1a1a); cursor: pointer;
+}
+.audio-chapter .ch-t { color: var(--muted, #888); margin-right: 0.25rem; font-variant-numeric: tabular-nums; }
+.audio-chapter.is-current { border-color: rgba(37,99,235,0.95); color: #fff; background: rgba(37,99,235,0.92); }
+.audio-chapter.is-current .ch-t { color: rgba(255,255,255,0.85); }
+
 @media (prefers-reduced-motion: reduce) {
   .audio-highlight { animation: none; }
+  .must-card.audio-highlight, .insight.audio-highlight, .insight-card.audio-highlight,
+  .risk-card.audio-highlight, .stock-card.audio-highlight, .brief.audio-highlight {
+    outline-width: 4px; background: rgba(64,158,255,0.26);
+  }
 }
+
+.card-actions { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.45rem; }
+.card-actions button {
+  font: inherit; font-size: 0.68rem; line-height: 1.8; padding: 0 0.45rem;
+  border: 1px solid var(--rule); border-radius: 999px;
+  background: var(--bg-elevated); color: var(--muted); cursor: pointer;
+}
+.card-actions button:hover { color: var(--fg); border-color: var(--muted); }
+.card-actions button.is-fav { color: #b8860b; border-color: #d4a017; font-weight: 700; }
+.fav-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.6rem 0 0; font-size: 0.78rem; }
+.fav-bar .fav-label { color: var(--muted); }
+.fav-bar button {
+  font: inherit; font-size: 0.78rem; line-height: 1.9; padding: 0 0.55rem;
+  border: 1px solid var(--rule); border-radius: 999px;
+  background: var(--bg-elevated); color: var(--fg); cursor: pointer;
+}
+.fav-bar button:hover { border-color: var(--muted); }
+.fav-empty { color: var(--muted); font-size: 0.75rem; }
+.fav-list { margin: 0.4rem 0 0; padding-left: 1.1rem; font-size: 0.8rem; line-height: 1.8; }
+.fav-list a { color: var(--c-link, #2f4cdd); }
+  /* C4 产品条线覆盖 (2026-09-17)：按揭 / 信用卡 / 代发 —— 未命中显式标「本期无」 */
+  .product-coverage { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.5rem 0 0; font-size: 0.76rem; }
+  .product-coverage .pc-label { color: var(--muted); }
+  .pc-chip { padding: 0 0.45rem; border-radius: 999px; line-height: 1.8; white-space: nowrap; }
+  .pc-hit { background: #e8f2ff; color: #1f4e9c; border: 1px solid #c3daf7; font-weight: 600; }
+  .pc-none { background: var(--bg); color: var(--muted); border: 1px dashed var(--rule); }
+  /* F1 同主题进展节点 (2026-09-17)：同主题被裁剪的报道折叠在卡片内 */
+  .progress-nodes { margin: 0.4rem 0 0; font-size: 0.78rem; }
+  .progress-nodes > summary { cursor: pointer; color: var(--muted); }
+  .progress-nodes ul { margin: 0.3rem 0 0; padding-left: 1.1rem; line-height: 1.8; }
+  .progress-nodes li { margin: 0.15rem 0; }
+  .progress-nodes .pn-date { color: var(--muted); margin-right: 0.35rem; font-variant-numeric: tabular-nums; }
+  .progress-nodes .pn-src { color: var(--muted); margin-left: 0.35rem; font-size: 0.72rem; }
+  /* C1 角色视图条 (2026-09-17)：按条线一键筛选 */
+  .role-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.35rem; margin: 0.85rem 0 0; }
+  .role-label { font-size: 0.78rem; color: var(--muted); }
+  .role-chip { font: inherit; font-size: 0.78rem; line-height: 1.9; padding: 0 0.55rem;
+    border: 1px solid var(--rule); border-radius: 999px; background: var(--bg-elevated); color: var(--fg); cursor: pointer; }
+  .role-chip.active { background: #2563eb; border-color: #2563eb; color: #fff; }
+  .role-hint { font-size: 0.72rem; color: var(--muted); }
+  /* C1 客群标签可点（原为纯展示 span） */
+  button.seg-chip { font-family: inherit; cursor: pointer; border: none; }
+  button.seg-chip:hover { filter: brightness(0.94); }
+  /* A3 增量三态徽章 (2026-09-17)：新增 / 有进展 / 续报 */
+  .delta-badge { display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 8px;
+    font-size: 10px; font-weight: 700; line-height: 1.7; vertical-align: middle; white-space: nowrap; }
+  .delta-new { color: #fff; background: #1e7e34; }
+  .delta-changed { color: #fff; background: #d97706; }
+  .delta-followup { color: #5b6472; background: #eceef1; }
+
+  
+  .maturity { display: inline-flex; align-items: center; gap: 4px; margin-left: 6px;
+    padding: 0 6px; border-radius: 8px; font-size: 10px; font-weight: 700;
+    line-height: 1.7; vertical-align: middle; white-space: nowrap; cursor: help; }
+  .maturity-clue { color: #5b6472; background: #eceef1; }
+  .maturity-progress { color: #1d4ed8; background: #e4ecfd; }
+  .maturity-landed { color: #fff; background: #1e7e34; }
+  .mt-track { display: inline-flex; gap: 2px; }
+  .mt-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .28; }
+  .mt-dot.mt-on { opacity: 1; }
+  .maturity-next { margin: .35rem 0 0; font-size: .82rem; color: var(--fg, #1a1a1f); }
+  .maturity-next b { color: var(--muted, #797986); font-weight: 600; }
+
   /* 商机洞察客户客群标签 (2026-09-08) */
   .insight-segs { margin: 4px 0 6px; display: flex; flex-wrap: wrap; gap: 5px; }
   .seg-chip { font-size: 11px; font-weight: 600; border-radius: 9px; padding: 1px 8px; line-height: 1.7; white-space: nowrap; }
@@ -1287,19 +1410,21 @@
     <div class="player-card">
     <div class="player-title"><span class="ic">🎧</span> 今日语音简报 <span class="player-dur">约 3 分 48 秒</span><span class="player-badge player-badge-tencent">腾讯合成</span></div>
     <audio controls preload="none" src="audio/briefing-2026-09-17.mp3" id="audio-player"></audio>
-    <script type="application/json" id="audio-segments">[{&quot;id&quot;:&quot;intro&quot;,&quot;startSec&quot;:0,&quot;durationSec&quot;:1,&quot;refs&quot;:[],&quot;text&quot;:&quot;早上好。&quot;},{&quot;id&quot;:&quot;hero&quot;,&quot;startSec&quot;:1,&quot;durationSec&quot;:18,&quot;refs&quot;:[],&quot;text&quot;:&quot;先看今日定调。美联储时隔三年多重启加息二十五个基点，并预计年内还可能再升一次，美元利率中枢明显抬升。建议分行梳理有美元负债和跨境资金需求的客户名单，主动提示结售汇与外币存款的配置窗口。&quot;},{&quot;id&quot;:&quot;must&quot;,&quot;startSec&quot;:19,&quot;durationSec&quot;:34,&quot;refs&quot;:[&quot;https://news.dayoo.com/guangzhou/202609/16/139995_55004139.htm&quot;,&quot;https://www.stcn.com/article/detail/4188335.html&quot;,&quot;https://m.21jingji.com/article/20260916/herald/55d33592173c7762b790768c6ff6c2d0.html&quot;],&quot;text&quot;:&quot;接下去看今日必读。香港五年规划设大湾区专章。明确支持南沙对外开放门户作用，跨境金融与南沙客群服务窗口打开，政银合作可提前布局。。其次，一线二手房价格连涨6月。一线城市二手房价格连涨、上海新房领涨，按揭与置换需求或回暖，住房金融投放节奏可跟进。。此外，大额存单利率低于定存。存款产品比价逻辑生变，到期资金或向理财、保险迁移，财富条线需重排货架与话术。。&quot;},{&quot;id&quot;:&quot;insight&quot;,&quot;startSec&quot;:53,&quot;durationSec&quot;:96,&quot;refs&quot;:[&quot;https://finance.eastmoney.com/a/202609173876448964.html&quot;,&quot;https://finance.sina.com.cn/roll/2026-09-17/doc-inisatup0253673.shtml&quot;,&quot;https://finance.sina.com.cn/roll/2026-09-16/doc-inirxxxq3375587.shtml&quot;,&quot;https://www.cnfin.com/yw-lb/detail/20260917/4470926_1.html&quot;,&quot;https://www.cnr.cn/gd/meiliguangdong/20260916/t20260916_527815797.shtml&quot;,&quot;https://www.cnr.cn/gd/fxgz/20260916/t20260916_527815570.shtml&quot;,&quot;https://news.dayoo.com/guangzhou/202609/16/139995_55004340.htm&quot;,&quot;https://www.cnfin.com/yw-lb/detail/20260917/4470937_1.html&quot;,&quot;https://news.dayoo.com/guangzhou/202609/16/139995_55004409.htm&quot;,&quot;https://finance.eastmoney.com/a/202609163875242121.html&quot;],&quot;text&quot;:&quot;接下去是商机洞察。具备高端客户商机的，跨境客群外币配置窗口，美联储加息推升美元利率，有美元负债或跨境融资需求的广州外向型企业主与私行客户，锁汇与外币存款诉求上升。。本周梳理跨境结算与外币负债客户名单，主动提示结售汇与外币存款窗口，配套美元融资成本锁定方案。。此外，具备零售 A U M商机的，理财信披调整客户沟通，理财统一信披进入实操、存量产品业绩基准分批调整，叠加销售费率打折，客户比价与赎回咨询可能集中出现。。本周完成存量产品披露口径自查，理财经理提前备好业绩基准调整说明，对到期资金主动推荐适配货架。。同时，具备普惠小微商机的，穗港科创平台客群对接，穗港科技产业融合创新中心揭牌，港资科研机构与穗企联合项目落地，跨境账户、结算与融资需求集中释放。。本周对接平台入驻机构名单，梳理港资科研企业开户与跨境资金通道需求，配套科创企业全周期服务方案。。另一条值得关注，具备普惠小微商机的，跨境电商海外仓融资，广州推动跨境电商海外仓高质量发展，海外仓企业备货与结算资金需求上升，是普惠小微与跨境结算的交叉客群。。本周走访本地海外仓与跨境电商企业，主推经营贷加跨境结算组合方案，同步跟进汇率避险产品配置。。&quot;},{&quot;id&quot;:&quot;risk&quot;,&quot;startSec&quot;:149,&quot;durationSec&quot;:17,&quot;refs&quot;:[&quot;https://finance.eastmoney.com/a/202609173876448964.html&quot;,&quot;https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzwqv3656432.shtml&quot;],&quot;text&quot;:&quot;接下去是风险预警。今天有 1 个需要警惕：美联储加息外溢汇率风险，财富端外币理财净值波动加大，私行客户海外资产咨询增多；个贷端美元负债客户还款成本上升；风控需关注汇率敞口集中度。。&quot;},{&quot;id&quot;:&quot;stock&quot;,&quot;startSec&quot;:166,&quot;durationSec&quot;:60,&quot;refs&quot;:[],&quot;text&quot;:&quot;下面是9月16日股市收盘信息。A股（北京时间9月16日 周三收盘）：创业板指涨1.96%，半导体全线爆发领涨，美联储加息决议前资金抢跑科技。板块上看，结构分化比较明显：机器人概念承压，知情人士称商业化订单存三类注水，资金情绪受扰动；半导体板块爆发，科创50涨超4%，HBM现货价格走高叠加多重利好催化。港股（北京时间9月16日 周三收盘）：恒生指数收报24713.78点（+0.19%）；恒生科技收报4325.45点（+0.79%）。板块层面：恒生科技指数涨0.79%；恒生指数涨0.19%。美股（美东时间9月16日 周三收盘）：道琼斯收报51461.90点（-1.21%）；纳斯达克收报25978.42点（-0.01%）。&quot;}]</script>
+    <div class="audio-now-hint" id="audio-now-hint" hidden><span class="an-dot" aria-hidden="true"></span><span class="an-txt" id="audio-now-text"></span><span class="an-note" id="audio-now-note"></span><button type="button" class="an-go" id="audio-now-go" hidden>定位到卡片</button></div>
+    <div class="audio-chapters" id="audio-chapters"><button type="button" class="audio-chapter" data-seg="intro" data-start="0" data-idx="0"><span class="ch-t">0:00</span>开场</button><button type="button" class="audio-chapter" data-seg="hero" data-start="1" data-idx="1"><span class="ch-t">0:01</span>今日定调</button><button type="button" class="audio-chapter" data-seg="must" data-start="17" data-idx="2"><span class="ch-t">0:17</span>今日必读</button><button type="button" class="audio-chapter" data-seg="insight" data-start="55" data-idx="3"><span class="ch-t">0:55</span>业务启示</button><button type="button" class="audio-chapter" data-seg="stock" data-start="161" data-idx="4"><span class="ch-t">2:41</span>股市动态</button></div>
+    <script type="application/json" id="audio-segments">[{&quot;id&quot;:&quot;intro&quot;,&quot;startSec&quot;:0,&quot;durationSec&quot;:1,&quot;refs&quot;:[],&quot;text&quot;:&quot;早上好。&quot;},{&quot;id&quot;:&quot;hero&quot;,&quot;startSec&quot;:1,&quot;durationSec&quot;:16,&quot;refs&quot;:[],&quot;text&quot;:&quot;先看今日定调。美联储议息今夜揭晓，美债收益率和房贷利率同步走高，跨境客户结售汇与外币配置咨询会明显升温；同时金融营销九三零新规落地在即，宣传话术和第三方素材都要倒排自查。&quot;},{&quot;id&quot;:&quot;must&quot;,&quot;startSec&quot;:17,&quot;durationSec&quot;:38,&quot;refs&quot;:[&quot;https://www.cnfin.com/hg-lb/detail/20260916/4470375_1.html&quot;,&quot;https://finance.sina.com.cn/roll/2026-09-16/doc-inirzshv4689713.shtml&quot;,&quot;https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzmyz3773279.shtml&quot;],&quot;text&quot;:&quot;接下去看今日必读。多地房地产政策优化见效。统计局称多地政策优化效果逐步显现，叠加70城房价新指标发布，住房金融投放节奏与区域差异值得跟踪。。其次，金融营销9·30新规将近。宣传话术、展示规则与第三方合作素材面临整改，财富与信用卡条线需倒排自查时间表，避免合规敞口。。此外，9月金融债提速740亿。银行加快补充中长期负债，负债成本与期限结构变化可能传导至存款定价策略，影响零售AUM产品布局。。&quot;},{&quot;id&quot;:&quot;insight&quot;,&quot;startSec&quot;:55,&quot;durationSec&quot;:106,&quot;refs&quot;:[&quot;https://finance.eastmoney.com/a/202609173876448964.html&quot;,&quot;https://finance.sina.com.cn/roll/2026-09-17/doc-inisatup0253673.shtml&quot;,&quot;https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-17/doc-inisatui4286974.shtml&quot;,&quot;https://finance.sina.com.cn/roll/2026-09-16/doc-inirxxxq3375587.shtml&quot;,&quot;https://news.dayoo.com/guangzhou/202609/16/139995_55004139.htm&quot;,&quot;https://news.dayoo.com/guangzhou/202609/17/139995_55004542.htm&quot;,&quot;https://www.cnr.cn/gd/fxgz/20260916/t20260916_527815570.shtml&quot;,&quot;https://www.cnfin.com/yw-lb/detail/20260917/4470937_1.html&quot;,&quot;https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-16/doc-inirzsia9882739.shtml&quot;],&quot;text&quot;:&quot;接下去是商机洞察。具备零售 A U M商机的，跨境客群结售汇窗口，美联储加息落地后美元利率中枢抬升，广州有美元资产或跨境收付需求的客户换汇与外币配置意愿上升，结售汇与外币存款咨询量预计走高。。今日起梳理跨境客群名单，主动推送外币存款与结售汇方案；对美元负债客户提示提前锁定融资成本。。此外，具备零售 A U M商机的，含权理财配置话术调整，8月理财规模再创新高、含权产品增量突出，客户对净值波动接受度在变，叠加信披统一进入实操，财富端沟通口径需同步更新。。本周更新含权产品配置话术与业绩基准说明，对到期定存客户做理财、保险迁移引导，同步准备波动安抚口径。。同时，具备高端客户商机的，南沙跨境金融门户机会，香港五年规划设大湾区专章并支持南沙对外开放门户作用，南沙跨境客群与港资企业主的账户、结算及资产配置需求有望增加。。下一步观察南沙跨境政策细则落地节奏，提前储备港人港企开户与跨境理财通服务方案，锁定高净值跨境客群。。另一条值得关注，具备普惠小微商机的，汽车零部件产业链小微客群，黄埔再落两个汽车零部件项目，广州东部汽车产业链延链补链提速，上下游小微供应商与个体工商户的经营贷、代发需求同步上升。。本周走访黄埔汽车产业链园区，梳理零部件供应商名单，配套经营贷与代发工资方案，抢占园区政银合作入口。。&quot;},{&quot;id&quot;:&quot;stock&quot;,&quot;startSec&quot;:161,&quot;durationSec&quot;:66,&quot;refs&quot;:[],&quot;text&quot;:&quot;下面是9月16日股市收盘信息。A股（北京时间9月16日 周三收盘）：沪指涨0.71%，创业板指涨近2%，美联储重启加息落地，半导体板块爆发。强势方向集中在：创业板指涨1.96%，成长风格领涨，科技股资金关注度明显提升；半导体板块爆发，科创50指数涨超4%，HBM现货价格走高带动相关概念股走强。港股（北京时间9月16日 周三收盘）：恒指收报24533.46点，跌0.73%，科指跌0.76%，科网股低迷、黄金股下挫。走弱的方向集中在：黄金股下挫，香港金管局跟随加息25个基点，利率敏感板块承压；科网股整体低迷，恒生科技指数跌0.76%，拖累大市表现。美股（美东时间9月16日 周三收盘）：道琼斯收报51461.90点（-1.21%）；纳斯达克收报25978.42点（-0.01%）。&quot;}]</script>
   </div>
   <!-- 报头：今日定调 + 数据截至 -->
   <header class="masthead">
     <div class="eyebrow">广州地区 · 零售业务每日资信（个人整理，非本行立场）</div>
     <h1>9月17日 星期四</h1>
-    <p class="hero-line">今日定调：美联储重启加息25基点，美元利率中枢抬升，跨境客群结售汇与外币配置窗口打开。</p>
-    <p class="meta-line">数据截至 07:43 · 去重后资讯 21 条 · 商机 7 条 · <a class="archive" href="../archive.html">← 历史归档</a></p>
+    <p class="hero-line">今日定调：美联储今夜议息叠加营销9·30新规临近，跨境资产与合规整改双线并进，零售条线宜提前布防。<span class="delta-badge delta-new" title="本期首次出现（此前 30 天记忆库中没有同类事件）">新增</span></p>
+    <p class="meta-line">数据截至 13:09 · 去重后资讯 21 条 · 商机 6 条 · <a class="archive" href="../archive.html">← 历史归档</a></p>
     <details class="coverage">
     <summary>覆盖度与来源分布</summary>
     <div class="cov-grid">
-      <div class="cov-col"><h4>板块条数</h4><ul><li class="cov-zero"><span class="cov-k">广州本地</span><span class="cov-v">本期无</span></li><li><span class="cov-k">业务启示</span><span class="cov-v">8 条</span></li><li><span class="cov-k">政策与市场</span><span class="cov-v">12 条</span></li><li><span class="cov-k">科技前沿</span><span class="cov-v">1 条</span></li><li><span class="cov-k">广东IPO</span><span class="cov-v">5 条</span></li><li><span class="cov-k">股市动态</span><span class="cov-v">6 条</span></li></ul></div>
-      <div class="cov-col"><h4>来源（抓取 → 收录）</h4><ul><li><span class="cov-k">cnr-gd</span><span class="cov-v">58 → 1 · 均分 31</span></li><li><span class="cov-k">sina-bank</span><span class="cov-v">47 → 0</span></li><li><span class="cov-k">guancha</span><span class="cov-v">47 → 0</span></li><li><span class="cov-k">cnfin</span><span class="cov-v">46 → 13 · 均分 27</span></li><li><span class="cov-k">sina-a-stock</span><span class="cov-v">36 → 1 · 均分 21</span></li><li><span class="cov-k">southcn</span><span class="cov-v">33 → 0</span></li><li><span class="cov-k">sina-hk-stock</span><span class="cov-v">32 → 0</span></li><li><span class="cov-k">cnbc-top</span><span class="cov-v">30 → 1 · 均分 21</span></li><li><span class="cov-k">stcn</span><span class="cov-v">30 → 14 · 均分 21</span></li><li><span class="cov-k">dayoo-gz</span><span class="cov-v">29 → 0</span></li><li><span class="cov-k">cctv-finance</span><span class="cov-v">21 → 0</span></li><li><span class="cov-k">fed-press</span><span class="cov-v">20 → 2 · 均分 21</span></li><li><span class="cov-k">eastmoney-stock</span><span class="cov-v">20 → 3 · 均分 45</span></li><li><span class="cov-k">sina-money</span><span class="cov-v">18 → 1 · 均分 74</span></li><li><span class="cov-k">investing-news</span><span class="cov-v">10 → 9 · 均分 25</span></li><li><span class="cov-k">crunchbase-news</span><span class="cov-v">10 → 0</span></li><li><span class="cov-k">govcn-policy</span><span class="cov-v">8 → 0</span></li><li><span class="cov-k">21jingji-finance</span><span class="cov-v">8 → 0</span></li><li><span class="cov-k">arxiv-fintech</span><span class="cov-v">4 → 0</span></li><li><span class="cov-k">hk-filing</span><span class="cov-v">3 → 2 · 均分 21</span></li><li><span class="cov-k">gd-csrc-tutoring</span><span class="cov-v">3 → 3 · 均分 21</span></li><li><span class="cov-k">hk-filing-gd</span><span class="cov-v">2 → 1 · 均分 30</span></li><li><span class="cov-k">gd-szse-audit</span><span class="cov-v">1 → 1 · 均分 61</span></li></ul></div>
+      <div class="cov-col"><h4>板块条数</h4><ul><li><span class="cov-k">广州本地</span><span class="cov-v">1 条</span></li><li><span class="cov-k">业务启示</span><span class="cov-v">8 条</span></li><li><span class="cov-k">政策与市场</span><span class="cov-v">12 条</span></li><li class="cov-zero"><span class="cov-k">科技前沿</span><span class="cov-v">本期无</span></li><li><span class="cov-k">广东IPO</span><span class="cov-v">5 条</span></li><li><span class="cov-k">股市动态</span><span class="cov-v">6 条</span></li></ul></div>
+      <div class="cov-col"><h4>来源（抓取 → 收录）</h4><ul><li><span class="cov-k">cnr-gd</span><span class="cov-v">58 → 2 · 均分 21</span></li><li><span class="cov-k">guancha</span><span class="cov-v">47 → 1 · 均分 34</span></li><li><span class="cov-k">cnfin</span><span class="cov-v">46 → 20 · 均分 30</span></li><li><span class="cov-k">sina-bank</span><span class="cov-v">46 → 10 · 均分 33</span></li><li><span class="cov-k">sina-a-stock</span><span class="cov-v">31 → 13 · 均分 24</span></li><li><span class="cov-k">cnbc-top</span><span class="cov-v">30 → 0</span></li><li><span class="cov-k">stcn</span><span class="cov-v">30 → 20 · 均分 30</span></li><li><span class="cov-k">dayoo-gz</span><span class="cov-v">30 → 12 · 均分 32</span></li><li><span class="cov-k">cctv-finance</span><span class="cov-v">23 → 3 · 均分 21</span></li><li><span class="cov-k">sina-hk-stock</span><span class="cov-v">22 → 8 · 均分 27</span></li><li><span class="cov-k">fed-press</span><span class="cov-v">20 → 0</span></li><li><span class="cov-k">sina-money</span><span class="cov-v">19 → 6 · 均分 66</span></li><li><span class="cov-k">eastmoney-stock</span><span class="cov-v">19 → 8 · 均分 31</span></li><li><span class="cov-k">investing-news</span><span class="cov-v">10 → 8 · 均分 21</span></li><li><span class="cov-k">crunchbase-news</span><span class="cov-v">10 → 0</span></li><li><span class="cov-k">21jingji-finance</span><span class="cov-v">9 → 1 · 均分 66</span></li><li><span class="cov-k">govcn-policy</span><span class="cov-v">8 → 0</span></li><li><span class="cov-k">hk-filing</span><span class="cov-v">3 → 2 · 均分 21</span></li><li><span class="cov-k">gd-csrc-tutoring</span><span class="cov-v">3 → 3 · 均分 21</span></li><li><span class="cov-k">arxiv-fintech</span><span class="cov-v">2 → 2 · 均分 21</span></li><li><span class="cov-k">hk-filing-gd</span><span class="cov-v">2 → 1 · 均分 30</span></li><li><span class="cov-k">gd-szse-audit</span><span class="cov-v">1 → 1 · 均分 61</span></li></ul></div>
     </div>
     
     <p class="cov-note">「收录」＝经时间窗、跨天判重、相关性漏斗后进入本期的条数；标「本期无」的板块是<strong>确实没有</strong>，不是漏采。</p>
@@ -1311,45 +1436,52 @@
       <h2 class="exec-title">执行摘要</h2>
       <span class="exec-sub">今日必读 · 商机洞察 · 风险预警（AI 生成）· 广东IPO（交易所/证监会官方源）</span>
     </div>
-    <div class="exec-must"><h3 class="exec-col-title">📌 今日必读<span class="must-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><ul class="must-scroller"><li class="must-card must-top" data-audio-section="must" data-top-must="true"><span class="must-index">1</span><div class="must-body"><strong>香港五年规划设大湾区专章</strong><span class="must-why">明确支持南沙对外开放门户作用，跨境金融与南沙客群服务窗口打开，政银合作可提前布局。</span><a class="must-inbody" href="#itm-1nmgprb">见正文</a></div><span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span></li><li class="must-card must-top" data-audio-section="must" data-top-must="true"><span class="must-index">2</span><a class="must-body must-link" href="https://www.stcn.com/article/detail/4188335.html" target="_blank" rel="noopener"><strong>一线二手房价格连涨6月</strong><span class="must-why">一线城市二手房价格连涨、上海新房领涨，按揭与置换需求或回暖，住房金融投放节奏可跟进。</span></a><span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span></li><li class="must-card must-top" data-audio-section="must" data-top-must="true"><span class="must-index">3</span><a class="must-body must-link" href="https://m.21jingji.com/article/20260916/herald/55d33592173c7762b790768c6ff6c2d0.html" target="_blank" rel="noopener"><strong>大额存单利率低于定存</strong><span class="must-why">存款产品比价逻辑生变，到期资金或向理财、保险迁移，财富条线需重排货架与话术。</span></a><span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span></li></ul></div>
+    <div class="exec-must"><h3 class="exec-col-title">📌 今日必读<span class="must-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><ul class="must-scroller"><li class="must-card must-top" data-audio-section="must" data-top-must="true"><span class="must-index">1</span><div class="must-body"><strong>多地房地产政策优化见效</strong><span class="must-why">统计局称多地政策优化效果逐步显现，叠加70城房价新指标发布，住房金融投放节奏与区域差异值得跟踪。</span><a class="must-inbody" href="#itm-1dn9aj6">见正文</a></div><span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span><span class="delta-badge delta-changed" title="此前播报过，本期出现新进展：!发布">有进展</span></li><li class="must-card must-top" data-audio-section="must" data-top-must="true"><span class="must-index">2</span><div class="must-body"><strong>金融营销9·30新规将近</strong><span class="must-why">宣传话术、展示规则与第三方合作素材面临整改，财富与信用卡条线需倒排自查时间表，避免合规敞口。</span><a class="must-inbody" href="#itm-heipcf">见正文</a></div><span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span><span class="delta-badge delta-new" title="本期首次出现（此前 30 天记忆库中没有同类事件）">新增</span></li><li class="must-card must-top" data-audio-section="must" data-top-must="true"><span class="must-index">3</span><div class="must-body"><strong>9月金融债提速740亿</strong><span class="must-why">银行加快补充中长期负债，负债成本与期限结构变化可能传导至存款定价策略，影响零售AUM产品布局。</span><a class="must-inbody" href="#itm-wjqh3c">见正文</a></div><span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span><span class="delta-badge delta-new" title="本期首次出现（此前 30 天记忆库中没有同类事件）">新增</span></li></ul></div>
     <div class="exec-insights"><h3 class="exec-col-title">💡 商机洞察<span class="insight-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><div class="insight-scroller"><article class="insight" data-audio-section="insight">
+      <div class="insight-tags"><span class="tag t-wealth">财富</span><span class="tag t-mass">客群</span></div>
+      <div class="insight-segs"><button type="button" class="seg-chip seg-aum" data-seg="零售AUM" title="按「零售AUM」筛选下方板块">零售AUM</button></div>
+      <h3>跨境客群结售汇窗口<span class="delta-badge delta-changed" title="此前播报过，本期出现新进展：!落地">有进展</span><span class="maturity maturity-clue" title="公开信息里只有规划/意向类信号，尚未见程序性动作"><span class="mt-track"><i class="mt-dot mt-on"></i><i class="mt-dot"></i><i class="mt-dot"></i></span>线索</span> <span class="insight-srcs"><a class="insight-src" href="https://finance.eastmoney.com/a/202609173876448964.html" target="_blank" rel="noopener" title="打开原文 · 时隔三年多！美联储重启加息25个基点内部预计年内还会升息一次" aria-label="打开原文 · 时隔三年多！美联储重启加息25个基点内部预计年内还会升息一次">①</a><a class="insight-src insight-src-inbody" href="#itm-jwvtis" title="跳转正文 · 09/17 · 美国金融机构上调贷款参考利率至7%" aria-label="跳转正文 · 09/17 · 美国金融机构上调贷款参考利率至7%">②</a></span></h3>
+      <p><b>影响：</b>美联储加息落地后美元利率中枢抬升，广州有美元资产或跨境收付需求的客户换汇与外币配置意愿上升，结售汇与外币存款咨询量预计走高。</p>
+      <p><b>建议：</b>今日起梳理跨境客群名单，主动推送外币存款与结售汇方案；对美元负债客户提示提前锁定融资成本。</p>
+      <p class="maturity-next"><b>下一步：</b>先建档跟踪：把主体纳入目标名单，等出现预算/招标/审批等硬信号再评估接触</p>
+    </article><article class="insight" data-audio-section="insight">
       <div class="insight-tags"><span class="tag t-wealth">财富</span></div>
-      <div class="insight-segs"><span class="seg-chip seg-aum">零售AUM</span></div>
-      <h3>理财信披调整客户沟通 <span class="insight-srcs"><a class="insight-src" href="https://finance.sina.com.cn/roll/2026-09-16/doc-inirxxxq3375587.shtml" target="_blank" rel="noopener" title="打开原文 · 理财统一信披进入实操阶段 存量产品业绩基准分批" aria-label="打开原文 · 理财统一信披进入实操阶段 存量产品业绩基准分批">①</a><a class="insight-src insight-src-inbody" href="#itm-1fxswba" title="跳转正文 · 09/17 · 竞争加剧 理财产品销售费率频现“打折”" aria-label="跳转正文 · 09/17 · 竞争加剧 理财产品销售费率频现“打折”">②</a></span></h3>
-      <p><b>影响：</b>理财统一信披进入实操、存量产品业绩基准分批调整，叠加销售费率打折，客户比价与赎回咨询可能集中出现。</p>
-      <p><b>建议：</b>本周完成存量产品披露口径自查，理财经理提前备好业绩基准调整说明，对到期资金主动推荐适配货架。</p>
+      <div class="insight-segs"><button type="button" class="seg-chip seg-aum" data-seg="零售AUM" title="按「零售AUM」筛选下方板块">零售AUM</button></div>
+      <h3>含权理财配置话术调整<span class="delta-badge delta-changed" title="此前播报过，本期出现新进展：#8月">有进展</span><span class="maturity maturity-clue" title="公开信息里只有规划/意向类信号，尚未见程序性动作"><span class="mt-track"><i class="mt-dot mt-on"></i><i class="mt-dot"></i><i class="mt-dot"></i></span>线索</span> <span class="insight-srcs"><a class="insight-src insight-src-inbody" href="#itm-os5fo8" title="跳转正文 · 09/17 · 银行理财规模8月再创新高，“含权”产品年内增量突出" aria-label="跳转正文 · 09/17 · 银行理财规模8月再创新高，“含权”产品年内增量突出">①</a><a class="insight-src" href="https://finance.sina.com.cn/roll/2026-09-16/doc-inirxxxq3375587.shtml" target="_blank" rel="noopener" title="打开原文 · 理财统一信披进入实操阶段 存量产品业绩基准分批" aria-label="打开原文 · 理财统一信披进入实操阶段 存量产品业绩基准分批">②</a></span></h3>
+      <p><b>影响：</b>8月理财规模再创新高、含权产品增量突出，客户对净值波动接受度在变，叠加信披统一进入实操，财富端沟通口径需同步更新。</p>
+      <p><b>建议：</b>本周更新含权产品配置话术与业绩基准说明，对到期定存客户做理财、保险迁移引导，同步准备波动安抚口径。</p>
+      <p class="maturity-next"><b>下一步：</b>先建档跟踪：把主体纳入目标名单，等出现预算/招标/审批等硬信号再评估接触</p>
     </article><article class="insight" data-audio-section="insight">
-      <div class="insight-tags"><span class="tag t-policy">政银合作</span><span class="tag ">科技金融</span></div>
-      <div class="insight-segs"><span class="seg-chip seg-aum">零售AUM</span></div>
-      <h3>政务词元专区引流入口 <span class="insight-srcs"><a class="insight-src" href="https://news.dayoo.com/guangzhou/202609/16/139995_55004340.htm" target="_blank" rel="noopener" title="打开原文 · 全国首个“政务+”词元服务专区在越秀区政务服务中心启用" aria-label="打开原文 · 全国首个“政务+”词元服务专区在越秀区政务服务中心启用">①</a><a class="insight-src insight-src-inbody" href="#itm-7r14s8" title="跳转正文 · 09/17 · 有银行日均Token消耗量破百亿 客户经理有了“外挂”" aria-label="跳转正文 · 09/17 · 有银行日均Token消耗量破百亿 客户经理有了“外挂”">②</a></span></h3>
-      <p><b>影响：</b>全国首个政务加词元服务专区落地越秀，政务场景与AI服务结合提速，为科创企业开户与结算提供新引流入口。</p>
-      <p><b>建议：</b>可考虑对接越秀政务服务中心，争取专区服务嵌入，同步评估AI助手在客户经理话术支持上的落地空间。</p>
+      <div class="insight-tags"><span class="tag t-wealth">私行</span><span class="tag t-policy">政银合作</span></div>
+      <div class="insight-segs"><button type="button" class="seg-chip seg-private" data-seg="中高端客群(过亿资产)" title="按「高端客户」筛选下方板块">高端客户</button></div>
+      <h3>南沙跨境金融门户机会<span class="delta-badge delta-changed" title="此前播报过，本期出现新进展：!落地">有进展</span><span class="maturity maturity-clue" title="公开信息里只有规划/意向类信号，尚未见程序性动作"><span class="mt-track"><i class="mt-dot mt-on"></i><i class="mt-dot"></i><i class="mt-dot"></i></span>线索</span> <span class="insight-srcs"><a class="insight-src" href="https://news.dayoo.com/guangzhou/202609/16/139995_55004139.htm" target="_blank" rel="noopener" title="打开原文 · 香港五年规划专章聚焦大湾区，支持南沙对外开放门户作用" aria-label="打开原文 · 香港五年规划专章聚焦大湾区，支持南沙对外开放门户作用">①</a></span></h3>
+      <p><b>影响：</b>香港五年规划设大湾区专章并支持南沙对外开放门户作用，南沙跨境客群与港资企业主的账户、结算及资产配置需求有望增加。</p>
+      <p><b>建议：</b>下一步观察南沙跨境政策细则落地节奏，提前储备港人港企开户与跨境理财通服务方案，锁定高净值跨境客群。</p>
+      <p class="maturity-next"><b>下一步：</b>先核关系：公开披露的股东与高管名单可作为切入点参考，暂不必投入触达资源</p>
     </article><article class="insight" data-audio-section="insight">
-      <div class="insight-tags"><span class="tag t-wealth">私行</span><span class="tag t-wealth">财富</span></div>
-      <div class="insight-segs"><span class="seg-chip seg-private">高端客户</span></div>
-      <h3>跨境客群外币配置窗口 <span class="insight-srcs"><a class="insight-src insight-src-inbody" href="#itm-1mj32ks" title="跳转正文 · 09/17 · 时隔三年多！美联储重启加息25个基点 内部预计年内还会升息一次" aria-label="跳转正文 · 09/17 · 时隔三年多！美联储重启加息25个基点 内部预计年内还会升息一次">①</a><a class="insight-src insight-src-inbody" href="#itm-jwvtis" title="跳转正文 · 09/17 · 美国金融机构上调贷款参考利率至7%" aria-label="跳转正文 · 09/17 · 美国金融机构上调贷款参考利率至7%">②</a></span></h3>
-      <p><b>影响：</b>美联储加息推升美元利率，有美元负债或跨境融资需求的广州外向型企业主与私行客户，锁汇与外币存款诉求上升。</p>
-      <p><b>建议：</b>本周梳理跨境结算与外币负债客户名单，主动提示结售汇与外币存款窗口，配套美元融资成本锁定方案。</p>
-    </article><article class="insight" data-audio-section="insight">
-      <div class="insight-tags"><span class="tag ">科技金融</span><span class="tag t-policy">政银合作</span></div>
-      <div class="insight-segs"><span class="seg-chip seg-inclusive">普惠小微</span></div>
-      <h3>穗港科创平台客群对接 <span class="insight-srcs"><a class="insight-src" href="https://www.cnr.cn/gd/meiliguangdong/20260916/t20260916_527815797.shtml" target="_blank" rel="noopener" title="打开原文 · 穗港科技和产业融合创新中心（广州）揭牌启用" aria-label="打开原文 · 穗港科技和产业融合创新中心（广州）揭牌启用">①</a></span></h3>
-      <p><b>影响：</b>穗港科技产业融合创新中心揭牌，港资科研机构与穗企联合项目落地，跨境账户、结算与融资需求集中释放。</p>
-      <p><b>建议：</b>本周对接平台入驻机构名单，梳理港资科研企业开户与跨境资金通道需求，配套科创企业全周期服务方案。</p>
+      <div class="insight-tags"><span class="tag ">信贷</span><span class="tag t-mass">代发</span></div>
+      <div class="insight-segs"><button type="button" class="seg-chip seg-inclusive" data-seg="普惠小微贷款客户" title="按「普惠小微」筛选下方板块">普惠小微</button></div>
+      <h3>汽车零部件产业链小微客群<span class="delta-badge delta-followup" title="此前已播报 1 次，本期继续跟进（未发现实质新进展）">续报·第2期</span><span class="maturity maturity-clue" title="公开信息里只有规划/意向类信号，尚未见程序性动作"><span class="mt-track"><i class="mt-dot mt-on"></i><i class="mt-dot"></i><i class="mt-dot"></i></span>线索</span> <span class="insight-srcs"><a class="insight-src insight-src-inbody" href="#itm-pztdza" title="跳转正文 · 09/17 · 广州东部汽车产业延链补链强链 两大汽车零部件项目落地黄埔" aria-label="跳转正文 · 09/17 · 广州东部汽车产业延链补链强链 两大汽车零部件项目落地黄埔">①</a></span></h3>
+      <p><b>影响：</b>黄埔再落两个汽车零部件项目，广州东部汽车产业链延链补链提速，上下游小微供应商与个体工商户的经营贷、代发需求同步上升。</p>
+      <p><b>建议：</b>本周走访黄埔汽车产业链园区，梳理零部件供应商名单，配套经营贷与代发工资方案，抢占园区政银合作入口。</p>
+      <p class="maturity-next"><b>下一步：</b>先看上下游：园区配套与供应链上的小微通常比主体更早出现融资需求</p>
     </article><article class="insight" data-audio-section="insight">
       <div class="insight-tags"><span class="tag ">信贷</span><span class="tag t-mass">客群</span></div>
-      <div class="insight-segs"><span class="seg-chip seg-inclusive">普惠小微</span></div>
-      <h3>跨境电商海外仓融资 <span class="insight-srcs"><a class="insight-src" href="https://www.cnr.cn/gd/fxgz/20260916/t20260916_527815570.shtml" target="_blank" rel="noopener" title="打开原文 · 广州举办跨境电商海外仓高质量发展促进活动" aria-label="打开原文 · 广州举办跨境电商海外仓高质量发展促进活动">①</a></span></h3>
-      <p><b>影响：</b>广州推动跨境电商海外仓高质量发展，海外仓企业备货与结算资金需求上升，是普惠小微与跨境结算的交叉客群。</p>
-      <p><b>建议：</b>本周走访本地海外仓与跨境电商企业，主推经营贷加跨境结算组合方案，同步跟进汇率避险产品配置。</p>
+      <div class="insight-segs"><button type="button" class="seg-chip seg-inclusive" data-seg="普惠小微贷款客户" title="按「普惠小微」筛选下方板块">普惠小微</button></div>
+      <h3>跨境电商海外仓融资<span class="delta-badge delta-followup" title="此前已播报 1 次，本期继续跟进（未发现实质新进展）">续报·第2期</span><span class="maturity maturity-clue" title="公开信息里只有规划/意向类信号，尚未见程序性动作"><span class="mt-track"><i class="mt-dot mt-on"></i><i class="mt-dot"></i><i class="mt-dot"></i></span>线索</span> <span class="insight-srcs"><a class="insight-src" href="https://www.cnr.cn/gd/fxgz/20260916/t20260916_527815570.shtml" target="_blank" rel="noopener" title="打开原文 · 广州举办跨境电商海外仓高质量发展促进活动" aria-label="打开原文 · 广州举办跨境电商海外仓高质量发展促进活动">①</a></span></h3>
+      <p><b>影响：</b>广州推动跨境电商海外仓高质量发展，海外仓企业的备货融资与跨境结算需求上升，是普惠小微与跨境客群交叉的获客场景。</p>
+      <p><b>建议：</b>可考虑联合跨境电商园区举办融资对接，主推海外仓备货贷与跨境结算套餐，本周内完成首批目标客户名单。</p>
+      <p class="maturity-next"><b>下一步：</b>先看上下游：园区配套与供应链上的小微通常比主体更早出现融资需求</p>
+    </article><article class="insight" data-audio-section="insight">
+      <div class="insight-tags"><span class="tag ">科技金融</span><span class="tag t-mass">客群</span></div>
+      <div class="insight-segs"><button type="button" class="seg-chip seg-other" data-seg="其他业务线" title="按「其他业务线」筛选下方板块">其他业务线</button></div>
+      <h3>AI助手赋能客群经营<span class="delta-badge delta-changed" title="此前播报过，本期出现新进展：!落地、!试点">有进展</span><span class="maturity maturity-clue" title="公开信息里只有规划/意向类信号，尚未见程序性动作"><span class="mt-track"><i class="mt-dot mt-on"></i><i class="mt-dot"></i><i class="mt-dot"></i></span>线索</span> <span class="insight-srcs"><a class="insight-src" href="https://www.cnfin.com/yw-lb/detail/20260917/4470937_1.html" target="_blank" rel="noopener" title="打开原文 · 有银行日均Token消耗量破百亿 客户经理有了“外挂”" aria-label="打开原文 · 有银行日均Token消耗量破百亿 客户经理有了“外挂”">①</a><a class="insight-src" href="https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-16/doc-inirzsia9882739.shtml" target="_blank" rel="noopener" title="打开原文 · AI入职后 有银行靠它半年贡献近7000人年工作量" aria-label="打开原文 · AI入职后 有银行靠它半年贡献近7000人年工作量">②</a></span></h3>
+      <p><b>影响：</b>有银行日均Token消耗破百亿、AI半年贡献近7000人年工作量，客户经理作业模式正在变化，零售中后台与客服场景替代效应值得跟踪。</p>
+      <p><b>建议：</b>可评估在客群经营与话术支持上引入AI助手的落地空间，先选一个支行试点，观察客户经理产能变化。</p>
+      <p class="maturity-next"><b>下一步：</b>先纳入观察名单，等出现程序性动作（招标/获批/签约）再评估</p>
     </article></div></div>
-    <div class="exec-risk"><h3 class="exec-col-title">⚠️ 风险预警<span class="risk-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><div class="risk-scroller"><article class="risk-card" data-audio-section="risk">
-        <div class="risk-header">⚠️ 风险预警<span class="risk-source-badge risk-source-t1">官方</span> <span class="risk-srcs"><a class="risk-src risk-src-inbody" href="#itm-1mj32ks" title="跳转正文 · 09/17 · 时隔三年多！美联储重启加息25个基点 内部预计年内还会升息一次" aria-label="跳转正文 · 09/17 · 时隔三年多！美联储重启加息25个基点 内部预计年内还会升息一次">①</a><a class="risk-src" href="https://finance.sina.com.cn/jjxw/2026-09-16/doc-inirzwqv3656432.shtml" target="_blank" rel="noopener" title="打开原文 · 美联储是否加息，今夜揭晓！美债收益率狂飙，房贷利率已突破7.2%" aria-label="打开原文 · 美联储是否加息，今夜揭晓！美债收益率狂飙，房贷利率已突破7.2%">②</a></span></div>
-        <h3>美联储加息外溢汇率风险</h3>
-        <p><b>依据：</b>美联储重启加息25个基点并预计年内或再升息一次，美债收益率狂飙、美国房贷利率突破7.2%。</p>
-        <p><b>影响：</b>财富端外币理财净值波动加大，私行客户海外资产咨询增多；个贷端美元负债客户还款成本上升；风控需关注汇率敞口集中度。</p>
-        <p><b>建议：</b>财富部应更新外币产品风险提示口径，风控部应排查美元负债客户敞口，公司部同步提示跨境结算客户锁汇。</p>
-      </article></div></div>
+    <p class="product-coverage"><span class="pc-label">产品条线覆盖</span><span class="pc-chip pc-none" title="本期确无该条线相关商机（不凑数，也不代表系统漏采）">按揭 本期无</span><span class="pc-chip pc-hit" title="平台支付月付仍在，页面分家；调查！资方停摆、现金流承压，助贷行业深度出清">信用卡 2</span><span class="pc-chip pc-hit" title="汽车零部件产业链小微客群">代发 1</span></p>
+    
     
   </section>
 
@@ -1360,16 +1492,16 @@
       <ul class="stock-scroller"><li class="stock-card stock-card--a" data-audio-section="stock">
         <header class="stock-card-head">A股</header>
         <div class="stock-indices"><span class="stock-idx-cap">收盘点位</span><div class="stock-idx-list"><span class="stock-idx">上证指数 <b>3891.60</b> <em class="stock-idx-pct up">+0.71%</em></span><span class="stock-idx">深证成指 <b>13454.74</b> <em class="stock-idx-pct up">+1.26%</em></span><span class="stock-idx">创业板指 <b>3311.47</b> <em class="stock-idx-pct up">+1.96%</em></span></div><span class="stock-idx-src">新浪行情 · 取值于 2026-09-16 收盘</span></div>
-        <p class="stock-overview"><span class="stock-sec-label">大盘一句话总结</span>创业板指涨1.96%，半导体全线爆发领涨，美联储加息决议前资金抢跑科技。</p>
+        <p class="stock-overview"><span class="stock-sec-label">大盘一句话总结</span>沪指涨0.71%，创业板指涨近2%，美联储重启加息落地，半导体板块爆发。</p>
         
-        <div class="stock-sectors"><span class="stock-sec-label">关键板块总结</span><ul><li>半导体板块爆发，科创50涨超4%，HBM现货价格走高叠加多重利好催化。</li><li>千帆星座组网提速，朱雀、引力接连发射成功，相关概念股获融资客抢筹。</li><li>机器人概念承压，知情人士称商业化订单存三类注水，资金情绪受扰动。</li></ul></div>
+        <div class="stock-sectors"><span class="stock-sec-label">关键板块总结</span><ul><li>半导体板块爆发，科创50指数涨超4%，HBM现货价格走高带动相关概念股走强。</li><li>创业板指涨1.96%，成长风格领涨，科技股资金关注度明显提升。</li><li>美联储重启加息25个基点，内部预计年内还会升息一次，券商首席称对A股持续影响尚待观察。</li></ul></div>
         <p class="stock-meta">渠道：东方财富 · 发布时间：2026-09-17 · 交叉验证：新浪行情</p>
       </li><li class="stock-card stock-card--hk" data-audio-section="stock">
         <header class="stock-card-head">港股</header>
-        <div class="stock-indices"><span class="stock-idx-cap">收盘点位</span><div class="stock-idx-list"><span class="stock-idx">恒生指数 <b>24713.78</b> <em class="stock-idx-pct up">+0.19%</em></span><span class="stock-idx">恒生科技 <b>4325.45</b> <em class="stock-idx-pct up">+0.79%</em></span></div><span class="stock-idx-src">新浪行情 · 取值于 2026-09-16 收盘</span></div>
-        <p class="stock-overview"><span class="stock-sec-label">大盘一句话总结</span>恒生指数收报24713.78点（+0.19%）；恒生科技收报4325.45点（+0.79%）。</p>
-        <a class="stock-source-report" href="https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-16/doc-inirzfsu6652365.shtml" target="_blank" rel="noopener">📄 原报告：港股收评：恒指涨0.19% 科指涨0.79% 黄金股、半导体板块走强</a>
-        <div class="stock-sectors"><span class="stock-sec-label">关键板块总结</span><ul><li>恒生指数涨0.19%</li><li>恒生科技指数涨0.79%</li><li>黄金股、半导体板块走强</li></ul></div>
+        <div class="stock-indices"><span class="stock-idx-cap">收盘点位</span><div class="stock-idx-list"><span class="stock-idx">恒生指数 <b>24533.46</b> <em class="stock-idx-pct down">-0.73%</em></span><span class="stock-idx">恒生科技 <b>4292.46</b> <em class="stock-idx-pct down">-0.76%</em></span></div><span class="stock-idx-src">新浪行情 · 取值于 2026-09-16 收盘</span></div>
+        <p class="stock-overview"><span class="stock-sec-label">大盘一句话总结</span>恒指收报24533.46点，跌0.73%，科指跌0.76%，科网股低迷、黄金股下挫。</p>
+        
+        <div class="stock-sectors"><span class="stock-sec-label">关键板块总结</span><ul><li>科网股整体低迷，恒生科技指数跌0.76%，拖累大市表现。</li><li>黄金股下挫，香港金管局跟随加息25个基点，利率敏感板块承压。</li><li>携程集团港股收涨3%，全球业务成增长动力，高盛维持买入评级。</li></ul></div>
         <p class="stock-meta">渠道：新浪财经·港股 · 发布时间：2026-09-17 · 交叉验证：新浪行情</p>
       </li><li class="stock-card stock-card--us" data-audio-section="stock">
         <header class="stock-card-head">美股</header>
@@ -1382,257 +1514,29 @@
     </div>
   </section>
 
+  <!-- C1 角色视图：按条线一键筛选下方板块（再点一次取消） -->
+  <div class="role-bar" id="role-bar">
+  <span class="role-label">角色视图</span>
+  <button type="button" class="role-chip" data-role="exec">行长</button><button type="button" class="role-chip" data-role="biz">零售银行部</button><button type="button" class="role-chip" data-role="private">私行部</button><button type="button" class="role-chip" data-role="wealth">财富管理部</button><button type="button" class="role-chip" data-role="credit">零售信贷部</button>
+  <span class="role-hint" id="role-hint">按条线一键筛选（再点一次取消）</span>
+  <script type="application/json" id="role-views">[{"id":"exec","label":"行长","tags":[]},{"id":"biz","label":"零售银行部","tags":["客群"]},{"id":"private","label":"私行部","tags":["私行"]},{"id":"wealth","label":"财富管理部","tags":["财富"]},{"id":"credit","label":"零售信贷部","tags":["信贷"]}]</script>
+</div>
+
+  <!-- E2 收藏栏（localStorage，纯前端；无收藏时只显示说明） -->
+  <div class="fav-bar" id="fav-bar" hidden>
+  <span class="fav-label">⭐ 我的收藏</span>
+  <button type="button" id="fav-export">导出本期（Markdown）</button>
+  <button type="button" id="fav-clear">清空收藏</button>
+  <span class="fav-empty" id="fav-empty"></span>
+  <ol class="fav-list" id="fav-list"></ol>
+</div>
+
   <!-- 板块导航：单层 tab，移动端横滑不折行 -->
   <nav class="tabs">
-    <button class="tab active" data-target="p-gz" style="--cat:var(--c-gz)">广州本地<span class="n">0</span></button><button class="tab" data-target="p-stock" style="--cat:var(--c-trading)">股市动态<span class="n">6</span></button><button class="tab" data-target="p-biz" style="--cat:var(--c-biz)">业务启示<span class="n">8</span></button><button class="tab" data-target="p-pol" style="--cat:var(--c-pol)">政策与市场<span class="n">12</span></button><button class="tab" data-target="p-tech" style="--cat:var(--c-tech)">科技前沿<span class="n">1</span></button><button class="tab" data-target="p-ipo" style="--cat:var(--c-ipo)">广东IPO动态<span class="n">5</span></button>
+    <button class="tab active" data-target="p-gz" style="--cat:var(--c-gz)">广州本地<span class="n">1</span></button><button class="tab" data-target="p-stock" style="--cat:var(--c-trading)">股市动态<span class="n">6</span></button><button class="tab" data-target="p-biz" style="--cat:var(--c-biz)">业务启示<span class="n">8</span></button><button class="tab" data-target="p-pol" style="--cat:var(--c-pol)">政策与市场<span class="n">12</span></button><button class="tab" data-target="p-ipo" style="--cat:var(--c-ipo)">广东IPO动态<span class="n">5</span></button>
   </nav>
 
   <section class="panel active" id="p-gz">
-    <div class="filter-bar">
-    <span class="filter-label">筛选</span>
-    <div class="filter-group">
-        <span class="filter-gtitle">来源</span>
-        <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
-      </div>
-    <button type="button" class="filter-reset">重置</button>
-  </div>
-    <p class="empty-hint">今日暂无广州本地要闻（本地源未捕捉到高价值广州事件）。大湾区/广东要闻可在「政策与市场」查看。</p>
-  </section><section class="panel" id="p-stock">
-    <div class="filter-bar">
-    <span class="filter-label">市场</span>
-    <button type="button" class="filter-chip" data-group="market" data-filter="a-share">A股</button><button type="button" class="filter-chip" data-group="market" data-filter="hk">港股</button><button type="button" class="filter-chip" data-group="market" data-filter="us">美股</button>
-    <button type="button" class="filter-reset">重置</button>
-  </div>
-    <article class="brief must" id="itm-23es4g" data-source="media" data-tags="美联储 货币政策 A股" data-market="a-share" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/16</span><span class="imp-badge">必知</span></div>
-  <h3><a href="https://finance.eastmoney.com/a/202609163876026493.html" target="_blank" rel="noopener noreferrer">就在今晚！美联储“加息之锤”即将落下？</a></h3>
-  <p class="sum">东方财富报道称美联储加息决议将于当晚公布，市场关注其对A股的影响。</p>
-  
-  
-  <div class="tags"><span class="tag ">美联储</span><span class="tag t-policy">货币政策</span><span class="tag ">A股</span></div>
-</article>
-<article class="brief" id="itm-xw069z" data-source="media" data-tags="卫星互联网 航天 融资" data-market="a-share" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/16</span></div>
-  <h3><a href="https://finance.eastmoney.com/a/202609163875348467.html" target="_blank" rel="noopener noreferrer">朱雀、引力接连发射成功千帆星座组网提速多股获融资客抢筹(名单)</a></h3>
-  <p class="sum">朱雀、引力等发射任务接连成功，千帆星座组网提速，多只相关个股获融资客买入。</p>
-  
-  
-  <div class="tags"><span class="tag ">卫星互联网</span><span class="tag ">航天</span><span class="tag ">融资</span></div>
-</article>
-<article class="brief must" id="itm-mu8h9g" data-source="media" data-tags="美联储 货币政策 白宫" data-market="a-share" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/16</span><span class="imp-badge">必知</span></div>
-  <h3><a href="https://finance.eastmoney.com/a/202609163875860735.html" target="_blank" rel="noopener noreferrer">美联储加息风暴倒计时！白宫高官：我和特朗普将尊重沃什的决定</a></h3>
-  <p class="sum">美联储加息决议进入倒计时，白宫高官表示将与特朗普尊重沃什的决定。</p>
-  
-  
-  <div class="tags"><span class="tag ">美联储</span><span class="tag t-policy">货币政策</span><span class="tag ">白宫</span></div>
-</article>
-<article class="brief" id="itm-1ai9wae" data-source="media" data-tags="港股 指数 半导体 黄金" data-market="hk" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/16</span></div>
-  <h3><a href="https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-16/doc-inirzfsu6652365.shtml" target="_blank" rel="noopener noreferrer">港股收评：恒指涨0.19% 科指涨0.79% 黄金股、半导体板块走强</a></h3>
-  <p class="sum">港股收评：恒指涨0.19%，恒生科技指数涨0.79%，黄金股与半导体板块走强。</p>
-  
-  
-  <div class="tags"><span class="tag ">港股</span><span class="tag ">指数</span><span class="tag ">半导体</span><span class="tag ">黄金</span></div>
-</article>
-<article class="brief" id="itm-1pukbx4" data-source="media" data-tags="港股 股东增减持 医药" data-market="hk" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/17</span></div>
-  <h3><a href="https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-17/doc-inisatup0253667.shtml" target="_blank" rel="noopener noreferrer">时代天使获小摩增持约16.81万股 每股作价约86.88港元</a></h3>
-  <p class="sum">时代天使获摩根大通增持约16.81万股，每股作价约86.88港元。</p>
-  
-  
-  <div class="tags"><span class="tag ">港股</span><span class="tag ">股东增减持</span><span class="tag ">医药</span></div>
-</article><article class="brief more" id="itm-1n3y5v5" data-source="media" data-tags="港股 股东增减持 餐饮" data-market="hk" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/17</span></div>
-  <h3><a href="https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-17/doc-inisatup0252382.shtml" target="_blank" rel="noopener noreferrer">翠华控股获BOOST TREASURE LIMITED增持200万股 每股作价0.1943港元</a></h3>
-  <p class="sum">翠华控股获BOOST TREASURE LIMITED增持200万股，每股作价0.1943港元。</p>
-  
-  
-  <div class="tags"><span class="tag ">港股</span><span class="tag ">股东增减持</span><span class="tag ">餐饮</span></div>
-</article><button class="expand-btn" type="button">展开其余 1 条</button>
-  </section><section class="panel" id="p-biz">
-    <div class="filter-bar">
-    <span class="filter-label">筛选</span>
-    <div class="filter-group">
-        <span class="filter-gtitle">来源</span>
-        <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
-      </div><div class="filter-group">
-        <span class="filter-gtitle">业务线</span>
-        <button type="button" class="filter-chip" data-group="tag" data-filter="财富">财富</button><button type="button" class="filter-chip" data-group="tag" data-filter="__none__">其他</button>
-      </div>
-    <button type="button" class="filter-reset">重置</button>
-  </div>
-    <article class="brief" id="itm-1fxswba" data-source="media" data-tags="财富 竞对动态" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>新华财经</span><span>09/17</span></div>
-  <h3><a class="to-detail" href="i/itm-1fxswba.html">竞争加剧 理财产品销售费率频现“打折”</a></h3>
-  <p class="sum">理财销售费率打折反映同业获客竞争加剧，中低风险产品货架与费率策略值得重新比对，可关注客户比价流失风险…</p>
-  
-  
-  <div class="tags"><span class="tag t-wealth">财富</span><span class="tag ">竞对动态</span></div>
-</article>
-<article class="brief" id="itm-nzy28i" data-source="media" data-tags="财富" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·理财保险</span><span>09/17</span></div>
-  <h3><a class="to-detail" href="i/itm-nzy28i.html">美联储决议倒计时，芯片股、光通信股大涨，英特尔飙涨7%，SpaceX涨超4%，黄金白银反弹</a></h3>
-  <p class="sum">决议前芯片、光通信股大涨，黄金白银反弹，客户对贵金属与科技类资产的关注度提升，可做好产品适配说明。</p>
-  
-  
-  <div class="tags"><span class="tag t-wealth">财富</span></div>
-</article>
-<article class="brief" id="itm-mtz5gx" data-source="media" data-tags="财富" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·理财保险</span><span>09/17</span></div>
-  <h3><a class="to-detail" href="i/itm-mtz5gx.html">莫让“固收+”基金稳健底色褪成“固收-”</a></h3>
-  <p class="sum">“固收+”产品稳健定位受关注，提示理财经理在客户回访中重点说明回撤与波动来源，避免收益预期错配。</p>
-  
-  
-  <div class="tags"><span class="tag t-wealth">财富</span></div>
-</article>
-<article class="brief" id="itm-18kfgj5" data-source="official" data-tags="财富" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-official">官方</span><span>新华财经</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-18kfgj5.html">银行个人贵金属代理业务密集“退场”</a></h3>
-  <p class="sum">多家银行收缩个人贵金属代理业务，存量客户面临迁移，财富条线可关注承接窗口与替代产品配置需求。</p>
-  
-  
-  <div class="tags"><span class="tag t-wealth">财富</span></div>
-</article>
-<article class="brief" id="itm-15mfehw" data-source="media" data-tags="" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-15mfehw.html">顺丰控股离岸人民币债券即将于香港交易所上市</a></h3>
-  <p class="sum">顺丰控股离岸人民币债券将登陆港交所，离岸人民币融资活跃，跨境债券承销与投资机会可关注。</p>
-  
-  
-  
-</article><article class="brief more" id="itm-f3xqcu" data-source="media" data-tags="" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>Crunchbase News</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-f3xqcu.html">A Hard Year For Software IPOs</a></h3>
-  <p class="sum">U.S. venture-backed technology companies have secu…</p>
-  
-  
-  
-</article>
-<article class="brief more" id="itm-1eyg48f" data-source="official" data-tags="" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-official">官方</span><span>新华财经</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-1eyg48f.html">8月我国跨境资金净流入环比增长4%</a></h3>
-  <p class="sum">8月跨境资金净流入环比增长4%，结售汇与跨境收付窗口值得提示客户，跨境客群资金安排需求可能上升。</p>
-  
-  
-  
-</article>
-<article class="brief more" id="itm-i37o39" data-source="official" data-tags="" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-official">官方</span><span>新华财经</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-i37o39.html">8月经济运行呈现“三稳两快”特点</a></h3>
-  <p class="sum">8月经济运行呈“三稳两快”，新动能支撑力凸显，零售条线可关注消费与投资相关客群的信贷需求结构性变化。</p>
-  
-  
-  
-</article><button class="expand-btn" type="button">展开其余 3 条</button>
-  </section><section class="panel" id="p-pol">
-    <div class="filter-bar">
-    <span class="filter-label">筛选</span>
-    <div class="filter-group">
-        <span class="filter-gtitle">来源</span>
-        <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
-      </div><div class="filter-group">
-        <span class="filter-gtitle">业务线</span>
-        <button type="button" class="filter-chip" data-group="tag" data-filter="客群">客群</button><button type="button" class="filter-chip" data-group="tag" data-filter="财富">财富</button><button type="button" class="filter-chip" data-group="tag" data-filter="信贷">信贷</button><button type="button" class="filter-chip" data-group="tag" data-filter="__none__">其他</button>
-      </div>
-    <button type="button" class="filter-reset">重置</button>
-  </div>
-    <article class="brief must" id="itm-1mj32ks" data-source="media" data-tags="市场 客群" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>东方财富·A股股市新闻</span><span>09/17</span><span class="imp-badge">必知</span></div>
-  <h3><a class="to-detail" href="i/itm-1mj32ks.html">时隔三年多！美联储重启加息25个基点 内部预计年内还会升息一次</a></h3>
-  <p class="sum">美联储重启加息25个基点并预计年内或再升息一次，美元利率中枢抬升，跨境客户结售汇与外币存款窗口值得提…</p>
-  
-  
-  <div class="tags"><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
-</article>
-<article class="brief" id="itm-yhhvod" data-source="media" data-tags="市场 客群" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-yhhvod.html">8月政府债券净融资1.01万亿元，在当月社融中占比超过60%</a></h3>
-  <p class="sum">8月政府债券净融资1.01万亿元、占当月社融超60%，财政发力支撑社融，可关注配套项目与机构资金流向…</p>
-  
-  
-  <div class="tags"><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
-</article>
-<article class="brief must" id="itm-jwvtis" data-source="media" data-tags="市场 客群" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·理财保险</span><span>09/17</span><span class="imp-badge">必知</span></div>
-  <h3><a class="to-detail" href="i/itm-jwvtis.html">美国金融机构上调贷款参考利率至7%</a></h3>
-  <p class="sum">美国贷款参考利率升至7%，美元融资成本上行，有美元负债或跨境融资需求的客户可考虑提前锁定成本。</p>
-  
-  
-  <div class="tags"><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
-</article>
-<article class="brief" id="itm-tt5xv3" data-source="media" data-tags="市场 客群" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>新华财经</span><span>09/17</span></div>
-  <h3><a class="to-detail" href="i/itm-tt5xv3.html">美联储时隔三年首次加息 纽约股市三大股指16日均下跌</a></h3>
-  <p class="sum">纽约三大股指16日全线下跌，权益类产品净值短期承压，客户沟通中可提示波动来源与持有期安排。</p>
-  
-  
-  <div class="tags"><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
-</article>
-<article class="brief" id="itm-h6ef2u" data-source="official" data-tags="信贷 客群" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-official">官方</span><span>新华财经</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-h6ef2u.html">对公高歌 零售褪色——银行信贷业务格局生变</a></h3>
-  <p class="sum">对公信贷走强、零售信贷走弱格局延续，零售条线需重新审视客群结构与投放节奏，关注按揭、消费贷增长动能变…</p>
-  
-  
-  <div class="tags"><span class="tag ">信贷</span><span class="tag t-mass">客群</span></div>
-</article><article class="brief more" id="itm-1l5xluu" data-source="media" data-tags="财富 信贷" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·理财保险</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-1l5xluu.html">极致内卷撞上美债高利率，ETF怎么配？</a></h3>
-  <p class="sum">美债高利率叠加ETF内卷，客户海外资产配置需求上升，跨境理财与ETF配置服务值得关注。</p>
-  
-  
-  <div class="tags"><span class="tag t-wealth">财富</span><span class="tag ">信贷</span></div>
-</article>
-<article class="brief more" id="itm-5r5l5x" data-source="media" data-tags="信贷" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·银行频道</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-5r5l5x.html">如何看待8月新增贷款同比少增？</a></h3>
-  <p class="sum">8月新增贷款同比少增，信贷需求偏弱，对公与零售投放节奏可关注后续政策与需求变化。</p>
-  
-  
-  <div class="tags"><span class="tag ">信贷</span></div>
-</article>
-<article class="brief more" id="itm-2mtv8a" data-source="media" data-tags="财富" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·理财保险</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-2mtv8a.html">8月银行理财规模达35.8万亿创历史新高，增量资金配向何处？</a></h3>
-  <p class="sum">8月理财规模35.8万亿创历史新高，增量资金流向决定财富产品布局，可关注客户资产配置迁移方向。</p>
-  
-  
-  <div class="tags"><span class="tag t-wealth">财富</span></div>
-</article>
-<article class="brief more" id="itm-9v0xr4" data-source="media" data-tags="" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-9v0xr4.html">集中推盘 “金九银十”深圳好房嘉年华举行</a></h3>
-  <p class="sum">深圳金九银十集中推盘，按揭与住房金融需求阶段性释放，相关客群服务窗口值得关注。</p>
-  
-  
-  
-</article>
-<article class="brief more" id="itm-y0jxw6" data-source="media" data-tags="" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-y0jxw6.html">香港首个五年规划：巩固提升“深圳—香港—广州”全球创新集群领先地位</a></h3>
-  <p class="sum">香港五年规划提出巩固深港穗全球创新集群领先地位，跨境科创金融与湾区客群服务窗口打开。</p>
-  
-  
-  
-</article>
-<article class="brief more must" id="itm-1dn9aj6" data-source="official" data-tags="" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-official">官方</span><span>新华财经</span><span>09/16</span><span class="imp-badge">必知</span></div>
-  <h3><a class="to-detail" href="i/itm-1dn9aj6.html">国家统计局：多地调整优化房地产政策 效果正逐步显现</a></h3>
-  <p class="sum">多地房地产政策优化效果逐步显现，住房金融条线可关注按揭投放节奏与区域政策落地差异带来的客户咨询变化。</p>
-  
-  
-  
-</article>
-<article class="brief more" id="itm-1nmgprb" data-source="media" data-tags="" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>广州日报·大洋网(广州频道)</span><span>09/16</span></div>
-  <h3><a class="to-detail" href="i/itm-1nmgprb.html">香港五年规划专章聚焦大湾区，支持南沙对外开放门户作用</a></h3>
-  <p class="sum">香港首份五年规划设大湾区专章，明确支持南沙对外开放门户作用，跨境金融与南沙客群服务窗口值得关注。</p>
-  
-  
-  
-</article><button class="expand-btn" type="button">展开其余 7 条</button>
-  </section><section class="panel" id="p-tech">
     <div class="filter-bar">
     <span class="filter-label">筛选</span>
     <div class="filter-group">
@@ -1644,14 +1548,252 @@
       </div>
     <button type="button" class="filter-reset">重置</button>
   </div>
-    <article class="brief" id="itm-7r14s8" data-source="media" data-tags="客群 科技金融" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>新华财经</span><span>09/17</span></div>
-  <h3><a class="to-detail" href="i/itm-7r14s8.html">有银行日均Token消耗量破百亿 客户经理有了“外挂”</a></h3>
-  <p class="sum">有银行日均Token消耗量破百亿，AI助手已进入客户经理日常作业，可评估在客群经营与话术支持上的落地…</p>
+    <article class="brief must" id="itm-pztdza" data-source="media" data-tags="客群 政银合作" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>广州日报·大洋网(广州频道)</span><span>09/17</span><span class="imp-badge">必知</span></div>
+  <h3><a class="to-detail" href="i/itm-pztdza.html">广州东部汽车产业延链补链强链 两大汽车零部件项目落地黄埔</a></h3>
+  <p class="sum">黄埔再落两个汽车零部件项目，广州东部汽车产业链延链补链提速，汽车产业链上下游对公客群与园区政银合作值…</p>
   
   
-  <div class="tags"><span class="tag t-mass">客群</span><span class="tag ">科技金融</span></div>
+  <div class="tags"><span class="tag t-mass">客群</span><span class="tag t-policy">政银合作</span></div>
 </article>
+  </section><section class="panel" id="p-stock">
+    <div class="filter-bar">
+    <span class="filter-label">市场</span>
+    <button type="button" class="filter-chip" data-group="market" data-filter="a-share">A股</button><button type="button" class="filter-chip" data-group="market" data-filter="hk">港股</button><button type="button" class="filter-chip" data-group="market" data-filter="us">美股</button>
+    <button type="button" class="filter-reset">重置</button>
+  </div>
+    <article class="brief must" id="itm-1mj32ks" data-source="media" data-tags="美联储 加息 货币政策" data-market="a-share" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/17</span><span class="imp-badge">必知</span></div>
+  <h3><a class="to-detail" href="i/itm-1mj32ks.html">时隔三年多！美联储重启加息25个基点内部预计年内还会升息一次</a></h3>
+  <p class="sum">美联储时隔三年多重启加息，本次加息25个基点，内部预计年内还会再升息一次。</p>
+  
+  
+  <div class="tags"><span class="tag ">美联储</span><span class="tag ">加息</span><span class="tag t-policy">货币政策</span></div>
+</article>
+<article class="brief" id="itm-23es4g" data-source="media" data-tags="美联储 加息 货币政策" data-market="a-share" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/16</span></div>
+  <h3><a class="to-detail" href="i/itm-23es4g.html">就在今晚！美联储“加息之锤”即将落下？</a></h3>
+  <p class="sum">市场关注美联储即将公布的加息决定，等待&quot;加息之锤&quot;落地。</p>
+  
+  
+  <div class="tags"><span class="tag ">美联储</span><span class="tag ">加息</span><span class="tag t-policy">货币政策</span></div>
+</article>
+<article class="brief" id="itm-14gwc3d" data-source="media" data-tags="A股 半导体 创业板 科创50" data-market="a-share" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/16</span></div>
+  <h3><a class="to-detail" href="i/itm-14gwc3d.html">创业板指涨近2%科创50指数涨超4%半导体板块爆发</a></h3>
+  <p class="sum">创业板指涨近2%，科创50指数涨超4%，半导体板块集体爆发。</p>
+  
+  
+  <div class="tags"><span class="tag ">A股</span><span class="tag ">半导体</span><span class="tag ">创业板</span><span class="tag ">科创50</span></div>
+</article>
+<article class="brief" id="itm-32e5j2" data-source="media" data-tags="港股 恒指 科网股 黄金" data-market="hk" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-32e5j2.html">港股午评：恒指跌0.73% 科指跌0.76% 科网股低迷 黄金股下挫</a></h3>
+  <p class="sum">港股午间收盘，恒指跌0.73%，科指跌0.76%，科网股低迷，黄金股下挫。</p>
+  
+  
+  <div class="tags"><span class="tag ">港股</span><span class="tag ">恒指</span><span class="tag ">科网股</span><span class="tag ">黄金</span></div>
+</article>
+<article class="brief must" id="itm-17m5pbd" data-source="media" data-tags="港股 香港金管局 加息" data-market="hk" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/17</span><span class="imp-badge">必知</span></div>
+  <h3><a class="to-detail" href="i/itm-17m5pbd.html">香港金管局：加息25个基点</a></h3>
+  <p class="sum">香港金管局宣布加息25个基点。</p>
+  
+  
+  <div class="tags"><span class="tag ">港股</span><span class="tag ">香港金管局</span><span class="tag ">加息</span></div>
+</article><article class="brief more" id="itm-b6jmqf" data-source="media" data-tags="港股 立讯精密 股东增持" data-market="hk" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-b6jmqf.html">立讯精密获Mitsubishi UFJ Financial Group, Inc.增持75.62万股 每股作价约57港元</a></h3>
+  <p class="sum">立讯精密获三菱日联金融集团增持75.62万股，每股作价约57港元。</p>
+  
+  
+  <div class="tags"><span class="tag ">港股</span><span class="tag ">立讯精密</span><span class="tag ">股东增持</span></div>
+</article><button class="expand-btn" type="button">展开其余 1 条</button>
+  </section><section class="panel" id="p-biz">
+    <div class="filter-bar">
+    <span class="filter-label">筛选</span>
+    <div class="filter-group">
+        <span class="filter-gtitle">来源</span>
+        <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
+      </div><div class="filter-group">
+        <span class="filter-gtitle">业务线</span>
+        <button type="button" class="filter-chip" data-group="tag" data-filter="客群">客群</button><button type="button" class="filter-chip" data-group="tag" data-filter="财富">财富</button><button type="button" class="filter-chip" data-group="tag" data-filter="信贷">信贷</button>
+      </div>
+    <button type="button" class="filter-reset">重置</button>
+  </div>
+    <article class="brief" id="itm-8xzg1r" data-source="media" data-tags="财富 市场 客群" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-8xzg1r.html">利率优势消退 大行大额存单向普通定存靠拢</a></h3>
+  <p class="sum">大额存单利率优势消退、向普通定存靠拢，存款价格竞争空间收窄，可考虑把客户维护重心从价格转向期限与综合…</p>
+  
+  
+  <div class="tags"><span class="tag t-wealth">财富</span><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
+</article>
+<article class="brief must" id="itm-4gkcd0" data-source="media" data-tags="信用卡 消费贷 监管合规 竞对动态 客群 信贷" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·银行频道</span><span>09/17</span><span class="imp-badge">必知</span></div>
+  <h3><a class="to-detail" href="i/itm-4gkcd0.html">平台支付月付仍在，页面分家</a></h3>
+  <p class="sum">平台月付功能仍在、仅页面分家，支付与信贷展示规则调整落地，信用卡与消费贷条线可关注绑卡与分期入口的流…</p>
+  
+  
+  <div class="tags"><span class="tag ">信用卡</span><span class="tag ">消费贷</span><span class="tag t-policy">监管合规</span><span class="tag ">竞对动态</span><span class="tag t-mass">客群</span><span class="tag ">信贷</span></div>
+</article>
+<article class="brief" id="itm-11gvvha" data-source="media" data-tags="财富 监管合规" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-11gvvha.html">抖音出手！一次清退6888名“理财师”</a></h3>
+  <p class="sum">抖音一次清退6888名理财师，互联网平台财经内容整治加码，提示关注员工自媒体展业合规与客户触达渠道的…</p>
+  
+  
+  <div class="tags"><span class="tag t-wealth">财富</span><span class="tag t-policy">监管合规</span></div>
+</article>
+<article class="brief" id="itm-28y1f5" data-source="media" data-tags="消费贷 信贷 监管合规 竞对动态" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·银行频道</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-28y1f5.html">调查！资方停摆、现金流承压，助贷行业深度出清</a></h3>
+  <p class="sum">助贷行业深度出清、资方停摆，合作机构现金流风险上升，消费贷条线值得关注存量合作方准入与贷后管理压力。</p>
+  
+  
+  <div class="tags"><span class="tag ">消费贷</span><span class="tag ">信贷</span><span class="tag t-policy">监管合规</span><span class="tag ">竞对动态</span></div>
+</article>
+<article class="brief" id="itm-1v221v1" data-source="media" data-tags="财富 市场 客群" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>央视财经</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-1v221v1.html">超500亿新钱涌入“固收+”，策略标签化、赛道化争议升温</a></h3>
+  <p class="sum">超500亿新钱涌入固收+，策略标签化争议升温，提示代销准入与产品标签审核需更细，避免客户预期与实际策…</p>
+  
+  
+  <div class="tags"><span class="tag t-wealth">财富</span><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
+</article><article class="brief more" id="itm-os5fo8" data-source="media" data-tags="财富 市场 客群" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·银行频道</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-os5fo8.html">银行理财规模8月再创新高，“含权”产品年内增量突出</a></h3>
+  <p class="sum">理财规模8月再创新高、含权产品增量突出，客户对净值波动的接受度在变，财富条线可考虑同步调整含权产品配…</p>
+  
+  
+  <div class="tags"><span class="tag t-wealth">财富</span><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
+</article>
+<article class="brief more" id="itm-nzy28i" data-source="media" data-tags="财富" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·理财保险</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-nzy28i.html">美联储决议倒计时，芯片股、光通信股大涨，英特尔飙涨7%，SpaceX涨超4%，黄金白银反弹</a></h3>
+  <p class="sum">决议前芯片、光通信股大涨，黄金白银反弹，客户对贵金属与科技类资产的关注度提升，可做好产品适配说明。</p>
+  
+  
+  <div class="tags"><span class="tag t-wealth">财富</span></div>
+</article>
+<article class="brief more" id="itm-mtz5gx" data-source="media" data-tags="财富" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·理财保险</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-mtz5gx.html">莫让“固收+”基金稳健底色褪成“固收-”</a></h3>
+  <p class="sum">“固收+”产品稳健定位受关注，提示理财经理在客户回访中重点说明回撤与波动来源，避免收益预期错配。</p>
+  
+  
+  <div class="tags"><span class="tag t-wealth">财富</span></div>
+</article><button class="expand-btn" type="button">展开其余 3 条</button>
+  </section><section class="panel" id="p-pol">
+    <div class="filter-bar">
+    <span class="filter-label">筛选</span>
+    <div class="filter-group">
+        <span class="filter-gtitle">来源</span>
+        <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
+      </div><div class="filter-group">
+        <span class="filter-gtitle">业务线</span>
+        <button type="button" class="filter-chip" data-group="tag" data-filter="客群">客群</button><button type="button" class="filter-chip" data-group="tag" data-filter="财富">财富</button><button type="button" class="filter-chip" data-group="tag" data-filter="信贷">信贷</button><button type="button" class="filter-chip" data-group="tag" data-filter="__none__">其他</button>
+      </div><div class="filter-group">
+        <span class="filter-gtitle">客群</span>
+        <button type="button" class="filter-chip" data-group="seg" data-filter="零售AUM">零售AUM</button><button type="button" class="filter-chip" data-group="seg" data-filter="其他业务线">其他客群</button>
+      </div>
+    <button type="button" class="filter-reset">重置</button>
+  </div>
+    <article class="brief" id="itm-1si4pdy" data-source="media" data-tags="市场 客群" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>观察者网·金融</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-1si4pdy.html">美联储三年来首次加息，点阵图暗示年内或再加一次</a></h3>
+  <p class="sum">美联储三年来首次加息、点阵图暗示年内或再加一次，美元与跨境资金成本预期生变，结售汇窗口与外币资产配置…</p>
+  
+  
+  <div class="tags"><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
+</article>
+<article class="brief" id="itm-1larznw" data-source="media" data-tags="市场 跨境 客群 财富" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>21世纪经济报道·金融</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-1larznw.html">三年首次加息！香港金管局总裁余伟文：公众需注意利率风险</a></h3>
+  <p class="sum">香港金管局三年首次加息并提示公众注意利率风险，跨境按揭与港元负债客户月供压力上升，可考虑提前做客户分…</p>
+  
+  
+  <div class="tags"><span class="tag ">市场</span><span class="tag ">跨境</span><span class="tag t-mass">客群</span><span class="tag t-wealth">财富</span></div>
+</article>
+<article class="brief" id="itm-m4uwod" data-source="media" data-tags="财富 市场 客群" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·理财保险</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-m4uwod.html">美联储加息压制金价 多只黄金类ETF跌逾5%</a></h3>
+  <p class="sum">加息压制金价，多只黄金类ETF跌逾5%，持有黄金主题产品的客户净值波动放大，财富条线需准备安抚与再平…</p>
+  
+  
+  <div class="tags"><span class="tag t-wealth">财富</span><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
+</article>
+<article class="brief" id="itm-heipcf" data-source="media" data-tags="监管合规 财富 信用卡 客群" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·银行频道</span><span>09/16</span></div>
+  <h3><a class="to-detail" href="i/itm-heipcf.html">金融营销“9·30”新规落地将近</a></h3>
+  <p class="sum">金融营销9·30新规落地将近，宣传话术、展示规则与第三方合作素材面临整改，财富与信用卡条线需倒排自查…</p>
+  
+  
+  <div class="tags"><span class="tag t-policy">监管合规</span><span class="tag t-wealth">财富</span><span class="tag ">信用卡</span><span class="tag t-mass">客群</span></div>
+</article>
+<article class="brief" id="itm-wjqh3c" data-source="media" data-tags="市场 客群" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·银行频道</span><span>09/16</span></div>
+  <h3><a class="to-detail" href="i/itm-wjqh3c.html">9月金融债提速！740亿集中落地，银行加快补充中长期负债</a></h3>
+  <p class="sum">9月金融债提速、740亿集中落地，银行加快补充中长期负债，负债成本与期限结构变化可能影响后续存款定价…</p>
+  
+  
+  <div class="tags"><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
+</article><article class="brief more must" id="itm-jwvtis" data-source="media" data-tags="信贷" data-market="" data-stage="" data-segs="零售AUM">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>新浪财经·理财保险</span><span>09/17</span><span class="imp-badge">必知</span></div>
+  <h3><a class="to-detail" href="i/itm-jwvtis.html">美国金融机构上调贷款参考利率至7%</a></h3>
+  <p class="sum">美国贷款参考利率升至7%，美元融资成本上行，有美元负债或跨境融资需求的客户可考虑提前锁定成本。</p>
+  
+  
+  <div class="tags"><span class="tag ">信贷</span></div>
+</article>
+<article class="brief more" id="itm-16px0fc" data-source="official" data-tags="" data-market="" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="src-badge src-official">官方</span><span>新华财经</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-16px0fc.html">【前8个月上线微短剧中AI剧超九成】广电总局网络视听节目管理司司长王小亮17日在国新办举行的“开局起步‘十五五’”系列主题新闻发布会上介绍，今年前8个月，全国上线微短剧43万部，是去年全年的13倍，其中AI剧超九成。</a></h3>
+  <p class="sum">【前8个月上线微短剧中AI剧超九成】广电总局网络视听节目管理司司长王小亮17日在国新办举行的“开局起…</p>
+  
+  
+  
+</article>
+<article class="brief more" id="itm-yhhvod" data-source="media" data-tags="" data-market="" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-yhhvod.html">8月政府债券净融资1.01万亿元，在当月社融中占比超过60%</a></h3>
+  <p class="sum">8月政府债券净融资1.01万亿元、占当月社融超60%，财政发力支撑社融，可关注配套项目与机构资金流向…</p>
+  
+  
+  
+</article>
+<article class="brief more" id="itm-zs3hsv" data-source="media" data-tags="" data-market="" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/17</span></div>
+  <h3><a class="to-detail" href="i/itm-zs3hsv.html">国家统计局8月最新数据：一线城市二手房价格连涨6月，上海新房继续领涨</a></h3>
+  <p class="sum">8月一线城市二手房价格连涨6月、上海新房领涨，按揭与置换需求或有回暖，可关注相关客群跟进节奏。</p>
+  
+  
+  
+</article>
+<article class="brief more" id="itm-9v0xr4" data-source="media" data-tags="" data-market="" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/16</span></div>
+  <h3><a class="to-detail" href="i/itm-9v0xr4.html">集中推盘 “金九银十”深圳好房嘉年华举行</a></h3>
+  <p class="sum">深圳金九银十集中推盘，按揭与住房金融需求阶段性释放，相关客群服务窗口值得关注。</p>
+  
+  
+  
+</article>
+<article class="brief more" id="itm-y0jxw6" data-source="media" data-tags="" data-market="" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/16</span></div>
+  <h3><a class="to-detail" href="i/itm-y0jxw6.html">香港首个五年规划：巩固提升“深圳—香港—广州”全球创新集群领先地位</a></h3>
+  <p class="sum">香港五年规划提出巩固深港穗全球创新集群领先地位，跨境科创金融与湾区客群服务窗口打开。</p>
+  
+  
+  
+</article>
+<article class="brief more" id="itm-1dn9aj6" data-source="official" data-tags="" data-market="" data-stage="" data-segs="其他业务线">
+  <div class="bm"><span class="src-badge src-official">官方</span><span>新华财经</span><span>09/16</span></div>
+  <h3><a class="to-detail" href="i/itm-1dn9aj6.html">国家统计局：多地调整优化房地产政策 效果正逐步显现</a></h3>
+  <p class="sum">多地房地产政策优化效果逐步显现，住房金融条线可关注按揭投放节奏与区域政策落地差异带来的客户咨询变化。</p>
+  
+  
+  
+</article><button class="expand-btn" type="button">展开其余 7 条</button>
   </section><section class="panel" id="p-ipo">
     <div class="filter-bar">
     <span class="filter-label">筛选</span>
@@ -1660,62 +1802,69 @@
         <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
       </div><div class="filter-group">
         <span class="filter-gtitle">阶段</span>
-        <button type="button" class="filter-chip" data-group="stage" data-filter="stage-tutoring">辅导备案</button><button type="button" class="filter-chip" data-group="stage" data-filter="stage-registered">注册发行</button><button type="button" class="filter-chip" data-group="stage" data-filter="stage-listed">已上市</button>
+        <button type="button" class="filter-chip" data-group="stage" data-filter="stage-tutoring">辅导备案</button><button type="button" class="filter-chip" data-group="stage" data-filter="stage-coach-done">辅导完成</button><button type="button" class="filter-chip" data-group="stage" data-filter="stage-registered">注册发行</button><button type="button" class="filter-chip" data-group="stage" data-filter="stage-listed">已上市</button>
       </div>
     <button type="button" class="filter-reset">重置</button>
   </div>
     <section class="ipo-group" data-stage="stage-tutoring">
-    <h4 class="ipo-group-head"><span class="ipo-group-dot ipo-stage--stage-tutoring"></span>辅导备案<span class="ipo-group-n">3</span></h4>
-    <article class="brief" id="itm-1o56h01" data-source="official" data-tags="科技金融" data-market="" data-stage="stage-tutoring">
+    <h4 class="ipo-group-head"><span class="ipo-group-dot ipo-stage--stage-tutoring"></span>辅导备案<span class="ipo-group-n">2</span></h4>
+    <article class="brief" id="itm-1bxgrz8" data-source="official" data-tags="粤" data-market="" data-stage="stage-tutoring" data-segs="其他业务线">
+  <div class="bm"><span class="src-badge src-official">官方</span><span>证监会辅导备案(官方csrcfd)</span><span>09/11 · 6 天前</span></div>
+  <h3><a class="to-detail" href="i/itm-1bxgrz8.html">深圳硕日新能科技股份有限公司 (辅导备案) [深圳证监局]</a></h3>
+  <p class="sum">IPO辅导备案 | 辅导机构: 国泰海通证券股份有限公司 | 备案时间: 2026-01-23 | …</p>
+  
+  
+  <div class="tags"><span class="tag t-gd">广东</span></div>
+</article>
+<article class="brief" id="itm-1dhjqx5" data-source="official" data-tags="粤" data-market="" data-stage="stage-tutoring" data-segs="其他业务线">
+  <div class="bm"><span class="src-badge src-official">官方</span><span>证监会辅导备案(官方csrcfd)</span><span>09/11 · 6 天前</span></div>
+  <h3><a class="to-detail" href="i/itm-1dhjqx5.html">云英谷科技股份有限公司 (辅导备案) [深圳证监局]</a></h3>
+  <p class="sum">IPO辅导备案 | 辅导机构: 广发证券股份有限公司 | 备案时间: 2026-09-10 | 状态…</p>
+  
+  
+  <div class="tags"><span class="tag t-gd">广东</span></div>
+</article>
+  </section>
+<section class="ipo-group" data-stage="stage-coach-done">
+    <h4 class="ipo-group-head"><span class="ipo-group-dot ipo-stage--stage-coach-done"></span>辅导完成<span class="ipo-group-n">1</span></h4>
+    <article class="brief" id="itm-1o56h01" data-source="official" data-tags="粤" data-market="" data-stage="stage-coach-done" data-segs="其他业务线">
   <div class="bm"><span class="src-badge src-official">官方</span><span>证监会辅导备案(官方csrcfd)</span><span>09/12 · 5 天前</span></div>
-  <h3><a class="to-detail" href="i/itm-1o56h01.html">深圳楠菲微电子IPO辅导验收</a></h3>
-  <p class="sum">深圳楠菲微电子IPO辅导验收完成，辅导机构为中信建投，上市进程推进，可关注其后续募资与结算合作机会。</p>
+  <h3><a class="to-detail" href="i/itm-1o56h01.html">深圳市楠菲微电子股份有限公司 (辅导验收) [深圳证监局]</a></h3>
+  <p class="sum">IPO辅导备案 | 辅导机构: 中信建投证券股份有限公司 | 备案时间: 2026-02-09 | …</p>
   
   
-  <div class="tags"><span class="tag ">科技金融</span></div>
-</article>
-<article class="brief" id="itm-1dhjqx5" data-source="official" data-tags="科技金融" data-market="" data-stage="stage-tutoring">
-  <div class="bm"><span class="src-badge src-official">官方</span><span>证监会辅导备案(官方csrcfd)</span><span>09/11 · 6 天前</span></div>
-  <h3><a class="to-detail" href="i/itm-1dhjqx5.html">云英谷科技IPO辅导备案</a></h3>
-  <p class="sum">云英谷科技IPO辅导备案，辅导机构为广发证券，尚处辅导期，可关注其账户开立与后续融资安排。</p>
-  
-  
-  <div class="tags"><span class="tag ">科技金融</span></div>
-</article>
-<article class="brief" id="itm-1bxgrz8" data-source="official" data-tags="科技金融" data-market="" data-stage="stage-tutoring">
-  <div class="bm"><span class="src-badge src-official">官方</span><span>证监会辅导备案(官方csrcfd)</span><span>09/11 · 6 天前</span></div>
-  <h3><a class="to-detail" href="i/itm-1bxgrz8.html">深圳硕日新能IPO辅导备案</a></h3>
-  <p class="sum">深圳硕日新能IPO辅导备案，辅导机构为国泰海通，处于早期辅导阶段，可纳入科技客群长期跟踪名单。</p>
-  
-  
-  <div class="tags"><span class="tag ">科技金融</span></div>
+  <div class="tags"><span class="tag t-gd">广东</span></div>
 </article>
   </section>
 <section class="ipo-group" data-stage="stage-registered">
     <h4 class="ipo-group-head"><span class="ipo-group-dot ipo-stage--stage-registered"></span>注册发行<span class="ipo-group-n">1</span></h4>
-    <article class="brief" id="itm-1bqiqy1" data-source="official" data-tags="粤" data-market="" data-stage="stage-registered">
+    <article class="brief" id="itm-1bqiqy1" data-source="official" data-tags="粤 市场 客群" data-market="" data-stage="stage-registered" data-segs="零售AUM">
   <div class="bm"><span class="src-badge src-official">官方</span><span>深交所审核项目动态(官方)</span><span>09/14 · 3 天前</span></div>
   <h3><a class="to-detail" href="i/itm-1bqiqy1.html">优邦科技：IPO注册生效（拟创业板）</a></h3>
-  <p class="sum">优邦科技创业板IPO注册生效，保荐为申万宏源承销保荐，注册生效后进入发行窗口，可关注募资账户与员工持…</p>
+  <p class="sum">优邦科技创业板IPO注册生效，保荐为申万宏源承销保荐，注册生效后进入发行窗口，可关注其募资与员工持股…</p>
   
   
-  <div class="tags"><span class="tag t-gd">粤</span></div>
+  <div class="tags"><span class="tag t-gd">粤</span><span class="tag ">市场</span><span class="tag t-mass">客群</span></div>
 </article>
   </section>
 <section class="ipo-group" data-stage="stage-listed">
     <h4 class="ipo-group-head"><span class="ipo-group-dot ipo-stage--stage-listed"></span>已上市<span class="ipo-group-n">1</span></h4>
-    <article class="brief" id="itm-2lu926" data-source="official" data-tags="粤 跨境 财富" data-market="" data-stage="stage-listed">
+    <article class="brief" id="itm-2lu926" data-source="official" data-tags="跨境 粤 财富" data-market="" data-stage="stage-listed" data-segs="零售AUM">
   <div class="bm"><span class="src-badge src-official">官方</span><span>港交所新股递表(广东企业赴港)</span><span>09/13 · 4 天前</span></div>
-  <h3><a class="to-detail" href="i/itm-2lu926.html">海柔创新智能科技集团：港交所主板递表</a></h3>
-  <p class="sum">海柔创新智能科技集团9月13日递表港交所主板，赴港上市推进中，跨境融资与外汇结算需求可提前对接。</p>
+  <h3><a class="to-detail" href="i/itm-2lu926.html">海柔创新智能科技集团递表港交所主板</a></h3>
+  <p class="sum">海柔创新递表港交所主板，赴港上市路径延续，跨境融资与上市前后资金安排值得关注，可跟进相关企业金融需求…</p>
   
   
-  <div class="tags"><span class="tag t-gd">粤</span><span class="tag ">跨境</span><span class="tag t-wealth">财富</span></div>
+  <div class="tags"><span class="tag ">跨境</span><span class="tag t-gd">粤</span><span class="tag t-wealth">财富</span></div>
 </article>
   </section>
   </section>
 
-  
+  <section class="redchip-panel redchip-panel--quiet" aria-labelledby="redchip-title">
+    <h2 class="redchip-title" id="redchip-title">🚩 红筹线索</h2>
+    <p class="redchip-ledger"><a href="../redchip/index.html">📋 红筹商机台账（在册 38 家）→</a><span class="redchip-ledger-hint">本期无新动向 · 台账为全量在册线索，面板只列近期动向</span></p>
+    <p class="redchip-note">「线索」为机器判定（离岸注册 ∧ 广东运营实体语境命中），<strong>非结论</strong>。</p>
+  </section>
 
   <footer>
     <p>免责声明：本页面为个人学习项目，内容基于公开信息整理，不代表任何机构立场；市场信息不构成投资建议。页面面向内部参考，请勿外传。</p>
@@ -1818,6 +1967,83 @@
   }
   window.addEventListener('hashchange', onHash);
   onHash();
+  // —— C1 客群切分轴 + 角色视图（2026-09-17）——
+  // 与筛选条复用同一套 applyFilter：角色 = 预设一组业务线；客群标签 = 预设一个段位。
+  // 都是「设置选中态 → 应用」，不新增匹配规则（避免两套判定漂移）。
+  var ROLE_VIEWS = [];
+  try { ROLE_VIEWS = JSON.parse((document.getElementById('role-views') || {}).textContent || '[]'); } catch (e) { ROLE_VIEWS = []; }
+  var roleBar = document.getElementById('role-bar');
+  var roleHint = document.getElementById('role-hint');
+  var currentRole = null;
+  var ROLE_HINT_DEFAULT = roleHint ? roleHint.textContent : '';
+  function activatePanel(pid) {
+    document.querySelectorAll('.tabs > .tab').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-target') === pid);
+    });
+    document.querySelectorAll('.panel').forEach(function (p) {
+      p.classList.toggle('active', p.id === pid);
+    });
+  }
+  // 按 { 维度: [值...] } 设置某面板筛选条选中态，并立即应用；返回是否有筛选条
+  function setChips(panel, activeMap) {
+    var bar = panel.querySelector('.filter-bar');
+    if (!bar) return false;
+    bar.querySelectorAll('.filter-chip').forEach(function (c) {
+      var g = c.getAttribute('data-group');
+      var v = c.getAttribute('data-filter');
+      var want = activeMap[g];
+      c.classList.toggle('active', !!want && want.indexOf(v) >= 0);
+    });
+    applyFilter(panel, bar);
+    return true;
+  }
+  function applyRole(id) {
+    var role = null;
+    for (var i = 0; i < ROLE_VIEWS.length; i++) if (ROLE_VIEWS[i].id === id) role = ROLE_VIEWS[i];
+    currentRole = role ? role.id : null;
+    if (roleBar) {
+      roleBar.querySelectorAll('.role-chip').forEach(function (c) {
+        c.classList.toggle('active', !!role && c.getAttribute('data-role') === role.id);
+      });
+    }
+    if (roleHint) {
+      roleHint.textContent = role
+        ? '当前视图：' + role.label + (role.tags.length ? '（' + role.tags.join('/') + '）' : '（全部）')
+        : ROLE_HINT_DEFAULT;
+    }
+    document.querySelectorAll('.panel').forEach(function (panel) {
+      setChips(panel, role && role.tags.length ? { tag: role.tags } : {});
+    });
+  }
+  if (roleBar) {
+    roleBar.addEventListener('click', function (e) {
+      var chip = e.target && e.target.closest ? e.target.closest('.role-chip') : null;
+      if (!chip) return;
+      var id = chip.getAttribute('data-role');
+      applyRole(currentRole === id ? null : id); // 再点一次 = 取消
+    });
+  }
+  // 客群标签（商机洞察卡上）点击 → 按该客群筛选所有板块，并跳到第一个有命中的面板
+  function applySegFilter(value) {
+    var target = null;
+    document.querySelectorAll('.panel').forEach(function (panel) {
+      if (!setChips(panel, { seg: [value] })) return;
+      if (!target && panel.querySelectorAll('.brief:not(.filtered-out)').length > 0) target = panel;
+    });
+    if (roleBar) roleBar.querySelectorAll('.role-chip').forEach(function (c) { c.classList.remove('active'); });
+    currentRole = null;
+    if (roleHint) roleHint.textContent = '已按客群筛选：' + value + '（点筛选条「重置」可清除）';
+    if (target) {
+      activatePanel(target.id);
+      try { target.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch (err) { target.scrollIntoView(); }
+    }
+  }
+  document.addEventListener('click', function (e) {
+    var chip = e.target && e.target.closest ? e.target.closest('button.seg-chip[data-seg]') : null;
+    if (!chip) return;
+    applySegFilter(chip.getAttribute('data-seg'));
+  });
+
   // 板块内标签筛选（两维度：来源 OR、业务线 OR；维度间 AND；全不选 / 全选 = 全部显示）
   document.querySelectorAll('.filter-bar').forEach(function (bar) {
     var panel = bar.closest('.panel');
@@ -1874,6 +2100,13 @@
         } else if (g === 'market') {
           // 股市动态面板：按 A股 / 港股 / 美股 过滤（维度内 OR）
           if (sel.indexOf(market) < 0) { ok = false; break; }
+        } else if (g === 'seg') {
+          // C1 客群轴：卡片 data-segs（空格分隔）与选中段位有交集即满足；维度内 OR
+          var segs = (card.getAttribute('data-segs') || '').split(' ').filter(Boolean);
+          var segHit = sel.some(function (f) {
+            return f === '__none__' ? segs.length === 0 : segs.indexOf(f) >= 0;
+          });
+          if (!segHit) { ok = false; break; }
         } else if (g === 'stage') {
           // 广东IPO 面板：按四阶段过滤（维度内 OR）；「__none__」= 阶段待定（无阶段信号）
           var stageHit = sel.some(function (f) { return f === '__none__' ? stage === '' : stage === f; });
@@ -1895,6 +2128,232 @@
 <script>
 
 (function(){
+  var meta = document.querySelector('meta[name="report-date"]');
+  var PAGE_DATE = meta ? (meta.getAttribute('content') || '') : '';
+  var CARD_SEL = '.brief, .must-card, .insight, .risk-card, .ipo-card, .stock-card';
+  var audio = document.getElementById('audio-player');
+  var segEl = document.getElementById('audio-segments');
+  var SEGS = [];
+  if (segEl) { try { SEGS = JSON.parse(segEl.textContent || '[]'); } catch (e) { SEGS = []; } }
+  function segOf(id) { for (var i = 0; i < SEGS.length; i++) if (SEGS[i].id === id) return SEGS[i]; return null; }
+
+  function textOf(el) { return el ? (el.textContent || '').replace(/\s+/g, ' ').trim() : ''; }
+  function cardInfo(card) {
+    var titleEl = card.querySelector('h3 a, h3, .must-body strong, .stock-card-head');
+    var sumEl = card.querySelector('.sum, .must-why, .stock-overview');
+    var linkEl = card.querySelector('a[href^="http"]');
+    return {
+      title: textOf(titleEl),
+      sum: textOf(sumEl),
+      url: linkEl ? linkEl.getAttribute('href') : '',
+      id: card.id || ''
+    };
+  }
+  function copyToClipboard(text) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).catch(function () { legacyCopy(text); });
+      return;
+    }
+    legacyCopy(text);
+  }
+  function legacyCopy(text) {
+    try {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.setAttribute('readonly', '');
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+    } catch (e) {}
+  }
+  function copyForm(item) {
+    var lines = [item.title];
+    if (item.sum) lines.push(item.sum);
+    var meta = [];
+    if (item.src) meta.push(item.src);
+    if (PAGE_DATE) meta.push(PAGE_DATE);
+    if (meta.length) lines.push(meta.join(' · '));
+    if (item.url) lines.push(item.url);
+    return lines.join('\n');
+  }
+  function flash(btn, txt) {
+    var old = btn.textContent;
+    btn.textContent = txt;
+    setTimeout(function () { btn.textContent = old; }, 1200);
+  }
+
+  // —— 收藏（localStorage）——
+  function favRead() {
+    try { var v = JSON.parse(localStorage.getItem('gz_fav') || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+  }
+  function favWrite(list) {
+    try { localStorage.setItem('gz_fav', JSON.stringify(list.slice(0, 300))); } catch (e) {}
+    favRender();
+  }
+  function favKeyOf(card, info) { return PAGE_DATE + '|' + (info.id || info.title); }
+  function favRender() {
+    var bar = document.getElementById('fav-bar');
+    var listEl = document.getElementById('fav-list');
+    var emptyEl = document.getElementById('fav-empty');
+    if (!bar || !listEl) return;
+    var list = favRead();
+    while (listEl.firstChild) listEl.removeChild(listEl.firstChild);
+    if (!list.length) {
+      if (emptyEl) emptyEl.textContent = '（尚未收藏任何条目）';
+      bar.hidden = false;
+      return;
+    }
+    if (emptyEl) emptyEl.textContent = '共 ' + list.length + ' 条';
+    for (var i = 0; i < list.length; i++) {
+      var it = list[i];
+      var li = document.createElement('li');
+      var y = document.createElement('span');
+      y.textContent = (it.d || '') + ' ';
+      li.appendChild(y);
+      var href = it.h || it.u || '';
+      if (href) {
+        var a = document.createElement('a');
+        a.href = href;
+        a.textContent = it.t || '(无标题)';
+        li.appendChild(a);
+      } else {
+        li.appendChild(document.createTextNode(it.t || '(无标题)'));
+      }
+      listEl.appendChild(li);
+    }
+    bar.hidden = false;
+  }
+  function markFavButtons() {
+    var list = favRead();
+    var keys = {};
+    for (var i = 0; i < list.length; i++) keys[list[i].k] = true;
+    document.querySelectorAll('.card-actions .act-fav').forEach(function (b) {
+      var k = b.getAttribute('data-fav-key');
+      b.classList.toggle('is-fav', !!keys[k]);
+      b.textContent = keys[k] ? '★ 已收藏' : '☆ 收藏';
+    });
+  }
+
+  // —— 批量导出（Markdown；纯前端 Blob 下载）——
+  function exportMarkdown() {
+    var lines = ['# 每日资信简报 ' + (PAGE_DATE || ''), ''];
+    function block(title, cards) {
+      if (!cards.length) return;
+      lines.push('## ' + title, '');
+      cards.forEach(function (c, i) {
+        var info = cardInfo(c);
+        lines.push((i + 1) + '. **' + (info.title || '(无标题)') + '**');
+        if (info.sum) lines.push('   - ' + info.sum);
+        if (info.url) lines.push('   - 原文：' + info.url);
+      });
+      lines.push('');
+    }
+    block('执行摘要 · 今日必读', Array.prototype.slice.call(document.querySelectorAll('.must-card')));
+    block('执行摘要 · 商机洞察', Array.prototype.slice.call(document.querySelectorAll('.insight')));
+    var riskCards = Array.prototype.slice.call(document.querySelectorAll('.risk-card'));
+    if (riskCards.length) {
+      var r = cardInfo(riskCards[0]);
+      lines.push('## 执行摘要 · 风险预警', '');
+      lines.push('1. **' + (r.title || '风险提示') + '**');
+      if (r.sum) lines.push('   - ' + r.sum);
+      lines.push('');
+    }
+    document.querySelectorAll('.panel').forEach(function (panel) {
+      var tab = document.querySelector('.tabs > .tab[data-target="' + panel.id + '"]');
+      var label = tab ? textOf(tab).replace(/\d+$/, '') : panel.id;
+      block(label, Array.prototype.slice.call(panel.querySelectorAll('.brief, .ipo-card')));
+    });
+    var text = lines.join('\n');
+    try {
+      var blob = new Blob([text], { type: 'text/markdown;charset=utf-8' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'briefing-' + (PAGE_DATE || 'report') + '.md';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+    } catch (e) {
+      copyToClipboard(text);
+    }
+  }
+
+  // —— 工具栏注入（每张卡片一次）——
+  document.querySelectorAll(CARD_SEL).forEach(function (card) {
+    if (card.querySelector('.card-actions')) return; // 防重复注入（脚本重跑/浏览器恢复）
+    var info = cardInfo(card);
+    if (!info.title) return;
+    var src = textOf(card.querySelector('.bm, .src-badge')) ;
+    var bar = document.createElement('div');
+    bar.className = 'card-actions';
+
+    var btnCopy = document.createElement('button');
+    btnCopy.type = 'button';
+    btnCopy.className = 'act-copy';
+    btnCopy.textContent = '⧉ 复制';
+    btnCopy.addEventListener('click', function () {
+      copyToClipboard(copyForm({ title: info.title, sum: info.sum, url: info.url, src: src }));
+      flash(btnCopy, '✓ 已复制');
+    });
+    bar.appendChild(btnCopy);
+
+    var btnFav = document.createElement('button');
+    btnFav.type = 'button';
+    btnFav.className = 'act-fav';
+    var key = favKeyOf(card, info);
+    btnFav.setAttribute('data-fav-key', key);
+    btnFav.textContent = '☆ 收藏';
+    btnFav.addEventListener('click', function () {
+      var list = favRead();
+      var idx = -1;
+      for (var i = 0; i < list.length; i++) if (list[i].k === key) { idx = i; break; }
+      if (idx >= 0) list.splice(idx, 1);
+      else list.push({ k: key, d: PAGE_DATE, t: info.title, u: info.url, h: location.pathname + (card.id ? '#' + card.id : '') });
+      favWrite(list);
+      markFavButtons();
+      flash(btnFav, idx >= 0 ? '已取消' : '✓ 已收藏');
+    });
+    bar.appendChild(btnFav);
+
+    var sec = card.getAttribute('data-audio-section');
+    var seg = sec ? segOf(sec) : null;
+    if (audio && seg) {
+      var btnPlay = document.createElement('button');
+      btnPlay.type = 'button';
+      btnPlay.className = 'act-listen';
+      btnPlay.textContent = '▶ 听这段';
+      btnPlay.addEventListener('click', function () {
+        try { audio.currentTime = seg.startSec + 0.05; } catch (e) {}
+        var p = audio.play();
+        if (p && p.catch) p.catch(function () {});
+        try { audio.scrollIntoView({ behavior: 'smooth', block: 'center' }); } catch (e) {}
+      });
+      bar.appendChild(btnPlay);
+    }
+    card.appendChild(bar);
+  });
+
+  var favBar = document.getElementById('fav-bar');
+  var btnExport = document.getElementById('fav-export');
+  if (btnExport) btnExport.addEventListener('click', exportMarkdown);
+  var btnClear = document.getElementById('fav-clear');
+  if (btnClear) {
+    btnClear.addEventListener('click', function () {
+      if (window.confirm('确定清空本机收藏？')) favWrite([]);
+    });
+  }
+  if (favBar) favRender();
+  markFavButtons();
+})();
+
+</script>
+<script>
+
+(function(){
   var audio = document.getElementById("audio-player");
   var dataEl = document.getElementById("audio-segments");
   if (!audio || !dataEl) return;
@@ -1902,7 +2361,103 @@
   try { segments = JSON.parse(dataEl.textContent || "[]"); } catch(e) { return; }
   if (!Array.isArray(segments) || segments.length === 0) return;
 
+  var LABELS = {"intro":"开场","hero":"今日定调","must":"今日必读","insight":"业务启示","risk":"风险提示","stock":"股市动态","ipo":"广东IPO"};
+  var hint = document.getElementById("audio-now-hint");
+  var hintTxt = document.getElementById("audio-now-text");
+  var hintNote = document.getElementById("audio-now-note");
+  var hintGo = document.getElementById("audio-now-go");
   var lastId = null;
+
+  function cardsOf(id) { return document.querySelectorAll('[data-audio-section="' + id + '"]'); }
+  function clearHighlights() {
+    var els = document.querySelectorAll(".audio-highlight");
+    for (var i = 0; i < els.length; i++) els[i].classList.remove("audio-highlight");
+    var badges = document.querySelectorAll(".audio-now-badge");
+    for (var j = badges.length - 1; j >= 0; j--) {
+      if (badges[j].parentNode) badges[j].parentNode.removeChild(badges[j]);
+    }
+  }
+  function addBadges(cards) {
+    for (var i = 0; i < cards.length; i++) {
+      var c = cards[i];
+      if (c.querySelector && c.querySelector(".audio-now-badge")) continue;
+      var b = document.createElement("span");
+      b.className = "audio-now-badge";
+      b.textContent = "🔊 正在播";
+      c.appendChild(b);
+    }
+  }
+  function syncChapters(id) {
+    var btns = document.querySelectorAll(".audio-chapter");
+    for (var i = 0; i < btns.length; i++) {
+      btns[i].classList.toggle("is-current", btns[i].getAttribute("data-seg") === id);
+    }
+  }
+  // 卡片是否落在「未激活标签面板」或「折叠区」里（此时高亮本身看不见）
+  function hiddenReason(el) {
+    if (!el || !el.closest) return null;
+    var panel = el.closest(".panel");
+    if (panel && !panel.classList.contains("active")) {
+      var tab = document.querySelector('.tabs > .tab[data-target="' + panel.id + '"]');
+      return tab ? tab.textContent.replace(/\s+/g, "") : "下方标签页";
+    }
+    if (el.classList.contains("more")) {
+      var host = el.closest(".panel, .exec-must");
+      if (host && !host.classList.contains("expanded")) return "本页折叠区";
+    }
+    return null;
+  }
+  // 仅在**读者主动点击**时执行：切面板 + 展开折叠 + 滚动定位（绝不自动触发）
+  function gotoCards(cards) {
+    if (!cards || !cards.length) return;
+    var el = cards[0];
+    var panel = el.closest ? el.closest(".panel") : null;
+    if (panel && !panel.classList.contains("active")) {
+      var pid = panel.id;
+      var tabs = document.querySelectorAll(".tabs > .tab");
+      for (var i = 0; i < tabs.length; i++) tabs[i].classList.toggle("active", tabs[i].getAttribute("data-target") === pid);
+      var panels = document.querySelectorAll(".panel");
+      for (var j = 0; j < panels.length; j++) panels[j].classList.toggle("active", panels[j].id === pid);
+    }
+    if (el.classList && el.classList.contains("more")) {
+      var host = el.closest(".panel, .exec-must");
+      if (host) host.classList.add("expanded");
+    }
+    try { el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { el.scrollIntoView(); }
+    for (var k = 0; k < cards.length; k++) {
+      (function (node) {
+        node.classList.add("flash");
+        setTimeout(function () { node.classList.remove("flash"); }, 1800);
+      })(cards[k]);
+    }
+  }
+  function updateHint(seg, cards) {
+    if (!hint) return;
+    if (!seg) { hint.hidden = true; return; }
+    var name = LABELS[seg.id] || seg.id;
+    var n = cards.length;
+    hintTxt.textContent = "正在播：" + name + (n ? "（已高亮 " + n + " 张卡）" : "");
+    var reason = n ? hiddenReason(cards[0]) : null;
+    if (!n) hintNote.textContent = "· 本段没有对应卡片";
+    else if (reason) hintNote.textContent = "· 卡片在「" + reason + "」中";
+    else hintNote.textContent = "";
+    if (hintGo) hintGo.hidden = !(n && reason);
+    hint.hidden = false;
+  }
+  function apply(seg) {
+    if (!seg) { clearHighlights(); syncChapters(null); updateHint(null, []); lastId = null; return; }
+    syncChapters(seg.id);
+    var cards = cardsOf(seg.id);
+    if (seg.id === lastId) { updateHint(seg, cards); return; }
+    lastId = seg.id;
+    clearHighlights();
+    for (var i = 0; i < cards.length; i++) cards[i].classList.add("audio-highlight");
+    addBadges(cards);
+    updateHint(seg, cards);
+    if (hintGo) {
+      hintGo.onclick = function () { gotoCards(cardsOf(seg.id)); };
+    }
+  }
   function currentSegment(t) {
     for (var i = 0; i < segments.length; i++) {
       var s = segments[i];
@@ -1910,27 +2465,28 @@
     }
     return null;
   }
-  function clearAll() {
-    var els = document.querySelectorAll(".audio-highlight");
-    for (var i = 0; i < els.length; i++) els[i].classList.remove("audio-highlight");
-  }
-  function applyHighlight(seg) {
-    if (!seg) { lastId = null; return; }
-    if (seg.id === lastId) return;
-    clearAll();
-    var cards = document.querySelectorAll('[data-audio-section="' + seg.id + '"]');
-    for (var i = 0; i < cards.length; i++) cards[i].classList.add("audio-highlight");
-    lastId = seg.id;
-  }
-  audio.addEventListener("timeupdate", function() {
-    var seg = currentSegment(audio.currentTime || 0);
-    applyHighlight(seg);
+  function tick() { apply(currentSegment(audio.currentTime || 0)); }
+  audio.addEventListener("timeupdate", tick);
+  audio.addEventListener("seeked", function () { lastId = null; tick(); });
+  audio.addEventListener("play", tick);
+  audio.addEventListener("pause", tick);
+  audio.addEventListener("ended", function () {
+    clearHighlights(); syncChapters(null); updateHint(null, []); lastId = null;
   });
-  audio.addEventListener("ended", function() { clearAll(); lastId = null; });
-  audio.addEventListener("seeked", function() {
-    var seg = currentSegment(audio.currentTime || 0);
-    applyHighlight(seg);
-  });
+  // A4 章节列表：点击跳段（读者主动；跳完刷新提示）
+  var chapters = document.querySelectorAll(".audio-chapter");
+  for (var k = 0; k < chapters.length; k++) {
+    (function (btn) {
+      btn.addEventListener("click", function () {
+        var t = parseFloat(btn.getAttribute("data-start")) || 0;
+        try { audio.currentTime = t; } catch (e) {}
+        lastId = null;
+        tick();
+        var p = audio.play();
+        if (p && p.catch) p.catch(function () {});
+      });
+    })(chapters[k]);
+  }
 })();
 
 </script>
