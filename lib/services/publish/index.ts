@@ -2,7 +2,7 @@
  * 发布服务 C9：把渲染产物落盘为「可独立部署的产物包」。
  *
  * 职责边界（端口适配器）：只通过 FileStore 端口写盘，不碰 git / 网络。
- * 实际的 gh-pages 推送、企微/公众号推送由 CI（.github/workflows）或部署脚本负责，
+ * 实际的 gh-pages 推送、企微群机器人推送由 CI（.github/workflows）或部署脚本负责，
  * 本服务只保证「产物已就位 + 写出 latest 指针」，使项目可独立发布/部署/运行。
  */
 import type { DailyReport } from "../../contracts/report";

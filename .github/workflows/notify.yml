@@ -1,4 +1,4 @@
-name: WeChat & WeCom Notify (Manual)
+name: WeCom Group Robot Notify (Manual)
 
 # 简报外发工作流（自 gzinfo .github/workflows/notify.yml 移植，2026-09-15）。
 #
@@ -9,18 +9,17 @@ name: WeChat & WeCom Notify (Manual)
 #   1. daily.yml（手动触发，无定时调度）build + 发布 gh-pages（并归档
 #      data/event-memory.json，含当日「暂存区 today」口播）；
 #   2. 用户打开报告 URL 人工核对内容无误；
-#   3. 手动 Run this workflow → 合并推送：① 公众号（微信测试号模板消息）
-#      ② 企业号（企业微信，群机器人 Webhook 优先；否则自建应用）。两渠道各自缺配置则跳过，
-#      任一成功即交付；
+#   3. 手动 Run this workflow → 推送到企业微信群机器人（Webhook，**唯一通道**；
+#      公众号与企微自建应用已于 2026-09-17 永久移除）；
 #   4. 推送真正送达（notify 退出 0）→ mark-delivered 写当日「交付信号」(deliveries) 并
 #      **立即把当日暂存区结算进长期记忆 (events)**，提交 main。
 #      ⚠️ 生效判据 = 触达即生效：渠道无「客户已读」回执，已读不可观测，
-#      以「推送全量送达」为正式生效判据（未送达/无目标不算交付）。
+#      以「推送送达」为正式生效判据（未送达 / 未配置不算交付）。
 #      语义：**只有发送成功的才算入记忆**（代表客户已经看过这些数据）。
 #
-# 并发：concurrency 串行化本 workflow，避免同一天多次手动触发（公众号 / 企业号各跑一次）
-# 的 git commit+push 相互覆盖冲突。
-# 失败语义：两渠道均未送达 → 步骤红 → 不写交付信号（不算交付），用户处理后重试即可；
+# 并发：concurrency 串行化本 workflow，避免同一天多次手动触发的 git commit+push
+# 相互覆盖冲突。
+# 失败语义：群机器人未送达 → 步骤红 → 不写交付信号（不算交付），用户处理后重试即可；
 # 重复触发会重复推送 + 重复打标（微信侧无去重，deliveries 覆盖 pushedAt），请确认后再点。
 
 on:
@@ -37,7 +36,7 @@ permissions:
 
 jobs:
   notify:
-    name: Push WeChat & WeCom & mark delivered
+    name: Push WeCom group robot & mark delivered
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -65,20 +64,12 @@ jobs:
           fi
           echo "store.json 已就绪: history/${TODAY}/store.json"
 
-      # 合并推送：公众号 + 企业号（notify-daily.ts 内部按「先公众号后企业号」顺序，
-      # 任一成功即 exit 0）。真正送达（目标 ≥1 且全成功）→ exit 0；两渠道均失败/无目标 → exit 1。
-      - name: Push notifications (WeChat + WeCom)
+      # 唯一外发通道：企业微信群机器人（Webhook）。公众号与企微自建应用已于 2026-09-17 移除。
+      # 群机器人真正送达 → exit 0（触发 mark-delivered 结算记忆）；未配置 / 推送失败 → exit 1。
+      - name: Push notification (WeCom group robot)
         id: push
         env:
-          WX_APP_ID: ${{ secrets.WX_APP_ID }}
-          WX_APP_SECRET: ${{ secrets.WX_APP_SECRET }}
-          WX_USER_ID: ${{ secrets.WX_USER_ID }}
-          WX_TEMPLATE_ID: ${{ secrets.WX_TEMPLATE_ID }}
           WECOM_WEBHOOK: ${{ secrets.WECOM_WEBHOOK }}
-          WECOM_CORP_ID: ${{ secrets.WECOM_CORP_ID }}
-          WECOM_AGENT_ID: ${{ secrets.WECOM_AGENT_ID }}
-          WECOM_CORP_SECRET: ${{ secrets.WECOM_CORP_SECRET }}
-          WECOM_USER_IDS: ${{ secrets.WECOM_USER_IDS }}
           REPORT_BASE_URL: ${{ vars.REPORT_BASE_URL || 'https://shengc-shv.github.io/gzinfols' }}
         run: npm run notify
 

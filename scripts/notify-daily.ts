@@ -1,39 +1,31 @@
 /**
- * 简报外发：公众号（微信测试号模板消息）+ 企业号（企业微信）**合并为一条流程**。
- * （自 gzinfo scripts/notify-daily.ts 移植，2026-09-15）
+ * 简报外发：**企业微信群机器人（Webhook）** 单一通道。
+ * （自 gzinfo scripts/notify-daily.ts 移植，2026-09-15；2026-09-17 移除公众号与自建应用）
  *
  * 用法：npm run notify（由 .github/workflows/notify.yml 人工触发调用）
  *
- * 推送顺序：① 公众号先推；② 企业号后推。
- * 任一渠道成功送达即视为正式交付（notify 退出 0）→ notify.yml 据此写当日交付信号
- * 并**立即结算**进长期记忆（见 mark-delivered.ts）。两渠道均失败才退出 1。
+ * ⚠️ **唯一外发通道（2026-09-17 定案）**：公众号（微信测试号模板消息）与企业微信
+ *    自建应用（message/send）已**永久移除**——用户确认今后不再使用。仅保留群机器人
+ *    Webhook：自带 key 鉴权，不受企业可信 IP 白名单限制，从 CI 直接 POST 即可。
  *
- * 渠道选择：默认 `both`（两渠道都推）；可用 NOTIFY_CHANNEL=wechat|wecom 单独指定。
- * 各渠道缺配置则跳过该渠道（不影响另一渠道）。
+ * ⚠️ **记忆结算闸门**：群机器人真正送达 → notify 退出 0 → notify.yml 写当日交付信号
+ *    并**立即结算**进长期记忆（见 mark-delivered.ts）。未送达 → 退出 1，**不结算**
+ *    （宁漏勿误：未触达客户的内容不得进记忆，否则会误冷却后续真实新闻）。
  *
  * env（CI secrets / vars）：
- *   公众号：
- *     WX_APP_ID       必填 测试号 appID
- *     WX_APP_SECRET   必填 测试号 appsecret
- *     WX_TEMPLATE_ID  必填 模板 ID
- *     WX_USER_ID      可选 显式目标 openid（逗号分隔；关注者列表之外补发）
- *   企业号：
- *     WECOM_WEBHOOK         可选 群机器人 Webhook（自带 key 鉴权，不受企业可信 IP 限制，推荐）
- *     WECOM_CORP_ID / _AGENT_ID / _CORP_SECRET / _USER_IDS  可选 自建应用 message/send
- *   公共：
- *     REPORT_BASE_URL 可选 报告根 URL，默认 https://shengc-shv.github.io/gzinfols
- *     REPORT_TZ       可选 报告时区，默认 Asia/Shanghai
+ *     WECOM_WEBHOOK          必填 群机器人 Webhook 完整 URL（含 ?key=）
+ *     WECOM_WEBHOOK_MSGTYPE  可选 text（默认，个人微信可直接读）/ markdown（仅企业微信 App 可读）
+ *     REPORT_BASE_URL        可选 报告根 URL，默认 https://shengc-shv.github.io/gzinfols
+ *     REPORT_TZ              可选 报告时区，默认 Asia/Shanghai
  *
  * 数据源：history/<date>/store.json → executive.hero_line（+ guangdong_ipo.spoken 一行）
  *
- * 退出码：任一渠道真正送达 → 0；两渠道均缺配置或失败 → 1。
+ * 退出码：群机器人送达 → 0（触发结算记忆）；未配置或推送失败 → 1。
  */
 import "./_env";
 import fs from "node:fs";
 import path from "node:path";
-import { pushDailyReport, buildTemplatePayload } from "../lib/adapters/notify/wechat";
 import {
-  pushWecomDaily,
   buildWecomMarkdown,
   buildWecomText,
   pushWecomWebhook,
@@ -68,72 +60,6 @@ function loadExecSummary(storePath: string): { heroLine: string; ipoLine: string
     log(`store.json 解析失败，使用默认数据: ${e instanceof Error ? e.message : String(e)}`);
     return empty;
   }
-}
-
-async function pushWechat(cfg: {
-  appId: string;
-  appSecret: string;
-  templateId: string;
-  baseUrl: string;
-  extraOpenIds: string[];
-  heroLine: string;
-  dateStr: string;
-  reportUrl: string;
-}): Promise<boolean> {
-  const payload = buildTemplatePayload(cfg.heroLine, cfg.dateStr);
-  const result = await pushDailyReport(
-    { appId: cfg.appId, appSecret: cfg.appSecret, templateId: cfg.templateId, baseUrl: cfg.baseUrl, extraOpenIds: cfg.extraOpenIds },
-    payload,
-    cfg.reportUrl,
-  );
-  if (result.error) {
-    log(`❌ 微信推送失败: ${result.error}`);
-    return false;
-  }
-  if (result.targets === 0) {
-    log(`⚠️ 微信无发送目标（无关注者且未配置 WX_USER_ID），未送达任何客户 → 不算交付`);
-    return false;
-  }
-  if (result.ok) {
-    log(`✅ 微信推送完成：目标 ${result.targets} 人，成功 ${result.sent}，失败 ${result.failed.length}`);
-    return true;
-  }
-  log(`❌ 微信部分失败：成功 ${result.sent}/${result.targets} → 不算完全交付`);
-  for (const f of result.failed) log(`   失败 ${f.openid}: ${f.reason}`);
-  return false;
-}
-
-async function pushWecom(cfg: {
-  corpId: string;
-  agentId: string;
-  corpSecret: string;
-  userIds: string[];
-  heroLine: string;
-  ipoLine?: string;
-  dateStr: string;
-  reportUrl: string;
-}): Promise<boolean> {
-  const markdown = buildWecomMarkdown(cfg.heroLine, cfg.dateStr, cfg.reportUrl, cfg.ipoLine);
-  const result = await pushWecomDaily(
-    { corpId: cfg.corpId, agentId: cfg.agentId, corpSecret: cfg.corpSecret, userIds: cfg.userIds },
-    markdown,
-    cfg.reportUrl,
-  );
-  if (result.error) {
-    log(`❌ 企业微信推送失败: ${result.error}`);
-    return false;
-  }
-  if (result.targets === 0) {
-    log(`⚠️ 企业微信无发送目标（未配置 WECOM_USER_IDS），未送达任何客户 → 不算交付`);
-    return false;
-  }
-  if (result.ok) {
-    log(`✅ 企业微信推送完成：目标 ${result.targets} 人，成功 ${result.sent}，失败 ${result.failed.length}`);
-    return true;
-  }
-  log(`❌ 企业微信部分失败：成功 ${result.sent}/${result.targets} → 不算完全交付`);
-  for (const f of result.failed) log(`   失败 ${f.userid}: ${f.reason}`);
-  return false;
 }
 
 async function pushWecomViaWebhook(cfg: {
@@ -185,53 +111,23 @@ async function main(): Promise<void> {
   const base = (process.env.REPORT_BASE_URL || "https://shengc-shv.github.io/gzinfols").replace(/\/+$/, "");
   const reportUrl = `${base}/${dateStr}/${dateStr}.html`;
 
-  // 渠道选择：默认 both（公众号 + 企业号合并推送）；NOTIFY_CHANNEL 可单独指定单一渠道。
-  const channel = (process.env.NOTIFY_CHANNEL || "both").toLowerCase();
-
-  let okWechat = false;
-  let okWecom = false;
-
-  // ① 公众号（微信测试号模板消息）—— 顺序在前
-  if (channel === "both" || channel === "wechat") {
-    const appId = process.env.WX_APP_ID ?? "";
-    const appSecret = process.env.WX_APP_SECRET ?? "";
-    const templateId = process.env.WX_TEMPLATE_ID ?? "";
-    if (!appId || !appSecret || !templateId) {
-      log("⚠️ 公众号未配置（缺 WX_APP_ID / WX_APP_SECRET / WX_TEMPLATE_ID），跳过");
-    } else {
-      const extraOpenIds = (process.env.WX_USER_ID ?? "")
-        .split(",")
-        .map((s) => s.trim())
-        .filter(Boolean);
-      okWechat = await pushWechat({ appId, appSecret, templateId, baseUrl: base, extraOpenIds, heroLine, dateStr, reportUrl });
-    }
+  // 唯一外发通道：企业微信群机器人（Webhook）。公众号 / 自建应用已于 2026-09-17 移除。
+  const webhookUrl = process.env.WECOM_WEBHOOK ?? "";
+  if (!webhookUrl) {
+    log("❌ 未配置 WECOM_WEBHOOK（群机器人 Webhook 缺失）→ 无法外发，notify 退出 1");
+    process.exitCode = 1;
+    return;
   }
-
-  // ② 企业号（群机器人 Webhook 优先；否则自建应用 message/send）—— 顺序在后
-  if (channel === "both" || channel === "wecom") {
-    const webhookUrl = process.env.WECOM_WEBHOOK ?? "";
-    if (webhookUrl) {
-      okWecom = await pushWecomViaWebhook({ webhookUrl, heroLine, ipoLine, dateStr, reportUrl });
-    } else {
-      const corpId = process.env.WECOM_CORP_ID ?? "";
-      const agentId = process.env.WECOM_AGENT_ID ?? "";
-      const corpSecret = process.env.WECOM_CORP_SECRET ?? "";
-      const userIds = (process.env.WECOM_USER_IDS ?? "").split(",").map((s) => s.trim()).filter(Boolean);
-      if (!corpId || !agentId || !corpSecret || userIds.length === 0) {
-        log("⚠️ 企业号未配置（缺 WECOM_WEBHOOK 或 WECOM_CORP_ID/Agent/Secret/UserIds），跳过");
-      } else {
-        okWecom = await pushWecom({ corpId, agentId, corpSecret, userIds, heroLine, ipoLine, dateStr, reportUrl });
-      }
-    }
-  }
+  const okWecomWebhook = await pushWecomViaWebhook({ webhookUrl, heroLine, ipoLine, dateStr, reportUrl });
 
   log(`报告链接: ${reportUrl}`);
 
-  // 任一渠道成功即视为正式交付（触发 notify.yml 写交付信号 + 结算）；两渠道均失败才未交付。
-  if (okWechat || okWecom) {
-    log(`✅ 交付达成：公众号=${okWechat} 企业号=${okWecom} → notify 退出 0，notify.yml 将写交付信号并结算`);
+  // ⚠️ 记忆结算闸门：群机器人真正送达 → 退出 0，notify.yml 写交付信号并结算记忆；
+  // 未送达 → 退出 1，不结算（宁漏勿误：未触达客户的内容不得进记忆）。
+  if (okWecomWebhook) {
+    log(`✅ 群机器人送达（客户渠道）→ notify 退出 0，notify.yml 将写交付信号并结算`);
   } else {
-    log("❌ 公众号与企业号均未成功送达（缺配置或推送失败）→ 未交付，notify 退出 1");
+    log("❌ 群机器人未成功送达（推送失败）→ 未交付，notify 退出 1（不结算记忆）");
     process.exitCode = 1;
   }
 }

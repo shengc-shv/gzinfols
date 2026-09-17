@@ -1,31 +1,18 @@
 /**
  * 企业微信消息推送 — 简报外发渠道（自 gzinfo lib/notify/wecom.ts 移植，2026-09-15）。
  *
- * 两种通道：
- *   ① 群机器人 Webhook（推荐）：自带 key 鉴权，不受「企业可信 IP」白名单限制，
- *      从 CI 直接 POST 即可；送达「群聊」（可建只有自己的群近似私聊）。
- *   ② 自建应用 message/send：送达企业微信 App 内聊天；在「我的企业 → 微信插件」
- *      扫码绑定后消息直接进个人微信聊天列表。受可信 IP 约束（errcode 60020），
- *      GitHub Actions runner 出口 IP 动态变化无法稳定加白名单 → 优先用 ①。
+ * ⚠️ 单一通道（2026-09-17 定案）：仅保留**群机器人 Webhook**。
+ *    自建应用 message/send 与公众号已**永久移除**（用户确认不再使用）。
+ *    群机器人自带 key 鉴权，不受「企业可信 IP」白名单限制，从 CI 直接 POST 即可。
  *
  * 架构定位：本文件在 **adapters 层**（唯一副作用出口）；只依赖全局 fetch，
  * 由 scripts/notify-daily.ts 编排调用。
  *
- * 设计约束（与 wechat.ts 对齐）：
+ * 设计约束：
  *   - 发送失败不中断整体（try/catch 收集 failed）
  *   - 任何阶段失败都返回 { ok:false, error }，不抛异常 → 调用方决定是否阻断
  *   - fetch 可注入（fetchImpl），测试零 mock 全局
  */
-
-export interface WecomNotifierConfig {
-  corpId: string;
-  agentId: string;
-  corpSecret: string;
-  /** 目标成员 userid 列表（逗号分隔）；含 "@all" 即推应用可见范围全员 */
-  userIds: string[];
-  /** 测试注入用，默认 global fetch */
-  fetchImpl?: typeof fetch;
-}
 
 export interface WecomNotifyResult {
   ok: boolean;
@@ -36,51 +23,7 @@ export interface WecomNotifyResult {
   error?: string;
 }
 
-const API = "https://qyapi.weixin.qq.com";
-
 const WEEKDAY_CN = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
-
-/** 换取 access_token（2h 有效，CI 一次性使用无需缓存） */
-export async function getWecomToken(
-  corpId: string,
-  corpSecret: string,
-  fetchImpl: typeof fetch = fetch,
-): Promise<string> {
-  const url = `${API}/cgi-bin/gettoken?corpid=${encodeURIComponent(corpId)}&corpsecret=${encodeURIComponent(corpSecret)}`;
-  const res = await fetchImpl(url);
-  const body = (await res.json()) as { access_token?: string; errcode?: number; errmsg?: string };
-  if (!body.access_token) {
-    throw new Error(`企业微信 access_token 获取失败: ${JSON.stringify(body)}`);
-  }
-  return body.access_token;
-}
-
-/** 给成员发 markdown 应用消息（touser 用 | 拼接，上限 1000）。失败抛错。 */
-export async function sendWecomMarkdown(
-  opts: {
-    accessToken: string;
-    agentId: string;
-    touser: string; // 已拼接，如 "zhangsan|lisi" 或 "@all"
-    content: string;
-  },
-  fetchImpl: typeof fetch = fetch,
-): Promise<void> {
-  const url = `${API}/cgi-bin/message/send?access_token=${encodeURIComponent(opts.accessToken)}`;
-  const payload = {
-    touser: opts.touser,
-    msgtype: "markdown",
-    agentid: Number(opts.agentId),
-    markdown: { content: opts.content },
-    enable_duplicate_check: 1,
-    duplicate_check_interval: 1800,
-  };
-  const res = await fetchImpl(url, { method: "POST", body: JSON.stringify(payload) });
-  const body = (await res.json()) as { errcode?: number; errmsg?: string; invaliduser?: string };
-  if (body.errcode && body.errcode !== 0) {
-    const detail = body.invaliduser ? ` invaliduser=${body.invaliduser}` : "";
-    throw new Error(`企业微信消息发送失败(errcode=${body.errcode})${detail}: ${body.errmsg ?? JSON.stringify(body)}`);
-  }
-}
 
 /**
  * 广东IPO 摘要行（可选）：把当日「广东IPO」口播稿（store.json 的
@@ -150,33 +93,7 @@ export function buildWecomText(
 }
 
 /**
- * 主编排：token → 组装 markdown → 发送（单条失败收集进 failed）。
- * 任何整体阶段失败返回 ok=false + error；逐条失败进 failed。
- */
-export async function pushWecomDaily(
-  cfg: WecomNotifierConfig,
-  markdown: string,
-  url: string,
-): Promise<WecomNotifyResult> {
-  const fetchImpl = cfg.fetchImpl ?? fetch;
-  const touser = cfg.userIds.includes("@all") ? "@all" : cfg.userIds.join("|");
-  const targets = cfg.userIds.length;
-  try {
-    const token = await getWecomToken(cfg.corpId, cfg.corpSecret, fetchImpl);
-    try {
-      await sendWecomMarkdown({ accessToken: token, agentId: cfg.agentId, touser, content: markdown }, fetchImpl);
-      return { ok: true, targets, sent: targets, failed: [] };
-    } catch (e) {
-      const reason = e instanceof Error ? e.message : String(e);
-      return { ok: false, targets, sent: 0, failed: cfg.userIds.map((u) => ({ userid: u, reason })) };
-    }
-  } catch (e) {
-    return { ok: false, targets: 0, sent: 0, failed: [], error: e instanceof Error ? e.message : String(e) };
-  }
-}
-
-/**
- * ── 群机器人 Webhook 通道（推荐）──
+ * ── 群机器人 Webhook 通道（唯一保留的外发通道）──
  *
  * 报送方式：企业微信任意群 → 群设置 → 群机器人 → 添加 → 复制
  *   https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxxxx
@@ -212,7 +129,7 @@ export async function sendWecomWebhook(
   }
 }
 
-/** 群机器人主编排：组装正文 → 发送。返回结构与 pushWecomDaily 同形。 */
+/** 群机器人主编排：组装正文 → 发送。 */
 export async function pushWecomWebhook(
   webhookUrl: string,
   content: string,

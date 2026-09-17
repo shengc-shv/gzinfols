@@ -59,7 +59,7 @@ sources.config.json / sources.keywords.json  # 源与关键词唯一真源
 | `npm run dry-run` | 仅采集+归一化+漏斗，不调 LLM、不落盘 |
 | `npm run render` | 用已落盘的报告 JSON 重渲染产物 |
 | `npm run ipo:local` | 本地抓两个 WAF 拦源的 IPO 数据并提交 `data/local-ipo.json`（`--dry-run`/`--no-push`） |
-| `npm run notify` | 简报外发：公众号 + 企业微信合并推送（由 `notify.yml` 人工触发；任一渠道送达即退出 0） |
+| `npm run notify` | 简报外发：企业微信群机器人（Webhook）推送 —— **唯一通道**（由 `notify.yml` 人工触发；送达即退出 0） |
 | `npm run mark-delivered` | 推送成功后写当日交付信号（deliveries）并结算暂存进长期记忆（`--dry-run` 演练不落盘） |
 | `npm run build-site` | 站点聚合：生成 index.html / archive.html（跑在 daily 之后） |
 | `npm run regen:trading` | 只重跑交易面板并打补丁回当日报告 JSON |
