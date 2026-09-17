@@ -5606,12 +5606,9 @@
       "excerpt": "美众议院授权特朗普对俄罗斯油气的主要买家征收高达100%的关税外交部回应",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "sina-a-stock",
@@ -5778,9 +5775,6 @@
       "excerpt": "【环球财经】英国央行继续维持利率不变",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -5792,9 +5786,6 @@
       "excerpt": "所见即所得 深圳楼市加速进入“现房时代”",
       "publishedAt": "2026-09-17T13:09:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -5806,9 +5797,6 @@
       "excerpt": "地产观潮：资本加速布局香港宿舍市场",
       "publishedAt": "2026-09-17T10:54:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -5818,15 +5806,13 @@
       "title": "利率向普通定存靠拢！大额存单“红利”缩水，银行不缺钱了？",
       "url": "https://finance.sina.com.cn/jjxw/2026-09-17/doc-inisczpx0385933.shtml",
       "excerpt": "【财富管理】利率向普通定存靠拢！大额存单“红利”缩水，银行不缺钱了？",
-      "category": "gz",
       "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "新浪财经·理财保险",
+      "category": "gz",
       "summary": "大额存单利率向普通定存靠拢，高息揽储红利消退，可考虑引导到期资金向理财、保险等承接产品迁移。",
-      "relevant": true,
+      "source": "新浪财经·理财保险",
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "sina-hk-stock",
@@ -5835,12 +5821,9 @@
       "excerpt": "高盛：香港施政报告楼市刺激措施有限 维持楼市上升周期看法",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "hk",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·港股频道",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "hk"
     },
     {
       "sourceId": "investing-news",
@@ -5848,11 +5831,7 @@
       "url": "https://www.investing.com/news/stock-market-news/orion180-insurance-said-to-price-ipo-below-marketed-range-93CH-4905971",
       "excerpt": "Orion180 Insurance said to price IPO below marketed range",
       "publishedAt": "2026-09-17T14:27:14.000Z",
-      "fetchedAt": "2026-09-17T14:45:44.781Z",
       "category": "stocks",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
       "fetchedToday": true,
       "subcategory": "us"
@@ -5862,25 +5841,21 @@
       "title": "理财子猛攻IPO，最高年化14.01%，打新红利究竟稳不稳？",
       "url": "https://finance.sina.com.cn/roll/2026-09-17/doc-iniscvfv3942492.shtml",
       "excerpt": "【财富管理】理财子猛攻IPO，最高年化14.01%，打新红利究竟稳不稳？",
-      "category": "gz",
       "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "新浪财经·理财保险",
+      "category": "gz",
       "summary": "理财子打新最高年化14.01%，收益弹性与波动并存，向客户推介含权理财时需同步提示净值回撤风险。",
-      "relevant": true,
+      "source": "新浪财经·理财保险",
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "sina-money",
       "title": "5年慢牛，银行股涨幅跑赢黄金",
       "url": "https://finance.sina.com.cn/stock/wbstock/2026-09-17/doc-iniscvfx3624418.shtml",
       "excerpt": "【财富管理】5年慢牛，银行股涨幅跑赢黄金",
-      "category": "gz",
       "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
+      "category": "gz",
       "source": "新浪财经·理财保险",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -5890,10 +5865,8 @@
       "title": "英大基金旗下20只基金盈利投资者占比中位数为93",
       "url": "https://finance.sina.com.cn/roll/2026-09-17/doc-inisczpt3904633.shtml",
       "excerpt": "【财富管理】英大基金旗下20只基金盈利投资者占比中位数为93",
-      "category": "gz",
       "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
+      "category": "gz",
       "source": "新浪财经·理财保险",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -5905,12 +5878,9 @@
       "excerpt": "港股收评：恒指跌0.44% 科指跌0.34% 黄金股、石油股同步下挫 汽车股逆势活跃",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "hk",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·港股频道",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "hk"
     },
     {
       "sourceId": "gd-bse-audit",
@@ -5934,30 +5904,26 @@
       "title": "理财8月报：产品破净率回落，合资理财、杭银理财等破净率居高",
       "url": "https://finance.sina.com.cn/roll/2026-09-17/doc-iniscvfx3578655.shtml",
       "excerpt": "【财富管理】理财8月报：产品破净率回落，合资理财、杭银理财等破净率居高",
-      "category": "gz",
       "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "新浪财经·理财保险",
+      "category": "gz",
       "summary": "8月理财破净率整体回落但机构分化明显，代销准入与存续产品跟踪中，管理人破净率差异值得纳入筛选。",
-      "relevant": true,
+      "source": "新浪财经·理财保险",
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "21jingji-finance",
       "title": "建行设立万亿级集成电路融资支持目标，银行如何定价硬科技",
       "url": "https://m.21jingji.com/article/20260917/herald/a22bd5d35bfbceb1b923c6bee2552223.html",
       "excerpt": "【21财经·金融】建行设立万亿级集成电路融资支持目标，银行如何定价硬科技",
-      "category": "gz",
       "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "21世纪经济报道·金融",
+      "category": "gz",
       "summary": "建行设万亿级集成电路融资目标，硬科技定价竞争升级，科创客群授信方案与风险定价需重新评估。",
-      "relevant": true,
+      "source": "21世纪经济报道·金融",
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "sina-bank",
@@ -5967,12 +5933,10 @@
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
       "summary": "信用卡累计缩水1.3亿张，存量经营取代发卡扩张，客群分层与分期、权益运营的投入产出需重新测算。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·银行频道",
-      "relevant": true,
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "cnfin",
@@ -5981,9 +5945,6 @@
       "excerpt": "广西面向东盟多平台优势助力中国药械“造船出海”",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -5995,9 +5956,6 @@
       "excerpt": "英国央行宣布：不加息！最新警告来了",
       "publishedAt": "2026-09-17T12:58:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6010,12 +5968,10 @@
       "publishedAt": "2026-09-17T11:39:00.000Z",
       "category": "gz",
       "summary": "美联储加息外溢至多国，居民端影响集中在汇率与理财收益，可考虑在客户沙龙中做通俗化解读。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "南方网·南方经济",
-      "relevant": true,
       "fetchedToday": true,
-      "subcategory": "gz-media"
+      "subcategory": "gz-media",
+      "relevant": true
     },
     {
       "sourceId": "cnfin",
@@ -6024,9 +5980,6 @@
       "excerpt": "英国央行暂不存在加息迫切性 10月政府预算案成为关键",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6039,12 +5992,10 @@
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
       "summary": "美联储重启加息牵动全球资产定价锚，公募解读A股影响，权益类客户沟通中需前置波动预期管理。",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·A股频道",
-      "relevant": true,
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "a-share",
+      "relevant": true
     },
     {
       "sourceId": "southcn",
@@ -6054,12 +6005,10 @@
       "publishedAt": "2026-09-17T13:53:00.000Z",
       "category": "gz",
       "summary": "广深二手房成主流选择且全款比例上升，按揭投放承压，可考虑转向二手房交易资金监管、赎楼与家装分期等场景。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "南方网·南方经济",
-      "relevant": true,
       "fetchedToday": true,
-      "subcategory": "gz-media"
+      "subcategory": "gz-media",
+      "relevant": true
     },
     {
       "sourceId": "dayoo-gz",
@@ -6068,9 +6017,6 @@
       "excerpt": "远景规划规模接近广州南站！广州又一新高铁站南沙站进入主体结构施工",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
       "fetchedToday": true,
       "subcategory": "gz-media"
@@ -6082,9 +6028,6 @@
       "excerpt": "5分钟速配！广州民营科技园汽配企业抱团掘金海外市场",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
       "fetchedToday": true,
       "subcategory": "gz-media"
@@ -6096,9 +6039,6 @@
       "excerpt": "北方多地入秋，广州持续酷暑，周末直冲35℃高温",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
       "fetchedToday": true,
       "subcategory": "gz-media"
@@ -6110,9 +6050,6 @@
       "excerpt": "本周六，广州将举行防空警报试鸣暨“羊城天盾-2026”城市人民防空演习",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
       "fetchedToday": true,
       "subcategory": "gz-media"
@@ -6124,9 +6061,6 @@
       "excerpt": "到2030年广州海洋生产总值将突破7300亿元丨广州市海洋经济发展“十五五”规划",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
       "fetchedToday": true,
       "subcategory": "gz-media"
@@ -6138,9 +6072,6 @@
       "excerpt": "@2026级大学新生，这份广州城市福利全攻略请收好",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
       "fetchedToday": true,
       "subcategory": "gz-media"
@@ -6152,9 +6083,6 @@
       "excerpt": "地瓜机器人、帕西尼等新融资落地！一线VC/PE，正加码这些赛道",
       "publishedAt": "2026-09-17T10:20:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6163,11 +6091,9 @@
       "sourceId": "cctv-finance",
       "title": "鹰派加息落地 AI科技后市怎么走？公募火线解读",
       "url": "https://finance.cctv.com/2026/09/17/ARTIZGFNpZY3gsZHqIHRbHXA260917.shtml",
-      "category": "finance",
-      "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T1.5",
-      "isIpo": false,
       "excerpt": "鹰派加息落地 AI科技后市怎么走？公募火线解读",
+      "publishedAt": "2026-09-17T00:00:00.000Z",
+      "category": "finance",
       "source": "央视财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6177,15 +6103,13 @@
       "title": "头部机构组团接入，金融业的AI落地这次来真的了",
       "url": "https://m.21jingji.com/article/20260917/herald/af7e0cf1c2bc595d2ead93e29ec0e0d2.html",
       "excerpt": "【21财经·金融】头部机构组团接入，金融业的AI落地这次来真的了",
-      "category": "gz",
       "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "21世纪经济报道·金融",
+      "category": "gz",
       "summary": "头部机构组团接入金融AI，落地从试点转向生产，零售条线的智能客服与营销工具选型值得提前对标。",
-      "relevant": true,
+      "source": "21世纪经济报道·金融",
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "cnfin",
@@ -6194,9 +6118,6 @@
       "excerpt": "新华财经晚报：《全国种植业发展“十五五”规划》发布 我国力争到2030年粮食综合生产能力稳步提升",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6208,9 +6129,6 @@
       "excerpt": "【环球财经】土耳其股市大幅下跌 流动性压力引发监管关注",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6222,9 +6140,6 @@
       "excerpt": "多地重大工程加快实施 着力夯实高质量发展根基",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6236,9 +6151,6 @@
       "excerpt": "农业农村部等三部门联合实施农业品牌保护专项行动",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6250,9 +6162,6 @@
       "excerpt": "上海并购重组提速，“并购六条”发布至今交易额近3000亿元",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6264,9 +6173,6 @@
       "excerpt": "征求意见：公共汽车427路等线路拟调整",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
       "fetchedToday": true,
       "subcategory": "gz-media"
@@ -6279,12 +6185,10 @@
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "gz",
       "summary": "广州造船业1—7月新接订单量同比增长86.7%，叠加海洋经济“十五五”规划，船舶产业链上下游结算与项目贷需求值得关注。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "relevant": true,
       "fetchedToday": true,
-      "subcategory": "gz-media"
+      "subcategory": "gz-media",
+      "relevant": true
     },
     {
       "sourceId": "stcn",
@@ -6294,12 +6198,10 @@
       "publishedAt": "2026-09-17T10:58:00.000Z",
       "category": "finance",
       "summary": "永辉广州两家调改门店近期开业，商超场景客流回升，可关注门店周边收单、商户结算与消费信贷的联动机会。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "relevant": true,
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "stcn",
@@ -6308,9 +6210,6 @@
       "excerpt": "*ST英飞签署《重整投资协议》 国科控股等逾28亿元参与重整",
       "publishedAt": "2026-09-17T14:28:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6321,11 +6220,7 @@
       "url": "https://www.investing.com/news/stock-market-news/us-securities-regulator-rolls-out-fiveyear-exemption-for-tokenized-stock-trading-4905776",
       "excerpt": "US securities regulator rolls out five-year exemption for tokenized stock trading",
       "publishedAt": "2026-09-17T14:25:15.000Z",
-      "fetchedAt": "2026-09-17T14:45:44.781Z",
       "category": "stocks",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
       "fetchedToday": true,
       "subcategory": "us"
@@ -6336,15 +6231,12 @@
       "url": "https://www.investing.com/news/economy-news/wall-st-futures-rise-as-fed-rate-hike-lifts-longstanding-overhang-4905088",
       "excerpt": "Wall St climbs as easing oil prices offer reprieve after Fed rate hike",
       "publishedAt": "2026-09-17T14:24:56.000Z",
-      "fetchedAt": "2026-09-17T14:45:44.781Z",
       "category": "stocks",
       "summary": "美联储加息后油价回落带动美股上涨，风险偏好边际修复，QDII类产品客户沟通可参考这一情绪变化。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "relevant": true,
       "fetchedToday": true,
-      "subcategory": "us"
+      "subcategory": "us",
+      "relevant": true
     },
     {
       "sourceId": "investing-news",
@@ -6352,11 +6244,7 @@
       "url": "https://www.investing.com/news/company-news/dutch-bros-stock-hits-52week-low-at-4104-usd-93CH-4905967",
       "excerpt": "Dutch Bros stock hits 52-week low at 41.04 USD",
       "publishedAt": "2026-09-17T14:22:53.000Z",
-      "fetchedAt": "2026-09-17T14:45:44.781Z",
       "category": "stocks",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
       "fetchedToday": true,
       "subcategory": "us"
@@ -6368,9 +6256,6 @@
       "excerpt": "“天元星座”首星成功入轨 国产SAR星座组网提速",
       "publishedAt": "2026-09-17T14:19:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6382,9 +6267,6 @@
       "excerpt": "海尔智家(06690.HK)连续7日回购，累计斥资5935.70万港元",
       "publishedAt": "2026-09-17T14:08:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6396,9 +6278,6 @@
       "excerpt": "海天味业(03288.HK)9月17日回购23.44万股，耗资625.38万港元",
       "publishedAt": "2026-09-17T14:08:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6410,9 +6289,6 @@
       "excerpt": "星谦发展(00640.HK)9月17日回购474.60万股，耗资1098.63万港元",
       "publishedAt": "2026-09-17T14:08:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6424,9 +6300,6 @@
       "excerpt": "极兔速递-W(01519.HK)连续13日回购，累计回购2642.74万股",
       "publishedAt": "2026-09-17T14:08:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6438,9 +6311,6 @@
       "excerpt": "百度集团-W(09888.HK)连续9日回购，累计斥资4.50亿港元",
       "publishedAt": "2026-09-17T14:08:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6452,9 +6322,6 @@
       "excerpt": "太力科技：暂未向太空光伏、柔性光伏供应材料 也未向MLCC供应膜材料的业务",
       "publishedAt": "2026-09-17T14:02:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6466,9 +6333,6 @@
       "excerpt": "海螺水泥(00914.HK)连续9日回购，累计回购325.00万股",
       "publishedAt": "2026-09-17T14:01:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6479,11 +6343,8 @@
       "url": "https://news.crunchbase.com/venture/fintech-alternative-funding-customer-acquisition-skalar/",
       "excerpt": "Newly launched Skalar provides startups with capital to fund sales and marketing initiatives in a fairly straightforward, though somewhat unusual model which lets the startups pay it back out of the revenue generated by the customers acquired with that capital.",
       "publishedAt": "2026-09-17T14:00:42.000Z",
-      "fetchedAt": "2026-09-17T14:45:44.781Z",
       "category": "finance",
       "summary": "Newly launched Skalar provides startups with capital to fund sales and marketing initiatives in a fairly straightforward, though somewhat unusual model which lets the startups pay it back out of the revenue generated by the customers acquired with that capital.",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Crunchbase News",
       "fetchedToday": true,
       "subcategory": "overseas"
@@ -6495,9 +6356,6 @@
       "excerpt": "002965，终止收购液冷资产！",
       "publishedAt": "2026-09-17T14:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6509,9 +6367,6 @@
       "excerpt": "帕西尼再获B++轮融资，累计融资总额已超40亿元",
       "publishedAt": "2026-09-17T13:52:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6523,9 +6378,6 @@
       "excerpt": "狂热投资、资本寒冬后，生物医药行业已步入价值回归阶段",
       "publishedAt": "2026-09-17T13:38:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6537,9 +6389,6 @@
       "excerpt": "OPPO创始人陈明永：AI的本质不是提效和替代人",
       "publishedAt": "2026-09-17T12:34:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6551,9 +6400,6 @@
       "excerpt": "机器人产业链加速兑现，3D视觉底层能力受资本关注",
       "publishedAt": "2026-09-17T12:32:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6564,11 +6410,8 @@
       "url": "https://news.crunchbase.com/venture/interesting-startup-deals-nuclear-power-robotics-ai-agtech-proptech/",
       "excerpt": "From putting nuclear reactors on barges to grading how well AI models can control robots, this month’s crop of interesting startup deals takes AI and other emerging technologies well beyond the conventional software stack.",
       "publishedAt": "2026-09-17T11:00:13.000Z",
-      "fetchedAt": "2026-09-17T14:45:44.781Z",
       "category": "finance",
       "summary": "From putting nuclear reactors on barges to grading how well AI models can control robots, this month’s crop of interesting startup deals takes AI and other emerging technologies well beyond the conventional software stack.",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Crunchbase News",
       "fetchedToday": true,
       "subcategory": "overseas"
@@ -6581,12 +6424,10 @@
       "publishedAt": "2026-09-17T10:09:00.000Z",
       "category": "finance",
       "summary": "金融AI进入生产一线，算力底座走向分工协作，科技投入的算力成本与外部合作模式可能影响预算安排。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "relevant": true,
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "southcn",
@@ -6595,9 +6436,6 @@
       "excerpt": "九方智投探秘模速空间，解锁AI产融联动新可能",
       "publishedAt": "2026-09-17T09:58:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "南方网·南方经济",
       "fetchedToday": true,
       "subcategory": "gz-media"
@@ -6607,15 +6445,13 @@
       "title": "五年慢牛，银行股悄悄跑赢了不少主流资产",
       "url": "https://m.21jingji.com/article/20260917/herald/72a2dc7b90bbadb2bd126122c993d6e7.html",
       "excerpt": "【21财经·金融】五年慢牛，银行股悄悄跑赢了不少主流资产",
-      "category": "gz",
       "publishedAt": "2026-09-17T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "21世纪经济报道·金融",
+      "category": "gz",
       "summary": "银行股五年慢牛跑赢多类主流资产，红利属性获认可，可关注高股息策略在财富客群配置中的沟通切入点。",
-      "relevant": true,
+      "source": "21世纪经济报道·金融",
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "cnfin",
@@ -6625,12 +6461,10 @@
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
       "summary": "9月17日货币市场日报显示资金面延续平稳，短端定价参考意义有限，负债端成本走势仍需持续观察。",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "relevant": true,
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "cnfin",
@@ -6640,12 +6474,10 @@
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
       "summary": "商务部回应中美降税磋商进展，外贸企业汇率与订单预期或生变化，结售汇窗口值得向跨境客户提示。",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "relevant": true,
       "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "cnfin",
@@ -6654,9 +6486,6 @@
       "excerpt": "商品日报（9月16日）：原油系集体回调SC原油重挫超6% 集运欧线涨超8%",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6668,9 +6497,6 @@
       "excerpt": "跨国公司地区总部1107家 上海构筑全球资本链接新高地",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6682,9 +6508,6 @@
       "excerpt": "国家电投集团发电总装机突破3亿千瓦",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6696,9 +6519,6 @@
       "excerpt": "值得买科技联合华为云升级“值数Matrix”",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6710,9 +6530,6 @@
       "excerpt": "我国今年以来已批准上市创新药59个",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6724,9 +6541,6 @@
       "excerpt": "【环球财经】欧元区8月通胀率终值下修至3.2%",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6738,9 +6552,6 @@
       "excerpt": "赛诺菲上海外资研发创新中心揭牌 与华山医院共建全球卓越转化中心",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6752,9 +6563,6 @@
       "excerpt": "长三角搭建区域知识产权协同发展平台",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6766,9 +6574,6 @@
       "excerpt": "上海市新增12款已完成登记的生成式人工智能服务",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6780,9 +6585,6 @@
       "excerpt": "“大咖话川酒”第三季：“宋元酌风华”开启一场跨越700余年的对话",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
       "fetchedToday": true,
       "subcategory": "cn-finance"
@@ -6794,9 +6596,6 @@
       "excerpt": "星空有约，周六解锁年度星月双重浪漫天象",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
       "fetchedToday": true,
       "subcategory": "gz-media"
@@ -6808,12 +6607,9 @@
       "excerpt": "突发！3家科技巨头被查！美国再度启动337调查",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "eastmoney-stock",
@@ -6822,12 +6618,9 @@
       "excerpt": "王毅同美国国务卿鲁比奥通电话",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "eastmoney-stock",
@@ -6836,12 +6629,9 @@
       "excerpt": "黄仁勋：英伟达明年芯片销量将是今年的两倍",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "sina-a-stock",
@@ -6850,12 +6640,9 @@
       "excerpt": "ETF日报：近期粮食板块行情以超强厄尔尼诺减产预期为核心主线，中长期配置价值显著，可关注粮食ETF",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·A股频道",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "sina-a-stock",
@@ -6864,12 +6651,9 @@
       "excerpt": "创业板人工智能=创业板算力+创业板AI应用？光模块等强共识方向获资金认可，AI应用卷土重来",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·A股频道",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "sina-a-stock",
@@ -6878,12 +6662,9 @@
       "excerpt": "国光连锁9月17日现5笔大宗交易 总成交金...",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·A股频道",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "sina-hk-stock",
@@ -6892,12 +6673,9 @@
       "excerpt": "高盛：香港首份《五年规划》利好港交所(00388)多元资产策略 维持“买入”评级",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "hk",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·港股频道",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "hk"
     },
     {
       "sourceId": "eastmoney-stock",
@@ -6906,12 +6684,9 @@
       "excerpt": "美股三大指数集体上涨国际金价大涨、油价走低",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": true,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "sina-a-stock",
@@ -6920,12 +6695,302 @@
       "excerpt": "超2800股下跌，A股走出缩量十字星，什么信号？",
       "publishedAt": "2026-09-17T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
+      "source": "新浪财经·A股频道",
+      "fetchedToday": true,
+      "subcategory": "a-share"
+    },
+    {
+      "sourceId": "21jingji-finance",
+      "title": "金融城小燃哥｜美联储加息 怎么影响你的钱包？",
+      "url": "https://m.21jingji.com/article/20260917/herald/65c9224f6d07c27f1a3a8395296cb891.html",
+      "excerpt": "【21财经·粤港澳】金融城小燃哥｜美联储加息 怎么影响你的钱包？",
+      "category": "gz",
+      "publishedAt": "2026-09-17T00:00:00.000Z",
       "tier": "T2",
       "isIpo": false,
-      "source": "新浪财经·A股频道",
-      "fetchedToday": true
+      "source": "21世纪经济报道·金融",
+      "summary": "以美联储政策为切口解读对个人钱包的影响，可作为理财经理向客户解释汇率与外币资产波动的通俗素材。",
+      "relevant": true,
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnr-gd",
+      "title": "广东电网主动探路“六网协同”",
+      "url": "https://www.cnr.cn/gd/meiliguangdong/20260917/t20260917_527817011.shtml",
+      "excerpt": "广东电网主动探路“六网协同”",
+      "publishedAt": "2026-09-17T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "央广网·广东频道",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Xpeng stock rises on plans to license tech to foreign automakers",
+      "url": "https://www.investing.com/news/stock-market-news/xpeng-stock-rises-on-plans-to-license-tech-to-foreign-automakers-93CH-4906019",
+      "excerpt": "Xpeng stock rises on plans to license tech to foreign automakers",
+      "publishedAt": "2026-09-17T14:50:18.000Z",
+      "fetchedAt": "2026-09-17T15:11:47.520Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Rubrik stock hits all-time high at 108.33 USD",
+      "url": "https://www.investing.com/news/company-news/rubrik-stock-hits-alltime-high-at-10833-usd-93CH-4906018",
+      "excerpt": "Rubrik stock hits all-time high at 108.33 USD",
+      "publishedAt": "2026-09-17T14:49:29.000Z",
+      "fetchedAt": "2026-09-17T15:11:47.520Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "BetterLife Pharma closes $100M public offering for drug trials",
+      "url": "https://www.investing.com/news/company-news/betterlife-pharma-closes-100m-public-offering-for-drug-trials-93CH-4906017",
+      "excerpt": "BetterLife Pharma closes $100M public offering for drug trials",
+      "publishedAt": "2026-09-17T14:48:32.000Z",
+      "fetchedAt": "2026-09-17T15:11:47.520Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Dollar eases after Fed-driven jump as Treasury yields and oil prices retreat",
+      "url": "https://www.investing.com/news/economy-news/hawkish-fed-lifts-dollar-to-sevenweek-high-as-focus-turn-to-boj-4904757",
+      "excerpt": "Dollar eases after Fed-driven jump as Treasury yields and oil prices retreat",
+      "publishedAt": "2026-09-17T14:48:29.000Z",
+      "fetchedAt": "2026-09-17T15:11:47.520Z",
+      "category": "stocks",
+      "summary": "美元升至七周高位后回落，美债收益率与油价同步走低；有换汇或外币配置需求的客户，结售汇时点值得提示。",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "relevant": true,
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "AutoNation at Morgan Stanley conference: service and finance drive growth",
+      "url": "https://www.investing.com/news/transcripts/autonation-at-morgan-stanley-conference-service-and-finance-drive-growth-93CH-4906016",
+      "excerpt": "AutoNation at Morgan Stanley conference: service and finance drive growth",
+      "publishedAt": "2026-09-17T14:47:04.000Z",
+      "fetchedAt": "2026-09-17T15:11:47.520Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "TD Cowen reiterates Buy on FirstService stock, $195 target",
+      "url": "https://www.investing.com/news/analyst-ratings/td-cowen-reiterates-buy-on-firstservice-stock-195-target-93CH-4906015",
+      "excerpt": "TD Cowen reiterates Buy on FirstService stock, $195 target",
+      "publishedAt": "2026-09-17T14:46:48.000Z",
+      "fetchedAt": "2026-09-17T15:11:47.520Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "SpaceX Nasdaq-100 rebalance: what the $15.5B to $22B passive buying event means for SPCX",
+      "url": "https://www.investing.com/news/stock-market-news/spacex-nasdaq100-rebalance-what-the-155b-to-22b-passive-buying-event-means-for-spcx-93CH-4906014",
+      "excerpt": "SpaceX Nasdaq-100 rebalance: what the $15.5B to $22B passive buying event means for SPCX",
+      "publishedAt": "2026-09-17T14:46:06.000Z",
+      "fetchedAt": "2026-09-17T15:11:47.520Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Chemung financial EVP & CIO Loren Cole sells $430,847 in stock",
+      "url": "https://www.investing.com/news/insider-trading-news/chemung-financial-evp--cio-loren-cole-sells-430847-in-stock-93CH-4906013",
+      "excerpt": "Chemung financial EVP & CIO Loren Cole sells $430,847 in stock",
+      "publishedAt": "2026-09-17T14:45:59.000Z",
+      "fetchedAt": "2026-09-17T15:11:47.520Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "LI vs XPEV: which Chinese EV stock has better risk-reward now",
+      "url": "https://www.investing.com/news/stock-market-news/li-vs-xpev-which-chinese-ev-stock-has-better-riskreward-now-93CH-4906012",
+      "excerpt": "LI vs XPEV: which Chinese EV stock has better risk-reward now",
+      "publishedAt": "2026-09-17T14:45:07.000Z",
+      "fetchedAt": "2026-09-17T15:11:47.520Z",
+      "category": "stocks",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true,
+      "subcategory": "us"
+    },
+    {
+      "sourceId": "stcn",
+      "title": "云从科技Model Hub接入GLM-5.3，模型矩阵增至72款",
+      "url": "https://www.stcn.com/article/detail/4189279.html",
+      "excerpt": "云从科技Model Hub接入GLM-5.3，模型矩阵增至72款",
+      "publishedAt": "2026-09-17T09:12:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "证券时报",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "stcn",
+      "title": "欧派家居关于严正驳斥不实言论、坚决捍卫企业商誉的郑重声明",
+      "url": "https://www.stcn.com/article/detail/4188898.html",
+      "excerpt": "欧派家居关于严正驳斥不实言论、坚决捍卫企业商誉的郑重声明",
+      "publishedAt": "2026-09-17T08:36:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "证券时报",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "stcn",
+      "title": "惠伦晶体为豆包AI手机提供核心时钟器件",
+      "url": "https://www.stcn.com/article/detail/4189085.html",
+      "excerpt": "惠伦晶体为豆包AI手机提供核心时钟器件",
+      "publishedAt": "2026-09-17T08:03:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "证券时报",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "创新药械产业：迎来最好发展时期 共筑健康东盟新格局",
+      "url": "https://www.cnfin.com/hg-lb/detail/20260917/4471498_1.html",
+      "excerpt": "创新药械产业：迎来最好发展时期 共筑健康东盟新格局",
+      "publishedAt": "2026-09-17T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "【新华解读】碳排放权回购清算“破壁” 金融基础设施如何打通碳金融服务的“最后一公里”？",
+      "url": "https://www.cnfin.com/yw-lb/detail/20260917/4471354_1.html",
+      "excerpt": "【新华解读】碳排放权回购清算“破壁” 金融基础设施如何打通碳金融服务的“最后一公里”？",
+      "publishedAt": "2026-09-17T00:00:00.000Z",
+      "category": "finance",
+      "summary": "碳排放权回购清算环节打通，碳资产融资的落地路径更清晰；对涉碳企业客群的融资产品设计值得关注。",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "relevant": true,
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "【财经分析】民营火箭参与巨型低轨星座组网，预计改变什么？",
+      "url": "https://www.cnfin.com/yw-lb/detail/20260917/4471319_1.html",
+      "excerpt": "【财经分析】民营火箭参与巨型低轨星座组网，预计改变什么？",
+      "publishedAt": "2026-09-17T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "每日机构分析：9月17日",
+      "url": "https://www.cnfin.com/yw-lb/detail/20260917/4471283_1.html",
+      "excerpt": "每日机构分析：9月17日",
+      "publishedAt": "2026-09-17T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "网联：今年入境来华移动支付交易额同比增长40%",
+      "url": "https://www.cnfin.com/hg-lb/detail/20260917/4471465_1.html",
+      "excerpt": "网联：今年入境来华移动支付交易额同比增长40%",
+      "publishedAt": "2026-09-17T00:00:00.000Z",
+      "category": "finance",
+      "summary": "入境来华移动支付交易额同比增长40%，境外来华客群支付活跃度抬升；可关注外卡收单与跨境消费场景的承接机会。",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "relevant": true,
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "地瓜机器人完成4亿美元C轮融资 商业化步入高速增长",
+      "url": "https://www.cnfin.com/qy-lb/detail/20260917/4471489_1.html",
+      "excerpt": "地瓜机器人完成4亿美元C轮融资 商业化步入高速增长",
+      "publishedAt": "2026-09-17T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
     }
   ]
 }
