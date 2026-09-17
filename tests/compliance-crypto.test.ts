@@ -12,6 +12,8 @@ import fsSync from "node:fs";
 import path from "node:path";
 import { BANNED_WORDS } from "../lib/services/enrich/validator";
 import { mergeStoredExecutive } from "../lib/services/assemble/merge-executive";
+import { detailPagesOf } from "../lib/services/render/detail";
+import { itemIdOf } from "../lib/utils/item-id";
 import type { DailyReport } from "../lib/contracts/report";
 
 const ROOT = path.resolve(import.meta.dirname, "..");
@@ -150,4 +152,39 @@ test("③ 行为：命中违禁词的必读/洞察在回流时被丢弃", () => 
   assert.ok(!topics.includes("加密货币"), `加密洞察未被剔除：${topics}`);
   assert.ok(titles.includes("正常必读"), "正常必读被误杀");
   assert.ok(topics.includes("正常洞察"), "正常洞察被误杀");
+});
+
+test("④ 行为：站内详情页也不得产出加密条目（2026-09-17 实证漏网）", () => {
+  // 实证：股市快讯纳入详情页生成后，一条「加密货币市场…」被写出了独立公开页面
+  // （报告页早已拦下，详情页没走红线过滤）。故详情页必须在生成前兜底再滤一次。
+  const report = {
+    date: "2026-09-17",
+    hero_line: "",
+    must_read: [],
+    insights: [],
+    sections: {
+      gz_local: [
+        { url: "https://example.com/a", title_cn: "正常要闻", source: "源", date: "09/17", summary: "正常", importance: 2, rank: 1, tags: [] },
+      ],
+      biz_insight: [],
+      policy_market: [],
+      tech: [],
+      ipo: [],
+    },
+    stock_news: [
+      { url: "https://example.com/ok", title_cn: "正常股市快讯", source: "源", date: "09/17", summary: "正常" },
+      { url: "https://example.com/crypto", title_cn: "加密货币市场遭遇重大利空", source: "源", date: "09/17", summary: "涉加密资产" },
+    ],
+  } as unknown as DailyReport;
+  const pages = detailPagesOf(report);
+  const ids = pages.map((p) => p.id);
+  assert.equal(ids.includes(itemIdOf("https://example.com/crypto")), false, "加密条目不得有详情页");
+  assert.ok(ids.includes(itemIdOf("https://example.com/ok")), "正常股市快讯应有详情页");
+  for (const p of pages) {
+    assert.ok(!/加密|比特币|虚拟货币/.test(p.html), `详情页含加密内容：${p.id}`);
+  }
+  // 板块名与字段缺失时不得渲染出 "undefined"
+  const stock = pages.find((p) => p.id === itemIdOf("https://example.com/ok"));
+  assert.ok(stock?.html.includes("股市动态"), "股市快讯详情页须显示正确板块名");
+  assert.ok(!stock?.html.includes("undefined"), "缺失字段须显示「—」，不得出现 undefined");
 });

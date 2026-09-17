@@ -15,6 +15,7 @@ import { itemIdOf } from "../../utils/item-id";
 import { escapeHtml } from "./cards";
 import { THEME_CSS } from "./theme";
 import { stripCssComments } from "./css";
+import { stripCryptoNews } from "../assemble/safety";
 
 /** 板块中文名（与报告页筛选栏同款文案）。 */
 const SECTION_LABEL: Record<ReportSectionKey, string> = {
@@ -23,6 +24,15 @@ const SECTION_LABEL: Record<ReportSectionKey, string> = {
   policy_market: "政策与市场",
   tech: "科技前沿",
   ipo: "IPO 动态",
+};
+
+/**
+ * 非 `sections` 板块的中文名（股市快讯 `stock_news` 不在 ReportSectionKey 里）。
+ * 2026-09-17：股市快讯此前**没有详情页**（卡片直链外链，与正文不一致）；
+ * 本表让它也能生成站内页并显示正确的板块名。
+ */
+const EXTRA_SECTION_LABEL: Record<string, string> = {
+  stock_news: "股市动态",
 };
 
 const IMPORTANCE_LABEL: Record<number, string> = {
@@ -60,12 +70,14 @@ export function renderDetailPage(
   const back = `../${report.date}.html#${id}`;
   const summary = (item.summary || "").trim();
 
+  // 股市快讯等非正文条目没有重要度/地域字段 → 显式「—」，不要渲染出 "undefined"
+  const sectionLabel = SECTION_LABEL[section] ?? EXTRA_SECTION_LABEL[String(section)] ?? String(section);
   const kv: Array<[string, string]> = [
     ["来源", item.source + (item.tier ? ` · ${item.tier}` : "")],
-    ["发布", item.date],
-    ["板块", SECTION_LABEL[section] ?? section],
-    ["重要度", IMPORTANCE_LABEL[item.importance] ?? String(item.importance)],
-    ["地域", LOCALE_LABEL[item.locale] ?? item.locale],
+    ["发布", item.date || "—"],
+    ["板块", sectionLabel],
+    ["重要度", item.importance ? IMPORTANCE_LABEL[item.importance] ?? String(item.importance) : "—"],
+    ["地域", item.locale ? LOCALE_LABEL[item.locale] ?? item.locale : "—"],
     ["标签", (item.tags ?? []).length ? (item.tags ?? []).join(" / ") : "—"],
   ];
   // IPO 附加结构化字段（有才渲染，不编造）
@@ -125,12 +137,29 @@ ${kvHtml}
 export function detailPagesOf(
   report: DailyReport,
 ): Array<{ id: string; html: string }> {
+  // 🔴 加密资产零容忍（2026-09-12 拍板，永久）：详情页是**公开页面**，必须与报告页
+  // 走同一条红线过滤。2026-09-17 实证：股市快讯纳入详情页后，一条「加密货币…」
+  // 被写出了独立页面 —— 报告页早已拦下，详情页却漏了。故在此**兜底再滤一次**
+  // （幂等；调用方是否已滤过都不影响结果）。
+  const safe = stripCryptoNews(report);
   const out: Array<{ id: string; html: string }> = [];
-  for (const key of Object.keys(report.sections ?? {}) as ReportSectionKey[]) {
-    for (const it of report.sections[key] ?? []) {
+  for (const key of Object.keys(safe.sections ?? {}) as ReportSectionKey[]) {
+    for (const it of safe.sections[key] ?? []) {
       const id = it.id ?? itemIdOf(it.url);
-      out.push({ id, html: renderDetailPage(report, it, key) });
+      out.push({ id, html: renderDetailPage(report, { ...it, id }, key) });
     }
+  }
+  // 股市快讯（`stock_news`）不在 sections 内 —— 其卡片有锚点但此前没有详情页，
+  // 标题只能直链外链（与正文「先进站内页」的口径不一致）。此处一并生成；
+  // 卡片端由 renderHtml 给这些条目补 id 后即自动链到本页（见 full.ts stockNews）。
+  const stockKey = "stock_news" as unknown as ReportSectionKey;
+  const seen = new Set(out.map((p) => p.id));
+  for (const s of safe.stock_news ?? []) {
+    if (!s.url) continue; // 无 url → 无法稳定派生 id，也不该有详情页
+    const id = itemIdOf(s.url);
+    if (seen.has(id)) continue; // 与正文同一条 → 以正文那版为准
+    seen.add(id);
+    out.push({ id, html: renderDetailPage(report, { ...s, id } as unknown as ReportItem, stockKey) });
   }
   return out;
 }
