@@ -17,7 +17,6 @@ import assert from "node:assert/strict";
 import {
   AUDIO_HIGHLIGHT_CSS,
   generateAudioHighlightScript,
-  renderAudioChapters,
   renderAudioNowHint,
 } from "../lib/services/render/inline-player";
 import { renderHtml } from "../lib/services/render";
@@ -85,20 +84,7 @@ test("⑤ v4：高亮不得被卡片自身规则盖掉，且不得被横滑容�
   assert.ok(outline, "须有 outline + 负 outline-offset（画在卡片内部，容器裁不掉）");
 });
 
-test("⑥ A4 章节列表：多段产出可点击章节，单段/空不产出", () => {
-  const segs = [
-    { id: "hero", startSec: 1, durationSec: 17 },
-    { id: "must", startSec: 18, durationSec: 36 },
-  ];
-  const out = renderAudioChapters(segs);
-  assert.ok(out.includes('id="audio-chapters"'), "须产出章节容器");
-  assert.ok(out.includes('data-start="18"'), "章节须带起始秒（点击跳段）");
-  assert.ok(out.includes("今日必读"), "章节须显示中文段名（回落 id 会很难读）");
-  assert.equal(renderAudioChapters([]), "", "空段落不产出章节列表");
-  assert.equal(renderAudioChapters([segs[0]]), "", "仅 1 段无跳转意义 → 不产出");
-});
-
-test("⑦ A4 章节列表注入当日页面，且与高亮脚本同源联动", () => {
+test("⑦ 章节列表已按用户要求移除；页面只保留「正在播」提示条", () => {
   const page = renderHtml(
     {
       date: "2026-09-17",
@@ -118,11 +104,12 @@ test("⑦ A4 章节列表注入当日页面，且与高亮脚本同源联动", (
       },
     },
   );
-  assert.ok(page.includes('id="audio-chapters"'), "有音频时页面须带章节列表");
-  assert.ok(page.includes('class="audio-chapter"'), "须有章节按钮");
-  assert.ok(page.includes("audio-highlight"), "高亮脚本须一并注入（否则点章节只跳音不亮卡）");
-  assert.ok(page.includes('id="audio-now-hint"'), "有音频时页面须带「正在播」提示条");
+  assert.ok(!page.includes("audio-chapters"), "章节列表（几分几秒段落提示）不得再出现");
+  assert.ok(!page.includes("audio-chapter"), "章节按钮不得再出现");
+  assert.ok(page.includes('id="audio-now-hint"'), "「正在播」提示条保留");
   assert.ok(renderAudioNowHint().includes('id="audio-now-go"'), "提示条须含「定位到卡片」按钮（点击才跳）");
+  const script = generateAudioHighlightScript();
+  assert.ok(!script.includes("audio-chapter"), "脚本不得再引用章节元素");
 });
 
 test("⑨ 脚本不得自动切面板 / 自动滚动（读者要求：音频跟随只提示不切）", () => {

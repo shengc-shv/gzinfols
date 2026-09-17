@@ -8,7 +8,7 @@
  * 调用方需在 HTML 中放置：
  *   - `<audio id="audio-player">`
  *   - `<script type="application/json" id="audio-segments">[{...segments}]</script>`
- *   - 提示条容器（`renderAudioNowHint()`）与章节列表（`renderAudioChapters()`）
+ *   - 提示条容器（`renderAudioNowHint()`）
  */
 
 /**
@@ -25,11 +25,6 @@ export const AUDIO_SEGMENT_LABELS: Record<string, string> = {
   ipo: "广东IPO",
 };
 
-/** 秒 → mm:ss（章节列表时间戳；纯函数，无时钟依赖）。 */
-export function mmssOf(sec: number): string {
-  const s = Math.max(0, Math.round(Number(sec) || 0));
-  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
-}
 
 /**
  * 音频联动高亮 + 章节列表 + 播放提示条（CSS）。
@@ -109,16 +104,6 @@ export const AUDIO_HIGHLIGHT_CSS = `
   background: #2563eb; color: #fff; cursor: pointer;
 }
 .audio-now-hint .an-go[hidden] { display: none; }
-/* A4 章节列表：即使卡片在视口外 / 未激活 tab 里，读者也能看到「正在播哪一段」 */
-.audio-chapters { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.5rem 0 0; }
-.audio-chapter {
-  font: inherit; font-size: 0.78rem; line-height: 1.9;
-  padding: 0 0.5rem; border: 1px solid var(--rule, #ddd); border-radius: 999px;
-  background: var(--bg-elevated, #fff); color: var(--fg, #1a1a1a); cursor: pointer;
-}
-.audio-chapter .ch-t { color: var(--muted, #888); margin-right: 0.25rem; font-variant-numeric: tabular-nums; }
-.audio-chapter.is-current { border-color: rgba(37,99,235,0.95); color: #fff; background: rgba(37,99,235,0.92); }
-.audio-chapter.is-current .ch-t { color: rgba(255,255,255,0.85); }
 /* 尊重「减少动态效果」偏好：不闪不脉冲，改用更强的静态对比补偿（描边加粗 + 底色加深 + 徽章） */
 @media (prefers-reduced-motion: reduce) {
   .audio-highlight { animation: none; }
@@ -157,27 +142,6 @@ export function renderAudioNowHint(): string {
   );
 }
 
-/**
- * 渲染「口播章节列表」（A4）。
- * 段落级跳转入口 + 当前段指示；当卡片不在当前视图时，它是最可靠的「正在讲哪段」线索。
- */
-export function renderAudioChapters(
-  segments: { id: string; startSec: number; durationSec: number }[],
-): string {
-  if (!segments || segments.length < 2) return "";
-  const items = segments
-    .map((s, i) => {
-      const label = AUDIO_SEGMENT_LABELS[s.id] ?? s.id;
-      return (
-        `<button type="button" class="audio-chapter" data-seg="${escapeAttr(s.id)}" ` +
-        `data-start="${escapeAttr(String(Math.max(0, Math.round(s.startSec || 0))))}" ` +
-        `data-idx="${i}"><span class="ch-t">${escapeHtml(mmssOf(s.startSec))}</span>${escapeHtml(label)}</button>`
-      );
-    })
-    .join("");
-  return `<div class="audio-chapters" id="audio-chapters">${items}</div>`;
-}
-
 function escapeHtml(s: string): string {
   return escapeAttr(s);
 }
@@ -187,7 +151,7 @@ function escapeHtml(s: string): string {
  *
  * 读者 2026-09-17 的要求：**音频跟随只做提示、不要自动切标签页**（会打断阅读）。
  * 故本脚本**不做任何自动切面板 / 自动滚动**：把「卡片在别处」写成提示条 + 一个
- * 「定位到卡片」按钮，**由读者点击才跳**；章节列表点击跳段同理（读者主动）。
+ * 「定位到卡片」按钮，**由读者点击才跳**。
  *
  * 时间基准一律用 `audio.currentTime`（**不用 Date.now()**：服务层禁隐式时钟，
  * 且页面里「播到第几秒」比墙钟更贴合语义）。
@@ -227,12 +191,6 @@ export function generateAudioHighlightScript(): string {
       b.className = "audio-now-badge";
       b.textContent = "🔊 正在播";
       c.appendChild(b);
-    }
-  }
-  function syncChapters(id) {
-    var btns = document.querySelectorAll(".audio-chapter");
-    for (var i = 0; i < btns.length; i++) {
-      btns[i].classList.toggle("is-current", btns[i].getAttribute("data-seg") === id);
     }
   }
   // 卡片是否落在「未激活标签面板」或「折叠区」里（此时高亮本身看不见）
@@ -287,8 +245,7 @@ export function generateAudioHighlightScript(): string {
     hint.hidden = false;
   }
   function apply(seg) {
-    if (!seg) { clearHighlights(); syncChapters(null); updateHint(null, []); lastId = null; return; }
-    syncChapters(seg.id);
+    if (!seg) { clearHighlights(); updateHint(null, []); lastId = null; return; }
     var cards = cardsOf(seg.id);
     if (seg.id === lastId) { updateHint(seg, cards); return; }
     lastId = seg.id;
@@ -313,22 +270,8 @@ export function generateAudioHighlightScript(): string {
   audio.addEventListener("play", tick);
   audio.addEventListener("pause", tick);
   audio.addEventListener("ended", function () {
-    clearHighlights(); syncChapters(null); updateHint(null, []); lastId = null;
+    clearHighlights(); updateHint(null, []); lastId = null;
   });
-  // A4 章节列表：点击跳段（读者主动；跳完刷新提示）
-  var chapters = document.querySelectorAll(".audio-chapter");
-  for (var k = 0; k < chapters.length; k++) {
-    (function (btn) {
-      btn.addEventListener("click", function () {
-        var t = parseFloat(btn.getAttribute("data-start")) || 0;
-        try { audio.currentTime = t; } catch (e) {}
-        lastId = null;
-        tick();
-        var p = audio.play();
-        if (p && p.catch) p.catch(function () {});
-      });
-    })(chapters[k]);
-  }
 })();
 `;
 }

@@ -50,7 +50,6 @@ import { scoreBranchRelevance } from "../select/filters/relevance-score";
 import {
   generateAudioHighlightScript,
   AUDIO_HIGHLIGHT_CSS,
-  renderAudioChapters,
   renderAudioNowHint,
 } from "./inline-player";
 import { itemIdOf } from "../../utils/item-id";
@@ -345,6 +344,13 @@ ${stripCssComments(PAGE_ACTIONS_CSS)}
     border: 1px solid var(--rule); border-radius: 999px; background: var(--bg-elevated); color: var(--fg); cursor: pointer; }
   .role-chip.active { background: #2563eb; border-color: #2563eb; color: #fff; }
   .role-hint { font-size: 0.72rem; color: var(--muted); }
+  /* C1 角色视图 ↔ 筛选条联动 (2026-09-17 用户反馈)：选部门 → 业务线 chips 只留该部门+其他 */
+  .filter-chip.role-hidden { display: none; }
+  /* chip 计数（分面计数：随其他维度筛选联动刷新） */
+  .chip-n { display: inline-block; margin-left: 4px; padding: 0 5px; border-radius: 8px;
+    background: rgba(15,23,42,0.08); font-size: 10px; line-height: 1.6; font-variant-numeric: tabular-nums; }
+  .filter-chip.active .chip-n { background: rgba(255,255,255,0.28); }
+  .filter-chip.chip-zero { opacity: 0.45; }
   /* C1 客群标签可点（原为纯展示 span） */
   button.seg-chip { font-family: inherit; cursor: pointer; border: none; }
   button.seg-chip:hover { filter: brightness(0.94); }
@@ -370,7 +376,6 @@ ${stripCssComments(MATURITY_CSS)}
     <div class="player-title"><span class="ic">🎧</span> 今日语音简报 <span class="player-dur">${escapeHtml(opts.audio.duration)}</span>${opts.audio.backend ? `<span class="player-badge player-badge-${opts.audio.backend}">${opts.audio.backend === "tencent" ? "腾讯合成" : "开源合成"}</span>` : ""}</div>
     <audio controls preload="none" src="${escapeHtml(opts.audio.src)}" id="audio-player"></audio>
     ${renderAudioNowHint()}
-    ${renderAudioChapters(opts.audio.segments ?? [])}
     ${opts.audio.segments && opts.audio.segments.length ? `<script type="application/json" id="audio-segments">${escapeHtml(JSON.stringify(opts.audio.segments))}</script>` : ""}
   </div>` : ""}
   <!-- 报头：今日定调 + 数据截至 -->
@@ -569,6 +574,16 @@ ${stripCssComments(MATURITY_CSS)}
         : ROLE_HINT_DEFAULT;
     }
     document.querySelectorAll('.panel').forEach(function (panel) {
+      var bar = panel.querySelector('.filter-bar');
+      // C1 联动（2026-09-17 用户反馈）：选具体部门 → 业务线 chips 只留「该部门 + 其他」，
+      // 其余隐藏；行长（tags 为空）→ 全部可见。卡片过滤由 setChips → applyFilter 完成。
+      if (bar) {
+        var allow = role && role.tags.length ? role.tags.concat(['__none__']) : null;
+        bar.querySelectorAll('.filter-chip[data-group="tag"]').forEach(function (c) {
+          var v = c.getAttribute('data-filter');
+          c.classList.toggle('role-hidden', !!allow && allow.indexOf(v) < 0);
+        });
+      }
       setChips(panel, role && role.tags.length ? { tag: role.tags } : {});
     });
   }
@@ -614,72 +629,89 @@ ${stripCssComments(MATURITY_CSS)}
       }
     });
   });
+  // —— 维度命中判断（applyFilter 与数量刷新共用同一套逻辑，防两处漂移）——
+  function cardHits(card, group, value) {
+    var tags = (card.getAttribute('data-tags') || '').split(' ').filter(Boolean);
+    if (group === 'src') return card.getAttribute('data-source') === value;
+    if (group === 'market') return card.getAttribute('data-market') === value;
+    if (group === 'seg') {
+      var segs = (card.getAttribute('data-segs') || '').split(' ').filter(Boolean);
+      return value === '__none__' ? segs.length === 0 : segs.indexOf(value) >= 0;
+    }
+    if (group === 'stage') {
+      var stage = card.getAttribute('data-stage') || '';
+      return value === '__none__' ? stage === '' : stage === value;
+    }
+    return value === '__none__' ? tags.length === 0 : tags.indexOf(value) >= 0;
+  }
+  function cardPasses(card, selByGroup, except) {
+    for (var g in selByGroup) {
+      if (g === except) continue;
+      var sel = selByGroup[g], ok = false;
+      for (var i = 0; i < sel.length; i++) if (cardHits(card, g, sel[i])) { ok = true; break; }
+      if (!ok) return false;
+    }
+    return true;
+  }
+  function collectSel(bar) {
+    var sel = {};
+    bar.querySelectorAll('.filter-chip.active').forEach(function (c) {
+      var g = c.getAttribute('data-group');
+      (sel[g] = sel[g] || []).push(c.getAttribute('data-filter'));
+    });
+    return sel;
+  }
+  // 数量联动刷新（分面计数）：每个 chip 的数字 = 「其他维度按当前选中过滤后」命中该 chip 的卡片数。
+  // 所以「选了官方之后，信贷 3 → 信贷 2」是预期行为，不是 bug。
+  function recountChips(panel, bar) {
+    var selByGroup = collectSel(bar);
+    var cards = panel.querySelectorAll('.brief');
+    bar.querySelectorAll('.filter-chip').forEach(function (c) {
+      var nEl = c.querySelector('.chip-n');
+      if (!nEl) return;
+      var g = c.getAttribute('data-group'), v = c.getAttribute('data-filter');
+      var n = 0;
+      cards.forEach(function (card) {
+        if (cardPasses(card, selByGroup, g) && cardHits(card, g, v)) n++;
+      });
+      nEl.textContent = String(n);
+      c.classList.toggle('chip-zero', n === 0 && !c.classList.contains('active'));
+    });
+  }
   function applyFilter(panel, bar) {
     var chips = bar.querySelectorAll('.filter-chip');
+    // 「全选 = 全部显示」的判定只看**可见** chips：角色视图隐藏掉的 chip 不参与
+    // （否则选「信贷」后再全点亮可见 chips 会被误判为全选而清空过滤）。
+    var visibleCount = 0;
+    chips.forEach(function (c) { if (!c.classList.contains('role-hidden')) visibleCount++; });
     var active = Array.prototype.filter.call(chips, function (c) { return c.classList.contains('active'); });
     var btn = panel.querySelector('.expand-btn');
     // 广东IPO 四阶段分栏：过滤后隐藏「无可见卡片」的整组（否则会留下空组标题）
     function syncGroups() {
       panel.querySelectorAll('.ipo-group').forEach(function (grp) {
-        var visible = grp.querySelectorAll('.brief:not(.filtered-out)').length;
-        grp.classList.toggle('filtered-out', visible === 0);
+        var alive = grp.querySelectorAll('.brief:not(.filtered-out)').length;
+        grp.classList.toggle('filtered-out', alive === 0);
       });
     }
-    // 全不选（重置）或全选 → 全部显示，并恢复「前 5 展示 + 其余折叠」的默认布局
-    if (active.length === 0 || active.length === chips.length) {
+    // 全不选（重置）或可见的全选 → 全部显示，并恢复「前 5 展示 + 其余折叠」的默认布局
+    if (active.length === 0 || active.length === visibleCount) {
       panel.classList.remove('expanded');
       if (btn) btn.style.display = '';
       panel.querySelectorAll('.brief').forEach(function (card) { card.classList.remove('filtered-out'); });
       syncGroups();
+      recountChips(panel, bar);
       return;
     }
     // 筛选生效：自动展开折叠区——命中项（含原折叠区内）无需再点「展开」即可见，
     // 与查询结果刷新的预期联动；隐藏展开按钮，避免出现「仍提示折叠 N 条」的错位。
     panel.classList.add('expanded');
     if (btn) btn.style.display = 'none';
-    // 按维度（data-group）分组收集选中值
-    var selByGroup = {};
-    active.forEach(function (c) {
-      var g = c.getAttribute('data-group');
-      (selByGroup[g] = selByGroup[g] || []).push(c.getAttribute('data-filter'));
-    });
+    var selByGroup = collectSel(bar);
     panel.querySelectorAll('.brief').forEach(function (card) {
-      var src = card.getAttribute('data-source');
-      var tags = (card.getAttribute('data-tags') || '').split(' ').filter(Boolean);
-      var market = card.getAttribute('data-market');
-      var stage = card.getAttribute('data-stage') || '';
-      var ok = true;
-      for (var g in selByGroup) {
-        var sel = selByGroup[g];
-        if (g === 'src') {
-          // 维度内 OR：命中官方 / 媒体 其一即满足
-          if (sel.indexOf(src) < 0) { ok = false; break; }
-        } else if (g === 'market') {
-          // 股市动态面板：按 A股 / 港股 / 美股 过滤（维度内 OR）
-          if (sel.indexOf(market) < 0) { ok = false; break; }
-        } else if (g === 'seg') {
-          // C1 客群轴：卡片 data-segs（空格分隔）与选中段位有交集即满足；维度内 OR
-          var segs = (card.getAttribute('data-segs') || '').split(' ').filter(Boolean);
-          var segHit = sel.some(function (f) {
-            return f === '__none__' ? segs.length === 0 : segs.indexOf(f) >= 0;
-          });
-          if (!segHit) { ok = false; break; }
-        } else if (g === 'stage') {
-          // 广东IPO 面板：按四阶段过滤（维度内 OR）；「__none__」= 阶段待定（无阶段信号）
-          var stageHit = sel.some(function (f) { return f === '__none__' ? stage === '' : stage === f; });
-          if (!stageHit) { ok = false; break; }
-        } else {
-          // 维度内 OR：命中业务线其一即满足；「__none__」（其他）命中空标签卡片
-          var hit = sel.some(function (f) {
-            if (f === '__none__') return tags.length === 0; // 其他 = 无 4 部门标签
-            return tags.indexOf(f) >= 0;
-          });
-          if (!hit) { ok = false; break; }
-        }
-      }
-      card.classList.toggle('filtered-out', !ok);
+      card.classList.toggle('filtered-out', !cardPasses(card, selByGroup, null));
     });
     syncGroups();
+    recountChips(panel, bar);
   }
 </script>
 <script>
