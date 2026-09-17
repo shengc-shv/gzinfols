@@ -2,6 +2,8 @@
 export interface SearchPageDay {
   date: string;
   hero?: string;
+  /** 该期页面是否带条目锚点（A2 之前生成的老期次为 false → 只链到当期页，不拼 #itm-）。 */
+  anchored?: boolean;
   items: {
     i: string;
     t: string;

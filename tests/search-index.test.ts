@@ -10,6 +10,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { buildSlimDay, anchorsOfHtml, filterToAnchors } from "../scripts/build-search-index";
 import { renderSearchPage } from "../scripts/lib/search-page.mjs";
+import type { SearchPageDay } from "../scripts/lib/search-page.mjs";
 import type { DailyReport } from "../lib/contracts/report";
 import { itemIdOf } from "../lib/utils/item-id";
 import { assignItemIds } from "../lib/services/assemble/item-id";
@@ -109,6 +110,32 @@ test("⑤ 只索引页面上真有锚点的条目（防死链）；老页面（�
   // 检索结果只链到当期页；此处锁「过滤函数本身不擅自丢整期」
   const noAnchorHtml = anchorsOfHtml("<html><body>no ids here</body></html>");
   assert.equal(noAnchorHtml.size, 0);
+});
+
+test("⑥ 两期对比（B1 补）：模式切换 + 双期选择 + 三组呈现", () => {
+  const day = (date: string, items: SearchPageDay["items"]): SearchPageDay => ({ date, hero: "", items, anchored: true });
+  const mk = (i: string, t: string, g: string[]) => ({ i, t, s: "源", d: "09/17", m: 2, k: "biz_insight", g, x: "", u: "u" });
+  const html = renderSearchPage({
+    latest: "2026-09-17",
+    generatedAt: "2026-09-17T08:00:00",
+    days: [
+      day("2026-09-17", [mk("itm-a", "南沙跨境客群对接", ["客群", "信贷"]), mk("itm-b", "消费贷贴息扩围", ["信贷", "客群"])]),
+      day("2026-09-16", [mk("itm-a", "南沙跨境客群对接", ["客群", "信贷"]), mk("itm-c", "养老信托首单", ["财富", "客群"])]),
+    ],
+  });
+  // 模式切换 UI
+  assert.ok(html.includes('data-mode="search"') && html.includes('data-mode="compare"'));
+  assert.ok(html.includes('id="compare-pane"'), "须有对比面板容器");
+  assert.ok(html.includes('id="cmp-a"') && html.includes('id="cmp-b"'), "须有两个期次选择器");
+  // 三组语义（新增 / 消失 / 延续）与主题匹配
+  for (const k of ["cmp-new", "cmp-gone", "cmp-both"]) assert.ok(html.includes(k), `须有 ${k} 徽章样式`);
+  assert.ok(html.includes("sameTopic"), "须有「同一主题」判定");
+  assert.ok(html.includes("相 对 A 新增") || html.includes("相对 A 新增"), "须有「B 相对 A 新增」分组标题");
+  const script = /<script>([\s\S]*?)<\/script>/.exec(html)?.[1] ?? "";
+  assert.ok(script.includes("renderCompare"), "须有针对对比的渲染逻辑");
+  assert.ok(!script.includes("Date.now"), "脚本不得读墙钟（日期来自索引数据）");
+  // 两条能力都在同一页：检索仍可用
+  assert.ok(html.includes('id="search-pane"') && html.includes('id="q"'), "检索面板不得被对比模式挤掉");
 });
 
 test("④ 检索页：数据内联 + XSS 转义（外部源标题不得裸奔）", () => {

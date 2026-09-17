@@ -71,20 +71,53 @@ export function renderSearchPage({ days, generatedAt, latest }) {
   .x { font-size:.85rem; margin-top:.3rem; }
   mark { background:rgba(250,204,21,.55); color:inherit; border-radius:2px; }
   .empty { color:var(--muted); font-size:.9rem; padding:1rem 0; }
+  /* B1 两期对比（2026-09-17） */
+  .modes { display:flex; gap:.35rem; margin:.9rem 0 .2rem; }
+  .mode { font:inherit; font-size:.85rem; line-height:2; padding:0 .8rem; border:1px solid var(--rule);
+    border-radius:999px; background:var(--card); color:var(--fg); cursor:pointer; }
+  .mode.on { background:var(--brand); border-color:var(--brand); color:#fff; font-weight:600; }
+  .cmp-controls { display:flex; flex-wrap:wrap; gap:.6rem; align-items:center; margin:.7rem 0 .2rem; font-size:.85rem; }
+  .cmp-controls select { font:inherit; font-size:.85rem; padding:.25rem .4rem; border:1px solid var(--rule);
+    border-radius:8px; background:var(--card); color:var(--fg); }
+  .cmp-sum { font-size:.82rem; color:var(--muted); margin:.5rem 0 .2rem; }
+  .cmp-group { margin:.7rem 0 0; }
+  .cmp-group h3 { font-size:.9rem; margin:0 0 .35rem; }
+  .cmp-badge { display:inline-block; margin-left:.35rem; padding:0 .4rem; border-radius:8px;
+    font-size:.68rem; font-weight:700; line-height:1.7; }
+  .cmp-new { background:#1e7e34; color:#fff; }
+  .cmp-gone { background:#b02a37; color:#fff; }
+  .cmp-both { background:#eceef1; color:#5b6472; }
+  .cmp-col { font-size:.78rem; color:var(--muted); }
   @media (prefers-color-scheme: dark) { :root { --bg:#141414; --card:#1e1e1e; --fg:#e8e8e8; --rule:#2e2e2e; } }
 </style>
 </head>
 <body>
   <h1>🔍 检索与主题归档</h1>
   <p class="meta">共 ${kept.length} 期 / ${total} 条${generatedAt ? ` · 索引生成于 ${esc(generatedAt)}` : ""} · <a href="./index.html">最新一期（${esc(latest)}）</a> · <a href="./archive.html">归档</a></p>
-  <input type="search" id="q" placeholder="输入关键词（标题 / 摘要 / 来源 / 标签）" autocomplete="off">
-  <div class="rowlabel">板块</div>
-  <div class="chips" id="sec-chips"></div>
-  <div class="rowlabel">主题（客群 · 业务线 · 标签）</div>
-  <div class="chips" id="tag-chips"></div>
-  <div class="count" id="count"></div>
-  <ul id="list"></ul>
-  <div class="empty" id="empty" hidden>没有匹配结果。试试更短的关键词，或点「全部」清空筛选。</div>
+  <div class="modes">
+    <button type="button" class="mode on" data-mode="search">🔍 检索</button>
+    <button type="button" class="mode" data-mode="compare">⇄ 两期对比</button>
+  </div>
+
+  <div id="search-pane">
+    <input type="search" id="q" placeholder="输入关键词（标题 / 摘要 / 来源 / 标签）" autocomplete="off">
+    <div class="rowlabel">板块</div>
+    <div class="chips" id="sec-chips"></div>
+    <div class="rowlabel">主题（客群 · 业务线 · 标签）</div>
+    <div class="chips" id="tag-chips"></div>
+    <div class="count" id="count"></div>
+    <ul id="list"></ul>
+    <div class="empty" id="empty" hidden>没有匹配结果。试试更短的关键词，或点「全部」清空筛选。</div>
+  </div>
+
+  <div id="compare-pane" hidden>
+    <div class="cmp-controls">
+      <label>对照 A（较早）<select id="cmp-a"></select></label>
+      <label>对照 B（较新）<select id="cmp-b"></select></label>
+    </div>
+    <div class="cmp-sum" id="cmp-sum"></div>
+    <div id="cmp-result"></div>
+  </div>
 
 <script type="application/json" id="search-data">${data}</script>
 <script>
@@ -181,6 +214,135 @@ export function renderSearchPage({ days, generatedAt, latest }) {
     emptyBox.hidden = out > 0;
   }
   q.addEventListener('input', render);
+
+  // ---------- 两期对比（B1，2026-09-17）----------
+  // 目的：把「这一期和上一期到底差在哪」变成两次点击。判定「同一主题」用
+  // 条目 ID（同 URL 跨期稳定）→ 主题标签交集 ≥2 → 标题前 12 字相同，逐级放宽。
+  // 全部 DOM 渲染（textContent），不拼 innerHTML。
+  var modeBtns = document.querySelectorAll('.mode');
+  var searchPane = document.getElementById('search-pane');
+  var comparePane = document.getElementById('compare-pane');
+  var selA = document.getElementById('cmp-a');
+  var selB = document.getElementById('cmp-b');
+  var cmpSum = document.getElementById('cmp-sum');
+  var cmpResult = document.getElementById('cmp-result');
+
+  function fillSelect(sel, defIdx) {
+    days.forEach(function (d) {
+      var o = document.createElement('option');
+      o.value = d.date;
+      o.textContent = d.date + '（' + (d.items || []).length + ' 条）';
+      sel.appendChild(o);
+    });
+    if (days[defIdx]) sel.value = days[defIdx].date;
+  }
+  if (selA && selB && days.length) {
+    fillSelect(selA, Math.min(1, days.length - 1)); // A 默认「上一期」
+    fillSelect(selB, 0); // B 默认「最新一期」
+    if (days.length === 1) {
+      cmpSum.textContent = '当前索引只有 1 期，暂无可对比对象（等下一期发布后即可对比）。';
+    }
+  }
+  function normTitle(t) { return String(t || '').replace(/\\s+/g, '').slice(0, 12); }
+  function sameTopic(a, b) {
+    if (a.i && b.i && a.i === b.i) return true;
+    var ga = a.g || [], gb = b.g || [];
+    var inter = 0;
+    for (var i = 0; i < ga.length; i++) if (gb.indexOf(ga[i]) >= 0) inter++;
+    if (inter >= 2) return true;
+    return normTitle(a.t) !== '' && normTitle(a.t) === normTitle(b.t);
+  }
+  function dayByDate(date) {
+    for (var i = 0; i < days.length; i++) if (days[i].date === date) return days[i];
+    return null;
+  }
+  function itemLink(it, date) {
+    var a = document.createElement('a');
+    a.href = './' + date + '/' + date + '.html' +
+      (dayByDate(date) && dayByDate(date).anchored === false ? '' : '#itm-' + String(it.i || '').replace(/^itm-/, ''));
+    a.textContent = it.t || '(无标题)';
+    return a;
+  }
+  function groupsHtml(title, cls, rows) {
+    var box = document.createElement('div');
+    box.className = 'cmp-group';
+    var h = document.createElement('h3');
+    h.appendChild(document.createTextNode(title));
+    var badge = document.createElement('span');
+    badge.className = 'cmp-badge ' + cls;
+    badge.textContent = String(rows.length);
+    h.appendChild(badge);
+    box.appendChild(h);
+    if (!rows.length) {
+      var p = document.createElement('div');
+      p.className = 'empty';
+      p.textContent = '（无）';
+      box.appendChild(p);
+      return box;
+    }
+    var ul = document.createElement('ul');
+    rows.forEach(function (r) {
+      var li = document.createElement('li');
+      var t = document.createElement('div');
+      t.className = 't';
+      t.appendChild(itemLink(r.it, r.date));
+      li.appendChild(t);
+      var sub = document.createElement('div');
+      sub.className = 'sub';
+      sub.textContent = r.date + ' · ' + (SECTIONS[r.it.k] || r.it.k) + (r.it.s ? ' · ' + r.it.s : '');
+      li.appendChild(sub);
+      ul.appendChild(li);
+    });
+    box.appendChild(ul);
+    return box;
+  }
+  function renderCompare() {
+    if (!cmpResult || !selA || !selB) return;
+    var A = dayByDate(selA.value), B = dayByDate(selB.value);
+    while (cmpResult.firstChild) cmpResult.removeChild(cmpResult.firstChild);
+    if (!A || !B) return;
+    // 让 A 永远是「较早」的那期（用户选反了就自动换位，避免「新增/消失」语义倒挂）
+    if (A.date > B.date) { var tmp = A; A = B; B = tmp; }
+    var matchedB = {};
+    var both = [];
+    (A.items || []).forEach(function (ia) {
+      var hit = null;
+      (B.items || []).forEach(function (ib, j) {
+        if (matchedB[j]) return;
+        if (!hit && sameTopic(ia, ib)) { hit = { j: j, it: ib }; }
+      });
+      if (hit) { matchedB[hit.j] = true; both.push({ date: A.date, it: ia, newer: hit.it }); }
+    });
+    var gone = (A.items || []).filter(function (ia) {
+      return !(B.items || []).some(function (ib) { return sameTopic(ia, ib); });
+    }).map(function (ia) { return { date: A.date, it: ia }; });
+    var added = (B.items || []).filter(function (ib, j) { return !matchedB[j]; })
+      .map(function (ib) { return { date: B.date, it: ib }; });
+
+    cmpSum.textContent = 'A（较早）= ' + A.date + ' · ' + (A.items || []).length + ' 条 ／ B（较新）= ' +
+      B.date + ' · ' + (B.items || []).length + ' 条 ／ 同主题 ' + both.length + ' 条';
+    cmpResult.appendChild(groupsHtml('B 相对 A 新增', 'cmp-new', added));
+    cmpResult.appendChild(groupsHtml('A 有、B 没有', 'cmp-gone', gone));
+    cmpResult.appendChild(groupsHtml('两期延续的同一主题', 'cmp-both', both.map(function (r) {
+      return { date: r.date + ' → ' + B.date, it: r.newer || r.it };
+    })));
+  }
+  if (selA && selB) {
+    selA.addEventListener('change', renderCompare);
+    selB.addEventListener('change', renderCompare);
+  }
+  for (var mi = 0; mi < modeBtns.length; mi++) {
+    (function (btn) {
+      btn.addEventListener('click', function () {
+        var mode = btn.getAttribute('data-mode');
+        for (var k = 0; k < modeBtns.length; k++) modeBtns[k].classList.toggle('on', modeBtns[k] === btn);
+        searchPane.hidden = mode !== 'search';
+        comparePane.hidden = mode !== 'compare';
+        if (mode === 'compare') renderCompare();
+      });
+    })(modeBtns[mi]);
+  }
+
   syncChips(); render();
 })();
 </script>
