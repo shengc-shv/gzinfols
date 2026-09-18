@@ -65,7 +65,10 @@ export const MOBILE_OPT_CSS = `
        滚动后收起标题行，只留播放控件，压到约 79px。
        仅移动端生效：桌面视口高、且播放器不挡阅读。
        ⚠️ 收窄会让下方内容上移 —— 脚本会把省下的高度**补回下边距**（内联），
-       使文档流总高不变。这里保留一个静态兜底值（脚本未运行时也不至于贴太紧）。 */
+       使文档流总高不变。这里保留一个静态兜底值（脚本未运行时也不至于贴太紧）。
+       overflow-anchor: none —— 本元素尺寸会变，排除浏览器滚动锚定插手（微信内核里
+       锚定会把滚动位置挪一下，反而给切换判据制造干扰）。 */
+    .player-card { overflow-anchor: none; }
     .player-card.compact { padding: 0.45rem 0.8rem; margin-bottom: 0.8rem; }
     .player-card.compact .player-title { display: none; }
     .player-card.compact audio { margin-top: 0; }
@@ -76,22 +79,26 @@ export const MOBILE_OPT_CSS = `
  * 播放器紧凑态脚本。
  *
  * 只在页面存在播放器时注入（无音频的期次不注入空脚本）。
- * 判据用「元素在文档中的原始位置」而不是滚动量：播放器一旦钉住，
- * 其 rect.top 恒为 0，无法再作为判据，故在未钉住时先取一次基准。
  * 不读墙钟（服务层禁 Date.now / 裸 new Date）。
  *
  * ⚠️ 播放器在**文档流内**，收窄会让它下面的内容整体上移。若不管，用户往下滑时
  *    整页会「窜」一下（实测滚动 5px 时正文位移 67px，其中 62px 来自布局跳变）。
+ *    故切换后把省下的高度**原样补回下边距**（见下），让「播放器 + 下边距」总高不变。
  *
- * 🔴 **不要用「补偿滚动位置」来消这个跳变**（2026-09-18 真机实锤）：
- *    第一版是 `scrollBy(0, after - before)` + 滞回带，桌面模拟通过，但**手机上直接
- *    死循环抖动** —— 程序化滚动会改变滚动量，而滚动量又是切换判据，两者构成反馈环；
- *    真机上再有惯性滚动、尺寸测量偏差（字体/原生播放器控件渲染晚于测量）就会来回翻转。
+ * 🔴 **两条真机实锤的教训（2026-09-18，微信内置浏览器）**：
+ *    ① 不要用「补偿滚动位置」（`scrollBy`）来消跳变：程序化滚动会改变滚动量，
+ *       而滚动量又是切换判据 → 「切换条件 = 切换自身会改动的量」构成反馈环，一滚就抖。
+ *    ② **不要用「绝对滚动位置 + 小滞回带」做判据**：微信内核（WKWebView / X5）在惯性
+ *       与回弹期间会持续补发 scroll 事件，指头在阈值附近一停就有 ±10px 抖动，
+ *       12px 的滞回带会被反复穿越 → 播放器高度 132↔79 反复切换 = 肉眼看到的「抖动」。
+ *       症状特征：**贴着顶部时会抖，从页面下方快速滑过则不抖**。
  *
- * ✅ 正确做法：**把省下的高度原样补回下边距**，让「播放器 + 其下边距」的总高不变 →
- *    文档流不发生变化 → 内容一动不动（无跳变）、**完全不碰滚动位置**（无反馈环，
- *    想抖也抖不起来），而收益照常：钉在视口顶部的播放器只有 79px 而非 132px。
- *    补偿量在切换瞬间现测（before - after），因此不依赖初始化时的陈旧测量。
+ * ✅ 现在的判据：**只看「同向净行程」**（连续同向累积 ≥ 90px 才允许切换一次），
+ *    完全不用绝对位置。于是：
+ *    - 阈值附近的小幅抖动（±十几 px、方向反复）永远累积不到 90px → 结构上不可能抖；
+ *    - 内核补发的单次跳变（几十 px）也到不了 90px，无法连锁；
+ *    - 切换仍然只改布局（补回下边距保持总高不变），**完全不碰滚动位置** → 无反馈环。
+ *    另外给播放器加 `overflow-anchor: none`，排除浏览器滚动锚定插手的可能。
  */
 export function generateCompactPlayerScript(): string {
   return `
@@ -102,24 +109,36 @@ export function generateCompactPlayerScript(): string {
   if (!window.matchMedia || !window.matchMedia('(max-width: 719.98px)').matches) return;
 
   var baseMargin = getComputedStyle(pc).marginBottom;   // 展开态的原始下边距
-  var origin = pc.getBoundingClientRect().top + window.scrollY;
-  var onAt = origin + 6;    // 滚过这里 → 收窄
-  var offAt = origin - 6;   // 退回这里 → 展开（小滞回带，只防阈值边界反复切换）
+  var STEP = 90;              // 连续同向净行程达到这个量，才允许切换一次
+  var lastY = window.scrollY;
+  var dist = 0;               // 有符号净行程：方向一变就重新计，切换后归零
   var on = false;
+
+  function apply(next) {
+    var before = pc.getBoundingClientRect().height;
+    pc.classList.toggle('compact', next);
+    var after = pc.getBoundingClientRect().height;
+    on = next;
+    // 把省下的高度补回下边距：总高不变 → 内容不动，且不碰滚动位置
+    pc.style.marginBottom = next ? 'calc(' + baseMargin + ' + ' + (before - after) + 'px)' : '';
+  }
 
   function sync() {
     var y = window.scrollY;
-    var want = on ? y > offAt : y > onAt;
-    if (want === on) return;
-    var before = pc.getBoundingClientRect().height;
-    on = want;
-    if (want) pc.classList.add('compact'); else pc.classList.remove('compact');
-    var after = pc.getBoundingClientRect().height;
-    // 把省下的高度补回下边距：文档流总高不变 → 内容不位移，且不碰滚动位置
-    pc.style.marginBottom = want ? 'calc(' + baseMargin + ' + ' + (before - after) + 'px)' : '';
+    var dy = y - lastY;
+    lastY = y;
+    if (dy) {
+      dist = (dist > 0) === (dy > 0) ? dist + dy : dy;   // 反向 → 从这一小段重新计
+      if (dist > STEP) dist = STEP;                      // 截断长距离累积：否则「先下滚很远
+      if (dist < -STEP) dist = -STEP;                    // 再上滚」要滚很久才展开
+    }
+    if (!on && dist >= STEP) { apply(true); dist = 0; }
+    else if (on && dist <= -STEP) { apply(false); dist = 0; }
   }
+
+  // 页面恢复在中段（回到上次位置）时播放器已钉住，直接进紧凑态
+  if (window.scrollY > 0) apply(true);
   window.addEventListener('scroll', sync, { passive: true });
-  sync();
 })();
 `.trim();
 }

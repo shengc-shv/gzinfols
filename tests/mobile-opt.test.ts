@@ -159,30 +159,44 @@ test("③-c 紧凑播放器脚本按需注入，且不读墙钟", () => {
   assert.ok(!/\bDate\b/.test(script), "脚本不得读墙钟（服务层禁 Date.now / 裸 new Date）");
 });
 
-test("③-d 紧凑态必须「补回下边距」而不是「补偿滚动位置」（真机死循环的根因）", () => {
+test("③-d 紧凑态：只准按「同向净行程」切换，不得碰滚动、不得用绝对位置", () => {
   const script = generateCompactPlayerScript();
-  // 🔴 回归守卫：绝不能再用 scrollBy 补偿。程序化滚动会改变滚动量，而滚动量又是切换判据，
-  // 两者构成反馈环 —— 2026-09-18 真机上表现为「一滚就死循环抖动」（桌面模拟却通过）。
+  // 🔴 回归守卫 1：绝不能改滚动位置。程序化滚动改变滚动量、而滚动量若参与判据 = 反馈环，
+  // 2026-09-18 真机（微信内置浏览器）表现为「一滚就死循环抖动」。
   assert.ok(
     !/scrollBy|scrollTo/.test(script),
-    "紧凑态切换**不得**改动滚动位置：程序化滚动 + 阈值判据 = 反馈环，真机会来回翻转抖动",
+    "紧凑态切换**不得**改动滚动位置（程序化滚动 + 判据 = 反馈环，真机会抖）",
+  );
+  // 🔴 回归守卫 2：判据不得用绝对滚动位置。真机（WKWebView/X5）在惯性/回弹期间持续补发
+  // scroll 事件，指头在阈值附近一停就有 ±10px 抖动，滞回带会被反复穿越 → 高度反复横跳。
+  assert.ok(
+    !/\borigin\b|onAt|offAt/.test(script),
+    "判据**不得**依赖绝对滚动位置（绝对位置 + 小滞回带 = 阈值附近反复翻转）",
+  );
+  assert.ok(
+    /var STEP = 90/.test(script) && /dist >= STEP/.test(script) && /dist <= -STEP/.test(script),
+    "须按「连续同向净行程 ≥ STEP」才切换一次（小幅抖动永远累积不到，结构上抖不起来）",
   );
   // 正确做法：把省下的高度补回下边距 → 文档流总高不变 → 内容一动不动，且不碰滚动
   assert.ok(
-    /pc\.style\.marginBottom = want \? 'calc\('/.test(script),
+    /pc\.style\.marginBottom = next \? 'calc\('/.test(script),
     "切换后须把 (before - after) 补回下边距，保持「播放器 + 下边距」总高不变（内容不位移）",
   );
   assert.ok(
     /getComputedStyle\(pc\)\.marginBottom/.test(script),
     "补偿基准须取展开态的计算下边距（写成常量会在样式调整后失真）",
   );
-  // 阈值：小滞回带即可（切换不再影响滚动量，故不需要「滞回带 > 收窄量」那套）
-  assert.ok(
-    /var onAt = origin \+ 6/.test(script) && /var offAt = origin - 6/.test(script) && /on \? y > offAt : y > onAt/.test(script),
-    "开关用「上开下关」的小滞回带，防阈值边界反复切换",
-  );
   assert.ok(
     /matchMedia\('\(max-width: 719\.98px\)'\)/.test(script),
     "脚本须先判小屏再介入（宽屏紧凑样式不生效）",
+  );
+});
+
+test("③-e 播放器须排除滚动锚定（overflow-anchor: none）", () => {
+  const style = stripComments(styleOf(renderHtml(report())));
+  assert.ok(
+    /\.player-card\s*\{[^}]*overflow-anchor:\s*none/.test(style),
+    "播放器尺寸会变，须 overflow-anchor: none —— 否则微信内核的滚动锚定会挪动滚动位置，" +
+      "给切换判据制造干扰",
   );
 });
