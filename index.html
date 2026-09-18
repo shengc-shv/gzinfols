@@ -19,11 +19,13 @@
 <style>
 
   :root {
+    
+    color-scheme: light dark;
     --bg: #f6f5f3;
     --bg-elevated: #ffffff;
     --fg: #1a1a1f;
     --fg-soft: #4a4a52;
-    --muted: #797986;
+    --muted: #6b6b78;   
     --rule: #e7e5e1;
     --card: #ffffff;
     --card-alt: #f1efec;
@@ -220,8 +222,19 @@
   .must-scroller::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
   .must-card {
     flex: 0 0 auto; width: 80vw; max-width: 300px;
-    display: flex; gap: 0.55rem; align-items: flex-start;
+    
+    display: flex; flex-wrap: wrap; gap: 0.55rem; align-items: flex-start;
+    
+    border: 1px solid var(--rule); border-radius: 12px;
+    padding: 0.6rem 0.75rem; background: var(--bg-elevated);
+    box-shadow: var(--shadow-sm);
   }
+  
+  .must-card::before { content: ""; flex: 0 0 100%; height: 0; order: 3; }
+  
+  .must-top-badge, .delta-badge { order: 4; align-self: flex-start; }
+  
+  .must-card .must-top-badge, .must-card .delta-badge { margin-left: calc(1.2rem + 0.55rem); }
   
   .must-card.must-top {
     background: color-mix(in srgb, var(--accent-brand) 6%, var(--card));
@@ -232,10 +245,8 @@
     font-size: 0.66rem; font-weight: 700; color: white;
     background: var(--accent-brand); border-radius: 3px;
     vertical-align: middle;
-  }
-    border: 1px solid var(--rule); border-radius: 12px;
-    padding: 0.6rem 0.75rem; background: var(--bg-elevated);
-    box-shadow: var(--shadow-sm);
+    
+    white-space: nowrap; flex: none;
   }
   
   .exec-must::after {
@@ -259,7 +270,8 @@
     background: var(--accent-brand); color: #fff; font-size: 0.72rem; font-weight: 700;
     display: inline-flex; align-items: center; justify-content: center; margin-top: 0.05rem;
   }
-  .must-body { display: flex; flex-direction: column; min-width: 0; }
+  
+  .must-body { display: flex; flex-direction: column; min-width: 0; flex: 1 1 0; }
   .must-body strong { font-size: 0.85rem; color: var(--fg); font-weight: 600; line-height: 1.35; }
   .must-why {
     font-size: 0.74rem; color: var(--fg-soft); line-height: 1.45; margin-top: 0.2rem;
@@ -695,8 +707,9 @@
     margin: 0 0 0.3rem;
     line-height: 1.4;
   }
-  .brief-title a { color: var(--fg); text-decoration: none; }
-  .brief-title a:hover { color: var(--link); text-decoration: underline; }
+  
+  .brief h3 a { color: var(--fg); text-decoration: none; }
+  .brief h3 a:hover { color: var(--link); text-decoration: underline; }
   .brief-summary {
     margin: 0;
     color: var(--fg-soft);
@@ -1165,7 +1178,8 @@
   .cov-note { margin: 0.35rem 0 0; font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
   .cov-missing { color: var(--c-finance); }
   
-  .must-inbody { display: inline-block; margin-left: 0.4rem; font-size: 0.66rem; color: var(--c-pol); border: 1px solid color-mix(in srgb, var(--c-pol) 45%, transparent); border-radius: 3px; padding: 0 5px; white-space: nowrap; text-decoration: none; }
+  
+  .must-inbody { display: inline-block; margin-left: 0.4rem; font-size: 0.75rem; color: var(--c-pol); border: 1px solid color-mix(in srgb, var(--c-pol) 45%, transparent); border-radius: 3px; padding: 0 5px; white-space: nowrap; text-decoration: none; }
   .must-inbody:hover { background: color-mix(in srgb, var(--c-pol) 10%, transparent); }
   .insight-src-inbody, .risk-src-inbody { border-bottom: 1px dashed currentColor; }
   .brief.flash, .ipo-card.flash { outline: 3px solid color-mix(in srgb, var(--c-pol) 55%, transparent); outline-offset: 2px; border-radius: 8px; transition: outline-color 0.2s; }
@@ -1176,18 +1190,26 @@
   .insight p { margin: 0.25rem 0 0; font-size: 0.9rem; color: var(--fg-soft); line-height: 1.6; }
   .insight p b { color: var(--fg); }
   .insight-tags { margin-bottom: 0.1rem; }
-  .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; border-radius: 4px; padding: 0.08rem 0.42rem; margin-right: 0.35rem; color: var(--brand, #e60012); background: rgba(230, 0, 18, 0.1); }
+  
+  .tag { display: inline-block; font-size: 0.78rem; font-weight: 700; border-radius: 4px; padding: 0.08rem 0.42rem; margin-right: 0.35rem; color: var(--brand, #e60012); background: rgba(230, 0, 18, 0.1); }
   .tag.t-wealth { color: #7c3aed; background: rgba(124, 58, 237, 0.12); }
   .tag.t-mass { color: #059669; background: rgba(5, 150, 105, 0.12); }
   .tag.t-policy { color: #b45309; background: rgba(180, 83, 9, 0.12); }
   
   .tag.t-gd { color: var(--accent-brand, #e60012); background: color-mix(in srgb, var(--accent-brand, #e60012) 8%, transparent); border: 1px solid color-mix(in srgb, var(--accent-brand, #e60012) 45%, transparent); font-weight: 800; }
+  
+  @media (prefers-color-scheme: dark) {
+    .tag { color: var(--accent-brand, #e60012); }
+    .tag.t-wealth { color: #a78bfa; }
+    .tag.t-policy { color: #fbbf24; }
+  }
 
   
   .tabs { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 0.1rem; margin: 1.4rem 0 0; padding: 0.6rem 0 0; border-bottom: 1px solid var(--rule); background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
   .tabs .tab { flex: none; background: none; border: none; font-family: inherit; cursor: pointer; padding: 0.6rem 0.9rem 0.75rem; font-size: 0.95rem; font-weight: 500; color: var(--muted); border-bottom: 2.5px solid transparent; margin-bottom: -1px; white-space: nowrap; }
   .tabs .tab .n { font-size: 0.72rem; color: var(--muted); margin-left: 0.2rem; }
-  .tabs .tab.active { color: var(--cat, var(--fg)); border-bottom-color: var(--cat, var(--fg)); font-weight: 600; }
+  
+  .tabs .tab.active { color: var(--fg); border-bottom-color: var(--cat, var(--fg)); font-weight: 600; }
   .panel { display: none; padding-top: 1rem; }
   .panel.active { display: block; }
 
@@ -1326,7 +1348,8 @@
 
 .card-actions { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.45rem; }
 .card-actions button {
-  font: inherit; font-size: 0.68rem; line-height: 1.8; padding: 0 0.45rem;
+  
+  font: inherit; font-size: 0.75rem; line-height: 1.8; padding: 0 0.45rem;
   border: 1px solid var(--rule); border-radius: 999px;
   background: var(--bg-elevated); color: var(--muted); cursor: pointer;
 }
@@ -1367,15 +1390,18 @@
   .filter-chip.role-hidden { display: none; }
   /* chip 计数（分面计数：随其他维度筛选联动刷新） */
   .chip-n { display: inline-block; margin-left: 4px; padding: 0 5px; border-radius: 8px;
-    background: rgba(15,23,42,0.08); font-size: 10px; line-height: 1.6; font-variant-numeric: tabular-nums; }
+    background: rgba(15,23,42,0.08); font-size: 11px; line-height: 1.6; font-variant-numeric: tabular-nums; }
   .filter-chip.active .chip-n { background: rgba(255,255,255,0.28); }
   .filter-chip.chip-zero { opacity: 0.45; }
   /* C1 客群标签可点（原为纯展示 span） */
   button.seg-chip { font-family: inherit; cursor: pointer; border: none; }
   button.seg-chip:hover { filter: brightness(0.94); }
-  /* A3 增量三态徽章 (2026-09-17)：新增 / 有进展 / 续报 */
+  /* A3 增量三态徽章 (2026-09-17)：新增 / 有进展 / 续报
+     2026-09-18：字号 10px → 12px（它此前是全站最小字号，而「本期有没有变化」
+     恰恰是最需要被一眼看见的信号）；并加 flex:none —— 在 flex 单行卡里
+     不参与收缩，避免「续报」被压成逐字竖排。 */
   .delta-badge { display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 8px;
-    font-size: 10px; font-weight: 700; line-height: 1.7; vertical-align: middle; white-space: nowrap; }
+    font-size: 12px; font-weight: 700; line-height: 1.7; vertical-align: middle; white-space: nowrap; flex: none; }
   .delta-new { color: #fff; background: #1e7e34; }
   .delta-changed { color: #fff; background: #d97706; }
   .delta-followup { color: #5b6472; background: #eceef1; }
@@ -1419,6 +1445,43 @@
   .seg-chip.seg-private { color: #fff; background: #8e44ad; }
   .seg-chip.seg-inclusive { color: #fff; background: #1e7e34; }
   .seg-chip.seg-other { color: #555; background: #ececec; }
+  /* 移动端增强层（2026-09-18）——**必须置于本 <style> 最末**：
+     媒体查询不提升优先级，只要其后再出现同选择器规则（如上面的 .seg-chip），
+     本层就会被静默压掉。合并本段时请保持它在最后。见 render/mobile-opt.ts。 */
+@media (max-width: 719.98px) {
+    
+
+    .card-actions button,
+    .filter-chip, .filter-reset,
+    .role-chip, .seg-chip,
+    .archive, .coverage > summary,
+    .expand-btn, .brief .official-src a,
+    .insight-src, .risk-src, .ipo-src,
+    .stock-source-report, .fav-bar button,
+    .redchip-ledger a, .must-inbody { position: relative; }
+
+    .card-actions button::after { content: ""; position: absolute; inset: -11px -8px; z-index: 1; }
+    .filter-chip::after, .filter-reset::after { content: ""; position: absolute; inset: -8px -4px; z-index: 1; }
+    .role-chip::after { content: ""; position: absolute; inset: -9px -2px; z-index: 1; }
+    .seg-chip::after { content: ""; position: absolute; inset: -11px -4px; z-index: 1; }
+    .archive::after { content: ""; position: absolute; inset: -14px 0; z-index: 1; }
+    .coverage > summary::after { content: ""; position: absolute; inset: -14px 0; z-index: 1; }
+    .insight-src::after, .risk-src::after { content: ""; position: absolute; inset: -11px -8px; z-index: 1; }
+    .ipo-src::after, .stock-source-report::after, .fav-bar button::after,
+    .redchip-ledger a::after, .must-inbody::after { content: ""; position: absolute; inset: -14px 0; z-index: 1; }
+
+    
+    .insight-srcs, .risk-srcs { gap: 0.55rem; }
+    .seg-chip { padding: 3px 10px; border-radius: 10px; }
+    .stock-source-report { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.5rem; }
+    .expand-btn { min-height: 44px; }
+
+    
+    .player-card { overflow-anchor: none; }
+    .player-card.compact { padding: 0.45rem 0.8rem; margin-bottom: 0.8rem; }
+    .player-card.compact .player-title { display: none; }
+    .player-card.compact audio { margin-top: 0; }
+  }
   </style>
 </head>
 <body>
@@ -2224,7 +2287,11 @@
 (function(){
   var meta = document.querySelector('meta[name="report-date"]');
   var PAGE_DATE = meta ? (meta.getAttribute('content') || '') : '';
-  var CARD_SEL = '.brief, .must-card, .insight, .risk-card, .ipo-card, .stock-card';
+  // 2026-09-18：不再包含 .must-card —— 它是 display:flex 的**横向单行**卡（80vw 宽），
+  // 追加第三个 flex 子项后正文列被压到 142px（卡宽 300px 的 47%），「三件事」徽章与
+  // 复制/收藏按钮逐字竖排。工具条是为整宽纵向卡设计的，横滑卡不适合承载；
+  // 必读卡本身已是「点标题进正文」的入口，复制/收藏在正文卡上完成即可。
+  var CARD_SEL = '.brief, .insight, .risk-card, .ipo-card, .stock-card';
   var audio = document.getElementById('audio-player');
   var segEl = document.getElementById('audio-segments');
   var SEGS = [];
@@ -2562,6 +2629,46 @@
   });
 })();
 
+</script>
+<script>
+(function () {
+  var pc = document.querySelector('.player-card');
+  if (!pc) return;
+  // 紧凑态样式只在小屏生效（见 MOBILE_OPT_CSS 的媒体查询）；宽屏套类无意义，直接不介入
+  if (!window.matchMedia || !window.matchMedia('(max-width: 719.98px)').matches) return;
+
+  var baseMargin = getComputedStyle(pc).marginBottom;   // 展开态的原始下边距
+  var STEP = 90;              // 连续同向净行程达到这个量，才允许切换一次
+  var lastY = window.scrollY;
+  var dist = 0;               // 有符号净行程：方向一变就重新计，切换后归零
+  var on = false;
+
+  function apply(next) {
+    var before = pc.getBoundingClientRect().height;
+    pc.classList.toggle('compact', next);
+    var after = pc.getBoundingClientRect().height;
+    on = next;
+    // 把省下的高度补回下边距：总高不变 → 内容不动，且不碰滚动位置
+    pc.style.marginBottom = next ? 'calc(' + baseMargin + ' + ' + (before - after) + 'px)' : '';
+  }
+
+  function sync() {
+    var y = window.scrollY;
+    var dy = y - lastY;
+    lastY = y;
+    if (dy) {
+      dist = (dist > 0) === (dy > 0) ? dist + dy : dy;   // 反向 → 从这一小段重新计
+      if (dist > STEP) dist = STEP;                      // 截断长距离累积：否则「先下滚很远
+      if (dist < -STEP) dist = -STEP;                    // 再上滚」要滚很久才展开
+    }
+    if (!on && dist >= STEP) { apply(true); dist = 0; }
+    else if (on && dist <= -STEP) { apply(false); dist = 0; }
+  }
+
+  // 页面恢复在中段（回到上次位置）时播放器已钉住，直接进紧凑态
+  if (window.scrollY > 0) apply(true);
+  window.addEventListener('scroll', sync, { passive: true });
+})();
 </script>
 </body>
 </html>
