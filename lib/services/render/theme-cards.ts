@@ -44,10 +44,17 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
     padding: 0.6rem 0.75rem; background: var(--bg-elevated);
     box-shadow: var(--shadow-sm);
   }
-  /* 换行断点：占满一行的零高元素，把后面的徽章挤到第二行（纯布局，不引入可见元素） */
+  /* 换行断点：占满一行的零高元素，把后面的徽章挤到第二行（纯布局，不引入可见元素）。
+     桌面同样适用：网格列窄到 200px 上下时，徽章与正文争宽度会把正文压到 ~120px
+     （原版更糟 —— 徽章被压成 25×58「三/件/事」逐字竖排）。 */
   .must-card::before { content: ""; flex: 0 0 100%; height: 0; order: 3; }
   /* 徽章不参与正文列的宽度竞争：统一排到第二行，横向呈现 */
   .must-top-badge, .delta-badge { order: 4; align-self: flex-start; }
+  /* 第二行左缩进 = 序号宽(1.2rem) + 卡片 gap(0.55rem)，与正文文字左边界对齐；
+     否则徽章会顶到卡片左边、挂在序号正下方。加 .must-card 前缀是为了压过
+     full.ts 内联段里 .delta-badge 的 margin-left: 6px（那段在样式表更靠后，
+     同权重会胜出）。 */
+  .must-card .must-top-badge, .must-card .delta-badge { margin-left: calc(1.2rem + 0.55rem); }
   /* N 层：top 3 必读卡片 — "今日三件事" 视觉强调（行长音频重点） */
   .must-card.must-top {
     background: color-mix(in srgb, var(--accent-brand) 6%, var(--card));
