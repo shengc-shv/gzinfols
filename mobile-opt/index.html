@@ -1477,6 +1477,7 @@
     .expand-btn { min-height: 44px; }
 
     
+    .player-card { overflow-anchor: none; }
     .player-card.compact { padding: 0.45rem 0.8rem; margin-bottom: 0.8rem; }
     .player-card.compact .player-title { display: none; }
     .player-card.compact audio { margin-top: 0; }
@@ -2630,24 +2631,36 @@
   if (!window.matchMedia || !window.matchMedia('(max-width: 719.98px)').matches) return;
 
   var baseMargin = getComputedStyle(pc).marginBottom;   // 展开态的原始下边距
-  var origin = pc.getBoundingClientRect().top + window.scrollY;
-  var onAt = origin + 6;    // 滚过这里 → 收窄
-  var offAt = origin - 6;   // 退回这里 → 展开（小滞回带，只防阈值边界反复切换）
+  var STEP = 90;              // 连续同向净行程达到这个量，才允许切换一次
+  var lastY = window.scrollY;
+  var dist = 0;               // 有符号净行程：方向一变就重新计，切换后归零
   var on = false;
+
+  function apply(next) {
+    var before = pc.getBoundingClientRect().height;
+    pc.classList.toggle('compact', next);
+    var after = pc.getBoundingClientRect().height;
+    on = next;
+    // 把省下的高度补回下边距：总高不变 → 内容不动，且不碰滚动位置
+    pc.style.marginBottom = next ? 'calc(' + baseMargin + ' + ' + (before - after) + 'px)' : '';
+  }
 
   function sync() {
     var y = window.scrollY;
-    var want = on ? y > offAt : y > onAt;
-    if (want === on) return;
-    var before = pc.getBoundingClientRect().height;
-    on = want;
-    if (want) pc.classList.add('compact'); else pc.classList.remove('compact');
-    var after = pc.getBoundingClientRect().height;
-    // 把省下的高度补回下边距：文档流总高不变 → 内容不位移，且不碰滚动位置
-    pc.style.marginBottom = want ? 'calc(' + baseMargin + ' + ' + (before - after) + 'px)' : '';
+    var dy = y - lastY;
+    lastY = y;
+    if (dy) {
+      dist = (dist > 0) === (dy > 0) ? dist + dy : dy;   // 反向 → 从这一小段重新计
+      if (dist > STEP) dist = STEP;                      // 截断长距离累积：否则「先下滚很远
+      if (dist < -STEP) dist = -STEP;                    // 再上滚」要滚很久才展开
+    }
+    if (!on && dist >= STEP) { apply(true); dist = 0; }
+    else if (on && dist <= -STEP) { apply(false); dist = 0; }
   }
+
+  // 页面恢复在中段（回到上次位置）时播放器已钉住，直接进紧凑态
+  if (window.scrollY > 0) apply(true);
   window.addEventListener('scroll', sync, { passive: true });
-  sync();
 })();
 </script>
 </body>
