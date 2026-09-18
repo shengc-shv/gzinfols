@@ -4,12 +4,21 @@
  * 现锁两件事（2026-09-17 按用户实测反馈调整）：
  *   ① 首屏只留 Top3，其余折叠（「展开其余 N 条」）——与音频侧「三件事」口径一致；
  *   ② **横滑样式保持原样**：曾一度改为纵向流，但用户实测**手机上横滑更好**，
- *      故于 2026-09-17 回退（纵向覆盖规则不得再出现），折叠这一项保留。
+ *      故于 2026-09-17 回退（commit `2e3df51`），折叠这一项保留。
+ *
+ * 2026-09-18 加固 ②：原守卫是「产物里不得出现某条字面选择器字符串」
+ * （`!html.includes(".must-scroller, .insight-scroller")`）。
+ * 实测它**换个写法就能静默绕过** —— 例如写成 `.must-scroller { display: block }`
+ * 并挪进 `@media (max-width: 719.98px)`，字符串对不上、测试照常全绿，但横滑已经没了。
+ * 现改为**声明级行为断言**：解析产物 CSS，凡是命中滚动容器选择器的规则，
+ * 只要处在「窄视口」媒体条件下，就不得出现取消横滑的声明。
+ * 断言语义而非拼写。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { renderReportExec } from "../lib/services/render/exec-block";
 import { renderHtml } from "../lib/services/render";
+import { styleOf, stripComments, rulesMatching, rulesOf } from "./css-inspect";
 import type { DailyReport } from "../lib/contracts/report";
 
 function report(mustRead: Array<{ url: string; why: string; title?: string }>): DailyReport {
@@ -39,15 +48,45 @@ test("② 必读 ≤3 条时：不折叠、不出现展开按钮", () => {
   assert.ok(!html.includes("expand-btn"), "无多余条目时不该有展开按钮");
 });
 
-test("③ 已回退横滑：不得再出现纵向流覆盖规则（且折叠项保留）", () => {
+test("③ 窄视口下滚动容器必须保持横滑（按声明判定，不认写法）", () => {
   const html = renderHtml(report([M(1)]));
+  const style = stripComments(styleOf(html));
+  /** 五个横滑容器（今日必读 / 商机洞察 / 风险预警 / 广东IPO / 昨日股市）。 */
+  const SCROLLER = /\.(?:must|insight|risk|ipo|stock)-scroller\b/;
+  /** 窄视口条件 —— 移动端覆盖都写在这里；桌面网格化写在 min-width 下，属合法。 */
+  const NARROW = /max-width\s*:/;
+
+  // (a) 基础层（无条件规则）必须提供横滑能力
+  const base = rulesMatching(style, SCROLLER).filter((r) => r.ancestors.length === 0);
   assert.ok(
-    !html.includes(".must-scroller, .insight-scroller"),
-    "纵向流覆盖选择器组不应存在 —— 2026-09-17 用户实测手机横滑更好，已回退",
+    base.some((r) => /overflow-x:\s*auto/.test(r.body)),
+    "基础层必须保留 overflow-x: auto —— 横滑是用户 2026-09-17 实测确认要保留的交互",
   );
-  assert.ok(html.includes("scroll-snap-type: x mandatory"), "横滑（原行为）必须保留");
+
+  // (b) 窄视口下，任何命中滚动容器的规则都不得取消横滑
+  const narrow = rulesMatching(style, SCROLLER).filter((r) =>
+    r.ancestors.some((a) => NARROW.test(a)),
+  );
+  for (const r of narrow) {
+    assert.ok(
+      !/overflow(-x)?:\s*visible/.test(r.body),
+      `窄视口下滚动容器不得改成 overflow: visible（规则：${r.prelude}）` +
+        ` —— 2026-09-17 用户实测手机上横滑更好，纵向流已回退`,
+    );
+    assert.ok(
+      !/(?:^|;)\s*display:\s*block/.test(r.body),
+      `窄视口下滚动容器不得改成 display: block（规则：${r.prelude}）—— 会取消横滑`,
+    );
+    assert.ok(
+      !/scroll-snap-type:\s*none/.test(r.body),
+      `窄视口下不得关闭 scroll-snap（规则：${r.prelude}）`,
+    );
+  }
+
+  // (c) 折叠展开态须保留（回退只针对布局，不针对折叠）
   assert.ok(
-    html.includes(".exec-must.expanded .must-card.must-more"),
+    style.includes(".exec-must.expanded .must-card.must-more") ||
+      rulesOf(style).some((r) => /expanded .must-card\.must-more/.test(r.prelude)),
     "折叠展开态须保留（回退只针对布局，不针对折叠）",
   );
 });

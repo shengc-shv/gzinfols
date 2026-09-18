@@ -69,7 +69,9 @@ export const THEME_INTERACTIVE_CSS = `  /* ===== 2026-08-21 交互重构（demo 
   .cov-note { margin: 0.35rem 0 0; font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
   .cov-missing { color: var(--c-finance); }
   /* F2 摘要去重：已在正文的条目/来源改为站内锚点（可点、跳正文），并高亮目标卡片 */
-  .must-inbody { display: inline-block; margin-left: 0.4rem; font-size: 0.66rem; color: var(--c-pol); border: 1px solid color-mix(in srgb, var(--c-pol) 45%, transparent); border-radius: 3px; padding: 0 5px; white-space: nowrap; text-decoration: none; }
+  /* 2026-09-18：0.66rem(10.6px) → 0.75rem(12px)。它是「见正文」跳转入口，
+     10px 级字号在手机上既难点也难认。 */
+  .must-inbody { display: inline-block; margin-left: 0.4rem; font-size: 0.75rem; color: var(--c-pol); border: 1px solid color-mix(in srgb, var(--c-pol) 45%, transparent); border-radius: 3px; padding: 0 5px; white-space: nowrap; text-decoration: none; }
   .must-inbody:hover { background: color-mix(in srgb, var(--c-pol) 10%, transparent); }
   .insight-src-inbody, .risk-src-inbody { border-bottom: 1px dashed currentColor; }
   .brief.flash, .ipo-card.flash { outline: 3px solid color-mix(in srgb, var(--c-pol) 55%, transparent); outline-offset: 2px; border-radius: 8px; transition: outline-color 0.2s; }
@@ -80,18 +82,31 @@ export const THEME_INTERACTIVE_CSS = `  /* ===== 2026-08-21 交互重构（demo 
   .insight p { margin: 0.25rem 0 0; font-size: 0.9rem; color: var(--fg-soft); line-height: 1.6; }
   .insight p b { color: var(--fg); }
   .insight-tags { margin-bottom: 0.1rem; }
-  .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; border-radius: 4px; padding: 0.08rem 0.42rem; margin-right: 0.35rem; color: var(--brand, #e60012); background: rgba(230, 0, 18, 0.1); }
+  /* 2026-09-18：字号 0.7rem(11.2px) → 0.78rem(12.5px)。11px 级中文标签在手机上
+     辨识成本明显偏高，而标签是读者判断「这条跟不跟我有关」的第一线索。 */
+  .tag { display: inline-block; font-size: 0.78rem; font-weight: 700; border-radius: 4px; padding: 0.08rem 0.42rem; margin-right: 0.35rem; color: var(--brand, #e60012); background: rgba(230, 0, 18, 0.1); }
   .tag.t-wealth { color: #7c3aed; background: rgba(124, 58, 237, 0.12); }
   .tag.t-mass { color: #059669; background: rgba(5, 150, 105, 0.12); }
   .tag.t-policy { color: #b45309; background: rgba(180, 83, 9, 0.12); }
   /* 粤标签（2026-08-23）：广东企业/事件地域标记，品牌红描边胶囊，区别于业务线彩底 */
   .tag.t-gd { color: var(--accent-brand, #e60012); background: color-mix(in srgb, var(--accent-brand, #e60012) 8%, transparent); border: 1px solid color-mix(in srgb, var(--accent-brand, #e60012) 45%, transparent); font-weight: 800; }
+  /* 2026-09-18：标签色是硬编码值（未走 token），在深色底 #15191f 上多数不达 AA：
+     默认 #e60012 = 3.78:1、t-wealth #7c3aed = 3.19:1、t-policy #b45309 = 3.51:1。
+     仅在深色侧覆盖为可达标值（浅色侧一字不动，避免影响已确认的浅色观感）。 */
+  @media (prefers-color-scheme: dark) {
+    .tag { color: var(--accent-brand, #e60012); }
+    .tag.t-wealth { color: #a78bfa; }
+    .tag.t-policy { color: #fbbf24; }
+  }
 
   /* 单层 tab：横滑不折行（#11） */
   .tabs { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 0.1rem; margin: 1.4rem 0 0; padding: 0.6rem 0 0; border-bottom: 1px solid var(--rule); background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
   .tabs .tab { flex: none; background: none; border: none; font-family: inherit; cursor: pointer; padding: 0.6rem 0.9rem 0.75rem; font-size: 0.95rem; font-weight: 500; color: var(--muted); border-bottom: 2.5px solid transparent; margin-bottom: -1px; white-space: nowrap; }
   .tabs .tab .n { font-size: 0.72rem; color: var(--muted); margin-left: 0.2rem; }
-  .tabs .tab.active { color: var(--cat, var(--fg)); border-bottom-color: var(--cat, var(--fg)); font-weight: 600; }
+  /* 2026-09-18：tab 选中态原先只靠分类色（--c-gz 3.46:1、--c-pol 4.17:1），
+     是全站对比度最低的交互态。改为「文字用正文色保证可读（15.91:1）+
+     分类色只留在下划线上」，选中依旧一眼可辨。 */
+  .tabs .tab.active { color: var(--fg); border-bottom-color: var(--cat, var(--fg)); font-weight: 600; }
   .panel { display: none; padding-top: 1rem; }
   .panel.active { display: block; }
 

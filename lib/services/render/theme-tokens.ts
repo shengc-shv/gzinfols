@@ -6,11 +6,17 @@
  */
 export const THEME_TOKENS_CSS = `
   :root {
+    /* 让 UA 原生控件（滚动条、<audio> 播放器）跟随系统深浅色 —— 否则深色模式下
+       原生播放器仍是浅色，和白底控件一起“发光”。 */
+    color-scheme: light dark;
     --bg: #f6f5f3;
     --bg-elevated: #ffffff;
     --fg: #1a1a1f;
     --fg-soft: #4a4a52;
-    --muted: #797986;
+    --muted: #6b6b78;   /* 2026-09-18：#797986 在 #f6f5f3 上仅 3.94:1，未达 AA(4.5)。
+                           它是 7 类文字角色的共用色（元信息 / 副标 / tab 未选中 /
+                           覆盖度说明 / 页脚 / 搜索副标…），统一调深到 4.82:1。
+                           深色侧的 #8b909c 实测 6.08:1 已达标，故不动。 */
     --rule: #e7e5e1;
     --card: #ffffff;
     --card-alt: #f1efec;

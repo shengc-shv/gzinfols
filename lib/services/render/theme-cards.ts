@@ -32,8 +32,22 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
   .must-scroller::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
   .must-card {
     flex: 0 0 auto; width: 80vw; max-width: 300px;
-    display: flex; gap: 0.55rem; align-items: flex-start;
+    /* 2026-09-18：改为可换行 —— 卡片只有 300px，却要挤下序号/正文/两个徽章四列，
+       正文列曾被压到 142px（约 8 字/行）。让徽章落到卡片内的第二行后，
+       正文独占第一行（约 247px）。横滑交互本身不变。 */
+    display: flex; flex-wrap: wrap; gap: 0.55rem; align-items: flex-start;
+    /* 2026-09-18 修复：以下 5 条声明原本落在规则体之外（规则在 display:flex 后被提前闭合），
+       成了「顶层裸声明」被浏览器整块丢弃 —— 卡片因此没有内边距/边框/圆角/白底/阴影，
+       移动端首屏的「今日必读」几乎不可读。修改本段时务必保持规则体完整闭合；
+       tests/mobile-opt.test.ts 已加「产物 CSS 不得含顶层裸声明」守卫防复发。 */
+    border: 1px solid var(--rule); border-radius: 12px;
+    padding: 0.6rem 0.75rem; background: var(--bg-elevated);
+    box-shadow: var(--shadow-sm);
   }
+  /* 换行断点：占满一行的零高元素，把后面的徽章挤到第二行（纯布局，不引入可见元素） */
+  .must-card::before { content: ""; flex: 0 0 100%; height: 0; order: 3; }
+  /* 徽章不参与正文列的宽度竞争：统一排到第二行，横向呈现 */
+  .must-top-badge, .delta-badge { order: 4; align-self: flex-start; }
   /* N 层：top 3 必读卡片 — "今日三件事" 视觉强调（行长音频重点） */
   .must-card.must-top {
     background: color-mix(in srgb, var(--accent-brand) 6%, var(--card));
@@ -44,10 +58,9 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
     font-size: 0.66rem; font-weight: 700; color: white;
     background: var(--accent-brand); border-radius: 3px;
     vertical-align: middle;
-  }
-    border: 1px solid var(--rule); border-radius: 12px;
-    padding: 0.6rem 0.75rem; background: var(--bg-elevated);
-    box-shadow: var(--shadow-sm);
+    /* 2026-09-18：卡片是 flex 单行，徽章原本会被压到 ~23px 宽而「三/件/事」逐字竖排。
+       锁住固有宽度不参与收缩即可横向呈现（不改变横滑布局）。 */
+    white-space: nowrap; flex: none;
   }
   /* 移动端横向滑动提示：右侧渐隐遮罩，暗示右侧还有更多必读卡片 */
   .exec-must::after {
@@ -71,7 +84,9 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
     background: var(--accent-brand); color: #fff; font-size: 0.72rem; font-weight: 700;
     display: inline-flex; align-items: center; justify-content: center; margin-top: 0.05rem;
   }
-  .must-body { display: flex; flex-direction: column; min-width: 0; }
+  /* flex:1 1 0 —— flex-basis 归零，正文才能和序号同处第一行（basis:auto 时
+     正文的 max-content 宽度会把序号单独挤在第一行）。 */
+  .must-body { display: flex; flex-direction: column; min-width: 0; flex: 1 1 0; }
   .must-body strong { font-size: 0.85rem; color: var(--fg); font-weight: 600; line-height: 1.35; }
   .must-why {
     font-size: 0.74rem; color: var(--fg-soft); line-height: 1.45; margin-top: 0.2rem;

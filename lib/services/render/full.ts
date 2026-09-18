@@ -53,6 +53,7 @@ import {
   renderAudioNowHint,
 } from "./inline-player";
 import { renderSearchEntry, SEARCH_ENTRY_CSS } from "./search-entry";
+import { MOBILE_OPT_CSS, generateCompactPlayerScript } from "./mobile-opt";
 import { itemIdOf } from "../../utils/item-id";
 import { renderDeltaBadge } from "./delta-badge";
 import { MATURITY_CSS } from "./maturity-badge";
@@ -349,15 +350,18 @@ ${stripCssComments(PAGE_ACTIONS_CSS)}
   .filter-chip.role-hidden { display: none; }
   /* chip 计数（分面计数：随其他维度筛选联动刷新） */
   .chip-n { display: inline-block; margin-left: 4px; padding: 0 5px; border-radius: 8px;
-    background: rgba(15,23,42,0.08); font-size: 10px; line-height: 1.6; font-variant-numeric: tabular-nums; }
+    background: rgba(15,23,42,0.08); font-size: 11px; line-height: 1.6; font-variant-numeric: tabular-nums; }
   .filter-chip.active .chip-n { background: rgba(255,255,255,0.28); }
   .filter-chip.chip-zero { opacity: 0.45; }
   /* C1 客群标签可点（原为纯展示 span） */
   button.seg-chip { font-family: inherit; cursor: pointer; border: none; }
   button.seg-chip:hover { filter: brightness(0.94); }
-  /* A3 增量三态徽章 (2026-09-17)：新增 / 有进展 / 续报 */
+  /* A3 增量三态徽章 (2026-09-17)：新增 / 有进展 / 续报
+     2026-09-18：字号 10px → 12px（它此前是全站最小字号，而「本期有没有变化」
+     恰恰是最需要被一眼看见的信号）；并加 flex:none —— 在 flex 单行卡里
+     不参与收缩，避免「续报」被压成逐字竖排。 */
   .delta-badge { display: inline-block; margin-left: 6px; padding: 0 6px; border-radius: 8px;
-    font-size: 10px; font-weight: 700; line-height: 1.7; vertical-align: middle; white-space: nowrap; }
+    font-size: 12px; font-weight: 700; line-height: 1.7; vertical-align: middle; white-space: nowrap; flex: none; }
   .delta-new { color: #fff; background: #1e7e34; }
   .delta-changed { color: #fff; background: #d97706; }
   .delta-followup { color: #5b6472; background: #eceef1; }
@@ -370,6 +374,10 @@ ${stripCssComments(SEARCH_ENTRY_CSS)}
   .seg-chip.seg-private { color: #fff; background: #8e44ad; }
   .seg-chip.seg-inclusive { color: #fff; background: #1e7e34; }
   .seg-chip.seg-other { color: #555; background: #ececec; }
+  /* 移动端增强层（2026-09-18）——**必须置于本 <style> 最末**：
+     媒体查询不提升优先级，只要其后再出现同选择器规则（如上面的 .seg-chip），
+     本层就会被静默压掉。合并本段时请保持它在最后。见 render/mobile-opt.ts。 */
+${stripCssComments(MOBILE_OPT_CSS)}
   </style>
 </head>
 <body>
@@ -724,6 +732,9 @@ ${generatePageActionsScript()}
 </script>
 ${opts.audio?.segments && opts.audio.segments.length ? `<script>
 ${generateAudioHighlightScript()}
+</script>` : ""}
+${opts.audio ? `<script>
+${generateCompactPlayerScript()}
 </script>` : ""}
 </body>
 </html>`;

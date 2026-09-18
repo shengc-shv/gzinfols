@@ -21,7 +21,9 @@ export const PAGE_ACTIONS_CSS = `
 /* E2/A4 卡片工具条（2026-09-17）：复制 · 收藏 · 听这段 */
 .card-actions { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-top: 0.45rem; }
 .card-actions button {
-  font: inherit; font-size: 0.68rem; line-height: 1.8; padding: 0 0.45rem;
+  /* 2026-09-18：字号 0.68rem(10.9px) → 0.75rem(12px)；触摸热区另由
+     mobile-opt.ts 的伪元素铺到 ≥44px（视觉尺寸不变，不拉长页面）。 */
+  font: inherit; font-size: 0.75rem; line-height: 1.8; padding: 0 0.45rem;
   border: 1px solid var(--rule); border-radius: 999px;
   background: var(--bg-elevated); color: var(--muted); cursor: pointer;
 }
@@ -71,7 +73,11 @@ export function generatePageActionsScript(): string {
 (function(){
   var meta = document.querySelector('meta[name="report-date"]');
   var PAGE_DATE = meta ? (meta.getAttribute('content') || '') : '';
-  var CARD_SEL = '.brief, .must-card, .insight, .risk-card, .ipo-card, .stock-card';
+  // 2026-09-18：不再包含 .must-card —— 它是 display:flex 的**横向单行**卡（80vw 宽），
+  // 追加第三个 flex 子项后正文列被压到 142px（卡宽 300px 的 47%），「三件事」徽章与
+  // 复制/收藏按钮逐字竖排。工具条是为整宽纵向卡设计的，横滑卡不适合承载；
+  // 必读卡本身已是「点标题进正文」的入口，复制/收藏在正文卡上完成即可。
+  var CARD_SEL = '.brief, .insight, .risk-card, .ipo-card, .stock-card';
   var audio = document.getElementById('audio-player');
   var segEl = document.getElementById('audio-segments');
   var SEGS = [];

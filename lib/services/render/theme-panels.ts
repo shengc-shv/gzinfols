@@ -135,8 +135,13 @@ export const THEME_PANELS_CSS = `  /* ===== sticky primary tabs ===== */
     margin: 0 0 0.3rem;
     line-height: 1.4;
   }
-  .brief-title a { color: var(--fg); text-decoration: none; }
-  .brief-title a:hover { color: var(--link); text-decoration: underline; }
+  /* 2026-09-18 修复死选择器：正文卡真实 DOM 是 h3 > a.to-detail，
+     从来没有 .brief-title 这个类名 —— 原规则永不命中，标题因此回落到浏览器默认
+     链接色 #0000EE（浅色侥幸 9.4:1，深色模式下崩到 1.88:1，几乎不可读）。
+     改为命中真实结构；.brief-title 是更早版式的遗留类名，不再使用。
+     注意：本段在模板字符串内，注释中不可出现反引号（会截断模板）。 */
+  .brief h3 a { color: var(--fg); text-decoration: none; }
+  .brief h3 a:hover { color: var(--link); text-decoration: underline; }
   .brief-summary {
     margin: 0;
     color: var(--fg-soft);
