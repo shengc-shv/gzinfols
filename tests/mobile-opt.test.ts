@@ -159,27 +159,30 @@ test("③-c 紧凑播放器脚本按需注入，且不读墙钟", () => {
   assert.ok(!/\bDate\b/.test(script), "脚本不得读墙钟（服务层禁 Date.now / 裸 new Date）");
 });
 
-test("③-d 紧凑态必须补偿滚动 + 带滞回带（否则首次滚动整页会窜一下）", () => {
+test("③-d 紧凑态必须「补回下边距」而不是「补偿滚动位置」（真机死循环的根因）", () => {
   const script = generateCompactPlayerScript();
-  // 播放器在文档流内，收窄会让下方内容上移 —— 必须按两态高度差反向补偿滚动
+  // 🔴 回归守卫：绝不能再用 scrollBy 补偿。程序化滚动会改变滚动量，而滚动量又是切换判据，
+  // 两者构成反馈环 —— 2026-09-18 真机上表现为「一滚就死循环抖动」（桌面模拟却通过）。
   assert.ok(
-    /window\.scrollBy\(0, after - before\)/.test(script),
-    "切换紧凑态后须按高度差补偿滚动位置，否则用户第一次滚动时整页会突然上跳（实测 62px）",
+    !/scrollBy|scrollTo/.test(script),
+    "紧凑态切换**不得**改动滚动位置：程序化滚动 + 阈值判据 = 反馈环，真机会来回翻转抖动",
   );
-  // 补偿会把滚动量减小收窄量，若两态共用同一阈值会来回抖 → 必须有滞回带
+  // 正确做法：把省下的高度补回下边距 → 文档流总高不变 → 内容一动不动，且不碰滚动
   assert.ok(
-    /var onAt = offAt \+ Math\.abs\(delta\) \+ 16/.test(script),
-    "ON 阈值必须 = OFF 阈值 + 收窄量 + 余量（滞回带），否则「切换 → 补偿 → 又越过阈值」会抖动",
+    /pc\.style\.marginBottom = want \? 'calc\('/.test(script),
+    "切换后须把 (before - after) 补回下边距，保持「播放器 + 下边距」总高不变（内容不位移）",
   );
   assert.ok(
-    /on && y < offAt/.test(script) && /!on && y > onAt/.test(script),
-    "两态须各用各的阈值（上开下关）",
+    /getComputedStyle\(pc\)\.marginBottom/.test(script),
+    "补偿基准须取展开态的计算下边距（写成常量会在样式调整后失真）",
   );
-  // 宽屏不介入：紧凑态样式只在小屏生效，套类无意义
+  // 阈值：小滞回带即可（切换不再影响滚动量，故不需要「滞回带 > 收窄量」那套）
+  assert.ok(
+    /var onAt = origin \+ 6/.test(script) && /var offAt = origin - 6/.test(script) && /on \? y > offAt : y > onAt/.test(script),
+    "开关用「上开下关」的小滞回带，防阈值边界反复切换",
+  );
   assert.ok(
     /matchMedia\('\(max-width: 719\.98px\)'\)/.test(script),
-    "脚本须先判小屏再介入（宽屏紧凑样式不生效，delta 为 0）",
+    "脚本须先判小屏再介入（宽屏紧凑样式不生效）",
   );
-  // 补偿只在已经滚下去时做（回到顶部时切回展开不该把页面顶飞）
-  assert.ok(/window\.scrollY > 0/.test(script), "补偿须带滚动位置守卫");
 });

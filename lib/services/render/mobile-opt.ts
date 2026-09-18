@@ -63,7 +63,9 @@ export const MOBILE_OPT_CSS = `
        .player-card 是 position: sticky，滚动时钉在视口顶部常驻 132px
        （844px 屏的 15.6%），有效阅读高度只剩 712px。
        滚动后收起标题行，只留播放控件，压到约 79px。
-       仅移动端生效：桌面视口高、且播放器不挡阅读。 */
+       仅移动端生效：桌面视口高、且播放器不挡阅读。
+       ⚠️ 收窄会让下方内容上移 —— 脚本会把省下的高度**补回下边距**（内联），
+       使文档流总高不变。这里保留一个静态兜底值（脚本未运行时也不至于贴太紧）。 */
     .player-card.compact { padding: 0.45rem 0.8rem; margin-bottom: 0.8rem; }
     .player-card.compact .player-title { display: none; }
     .player-card.compact audio { margin-top: 0; }
@@ -78,14 +80,18 @@ export const MOBILE_OPT_CSS = `
  * 其 rect.top 恒为 0，无法再作为判据，故在未钉住时先取一次基准。
  * 不读墙钟（服务层禁 Date.now / 裸 new Date）。
  *
- * ⚠️ 播放器在**文档流内**，收窄会让它下面的内容整体上移。若不管，用户第一次
- *    往下滑时整页会「窜」一下 —— 实测滚动 5px 时正文位移 67px（其中 62px 来自布局跳变）。
- *    故切换后按两态高度差反向补偿滚动位置，使**视线里的内容不动**：
- *    内容在文档中上移 53px 的同时把滚动量也减 53px，两者相抵，视觉静止，
- *    而「播放器只占 79px 而非 132px」的收益照常拿到（等价于少滚 53px）。
+ * ⚠️ 播放器在**文档流内**，收窄会让它下面的内容整体上移。若不管，用户往下滑时
+ *    整页会「窜」一下（实测滚动 5px 时正文位移 67px，其中 62px 来自布局跳变）。
  *
- * ⚠️ 必须带**滞回带**：补偿会把滚动量减小 53px，若开关共用同一个阈值，
- *    「切换 → 补偿 → 又落回阈值另一侧」会来回抖。故 ON 阈值 = OFF 阈值 + 收窄量 + 余量。
+ * 🔴 **不要用「补偿滚动位置」来消这个跳变**（2026-09-18 真机实锤）：
+ *    第一版是 `scrollBy(0, after - before)` + 滞回带，桌面模拟通过，但**手机上直接
+ *    死循环抖动** —— 程序化滚动会改变滚动量，而滚动量又是切换判据，两者构成反馈环；
+ *    真机上再有惯性滚动、尺寸测量偏差（字体/原生播放器控件渲染晚于测量）就会来回翻转。
+ *
+ * ✅ 正确做法：**把省下的高度原样补回下边距**，让「播放器 + 其下边距」的总高不变 →
+ *    文档流不发生变化 → 内容一动不动（无跳变）、**完全不碰滚动位置**（无反馈环，
+ *    想抖也抖不起来），而收益照常：钉在视口顶部的播放器只有 79px 而非 132px。
+ *    补偿量在切换瞬间现测（before - after），因此不依赖初始化时的陈旧测量。
  */
 export function generateCompactPlayerScript(): string {
   return `
@@ -95,39 +101,24 @@ export function generateCompactPlayerScript(): string {
   // 紧凑态样式只在小屏生效（见 MOBILE_OPT_CSS 的媒体查询）；宽屏套类无意义，直接不介入
   if (!window.matchMedia || !window.matchMedia('(max-width: 719.98px)').matches) return;
 
-  function h() { return pc.getBoundingClientRect().height; }
+  var baseMargin = getComputedStyle(pc).marginBottom;   // 展开态的原始下边距
   var origin = pc.getBoundingClientRect().top + window.scrollY;
-  var fullH = h();
-  pc.classList.add('compact');
-  var compactH = h();
-  pc.classList.remove('compact');
-  var delta = compactH - fullH;              // 负数：收窄了多少
-  if (!delta) return;                        // 样式没生效，不介入
-
-  var offAt = origin + 4;                    // 低于此值展开
-  var onAt = offAt + Math.abs(delta) + 16;   // 高于此值收窄（滞回带 > 收窄量）
+  var onAt = origin + 6;    // 滚过这里 → 收窄
+  var offAt = origin - 6;   // 退回这里 → 展开（小滞回带，只防阈值边界反复切换）
   var on = false;
-  var busy = false;
 
-  function apply(next) {
-    if (next === on) return;
-    busy = true;
-    var before = h();
-    pc.classList.toggle('compact', next);
-    var after = h();                         // 读尺寸即强制重排，拿到最终高度
-    on = next;
-    // 内容因布局变化位移了 (after - before)；把滚动位置补偿同样的量，视线里的内容保持不动
-    if (after !== before && window.scrollY > 0) window.scrollBy(0, after - before);
-    busy = false;
-  }
   function sync() {
-    if (busy) return;
     var y = window.scrollY;
-    if (!on && y > onAt) apply(true);
-    else if (on && y < offAt) apply(false);
+    var want = on ? y > offAt : y > onAt;
+    if (want === on) return;
+    var before = pc.getBoundingClientRect().height;
+    on = want;
+    if (want) pc.classList.add('compact'); else pc.classList.remove('compact');
+    var after = pc.getBoundingClientRect().height;
+    // 把省下的高度补回下边距：文档流总高不变 → 内容不位移，且不碰滚动位置
+    pc.style.marginBottom = want ? 'calc(' + baseMargin + ' + ' + (before - after) + 'px)' : '';
   }
   window.addEventListener('scroll', sync, { passive: true });
-  window.addEventListener('resize', sync, { passive: true });
   sync();
 })();
 `.trim();
