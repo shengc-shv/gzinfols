@@ -17,6 +17,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { renderHtml } from "../lib/services/render";
+import { generateCompactPlayerScript } from "../lib/services/render/mobile-opt";
 import {
   styleOf,
   stripComments,
@@ -148,11 +149,37 @@ test("③-b 触摸热区规则存在（伪元素铺开，不靠撑高盒子）",
 });
 
 test("③-c 紧凑播放器脚本按需注入，且不读墙钟", () => {
+  const script = generateCompactPlayerScript();
   const withAudio = renderHtml(report(), {
     audio: { src: "audio/a.mp3", duration: "约 1 分", segments: [] },
   });
-  assert.ok(withAudio.includes("player-card"), "有音频时应注入紧凑播放器脚本");
-  assert.ok(withAudio.includes("origin + 4"), "脚本须以「播放器原始位置」为判据");
+  assert.ok(withAudio.includes(script), "有音频时应注入紧凑播放器脚本");
   const noAudio = renderHtml(report());
-  assert.ok(!noAudio.includes("origin + 4"), "无音频的期次不得注入空脚本");
+  assert.ok(!noAudio.includes("var offAt = origin + 4"), "无音频的期次不得注入空脚本");
+  assert.ok(!/\bDate\b/.test(script), "脚本不得读墙钟（服务层禁 Date.now / 裸 new Date）");
+});
+
+test("③-d 紧凑态必须补偿滚动 + 带滞回带（否则首次滚动整页会窜一下）", () => {
+  const script = generateCompactPlayerScript();
+  // 播放器在文档流内，收窄会让下方内容上移 —— 必须按两态高度差反向补偿滚动
+  assert.ok(
+    /window\.scrollBy\(0, after - before\)/.test(script),
+    "切换紧凑态后须按高度差补偿滚动位置，否则用户第一次滚动时整页会突然上跳（实测 62px）",
+  );
+  // 补偿会把滚动量减小收窄量，若两态共用同一阈值会来回抖 → 必须有滞回带
+  assert.ok(
+    /var onAt = offAt \+ Math\.abs\(delta\) \+ 16/.test(script),
+    "ON 阈值必须 = OFF 阈值 + 收窄量 + 余量（滞回带），否则「切换 → 补偿 → 又越过阈值」会抖动",
+  );
+  assert.ok(
+    /on && y < offAt/.test(script) && /!on && y > onAt/.test(script),
+    "两态须各用各的阈值（上开下关）",
+  );
+  // 宽屏不介入：紧凑态样式只在小屏生效，套类无意义
+  assert.ok(
+    /matchMedia\('\(max-width: 719\.98px\)'\)/.test(script),
+    "脚本须先判小屏再介入（宽屏紧凑样式不生效，delta 为 0）",
+  );
+  // 补偿只在已经滚下去时做（回到顶部时切回展开不该把页面顶飞）
+  assert.ok(/window\.scrollY > 0/.test(script), "补偿须带滚动位置守卫");
 });

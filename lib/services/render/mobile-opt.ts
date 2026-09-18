@@ -77,14 +77,55 @@ export const MOBILE_OPT_CSS = `
  * 判据用「元素在文档中的原始位置」而不是滚动量：播放器一旦钉住，
  * 其 rect.top 恒为 0，无法再作为判据，故在未钉住时先取一次基准。
  * 不读墙钟（服务层禁 Date.now / 裸 new Date）。
+ *
+ * ⚠️ 播放器在**文档流内**，收窄会让它下面的内容整体上移。若不管，用户第一次
+ *    往下滑时整页会「窜」一下 —— 实测滚动 5px 时正文位移 67px（其中 62px 来自布局跳变）。
+ *    故切换后按两态高度差反向补偿滚动位置，使**视线里的内容不动**：
+ *    内容在文档中上移 53px 的同时把滚动量也减 53px，两者相抵，视觉静止，
+ *    而「播放器只占 79px 而非 132px」的收益照常拿到（等价于少滚 53px）。
+ *
+ * ⚠️ 必须带**滞回带**：补偿会把滚动量减小 53px，若开关共用同一个阈值，
+ *    「切换 → 补偿 → 又落回阈值另一侧」会来回抖。故 ON 阈值 = OFF 阈值 + 收窄量 + 余量。
  */
 export function generateCompactPlayerScript(): string {
   return `
 (function () {
   var pc = document.querySelector('.player-card');
   if (!pc) return;
+  // 紧凑态样式只在小屏生效（见 MOBILE_OPT_CSS 的媒体查询）；宽屏套类无意义，直接不介入
+  if (!window.matchMedia || !window.matchMedia('(max-width: 719.98px)').matches) return;
+
+  function h() { return pc.getBoundingClientRect().height; }
   var origin = pc.getBoundingClientRect().top + window.scrollY;
-  function sync() { pc.classList.toggle('compact', window.scrollY > origin + 4); }
+  var fullH = h();
+  pc.classList.add('compact');
+  var compactH = h();
+  pc.classList.remove('compact');
+  var delta = compactH - fullH;              // 负数：收窄了多少
+  if (!delta) return;                        // 样式没生效，不介入
+
+  var offAt = origin + 4;                    // 低于此值展开
+  var onAt = offAt + Math.abs(delta) + 16;   // 高于此值收窄（滞回带 > 收窄量）
+  var on = false;
+  var busy = false;
+
+  function apply(next) {
+    if (next === on) return;
+    busy = true;
+    var before = h();
+    pc.classList.toggle('compact', next);
+    var after = h();                         // 读尺寸即强制重排，拿到最终高度
+    on = next;
+    // 内容因布局变化位移了 (after - before)；把滚动位置补偿同样的量，视线里的内容保持不动
+    if (after !== before && window.scrollY > 0) window.scrollBy(0, after - before);
+    busy = false;
+  }
+  function sync() {
+    if (busy) return;
+    var y = window.scrollY;
+    if (!on && y > onAt) apply(true);
+    else if (on && y < offAt) apply(false);
+  }
   window.addEventListener('scroll', sync, { passive: true });
   window.addEventListener('resize', sync, { passive: true });
   sync();
