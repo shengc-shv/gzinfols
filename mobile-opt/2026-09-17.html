@@ -2629,39 +2629,24 @@
   // 紧凑态样式只在小屏生效（见 MOBILE_OPT_CSS 的媒体查询）；宽屏套类无意义，直接不介入
   if (!window.matchMedia || !window.matchMedia('(max-width: 719.98px)').matches) return;
 
-  function h() { return pc.getBoundingClientRect().height; }
+  var baseMargin = getComputedStyle(pc).marginBottom;   // 展开态的原始下边距
   var origin = pc.getBoundingClientRect().top + window.scrollY;
-  var fullH = h();
-  pc.classList.add('compact');
-  var compactH = h();
-  pc.classList.remove('compact');
-  var delta = compactH - fullH;              // 负数：收窄了多少
-  if (!delta) return;                        // 样式没生效，不介入
-
-  var offAt = origin + 4;                    // 低于此值展开
-  var onAt = offAt + Math.abs(delta) + 16;   // 高于此值收窄（滞回带 > 收窄量）
+  var onAt = origin + 6;    // 滚过这里 → 收窄
+  var offAt = origin - 6;   // 退回这里 → 展开（小滞回带，只防阈值边界反复切换）
   var on = false;
-  var busy = false;
 
-  function apply(next) {
-    if (next === on) return;
-    busy = true;
-    var before = h();
-    pc.classList.toggle('compact', next);
-    var after = h();                         // 读尺寸即强制重排，拿到最终高度
-    on = next;
-    // 内容因布局变化位移了 (after - before)；把滚动位置补偿同样的量，视线里的内容保持不动
-    if (after !== before && window.scrollY > 0) window.scrollBy(0, after - before);
-    busy = false;
-  }
   function sync() {
-    if (busy) return;
     var y = window.scrollY;
-    if (!on && y > onAt) apply(true);
-    else if (on && y < offAt) apply(false);
+    var want = on ? y > offAt : y > onAt;
+    if (want === on) return;
+    var before = pc.getBoundingClientRect().height;
+    on = want;
+    if (want) pc.classList.add('compact'); else pc.classList.remove('compact');
+    var after = pc.getBoundingClientRect().height;
+    // 把省下的高度补回下边距：文档流总高不变 → 内容不位移，且不碰滚动位置
+    pc.style.marginBottom = want ? 'calc(' + baseMargin + ' + ' + (before - after) + 'px)' : '';
   }
   window.addEventListener('scroll', sync, { passive: true });
-  window.addEventListener('resize', sync, { passive: true });
   sync();
 })();
 </script>
