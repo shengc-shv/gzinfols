@@ -1,45 +1,45 @@
 {
-  "date": "2026-09-18",
+  "date": "2026-09-19",
   "report": {
-    "date": "2026-09-18",
-    "hero_line": "住建部今晨发布会叠加广深二手房全款化，按揭逻辑生变，住房金融与财富配置需同步调仓。",
+    "date": "2026-09-19",
+    "hero_line": "住建部推现房销售制叠加个贷成本明示新规，按揭逻辑与消贷宣传口径同步生变",
     "must_read": [
       {
-        "title": "广深二手房全款化",
-        "why": "广深二手房成主流且全款比例上升，按揭投放承压，住房金融需从新增按揭转向交易场景与存量客户经营。",
-        "url": "https://news.southcn.com/node_812903b83a/8e93dca01f.shtml",
+        "title": "央行回应信贷失速",
+        "why": "央行强调长钱筑牢市场根基，信贷投放节奏与市场预期趋稳，对客沟通口径可据此统一。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_09_18_901180.shtml",
         "delta": {
           "state": "followup"
         }
       },
       {
-        "title": "美国贷款参考利率升至7%",
-        "why": "美元融资成本上行，有美元负债或跨境融资需求的客户提前锁定成本意愿增强，是切入跨境客群的时机。",
-        "url": "https://finance.sina.com.cn/roll/2026-09-17/doc-inisatup0253673.shtml",
+        "title": "个贷成本明示新规落地",
+        "why": "五协会自律规范要求贷款年化成本一表看清、禁用日利率月费率，个贷展示与合同文本面临全面校准。",
+        "url": "https://m.21jingji.com/article/20260918/herald/cd166c88eb10b7b83242a2135ef7d0ac.html",
         "delta": {
           "state": "followup"
         }
       },
       {
-        "title": "全球金融中心指数发布",
-        "why": "香港稳居亚洲之首、深圳进入前八，大湾区跨境金融与财富管理客群沟通可借势，私行条线有话题抓手。",
-        "url": "https://news.southcn.com/node_de9aedeec1/1dd07b4e10.shtml",
+        "title": "住建部今晨发布会",
+        "why": "住房城乡建设重要发布会今日10时举行，按揭与住房金融政策预期可能生变，需盯紧发布内容。",
+        "url": "https://finance.eastmoney.com/a/202609183877708769.html",
         "delta": {
           "state": "followup"
         }
       },
       {
-        "title": "金融业AI落地转向生产",
-        "why": "头部机构组团接入，零售智能客服与营销工具选型窗口打开，信息技术部需提前对标同业落地节奏。",
-        "url": "https://m.21jingji.com/article/20260917/herald/af7e0cf1c2bc595d2ead93e29ec0e0d2.html",
+        "title": "金融强国顶层设计落地",
+        "why": "金融强国两步走路径明确，后续对零售业务布局与合规要求的传导值得持续跟踪。",
+        "url": "https://www.cnfin.com/hg-lb/detail/20260918/4471528_1.html",
         "delta": {
           "state": "followup"
         }
       },
       {
-        "title": "香港金管局三年首次加息",
-        "why": "港元负债客户月供压力上升，跨境按揭与港元负债客群需提前分层提示，避免被动应对投诉。",
-        "url": "https://m.21jingji.com/article/20260917/herald/83eb3283c187ce48d8feefb5128be686.html",
+        "title": "国办转发促房车消费",
+        "why": "房车消费措施落地，房车购置与文旅消费信贷场景迎增量，可对接相关产品与商户资源。",
+        "url": "https://www.gov.cn/zhengce/content/202609/content_7081441.htm",
         "delta": {
           "state": "followup"
         }
@@ -47,49 +47,24 @@
     ],
     "insights": [
       {
-        "topic": "二手房交易场景切入",
+        "topic": "广交会跨境客群对接",
         "tags": [
-          "住房金融",
-          "客群"
+          "客群",
+          "政银合作"
         ],
-        "impact": "广深二手房成主流且全款比例上升，按揭新增承压，但交易资金监管、赎楼与家装分期场景需求同步放大。",
-        "action": "可考虑本周联合中介机构梳理二手房交易资金监管与赎楼垫资流程，把家装分期嵌入过户后环节，抢抓存量房交易客群。",
-        "segments": [
-          "零售AUM"
-        ],
-        "sources": [
-          {
-            "title": "二手房成广州、深圳市场主流选择，全款买房的人越来越多",
-            "url": "https://news.southcn.com/node_812903b83a/8e93dca01f.shtml"
-          }
-        ],
-        "delta": {
-          "state": "followup"
-        },
-        "maturity": {
-          "stage": "clue",
-          "nextStep": "先建档跟踪：把主体纳入目标名单，等出现预算/招标/审批等硬信号再评估接触"
-        }
-      },
-      {
-        "topic": "私行客群黄金再平衡",
-        "tags": [
-          "私行",
-          "财富"
-        ],
-        "impact": "加息压制金价、黄金类ETF跌逾5%，持有贵金属的私行与高净值客户净值波动放大，需及时安抚与再平衡。",
-        "action": "可考虑本周对贵金属持仓超百万的客户逐一电话沟通，提供仓位再平衡与黄金定投替代方案，避免客户自行赎回流失。",
+        "impact": "第140届广交会10月15日至11月4日在穗举办，多个首次叠加三条考察路线，跨境结算、外币兑换与商户收单需求将集中释放。",
+        "action": "可提前梳理参展商与采购商名单，10月前完成跨境结算、外币兑换及收单方案对接，结合三条考察路线设计场景化服务包。",
         "segments": [
           "中高端客群(过亿资产)"
         ],
         "sources": [
           {
-            "title": "美联储加息压制金价 多只黄金类ETF跌逾5%",
-            "url": "https://finance.sina.com.cn/roll/2026-09-17/doc-inisayan9408735.shtml"
+            "title": "第140届广交会将于10月15日至11月4日在广州举办",
+            "url": "https://www.stcn.com/article/detail/4190593.html"
           },
           {
-            "title": "美联储加息砸出130美元深坑 但现货黄金的“骨架”没散",
-            "url": "https://finance.sina.com.cn/money/nmetal/hjzx/2026-09-17/doc-iniscekf3605149.shtml"
+            "title": "第140届广交会将实现多个\"首次\"，广州精心策划三条主题考察路线",
+            "url": "https://news.dayoo.com/guangzhou/202609/18/139995_55005040.htm"
           }
         ],
         "delta": {
@@ -101,19 +76,25 @@
         }
       },
       {
-        "topic": "含权理财配置话术调整",
+        "topic": "黄金配置需求切换",
         "tags": [
-          "财富"
+          "财富",
+          "私行"
         ],
-        "impact": "理财规模8月再创新高、含权产品增量突出，客户对净值波动接受度在变，是提升AUM与中收的配置窗口。",
-        "action": "值得关注本周更新含权产品配置话术，对风险等级匹配客户做分批建仓建议，同步准备波动期客户沟通口径。",
+        "impact": "加息背景下金价不降反涨，黄金定价逻辑切换，瑞银维持长期看涨、4000美元附近视为增持窗口，客户黄金类资产配置需求上升。",
+        "action": "可结合瑞银分阶段目标价更新客户沟通口径，为私行及财富客户提供黄金类资产再平衡建议，同步做好贵金属业务合规提示。",
         "segments": [
-          "零售AUM"
+          "零售AUM",
+          "中高端客群(过亿资产)"
         ],
         "sources": [
           {
-            "title": "银行理财规模8月再创新高，“含权”产品年内增量突",
-            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-17/doc-inisatui4286974.shtml"
+            "title": "美联储加息金价不降反涨？黄金定价逻辑正在切换",
+            "url": "https://finance.sina.com.cn/roll/2026-09-18/doc-inisewti3567817.shtml"
+          },
+          {
+            "title": "瑞银\"鹰派加息\"定性不改黄金长期看涨：分阶段目标最高5400美元，4000美元附近是增持良机",
+            "url": "https://finance.sina.com.cn/money/nmetal/gjshz/2026-09-18/doc-inisesmp3489853.shtml"
           }
         ],
         "delta": {
@@ -125,20 +106,45 @@
         }
       },
       {
-        "topic": "汽车产业链普惠客群",
+        "topic": "贵金属代理清退承接",
         "tags": [
-          "政银合作",
-          "信贷"
+          "财富",
+          "监管"
         ],
-        "impact": "黄埔再落两个汽车零部件项目，广州东部汽车产业链延链补链提速，上下游小微与园区客群融资需求上升。",
-        "action": "可考虑本周对接黄埔园区管委会，梳理新落地项目上下游小微名单，配套经营贷与代发工资一揽子方案。",
+        "impact": "多家银行关停炒金通道、清退个人贵金属代理业务，相关客户面临产品切换，存在承接与再配置的窗口。",
+        "action": "可梳理存量贵金属客户名单，主动提供替代性配置方案与合规提示，避免客户流失至同业。",
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "多家银行关停\"炒金\"通道 清退个人贵金属代理业务",
+            "url": "https://finance.cctv.com/2026/09/18/ARTIf55CC1YUKOIl0NI2Yycp260918.shtml"
+          }
+        ],
+        "delta": {
+          "state": "followup"
+        },
+        "maturity": {
+          "stage": "clue",
+          "nextStep": "先建档跟踪：把主体纳入目标名单，等出现预算/招标/审批等硬信号再评估接触"
+        }
+      },
+      {
+        "topic": "中行普惠平台抢跑",
+        "tags": [
+          "信贷",
+          "政银合作"
+        ],
+        "impact": "中行推出百千万工程＋普惠平台，县域小微客群竞争加剧，我行对应产品与政银合作节奏面临对标压力。",
+        "action": "可评估现有普惠产品与政银合作节奏，本周走访重点县域与专业市场小微客群，强化差异化服务方案。",
         "segments": [
           "普惠小微贷款客户"
         ],
         "sources": [
           {
-            "title": "广州东部汽车产业延链补链强链 两大汽车零部件项目落地黄埔",
-            "url": "https://news.dayoo.com/guangzhou/202609/17/139995_55004542.htm"
+            "title": "\"中银普惠·百千万工程＋\"平台正式亮相",
+            "url": "https://www.cnr.cn/gd/xgyxgd/20260918/t20260918_527817259.shtml"
           }
         ],
         "delta": {
@@ -150,43 +156,45 @@
         }
       },
       {
-        "topic": "商超场景消费信贷联动",
+        "topic": "就业指导课切入新市民",
         "tags": [
-          "信贷",
+          "代发",
           "客群"
         ],
-        "impact": "永辉广州两家调改门店近期开业，商超客流回升，门店周边收单、商户结算与消费信贷联动机会显现。",
-        "action": "提示本周走访新开门店周边商户，打包收单结算与消费分期方案，同步争取门店内信用卡绑卡与分期入口。",
+        "impact": "广州发布超20场免费就业指导课排期，可借势切入新市民与青年客群的代发工资与首贷场景。",
+        "action": "可对接活动主办方嵌入金融服务环节，现场受理代发工资与首贷申请，形成新市民客群批量获客入口。",
         "segments": [
           "普惠小微贷款客户"
         ],
         "sources": [
           {
-            "title": "永辉超市：广州两家调改门店将于近期开业",
-            "url": "https://www.stcn.com/article/detail/4189472.html"
+            "title": "超20场免费就业指导课来了！广州发布公共就业指导活动排期",
+            "url": "https://news.dayoo.com/guangzhou/202609/18/139995_55004907.htm"
           }
         ],
         "delta": {
           "state": "followup"
         },
         "maturity": {
-          "stage": "landed",
-          "evidence": "开业",
-          "nextStep": "可切入供应链：运营期采购与用工需求明确，上下游名单可直接对接"
+          "stage": "clue",
+          "nextStep": "先看上下游：园区配套与供应链上的小微通常比主体更早出现融资需求"
         }
       },
       {
-        "topic": "平台月付入口流量变化",
+        "topic": "经纪客户迁移获客窗口",
         "tags": [
-          "信贷",
+          "财富",
           "竞对动态"
         ],
-        "impact": "平台月付功能仍在、仅页面分家，支付与信贷展示规则调整落地，信用卡绑卡与分期入口流量结构将生变。",
-        "action": "可考虑本周监测主流平台绑卡与分期转化数据，及时调整信用卡分期投放位与权益配置，抢占迁移期流量。",
+        "impact": "中金吸并东兴、信达进入实施阶段，548万经纪客户待迁移，财富条线存在客户流动带来的获客窗口。",
+        "action": "可关注迁移期间客户服务断点，针对性推出转户与资产配置承接方案，重点触达高净值经纪客户。",
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
         "sources": [
           {
-            "title": "平台支付月付仍在，页面分家",
-            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-17/doc-inisatuq9447220.shtml"
+            "title": "中金吸并东兴、信达进入实施阶段，548万经纪客户待迁移",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_09_18_901015.shtml"
           }
         ],
         "delta": {
@@ -194,25 +202,24 @@
         },
         "maturity": {
           "stage": "clue",
-          "nextStep": "先纳入观察名单，等出现程序性动作（招标/获批/签约）再评估"
+          "nextStep": "先核关系：公开披露的股东与高管名单可作为切入点参考，暂不必投入触达资源"
         }
       },
       {
-        "topic": "AI助手客群经营落地",
+        "topic": "科创债联动科创客群",
         "tags": [
           "科技金融",
-          "客群"
+          "财富"
         ],
-        "impact": "有银行日均Token消耗破百亿，AI助手已进入客户经理日常作业，客群经营与话术支持效率差距将拉大。",
-        "action": "值得关注信息技术部本月评估智能助手在客群分层与话术支持上的试点场景，先选一个支行做小范围验证。",
+        "impact": "科创债从试水走向定制，创投募资生态重构，科创企业客群的债券融资与投行联动机会增多。",
+        "action": "可联合投行梳理广州科创企业名单，探索债券融资与零售高端客户配置的联动方案。",
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
         "sources": [
           {
-            "title": "有银行日均Token消耗量破百亿 客户经理有了“外挂”",
-            "url": "https://www.cnfin.com/yw-lb/detail/20260917/4470937_1.html"
-          },
-          {
-            "title": "头部机构组团接入，金融业的AI落地这次来真的了",
-            "url": "https://m.21jingji.com/article/20260917/herald/af7e0cf1c2bc595d2ead93e29ec0e0d2.html"
+            "title": "科创债从试水走向定制 创投募资生态正在重构",
+            "url": "https://www.stcn.com/article/detail/4189834.html"
           }
         ],
         "delta": {
@@ -220,159 +227,229 @@
         },
         "maturity": {
           "stage": "clue",
-          "nextStep": "先纳入观察名单，等出现程序性动作（招标/获批/签约）再评估"
+          "nextStep": "先核关系：公开披露的股东与高管名单可作为切入点参考，暂不必投入触达资源"
+        }
+      },
+      {
+        "topic": "打新客户资金安排",
+        "tags": [
+          "财富"
+        ],
+        "impact": "力勤资源今日申购，有打新需求的客户存在资金调度与短期理财衔接需求。",
+        "action": "可提示打新客户关注申购时间与资金安排，配套短期理财与资金归集服务。",
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "新股提示：力勤资源今日申购",
+            "url": "https://www.stcn.com/article/detail/4189832.html"
+          }
+        ],
+        "delta": {
+          "state": "followup"
+        },
+        "maturity": {
+          "stage": "clue",
+          "nextStep": "先建档跟踪：把主体纳入目标名单，等出现预算/招标/审批等硬信号再评估接触"
         }
       }
     ],
     "sections": {
       "gz_local": [
         {
-          "url": "https://news.dayoo.com/guangzhou/202609/17/139995_55004542.htm",
-          "title_cn": "广州东部汽车产业延链补链强链 两大汽车零部件项目落地黄埔",
-          "source": "广州日报·大洋网(广州频道)",
+          "url": "https://www.stcn.com/article/detail/4190593.html",
+          "title_cn": "第140届广交会将于10月15日至11月4日在广州举办",
+          "title_orig": "",
+          "source": "证券时报",
           "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "黄埔再落两个汽车零部件项目，广州东部汽车产业链延链补链提速，汽车产业链上下游对公客群与园区政银合作值得关注。",
-          "importance": 2,
+          "date": "09/18",
+          "summary": "广交会10月15日至11月4日在穗举办，跨境结算、外币兑换及商户收单需求将集中释放，可提前对接参展客群。",
+          "importance": 3,
           "rank": 1,
-          "tags": [],
-          "locale": "gz"
+          "tags": [
+            "客群",
+            "跨境",
+            "政银合作",
+            "财富"
+          ],
+          "locale": "gz",
+          "locale_evidence": "第140届广交会将于10月15日至11月4日在广州举办"
         },
         {
-          "url": "https://news.dayoo.com/guangzhou/202609/17/139995_55004517.htm",
-          "title_cn": "出行更便捷！广州国际金融城多条道路通车试运行",
-          "source": "广州日报·大洋网(广州频道)",
+          "url": "https://www.cnfin.com/hg-lb/detail/20260918/4472035_1.html",
+          "title_cn": "第140届广交会将启 这些亮点不容错过",
+          "title_orig": "",
+          "source": "新华财经",
           "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "广州国际金融城多条道路通车试运行，片区通勤与商务动线改善，可关注周边网点到店客流及对公客户入驻节奏变化。",
+          "date": "09/18",
+          "summary": "广交会亮点披露，可结合展会节奏梳理跨境收付、汇率避险等对客服务清单。",
           "importance": 2,
           "rank": 2,
-          "tags": [],
-          "locale": "gz"
+          "tags": [
+            "客群",
+            "跨境",
+            "政银合作",
+            "财富"
+          ],
+          "locale": "gz",
+          "locale_evidence": "第140届广交会将启 这些亮点不容错过"
         },
         {
-          "url": "https://news.dayoo.com/guangzhou/202609/17/139995_55004536.htm",
-          "title_cn": "今年1—7月广州造船业新接订单量同比增长86.7%丨广州市海洋经济发展“十五五”规划",
+          "url": "https://news.dayoo.com/guangzhou/202609/18/139995_55004907.htm",
+          "title_cn": "超20场免费就业指导课来了！广州发布公共就业指导活动排期",
+          "title_orig": "",
           "source": "广州日报·大洋网(广州频道)",
-          "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "广州造船业1—7月新接订单量同比增长86.7%，叠加海洋经济“十五五”规划，船舶产业链上下游结算与项目贷需求值得关注。",
+          "source_type": "official",
+          "date": "09/18",
+          "summary": "广州发布超20场免费就业指导课排期，可借势切入新市民、青年客群代发工资与首贷场景。",
           "importance": 2,
           "rank": 3,
-          "tags": [],
-          "locale": "gz"
+          "tags": [
+            "客群",
+            "政银合作",
+            "粤"
+          ],
+          "locale": "gz",
+          "locale_evidence": "广州发布公共就业指导活动排期"
         }
       ],
       "biz_insight": [
         {
-          "url": "https://www.investing.com/news/economy-news/hawkish-fed-lifts-dollar-to-sevenweek-high-as-focus-turn-to-boj-4904757",
-          "title_cn": "Dollar eases after Fed-driven jump as Treasury yields and oil prices retreat",
-          "source": "Investing.com News",
+          "url": "https://www.cnr.cn/gd/xgyxgd/20260918/t20260918_527817259.shtml",
+          "title_cn": "“中银普惠·百千万工程＋”平台正式亮相",
+          "title_orig": "",
+          "source": "央广网·广东频道",
           "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "美元升至七周高位后回落，美债收益率与油价同步走低；有换汇或外币配置需求的客户，结售汇时点值得提示。",
-          "importance": 2,
+          "date": "09/18",
+          "summary": "中行推出“百千万工程＋”普惠平台，县域小微客群竞争加剧，可评估我行对应产品与政银合作节奏。",
+          "importance": 3,
           "rank": 1,
-          "tags": [],
+          "tags": [
+            "信贷",
+            "政银合作",
+            "竞对动态",
+            "粤",
+            "客群"
+          ],
           "locale": "national"
         },
         {
-          "url": "https://news.southcn.com/node_812903b83a/2cc1a88ed6.shtml",
-          "title_cn": "美联储加息影响多国，对中国老百姓有哪些影响？",
-          "source": "南方网·南方经济",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_09_18_901015.shtml",
+          "title_cn": "中金吸并东兴、信达进入实施阶段，548万经纪客户待迁移",
+          "title_orig": "",
+          "source": "观察者网·金融",
           "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "美联储加息外溢至多国，居民端影响集中在汇率与理财收益，可考虑在客户沙龙中做通俗化解读。",
+          "date": "09/18",
+          "summary": "中金吸并东兴、信达进入实施阶段，548万经纪客户待迁移，财富条线可关注客户流动带来的获客窗口。",
           "importance": 2,
           "rank": 2,
-          "tags": [],
+          "tags": [
+            "竞对动态",
+            "财富"
+          ],
           "locale": "national"
         },
         {
-          "url": "https://www.stcn.com/article/detail/4189472.html",
-          "title_cn": "永辉超市：广州两家调改门店将于近期开业",
-          "source": "证券时报",
+          "url": "https://finance.cctv.com/2026/09/18/ARTIf55CC1YUKOIl0NI2Yycp260918.shtml",
+          "title_cn": "多家银行关停“炒金”通道 清退个人贵金属代理业务",
+          "title_orig": "",
+          "source": "央视财经",
           "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "永辉广州两家调改门店近期开业，商超场景客流回升，可关注门店周边收单、商户结算与消费信贷的联动机会。",
+          "date": "09/18",
+          "summary": "多家银行清退个人贵金属代理业务，相关客户面临产品切换，财富条线可关注承接与合规提示。",
           "importance": 2,
           "rank": 3,
-          "tags": [],
+          "tags": [
+            "财富",
+            "监管合规",
+            "竞对动态"
+          ],
           "locale": "national"
         },
         {
-          "url": "https://www.stcn.com/article/detail/4189312.html",
-          "title_cn": "金融AI走向生产一线 算力底座开始“分工协作”",
-          "source": "证券时报",
+          "url": "https://finance.sina.com.cn/jinrong/yh/2026-09-18/doc-inisfprf0286920.shtml",
+          "title_cn": "月付、花呗退出网购付款页？实测：部分平台已与支付区隔，抖音、京东等暂未改造",
+          "title_orig": "",
+          "source": "新浪财经·银行频道",
           "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "金融AI进入生产一线，算力底座走向分工协作，科技投入的算力成本与外部合作模式可能影响预算安排。",
+          "date": "09/18",
+          "summary": "部分平台将月付、花呗与支付区隔，信用卡支付位次或变化，可关注线上收银台流量再分配。",
           "importance": 2,
           "rank": 4,
-          "tags": [],
+          "tags": [
+            "信用卡",
+            "消费贷",
+            "竞对动态",
+            "客群",
+            "信贷"
+          ],
           "locale": "national"
         },
         {
-          "url": "https://www.stcn.com/article/detail/4188871.html",
-          "title_cn": "美团：中秋国庆机票预订量同比增长44%",
-          "source": "证券时报",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-18/doc-inisesmr0271621.shtml",
+          "title_cn": "金融产品网络营销乱象加速出清",
+          "title_orig": "",
+          "source": "新浪财经·银行频道",
           "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "双节机票预订量同比增44%，出行消费升温，信用卡与消费贷可关注旅游分期、临时额度等场景化营销窗口。",
+          "date": "09/18",
+          "summary": "金融产品网络营销乱象加速出清，线上获客素材与话术合规要求提升，可提前自查宣传口径。",
           "importance": 2,
           "rank": 5,
-          "tags": [],
+          "tags": [
+            "监管合规",
+            "财富"
+          ],
           "locale": "national"
         },
         {
-          "url": "https://www.stcn.com/article/detail/4188640.html",
-          "title_cn": "抖音出手！一次清退6888名“理财师”",
-          "source": "证券时报",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-18/doc-inisewtm3423108.shtml",
+          "title_cn": "首次明确划分！万亿城商行停投三款助贷类产品",
+          "title_orig": "",
+          "source": "新浪财经·银行频道",
           "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "抖音一次清退6888名理财师，互联网平台财经内容整治加码，提示关注员工自媒体展业合规与客户触达渠道的替代安排。",
+          "date": "09/18",
+          "summary": "万亿城商行停投三款助贷类产品，助贷合作边界趋严，可对照检视我行合作机构与产品结构。",
           "importance": 2,
           "rank": 6,
           "tags": [
-            "财富"
+            "消费贷",
+            "信贷",
+            "监管合规",
+            "竞对动态"
           ],
           "locale": "national"
         },
         {
-          "url": "https://finance.sina.com.cn/stock/t/2026-09-17/doc-inisaawr4525063.shtml",
-          "title_cn": "美联储决议倒计时，芯片股、光通信股大涨，英特尔飙涨7%，SpaceX涨超4%，黄金白银反弹",
-          "source": "新浪财经·理财保险",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-18/doc-inisftxe8447913.shtml",
+          "title_cn": "亚金协杨再平：银行需走出冲销量的旧路径",
+          "title_orig": "",
+          "source": "新浪财经·银行频道",
           "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "决议前芯片、光通信股大涨，黄金白银反弹，客户对贵金属与科技类资产的关注度提升，可做好产品适配说明。",
-          "importance": 2,
+          "date": "09/18",
+          "summary": "亚金协杨再平提出银行需走出冲销量旧路径，零售考核与客群经营思路或面临调整参考。",
+          "importance": 1,
           "rank": 7,
           "tags": [
-            "财富"
+            "客群",
+            "竞对动态"
           ],
           "locale": "national"
         },
         {
-          "url": "https://finance.sina.com.cn/jjxw/2026-09-17/doc-inisaawr4525912.shtml",
-          "title_cn": "莫让“固收+”基金稳健底色褪成“固收-”",
-          "source": "新浪财经·理财保险",
+          "url": "https://news.dayoo.com/guangzhou/202609/18/139995_55005040.htm",
+          "title_cn": "第140届广交会将实现多个\"首次\"，广州精心策划三条主题考察路线",
+          "title_orig": "",
+          "source": "广州日报·大洋网(广州频道)",
           "source_type": "media",
-          "tier": "T2",
-          "date": "09/17",
-          "summary": "“固收+”产品稳健定位受关注，提示理财经理在客户回访中重点说明回撤与波动来源，避免收益预期错配。",
-          "importance": 2,
+          "date": "09/18",
+          "summary": "广交会多个“首次”叠加三条主题考察路线，可结合路线场景设计跨境客群对接方案。",
+          "importance": 1,
           "rank": 8,
           "tags": [
+            "客群",
+            "跨境",
+            "政银合作",
             "财富"
           ],
           "locale": "national"
@@ -380,48 +457,32 @@
       ],
       "policy_market": [
         {
-          "url": "https://www.stcn.com/article/detail/4189818.html",
-          "title_cn": "“鹰派加息”震动市场 美元指数重回100关口",
-          "title_orig": "“鹰派加息”震动市场 美元指数重回100关口",
-          "source": "证券时报",
+          "url": "https://finance.sina.com.cn/jryx/bank/2026-09-18/doc-inishkuv0176624.shtml",
+          "title_cn": "《个人贷款业务明示综合融资成本自律规范》发布 明示综合融资成本时不得使用“日利率”“月费率”等形式",
+          "title_orig": "",
+          "source": "新浪财经·银行频道",
           "source_type": "media",
-          "date": "09/17",
-          "summary": "美元指数重回100关口，结售汇窗口值得提示有换汇需求的客户，关注后续汇率波动对客户资产配置的影响。",
+          "date": "09/18",
+          "summary": "个人贷款明示综合融资成本自律规范发布，禁用“日利率”“月费率”表述，消费贷宣传物料需尽快校准。",
           "importance": 3,
           "rank": 1,
           "tags": [
-            "市场",
-            "客群"
+            "消费贷",
+            "信贷",
+            "监管合规"
           ],
           "locale": "national"
         },
         {
-          "url": "https://www.stcn.com/article/detail/4189826.html",
-          "title_cn": "“监管亮剑”护航资本市场高质量前行",
-          "title_orig": "“监管亮剑”护航资本市场高质量前行",
-          "source": "证券时报",
-          "source_type": "media",
-          "date": "09/17",
-          "summary": "监管持续强化资本市场执法，提示财富代销与投资者适当性管理需保持合规审慎。",
+          "url": "https://finance.cctv.com/2026/09/18/ARTIeiH2qCEXwialqzWfPdOD260918.shtml",
+          "title_cn": "住建部：\"十五五\"时期将推进现房销售制，从根本上防范交付风险",
+          "title_orig": "",
+          "source": "央视财经",
+          "source_type": "official",
+          "date": "09/18",
+          "summary": "住建部提出“十五五”推进现房销售制，按揭投放节奏与楼盘准入标准可能调整，值得关注。",
           "importance": 2,
           "rank": 2,
-          "tags": [
-            "监管合规",
-            "市场",
-            "客群"
-          ],
-          "locale": "national"
-        },
-        {
-          "url": "https://finance.eastmoney.com/a/202609183877708769.html",
-          "title_cn": "事关住房城乡建设 今日10时举行重要发布会",
-          "title_orig": "事关住房城乡建设今天10时举行重要发布会",
-          "source": "东方财富·A股股市新闻",
-          "source_type": "media",
-          "date": "09/18",
-          "summary": "住房城乡建设重要发布会今日10时举行，可能影响按揭与住房金融政策预期，建议关注发布内容。",
-          "importance": 2,
-          "rank": 3,
           "tags": [
             "住房金融",
             "信贷"
@@ -429,114 +490,131 @@
           "locale": "national"
         },
         {
-          "url": "https://www.stcn.com/article/detail/4189815.html",
-          "title_cn": "国际金价坐上“过山车”",
-          "title_orig": "国际金价坐上“过山车”",
+          "url": "https://www.stcn.com/article/detail/4191229.html",
+          "title_cn": "升破6.7！专访高盛闪辉：人民币升值得“慢慢来”，中国出口强≠倾销",
+          "title_orig": "",
           "source": "证券时报",
           "source_type": "media",
-          "date": "09/17",
-          "summary": "国际金价大幅波动，提示关注贵金属持仓客户的短期风险承受度与仓位管理。",
+          "date": "09/18",
+          "summary": "人民币升破6.7，出口企业结汇窗口值得提示客户，跨境客群汇率避险需求或上升。",
+          "importance": 2,
+          "rank": 3,
+          "tags": [
+            "市场",
+            "跨境",
+            "客群",
+            "财富"
+          ],
+          "locale": "national"
+        },
+        {
+          "url": "https://www.gov.cn/zhengce/content/202609/content_7081441.htm",
+          "title_cn": "国务院办公厅转发《关于促进房车消费的若干措施》",
+          "title_orig": "",
+          "source": "中国政府网·国务院政策",
+          "source_type": "official",
+          "date": "09/18",
+          "summary": "国办转发促进房车消费措施，房车购置与文旅消费信贷场景或迎增量，可关注相关产品对接。",
           "importance": 2,
           "rank": 4,
           "tags": [
-            "市场",
-            "财富",
-            "客群"
+            "消费贷",
+            "信贷"
           ],
           "locale": "national"
         },
         {
-          "url": "https://finance.sina.com.cn/money/nmetal/gjshz/2026-09-18/doc-inisesmp3489853.shtml",
-          "title_cn": "瑞银：鹰派加息不改黄金长期看涨，4000美元附近是增持良机",
-          "title_orig": "瑞银“鹰派加息”定性不改黄金长期看涨：分阶段目标最高5400美元，4000美元附近是增持良机",
-          "source": "新浪财经·理财保险",
-          "source_type": "media",
+          "url": "https://www.cnfin.com/hg-lb/detail/20260918/4472034_1.html",
+          "title_cn": "国务院常务会议部署实施医疗康复护理扩容提升工程",
+          "title_orig": "",
+          "source": "新华财经",
+          "source_type": "official",
           "date": "09/18",
-          "summary": "瑞银维持黄金长期看涨，分阶段目标最高5400美元，4000美元附近视为增持窗口，可作客户沟通参考。",
+          "summary": "国常会部署医疗康复护理扩容提升工程，养老健康类信贷与支付场景可能扩容，可关注相关客群。",
           "importance": 2,
           "rank": 5,
           "tags": [
-            "财富",
-            "市场",
+            "养老",
             "客群"
           ],
           "locale": "national"
         },
         {
-          "url": "https://www.stcn.com/article/detail/4189834.html",
-          "title_cn": "科创债从试水走向定制 创投募资生态正在重构",
-          "title_orig": "科创债从试水走向定制 创投募资生态正在重构",
-          "source": "证券时报",
-          "source_type": "media",
-          "date": "09/17",
-          "summary": "科创债走向定制化，创投募资生态重构，可关注科创企业客群的债券融资与投行联动机会。",
+          "url": "https://finance.eastmoney.com/a/202609183878731317.html",
+          "title_cn": "国常会：深入实施积极应对人口老龄化国家战略 推动老龄事业全面发展进步",
+          "title_orig": "",
+          "source": "东方财富·A股股市新闻",
+          "source_type": "official",
+          "date": "09/18",
+          "summary": "国常会部署积极应对人口老龄化，养老金融产品与适老服务场景值得关注，可梳理客群切入点。",
           "importance": 2,
           "rank": 6,
           "tags": [
-            "市场",
+            "养老",
             "客群"
           ],
           "locale": "national"
         },
         {
-          "url": "https://www.investing.com/news/economy-news/wall-st-futures-rise-as-fed-rate-hike-lifts-longstanding-overhang-4905088",
-          "title_cn": "科技股带动美股收高，油价回落、美债收益率下行",
-          "title_orig": "Tech leads Wall St to higher close as oil eases, Treasury yields dip",
-          "source": "Investing.com News",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_09_18_901183.shtml",
+          "title_cn": "大和首次覆盖内银股 看好行业企稳",
+          "title_orig": "",
+          "source": "观察者网·金融",
           "source_type": "media",
-          "date": "09/17",
-          "summary": "美联储加息后油价回落带动美股上涨，风险偏好边际修复，QDII类产品客户沟通可参考这一情绪变化。",
+          "date": "09/18",
+          "summary": "大和首次覆盖内银股并看好行业企",
           "importance": 2,
           "rank": 7,
           "tags": [
             "市场",
+            "竞对动态",
             "客群"
           ],
           "locale": "national"
         },
         {
-          "url": "https://finance.sina.com.cn/roll/2026-09-18/doc-inisewti3567817.shtml",
-          "title_cn": "美联储加息金价不降反涨？黄金定价逻辑正在切换",
-          "title_orig": "美联储加息金价不降反涨？黄金定价逻辑正在切换",
-          "source": "新浪财经·理财保险",
+          "url": "https://www.stcn.com/article/detail/4191238.html",
+          "title_cn": "日本加息至31年来新高，日元汇率却不买账",
+          "title_orig": "",
+          "source": "证券时报",
           "source_type": "media",
           "date": "09/18",
-          "summary": "黄金定价逻辑切换，加息背景下金价不降反涨，可关注客户对黄金类资产的配置需求变化。",
+          "summary": "日本加息至31年来新高但日元未走强，涉日跨境客群汇率波动加大，可提示套保与结算安排。",
           "importance": 2,
           "rank": 8,
           "tags": [
-            "财富",
             "市场",
-            "客群"
+            "跨境",
+            "客群",
+            "财富"
           ],
           "locale": "national"
         },
         {
-          "url": "https://www.cnfin.com/hg-lb/detail/20260918/4471528_1.html",
-          "title_cn": "顶层设计落地 金融强国建设开启两步走新征程",
-          "title_orig": "顶层设计落地 金融强国建设开启两步走新征程",
-          "source": "新华财经",
+          "url": "https://www.cnbc.com/2026/09/18/three-words-from-kevin-warsh-have-wall-street-wondering-how-far-the-fed-will-go-with-rate-hikes.html",
+          "title_cn": "沃什三句话令华尔街猜测美联储加息还将走多远",
+          "title_orig": "Three words from Kevin Warsh have Wall Street wondering how far the Fed will go with rate hikes",
+          "source": "CNBC Investing",
           "source_type": "media",
           "date": "09/18",
-          "summary": "金融强国顶层设计落地，两步走路径明确，值得关注后续对零售业务布局与合规要求的传导。",
+          "summary": "美联储主席表态引发市场对加息路径的猜测，海外利率预期波动，可关注客户境外资产咨询需求。",
           "importance": 2,
           "rank": 9,
           "tags": [
-            "监管合规",
             "市场",
             "客群"
           ],
           "locale": "national"
         },
         {
-          "url": "https://finance.eastmoney.com/a/202609183877693612.html",
-          "title_cn": "全球市场：美股三大指数收涨，AI硬件、芯片半导体板块走强",
-          "title_orig": "全球市场：美股三大指数收涨纳指、标普500涨超1%AI硬件、芯片半导体板块走强",
-          "source": "东方财富·A股股市新闻",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-18/doc-inisefvt3596246.shtml",
+          "title_cn": "美联储加息落地 我国货币政策定力不减",
+          "title_orig": "",
+          "source": "新浪财经·银行频道",
           "source_type": "media",
           "date": "09/18",
-          "summary": "美股三大指数收涨，纳指、标普500涨超1%，AI硬件与芯片半导体走强，关注QDII类产品客户情绪。",
-          "importance": 1,
+          "summary": "美联储加息落地，我国货币政策定力不减，境内外利差变化对客户资产配置预期或有影响。",
+          "importance": 2,
           "rank": 10,
           "tags": [
             "市场",
@@ -545,34 +623,35 @@
           "locale": "national"
         },
         {
-          "url": "https://finance.sina.com.cn/roll/2026-09-18/doc-inisencu8906802.shtml",
-          "title_cn": "外围扰动不改市场长期趋势 基金公司看好A股韧性",
-          "title_orig": "外围扰动不改市场长期趋势 基金公司看好A股韧性",
-          "source": "新浪财经·A股频道",
+          "url": "https://m.21jingji.com/article/20260918/herald/cd166c88eb10b7b83242a2135ef7d0ac.html",
+          "title_cn": "贷款年化成本迎来“一表看清”！五协会联合发布自律规范",
+          "title_orig": "",
+          "source": "21世纪经济报道·金融",
           "source_type": "media",
           "date": "09/18",
-          "summary": "基金公司看好A股韧性，外围扰动不改长期趋势，可作为客户安抚与权益类产品沟通的参考口径。",
-          "importance": 1,
+          "summary": "五协会联合发布自律规范，贷款年化成本需“一表看清”，可对照检视我行个贷展示与合同文本。",
+          "importance": 2,
           "rank": 11,
           "tags": [
-            "市场",
-            "财富",
-            "客群"
+            "消费贷",
+            "信贷",
+            "监管合规"
           ],
           "locale": "national"
         },
         {
-          "url": "https://finance.sina.com.cn/roll/2026-09-18/doc-inisencp3743573.shtml",
-          "title_cn": "科技新热点浮出水面 机构热议结构性反弹成色",
-          "title_orig": "科技新热点浮出水面 机构热议结构性反弹成色",
-          "source": "新浪财经·A股频道",
+          "url": "https://m.21jingji.com/article/20260918/herald/11f52fdacac82a6ff205e97a27b29f3b.html",
+          "title_cn": "通胀及利率担忧升温！全球股票基金现9个月来最大单周净流出 美国股票基金连续第四周遭资金外流",
+          "title_orig": "",
+          "source": "21世纪经济报道·金融",
           "source_type": "media",
           "date": "09/18",
-          "summary": "机构热议科技板块结构性反弹，可关注科技主题产品客户的关注度与配置意愿变化。",
-          "importance": 1,
+          "summary": "全球股票基金现9个月最大单周净流出，美国股票基金连续第四周外流，客户风险偏好或趋谨慎。",
+          "importance": 2,
           "rank": 12,
           "tags": [
             "市场",
+            "财富",
             "客群"
           ],
           "locale": "national"
@@ -581,54 +660,85 @@
       "tech": [],
       "ipo": [
         {
-          "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm",
-          "title_cn": "海柔创新智能科技：港交所主板递表（深圳）",
-          "title_orig": "海柔创新智能科技：港交所主板递表（深圳）",
-          "source": "港交所新股递表(广东企业赴港)",
+          "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1003010",
+          "title_cn": "东莞证券：IPO已受理（拟主板）",
+          "source": "深交所审核项目动态(官方)",
           "source_type": "official",
-          "date": "09/13",
-          "summary": "深圳企业海柔创新递表港交所主板，可跟进跨境融资与员工股权激励等商机。",
-          "importance": 3,
+          "tier": "T1",
+          "date": "09/18",
+          "summary": "注册地：广东｜保荐：东方证券｜受理：2023-03-02｜状态：已受理｜更新：2026-09-18",
+          "importance": 2,
           "rank": 1,
-          "tags": [
-            "粤",
-            "跨境",
-            "市场",
-            "财富",
-            "客群"
-          ],
-          "locale": "national",
-          "locale_evidence": "广东企业赴港上市"
-        },
-        {
-          "url": "https://www.stcn.com/article/detail/4189832.html",
-          "title_cn": "新股提示：力勤资源今日申购",
-          "title_orig": "新股提示：力勤资源今日申购",
-          "source": "证券时报",
-          "source_type": "media",
-          "date": "09/17",
-          "summary": "力勤资源今日申购，可提示有打新需求的客户关注申购时间与资金安排。",
-          "importance": 1,
-          "rank": 2,
-          "tags": [
-            "市场",
-            "客群"
-          ],
+          "tags": [],
           "locale": "national"
         },
         {
-          "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/12/PREIPO_F0101_V01_20260912_36481_Q/7915790F23BE4FB5A28AF6780C8AE295/关于深圳市楠菲微电子股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf",
-          "title_cn": "深圳市楠菲微电子股份有限公司（辅导验收）",
-          "title_orig": "深圳市楠菲微电子股份有限公司（辅导验收）",
-          "source": "证监会辅导备案(官方csrcfd)",
+          "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004241",
+          "title_cn": "纽恩泰：IPO问询中（拟主板）",
+          "source": "深交所审核项目动态(官方)",
           "source_type": "official",
-          "date": "09/12",
-          "summary": "深圳楠菲微电子辅导验收，辅导机构中信建投，可关注其后续上市进程与科创客群服务机会。",
-          "importance": 1,
+          "tier": "T1",
+          "date": "09/18",
+          "summary": "注册地：广东｜保荐：国联民生承销保荐｜受理：2026-04-29｜状态：已问询｜更新：2026-09-18",
+          "importance": 2,
+          "rank": 2,
+          "tags": [],
+          "locale": "national"
+        },
+        {
+          "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004360",
+          "title_cn": "云豹智能：IPO问询中（拟创业板）",
+          "source": "深交所审核项目动态(官方)",
+          "source_type": "official",
+          "tier": "T1",
+          "date": "09/18",
+          "summary": "注册地：广东｜保荐：中信证券｜受理：2026-06-30｜状态：已问询｜更新：2026-09-18",
+          "importance": 2,
           "rank": 3,
-          "tags": [
-            "科技金融"
-          ],
+          "tags": [],
+          "locale": "national"
+        },
+        {
+          "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004431",
+          "title_cn": "柳鑫股份：IPO问询中（拟创业板）",
+          "source": "深交所审核项目动态(官方)",
+          "source_type": "official",
+          "tier": "T1",
+          "date": "09/18",
+          "summary": "注册地：广东｜保荐：中信建投｜受理：2026-06-12｜状态：已问询｜更新：2026-09-18",
+          "importance": 2,
+          "rank": 4,
+          "tags": [],
+          "locale": "national"
+        },
+        {
+          "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004549",
+          "title_cn": "高标科技：IPO问询中（拟创业板）",
+          "source": "深交所审核项目动态(官方)",
+          "source_type": "official",
+          "tier": "T1",
+          "date": "09/18",
+          "summary": "注册地：广东｜保荐：中金公司｜受理：2026-06-18｜状态：已问询｜更新：2026-09-18",
+          "importance": 2,
+          "rank": 5,
+          "tags": [],
+          "locale": "national"
+        },
+        {
+          "url": "https://www1.hkexnews.hk/app/sehk/2026/108886/2026091801771_c.htm",
+          "title_cn": "浙江京新藥業股份有限公司（主板递表）",
+          "source": "港交所新股递表(主板/GEM·全国参考)",
+          "source_type": "official",
+          "tier": "T1",
+          "date": "09/18",
+          "summary": "市场：主板｜递表日：2026-09-18｜港股在审（全国参考）",
+          "ipoStage": "stage-reviewing",
+          "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108886/2026091801771_c.htm",
+          "officialLabel": "申請版本（第一次呈交）",
+          "ipoMeta": "",
+          "importance": 2,
+          "rank": 6,
+          "tags": [],
           "locale": "national"
         },
         {
@@ -639,28 +749,53 @@
           "tier": "T1",
           "date": "09/17",
           "summary": "注册地：广东｜保荐：国泰海通｜受理：2026-06-23｜状态：已问询｜更新：2026-09-17",
+          "ipoStage": "stage-reviewing",
+          "ipoMeta": "保荐 国泰海通 ｜ 拟上市主板 ｜ 受理 2026-06-23",
+          "ipoCity": "广东",
           "importance": 2,
-          "rank": 4,
-          "tags": [],
+          "rank": 7,
+          "tags": [
+            "粤"
+          ],
           "locale": "national"
         },
         {
           "url": "https://www.bse.cn/audit/project_news_select.html#874544@P02",
-          "title_cn": "邦正精机：IPO问询中（拟北交所，深圳）",
-          "title_orig": "邦正精机：IPO问询中（拟北交所，深圳）",
+          "title_cn": "邦正精机：IPO问询中（拟北交所）",
           "source": "北交所审核项目动态(官方)",
           "source_type": "official",
+          "tier": "T1",
           "date": "09/16",
-          "summary": "深圳企业邦正精机北交所IPO问询中，代码874544，可关注北交所打新与客户开户需求。",
+          "summary": "注册地：广东省深圳市｜保荐：国联民生证券承销保荐有限公司｜代码：874544｜状态：IPO问询中｜更新：2026-09-16",
+          "ipoStage": "stage-reviewing",
+          "ipoMeta": "保荐 国联民生证券承销保荐有限公司 ｜ 拟上市北交所",
+          "ipoCity": "深圳市",
           "importance": 2,
-          "rank": 5,
+          "rank": 8,
           "tags": [
-            "粤",
-            "市场",
-            "客群"
+            "粤"
           ],
-          "locale": "national",
-          "locale_evidence": "注册地：广东省深圳市"
+          "locale": "national"
+        },
+        {
+          "url": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm",
+          "title_cn": "深圳市海柔創新智能科技集團股份有限公司 - W（主板递表·广东企业）",
+          "source": "港交所新股递表(广东企业赴港)",
+          "source_type": "official",
+          "tier": "T1",
+          "date": "09/13",
+          "summary": "市场：主板｜递表日：2026-09-13｜广东企业赴港上市，可跟进跨境融资商机",
+          "ipoStage": "stage-reviewing",
+          "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm",
+          "officialLabel": "申請版本（第一次呈交）",
+          "ipoMeta": "",
+          "ipoCity": "广东",
+          "importance": 2,
+          "rank": 9,
+          "tags": [
+            "粤"
+          ],
+          "locale": "national"
         },
         {
           "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004223",
@@ -674,7 +809,7 @@
           "ipoMeta": "保荐 中金公司 ｜ 拟上市创业板 ｜ 受理 2025-12-24",
           "ipoCity": "广东",
           "importance": 2,
-          "rank": 6,
+          "rank": 10,
           "tags": [
             "粤"
           ],
@@ -692,7 +827,7 @@
           "ipoMeta": "保荐 申万宏源承销保荐 ｜ 拟上市创业板 ｜ 受理 2025-12-27",
           "ipoCity": "广东",
           "importance": 2,
-          "rank": 7,
+          "rank": 11,
           "tags": [
             "粤"
           ],
@@ -701,15 +836,19 @@
       ]
     },
     "risk": {
-      "topic": "资本市场执法趋严",
-      "evidence": "监管持续强化资本市场执法，'监管亮剑'护航资本市场高质量前行，投资者适当性管理要求同步收紧。",
-      "impact": "财富条线代销产品适当性留痕与双录环节承压，私行高净值客户风险揭示不足易引发投诉，风控部需前置排查。",
-      "action": "财富部应本月完成代销产品适当性留痕自查，风控部对高风险等级产品双录做抽查，私行客户经理同步更新风险揭示话术。",
-      "source": "T2",
+      "topic": "个贷成本展示口径收紧",
+      "evidence": "五协会联合发布《个人贷款业务明示综合融资成本自律规范》，明确明示综合融资成本时不得使用日利率、月费率等形式。",
+      "impact": "消费贷与个贷宣传物料、合同文本若沿用旧表述将面临合规风险，财富条线产品说明与客户沟通口径也需同步校准。",
+      "action": "可提示个贷与财富条线本周完成宣传物料与合同文本自查，统一改用年化综合融资成本口径，风控部同步复核存量话术。",
+      "source": "T1.5",
       "sources": [
         {
-          "title": "“监管亮剑”护航资本市场高质量前行",
-          "url": "https://www.stcn.com/article/detail/4189826.html"
+          "title": "贷款年化成本迎来\"一表看清\"！五协会联合发布自律规范",
+          "url": "https://m.21jingji.com/article/20260918/herald/cd166c88eb10b7b83242a2135ef7d0ac.html"
+        },
+        {
+          "title": "《个人贷款业务明示综合融资成本自律规范》发布 明示综合融资成本时不得使用\"日利率\"\"月费率\"等形式",
+          "url": "https://finance.sina.com.cn/jryx/bank/2026-09-18/doc-inishkuv0176624.shtml"
         }
       ],
       "delta": {
@@ -718,9 +857,9 @@
     },
     "stock_recap": {
       "us": {
-        "overview": "道琼斯收报51778.04点（+0.61%）；纳斯达克收报26418.30点（+1.69%）；标普500收报7637.76点（+1.14%）。",
+        "overview": "道琼斯收报51682.64点（-0.18%）；纳斯达克收报26522.55点（+0.39%）；标普500收报7650.50点（+0.17%）。",
         "sectors": [],
-        "spoken": "道琼斯（+0.61%）；纳斯达克（+1.69%）；标普500（+1.14%）。",
+        "spoken": "道琼斯（-0.18%）；纳斯达克（+0.39%）；标普500（+0.17%）。",
         "meta": {
           "source": "",
           "crossCheck": "新浪行情",
@@ -729,61 +868,58 @@
         "indices": [
           {
             "name": "道琼斯",
-            "value": "51778.04",
-            "changePct": "+0.61%"
+            "value": "51682.64",
+            "changePct": "-0.18%"
           },
           {
             "name": "纳斯达克",
-            "value": "26418.30",
-            "changePct": "+1.69%"
+            "value": "26522.55",
+            "changePct": "+0.39%"
           },
           {
             "name": "标普500",
-            "value": "7637.76",
-            "changePct": "+1.14%"
+            "value": "7650.50",
+            "changePct": "+0.17%"
           }
         ]
       },
       "aShare": {
-        "overview": "A股三大指数小幅收跌，沪指跌0.41%，美联储重启加息扰动情绪。",
+        "overview": "创业板指、科创50涨超2%。",
         "sectors": [
-          "粮食概念股逆市大涨，资金避险与涨价预期共振。",
-          "CRO概念大涨，BD高增叠加AI制药消息，机构看好量价齐升。",
-          "文旅发展五年规划出炉，政策红利释放，多股获融资客逆势押注。",
-          "华为新款AI芯片提前推出，AI算力与光通信概念受关注。",
-          "美众议院授权对俄油气买家征最高100%关税，外交部回应。"
+          "创业板指、科创50涨超2%",
+          "芯片产业链集体走强"
         ],
-        "spoken": "A股三大指数小幅收跌，沪指跌百分之零点四一，深成指跌百分之零点三三，创业板指跌百分之零点四。盘面上，粮食概念股逆市大涨，CRO概念受BD高增和AI制药消息带动走强，文旅板块迎五年规划政策红利。华为新款AI芯片提前推出，AI算力方向受关注。美联储重启加息扰动市场情绪。",
         "meta": {
           "source": "东方财富",
           "crossCheck": "新浪行情",
-          "date": "2026-09-18"
+          "date": "2026-09-19"
         },
         "indices": [
           {
             "name": "上证指数",
-            "value": "3875.60",
-            "changePct": "-0.41%"
+            "value": "3911.87",
+            "changePct": "+0.94%"
           },
           {
             "name": "深证成指",
-            "value": "13409.91",
-            "changePct": "-0.33%"
+            "value": "13640.87",
+            "changePct": "+1.72%"
           },
           {
             "name": "创业板指",
-            "value": "3298.31",
-            "changePct": "-0.40%"
+            "value": "3372.68",
+            "changePct": "+2.25%"
           }
         ]
       },
       "hk": {
-        "overview": "恒生指数收报24604.29点（-0.44%）；恒生科技收报4310.74点（-0.34%）。",
+        "overview": "恒生指数收报24750.78点（+0.60%）；恒生科技收报4405.50点（+2.20%）。",
         "sectors": [
-          "恒生指数跌0.44%",
-          "恒生科技指数跌0.34%",
-          "黄金股、石油股同步下挫",
-          "汽车股逆势活跃"
+          "恒生指数涨0.6%",
+          "恒生科技指数涨2.2%",
+          "芯片股普涨",
+          "内房股午后走强",
+          "联想涨超9%"
         ],
         "meta": {
           "source": "新浪财经·港股",
@@ -791,130 +927,131 @@
           "date": "2026-09-18"
         },
         "sourceReport": {
-          "title": "港股收评：恒指跌0.44% 科指跌0.34% 黄金股、石油股同步下挫 汽车股逆势活跃",
-          "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-17/doc-iniscqyc0291472.shtml"
+          "title": "港股收评：恒指涨0.6% 科指涨2.2% 芯片股普涨 内房股午后走强 联想涨超9% MINIMAX涨超18%",
+          "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-18/doc-inisftwz3495601.shtml"
         },
         "indices": [
           {
             "name": "恒生指数",
-            "value": "24604.29",
-            "changePct": "-0.44%"
+            "value": "24750.78",
+            "changePct": "+0.60%"
           },
           {
             "name": "恒生科技",
-            "value": "4310.74",
-            "changePct": "-0.34%"
+            "value": "4405.50",
+            "changePct": "+2.20%"
           }
         ]
       },
       "quoteChannel": "新浪行情",
-      "quoteDate": "2026-09-17",
+      "quoteDate": "2026-09-18",
       "marketStatus": {
-        "isMarketClosed": false,
-        "reportDate": "2026-09-18",
-        "dataDate": "2026-09-17",
-        "note": "",
-        "spokenNote": "以下行情为上一交易日，9月17日 周四的收盘情况"
+        "isMarketClosed": true,
+        "reportDate": "2026-09-19",
+        "dataDate": "2026-09-18",
+        "note": "周末及周一休市时段，以下行情为上一交易日（9月18日 周五）收盘数据",
+        "spokenNote": "当前为休市时段，以下行情为上一交易日，9月18日 周五的收盘情况"
       }
     },
     "stock_news": [
       {
-        "url": "https://finance.eastmoney.com/a/202609173876682543.html",
-        "title_cn": "文旅发展五年规划出炉政策红利密集释放多股获融资客逆势押注(名单)",
+        "url": "https://finance.eastmoney.com/a/202609183878653398.html",
+        "title_cn": "十部门联合发布《关于促进房车消费的若干措施》",
         "source": "东方财富",
         "source_type": "media",
-        "date": "09/17",
-        "summary": "文旅发展五年规划出炉，政策红利密集释放，多只相关个股获融资客逆势押注。",
+        "date": "09/18",
+        "summary": "十部门联合发布《关于促进房车消费的若干措施》，出台促进房车消费的相关政策。",
         "importance": 2,
         "rank": 0,
         "tags": [
           "政策",
-          "文旅",
-          "融资"
-        ],
-        "locale": "national",
-        "market": "a-share"
-      },
-      {
-        "url": "https://finance.eastmoney.com/a/202609173877264816.html",
-        "title_cn": "A股三大指数小幅收跌粮食概念股逆市大涨",
-        "source": "东方财富",
-        "source_type": "media",
-        "date": "09/17",
-        "summary": "A股三大指数小幅收跌，粮食概念股逆市大涨。",
-        "importance": 2,
-        "rank": 0,
-        "tags": [
-          "A股",
-          "大盘",
-          "农业"
-        ],
-        "locale": "national",
-        "market": "a-share"
-      },
-      {
-        "url": "https://finance.eastmoney.com/a/202609173877460739.html",
-        "title_cn": "9月17日晚间沪深上市公司重大事项公告最新快递",
-        "source": "东方财富",
-        "source_type": "media",
-        "date": "09/17",
-        "summary": "9月17日晚间，沪深两市多家上市公司发布重大事项公告。",
-        "importance": 1,
-        "rank": 0,
-        "tags": [
-          "A股",
-          "公告"
-        ],
-        "locale": "national",
-        "market": "a-share"
-      },
-      {
-        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-17/doc-iniscqyc0291472.shtml",
-        "title_cn": "港股收评：恒指跌0.44% 科指跌0.34% 黄金股、石油股同步下挫 汽车股逆势活跃",
-        "source": "新浪财经·港股",
-        "source_type": "media",
-        "date": "09/17",
-        "summary": "港股收评：恒指跌0.44%，科指跌0.34%，黄金股、石油股同步下挫，汽车股逆势活跃。",
-        "importance": 2,
-        "rank": 0,
-        "tags": [
-          "港股",
-          "大盘",
-          "黄金",
+          "消费",
           "汽车"
         ],
         "locale": "national",
-        "market": "hk"
+        "market": "a-share"
       },
       {
-        "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-18/doc-inisewtm3439818.shtml",
-        "title_cn": "同源康医药-B获董事长兼总裁吴豫生增持12万股 每股作价3.486港元",
+        "url": "https://finance.eastmoney.com/a/202609183877839523.html",
+        "title_cn": "GPU租赁价格再上调！算力供需缺口持续扩大融资客提前埋伏这8股",
+        "source": "东方财富",
+        "source_type": "media",
+        "date": "09/18",
+        "summary": "GPU租赁价格再度上调，算力供需缺口持续扩大，融资客提前布局8只相关个股。",
+        "importance": 2,
+        "rank": 0,
+        "tags": [
+          "AI",
+          "算力",
+          "半导体"
+        ],
+        "locale": "national",
+        "market": "a-share"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202609183878036657.html",
+        "title_cn": "《医药工业发展“十五五”规划》发布创新药产业规模年均增速将超20%",
+        "source": "东方财富",
+        "source_type": "media",
+        "date": "09/18",
+        "summary": "《医药工业发展“十五五”规划》发布，提出创新药产业规模年均增速将超20%。",
+        "importance": 2,
+        "rank": 0,
+        "tags": [
+          "医药",
+          "政策",
+          "创新药"
+        ],
+        "locale": "national",
+        "market": "a-share"
+      },
+      {
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-18/doc-inisftwz3495601.shtml",
+        "title_cn": "港股收评：恒指涨0.6% 科指涨2.2% 芯片股普涨 内房股午后走强 联想涨超9% MINIMAX涨超18%",
         "source": "新浪财经·港股",
         "source_type": "media",
         "date": "09/18",
-        "summary": "同源康医药-B获董事长兼总裁吴豫生增持12万股，每股作价3.486港元。",
-        "importance": 1,
+        "summary": "港股收评：恒指涨0.6%，科指涨2.2%，芯片股普涨，内房股午后走强，联想涨超9%，MINIMAX涨超18%。",
+        "importance": 2,
         "rank": 0,
         "tags": [
           "港股",
-          "医药",
-          "股东增持"
+          "芯片",
+          "地产"
         ],
         "locale": "national",
         "market": "hk"
       },
       {
-        "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-18/doc-inisewtm3439290.shtml",
-        "title_cn": "国富量子获柳志伟增持174万股 每股作价约1.63港元",
+        "url": "https://finance.sina.com.cn/stock/marketresearch/2026-09-18/doc-inisfiif3455238.shtml",
+        "title_cn": "联想集团股价创历史新高，市值超4500亿港元！CFO郑孝明“估值低估论”点燃市场热情",
         "source": "新浪财经·港股",
         "source_type": "media",
         "date": "09/18",
-        "summary": "国富量子获柳志伟增持174万股，每股作价约1.63港元。",
+        "summary": "联想集团股价创历史新高，市值超4500亿港元，CFO郑孝明“估值低估论”引发市场关注。",
+        "importance": 2,
+        "rank": 0,
+        "tags": [
+          "港股",
+          "科技",
+          "财报"
+        ],
+        "locale": "national",
+        "market": "hk"
+      },
+      {
+        "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-09-18/doc-inisewti3580721.shtml",
+        "title_cn": "2026年中秋节、国庆节休市期间 港股通安排",
+        "source": "新浪财经·港股",
+        "source_type": "media",
+        "date": "09/18",
+        "summary": "公布2026年中秋节、国庆节休市期间港股通安排。",
         "importance": 1,
         "rank": 0,
         "tags": [
           "港股",
-          "股东增持"
+          "港股通",
+          "交易安排"
         ],
         "locale": "national",
         "market": "hk"
@@ -928,86 +1065,86 @@
       {
         "sourceId": "cnr-gd",
         "inflow": 58,
-        "kept": 1,
-        "avgScore": 21
+        "kept": 12,
+        "avgScore": 27
+      },
+      {
+        "sourceId": "sina-bank",
+        "inflow": 48,
+        "kept": 11,
+        "avgScore": 37
       },
       {
         "sourceId": "guancha",
         "inflow": 47,
-        "kept": 0,
-        "avgScore": null
+        "kept": 4,
+        "avgScore": 45
       },
       {
         "sourceId": "cnfin",
         "inflow": 46,
-        "kept": 6,
-        "avgScore": 22
-      },
-      {
-        "sourceId": "sina-bank",
-        "inflow": 46,
-        "kept": 0,
-        "avgScore": null
-      },
-      {
-        "sourceId": "sina-hk-stock",
-        "inflow": 34,
-        "kept": 0,
-        "avgScore": null
+        "kept": 20,
+        "avgScore": 31
       },
       {
         "sourceId": "southcn",
         "inflow": 33,
-        "kept": 0,
-        "avgScore": null
+        "kept": 4,
+        "avgScore": 21
       },
       {
-        "sourceId": "cnbc-top",
-        "inflow": 30,
-        "kept": 0,
-        "avgScore": null
+        "sourceId": "sina-a-stock",
+        "inflow": 33,
+        "kept": 17,
+        "avgScore": 22
+      },
+      {
+        "sourceId": "sina-hk-stock",
+        "inflow": 32,
+        "kept": 14,
+        "avgScore": 28
       },
       {
         "sourceId": "stcn",
         "inflow": 30,
-        "kept": 15,
+        "kept": 20,
         "avgScore": 25
       },
       {
         "sourceId": "dayoo-gz",
-        "inflow": 30,
-        "kept": 1,
+        "inflow": 29,
+        "kept": 17,
         "avgScore": 31
       },
       {
-        "sourceId": "sina-a-stock",
-        "inflow": 30,
-        "kept": 4,
-        "avgScore": 31
+        "sourceId": "cnbc-top",
+        "inflow": 28,
+        "kept": 2,
+        "avgScore": 21
       },
       {
         "sourceId": "cctv-finance",
-        "inflow": 23,
-        "kept": 0,
-        "avgScore": null
+        "inflow": 22,
+        "kept": 2,
+        "avgScore": 48
+      },
+      {
+        "sourceId": "sina-money",
+        "inflow": 20,
+        "kept": 2,
+        "avgScore": 66
       },
       {
         "sourceId": "fed-press",
         "inflow": 20,
-        "kept": 0,
-        "avgScore": null
+        "kept": 1,
+        "avgScore": 21
       },
       {
         "sourceId": "eastmoney-stock",
         "inflow": 20,
-        "kept": 7,
-        "avgScore": 22
-      },
-      {
-        "sourceId": "sina-money",
-        "inflow": 18,
-        "kept": 3,
-        "avgScore": 67
+        "kept": 17,
+        "avgScore": 27
       },
       {
         "sourceId": "investing-news",
@@ -1018,44 +1155,38 @@
       {
         "sourceId": "crunchbase-news",
         "inflow": 10,
-        "kept": 0,
-        "avgScore": null
-      },
-      {
-        "sourceId": "21jingji-finance",
-        "inflow": 9,
-        "kept": 0,
-        "avgScore": null
+        "kept": 2,
+        "avgScore": 21
       },
       {
         "sourceId": "govcn-policy",
         "inflow": 8,
-        "kept": 0,
-        "avgScore": null
+        "kept": 1,
+        "avgScore": 42
       },
       {
-        "sourceId": "hk-filing",
-        "inflow": 3,
-        "kept": 0,
-        "avgScore": null
+        "sourceId": "21jingji-finance",
+        "inflow": 8,
+        "kept": 2,
+        "avgScore": 72
       },
       {
         "sourceId": "gd-szse-audit",
-        "inflow": 3,
-        "kept": 3,
+        "inflow": 8,
+        "kept": 8,
         "avgScore": 61
       },
       {
         "sourceId": "arxiv-fintech",
-        "inflow": 2,
-        "kept": 0,
-        "avgScore": null
+        "inflow": 4,
+        "kept": 4,
+        "avgScore": 21
       },
       {
-        "sourceId": "hk-filing-gd",
-        "inflow": 2,
+        "sourceId": "hk-filing",
+        "inflow": 3,
         "kept": 1,
-        "avgScore": 30
+        "avgScore": 21
       },
       {
         "sourceId": "gd-bse-audit",
@@ -1064,10 +1195,10 @@
         "avgScore": 61
       },
       {
-        "sourceId": "gd-csrc-tutoring",
+        "sourceId": "hk-filing-gd",
         "inflow": 1,
         "kept": 1,
-        "avgScore": 21
+        "avgScore": 30
       }
     ],
     "heroDelta": {
@@ -1076,24 +1207,22 @@
     "productCoverage": [
       {
         "line": "按揭",
-        "count": 1,
-        "examples": [
-          "二手房交易场景切入"
-        ]
+        "count": 0,
+        "examples": []
       },
       {
         "line": "信用卡",
-        "count": 3,
+        "count": 2,
         "examples": [
-          "商超场景消费信贷联动",
-          "平台月付入口流量变化"
+          "月付、花呗退出网购付款页？实测：部分平台已与支付区隔，抖音、京东等暂未改造",
+          "首次明确划分！万亿城商行停投三款助贷类产品"
         ]
       },
       {
         "line": "代发",
         "count": 1,
         "examples": [
-          "汽车产业链普惠客群"
+          "就业指导课切入新市民"
         ]
       }
     ]
