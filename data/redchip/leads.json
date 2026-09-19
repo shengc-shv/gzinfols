@@ -1,5 +1,24 @@
 [
   {
+    "appId": "108886",
+    "nameCn": "Zhejiang Jingxin Pharmaceutical Co., Ltd.",
+    "nameEn": "",
+    "board": "主板",
+    "status": "A",
+    "submitDate": "2026-09-18",
+    "domicile": "中国(境内)",
+    "isOffshore": false,
+    "gdCityHits": 7,
+    "gdCityMentions": 75,
+    "isGdConnected": true,
+    "vie": "historical",
+    "verdict": "non-redchip",
+    "discoveredAt": "2026-09-19T07:48:01+08:00",
+    "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108886/documents/sehk26091801843.pdf",
+    "leadId": "108886",
+    "lastChangedAt": "2026-09-19T07:48:01+08:00"
+  },
+  {
     "appId": "108870",
     "nameCn": "Hai Robotics Innovation Group Co., Ltd. - W",
     "nameEn": "",

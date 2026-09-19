@@ -1,0 +1,713 @@
+{
+  "date": "2026-09-19",
+  "updatedAt": "2026-09-18T23:47:22.942Z",
+  "executive": {
+    "hero_line": "住建部推现房销售制叠加个贷成本明示新规，按揭逻辑与消贷宣传口径同步生变",
+    "spoken_hero": "住建部提出十五五推进现房销售制，个贷综合融资成本也要求一表看清、禁用日利率月费率表述。按揭准入节奏和消费贷宣传物料都可能要跟着调整，建议零售条线本周先做一轮口径与楼盘准入的对照检视。",
+    "must_read": [
+      {
+        "title": "央行回应信贷失速",
+        "why": "央行强调长钱筑牢市场根基，信贷投放节奏与市场预期趋稳，对客沟通口径可据此统一。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_09_18_901180.shtml"
+      },
+      {
+        "title": "个贷成本明示新规落地",
+        "why": "五协会自律规范要求贷款年化成本一表看清、禁用日利率月费率，个贷展示与合同文本面临全面校准。",
+        "url": "https://m.21jingji.com/article/20260918/herald/cd166c88eb10b7b83242a2135ef7d0ac.html"
+      },
+      {
+        "title": "住建部今晨发布会",
+        "why": "住房城乡建设重要发布会今日10时举行，按揭与住房金融政策预期可能生变，需盯紧发布内容。",
+        "url": "https://finance.eastmoney.com/a/202609183877708769.html"
+      },
+      {
+        "title": "金融强国顶层设计落地",
+        "why": "金融强国两步走路径明确，后续对零售业务布局与合规要求的传导值得持续跟踪。",
+        "url": "https://www.cnfin.com/hg-lb/detail/20260918/4471528_1.html"
+      },
+      {
+        "title": "国办转发促房车消费",
+        "why": "房车消费措施落地，房车购置与文旅消费信贷场景迎增量，可对接相关产品与商户资源。",
+        "url": "https://www.gov.cn/zhengce/content/202609/content_7081441.htm"
+      }
+    ],
+    "spoken_must_read": "央行回应信贷失速。央行强调长钱筑牢市场根基，信贷投放节奏与市场预期趋稳，对客沟通口径可据此统一。。其次，个贷成本明示新规落地。五协会自律规范要求贷款年化成本一表看清、禁用日利率月费率，个贷展示与合同文本面临全面校准。。此外，住建部今晨发布会。住房城乡建设重要发布会今日10时举行，按揭与住房金融政策预期可能生变，需盯紧发布内容。。还有，金融强国顶层设计落地。金融强国两步走路径明确，后续对零售业务布局与合规要求的传导值得持续跟踪。。另外，国办转发促房车消费。房车消费措施落地，房车购置与文旅消费信贷场景迎增量，可对接相关产品与商户资源。。",
+    "insights": [
+      {
+        "topic": "广交会跨境客群对接",
+        "impact": "第140届广交会10月15日至11月4日在穗举办，多个首次叠加三条考察路线，跨境结算、外币兑换与商户收单需求将集中释放。",
+        "action": "可提前梳理参展商与采购商名单，10月前完成跨境结算、外币兑换及收单方案对接，结合三条考察路线设计场景化服务包。",
+        "tag": [
+          "客群",
+          "政银合作"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "第140届广交会将于10月15日至11月4日在广州举办",
+            "url": "https://www.stcn.com/article/detail/4190593.html"
+          },
+          {
+            "title": "第140届广交会将实现多个\"首次\"，广州精心策划三条主题考察路线",
+            "url": "https://news.dayoo.com/guangzhou/202609/18/139995_55005040.htm"
+          }
+        ]
+      },
+      {
+        "topic": "黄金配置需求切换",
+        "impact": "加息背景下金价不降反涨，黄金定价逻辑切换，瑞银维持长期看涨、4000美元附近视为增持窗口，客户黄金类资产配置需求上升。",
+        "action": "可结合瑞银分阶段目标价更新客户沟通口径，为私行及财富客户提供黄金类资产再平衡建议，同步做好贵金属业务合规提示。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "零售AUM",
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "美联储加息金价不降反涨？黄金定价逻辑正在切换",
+            "url": "https://finance.sina.com.cn/roll/2026-09-18/doc-inisewti3567817.shtml"
+          },
+          {
+            "title": "瑞银\"鹰派加息\"定性不改黄金长期看涨：分阶段目标最高5400美元，4000美元附近是增持良机",
+            "url": "https://finance.sina.com.cn/money/nmetal/gjshz/2026-09-18/doc-inisesmp3489853.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "贵金属代理清退承接",
+        "impact": "多家银行关停炒金通道、清退个人贵金属代理业务，相关客户面临产品切换，存在承接与再配置的窗口。",
+        "action": "可梳理存量贵金属客户名单，主动提供替代性配置方案与合规提示，避免客户流失至同业。",
+        "tag": [
+          "财富",
+          "监管"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "多家银行关停\"炒金\"通道 清退个人贵金属代理业务",
+            "url": "https://finance.cctv.com/2026/09/18/ARTIf55CC1YUKOIl0NI2Yycp260918.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "中行普惠平台抢跑",
+        "impact": "中行推出百千万工程＋普惠平台，县域小微客群竞争加剧，我行对应产品与政银合作节奏面临对标压力。",
+        "action": "可评估现有普惠产品与政银合作节奏，本周走访重点县域与专业市场小微客群，强化差异化服务方案。",
+        "tag": [
+          "信贷",
+          "政银合作"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "sources": [
+          {
+            "title": "\"中银普惠·百千万工程＋\"平台正式亮相",
+            "url": "https://www.cnr.cn/gd/xgyxgd/20260918/t20260918_527817259.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "就业指导课切入新市民",
+        "impact": "广州发布超20场免费就业指导课排期，可借势切入新市民与青年客群的代发工资与首贷场景。",
+        "action": "可对接活动主办方嵌入金融服务环节，现场受理代发工资与首贷申请，形成新市民客群批量获客入口。",
+        "tag": [
+          "代发",
+          "客群"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "sources": [
+          {
+            "title": "超20场免费就业指导课来了！广州发布公共就业指导活动排期",
+            "url": "https://news.dayoo.com/guangzhou/202609/18/139995_55004907.htm"
+          }
+        ]
+      },
+      {
+        "topic": "经纪客户迁移获客窗口",
+        "impact": "中金吸并东兴、信达进入实施阶段，548万经纪客户待迁移，财富条线存在客户流动带来的获客窗口。",
+        "action": "可关注迁移期间客户服务断点，针对性推出转户与资产配置承接方案，重点触达高净值经纪客户。",
+        "tag": [
+          "财富",
+          "竞对动态"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "中金吸并东兴、信达进入实施阶段，548万经纪客户待迁移",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_09_18_901015.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "科创债联动科创客群",
+        "impact": "科创债从试水走向定制，创投募资生态重构，科创企业客群的债券融资与投行联动机会增多。",
+        "action": "可联合投行梳理广州科创企业名单，探索债券融资与零售高端客户配置的联动方案。",
+        "tag": [
+          "科技金融",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "科创债从试水走向定制 创投募资生态正在重构",
+            "url": "https://www.stcn.com/article/detail/4189834.html"
+          }
+        ]
+      },
+      {
+        "topic": "打新客户资金安排",
+        "impact": "力勤资源今日申购，有打新需求的客户存在资金调度与短期理财衔接需求。",
+        "action": "可提示打新客户关注申购时间与资金安排，配套短期理财与资金归集服务。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "新股提示：力勤资源今日申购",
+            "url": "https://www.stcn.com/article/detail/4189832.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "具备高端客户商机的，广交会跨境客群对接，第140届广交会10月15日至11月4日在穗举办，多个首次叠加三条考察路线，跨境结算、外币兑换与商户收单需求将集中释放。。可提前梳理参展商与采购商名单，10月前完成跨境结算、外币兑换及收单方案对接，结合三条考察路线设计场景化服务包。。此外，具备零售 A U M和高端客户商机的，黄金配置需求切换，加息背景下金价不降反涨，黄金定价逻辑切换，瑞银维持长期看涨、4000美元附近视为增持窗口，客户黄金类资产配置需求上升。。可结合瑞银分阶段目标价更新客户沟通口径，为私行及财富客户提供黄金类资产再平衡建议，同步做好贵金属业务合规提示。。同时，具备零售 A U M商机的，贵金属代理清退承接，多家银行关停炒金通道、清退个人贵金属代理业务，相关客户面临产品切换，存在承接与再配置的窗口。。可梳理存量贵金属客户名单，主动提供替代性配置方案与合规提示，避免客户流失至同业。。另一条值得关注，具备普惠小微商机的，中行普惠平台抢跑，中行推出百千万工程＋普惠平台，县域小微客群竞争加剧，我行对应产品与政银合作节奏面临对标压力。。可评估现有普惠产品与政银合作节奏，本周走访重点县域与专业市场小微客群，强化差异化服务方案。。另外，具备普惠小微商机的，就业指导课切入新市民，广州发布超20场免费就业指导课排期，可借势切入新市民与青年客群的代发工资与首贷场景。。可对接活动主办方嵌入金融服务环节，现场受理代发工资与首贷申请，形成新市民客群批量获客入口。。此外，具备高端客户商机的，经纪客户迁移获客窗口，中金吸并东兴、信达进入实施阶段，548万经纪客户待迁移，财富条线存在客户流动带来的获客窗口。。可关注迁移期间客户服务断点，针对性推出转户与资产配置承接方案，重点触达高净值经纪客户。。同时，具备高端客户商机的，科创债联动科创客群，科创债从试水走向定制，创投募资生态重构，科创企业客群的债券融资与投行联动机会增多。。可联合投行梳理广州科创企业名单，探索债券融资与零售高端客户配置的联动方案。。最后，具备零售 A U M商机的，打新客户资金安排，力勤资源今日申购，有打新需求的客户存在资金调度与短期理财衔接需求。。可提示打新客户关注申购时间与资金安排，配套短期理财与资金归集服务。。",
+    "risk": {
+      "topic": "个贷成本展示口径收紧",
+      "evidence": "五协会联合发布《个人贷款业务明示综合融资成本自律规范》，明确明示综合融资成本时不得使用日利率、月费率等形式。",
+      "impact": "消费贷与个贷宣传物料、合同文本若沿用旧表述将面临合规风险，财富条线产品说明与客户沟通口径也需同步校准。",
+      "action": "可提示个贷与财富条线本周完成宣传物料与合同文本自查，统一改用年化综合融资成本口径，风控部同步复核存量话术。",
+      "source": "T1.5",
+      "sources": [
+        {
+          "title": "贷款年化成本迎来\"一表看清\"！五协会联合发布自律规范",
+          "url": "https://m.21jingji.com/article/20260918/herald/cd166c88eb10b7b83242a2135ef7d0ac.html"
+        },
+        {
+          "title": "《个人贷款业务明示综合融资成本自律规范》发布 明示综合融资成本时不得使用\"日利率\"\"月费率\"等形式",
+          "url": "https://finance.sina.com.cn/jryx/bank/2026-09-18/doc-inishkuv0176624.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：个贷成本展示口径收紧，消费贷与个贷宣传物料、合同文本若沿用旧表述将面临合规风险，财富条线产品说明与客户沟通口径也需同步校准。。可提示个贷与财富条线本周完成宣传物料与合同文本自查，统一改用年化综合融资成本口径，风控部同步复核存量话术。。",
+    "guangdong_ipo": {
+      "spoken": "广东企业IPO在审动态更新：东莞证券拟登陆主板，已受理，保荐机构为东方证券；纽恩泰拟主板、云豹智能与柳鑫股份、高标科技拟创业板，均处于问询阶段，注册地均为广东。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "道琼斯收报51682.64点（-0.18%）；纳斯达克收报26522.55点（+0.39%）；标普500收报7650.50点（+0.17%）。",
+      "sectors": [],
+      "spoken": "道琼斯（-0.18%）；纳斯达克（+0.39%）；标普500（+0.17%）。",
+      "meta": {
+        "source": "",
+        "crossCheck": "新浪行情",
+        "date": ""
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51682.64",
+          "changePct": "-0.18%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26522.55",
+          "changePct": "+0.39%"
+        },
+        {
+          "name": "标普500",
+          "value": "7650.50",
+          "changePct": "+0.17%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "创业板指、科创50涨超2%。",
+      "sectors": [
+        "创业板指、科创50涨超2%",
+        "芯片产业链集体走强"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "crossCheck": "新浪行情",
+        "date": "2026-09-19"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3911.87",
+          "changePct": "+0.94%"
+        },
+        {
+          "name": "深证成指",
+          "value": "13640.87",
+          "changePct": "+1.72%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3372.68",
+          "changePct": "+2.25%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24750.78点（+0.60%）；恒生科技收报4405.50点（+2.20%）。",
+      "sectors": [
+        "恒生指数涨0.6%",
+        "恒生科技指数涨2.2%",
+        "芯片股普涨",
+        "内房股午后走强",
+        "联想涨超9%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "crossCheck": "新浪行情",
+        "date": "2026-09-18"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.6% 科指涨2.2% 芯片股普涨 内房股午后走强 联想涨超9% MINIMAX涨超18%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-18/doc-inisftwz3495601.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24750.78",
+          "changePct": "+0.60%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4405.50",
+          "changePct": "+2.20%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-09-18",
+    "marketStatus": {
+      "isMarketClosed": true,
+      "reportDate": "2026-09-19",
+      "dataDate": "2026-09-18",
+      "note": "周末及周一休市时段，以下行情为上一交易日（9月18日 周五）收盘数据",
+      "spokenNote": "当前为休市时段，以下行情为上一交易日，9月18日 周五的收盘情况"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202609183878653398.html",
+      "title_cn": "十部门联合发布《关于促进房车消费的若干措施》",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "十部门联合发布《关于促进房车消费的若干措施》，出台促进房车消费的相关政策。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "消费",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183877839523.html",
+      "title_cn": "GPU租赁价格再上调！算力供需缺口持续扩大融资客提前埋伏这8股",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "GPU租赁价格再度上调，算力供需缺口持续扩大，融资客提前布局8只相关个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "算力",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183878036657.html",
+      "title_cn": "《医药工业发展“十五五”规划》发布创新药产业规模年均增速将超20%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "《医药工业发展“十五五”规划》发布，提出创新药产业规模年均增速将超20%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "政策",
+        "创新药"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183878561074.html",
+      "title_cn": "暴拉超297%！沈鼓变“神鼓”什么情况？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "沈鼓集团股价盘中暴拉超297%，引发市场关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183878360784.html",
+      "title_cn": "沈鼓集团跌幅收窄至6%触发临停",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "沈鼓集团跌幅收窄至6%，盘中触发临时停牌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183878739945.html",
+      "title_cn": "上交所：依规对沈鼓集团异常交易相关投资者采取暂停账户交易等自律监管措施",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "上交所依规对沈鼓集团异常交易相关投资者采取暂停账户交易等自律监管措施。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "监管",
+        "A股",
+        "异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183878452543.html",
+      "title_cn": "华为大动作+黄仁勋喊话AI芯片彻底沸腾！最新高增长潜力股名单出炉",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "受华为大动作及黄仁勋喊话影响，AI芯片板块走强，相关高增长潜力股名单出炉。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "半导体",
+        "芯片"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183878514221.html",
+      "title_cn": "C沈鼓持续拉升最高涨幅达297%换手率超80%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "C沈鼓持续拉升，最高涨幅达297%，换手率超80%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183877941897.html",
+      "title_cn": "特斯拉Optimus来华审厂人形机器人产业化提速多只超跌标的获融资客关注(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "特斯拉Optimus来华审厂，人形机器人产业化提速，多只超跌标的获融资客关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机器人",
+        "特斯拉",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183878749821.html",
+      "title_cn": "9月18日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "9月18日晚间沪深上市公司重大事项公告汇总发布。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183878095775.html",
+      "title_cn": "国泰海通：地方新增专项债发行节奏偏慢预计四季度专项债用途更灵活",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "国泰海通指出地方新增专项债发行节奏偏慢，预计四季度专项债用途将更灵活。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "债券",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609183877955894.html",
+      "title_cn": "中金公司：多种因素催化全球农产品价格走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "中金公司表示多种因素催化全球农产品价格走强。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "农产品",
+        "宏观",
+        "大宗商品"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-18/doc-inisftwz3495601.shtml",
+      "title_cn": "港股收评：恒指涨0.6% 科指涨2.2% 芯片股普涨 内房股午后走强 联想涨超9% MINIMAX涨超18%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "港股收评：恒指涨0.6%，科指涨2.2%，芯片股普涨，内房股午后走强，联想涨超9%，MINIMAX涨超18%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "芯片",
+        "地产"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-18/doc-inisefvw9005952.shtml",
+      "title_cn": "港股上市机制有望迎来优化",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "港股上市机制有望迎来优化。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "政策",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-18/doc-inisfiic3410809.shtml",
+      "title_cn": "四方精创回应延迟H股上市：业务层面都正常 后续可能择机再推",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "四方精创回应延迟H股上市，称业务层面正常，后续可能择机再推。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/marketresearch/2026-09-18/doc-inisfiif3455238.shtml",
+      "title_cn": "联想集团股价创历史新高，市值超4500亿港元！CFO郑孝明“估值低估论”点燃市场热情",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "联想集团股价创历史新高，市值超4500亿港元，CFO郑孝明“估值低估论”引发市场关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "科技",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/observe/2026-09-18/doc-inisfprf0294676.shtml",
+      "title_cn": "港股IPO风险深扒①｜拨康视云停牌核查：发行数据里的异常信号",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "港股IPO风险分析文章指出拨康视云停牌核查，发行数据存在异常信号。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "监管"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-09-18/doc-inisewti3580721.shtml",
+      "title_cn": "2026年中秋节、国庆节休市期间 港股通安排",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "公布2026年中秋节、国庆节休市期间港股通安排。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "港股通",
+        "交易安排"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-18/doc-inisfazn8626885.shtml",
+      "title_cn": "港股何以成为中资企业“出海”桥头堡",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "分析文章指出港股成为中资企业“出海”桥头堡。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "中概股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-09-18/doc-inisewtp0192141.shtml",
+      "title_cn": "招股最后一天，四方精创把港股IPO的门关上了",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "四方精创在招股最后一天关闭港股IPO。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/observe/2026-09-18/doc-inisftxe8436864.shtml",
+      "title_cn": "港股IPO风险深扒②｜从拨康视云学筛查：招股阶段与配售公告里的预警信号",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "港股IPO风险分析文章以拨康视云为例，介绍招股阶段与配售公告中的预警信号筛查方法。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "监管"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-18/doc-inisftxc0317884.shtml",
+      "title_cn": "大摩：药明合联(02268)重申全年收入增长40%目标 维持“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "大摩重申药明合联全年收入增长40%目标，维持“增持”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-18/doc-inisftwx3327500.shtml",
+      "title_cn": "大摩：紫金黄金国际(02259)重申今年黄金产量约59吨 维持“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "大摩重申紫金黄金国际今年黄金产量约59吨，维持“增持”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "黄金",
+        "研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-18/doc-inisftxe8481142.shtml",
+      "title_cn": "花旗：予潍柴动力(02338)“买入”评级 目标价50港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "花旗予潍柴动力“买入”评级，目标价50港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "研报",
+        "机械"
+      ],
+      "locale": "national",
+      "market": "hk"
+    }
+  ]
+}
