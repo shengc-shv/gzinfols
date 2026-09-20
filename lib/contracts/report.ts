@@ -172,13 +172,27 @@ export interface StockRecap {
   quoteChannel?: string;
   quoteDate?: string;
   marketStatus?: {
-    isMarketClosed: boolean;
     reportDate: string;
-    dataDate: string;
-    /** 页面展示文案（仅非交易日有值：橙字警示「周末及周一休市时段…」）。 */
+    /**
+     * 各市场「隔夜新鲜度」（2026-09-20 重构）：`fresh=true` = 该市场有隔夜行情
+     * （数据自带日期距报告日 ≤ 1 天）→ 口播才播；否则口播不播、页面仅展示日期。
+     * 「部分开市」由各市场独立判定自然得出，不需特判。
+     */
+    markets: {
+      aShare: { fresh: boolean; dataDate?: string; reason?: string };
+      hk: { fresh: boolean; dataDate?: string; reason?: string };
+      us: { fresh: boolean; dataDate?: string; reason?: string };
+    };
+    /** 三市场均无隔夜行情。 */
+    allStale: boolean;
+    /** 页面展示文案（仅在有市场非新鲜时有值：橙字警示）。 */
     note?: string;
-    /** 口播专用文案（交易日也带日期：「以下行情为上一交易日，X月X日 周X的收盘情况」）。 */
+    /** 口播文案（含各市场数据日期；供 voice 决定播/不播）。 */
     spokenNote?: string;
+    /** @deprecated 旧字段（按星期几判休市时代）；保留以兼容旧 store.json 渲染。 */
+    isMarketClosed?: boolean;
+    /** @deprecated 旧字段；保留以兼容旧 store.json 渲染。 */
+    dataDate?: string;
   };
 }
 

@@ -37,9 +37,10 @@ const QUOTE_DAY = "2026-09-10";
 const HQ_TEXT = [
   `hq_str_hkHSI="hkHSI,恒生指数,18000.00,18100.00,18200.00,17900.00,18234.56,134.56,0.74,0,0,0,0,0,0,0,0,0,${QUOTE_DAY},16:08:00";`,
   `hq_str_hkHSTECH="hkHSTECH,恒生科技,5800.00,5700.00,5850.00,5650.00,5820.33,120.33,2.11,0,0,0,0,0,0,0,0,0,${QUOTE_DAY},16:08:00";`,
-  `hq_str_gb_dji="道琼斯,45544.88,-0.20,45600.00,45700.00,45400.00,45544.88,0,0,0,0,0,0,0,0,0,${QUOTE_DAY},05:00:00";`,
-  `hq_str_gb_ixic="纳斯达克,21000.00,0.35,20900.00,21100.00,20850.00,21000.00,0,0,0,0,0,0,0,0,0,${QUOTE_DAY},05:00:00";`,
-  `hq_str_gb_inx="标普500,6500.00,0.10,6480.00,6520.00,6470.00,6500.00,0,0,0,0,0,0,0,0,0,${QUOTE_DAY},05:00:00";`,
+  // 美股字段布局（2026-09-20 依实测修正）：f[3] = 日期时间（北京），如 `2026-09-19 04:20:27`
+  `hq_str_gb_dji="道琼斯,45544.88,-0.20,${QUOTE_DAY} 05:00:00,45600.00,45700.00,45400.00,45544.88,0,0,0,0,0,0,0,0,0,${QUOTE_DAY},05:00:00";`,
+  `hq_str_gb_ixic="纳斯达克,21000.00,0.35,${QUOTE_DAY} 05:00:00,20900.00,21100.00,20850.00,21000.00,0,0,0,0,0,0,0,0,0,${QUOTE_DAY},05:00:00";`,
+  `hq_str_gb_inx="标普500,6500.00,0.10,${QUOTE_DAY} 05:00:00,6480.00,6520.00,6470.00,6500.00,0,0,0,0,0,0,0,0,0,${QUOTE_DAY},05:00:00";`,
 ].join("\n");
 
 /** A股 K 线（日线）：目标日 + 前一交易日，用于涨跌幅计算。 */
@@ -159,16 +160,16 @@ test("B4-1 行情解析：A股走K线、港股取 f[6]、美股取 f[1]；卡脚
   });
 });
 
-test("B4-2 marketStatus：交易日 note 为空、spokenNote 带日期；周一（休市）note 给橙字警示", () => {
-  const tradeDay = computeMarketStatus(REPORT_DAY, QUOTE_DAY);
-  assert.equal(tradeDay.isMarketClosed, false);
-  assert.equal(tradeDay.note, "", "交易日页面不显示休市警示");
-  assert.ok(tradeDay.spokenNote?.includes(formatCnDate(QUOTE_DAY)), "口播恒带交易日日期");
+test("B4-2 marketStatus：有隔夜行情时 note 为空、spokenNote 带日期；无隔夜行情时给橙字警示", () => {
+  const tradeDay = computeMarketStatus(REPORT_DAY, { aShare: QUOTE_DAY, hk: QUOTE_DAY, us: QUOTE_DAY });
+  assert.equal(tradeDay.allStale, false, "gap=1 → 三市场均有隔夜行情");
+  assert.equal(tradeDay.note, "", "有隔夜行情时页面不显示警示");
+  assert.ok(tradeDay.spokenNote?.includes(formatCnDate(QUOTE_DAY)), "口播带数据日期");
 
   const closed = computeMarketStatus(CLOSED_DAY);
-  assert.equal(closed.isMarketClosed, true, "周一早间属休市时段");
-  assert.ok(closed.note?.includes("休市"), "休市警示文案");
-  assert.ok(closed.spokenNote?.includes("休市时段"), "口播休市口径");
+  assert.equal(closed.allStale, true, "无数据 → 三市场均无隔夜行情");
+  assert.ok(closed.note?.includes("无隔夜行情"), "警示文案");
+  assert.ok(closed.spokenNote?.includes("无隔夜行情"), "口播口径");
 });
 
 test("B4-3 store.json 字段级落盘：stock_recap 与 executive 共存互不覆盖", async () => {
@@ -287,7 +288,7 @@ test("B4-6 口播股市段：市场前缀含时区与交易日、板块要点纳
     hk: { overview: "恒指收报18234.56点（涨0.74%）", sectors: ["科网股普涨：恒生科技涨2.11%"], spoken: "" },
     quoteChannel: "新浪行情",
     quoteDate: QUOTE_DAY,
-    marketStatus: computeMarketStatus(REPORT_DAY, QUOTE_DAY),
+    marketStatus: computeMarketStatus(REPORT_DAY, { aShare: QUOTE_DAY, hk: QUOTE_DAY, us: QUOTE_DAY }),
   };
   const b = await assembleBriefingScript(report, { exec });
   assert.ok(b, "口播稿应生成");

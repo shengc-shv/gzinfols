@@ -31,6 +31,16 @@ export interface QuoteResult {
   channel: string;
   /** 取值日（上一交易日，YYYY-MM-DD） */
   date: string;
+  /**
+   * 各市场**数据自带日期**（YYYY-MM-DD，均为北京日期口径）：
+   *  - A股 = 新浪日 K 线最新一根的 `day`；
+   *  - 港股 = hq 字段 f[17]（`2026/09/18`）；
+   *  - 美股 = hq 字段 f[3] 的日期部分（北京时间，= 美东前一日凌晨收盘）。
+   *
+   * 缺失 = 该市场本次未取到数据。消费方（market-status）据此判断
+   * 「该市场是否真有隔夜行情」，不再靠星期几推算。
+   */
+  dates?: { aShare?: string; hk?: string; us?: string };
 }
 
 /** 单条市场输入（标题 + 摘要 + 源链接 + 发布日期；gzinfo ai/stock-recap.ts StockItem 逐字）。 */

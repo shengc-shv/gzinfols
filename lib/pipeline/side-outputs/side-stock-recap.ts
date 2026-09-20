@@ -144,7 +144,9 @@ export async function buildStockRecap(
     // 2026-09-03 修：必须在 writeStockRecap **之前**算好 —— 原实现写在写盘之后，
     // 导致 marketStatus 永远进不了 store.json，SKIP_AI 复用与口播侧拿到的都是 undefined，
     // 口播只剩「A股：」而丢掉「（北京时间9月2日 周三收盘）」标注。
-    recap.marketStatus = computeMarketStatus(date, quotes?.date);
+    // 2026-09-20 重构：改传各市场**数据自带日期**（quotes.dates），按「隔夜新鲜度」判定，
+    // 不再用推算的上一交易日（quotes.date，只看周末、不含节假日）。
+    recap.marketStatus = computeMarketStatus(date, quotes?.dates);
     if (!skipAi) {
       writeStockRecapStore(date, recap);
       ctx.log.info(

@@ -132,7 +132,9 @@ test("runPipeline 主链：股市复盘三卡 + 股市消息清单真实产出�
     assert.ok((recap.hk.indices?.length ?? 0) >= 1, "港股指数块应有数据");
     assert.ok((recap.hk.sectors.length ?? 0) >= 2, "港股收评应锚定解析出板块要点");
     assert.ok((recap.aShare.sectors.length ?? 0) >= 2, "A股收评应锚定解析出板块要点");
-    assert.equal(recap.marketStatus?.dataDate, QUOTE_DAY, "marketStatus 交易日状态应写入 store");
+    // 2026-09-20 重构：marketStatus 改为 per-market（markets.{aShare,hk,us}.{fresh,dataDate}）
+    assert.equal(recap.marketStatus?.markets?.aShare?.dataDate, QUOTE_DAY, "marketStatus 各市场数据日期应写入 store");
+    assert.equal(recap.marketStatus?.markets?.aShare?.fresh, true, "A股 gap=1 → 有隔夜行情");
 
     // 2) 股市消息清单产出（三市场过滤后）
     // 注：gzinfo 机制为「主板块优先」——已被主板块收编的条目（filterStockNewsAgainstSections）

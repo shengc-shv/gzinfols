@@ -94,11 +94,13 @@ export function renderStockRecap(report: DailyReport): string {
     })
     .join("");
   const ms = recap.marketStatus;
-  // 非交易日：橙字警示休市 + 上一交易日日期；交易日：常规说明。
-  // note 为可选（旧 store.json 可能缺失），缺失时回退到 spokenNote 的日期文案。
+  // 2026-09-20 重构：note 非空 = 有市场无隔夜行情（含「部分开市」）→ 橙字警示；
+  // 全市场都有隔夜行情 → note 为空串 → 常规说明。
+  // 兼容旧 store.json（无 markets/note 字段）：回退到旧的 isMarketClosed + spokenNote。
   const closedNote = ms?.note || (ms?.isMarketClosed ? ms?.spokenNote : "");
-  const stockNote = ms?.isMarketClosed
-    ? `<p class="stock-note stock-note--closed" style="color:#c8842a;font-weight:600">⚠️ ${escapeHtml(closedNote ?? "")}</p>`
+  const showClosed = !!(closedNote && closedNote.length > 0);
+  const stockNote = showClosed
+    ? `<p class="stock-note stock-note--closed" style="color:#c8842a;font-weight:600">⚠️ ${escapeHtml(closedNote)}</p>`
     : `<p class="stock-note">昨日市场复盘 · 涨跌概况与关键板块（AI 生成）</p>`;
   return `<section class="stock-recap">
     <div class="stock-must">

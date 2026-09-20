@@ -15,6 +15,7 @@
 
 import type { HttpClient } from "../../contracts/pipeline";
 import type { IndexQuote, MarketQuotes, QuoteResult } from "../../contracts/market";
+import { prevDateKey } from "../../utils/time";
 
 const A_SHARE_DEFS = [
   { code: "sh000001", name: "上证指数", kline: "sh000001" },
@@ -113,22 +114,32 @@ async function fetchText(
 async function aShareFromKline(
   http: HttpClient,
   klineSymbol: string,
-  targetDay: string,
-): Promise<{ value: string; changePct?: string } | null> {
+): Promise<{ value: string; changePct?: string; day: string } | null> {
   const text = await fetchText(http, `${KLINE_API}?symbol=${klineSymbol}&scale=240&ma=no&datalen=8`);
   if (!text) return null;
   try {
     const arr = JSON.parse(text) as Array<{ day: string; close: string }>;
-    const idx = arr.findIndex((k) => k.day === targetDay);
+    // 取**最新一根**日 K（数据自带日期），不再按推算日（prevTradingDay）精确匹配：
+    // 推算日只看周末、不含法定节假日，长假时会匹配不到而误判「该市场无数据」；
+    // 取最新一根则天然反映「该市场最近一次开市的日期」，交由 market-status 判新鲜度。
+    const idx = arr.length - 1;
     if (idx <= 0) return null;
     const yest = parseFloat(arr[idx].close);
     const prev = parseFloat(arr[idx - 1].close);
     if (!yest || !prev) return null;
     const changePct = (((yest - prev) / prev) * 100).toFixed(2);
-    return { value: yest.toFixed(2), changePct: fmtPct(changePct) };
+    return { value: yest.toFixed(2), changePct: fmtPct(changePct), day: arr[idx].day };
   } catch {
     return null;
   }
+}
+
+/** 归一化源站日期为 YYYY-MM-DD（兼容 `2026/09/18` 与 `2026-09-19 04:20:27`）。 */
+export function normSourceDate(raw?: string): string | undefined {
+  if (!raw) return undefined;
+  const m = raw.trim().match(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2})/);
+  if (!m) return undefined;
+  return `${m[1]}-${m[2].padStart(2, "0")}-${m[3].padStart(2, "0")}`;
 }
 
 export async function fetchMarketQuotes(
@@ -141,13 +152,22 @@ export async function fetchMarketQuotes(
     // 即使新浪 hq 接口失败，也尝试 K 线（仅 A股）：K 线接口有自己独立的请求，
     // 至少 A股数据还能 fallback；港股/美股没 K 线 fallback → 返回 null
     const aShareKlineOnly: IndexQuote[] = [];
+    let aShareDay: string | undefined;
     for (const d of A_SHARE_DEFS) {
-      const k = await aShareFromKline(http, d.kline, quoteDate);
-      if (k) aShareKlineOnly.push({ name: d.name, value: k.value, changePct: k.changePct });
+      const k = await aShareFromKline(http, d.kline);
+      if (k) {
+        aShareKlineOnly.push({ name: d.name, value: k.value, changePct: k.changePct });
+        aShareDay = aShareDay ?? k.day;
+      }
     }
     if (aShareKlineOnly.length) {
       console.log(`[quote] 仅 A股 K线 fallback：${aShareKlineOnly.length} 条（港股/美股无 fallback）`);
-      return { quotes: { aShare: aShareKlineOnly, hk: [], us: [] }, channel: "新浪K线", date: quoteDate };
+      return {
+        quotes: { aShare: aShareKlineOnly, hk: [], us: [] },
+        channel: "新浪K线",
+        date: quoteDate,
+        dates: aShareDay ? { aShare: aShareDay } : {},
+      };
     }
     return null;
   }
@@ -158,12 +178,17 @@ export async function fetchMarketQuotes(
   };
 
   const aShare: IndexQuote[] = [];
+  let aShareDay: string | undefined;
   for (const d of A_SHARE_DEFS) {
-    // A股：点位 + 涨跌幅一律走新浪日 K 线（按 targetDay 精确匹配，绝不错日）
-    const k = await aShareFromKline(http, d.kline, quoteDate);
-    if (k) aShare.push({ name: d.name, value: k.value, changePct: k.changePct });
+    // A股：点位 + 涨跌幅一律走新浪日 K 线；日期取**最新一根**（数据自带，绝不错日）
+    const k = await aShareFromKline(http, d.kline);
+    if (k) {
+      aShare.push({ name: d.name, value: k.value, changePct: k.changePct });
+      aShareDay = aShareDay ?? k.day;
+    }
   }
   const hk: IndexQuote[] = [];
+  let hkDay: string | undefined;
   for (const d of HK_DEFS) {
     const f = parseOne(d.code);
     // 港股 hq 字段顺序（2026-08-29 实测 hq.sinajs.cn，港股与 A股字段顺序不同）：
@@ -185,15 +210,25 @@ export async function fetchMarketQuotes(
             value: close.toFixed(2),
             changePct: fmtPct(changePct.toFixed(2)),
           });
+          // f[17] = 源站日期（实测 `2026/09/18`）→ 作该市场「数据自带日期」
+          hkDay = hkDay ?? normSourceDate(f[17]);
         }
       }
     }
   }
   const us: IndexQuote[] = [];
+  let usDay: string | undefined;
   for (const d of US_DEFS) {
     const f = parseOne(d.code);
-    // 美股：f[1] = 最新收盘；f[2] = 涨跌幅（北京时间白天稳定 = 上一美股交易日）
-    if (f && f[1]) us.push({ name: d.name, value: fmtNum(f[1]), changePct: f[2] ? fmtPct(f[2]) : undefined });
+    // 美股：f[1] = 最新收盘；f[2] = 涨跌幅；f[3] = 日期时间（北京，如 `2026-09-19 04:20:27`）
+    if (f && f[1]) {
+      us.push({ name: d.name, value: fmtNum(f[1]), changePct: f[2] ? fmtPct(f[2]) : undefined });
+      // f[3] 是**北京**时间戳（美股收盘 ≈ 北京次日凌晨 04~05 时）；美股交易日应记**美东**日期
+      // （美东 16:00 收盘 = 北京次日，恒差 1 天）→ 减 1 天，与 A股/港股同为「当地交易日」口径，
+      // 否则文案会把它说成「北京日期 周六 收盘」（周六美股并不开市）。
+      const beijingTs = normSourceDate(f[3]);
+      usDay = usDay ?? (beijingTs ? prevDateKey(beijingTs, 1) : undefined);
+    }
   }
 
   if (!aShare.length && !hk.length && !us.length) {
@@ -203,5 +238,14 @@ export async function fetchMarketQuotes(
   console.log(
     `[quote] 行情 API 抓取成功：A股 ${aShare.length} / 港股 ${hk.length} / 美股 ${us.length}（取值日 ${quoteDate}）`,
   );
-  return { quotes: { aShare, hk, us }, channel: "新浪行情", date: quoteDate };
+  return {
+    quotes: { aShare, hk, us },
+    channel: "新浪行情",
+    date: quoteDate,
+    dates: {
+      ...(aShareDay ? { aShare: aShareDay } : {}),
+      ...(hkDay ? { hk: hkDay } : {}),
+      ...(usDay ? { us: usDay } : {}),
+    },
+  };
 }

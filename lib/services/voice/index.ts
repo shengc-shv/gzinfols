@@ -333,12 +333,24 @@ export async function assembleBriefingScript(
   const stockRecap = opts.stockRecap ?? report.stock_recap ?? null;
   if (stockRecap) {
     const ms = stockRecap.marketStatus;
+    // 2026-09-20 重构：按各市场「隔夜新鲜度」决定播不播该市场（判据见 market/market-status.ts）；
+    // 旧 store.json（无 markets 字段）回退旧行为（三市场全播）。
+    const mkOf = (k: "aShare" | "hk" | "us") => ms?.markets?.[k];
+    const isFresh = (k: "aShare" | "hk" | "us"): boolean =>
+      !ms || !ms.markets ? true : !!ms.markets[k]?.fresh;
+    const freshKeys = (["aShare", "hk", "us"] as const).filter(isFresh);
+
     // gzinfo 2026-09-03 修：旧 store.json 里没有 marketStatus 时退回 quoteDate（行情取值日）
     const dataDate = ms?.dataDate || stockRecap.quoteDate || "";
-    const cnDate = dataDate ? formatCnDate(dataDate) : "";
-    // 2026-08-31 用户：口播须点明具体交易日，且作为 IPO→股市 的链接词
-    const stockIntro = dataDate
-      ? `下面是${formatCnDateShort(dataDate)}股市收盘信息。`
+    const shortDateOf = (k: "aShare" | "hk" | "us"): string => {
+      const dd = mkOf(k)?.dataDate || dataDate;
+      return dd ? formatCnDateShort(dd) : "";
+    };
+    // 2026-08-31 用户：口播须点明具体交易日，且作为 IPO→股市 的链接词。
+    // 2026-09-20：日期取「新鲜市场」的（各市场可能不同）；全无隔夜行情时不提日期。
+    const introDate = freshKeys.map(shortDateOf).find(Boolean) ?? "";
+    const stockIntro = introDate
+      ? `下面是${introDate}股市收盘信息。`
       : "下面是股市收盘信息。";
 
     // 预算：股市段吃「总上限 − 已拼内容 − 收尾语」的剩余额度，但不超过 AUDIO_SPEAK_LIMITS.stock。
@@ -355,40 +367,61 @@ export async function assembleBriefingScript(
       { key: "hk", label: "港股", tz: "北京" },
       { key: "us", label: "美股", tz: "美东" },
     ];
-    const prefixOf = (m: { label: string; tz: string }) =>
-      `${m.label}${cnDate ? `（${m.tz}时间${cnDate}收盘）` : ""}：`;
+    // 各市场用**自己的数据日期**（可能不同：如周日 A股为上周五、美股为当天凌晨）
+    const prefixOf = (m: { key: "aShare" | "hk" | "us"; label: string; tz: string }) => {
+      const dd = mkOf(m.key)?.dataDate || dataDate;
+      const cd = dd ? formatCnDate(dd) : "";
+      return `${m.label}${cd ? `（${m.tz}时间${cd}收盘）` : ""}：`;
+    };
     const labelChars: Partial<Record<"aShare" | "hk" | "us", number>> = {};
     for (const m of markets) labelChars[m.key] = prefixOf(m).length;
 
     // maxSectors: 2 = gzinfo 2026-09-03 晚间拍板：股市口播压缩 ~30%，每市场只详述打分最高 2 板块
     const built = buildStockSpoken(stockRecap, { budget: stockBudget, labelChars, maxSectors: 2 });
 
-    const segs: string[] = [];
-    for (const m of markets) {
-      let body = built.texts[m.key];
-      if (!body) {
-        // 兜底：overview/sectors 都缺（如纯指数合成的卡）时退回 LLM 的 spoken
-        const sp = sanitize(stockRecap[m.key]?.spoken ?? "");
-        if (sp) body = truncateAtSentence(sp.replace(/[。.]+$/, ""), 140);
-      }
-      if (!body) continue;
-      segs.push(`${prefixOf(m)}${body.replace(/[。.]+$/, "")}`);
-    }
-    if (segs.length) {
-      // 三市场以「。」连接，末尾补「。」收句（buildStockSpoken 已按预算控制总量）
-      const combined = truncateAtSentence(segs.join("。"), AUDIO_SPEAK_LIMITS.stock + 40) + "。";
-      const segText = `${stockIntro}${combined}`;
+    if (freshKeys.length === 0) {
+      // 三市场均无隔夜行情（休市 / 数据未更新）：按用户 2026-09-20 口径**只说明、不播行情**，
+      // 并引导听众到报告看最近一个工作日的行情（页面照常展示）。
+      const t = ms?.spokenNote?.trim() || "三地股市今日均无隔夜行情";
+      const segText = `${t}，行情详情请参见报告。`;
       parts.push(segText);
-      partMap.stock_recap = combined;
+      partMap.stock_recap = t;
       const dur = estimateDurationSec(segText.length);
       segments.push({ id: "stock", startSec: cursor, durationSec: dur, refs: [], text: segText });
       cursor += dur;
       found++;
-      console.log(
-        `📊 股市口播：A股 ${built.sectorCounts.aShare} / 港股 ${built.sectorCounts.hk} / 美股 ${built.sectorCounts.us} 个板块要点，合计 ${combined.length} 字（预算 ${stockBudget}）`,
-      );
+      console.log("📊 股市口播：三市场均无隔夜行情 → 仅说明情况，不播行情");
     } else {
-      console.warn("⚠️ 章节「昨日股市解读」三市场口播稿均缺失，跳过");
+      const segs: string[] = [];
+      for (const m of markets) {
+        if (!isFresh(m.key)) continue; // 该市场无隔夜行情 → 不播（页面仍展示其日期）
+        let body = built.texts[m.key];
+        if (!body) {
+          // 兜底：overview/sectors 都缺（如纯指数合成的卡）时退回 LLM 的 spoken
+          const sp = sanitize(stockRecap[m.key]?.spoken ?? "");
+          if (sp) body = truncateAtSentence(sp.replace(/[。.]+$/, ""), 140);
+        }
+        if (!body) continue;
+        segs.push(`${prefixOf(m)}${body.replace(/[。.]+$/, "")}`);
+      }
+      if (segs.length) {
+        // 市场之间以「。」连接，末尾补「。」收句（buildStockSpoken 已按预算控制总量）
+        const combined = truncateAtSentence(segs.join("。"), AUDIO_SPEAK_LIMITS.stock + 40) + "。";
+        // 有市场因无隔夜行情未播 → 引导听众到报告看其「最近一个工作日」的行情（页面照常展示）
+        const tail = freshKeys.length < 3 ? "其余市场行情详情请参见报告。" : "";
+        const segText = `${stockIntro}${combined}${tail}`;
+        parts.push(segText);
+        partMap.stock_recap = combined;
+        const dur = estimateDurationSec(segText.length);
+        segments.push({ id: "stock", startSec: cursor, durationSec: dur, refs: [], text: segText });
+        cursor += dur;
+        found++;
+        console.log(
+          `📊 股市口播：A股 ${built.sectorCounts.aShare} / 港股 ${built.sectorCounts.hk} / 美股 ${built.sectorCounts.us} 个板块要点，播出 ${segs.length} 个市场，合计 ${combined.length} 字（预算 ${stockBudget}）`,
+        );
+      } else {
+        console.warn("⚠️ 章节「昨日股市解读」新鲜市场口播稿均缺失，跳过");
+      }
     }
   }
 

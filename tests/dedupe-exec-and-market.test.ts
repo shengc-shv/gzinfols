@@ -65,23 +65,47 @@ test("dedupeExecAgainstSections: 必读头条命中的事件，资讯板块不�
   assert.equal(report.sections.policy_market.length, 3, "原 report 不应被修改");
 });
 
-test("computeMarketStatus: 周日报告标注上一交易日休市", () => {
-  const r = computeMarketStatus("2026-08-30", "2026-08-28")!; // 周日
-  assert.equal(r.isMarketClosed, true);
-  assert.equal(r.dataDate, "2026-08-28");
-  assert.match(r.note!, /上一交易日/);
-  assert.match(r.note!, /8月28日 周五/);
-});
-
-test("computeMarketStatus: 周一报告同样标注休市（早间市场未开）", () => {
-  // 2026-08-31 是周一
-  const r = computeMarketStatus("2026-08-31", "2026-08-28")!;
-  assert.equal(r.isMarketClosed, true);
-  assert.match(r.note!, /上一交易日/);
-});
-
-test("computeMarketStatus: 交易日(周三)无休市提示", () => {
-  const r = computeMarketStatus("2026-08-26", "2026-08-25")!; // 周三
-  assert.equal(r.isMarketClosed, false);
+test("computeMarketStatus: 周六报告 → 三市场 gap=1 均播（美股美东周五收盘的隔夜行情）", () => {
+  // 报告日 08-29（周六）：数据（A股/港股 08-28、美股美东 08-28）→ gap=1 → 全播。
+  const r = computeMarketStatus("2026-08-29", { aShare: "2026-08-28", hk: "2026-08-28", us: "2026-08-28" });
+  assert.equal(r.markets.us.fresh, true, "美股 gap=1 → 播");
+  assert.equal(r.markets.aShare.fresh, true, "A股 gap=1 → 播");
+  assert.equal(r.allStale, false);
   assert.equal(r.note, "");
+});
+
+test("computeMarketStatus: 周日报告 → 三市场均无隔夜行情（周五行情周六早已播过）", () => {
+  // 报告日 08-30（周日）：同一份 08-28 数据 → gap=2 → 全不播，避免重播。
+  const r = computeMarketStatus("2026-08-30", { aShare: "2026-08-28", hk: "2026-08-28", us: "2026-08-28" });
+  assert.equal(r.allStale, true, "gap=2 > 1 → 全无隔夜行情");
+  assert.equal(r.markets.us.fresh, false, "美股同理（周六已播）");
+  assert.match(r.note!, /无隔夜行情/);
+});
+
+test("computeMarketStatus: 周一报告 → 三市场均无隔夜行情", () => {
+  const r = computeMarketStatus("2026-08-31", { aShare: "2026-08-28", hk: "2026-08-28", us: "2026-08-28" });
+  assert.equal(r.allStale, true);
+  assert.match(r.note!, /无隔夜行情/);
+});
+
+test("computeMarketStatus: 周三报告，数据为周二（gap=1）→ 三市场均有隔夜行情、无警示", () => {
+  const r = computeMarketStatus("2026-08-26", { aShare: "2026-08-25", hk: "2026-08-25", us: "2026-08-25" });
+  assert.equal(r.allStale, false);
+  assert.equal(r.markets.aShare.fresh, true);
+  assert.equal(r.markets.hk.fresh, true);
+  assert.equal(r.note, "");
+});
+
+test("computeMarketStatus: 部分开市 —— A股/港股休市（gap 大）而美股新鲜 → 仅美股 fresh", () => {
+  // 场景：A股/港股数据停在假期前（gap=4），美股为美东前一日（美东基准 10-05、数据 10-05 → gap=0）
+  const r = computeMarketStatus("2026-10-06", {
+    aShare: "2026-10-02",
+    hk: "2026-10-02",
+    us: "2026-10-05",
+  });
+  assert.equal(r.markets.us.fresh, true, "美股有隔夜行情");
+  assert.equal(r.markets.aShare.fresh, false, "A股无隔夜行情");
+  assert.equal(r.markets.hk.fresh, false, "港股无隔夜行情");
+  assert.equal(r.allStale, false);
+  assert.match(r.note!, /A股、港股/);
 });
