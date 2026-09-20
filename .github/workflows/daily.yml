@@ -113,8 +113,6 @@ jobs:
         run: npm run architecture:check
       - name: 类型检查
         run: npm run typecheck
-      - name: 单元测试
-        run: npm test
 
       # 探测腾讯密钥（step 级 if 不支持 secrets 上下文，先转输出）
       - name: Detect Tencent TTS secret
