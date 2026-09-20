@@ -3,6 +3,15 @@ import assert from "node:assert/strict";
 import { renderHtml, renderMarkdown } from "../lib/services/render";
 import { SECTION_ORDER } from "../lib/contracts/report";
 import type { DailyReport, ReportItem } from "../lib/contracts/report";
+import { todayKey } from "../lib/utils/time";
+
+// ⚠️ 时间红线：fixture 日期必须相对「今天」动态生成，禁止写死。
+// 原因：IPO 面板（p-ipo）走 topGdIpo 的 IPO_LIST_WINDOW_DAYS 窗口判定，而
+// topGdIpo 未传 today 时以 todayKey()（真实今天）为基准 —— 写死日期会随日历
+// 逐日漂移，日差越过窗口后 p-ipo 不再渲染。
+// 实锤：fixture 写死 09/13，2026-09-20 日差到 7 → 跌出 7 天窗口 → 用例失败。
+const TODAY_KEY = todayKey();
+const TODAY_MMDD = `${TODAY_KEY.slice(5, 7)}/${TODAY_KEY.slice(8, 10)}`;
 
 function item(title: string, over: Partial<ReportItem> = {}): ReportItem {
   return {
@@ -10,7 +19,7 @@ function item(title: string, over: Partial<ReportItem> = {}): ReportItem {
     title_cn: title,
     source: "源",
     source_type: "official",
-    date: "09/11",
+    date: TODAY_MMDD,
     summary: "摘要",
     importance: 2,
     rank: 1,
@@ -23,7 +32,7 @@ function item(title: string, over: Partial<ReportItem> = {}): ReportItem {
 
 function baseReport(): DailyReport {
   return {
-    date: "2026-09-11",
+    date: TODAY_KEY,
     must_read: [],
     insights: [],
     sections: { gz_local: [], biz_insight: [], policy_market: [], tech: [], ipo: [] },
@@ -45,7 +54,7 @@ test("五板块面板齐全（完整版渲染：panel id 与 gzinfo 同款）", 
   // gzinfo 语义：空板块不渲染（alwaysShow 仅 gz）；各板块填 1 条以断言面板齐全
   const one = (url: string, title: string): any => ({
     url, title_cn: title, title_orig: title, source: "源", source_type: "media",
-    date: "09/13", summary: "摘要。", importance: 2, rank: 1, tags: [], locale: "national",
+    date: TODAY_MMDD, summary: "摘要。", importance: 2, rank: 1, tags: [], locale: "national",
   });
   report.sections.gz_local = [one("https://e.com/gz", "广州出台科技金融新政")];
   report.sections.biz_insight = [one("https://e.com/biz", "银行理财规模回升")];

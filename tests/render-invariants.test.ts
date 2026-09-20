@@ -16,6 +16,14 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { renderHtml } from "../lib/services/render";
 import type { DailyReport, ReportItem } from "../lib/contracts/report";
+import { todayKey } from "../lib/utils/time";
+
+// ⚠️ 时间红线：fixture 日期必须相对「今天」动态生成（与 tests/render.test.ts 同源教训）。
+// 本文件断言 p-ipo 面板，而 IPO 面板走 topGdIpo 的 IPO_LIST_WINDOW_DAYS 窗口判定
+// （未传 today 时以 todayKey() 为基准）→ 写死日期会随日历逐日漂移，日差越过窗口
+// 后 p-ipo 不再渲染、用例失败（render.test.ts 已于 2026-09-20 实锤）。
+const TODAY_KEY = todayKey();
+const TODAY_MMDD = `${TODAY_KEY.slice(5, 7)}/${TODAY_KEY.slice(8, 10)}`;
 
 function item(title: string, over: Partial<ReportItem> = {}): ReportItem {
   return {
@@ -23,7 +31,7 @@ function item(title: string, over: Partial<ReportItem> = {}): ReportItem {
     title_cn: title,
     source: "源",
     source_type: "media",
-    date: "09/14",
+    date: TODAY_MMDD,
     summary: "摘要。",
     importance: 2,
     rank: 1,
@@ -35,7 +43,7 @@ function item(title: string, over: Partial<ReportItem> = {}): ReportItem {
 
 function report(over: Partial<DailyReport> = {}): DailyReport {
   return {
-    date: "2026-09-14",
+    date: TODAY_KEY,
     must_read: [],
     insights: [],
     sections: { gz_local: [], biz_insight: [], policy_market: [], tech: [], ipo: [] },
