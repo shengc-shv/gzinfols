@@ -812,12 +812,15 @@
       ],
       "kind": "local",
       "firstBroadcastAt": "2026-09-17",
-      "lastBroadcastAt": "2026-09-17",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-09-21",
+      "broadcastCount": 2,
       "sections": [
-        "must_read"
+        "must_read",
+        "insights"
       ],
-      "anglesUsed": [],
+      "anglesUsed": [
+        "政策变化"
+      ],
       "samples": [
         {
           "date": "2026-09-17",
@@ -832,14 +835,32 @@
           "url": "https://news.dayoo.com/guangzhou/202609/16/139995_55004139.htm",
           "score": 71,
           "novelty": 1
+        },
+        {
+          "date": "2026-09-21",
+          "section": "insights",
+          "title": "跨境资金集中运营",
+          "text": "跨境资金集中运营 上海首批8家落地本外币跨境资金集中运营新政，大湾区跨境客群资金管理便利化需求上升。 值得关注大湾区跨境客群需求，评估跨境资金集中运营产品的对接空间。",
+          "facts": [
+            "#8家",
+            "!落地",
+            "@大湾区"
+          ],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://finance.sina.com.cn/jryx/bank/2026-09-20/doc-inisnnky6632818.shtml",
+          "novelty": 0.8235849056603772,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "香港五年规划设大湾区专章 香港五年规划设大湾区专章 明确支持南沙对外开放门户作用，跨境金融与南沙客群服务窗口打开，政银合作可提前布局。"
+        "香港五年规划设大湾区专章 香港五年规划设大湾区专章 明确支持南沙对外开放门户作用，跨境金融与南沙客群服务窗口打开，政银合作可提前布局。",
+        "跨境资金集中运营 跨境资金集中运营 上海首批8家落地本外币跨境资金集中运营新政，大湾区跨境客群资金管理便利化需求上升。 值得关注大湾区跨境客群需求，评估跨境资金集中运营产品的对接空间。"
       ],
       "broadcastedFacts": [
         "@南沙",
-        "@大湾区"
+        "@大湾区",
+        "#8家",
+        "!落地"
       ],
       "peakScore": 71
     },
@@ -1389,17 +1410,19 @@
       "anchors": [
         "信贷",
         "信用卡",
-        "广州"
+        "广州",
+        "普惠"
       ],
       "kind": "local",
       "firstBroadcastAt": "2026-09-18",
-      "lastBroadcastAt": "2026-09-18",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-09-21",
+      "broadcastCount": 2,
       "sections": [
         "insights"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -1426,15 +1449,32 @@
           "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-17/doc-inisatuq9447220.shtml",
           "novelty": 0.951875,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-09-21",
+          "section": "insights",
+          "title": "净土贷绿色融资",
+          "text": "净土贷绿色融资 广州首单净土贷落地，土壤治理类绿色信贷路径打通，本地环保与城投类客户融资需求显现。 可考虑本周走访本地环保与城投类客户，跟进绿色信贷与普惠小微融资需求。",
+          "facts": [
+            "!落地",
+            "!首单",
+            "@广州"
+          ],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202609/20/139995_55005694.htm",
+          "novelty": 0.6385964912280702,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "商超场景消费信贷联动 商超场景消费信贷联动 永辉广州两家调改门店近期开业，商超客流回升，门店周边收单、商户结算与消费信贷联动机会显现。 提示本周走访新开门店周边商户，打包收单结算与消费分期方案，同步争取门店内信用卡绑卡与分期入口。",
-        "平台月付入口流量变化 平台月付入口流量变化 平台月付功能仍在、仅页面分家，支付与信贷展示规则调整落地，信用卡绑卡与分期入口流量结构将生变。 可考虑本周监测主流平台绑卡与分期转化数据，及时调整信用卡分期投放位与权益配置，抢占迁移期流量。"
+        "平台月付入口流量变化 平台月付入口流量变化 平台月付功能仍在、仅页面分家，支付与信贷展示规则调整落地，信用卡绑卡与分期入口流量结构将生变。 可考虑本周监测主流平台绑卡与分期转化数据，及时调整信用卡分期投放位与权益配置，抢占迁移期流量。",
+        "净土贷绿色融资 净土贷绿色融资 广州首单净土贷落地，土壤治理类绿色信贷路径打通，本地环保与城投类客户融资需求显现。 可考虑本周走访本地环保与城投类客户，跟进绿色信贷与普惠小微融资需求。"
       ],
       "broadcastedFacts": [
         "@广州",
-        "!落地"
+        "!落地",
+        "!首单"
       ],
       "peakScore": 0
     },
@@ -1515,23 +1555,26 @@
       "id": "个贷|利率",
       "topicTags": [
         "利率流动性",
-        "消费信贷"
+        "消费信贷",
+        "监管合规"
       ],
       "anchors": [
         "个贷",
         "利率",
-        "消费贷"
+        "消费贷",
+        "违规"
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-09-19",
-      "lastBroadcastAt": "2026-09-19",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-09-21",
+      "broadcastCount": 2,
       "sections": [
         "must_read",
         "risk"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -1559,11 +1602,23 @@
           "score": 78,
           "novelty": 0.9338582677165355,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-09-21",
+          "section": "risk",
+          "title": "助贷中介违规介入放款",
+          "text": "助贷中介违规介入放款 卧底调查显示套娃式助贷105万贷款收近23万服务费，有公司自称能让银行人员控制放款时间。 个贷合作渠道与员工行为风险上升，消费贷宣传与放款环节合规压力加大，风控与渠道管理需同步收紧。 风控部应排查合作助贷渠道与员工行为，个贷部应复核放款流程与收费口径，本周完成自查。",
+          "facts": [],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "score": 74,
+          "novelty": 0.29267241379310344,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "个贷成本明示新规落地 个贷成本明示新规落地 五协会自律规范要求贷款年化成本一表看清、禁用日利率月费率，个贷展示与合同文本面临全面校准。",
-        "个贷成本展示口径收紧 个贷成本展示口径收紧 五协会联合发布《个人贷款业务明示综合融资成本自律规范》，明确明示综合融资成本时不得使用日利率、月费率等形式。 消费贷与个贷宣传物料、合同文本若沿用旧表述将面临合规风险，财富条线产品说明与客户沟通口径也需同步校准。 可提示个贷与财富条线本周完成宣传物料与合同文本自查，统一改用年化综合融资成本口径，风控部同步复核存量话术。"
+        "个贷成本展示口径收紧 个贷成本展示口径收紧 五协会联合发布《个人贷款业务明示综合融资成本自律规范》，明确明示综合融资成本时不得使用日利率、月费率等形式。 消费贷与个贷宣传物料、合同文本若沿用旧表述将面临合规风险，财富条线产品说明与客户沟通口径也需同步校准。 可提示个贷与财富条线本周完成宣传物料与合同文本自查，统一改用年化综合融资成本口径，风控部同步复核存量话术。",
+        "助贷中介违规介入放款 助贷中介违规介入放款 卧底调查显示套娃式助贷105万贷款收近23万服务费，有公司自称能让银行人员控制放款时间。 个贷合作渠道与员工行为风险上升，消费贷宣传与放款环节合规压力加大，风控与渠道管理需同步收紧。 风控部应排查合作助贷渠道与员工行为，个贷部应复核放款流程与收费口径，本周完成自查。"
       ],
       "broadcastedFacts": [
         "!落地",
@@ -2054,167 +2109,331 @@
         "@证监会"
       ],
       "peakScore": 87
+    },
+    "利率|美联储": {
+      "id": "利率|美联储",
+      "topicTags": [
+        "利率流动性"
+      ],
+      "anchors": [
+        "美联储",
+        "利率"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-09-21",
+      "lastBroadcastAt": "2026-09-21",
+      "broadcastCount": 1,
+      "sections": [
+        "hero"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-21",
+          "section": "hero",
+          "title": "美联储加息落地 全球利率现分化博弈",
+          "text": "美联储加息落地 全球利率现分化博弈",
+          "facts": [
+            "!落地",
+            "!加息",
+            "@美联储"
+          ],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_09_20_901407.shtml",
+          "score": 87,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "美联储加息落地 全球利率现分化博弈 美联储加息落地 全球利率现分化博弈"
+      ],
+      "broadcastedFacts": [
+        "!落地",
+        "!加息",
+        "@美联储"
+      ],
+      "peakScore": 87
+    },
+    "#40年|房贷|按揭": {
+      "id": "#40年|房贷|按揭",
+      "topicTags": [
+        "住房金融",
+        "私行客群"
+      ],
+      "anchors": [
+        "房贷",
+        "按揭",
+        "#40年",
+        "客群"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-09-21",
+      "lastBroadcastAt": "2026-09-21",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read",
+        "insights"
+      ],
+      "anglesUsed": [
+        "政策变化"
+      ],
+      "samples": [
+        {
+          "date": "2026-09-21",
+          "section": "must_read",
+          "title": "多家银行落地40年房贷",
+          "text": "多家银行落地40年房贷 按揭期限竞争加剧并设45岁年龄门槛，本行期限与年龄政策覆盖差异需评估。",
+          "facts": [
+            "#40年",
+            "!落地"
+          ],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://finance.sina.com.cn/jjxw/2026-09-20/doc-inismrff2565564.shtml",
+          "score": 74,
+          "novelty": 1
+        },
+        {
+          "date": "2026-09-21",
+          "section": "insights",
+          "title": "40年房贷期限竞争",
+          "text": "40年房贷期限竞争 多家银行推出40年房贷并设45岁年龄门槛，按揭期限竞争加剧，中年置业客群覆盖差异显现。 值得关注本行期限与年龄政策与同业的差距，评估对45岁以上客群的覆盖空间。",
+          "facts": [
+            "#40年"
+          ],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://finance.sina.com.cn/jjxw/2026-09-20/doc-inismrff2565564.shtml",
+          "novelty": 0.18768115942028987,
+          "angle": "政策变化"
+        }
+      ],
+      "broadcastedTexts": [
+        "多家银行落地40年房贷 多家银行落地40年房贷 按揭期限竞争加剧并设45岁年龄门槛，本行期限与年龄政策覆盖差异需评估。",
+        "40年房贷期限竞争 40年房贷期限竞争 多家银行推出40年房贷并设45岁年龄门槛，按揭期限竞争加剧，中年置业客群覆盖差异显现。 值得关注本行期限与年龄政策与同业的差距，评估对45岁以上客群的覆盖空间。"
+      ],
+      "broadcastedFacts": [
+        "#40年",
+        "!落地"
+      ],
+      "peakScore": 74
+    },
+    "#16个月|LPR|利率|房贷": {
+      "id": "#16个月|LPR|利率|房贷",
+      "topicTags": [
+        "住房金融",
+        "利率流动性",
+        "消费信贷"
+      ],
+      "anchors": [
+        "房贷",
+        "按揭",
+        "消费贷",
+        "LPR",
+        "利率",
+        "#16个月"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-09-21",
+      "lastBroadcastAt": "2026-09-21",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-21",
+          "section": "must_read",
+          "title": "LPR连续16个月按兵不动",
+          "text": "LPR连续16个月按兵不动 房贷与消费贷定价基准短期稳定，存量与新增利率差异成为客户沟通重点，影响按揭与消贷投放节奏。",
+          "facts": [
+            "#16个月"
+          ],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://finance.cctv.com/2026/09/20/ARTIQ2jOvfQyHGo9IwSNQsrH260920.shtml",
+          "score": 74,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "LPR连续16个月按兵不动 LPR连续16个月按兵不动 房贷与消费贷定价基准短期稳定，存量与新增利率差异成为客户沟通重点，影响按揭与消贷投放节奏。"
+      ],
+      "broadcastedFacts": [
+        "#16个月"
+      ],
+      "peakScore": 74
+    },
+    "保险|养老|客群": {
+      "id": "保险|养老|客群",
+      "topicTags": [
+        "财富管理",
+        "私行客群"
+      ],
+      "anchors": [
+        "保险",
+        "客群",
+        "养老"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-09-21",
+      "lastBroadcastAt": "2026-09-21",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read",
+        "insights"
+      ],
+      "anglesUsed": [
+        "政策变化"
+      ],
+      "samples": [
+        {
+          "date": "2026-09-21",
+          "section": "must_read",
+          "title": "国常会部署应对老龄化",
+          "text": "国常会部署应对老龄化 养老金融政策导向明确，养老储蓄与保险类产品对接窗口打开，关系零售长期客群经营。",
+          "facts": [],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://finance.eastmoney.com/a/202609203879356443.html",
+          "score": 69,
+          "novelty": 1
+        },
+        {
+          "date": "2026-09-21",
+          "section": "insights",
+          "title": "养老金融产品对接",
+          "text": "养老金融产品对接 国常会部署应对老龄化叠加保险加养老解读，养老储蓄与保险类产品客户教育窗口打开。 可考虑结合养老部署加快养老储蓄与保险类产品对接，本周启动客群宣讲。",
+          "facts": [],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://finance.eastmoney.com/a/202609203879356443.html",
+          "novelty": 0.19310344827586207,
+          "angle": "政策变化"
+        }
+      ],
+      "broadcastedTexts": [
+        "国常会部署应对老龄化 国常会部署应对老龄化 养老金融政策导向明确，养老储蓄与保险类产品对接窗口打开，关系零售长期客群经营。",
+        "养老金融产品对接 养老金融产品对接 国常会部署应对老龄化叠加保险加养老解读，养老储蓄与保险类产品客户教育窗口打开。 可考虑结合养老部署加快养老储蓄与保险类产品对接，本周启动客群宣讲。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 69
+    },
+    "#2万亿|债基|理财": {
+      "id": "#2万亿|债基|理财",
+      "topicTags": [
+        "财富管理"
+      ],
+      "anchors": [
+        "理财",
+        "债基",
+        "#2万亿"
+      ],
+      "kind": "market",
+      "firstBroadcastAt": "2026-09-21",
+      "lastBroadcastAt": "2026-09-21",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-21",
+          "section": "must_read",
+          "title": "被动指数债基破2万亿",
+          "text": "被动指数债基破2万亿 从机构工具转向大众理财，稳健型客户配置供给面临调整，财富货架需补充。",
+          "facts": [
+            "#2万亿"
+          ],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://finance.sina.com.cn/money/bond/2026-09-21/doc-inispuef2146417.shtml",
+          "score": 61,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "被动指数债基破2万亿 被动指数债基破2万亿 从机构工具转向大众理财，稳健型客户配置供给面临调整，财富货架需补充。"
+      ],
+      "broadcastedFacts": [
+        "#2万亿"
+      ],
+      "peakScore": 61
+    },
+    "公积金": {
+      "id": "公积金",
+      "topicTags": [
+        "住房金融"
+      ],
+      "anchors": [
+        "公积金"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-09-21",
+      "lastBroadcastAt": "2026-09-21",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-21",
+          "section": "must_read",
+          "title": "公积金条例正式实施",
+          "text": "公积金条例正式实施 装修、物业费均可提取，提取场景扩容，为住房金融与消费场景联动提供新抓手。",
+          "facts": [
+            "!实施"
+          ],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://finance.cctv.com/2026/09/20/ARTIKIG4Q7bPc3BTJfsQ0tR8260920.shtml",
+          "score": 29,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "公积金条例正式实施 公积金条例正式实施 装修、物业费均可提取，提取场景扩容，为住房金融与消费场景联动提供新抓手。"
+      ],
+      "broadcastedFacts": [
+        "!实施"
+      ],
+      "peakScore": 29
+    },
+    "客群|获客": {
+      "id": "客群|获客",
+      "topicTags": [
+        "私行客群"
+      ],
+      "anchors": [
+        "客群",
+        "获客"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-09-21",
+      "lastBroadcastAt": "2026-09-21",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-09-21",
+          "section": "insights",
+          "title": "中小机构整合客群迁移",
+          "text": "中小机构整合客群迁移 民生银行同日获批收购两家村镇银行，中小机构整合提速，区域内存量网点与客群迁移机会显现。 可关注区域内存量网点与客群迁移机会，评估承接与获客切入点。",
+          "facts": [],
+          "broadcastAt": "2026-09-21T07:48:27+08:00",
+          "url": "https://m.21jingji.com/article/20260920/herald/32aceff19ca709cc20a4766b8c501a0d.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "中小机构整合客群迁移 中小机构整合客群迁移 民生银行同日获批收购两家村镇银行，中小机构整合提速，区域内存量网点与客群迁移机会显现。 可关注区域内存量网点与客群迁移机会，评估承接与获客切入点。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
     }
   },
   "today": {
     "date": "2026-09-21",
-    "entries": [
-      {
-        "date": "2026-09-21",
-        "section": "hero",
-        "title": "美联储加息落地 全球利率现分化博弈",
-        "text": "美联储加息落地 全球利率现分化博弈",
-        "facts": [
-          "!落地",
-          "!加息",
-          "@美联储"
-        ],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://www.guancha.cn/GuanJinRong/2026_09_20_901407.shtml",
-        "score": 87,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-21",
-        "section": "must_read",
-        "title": "多家银行落地40年房贷",
-        "text": "多家银行落地40年房贷 按揭期限竞争加剧并设45岁年龄门槛，本行期限与年龄政策覆盖差异需评估。",
-        "facts": [
-          "#40年",
-          "!落地"
-        ],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://finance.sina.com.cn/jjxw/2026-09-20/doc-inismrff2565564.shtml",
-        "score": 74,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-21",
-        "section": "must_read",
-        "title": "LPR连续16个月按兵不动",
-        "text": "LPR连续16个月按兵不动 房贷与消费贷定价基准短期稳定，存量与新增利率差异成为客户沟通重点，影响按揭与消贷投放节奏。",
-        "facts": [
-          "#16个月"
-        ],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://finance.cctv.com/2026/09/20/ARTIQ2jOvfQyHGo9IwSNQsrH260920.shtml",
-        "score": 74,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-21",
-        "section": "must_read",
-        "title": "国常会部署应对老龄化",
-        "text": "国常会部署应对老龄化 养老金融政策导向明确，养老储蓄与保险类产品对接窗口打开，关系零售长期客群经营。",
-        "facts": [],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://finance.eastmoney.com/a/202609203879356443.html",
-        "score": 69,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-21",
-        "section": "must_read",
-        "title": "被动指数债基破2万亿",
-        "text": "被动指数债基破2万亿 从机构工具转向大众理财，稳健型客户配置供给面临调整，财富货架需补充。",
-        "facts": [
-          "#2万亿"
-        ],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://finance.sina.com.cn/money/bond/2026-09-21/doc-inispuef2146417.shtml",
-        "score": 61,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-21",
-        "section": "must_read",
-        "title": "公积金条例正式实施",
-        "text": "公积金条例正式实施 装修、物业费均可提取，提取场景扩容，为住房金融与消费场景联动提供新抓手。",
-        "facts": [
-          "!实施"
-        ],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://finance.cctv.com/2026/09/20/ARTIKIG4Q7bPc3BTJfsQ0tR8260920.shtml",
-        "score": 29,
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-21",
-        "section": "insights",
-        "title": "40年房贷期限竞争",
-        "text": "40年房贷期限竞争 多家银行推出40年房贷并设45岁年龄门槛，按揭期限竞争加剧，中年置业客群覆盖差异显现。 值得关注本行期限与年龄政策与同业的差距，评估对45岁以上客群的覆盖空间。",
-        "facts": [
-          "#40年"
-        ],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://finance.sina.com.cn/jjxw/2026-09-20/doc-inismrff2565564.shtml",
-        "novelty": 0.18768115942028987,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-09-21",
-        "section": "insights",
-        "title": "养老金融产品对接",
-        "text": "养老金融产品对接 国常会部署应对老龄化叠加保险加养老解读，养老储蓄与保险类产品客户教育窗口打开。 可考虑结合养老部署加快养老储蓄与保险类产品对接，本周启动客群宣讲。",
-        "facts": [],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://finance.eastmoney.com/a/202609203879356443.html",
-        "novelty": 0.19310344827586207,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-09-21",
-        "section": "insights",
-        "title": "净土贷绿色融资",
-        "text": "净土贷绿色融资 广州首单净土贷落地，土壤治理类绿色信贷路径打通，本地环保与城投类客户融资需求显现。 可考虑本周走访本地环保与城投类客户，跟进绿色信贷与普惠小微融资需求。",
-        "facts": [
-          "!落地",
-          "!首单",
-          "@广州"
-        ],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202609/20/139995_55005694.htm",
-        "novelty": 0.6385964912280702,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-09-21",
-        "section": "insights",
-        "title": "跨境资金集中运营",
-        "text": "跨境资金集中运营 上海首批8家落地本外币跨境资金集中运营新政，大湾区跨境客群资金管理便利化需求上升。 值得关注大湾区跨境客群需求，评估跨境资金集中运营产品的对接空间。",
-        "facts": [
-          "#8家",
-          "!落地",
-          "@大湾区"
-        ],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://finance.sina.com.cn/jryx/bank/2026-09-20/doc-inisnnky6632818.shtml",
-        "novelty": 0.8235849056603772,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-09-21",
-        "section": "insights",
-        "title": "中小机构整合客群迁移",
-        "text": "中小机构整合客群迁移 民生银行同日获批收购两家村镇银行，中小机构整合提速，区域内存量网点与客群迁移机会显现。 可关注区域内存量网点与客群迁移机会，评估承接与获客切入点。",
-        "facts": [],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "url": "https://m.21jingji.com/article/20260920/herald/32aceff19ca709cc20a4766b8c501a0d.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-09-21",
-        "section": "risk",
-        "title": "助贷中介违规介入放款",
-        "text": "助贷中介违规介入放款 卧底调查显示套娃式助贷105万贷款收近23万服务费，有公司自称能让银行人员控制放款时间。 个贷合作渠道与员工行为风险上升，消费贷宣传与放款环节合规压力加大，风控与渠道管理需同步收紧。 风控部应排查合作助贷渠道与员工行为，个贷部应复核放款流程与收费口径，本周完成自查。",
-        "facts": [],
-        "broadcastAt": "2026-09-21T07:48:27+08:00",
-        "score": 74,
-        "novelty": 0.29267241379310344,
-        "angle": "市场反应"
-      }
-    ],
-    "runId": "35545685032"
+    "entries": []
   },
   "deliveries": [
     {
@@ -2250,6 +2469,13 @@
       "runId": "35478439207",
       "reportRunId": "35478174077",
       "reportSha": "a9128385eac55f38c950bdcdaa79d2b0f9d8adae"
+    },
+    {
+      "date": "2026-09-21",
+      "pushedAt": "2026-09-21T07:56:49+08:00",
+      "runId": "35546093868",
+      "reportRunId": "35545685032",
+      "reportSha": "93c3d485a6134e4726ef0739a8955ab63e70cfec"
     }
   ],
   "ipoVoicing": {
