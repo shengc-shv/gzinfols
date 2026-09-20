@@ -79,8 +79,8 @@ function toPayloadItems(items: StockItem[]): Array<{ title: string; summary: str
   }));
 }
 
-/** 公告流源（无恒指/板块等综合盘面数据，不能充当股市解读主源或交叉验证源，仅作补充）。
- *  2026-08-25 用户拍板：披露易是公司级公告流，不应出现在卡脚 source/crossCheck 主位。 */
+/** 公告流源（无恒指/板块等综合盘面数据，不能充当股市解读主源，也不构成独立核验源，仅作补充）。
+ *  2026-08-25 用户拍板：披露易是公司级公告流，不应出现在卡脚 source/quoteSource 主位。 */
 const ANNOUNCEMENT_SOURCES = ["港交所披露易"];
 
 /**
@@ -109,14 +109,17 @@ export function rankHkStockItems(items: StockItem[]): StockItem[] {
     .map((x) => x.it);
 }
 
-/** 卡脚小字备注：来源网站（新闻综合主源）+ 交叉验证网站（指数核验源）+ 数据时间（条目最新日期）。
+/** 卡脚小字备注：新闻来源网站（渠道）+ 行情来源网站 + 数据时间（条目最新日期）。
  *  - source：取首个「非公告流」源（真正贡献盘面解读素材的综合新闻源，如港股=新浪港股）；
- *  - crossCheck：统一取指数核验源 indexChannel（= 新浪行情 API，恒指/道指等点位由它独立核验）；
+ *  - quoteSource：**行情（指数点位）来源** indexChannel（= 新浪行情 API）。
+ *    2026-09-20 由 crossCheck 更名：原名暗示「有第二个独立源交叉核验」，实际取的就是
+ *    点位提供者本身（三市场全为新浪系），属同源自证 → 如实标注为「来源」，不再声称核验。
+ *    也因此**不再回退到「第二个新闻源」**：新闻源不是行情来源，标在「行情来源」下仍属名实不符。
  *  - 全部取自真实字段，非 LLM 生成。 */
 function buildMeta(
   items: StockItem[],
   indexChannel?: string,
-): { source: string; date: string; crossCheck: string } {
+): { source: string; date: string; quoteSource: string } {
   const allSrcs = [...new Set(items.map((i) => (i.source ?? "").trim()).filter(Boolean))];
   const newsSrcs = allSrcs.filter((s) => !ANNOUNCEMENT_SOURCES.includes(s));
   const dates = items
@@ -127,8 +130,8 @@ function buildMeta(
   return {
     // 优先取新闻综合主源；若该市场只有公告流（极端），fallback 取首个源，避免空白
     source: newsSrcs[0] ?? allSrcs[0] ?? "",
-    // 交叉验证 = 指数核验源（新浪行情）；无行情兜底时退回「第二个新闻源」保持旧行为
-    crossCheck: indexChannel ?? newsSrcs[1] ?? allSrcs[1] ?? "",
+    // 行情来源 = 实际抓取点位的渠道（新浪行情）；无行情则留空（不显示该字段）
+    quoteSource: indexChannel ?? "",
     date: dates[0] ?? "",
   };
 }
@@ -341,8 +344,8 @@ function finalizeRecap(
   input: StockRecapInput,
   quotes?: QuoteResult | null,
 ): StockRecap | null {
-  // 卡脚小字备注（来源网站/交叉验证网站/数据时间取自输入条目真实字段，非 LLM 臆造；SKIP_AI 复用 store 时一并带回）
-  // crossCheck 统一为指数核验源「新浪行情」（quotes.channel），披露易等公告流不进主位
+  // 卡脚小字备注（新闻来源网站/行情来源网站/数据时间取自输入条目真实字段，非 LLM 臆造；SKIP_AI 复用 store 时一并带回）
+  // quoteSource 如实标注点位实际来源「新浪行情」（quotes.channel），不再声称交叉核验；披露易等公告流不进主位
   recap.us.meta = buildMeta(input.us, quotes?.channel);
   recap.aShare.meta = buildMeta(input.aShare, quotes?.channel);
   recap.hk.meta = buildMeta(input.hk, quotes?.channel);

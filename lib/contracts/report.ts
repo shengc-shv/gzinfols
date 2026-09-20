@@ -160,7 +160,16 @@ export interface MarketCard {
   sectors: string[];
   spoken?: string;
   indices?: IndexQuote[];
-  meta?: { source: string; date: string; crossCheck: string };
+  /**
+   * 卡脚小字备注。
+   *  - source：新闻解读素材来源（渠道）；
+   *  - date：条目数据日期；
+   *  - quoteSource：**行情（指数点位）来源**。2026-09-20 由 `crossCheck` 更名 ——
+   *    原名暗示「有第二个独立源交叉核验」，实际取的就是点位提供者本身（新浪），
+   *    属同源自证，标签误导；更名后如实标注来源。
+   *  - crossCheck：@deprecated 历史字段名，仅用于读旧 store.json / 历史报告，新数据不再写入。
+   */
+  meta?: { source: string; date: string; quoteSource: string; crossCheck?: string };
   sourceReport?: { title: string; url: string };
 }
 

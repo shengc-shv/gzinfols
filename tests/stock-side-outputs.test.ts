@@ -22,6 +22,7 @@ import { buildStockRecap } from "../lib/pipeline/side-outputs/side-stock-recap";
 import { buildStockNews } from "../lib/pipeline/side-outputs/side-stock-news";
 import { assembleBriefingScript } from "../lib/services/voice";
 import { computeMarketStatus, formatCnDate } from "../lib/services/market/market-status";
+import { renderStockRecap } from "../lib/services/render/stock-block";
 import type { HttpClient } from "../lib/contracts/pipeline";
 import type { ArticleInput, CrawledArticle } from "../lib/contracts/article";
 import type { DailyReport } from "../lib/contracts/report";
@@ -314,4 +315,33 @@ test("B4-7 行情全失败降级：无 quotes 时仍不空卡（LLM 兜底/收�
     assert.ok(out.stock_recap, "行情失败也应产出三卡（不阻断整页）");
     assert.equal(out.stock_recap!.quoteChannel, undefined, "无行情 → 无渠道标注");
   });
+});
+
+test("B4-8 卡脚标注「行情来源」而非「交叉验证」；旧 store 的 crossCheck 兼容回退", () => {
+  // 背景（2026-09-20 用户拍板）：卡脚原写「交叉验证：新浪行情」，但三市场点位实际全部取自
+  // 新浪系接口（A股 K线 / 港股美股 hq.sinajs.cn），即点位提供者自己「验证」自己 → 同源自证。
+  // 已如实更名为「行情来源」。本测试锁住：① 新数据用 quoteSource；② 旧字段 crossCheck 仍能回退渲染。
+  const mkCard = (meta: Record<string, string>) => ({ overview: "概述。", sectors: [], meta });
+  const mkReport = (meta: Record<string, string>) =>
+    ({
+      stock_recap: {
+        aShare: mkCard(meta),
+        hk: mkCard(meta),
+        us: mkCard(meta),
+        quoteChannel: "新浪行情",
+        quoteDate: "2026-09-19",
+      },
+    }) as unknown as DailyReport;
+
+  const fresh = renderStockRecap(
+    mkReport({ source: "东方财富", date: "2026-09-19", quoteSource: "新浪行情" }),
+  );
+  assert.ok(fresh.includes("行情来源：新浪行情"), "应如实标注行情来源");
+  assert.ok(!fresh.includes("交叉验证"), "不得再出现「交叉验证」字样");
+
+  const legacy = renderStockRecap(
+    mkReport({ source: "东方财富", date: "2026-09-19", crossCheck: "新浪行情" }),
+  );
+  assert.ok(legacy.includes("行情来源：新浪行情"), "旧字段 crossCheck 应回退渲染为行情来源");
+  assert.ok(!legacy.includes("交叉验证"), "旧数据渲染也不得出现「交叉验证」");
 });

@@ -351,7 +351,7 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
     display: block; margin-top: 0.3rem; font-size: 0.62rem; color: var(--muted);
     letter-spacing: 0.01em;
   }
-  /* 卡脚小字备注：来源网站 + 数据时间 + 交叉验证网站（2026-08-25 替代来源链接按钮） */
+  /* 卡脚小字备注：渠道（新闻来源）+ 数据时间 + 行情来源（2026-09-20 由「交叉验证」更名） */
   .stock-meta {
     margin: 0.2rem 0 0; font-size: 0.66rem; color: var(--muted);
     line-height: 1.5; letter-spacing: 0.01em;

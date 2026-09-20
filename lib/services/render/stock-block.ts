@@ -53,14 +53,17 @@ export function renderStockRecap(report: DailyReport): string {
   const cardHtml = cards
     .map(({ label, cls, card }) => {
       const empty = !card.overview && !card.spoken && card.sectors.length === 0 && !card.indices?.length;
-      // 卡脚小字备注：渠道（来源网站）+ 发布时间（数据日期）+ 交叉验证网站（2026-08-25 用户拍板替代来源链接按钮）
+      // 卡脚小字备注：渠道（新闻来源）+ 发布时间（数据日期）+ 行情来源（点位实际来源）
+      // 2026-09-20：原「交叉验证」改为「行情来源」——原标签暗示存在第二个独立源核验，
+      // 实际三市场点位全部取自新浪系接口，标签属同源自证、有误导性。
+      // 兼容旧 store.json / 历史报告：旧字段名为 crossCheck，读时回退。
+      const quoteSrc = card.meta?.quoteSource ?? card.meta?.crossCheck ?? "";
       const meta =
-        card.meta && (card.meta.source || card.meta.date || card.meta.crossCheck)
+        card.meta && (card.meta.source || card.meta.date || quoteSrc)
           ? `<p class="stock-meta">${[
               card.meta.source ? `渠道：${escapeHtml(card.meta.source)}` : "",
               card.meta.date ? `发布时间：${escapeHtml(card.meta.date)}` : "",
-              card.meta.crossCheck ? "" : "",
-              card.meta.crossCheck ? `交叉验证：${escapeHtml(card.meta.crossCheck)}` : "",
+              quoteSrc ? `行情来源：${escapeHtml(quoteSrc)}` : "",
             ]
               .filter(Boolean)
               .join(" · ")}</p>`
