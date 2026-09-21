@@ -28,12 +28,12 @@ import {
   nextAngle,
   SECTION_POLICY,
   MUST_READ_PLAY_TARGET,
+  INSIGHT_PLAY_TARGET,
   type EventMemoryStore,
   type EventRecord,
   type MemoryCandidate,
   type MemoryDecision,
   type MemorySection,
-  type MemoryVerdict,
 } from "./event-memory";
 
 /** 补位池条目（= 两天可评分池 ScorablePoolEntry 的超集）。 */
@@ -70,62 +70,6 @@ export interface GuardOutput {
   decisions: MemoryDecision[];
   /** 人类可读日志行。 */
   log: string[];
-}
-
-/** 释放优先级（L1 兜底时按此顺序放行被过滤项）。 */
-const RELEASE_PRIO: Record<MemoryVerdict, number> = {
-  new: 0,
-  progress: 1,
-  refresh: 2,
-  cooldown: 3,
-  duplicate: 4,
-  exhausted: 5,
-};
-
-interface Paired<T> {
-  item: T;
-  decision: MemoryDecision;
-}
-
-/**
- * L1 兜底：被过滤项按「结论优先级 → 信息增量降序」释放，直到达到 minKeep。
- * exhausted（板块内次数达上限）最后才考虑 —— 实在凑不齐时才放行。
- */
-function releaseToMin<T>(paired: Paired<T>[], minKeep: number): Paired<T>[] {
-  const kept = paired.filter((p) => p.decision.allow);
-  if (kept.length >= minKeep) return kept;
-  const dropped = paired.filter((p) => !p.decision.allow);
-  dropped.sort(
-    (a, b) =>
-      RELEASE_PRIO[a.decision.verdict] - RELEASE_PRIO[b.decision.verdict] ||
-      b.decision.novelty - a.decision.novelty,
-  );
-  const out = [...kept];
-  // 第一轮：不动 exhausted
-  for (const d of dropped) {
-    if (out.length >= minKeep) break;
-    if (d.decision.verdict === "exhausted") continue;
-    out.push(d);
-  }
-  // 第二轮：仍不足才动 exhausted（宁可重复，不留空）
-  if (out.length < minKeep) {
-    for (const d of dropped) {
-      if (out.length >= minKeep) break;
-      if (out.includes(d)) continue;
-      out.push(d);
-    }
-  }
-  return out;
-}
-
-/**
- * 板块拥挤时降级：若去掉 refresh（换角度重播）后仍满足 minKeep，
- * 就优先展示真正的新内容，把「重播项」让位。
- */
-function demoteRefresh<T>(kept: Paired<T>[], minKeep: number): Paired<T>[] {
-  if (kept.length <= minKeep) return kept;
-  const without = kept.filter((k) => k.decision.verdict !== "refresh");
-  return without.length >= minKeep ? without : kept;
 }
 
 /** 从补位池里挑出「记忆库中不存在」的条目（L2）。 */
@@ -190,22 +134,6 @@ function toMustRead(cand: MemoryCandidate): { title: string; why: string; url?: 
     title: cand.title.slice(0, 15),
     why: synthMustReadWhy(rel),
     ...(cand.url ? { url: cand.url } : {}),
-  };
-}
-
-/** 用补位条目拼一条 insight。 */
-function toInsight(cand: MemoryCandidate): ExecInsight {
-  const rel: BranchRelevance = scoreBranchRelevance({
-    title: cand.title,
-    ...(cand.text ? { summary: cand.text } : {}),
-  });
-  const lines = rel.businessLines.length ? rel.businessLines.join("/") : "相关";
-  return {
-    topic: cand.title.slice(0, 15),
-    impact: `对广州分行${lines}业务有潜在影响`,
-    action: `建议分行关注${rel.businessLines[0] ?? "相关"}动向并评估动作`,
-    ...(rel.businessLines.length ? { tag: rel.businessLines.slice(0, 2) } : {}),
-    ...(cand.url ? { sources: [{ title: cand.title, url: cand.url }] } : {}),
   };
 }
 
@@ -380,69 +308,42 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   }
 
   // ---- 3) insights（商机洞察）----
+  // 2026-09-21：与「必读」同构 —— 候选池 + 顺序判重 + 顺延补足（用户拍板：候选 12 条 → 补足 5~6 条）。
+  // 背景：此前是「生成 → 判重 → 剩多少算多少」，没有候补顺延。周末连跑两天后，周一候选与已播商机
+  //   大面积撞冷却 → 实证 09-21：8 → 3 条（去重 5 条：exhausted,refresh,refresh,cooldown,cooldown），
+  //   洞察板块内容腰斩、口播时长掉到 128s。与 09-17「3 件事只剩 2 件」是同一个病。
+  // 顺序：保持 LLM 给出的优先级顺序（不额外打分排序，避免改动相关性口径）；判重复用 evaluateCandidate。
   {
-    const paired: Paired<ExecInsight>[] = [];
-    for (const it of exec.insights ?? []) {
-      const cand: MemoryCandidate = {
+    const cands: Array<{ it: ExecInsight; cand: MemoryCandidate }> = (exec.insights ?? []).map((it) => ({
+      it,
+      cand: {
         title: it.topic,
         text: `${it.impact ?? ""} ${it.action ?? ""}`.trim(),
         ...(it.sources?.[0]?.url ? { url: it.sources[0].url } : {}),
-      };
-      const d = evaluateCandidate({ cand, section: "insights", today, store });
-      paired.push({ item: it, decision: d });
-      if (d.allow) {
-        store = rememberBroadcast(store, {
-          cand,
-          section: "insights",
-          date: today,
-          novelty: d.novelty,
-          broadcastAt,
-          ...(d.requiredAngle ? { angle: d.requiredAngle } : {}),
-        });
-      }
-    }
-    decisions.push(...paired.map((p) => p.decision));
-    let kept = releaseToMin(paired, SECTION_POLICY.insights.minKeep);
-    kept = demoteRefresh(kept, SECTION_POLICY.insights.minKeep);
+      },
+    }));
 
-    if (kept.length < SECTION_POLICY.insights.minKeep && pool.length > 0) {
-      const exclude = new Set<string>();
-      for (const k of kept) {
-        const u = k.item.sources?.[0]?.url;
-        if (u) exclude.add(u);
-      }
-      const box = { picked: [] as MemoryCandidate[], store, broadcastAt };
-      const n = pickFreshFromPool(
-        pool,
-        store,
-        "insights",
-        today,
-        exclude,
-        SECTION_POLICY.insights.minKeep - kept.length,
-        box,
-      );
-      store = box.store;
-      for (const c of box.picked) kept.push({ item: toInsight(c), decision: {
-        section: "insights",
-        title: c.title,
-        verdict: "new",
-        allow: true,
-        novelty: 1,
-        reason: "L2 兜底补位（池内新事件）",
-      } });
-      if (n > 0) log.push(`🧠 商机去重后不足 ${SECTION_POLICY.insights.minKeep} 条 → 池内补位 ${n} 条`);
-    }
+    // 依次取：未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延下一条候补，直到选满
+    // INSIGHT_PLAY_TARGET。候补用尽仍不足 → 按实际剩余，不强拉池内条目凑数（宁缺勿滥）。
+    const r = pickUntilTarget({
+      items: cands,
+      toCandidate: (c) => c.cand,
+      section: "insights",
+      today,
+      broadcastAt,
+      target: INSIGHT_PLAY_TARGET,
+      store,
+    });
+    store = r.store;
+    decisions.push(...r.chosen.map((c) => c.decision), ...r.skipped);
+    next.insights = r.chosen.map((c) => c.item.it);
 
-    const filtered = (exec.insights ?? []).length - kept.length;
-    if (filtered > 0) {
+    if (r.skipped.length > 0 || r.chosen.length < INSIGHT_PLAY_TARGET) {
       log.push(
-        `🧠 商机：${(exec.insights ?? []).length} → ${kept.length} 条（去重 ${filtered} 条：${paired
-          .filter((p) => !kept.includes(p))
-          .map((p) => p.decision.verdict)
-          .join(",")}）`,
+        `🧠 商机：候选 ${cands.length} 条 → 播出 ${r.chosen.length}/${INSIGHT_PLAY_TARGET} 条` +
+          `（命中重复跳过 ${r.skipped.length} 条：${r.skipped.map((d) => d.verdict).join(",") || "无"}）`,
       );
     }
-    next.insights = kept.map((k) => k.item);
   }
 
   // ---- 4) risk（风险提示）----

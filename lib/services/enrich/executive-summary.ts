@@ -7,8 +7,8 @@ import {
   type BranchRelevance,
   type ScorableArticle,
 } from "../select/filters/relevance-score";
-// 必读候选池条数（单一真源，禁止就地写死数字）
-import { MUST_READ_CANDIDATE_POOL } from "../memory/event-types";
+// 必读 / 洞察候选池条数（单一真源，禁止就地写死数字）
+import { MUST_READ_CANDIDATE_POOL, INSIGHT_CANDIDATE_POOL } from "../memory/event-types";
 
 /**
  * 「执行摘要 / 商机提示」AI 层（用户 2026-08-19 确认实施）
@@ -16,7 +16,7 @@ import { MUST_READ_CANDIDATE_POOL } from "../memory/event-types";
  * 每天一次 LLM 调用，基于当日 宏观政策(finance) + 广州商机(gz) 的高信号条目
  * 与市场点评，产出：
  *  - must_read：今日必读 3-5 条（高影响事件 + 对分行意味着什么）
- *  - insights：商机提示 5-8 条（对广州分行零售/对公的潜在影响 + 建议动作；每客群段≤2、其他≤1）
+ *  - insights：商机提示 10-12 条（候选池；对广州分行零售/对公的潜在影响 + 建议动作；每客群段≤2、其他≤1）
  * 把「看新闻」升级为「看结论」。任何失败 → 返回 null，页面不渲染该板块。
  */
 
@@ -108,7 +108,7 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
    - id：源条目标识，从下方输入对应条目的 id 字段原样回填（若对不上可省略，留空；禁止编造）
 
   **客户客群聚焦（极重要）**：分行当前最关注的三类客群商机须优先覆盖——① 零售AUM（财富管理/理财/基金/存款/资产配置等零售管理资产）；② 中高端客群(过亿资产)（私行/家族信托/企业主/超高净值）；③ 普惠小微贷款客户（普惠金融/小微企业/个体工商户/经营贷）。生成 insights 时，若输入中存在这三类客群的高信号，应优先选取并分别打上对应 segments 标签，确保三条客群线索在「商机洞察」中都有呈现；不要只堆房贷/宏观而漏掉普惠小微与私行客群。
-2. insights（商机提示，5-8 条）— **偏落地、可执行**：具体可落地的获客/产品/客户线索（"哪个客户/产品/动作该做"）。**不放宏观大信号**（宏观归 must_read）；**不放监管威胁**（威胁归 risk）。每条：
+2. insights（商机提示，10-12 条）— **偏落地、可执行**：具体可落地的获客/产品/客户线索（"哪个客户/产品/动作该做"）。**不放宏观大信号**（宏观归 must_read）；**不放监管威胁**（威胁归 risk）。**多给候选**：下游会按记忆判重剔除近期已播过的，命中重复时顺延取用靠后候选，故请尽量凑满 10-12 条（宁多勿少）。每条：
    - topic：主题（15 字内）
    - impact：对广州分行零售/对公业务的潜在影响（40-60 字）
    - action：建议动作——具体可执行、带时限感（获客方向/产品配置/风险提示，40-60 字），如"本周走访医疗企业客群、今日起推荐放开限购绩优基金"
@@ -302,7 +302,7 @@ export async function generateExecutiveSummary(
     `当日信息（JSON）：`,
     JSON.stringify(payload),
     "",
-    '请输出 {"hero_line":"...","spoken_hero":"...","must_read":[...],"insights":[...],"risk":{...} 或 null,"guangdong_ipo":{...} 或 null}，hero_line 1 句、must_read 8-10 条、insights 5-8 条；spoken_hero 与 guangdong_ipo.spoken 为纯口语文本（不要输出 spoken_must_read / spoken_insights / spoken_risk）；must_read / insights.sources / risk.sources 的 id 必须从输入条目原样回填，不得编造，也不要输出 url。',
+    '请输出 {"hero_line":"...","spoken_hero":"...","must_read":[...],"insights":[...],"risk":{...} 或 null,"guangdong_ipo":{...} 或 null}，hero_line 1 句、must_read 8-10 条、insights 10-12 条；spoken_hero 与 guangdong_ipo.spoken 为纯口语文本（不要输出 spoken_must_read / spoken_insights / spoken_risk）；must_read / insights.sources / risk.sources 的 id 必须从输入条目原样回填，不得编造，也不要输出 url。',
   ].join("\n");
   try {
     const text = await runner(SYSTEM_PROMPT, userPrompt);
@@ -388,7 +388,7 @@ export async function generateExecutiveSummary(
         url: urlById((m as { id?: unknown }).id) ?? knownUrl(m.url) ?? resolveUrl(m.title),
       })),
       spoken_must_read: typeof parsed.spoken_must_read === "string" && parsed.spoken_must_read.trim() ? parsed.spoken_must_read.trim() : undefined,
-      insights: parsed.insights.slice(0, 8).map((it) => {
+      insights: parsed.insights.slice(0, INSIGHT_CANDIDATE_POOL).map((it) => {
         // sources：优先用 LLM 显式引源；否则用生成时看到的 inputs（finance+gz，含真实 URL）
         // 按相似度回链 1-3 条来源，保证「商机洞察」卡片有可信溯源入口（不依赖 LLM 吐 url 格式）。
         const explicit = Array.isArray(it.sources) && it.sources.length > 0

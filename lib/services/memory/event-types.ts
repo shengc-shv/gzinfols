@@ -351,6 +351,18 @@ export const SECTION_POLICY: Record<MemorySection, SectionPolicy> = {
 export const MUST_READ_CANDIDATE_POOL = 10;
 export const MUST_READ_PLAY_TARGET = 5;
 
+/**
+ * 商机洞察「候选池 / 播出目标」条数（2026-09-21 新口径，与必读同构）。
+ *
+ * - `INSIGHT_CANDIDATE_POOL`：LLM 产出的**候选条数**；自第 `INSIGHT_PLAY_TARGET + 1` 条起为备用候补。
+ * - `INSIGHT_PLAY_TARGET`：判重后**播出条数**（顺序判重，选满即停；候补用尽则按实际剩余）。
+ *
+ * 背景：此前洞察无候选池，判重命中即永久减员 —— 周末连跑两天后周一「8 → 3 条」。
+ * ⚠️ 单一真源：消费方一律从这里导入，**禁止就地写死数字**。
+ */
+export const INSIGHT_CANDIDATE_POOL = 12;
+export const INSIGHT_PLAY_TARGET = 6;
+
 /** 事件类型 → 基础冷却期（天）。重大政策类最长。 */
 export const BASE_COOLDOWN_DAYS: Record<EventKind, number> = {
   policy: 6,
