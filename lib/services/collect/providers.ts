@@ -24,6 +24,9 @@ export async function fetchRss(source: SourceDef, http: HttpClient, now: Date): 
     publishedAt: it.isoDate ? new Date(it.isoDate) : undefined,
     fetchedAt: now,
     category: source.category,
+    // 采集元数据透传（2026-09-21 修）：此前漏传 subcategory → 美股源（category=stocks, subcategory=us）
+    // 的条目 subcategory=undefined → buildStockRecap 判据 `category==="stocks" && subcategory==="us"` 恒 0 条。
+    ...(source.subcategory ? { subcategory: source.subcategory } : {}),
     summary: it.contentSnippet ?? "",
   }));
 }
@@ -67,6 +70,8 @@ export async function fetchScrape(source: SourceDef, http: HttpClient, now: Date
       publishedAt,
       fetchedAt: now,
       category: source.category,
+      // 采集元数据透传（2026-09-21 修，同 fetchRss）
+      ...(source.subcategory ? { subcategory: source.subcategory } : {}),
     });
   });
   return out.slice(0, 50);
@@ -99,6 +104,8 @@ export async function fetchApi(source: SourceDef, http: HttpClient, now: Date): 
         publishedAt: o.date ? new Date(String(o.date)) : undefined,
         fetchedAt: now,
         category: source.category,
+        // 采集元数据透传（2026-09-21 修，同 fetchRss）
+        ...(source.subcategory ? { subcategory: source.subcategory } : {}),
       };
     });
   } catch {

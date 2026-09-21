@@ -49,6 +49,8 @@ export function parseCctvFinance(html: string, source: SourceDef, limit = 25): R
       title,
       url,
       category: source.category,
+      // 采集元数据透传（2026-09-21 修，同 providers.ts）
+      ...(source.subcategory ? { subcategory: source.subcategory } : {}),
       publishedAt: d ? new Date(`${d[1]}-${d[2]}-${d[3]}T08:00:00+08:00`) : undefined,
     });
   }
@@ -82,6 +84,8 @@ export function parseGovCnPolicy(html: string, source: SourceDef, limit = 25): R
       excerpt: `【国务院政策】${title}`,
       ...(publishedAt ? { publishedAt } : {}),
       category: source.category,
+      // 采集元数据透传（2026-09-21 修，同 providers.ts）
+      ...(source.subcategory ? { subcategory: source.subcategory } : {}),
     });
   }
   return out;
