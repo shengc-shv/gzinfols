@@ -1,28 +1,18 @@
 <!doctype html>
-<html lang="zh-CN">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>每日简报 · 2026-09-14</title>
-<meta name="description" content="今日定调：今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获">
-<meta property="og:type" content="website">
-<meta property="og:title" content="每日简报 · 2026-09-14">
-<meta property="og:description" content="今日定调：今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获">
-<meta property="og:image" content="https://shengc-shv.github.io/gzinfols/og-image.png">
-<meta property="og:image:width" content="240">
-<meta property="og:image:height" content="240">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="每日简报 · 2026-09-14">
-<meta name="twitter:description" content="今日定调：今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获">
-<meta name="twitter:image" content="https://shengc-shv.github.io/gzinfols/og-image.png">
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>得一微电子股份有限公司 (辅导验收) [深圳证监局] · 2026-09-21</title>
+<meta name="robots" content="noindex">
 <style>
 
   :root {
+    
+    color-scheme: light dark;
     --bg: #f6f5f3;
     --bg-elevated: #ffffff;
     --fg: #1a1a1f;
     --fg-soft: #4a4a52;
-    --muted: #797986;
+    --muted: #6b6b78;   
     --rule: #e7e5e1;
     --card: #ffffff;
     --card-alt: #f1efec;
@@ -41,6 +31,9 @@
     --c-finance: #d97706;
     --c-gdipo: #e11d48;
     --c-ipo: #7c3aed;
+    
+    --c-redchip: #b91c1c;
+    --c-redchip-new: #ea580c;
     --c-gz: #059669;
     --c-pol: #2f6fed;
     --hero-grad-from: #f6f5f3;
@@ -76,6 +69,8 @@
       --c-trading: #2dd4bf;
       --c-finance: #fbbf24;
       --c-gdipo: #fb7185;
+      --c-redchip: #f87171;
+      --c-redchip-new: #fb923c;
       --c-ipo: #a78bfa;
       --c-gz: #34d399;
       --c-pol: #5b8def;
@@ -214,8 +209,19 @@
   .must-scroller::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
   .must-card {
     flex: 0 0 auto; width: 80vw; max-width: 300px;
-    display: flex; gap: 0.55rem; align-items: flex-start;
+    
+    display: flex; flex-wrap: wrap; gap: 0.55rem; align-items: flex-start;
+    
+    border: 1px solid var(--rule); border-radius: 12px;
+    padding: 0.6rem 0.75rem; background: var(--bg-elevated);
+    box-shadow: var(--shadow-sm);
   }
+  
+  .must-card::before { content: ""; flex: 0 0 100%; height: 0; order: 3; }
+  
+  .must-top-badge, .delta-badge { order: 4; align-self: flex-start; }
+  
+  .must-card .must-top-badge, .must-card .delta-badge { margin-left: calc(1.2rem + 0.55rem); }
   
   .must-card.must-top {
     background: color-mix(in srgb, var(--accent-brand) 6%, var(--card));
@@ -226,10 +232,8 @@
     font-size: 0.66rem; font-weight: 700; color: white;
     background: var(--accent-brand); border-radius: 3px;
     vertical-align: middle;
-  }
-    border: 1px solid var(--rule); border-radius: 12px;
-    padding: 0.6rem 0.75rem; background: var(--bg-elevated);
-    box-shadow: var(--shadow-sm);
+    
+    white-space: nowrap; flex: none;
   }
   
   .exec-must::after {
@@ -253,7 +257,8 @@
     background: var(--accent-brand); color: #fff; font-size: 0.72rem; font-weight: 700;
     display: inline-flex; align-items: center; justify-content: center; margin-top: 0.05rem;
   }
-  .must-body { display: flex; flex-direction: column; min-width: 0; }
+  
+  .must-body { display: flex; flex-direction: column; min-width: 0; flex: 1 1 0; }
   .must-body strong { font-size: 0.85rem; color: var(--fg); font-weight: 600; line-height: 1.35; }
   .must-why {
     font-size: 0.74rem; color: var(--fg-soft); line-height: 1.45; margin-top: 0.2rem;
@@ -385,6 +390,39 @@
   .ipo-foot { display: flex; align-items: center; justify-content: space-between; gap: 0.4rem; font-size: 0.68rem; color: var(--muted); }
   .ipo-src { color: var(--c-gdipo); text-decoration: none; }
   .ipo-src:hover { text-decoration: underline; }
+  
+  .ipo-card--redchip { border-color: color-mix(in srgb, var(--c-redchip) 34%, var(--rule)); border-left-color: var(--c-redchip); background: color-mix(in srgb, var(--c-redchip) 5%, var(--card)); }
+  .ipo-redchip {
+    flex: none; font-size: 0.64rem; font-weight: 600; padding: 1px 6px; border-radius: 3px;
+    color: #fff; background: var(--c-redchip);
+  }
+  .ipo-redchip--unverified { color: var(--c-redchip); background: transparent; border: 1px solid color-mix(in srgb, var(--c-redchip) 55%, transparent); }
+  .ipo-new { flex: none; font-size: 0.6rem; font-weight: 700; line-height: 1; padding: 2px 4px; border-radius: 3px; color: #fff; background: var(--c-redchip-new); }
+  .ipo-rc-changed { flex: none; font-size: 0.62rem; color: var(--c-redchip); }
+  .ipo-report { display: inline-block; margin-top: 0.3rem; font-size: 0.7rem; color: var(--c-redchip); text-decoration: none; }
+  .ipo-report:hover { text-decoration: underline; }
+  
+  .redchip-panel { margin: 1.25rem 0 0; padding: 0.9rem 1rem; border: 1px solid color-mix(in srgb, var(--c-redchip) 26%, var(--rule)); border-radius: 12px; background: color-mix(in srgb, var(--c-redchip) 4%, var(--card)); }
+  .redchip-title { display: flex; align-items: center; gap: 0.4rem; font-size: 0.95rem; font-weight: 700; color: var(--fg); margin: 0 0 0.6rem; }
+  .redchip-count { font-size: 0.7rem; font-weight: 600; padding: 1px 6px; border-radius: 10px; color: #fff; background: var(--c-redchip); }
+  .redchip-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  @media (min-width: 720px) { .redchip-list { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); } }
+  .redchip-item { border: 1px solid color-mix(in srgb, var(--c-redchip) 22%, var(--rule)); border-left: 3px solid var(--c-redchip); border-radius: 10px; padding: 0.55rem 0.7rem; background: var(--card); }
+  .redchip-item--unverified { border-left-style: dashed; }
+  .redchip-head { display: flex; align-items: center; gap: 0.35rem; flex-wrap: wrap; margin-bottom: 0.3rem; }
+  .redchip-name { font-size: 0.84rem; font-weight: 700; color: var(--fg); }
+  .redchip-unmatched { font-size: 0.62rem; color: var(--muted); border: 1px dashed var(--rule); border-radius: 3px; padding: 0 4px; }
+  .redchip-facts { margin: 0 0 0.25rem; font-size: 0.72rem; color: var(--fg-soft); }
+  .redchip-evid { margin: 0; font-size: 0.7rem; color: var(--muted); }
+  .redchip-changed { margin: 0.25rem 0 0; font-size: 0.7rem; color: var(--c-redchip); }
+  .redchip-foot { display: flex; gap: 0.8rem; margin-top: 0.35rem; }
+  .redchip-foot .ipo-report { margin-top: 0; }
+  .redchip-note { margin: 0.6rem 0 0; font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
+  
+  .redchip-ledger { margin: 0.55rem 0 0; font-size: 0.75rem; line-height: 1.6; }
+  .redchip-ledger a { color: var(--c-redchip); font-weight: 600; text-decoration: none; }
+  .redchip-ledger a:hover { text-decoration: underline; }
+  .redchip-ledger-hint { margin-left: 0.5rem; color: var(--muted); font-size: 0.68rem; }
   .exec-ipo::after {
     content: ""; position: absolute; top: 1.7rem; right: 0; bottom: 0.5rem;
     width: 3.25rem; pointer-events: none; z-index: 3;
@@ -522,6 +560,10 @@
   .tag-action { color: var(--c-gdipo); background: color-mix(in srgb, var(--c-gdipo) 12%, transparent); }
 
   
+  .must-card.must-more { display: none; }
+  .exec-must.expanded .must-card.must-more { display: flex; }
+
+  
   .tabs {
     position: sticky;
     top: 0;
@@ -652,8 +694,9 @@
     margin: 0 0 0.3rem;
     line-height: 1.4;
   }
-  .brief-title a { color: var(--fg); text-decoration: none; }
-  .brief-title a:hover { color: var(--link); text-decoration: underline; }
+  
+  .brief h3 a { color: var(--fg); text-decoration: none; }
+  .brief h3 a:hover { color: var(--link); text-decoration: underline; }
   .brief-summary {
     margin: 0;
     color: var(--fg-soft);
@@ -1097,6 +1140,11 @@
     background: color-mix(in srgb, #1565c0 12%, var(--bg));
     border-color: color-mix(in srgb, #1565c0 38%, var(--rule));
   }
+  .player-badge-cosyvoice {
+    color: #c2410c;
+    background: color-mix(in srgb, #c2410c 12%, var(--bg));
+    border-color: color-mix(in srgb, #c2410c 38%, var(--rule));
+  }
   .player-badge-piper {
     color: var(--muted);
     background: color-mix(in srgb, var(--muted) 12%, var(--bg));
@@ -1107,6 +1155,26 @@
   
   .must-card strong { font-size: 0.92rem; }
   .must-card .must-why { font-size: 0.85rem; }
+  
+  .coverage { margin: 0.45rem 0 0; font-size: 0.72rem; color: var(--muted); }
+  .coverage > summary { cursor: pointer; color: var(--muted); font-size: 0.72rem; }
+  .coverage > summary:hover { color: var(--fg-soft); }
+  .cov-grid { display: grid; gap: 0.5rem 1.2rem; margin: 0.5rem 0 0.25rem; }
+  @media (min-width: 720px) { .cov-grid { grid-template-columns: 1fr 1fr; } }
+  .cov-col h4 { margin: 0 0 0.25rem; font-size: 0.72rem; color: var(--fg-soft); font-weight: 600; }
+  .cov-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.15rem; }
+  .cov-col li { display: flex; align-items: baseline; gap: 0.45rem; }
+  .cov-k { color: var(--fg-soft); }
+  .cov-v { color: var(--muted); }
+  .cov-zero .cov-v { color: var(--c-finance); }
+  .cov-note { margin: 0.35rem 0 0; font-size: 0.68rem; color: var(--muted); line-height: 1.5; }
+  .cov-missing { color: var(--c-finance); }
+  
+  
+  .must-inbody { display: inline-block; margin-left: 0.4rem; font-size: 0.75rem; color: var(--c-pol); border: 1px solid color-mix(in srgb, var(--c-pol) 45%, transparent); border-radius: 3px; padding: 0 5px; white-space: nowrap; text-decoration: none; }
+  .must-inbody:hover { background: color-mix(in srgb, var(--c-pol) 10%, transparent); }
+  .insight-src-inbody, .risk-src-inbody { border-bottom: 1px dashed currentColor; }
+  .brief.flash, .ipo-card.flash { outline: 3px solid color-mix(in srgb, var(--c-pol) 55%, transparent); outline-offset: 2px; border-radius: 8px; transition: outline-color 0.2s; }
 
   
   .insight-card, .insight { background: var(--card); border: 1px solid var(--rule); border-radius: 10px; padding: 0.7rem 0.85rem; }
@@ -1114,18 +1182,26 @@
   .insight p { margin: 0.25rem 0 0; font-size: 0.9rem; color: var(--fg-soft); line-height: 1.6; }
   .insight p b { color: var(--fg); }
   .insight-tags { margin-bottom: 0.1rem; }
-  .tag { display: inline-block; font-size: 0.7rem; font-weight: 700; border-radius: 4px; padding: 0.08rem 0.42rem; margin-right: 0.35rem; color: var(--brand, #e60012); background: rgba(230, 0, 18, 0.1); }
+  
+  .tag { display: inline-block; font-size: 0.78rem; font-weight: 700; border-radius: 4px; padding: 0.08rem 0.42rem; margin-right: 0.35rem; color: var(--brand, #e60012); background: rgba(230, 0, 18, 0.1); }
   .tag.t-wealth { color: #7c3aed; background: rgba(124, 58, 237, 0.12); }
   .tag.t-mass { color: #059669; background: rgba(5, 150, 105, 0.12); }
   .tag.t-policy { color: #b45309; background: rgba(180, 83, 9, 0.12); }
   
   .tag.t-gd { color: var(--accent-brand, #e60012); background: color-mix(in srgb, var(--accent-brand, #e60012) 8%, transparent); border: 1px solid color-mix(in srgb, var(--accent-brand, #e60012) 45%, transparent); font-weight: 800; }
+  
+  @media (prefers-color-scheme: dark) {
+    .tag { color: var(--accent-brand, #e60012); }
+    .tag.t-wealth { color: #a78bfa; }
+    .tag.t-policy { color: #fbbf24; }
+  }
 
   
   .tabs { position: sticky; top: 0; z-index: 20; display: flex; flex-wrap: nowrap; overflow-x: auto; gap: 0.1rem; margin: 1.4rem 0 0; padding: 0.6rem 0 0; border-bottom: 1px solid var(--rule); background: color-mix(in srgb, var(--bg) 90%, transparent); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
   .tabs .tab { flex: none; background: none; border: none; font-family: inherit; cursor: pointer; padding: 0.6rem 0.9rem 0.75rem; font-size: 0.95rem; font-weight: 500; color: var(--muted); border-bottom: 2.5px solid transparent; margin-bottom: -1px; white-space: nowrap; }
   .tabs .tab .n { font-size: 0.72rem; color: var(--muted); margin-left: 0.2rem; }
-  .tabs .tab.active { color: var(--cat, var(--fg)); border-bottom-color: var(--cat, var(--fg)); font-weight: 600; }
+  
+  .tabs .tab.active { color: var(--fg); border-bottom-color: var(--cat, var(--fg)); font-weight: 600; }
   .panel { display: none; padding-top: 1rem; }
   .panel.active { display: block; }
 
@@ -1200,408 +1276,36 @@
 
   footer p { margin: 0.25rem 0; line-height: 1.7; }
 
-
-.audio-highlight { box-shadow: 0 0 0 3px rgba(64,158,255,0.45); background: rgba(64,158,255,0.06); border-radius: 8px; transition: box-shadow 0.2s, background 0.2s; }
-.must-card.audio-highlight, .insight.audio-highlight, .stock-card.audio-highlight { transform: translateZ(0); }
-  /* 商机洞察客户客群标签 (2026-09-08) */
-  .insight-segs { margin: 4px 0 6px; display: flex; flex-wrap: wrap; gap: 5px; }
-  .seg-chip { font-size: 11px; font-weight: 600; border-radius: 9px; padding: 1px 8px; line-height: 1.7; white-space: nowrap; }
-  .seg-chip.seg-aum { color: #fff; background: #b8860b; }
-  .seg-chip.seg-private { color: #fff; background: #8e44ad; }
-  .seg-chip.seg-inclusive { color: #fff; background: #1e7e34; }
-  .seg-chip.seg-other { color: #555; background: #ececec; }
-  </style>
-</head>
+  body { max-width: 46rem; margin: 0 auto; padding: 1.5rem 1.1rem 3rem; }
+  .back { display: inline-block; margin-bottom: 1rem; font-size: .82rem; color: var(--fg-soft); text-decoration: none; }
+  .back:hover { text-decoration: underline; }
+  h1 { font-size: 1.15rem; line-height: 1.55; margin: 0 0 .7rem; }
+  .orig { font-size: .78rem; color: var(--muted); margin: -.3rem 0 .8rem; }
+  .summary { font-size: .92rem; line-height: 1.85; margin: 0 0 1.2rem; color: var(--fg); }
+  .kv { margin: 0 0 1.3rem; border-top: 1px solid var(--rule); }
+  .kv-row { display: flex; gap: .8rem; padding: .45rem 0; border-bottom: 1px solid var(--rule); font-size: .82rem; }
+  .kv-row dt { flex: 0 0 6.5rem; color: var(--muted); }
+  .kv-row dd { margin: 0; color: var(--fg); }
+  .origin { margin-top: 1.4rem; font-size: .85rem; }
+  .origin a { color: var(--c-link, #2f4cdd); }
+  .note { margin-top: 1.6rem; font-size: .74rem; color: var(--muted); line-height: 1.7; }
+</style></head>
 <body>
-<main>
-    
-  <!-- 报头：今日定调 + 数据截至 -->
-  <header class="masthead">
-    <div class="eyebrow">广州地区 · 零售业务每日资信（个人整理，非本行立场）</div>
-    <h1>9月14日 星期一</h1>
-    <p class="hero-line">今日定调：今日分行焦点：广州公安通报：番禺一男子持刀伤人，已被抓获</p>
-    <p class="meta-line">数据截至 23:58 · 去重后资讯 3 条 · 商机 5 条 · <a class="archive" href="../archive.html">← 历史归档</a></p>
-  </header>
-
-  <section class="exec-summary">
-    <div class="exec-head">
-      <h2 class="exec-title">执行摘要</h2>
-      <span class="exec-sub">今日必读 · 商机洞察 · 风险预警（AI 生成）· 广东IPO（交易所/证监会官方源）</span>
-    </div>
-    <div class="exec-must"><h3 class="exec-col-title">📌 今日必读<span class="must-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><ul class="must-scroller"><li class="must-card must-top" data-audio-section="must" data-top-must="true"><span class="must-index">1</span><a class="must-body must-link" href="https://www.stcn.com/article/detail/4184345.html" target="_blank" rel="noopener"><strong>核心企业“两头吃”？央行最新通报：部分企业已退出账款凭证业务</strong><span class="must-why">国家核心监管新政（监管合规）：直击监管合规业务</span></a><span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span></li><li class="must-card must-top" data-audio-section="must" data-top-must="true"><span class="must-index">2</span><a class="must-body must-link" href="https://finance.sina.com.cn/trust/2026-09-14/doc-inirveas7267226.shtml" target="_blank" rel="noopener"><strong>【信报】信披新规覆盖23类机构，信托等非银机构迎合规大考</strong><span class="must-why">市场信号（信贷）：直击信贷业务</span></a><span class="must-top-badge" title="今日三件事：行长音频重点">三件事</span></li><li class="must-card" data-audio-section="must" ><span class="must-index">3</span><a class="must-body must-link" href="https://news.dayoo.com/guangzhou/202609/14/139995_55003502.htm" target="_blank" rel="noopener"><strong>@新就业群体，广州为你送上“权益礼包”</strong><span class="must-why">市场信号（客群）：直击客群业务</span></a></li><li class="must-card" data-audio-section="must" ><span class="must-index">4</span><a class="must-body must-link" href="https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-14/doc-inirtwih7360540.shtml" target="_blank" rel="noopener"><strong>多家银行收紧个人贵金属业务 原因何在？</strong><span class="must-why">市场信号（财富）：直击财富业务</span></a></li></ul></div>
-    <div class="exec-insights"><h3 class="exec-col-title">💡 商机洞察<span class="insight-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3><div class="insight-scroller"><article class="insight" data-audio-section="insight">
-      
-      <div class="insight-segs"><span class="seg-chip seg-other">其他业务线</span></div>
-      <h3>港股IPO火爆背后：香港证监会</h3>
-      <p><b>影响：</b>对广州分行财富业务有潜在影响</p>
-      <p><b>建议：</b>建议分行关注财富动向并评估动作</p>
-    </article></div></div>
-    
-    <div class="exec-ipo exec-ipo--must">
-    <h3 class="exec-col-title">🏦 广东IPO<span class="ipo-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3>
-    <ul class="ipo-scroller"><li class="ipo-card" data-audio-section="ipo">
-        <div class="ipo-card-head">
-          <span class="ipo-name">粤芯半导体</span>
-          <span class="ipo-stage ipo-stage--stage-tutoring">辅导备案</span>
-        </div>
-        <p class="ipo-biz">商机线索 · 辅导备案·Pre-IPO（最佳商机）：Pre-IPO 授信、投贷联动、代发工资、高管私行、员工持股托管</p>
-        <div class="ipo-foot"><span class="ipo-date">09/14 · 今天</span><a class="ipo-src" href="https://www.stcn.com/article/detail/4184784.html" target="_blank" rel="noopener">来源 · 证券时报</a></div>
-      </li><li class="ipo-card" data-audio-section="ipo">
-        <div class="ipo-card-head">
-          <span class="ipo-name">深圳市海柔創新智能科技集團股份有限公司 - W</span>
-          <span class="ipo-stage ipo-stage--stage-listed">已上市</span>
-        </div>
-        <p class="ipo-biz">商机线索 · 已上市新股：可跟进 员工持股计划/股权激励理财、高管私行、募资后代发工资</p>
-        <div class="ipo-foot"><span class="ipo-date">09/13 · 昨天</span><a class="ipo-src" href="https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm" target="_blank" rel="noopener">来源 · 港交所新股递表(广东企业赴港)</a></div>
-      </li></ul>
-  </div>
-  </section>
-
-  <section class="stock-recap">
-    <div class="stock-must">
-      <h3 class="exec-col-title">📊 股市解读<span class="stock-hint-inline" aria-hidden="true">← 左右滑动查看 →</span></h3>
-      <p class="stock-note stock-note--closed" style="color:#c8842a;font-weight:600">⚠️ 周末及周一休市时段，以下行情为上一交易日（9月11日 周五）收盘数据</p>
-      <ul class="stock-scroller"><li class="stock-card stock-card--a" data-audio-section="stock">
-        <header class="stock-card-head">A股</header>
-        <div class="stock-indices"><span class="stock-idx-cap">收盘点位</span><div class="stock-idx-list"><span class="stock-idx">上证指数 <b>3888.11</b> <em class="stock-idx-pct down">-1.18%</em></span><span class="stock-idx">深证成指 <b>13471.26</b> <em class="stock-idx-pct down">-1.08%</em></span><span class="stock-idx">创业板指 <b>3322.04</b> <em class="stock-idx-pct down">-0.49%</em></span></div><span class="stock-idx-src">新浪行情 · 取值于 2026-09-11 收盘</span></div>
-        <p class="stock-overview"><span class="stock-sec-label">大盘一句话总结</span>上证指数收报3888.11点（-1.18%）；深证成指收报13471.26点（-1.08%）；创业板指收报3322.04点（-0.49%）。</p>
-        
-        
-        
-      </li><li class="stock-card stock-card--hk" data-audio-section="stock">
-        <header class="stock-card-head">港股</header>
-        <div class="stock-indices"><span class="stock-idx-cap">收盘点位</span><div class="stock-idx-list"><span class="stock-idx">恒生指数 <b>24917.60</b> <em class="stock-idx-pct up">+0.45%</em></span><span class="stock-idx">恒生科技 <b>4317.94</b> <em class="stock-idx-pct down">-0.06%</em></span></div><span class="stock-idx-src">新浪行情 · 取值于 2026-09-11 收盘</span></div>
-        <p class="stock-overview"><span class="stock-sec-label">大盘一句话总结</span>恒生指数收报24917.60点（+0.45%）；恒生科技收报4317.94点（-0.06%）。</p>
-        <a class="stock-source-report" href="https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-14/doc-inirutny4042987.shtml" target="_blank" rel="noopener">📄 原报告：港股收评：恒指涨0.45% 科指跌0.06% 创新药概念股大涨 存储概念股下挫</a>
-        
-        
-      </li><li class="stock-card stock-card--us" data-audio-section="stock">
-        <header class="stock-card-head">美股</header>
-        <div class="stock-indices"><span class="stock-idx-cap">收盘点位</span><div class="stock-idx-list"><span class="stock-idx">道琼斯 <b>52505.45</b> <em class="stock-idx-pct down">-0.13%</em></span><span class="stock-idx">纳斯达克 <b>26224.28</b> <em class="stock-idx-pct down">-0.41%</em></span><span class="stock-idx">标普500 <b>7631.33</b> <em class="stock-idx-pct down">-0.33%</em></span></div><span class="stock-idx-src">新浪行情 · 取值于 2026-09-11 收盘</span></div>
-        <p class="stock-overview"><span class="stock-sec-label">大盘一句话总结</span>道琼斯收报52505.45点（-0.13%）；纳斯达克收报26224.28点（-0.41%）；标普500收报7631.33点（-0.33%）。</p>
-        
-        
-        
-      </li></ul>
-    </div>
-  </section>
-
-  <!-- 板块导航：单层 tab，移动端横滑不折行 -->
-  <nav class="tabs">
-    <button class="tab active" data-target="p-gz" style="--cat:var(--c-gz)">广州本地<span class="n">0</span></button><button class="tab" data-target="p-stock" style="--cat:var(--c-trading)">股市动态<span class="n">10</span></button><button class="tab" data-target="p-biz" style="--cat:var(--c-biz)">业务启示<span class="n">1</span></button><button class="tab" data-target="p-pol" style="--cat:var(--c-pol)">政策与市场<span class="n">1</span></button><button class="tab" data-target="p-tech" style="--cat:var(--c-tech)">科技前沿<span class="n">1</span></button><button class="tab" data-target="p-ipo" style="--cat:var(--c-ipo)">广东IPO动态<span class="n">3</span></button>
-  </nav>
-
-  <section class="panel active" id="p-gz">
-    <div class="filter-bar">
-    <span class="filter-label">筛选</span>
-    <div class="filter-group">
-        <span class="filter-gtitle">来源</span>
-        <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
-      </div>
-    <button type="button" class="filter-reset">重置</button>
-  </div>
-    <p class="empty-hint">今日暂无广州本地要闻（本地源未捕捉到高价值广州事件）。大湾区/广东要闻可在「政策与市场」查看。</p>
-  </section><section class="panel" id="p-stock">
-    <div class="filter-bar">
-    <span class="filter-label">市场</span>
-    <button type="button" class="filter-chip" data-group="market" data-filter="a-share">A股</button><button type="button" class="filter-chip" data-group="market" data-filter="hk">港股</button><button type="button" class="filter-chip" data-group="market" data-filter="us">美股</button>
-    <button type="button" class="filter-reset">重置</button>
-  </div>
-    <article class="brief" data-source="media" data-tags="" data-market="a-share" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/14</span></div>
-  <h3><a href="https://finance.eastmoney.com/a/202609143872945253.html" target="_blank" rel="noopener noreferrer">AI利空突袭！三大巨头罕见联手呼吁：放缓！</a></h3>
-  <p class="sum">AI利空突袭！三大巨头罕见联手呼吁：放缓！</p>
+  <a class="back" href="../2026-09-21.html#itm-1a8j58b">← 返回 2026-09-21 简报</a>
+  <h1>得一微电子股份有限公司 (辅导验收) [深圳证监局]</h1>
   
-  
-  
-</article>
-<article class="brief" data-source="media" data-tags="" data-market="a-share" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/14</span></div>
-  <h3><a href="https://finance.eastmoney.com/a/202609143873268388.html" target="_blank" rel="noopener noreferrer">重磅利好启动！10分钟直线涨停！两大引擎发起“反攻”</a></h3>
-  <p class="sum">重磅利好启动！10分钟直线涨停！两大引擎发起“反攻”</p>
-  
-  
-  
-</article>
-<article class="brief" data-source="media" data-tags="" data-market="a-share" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/13</span></div>
-  <h3><a href="https://finance.eastmoney.com/a/202609133872891743.html" target="_blank" rel="noopener noreferrer">十大券商策略：迎接关键时刻！加息“靴子”将落地A股或迎反攻行情</a></h3>
-  <p class="sum">十大券商策略：迎接关键时刻！加息“靴子”将落地A股或迎反攻行情</p>
-  
-  
-  
-</article>
-<article class="brief" data-source="media" data-tags="" data-market="a-share" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/14</span></div>
-  <h3><a href="https://finance.eastmoney.com/a/202609143873370592.html" target="_blank" rel="noopener noreferrer">沪指震荡整理三市成交额1.64万亿医疗服务板块大涨</a></h3>
-  <p class="sum">沪指震荡整理三市成交额1.64万亿医疗服务板块大涨</p>
-  
-  
-  
-</article>
-<article class="brief" data-source="media" data-tags="" data-market="a-share" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-a">A股</span><span class="src-badge src-media">媒体</span><span>东方财富</span><span>09/14</span></div>
-  <h3><a href="https://finance.eastmoney.com/a/202609143872953521.html" target="_blank" rel="noopener noreferrer">美联储9月加息概率逼近90%！特朗普再度施压：美国利率应全球最低</a></h3>
-  <p class="sum">美联储9月加息概率逼近90%！特朗普再度施压：美国利率应全球最低</p>
-  
-  
-  
-</article><article class="brief more" data-source="media" data-tags="" data-market="hk" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/14</span></div>
-  <h3><a href="https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-14/doc-inirutny4042987.shtml" target="_blank" rel="noopener noreferrer">港股收评：恒指涨0.45% 科指跌0.06% 创新药概念股大涨 存储概念股下挫</a></h3>
-  <p class="sum">港股收评：恒指涨0.45% 科指跌0.06% 创新药概念股大涨 存储概念股下挫</p>
-  
-  
-  
-</article>
-<article class="brief more" data-source="media" data-tags="" data-market="hk" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/14</span></div>
-  <h3><a href="https://finance.sina.com.cn/stock/hkstock/2026-09-14/doc-iniruark4825868.shtml" target="_blank" rel="noopener noreferrer">智谱港股盘中跌幅扩大逾10%，以零息+溢价转股形式融资50亿美元</a></h3>
-  <p class="sum">智谱港股盘中跌幅扩大逾10%，以零息+溢价转股形式融资50亿美元</p>
-  
-  
-  
-</article>
-<article class="brief more" data-source="media" data-tags="" data-market="hk" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/14</span></div>
-  <h3><a href="https://finance.sina.com.cn/stock/stockzmt/2026-09-14/doc-inirtwih7343009.shtml" target="_blank" rel="noopener noreferrer">【中国银河策略】美联储加息预期升温，港股下一轮行情的主线何在？</a></h3>
-  <p class="sum">【中国银河策略】美联储加息预期升温，港股下一轮行情的主线何在？</p>
-  
-  
-  
-</article>
-<article class="brief more" data-source="media" data-tags="" data-market="hk" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/14</span></div>
-  <h3><a href="https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-14/doc-iniruarh4056350.shtml" target="_blank" rel="noopener noreferrer">快讯：恒指低开0.42% 科指跌0.69% 科网股低迷 存储概念股低开</a></h3>
-  <p class="sum">快讯：恒指低开0.42% 科指跌0.69% 科网股低迷 存储概念股低开</p>
-  
-  
-  
-</article>
-<article class="brief more" data-source="media" data-tags="" data-market="hk" data-stage="">
-  <div class="bm"><span class="mkt-badge mkt-hk">港股</span><span class="src-badge src-media">媒体</span><span>新浪财经·港股</span><span>09/14</span></div>
-  <h3><a href="https://finance.sina.com.cn/stock/stockzmt/2026-09-14/doc-inirtwih7318353.shtml" target="_blank" rel="noopener noreferrer">华泰 | 港股策略：控制美债波动率敏感敞口</a></h3>
-  <p class="sum">华泰 | 港股策略：控制美债波动率敏感敞口</p>
-  
-  
-  
-</article><button class="expand-btn" type="button">展开其余 5 条</button>
-  </section><section class="panel" id="p-biz">
-    <div class="filter-bar">
-    <span class="filter-label">筛选</span>
-    <div class="filter-group">
-        <span class="filter-gtitle">来源</span>
-        <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
-      </div><div class="filter-group">
-        <span class="filter-gtitle">业务线</span>
-        <button type="button" class="filter-chip" data-group="tag" data-filter="__none__">其他</button>
-      </div>
-    <button type="button" class="filter-reset">重置</button>
-  </div>
-    <article class="brief" data-source="media" data-tags="" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>CNBC Top Stories</span><span>09/14</span></div>
-  <h3><a href="https://www.cnbc.com/2026/09/12/anthropics-amodei-proposes-plan-to-slow-the-pace-of-advancing-ai-capabilities.html" target="_blank" rel="noopener noreferrer">OpenAI rules out IPO this year as Altman, Musk &amp; Amodei warn AI is moving too fast</a></h3>
-  <p class="sum">Altman&#39;s IPO comments and Amodei&#39;s public call for…</p>
-  
-  
-  
-</article>
-  </section><section class="panel" id="p-pol">
-    <div class="filter-bar">
-    <span class="filter-label">筛选</span>
-    <div class="filter-group">
-        <span class="filter-gtitle">来源</span>
-        <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
-      </div><div class="filter-group">
-        <span class="filter-gtitle">业务线</span>
-        <button type="button" class="filter-chip" data-group="tag" data-filter="客群">客群</button>
-      </div>
-    <button type="button" class="filter-reset">重置</button>
-  </div>
-    <article class="brief" data-source="official" data-tags="客群" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-official">官方</span><span>新华财经</span><span>09/14</span></div>
-  <h3><a href="https://www.cnfin.com/yw-lb/detail/20260914/4469467_1.html" target="_blank" rel="noopener noreferrer">【国务院国资委：中央企业带头及时支付账款】国务院国资委财管运行局负责人裴仁佺14日在国新办举行的国务院政策例行吹风会上说，《关于加强中小企业回款难问题治理有关工作的通知》对央企发挥表率作用提出专门要求。接下来，中央企业将积极筹措资金，确保及时支付；今后更要把对中小企业现金支付作为一条“硬杠杠”坚持好，同时结合自身实际对大型企业保持合理现金支付比例，推动沿业务链条传导，并严格“票证”使用，严禁新开6个月以上“票证”；将督促央企带头遵守所在行业领域规定，率先在合同中明确四项关键要素，率先响应并践行行业及时支付倡议等。</a></h3>
-  <p class="sum">【国务院国资委：中央企业带头及时支付账款】国务院国资委财管运行局负责人裴仁佺14日在国新办举行的国务…</p>
-  
-  
-  <div class="tags"><span class="tag t-mass">客群</span></div>
-</article>
-  </section><section class="panel" id="p-tech">
-    <div class="filter-bar">
-    <span class="filter-label">筛选</span>
-    <div class="filter-group">
-        <span class="filter-gtitle">来源</span>
-        <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
-      </div><div class="filter-group">
-        <span class="filter-gtitle">业务线</span>
-        <button type="button" class="filter-chip" data-group="tag" data-filter="__none__">其他</button>
-      </div>
-    <button type="button" class="filter-reset">重置</button>
-  </div>
-    <article class="brief" data-source="media" data-tags="" data-market="" data-stage="">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>arXiv 金融科技论文 (cs.AI·cs.LG·q-fin)</span><span>09/14</span></div>
-  <h3><a href="https://arxiv.org/abs/2609.12086" target="_blank" rel="noopener noreferrer">Creating an Atomic User Model for Personality-Aware Large Language Model Interaction</a></h3>
-  <p class="sum">arXiv:2609.12086v1 Announce Type: cross 
-Abstract:…</p>
-  
-  
-  
-</article>
-  </section><section class="panel" id="p-ipo">
-    <div class="filter-bar">
-    <span class="filter-label">筛选</span>
-    <div class="filter-group">
-        <span class="filter-gtitle">来源</span>
-        <button type="button" class="filter-chip" data-group="src" data-filter="official">官方</button><button type="button" class="filter-chip" data-group="src" data-filter="media">媒体</button>
-      </div><div class="filter-group">
-        <span class="filter-gtitle">阶段</span>
-        <button type="button" class="filter-chip" data-group="stage" data-filter="stage-tutoring">辅导备案</button><button type="button" class="filter-chip" data-group="stage" data-filter="stage-reviewing">在审</button><button type="button" class="filter-chip" data-group="stage" data-filter="stage-listed">已上市</button>
-      </div>
-    <button type="button" class="filter-reset">重置</button>
-  </div>
-    <section class="ipo-group" data-stage="stage-tutoring">
-    <h4 class="ipo-group-head"><span class="ipo-group-dot ipo-stage--stage-tutoring"></span>辅导备案<span class="ipo-group-n">1</span></h4>
-    <article class="brief" data-source="media" data-tags="粤" data-market="" data-stage="stage-tutoring">
-  <div class="bm"><span class="src-badge src-media">媒体</span><span>证券时报</span><span>09/14 · 今天</span></div>
-  <h3><a href="https://www.stcn.com/article/detail/4184784.html" target="_blank" rel="noopener noreferrer">粤芯半导体：初步询价日为9月18日 网下申购日为9月24日</a></h3>
-  <p class="sum">粤芯半导体：初步询价日为9月18日 网下申购日为9月24日</p>
-  
-  
-  <div class="tags"><span class="tag t-gd">广东</span></div>
-</article>
-  </section>
-<section class="ipo-group" data-stage="stage-reviewing">
-    <h4 class="ipo-group-head"><span class="ipo-group-dot ipo-stage--stage-reviewing"></span>在审<span class="ipo-group-n">1</span></h4>
-    <article class="brief" data-source="official" data-tags="粤" data-market="" data-stage="stage-reviewing">
-  <div class="bm"><span class="src-badge src-official">官方</span><span>港交所新股递表(广东企业赴港)</span><span>09/10 · 4 天前</span></div>
-  <h3><a href="https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm" target="_blank" rel="noopener noreferrer">廣東微電新能源股份有限公司（主板递表·广东企业）</a></h3>
-  <p class="sum">市场：主板｜递表日：2026-09-10｜广东企业赴港上市，可跟进跨境融资商机</p>
-  
-  <p class="official-src">官方源：<a href="https://www1.hkexnews.hk/app/sehk/2026/108867/2026091001722_c.htm" target="_blank" rel="noopener noreferrer">申請版本（第一次呈交）</a></p>
-  <div class="tags"><span class="tag t-gd">广东</span></div>
-</article>
-  </section>
-<section class="ipo-group" data-stage="stage-listed">
-    <h4 class="ipo-group-head"><span class="ipo-group-dot ipo-stage--stage-listed"></span>已上市<span class="ipo-group-n">1</span></h4>
-    <article class="brief" data-source="official" data-tags="" data-market="" data-stage="stage-listed">
-  <div class="bm"><span class="src-badge src-official">官方</span><span>港交所新股递表(广东企业赴港)</span><span>09/13 · 昨天</span></div>
-  <h3><a href="https://www1.hkexnews.hk/app/sehk/2026/108870/2026091300120_c.htm" target="_blank" rel="noopener noreferrer">深圳市海柔創新智能科技集團股份有限公司 - W（主板递表·广东企业）</a></h3>
-  <p class="sum">市场：主板｜递表日：2026-09-13｜广东企业赴港上市，可跟进跨境融资商机</p>
-  
-  
-  
-</article>
-  </section>
-  </section>
-
-  <footer>
-    <p>免责声明：本页面为个人学习项目，内容基于公开信息整理，不代表任何机构立场；市场信息不构成投资建议。页面面向内部参考，请勿外传。</p>
-    <p><a class="archive" href="../archive.html">← 历史归档（8月20日 / 8月19日 / 更多 →）</a></p>
-  </footer>
-</main>
-<script>
-  // tab 切换（单层五板块）
-  document.querySelectorAll('.tabs > .tab').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var target = btn.dataset.target;
-      document.querySelectorAll('.tabs > .tab').forEach(function (b) {
-        b.classList.toggle('active', b === btn);
-      });
-      document.querySelectorAll('.panel').forEach(function (p) {
-        p.classList.toggle('active', p.id === target);
-      });
-    });
-  });
-  // 空板块保险：panel 无卡片则连同 tab 移除
-  document.querySelectorAll('.panel').forEach(function (panel) {
-    if (panel.querySelectorAll('.brief').length === 0) {
-      var tab = document.querySelector('.tab[data-target="' + panel.id + '"]');
-      if (tab) tab.remove();
-      panel.remove();
-    }
-  });
-  // 展开其余 N 条
-  document.querySelectorAll('.expand-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var panel = btn.closest('.panel');
-      if (panel) panel.classList.add('expanded');
-      btn.remove();
-    });
-  });
-  // 板块内标签筛选（两维度：来源 OR、业务线 OR；维度间 AND；全不选 / 全选 = 全部显示）
-  document.querySelectorAll('.filter-bar').forEach(function (bar) {
-    var panel = bar.closest('.panel');
-    if (!panel) return;
-    bar.addEventListener('click', function (e) {
-      var chip = e.target.closest('.filter-chip');
-      if (chip) { chip.classList.toggle('active'); applyFilter(panel, bar); return; }
-      if (e.target.closest('.filter-reset')) {
-        bar.querySelectorAll('.filter-chip.active').forEach(function (c) { c.classList.remove('active'); });
-        applyFilter(panel, bar);
-      }
-    });
-  });
-  function applyFilter(panel, bar) {
-    var chips = bar.querySelectorAll('.filter-chip');
-    var active = Array.prototype.filter.call(chips, function (c) { return c.classList.contains('active'); });
-    var btn = panel.querySelector('.expand-btn');
-    // 广东IPO 四阶段分栏：过滤后隐藏「无可见卡片」的整组（否则会留下空组标题）
-    function syncGroups() {
-      panel.querySelectorAll('.ipo-group').forEach(function (grp) {
-        var visible = grp.querySelectorAll('.brief:not(.filtered-out)').length;
-        grp.classList.toggle('filtered-out', visible === 0);
-      });
-    }
-    // 全不选（重置）或全选 → 全部显示，并恢复「前 5 展示 + 其余折叠」的默认布局
-    if (active.length === 0 || active.length === chips.length) {
-      panel.classList.remove('expanded');
-      if (btn) btn.style.display = '';
-      panel.querySelectorAll('.brief').forEach(function (card) { card.classList.remove('filtered-out'); });
-      syncGroups();
-      return;
-    }
-    // 筛选生效：自动展开折叠区——命中项（含原折叠区内）无需再点「展开」即可见，
-    // 与查询结果刷新的预期联动；隐藏展开按钮，避免出现「仍提示折叠 N 条」的错位。
-    panel.classList.add('expanded');
-    if (btn) btn.style.display = 'none';
-    // 按维度（data-group）分组收集选中值
-    var selByGroup = {};
-    active.forEach(function (c) {
-      var g = c.getAttribute('data-group');
-      (selByGroup[g] = selByGroup[g] || []).push(c.getAttribute('data-filter'));
-    });
-    panel.querySelectorAll('.brief').forEach(function (card) {
-      var src = card.getAttribute('data-source');
-      var tags = (card.getAttribute('data-tags') || '').split(' ').filter(Boolean);
-      var market = card.getAttribute('data-market');
-      var stage = card.getAttribute('data-stage') || '';
-      var ok = true;
-      for (var g in selByGroup) {
-        var sel = selByGroup[g];
-        if (g === 'src') {
-          // 维度内 OR：命中官方 / 媒体 其一即满足
-          if (sel.indexOf(src) < 0) { ok = false; break; }
-        } else if (g === 'market') {
-          // 股市动态面板：按 A股 / 港股 / 美股 过滤（维度内 OR）
-          if (sel.indexOf(market) < 0) { ok = false; break; }
-        } else if (g === 'stage') {
-          // 广东IPO 面板：按四阶段过滤（维度内 OR）；「__none__」= 阶段待定（无阶段信号）
-          var stageHit = sel.some(function (f) { return f === '__none__' ? stage === '' : stage === f; });
-          if (!stageHit) { ok = false; break; }
-        } else {
-          // 维度内 OR：命中业务线其一即满足；「__none__」（其他）命中空标签卡片
-          var hit = sel.some(function (f) {
-            if (f === '__none__') return tags.length === 0; // 其他 = 无 4 部门标签
-            return tags.indexOf(f) >= 0;
-          });
-          if (!hit) { ok = false; break; }
-        }
-      }
-      card.classList.toggle('filtered-out', !ok);
-    });
-    syncGroups();
-  }
-</script>
-
+  <p class="summary">IPO辅导备案 | 辅导机构: 中信建投证券股份有限公司 | 备案时间: 2026-04-02 | 状态: 辅导验收 | 报告: 辅导工作完成报告 | 披露: 2026-09-21</p>
+  <dl class="kv">
+      <div class="kv-row"><dt>来源</dt><dd>证监会辅导备案(官方csrcfd) · T1</dd></div>
+      <div class="kv-row"><dt>发布</dt><dd>09/21</dd></div>
+      <div class="kv-row"><dt>板块</dt><dd>IPO 动态</dd></div>
+      <div class="kv-row"><dt>重要度</dt><dd>默认</dd></div>
+      <div class="kv-row"><dt>地域</dt><dd>全国</dd></div>
+      <div class="kv-row"><dt>标签</dt><dd>粤</dd></div>
+      <div class="kv-row"><dt>IPO 阶段</dt><dd>stage-coach-done</dd></div>
+      <div class="kv-row"><dt>企业属地</dt><dd>广东</dd></div>
+  </dl>
+  <p class="origin">原文：<a href="http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/21/PREIPO_F0101_V01_20260921_36490_Q/08DA449650D843549C5F65522B192C7D/关于得一微电子股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf" target="_blank" rel="noopener">证监会辅导备案(官方csrcfd)</a>（新窗口打开）</p>
+  <p class="note">本页为简报条目的站内上下文视图，内容摘录自公开来源；完整原文请以上方链接为准。</p>
 </body>
 </html>
