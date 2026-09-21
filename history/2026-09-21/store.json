@@ -1,65 +1,105 @@
 {
   "date": "2026-09-21",
-  "updatedAt": "2026-09-20T23:53:01.041Z",
+  "updatedAt": "2026-09-21T12:57:20.184Z",
   "executive": {
-    "hero_line": "今日分行焦点：美联储加息落地 全球利率现分化博弈",
+    "hero_line": "个人贷款全成本透明披露落地，营销话术与合同展示须同步整改，消费贷获客短期或承压。",
+    "spoken_hero": "个人贷款全成本透明披露要求正式落地，营销话术和合同展示都得同步整改，消费贷获客转化短期可能波动，可考虑统一口径、把真实成本讲清楚来稳住客户信任。",
     "must_read": [
       {
-        "title": "多家银行落地40年房贷",
-        "why": "按揭期限竞争加剧并设45岁年龄门槛，本行期限与年龄政策覆盖差异需评估。",
-        "url": "https://finance.sina.com.cn/jjxw/2026-09-20/doc-inismrff2565564.shtml"
+        "title": "美联储加息后金价反弹",
+        "why": "黄金中长期配置价值仍受支撑，客户咨询或增多，适当性匹配需同步跟上。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20260920/4472234_1.html"
       },
       {
         "title": "LPR连续16个月按兵不动",
-        "why": "房贷与消费贷定价基准短期稳定，存量与新增利率差异成为客户沟通重点，影响按揭与消贷投放节奏。",
+        "why": "9月报价维持不变，房贷与消费贷定价基准短期稳定，存量与新增利率差异可作客户沟通抓手。",
         "url": "https://finance.cctv.com/2026/09/20/ARTIQ2jOvfQyHGo9IwSNQsrH260920.shtml"
       },
       {
-        "title": "国常会部署应对老龄化",
-        "why": "养老金融政策导向明确，养老储蓄与保险类产品对接窗口打开，关系零售长期客群经营。",
-        "url": "https://finance.eastmoney.com/a/202609203879356443.html"
+        "title": "上海落地跨境资金集中运营新政",
+        "why": "本外币跨境资金管理便利化扩围，大湾区跨境客群需求值得提前摸排。",
+        "url": "https://finance.sina.com.cn/jryx/bank/2026-09-20/doc-inisnnky6632818.shtml"
       },
       {
-        "title": "被动指数债基破2万亿",
-        "why": "从机构工具转向大众理财，稳健型客户配置供给面临调整，财富货架需补充。",
-        "url": "https://finance.sina.com.cn/money/bond/2026-09-21/doc-inispuef2146417.shtml"
+        "title": "广东前8月社零仅增1.3%",
+        "why": "消费复苏偏弱，信用卡与消费贷促活策略可考虑向高频小额场景倾斜。",
+        "url": "https://www.stcn.com/article/detail/4192881.html"
       },
       {
-        "title": "公积金条例正式实施",
-        "why": "装修、物业费均可提取，提取场景扩容，为住房金融与消费场景联动提供新抓手。",
-        "url": "https://finance.cctv.com/2026/09/20/ARTIKIG4Q7bPc3BTJfsQ0tR8260920.shtml"
+        "title": "广东规上工业增加值增6.1%",
+        "why": "制造业景气好于投资端，制造业小微与供应链客群的授信机会值得关注。",
+        "url": "https://www.stcn.com/article/detail/4192879.html"
       }
     ],
-    "spoken_must_read": "多家银行落地40年房贷。按揭期限竞争加剧并设45岁年龄门槛，本行期限与年龄政策覆盖差异需评估。。其次，LPR连续16个月按兵不动。房贷与消费贷定价基准短期稳定，存量与新增利率差异成为客户沟通重点，影响按揭与消贷投放节奏。。此外，国常会部署应对老龄化。养老金融政策导向明确，养老储蓄与保险类产品对接窗口打开，关系零售长期客群经营。。还有，被动指数债基破2万亿。从机构工具转向大众理财，稳健型客户配置供给面临调整，财富货架需补充。。另外，公积金条例正式实施。装修、物业费均可提取，提取场景扩容，为住房金融与消费场景联动提供新抓手。。",
+    "spoken_must_read": "美联储加息后金价反弹。黄金中长期配置价值仍受支撑，客户咨询或增多，适当性匹配需同步跟上。其次，LPR连续16个月按兵不动。9月报价维持不变，房贷与消费贷定价基准短期稳定，存量与新增利率差异可作客户沟通抓手。此外，上海落地跨境资金集中运营新政。本外币跨境资金管理便利化扩围，大湾区跨境客群需求值得提前摸排。还有，广东前8月社零仅增1.3%。消费复苏偏弱，信用卡与消费贷促活策略可考虑向高频小额场景倾斜。另外，广东规上工业增加值增6.1%。制造业景气好于投资端，制造业小微与供应链客群的授信机会值得关注。",
     "insights": [
       {
-        "topic": "净土贷绿色融资",
-        "impact": "广州首单净土贷落地，土壤治理类绿色信贷路径打通，本地环保与城投类客户融资需求显现。",
-        "action": "可考虑本周走访本地环保与城投类客户，跟进绿色信贷与普惠小微融资需求。",
+        "topic": "公积金新政场景串联",
+        "impact": "新政覆盖购房、装修、养老全生命周期，装修分期与物业缴费场景获客窗口打开。",
+        "action": "值得关注装修与物业缴费场景，可考虑联合本地家装、物业商户做分期权益包，本月内试点上线。",
         "tag": [
-          "信贷",
-          "政银合作"
+          "住房金融",
+          "财富"
         ],
         "segments": [
-          "普惠小微贷款客户"
+          "零售AUM"
         ],
         "sources": [
           {
-            "title": "广州落地首单“净土贷”，解锁美丽城市建设绿色金融新路径",
-            "url": "https://news.dayoo.com/guangzhou/202609/20/139995_55005694.htm"
+            "title": "【新华解读】住房公积金新政施行 服务全生命周期住房消费",
+            "url": "https://m.21jingji.com/article/20260920/herald/eaecaf4bf205007a99003c364c720fc2.html"
           }
         ]
       },
       {
-        "topic": "跨境资金集中运营",
-        "impact": "上海首批8家落地本外币跨境资金集中运营新政，大湾区跨境客群资金管理便利化需求上升。",
-        "action": "值得关注大湾区跨境客群需求，评估跨境资金集中运营产品的对接空间。",
+        "topic": "贵金属货架重排",
+        "impact": "超10家银行清退代理炒金通道，贵金属类产品货架面临重排，客户沟通与替代配置需求集中释放。",
+        "action": "财富条线可提前梳理替代配置方案与统一沟通口径，对存量贵金属客户逐户提示，避免客户流失。",
         "tag": [
-          "政银合作",
-          "客群"
+          "财富",
+          "监管"
         ],
         "segments": [
-          "普惠小微贷款客户"
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "光大银行下月全面停办该业务！超10家银行清退'炒金'通道",
+            "url": "https://m.21jingji.com/article/20260921/herald/a6a61e5be4522c6ded4dcf36e5bf1848.html"
+          }
+        ]
+      },
+      {
+        "topic": "黄金预期管理",
+        "impact": "机构下调长期金价预测但仍看好长期走势，客户单边预期管理难度上升，适当性沟通压力加大。",
+        "action": "可考虑对黄金持仓客户做波动提示，引导分批配置而非追高，理财经理本周内完成话术培训。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "伯恩斯坦下调2030年金价预测，但仍看好黄金长期走势",
+            "url": "https://finance.sina.com.cn/stock/usstock/c/2026-09-21/doc-inisqzxv7574389.shtml"
+          },
+          {
+            "title": "美联储加息落地后金价反弹 中长期配置价值仍具支撑",
+            "url": "https://www.cnfin.com/yw-lb/detail/20260920/4472234_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "私行客户跨境需求",
+        "impact": "跨境资金集中运营便利化扩围，大湾区高净值客户跨境资金管理需求上升，私行服务切入点增多。",
+        "action": "私行团队可考虑摸排有跨境经营背景的企业主客户，联合对公条线提供本外币一体化方案。",
+        "tag": [
+          "私行",
+          "政银合作"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
         ],
         "sources": [
           {
@@ -69,47 +109,75 @@
         ]
       },
       {
-        "topic": "中小机构整合客群迁移",
-        "impact": "民生银行同日获批收购两家村镇银行，中小机构整合提速，区域内存量网点与客群迁移机会显现。",
-        "action": "可关注区域内存量网点与客群迁移机会，评估承接与获客切入点。",
+        "topic": "制造业小微授信",
+        "impact": "广东规上工业增加值增6.1%，制造业景气好于投资端，制造业小微与供应链客群授信机会显现。",
+        "action": "可考虑本周走访本地制造业小微与供应链企业，主推经营贷与代发联动方案，抢抓景气窗口。",
         "tag": [
-          "竞对动态",
-          "客群"
+          "信贷",
+          "代发"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
         ],
         "sources": [
           {
-            "title": "民生银行同日收购2家银行",
-            "url": "https://m.21jingji.com/article/20260920/herald/32aceff19ca709cc20a4766b8c501a0d.html"
+            "title": "广东：1—8月全省规模以上工业增加值同比增长6.1%",
+            "url": "https://www.stcn.com/article/detail/4192879.html"
+          }
+        ]
+      },
+      {
+        "topic": "绿色信贷新路径",
+        "impact": "广州首单净土贷落地，土壤治理类绿色信贷路径打通，本地环保与城投类客户融资需求值得关注。",
+        "action": "可考虑对接本地环保与城投类客户，梳理土壤治理项目清单，本月内形成绿色信贷储备。",
+        "tag": [
+          "信贷",
+          "政银合作"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "sources": [
+          {
+            "title": "广州落地首单'净土贷'，解锁美丽城市建设绿色金融新路径",
+            "url": "https://news.dayoo.com/guangzhou/202609/20/139995_55005694.htm"
           }
         ]
       }
     ],
-    "spoken_insights": "具备普惠小微商机的，净土贷绿色融资，广州首单净土贷落地，土壤治理类绿色信贷路径打通，本地环保与城投类客户融资需求显现。。可考虑本周走访本地环保与城投类客户，跟进绿色信贷与普惠小微融资需求。。此外，具备普惠小微商机的，跨境资金集中运营，上海首批8家落地本外币跨境资金集中运营新政，大湾区跨境客群资金管理便利化需求上升。。值得关注大湾区跨境客群需求，评估跨境资金集中运营产品的对接空间。。最后，中小机构整合客群迁移，民生银行同日获批收购两家村镇银行，中小机构整合提速，区域内存量网点与客群迁移机会显现。。可关注区域内存量网点与客群迁移机会，评估承接与获客切入点。。",
+    "spoken_insights": "具备零售 A U M商机的，公积金新政场景串联，新政覆盖购房、装修、养老全生命周期，装修分期与物业缴费场景获客窗口打开。值得关注装修与物业缴费场景，可考虑联合本地家装、物业商户做分期权益包，本月内试点上线。此外，具备零售 A U M商机的，贵金属货架重排，超10家银行清退代理炒金通道，贵金属类产品货架面临重排，客户沟通与替代配置需求集中释放。财富条线可提前梳理替代配置方案与统一沟通口径，对存量贵金属客户逐户提示，避免客户流失。同时，具备高端客户商机的，黄金预期管理，机构下调长期金价预测但仍看好长期走势，客户单边预期管理难度上升，适当性沟通压力加大。可考虑对黄金持仓客户做波动提示，引导分批配置而非追高，理财经理本周内完成话术培训。另一条值得关注，具备高端客户商机的，私行客户跨境需求，跨境资金集中运营便利化扩围，大湾区高净值客户跨境资金管理需求上升，私行服务切入点增多。私行团队可考虑摸排有跨境经营背景的企业主客户，联合对公条线提供本外币一体化方案。另外，具备普惠小微商机的，制造业小微授信，广东规上工业增加值增6.1%，制造业景气好于投资端，制造业小微与供应链客群授信机会显现。可考虑本周走访本地制造业小微与供应链企业，主推经营贷与代发联动方案，抢抓景气窗口。最后，具备普惠小微商机的，绿色信贷新路径，广州首单净土贷落地，土壤治理类绿色信贷路径打通，本地环保与城投类客户融资需求值得关注。可考虑对接本地环保与城投类客户，梳理土壤治理项目清单，本月内形成绿色信贷储备。",
     "risk": {
-      "topic": "助贷中介违规介入放款",
+      "topic": "套娃助贷违规介入放款",
       "evidence": "卧底调查显示套娃式助贷105万贷款收近23万服务费，有公司自称能让银行人员控制放款时间。",
-      "impact": "个贷合作渠道与员工行为风险上升，消费贷宣传与放款环节合规压力加大，风控与渠道管理需同步收紧。",
-      "action": "风控部应排查合作助贷渠道与员工行为，个贷部应复核放款流程与收费口径，本周完成自查。",
+      "impact": "个贷与消费贷合作渠道存在员工行为与中介违规风险，财富条线客户投诉隐患上升，风控与合规压力加大。",
+      "action": "风控部应牵头排查合作渠道与员工行为，个贷部同步复核放款时效管理，本月内完成一轮自查。",
       "source": "T2",
       "sources": [
         {
-          "title": "卧底“套娃式助贷”：贷款105万服务费近23万，有公司自称能“让银行人员控制放款时间”",
+          "title": "卧底'套娃式助贷'：贷款105万服务费近23万，有公司自称能'让银行人员控制放款时间'",
           "url": "https://m.21jingji.com/article/20260920/herald/f517f16e1b5b8b8daf5ebbfcf41eb51a.html"
         }
       ]
     },
-    "spoken_risk": "今天有 1 个需要警惕：助贷中介违规介入放款，个贷合作渠道与员工行为风险上升，消费贷宣传与放款环节合规压力加大，风控与渠道管理需同步收紧。。风控部应排查合作助贷渠道与员工行为，个贷部应复核放款流程与收费口径，本周完成自查。。",
-    "guangdong_ipo": null
+    "spoken_risk": "今天有 1 个需要警惕：套娃助贷违规介入放款，个贷与消费贷合作渠道存在员工行为与中介违规风险，财富条线客户投诉隐患上升，风控与合规压力加大。风控部应牵头排查合作渠道与员工行为，个贷部同步复核放款时效管理，本月内完成一轮自查。",
+    "guangdong_ipo": {
+      "spoken": "深圳得一微电子股份有限公司，注册地深圳，属半导体存储芯片行业，拟境内上市，目前处于辅导验收阶段，辅导机构为中信建投证券，辅导工作完成报告已于今日披露。"
+    }
   },
   "stock_recap": {
     "us": {
-      "overview": "道琼斯收报51682.64点（-0.18%）；纳斯达克收报26522.55点（+0.39%）；标普500收报7650.50点（+0.17%）。",
-      "sectors": [],
-      "spoken": "道琼斯（-0.18%）；纳斯达克（+0.39%）；标普500（+0.17%）。",
+      "overview": "纳指涨0.39%领涨，美联储加息后政策路径不明，AI交易回暖。",
+      "sectors": [
+        "AI交易反弹，期权市场出现异常看涨押注，科技股获资金追捧。",
+        "美联储主席沃什加息表态引发华尔街对后续加息幅度猜测，利率预期扰动市场。",
+        "伯克希尔巴菲特卸任董事长交棒其子霍华德，公司治理变动受关注。",
+        "拉美资产年内涨15%跑赢标普11%，ILF ETF成区域配置亮点。"
+      ],
+      "spoken": "美股三大指数涨跌互现，纳指涨0.39%，道指微跌0.18%。美联储加息后政策路径不明，但AI交易回暖，期权市场出现异常看涨押注，科技股获资金追捧。伯克希尔巴菲特卸任董事长，交棒其子霍华德。拉美资产年内涨15%，跑赢标普。",
       "meta": {
-        "source": "",
+        "source": "CNBC Investing",
         "quoteSource": "新浪行情",
-        "date": ""
+        "date": "2026-09-21"
       },
       "indices": [
         {
@@ -130,15 +198,15 @@
       ]
     },
     "aShare": {
-      "overview": "沪指涨0.94%，创业板指涨2.25%，MLCC涨价与AI景气共振。",
+      "overview": "三大指数集体收涨，上证涨0.97%，习近平将访美提振风险偏好。",
       "sectors": [
-        "MLCC概念领涨，AI重塑供需格局，高端产品订单排至2027年，缺货涨价延续。",
-        "黄酒板块走独立行情，龙头8月以来股价翻倍，资金持续关注。",
-        "脑机接口处产业爆发前夜，主题热度升温，但企业分化明显。",
-        "沈鼓集团上市两日暴涨1200%，部分投资者遭暂停账户交易。",
-        "十大机构论市：反弹时机恰到好处，建议抓住反弹窗口期。"
+        "创新药概念股爆发，AI制药迎海内外双催化，多股涨停。",
+        "券商板块突迎利好，牛市旗手异动，政策预期升温。",
+        "特斯拉机器人团队长三角审厂，多家企业已获订单，产业链受关注。",
+        "华为官宣昇腾960超节点，中信证券看好国产NPO投资机遇。",
+        "中美经贸磋商在纽约举行，外交部介绍习近平访美安排。"
       ],
-      "spoken": "A股今日集体收涨，上证指数涨0.94%，深证成指涨1.72%，创业板指涨2.25%。板块方面，MLCC概念领涨，AI重塑供需格局，高端产品订单排到2027年，缺货涨价延续。黄酒板块持续走独立行情，龙头8月以来股价翻倍。脑机接口主题升温，但企业分化明显。机构观点认为反弹窗口已打开。",
+      "spoken": "A股三大指数集体收涨，上证涨0.97%，超4500只个股飘红。习近平将访美提振风险偏好，中美经贸磋商在纽约举行。板块方面，创新药概念股爆发，AI制药迎海内外双催化。券商板块突迎利好，牛市旗手异动。特斯拉机器人团队长三角审厂，多家企业已获订单。华为官宣昇腾960超节点，国产算力链受关注。",
       "meta": {
         "source": "东方财富",
         "quoteSource": "新浪行情",
@@ -147,46 +215,50 @@
       "indices": [
         {
           "name": "上证指数",
-          "value": "3911.87",
-          "changePct": "+0.94%"
+          "value": "3949.91",
+          "changePct": "+0.97%"
         },
         {
           "name": "深证成指",
-          "value": "13640.87",
-          "changePct": "+1.72%"
+          "value": "13730.02",
+          "changePct": "+0.65%"
         },
         {
           "name": "创业板指",
-          "value": "3372.68",
-          "changePct": "+2.25%"
+          "value": "3399.59",
+          "changePct": "+0.80%"
         }
       ]
     },
     "hk": {
-      "overview": "恒指涨0.60%，恒生科技涨2.20%，科技股领涨带动大市走强。",
+      "overview": "恒指涨1.18%重回25000点，科指涨0.4%，科网股普涨创新药大涨。",
       "sectors": [
-        "恒生科技涨2.20%，科技股集体走强，为大盘主要上行动力。",
-        "大摩维持中国神华增持评级，目标价48.3港元，煤炭龙头获看好。",
-        "大和首予招商银行跑赢大市评级，目标价56.3港元，内银股受关注。",
-        "大摩给予蔚来增持评级，目标价68.5港元，新能源车股获支撑。",
-        "华泰港股策略：继续保持港股仓位灵活度，强调操作弹性。"
+        "创新药概念股大涨，美银上调中生制药目标价至7.3港元，行业加快创新及全球化。",
+        "科网股普涨，瑞银予美团买入评级，目标价升至132港元。",
+        "大摩将中国银行纳入中国香港焦点名单，予增持评级。",
+        "星环科技、纳真科技同日登陆港交所，新股挂牌受关注。",
+        "香港施政报告与十五五规划利好叠加，金融界聚焦人民币与大宗商品新机遇。"
       ],
-      "spoken": "港股今日收涨，恒生指数涨0.60%，恒生科技涨2.20%，科技股领涨带动大市走强。板块方面，煤炭龙头中国神华获大摩维持增持评级，目标价48.3港元。招商银行获大和首予跑赢大市评级，目标价56.3港元。蔚来获大摩增持评级，目标价68.5港元。华泰策略建议继续保持港股仓位灵活度。",
+      "spoken": "港股收涨，恒指涨1.18%重回25000点，科指涨0.4%。科网股普涨，创新药概念股大涨。瑞银予美团买入评级，目标价升至132港元。美银上调中生制药目标价至7.3港元。大摩将中国银行纳入焦点名单，予增持评级。星环科技、纳真科技同日登陆港交所。香港施政报告与十五五规划利好叠加，金融界聚焦人民币与大宗商品新机遇。",
       "meta": {
         "source": "新浪财经·港股",
         "quoteSource": "新浪行情",
         "date": "2026-09-21"
       },
+      "sourceReport": {
+        "title": "港股收评：恒指涨1.18%重回25000点 科指涨0.4% 科网股普涨 创新药概念股大涨",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-21/doc-inisqriw8876687.shtml"
+      },
       "indices": [
         {
           "name": "恒生指数",
-          "value": "24750.78",
-          "changePct": "+0.60%"
+          "value": "25042.71",
+          "changePct": "+1.18%"
         },
         {
           "name": "恒生科技",
-          "value": "4405.50",
-          "changePct": "+2.20%"
+          "value": "4423.29",
+          "changePct": "+0.40%"
         }
       ]
     },
@@ -196,14 +268,12 @@
       "reportDate": "2026-09-21",
       "markets": {
         "aShare": {
-          "fresh": false,
-          "dataDate": "2026-09-18",
-          "reason": "数据为 9月18日（距今 3 天）"
+          "fresh": true,
+          "dataDate": "2026-09-21"
         },
         "hk": {
-          "fresh": false,
-          "dataDate": "2026-09-18",
-          "reason": "数据为 9月18日（距今 3 天）"
+          "fresh": true,
+          "dataDate": "2026-09-21"
         },
         "us": {
           "fresh": false,
@@ -211,178 +281,155 @@
           "reason": "数据为 9月18日（距今 3 天）"
         }
       },
-      "allStale": true,
-      "note": "三地股市均无隔夜行情（休市或数据未更新），以下为最近一次收盘数据",
-      "spokenNote": "三地股市今日均无隔夜行情"
+      "allStale": false,
+      "note": "美股今日无隔夜行情，其余市场为最新收盘",
+      "spokenNote": "美股今日无隔夜行情；A股为 9月21日 周一 收盘；港股为 9月21日 周一 收盘"
     }
   },
   "stock_news": [
     {
-      "url": "https://finance.eastmoney.com/a/202609203879426630.html",
-      "title_cn": "9月20日晚间沪深上市公司重大事项公告最新快递",
+      "url": "https://finance.eastmoney.com/a/202609213879978625.html",
+      "title_cn": "习近平将对美国进行国事访问",
       "source": "东方财富",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "东方财富9月20日晚间汇总沪深上市公司重大事项公告。",
-      "importance": 1,
-      "rank": 0,
-      "tags": [
-        "A股",
-        "公告"
-      ],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609203879356443.html",
-      "title_cn": "周末要闻汇总：国常会部署深入实施积极应对人口老龄化国家战略",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/20",
-      "summary": "国常会部署深入实施积极应对人口老龄化国家战略，为周末要闻之一。",
+      "date": "09/21",
+      "summary": "据东方财富报道，习近平将对美国进行国事访问。",
       "importance": 3,
       "rank": 0,
       "tags": [
         "政策",
-        "养老",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879532291.html",
+      "title_cn": "突然上调！牛市“旗手”突迎利好！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "东方财富报道称，牛市\"旗手\"（券商板块）突然迎来利好，相关标的被上调。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "券商",
         "A股"
       ],
       "locale": "national",
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609203879293041.html",
-      "title_cn": "AI重塑MLCC供需格局！高端产品订单排至2027年缺货涨价潮仍在延续(附股)",
+      "url": "https://finance.eastmoney.com/a/202609213879834313.html",
+      "title_cn": "又炒“字典”！带这个字股票批量涨停",
       "source": "东方财富",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "AI重塑MLCC供需格局，高端产品订单排至2027年，缺货涨价潮延续。",
-      "importance": 2,
-      "rank": 0,
-      "tags": [
-        "半导体",
-        "AI",
-        "MLCC",
-        "涨价"
-      ],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609203879281496.html",
-      "title_cn": "上市两日暴涨1200%沈鼓集团部分投资者遭暂停账户交易发生了什么？",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/20",
-      "summary": "沈鼓集团上市两日暴涨1200%，部分投资者遭暂停账户交易。",
-      "importance": 2,
-      "rank": 0,
-      "tags": [
-        "A股",
-        "新股",
-        "监管"
-      ],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609203879413550.html",
-      "title_cn": "十大机构论市：反弹时机恰到好处抓住反弹窗口期",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/20",
-      "summary": "十大机构论市认为反弹时机恰到好处，建议抓住反弹窗口期。",
+      "date": "09/21",
+      "summary": "东方财富报道，A股市场再度炒作\"字典\"概念，名称中带特定字的股票批量涨停。",
       "importance": 1,
       "rank": 0,
       "tags": [
         "A股",
-        "机构观点",
-        "策略"
+        "题材炒作"
       ],
       "locale": "national",
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609203879278157.html",
-      "title_cn": "产业爆发前夜的脑机接口：水大鱼大浪也大“有些企业会很挣扎”",
+      "url": "https://finance.eastmoney.com/a/202609213879818095.html",
+      "title_cn": "3分钟20cm封板！AI制药迎海内外双催化Claude时刻即将到来？(附股)",
       "source": "东方财富",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "脑机接口产业处于爆发前夜，报道称部分企业将面临挣扎。",
+      "date": "09/21",
+      "summary": "东方财富报道，AI制药板块迎海内外双重催化，相关个股3分钟20cm封板。",
       "importance": 2,
       "rank": 0,
       "tags": [
-        "脑机接口",
+        "AI",
         "医药",
-        "科技"
+        "A股"
       ],
       "locale": "national",
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609203879283436.html",
-      "title_cn": "龙头8月以来股价翻倍黄酒板块为何持续走出独立行情？",
+      "url": "https://finance.eastmoney.com/a/202609213879681974.html",
+      "title_cn": "产业链人士：特斯拉机器人团队在长三角审厂多家企业已获订单",
       "source": "东方财富",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "黄酒板块龙头8月以来股价翻倍，板块持续走出独立行情。",
+      "date": "09/21",
+      "summary": "产业链人士称，特斯拉机器人团队在长三角审厂，多家企业已获订单。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机器人",
+        "特斯拉",
+        "产业链"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879979426.html",
+      "title_cn": "A股三大指数收涨超4500只股飘红创新药概念股爆发",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "A股三大指数收涨，超4500只个股飘红，创新药概念股爆发。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "医药",
+        "大盘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879990785.html",
+      "title_cn": "外交部介绍习近平主席访美有关安排和中方期待",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "外交部介绍习近平主席访美有关安排及中方期待。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879850380.html",
+      "title_cn": "大幅低开48%、两次临停！曾暴涨300%的“神股”上演过山车",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "东方财富报道，一只曾暴涨300%的\"神股\"大幅低开48%，盘中两次临停，走势剧烈波动。",
       "importance": 1,
       "rank": 0,
       "tags": [
         "A股",
-        "黄酒",
-        "消费"
+        "个股异动"
       ],
       "locale": "national",
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609203879408266.html",
-      "title_cn": "MLCC价格飙涨！未来两年需求料暴增",
+      "url": "https://finance.eastmoney.com/a/202609213879724934.html",
+      "title_cn": "中美经贸磋商在美国纽约举行",
       "source": "东方财富",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "MLCC价格飙涨，预计未来两年需求暴增。",
-      "importance": 2,
+      "date": "09/21",
+      "summary": "中美经贸磋商在美国纽约举行。",
+      "importance": 3,
       "rank": 0,
       "tags": [
-        "MLCC",
-        "半导体",
-        "涨价"
-      ],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609203879294620.html",
-      "title_cn": "AI四巨头遭到起诉：放缓AI发展的联合表态是非法协议",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/20",
-      "summary": "AI四巨头遭起诉，被指放缓AI发展的联合表态构成非法协议。",
-      "importance": 2,
-      "rank": 0,
-      "tags": [
-        "AI",
-        "诉讼",
-        "科技"
-      ],
-      "locale": "national",
-      "market": "a-share"
-    },
-    {
-      "url": "https://finance.eastmoney.com/a/202609203879281336.html",
-      "title_cn": "“民间股神”林园：我看好AI但我不投资AI个股",
-      "source": "东方财富",
-      "source_type": "media",
-      "date": "09/20",
-      "summary": "林园表示看好AI但不投资AI个股。",
-      "importance": 1,
-      "rank": 0,
-      "tags": [
-        "AI",
-        "机构观点",
-        "A股"
+        "中美关系",
+        "经贸"
       ],
       "locale": "national",
       "market": "a-share"
@@ -393,33 +440,83 @@
       "source": "东方财富",
       "source_type": "media",
       "date": "09/20",
-      "summary": "十大券商策略认为应把握年内最后进攻窗口，四季度有望迎来反弹行情。",
-      "importance": 1,
+      "summary": "十大券商发布策略观点，认为四季度有望迎来反弹行情，建议把握年内最后的进攻窗口。",
+      "importance": 2,
       "rank": 0,
       "tags": [
-        "A股",
-        "券商策略",
-        "机构观点"
+        "券商",
+        "策略",
+        "A股"
       ],
       "locale": "national",
       "market": "a-share"
     },
     {
-      "url": "https://finance.eastmoney.com/a/202609203879438690.html",
-      "title_cn": "高盛：AI投资热贡献美股近半数盈利增长但明年这一动力将逐渐消失",
+      "url": "https://finance.eastmoney.com/a/202609213879886185.html",
+      "title_cn": "金观平：坚持“四个注重”做强先进制造业",
       "source": "东方财富",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "高盛称AI投资热贡献美股近半数盈利增长，但预计明年该动力将逐渐消失。",
+      "date": "09/21",
+      "summary": "金观平发表评论，提出坚持\"四个注重\"做强先进制造业。",
       "importance": 2,
       "rank": 0,
       "tags": [
-        "AI",
-        "美股",
-        "高盛"
+        "政策",
+        "制造业"
       ],
       "locale": "national",
       "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879528797.html",
+      "title_cn": "中信证券：华为官宣昇腾960超节点持续看好国产NPO投资机遇",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "中信证券研报指出，华为官宣昇腾960超节点，持续看好国产NPO投资机遇。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "华为",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-21/doc-inisqriw8876687.shtml",
+      "title_cn": "港股收评：恒指涨1.18%重回25000点 科指涨0.4% 科网股普涨 创新药概念股大涨",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "港股收评：恒指涨1.18%重回25000点，科指涨0.4%，科网股普涨，创新药概念股大涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-09-21/doc-inispynh6022529.shtml",
+      "title_cn": "星环科技今日登陆港交所：首日即入港股通 持续亏损与信披失误拷问治理成效",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "星环科技登陆港交所，首日即纳入港股通；报道提及其持续亏损与信披失误等治理问题。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
     },
     {
       "url": "https://finance.sina.com.cn/stock/stockzmt/2026-09-21/doc-inispuek6064961.shtml",
@@ -432,198 +529,359 @@
       "rank": 0,
       "tags": [
         "港股",
-        "策略",
-        "机构观点"
+        "策略"
       ],
       "locale": "national",
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-21/doc-inispuek6074932.shtml",
-      "title_cn": "派格生物医药-B建议委任容诚香港为新任核数师",
+      "url": "https://finance.sina.com.cn/roll/2026-09-21/doc-inispueh8922075.shtml",
+      "title_cn": "从“吨位大港”到“价值港”：香港首个五年规划定调航运业高增值转型",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/21",
-      "summary": "派格生物医药-B建议委任容诚香港为新任核数师。",
-      "importance": 1,
-      "rank": 0,
-      "tags": [
-        "港股",
-        "医药",
-        "公司公告"
-      ],
-      "locale": "national",
-      "market": "hk"
-    },
-    {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-21/doc-inispuec0912006.shtml",
-      "title_cn": "中国生态旅游发盈喜 预期年度股东应占溢利约9500万至1.05亿港元同比扭亏为盈",
-      "source": "新浪财经·港股",
-      "source_type": "media",
-      "date": "09/21",
-      "summary": "中国生态旅游发盈喜，预期年度股东应占溢利约9500万至1.05亿港元，同比扭亏为盈。",
+      "summary": "香港首个五年规划定调航运业高增值转型，推动从\"吨位大港\"转向\"价值港\"。",
       "importance": 2,
       "rank": 0,
       "tags": [
         "港股",
-        "业绩",
-        "旅游"
+        "航运",
+        "政策"
       ],
       "locale": "national",
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-21/doc-inispuef2155239.shtml",
-      "title_cn": "同源康医药-B根据一般授权发行H股的认购协议失效",
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-09-21/doc-inisqzxx9192766.shtml",
+      "title_cn": "直击纳真科技港交所挂牌",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/21",
-      "summary": "同源康医药-B根据一般授权发行H股的认购协议失效。",
+      "summary": "纳真科技在港交所挂牌，媒体进行现场直击报道。",
       "importance": 1,
       "rank": 0,
       "tags": [
         "港股",
-        "医药",
-        "公司公告"
+        "IPO"
       ],
       "locale": "national",
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-21/doc-inispuec0909301.shtml",
-      "title_cn": "威华达控股拟31.86亿港元收购Apex Realm Ventures Limited全部股权",
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-09-21/doc-inisqvsc6050893.shtml",
+      "title_cn": "香港施政报告与“十五五”规划利好叠加 香港金融界聚焦人民币与大宗商品新机遇",
       "source": "新浪财经·港股",
       "source_type": "media",
       "date": "09/21",
-      "summary": "威华达控股拟以31.86亿港元收购Apex Realm Ventures Limited全部股权。",
+      "summary": "香港施政报告与\"十五五\"规划利好叠加，香港金融界聚焦人民币与大宗商品新机遇。",
       "importance": 2,
       "rank": 0,
       "tags": [
         "港股",
-        "收购",
-        "公司公告"
+        "政策",
+        "人民币"
       ],
       "locale": "national",
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-20/doc-inismrfc1733563.shtml",
-      "title_cn": "高视医疗获Futu Trustee Limited增持1.3万股 每股作价约4.61港元",
+      "url": "https://finance.sina.com.cn/stock/observe/2026-09-21/doc-inisqvsc5983772.shtml",
+      "title_cn": "纳真科技港股IPO：光模块“第五名”的定价博弈——AI算力红利下的增长与隐忧",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "高视医疗获Futu Trustee Limited增持1.3万股，每股作价约4.61港元。",
+      "date": "09/21",
+      "summary": "纳真科技港股IPO受关注，作为光模块行业\"第五名\"面临定价博弈，报道提及其在AI算力红利下的增长与隐忧。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "光模块",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriy5801929.shtml",
+      "title_cn": "瑞银：予美团-W(03690)“买入”评级 目标价升至132港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "瑞银给予美团-W\"买入\"评级，目标价上调至132港元。",
       "importance": 1,
       "rank": 0,
       "tags": [
         "港股",
-        "增持",
+        "券商观点",
+        "互联网"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriv2143011.shtml",
+      "title_cn": "大摩：中国银行(03988)纳入中国/香港焦点名单 予“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "摩根士丹利将中国银行纳入中国/香港焦点名单，给予\"增持\"评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriz7726389.shtml",
+      "title_cn": "美银证券：下调阿里健康(00241)目标价至4.2港元 重申“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "美银证券下调阿里健康目标价至4.2港元，重申\"买入\"评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
         "医药"
       ],
       "locale": "national",
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-20/doc-inisnsst2472012.shtml",
-      "title_cn": "大摩：中国神华维持“增持”评级 目标价48.3港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriy5771526.shtml",
+      "title_cn": "花旗：联想控股(03396)潜在出售BIL或收窄高达75% NAV折让 评级“买入”",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "大摩维持中国神华增持评级，目标价48.3港元。",
+      "date": "09/21",
+      "summary": "花旗认为联想控股潜在出售BIL或收窄高达75%的NAV折让，给予\"买入\"评级。",
       "importance": 1,
       "rank": 0,
       "tags": [
         "港股",
-        "能源",
-        "机构评级"
+        "券商观点"
       ],
       "locale": "national",
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-20/doc-inisnsst2471599.shtml",
-      "title_cn": "大和：招商银行首予“跑赢大市”评级 目标价56.3港元",
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriv2102750.shtml",
+      "title_cn": "美银证券：中国医疗保健行业加快创新及全球化 上调中生制药(01177)目标价至7.3港元",
       "source": "新浪财经·港股",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "大和首予招商银行跑赢大市评级，目标价56.3港元。",
+      "date": "09/21",
+      "summary": "美银证券称中国医疗保健行业加快创新及全球化，上调中生制药目标价至7.3港元。",
       "importance": 1,
       "rank": 0,
       "tags": [
         "港股",
-        "银行",
-        "机构评级"
+        "券商观点",
+        "医药"
       ],
       "locale": "national",
       "market": "hk"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-20/doc-inisnsst2470014.shtml",
-      "title_cn": "小摩：金斯瑞生物科技维持“增持”评级 目标价41港元",
-      "source": "新浪财经·港股",
+      "url": "https://www.cnbc.com/2026/09/20/top-wall-street-analysts-find-these-3-stocks-attractive-as-long-term-investments.html",
+      "title_cn": "Top Wall Street analysts find these 3 stocks attractive as long-term investments",
+      "source": "CNBC Investing",
       "source_type": "media",
       "date": "09/20",
-      "summary": "小摩维持金斯瑞生物科技增持评级，目标价41港元。",
+      "summary": "CNBC报道，华尔街顶级分析师选出3只具长期投资吸引力的股票。",
       "importance": 1,
       "rank": 0,
       "tags": [
-        "港股",
-        "医药",
-        "机构评级"
+        "美股",
+        "券商观点"
       ],
-      "locale": "national",
-      "market": "hk"
+      "locale": "overseas",
+      "market": "us"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-20/doc-inisnssw6529408.shtml",
-      "title_cn": "大摩：国泰航空维持“增持”评级 目标价16.9港元",
-      "source": "新浪财经·港股",
+      "url": "https://www.cnbc.com/2026/09/20/caruso-cabrera-the-investing-tailwinds-for-latin-america-are-the-best-in-decades.html",
+      "title_cn": "Caruso-Cabrera: The investing tailwinds for Latin America are the best in decades",
+      "source": "CNBC Investing",
       "source_type": "media",
       "date": "09/20",
-      "summary": "大摩维持国泰航空增持评级，目标价16.9港元。",
+      "summary": "Caruso-Cabrera表示，拉丁美洲当前面临数十年来最好的投资顺风。",
       "importance": 1,
       "rank": 0,
       "tags": [
-        "港股",
-        "航空",
-        "机构评级"
+        "美股",
+        "新兴市场"
       ],
-      "locale": "national",
-      "market": "hk"
+      "locale": "overseas",
+      "market": "us"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-20/doc-inisnssr1365927.shtml",
-      "title_cn": "大摩：蔚来-SW给予“增持”评级 目标价68.5港元",
-      "source": "新浪财经·港股",
+      "url": "https://www.cnbc.com/2026/09/19/warren-buffett-takes-next-step-in-plan-to-keep-berkshire-from-straying.html",
+      "title_cn": "Buffett takes next step in plan to keep Berkshire from straying",
+      "source": "CNBC Investing",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "大摩给予蔚来-SW增持评级，目标价68.5港元。",
-      "importance": 1,
+      "date": "09/19",
+      "summary": "巴菲特推进相关计划，以确保伯克希尔不偏离既定方向。",
+      "importance": 2,
       "rank": 0,
       "tags": [
-        "港股",
-        "新能源车",
-        "机构评级"
+        "美股",
+        "伯克希尔"
       ],
-      "locale": "national",
-      "market": "hk"
+      "locale": "overseas",
+      "market": "us"
     },
     {
-      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-20/doc-inisnsst2468190.shtml",
-      "title_cn": "大和：建设银行首予“买入”评级 目标价11.05港元",
-      "source": "新浪财经·港股",
+      "url": "https://www.cnbc.com/2026/09/18/three-words-from-kevin-warsh-have-wall-street-wondering-how-far-the-fed-will-go-with-rate-hikes.html",
+      "title_cn": "Three words from Kevin Warsh have Wall Street wondering how far the Fed will go with rate hikes",
+      "source": "CNBC Investing",
       "source_type": "media",
-      "date": "09/20",
-      "summary": "大和首予建设银行买入评级，目标价11.05港元。",
+      "date": "09/18",
+      "summary": "Kevin Warsh的一番表态令华尔街猜测美联储加息幅度将走多远。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "美联储",
+        "货币政策"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/18/ai-trade-rebound-sparks-flurry-of-unusually-bullish-options-activity.html",
+      "title_cn": "AI trade rebound sparks flurry of unusually bullish options activity",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "AI板块交易反弹，引发异常看涨的期权活动激增。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "期权"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/why-is-anterix-stock-rallying-today-93CH-4909029",
+      "title_cn": "Why is Anterix stock rallying today?",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "Investing.com报道，Anterix股价当日上涨，但未披露具体原因。",
       "importance": 1,
       "rank": 0,
       "tags": [
-        "港股",
-        "银行",
-        "机构评级"
+        "美股",
+        "个股异动"
       ],
-      "locale": "national",
-      "market": "hk"
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/analyst-ratings/cantor-fitzgerald-reiterates-overweight-rating-on-etoro-stock-93CH-4909026",
+      "title_cn": "Cantor Fitzgerald reiterates Overweight rating on eToro stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "Cantor Fitzgerald重申对eToro股票的\"增持\"评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/analyst-ratings/cantor-fitzgerald-reiterates-forward-industries-stock-rating-93CH-4909024",
+      "title_cn": "Cantor Fitzgerald reiterates Forward Industries stock rating",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "Cantor Fitzgerald重申对Forward Industries股票的评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/analyst-ratings/cantor-fitzgerald-raises-microsoft-stock-price-target-on-growth-93CH-4909025",
+      "title_cn": "Cantor Fitzgerald raises Microsoft stock price target on growth",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "Cantor Fitzgerald基于增长前景上调微软股票目标价。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商观点",
+        "科技"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/trump-open-to-meeting-iranian-president-pezeshkian-fox-reporter-4908230",
+      "title_cn": "Houthis, Saudi-backed forces fight for control of key Yemen highlands",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "胡塞武装与沙特支持的力量为争夺也门关键高地控制权发生交战。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "中东"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/why-is-stablecoinx-stock-surging-today-93CH-4909019",
+      "title_cn": "Why is Stablecoinx stock surging today?",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "Investing.com报道，Stablecoinx股价当日大幅上涨。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "个股异动",
+        "加密货币"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/cnn-ms-now-and-politico-file-lawsuit-against-trump-administration-over-white-house-access-4908656",
+      "title_cn": "MS NOW, CNN and Politico to sue over White House ban",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "MS NOW、CNN与Politico就白宫禁令提起诉讼。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "媒体",
+        "政策"
+      ],
+      "locale": "overseas",
+      "market": "us"
     }
   ]
 }
