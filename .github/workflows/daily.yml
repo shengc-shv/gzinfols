@@ -15,9 +15,12 @@ name: daily
 #     · 仍保留 workflow_dispatch 手动触发（gate 对手动一律放行，用户选择优先）。
 #     · 推送（notify.yml）仍为**人工触发**：07:30 出刊后可先在页面上核对内容，再点推送。
 #
-# 音频：AUDIO_ENABLED=true → 腾讯云 TTS（TENCENTCLOUD_* secrets）+ 分片 ffmpeg 拼接；
-#       腾讯失败 → 本轮降级为无播放器（不阻断发布；Piper 兜底为本地能力，CI 不预装）。
+# 音频：AUDIO_ENABLED=true → **阿里云百炼 CosyVoice 优先**（DASHSCOPE_API_KEY secret）
+#       → 模型链 cosyvoice-v3.5-plus → cosyvoice-v3.5-flash（额度耗尽就换下一个）
+#       → 两个都失败才用腾讯云 TTS 兜底（TENCENTCLOUD_* secrets）
+#       → 云端全挂则本轮降级为无播放器（不阻断发布；Piper 兜底为本地能力，CI 不预装）。
 #       audio input=false 或 SKIP_TTS=true 可跳过合成（省 TTS 成本，仍拼口播稿）。
+#       ⚠️ 改音色要**两处同步**：本文件的 DASHSCOPE_TTS_MODELS（CI）+ 根目录 .env（本地）。
 
 on:
   schedule:
@@ -27,7 +30,7 @@ on:
   workflow_dispatch:
     inputs:
       audio:
-        description: "生成语音播报（腾讯云 TTS）；取消勾选 = 只拼口播稿不合成"
+        description: "生成语音播报（百炼 CosyVoice 优先 → 腾讯 TTS 兜底）；取消勾选 = 只拼口播稿不合成"
         type: boolean
         default: true
       publish:
@@ -127,6 +130,17 @@ jobs:
             echo "::warning::未配置 TENCENTCLOUD_SECRET_ID — 语音播报将降级（无音频）"
           fi
 
+      # 探测百炼密钥（仅提示；缺了会自动跳过 cosyvoice 后端、回到腾讯，不算错误）
+      - name: Detect DashScope TTS secret
+        env:
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+        run: |
+          if [ -n "${DASHSCOPE_API_KEY}" ]; then
+            echo "✅ 已配置 DASHSCOPE_API_KEY — 语音播报优先走百炼 CosyVoice"
+          else
+            echo "::notice::未配置 DASHSCOPE_API_KEY — 跳过百炼，语音播报直接用腾讯云 TTS"
+          fi
+
       # ---------- ffmpeg（腾讯分片重编码 concat 必需，始终安装）----------
       - name: Install ffmpeg
         run: |
@@ -186,9 +200,13 @@ jobs:
           # 使从未送达客户的内容被误判「已播」而在次日被去重（实证：09-16 晚间 test run 写入
           # 15 条暂存 + 交付记录指纹缺失 → 次日本会误结算）。发布行为不受此开关影响。
           PUBLISH_RUN: ${{ (github.event_name == 'schedule' && needs.gate.outputs.should-run == 'true') || (github.event_name == 'workflow_dispatch' && inputs.publish == true && inputs.release_mode != 'test') }}
-          # —— 语音播报（腾讯云 TTS 主用）——
+          # —— 语音播报（百炼 CosyVoice 优先 → 腾讯兜底）——
           AUDIO_ENABLED: ${{ (github.event_name == 'schedule' || inputs.audio) && 'true' || 'false' }}
           SKIP_TTS: ${{ vars.SKIP_TTS }}
+          # 百炼：Key 走 secret；模型链明文（voice ID 不是凭据，可用 repo variable 覆盖）
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+          DASHSCOPE_TTS_MODELS: ${{ vars.DASHSCOPE_TTS_MODELS || 'cosyvoice-v3.5-plus@cosyvoice-v3.5-plus-vd-bailian-34019e71904f4f738cb5c57ad7786dd2,cosyvoice-v3.5-flash@cosyvoice-v3.5-flash-vd-bailian-0e33aa8c9a414c92b80dff0350fc6574' }}
+          # 腾讯云（兜底）
           TENCENTCLOUD_SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
           TENCENTCLOUD_SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
           TENCENTCLOUD_REGION: ${{ vars.TENCENTCLOUD_REGION }}

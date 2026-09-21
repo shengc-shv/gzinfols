@@ -23,6 +23,7 @@
     "cleanup:history": "node scripts/cleanup-history.mjs",
     "tts:fallback": "tsx scripts/tts-fallback.ts",
     "tts:probe": "tsx scripts/tts-probe.ts",
+    "tts:ab": "tsx scripts/tts-ab.ts",
     "seed:registry": "node scripts/seed-guangdong-registry.mjs",
     "regen:trading": "tsx scripts/regen-trading.ts",
     "quota-report": "tsx scripts/quota-report.ts",

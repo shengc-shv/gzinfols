@@ -25,6 +25,10 @@
 import fs from "node:fs";
 import path from "node:path";
 
+// ⚠️ 必须在 import tts 之前：腾讯密钥是模块加载期常量，晚于它 import 就读不到 .env。
+// （本行修复一个既有缺口：上面 help 文字承诺「写进 .env 后再跑」，但此前根本没加载 .env。）
+import "./_env";
+
 import { synthTencent, mergeMp3 } from "../lib/adapters/tts";
 import { toSpeechText } from "../lib/adapters/pronounce";
 

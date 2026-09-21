@@ -6,15 +6,17 @@
  * workflow 检测到标记后安装 Piper，再调用本脚本补合成。
  *
  * 流程：读 `<date>.json`（报告）+ store.json（executive 分稿）
- *   → assembleBriefingScript 拼口播稿 → 清掉腾讯密钥强制走 Piper
+ *   → assembleBriefingScript 拼口播稿 → 把候选链强制成 Piper
  *   → synthesizeAudio 生成 mp3 → 删除标记。
  *
  * 产物与 daily 一致：`daily_reports/<date>/audio/briefing-<date>.mp3`
  * （双路径落盘，site/audio 同步），后续 build-site / 发布步骤会正常带上播放器。
  *
- * ⚠️ 实现要点：`lib/adapters/tts.ts` 在**模块加载期**就把密钥读进常量
- * （`const TCE_SECRET_ID = process.env…`），因此必须在 import 之前删除 env，
- * 否则删除无效。故本脚本用动态 import（gzinfo 原版用静态 import 后删除，实为无效）。
+ * ⚠️ 实现要点（2026-09-21 更新）：`lib/adapters/tts.ts` 的**腾讯密钥是模块加载期常量**
+ * （`const TCE_SECRET_ID = process.env…`），所以清密钥必须在 import 之前，否则无效
+ * （gzinfo 原版用静态 import 后删除，实为无效；故本脚本用动态 import）。
+ * 另：现在统一显式设 `TTS_BACKEND=piper` —— 候选链是**显式**的，
+ * 置为 piper 就不必再靠「清掉别家密钥」这种间接手段来保证只走 Piper。
  *
  * Usage:
  *   npm run tts:fallback            # 扫描全部待兜底日期
@@ -27,9 +29,12 @@ import type { DailyReport } from "../lib/contracts/report";
 
 const REPORTS_DIR = path.resolve(process.cwd(), "daily_reports");
 
-// 强制走 Piper：必须在 import tts 之前清掉密钥（tts.ts 模块加载期即读取）
+// 强制只走 Piper：候选链显式指定为 piper；同时清掉云端密钥双保险
+// （必须在 import tts 之前 —— 腾讯密钥是模块加载期常量）
+process.env.TTS_BACKEND = "piper";
 delete process.env.TENCENTCLOUD_SECRET_ID;
 delete process.env.TENCENTCLOUD_SECRET_KEY;
+delete process.env.DASHSCOPE_API_KEY;
 
 function markerDates(): string[] {
   if (!fs.existsSync(REPORTS_DIR)) return [];
