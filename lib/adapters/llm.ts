@@ -10,7 +10,7 @@ import * as fs from "node:fs";
 import * as path from "node:path";
 import type { LlmPort, LlmRequest } from "../contracts/pipeline";
 import { jsonrepair } from "jsonrepair";
-import { logLlmCall, recordAiCall } from "./llm-log";
+import { logLlmCall, recordAiCall, bumpLlmCallStat } from "./llm-log";
 import { classifyError, estimateTokens } from "../services/metrics";
 import { todayKey } from "../utils/time";
 
@@ -274,6 +274,8 @@ export class LlmAdapter implements LlmPort {
           tokens: this.backend === "claude-cli" ? 0 : estimateTokens((req.system ?? "") + req.prompt) + estimateTokens(text),
           modelTag: model,
         });
+        // 进程内计数（供管线末尾「观测汇总」；此前 ctx.stats.llmCalls 从未被写入）
+        bumpLlmCallStat(true);
         return this.postProcess(text, req);
       } catch (e) {
         lastErr = e;
@@ -301,6 +303,8 @@ export class LlmAdapter implements LlmPort {
             tokens: 0,
             modelTag: model,
           });
+          // 进程内计数：重试算一次调用，仅在**最终失败**出口计一次（与 logLlmCall 口径一致）
+          bumpLlmCallStat(false);
           throw e;
         }
         const delay = BASE_DELAY_MS * Math.pow(2, attempt);

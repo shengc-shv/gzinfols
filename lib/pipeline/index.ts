@@ -25,6 +25,7 @@ import { assembleBriefingScript, type AudioMeta } from "../services/voice";
 import { publishReport } from "../services/publish";
 import { companyNameOf } from "../services/classify/gd-ipo-spoken";
 import { loadHistoryStore, loadExecStore, loadEventMemory, saveEventMemory } from "../adapters/persistence";
+import { llmCallStats } from "../adapters/llm-log";
 import { dayGap } from "../utils/time";
 import { recordIpoVoicing, ipoShouldSkip } from "../services/memory/event-memory";
 
@@ -43,6 +44,9 @@ export async function runPipeline(
   ctx: PipelineContext,
   deps: PipelineDeps,
 ): Promise<RunOutput> {
+  // LLM 调用计数基线：末尾取差值 = 本次运行的调用次数
+  // （适配器维护进程级计数，见 adapters/llm-log.ts；此前 ctx.stats.llmCalls 从未被写入 → 恒打印 0）
+  const llmBase = llmCallStats();
   const ingest = await ingestAll(ctx, { http: deps.http, crawlers: deps.crawlers });
   const { articles, dropped } = normalize(ingest.articles, ctx);
 
@@ -213,9 +217,12 @@ export async function runPipeline(
     "pipeline",
     `完成：原始 ${ingest.articles.length} / 归一化 ${articles.length}（丢 ${dropped}）/ 漏斗 ${selected.articles.length} / 历史库 ${Object.keys(histStep.history).length} → 发布 ${paths.htmlPath}${audio ? " + audio" : ""}`,
   );
+  const llmNow = llmCallStats();
+  const llmCalls = llmNow.calls - llmBase.calls;
+  const llmFailures = llmNow.failures - llmBase.failures;
   ctx.log.info(
     "pipeline",
-    `观测汇总：LLM 调用 ${ctx.stats.llmCalls ?? 0} 次（失败 ${ctx.stats.llmFailures ?? 0}）`,
+    `观测汇总：LLM 调用 ${llmCalls} 次（失败 ${llmFailures}）`,
   );
   return { report: annotated, html, markdown, speech, audio, paths };
 }

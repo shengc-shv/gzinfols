@@ -55,6 +55,16 @@ function segPhrase(segments?: string[]): string {
   if (segments.length === 1) return `具备${segSpeak(segments[0])}商机的，`;
   return `具备${segSpeak(segments[0])}和${segSpeak(segments[1])}商机的，`;
 }
+/**
+ * 句末恰好一个句号（2026-09-21 修「。。」双句号）：
+ * LLM 产出的 why / impact / action 字段**本身常已以「。」结尾**，拼接模板再补一个「。」
+ * 就会产出「。。」——TTS 听感出现异常停顿、文本也不整洁。
+ * 统一走本函数：先剥掉已有的句末标点，再补且只补一个「。」；空串返回空串（不产出孤立句号）。
+ */
+function endSentence(s: string | undefined): string {
+  const t = (s ?? "").trim().replace(/[。．.]+$/, "");
+  return t ? `${t}。` : "";
+}
 export function syncNarration(exec: ExecutiveSummary): ExecutiveSummary {
   const out: ExecutiveSummary = { ...exec };
 
@@ -64,7 +74,7 @@ export function syncNarration(exec: ExecutiveSummary): ExecutiveSummary {
         .map((it, i) => {
           const conn =
             i === 0 ? "" : i === ins.length - 1 ? "最后，" : INSIGHT_CONNECTORS[(i - 1) % INSIGHT_CONNECTORS.length];
-          const body = `${it.impact ?? ""}。${it.action ?? ""}。`;
+          const body = `${endSentence(it.impact)}${endSentence(it.action)}`;
           return `${conn}${segPhrase(it.segments)}${it.topic ?? ""}，${body}`;
         })
         .join("")
@@ -75,14 +85,14 @@ export function syncNarration(exec: ExecutiveSummary): ExecutiveSummary {
     ? mr
         .map((m, i) => {
           const conn = i === 0 ? "" : MR_CONNECTORS[(i - 1) % MR_CONNECTORS.length];
-          return `${conn}${m.title ?? ""}。${m.why ?? ""}。`;
+          return `${conn}${endSentence(m.title)}${endSentence(m.why)}`;
         })
         .join("")
     : undefined;
 
   // risk 1:1（去重清空则口播同步清空，消除孤儿口播）
   if (exec.risk) {
-    out.spoken_risk = `今天有 1 个需要警惕：${exec.risk.topic ?? ""}，${exec.risk.impact ?? ""}。${exec.risk.action ?? ""}。`;
+    out.spoken_risk = `今天有 1 个需要警惕：${exec.risk.topic ?? ""}，${endSentence(exec.risk.impact)}${endSentence(exec.risk.action)}`;
   } else {
     out.spoken_risk = undefined;
   }

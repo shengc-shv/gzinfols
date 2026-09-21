@@ -135,3 +135,25 @@ export function loadStageCalls(date?: string): AiCallMetric[] {
   }
   return out;
 }
+
+/* ───────── 进程内调用计数（2026-09-21 补）─────────
+ * 用途：管线末尾「观测汇总：LLM 调用 N 次（失败 M）」。
+ * 背景：该汇总读的是 `ctx.stats.llmCalls`，但**全仓没有任何地方写入过它**
+ *   → 恒为 undefined → ?? 0 → 日志永远打印「0 次」（2026-09-21 核查实锤）。
+ * 为何放在这里：适配器层拿不到 ctx（服务层契约），而本模块已是 LLM 的唯一埋点出口，
+ *   计数与日志同源、不会漂移。调用方取「相对本次运行起点的差值」，
+ *   这样同一进程内多次运行（测试/批量）也不会互相污染。
+ */
+let callCount = 0;
+let failureCount = 0;
+
+/** 记一次 LLM 调用（由 adapters/llm.ts 的成功/最终失败出口各调一次，重试算一次）。 */
+export function bumpLlmCallStat(ok: boolean): void {
+  callCount += 1;
+  if (!ok) failureCount += 1;
+}
+
+/** 读取进程内累计计数（调用方做差值即得本次运行次数）。 */
+export function llmCallStats(): { calls: number; failures: number } {
+  return { calls: callCount, failures: failureCount };
+}
