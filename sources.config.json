@@ -1017,7 +1017,7 @@
     "locales": [
       "zh"
     ],
-    "note": "上交所 IPO 审核项目动态（commonSoaQuery.do，currStatus 1~9 分批）官方源注册（IPO 体系重设计）。category/subcategory 仅采集元数据。"
+    "note": "上交所 IPO 审核项目动态（commonSoaQuery.do，currStatus 1~9 分批）官方源注册（IPO 体系重设计）。category/subcategory 仅采集元数据。2026-09-21 起 CI 全挂（全部 market/status 组合 × 4 次重试 fetch failed）而本机 curl 200，故并入本地专供源（LOCAL_ONLY_IPO_SOURCE_IDS / buildLocalOnlyIpoCrawlers），由 npm run ipo:local 补数。"
   },
   {
     "id": "gd-szse-audit",

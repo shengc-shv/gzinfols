@@ -66,7 +66,7 @@ function parseArgs(argv: string[]): Args {
       console.log(
         [
           "用法: npm run ipo:local -- [选项]",
-          "  --sources=local-only|all   源集合（默认 local-only = CI 不可达的 csrcfd + 深交所）",
+          "  --sources=local-only|all   源集合（默认 local-only = CI 不可达的 csrcfd + 深交所 + 上交所）",
           "  --window=<天>              窗口（默认取 lib/ipo-config.ts 的 IPO_SOURCE_WINDOW_DAYS）",
           "  --file=<路径>              产出文件（默认 data/local-ipo.json）",
           "  --dry-run                  只抓取与打印，不写盘、不推送",

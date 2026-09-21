@@ -30,8 +30,11 @@ export const LOCAL_IPO_GENERATOR = "local-ipo-sync";
 /** 超过此天数未更新 → 告警「本地同步可能已中断」。 */
 export const LOCAL_IPO_STALE_DAYS = 2;
 
-/** 只能本地抓到的 IPO 源 sourceId 白名单（唯一权威清单），与 buildLocalOnlyIpoCrawlers 一一对应。 */
-export const LOCAL_ONLY_IPO_SOURCE_IDS = ["gd-csrc-tutoring", "gd-szse-audit"] as const;
+/** 只能本地抓到的 IPO 源 sourceId 白名单（唯一权威清单），与 buildLocalOnlyIpoCrawlers 一一对应。
+ *  2026-09-21 新增 `gd-sse-audit`（上交所审核项目动态）：CI 2026-09-21 起全挂
+ *  （`query.sse.com.cn` 全部 market/status 组合 × 4 次重试均 fetch failed），而本机 curl 200/0.3s
+ *  —— 与深交所/证监会同因（地域 CDN/WAF），故并入本地补数。 */
+export const LOCAL_ONLY_IPO_SOURCE_IDS = ["gd-csrc-tutoring", "gd-szse-audit", "gd-sse-audit"] as const;
 
 export interface LocalIpoFile {
   version: number;
@@ -199,7 +202,7 @@ export function selectLocalIpoItems(
   const { file, reason } = readLocalIpoFile(opts.filePath);
   if (!file) {
     console.warn(
-      `[local-ipo] ⚠️ 本地 IPO 补数不可用（${reason}）→ 本次深交所/证监会辅导源为 0 条。` +
+      `[local-ipo] ⚠️ 本地 IPO 补数不可用（${reason}）→ 本次深交所/上交所/证监会辅导源为 0 条。` +
         `请本地跑 \`npm run ipo:local\` 补数并推送 data/local-ipo.json。`,
     );
     return [];

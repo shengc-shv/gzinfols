@@ -56,14 +56,16 @@ export function buildIpoCrawlers(): BaseCrawler[] {
   return [...buildLocalOnlyIpoCrawlers(), ...buildOnlineIpoCrawlers()];
 }
 
-/** 只能本地抓取的官方 IPO 源（WAF 拦海外 IP，CI 恒失败；数据由 data/local-ipo.json 补齐）。 */
+/** 只能本地抓取的官方 IPO 源（WAF 拦海外 IP，CI 恒失败；数据由 data/local-ipo.json 补齐）。
+ *  2026-09-21 把上交所审核（`SseAuditCrawler`）从「在线源」移入本组：CI 自该日起全挂
+ *  （全部 market/status 组合 × 4 次重试均 fetch failed），而本机 curl 200 —— 与深交所/证监会同因。 */
 export function buildLocalOnlyIpoCrawlers(): BaseCrawler[] {
-  return [new CsrcCoachCrawler(), new SzseAuditCrawler()];
+  return [new CsrcCoachCrawler(), new SzseAuditCrawler(), new SseAuditCrawler()];
 }
 
 /** CI 可达的在线 IPO 源（与本地专供源互补；两集合互斥且并集 = buildIpoCrawlers()）。 */
 export function buildOnlineIpoCrawlers(): BaseCrawler[] {
-  return [new SseAuditCrawler(), new BseAuditCrawler(), new HkFilingCrawler()];
+  return [new BseAuditCrawler(), new HkFilingCrawler()];
 }
 
 /** 本次 run 实际要跑的 IPO 源 = 在线源 +（非 CI 环境才跑本地专供源）。逃生口 IPO_LOCAL_ONLY_IN_REMOTE=1。 */
