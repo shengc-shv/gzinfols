@@ -1,0 +1,871 @@
+{
+  "date": "2026-09-22",
+  "updatedAt": "2026-09-21T23:28:04.855Z",
+  "executive": {
+    "hero_line": "个人贷款全成本透明披露落地，营销话术与合同展示须同步整改，消费贷获客逻辑面临重估。",
+    "spoken_hero": "个人贷款全成本透明披露要求正式落地，过去靠低息宣传引流的做法行不通了，建议分行尽快统一营销口径、重排消费贷获客话术，把真实成本讲清楚反而更容易赢得客户信任。",
+    "must_read": [
+      {
+        "title": "个人贷款全成本透明披露落地",
+        "why": "营销利率障眼法被叫停，消费贷获客转化短期或波动，产品定价与话术体系需整体重排。",
+        "url": "https://finance.sina.com.cn/roll/2026-09-21/doc-inisqvrw5729834.shtml"
+      },
+      {
+        "title": "广东社零仅增1.3%",
+        "why": "消费复苏偏弱，信用卡与消费贷促活策略宜向高频小额场景倾斜，避免大水漫灌式投放。",
+        "url": "https://www.stcn.com/article/detail/4192881.html"
+      },
+      {
+        "title": "广东规上工业增加值增6.1%",
+        "why": "制造业景气好于投资端，制造业小微与供应链客群授信机会相对确定，可优先配置资源。",
+        "url": "https://www.stcn.com/article/detail/4192879.html"
+      },
+      {
+        "title": "广东固投同比降10.7%",
+        "why": "项目类融资需求承压，按揭与经营贷投放节奏需重新评估，区域资产配置应更审慎。",
+        "url": "https://www.stcn.com/article/detail/4192883.html"
+      },
+      {
+        "title": "保险短视频营销迎强监管",
+        "why": "代销合作方展业合规风险上升，代销准入与宣传物料审核需同步收紧，防范声誉风险。",
+        "url": "https://m.21jingji.com/article/20260921/herald/c474648451a908b7a1315d191a42a10c.html"
+      }
+    ],
+    "spoken_must_read": "个人贷款全成本透明披露落地。营销利率障眼法被叫停，消费贷获客转化短期或波动，产品定价与话术体系需整体重排。其次，广东社零仅增1.3%。消费复苏偏弱，信用卡与消费贷促活策略宜向高频小额场景倾斜，避免大水漫灌式投放。此外，广东规上工业增加值增6.1%。制造业景气好于投资端，制造业小微与供应链客群授信机会相对确定，可优先配置资源。还有，广东固投同比降10.7%。项目类融资需求承压，按揭与经营贷投放节奏需重新评估，区域资产配置应更审慎。另外，保险短视频营销迎强监管。代销合作方展业合规风险上升，代销准入与宣传物料审核需同步收紧，防范声誉风险。",
+    "insights": [
+      {
+        "topic": "名创优品总部代发与高管财富",
+        "impact": "名创优品国际总部即将落成，总部企业结算、代发工资及高管私行财富管理需求集中释放，是本地稀缺的中高端客群入口。",
+        "action": "可考虑本月内对接园区与项目方，同步准备代发方案与高管资产配置建议书，争取结算与代发同步落地。",
+        "tag": [
+          "代发",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "287.5米！名创优品国际总部即将落成",
+            "url": "https://news.dayoo.com/guangzhou/202609/21/139995_55006209.htm"
+          }
+        ]
+      },
+      {
+        "topic": "制造业小微与供应链授信",
+        "impact": "广东规上工业增加值增6.1%，制造业景气好于投资端，制造业小微与供应链客群的经营贷需求相对确定。",
+        "action": "下一步可梳理广州本地制造业核心企业上下游名单，本周启动供应链小微批量授信走访。",
+        "tag": [
+          "信贷",
+          "科技金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "sources": [
+          {
+            "title": "广东：1—8月份全省规模以上工业增加值同比增长6.1%",
+            "url": "https://www.stcn.com/article/detail/4192879.html"
+          }
+        ]
+      },
+      {
+        "topic": "ETF-FOF补位财富货架",
+        "impact": "组合化配置工具扩容，低门槛配置型产品可承接风险偏好回落的客户资金，缓解基金净赎回压力。",
+        "action": "可考虑在财富产品货架中补充ETF-FOF类配置产品，本周完成准入评估与理财经理培训。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "ETF-FOF发展空间或进一步打开",
+            "url": "https://www.stcn.com/article/detail/4192337.html"
+          }
+        ]
+      },
+      {
+        "topic": "贵金属货架替代方案",
+        "impact": "超10家银行清退代理炒金通道，原有贵金属客户面临产品断档，若不及时承接易流失至同业。",
+        "action": "提示财富条线本周梳理受影响客户名单，准备积存金、实物金等替代方案与统一沟通口径。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "超10家银行清退代理炒金通道",
+            "url": "https://m.21jingji.com/article/20260921/herald/a6a61e5be4522c6ded4dcf36e5bf1848.html"
+          }
+        ]
+      },
+      {
+        "topic": "消费贷话术与场景重排",
+        "impact": "全成本透明披露落地叠加社零仅增1.3%，消费贷获客转化短期承压，粗放式低息宣传难以为继。",
+        "action": "可考虑本月内统一营销口径，把真实成本讲清楚，并将促活资源向高频小额消费场景倾斜。",
+        "tag": [
+          "信贷"
+        ],
+        "sources": [
+          {
+            "title": "全成本透明披露！个人贷款彻底告别营销利率障眼法",
+            "url": "https://finance.sina.com.cn/roll/2026-09-21/doc-inisqvrw5729834.shtml"
+          },
+          {
+            "title": "广东：1—8月份全省社会消费品零售总额同比增长1.3%",
+            "url": "https://www.stcn.com/article/detail/4192881.html"
+          }
+        ]
+      },
+      {
+        "topic": "节前资金安排与理财衔接",
+        "impact": "央行加码流动性投放，短端资金价格平稳，节前客户资金搬家与理财申购需求集中释放。",
+        "action": "提示理财与存款条线提前准备节前专属产品与到期资金承接方案，本周启动客户触达。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "央行加码流动性投放呵护节前资金面",
+            "url": "https://www.cnfin.com/hg-lb/detail/20260922/4473188_1.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "具备高端客户商机的，名创优品总部代发与高管财富，名创优品国际总部即将落成，总部企业结算、代发工资及高管私行财富管理需求集中释放，是本地稀缺的中高端客群入口。可考虑本月内对接园区与项目方，同步准备代发方案与高管资产配置建议书，争取结算与代发同步落地。此外，具备普惠小微商机的，制造业小微与供应链授信，广东规上工业增加值增6.1%，制造业景气好于投资端，制造业小微与供应链客群的经营贷需求相对确定。下一步可梳理广州本地制造业核心企业上下游名单，本周启动供应链小微批量授信走访。同时，具备零售 A U M商机的，ETF-FOF补位财富货架，组合化配置工具扩容，低门槛配置型产品可承接风险偏好回落的客户资金，缓解基金净赎回压力。可考虑在财富产品货架中补充ETF-FOF类配置产品，本周完成准入评估与理财经理培训。另一条值得关注，具备零售 A U M商机的，贵金属货架替代方案，超10家银行清退代理炒金通道，原有贵金属客户面临产品断档，若不及时承接易流失至同业。提示财富条线本周梳理受影响客户名单，准备积存金、实物金等替代方案与统一沟通口径。另外，消费贷话术与场景重排，全成本透明披露落地叠加社零仅增1.3%，消费贷获客转化短期承压，粗放式低息宣传难以为继。可考虑本月内统一营销口径，把真实成本讲清楚，并将促活资源向高频小额消费场景倾斜。最后，具备零售 A U M商机的，节前资金安排与理财衔接，央行加码流动性投放，短端资金价格平稳，节前客户资金搬家与理财申购需求集中释放。提示理财与存款条线提前准备节前专属产品与到期资金承接方案，本周启动客户触达。",
+    "risk": {
+      "topic": "个贷全成本披露合规红线",
+      "evidence": "个人贷款全成本透明披露要求落地，营销利率障眼法被明确叫停，合同展示与话术须同步整改。",
+      "impact": "个贷条线存量宣传物料与线上话术存在不合规风险，财富条线代销宣传同样受波及，风控与合规审核压力上升。",
+      "action": "个贷与风控部门应本周内完成存量营销物料排查，统一对外口径，避免因展示不实引发投诉与处罚。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "全成本透明披露！个人贷款彻底告别营销利率障眼法",
+          "url": "https://finance.sina.com.cn/roll/2026-09-21/doc-inisqvrw5729834.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：个贷全成本披露合规红线，个贷条线存量宣传物料与线上话术存在不合规风险，财富条线代销宣传同样受波及，风控与合规审核压力上升。个贷与风控部门应本周内完成存量营销物料排查，统一对外口径，避免因展示不实引发投诉与处罚。",
+    "guangdong_ipo": {
+      "spoken": "深圳得一微电子股份有限公司IPO辅导已通过深圳证监局验收，中信建投保荐，公司主营存储控制芯片，拟登陆境内资本市场，可关注其上市前股权融资与员工激励相关金融服务机会。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨2.26%领涨，Meta飙升12%点燃消费AI行情。",
+      "sectors": [
+        "Meta单日大涨12%，期权成交量激增，成消费AI新宠。",
+        "美联储主席Warsh加息表态引华尔街猜测后续路径，利率预期扰动。",
+        "拉美资产年内涨15%跑赢标普11%，ILF创数十年最佳顺风。",
+        "巴菲特卸任伯克希尔董事长，交棒其子Howard。",
+        "Silver Lake就Endeavor收购案起诉Icahn及对冲基金。"
+      ],
+      "spoken": "美股三大指数集体收涨，纳指涨2.26%领涨，标普涨1.49%，道指涨0.71%。Meta大涨12%，期权成交激增，成为消费AI新热点。美联储主席Warsh加息表态引发市场对后续路径的猜测。拉美资产年内涨15%，跑赢标普。巴菲特卸任伯克希尔董事长。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-22"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52048.83",
+          "changePct": "+0.71%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27122.09",
+          "changePct": "+2.26%"
+        },
+        {
+          "name": "标普500",
+          "value": "7764.70",
+          "changePct": "+1.49%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3949.91点（+0.97%）；深证成指收报13730.02点（+0.65%）；创业板指收报3399.59点（+0.80%）。",
+      "sectors": [
+        "上证指数高开高走涨近1%",
+        "全市场超4500只个股上涨"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-22"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3949.91",
+          "changePct": "+0.97%"
+        },
+        {
+          "name": "深证成指",
+          "value": "13730.02",
+          "changePct": "+0.65%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3399.59",
+          "changePct": "+0.80%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报25042.71点（+1.18%）；恒生科技收报4423.29点（+0.40%）。",
+      "sectors": [
+        "恒生指数涨1.18%重回25000点",
+        "恒生科技指数涨0.4%",
+        "科网股普涨",
+        "创新药概念股大涨"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-21"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨1.18%重回25000点 科指涨0.4% 科网股普涨 创新药概念股大涨",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-21/doc-inisqriw8876687.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "25042.71",
+          "changePct": "+1.18%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4423.29",
+          "changePct": "+0.40%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-09-21",
+    "marketStatus": {
+      "reportDate": "2026-09-22",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-09-21"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-09-21"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-09-21"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 9月21日 周一 收盘；港股为 9月21日 周一 收盘；美股为 9月21日 周一 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879978625.html",
+      "title_cn": "习近平将对美国进行国事访问",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "东方财富报道，习近平将对美国进行国事访问。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879532291.html",
+      "title_cn": "突然上调！牛市“旗手”突迎利好！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "东方财富报道，被称为牛市\"旗手\"的板块突然迎来上调利好。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "券商",
+        "市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879834313.html",
+      "title_cn": "又炒“字典”！带这个字股票批量涨停",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "东方财富报道，市场再度炒作\"字典\"概念，名称含特定字的股票批量涨停。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "题材炒作"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879990785.html",
+      "title_cn": "外交部介绍习近平主席访美有关安排和中方期待",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "外交部就习近平主席访美有关安排及中方期待作出介绍。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879979426.html",
+      "title_cn": "A股三大指数收涨超4500只股飘红创新药概念股爆发",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "A股三大指数收涨，超4500只个股上涨，创新药概念股集体爆发。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "创新药",
+        "大盘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879818095.html",
+      "title_cn": "3分钟20cm封板！AI制药迎海内外双催化Claude时刻即将到来？(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "东方财富报道，AI制药板块迎海内外双重催化，相关个股3分钟20cm封板。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "医药",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879681974.html",
+      "title_cn": "产业链人士：特斯拉机器人团队在长三角审厂多家企业已获订单",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "产业链人士称，特斯拉机器人团队在长三角审厂，多家企业已获订单。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机器人",
+        "特斯拉",
+        "产业链"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213880164651.html",
+      "title_cn": "9月21日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "东方财富汇总9月21日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213880107860.html",
+      "title_cn": "突然下调！韩国股市利空突袭！发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "东方财富报道，韩国股市突遭利空，相关指标突然下调。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "韩国股市",
+        "海外市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879850380.html",
+      "title_cn": "大幅低开48%、两次临停！曾暴涨300%的“神股”上演过山车",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "东方财富报道，一只曾暴涨300%的\"神股\"大幅低开48%，盘中两次临停。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "个股异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609213879886185.html",
+      "title_cn": "金观平：坚持“四个注重”做强先进制造业",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "金观平发文，提出坚持\"四个注重\"做强先进制造业。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "制造业"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609203879467014.html",
+      "title_cn": "十大券商策略：把握年内最后的进攻窗口！四季度有望迎来反弹行情",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/20",
+      "summary": "十大券商发布策略观点，认为四季度有望迎来反弹行情。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "券商策略",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-21/doc-inisqriw8876687.shtml",
+      "title_cn": "港股收评：恒指涨1.18%重回25000点 科指涨0.4% 科网股普涨 创新药概念股大涨",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "港股收评显示，恒指涨1.18%重回25000点，科指涨0.4%，科网股普涨，创新药概念股大涨。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "创新药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-09-21/doc-inispynh6022529.shtml",
+      "title_cn": "星环科技今日登陆港交所：首日即入港股通 持续亏损与信披失误拷问治理成效",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "星环科技登陆港交所，首日即纳入港股通，报道提及其持续亏损与信披失误问题。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-09-21/doc-inispuek6064961.shtml",
+      "title_cn": "华泰|港股策略：继续保持港股仓位灵活度",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "华泰发布港股策略，建议继续保持港股仓位灵活度。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商策略"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-09-21/doc-inispueh8922075.shtml",
+      "title_cn": "从“吨位大港”到“价值港”：香港首个五年规划定调航运业高增值转型",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "香港首个五年规划定调航运业高增值转型，从\"吨位大港\"转向\"价值港\"。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "航运",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-09-21/doc-inisqzxx9192766.shtml",
+      "title_cn": "直击纳真科技港交所挂牌",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "新浪财经直击纳真科技在港交所挂牌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-09-21/doc-inisqvsc6050893.shtml",
+      "title_cn": "香港施政报告与“十五五”规划利好叠加 香港金融界聚焦人民币与大宗商品新机遇",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "香港施政报告与\"十五五\"规划利好叠加，香港金融界聚焦人民币与大宗商品新机遇。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "政策",
+        "人民币"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriy5801929.shtml",
+      "title_cn": "瑞银：予美团-W(03690)“买入”评级 目标价升至132港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "瑞银给予美团-W\"买入\"评级，目标价上调至132港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "美团"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriv2143011.shtml",
+      "title_cn": "大摩：中国银行(03988)纳入中国/香港焦点名单 予“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "大摩将中国银行纳入中国/香港焦点名单，给予\"增持\"评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriz7726389.shtml",
+      "title_cn": "美银证券：下调阿里健康(00241)目标价至4.2港元 重申“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "美银证券下调阿里健康目标价至4.2港元，重申\"买入\"评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriy5771526.shtml",
+      "title_cn": "花旗：联想控股(03396)潜在出售BIL或收窄高达75% NAV折让 评级“买入”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "花旗称联想控股潜在出售BIL或收窄高达75%的NAV折让，给予\"买入\"评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriv2102750.shtml",
+      "title_cn": "美银证券：中国医疗保健行业加快创新及全球化 上调中生制药(01177)目标价至7.3港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "美银证券称中国医疗保健行业加快创新及全球化，上调中生制药目标价至7.3港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-21/doc-inisqriv2083994.shtml",
+      "title_cn": "小摩：维持英矽智能(03696)“增持”评级 目标价71港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "小摩维持英矽智能\"增持\"评级，目标价71港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "AI制药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/21/meta-investors-discover-new-ai-play.html",
+      "title_cn": "Investors discover their new favorite consumer AI play in Meta. Options volume is surging",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "CNBC报道，投资者将Meta视为新的消费AI标的，其期权成交量激增。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "Meta"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/21/historic-lawsuit-sparks-flurry-of-option-activity-in-ny-times-stock.html",
+      "title_cn": "Historic lawsuit sparks flurry of option activity in this stock",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "CNBC报道，一桩历史性诉讼引发某只股票期权交易活跃。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "期权"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/20/top-wall-street-analysts-find-these-3-stocks-attractive-as-long-term-investments.html",
+      "title_cn": "Top Wall Street analysts find these 3 stocks attractive as long-term investments",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/20",
+      "summary": "CNBC报道，华尔街顶级分析师认为3只股票具备长期投资吸引力。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/20/caruso-cabrera-the-investing-tailwinds-for-latin-america-are-the-best-in-decades.html",
+      "title_cn": "Caruso-Cabrera: The investing tailwinds for Latin America are the best in decades",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/20",
+      "summary": "Caruso-Cabrera表示，拉丁美洲当前面临数十年来最好的投资顺风。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "新兴市场"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/19/warren-buffett-takes-next-step-in-plan-to-keep-berkshire-from-straying.html",
+      "title_cn": "Buffett takes next step in plan to keep Berkshire from straying",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/19",
+      "summary": "CNBC报道，巴菲特推进相关计划，以防伯克希尔偏离既定方向。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "伯克希尔"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/18/three-words-from-kevin-warsh-have-wall-street-wondering-how-far-the-fed-will-go-with-rate-hikes.html",
+      "title_cn": "Three words from Kevin Warsh have Wall Street wondering how far the Fed will go with rate hikes",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/18",
+      "summary": "CNBC报道，Kevin Warsh的一番表态令华尔街猜测美联储加息幅度。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "美联储",
+        "货币政策"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/silver-lake-sues-carl-icahn-and-hedge-funds-over-endeavor-buyout-4909738",
+      "title_cn": "Silver Lake sues Carl Icahn and hedge funds over Endeavor buyout",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "Silver Lake就Endeavor收购案起诉Carl Icahn及多家对冲基金。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "诉讼",
+        "并购"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/global-gp-llc-general-partner-buys-503550-in-global-partners-lp-units-93CH-4909737",
+      "title_cn": "Global GP LLC, general partner, buys $503,550 in Global Partners LP units",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "Global GP LLC作为普通合伙人买入价值503,550美元的Global Partners LP份额。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/zscaler-chief-legal-officer-sells-108m-in-stock-93CH-4909736",
+      "title_cn": "Zscaler chief legal officer sells $1.08m in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "Zscaler首席法务官卖出108万美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/impinj-cfo-cary-baker-sells-165m-in-company-stock-93CH-4909735",
+      "title_cn": "Impinj CFO Cary Baker sells $1.65m in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "Impinj首席财务官Cary Baker卖出165万美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/bridgebio-pharma-ceo-neil-kumar-sells-690847-in-shares-93CH-4909733",
+      "title_cn": "BridgeBio Pharma CEO Neil Kumar sells $690,847 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "BridgeBio Pharma首席执行官Neil Kumar卖出690,847美元股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/heartflow-cmo-campbell-rogers-sells-987k-in-stock-93CH-4909732",
+      "title_cn": "Heartflow CMO Campbell Rogers sells $987k in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "Heartflow首席医疗官Campbell Rogers卖出98.7万美元股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
