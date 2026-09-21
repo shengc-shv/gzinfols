@@ -183,6 +183,28 @@ export * from "./markdown";
 // 此处 re-export 保持既有调用点可用。
 export { stripCssComments } from "./css";
 
+/**
+ * 播放器徽章的「合成后端」文案映射（2026-09-21）。
+ *
+ * ⚠️ 此前是 `backend === "tencent" ? "腾讯合成" : "开源合成"` —— 二元判断，
+ * 新增第三个后端（百炼 cosyvoice）会**静默落进 else**、在公开页面上被标成「开源合成」。
+ * 这里改为查表，键取自契约类型 `AudioMeta["backend"]`：
+ * 将来往 `TtsBackendName` 里加后端而漏配文案，`tsc` 会直接报缺键。
+ */
+const TTS_BACKEND_LABEL: Record<NonNullable<AudioMeta["backend"]>, string> = {
+  tencent: "腾讯合成",
+  cosyvoice: "百炼合成",
+  piper: "开源合成",
+};
+
+/** 后端徽章 HTML；无 backend 时不产出（与既有行为一致）。 */
+function renderTtsBadge(backend: AudioMeta["backend"]): string {
+  if (!backend) return "";
+  // 未知值（如读历史 store 的旧字段）回退到通用文案，宁可笼统也不要空徽章
+  const label = TTS_BACKEND_LABEL[backend] || "合成语音";
+  return `<span class="player-badge player-badge-${escapeHtml(backend)}">${escapeHtml(label)}</span>`;
+}
+
 export function renderHtml(
   report: DailyReport,
   date: string,
@@ -383,7 +405,7 @@ ${stripCssComments(MOBILE_OPT_CSS)}
 <body>
 <main>
     ${opts.audio ? `<div class="player-card">
-    <div class="player-title"><span class="ic">🎧</span> 今日语音简报 <span class="player-dur">${escapeHtml(opts.audio.duration)}</span>${opts.audio.backend ? `<span class="player-badge player-badge-${opts.audio.backend}">${opts.audio.backend === "tencent" ? "腾讯合成" : "开源合成"}</span>` : ""}</div>
+    <div class="player-title"><span class="ic">🎧</span> 今日语音简报 <span class="player-dur">${escapeHtml(opts.audio.duration)}</span>${renderTtsBadge(opts.audio.backend)}</div>
     <audio controls preload="none" src="${escapeHtml(opts.audio.src)}" id="audio-player"></audio>
     ${renderAudioNowHint()}
     ${opts.audio.segments && opts.audio.segments.length ? `<script type="application/json" id="audio-segments">${escapeHtml(JSON.stringify(opts.audio.segments))}</script>` : ""}

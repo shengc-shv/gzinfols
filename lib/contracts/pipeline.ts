@@ -67,15 +67,32 @@ export interface HttpClient {
 }
 
 /**
+ * TTS 合成后端标识（**单一真源**，2026-09-21 收敛）。
+ *
+ * 此前该字面量联合在 3 处各写一份（`adapters/tts.ts` 的 `TtsResult`、
+ * 本文件的 `TtsPort`、`services/voice/index.ts` 的 `AudioMeta`）——
+ * 新增后端时漏改任一处都会造成「类型不报错但渲染层写错」（如徽章落进 else 分支）。
+ *
+ * - `tencent`    腾讯云 TextToVoice（主用；SSML 逐字符读 AUM）
+ * - `cosyvoice`  阿里云百炼 CosyVoice（HTTP `SpeechSynthesizer`，仅北京地域）
+ * - `piper`      开源 Piper 本地兜底（CI 不预装）
+ *
+ * ⚠️ 新增后端时必须同步三处：本类型 + `lib/adapters/tts.ts` 的 `BACKENDS` 表
+ *    + `lib/services/render/full.ts` 的徽章文案表（缺后者会显示成兜底文案）。
+ */
+export type TtsBackendName = "tencent" | "cosyvoice" | "piper";
+
+/**
  * 语音合成端口（唯一 TTS 出口）。
  * 组合根按 AUDIO_ENABLED === "true" 装配；失败抛错，由管线 catch 降级为「页面无播放器」（不阻断发布）。
  * 落盘由适配器负责（双路径：daily_reports/<date>/audio/ 归档 + site/<date>/audio/ 站点）。
+ * 后端选择由 `TTS_BACKEND`（逗号分隔候选链）决定，见 `adapters/tts.ts#resolveBackendChain`。
  */
 export interface TtsPort {
   synthesize(
     script: string,
     date: string,
-  ): Promise<{ backend: "tencent" | "piper"; bytes: number; durationSec: number }>;
+  ): Promise<{ backend: TtsBackendName; bytes: number; durationSec: number }>;
 }
 
 /** 日志端口。 */

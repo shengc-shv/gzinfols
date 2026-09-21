@@ -33,7 +33,7 @@ export const THEME_INTERACTIVE_CSS = `  /* ===== 2026-08-21 交互重构（demo 
   }
   .player-title .ic { font-size: 1.05rem; }
   .player-dur { font-weight: 400; font-size: 0.82rem; color: var(--muted); }
-  /* 合成后端徽标（2026-08-24）：腾讯云=蓝（云），开源 Piper=灰 */
+  /* 合成后端徽标（2026-08-24；2026-09-21 增补百炼）：腾讯云=蓝（云），百炼=橙（阿里云），开源 Piper=灰 */
   .player-badge {
     margin-left: 0.35rem; padding: 0.06rem 0.5rem;
     font-size: 0.7rem; font-weight: 500; line-height: 1.4;
@@ -43,6 +43,11 @@ export const THEME_INTERACTIVE_CSS = `  /* ===== 2026-08-21 交互重构（demo 
     color: #1565c0;
     background: color-mix(in srgb, #1565c0 12%, var(--bg));
     border-color: color-mix(in srgb, #1565c0 38%, var(--rule));
+  }
+  .player-badge-cosyvoice {
+    color: #c2410c;
+    background: color-mix(in srgb, #c2410c 12%, var(--bg));
+    border-color: color-mix(in srgb, #c2410c 38%, var(--rule));
   }
   .player-badge-piper {
     color: var(--muted);

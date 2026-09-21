@@ -16,6 +16,7 @@
  *  - 股市段挂钩 StockRecap（C10 落地后自动接入），未产出时跳过该段（gzinfo 同款降级）。
  */
 import type { DailyReport, ReportItem, StockRecap } from "../../contracts/report";
+import type { TtsBackendName } from "../../contracts/pipeline";
 import type { ExecutiveSummary } from "../enrich/executive-summary";
 import { buildStockSpoken } from "./stock-spoken";
 import { formatCnDate, formatCnDateShort } from "../market/market-status";
@@ -42,8 +43,8 @@ export interface AudioMeta {
   src: string;
   /** 展示用时长文案（如「约 2 分 0 秒」） */
   duration: string;
-  /** 合成后端：tencent=腾讯云合成，piper=开源 Piper 本地合成 */
-  backend?: "tencent" | "piper";
+  /** 合成后端（字面量单一真源见 `contracts/pipeline.ts#TtsBackendName`） */
+  backend?: TtsBackendName;
   /** v2 段落信息：用于 HTML timeupdate 联动高亮（播放器段落联动） */
   segments?: AudioSegment[];
 }
