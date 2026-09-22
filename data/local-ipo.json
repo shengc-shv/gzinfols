@@ -1,13 +1,46 @@
 {
   "version": 1,
-  "fetchedAt": "2026-09-21T19:47:18+08:00",
+  "fetchedAt": "2026-09-22T18:18:46+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-csrc-tutoring": 1,
-    "gd-szse-audit": 7
+    "gd-csrc-tutoring": 2,
+    "gd-szse-audit": 8
   },
   "items": [
+    {
+      "title": "深圳市精锋医疗科技股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/22/PREIPO_F0101_V01_20260922_36492_Q/C84DEF88700845B7A0964E08C0C939F7/关于深圳市精锋医疗科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中信证券股份有限公司 | 备案时间: 2026-09-21 | 状态: 辅导备案 | 报告: 辅导备案报告 | 披露: 2026-09-22",
+      "publishedAt": "2026-09-22",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "云豹智能：IPO问询中（拟创业板）",
+      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004360",
+      "excerpt": "注册地：广东｜保荐：中信证券｜受理：2026-06-30｜状态：已问询｜更新：2026-09-22",
+      "publishedAt": "2026-09-22",
+      "source": "深交所IPO审核动态",
+      "sourceId": "gd-szse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
+    },
+    {
+      "title": "德聚技术：IPO问询中（拟创业板）",
+      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004585",
+      "excerpt": "注册地：广东｜保荐：中信证券｜受理：2026-06-26｜状态：已问询｜更新：2026-09-22",
+      "publishedAt": "2026-09-22",
+      "source": "深交所IPO审核动态",
+      "sourceId": "gd-szse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
+    },
     {
       "title": "得一微电子股份有限公司 (辅导验收) [深圳证监局]",
       "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/21/PREIPO_F0101_V01_20260921_36490_Q/08DA449650D843549C5F65522B192C7D/关于得一微电子股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf",
@@ -18,6 +51,17 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-coach-done"
+    },
+    {
+      "title": "万力轮胎：IPO问询中（拟主板）",
+      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004552",
+      "excerpt": "注册地：广东｜保荐：国泰海通｜受理：2026-06-23｜状态：已问询｜更新：2026-09-21",
+      "publishedAt": "2026-09-21",
+      "source": "深交所IPO审核动态",
+      "sourceId": "gd-szse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
     },
     {
       "title": "东莞证券：IPO已受理（拟主板）",
@@ -42,17 +86,6 @@
       "ipoStage": "stage-reviewing"
     },
     {
-      "title": "云豹智能：IPO问询中（拟创业板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004360",
-      "excerpt": "注册地：广东｜保荐：中信证券｜受理：2026-06-30｜状态：已问询｜更新：2026-09-18",
-      "publishedAt": "2026-09-18",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
       "title": "柳鑫股份：IPO问询中（拟创业板）",
       "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004431",
       "excerpt": "注册地：广东｜保荐：中信建投｜受理：2026-06-12｜状态：已问询｜更新：2026-09-18",
@@ -68,17 +101,6 @@
       "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004549",
       "excerpt": "注册地：广东｜保荐：中金公司｜受理：2026-06-18｜状态：已问询｜更新：2026-09-18",
       "publishedAt": "2026-09-18",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "万力轮胎：IPO问询中（拟主板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004552",
-      "excerpt": "注册地：广东｜保荐：国泰海通｜受理：2026-06-23｜状态：已问询｜更新：2026-09-17",
-      "publishedAt": "2026-09-17",
       "source": "深交所IPO审核动态",
       "sourceId": "gd-szse-audit",
       "region": "gd",
