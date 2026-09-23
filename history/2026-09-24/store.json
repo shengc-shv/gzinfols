@@ -1,0 +1,914 @@
+{
+  "date": "2026-09-24",
+  "updatedAt": "2026-09-23T23:34:20.006Z",
+  "executive": {
+    "hero_line": "今日分行焦点：中小银行压降网贷规模 助贷行业适配新规重塑合作模式",
+    "must_read": [
+      {
+        "title": "上海楼市已止跌回稳",
+        "why": "机构判断广深京大概率渐次跟上，广州按揭投放与二手房交易活跃度值得持续跟踪。",
+        "url": "https://finance.eastmoney.com/a/202609233882370195.html"
+      },
+      {
+        "title": "多地加码买房补贴",
+        "why": "金九银十购房成本下降，按揭咨询量或抬升，需提前备好补贴政策问答与受理口径。",
+        "url": "https://news.southcn.com/node_812903b83a/d0d2599ffb.shtml"
+      },
+      {
+        "title": "房企或国庆前推按揭补贴",
+        "why": "港股内房股大涨、融信涨超34%，合作楼盘促销节奏变化将直接影响一手按揭接单量。",
+        "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-23/doc-inisunsm5356453.shtml"
+      },
+      {
+        "title": "人民币升破6.7",
+        "why": "前期配置美元存款客户出现汇兑浮亏，客户沟通与结汇时点提醒成为近期财富条线重点。",
+        "url": "https://finance.sina.com.cn/roll/2026-09-23/doc-inisvcqf1237348.shtml"
+      },
+      {
+        "title": "南向通五周年双向提速",
+        "why": "离岸人民币债券配置渠道拓宽，跨境客户债券投资需求或成财富管理新增长点。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20260924/4474398_1.html"
+      }
+    ],
+    "spoken_must_read": "上海楼市已止跌回稳。机构判断广深京大概率渐次跟上，广州按揭投放与二手房交易活跃度值得持续跟踪。其次，多地加码买房补贴。金九银十购房成本下降，按揭咨询量或抬升，需提前备好补贴政策问答与受理口径。此外，房企或国庆前推按揭补贴。港股内房股大涨、融信涨超34%，合作楼盘促销节奏变化将直接影响一手按揭接单量。还有，人民币升破6.7。前期配置美元存款客户出现汇兑浮亏，客户沟通与结汇时点提醒成为近期财富条线重点。另外，南向通五周年双向提速。离岸人民币债券配置渠道拓宽，跨境客户债券投资需求或成财富管理新增长点。",
+    "insights": [
+      {
+        "topic": "美元货架与结汇提醒",
+        "impact": "美元存款利率超4%、人民币升破6.7，持有美元客户浮亏与再配置需求同时上升，财富条线沟通量将放大。",
+        "action": "本周梳理美元存款与理财货架，对存量美元持仓客户逐一提示结汇时点与再配置方案。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "美联储加息余波 部分美元存款利率超4%，理财业绩基准水涨船高",
+            "url": "https://finance.sina.com.cn/roll/2026-09-24/doc-iniswmip5053222.shtml"
+          },
+          {
+            "title": "人民币汇率升破6.7，买美元存款的人自嘲“存个寂寞”",
+            "url": "https://finance.sina.com.cn/roll/2026-09-23/doc-inisvcqf1237348.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "理财费率竞争应对",
+        "impact": "理财机构密集下调管理费率、0费率可持续性存疑，客户比价敏感度上升，单纯价格战难留客。",
+        "action": "可考虑以资产配置服务与投顾陪伴作为差异点，本周更新客户沟通口径，弱化费率单一卖点。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "银行理财机构密集推出产品管理费率优惠",
+            "url": "https://www.cnfin.com/hg-lb/detail/20260924/4474402_1.html"
+          },
+          {
+            "title": "银行理财“0费率” 还能持续多久？",
+            "url": "https://www.cnfin.com/hg-lb/detail/20260923/4473824_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "积存金承接炒金客",
+        "impact": "超10家银行清退代理上金所个人贵金属通道，光大亦停办，存量炒金客户面临迁移与再选择。",
+        "action": "加快积存金类产品上架与话术更新，本周对存量贵金属客户做一轮承接式触达。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "光大银行宣布停办代理上金所个人贵金属业务背后：超10家银行清退“炒金”通道",
+            "url": "https://finance.cctv.com/2026/09/23/ARTIvqQwc2j0BsHpXM2ThOTr260923.shtml"
+          },
+          {
+            "title": "银行黄金代客业务一进一退：“炒金”通道收窄 积存金扩容",
+            "url": "https://finance.sina.com.cn/stock/marketresearch/2026-09-24/doc-iniswezr5128550.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "跨境客户名单梳理",
+        "impact": "香港多项金融政策将落地、各项通机制优化，跨境资金与产品通道扩宽，高净值客户跨境配置需求升温。",
+        "action": "本周梳理有跨境资金往来与境外资产配置需求的客户名单，提前对接南向通与离岸债产品。",
+        "tag": [
+          "私行",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "香港金融市场多项重磅政策即将落地，继续优化各项“通”机制",
+            "url": "https://m.21jingji.com/article/20260923/herald/5f96af74b631a5545c9e91f58d2353c3.html"
+          },
+          {
+            "title": "债券通“南向通”五周年：双向开放提速 离岸人民币债券市场迈入新格局",
+            "url": "https://www.cnfin.com/yw-lb/detail/20260924/4474398_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "国际港片区批量获客",
+        "impact": "广州国际港枢纽片区350亿元打造万亩千亿产业平台，园区开发、物流与制造企业将成批量获客入口。",
+        "action": "可考虑提前对接片区开发主体，围绕园区企业主与员工设计代发、经营贷与结算一体化方案。",
+        "tag": [
+          "代发",
+          "政银合作"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "sources": [
+          {
+            "title": "350亿元！广州国际港枢纽片区打造“万亩千亿”枢纽经济产业平台",
+            "url": "https://news.dayoo.com/guangzhou/202609/23/139995_55007104.htm"
+          }
+        ]
+      },
+      {
+        "topic": "助贷合作方适配排查",
+        "impact": "助贷新规推动合作模式重塑，消费贷获客与分润结构或调整，存量合作方合规适配进度直接影响资产质量。",
+        "action": "本周排查存量助贷合作方适配进度，对不合规通道提前压降，同步评估自营消费贷获客补位方案。",
+        "tag": [
+          "信贷",
+          "监管"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "sources": [
+          {
+            "title": "助贷行业适配新规重塑合作模式",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-23/doc-inisuaap8653732.shtml"
+          },
+          {
+            "title": "中小银行压降网贷规模 助贷行业适配新规重塑合作模式",
+            "url": "https://www.cnfin.com/hg-lb/detail/20260923/4473809_1.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "具备零售 A U M商机的，美元货架与结汇提醒，美元存款利率超4%、人民币升破6.7，持有美元客户浮亏与再配置需求同时上升，财富条线沟通量将放大。本周梳理美元存款与理财货架，对存量美元持仓客户逐一提示结汇时点与再配置方案。此外，具备零售 A U M商机的，理财费率竞争应对，理财机构密集下调管理费率、0费率可持续性存疑，客户比价敏感度上升，单纯价格战难留客。可考虑以资产配置服务与投顾陪伴作为差异点，本周更新客户沟通口径，弱化费率单一卖点。同时，具备零售 A U M商机的，积存金承接炒金客，超10家银行清退代理上金所个人贵金属通道，光大亦停办，存量炒金客户面临迁移与再选择。加快积存金类产品上架与话术更新，本周对存量贵金属客户做一轮承接式触达。另一条值得关注，具备高端客户商机的，跨境客户名单梳理，香港多项金融政策将落地、各项通机制优化，跨境资金与产品通道扩宽，高净值客户跨境配置需求升温。本周梳理有跨境资金往来与境外资产配置需求的客户名单，提前对接南向通与离岸债产品。另外，具备普惠小微商机的，国际港片区批量获客，广州国际港枢纽片区350亿元打造万亩千亿产业平台，园区开发、物流与制造企业将成批量获客入口。可考虑提前对接片区开发主体，围绕园区企业主与员工设计代发、经营贷与结算一体化方案。最后，具备普惠小微商机的，助贷合作方适配排查，助贷新规推动合作模式重塑，消费贷获客与分润结构或调整，存量合作方合规适配进度直接影响资产质量。本周排查存量助贷合作方适配进度，对不合规通道提前压降，同步评估自营消费贷获客补位方案。",
+    "risk": {
+      "topic": "助贷新规重塑合作模式",
+      "evidence": "助贷新规推动合作模式重塑，中小银行压降网贷规模，存量助贷合作方合规适配进度不一。",
+      "impact": "消费贷条线获客与分润结构或调整，风控部需重估合作方准入与资产质量联动，个贷与财富条线客户信息展示口径亦受牵连。",
+      "action": "风控部应牵头排查存量助贷合作方适配进度，对不合规通道提前压降；个贷部同步评估自营获客补位方案。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "助贷行业适配新规重塑合作模式",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-23/doc-inisuaap8653732.shtml"
+        },
+        {
+          "title": "中小银行压降网贷规模 助贷行业适配新规重塑合作模式",
+          "url": "https://www.cnfin.com/hg-lb/detail/20260923/4473809_1.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：助贷新规重塑合作模式，消费贷条线获客与分润结构或调整，风控部需重估合作方准入与资产质量联动，个贷与财富条线客户信息展示口径亦受牵连。风控部应牵头排查存量助贷合作方适配进度，对不合规通道提前压降；个贷部同步评估自营获客补位方案。",
+    "guangdong_ipo": {
+      "spoken": "广州企业保伦股份，注册地广州，主营计算机通信及电子设备制造，由广发证券保荐，拟登陆主板，目前处于IPO问询阶段，九月二十三日更新进展。同日广州文石信息科技向主板递表，赴港上市，可跟进其跨境融资商机。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "美股三大指数集体收跌，纳指跌1.13%领跌，Meta新品引发AI颠覆担忧。",
+      "sectors": [
+        "Meta发布消费级AI产品，股价周一大涨12%，期权成交量激增。",
+        "Meta的Muse产品引发AI冲击担忧，交易员瞄准券商股作为下一个受害者。",
+        "伯克希尔建仓Lennar近10%，该房屋建筑商股价应声跳涨。",
+        "期权市场显示交易员押注部分个股将创新高，尽管大盘未见新高。",
+        "特朗普计划为习近平举行盛大欢迎活动，美方称贸易休战延长。"
+      ],
+      "spoken": "美股三大指数集体收跌，纳指跌1.13%，标普跌0.75%，道指跌0.68%。Meta发布消费级AI产品引发行业颠覆担忧，其股价周一大涨12%，期权成交激增。伯克希尔建仓Lennar近10%，该股跳涨。特朗普计划为习近平举行盛大欢迎活动，美方称贸易休战延长。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-24"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51511.59",
+          "changePct": "-0.68%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26936.04",
+          "changePct": "-1.13%"
+        },
+        {
+          "name": "标普500",
+          "value": "7706.03",
+          "changePct": "-0.75%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "A股三大指数集体收跌，成交额不足1.8万亿，复合集流体概念逆市走强。",
+      "sectors": [
+        "复合集流体概念股逆市走强，成为当日少数活跃方向。",
+        "地产股持续大涨，但业内人士称全国性政策可能性不大。",
+        "多只热门股直线跳水，出现30%跌停，资金分歧明显。",
+        "玻璃基板概念逆势拉升，巨头宣布涨价或加速放量。",
+        "存储龙头加码扩产，超级周期有望延续，高增长潜力股受关注。"
+      ],
+      "spoken": "A股三大指数集体收跌，沪指跌0.39%，深成指跌0.64%，创业板指跌0.60%，成交额不足1.8万亿。复合集流体概念逆市走强，地产股持续大涨但政策预期有限。多只热门股直线跳水，出现30%跌停。玻璃基板概念受涨价消息逆势拉升，存储龙头加码扩产。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-24"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3936.52",
+          "changePct": "-0.39%"
+        },
+        {
+          "name": "深证成指",
+          "value": "13636.07",
+          "changePct": "-0.64%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3379.61",
+          "changePct": "-0.60%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24834.12点（-1.01%）；恒生科技收报4379.07点（-1.33%）。",
+      "sectors": [
+        "恒生指数跌1.01%",
+        "恒生科技指数跌1.33%",
+        "AI应用股下挫",
+        "内房股逆势走强",
+        "智谱跌超12%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-23"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.01% 科指跌1.33% AI应用股下挫 内房股逆势走强 智谱跌超12%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-23/doc-inisvcqc5296303.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24834.12",
+          "changePct": "-1.01%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4379.07",
+          "changePct": "-1.33%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-09-23",
+    "marketStatus": {
+      "reportDate": "2026-09-24",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-09-23"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-09-23"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-09-23"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 9月23日 周三 收盘；港股为 9月23日 周三 收盘；美股为 9月23日 周三 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882310052.html",
+      "title_cn": "一夜反转！30%跌停！多只热门股直线跳水！发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "A股多只热门股盘中直线跳水，出现30%跌停，市场关注异动原因。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "市场异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882481847.html",
+      "title_cn": "习近平离京对美国进行国事访问",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "习近平离京对美国进行国事访问。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882418963.html",
+      "title_cn": "中国企业家代表团将随习主席一同访美吗？外交部：没有相关信息",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "外交部回应中国企业家代表团是否随习近平访美，称没有相关信息。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882402270.html",
+      "title_cn": "A股三大指数收跌成交额不足1.8万亿复合集流体概念股逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "A股三大指数收跌，成交额不足1.8万亿元，复合集流体概念股逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "复合集流体"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233881922070.html",
+      "title_cn": "价格战愈演愈烈！AI大模型概念景气升温这12股业绩倍增可期(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "AI大模型概念景气升温，价格战愈演愈烈，报道列出12只业绩倍增潜力股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882592180.html",
+      "title_cn": "9月23日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "汇总9月23日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882444072.html",
+      "title_cn": "机构调研丨磷化铟+MLCC+先进封装这家公司算力相关新增订单增近350%MLCC设备海外拓展取得实质突破",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "机构调研显示，一家涉及磷化铟、MLCC、先进封装的公司算力相关新增订单增长近350%，MLCC设备海外拓展取得实质突破。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "MLCC",
+        "先进封装",
+        "机构调研"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882298778.html",
+      "title_cn": "巨头宣布涨价！玻璃基板逆势拉升未来或加速放量",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "巨头宣布涨价，玻璃基板板块逆势拉升，未来或加速放量。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "玻璃基板",
+        "涨价",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882143571.html",
+      "title_cn": "存储龙头加码扩产“超级周期”有望延续最新高增长潜力股名单来了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "存储龙头加码扩产，报道称存储“超级周期”有望延续，并列出高增长潜力股名单。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "存储",
+        "半导体",
+        "扩产"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882351742.html",
+      "title_cn": "地产股持续大涨业内人士：全国性政策的可能性不大",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "地产股持续大涨，业内人士认为出台全国性政策的可能性不大。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地产",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882370195.html",
+      "title_cn": "中信建投竺劲：上海楼市已止跌回稳深圳、北京、广州大概率渐次跟上",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "中信建投竺劲表示上海楼市已止跌回稳，深圳、北京、广州大概率渐次跟上。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地产",
+        "楼市"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609233882332091.html",
+      "title_cn": "国海富兰克林基金狄星华：AI仍是确定性较强的方向",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "国海富兰克林基金狄星华表示AI仍是确定性较强的方向。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "基金"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-23/doc-inisvcqc5296303.shtml",
+      "title_cn": "港股收评：恒指跌1.01% 科指跌1.33% AI应用股下挫 内房股逆势走强 智谱跌超12%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "港股收评：恒指跌1.01%，科指跌1.33%，AI应用股下挫，内房股逆势走强，智谱跌超12%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "AI",
+        "地产"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-23/doc-inisunsm5356453.shtml",
+      "title_cn": "港股内房股集体大涨 融信中国涨超34% 摩根大通：中国房企或于国庆前推出按揭补贴",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "港股内房股集体大涨，融信中国涨超34%；摩根大通称中国房企或于国庆前推出按揭补贴。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "地产",
+        "按揭补贴"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-09-23/doc-inistrnt8819923.shtml",
+      "title_cn": "欢创科技宣布启动IPO招股 小幅集资6.82亿港元 潜在客户比亚迪及上游供应商中润光学入局基石",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "欢创科技启动IPO招股，集资6.82亿港元，比亚迪及中润光学入局基石投资。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-23/doc-inisuhkm8570462.shtml",
+      "title_cn": "港股分拆上市政策有望“松绑”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "港股分拆上市政策有望“松绑”。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "政策",
+        "分拆上市"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-23/doc-inistvur8707364.shtml",
+      "title_cn": "科创与资本双向奔赴 深圳企业港股上市路径明晰",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "报道称科创与资本双向奔赴，深圳企业港股上市路径明晰。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "深圳"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-09-23/doc-inistrnv5568659.shtml",
+      "title_cn": "00后女孩领“分红”上热搜 背后的港股公司业绩大幅下滑",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "00后女孩领“分红”上热搜，背后港股公司业绩大幅下滑。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "分红",
+        "业绩"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-23/doc-inisuhkm8565041.shtml",
+      "title_cn": "国泰海通：赚钱效应上升 外资流入A股和港股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "国泰海通称赚钱效应上升，外资流入A股和港股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "A股",
+        "外资"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/observe/2026-09-23/doc-inisvivx8527604.shtml",
+      "title_cn": "四方精创港股IPO中止：招股价上限折扣仅四成 保荐团队缺乏A+H经验 公司能否接受降价再启动？",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "四方精创港股IPO中止，招股价上限折扣仅四成，保荐团队缺乏A+H经验。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-09-23/doc-inisvivx8501104.shtml",
+      "title_cn": "港股反弹“熄火”？恒指跌超1%，智谱跌超12%创本轮下跌新低",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "港股反弹“熄火”，恒指跌超1%，智谱跌超12%创本轮下跌新低。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-23/doc-inisvcpz8586746.shtml",
+      "title_cn": "高盛：对网易(09999)评级为“买入” 目标价263港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "高盛对网易(09999)评级为“买入”，目标价263港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "网易"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-23/doc-inisvcpz8567621.shtml",
+      "title_cn": "高盛：上调心动公司(02400)评级至“买入” 下调目标价至60.7港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "高盛上调心动公司(02400)评级至“买入”，下调目标价至60.7港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "心动公司"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-23/doc-inisvcqc5308351.shtml",
+      "title_cn": "瑞银：下调敏实集团(00425)目标价至41港元 维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "瑞银下调敏实集团(00425)目标价至41港元，维持“买入”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "敏实集团"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/23/metas-muse-ai-causes-schwab-selloff.html",
+      "title_cn": "Meta's Muse reignites AI disruption fears. Traders are targeting this brokerage stock as next casualty",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "Meta的Muse引发AI颠覆担忧，交易员将某券商股视为下一个受害者。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "Meta"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/22/lennar-shares-pop-as-berkshire-builds-almost-a-10percent-stake-in-beleaguered-homebuilder.html",
+      "title_cn": "Lennar shares pop as Berkshire builds almost a 10% stake in beleaguered homebuilder",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/22",
+      "summary": "伯克希尔建仓Lennar近10%股份，Lennar股价大涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "伯克希尔",
+        "地产"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/22/no-new-stock-highs-no-problem-options-traders-bet-theyre-coming-in-these-names.html",
+      "title_cn": "No new stock highs, no problem: Options traders bet they're coming in these names",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/22",
+      "summary": "期权交易员押注部分个股将创出新高，尽管当前未创新高。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "期权"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/21/meta-investors-discover-new-ai-play.html",
+      "title_cn": "Investors discover their new favorite consumer AI play in Meta. Options volume is surging",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "投资者发现Meta成为新的消费AI热门标的，期权成交量激增。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "Meta",
+        "期权"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/21/historic-lawsuit-sparks-flurry-of-option-activity-in-ny-times-stock.html",
+      "title_cn": "Historic lawsuit sparks flurry of option activity in this stock",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "一桩历史性诉讼引发某只股票期权活动激增。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "期权",
+        "诉讼"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/trump-plans-grand-spectacle-for-potentially-tense-xi-talks-4912458",
+      "title_cn": "Trump plans grand spectacle for Xi as US says trade truce extended",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "美国称贸易休战延长，特朗普计划为习近平举行盛大活动。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "中美关系",
+        "贸易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/asana-general-counsel-katie-colendich-sells-over-153000-in-company-stock-93CH-4914212",
+      "title_cn": "Asana general counsel Katie Colendich sells over $153,000 in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "Asana总法律顾问Katie Colendich出售超过15.3万美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "Asana"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/national-healthcare-sr-vp-patient-srvcs-dodson-sells-109m-stock-93CH-4914207",
+      "title_cn": "National healthcare sr. VP patient srvcs Dodson sells $1.09m stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "National Healthcare高级副总裁Dodson出售109万美元股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "医疗"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/asana-ceo-daniel-rogers-sells-over-42m-in-company-stock-93CH-4914206",
+      "title_cn": "Asana CEO Daniel Rogers sells over $4.2m in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "Asana CEO Daniel Rogers出售超过420万美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "Asana"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/mission-produce-executive-chairman-sells-145m-in-avo-stock-93CH-4914205",
+      "title_cn": "Mission Produce executive chairman sells $1.45m in AVO stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "Mission Produce执行主席出售145万美元AVO股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "Mission Produce"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/beta-bionics-director-christy-jones-sells-147890-in-shares-93CH-4914204",
+      "title_cn": "Beta Bionics director Christy Jones sells $147,890 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "Beta Bionics董事Christy Jones出售147,890美元股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "Beta Bionics"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/meta-expected-to-unveil-smart-glasses-without-camera-as-privacy-concerns-grow-4912466",
+      "title_cn": "Meta opens Connect conference as camera-free smart glasses expected",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "Meta召开Connect大会，预计发布无摄像头智能眼镜。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "Meta",
+        "智能眼镜",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
