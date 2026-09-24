@@ -154,9 +154,11 @@ test("B4-1 行情解析：A股走K线、港股取 f[6]、美股取 f[1]；卡脚
     assert.equal(hsi?.value, "18234.56");
     assert.equal(hsi?.changePct, "+0.74%");
 
-    // 收评锚定：A股/港股均命中当日收评 → 确定性出卡（sectors 来自收评解析）
-    assert.ok((recap.aShare.sectors.length ?? 0) >= 2, "A股应锚定收评解析出板块要点");
-    assert.ok((recap.hk.sectors.length ?? 0) >= 2, "港股应锚定收评解析出板块要点");
+    // 收评锚定：A股/港股均命中当日收评 → 确定性出卡。
+    // ⚠️ 2026-09-24 起：sectors 会剔除「指数涨跌复述」句（`恒指涨0.74%` / `科创50指数…跌2.10%`），
+    // 这两条夹具标题里各只剩 1 条真板块。
+    assert.deepEqual(recap.aShare.sectors, ["算力产业链下挫"], "A股：只留真板块（指数句被剔除）");
+    assert.deepEqual(recap.hk.sectors, ["科网股普涨"], "港股：只留真板块（指数句被剔除）");
     assert.ok(out.stock_recap!.us.overview.length > 0, "美股走 LLM 出 overview");
   });
 });

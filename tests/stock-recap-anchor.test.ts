@@ -13,6 +13,9 @@
  *  5. parseRecapCard：术语展开（科指→恒生科技指数）、overview 用行情权威数字
  *  6. parseRecapCard：营销噪声 / 截断残片 → null（宁缺毋滥，回退 LLM）
  *  7. 集成：A股+港股均锚定 → LLM 收到的 prompt 不含 aShare/hk 条目（根除跨市场串味）
+ *  8. sectors **不得混入「指数涨跌复述」**（2026-09-24 用户反馈）：
+ *     收评标题常以「恒指跌1.01% 科指跌1.33%」开头，原先被当成板块，
+ *     导致口播把指数念两遍、真板块（AI应用股/内房股）反被挤掉预算。
  */
 import { test, mock } from "node:test";
 import assert from "node:assert/strict";
@@ -21,6 +24,7 @@ import {
   anchorRecapCard,
   extractIndexPcts,
   hasIndexConflict,
+  isIndexMoveClause,
   isRecapTitle,
   parseRecapCard,
   pickRecapAnchor,
@@ -82,14 +86,9 @@ test("parseRecapCard：术语展开 + overview 用行情权威数字", () => {
     HK_QUOTES,
   );
   assert.ok(card);
-  assert.deepEqual(card!.sectors, [
-    "恒生指数涨1.74%",
-    "恒生科技指数涨2.27%",
-    "科网股普涨",
-    "AI应用股走强",
-    "联想涨超6%",
-  ]);
-  // overview 与卡内指数块同源，非 LLM 复述
+  // 指数复述句（恒指/科指）不进 sectors —— 见 isIndexMoveClause 单测
+  assert.deepEqual(card!.sectors, ["科网股普涨", "AI应用股走强", "联想涨超6%"]);
+  // overview 与卡内指数块同源，非 LLM 复述（点位保留在卡面，口播侧由 toSpokenOverview 剥掉）
   assert.equal(card!.overview, "恒生指数收报25650.10点（+1.74%）；恒生科技收报5820.33点（+2.27%）。");
 });
 
@@ -99,7 +98,8 @@ test("parseRecapCard：无行情时 overview 退回收评首段", () => {
   );
   assert.ok(card);
   assert.equal(card!.overview, "科创50指数高开低走跌2.10%");
-  assert.equal(card!.sectors.length, 3);
+  // 「科创50指数高开低走跌2.10%」属指数复述 → 剔除，只留 2 条真板块
+  assert.deepEqual(card!.sectors, ["算力产业链持续下挫", "猪肉板块逆势走强"]);
 });
 
 test("parseRecapCard：营销噪声与截断残片 → null（回退 LLM）", () => {
@@ -189,10 +189,56 @@ test("集成：A股+港股锚定后，LLM prompt 不再含 aShare/hk 条目（�
   assert.ok(!capturedPrompt.includes("算力产业链"), "A股条目不应出现在 prompt 中");
   assert.ok(!capturedPrompt.includes("科网股"), "港股条目不应出现在 prompt 中");
   assert.ok(capturedPrompt.includes("本轮只需生成：美股"), "应只生成美股");
-  // 锚定结果落地
-  assert.equal(recap!.aShare.sectors.length, 3);
-  assert.equal(recap!.hk.sectors[0], "恒生指数涨1.74%");
+  // 锚定结果落地：**指数复述句不进 sectors**（2026-09-24 修，见 isIndexMoveClause 单测）
+  // 它已由 overview 承担；留在 sectors 会让口播把同一件事念两遍，还挤掉真板块的预算。
+  assert.deepEqual(
+    recap!.aShare.sectors,
+    ["算力产业链持续下挫", "猪肉板块逆势走强"],
+    "A股：「科创50指数高开低走跌2.10%」属指数复述 → 剔除",
+  );
+  assert.deepEqual(
+    recap!.hk.sectors,
+    ["科网股普涨", "联想涨超6%"],
+    "港股：「恒指涨1.74%」「科指涨2.27%」属指数复述 → 剔除",
+  );
   // 美股仍由 LLM 产出
   assert.equal(recap!.us.overview, "美股三大指数收跌");
   mock.reset();
+});
+
+// ——— 2026-09-24 新增：sectors 不得混入「指数涨跌复述」———
+//
+// 实测（09-24 港股口播）：「板块层面：恒生科技指数跌1.33%；恒生指数跌1.01%」——
+// 板块段把指数涨跌又念了一遍，而真板块（AI应用股/内房股）被挤掉了。
+
+test("isIndexMoveClause：指数涨跌句判为「复述」，含板块事实的句子保留", () => {
+  for (const s of ["恒指跌1.01%", "科指跌1.33%", "恒生指数涨1.74%", "恒生科技指数跌2.27%", "纳指跌1.13%领跌"]) {
+    assert.equal(isIndexMoveClause(s), true, `应判为指数复述：${s}`);
+  }
+  for (const s of [
+    "AI应用股下挫",
+    "内房股逆势走强",
+    "智谱跌超12%",
+    "猪肉板块逆势走强",
+    "恒生科技指数跌1.33%，AI股逆势拉升", // 摘掉指数片段后仍有真内容
+    "恒指成份股中地产股领涨", // 提到指数但无「指数+涨跌幅」片段
+  ]) {
+    assert.equal(isIndexMoveClause(s), false, `应保留：${s}`);
+  }
+});
+
+test("parseRecapCard：真实港股收评标题 → 假板块被剔除，真板块保住且顺序不变", () => {
+  // 用与收评一致的行情值（否则 hasIndexConflict 会走「以收评为真」分支，overview 不是行情合成）
+  const realQuotes: IndexQuote[] = [
+    { name: "恒生指数", value: "24834.12", changePct: "-1.01%" },
+    { name: "恒生科技", value: "4379.07", changePct: "-1.33%" },
+  ];
+  const card = parseRecapCard(
+    mk("港股收评：恒指跌1.01% 科指跌1.33% AI应用股下挫 内房股逆势走强 智谱跌超12%", "2026-09-23"),
+    realQuotes,
+  );
+  assert.ok(card);
+  assert.deepEqual(card!.sectors, ["AI应用股下挫", "内房股逆势走强", "智谱跌超12%"]);
+  // 卡面**保留**权威点位（点位给视觉卡看）；口播侧由 toSpokenOverview 剥掉 → 见 stock-spoken.test.ts
+  assert.ok(card!.overview.includes("收报"), `overview 仍含点位：${card!.overview}`);
 });

@@ -154,6 +154,41 @@ export function extractIndexPcts(clauses: string[]): Array<{ name: string; pct: 
   return out;
 }
 
+/**
+ * 识别「指数复述句」专用的指数名清单（**含收评常见的简称 `恒指`/`科指`**）。
+ *
+ * ⚠️ 刻意与 `INDEX_ALIASES` 分开：后者服务于 `extractIndexPcts` / `hasIndexConflict`
+ * 的「收评 vs 行情一致性」校验，动它会改变冲突判定的行为，超出本次修 bug 的范围。
+ * 本清单只用于「这句是不是在复述指数」这一件事。
+ */
+const RECAP_INDEX_NAME_RE =
+  /(?:恒生科技指数|恒生科技|恒生指数|恒指|科指|国企指数|H股指数|上证指数|沪指|深证成指|深成指|创业板指|科创50|科创\d{2}|沪深300|中证\d{2,4}|纳斯达克指数|纳斯达克|纳指|标普500|标普|道琼斯|道指|三大指数|大盘)/;
+
+/** 摘除「指数名 + 涨跌幅」片段（与 `extractIndexPcts` 同形，但用上面更全的清单）。 */
+const RECAP_INDEX_MOVE_RE =
+  /(?:恒生科技指数|恒生科技|恒生指数|恒指|科指|国企指数|H股指数|上证指数|沪指|深证成指|深成指|创业板指|科创50|科创\d{2}|沪深300|中证\d{2,4}|纳斯达克指数|纳斯达克|纳指|标普500|标普|道琼斯|道指|三大指数|大盘)[^%]{0,10}?\d+(?:\.\d+)?\s*%/g;
+
+/**
+ * 该片段是否「只是把指数涨跌复述一遍」（不含独立的板块事实）。
+ *
+ * 为什么必须剔除（用户 2026-09-24 反馈）：`parseRecapCard` 原先直接
+ * `clauses.slice(0, 5)` 当 sectors，而收评标题常以「恒指跌1.01% 科指跌1.33% AI应用股下挫
+ * 内房股逆势走强…」开头 —— 于是**指数涨跌句被当成板块**：
+ *   ① 卡片里等于把 overview 重复一遍；
+ *   ② 口播里「板块层面：恒生科技指数跌1.33%；恒生指数跌1.01%」把同一件事又念一遍，
+ *      还把真板块（AI应用股 / 内房股）的预算挤掉 —— 用户要的正是这些真板块。
+ *
+ * 判定：片段**含指数名**，且摘掉「指数名+涨跌幅」片段、去掉标点后所剩不足 4 字
+ * → 认定只是指数复述。
+ * 反例（必须保留）：「智谱跌超12%」（无指数名）、
+ * 「恒生科技指数跌1.33%，AI股逆势拉升」（摘掉指数片段后仍剩「AI股逆势拉升」）。
+ */
+export function isIndexMoveClause(clause: string): boolean {
+  if (!RECAP_INDEX_NAME_RE.test(clause)) return false;
+  const remainder = clause.replace(RECAP_INDEX_MOVE_RE, "").replace(/[\s\p{P}\p{S}]/gu, "");
+  return remainder.length < 4;
+}
+
 /** 收评与行情指数涨跌幅是否冲突（差异 > 0.05 个百分点即认为行情取值日错位）。 */
 export function hasIndexConflict(clauses: string[], quotes?: IndexQuote[]): boolean {
   if (!quotes || quotes.length === 0) return false;
@@ -189,7 +224,8 @@ export function parseRecapCard(
     .filter((c) => c.length >= 4 && !NOISE_RE.test(c) && !/(^|[^\d])(多|少)$/.test(c))
     .map(expandTerms);
   if (clauses.length < 2) return null;
-  const sectors = clauses.slice(0, 5);
+  // 剔除「只是把指数涨跌复述一遍」的片段 —— 它已由 overview 承担（用户 2026-09-24 反馈）
+  const sectors = clauses.filter((c) => !isIndexMoveClause(c)).slice(0, 5);
   // 行情取值日错位守护：数字自相矛盾时以收评为真（详见 hasIndexConflict 注释）
   if (hasIndexConflict(clauses, quotes)) {
     console.warn(

@@ -5,6 +5,13 @@
  * 按 `stock/3 ≈ 66 字/市场` 二次截断 —— 卡片里已提炼好的细分板块要点
  * （涨跌表现 / 资金流向 / 异动原因）几乎全被砍掉，只剩一句大盘。
  *
+ * 2026-09-24 追加（用户反馈）：**口播不读具体收盘点位**，见 `toSpokenOverview`。
+ *   该规则原本只写在 LLM prompt 里，而「锚定收评」确定性通道**跳过 LLM**、
+ *   overview 直接由行情合成（`恒生指数收报24834.12点（-1.01%）`）—— 规则被绕过，
+ *   听众听到一串大数。收到拼装层做兜底，则 LLM 通道 / 锚定通道、三市场一律生效。
+ *   同时 `parseRecapCard` 会剔除「只是复述指数涨跌」的 sectors 条目（`isIndexMoveClause`），
+ *   否则「板块层面：恒生科技指数跌1.33%；恒生指数跌1.01%」会把指数念第二遍、挤掉真板块。
+ *
  * 目标：把 `sectors`（卡片中提炼的细分板块要点）纳入股市口播，并按用户 5 条要求组织：
  *   1. 板块按重要性 + 市场关注度排序，只取有代表性、有信息增量的，不罗列堆砌；
  *   2. 叙述分三层：整体行情（overview）→ 结构分化（过渡句）→ 重点板块（排序后的 sectors）；
@@ -115,6 +122,36 @@ function clean(s: string): string {
 /** 去掉句尾句号（拼装时统一补）。 */
 function stripTrailingPeriod(s: string): string {
   return s.replace(/[。.!！？?；;、,，]+$/g, "").trim();
+}
+
+/**
+ * 口播用大盘句：**剥掉具体收盘点位，只留涨跌幅**（用户 2026-09-24 反馈）。
+ *
+ * 依据是 LLM prompt 里**早已写明、但确定性拼装层漏掉**的规则：
+ *   「口播只说收盘涨跌（涨跌幅），不读具体收盘点位（如说「恒指跌0.62%」「纳指跌0.29%」，
+ *     不要说「收报18234点」）；点位留给视觉卡片展示。」
+ *
+ * 为什么需要这一层兜底：走「锚定收评」确定性通道时 overview 由**行情数据**合成
+ * （`恒生指数收报24834.12点（-1.01%）`），而该通道跳过 LLM → 没有 prompt 的保护，
+ * 原样朗读就是让听众听一串无意义的大数（实测 2026-09-24 港股口播）。
+ * 把规则收到「口播拼装」这一层，A股/港股/美股、LLM 通道/锚定通道一律生效。
+ *
+ * 变换：`收报24834.12点（-1.01%）` → `跌1.01%`（正负号转「涨/跌」，忠于原文不改数字）。
+ * 卡面不受影响（卡里仍展示点位）。
+ */
+export function toSpokenOverview(overview: string): string {
+  if (!overview) return "";
+  return overview
+    // 「收报 24834.12 点」/「报收1234点」/「收于/收在 …点」→ 删掉点位本身
+    .replace(/(?:收报|报收|收于|收在|报|收)\s*[\d,]+(?:\.\d+)?\s*点/g, "")
+    // 「（-1.01%）」「(+0.39%)」→「跌1.01%」「涨0.39%」
+    .replace(
+      /[（(]\s*([+-])\s*(\d+(?:\.\d+)?)\s*%\s*[)）]/g,
+      (_m, sign: string, num: string) => `${sign === "-" ? "跌" : "涨"}${num}%`,
+    )
+    .replace(/([；;，,])\s*(?=[；;，,])/g, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
 
 /** 在分隔点（，；、）处截断到 max 内，避免把半句话念出来。 */
@@ -273,7 +310,9 @@ export function buildMarketSpoken(card: MarketCard, opts: StockSpokenOptions): s
   const labelChars = opts.labelChars ?? 0;
   const budget = Math.max(0, opts.budget - labelChars);
 
-  const overview = stripTrailingPeriod(clipAtClause(clean(card.overview ?? ""), MAX_OVERVIEW_CHARS));
+  const overview = stripTrailingPeriod(
+    clipAtClause(toSpokenOverview(clean(card.overview ?? "")), MAX_OVERVIEW_CHARS),
+  );
   if (!overview) return ""; // 无大盘信息 → 整段跳过（由外层决定兜底）
 
   const lines = selectSectors(card.sectors ?? [], overview, maxSectors, maxSectorChars);
@@ -348,7 +387,7 @@ export function buildStockSpoken(
   for (const key of MARKET_ORDER) {
     const card = recap[key];
     const overview = stripTrailingPeriod(
-      clipAtClause(clean(card?.overview ?? ""), MAX_OVERVIEW_CHARS),
+      clipAtClause(toSpokenOverview(clean(card?.overview ?? "")), MAX_OVERVIEW_CHARS),
     );
     if (!overview) continue;
     const lines = selectSectors(card?.sectors ?? [], overview, maxSectors, maxSectorChars);

@@ -174,18 +174,52 @@ export interface NoveltyResult {
   newBigramRatio: number;
   /** 是否发生「阶段推进」（如 受理 → 过会、传闻 → 正式印发）。 */
   stageAdvance: boolean;
+  /**
+   * 是否出现「新时点」（候选带记录里没有的月份/年度/季度事实）。
+   *
+   * 语义：**对周期性事件（议息、LPR 报价、月度数据），新的一期就是实质进展**，
+   * 哪怕措辞与上一期高度雷同。典型：记录是「9月加息落地」，候选是「10月加息概率七成」——
+   * 两者同为「美联储/利率」，但**月份是事件标识本身**，不是可忽略的数量差异
+   * （用户 2026-09-24 明确指出的核心差异）。
+   */
+  newPeriod: boolean;
   /** 与历史内容的标题重复度（0-1，越高越雷同）。 */
   titleOverlap: number;
 }
 
 /**
+ * 时点类事实（**带 `#` 前缀的月份/年度/季度**）。
+ *
+ * 为什么要单独识别：`extractFacts` 的 `NUM_RE` 把「10月」和「25基点」「7.2%」一并抽成
+ * `#数字锚点` —— 但二者语义不同：
+ *   - `#25基点` 是**量级**（同一件事的强弱变化）；
+ *   - `#10月`  是**时点**（事件落到哪一期）→ 对周期性事件是新旧事件的判别键。
+ * 词法上刻意区分：`#10个月`（时长，非时点）不匹配本式（`年` 也要求 4 位年份）。
+ */
+const PERIOD_FACT_RE = /^#(?:\d{4}年|\d{1,2}月(?:\d{1,2}日)?|\d{1,2}季度|Q[1-4])$/;
+
+/** 取事实集合里的时点子集。 */
+function periodsOf(facts: readonly string[]): Set<string> {
+  return new Set(facts.filter((f) => PERIOD_FACT_RE.test(f)));
+}
+
+/** 「新时点」的增量权重（与 stageAdvance 同量级：都是「事件往前走了一期/一步」）。 */
+const PERIOD_ADVANCE_WEIGHT = 0.2;
+
+/**
  * 量化信息增量。
  *
- * 综合三项（加权）：
+ * 综合四项（加权）：
  *  - 新事实占比（权重 0.45）：数字/阶段/主体的新增 —— 最能代表「有进展」
  *  - 新 bigram 占比（权重 0.35）：表述层面的新增内容量
  *  - 阶段推进（权重 0.20）：事件生命周期往前走了一步
+ *  - **新时点（权重 0.20）**：本轮是周期性事件的**新一期**（见 `newPeriod`）
  * 最后按标题重复度做惩罚（措辞越雷同，增量越被压低）。
+ *
+ * ⚠️ 新时点与「新事实占比」存在**刻意的重叠计权**：新月份既计入新事实（0.45 项），
+ * 又额外拿时点权重 —— 这是有意为之。用户口径（2026-09-24）：「9月加息」与「10月加息」
+ * 里**月份是最核心的差异之一**，若只按「众多数字里的一个」分摊权重，会被稀释到门槛之下
+ * （实测 09-24 定调：0.383 vs 门槛 0.43，仅差 0.047 被误拦）。
  *
  * 阈值语义（在 evaluateCandidate 中消费）：
  *  - ≥ 0.35 视为「有实质进展」
@@ -223,16 +257,23 @@ export function computeNovelty(cand: MemoryCandidate, record: EventRecord): Nove
   const candStages = facts.filter((f) => f.startsWith("!"));
   const stageAdvance = candStages.some((s) => !histStages.has(s));
 
+  // 新时点：候选带记录里没有的月份/年度/季度事实 → 周期性事件的新一期
+  const histPeriods = periodsOf(record.broadcastedFacts ?? []);
+  const newPeriod = [...periodsOf(facts)].some((p) => !histPeriods.has(p));
+
   // 标题重复度惩罚
   const titleOverlap = bestTitleDice(cand.title, record);
 
   const raw =
-    0.45 * clamp01(newFactRatio) + 0.35 * clamp01(newBigramRatio) + (stageAdvance ? 0.2 : 0);
+    0.45 * clamp01(newFactRatio) +
+    0.35 * clamp01(newBigramRatio) +
+    (stageAdvance ? 0.2 : 0) +
+    (newPeriod ? PERIOD_ADVANCE_WEIGHT : 0);
   // 措辞高度雷同（Dice ≥ 0.6）时按超出部分线性压低，最低压到 55%
   const penalty = titleOverlap > 0.6 ? Math.min((titleOverlap - 0.6) / 0.4, 1) * 0.45 : 0;
   const novelty = clamp01(raw * (1 - penalty));
 
-  return { novelty, newFacts, newBigramRatio, stageAdvance, titleOverlap };
+  return { novelty, newFacts, newBigramRatio, stageAdvance, newPeriod, titleOverlap };
 }
 
 function clamp01(n: number): number {

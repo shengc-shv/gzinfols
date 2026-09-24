@@ -19,6 +19,7 @@ import {
   selectSectors,
   pickTransition,
   similarity,
+  toSpokenOverview,
   buildMarketSpoken,
   buildStockSpoken,
   type MarketKey,
@@ -384,4 +385,48 @@ test("similarity：完全相同的文本相似度为 1，无关文本接近 0", 
   assert.ok(similarity("地面兵装逆市大涨", "地面兵装逆市大涨") > 0.99);
   assert.ok(similarity("地面兵装逆市大涨", "南向资金净买入41亿") < 0.2);
   assert.equal(similarity("", "abc"), 0);
+});
+
+// ——— 9. 口播不念收盘点位（2026-09-24 用户反馈）———
+//
+// 规则原文在 LLM prompt 里早已存在（「口播只说收盘涨跌，不读具体收盘点位；
+// 点位留给视觉卡片展示」），但走「锚定收评」确定性通道时绕过 LLM，
+// overview 由行情合成（`恒生指数收报24834.12点（-1.01%）`）→ 原样朗读就是一串大数。
+// 故把规则收到口播拼装层做兜底。
+
+test("toSpokenOverview：剥掉收盘点位、只留涨跌幅（正负号转「涨/跌」）", () => {
+  assert.equal(
+    toSpokenOverview("恒生指数收报24834.12点（-1.01%）；恒生科技收报4379.07点（-1.33%）。"),
+    "恒生指数跌1.01%；恒生科技跌1.33%。",
+  );
+  assert.equal(toSpokenOverview("标普500收报7650.50点（+0.17%）"), "标普500涨0.17%");
+  assert.equal(toSpokenOverview("道指报收 45544.88 点（-0.20%）"), "道指跌0.20%");
+});
+
+test("toSpokenOverview：无点位的正常大盘句必须原样保留（不得误伤）", () => {
+  for (const s of [
+    "A股三大指数集体收跌，成交额不足1.8万亿，复合集流体概念逆市走强。",
+    "美股三大指数集体收跌，纳指跌1.13%领跌，Meta新品引发AI颠覆担忧。",
+    "恒生指数跌1.01%；恒生科技跌1.33%。",
+  ]) {
+    assert.equal(toSpokenOverview(s), s, s);
+  }
+  // 「收」后面不接数字时不能被吃掉（收跌/收涨是常用词）
+  assert.equal(toSpokenOverview("三大指数集体收跌"), "三大指数集体收跌");
+});
+
+test("小盘股口播：锚定通道给的点位概览，落进 spoken 后不含具体点位", () => {
+  const card = mkCard("恒生指数收报24834.12点（-1.01%）；恒生科技收报4379.07点（-1.33%）。", [
+    "AI应用股下挫",
+    "内房股逆势走强",
+  ]);
+  const one = buildMarketSpoken(card, { budget: 200 });
+  assert.ok(!/\d{4,}\.\d+\s*点/.test(one), `口播不应出现收盘点位：${one}`);
+  assert.ok(one.includes("跌1.01%"), `应保留涨跌幅：${one}`);
+
+  const all = buildStockSpoken(
+    { hk: card } as unknown as StockRecap,
+    { budget: 300, maxSectors: 2, labelChars: { hk: 0 } },
+  );
+  assert.ok(!/\d{4,}\.\d+\s*点/.test(all.texts.hk), `多市场路径同样不带点位：${all.texts.hk}`);
 });
