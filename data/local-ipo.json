@@ -1,14 +1,25 @@
 {
   "version": 1,
-  "fetchedAt": "2026-09-23T23:02:38+08:00",
+  "fetchedAt": "2026-09-25T00:26:00+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
     "gd-csrc-tutoring": 2,
     "gd-sse-audit": 1,
-    "gd-szse-audit": 7
+    "gd-szse-audit": 4
   },
   "items": [
+    {
+      "title": "时创意：IPO问询中（拟创业板）",
+      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004571",
+      "excerpt": "注册地：广东｜保荐：中信证券｜受理：2026-06-25｜状态：已问询｜更新：2026-09-24",
+      "publishedAt": "2026-09-24",
+      "source": "深交所IPO审核动态",
+      "sourceId": "gd-szse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
+    },
     {
       "title": "保伦股份：IPO问询中（拟主板）",
       "url": "https://www.sse.com.cn/listing/renewal/ipo/#2189@2",
@@ -69,50 +80,6 @@
       "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004552",
       "excerpt": "注册地：广东｜保荐：国泰海通｜受理：2026-06-23｜状态：已问询｜更新：2026-09-21",
       "publishedAt": "2026-09-21",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "东莞证券：IPO已受理（拟主板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1003010",
-      "excerpt": "注册地：广东｜保荐：东方证券｜受理：2023-03-02｜状态：已受理｜更新：2026-09-18",
-      "publishedAt": "2026-09-18",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "纽恩泰：IPO问询中（拟主板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004241",
-      "excerpt": "注册地：广东｜保荐：国联民生承销保荐｜受理：2026-04-29｜状态：已问询｜更新：2026-09-18",
-      "publishedAt": "2026-09-18",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "柳鑫股份：IPO问询中（拟创业板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004431",
-      "excerpt": "注册地：广东｜保荐：中信建投｜受理：2026-06-12｜状态：已问询｜更新：2026-09-18",
-      "publishedAt": "2026-09-18",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "高标科技：IPO问询中（拟创业板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004549",
-      "excerpt": "注册地：广东｜保荐：中金公司｜受理：2026-06-18｜状态：已问询｜更新：2026-09-18",
-      "publishedAt": "2026-09-18",
       "source": "深交所IPO审核动态",
       "sourceId": "gd-szse-audit",
       "region": "gd",
