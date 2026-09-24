@@ -1,0 +1,895 @@
+{
+  "date": "2026-09-25",
+  "updatedAt": "2026-09-24T23:29:46.158Z",
+  "executive": {
+    "hero_line": "美联储10月加息概率逼近七成，美元存款利率破4%，外币货架与结售汇窗口同步打开。",
+    "spoken_hero": "美联储10月加息概率已逼近七成，部分美元存款利率超过4%，美元理财业绩基准跟着抬升。建议分行尽快梳理美元产品货架，同步向有结售汇需求的跨境客户提示锁汇窗口。",
+    "must_read": [
+      {
+        "title": "上海推银行业AI应用措施",
+        "why": "监管导向明确，科技条线可关注同业AI落地路径与合规边界，为数字化获客蓄力。",
+        "url": "https://www.cnfin.com/qy-lb/detail/20260924/4474707_1.html"
+      },
+      {
+        "title": "美元存款利率超4%",
+        "why": "外币产品定价空间打开，美元存款与理财业绩基准同步抬升，财富条线货架需及时更新。",
+        "url": "https://finance.sina.com.cn/roll/2026-09-24/doc-iniswmip5053222.shtml"
+      },
+      {
+        "title": "美联储10月加息概率近七成",
+        "why": "美元资产波动加大，结售汇与外币理财定价窗口打开，跨境客群资金摆布或生变，需提前研判。",
+        "url": "https://finance.eastmoney.com/a/202609243882836693.html"
+      },
+      {
+        "title": "理财规模高增含权为主力",
+        "why": "行业共识转向控波动控回撤，含权产品扩容，财富条线配置方向可据此调整。",
+        "url": "https://finance.sina.com.cn/roll/2026-09-24/doc-iniswrri8184030.shtml"
+      },
+      {
+        "title": "一线新房成交同比增超10%",
+        "why": "楼市金九成色向好，按揭投放节奏与区域分化值得关注，住房金融可顺势加力。",
+        "url": "https://finance.cctv.com/2026/09/24/ARTIiIIa0lsIGqm38eZlmCqG260924.shtml"
+      }
+    ],
+    "spoken_must_read": "上海推银行业AI应用措施。监管导向明确，科技条线可关注同业AI落地路径与合规边界，为数字化获客蓄力。其次，美元存款利率超4%。外币产品定价空间打开，美元存款与理财业绩基准同步抬升，财富条线货架需及时更新。此外，美联储10月加息概率近七成。美元资产波动加大，结售汇与外币理财定价窗口打开，跨境客群资金摆布或生变，需提前研判。还有，理财规模高增含权为主力。行业共识转向控波动控回撤，含权产品扩容，财富条线配置方向可据此调整。另外，一线新房成交同比增超10%。楼市金九成色向好，按揭投放节奏与区域分化值得关注，住房金融可顺势加力。",
+    "insights": [
+      {
+        "topic": "美元货架与结汇窗口",
+        "impact": "美元存款利率超4%、理财基准抬升，叠加10月加息概率近七成，有美元需求的跨境与高净值客户配置意愿上升。",
+        "action": "本周梳理美元存款与理财货架，向进出口企业主与外币持有客户提示锁汇与配置窗口，同步更新话术。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "零售AUM",
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "美联储加息余波 部分美元存款利率超4%，理财业绩基准水涨船高",
+            "url": "https://finance.sina.com.cn/roll/2026-09-24/doc-iniswmip5053222.shtml"
+          },
+          {
+            "title": "油价涨、美债跌市场再掀加息风暴！美联储10月加息概率逼近七成",
+            "url": "https://finance.eastmoney.com/a/202609243882836693.html"
+          }
+        ]
+      },
+      {
+        "topic": "私募高净值配置动向",
+        "impact": "私募存续规模达25.75万亿元，高净值客群资金体量稳定，私行客户资产配置与家族信托需求存在挖掘空间。",
+        "action": "可考虑本周梳理存量私行客户私募持仓，结合含权产品控回撤方向做再配置沟通，带动AUM留存。",
+        "tag": [
+          "私行",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "中基协发布8月私募月报 存续规模达25.75万亿元",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_09_24_902013.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "含权理财控回撤配置",
+        "impact": "9月理财规模高增、含权类为扩容主力，行业共识转向控波动控回撤，客户比价敏感度上升。",
+        "action": "今日起在货架主推控回撤型含权产品，以配置能力而非费率做差异点，配套客户经理话术更新。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "9月银行理财规模延续高增态势：含权类产品为扩容主力 “控波动，控回撤”成共识",
+            "url": "https://finance.sina.com.cn/roll/2026-09-24/doc-iniswrri8184030.shtml"
+          },
+          {
+            "title": "银行理财机构密集推出产品管理费率优惠",
+            "url": "https://www.cnfin.com/hg-lb/detail/20260924/4474402_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "用电数据看小微景气",
+        "impact": "广州前九月用电需求同比增15.29%，本地工商业景气度回升，小微与个体工商户经营活力改善。",
+        "action": "可考虑按区域用电增长行业筛选小微客群名单，本周启动经营贷与收单结算的组合走访。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "sources": [
+          {
+            "title": "广州前九个月用电需求突破1200万千伏安，同比增长15.29%",
+            "url": "https://news.dayoo.com/guangzhou/202609/24/139995_55007573.htm"
+          }
+        ]
+      },
+      {
+        "topic": "金九按揭投放节奏",
+        "impact": "一线城市新房成交面积同比增超10%，楼市金九成色向好，按揭投放与区域分化值得关注。",
+        "action": "可考虑本周加密合作楼盘驻点，按区域分化调整按揭额度与审批时效，抢抓金九尾段成交。",
+        "tag": [
+          "住房金融"
+        ],
+        "sources": [
+          {
+            "title": "一线城市新房成交面积同比增长超10% 楼市“金九”成色向好",
+            "url": "https://finance.cctv.com/2026/09/24/ARTIiIIa0lsIGqm38eZlmCqG260924.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "粤芯半导体员工金融",
+        "impact": "粤芯半导体今日申购，大湾区半导体龙头登陆资本市场，上下游企业与员工客群综合金融需求集中释放。",
+        "action": "可考虑本周对接粤芯上下游企业，配套代发工资、员工理财与股权激励资金留存方案。",
+        "tag": [
+          "代发",
+          "科技金融"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "粤芯半导体今日申购 撑起大湾区“造芯”底气",
+            "url": "https://www.stcn.com/article/detail/4197742.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "具备零售 A U M和高端客户商机的，美元货架与结汇窗口，美元存款利率超4%、理财基准抬升，叠加10月加息概率近七成，有美元需求的跨境与高净值客户配置意愿上升。本周梳理美元存款与理财货架，向进出口企业主与外币持有客户提示锁汇与配置窗口，同步更新话术。此外，具备高端客户商机的，私募高净值配置动向，私募存续规模达25.75万亿元，高净值客群资金体量稳定，私行客户资产配置与家族信托需求存在挖掘空间。可考虑本周梳理存量私行客户私募持仓，结合含权产品控回撤方向做再配置沟通，带动AUM留存。同时，具备零售 A U M商机的，含权理财控回撤配置，9月理财规模高增、含权类为扩容主力，行业共识转向控波动控回撤，客户比价敏感度上升。今日起在货架主推控回撤型含权产品，以配置能力而非费率做差异点，配套客户经理话术更新。另一条值得关注，具备普惠小微商机的，用电数据看小微景气，广州前九月用电需求同比增15.29%，本地工商业景气度回升，小微与个体工商户经营活力改善。可考虑按区域用电增长行业筛选小微客群名单，本周启动经营贷与收单结算的组合走访。另外，金九按揭投放节奏，一线城市新房成交面积同比增超10%，楼市金九成色向好，按揭投放与区域分化值得关注。可考虑本周加密合作楼盘驻点，按区域分化调整按揭额度与审批时效，抢抓金九尾段成交。最后，具备零售 A U M商机的，粤芯半导体员工金融，粤芯半导体今日申购，大湾区半导体龙头登陆资本市场，上下游企业与员工客群综合金融需求集中释放。可考虑本周对接粤芯上下游企业，配套代发工资、员工理财与股权激励资金留存方案。",
+    "risk": {
+      "topic": "运营商分期业务暂停",
+      "evidence": "“免费领手机”变分期贷事件新进展，三大运营商金融分期相关业务暂停办理。",
+      "impact": "消费贷条线场景合作渠道收缩，存量分期客户还款与投诉压力上升；风控需重估运营商渠道资产质量。",
+      "action": "消费贷条线应暂停同类渠道新增进件，风控部本周排查存量运营商分期资产并制定客户沟通口径。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "“免费领手机”变分期贷事件新进展：三大运营商金融分期相关业务暂停办理",
+          "url": "https://m.21jingji.com/article/20260924/herald/04f92b85a137a712a3ad1a55a2388bbd.html"
+        },
+        {
+          "title": "凭公积金借钱？“上海市民随心贷”运营方实缴资本仅55万元",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_09_24_901934.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：运营商分期业务暂停，消费贷条线场景合作渠道收缩，存量分期客户还款与投诉压力上升；风控需重估运营商渠道资产质量。消费贷条线应暂停同类渠道新增进件，风控部本周排查存量运营商分期资产并制定客户沟通口径。",
+    "guangdong_ipo": {
+      "spoken": "粤芯半导体今日申购，注册地广州，属半导体制造行业，登陆深交所，是大湾区造芯龙头；同日深圳海明润、东莞深达威北交所IPO进入问询，广东时创意创业板已问询。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "道指跌0.31%，纳指微涨0.01%，Meta大涨12%带动AI消费概念。",
+      "sectors": [
+        "Meta周一涨12%，新消费级AI产品引发关注，期权成交量激增。",
+        "Lennar股价跳涨，伯克希尔建仓近10%，押注困境中的房屋建筑商。",
+        "Costco业绩超预期，折扣油价与大宗商品吸引通胀承压消费者。",
+        "甲骨文与Blue Owl项目延期，AI融资链条受波及，市场情绪受扰。"
+      ],
+      "spoken": "美股收盘涨跌互现，道指跌0.31%，纳指微涨0.01%。板块方面，Meta因新AI产品大涨12%，带动消费级AI概念走强。伯克希尔建仓近10%推动Lennar跳涨。Costco业绩超预期。甲骨文与Blue Owl项目延期，AI融资链受关注。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-25"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51349.98",
+          "changePct": "-0.31%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26939.37",
+          "changePct": "+0.01%"
+        },
+        {
+          "name": "标普500",
+          "value": "7704.13",
+          "changePct": "-0.02%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "深证成指、创业板指低开低走跌超2%。",
+      "sectors": [
+        "深证成指、创业板指低开低走跌超2%",
+        "下跌个股超4300只"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-25"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3888.37",
+          "changePct": "-1.22%"
+        },
+        {
+          "name": "深证成指",
+          "value": "13316.97",
+          "changePct": "-2.34%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3288.95",
+          "changePct": "-2.68%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24763.81点（-0.28%）；恒生科技收报4361.63点（-0.40%）。",
+      "sectors": [
+        "黄金股下挫",
+        "石油股逆势活跃"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-25"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.29% 科指跌0.41% 黄金股下挫 石油股逆势活跃",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-24/doc-inisxhpc5061493.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24763.81",
+          "changePct": "-0.28%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4361.63",
+          "changePct": "-0.40%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-09-24",
+    "marketStatus": {
+      "reportDate": "2026-09-25",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-09-24"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-09-24"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-09-24"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 9月24日 周四 收盘；港股为 9月24日 周四 收盘；美股为 9月24日 周四 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883675769.html",
+      "title_cn": "商务部：中美第八轮经贸磋商达成多项共识",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "商务部表示，中美第八轮经贸磋商达成多项共识。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美经贸"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243882872313.html",
+      "title_cn": "矢量网络分析仪概念突然火了！龙头暴涨近70%（附股）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "矢量网络分析仪概念股突然走强，龙头股暴涨近70%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "概念股",
+        "通信设备"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883655817.html",
+      "title_cn": "A股三大指数收跌成交额不足1.7万亿风电板块逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "A股三大指数收跌，成交额不足1.7万亿元，风电板块逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "风电"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883533873.html",
+      "title_cn": "“神股”跌停！较最高点回撤近70%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "一只被称为“神股”的个股跌停，较最高点回撤近70%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "个股异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883671122.html",
+      "title_cn": "美财长称中美已同意将贸易休战协议延长至明年1月外交部回应",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "美财长称中美已同意将贸易休战协议延长至明年1月，外交部就此作出回应。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美经贸",
+        "外交部"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883088554.html",
+      "title_cn": "卫星互联网组网提速！机构紧盯多只商业航天概念股(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "卫星互联网组网提速，机构关注多只商业航天概念股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "商业航天",
+        "卫星互联网",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883848950.html",
+      "title_cn": "9月24日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "汇总9月24日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883459757.html",
+      "title_cn": "美科技股危矣？越来越多危险信号正涌现互联网泡沫以来未见！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "报道称美科技股出现越来越多危险信号，为互联网泡沫以来未见。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "科技股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883535645.html",
+      "title_cn": "“十五五”海风装机剑指翻番风电设备逆势走高最新绩优+融资客抢筹股名单来了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "“十五五”海上风电装机目标剑指翻番，风电设备板块逆势走高，相关绩优及融资客抢筹股名单出炉。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "风电",
+        "政策",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883665275.html",
+      "title_cn": "商务部：在中美经贸磋商机制下双方就人工智能进行了首次对话",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "商务部称，在中美经贸磋商机制下，双方就人工智能进行了首次对话。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美经贸",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883525565.html",
+      "title_cn": "杨德龙：四季度AI科技板块有望迎来反弹机会",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "杨德龙表示，四季度AI科技板块有望迎来反弹机会。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "A股",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609243883094436.html",
+      "title_cn": "中信建投证券：医疗器械板块拐点来临关注脑机接口、AI医疗等主题投资机会",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "中信建投证券认为医疗器械板块拐点来临，关注脑机接口、AI医疗等主题投资机会。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "医疗器械",
+        "AI医疗",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-24/doc-inisxhpc5061493.shtml",
+      "title_cn": "港股收评：恒指跌0.29% 科指跌0.41% 黄金股下挫 石油股逆势活跃",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "港股收评：恒指跌0.29%，科指跌0.41%，黄金股下挫，石油股逆势活跃。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "黄金",
+        "石油"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-25/doc-inisycst4873787.shtml",
+      "title_cn": "智通港股投资日志|9月25日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "智通发布9月25日港股投资日志。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "投资日志"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-24/doc-iniswrri8230786.shtml",
+      "title_cn": "五年规划为香港长远发展锚定航向",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "报道称五年规划为香港长远发展锚定航向。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "政策",
+        "香港"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-24/doc-inisvytp5761035.shtml",
+      "title_cn": "香港证监会：持续扩大及深化市场互联互通",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "香港证监会表示将持续扩大及深化市场互联互通。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "监管",
+        "互联互通"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-24/doc-iniswvxi4956068.shtml",
+      "title_cn": "伊朗硬刚、海峡不放行，原油终结五连跌，港股石油股逆势上涨",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "伊朗态度强硬、海峡未放行，原油终结五连跌，港股石油股逆势上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "石油",
+        "原油"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-24/doc-iniswvxm0562135.shtml",
+      "title_cn": "香港：将扩大“特邀人士入境便利计划”及“为来港参与指定界别短期活动的访客提供入境便利计划”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "香港将扩大“特邀人士入境便利计划”及“为来港参与指定界别短期活动的访客提供入境便利计划”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "香港",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-09-24/doc-iniswrrm4943737.shtml",
+      "title_cn": "港股通 大换血 后，名单外或有一个 准通关 标的",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "报道称港股通“大换血”后，名单外或存在一个“准通关”标的。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "港股通"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-24/doc-iniswrri8166956.shtml",
+      "title_cn": "钱大妈二次冲刺港交所：门店超3000家，毛利率逐年改善",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "钱大妈二次冲刺港交所，门店超3000家，毛利率逐年改善。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "零售"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-24/doc-inisxnvc0359444.shtml",
+      "title_cn": "里昂：港股综合企业仍被视为优质孳息避风港 维持长和(00001)、周大福创建(00659)首选股地位",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "里昂称港股综合企业仍被视为优质孳息避风港，维持长和、周大福创建首选股地位。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构观点",
+        "综合企业"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-24/doc-inisxnuz4961865.shtml",
+      "title_cn": "高盛：阿里巴巴-W(09988)赋能并拓展智能体时代 维持云业务收入增长预测",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "高盛称阿里巴巴赋能并拓展智能体时代，维持云业务收入增长预测。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "阿里巴巴",
+        "AI",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-24/doc-inisxhpf0466716.shtml",
+      "title_cn": "大摩：予玖龙纸业(02689)“与大市同步”评级 目标价7.7港元 未来数年重点去杠杆",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "大摩予玖龙纸业“与大市同步”评级，目标价7.7港元，称未来数年重点去杠杆。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构观点",
+        "造纸"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-24/doc-inisxhnz8287713.shtml",
+      "title_cn": "富瑞：中国高端新能源车品牌超越同业 维持蔚来-SW(09866)“持有”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "富瑞称中国高端新能源车品牌超越同业，维持蔚来“持有”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "新能源车",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/23/metas-muse-ai-causes-schwab-selloff.html",
+      "title_cn": "Meta's Muse reignites AI disruption fears. Traders are targeting this brokerage stock as next casualty",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "Meta的Muse再度引发AI颠覆担忧，交易员将某券商股视为下一个受冲击对象。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "Meta"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/22/lennar-shares-pop-as-berkshire-builds-almost-a-10percent-stake-in-beleaguered-homebuilder.html",
+      "title_cn": "Lennar shares pop as Berkshire builds almost a 10% stake in beleaguered homebuilder",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/22",
+      "summary": "伯克希尔建仓Lennar近10%股份，该房屋建筑商股价大涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "伯克希尔",
+        "地产"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/22/no-new-stock-highs-no-problem-options-traders-bet-theyre-coming-in-these-names.html",
+      "title_cn": "No new stock highs, no problem: Options traders bet they're coming in these names",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/22",
+      "summary": "尽管无个股创新高，期权交易员押注部分个股将创新高。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "期权"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/21/meta-investors-discover-new-ai-play.html",
+      "title_cn": "Investors discover their new favorite consumer AI play in Meta. Options volume is surging",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "投资者发现新的消费AI标的Meta，其期权成交量激增。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "Meta",
+        "期权"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/21/historic-lawsuit-sparks-flurry-of-option-activity-in-ny-times-stock.html",
+      "title_cn": "Historic lawsuit sparks flurry of option activity in this stock",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/21",
+      "summary": "一桩历史性诉讼引发某只股票期权活动激增。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "期权",
+        "诉讼"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/costco-beats-quarterly-sales-estimates-on-resilient-demand-for-essentials-4916155",
+      "title_cn": "Costco tops estimates as discount gas, bulk deals draw inflation-weary shoppers",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "Costco业绩超预期，折扣汽油和大宗交易吸引受通胀困扰的消费者。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "零售"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economic-indicators/uk-consumer-confidence-hits-more-than-twoyear-high-in-september-gfk-says-4916400",
+      "title_cn": "UK consumer confidence hits more than two-year high in September, GfK says",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "GfK称英国9月消费者信心指数升至两年多来最高。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "英国",
+        "消费者信心"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/trump-welcomes-xi-to-washington-looking-for-a-trade-win-4914436",
+      "title_cn": "Trump-Xi summit in Washington features great fanfare but low expectations",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "特朗普与习近平在华盛顿举行峰会，场面隆重但预期较低。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "中美关系",
+        "政策"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/apple-svp-jennifer-newstead-sells-815803-in-company-stock-93CH-4916398",
+      "title_cn": "Apple SVP Jennifer Newstead sells $815,803 in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "苹果高级副总裁Jennifer Newstead出售价值815,803美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "苹果",
+        "高管交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/analysisoracle-blue-owl-project-delaysends-ripples-through-ai-financing-sources-say-4916397",
+      "title_cn": "Analysis-Oracle, Blue Owl project delay sends ripples through AI financing, sources say",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "消息称甲骨文与Blue Owl项目延期，在AI融资领域引发连锁反应。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "甲骨文",
+        "融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/amc-entertainment-stockholders-approve-equity-plan-amendment-reject-board-changes-93CH-4916386",
+      "title_cn": "AMC Entertainment stockholders approve equity plan amendment, reject board changes",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "AMC Entertainment股东批准股权计划修正案，否决董事会变动。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AMC",
+        "公司治理"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/airbus-alerts-customers-to-a321neo-defect-potentially-affecting-over-500-aircraft-air-current-reports-4916300",
+      "title_cn": "Airbus identifies A321neo defect, says no safety risk",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/24",
+      "summary": "空客发现A321neo缺陷，称不存在安全风险。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "航空",
+        "空客"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
