@@ -363,6 +363,19 @@ export const MUST_READ_PLAY_TARGET = 5;
 export const INSIGHT_CANDIDATE_POOL = 12;
 export const INSIGHT_PLAY_TARGET = 6;
 
+/**
+ * 补位池「当天已用事件」的标题相似度阈值（2026-09-24 用户要求）。
+ *
+ * 语义：池内候选的标题与「当天其他板块已用的某条」标题的 bigram Dice ≥ 该值，
+ * 即视为同一事件的多家报道（URL 不同但事是同一件）→ 补位时跳过。
+ *
+ * 取值 0.7 与漏斗层 `dedup-similar` 的**同一主题判定阈值同口径**（不新造刻度）。
+ * 偏保守是刻意的：宁可在极少数情况下漏掉一次避让，也不误杀一条独立候选 ——
+ * 池内候选本就按分行关联度降序，误杀会把定调挤到更边缘的事件上。
+ * 主判据仍是 **URL 规范化后精确相等**（无阈值风险），本阈值只覆盖「多家报道」。
+ */
+export const USED_EVENT_TITLE_DICE = 0.7;
+
 /** 事件类型 → 基础冷却期（天）。重大政策类最长。 */
 export const BASE_COOLDOWN_DAYS: Record<EventKind, number> = {
   policy: 6,

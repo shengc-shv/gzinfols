@@ -9,16 +9,20 @@
  *  1. 判定顺序 = hero → must_read → insights → risk（板块优先级）。
  *     边判边写记忆（rememberBroadcast），因此**同一板块内同事件只留第一条**
  *     ——LLM 常把同一事件拆成两条必读，靠这个天然收敛。
- *  2. 同日跨板块不互斥：定调一句话 + 必读展开是合理呈现，只要求基本增量。
- *  3. 兜底三级（永不产出空板块，守住「定调/必读永不空」红线）：
- *     L1 释放被过滤项（progress > refresh > cooldown > duplicate，同级按增量降序）
- *     L2 从两天池补位「记忆库中不存在」的高分条目
- *     L3 仍不足 → 保留 LLM 原产出（宁可重复，不留空）
+ *  2. 同日跨板块不互斥（定调一句话 + 必读展开是合理呈现，只要求基本增量），
+ *     但**补位时要避让**：定调被去重后从池内补位，须跳过当天其他板块已用的事件
+ *     （2026-09-24 用户要求，见 `collectUsedEvents`）。
+ *  3. 兜底（永不产出空板块，守住「定调/必读永不空」红线）：
+ *     ① 必读 / 商机：上游多给候选（`*_CANDIDATE_POOL`），顺序判重 + 顺延补足；
+ *     ② 定调被去重：从两天池补位「记忆库不存在、且当天未被其他板块使用」的高分条目；
+ *     ③ 仍无 → 保留 LLM 原产出（宁可重复，不留空）
  */
 
 import type { ExecutiveSummary, ExecInsight, ExecRisk } from "../enrich/executive-summary";
 import { synthMustReadWhy } from "../enrich/executive-summary";
 import { scoreBranchRelevance, type BranchRelevance } from "../select/filters/relevance-score";
+import { titleSimilarityDice } from "../select/filters/dedup-similar";
+import { canonicalizeUrl } from "../../utils/url";
 import { formatBroadcastAt } from "./broadcast-time";
 import {
   beginDay,
@@ -29,6 +33,7 @@ import {
   SECTION_POLICY,
   MUST_READ_PLAY_TARGET,
   INSIGHT_PLAY_TARGET,
+  USED_EVENT_TITLE_DICE,
   type EventMemoryStore,
   type EventRecord,
   type MemoryCandidate,
@@ -46,6 +51,56 @@ export interface GuardPoolItem {
   url?: string;
   locale?: string;
   category?: string;
+}
+
+/**
+ * 当天「已用事件」判定器（2026-09-24 用户要求：补位时排除当天已用事件）。
+ *
+ * **要解决的病**：定调被去重后由池内补位，而补位只按「分行关联度」挑，
+ * **不检查这条是否已在当天其他板块讲过** —— 实证 09-24：定调补位选中
+ * 「中小银行压降网贷规模 助贷行业适配新规重塑合作模式」，而同一事件当天
+ * 已在**风险预警 + 商机洞察**里各出现一次（同一件事在一期报告里讲了 3 遍）。
+ *
+ * 为什么能在 hero 段就拿到「当天已用」：`applyMemoryGuard` 的处理顺序是
+ * hero → must_read → insights → risk，而 must_read/insights/risk 的 LLM 产出
+ * 在进入本函数时**已经全在 `exec` 里**（本模块只做去重与兜底，不生成内容）。
+ * 所以 hero 补位时可以直接把这三个板块当作「即将播出」来避让。
+ *
+ * 判定双路（顺序有讲究）：
+ *  ① **URL 规范化后相等** → 同一条内容（最可靠，覆盖「同一媒体同一条」）；
+ *  ② **标题 bigram Dice ≥ `USED_EVENT_TITLE_DICE`** → 同一事件的多家报道
+ *     （不同 URL，如新浪与财新同发一条政策）。
+ *
+ * ⚠️ 这里**只做「避让」**（影响补位选谁），**不参与 `evaluateCandidate` 判重** ——
+ * 判重窗与冷却期是 2026-09-18 用户锁定的口径，一行未动。
+ */
+export interface UsedEvents {
+  /** 已用条目的规范化 URL。 */
+  urls: Set<string>;
+  /** 已用条目的标题（原文，比对时各自归一化为 bigram）。 */
+  titles: string[];
+}
+
+/** 收集「当天报告里将出现的事件」（**不含 hero 自身**：它就是被去重的那条）。 */
+export function collectUsedEvents(exec: ExecutiveSummary): UsedEvents {
+  const urls = new Set<string>();
+  const titles: string[] = [];
+  const add = (title?: string, ...urlsIn: Array<string | undefined>): void => {
+    if (title && title.trim()) titles.push(title.trim());
+    for (const u of urlsIn) if (u) urls.add(canonicalizeUrl(u));
+  };
+  for (const m of exec.must_read ?? []) add(m.title, m.url);
+  for (const it of exec.insights ?? []) add(it.topic, ...(it.sources ?? []).map((s) => s.url));
+  if (exec.risk) {
+    add(exec.risk.topic, exec.risk.url, ...(exec.risk.sources ?? []).map((s) => s.url));
+  }
+  return { urls, titles };
+}
+
+/** 该池条目是否与「当天已用事件」指向同一件事。 */
+export function isUsedEvent(used: UsedEvents, title: string, url?: string): boolean {
+  if (url && used.urls.has(canonicalizeUrl(url))) return true;
+  return used.titles.some((t) => titleSimilarityDice(t, title) >= USED_EVENT_TITLE_DICE);
 }
 
 export interface GuardInput {
@@ -72,7 +127,12 @@ export interface GuardOutput {
   log: string[];
 }
 
-/** 从补位池里挑出「记忆库中不存在」的条目（L2）。 */
+/**
+ * 从补位池里挑出「记忆库中不存在」的条目（L2）。
+ *
+ * `used` 给了就额外跳过「当天已在其他板块讲过」的候选（见 `UsedEvents`）；
+ * 不传 = 沿用旧行为（只按记忆库判重）。
+ */
 function pickFreshFromPool(
   pool: GuardPoolItem[],
   store: EventMemoryStore,
@@ -81,10 +141,12 @@ function pickFreshFromPool(
   excludeUrls: Set<string>,
   limit: number,
   out: { picked: MemoryCandidate[]; store: EventMemoryStore; broadcastAt: string },
+  used?: UsedEvents,
 ): number {
   if (limit <= 0) return 0;
   const scored = pool
     .filter((p) => p.title && (!p.url || !excludeUrls.has(p.url)))
+    .filter((p) => !(used && isUsedEvent(used, p.title, p.url)))
     .map((p) => {
       const rel = scoreBranchRelevance({
         title: p.title,
@@ -238,14 +300,31 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
       log.push(`🧠 定调：${d.verdict}（增量 ${d.novelty.toFixed(2)}）— ${d.reason}`);
     } else {
       // 定调被去重 → 必须补一条新的（红线：定调永不空）
+      // 2026-09-24（用户要求）：补位须避开「当天其他板块已在讲的事件」——
+      //   must_read / insights / risk 的 LLM 产出此刻已全在 exec 里，可直接作避让清单。
+      //   实证 09-24：定调补位选中「中小银行压降网贷规模」，而同一事件当天又在
+      //   风险预警 + 商机里各讲一次（一件事在一期报告里讲了 3 遍）。
       const box = { picked: [] as MemoryCandidate[], store, broadcastAt };
-      const n = pickFreshFromPool(pool, store, "hero", today, new Set(), 1, box);
+      const used = collectUsedEvents(exec);
+      let n = pickFreshFromPool(pool, store, "hero", today, new Set(), 1, box, used);
+      let relaxed = false;
+      if (n === 0) {
+        // 池内已无「当天未被其他板块使用」的候选 → 放宽排除再试一次。
+        // 红线不变：定调永不空 —— 宁可与别处重复，也不留空。
+        n = pickFreshFromPool(pool, box.store, "hero", today, new Set(), 1, box);
+        relaxed = n > 0;
+      }
       store = box.store;
       if (n > 0) {
         next.hero_line = `今日分行焦点：${box.picked[0].title.slice(0, 26)}`;
         // 口播稿沿用会与旧稿雷同 → 清空，由 audio.ts 按 hero_line 重新确定性生成
         next.spoken_hero = undefined;
-        log.push(`🧠 定调命中去重（${d.verdict}），改用池内新事件补位：${next.hero_line}`);
+        log.push(
+          `🧠 定调命中去重（${d.verdict}），改用池内新事件补位：${next.hero_line}` +
+            (relaxed
+              ? "（⚠️ 池内已无「当天未被其他板块使用」的候选，已放宽排除条件 → 可能与当日板块重复）"
+              : ""),
+        );
       } else {
         log.push(
           `🧠 定调命中去重（${d.verdict}），但池内无新事件可补 → 保留原定调（宁可重复，不留空）`,
