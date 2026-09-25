@@ -86,6 +86,38 @@ test("risk 存在 → 派生 1 句风险口播", () => {
   assert.match(out.spoken_risk ?? "", /今天有 1 个需要警惕：理财违规/);
 });
 
+// ---------- 今日定调（2026-09-26：补位后不得丢定调口播） ----------
+// 背景：定调被判重 → exec-guard 从池内补位并把 spoken_hero 清空（避免沿用旧稿），
+// 而 voice/index.ts 只读 spoken_hero（明写不读 hero_line）→ 若无兜底，「今日定调」
+// 口播段整段消失。实证：补位期次 09-24 / 09-26 皆缺，非补位期次（09-25 等）正常。
+
+test("定调补位：spoken_hero 被清空 → 由 hero_line 兜底派生（不再整段消失）", () => {
+  const exec = base({
+    hero_line: "今日分行焦点：被立案两券商重罚落地！暂停新开户3个月多名高管遭罚",
+    spoken_hero: undefined,
+  });
+  const out = syncNarration(exec);
+  assert.ok(out.spoken_hero, "补位后必须仍有定调口播");
+  assert.ok(!out.spoken_hero!.includes("今日分行焦点"), "口播里不重复念卡面的补位前缀");
+  assert.match(out.spoken_hero!, /。$/, "句号收尾");
+});
+
+test("定调：LLM 产出优先（不被卡面 1:1 覆盖，保住建议动作句）", () => {
+  const llm = "美联储10月加息概率已逼近七成。建议分行尽快梳理美元产品货架，同步提示锁汇窗口。";
+  const exec = base({ hero_line: "美联储10月加息概率逼近七成，破4%", spoken_hero: llm });
+  assert.equal(syncNarration(exec).spoken_hero, llm, "LLM 版比卡面更完整，应原样保留");
+});
+
+test("定调：标题自带感叹号 → 收尾只有一个句号（不出现「！。」）", () => {
+  const out = syncNarration(base({ hero_line: "今日分行焦点：券商重罚落地！", spoken_hero: undefined }));
+  assert.equal(out.spoken_hero, "券商重罚落地。");
+});
+
+test("定调：卡面与口播皆无 → 不产出孤立句号（保持 undefined）", () => {
+  const exec = base({ hero_line: "", spoken_hero: undefined });
+  assert.equal(syncNarration(exec).spoken_hero, undefined);
+});
+
 test("衔接词轮换缓解逐条拼接生硬感", () => {
   const exec = base({
     insights: Array.from({ length: 4 }, (_, i) => ({ topic: `t${i}`, impact: `i${i}`, action: `a${i}` })),

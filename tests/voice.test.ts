@@ -12,6 +12,7 @@ import {
   SCRIPT_MAX_CHARS,
 } from "../lib/services/voice";
 import { writeMp3Both } from "../lib/adapters/tts";
+import { syncNarration } from "../lib/pipeline/side-outputs/side-exec-summary";
 import type { DailyReport } from "../lib/contracts/report";
 import type { ExecutiveSummary } from "../lib/services/enrich/executive-summary";
 
@@ -134,4 +135,16 @@ test("TTS 归档：返回的路径必须是持久路径且文件存在（回归 
   } finally {
     fsSync.rmSync(base, { recursive: true, force: true });
   }
+});
+
+test("定调补位：口播仍含「先看今日定调」（2026-09-26 实证缺陷回归）", async () => {
+  // 复现 exec-guard 补位后的 exec：卡面换成补位标题、spoken_hero 被清空
+  const patched = syncNarration(
+    exec({ hero_line: "今日分行焦点：券商重罚落地暂停新开户3个月", spoken_hero: undefined }),
+  );
+  assert.ok(patched.spoken_hero, "syncNarration 应兜底派生定调口播");
+  const b = await assembleBriefingScript(report(), { exec: patched });
+  assert.ok(b);
+  assert.ok(b!.script.includes("先看今日定调。"), "补位后不得丢定调口播");
+  assert.ok(!b!.script.includes("今日分行焦点"), "口播不重复念卡面的补位前缀");
 });

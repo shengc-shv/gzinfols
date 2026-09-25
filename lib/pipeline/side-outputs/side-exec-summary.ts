@@ -34,6 +34,7 @@ import { loadEventMemory, saveEventMemory } from "../../adapters/persistence";
 import {
   INSIGHT_CONNECTORS,
   MR_CONNECTORS,
+  heroSpeechLine,
   insightSpeechLine,
   mustReadSpeechLine,
   riskSpeechLine,
@@ -51,6 +52,13 @@ import {
  */
 export function syncNarration(exec: ExecutiveSummary): ExecutiveSummary {
   const out: ExecutiveSummary = { ...exec };
+
+  // hero（2026-09-26）：**LLM 产出优先** —— 它比卡面 hero_line 多出建议动作句（09-25 实证），
+  // 故此处不像 insights/must_read/risk 那样 1:1 覆盖卡面。
+  // 仅在 spoken_hero 缺失时兜底派生 —— 定调被「池内补位」后 exec-guard 会清空 spoken_hero，
+  // 若无兜底，「今日定调」口播段会整段消失（实证：09-24 / 09-26 两期皆缺）。
+  const heroFallback = heroSpeechLine(exec.hero_line);
+  out.spoken_hero = exec.spoken_hero?.trim() ? exec.spoken_hero : heroFallback || undefined;
 
   const ins = exec.insights ?? [];
   out.spoken_insights = ins.length

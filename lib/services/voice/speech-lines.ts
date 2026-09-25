@@ -65,3 +65,31 @@ export function insightSpeechLine(
 export function riskSpeechLine(r: { topic?: string; impact?: string; action?: string }): string {
   return `今天有 1 个需要警惕：${r.topic ?? ""}，${endSentence(r.impact)}${endSentence(r.action)}`;
 }
+
+/** 定调被「池内补位」时 exec-guard 给卡面加的前缀（派生口播时要去掉，否则念两遍）。 */
+const HERO_FALLBACK_PREFIX = "今日分行焦点：";
+
+/**
+ * 今日定调口播句（**兜底派生**用）。
+ *
+ * 正常路径的 `spoken_hero` 由 LLM 产出，且比卡面 `hero_line` 更完整 —— 09-25 实证：
+ * 卡面「美联储10月加息概率逼近七成…」，口播多出一句建议动作（梳理美元货架、提示锁汇窗口）。
+ * 所以**不能**像 insights/must_read/risk 那样 1:1 覆盖卡面，必须 LLM 优先。
+ *
+ * 但定调被判重、走「池内补位」时，`exec-guard` 会把 `spoken_hero` 清空（避免沿用被去重
+ * 定调的旧稿），而**没有任何环节重新生成** → `voice/index.ts` 只读 `spoken_hero`
+ * （注释明写「不读 report.hero_line」）→ **「今日定调」口播段整段消失**。
+ * 2026-09-26 实证：补位期次（09-24 / 09-26）100% 丢定调口播，非补位期次（09-25 等）正常。
+ *
+ * 故补这个兜底：卡面有 `hero_line` 而 `spoken_hero` 为空 → 由 `hero_line` 派生一句。
+ * @returns 空串表示「无可派生」（调用方据此置 undefined，口播段照常不产出）
+ */
+export function heroSpeechLine(heroLine?: string): string {
+  const raw = (heroLine ?? "").trim();
+  if (!raw) return "";
+  const body = raw.startsWith(HERO_FALLBACK_PREFIX)
+    ? raw.slice(HERO_FALLBACK_PREFIX.length).trim()
+    : raw;
+  // 补位标题常带「！」「？」收尾 → 先剥宽句末标点，再由 endSentence 补且只补一个「。」
+  return endSentence(body.replace(/[。．.!！?？；;]+$/, ""));
+}

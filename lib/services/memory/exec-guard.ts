@@ -317,7 +317,10 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
       store = box.store;
       if (n > 0) {
         next.hero_line = `今日分行焦点：${box.picked[0].title.slice(0, 26)}`;
-        // 口播稿沿用会与旧稿雷同 → 清空，由 audio.ts 按 hero_line 重新确定性生成
+        // 口播稿沿用会与旧稿雷同 → 清空；由 syncNarration 用补位后的 hero_line 兜底派生。
+        // ⚠️ 2026-09-26 修复：此处原注释写「由 audio.ts 按 hero_line 重新确定性生成」，
+        //   但那个环节**并不存在**（voice/index.ts 只读 spoken_hero、明写不读 hero_line）
+        //   → 补位期次的「今日定调」口播段整段消失（实证 09-24 / 09-26 皆缺，非补位期次正常）。
         next.spoken_hero = undefined;
         log.push(
           `🧠 定调命中去重（${d.verdict}），改用池内新事件补位：${next.hero_line}` +
