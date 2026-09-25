@@ -1,0 +1,883 @@
+{
+  "date": "2026-09-26",
+  "updatedAt": "2026-09-25T23:10:09.331Z",
+  "executive": {
+    "hero_line": "今日分行焦点：被立案两券商重罚落地！暂停新开户3个月多名高管遭罚",
+    "must_read": [
+      {
+        "title": "金价大变局后市分歧加大",
+        "why": "加息与黄金传统关系被重新讨论，贵金属持仓客户波动风险上升，需提示仓位管理。",
+        "url": "https://www.stcn.com/article/detail/4199268.html"
+      },
+      {
+        "title": "央行三季度例会首现新提法",
+        "why": "货币政策最新部署释放结构性信号，信贷投向与负债成本走向将直接影响分行零售资产端与存款定价安排。",
+        "url": "https://finance.eastmoney.com/a/202609253884248169.html"
+      },
+      {
+        "title": "债券通债券入闸香港衍生品",
+        "why": "人民币债券抵押品跨境应用关键一跃，跨境机构与债券持仓客户的抵押品管理路径拓宽。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20260925/4475147_1.html"
+      },
+      {
+        "title": "央行最新部署货币政策",
+        "why": "政策基调延续，后续操作节奏影响零售信贷投放与存款成本，需纳入四季度经营规划考量。",
+        "url": "https://finance.cctv.com/2026/09/25/ARTIqt9SyUExlENIsFE8L3ZG260925.shtml"
+      },
+      {
+        "title": "香港证监会明确三大行动目标",
+        "why": "跨境监管协同方向更清晰，涉及香港业务的客户合规要求变化需提前排查与提示。",
+        "url": "https://www.stcn.com/article/detail/4199211.html"
+      }
+    ],
+    "spoken_must_read": "金价大变局后市分歧加大。加息与黄金传统关系被重新讨论，贵金属持仓客户波动风险上升，需提示仓位管理。其次，央行三季度例会首现新提法。货币政策最新部署释放结构性信号，信贷投向与负债成本走向将直接影响分行零售资产端与存款定价安排。此外，债券通债券入闸香港衍生品。人民币债券抵押品跨境应用关键一跃，跨境机构与债券持仓客户的抵押品管理路径拓宽。还有，央行最新部署货币政策。政策基调延续，后续操作节奏影响零售信贷投放与存款成本，需纳入四季度经营规划考量。另外，香港证监会明确三大行动目标。跨境监管协同方向更清晰，涉及香港业务的客户合规要求变化需提前排查与提示。",
+    "insights": [
+      {
+        "topic": "美元资产客户再配置",
+        "impact": "美30年期国债收益率破5.5%，持有美元存款与美元理财的客户面临汇率与利率双重波动，再配置需求上升。",
+        "action": "提示客户关注长端美债利率走高下的汇率风险，今日起梳理美元资产持仓客户，提供再配置建议。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "美国30年期国债收益率突破5.5%",
+            "url": "https://finance.eastmoney.com/a/202609253884332883.html"
+          }
+        ]
+      },
+      {
+        "topic": "私行客户债券抵押安排",
+        "impact": "港交所11月起接受中国国债作非现金抵押品，持有人民币债券的私行与跨境客户资金使用效率提升，是差异化服务切入点。",
+        "action": "本周向持有人民币债券的私行客户提示抵押品安排变化，协助对接跨境抵押与流动性管理方案。",
+        "tag": [
+          "私行",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "港交所旗下衍生产品结算所11月起接受中国国债、政策性金融债及财政部债券作为非现金抵押品",
+            "url": "https://www.stcn.com/article/detail/4199344.html"
+          }
+        ]
+      },
+      {
+        "topic": "贵金属持仓客户仓位管理",
+        "impact": "金价与加息关系被重新讨论，后市分歧加大，贵金属持仓客户波动风险上升，财富条线需主动介入。",
+        "action": "今日起对贵金属持仓较重的客户提示波动加大，建议分批调整仓位，避免单一资产过度集中。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "金价，大变局！加息=黄金熊市？后市如何走？",
+            "url": "https://www.stcn.com/article/detail/4199268.html"
+          }
+        ]
+      },
+      {
+        "topic": "按揭项目准入策略调整",
+        "impact": "北京率先落地现房销售细则，若广州跟进，按揭项目准入与楼盘合作策略需相应调整，住房金融条线需提前研判。",
+        "action": "住房金融条线可关注广州现房销售跟进动向，提前梳理合作楼盘清单，评估准入标准变化影响。",
+        "tag": [
+          "住房金融"
+        ],
+        "sources": [
+          {
+            "title": "北京率先落地现房销售等细则 其他城市什么时候跟进？",
+            "url": "https://finance.cctv.com/2026/09/25/ARTI2xHt9uN65QuYxUXJCTIz260925.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "银行AI对客流程自动化",
+        "impact": "银行AI竞争从对话转向任务执行，对客流程自动化与运营提效成为比拼焦点，信息技术部可评估落地场景。",
+        "action": "信息技术部可考虑本周梳理对客高频流程，选取开户、资料审核等场景试点AI任务执行，提升效率。",
+        "tag": [
+          "科技金融"
+        ],
+        "sources": [
+          {
+            "title": "从“对话”到“办事”：银行业AI竞争重心在哪里",
+            "url": "https://www.cnfin.com/yw-lb/detail/20260925/4475085_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "跨境客户合规要求排查",
+        "impact": "香港证监会明确三大行动目标，跨境监管协同趋严，涉及香港业务的客户合规要求可能变化，需提前排查。",
+        "action": "风控与私行条线可本周排查涉港业务客户，梳理合规要点变化，提前做好客户沟通与资料更新。",
+        "tag": [
+          "监管",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "香港证监会最新工作计划曝光 明确三大行动目标",
+            "url": "https://www.stcn.com/article/detail/4199211.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "具备零售 A U M商机的，美元资产客户再配置，美30年期国债收益率破5.5%，持有美元存款与美元理财的客户面临汇率与利率双重波动，再配置需求上升。提示客户关注长端美债利率走高下的汇率风险，今日起梳理美元资产持仓客户，提供再配置建议。此外，具备高端客户商机的，私行客户债券抵押安排，港交所11月起接受中国国债作非现金抵押品，持有人民币债券的私行与跨境客户资金使用效率提升，是差异化服务切入点。本周向持有人民币债券的私行客户提示抵押品安排变化，协助对接跨境抵押与流动性管理方案。同时，具备零售 A U M商机的，贵金属持仓客户仓位管理，金价与加息关系被重新讨论，后市分歧加大，贵金属持仓客户波动风险上升，财富条线需主动介入。今日起对贵金属持仓较重的客户提示波动加大，建议分批调整仓位，避免单一资产过度集中。另一条值得关注，按揭项目准入策略调整，北京率先落地现房销售细则，若广州跟进，按揭项目准入与楼盘合作策略需相应调整，住房金融条线需提前研判。住房金融条线可关注广州现房销售跟进动向，提前梳理合作楼盘清单，评估准入标准变化影响。另外，银行AI对客流程自动化，银行AI竞争从对话转向任务执行，对客流程自动化与运营提效成为比拼焦点，信息技术部可评估落地场景。信息技术部可考虑本周梳理对客高频流程，选取开户、资料审核等场景试点AI任务执行，提升效率。最后，具备高端客户商机的，跨境客户合规要求排查，香港证监会明确三大行动目标，跨境监管协同趋严，涉及香港业务的客户合规要求可能变化，需提前排查。风控与私行条线可本周排查涉港业务客户，梳理合规要点变化，提前做好客户沟通与资料更新。",
+    "risk": {
+      "topic": "跨境监管协同趋严",
+      "evidence": "香港证监会最新工作计划曝光，明确三大行动目标，跨境监管协同方向更清晰。",
+      "impact": "私行与财富条线涉港业务客户合规要求可能变化，风控部需关注客户资料与业务准入的合规衔接，公司部涉港联动业务亦需同步排查。",
+      "action": "风控部可本周牵头排查涉港业务客户清单，梳理合规要点变化，私行与财富条线配合做好客户沟通与资料更新。",
+      "source": "T1.5",
+      "sources": [
+        {
+          "title": "香港证监会最新工作计划曝光 明确三大行动目标",
+          "url": "https://www.stcn.com/article/detail/4199211.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：跨境监管协同趋严，私行与财富条线涉港业务客户合规要求可能变化，风控部需关注客户资料与业务准入的合规衔接，公司部涉港联动业务亦需同步排查。风控部可本周牵头排查涉港业务客户清单，梳理合规要点变化，私行与财富条线配合做好客户沟通与资料更新。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "道指涨0.93%，标普涨0.51%，伯克希尔建仓地产股带动道指走强。",
+      "sectors": [
+        "伯克希尔建仓Lennar近10%股份，该股大涨，地产建筑板块受提振。",
+        "Meta新AI产品引发行业颠覆担忧，券商股被交易员视为下一个受冲击对象。",
+        "上诉法院裁定各州可监管Kalshi体育预测市场，平台再遭法律打击。",
+        "期权市场显示交易员押注部分个股即将创出新高，看涨情绪仍在。"
+      ],
+      "spoken": "美股三大指数收涨，道指涨0.93%，标普500涨0.51%，纳指涨0.48%。伯克希尔建仓Lennar近一成股份，该股大涨，带动地产建筑板块走强。Meta新AI产品引发行业颠覆担忧，券商股被交易员视为下一个受冲击对象。上诉法院裁定各州可监管Kalshi体育预测市场，平台再遭法律打击。期权市场显示交易员押注部分个股将创新高。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-26"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51828.62",
+          "changePct": "+0.93%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27068.72",
+          "changePct": "+0.48%"
+        },
+        {
+          "name": "标普500",
+          "value": "7743.41",
+          "changePct": "+0.51%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "沪指跌1.22%，创业板指跌2.68%，双节前资金避险情绪升温。",
+      "sectors": [
+        "央行三季度例会释放政策信号，提法首次出现，稳增长预期受关注。",
+        "万亿巨头突发公告加码AI与半导体，科技主线再获产业资本背书。",
+        "隆基绿能晶硅电池效率再破世界纪录，光伏技术突破提振板块关注。",
+        "两家券商被立案后重罚落地，暂停新开户3个月，多名高管遭罚。",
+        "股票私募仓位两连升，满仓占比近七成，机构持仓意愿偏强。"
+      ],
+      "spoken": "A股今日集体收跌，上证指数跌1.22%，深证成指跌2.34%，创业板指跌2.68%，双节前资金偏谨慎。板块方面，央行三季度例会释放政策信号，万亿巨头公告加码AI和半导体，隆基绿能电池效率再破世界纪录，光伏受关注。两家券商重罚落地，暂停新开户三个月。私募仓位两连升，满仓占比近七成。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-26"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3888.37",
+          "changePct": "-1.22%"
+        },
+        {
+          "name": "深证成指",
+          "value": "13316.97",
+          "changePct": "-2.34%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3288.95",
+          "changePct": "-2.68%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24510.09点（-1.01%）；恒生科技收报4311.78点（-1.13%）。",
+      "sectors": [
+        "科网股普跌",
+        "石油股走弱"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-25"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.01% 科指跌1.13% 科网股普跌 石油股走弱",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-25/doc-iniszrtx7720176.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24510.09",
+          "changePct": "-1.01%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4311.78",
+          "changePct": "-1.13%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-09-25",
+    "marketStatus": {
+      "reportDate": "2026-09-26",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-09-24",
+          "reason": "数据为 9月24日（距今 2 天）"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-09-25"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-09-25"
+        }
+      },
+      "allStale": false,
+      "note": "A股今日无隔夜行情，其余市场为最新收盘",
+      "spokenNote": "A股今日无隔夜行情；港股为 9月25日 周五 收盘；美股为 9月25日 周五 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884221681.html",
+      "title_cn": "直线飙升超20%！美股巨头，突然宣布AI大单",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "某美股巨头突然宣布AI大单，相关股价直线飙升超20%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股",
+        "订单"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884219084.html",
+      "title_cn": "新突破！隆基绿能晶硅电池效率再破世界纪录逼近极限",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "隆基绿能晶硅电池效率再破世界纪录，逼近理论极限。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "光伏",
+        "新能源",
+        "技术突破"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884224596.html",
+      "title_cn": "习近平在美国总统特朗普举行的欢迎宴会上的祝酒辞（全文）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "习近平在美国总统特朗普举行的欢迎宴会上发表祝酒辞，全文发布。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美关系",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884222678.html",
+      "title_cn": "被立案两券商重罚落地！暂停新开户3个月多名高管遭罚",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "两家被立案券商重罚落地，被暂停新开户3个月，多名高管遭处罚。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "券商",
+        "监管",
+        "处罚"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884282196.html",
+      "title_cn": "9月25日港股收盘：恒指跌1.01%潍柴动力领跌成分股",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "9月25日港股收盘，恒指跌1.01%，潍柴动力领跌成分股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "收盘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884090098.html",
+      "title_cn": "股票私募仓位两连升满仓占比近七成",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "股票私募仓位连续两连升，满仓占比接近七成。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "私募",
+        "仓位",
+        "资金"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884249577.html",
+      "title_cn": "突发公告！A股万亿巨头大动作！加码AI、半导体",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "A股万亿市值巨头突发公告，宣布加码AI、半导体领域的大动作。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "半导体",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884219657.html",
+      "title_cn": "*ST亿通撤销退市风险警示下周一停牌！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "*ST亿通公告撤销退市风险警示，下周一停牌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "ST股",
+        "退市",
+        "停牌"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884249645.html",
+      "title_cn": "“双节”后行情怎么看？反弹仍待四大变量验证",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "市场关注双节后行情走势，分析认为反弹仍待四大变量验证。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "行情",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884248169.html",
+      "title_cn": "央行三季度例会内容发布这个提法首次出现",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "央行发布三季度例会内容，其中一提法为首次出现。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "央行",
+        "货币政策",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884263578.html",
+      "title_cn": "光大证券：从防御到进攻加息落地后的港美股成长与兑现主线",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "光大证券发布研报，分析加息落地后港美股从防御到进攻的成长与兑现主线。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "券商研报",
+        "港股",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884257226.html",
+      "title_cn": "中信建投证券黄文涛：人民币资产重估与投资中国是确定的",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "中信建投证券黄文涛表示，人民币资产重估与投资中国是确定的。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "券商研报",
+        "人民币资产",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-25/doc-iniszrtx7720176.shtml",
+      "title_cn": "港股收评：恒指跌1.01% 科指跌1.13% 科网股普跌 石油股走弱",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "港股收评：恒指跌1.01%，科指跌1.13%，科网股普跌，石油股走弱。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "科网股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-25/doc-iniszmnc4595021.shtml",
+      "title_cn": "超购3551倍！欢创科技认购涉资2500亿港元，16万人抢筹“扫地机器人激光雷达一哥”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "欢创科技港股IPO超购3551倍，认购涉资2500亿港元，16万人抢筹，被称为扫地机器人激光雷达一哥。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "打新"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-25/doc-iniszmnc4550254.shtml",
+      "title_cn": "港股主要指数探底回升，恒指、科指跌幅均收窄至1.5%以内",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "港股主要指数探底回升，恒指、科指跌幅均收窄至1.5%以内。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "行情"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-25/doc-iniszfec7822839.shtml",
+      "title_cn": "港股午评：恒指跌1.69% 科指跌2.14% 科网股普跌 内房股下挫",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "港股午评：恒指跌1.69%，科指跌2.14%，科网股普跌，内房股下挫。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "内房股",
+        "科网股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/bxjj/2026-09-25/doc-inisyywk9781204.shtml",
+      "title_cn": "香港证监会：GEM与主板整合的计划，仍在考虑之中",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "香港证监会表示，GEM与主板整合的计划仍在考虑之中。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "监管",
+        "港交所"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-25/doc-iniszmmz7769432.shtml",
+      "title_cn": "阿维塔香港上市今年内还有希望吗？长安汽车回应",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "针对阿维塔香港上市今年内是否还有希望，长安汽车作出回应。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-25/doc-inisyywi4633867.shtml",
+      "title_cn": "视频|香港证监会抛出一揽子新政：南向通人民币柜台要来！",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "香港证监会抛出一揽子新政，包括推出南向通人民币柜台。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "监管",
+        "人民币柜台"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-09-25/doc-inisyywi4606664.shtml",
+      "title_cn": "中资券商华泰国际赞助！中秋节当日香港叮叮车及轻轨铁路免费，不限次数",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "中资券商华泰国际赞助，中秋节当日香港叮叮车及轻轨铁路免费乘坐，不限次数。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商",
+        "赞助"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-25/doc-iniszrtx7763673.shtml",
+      "title_cn": "瑞银：诺诚健华(09969)与礼来(LLY.US)就创新靶点项目达成合作 看法正面",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "瑞银研报称，诺诚健华与礼来就创新靶点项目达成合作，看法正面。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "港股",
+        "券商研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-25/doc-iniszrtx7757131.shtml",
+      "title_cn": "花旗：中国电池材料正“去宁德时代化” 惟认为宁德时代(03750)被过度沽空",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "花旗研报指出，中国电池材料正去宁德时代化，但认为宁德时代被过度沽空。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "电池",
+        "宁德时代",
+        "券商研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-25/doc-iniszrtz4529639.shtml",
+      "title_cn": "惠誉评级：跨境资金流将惠及香港证券公司 进一步支撑其盈利能力提升",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "惠誉评级表示，跨境资金流将惠及香港证券公司，进一步支撑其盈利能力提升。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商",
+        "评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-25/doc-iniszrua9530830.shtml",
+      "title_cn": "高盛：药明合联(02268)商业化生产验证成为长期能见度关键催化剂",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "高盛研报称，药明合联商业化生产验证成为其长期能见度的关键催化剂。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "港股",
+        "券商研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/25/appeals-court-rules-states-can-regulate-sports-prediction-markets.html",
+      "title_cn": "Appeals court rules that states can regulate Kalshi’s sports prediction markets, dealing another legal blow to platforms",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "美国上诉法院裁定各州可监管Kalshi的体育预测市场，对相关平台构成又一法律打击。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "监管",
+        "预测市场"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/23/metas-muse-ai-causes-schwab-selloff.html",
+      "title_cn": "Meta's Muse reignites AI disruption fears. Traders are targeting this brokerage stock as next casualty",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "Meta的Muse再度引发AI颠覆担忧，交易员将某券商股视为下一个受害者。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股",
+        "券商"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/22/lennar-shares-pop-as-berkshire-builds-almost-a-10percent-stake-in-beleaguered-homebuilder.html",
+      "title_cn": "Lennar shares pop as Berkshire builds almost a 10% stake in beleaguered homebuilder",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/22",
+      "summary": "伯克希尔建仓陷入困境的房屋建筑商Lennar近10%股份，Lennar股价大涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "伯克希尔",
+        "地产"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/22/no-new-stock-highs-no-problem-options-traders-bet-theyre-coming-in-these-names.html",
+      "title_cn": "No new stock highs, no problem: Options traders bet they're coming in these names",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/22",
+      "summary": "尽管未创新高，期权交易员押注部分个股将迎来新高。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "期权",
+        "交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/rush-of-money-campaign-stops-show-republicans-feel-vulnerable-in-iowa-kansas-4917071",
+      "title_cn": "Rush of money, campaign stops show Republicans feel vulnerable in Iowa, Kansas",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "资金涌入与竞选活动显示，共和党在爱荷华州和堪萨斯州感到选情脆弱。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美国政治",
+        "选举",
+        "宏观"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/cypherpunk-technologies-director-oei-khing-djien-sells-661500-in-stock-93CH-4918282",
+      "title_cn": "Cypherpunk technologies director Oei Khing Djien sells $661,500 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "Cypherpunk Technologies董事Oei Khing Djien卖出价值66.15万美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "减持"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/us-lawmakers-aim-to-keep-chinas-datacenter-tech-out-of-sensitive-government-systems-4918273",
+      "title_cn": "US lawmakers aim to keep China’s datacenter tech out of sensitive government systems",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "美国议员寻求将中国数据中心技术排除在敏感政府系统之外。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "中美关系",
+        "数据中心"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/venezuelas-promised-elections-face-long-delays-sources-say-4918243",
+      "title_cn": "Venezuela’s promised elections face long delays, sources say",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "消息人士称，委内瑞拉承诺的选举面临长期推迟。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "国际政治",
+        "选举",
+        "宏观"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/toro-at-25th-annual-diversified-industrials--services-conference-growth-reset-93CH-4918271",
+      "title_cn": "Toro at 25th Annual Diversified Industrials & Services Conference: growth reset",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "Toro在第25届年度多元化工业与服务会议上谈及增长重置。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "工业",
+        "会议"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/bakkt-coo-nicholas-baes-sells-10951-in-bkkt-stock-93CH-4918267",
+      "title_cn": "Bakkt COO Nicholas Baes sells $10,951 in BKKT stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "Bakkt首席运营官Nicholas Baes卖出价值10,951美元的BKKT股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "减持"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/nutanix-president-and-cco-tarkan-maner-sells-476m-in-stock-93CH-4918266",
+      "title_cn": "Nutanix president and CCO Tarkan Maner sells $4.76m in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "Nutanix总裁兼首席商务官Tarkan Maner卖出价值476万美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "减持"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/rush-street-interactive-director-jack-markell-buys-29025-in-stock-93CH-4918265",
+      "title_cn": "Rush Street Interactive director Jack Markell buys $29,025 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "Rush Street Interactive董事Jack Markell买入价值29,025美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "增持"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
