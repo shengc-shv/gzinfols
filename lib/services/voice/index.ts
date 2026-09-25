@@ -19,6 +19,7 @@ import type { DailyReport, ReportItem, StockRecap } from "../../contracts/report
 import type { TtsBackendName } from "../../contracts/pipeline";
 import type { ExecutiveSummary } from "../enrich/executive-summary";
 import { buildStockSpoken } from "./stock-spoken";
+import { condenseSpeech, formatOverlapLog, type SpeechOverlapStats } from "./condense";
 import { formatCnDate, formatCnDateShort } from "../market/market-status";
 import { ipoShouldSkip } from "../memory/event-memory";
 import { buildGdIpoSpoken, pickGdIpoCompanies, companyNameOf, pickSpokenItems } from "../classify/gd-ipo-spoken";
@@ -58,6 +59,11 @@ export interface AudioBuildResult {
   parts: Record<string, string>;
   durationSec: number;
   segments: AudioSegment[];
+  /**
+   * 跨段收敛统计（A+C，2026-09-25）：定调↔必读 / 必读↔商机 的同源收敛情况。
+   * 供调用方打日志与测试断言（让「口播重复」可观测，不再只靠人耳发现）。
+   */
+  speechOverlap?: SpeechOverlapStats;
 }
 
 /**
@@ -175,7 +181,13 @@ export async function assembleBriefingScript(
     };
   } = {},
 ): Promise<AudioBuildResult | null> {
-  const exec = opts.exec ?? null;
+  // A+C（2026-09-25，用户反馈「听起来重复较多」）：**先跨段收敛，再按章节截断**。
+  // 顺序有实质意义 —— 原实现直接截断，520 字上限会把「唯一不与别段重复的新信息」砍掉，
+  // 而重复内容全部保留（实证 09-25：商机第 6 条「粤芯半导体」被截掉，三件重复的事全留下）。
+  // 收敛只改口播文本，不改 `report`、不写盘（store.json 仍是完整稿，可回溯、幂等）。
+  const condensed = opts.exec ? condenseSpeech(opts.exec) : null;
+  const exec = condensed?.exec ?? null;
+  const overlapStats = condensed?.stats ?? null;
   const parts: string[] = [OPENER];
   const partMap: Record<string, string> = {};
   const segments: AudioSegment[] = [];
@@ -433,11 +445,23 @@ export async function assembleBriefingScript(
   if (script.length > SCRIPT_MAX_CHARS) {
     console.warn(`::warning:: 口播稿 ${script.length} 字，超出 ${SCRIPT_MAX_CHARS} 字上限（约 4 分 10 秒）`);
   }
+  // C 项：跨段收敛可观测（此前「口播重复」完全不可见，只能靠人耳发现）
+  if (overlapStats) {
+    console.log(
+      `🎙️ ${formatOverlapLog(overlapStats)}；成稿 ${script.length} 字（约 ${durationSec}s）`,
+    );
+  }
   if (durationSec < AUDIO_DURATION_MIN_SEC - 10 || durationSec > AUDIO_DURATION_MAX_SEC + 5) {
     console.warn(
       `::warning:: 估算音频时长 ${durationSec}s 超出目标窗口（${AUDIO_DURATION_MIN_SEC}~${AUDIO_DURATION_MAX_SEC}s），请检查口播稿字数`,
     );
   }
 
-  return { script, parts: partMap, durationSec, segments };
+  return {
+    script,
+    parts: partMap,
+    durationSec,
+    segments,
+    ...(overlapStats ? { speechOverlap: overlapStats } : {}),
+  };
 }
