@@ -16,8 +16,9 @@ name: daily
 #     · 推送（notify.yml）仍为**人工触发**：07:30 出刊后可先在页面上核对内容，再点推送。
 #
 # 音频：AUDIO_ENABLED=true → **阿里云百炼 CosyVoice 优先**（DASHSCOPE_API_KEY secret）
-#       → 模型链 cosyvoice-v3.5-plus → cosyvoice-v3.5-flash（额度耗尽就换下一个）
-#       → 两个都失败才用腾讯云 TTS 兜底（TENCENTCLOUD_* secrets）
+#       → 模型链缺省 cosyvoice-v3.5-flash（2026-09-25 用户决定不再采用 v3.5-plus；如需可在
+#         repo variable DASHSCOPE_TTS_MODELS 里自行加回，链会按序降级）
+#       → 全失败才用腾讯云 TTS 兜底（TENCENTCLOUD_* secrets）
 #       → 云端全挂则本轮降级为无播放器（不阻断发布；Piper 兜底为本地能力，CI 不预装）。
 #       audio input=false 或 SKIP_TTS=true 可跳过合成（省 TTS 成本，仍拼口播稿）。
 #       ⚠️ 改音色要**两处同步**：本文件的 DASHSCOPE_TTS_MODELS（CI）+ 根目录 .env（本地）。
@@ -205,7 +206,7 @@ jobs:
           SKIP_TTS: ${{ vars.SKIP_TTS }}
           # 百炼：Key 走 secret；模型链明文（voice ID 不是凭据，可用 repo variable 覆盖）
           DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
-          DASHSCOPE_TTS_MODELS: ${{ vars.DASHSCOPE_TTS_MODELS || 'cosyvoice-v3.5-plus@cosyvoice-v3.5-plus-vd-bailian-34019e71904f4f738cb5c57ad7786dd2,cosyvoice-v3.5-flash@cosyvoice-v3.5-flash-vd-bailian-0e33aa8c9a414c92b80dff0350fc6574' }}
+          DASHSCOPE_TTS_MODELS: ${{ vars.DASHSCOPE_TTS_MODELS || 'cosyvoice-v3.5-flash@cosyvoice-v3.5-flash-vd-bailian-0e33aa8c9a414c92b80dff0350fc6574' }}
           # 腾讯云（兜底）
           TENCENTCLOUD_SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
           TENCENTCLOUD_SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}

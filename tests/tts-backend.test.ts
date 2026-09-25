@@ -198,24 +198,21 @@ test("播放器徽章：三个后端各有独立文案与 class（回归「第�
   );
 });
 
-// ---------- 百炼模型链（2026-09-21 用户定案：v3.5-plus → v3.5-flash → 腾讯兜底） ----------
+// ---------- 百炼模型链（缺省 cosyvoice-v3.5-flash；2026-09-25 用户决定移除 v3.5-plus） ----------
 
-test("模型链解析：缺省即用户口径 v3.5-plus → v3.5-flash", () => {
-  assert.deepEqual(
-    parseModelChain(undefined).map((t) => t.model),
-    ["cosyvoice-v3.5-plus", "cosyvoice-v3.5-flash"],
-  );
+test("模型链解析：缺省只剩 cosyvoice-v3.5-flash（不再采用 v3.5-plus）", () => {
+  assert.deepEqual(parseModelChain(undefined).map((t) => t.model), ["cosyvoice-v3.5-flash"]);
 });
 
-test("模型链解析：支持 `模型@音色ID` 逐模型指定音色（复刻音色绑定目标模型，必须能分开配）", () => {
-  assert.deepEqual(parseModelChain("cosyvoice-v3.5-plus@vA,cosyvoice-v3.5-flash@vB"), [
-    { model: "cosyvoice-v3.5-plus", voice: "vA" },
-    { model: "cosyvoice-v3.5-flash", voice: "vB" },
+test("模型链解析：支持 `模型@音色ID` 逐模型指定音色（复刻/设计音色绑定目标模型，必须能分开配）", () => {
+  assert.deepEqual(parseModelChain("cosyvoice-v3.5-flash@vA,cosyvoice-v3-flash@vB"), [
+    { model: "cosyvoice-v3.5-flash", voice: "vA" },
+    { model: "cosyvoice-v3-flash", voice: "vB" },
   ]);
   // 未写 @音色 → 回落到 DASHSCOPE_TTS_VOICE
-  assert.deepEqual(parseModelChain("cosyvoice-v3.5-plus,cosyvoice-v3.5-flash@vB", "fallbackV"), [
-    { model: "cosyvoice-v3.5-plus", voice: "fallbackV" },
-    { model: "cosyvoice-v3.5-flash", voice: "vB" },
+  assert.deepEqual(parseModelChain("cosyvoice-v3.5-flash,cosyvoice-v3-flash@vB", "fallbackV"), [
+    { model: "cosyvoice-v3.5-flash", voice: "fallbackV" },
+    { model: "cosyvoice-v3-flash", voice: "vB" },
   ]);
   assert.deepEqual(parseModelChain(" , cosyvoice-v3-flash , "), [
     { model: "cosyvoice-v3-flash", voice: "" },
@@ -224,37 +221,37 @@ test("模型链解析：支持 `模型@音色ID` 逐模型指定音色（复刻�
 });
 
 test("音色缺省：v3.5 系列没有系统音色 → 不给缺省；v3 系列给 longanyang", () => {
-  assert.equal(resolveVoice({ model: "cosyvoice-v3.5-plus", voice: "" }), null, "v3.5 无系统音色");
+  assert.equal(resolveVoice({ model: "cosyvoice-v3.5-flash", voice: "" }), null, "v3.5 无系统音色");
   assert.equal(resolveVoice({ model: "cosyvoice-v3-flash", voice: "" }), "longanyang", "v3 有缺省");
-  assert.equal(resolveVoice({ model: "cosyvoice-v3.5-plus", voice: "vA" }), "vA", "显式音色优先");
+  assert.equal(resolveVoice({ model: "cosyvoice-v3.5-flash", voice: "vA" }), "vA", "显式音色优先");
 });
 
 test("兼容性判定：返回原因而**不抛错**（单个模型不可用不该拖垮整条模型链）", () => {
   withEnv({ DASHSCOPE_TTS_VOICE_FORCE: undefined }, () => {
     assert.equal(modelUnavailableReason("cosyvoice-v3-flash", "longanyang"), null, "v3 + 系统音色可用");
-    assert.match(modelUnavailableReason("cosyvoice-v3.5-plus", null) ?? "", /没有系统音色/);
+    assert.match(modelUnavailableReason("cosyvoice-v3.5-flash", null) ?? "", /没有系统音色/);
     assert.match(
-      modelUnavailableReason("cosyvoice-v3.5-plus", "longanyang") ?? "",
+      modelUnavailableReason("cosyvoice-v3.5-flash", "longanyang") ?? "",
       /看起来是系统音色/,
       "v3.5 + 系统音色 → 给出明确原因",
     );
-    assert.equal(modelUnavailableReason("cosyvoice-v3.5-plus", "myvoice-abc"), null, "v3.5 + 复刻音色可用");
+    assert.equal(modelUnavailableReason("cosyvoice-v3.5-flash", "myvoice-abc"), null, "v3.5 + 复刻音色可用");
   });
   withEnv({ DASHSCOPE_TTS_VOICE_FORCE: "true" }, () => {
-    assert.equal(modelUnavailableReason("cosyvoice-v3.5-plus", "longanyang"), null, "强制开关放行");
+    assert.equal(modelUnavailableReason("cosyvoice-v3.5-flash", "longanyang"), null, "强制开关放行");
   });
 });
 
 test("resolveCosyTargets：不可用的模型被跳过并留原因，其余照常可用", () => {
   withEnv({ DASHSCOPE_TTS_VOICE_FORCE: undefined }, () => {
-    const noVoice = resolveCosyTargets("cosyvoice-v3.5-plus,cosyvoice-v3-flash", "");
+    const noVoice = resolveCosyTargets("cosyvoice-v3.5-flash,cosyvoice-v3-flash", "");
     assert.deepEqual(noVoice.usable, [{ model: "cosyvoice-v3-flash", voice: "longanyang" }]);
     assert.equal(noVoice.skipped.length, 1);
-    assert.match(noVoice.skipped[0]!, /cosyvoice-v3\.5-plus/);
+    assert.match(noVoice.skipped[0]!, /cosyvoice-v3\.5-flash/);
 
-    const ok = resolveCosyTargets("cosyvoice-v3.5-plus,cosyvoice-v3.5-flash", "myvoice-abc");
+    const ok = resolveCosyTargets("cosyvoice-v3.5-flash,cosyvoice-v3-flash", "myvoice-abc");
     assert.deepEqual(ok.skipped, []);
-    assert.deepEqual(ok.usable.map((t) => t.model), ["cosyvoice-v3.5-plus", "cosyvoice-v3.5-flash"]);
+    assert.deepEqual(ok.usable.map((t) => t.model), ["cosyvoice-v3.5-flash", "cosyvoice-v3-flash"]);
   });
 });
 
@@ -312,7 +309,7 @@ const COSY_SCRIPT = "具备零售AUM商机的，可提前备好卖点和话术�
 const COSY_ENV: Record<string, string | undefined> = {
   DASHSCOPE_API_KEY: "k",
   DASHSCOPE_TTS_VOICE: "myvoice-abc",
-  DASHSCOPE_TTS_MODELS: "cosyvoice-v3.5-plus,cosyvoice-v3.5-flash",
+  DASHSCOPE_TTS_MODELS: "cosyvoice-v3.5-flash,cosyvoice-v3-flash",
   DASHSCOPE_TTS_VOICE_FORCE: undefined,
 };
 
@@ -321,15 +318,15 @@ function cosyOut(tag: string): string {
   return path.join(fsSync.mkdtempSync(path.join(os.tmpdir(), `cosy-${tag}-`)), "o.mp3");
 }
 
-test("模型链行为：v3.5-plus 失败（400 额度耗尽）→ 自动换 v3.5-flash 并成功", async () => {
-  const mock = await startCosyMock({ status: 400, failModels: ["cosyvoice-v3.5-plus"] });
+test("模型链行为：v3.5-flash 失败（400 额度耗尽）→ 自动换下一个模型并成功", async () => {
+  const mock = await startCosyMock({ status: 400, failModels: ["cosyvoice-v3.5-flash"] });
   try {
     await withEnvAsync({ ...COSY_ENV, DASHSCOPE_TTS_ENDPOINT: `${mock.baseUrl}/t` }, async () => {
       const out = cosyOut("chain");
       await synthCosyvoice(COSY_SCRIPT, out, "2026-09-21");
       assert.deepEqual(
         mock.calls,
-        ["cosyvoice-v3.5-plus", "cosyvoice-v3.5-flash"],
+        ["cosyvoice-v3.5-flash", "cosyvoice-v3-flash"],
         "顺序正确，且 400 不触发同模型重试",
       );
       assert.ok(fsSync.readFileSync(out).equals(mock.mp3), "落盘的是第二个模型的音频");
@@ -345,23 +342,23 @@ test("模型链行为：401 凭据错误 → **不试第二个模型**（同一�
     await withEnvAsync({ ...COSY_ENV, DASHSCOPE_TTS_ENDPOINT: `${mock.baseUrl}/t` }, async () => {
       const out = cosyOut("auth");
       await assert.rejects(() => synthCosyvoice(COSY_SCRIPT, out, "2026-09-21"), /凭据\/权限问题/);
-      assert.deepEqual(mock.calls, ["cosyvoice-v3.5-plus"], "只试了第一个就放弃");
+      assert.deepEqual(mock.calls, ["cosyvoice-v3.5-flash"], "只试了第一个就放弃");
     });
   } finally {
     mock.server.close();
   }
 });
 
-test("模型链行为：两个模型都失败 → 抛错（交由后端链上的腾讯接手）", async () => {
+test("模型链行为：链上模型全部失败 → 抛错（交由后端链上的腾讯接手）", async () => {
   const mock = await startCosyMock({
     status: 400,
-    failModels: ["cosyvoice-v3.5-plus", "cosyvoice-v3.5-flash"],
+    failModels: ["cosyvoice-v3.5-flash", "cosyvoice-v3-flash"],
   });
   try {
     await withEnvAsync({ ...COSY_ENV, DASHSCOPE_TTS_ENDPOINT: `${mock.baseUrl}/t` }, async () => {
       const out = cosyOut("both");
       await assert.rejects(() => synthCosyvoice(COSY_SCRIPT, out, "2026-09-21"), /模型链全部失败/);
-      assert.deepEqual(mock.calls, ["cosyvoice-v3.5-plus", "cosyvoice-v3.5-flash"], "两个都试过");
+      assert.deepEqual(mock.calls, ["cosyvoice-v3.5-flash", "cosyvoice-v3-flash"], "两个都试过");
     });
   } finally {
     mock.server.close();
@@ -370,7 +367,7 @@ test("模型链行为：两个模型都失败 → 抛错（交由后端链上的
 
 test("模型链行为：没有任何可用模型 → 明确报错并给出修法（不静默无声）", async () => {
   await withEnvAsync(
-    { ...COSY_ENV, DASHSCOPE_TTS_VOICE: "", DASHSCOPE_TTS_MODELS: "cosyvoice-v3.5-plus" },
+    { ...COSY_ENV, DASHSCOPE_TTS_VOICE: "", DASHSCOPE_TTS_MODELS: "cosyvoice-v3.5-flash" },
     async () => {
       await assert.rejects(
         () => synthCosyvoice(COSY_SCRIPT, cosyOut("none"), "2026-09-21"),

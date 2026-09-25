@@ -13,10 +13,10 @@
  *        ↓ 就绪
  *   BACKENDS[name].synth()  ← 各自负责分片 + 拼接，runBackend 只管重试与「异常偏小」校验
  *
- * **两级降级**（2026-09-21 用户定案）：
+ * **两级降级**（2026-09-21 定案；**2026-09-25 用户决定去掉 v3.5-plus**）：
  *   ① 后端链（跨服务商）：百炼 → 腾讯 → Piper；
- *   ② 百炼内部的**模型链**（同一服务商内）：`cosyvoice-v3.5-plus` → `cosyvoice-v3.5-flash`
- *      （额度耗尽/失败就换下一个模型；两个都失败才轮到腾讯）。
+ *   ② 百炼内部的**模型链**（同一服务商内）：缺省只有 `cosyvoice-v3.5-flash`
+ *      （链是配置驱动的，可自行再加模型；全失败才轮到腾讯）。
  *
  * **候选链语义是「显式」的**：`TTS_BACKEND=cosyvoice` 表示「只用 cosyvoice」，
  * 失败即失败，**不会静默换成腾讯** —— 否则做 A/B 盲听时拿到的音频可能根本不是目标后端。
@@ -68,13 +68,13 @@
  *                "id":"audio_…","expires_at":1772697707}},"usage":{"characters":15}}
  *  - 格式：`format` 缺省 **mp3**（可选 mp3/pcm/wav/opus）；`sample_rate` 支持
  *    8000/12000/16000/22050(缺省)/24000/44100/48000。
- *  - ⚠️ **`cosyvoice-v3.5-flash` / `cosyvoice-v3.5-plus` 只支持「声音复刻 / 声音设计」音色，
- *    没有系统音色**（官方原话：仅支持声音设计和声音复刻场景(无系统音色)），
+ *  - ⚠️ **`cosyvoice-v3.5-flash` 只支持「声音复刻 / 声音设计」音色，没有系统音色**
+ *    （官方原话：仅支持声音设计和声音复刻场景(无系统音色)），
  *    所以「v3.5 + 系统音色」这种组合必然失败。系统音色要配
  *    `cosyvoice-v3-flash` / `cosyvoice-v3-plus`（如 `longanyang`）
  *    → 前置判定见 `modelUnavailableReason`（不可用的模型会被跳过并告警，不拖垮整条模型链）。
- *  - **模型链**：`DASHSCOPE_TTS_MODELS` 按序尝试，前一个失败就换下一个（用户 2026-09-21 定案：
- *    v3.5-plus → v3.5-flash，两个都失败才轮到腾讯）。错误按 HTTP 状态分级：
+ *  - **模型链**：`DASHSCOPE_TTS_MODELS` 按序尝试，前一个失败就换下一个
+ *    （缺省只有 `cosyvoice-v3.5-flash`；全失败才轮到腾讯）。错误按 HTTP 状态分级：
  *    4xx → 换模型；401/403 → 换模型无意义，直接放弃百炼；网络/5xx/429 → 同模型退避重试。
  *  - 计费：按输入字符数（`usage.characters` 回显），v3.5-flash 0.8 元/万字符、v3-flash 1 元/万字符。
  *  - 合规：文本出本机到阿里云**华北2(北京)**，数据中心在国内；调用方须已确认
@@ -99,7 +99,7 @@
  *   —— 百炼 CosyVoice ——
  *   DASHSCOPE_API_KEY（无则跳过 cosyvoice）
  *   DASHSCOPE_TTS_MODELS（**模型链**，逗号分隔，每项 `模型` 或 `模型@音色ID`；
- *     缺省 cosyvoice-v3.5-plus,cosyvoice-v3.5-flash）
+ *     缺省 cosyvoice-v3.5-flash）
  *   DASHSCOPE_TTS_VOICE（模型链里未写 `@音色` 时的音色；v3.5 系列无系统音色 → 必须显式给）
  *   DASHSCOPE_TTS_ENDPOINT / DASHSCOPE_WORKSPACE_ID（端点覆盖；后者走官方专属域名）
  *   DASHSCOPE_TTS_FORMAT（默认 mp3） DASHSCOPE_TTS_SAMPLE_RATE（默认 24000）
@@ -397,11 +397,12 @@ export async function synthTencent(text: string, outPath: string, date: string):
 /**
  * **缺省模型链**（按序尝试，前面的失败就换下一个）。
  *
- * 2026-09-21 用户定案：**先 `cosyvoice-v3.5-plus`（表现力最好）→ 没额度了就换
- * `cosyvoice-v3.5-flash`（更便宜、额度池独立）→ 两个都失败才轮到腾讯 TTS 兜底**。
+ * 2026-09-21 定案为 `v3.5-plus → v3.5-flash`；**2026-09-25 用户决定不再采用
+ * `cosyvoice-v3.5-plus`**，故缺省链只剩 `cosyvoice-v3.5-flash`（0.8 元/万字符、额度池独立）。
  * ⚠️ 「轮到腾讯」不在这里，而是 `TTS_BACKEND` 链上的下一个后端（缺省 `cosyvoice,tencent,piper`）。
+ * 链本身仍是配置驱动的：`DASHSCOPE_TTS_MODELS` 想再加模型随时可加，本常量只是缺省值。
  */
-const COSY_DEFAULT_MODELS: readonly string[] = ["cosyvoice-v3.5-plus", "cosyvoice-v3.5-flash"];
+const COSY_DEFAULT_MODELS: readonly string[] = ["cosyvoice-v3.5-flash"];
 
 /**
  * CosyVoice **系统音色**的命名特征：一律以 `long` 开头
@@ -411,8 +412,9 @@ const COSY_DEFAULT_MODELS: readonly string[] = ["cosyvoice-v3.5-plus", "cosyvoic
 const COSY_SYSTEM_VOICE_RE = /^long/i;
 
 /**
- * **没有系统音色**的模型族：`cosyvoice-v3.5-plus` / `-flash` 只支持「声音复刻 / 声音设计」
- * 场景（官方原话「仅支持声音设计和声音复刻场景(无系统音色)」）→ 必须显式提供音色 ID。
+ * **没有系统音色**的模型族：`cosyvoice-v3.5-*`（当前在用的是 `-flash`）只支持
+ * 「声音复刻 / 声音设计」场景（官方原话「仅支持声音设计和声音复刻场景(无系统音色)」）
+ * → 必须显式提供音色 ID。
  */
 const COSY_NO_SYSTEM_VOICE_RE = /^cosyvoice-v3\.5/;
 
@@ -473,7 +475,7 @@ export function resolveVoice(target: CosyTarget): string | null {
  * 该 (模型, 音色) 组合是否可用；返回**不可用原因**（`null` = 可用）。
  *
  * 刻意**不抛错**：单个模型不可用（缺音色 ID / 音色与模型不匹配）不该拖垮整条模型链 ——
- * 上层会 `::warning::` 记一笔并继续试下一个模型（这正是「v3.5-plus 不行就换 v3.5-flash」的前提）。
+ * 上层会 `::warning::` 记一笔并继续试下一个模型（这正是「某个模型不可用就换下一个」的前提）。
  * 提前判定的价值：拿一条「该模型不支持此音色」的 400，代价是一次真实请求 + 一句难懂的报错。
  */
 export function modelUnavailableReason(model: string, voice: string | null): string | null {
@@ -925,8 +927,8 @@ export function isTtsBackendName(v: string): v is TtsBackendName {
  * 缺省候选链（2026-09-21 用户定案）：
  * **百炼 CosyVoice 优先 → 腾讯云兜底 → Piper 本地最后一道**。
  *
- * 百炼内部还有自己的模型链（v3.5-plus → v3.5-flash，见 `COSY_DEFAULT_MODELS`），
- * 所以整体降级顺序是：v3.5-plus → v3.5-flash → 腾讯 → Piper。
+ * 百炼内部还有自己的模型链（缺省仅 `cosyvoice-v3.5-flash`，见 `COSY_DEFAULT_MODELS`），
+ * 所以整体降级顺序是：v3.5-flash → 腾讯 → Piper。
  * 回退到旧行为：`TTS_BACKEND=tencent,piper`。
  */
 export const DEFAULT_BACKEND_CHAIN: readonly TtsBackendName[] = ["cosyvoice", "tencent", "piper"];
@@ -999,7 +1001,7 @@ const BACKENDS: Record<TtsBackendName, TtsBackendSpec> = {
         ? { ok: true }
         : { ok: false, reason: "未配置 DASHSCOPE_API_KEY" },
     synth: (t, o, d) => synthCosyvoice(t, o, d),
-    // 内部已有「模型链（v3.5-plus → v3.5-flash）+ 分片瞬时重试」→ 外层不再叠重试
+    // 内部已有「模型链 + 分片瞬时重试」→ 外层不再叠重试
     maxAttempts: 1,
   },
   piper: {
