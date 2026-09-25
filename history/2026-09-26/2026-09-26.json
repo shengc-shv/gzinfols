@@ -1,0 +1,1141 @@
+{
+  "date": "2026-09-26",
+  "hero_line": "今日分行焦点：被立案两券商重罚落地！暂停新开户3个月多名高管遭罚",
+  "must_read": [
+    {
+      "title": "金价大变局后市分歧加大",
+      "why": "加息与黄金传统关系被重新讨论，贵金属持仓客户波动风险上升，需提示仓位管理。",
+      "url": "https://www.stcn.com/article/detail/4199268.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "央行三季度例会首现新提法",
+      "why": "货币政策最新部署释放结构性信号，信贷投向与负债成本走向将直接影响分行零售资产端与存款定价安排。",
+      "url": "https://finance.eastmoney.com/a/202609253884248169.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "债券通债券入闸香港衍生品",
+      "why": "人民币债券抵押品跨境应用关键一跃，跨境机构与债券持仓客户的抵押品管理路径拓宽。",
+      "url": "https://www.cnfin.com/yw-lb/detail/20260925/4475147_1.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "央行最新部署货币政策",
+      "why": "政策基调延续，后续操作节奏影响零售信贷投放与存款成本，需纳入四季度经营规划考量。",
+      "url": "https://finance.cctv.com/2026/09/25/ARTIqt9SyUExlENIsFE8L3ZG260925.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "香港证监会明确三大行动目标",
+      "why": "跨境监管协同方向更清晰，涉及香港业务的客户合规要求变化需提前排查与提示。",
+      "url": "https://www.stcn.com/article/detail/4199211.html",
+      "delta": {
+        "state": "followup"
+      }
+    }
+  ],
+  "insights": [
+    {
+      "topic": "美元资产客户再配置",
+      "tags": [
+        "财富"
+      ],
+      "impact": "美30年期国债收益率破5.5%，持有美元存款与美元理财的客户面临汇率与利率双重波动，再配置需求上升。",
+      "action": "提示客户关注长端美债利率走高下的汇率风险，今日起梳理美元资产持仓客户，提供再配置建议。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "美国30年期国债收益率突破5.5%",
+          "url": "https://finance.eastmoney.com/a/202609253884332883.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue",
+        "nextStep": "先建档跟踪：把主体纳入目标名单，等出现预算/招标/审批等硬信号再评估接触"
+      }
+    },
+    {
+      "topic": "私行客户债券抵押安排",
+      "tags": [
+        "私行",
+        "财富"
+      ],
+      "impact": "港交所11月起接受中国国债作非现金抵押品，持有人民币债券的私行与跨境客户资金使用效率提升，是差异化服务切入点。",
+      "action": "本周向持有人民币债券的私行客户提示抵押品安排变化，协助对接跨境抵押与流动性管理方案。",
+      "segments": [
+        "中高端客群(过亿资产)"
+      ],
+      "sources": [
+        {
+          "title": "港交所旗下衍生产品结算所11月起接受中国国债、政策性金融债及财政部债券作为非现金抵押品",
+          "url": "https://www.stcn.com/article/detail/4199344.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue",
+        "nextStep": "先核关系：公开披露的股东与高管名单可作为切入点参考，暂不必投入触达资源"
+      }
+    },
+    {
+      "topic": "贵金属持仓客户仓位管理",
+      "tags": [
+        "财富"
+      ],
+      "impact": "金价与加息关系被重新讨论，后市分歧加大，贵金属持仓客户波动风险上升，财富条线需主动介入。",
+      "action": "今日起对贵金属持仓较重的客户提示波动加大，建议分批调整仓位，避免单一资产过度集中。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "金价，大变局！加息=黄金熊市？后市如何走？",
+          "url": "https://www.stcn.com/article/detail/4199268.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue",
+        "nextStep": "先建档跟踪：把主体纳入目标名单，等出现预算/招标/审批等硬信号再评估接触"
+      }
+    },
+    {
+      "topic": "按揭项目准入策略调整",
+      "tags": [
+        "住房金融"
+      ],
+      "impact": "北京率先落地现房销售细则，若广州跟进，按揭项目准入与楼盘合作策略需相应调整，住房金融条线需提前研判。",
+      "action": "住房金融条线可关注广州现房销售跟进动向，提前梳理合作楼盘清单，评估准入标准变化影响。",
+      "sources": [
+        {
+          "title": "北京率先落地现房销售等细则 其他城市什么时候跟进？",
+          "url": "https://finance.cctv.com/2026/09/25/ARTI2xHt9uN65QuYxUXJCTIz260925.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue",
+        "nextStep": "先纳入观察名单，等出现程序性动作（招标/获批/签约）再评估"
+      }
+    },
+    {
+      "topic": "银行AI对客流程自动化",
+      "tags": [
+        "科技金融"
+      ],
+      "impact": "银行AI竞争从对话转向任务执行，对客流程自动化与运营提效成为比拼焦点，信息技术部可评估落地场景。",
+      "action": "信息技术部可考虑本周梳理对客高频流程，选取开户、资料审核等场景试点AI任务执行，提升效率。",
+      "sources": [
+        {
+          "title": "从“对话”到“办事”：银行业AI竞争重心在哪里",
+          "url": "https://www.cnfin.com/yw-lb/detail/20260925/4475085_1.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue",
+        "nextStep": "先纳入观察名单，等出现程序性动作（招标/获批/签约）再评估"
+      }
+    },
+    {
+      "topic": "跨境客户合规要求排查",
+      "tags": [
+        "监管",
+        "私行"
+      ],
+      "impact": "香港证监会明确三大行动目标，跨境监管协同趋严，涉及香港业务的客户合规要求可能变化，需提前排查。",
+      "action": "风控与私行条线可本周排查涉港业务客户，梳理合规要点变化，提前做好客户沟通与资料更新。",
+      "segments": [
+        "中高端客群(过亿资产)"
+      ],
+      "sources": [
+        {
+          "title": "香港证监会最新工作计划曝光 明确三大行动目标",
+          "url": "https://www.stcn.com/article/detail/4199211.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue",
+        "nextStep": "先核关系：公开披露的股东与高管名单可作为切入点参考，暂不必投入触达资源"
+      }
+    }
+  ],
+  "sections": {
+    "gz_local": [],
+    "biz_insight": [
+      {
+        "url": "https://www.cnfin.com/yw-lb/detail/20260925/4475085_1.html",
+        "title_cn": "从“对话”到“办事”：银行业AI竞争重心在哪里",
+        "title_orig": "",
+        "source": "新华财经",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "银行AI竞争从对话式转向任务执行，落地能力成比拼焦点；可关注对客流程自动化与运营提效的切入场景。",
+        "importance": 2,
+        "rank": 1,
+        "tags": [
+          "科技金融",
+          "竞对动态"
+        ],
+        "locale": "national"
+      }
+    ],
+    "policy_market": [
+      {
+        "url": "https://www.stcn.com/article/detail/4199344.html",
+        "title_cn": "港交所旗下衍生产品结算所11月起接受中国国债、政策性金融债及财政部债券作为非现金抵押品",
+        "title_orig": "",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "11月起港交所衍生品结算所接受中国国债等作非现金抵押品，人民币债券跨境应用再进一步；持有相关债券的跨境客户可关注抵押品安排变化。",
+        "importance": 3,
+        "rank": 1,
+        "tags": [
+          "跨境",
+          "市场",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.cctv.com/2026/09/25/ARTI2xHt9uN65QuYxUXJCTIz260925.shtml",
+        "title_cn": "北京率先落地现房销售等细则 其他城市什么时候跟进？",
+        "title_orig": "",
+        "source": "央视财经",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "北京率先落地现房销售细则，其他城市跟进节奏待观察；可能影响按揭项目准入与楼盘合作策略，值得关注。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "住房金融",
+          "信贷"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202609253884248169.html",
+        "title_cn": "央行三季度例会内容发布 这个提法首次出现",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "央行三季度例会释放货币政策最新部署，首次出现新提法；可关注后续信贷投向与结构性工具对零售资产端的传导。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "监管合规",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20260925/herald/6e47a7d4515b7ee1773b79299e183fc3.html",
+        "title_cn": "密集落地！跨境金融多点突破 外汇、数字人民币、资金池同步推进",
+        "title_orig": "",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "外汇、数字人民币、跨境资金池同步推进，跨境金融政策密集落地；可关注对跨境客群结算与资金归集方案的更新机会。",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "跨境",
+          "市场",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202609253884332883.html",
+        "title_cn": "美国30年期国债收益率突破5.5%",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "美国30年期国债收益率突破5.5%，长端利率走高；对持有美元资产或跨境配置需求的客户，汇率与再配置窗口值得提示。",
+        "importance": 2,
+        "rank": 5,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.stcn.com/article/detail/4199268.html",
+        "title_cn": "金价，大变局！加息=黄金熊市？后市如何走？",
+        "title_orig": "",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "金价与加息的传统关系被重新讨论，后市分歧加大；对贵金属持仓客户，可提示关注波动加大下的仓位管理。",
+        "importance": 2,
+        "rank": 6,
+        "tags": [
+          "市场",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-25/doc-inisyywi4633867.shtml",
+        "title_cn": "香港证监会抛出一揽子新政：南向通人民币柜台要来！",
+        "title_orig": "",
+        "source": "新浪财经·港股频道",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "香港证监会新政指向南向通人民币柜台，港股通人民币计价交易预期升温；关注对跨境财富客群配置港股的资金安排影响。",
+        "importance": 2,
+        "rank": 7,
+        "tags": [
+          "跨境",
+          "财富"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202609253884249645.html",
+        "title_cn": "“双节”后行情怎么看？反弹仍待四大变量验证",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "双节后行情反弹仍待四大变量验证，短期方向未明；对节后客户沟通，可提示关注变量落地节奏而非单日涨跌。",
+        "importance": 1,
+        "rank": 8,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202609253884282196.html",
+        "title_cn": "9月25日港股收盘：恒指跌1.01% 潍柴动力领跌成分股",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "恒指收跌1.01%，潍柴动力领跌成分股，科网与石油股走弱；港股通客户情绪偏谨慎，可关注后续资金流向变化。",
+        "importance": 1,
+        "rank": 9,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20260925/herald/a9e309666bbf599c25b045368cf1a119.html",
+        "title_cn": "中国金融结构变迁，发展阶段演进的深刻反映",
+        "title_orig": "",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "金融结构变迁反映发展阶段演进，直接融资比重等趋势值得跟踪；对零售资产配置与产品布局有中长期参考。",
+        "importance": 1,
+        "rank": 10,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20260925/herald/abb8fbe617ff595527b6804f3cde612f.html",
+        "title_cn": "人民币国际化，最新消息",
+        "title_orig": "",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "人民币国际化最新进展发布，跨境使用场景持续拓展；对跨境结算客户，可关注人民币计价与结算的新安排。",
+        "importance": 1,
+        "rank": 11,
+        "tags": [
+          "跨境",
+          "市场",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnfin.com/yw-lb/detail/20260925/4475147_1.html",
+        "title_cn": "债券通债券“入闸”香港衍生品市场 人民币债券抵押品跨境应用再迎关键一跃",
+        "title_orig": "",
+        "source": "新华财经",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "债券通债券进入香港衍生品市场，人民币债券抵押品跨境应用再进一步；对跨境机构与债券持仓客户，可关注抵押品管理新路径。",
+        "importance": 1,
+        "rank": 12,
+        "tags": [
+          "跨境",
+          "市场",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      }
+    ],
+    "tech": [],
+    "ipo": [
+      {
+        "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-25/doc-iniszmnc4595021.shtml",
+        "title_cn": "欢创科技港股认购超购3551倍 涉资2500亿港元",
+        "title_orig": "",
+        "source": "新浪财经·港股频道",
+        "source_type": "media",
+        "date": "09/25",
+        "summary": "欢创科技港股认购超购3551倍、涉资2500亿港元，16万人抢筹；港股打新热度高企，可关注客户打新与融资需求。",
+        "importance": 2,
+        "rank": 1,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/22/PREIPO_F0101_V01_20260922_36492_Q/C84DEF88700845B7A0964E08C0C939F7/关于深圳市精锋医疗科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf",
+        "title_cn": "深圳市精锋医疗科技股份有限公司 (辅导备案) [深圳证监局]",
+        "source": "证监会辅导备案(官方csrcfd)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "09/22",
+        "summary": "IPO辅导备案 | 辅导机构: 中信证券股份有限公司 | 备案时间: 2026-09-21 | 状态: 辅导备案 | 报告: 辅导备案报告 | 披露: 2026-09-22",
+        "ipoStage": "stage-tutoring",
+        "ipoMeta": "",
+        "ipoCity": "广东",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/21/PREIPO_F0101_V01_20260921_36490_Q/08DA449650D843549C5F65522B192C7D/关于得一微电子股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf",
+        "title_cn": "得一微电子股份有限公司 (辅导验收) [深圳证监局]",
+        "source": "证监会辅导备案(官方csrcfd)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "09/21",
+        "summary": "IPO辅导备案 | 辅导机构: 中信建投证券股份有限公司 | 备案时间: 2026-04-02 | 状态: 辅导验收 | 报告: 辅导工作完成报告 | 披露: 2026-09-21",
+        "ipoStage": "stage-coach-done",
+        "ipoMeta": "",
+        "ipoCity": "广东",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004571",
+        "title_cn": "时创意：创业板IPO问询中",
+        "title_orig": "",
+        "source": "深交所审核项目动态(官方)",
+        "source_type": "official",
+        "date": "09/24",
+        "summary": "时创意创业板IPO进入问询，保荐中信证券；注册地在广东的拟上市企业，可关注其上市前综合金融需求。",
+        "importance": 1,
+        "rank": 4,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national",
+        "locale_evidence": "注册地：广东"
+      },
+      {
+        "url": "https://www.bse.cn/audit/project_news_select.html#874930@P02",
+        "title_cn": "海明润：北交所IPO问询中",
+        "title_orig": "",
+        "source": "北交所审核项目动态(官方)",
+        "source_type": "official",
+        "date": "09/24",
+        "summary": "深圳企业海明润北交所IPO进入问询，保荐国金证券；可关注其上市前资金归集与结算服务需求。",
+        "importance": 1,
+        "rank": 5,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national",
+        "locale_evidence": "注册地：广东省深圳市"
+      },
+      {
+        "url": "https://www.bse.cn/audit/project_news_select.html#874729@P02",
+        "title_cn": "深达威：IPO问询中（拟北交所）",
+        "source": "北交所审核项目动态(官方)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "09/24",
+        "summary": "注册地：广东省东莞市｜保荐：广发证券股份有限公司｜代码：874729｜状态：IPO问询中｜更新：2026-09-24",
+        "ipoStage": "stage-reviewing",
+        "ipoMeta": "保荐 广发证券股份有限公司 ｜ 拟上市北交所",
+        "ipoCity": "东莞市",
+        "importance": 2,
+        "rank": 6,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www1.hkexnews.hk/app/sehk/2026/108890/2026092401153_c.htm",
+        "title_cn": "奧比中光科技集團股份有限公司 - W（主板递表）",
+        "source": "港交所新股递表(主板/GEM·全国参考)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "09/24",
+        "summary": "市场：主板｜递表日：2026-09-24｜港股在审（全国参考）",
+        "ipoStage": "stage-reviewing",
+        "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108890/2026092401153_c.htm",
+        "officialLabel": "申請版本（第一次呈交）",
+        "ipoMeta": "",
+        "importance": 2,
+        "rank": 7,
+        "tags": [],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.sse.com.cn/listing/renewal/ipo/#2189@2",
+        "title_cn": "保伦股份：主板IPO问询中",
+        "title_orig": "",
+        "source": "上交所审核项目动态(官方)",
+        "source_type": "official",
+        "date": "09/23",
+        "summary": "广州本地计算机通信电子企业保伦股份主板IPO进入问询，保荐广发证券；本地投行与对公联动线索值得关注。",
+        "importance": 3,
+        "rank": 8,
+        "tags": [
+          "粤"
+        ],
+        "locale": "gz",
+        "locale_evidence": "注册地：广东广州市"
+      },
+      {
+        "url": "https://www.bse.cn/audit/project_news_select.html#874778@P02",
+        "title_cn": "格兰达：IPO问询中（拟北交所）",
+        "source": "北交所审核项目动态(官方)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "09/22",
+        "summary": "注册地：广东省江门市｜保荐：兴业证券股份有限公司｜代码：874778｜状态：IPO问询中｜更新：2026-09-22",
+        "ipoStage": "stage-reviewing",
+        "ipoMeta": "保荐 兴业证券股份有限公司 ｜ 拟上市北交所",
+        "ipoCity": "江门市",
+        "importance": 2,
+        "rank": 9,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004360",
+        "title_cn": "云豹智能：IPO问询中（拟创业板）",
+        "source": "深交所审核项目动态(官方)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "09/22",
+        "summary": "注册地：广东｜保荐：中信证券｜受理：2026-06-30｜状态：已问询｜更新：2026-09-22",
+        "ipoStage": "stage-reviewing",
+        "ipoMeta": "保荐 中信证券 ｜ 拟上市创业板 ｜ 受理 2026-06-30",
+        "ipoCity": "广东",
+        "importance": 2,
+        "rank": 10,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004585",
+        "title_cn": "德聚技术：IPO问询中（拟创业板）",
+        "source": "深交所审核项目动态(官方)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "09/22",
+        "summary": "注册地：广东｜保荐：中信证券｜受理：2026-06-26｜状态：已问询｜更新：2026-09-22",
+        "ipoStage": "stage-reviewing",
+        "ipoMeta": "保荐 中信证券 ｜ 拟上市创业板 ｜ 受理 2026-06-26",
+        "ipoCity": "广东",
+        "importance": 2,
+        "rank": 11,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004552",
+        "title_cn": "万力轮胎：IPO问询中（拟主板）",
+        "source": "深交所审核项目动态(官方)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "09/21",
+        "summary": "注册地：广东｜保荐：国泰海通｜受理：2026-06-23｜状态：已问询｜更新：2026-09-21",
+        "ipoStage": "stage-reviewing",
+        "ipoMeta": "保荐 国泰海通 ｜ 拟上市主板 ｜ 受理 2026-06-23",
+        "ipoCity": "广东",
+        "importance": 2,
+        "rank": 12,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www1.hkexnews.hk/app/sehk/2026/108887/2026092101142_c.htm",
+        "title_cn": "超穎電子電路股份有限公司（主板递表）",
+        "source": "港交所新股递表(主板/GEM·全国参考)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "09/21",
+        "summary": "市场：主板｜递表日：2026-09-21｜港股在审（全国参考）",
+        "ipoStage": "stage-reviewing",
+        "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108887/2026092101142_c.htm",
+        "officialLabel": "申請版本（第一次呈交）",
+        "ipoMeta": "",
+        "importance": 2,
+        "rank": 13,
+        "tags": [],
+        "locale": "national"
+      },
+      {
+        "url": "https://www1.hkexnews.hk/app/sehk/2026/108889/2026092301798_c.htm",
+        "title_cn": "广州文石信息科技股份有限公司（主板递表）",
+        "title_orig": "廣州文石信息科技股份有限公司（主板递表·广东企业）",
+        "source": "港交所新股递表(广东企业赴港)",
+        "source_type": "official",
+        "date": "09/23",
+        "summary": "文石信息科技9月23日递表港交所主板，赴港上市推进中；可跟进其跨境融资与员工持股相关服务机会。",
+        "importance": 2,
+        "rank": 14,
+        "tags": [
+          "跨境",
+          "粤",
+          "财富"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www1.hkexnews.hk/app/sehk/2026/108888/2026092201466_c.htm",
+        "title_cn": "广东省广晟大宝山铜业股份有限公司（主板递表）",
+        "title_orig": "廣東省廣晟大寶山銅業股份有限公司（主板遞表·廣東企業）",
+        "source": "港交所新股递表(广东企业赴港)",
+        "source_type": "official",
+        "date": "09/22",
+        "summary": "广晟大宝山铜业9月22日递表港交所主板，赴港上市推进中；可关注其跨境融资及上下游客户联动机会。",
+        "importance": 2,
+        "rank": 15,
+        "tags": [
+          "跨境",
+          "粤",
+          "财富"
+        ],
+        "locale": "national"
+      }
+    ]
+  },
+  "risk": {
+    "topic": "跨境监管协同趋严",
+    "evidence": "香港证监会最新工作计划曝光，明确三大行动目标，跨境监管协同方向更清晰。",
+    "impact": "私行与财富条线涉港业务客户合规要求可能变化，风控部需关注客户资料与业务准入的合规衔接，公司部涉港联动业务亦需同步排查。",
+    "action": "风控部可本周牵头排查涉港业务客户清单，梳理合规要点变化，私行与财富条线配合做好客户沟通与资料更新。",
+    "source": "T1.5",
+    "sources": [
+      {
+        "title": "香港证监会最新工作计划曝光 明确三大行动目标",
+        "url": "https://www.stcn.com/article/detail/4199211.html"
+      }
+    ],
+    "delta": {
+      "state": "followup"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "道指涨0.93%，标普涨0.51%，伯克希尔建仓地产股带动道指走强。",
+      "sectors": [
+        "伯克希尔建仓Lennar近10%股份，该股大涨，地产建筑板块受提振。",
+        "Meta新AI产品引发行业颠覆担忧，券商股被交易员视为下一个受冲击对象。",
+        "上诉法院裁定各州可监管Kalshi体育预测市场，平台再遭法律打击。",
+        "期权市场显示交易员押注部分个股即将创出新高，看涨情绪仍在。"
+      ],
+      "spoken": "美股三大指数收涨，道指涨0.93%，标普500涨0.51%，纳指涨0.48%。伯克希尔建仓Lennar近一成股份，该股大涨，带动地产建筑板块走强。Meta新AI产品引发行业颠覆担忧，券商股被交易员视为下一个受冲击对象。上诉法院裁定各州可监管Kalshi体育预测市场，平台再遭法律打击。期权市场显示交易员押注部分个股将创新高。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-26"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51828.62",
+          "changePct": "+0.93%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27068.72",
+          "changePct": "+0.48%"
+        },
+        {
+          "name": "标普500",
+          "value": "7743.41",
+          "changePct": "+0.51%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "沪指跌1.22%，创业板指跌2.68%，双节前资金避险情绪升温。",
+      "sectors": [
+        "央行三季度例会释放政策信号，提法首次出现，稳增长预期受关注。",
+        "万亿巨头突发公告加码AI与半导体，科技主线再获产业资本背书。",
+        "隆基绿能晶硅电池效率再破世界纪录，光伏技术突破提振板块关注。",
+        "两家券商被立案后重罚落地，暂停新开户3个月，多名高管遭罚。",
+        "股票私募仓位两连升，满仓占比近七成，机构持仓意愿偏强。"
+      ],
+      "spoken": "A股今日集体收跌，上证指数跌1.22%，深证成指跌2.34%，创业板指跌2.68%，双节前资金偏谨慎。板块方面，央行三季度例会释放政策信号，万亿巨头公告加码AI和半导体，隆基绿能电池效率再破世界纪录，光伏受关注。两家券商重罚落地，暂停新开户三个月。私募仓位两连升，满仓占比近七成。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-26"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3888.37",
+          "changePct": "-1.22%"
+        },
+        {
+          "name": "深证成指",
+          "value": "13316.97",
+          "changePct": "-2.34%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3288.95",
+          "changePct": "-2.68%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24510.09点（-1.01%）；恒生科技收报4311.78点（-1.13%）。",
+      "sectors": [
+        "科网股普跌",
+        "石油股走弱"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-25"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.01% 科指跌1.13% 科网股普跌 石油股走弱",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-25/doc-iniszrtx7720176.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24510.09",
+          "changePct": "-1.01%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4311.78",
+          "changePct": "-1.13%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-09-25",
+    "marketStatus": {
+      "reportDate": "2026-09-26",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-09-24",
+          "reason": "数据为 9月24日（距今 2 天）"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-09-25"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-09-25"
+        }
+      },
+      "allStale": false,
+      "note": "A股今日无隔夜行情，其余市场为最新收盘",
+      "spokenNote": "A股今日无隔夜行情；港股为 9月25日 周五 收盘；美股为 9月25日 周五 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884221681.html",
+      "title_cn": "直线飙升超20%！美股巨头，突然宣布AI大单",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "某美股巨头突然宣布AI大单，相关股价直线飙升超20%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股",
+        "订单"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884219084.html",
+      "title_cn": "新突破！隆基绿能晶硅电池效率再破世界纪录逼近极限",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "隆基绿能晶硅电池效率再破世界纪录，逼近理论极限。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "光伏",
+        "新能源",
+        "技术突破"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609253884224596.html",
+      "title_cn": "习近平在美国总统特朗普举行的欢迎宴会上的祝酒辞（全文）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "习近平在美国总统特朗普举行的欢迎宴会上发表祝酒辞，全文发布。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美关系",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-25/doc-iniszmnc4595021.shtml",
+      "title_cn": "超购3551倍！欢创科技认购涉资2500亿港元，16万人抢筹“扫地机器人激光雷达一哥”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "欢创科技港股IPO超购3551倍，认购涉资2500亿港元，16万人抢筹，被称为扫地机器人激光雷达一哥。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "打新"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-09-25/doc-iniszmnc4550254.shtml",
+      "title_cn": "港股主要指数探底回升，恒指、科指跌幅均收窄至1.5%以内",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "港股主要指数探底回升，恒指、科指跌幅均收窄至1.5%以内。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "行情"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-25/doc-iniszfec7822839.shtml",
+      "title_cn": "港股午评：恒指跌1.69% 科指跌2.14% 科网股普跌 内房股下挫",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/25",
+      "summary": "港股午评：恒指跌1.69%，科指跌2.14%，科网股普跌，内房股下挫。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "内房股",
+        "科网股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/23/metas-muse-ai-causes-schwab-selloff.html",
+      "title_cn": "Meta's Muse reignites AI disruption fears. Traders are targeting this brokerage stock as next casualty",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/23",
+      "summary": "Meta的Muse再度引发AI颠覆担忧，交易员将某券商股视为下一个受害者。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股",
+        "券商"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/22/lennar-shares-pop-as-berkshire-builds-almost-a-10percent-stake-in-beleaguered-homebuilder.html",
+      "title_cn": "Lennar shares pop as Berkshire builds almost a 10% stake in beleaguered homebuilder",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/22",
+      "summary": "伯克希尔建仓陷入困境的房屋建筑商Lennar近10%股份，Lennar股价大涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "伯克希尔",
+        "地产"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/22/no-new-stock-highs-no-problem-options-traders-bet-theyre-coming-in-these-names.html",
+      "title_cn": "No new stock highs, no problem: Options traders bet they're coming in these names",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/22",
+      "summary": "尽管未创新高，期权交易员押注部分个股将迎来新高。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "期权",
+        "交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ],
+  "redchipPanel": {
+    "entries": [],
+    "ledgerCount": 38
+  },
+  "sourceStats": [
+    {
+      "sourceId": "cnr-gd",
+      "inflow": 58,
+      "kept": 8,
+      "avgScore": 24
+    },
+    {
+      "sourceId": "cnfin",
+      "inflow": 46,
+      "kept": 20,
+      "avgScore": 25
+    },
+    {
+      "sourceId": "sina-bank",
+      "inflow": 45,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "guancha",
+      "inflow": 44,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "southcn",
+      "inflow": 33,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "cnbc-top",
+      "inflow": 30,
+      "kept": 1,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "stcn",
+      "inflow": 30,
+      "kept": 13,
+      "avgScore": 28
+    },
+    {
+      "sourceId": "sina-hk-stock",
+      "inflow": 30,
+      "kept": 12,
+      "avgScore": 23
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "inflow": 29,
+      "kept": 17,
+      "avgScore": 28
+    },
+    {
+      "sourceId": "sina-a-stock",
+      "inflow": 28,
+      "kept": 4,
+      "avgScore": 33
+    },
+    {
+      "sourceId": "cctv-finance",
+      "inflow": 23,
+      "kept": 2,
+      "avgScore": 34
+    },
+    {
+      "sourceId": "sina-money",
+      "inflow": 20,
+      "kept": 4,
+      "avgScore": 64
+    },
+    {
+      "sourceId": "fed-press",
+      "inflow": 20,
+      "kept": 1,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "inflow": 19,
+      "kept": 16,
+      "avgScore": 25
+    },
+    {
+      "sourceId": "investing-news",
+      "inflow": 10,
+      "kept": 10,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "crunchbase-news",
+      "inflow": 10,
+      "kept": 2,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "govcn-policy",
+      "inflow": 8,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "21jingji-finance",
+      "inflow": 6,
+      "kept": 3,
+      "avgScore": 33
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "inflow": 4,
+      "kept": 4,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "gd-szse-audit",
+      "inflow": 4,
+      "kept": 4,
+      "avgScore": 61
+    },
+    {
+      "sourceId": "gd-bse-audit",
+      "inflow": 3,
+      "kept": 3,
+      "avgScore": 61
+    },
+    {
+      "sourceId": "hk-filing",
+      "inflow": 3,
+      "kept": 2,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "hk-filing-gd",
+      "inflow": 2,
+      "kept": 2,
+      "avgScore": 30
+    },
+    {
+      "sourceId": "gd-csrc-tutoring",
+      "inflow": 2,
+      "kept": 2,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "gd-sse-audit",
+      "inflow": 1,
+      "kept": 1,
+      "avgScore": 61
+    }
+  ],
+  "heroDelta": {
+    "state": "followup"
+  },
+  "productCoverage": [
+    {
+      "line": "按揭",
+      "count": 1,
+      "examples": [
+        "按揭项目准入策略调整"
+      ]
+    },
+    {
+      "line": "信用卡",
+      "count": 0,
+      "examples": []
+    },
+    {
+      "line": "代发",
+      "count": 0,
+      "examples": []
+    }
+  ]
+}
