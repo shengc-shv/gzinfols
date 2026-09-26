@@ -2,18 +2,22 @@ name: daily
 
 # 每日资信简报：构建（架构门禁 → 类型 → 测试 → 全 AI 管线 → TTS）→ GitHub Pages 发布。
 #
-# 发布门控（对齐 gzinfo 口径，2026-09-11 B5）：一天只发一次**正式版**。
-#   - gate 读 main 的 data/publish-state.json，判据 =「当天是否已正式生效」
-#     （source=schedule 或 manual-final）；是则整个 run 跳过（不重复跑全 AI / TTS / 发布）。
-#     manual-test（验证抢跑）不阻断；workflow_dispatch 手动触发永远跑（用户选择优先）。
-#   - 发布成功后部署 job 之后的 record job 才写 publish-state.json（先发后记）；
-#     次日/后续 schedule 据此跳过，凌晨 dispatch 测试不再吞掉当天正式首发。
-#   定时调度（2026-09-16 恢复，用户口径：**每天 07:30–07:50 之间跑**）：
-#     · `30 23 * * *`（UTC）= 北京 07:30 主跑；`45 23 * * *` = 北京 07:45 补跑。
-#       GitHub 定时任务可能延迟，补跑由 gate「当天已正式生效则跳过」兜底 —— **不会重复发布，
-#       也不会重复烧 LLM**（gate 在 build 之前判定，跳过即整个 run 不执行）。
-#     · 仍保留 workflow_dispatch 手动触发（gate 对手动一律放行，用户选择优先）。
-#     · 推送（notify.yml）仍为**人工触发**：07:30 出刊后可先在页面上核对内容，再点推送。
+# 发布门控（2026-09-26 按用户口径改造；2026-09-11 B5 起一天只发一次正式版）：
+#   **手动触发永远最高优先级**：workflow_dispatch 无条件放行 —— 即使当天已被 final
+#   （人工 final 或 schedule 自动生效），自动触发不能再跑，但手动重跑（重发 / 覆盖 /
+#   补跑）随时可以；时间门禁同样不约束手动。
+#   schedule 触发经两个跳过条件（有序互斥、命中行为一致：打日志 → should-run=false
+#   → build job 整体不执行）：
+#     ① 当天已正式生效（publish-state source=schedule 或 manual-final）→ 跳过 ——
+#        两种 final 都算「今天已出刊」，自动不得再跑；manual-test（验证抢跑）不算生效、不阻断。
+#     ② 时间门禁：实际执行时北京时间不在 07:00–07:59 → 跳过（不烧 LLM）。
+#   - 发布成功后部署 job 之后的 record job 才写 publish-state.json（先发后记）。
+#   定时调度（2026-09-26 用户口径：**北京 05:00–07:40 每 20 分钟一枪**）：
+#     · `0,20,40 21-23 * * *`（UTC）= 北京 05:00 / 05:20 / … / 07:40 共 9 枪。
+#       GitHub 定时任务实测延迟 2–5h 且不稳定 → 多打枪，由 ② 时间门禁保证只有
+#       **实际执行落在北京 7–8 点窗口**的那一枪真正生成报告，其余枪在 gate 快速跳过。
+#     · workflow_dispatch 手动触发保留：**永远放行**。
+#     · 推送（notify.yml）仍为**人工触发**：出刊后可先在页面上核对内容，再点推送。
 #
 # 音频：AUDIO_ENABLED=true → **阿里云百炼 CosyVoice 优先**（DASHSCOPE_API_KEY secret）
 #       → 模型链缺省 cosyvoice-v3.5-flash（2026-09-25 用户决定不再采用 v3.5-plus；如需可在
@@ -25,9 +29,11 @@ name: daily
 
 on:
   schedule:
-    # 北京时间 07:30 / 07:45（cron 为 UTC；北京 = UTC+8，无夏令时）
-    - cron: "30 23 * * *"
-    - cron: "45 23 * * *"
+    # 北京时间 05:00–07:40 每 20 分钟（cron 为 UTC；北京 = UTC+8，无夏令时 → UTC 21 时段）。
+    # 2026-09-26 用户口径：多打枪对抗 GitHub 调度延迟（实测 2–5h），由 gate 的时间门禁
+    # 保证「实际执行落在北京 07:00–07:59 窗口」的那一枪才真正生成报告，其余枪在 gate 跳过。
+    # （08:00 整点未加：该枪延迟后必落窗外、注定被时间门禁拦，加了只会白跑一次 gate。）
+    - cron: "0,20,40 21-23 * * *"
   workflow_dispatch:
     inputs:
       audio:
@@ -69,37 +75,57 @@ jobs:
       should-run: ${{ steps.check.outputs.should-run }}
     steps:
       - uses: actions/checkout@v4
-      - name: Check publish state (today already in effect?)
+      - name: Check publish state & time gate (should-run?)
         id: check
         env:
           EVENT_NAME: ${{ github.event_name }}
         run: |
           set -euo pipefail
-          # 手动触发永远跑（用户选择 = 最高优先级）
+          # ── 手动触发：**永远最高优先级，无条件放行**（2026-09-26 sc 口径）──────────
+          # 即使当天已被 final（人工 final 或 schedule 自动生效）：自动触发不能再跑，
+          # 但手动重跑（重发 / 覆盖 / 补跑）随时可以 —— 那是用户明确意图。
+          # 时间门禁同样不约束手动（白天验证 / 补跑靠它）。
           if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            echo "Manual trigger — proceeding"
+            echo "Manual trigger — proceeding (manual always wins)"
             echo "should-run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+
+          # ── 以下仅 schedule 触发 ─────────────────────────────────────────────
+          # 北京时间（固定 Asia/Shanghai，不回落系统时区）。
           # 注意：TZ 必须**双引号**展开（单引号不展开 → date 退回 UTC → 取到前一天，
-          # 定时任务会永远跳过；2026-09-02 gzinfo 修复）。
+          # 定时任务会永远跳过；2026-09-02 历史修复）。
           TODAY=$(TZ="Asia/Shanghai" date +%Y-%m-%d)
-          echo "Report date (tz=${REPORT_TZ:-Asia/Shanghai}): ${TODAY}"
-          # 判据改为「当天是否已正式生效」：读 main 的 data/publish-state.json。
-          # 只认 source=schedule 或 manual-final；manual-test / 裸 manual / 无记录 / 损坏 → 未发布。
+          BJ_HOUR=$(TZ="Asia/Shanghai" date +%H)
+          echo "event=${EVENT_NAME} report-date=${TODAY} bj-hour=${BJ_HOUR}"
+
+          # 当天 publish-state 的 source（schedule / manual-final / manual-test / none）。
+          SOURCE=none
           if [ -f data/publish-state.json ]; then
-            IN_EFFECT=$(node -e "const s=JSON.parse(require('fs').readFileSync('data/publish-state.json','utf8'));const e=(s.reports||{})[process.argv[1]];process.stdout.write(e&&(e.source==='schedule'||e.source==='manual-final')?'yes':'no')" "$TODAY" 2>/dev/null || echo no)
-          else
-            IN_EFFECT=no
+            SOURCE=$(node -e "const s=JSON.parse(require('fs').readFileSync('data/publish-state.json','utf8'));const e=(s.reports||{})[process.argv[1]];process.stdout.write((e&&e.source)||'none')" "$TODAY" 2>/dev/null || echo none)
           fi
-          echo "publish-state in-effect=${IN_EFFECT}"
-          if [ "$IN_EFFECT" = "yes" ]; then
-            echo "→ 今日正式版已生效（publish-state: schedule/manual-final），跳过（gzinfo 口径：一天一次正式发布）"
-            echo "should-run=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "→ 今日尚未正式发布 — proceeding"
-            echo "should-run=true" >> "$GITHUB_OUTPUT"
+          echo "publish-state source=${SOURCE}"
+
+          # 统一跳过出口：两个条件命中时行为完全一致（日志 + should-run=false +
+          # 立即结束 gate，build job 因 `if: needs.gate.outputs.should-run == 'true'` 整体不执行）。
+          skip() { echo "→ 跳过：$1"; echo "should-run=false" >> "$GITHUB_OUTPUT"; exit 0; }
+
+          # ── 条件 ①（schedule）：当天已正式生效 → 跳过 ────────────────────────
+          # 覆盖两种 final：schedule 自动生效、人工 manual-final —— 都算「今天已出刊」，
+          # 自动触发不得再跑。manual-test 是验证抢跑、不算生效、不阻断。
+          if [ "$SOURCE" = "schedule" ] || [ "$SOURCE" = "manual-final" ]; then
+            skip "今日正式版已生效（publish-state: ${SOURCE}），不重复发布"
           fi
+
+          # ── 条件 ②（schedule）：时间门禁 ────────────────────────────────────
+          # cron 在北京 05:00–07:40 每 20 分钟打枪，GitHub 调度延迟 2–5h 且不稳定，
+          # 只认实际执行落在北京 07:00–07:59 窗口的那一枪；其余枪在此快速跳过（不烧 LLM）。
+          if [ "$BJ_HOUR" != "07" ]; then
+            skip "当前北京时间 ${BJ_HOUR} 点不在 07:00–07:59 门禁窗口（等窗口内的下一枪）"
+          fi
+
+          echo "→ 时间门禁通过（北京 ${BJ_HOUR} 点）且今日未发布 — proceeding"
+          echo "should-run=true" >> "$GITHUB_OUTPUT"
 
   build:
     needs: gate
