@@ -183,6 +183,7 @@ export async function buildExecutiveSummary(
         exec: ex,
         store: memStore,
         today: date,
+        // 必读段按 url 回查池内 summary 重算关联度（定调兜底已改为「必读+商机归纳」，不再用池）
         pool: twoDayPool,
         // 2026-09-14（C-3）：播报时刻由组合根注入的时刻显式换算（服务层不隐式读时钟）
         now: ctx.startTime,

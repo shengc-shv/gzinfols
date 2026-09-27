@@ -3,26 +3,30 @@
  *
  * 定位：LLM 之后、写盘之前的**确定性闸门**。
  *  - LLM 生成前：由 buildMemoryBrief + formatMemoryBrief 注入提示（避开重复、给出建议角度）；
- *  - LLM 生成后：本模块逐条判定，过滤/降级重播项，板块不足时分三级兜底补齐。
+ *  - LLM 生成后：本模块逐条判定，过滤/降级重播项，板块不足时兜底补齐。
  *
  * 关键设计：
  *  1. 判定顺序 = hero → must_read → insights → risk（板块优先级）。
  *     边判边写记忆（rememberBroadcast），因此**同一板块内同事件只留第一条**
  *     ——LLM 常把同一事件拆成两条必读，靠这个天然收敛。
- *  2. 同日跨板块不互斥（定调一句话 + 必读展开是合理呈现，只要求基本增量），
- *     但**补位时要避让**：定调被去重后从池内补位，须跳过当天其他板块已用的事件
- *     （2026-09-24 用户要求，见 `collectUsedEvents`）。
+ *  2. 同日跨板块不互斥：定调一句话 + 必读展开是合理呈现，只要求基本增量。
  *  3. 兜底（永不产出空板块，守住「定调/必读永不空」红线）：
  *     ① 必读 / 商机：上游多给候选（`*_CANDIDATE_POOL`），顺序判重 + 顺延补足；
- *     ② 定调被去重：从两天池补位「记忆库不存在、且当天未被其他板块使用」的高分条目；
- *     ③ 仍无 → 保留 LLM 原产出（宁可重复，不留空）
+ *     ② 定调被去重：由**本次报告自身**的必读 + 商机归纳一段「关注导语」
+ *        （`deriveHeroLine`，2026-09-27 sc 口径）——**不再从两天池另挑一条事件**；
+ *     ③ 仍无（必读/商机均为空）→ 保留 LLM 原产出（宁可重复，不留空）
+ *
+ * 演进记录（不要再走回头路）：
+ *  - 2026-09-24：曾加「定调补位须避开当天其他板块已用事件」（`collectUsedEvents`）——
+ *    那是为「池内另挑一条事件」打的补丁；2026-09-27 改为归纳式兜底后**整条机制失去意义**
+ *    （归纳素材本就来自当日板块，不存在「与别处撞车」问题），已连同 `pickFreshFromPool` 一并删除。
+ *  - 2026-09-27：曾加「补位候选地域/层级门槛」（`isHeroFallbackEligible` / `NATIONAL_POLICY_ACTORS`）
+ *    拦外省琐闻 —— 同样随池补位的取消而删除（不挑事件，自然不需要挑地域）。
  */
 
 import type { ExecutiveSummary, ExecInsight, ExecRisk } from "../enrich/executive-summary";
-import { synthMustReadWhy } from "../enrich/executive-summary";
-import { scoreBranchRelevance, type BranchRelevance } from "../select/filters/relevance-score";
-import { titleSimilarityDice } from "../select/filters/dedup-similar";
-import { canonicalizeUrl } from "../../utils/url";
+import { deriveHeroLine } from "../enrich/executive-summary";
+import { scoreBranchRelevance } from "../select/filters/relevance-score";
 import { formatBroadcastAt } from "./broadcast-time";
 import {
   beginDay,
@@ -30,10 +34,8 @@ import {
   evaluateCandidate,
   rememberBroadcast,
   nextAngle,
-  SECTION_POLICY,
   MUST_READ_PLAY_TARGET,
   INSIGHT_PLAY_TARGET,
-  USED_EVENT_TITLE_DICE,
   type EventMemoryStore,
   type EventRecord,
   type MemoryCandidate,
@@ -41,7 +43,16 @@ import {
   type MemorySection,
 } from "./event-memory";
 
-/** 补位池条目（= 两天可评分池 ScorablePoolEntry 的超集）。 */
+/**
+ * 两天可评分池条目（`enrich/exec-pool.ts#collectTwoDayArticles` 产出）。
+ *
+ * 用途：必读段按 url 回查条目，**用池内的完整 summary 重算分行关联度**
+ * （比「标题 + why」更准，且影响「重大事件打破冷却」的 peakScore）——
+ * 拿不到就退回标题+why 兜底（口径统一）。
+ *
+ * ⚠️ 2026-09-27：定调兜底改为「由必读+商机归纳」后，本池**不再**参与定调补位
+ *    （旧用法 `pickFreshFromPool` 已删），只剩必读打分这一处用途。
+ */
 export interface GuardPoolItem {
   title: string;
   summary?: string;
@@ -53,62 +64,12 @@ export interface GuardPoolItem {
   category?: string;
 }
 
-/**
- * 当天「已用事件」判定器（2026-09-24 用户要求：补位时排除当天已用事件）。
- *
- * **要解决的病**：定调被去重后由池内补位，而补位只按「分行关联度」挑，
- * **不检查这条是否已在当天其他板块讲过** —— 实证 09-24：定调补位选中
- * 「中小银行压降网贷规模 助贷行业适配新规重塑合作模式」，而同一事件当天
- * 已在**风险预警 + 商机洞察**里各出现一次（同一件事在一期报告里讲了 3 遍）。
- *
- * 为什么能在 hero 段就拿到「当天已用」：`applyMemoryGuard` 的处理顺序是
- * hero → must_read → insights → risk，而 must_read/insights/risk 的 LLM 产出
- * 在进入本函数时**已经全在 `exec` 里**（本模块只做去重与兜底，不生成内容）。
- * 所以 hero 补位时可以直接把这三个板块当作「即将播出」来避让。
- *
- * 判定双路（顺序有讲究）：
- *  ① **URL 规范化后相等** → 同一条内容（最可靠，覆盖「同一媒体同一条」）；
- *  ② **标题 bigram Dice ≥ `USED_EVENT_TITLE_DICE`** → 同一事件的多家报道
- *     （不同 URL，如新浪与财新同发一条政策）。
- *
- * ⚠️ 这里**只做「避让」**（影响补位选谁），**不参与 `evaluateCandidate` 判重** ——
- * 判重窗与冷却期是 2026-09-18 用户锁定的口径，一行未动。
- */
-export interface UsedEvents {
-  /** 已用条目的规范化 URL。 */
-  urls: Set<string>;
-  /** 已用条目的标题（原文，比对时各自归一化为 bigram）。 */
-  titles: string[];
-}
-
-/** 收集「当天报告里将出现的事件」（**不含 hero 自身**：它就是被去重的那条）。 */
-export function collectUsedEvents(exec: ExecutiveSummary): UsedEvents {
-  const urls = new Set<string>();
-  const titles: string[] = [];
-  const add = (title?: string, ...urlsIn: Array<string | undefined>): void => {
-    if (title && title.trim()) titles.push(title.trim());
-    for (const u of urlsIn) if (u) urls.add(canonicalizeUrl(u));
-  };
-  for (const m of exec.must_read ?? []) add(m.title, m.url);
-  for (const it of exec.insights ?? []) add(it.topic, ...(it.sources ?? []).map((s) => s.url));
-  if (exec.risk) {
-    add(exec.risk.topic, exec.risk.url, ...(exec.risk.sources ?? []).map((s) => s.url));
-  }
-  return { urls, titles };
-}
-
-/** 该池条目是否与「当天已用事件」指向同一件事。 */
-export function isUsedEvent(used: UsedEvents, title: string, url?: string): boolean {
-  if (url && used.urls.has(canonicalizeUrl(url))) return true;
-  return used.titles.some((t) => titleSimilarityDice(t, title) >= USED_EVENT_TITLE_DICE);
-}
-
 export interface GuardInput {
   exec: ExecutiveSummary;
   store: EventMemoryStore;
   /** 今天 YYYY-MM-DD。 */
   today: string;
-  /** 兜底补位池（两天可评分池）。为空则跳过 L2 补位。 */
+  /** 两天可评分池（必读段按 url 回查完整 summary 重算关联度；不再用于定调补位）。 */
   pool?: GuardPoolItem[];
   /**
    * 参照时刻（**必填**，2026-09-14 C-3）。由编排层注入 `ctx.startTime`：
@@ -125,78 +86,6 @@ export interface GuardOutput {
   decisions: MemoryDecision[];
   /** 人类可读日志行。 */
   log: string[];
-}
-
-/**
- * 从补位池里挑出「记忆库中不存在」的条目（L2）。
- *
- * `used` 给了就额外跳过「当天已在其他板块讲过」的候选（见 `UsedEvents`）；
- * 不传 = 沿用旧行为（只按记忆库判重）。
- */
-function pickFreshFromPool(
-  pool: GuardPoolItem[],
-  store: EventMemoryStore,
-  section: MemorySection,
-  today: string,
-  excludeUrls: Set<string>,
-  limit: number,
-  out: { picked: MemoryCandidate[]; store: EventMemoryStore; broadcastAt: string },
-  used?: UsedEvents,
-): number {
-  if (limit <= 0) return 0;
-  const scored = pool
-    .filter((p) => p.title && (!p.url || !excludeUrls.has(p.url)))
-    .filter((p) => !(used && isUsedEvent(used, p.title, p.url)))
-    .map((p) => {
-      const rel = scoreBranchRelevance({
-        title: p.title,
-        ...(p.summary ? { summary: p.summary } : {}),
-        ...(p.category ? { category: p.category } : {}),
-        ...(p.subcategory ? { subcategory: p.subcategory } : {}),
-      });
-      return { p, rel };
-    })
-    .filter((x) => x.rel.tier !== "drop")
-    .sort((a, b) => b.rel.score - a.rel.score);
-
-  let n = 0;
-  for (const { p, rel } of scored) {
-    if (n >= limit) break;
-    const cand: MemoryCandidate = {
-      title: p.title,
-      text: p.summary ?? "",
-      ...(p.url ? { url: p.url } : {}),
-      score: rel.score,
-      tier: rel.tier,
-      ...(rel.override ? { override: true } : {}),
-    };
-    const d = evaluateCandidate({ cand, section, today, store: out.store });
-    if (d.verdict !== "new" && d.verdict !== "progress") continue;
-    out.picked.push(cand);
-    out.store = rememberBroadcast(out.store, {
-      cand,
-      section,
-      date: today,
-      novelty: d.novelty,
-      broadcastAt: out.broadcastAt,
-    });
-    if (p.url) excludeUrls.add(p.url);
-    n++;
-  }
-  return n;
-}
-
-/** 用补位条目拼一条 must_read（文案口径与评分兜底一致）。 */
-function toMustRead(cand: MemoryCandidate): { title: string; why: string; url?: string } {
-  const rel: BranchRelevance = scoreBranchRelevance({
-    title: cand.title,
-    ...(cand.text ? { summary: cand.text } : {}),
-  });
-  return {
-    title: cand.title.slice(0, 15),
-    why: synthMustReadWhy(rel),
-    ...(cand.url ? { url: cand.url } : {}),
-  };
 }
 
 /**
@@ -299,38 +188,32 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
       });
       log.push(`🧠 定调：${d.verdict}（增量 ${d.novelty.toFixed(2)}）— ${d.reason}`);
     } else {
-      // 定调被去重 → 必须补一条新的（红线：定调永不空）
-      // 2026-09-24（用户要求）：补位须避开「当天其他板块已在讲的事件」——
-      //   must_read / insights / risk 的 LLM 产出此刻已全在 exec 里，可直接作避让清单。
-      //   实证 09-24：定调补位选中「中小银行压降网贷规模」，而同一事件当天又在
-      //   风险预警 + 商机里各讲一次（一件事在一期报告里讲了 3 遍）。
-      const box = { picked: [] as MemoryCandidate[], store, broadcastAt };
-      const used = collectUsedEvents(exec);
-      let n = pickFreshFromPool(pool, store, "hero", today, new Set(), 1, box, used);
-      let relaxed = false;
-      if (n === 0) {
-        // 池内已无「当天未被其他板块使用」的候选 → 放宽排除再试一次。
-        // 红线不变：定调永不空 —— 宁可与别处重复，也不留空。
-        n = pickFreshFromPool(pool, box.store, "hero", today, new Set(), 1, box);
-        relaxed = n > 0;
-      }
-      store = box.store;
-      if (n > 0) {
-        next.hero_line = `今日分行焦点：${box.picked[0].title.slice(0, 26)}`;
-        // 口播稿沿用会与旧稿雷同 → 清空；由 syncNarration 用补位后的 hero_line 兜底派生。
+      // 定调被去重 → 兜底一段「关注导语」（红线：定调永不空）
+      //
+      // 2026-09-27 sc 口径（关键转向）：定调是「今天要关注什么」的**纲** —— 让读者在看正文前
+      // 就知道接下来必读/商机里要重点看哪几个方面、以及为什么值得看。因此判重命中后
+      // **不再从两天池另挑一条事件顶上**（旧实现实证 09-27 把「河南省首笔取水权质押贷款落地
+      // 信阳」顶成定调：既是不相干的外省琐闻，又与当天必读/商机毫无关系），改为回到
+      // **本次报告自身**已定稿的必读 + 商机做确定性归纳（`deriveHeroLine`：方向 + 一句
+      // 「为什么值得关注」）—— 天然提纲挈领，也不会引入新事件。
+      //
+      // ⚠️ 随池补位一并删除的旧机制（不要再加回来）：① 09-24「避开当天其他板块已用事件」
+      // （`collectUsedEvents`）—— 归纳素材本就来自当日板块，不存在「与别处撞车」；
+      // ② 09-27「候选地域/层级门槛」（`isHeroFallbackEligible`）—— 不挑事件就不必挑地域。
+      const derived = deriveHeroLine(exec);
+      if (derived) {
+        // 卡面只放正文（**不带任何标签前缀**）：页面「今日定调：」/ 企微「【今日定调】」/
+        // 口播「先看今日定调。」各端自加标签，生产者再加前缀会渲染成双标签（09-27 实证）。
+        next.hero_line = derived;
+        // 口播稿是围绕**原定调**写的，定调换了就必须清空 → 由 syncNarration 用新 hero_line 兜底派生。
         // ⚠️ 2026-09-26 修复：此处原注释写「由 audio.ts 按 hero_line 重新确定性生成」，
         //   但那个环节**并不存在**（voice/index.ts 只读 spoken_hero、明写不读 hero_line）
-        //   → 补位期次的「今日定调」口播段整段消失（实证 09-24 / 09-26 皆缺，非补位期次正常）。
+        //   → 兜底期次的「今日定调」口播段整段消失（实证 09-24 / 09-26 皆缺，非兜底期次正常）。
         next.spoken_hero = undefined;
-        log.push(
-          `🧠 定调命中去重（${d.verdict}），改用池内新事件补位：${next.hero_line}` +
-            (relaxed
-              ? "（⚠️ 池内已无「当天未被其他板块使用」的候选，已放宽排除条件 → 可能与当日板块重复）"
-              : ""),
-        );
+        log.push(`🧠 定调命中去重（${d.verdict}），改由必读+商机归纳今日关注主线：${derived}`);
       } else {
         log.push(
-          `🧠 定调命中去重（${d.verdict}），但池内无新事件可补 → 保留原定调（宁可重复，不留空）`,
+          `🧠 定调命中去重（${d.verdict}），但必读/商机均为空、无可归纳 → 保留原定调（宁可重复，不留空）`,
         );
       }
     }

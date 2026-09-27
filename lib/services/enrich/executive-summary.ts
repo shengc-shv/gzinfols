@@ -37,7 +37,12 @@ export interface ExecInsight {
 }
 
 export interface ExecutiveSummary {
-  /** 今日定调（2026-08-21 重构）：一句话总编辑视角，3 秒 get 今天主题；无则页面不渲染 hero-line */
+  /**
+   * 今日定调（2026-08-21 重构；**2026-09-27 改为「导语式」**）：一句话把当天必读与商机的
+   * 关注主线归纳出来（2~4 条：方向 + 为什么值得关注），起**提纲挈领**作用 —— 让读者在看
+   * 正文前就知道该重点看哪几个方面，而不是复述某一条事件。无则页面不渲染 hero-line。
+   * 判重命中时由 `deriveHeroLine` 从必读/商机兜底派生（不再从两天池另挑事件）。
+   */
   hero_line?: string;
   /** 今日必读：高影响事件 + 为何重要 + 源链接（可空：旧归档/AI 未回链时渲染不包 <a>） */
   must_read: Array<{ title: string; why: string; url?: string }>;
@@ -47,7 +52,7 @@ export interface ExecutiveSummary {
   risk?: ExecRisk;
   /** 广东/广州 IPO 企业动态口播（≤60字）；当日无相关动态时为 null */
   guangdong_ipo?: { spoken?: string } | null;
-  /** 口播稿：今日定调（主播解读感：60字左右完整句，事件+应对建议，纯口语） */
+  /** 口播稿：今日定调（主播解读感：70~120 字，把当日关注主线讲成口语 + 应对提示，纯口语） */
   spoken_hero?: string;
   /** 口播稿：今日必读（主播解读感：5条左右，每条=事件+应对建议，独立成句换行，≤280字，纯口语） */
   spoken_must_read?: string;
@@ -100,7 +105,12 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 
 基于输入的当日条目（宏观政策 + 广州商机 + 市场总览 + IPO），输出五部分：
 
-0. hero_line（今日定调，1 句话）：以"总编辑"视角提炼今天最值得分行领导关注的一件事，50 字以内，一句话讲清"今天主题是什么、对分行意味着什么"。例："中行'算力Token贷'在穗抢跑落地，同业以新风控逻辑圈占科创轻资产客群，建议分行尽快评估应对。" 若当日无突出主题可省略（输出空字符串）；并为该定调配套口播稿 spoken_hero（"主播解读感"：60 字左右完整句，先讲事件再给应对建议，如"消费贷贴息集体扩围，价格战升级，建议分行统一口径抢抓窗口"，与 hero_line 结论一致；纯口语、无链接/无Markdown/无emoji，可直接朗读，严禁照读 hero_line 原文）。
+0. hero_line（今日定调，**导语式**，60~110 字）：**它是下面 must_read 与 insights 的「纲」** —— 先想清楚必读与商机会覆盖哪几条主线，再用一段话把它们归纳出来，让读者在看正文之前就知道**今天要关注哪几个方面、以及为什么值得关注**。它**不是**「今天发生了什么」的一条事件摘要，**更不要**换个说法把某条必读复述一遍。
+   - 句式：今天值得重点关注N个方面：一是「方向」，「为什么值得关注」；二是…；三是…。
+   - {方向} = 3~8 字的领域词组（如「理财费率竞争」「消费贷合作模式」「跨境资金安排」），**不要**写具体企业/机构名或事件细节；
+   - 每个方向后面**必须**跟一句「为什么值得关注」（10~25 字，点出对分行的意义或看点）—— 只列方向不给理由等于没说；
+   - 覆盖 2~4 条主线，全部取自下面 must_read / insights 将要讲的内容（顺序：必读先、商机后）；
+   - 若当日确实无突出主题，可输出空字符串；并为该定调配套口播稿 spoken_hero（"主播解读感"：70~120 字完整句，把同一批关注方向讲成口语，可补一句应对提示，与 hero_line 口径一致；纯口语、无链接/无Markdown/无emoji，可直接朗读，**严禁照读 hero_line 原文**）。
 
 1. must_read（今日必读，8-10 条）— **偏宏观、市场级大信号**：央行/金融监管总局等全国性政策转向、市场重大变化、行业性新趋势、新产品新玩法。答"今天/本周市场可能怎么走"。**只放宏观，不放具体获客动作**（具体动作归 insights）。
    - title：事件标题（15 字内，中文，可精简）
@@ -453,6 +463,82 @@ export function synthMustReadWhy(rel: BranchRelevance): string {
   return `${head}（${lines}）：${tail}`.slice(0, 60);
 }
 
+/* ───────── 今日定调：兜底「关注导语」（2026-09-27 sc 口径） ───────── */
+
+/** 兜底导语最多归纳几条主线。 */
+export const HERO_DERIVE_MAX_LINES = 3;
+/** 每条主线的「为什么值得关注」截断长度（字）。 */
+export const HERO_DERIVE_REASON_CHARS = 22;
+/** 导语整体字数上限；超长则先砍掉最后一条主线再试。 */
+export const HERO_DERIVE_MAX_CHARS = 150;
+
+const HERO_ORDINALS = ["一是", "二是", "三是"] as const;
+const HERO_CN_NUM = ["", "一", "两", "三"] as const;
+
+/** 取「为什么值得关注」的第一句，并按标点截断到 max 字（不产出半截词）。 */
+function heroReason(raw: string | undefined, max: number): string {
+  const t = (raw ?? "").trim().replace(/[。．.!！?？；;]+$/g, "");
+  if (!t) return "";
+  const first = t.split(/[。；;]/)[0]!.replace(/^[，,、\s]+/, "");
+  if (first.length <= max) return first.replace(/[，,、]+$/, "");
+  const cut = first.slice(0, max);
+  const p = Math.max(cut.lastIndexOf("，"), cut.lastIndexOf("、"));
+  return p >= 6 ? cut.slice(0, p) : cut;
+}
+
+/** 把选出的主线渲染成一句导语（句式与 LLM 的 hero_line 口径同构）。 */
+function renderHeroDerived(picks: Array<{ head: string; reason: string }>): string {
+  const body = (p: { head: string; reason: string }): string =>
+    `${p.head}${p.reason ? `，${p.reason}` : ""}`;
+  if (picks.length === 1) return `今天值得重点关注：${body(picks[0]!)}。`;
+  const items = picks.map((p, i) => `${HERO_ORDINALS[i]}${body(p)}`);
+  return `今天值得重点关注${HERO_CN_NUM[picks.length]}个方面：${items.join("；")}。`;
+}
+
+/**
+ * 今日定调兜底：由**本次报告自身**的必读 + 商机确定性归纳一段「关注导语」。
+ *
+ * 为什么需要（2026-09-27 sc 口径，本函数存在的理由）：
+ * 定调是「今天要关注什么」的**纲** —— 读者看它就该知道接下来必读/商机里要重点看哪几个
+ * 方面、以及为什么值得看。所以「LLM 定调判重命中」后的兜底**不能从两天池另挑一条事件顶上**
+ * （旧实现实证 09-27 把「河南省首笔取水权质押贷款落地信阳」顶成定调：既是不相干的外省琐闻，
+ * 又与当天必读/商机毫无关系），而应回到**本次报告已定稿的内容**里做归纳。
+ *
+ * 素材与口径（不新造内容）：
+ *  - 方向 head 取 `must_read.title` / `insights.topic`（都 ≤15 字，本身即方向词组）；
+ *  - 理由 reason 取 `must_read.why` / `insights.impact` 的**第一句**（LLM 已写好的「为什么重要」）；
+ *  - 交错取用（必读 1 → 商机 1 → 必读 2 …）：必读占硬信号、商机预告落地线索，两个板块都能被点到；
+ *  - 句式与 LLM 的 §0 口径同构 → 两条路径产出的定调风格一致。
+ *
+ * ⚠️ 只用于「LLM 定调被判重」的兜底分支；LLM 正常产出的 hero_line 一字不改。
+ * @returns 空串 = 无素材可归纳（调用方据此保留原定调，守住「定调永不空」红线）
+ */
+export function deriveHeroLine(input: {
+  must_read?: Array<{ title?: string; why?: string }>;
+  insights?: Array<{ topic?: string; impact?: string }>;
+}): string {
+  const mr = (input.must_read ?? []).filter((m) => (m.title ?? "").trim());
+  const ins = (input.insights ?? []).filter((it) => (it.topic ?? "").trim());
+  const picks: Array<{ head: string; reason: string }> = [];
+  for (let i = 0; i < Math.max(mr.length, ins.length); i++) {
+    for (const [head, reason] of [
+      [mr[i]?.title, mr[i]?.why],
+      [ins[i]?.topic, ins[i]?.impact],
+    ] as const) {
+      const h = (head ?? "").trim();
+      if (!h || picks.length >= HERO_DERIVE_MAX_LINES) continue;
+      if (picks.some((p) => p.head === h)) continue;
+      picks.push({ head: h, reason: heroReason(reason, HERO_DERIVE_REASON_CHARS) });
+    }
+  }
+  while (picks.length > 0) {
+    const text = renderHeroDerived(picks);
+    if (text.length <= HERO_DERIVE_MAX_CHARS || picks.length === 1) return text;
+    picks.pop(); // 超长 → 先砍最后一条主线，再试
+  }
+  return "";
+}
+
 /**
  * 评分层兜底生成器（SKIP_AI 无 store.json 时调用）。
  *
@@ -615,7 +701,10 @@ export function buildExecutiveFromScores(
       }
     : undefined;
   const top = ranked[0];
-  const hero_line = top ? `今日分行焦点：${top.article.title.slice(0, 26)}` : "";
+  // 卡面只放正文标题（不再加「今日分行焦点：」前缀，2026-09-27）：
+  // 各消费端自加标签（页面「今日定调：」/ 企微「【今日定调】」/ 口播「先看今日定调。」），
+  // 生产者再加前缀会渲染成「今日定调：今日分行焦点：…」双标签。
+  const hero_line = top ? top.article.title.slice(0, 26) : "";
   return {
     hero_line,
     must_read,
