@@ -1,5 +1,24 @@
 [
   {
+    "appId": "108906",
+    "nameCn": "Voyager Intelligent Systems Limited",
+    "nameEn": "",
+    "board": "主板",
+    "status": "A",
+    "submitDate": "2026-09-27",
+    "domicile": "中国(境内)",
+    "isOffshore": false,
+    "gdCityHits": 6,
+    "gdCityMentions": 164,
+    "isGdConnected": true,
+    "vie": "historical",
+    "verdict": "non-redchip",
+    "discoveredAt": "2026-09-28T07:40:18+08:00",
+    "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108906/documents/sehk26092700112.pdf",
+    "leadId": "108906",
+    "lastChangedAt": "2026-09-28T07:40:18+08:00"
+  },
+  {
     "appId": "108867",
     "nameCn": "Guangdong Mic-Power New Energy Co., Ltd.",
     "nameEn": "",
