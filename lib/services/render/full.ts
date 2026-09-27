@@ -16,6 +16,7 @@ import { SECTIONS, BANNED_WORDS } from "../enrich/validator";
 import { rollUpTags } from "../enrich/tag-rollup";
 import { PRIORITY_SEGMENTS, OTHER_SEGMENT, mapTagsToSegments } from "../classify/customer-segment";
 import { titleSimilarityDice } from "../select/filters/dedup-similar";
+import { stripHeroPrefix } from "../../utils/hero-text";
 import {
   renderRawCategoryPanel,
   countItemsRecent,
@@ -301,7 +302,9 @@ export function renderHtml(
         hour12: false,
       }).format(opts.now)
     : "";
-  const hero = report.hero_line?.trim();
+  // 定调文本：剥掉历史遗留的「今日分行焦点：」补位前缀（2026-09-27），
+  // 标签由本模板统一加「今日定调：」，避免出现「今日定调：今日分行焦点：…」双标签。
+  const hero = stripHeroPrefix(report.hero_line);
   // 微信/QQ/推特 等转发卡片元信息（2026-09-14 P1-2 + P0-4）：基址由调用方注入
   // （REPORT_BASE_URL → ctx.config.reportBaseUrl）。
   // 此前硬编码 fallback 指向**旧仓库** gzinfo 的 gh-pages 域，且本仓库不存在

@@ -14,6 +14,8 @@
  *   - fetch 可注入（fetchImpl），测试零 mock 全局
  */
 
+import { stripHeroPrefix } from "../../utils/hero-text";
+
 export interface WecomNotifyResult {
   ok: boolean;
   targets: number;
@@ -50,7 +52,7 @@ export function buildWecomMarkdown(
   const title = "# 📢 今日分行简报已生成";
   const dateLine = `📅 ${dateStr}（${weekday}）`;
   const hero = heroLine
-    ? `> **【今日定调】** ${heroLine}`
+    ? `> **【今日定调】** ${stripHeroPrefix(heroLine)}`
     : "> ⚠️ 今日暂无定调，点击查看完整简报";
   const ipo = ipoLineOf(ipoLine);
   const link = `[点击查看完整简报 →](${url})`;
@@ -78,7 +80,7 @@ export function buildWecomText(
   const weekday = WEEKDAY_CN[new Date(`${dateStr}T12:00:00+08:00`).getDay()] ?? "";
   const title = "📢 今日分行简报已生成";
   const dateLine = `📅 ${dateStr}（${weekday}）`;
-  const hero = heroLine ? `【今日定调】${heroLine}` : "【今日定调】今日暂无定调，请点击下方链接查看完整简报";
+  const hero = heroLine ? `【今日定调】${stripHeroPrefix(heroLine)}` : "【今日定调】今日暂无定调，请点击下方链接查看完整简报";
   const ipo = ipoLineOf(ipoLine);
   return [
     title,

@@ -10,6 +10,8 @@
  * 纯函数、零副作用、零 LLM；不依赖 node: 与 adapters。
  */
 
+import { stripHeroPrefix } from "../../utils/hero-text";
+
 /** 商机条目的衔接词（轮换，缓解逐条拼接的生硬感）。 */
 export const INSIGHT_CONNECTORS = ["此外，", "同时，", "另一条值得关注，", "另外，"];
 /** 必读条目的衔接词（轮换）。 */
@@ -66,9 +68,6 @@ export function riskSpeechLine(r: { topic?: string; impact?: string; action?: st
   return `今天有 1 个需要警惕：${r.topic ?? ""}，${endSentence(r.impact)}${endSentence(r.action)}`;
 }
 
-/** 定调被「池内补位」时 exec-guard 给卡面加的前缀（派生口播时要去掉，否则念两遍）。 */
-const HERO_FALLBACK_PREFIX = "今日分行焦点：";
-
 /**
  * 今日定调口播句（**兜底派生**用）。
  *
@@ -85,11 +84,9 @@ const HERO_FALLBACK_PREFIX = "今日分行焦点：";
  * @returns 空串表示「无可派生」（调用方据此置 undefined，口播段照常不产出）
  */
 export function heroSpeechLine(heroLine?: string): string {
-  const raw = (heroLine ?? "").trim();
-  if (!raw) return "";
-  const body = raw.startsWith(HERO_FALLBACK_PREFIX)
-    ? raw.slice(HERO_FALLBACK_PREFIX.length).trim()
-    : raw;
+  // 前缀剥离复用 utils 的单一实现（页面 / 企微 / 口播消费端共用，避免三套各写一份）
+  const body = stripHeroPrefix(heroLine);
+  if (!body) return "";
   // 补位标题常带「！」「？」收尾 → 先剥宽句末标点，再由 endSentence 补且只补一个「。」
   return endSentence(body.replace(/[。．.!！?？；;]+$/, ""));
 }
