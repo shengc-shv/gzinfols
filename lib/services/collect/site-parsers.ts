@@ -114,7 +114,14 @@ export function parseSinaMoney(html: string, source: SourceDef, limit = 20): Raw
       title,
       url,
       excerpt: `【财富管理】${title}`,
-      category: "gz",
+      // 2026-09-27 修复：此前硬编码 "gz"，与源配置（sina-money = finance）矛盾，
+      // 等于用「源」决定归属（违反无状态源红线），并把全国性内容塞进广州商机。
+      // 改为跟随源配置；「全国业务线并入广州商机」的正确机制在 group.ts#CN_BIZ_MAP
+      // （按 subcategory 内容判定 cn-wealth/cn-credit/cn-private），不靠源级硬编码。
+      category: source.category,
+      // 采集元数据透传（2026-09-27 补，同 providers.ts 2026-09-21 的修法）：
+      // 漏传 subcategory 会让 relevance-score#sourceScore 的 cn-policy/cn-finance 加分变死代码。
+      ...(source.subcategory ? { subcategory: source.subcategory } : {}),
       ...(d ? { publishedAt: dateAt(d) } : {}),
     });
   }
@@ -148,7 +155,12 @@ export function parse21jingji(
       title,
       url,
       excerpt: `【21财经·${channelName}】${title}`,
-      category: "gz",
+      // 2026-09-27 修复：此前硬编码 "gz"，与源配置（21jingji-finance = finance，
+      // notes 明写「全国性资讯，归宏观政策·国内财经，不作广州商机」）直接矛盾。
+      // 实证：河南取水权贷款等全国性内容带着 gz 标签入库 → 进定调补位池后被选中当「今日定调」。
+      category: source.category,
+      // 采集元数据透传（2026-09-27 补，同 providers.ts 2026-09-21 的修法）
+      ...(source.subcategory ? { subcategory: source.subcategory } : {}),
       ...(d ? { publishedAt: dateAt(d) } : {}),
     });
   }

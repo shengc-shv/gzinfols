@@ -8,18 +8,23 @@
  * 进入「广东IPO动态」板块，并被打上「粤」标 + `ipoCity = "广东"`。
  * 实测同时存在反向错误：真粤企「深圳市海柔創新…（主板递表·广东企业）」漏标「粤」。
  *
- * 本测试锁住四件事：
+ * 本测试锁住五件事：
  *  1. 源配置不变量：`category ∈ {ipo, gd-ipo}` 只能给**结构化 IPO 采集源**（非通用 RSS）；
  *  2. category 单独命中不再足以进板块 / 打粤标（须结构化信号或内容判定）；
  *  3. 结构化广东信号（`registeredProvince`）仍能打粤标 —— 防过度收紧导致真粤企漏标；
- *  4. 港交所「全国参考」递表条目仍进板块但**不**打粤标（既有设计不得回退）。
+ *  4. 港交所「全国参考」递表条目仍进板块但**不**打粤标（既有设计不得回退）；
+ *  5. 站点专用解析器（sina-money / 21jingji）的 category 必须**跟随源配置**，
+ *     不得硬编码 `gz` —— 2026-09-27 事故：两者硬编码 gz，把全国性资讯（河南取水权贷款等）
+ *     塞进「广州商机」→ 进而被选成「今日定调」。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { todayKey } from "../lib/utils/time";
 import { buildGdIpo } from "../lib/pipeline/side-outputs/side-gd-ipo";
+import { parse21jingji, parseSinaMoney } from "../lib/services/collect/site-parsers";
 import type { ArticleInput } from "../lib/contracts/article";
+import type { SourceDef } from "../lib/contracts/source";
 import type { DailyReport } from "../lib/contracts/report";
 import type { PipelineContext } from "../lib/contracts/pipeline";
 
@@ -160,4 +165,42 @@ test("港交所「全国参考」递表：进板块但不打「粤」标（既�
     !out.sections.ipo![0].tags?.includes("粤"),
     "外省企业不得打「粤」标",
   );
+});
+
+test("站点专用解析器：category 必须跟随源配置，不得硬编码 gz（09-27 河南取水权事故）", () => {
+  const sina: SourceDef = {
+    id: "sina-money",
+    name: "新浪财经·理财",
+    type: "scrape",
+    url: "https://finance.sina.com.cn/money/",
+    category: "finance",
+    subcategory: "cn-finance",
+  };
+  const sinaOut = parseSinaMoney(
+    '<a href="https://finance.sina.com.cn/roll/2026-09-26/doc-abc123.shtml">多家银行理财集体下调费率 存续规模承压</a>',
+    sina,
+  );
+  assert.equal(sinaOut.length, 1, "财富关键词条目应解析出 1 条");
+  assert.equal(sinaOut[0].category, "finance", "跟随源配置（此前硬编码 gz）");
+  assert.equal(sinaOut[0].subcategory, "cn-finance", "subcategory 一并透传（否则 sourceScore 加分失效）");
+
+  const jj: SourceDef = {
+    id: "21jingji-finance",
+    name: "21世纪经济报道",
+    type: "scrape",
+    url: "https://www.21jingji.com/",
+    category: "finance",
+  };
+  const jjOut = parse21jingji(
+    '<a href="https://m.21jingji.com/article/20260926/herald/ed96576018687d9c16a278413ad23558.html" title="河南省首笔取水权质押贷款落地信阳">信贷要闻</a>',
+    "金融",
+    jj,
+  );
+  assert.equal(jjOut.length, 1, "信贷关键词条目应解析出 1 条");
+  assert.equal(
+    jjOut[0].category,
+    "finance",
+    "全国性资讯不得被打成 gz —— 否则会以「广州商机」名义进定调候选池",
+  );
+  assert.ok(!JSON.stringify(jjOut[0]).includes('"gz"'), "不得出现任何 gz 归属");
 });
