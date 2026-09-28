@@ -1,0 +1,876 @@
+{
+  "date": "2026-09-29",
+  "updatedAt": "2026-09-28T23:52:43.034Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：增量政策落地，稳楼市促增收；助贷中介整改，节前合规排查；养老营销纠偏，返现冲量刹车；节前财富排期，新基金超70只。",
+    "spoken_hero": "今天主要看四个方面：增量政策落地，稳楼市促增收；助贷中介整改，节前合规排查；养老营销纠偏，返现冲量刹车；节前财富排期，新基金超70只。",
+    "must_read": [
+      {
+        "title": "贷款中介新规9月30日落地",
+        "why": "中介合作与获客渠道面临整改，节前需排查合作方合规与收费话术，避免新规生效首日出现渠道断档。",
+        "url": "https://m.21jingji.com/article/20260928/herald/2ffad81cd26d6e71cc80f36d70753379.html"
+      },
+      {
+        "title": "险资投港股通ETF口径明确",
+        "why": "长期资金配置通道拓宽，机构与高净值客户的跨境配置需求上升，财富与私行可提前准备对接方案。",
+        "url": "https://www.stcn.com/article/detail/4200075.html"
+      },
+      {
+        "title": "个人养老金违规冲量被点名",
+        "why": "开户返现、投保返佣最高超30%被点名，养老金融营销话术需自查，避免节前冲量触碰监管红线。",
+        "url": "https://finance.cctv.com/2026/09/28/ARTIAa3XHuCXPEfbaBnYN2JQ260928.shtml"
+      },
+      {
+        "title": "金融产品网络营销监管收紧",
+        "why": "头部平台密集清退违规账号，线上营销素材与第三方引流合作合规性需自查，影响获客渠道稳定性。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20260928/4475319_1.html"
+      },
+      {
+        "title": "国常会部署增量政策稳楼市促增收",
+        "why": "盘活地方债、稳楼市、促增收三线并进，住房金融与消费信贷的后续细则将直接影响四季度投放节奏与客群结构。",
+        "url": "https://finance.eastmoney.com/a/202609283885517175.html"
+      }
+    ],
+    "spoken_must_read": "贷款中介新规9月30日落地。中介合作与获客渠道面临整改，节前需排查合作方合规与收费话术，避免新规生效首日出现渠道断档。其次，险资投港股通ETF口径明确。长期资金配置通道拓宽，机构与高净值客户的跨境配置需求上升，财富与私行可提前准备对接方案。此外，个人养老金违规冲量被点名。开户返现、投保返佣最高超30%被点名，养老金融营销话术需自查，避免节前冲量触碰监管红线。还有，金融产品网络营销监管收紧。头部平台密集清退违规账号，线上营销素材与第三方引流合作合规性需自查，影响获客渠道稳定性。另外，国常会部署增量政策稳楼市促增收。盘活地方债、稳楼市、促增收三线并进，住房金融与消费信贷的后续细则将直接影响四季度投放节奏与客群结构。",
+    "insights": [
+      {
+        "topic": "节后新基金代销排期",
+        "impact": "超70只新基金定档10月，叠加科技主题基金松绑限购，节后代销货架与客户预约节奏直接决定四季度财富中收。",
+        "action": "本周梳理10月新发产品清单，按风险等级匹配存量客户，节前完成重点客户预约登记。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "新基金密集发行 超70只产品定档10月",
+            "url": "https://finance.sina.com.cn/jjxw/2026-09-29/doc-initmuyi8016216.shtml"
+          },
+          {
+            "title": "逐鹿科技赛道 多只基金“松绑”限购",
+            "url": "https://finance.sina.com.cn/jjxw/2026-09-28/doc-initimtt4095915.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "私行跨境配置需求升温",
+        "impact": "险资投资港股通ETF口径明确，高净值客户跨境资产再平衡咨询增多，私行产品准入与合规说明需同步更新。",
+        "action": "本周更新私行跨境产品准入清单，对过亿资产客户逐户梳理港股通ETF等配置需求。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "监管部门明确险资投资港股通ETF监管口径",
+            "url": "https://www.stcn.com/article/detail/4200075.html"
+          }
+        ]
+      },
+      {
+        "topic": "企业主客群四季度策略沟通",
+        "impact": "公私募备战四季度存共识与分歧，企业主客户对方向判断需求上升，是私行顾问式服务的切入窗口。",
+        "action": "节后首周组织四季度策略小范围沟通会，优先邀请企业主与家族信托意向客户。",
+        "tag": [
+          "私行",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "sources": [
+          {
+            "title": "备战四季度，公私募的共识与分歧",
+            "url": "https://www.stcn.com/article/detail/4201765.html"
+          }
+        ]
+      },
+      {
+        "topic": "科创小微融担增信合作",
+        "impact": "政策性融担补科技金融短板，科创小微的增信路径拓宽，可带动普惠经营贷与结算代发综合贡献。",
+        "action": "本周对接辖内融担机构，梳理科创小微白名单，节后首周启动首批增信授信申报。",
+        "tag": [
+          "信贷",
+          "科技金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "sources": [
+          {
+            "title": "政策性融担如何补齐科技金融短板？打通“断点”，织密生态网",
+            "url": "https://m.21jingji.com/article/20260928/herald/5f8e3117b5bd8cbdac3683f5c7b004ac.html"
+          }
+        ]
+      },
+      {
+        "topic": "花都民生配套项目对接",
+        "impact": "花都重点民生配套项目加速落地，政银合作场景可带动代发、按揭与项目资金沉淀。",
+        "action": "本周对接花都项目清单，锁定代发与按揭合作切入点，节前完成方案报送。",
+        "tag": [
+          "政银合作",
+          "代发"
+        ],
+        "sources": [
+          {
+            "title": "广州花都全力保障重点民生配套项目落地建设",
+            "url": "https://www.cnr.cn/gd/guangdongyaowen/20260928/t20260928_527828120.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "季末零售信贷投放冲刺",
+        "impact": "季末银行资产冲刺，零售信贷与客群指标承压，节前最后窗口的投放节奏与定价安排影响季度收官。",
+        "action": "节前梳理待放款按揭与消费贷清单，优先处理已批未放件，同步确认节后定价策略。",
+        "tag": [
+          "信贷"
+        ],
+        "sources": [
+          {
+            "title": "季末商业银行迎来资产冲刺 推动零售业务量质提升",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-28/doc-inithzcu3169085.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，节前理财转向多资产多策略，加上超70只新基金定档10月，本周先把节后代销排期和客户预约做出来。高端客户方面，险资投港股通ETF口径明确，跨境配置需求升温，本周更新私行产品准入清单。普惠小微方面，政策性融担补科技金融短板，本周对接融担机构，梳理科创小微增信名单。本地消费场景方面，广州商圈节前密集上新，信用卡商圈分期和绑卡促活要跟上。",
+    "risk": {
+      "topic": "贷款中介与助贷新规节前落地",
+      "evidence": "贷款中介新规9月30日落地，互联网助贷整改提速，合作机构名单与分润模式面临调整。",
+      "impact": "个贷条线中介获客渠道或短期收缩，消费贷存量合作项目需合规复核；财富条线线上引流素材同步面临清退压力。",
+      "action": "个贷与消费贷条线节前完成合作方合规排查与收费话术整改，风控部同步复核存量合作项目名单。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "贷款中介，集体安静了！重磅新规9月30日落地",
+          "url": "https://m.21jingji.com/article/20260928/herald/2ffad81cd26d6e71cc80f36d70753379.html"
+        },
+        {
+          "title": "监管新规落地在即 互联网助贷行业整改提速",
+          "url": "https://www.cnfin.com/yw-lb/detail/20260929/4475878_1.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：贷款中介与助贷新规节前落地，个贷条线中介获客渠道或短期收缩，消费贷存量合作项目需合规复核；财富条线线上引流素材同步面临清退压力。个贷与消费贷条线节前完成合作方合规排查与收费话术整改，风控部同步复核存量合作项目名单。",
+    "guangdong_ipo": {
+      "spoken": "广东有两家企业在审。东莞的龙行天下，做皮革制鞋，拟上主板，招商证券保荐，目前处于问询阶段。另一家科杰技术，注册地广东，拟上创业板，中信建投保荐，也已进入问询。两家更新日期都是昨天。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "三大指数集体收跌，油价与美债收益率走高施压，纳指跌0.92%领跌。",
+      "sectors": [
+        "标普500近半数成分股呈负贝塔，指数与个股走势背离加剧。",
+        "AMD以82亿美元收购李飞飞World Labs，押注物理AI。",
+        "高盛董事会讨论任命Waldron为下一任CEO，据WSJ报道。",
+        "油价与美债收益率双双走高，成为拖累美股的主要压力。",
+        "Anthropic IPO招股书曝光，AI愿景宏大但成本激增。"
+      ],
+      "spoken": "美股三大指数集体收跌，纳指跌百分之零点九二领跌，道指跌百分之零点六七，标普跌百分之零点七七，油价和美债收益率走高是主要压力。板块方面，标普五百近半数成分股呈负贝塔，指数与个股背离加剧。个股上，AMD以八十二亿美元收购李飞飞旗下World Labs，押注物理AI。高盛董事会讨论任命Waldron为下一任CEO。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-29"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51481.51",
+          "changePct": "-0.67%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26820.38",
+          "changePct": "-0.92%"
+        },
+        {
+          "name": "标普500",
+          "value": "7683.69",
+          "changePct": "-0.77%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3823.62点（-1.67%）；深证成指收报12858.75点（-3.44%）；创业板指收报3139.82点（-4.53%）。",
+      "sectors": [
+        "三大指数集体收跌",
+        "超4500只个股飘绿"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-29"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3823.62",
+          "changePct": "-1.67%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12858.75",
+          "changePct": "-3.44%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3139.82",
+          "changePct": "-4.53%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24642.51点（+0.54%）；恒生科技收报4296.00点（-0.37%）。",
+      "sectors": [
+        "科网股活跃",
+        "石油股走强",
+        "光通信板块大跌",
+        "长飞光纤光缆跌超16%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-29"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.54% 科指跌0.37% 科网股活跃 石油股走强 光通信板块大跌 长飞光纤光缆跌超16%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-28/doc-initkpfc9653942.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24642.51",
+          "changePct": "+0.54%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4296.00",
+          "changePct": "-0.37%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-09-28",
+    "marketStatus": {
+      "reportDate": "2026-09-29",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-09-28"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-09-28"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-09-28"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 9月28日 周一 收盘；港股为 9月28日 周一 收盘；美股为 9月28日 周一 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202609283885049274.html",
+      "title_cn": "“易中天”重挫CPO概念罕见跌停潮发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "A股CPO（光模块）概念股出现罕见跌停潮，相关个股集体重挫，市场关注下跌原因。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "光通信",
+        "CPO"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609283885129149.html",
+      "title_cn": "段永平买入3万股贵州茅台直线拉升翻红",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "段永平买入3万股贵州茅台，消息带动贵州茅台股价直线拉升翻红。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "白酒",
+        "个股动态"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609283885154233.html",
+      "title_cn": "七部门联合印发《新型电池产业发展“十五五”规划》",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "七部门联合印发《新型电池产业发展“十五五”规划》，涉及新型电池产业政策部署。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "政策",
+        "新能源电池"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609283885170096.html",
+      "title_cn": "A股三大指数集体收跌汽车整车板块逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "A股三大指数集体收跌，汽车整车板块逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609283885198059.html",
+      "title_cn": "A股突变！全天跳水大跌背后四大原因曝光",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "A股全天跳水大跌，媒体报道称背后存在四大原因。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609283884590598.html",
+      "title_cn": "商务部美大司负责人解读第八轮中美经贸磋商成果",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "商务部美大司负责人就第八轮中美经贸磋商成果进行解读。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "政策",
+        "中美经贸"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609283884990464.html",
+      "title_cn": "突然！美联储酝酿大动作：通通上调！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "媒体报道美联储正酝酿大动作，涉及普遍上调相关事项。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "美联储",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609283884600721.html",
+      "title_cn": "连续三天人民日报“金轩”发文主题涉及北斗、生物制造、智能经济",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "人民日报“金轩”连续三天发文，主题涉及北斗、生物制造、智能经济。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "政策",
+        "北斗",
+        "生物制造"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609283884579686.html",
+      "title_cn": "OpenAI叫停开发、盖茨发出严厉警告！网络安全需求升温这10股业绩有望倍增",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "OpenAI叫停相关开发、盖茨发出警告，网络安全需求升温，报道提及10只业绩有望倍增的个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "AI",
+        "网络安全"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609283885348716.html",
+      "title_cn": "9月28日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "汇总9月28日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609293885632951.html",
+      "title_cn": "当大模型不再稀缺，AI产业的下一道护城河",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/29",
+      "summary": "评论文章探讨当大模型不再稀缺时，AI产业下一道护城河所在。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "AI",
+        "大模型"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609293885630189.html",
+      "title_cn": "21评论丨本轮黄金超级周期结束了吗？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/29",
+      "summary": "评论文章讨论本轮黄金超级周期是否已经结束。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "黄金",
+        "大宗商品"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-28/doc-initkpfc9653942.shtml",
+      "title_cn": "港股收评：恒指涨0.54% 科指跌0.37% 科网股活跃 石油股走强 光通信板块大跌 长飞光纤光缆跌超16%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "港股收评：恒指涨0.54%，科指跌0.37%，科网股活跃、石油股走强，光通信板块大跌，长飞光纤光缆跌超16%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "光通信",
+        "石油"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-29/doc-initmuyr3186573.shtml",
+      "title_cn": "中国中车获贝莱德增持49.6万股 每股作价约5.19港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/29",
+      "summary": "中国中车获贝莱德增持49.6万股，每股作价约5.19港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "个股动态",
+        "机构增减持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-09-29/doc-initmuyr3186295.shtml",
+      "title_cn": "中海油田服务获小摩增持约281.88万股 每股作价约7.51港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/29",
+      "summary": "中海油田服务获小摩增持约281.88万股，每股作价约7.51港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "个股动态",
+        "机构增减持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-09-28/doc-initirzn2915133.shtml",
+      "title_cn": "港股因国庆节周四休市一日 多只新股即将挂牌",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "港股因国庆节周四休市一日，多只新股即将挂牌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "休市",
+        "新股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/bxjj/2026-09-28/doc-initirzp9707580.shtml",
+      "title_cn": "华泰证券港股策略：节日期间短期流动性或承压",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "华泰证券发布港股策略，认为节日期间短期流动性或承压。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "流动性"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-28/doc-initimtr9810182.shtml",
+      "title_cn": "监管部门明确险资投资港股通ETF监管口径",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "监管部门明确险资投资港股通ETF的监管口径。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "政策",
+        "险资"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-09-28/doc-initimtq3034489.shtml",
+      "title_cn": "大摩“手滑”泄密百宗投行项目：香港证监会主席表示不评论个别事件",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "大摩“手滑”泄密百宗投行项目，香港证监会主席表示不评论个别事件。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "监管",
+        "投行"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-09-28/doc-initkxux9699673.shtml",
+      "title_cn": "景旺电子（3228.HK）将于9月29日于港交所挂牌，市场反响如何？",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "景旺电子（3228.HK）将于9月29日在港交所挂牌，市场关注其反响。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "新股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-09-28/doc-initkxux9699142.shtml",
+      "title_cn": "本末科技（6731.HK）将于9月29日于港交所挂牌，破发概率几何？",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "本末科技（6731.HK）将于9月29日在港交所挂牌，市场关注其破发概率。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "新股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-28/doc-initkpfc9715332.shtml",
+      "title_cn": "西部证券首予博泰车联(02889)“买入”评级：智舱龙头卡位高端化赛道，拟收购成都明夷切入光通信电芯片赛道",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "西部证券首次给予博泰车联（02889）“买入”评级，称其为智舱龙头并拟收购成都明夷切入光通信电芯片赛道。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "汽车",
+        "光通信"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-28/doc-initkpfc9680358.shtml",
+      "title_cn": "大摩：上调上海电气(02727)目标价两成至2.32港元 维持“减持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "大摩上调上海电气（02727）目标价两成至2.32港元，维持“减持”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "电力设备"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-28/doc-initkpfa2897162.shtml",
+      "title_cn": "里昂：重申联想集团(00992)为首选中国科技股 维持“跑赢大市”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "里昂重申联想集团（00992）为首选中国科技股，维持“跑赢大市”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/28/nearly-half-of-the-stocks-in-the-sp-500-are-working-against-it.html",
+      "title_cn": "Nearly half the stocks in the S&P 500 are at cross purposes with the rest of the market",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "CNBC报道称，标普500指数中近半数个股走势与市场其余部分相背离。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "标普500",
+        "市场结构"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/hennessy-advisors-director-thomas-seavey-sells-19031-in-shares-93CH-4921414",
+      "title_cn": "Hennessy Advisors director Thomas Seavey sells $19,031 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "Hennessy Advisors董事Thomas Seavey卖出价值19,031美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/analysistrump-and-xis-stalemate-summit-was-a-glitzy-gift-to-china-4919638",
+      "title_cn": "Trump and Xi’s ’stalemate’ summit was a glitzy gift to China",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "报道评论特朗普与习近平的“僵局”峰会，称其对中国构成一份华丽礼物。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "中美关系",
+        "宏观"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/first-atlantic-nickel-closes-38m-financing-for-drilling-93CH-4921403",
+      "title_cn": "First Atlantic Nickel closes $3.8M financing for drilling",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "First Atlantic Nickel完成380万美元融资，用于钻探。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "矿业",
+        "融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/ivanhoe-mines-at-mining-forum-americas-2026-copper-critical-metals-93CH-4921402",
+      "title_cn": "Ivanhoe Mines at Mining Forum Americas 2026: copper, critical metals",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "Ivanhoe Mines在2026年美洲矿业论坛上介绍铜及关键金属业务。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "矿业",
+        "铜"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/amd-to-buy-feifei-lis-world-labs-in-82-billion-bet-on-physical-ai-4921381",
+      "title_cn": "AMD to buy Fei-Fei Li’s World Labs in $8.2 billion bet on ’physical AI’",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "AMD以82亿美元收购李飞飞的World Labs，押注“物理AI”。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "半导体",
+        "并购"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/goldman-sachs-board-discussed-plan-to-name-waldron-as-next-ceo-wsj-4921389",
+      "title_cn": "Goldman Sachs board discussed plan to name Waldron as next CEO- WSJ",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "据华尔街日报报道，高盛董事会讨论了任命Waldron为下一任CEO的计划。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高盛",
+        "人事变动"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/podcastone-director-d-jonathan-merriman-buys-24310-in-shares-93CH-4921387",
+      "title_cn": "PodcastOne director D. Jonathan Merriman buys $24,310 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "PodcastOne董事D. Jonathan Merriman买入价值24,310美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/wall-st-futures-drop-as-oil-spikes-after-trump-rejects-iran-peace-proposal-4919715",
+      "title_cn": "Stocks fall as higher oil prices, Treasury yields weigh",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "美股下跌，油价与美债收益率走高对市场构成压力。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "大盘",
+        "原油",
+        "美债"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/exclusiveanthropics-ipo-prospectus-shows-sweeping-ai-vision-surging-costs-4921382",
+      "title_cn": "Exclusive-Anthropic’s IPO prospectus shows sweeping AI vision, surging costs",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "独家报道称Anthropic的IPO招股书展示了其宏大的AI愿景及激增的成本。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "IPO"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/hycroft-mining-at-mining-forum-americas-2026-big-resource-big-gap-93CH-4921379",
+      "title_cn": "Hycroft Mining at Mining Forum Americas 2026: big resource, big gap",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "Hycroft Mining在2026年美洲矿业论坛上介绍其资源规模与开发差距。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "矿业"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
