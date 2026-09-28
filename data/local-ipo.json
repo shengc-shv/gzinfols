@@ -1,14 +1,36 @@
 {
   "version": 1,
-  "fetchedAt": "2026-09-27T23:06:35+08:00",
+  "fetchedAt": "2026-09-28T19:50:30+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-csrc-tutoring": 2,
-    "gd-sse-audit": 1,
+    "gd-csrc-tutoring": 1,
+    "gd-sse-audit": 2,
     "gd-szse-audit": 4
   },
   "items": [
+    {
+      "title": "龙行天下：IPO问询中（拟主板）",
+      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2193@2",
+      "excerpt": "注册地：广东东莞市｜保荐：招商证券股份有限公司｜受理：2026-05-29｜状态：IPO问询中｜更新：2026-09-28｜行业：皮革、毛皮、羽毛及其制品和制鞋业",
+      "publishedAt": "2026-09-28",
+      "source": "上交所IPO审核动态",
+      "sourceId": "gd-sse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
+    },
+    {
+      "title": "科杰技术：IPO问询中（拟创业板）",
+      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004576",
+      "excerpt": "注册地：广东｜保荐：中信建投｜受理：2026-06-26｜状态：已问询｜更新：2026-09-28",
+      "publishedAt": "2026-09-28",
+      "source": "深交所IPO审核动态",
+      "sourceId": "gd-szse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
+    },
     {
       "title": "时创意：IPO问询中（拟创业板）",
       "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004571",
@@ -58,28 +80,6 @@
       "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004585",
       "excerpt": "注册地：广东｜保荐：中信证券｜受理：2026-06-26｜状态：已问询｜更新：2026-09-22",
       "publishedAt": "2026-09-22",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "得一微电子股份有限公司 (辅导验收) [深圳证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/9/21/PREIPO_F0101_V01_20260921_36490_Q/08DA449650D843549C5F65522B192C7D/关于得一微电子股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 中信建投证券股份有限公司 | 备案时间: 2026-04-02 | 状态: 辅导验收 | 报告: 辅导工作完成报告 | 披露: 2026-09-21",
-      "publishedAt": "2026-09-21",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-coach-done"
-    },
-    {
-      "title": "万力轮胎：IPO问询中（拟主板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004552",
-      "excerpt": "注册地：广东｜保荐：国泰海通｜受理：2026-06-23｜状态：已问询｜更新：2026-09-21",
-      "publishedAt": "2026-09-21",
       "source": "深交所IPO审核动态",
       "sourceId": "gd-szse-audit",
       "region": "gd",
