@@ -95,6 +95,17 @@ export const AUDIO_DURATION_MAX_SEC = 250;
 // v2：去掉「行长」等称呼；「今天播报结束。」收尾，不下命令。
 const OPENER = "早上好。";
 const CLOSER = "今天播报结束。";
+
+/**
+ * 开场白（2026-09-28 sc 口径）：**声明报告日**，让后续「今天 / 昨天 / 昨晚」有明确锚点。
+ *
+ * 听众在车里、看不见屏幕 —— 不给日期参照，就分不清正文里的「今天」指的是哪一天，
+ * 这是「时间表述认知割裂」的根源之一（sc 实证）。缺日期时退回原开场白（不硬造）。
+ */
+function openerOf(date: string | undefined): string {
+  const d = date ? formatCnDateShort(date) : "";
+  return d ? `早上好，这是${d}的早报。` : OPENER;
+}
 /** 广东IPO 段过渡语（2026-09-10 修正：口播窗口实为 2 天，「近两日」与卡面一致）。 */
 const IPO_TRANSITION = "近两日有IPO动态的广东企业。";
 /** 中文 TTS 语速估算（字/秒）：腾讯 Speed=1（1.2 倍）实测约 5.3 字/秒，取 5.2（2026-08-24 校准）。 */
@@ -227,13 +238,14 @@ export async function assembleBriefingScript(
   const condensed = opts.exec ? condenseSpeech(opts.exec) : null;
   const exec = condensed?.exec ?? null;
   const overlapStats = condensed?.stats ?? null;
-  const parts: string[] = [OPENER];
+  const opener = openerOf(report.date);
+  const parts: string[] = [opener];
   const partMap: Record<string, string> = {};
   const segments: AudioSegment[] = [];
-  let cursor = estimateDurationSec(OPENER.length);
+  let cursor = estimateDurationSec(opener.length);
   let found = 0;
 
-  segments.push({ id: "intro", startSec: 0, durationSec: cursor, refs: [], text: OPENER });
+  segments.push({ id: "intro", startSec: 0, durationSec: cursor, refs: [], text: opener });
 
   // —— 今日定调：只读 exec.spoken_hero（gzinfo 口径——口播稿的唯一来源是执行摘要的
   // spoken_* 字段，由 LLM 产出或 syncNarration 由卡面 1:1 确定性派生；不读 report.hero_line）——

@@ -49,7 +49,10 @@ function report(over: Partial<DailyReport> = {}): DailyReport {
 test("口播稿：章节引导语 + 收尾语 + 段落时序（gzinfo 口径）", async () => {
   const b = await assembleBriefingScript(report(), { exec: exec() });
   assert.ok(b);
-  assert.ok(b.script.startsWith("早上好。"), "开场白");
+  assert.ok(
+    b.script.startsWith("早上好，这是9月11日的早报。"),
+    "开场白声明报告日（让「今天/昨天」有锚点，2026-09-28 sc 口径）",
+  );
   assert.ok(b.script.includes("先看今天的整体定调。"));
   assert.ok(b.script.includes("接着看今日必读，共1条。"), "必读过渡语报出条数（「纲」之后进「目」）");
   assert.ok(b.script.includes("下面是商机洞察，按客群看。"));

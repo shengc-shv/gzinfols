@@ -144,3 +144,111 @@ export function recentMmddSet(days: number, today: string): Set<string> {
   }
   return out;
 }
+
+/* ───────── 相对日表述（口播/卡面「昨天 / 今天凌晨」口径，2026-09-28 sc 立项） ───────── */
+
+/**
+ * 「仅日期」发布时间的识别（源站把时分秒归零，如 `2026-09-27T00:00:00.000Z`）。
+ *
+ * ⚠️ 为什么必须识别：这类值**没有真实时刻**。若照常做「时刻 → 时段」换算，
+ * 会算出「今天上午 8 点发布」这种**编造时间**（00:00Z 换算到北京时区正是 08:00），
+ * 直接违反「时间真实性」红线。故此类条目只能说到「日」。
+ */
+const DATE_ONLY_RE = /[T ]00:00:00(?:\.0+)?(?:Z|[+-]\d{2}:?\d{2})?$/;
+
+const HOUR_FMT = new Intl.DateTimeFormat("en-GB", {
+  timeZone: REPORT_TZ,
+  hour: "2-digit",
+  hour12: false,
+});
+
+/** 报告时区下的小时（0-23）。 */
+function hourInReportTz(d: Date): number {
+  return Number(HOUR_FMT.format(d));
+}
+
+/** 相对日 + 精度（供口播/卡面措辞使用）。 */
+export interface SpokenDayParts {
+  /** 与报告日的天数差（0 = 今天、1 = 昨天…）；无法解析 → null。 */
+  gap: number | null;
+  /** 仅日期（无真实时分）→ 调用方**不得**给出「上午 / 下午」这类时段。 */
+  dateOnly: boolean;
+  /** 报告时区下的小时（0-23）；无法解析 → null。 */
+  hour: number | null;
+}
+
+/** MM/DD（无年份）形态 —— 报告条目 `ReportItem.date` 与 IPO 池用的就是它。 */
+const MM_DD_RE = /^(\d{2})\/(\d{2})$/;
+
+/** 拆出「相对日 + 精度 + 时刻」（纯函数，报告时区口径）。支持 ISO 与 MM/DD 两种输入。 */
+export function spokenDayParts(
+  publishedAt: Date | string | undefined,
+  reportDate: string,
+): SpokenDayParts {
+  if (!publishedAt) return { gap: null, dateOnly: true, hour: null };
+  const raw = typeof publishedAt === "string" ? publishedAt.trim() : "";
+  // MM/DD（无年份）：跨年按「今年 → 去年」两次尝试（与 render/atoms.ts#relativeDayLabel 同口径）。
+  // 天然只有日粒度 → dateOnly=true，绝不给出时段。
+  const mmdd = MM_DD_RE.exec(raw);
+  if (mmdd) {
+    const [ty, tm, td] = reportDate.split("-").map(Number);
+    if (!ty || !tm || !td) return { gap: null, dateOnly: true, hour: null };
+    const base = Date.UTC(ty, tm - 1, td);
+    for (const y of [ty, ty - 1]) {
+      const gap = Math.round(
+        (base - Date.UTC(y, Number(mmdd[1]) - 1, Number(mmdd[2]))) / 86_400_000,
+      );
+      if (gap >= 0) return { gap, dateOnly: true, hour: null };
+    }
+    return { gap: null, dateOnly: true, hour: null };
+  }
+  const iso = typeof publishedAt === "string" ? publishedAt : publishedAt.toISOString();
+  const t = new Date(iso).getTime();
+  if (Number.isNaN(t)) return { gap: null, dateOnly: true, hour: null };
+  const d = new Date(t);
+  return {
+    gap: dayGap(todayKeyOf(d), reportDate), // b - a = 报告日 − 发布日
+    dateOnly: DATE_ONLY_RE.test(iso.trim()),
+    hour: hourInReportTz(d),
+  };
+}
+
+/** 时段划分（报告时区）：口语习惯优先 —— 0-5 凌晨 / 6-8 一早 / 9-11 上午 / 12-17 下午 / 18-23 晚间。 */
+const DAY_PERIODS: ReadonlyArray<readonly [number, number, string]> = [
+  [0, 5, "凌晨"],
+  [6, 8, "一早"],
+  [9, 11, "上午"],
+  [12, 17, "下午"],
+  [18, 23, "晚间"],
+];
+
+function periodOf(hour: number): string {
+  for (const [lo, hi, label] of DAY_PERIODS) if (hour >= lo && hour <= hi) return label;
+  return "";
+}
+
+/**
+ * 把发布时间换算成**可朗读的相对日短语**（2026-09-28 sc 口径）。
+ *
+ * 口径（sc 拍板）：以**报道时间**为准（媒体刊发 / 官方发布时刻）—— 数据里只有这个；
+ * 官方源的结构化事件日（如 IPO 的 `ipoMeta` 受理日）由各自分支单独精确化。
+ *
+ * 返回示例：`今天凌晨` / `今天一早` / `昨天上午` / `昨晚` / `昨天` / `前天`。
+ * - **精度分级**：`00:00:00` 兜底值（无真实时分）只给到「日」，绝不编造时段；
+ * - 超出两天窗口（gap > 2）或无法解析 → 空串（调用方按自身口径回退，不硬造）。
+ * - 未来时间（gap < 0，时钟偏差等）→ 空串。
+ */
+export function spokenRelativeDay(
+  publishedAt: Date | string | undefined,
+  reportDate: string,
+): string {
+  const { gap, dateOnly, hour } = spokenDayParts(publishedAt, reportDate);
+  if (gap === null || gap < 0 || gap > 2) return "";
+  if (gap === 2) return "前天";
+  const dayWord = gap === 0 ? "今天" : "昨天";
+  if (dateOnly || hour === null) return dayWord;
+  const period = periodOf(hour);
+  if (!period) return dayWord;
+  if (gap === 1 && period === "晚间") return "昨晚"; // 口语更自然
+  return `${dayWord}${period}`;
+}

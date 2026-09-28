@@ -88,25 +88,33 @@ test("③ T3 红筹句置段首 + 模板文案（含离岸地/广东运营实体
   const rc = hkItem("某红筹企业：已受理（主板递表）", "108870", { redchip: badge() });
   const normal = gdItem("某常规企业：IPO问询中（拟创业板）", "stage-reviewing");
   const s = buildGdIpoSpoken([normal, rc], { today: "2026-09-15" });
-  assert.ok(s.startsWith("某红筹企业为红筹线索"), `红筹句应置段首，实际：${s}`);
+  assert.ok(
+    s.startsWith("昨天的某红筹企业为红筹线索"),
+    `红筹句应置段首、且带相对日（B3,2026-09-28），实际：${s}`,
+  );
   assert.ok(s.includes("（开曼群岛注册、含广东运营实体）"));
   assert.ok(s.includes("拟在港交所IPO"), "港交所条目应兜底推导交易所（标题无「拟XX」字样）");
   assert.ok(s.includes("目前已受理"));
-  assert.ok(s.includes("；某常规企业"), "常规句应在其后");
+  assert.ok(s.includes("；昨天的某常规企业"), "常规句应在其后（同样带相对日）");
 });
 
 test("④ added → 前缀「新增红筹线索：」；changed → 播「红筹线索有更新：<字段> <from>→<to>」", () => {
   const isNew = hkItem("某红筹企业（主板递表）", "108870", {
     redchip: badge({ isNew: true }),
   });
-  assert.ok(buildGdIpoSpoken([isNew], { today: "2026-09-15" }).startsWith("新增红筹线索：某红筹企业为红筹线索"));
+  // B3：相对日插在公司名之前，**不得**破坏「新增红筹线索：」前缀语序
+  assert.ok(
+    buildGdIpoSpoken([isNew], { today: "2026-09-15" }).startsWith(
+      "新增红筹线索：昨天的某红筹企业为红筹线索",
+    ),
+  );
 
   const changed = hkItem("某红筹企业（主板递表）", "108870", {
     redchip: badge({ changeSummary: "状态 处理中→已受理" }),
   });
   assert.equal(
     buildGdIpoSpoken([changed], { today: "2026-09-15" }),
-    "某红筹企业红筹线索有更新：状态 处理中→已受理",
+    "昨天的某红筹企业红筹线索有更新：状态 处理中→已受理",
   );
 });
 

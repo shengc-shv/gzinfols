@@ -11,7 +11,7 @@ import type { ReportItem } from "../../contracts/report";
 import { inferStage, isGdStage, type GdStage } from "./gd-ipo";
 import { hkexAppIdOf } from "./redchip";
 import { isGdIpoCandidate } from "../enrich/heuristics";
-import { recentMmddSet, todayKey } from "../../utils/time";
+import { recentMmddSet, spokenRelativeDay, todayKey } from "../../utils/time";
 import {
   IPO_VOICE_WINDOW_DAYS,
   REDCHIP_VOICE_BOOST,
@@ -114,7 +114,7 @@ function progressOf(title: string, summary: string): string {
   return s ? s[1].trim() : "";
 }
 
-/** 常规 IPO 口播句（原 buildGdIpoSpoken 内联逻辑抽出，逐字保留口径）。 */function regularClauseOf(it: ReportItem): string {
+/** 常规 IPO 口播句（原 buildGdIpoSpoken 内联逻辑抽出，逐字保留口径）。 */function regularClauseOf(it: ReportItem, when = ""): string {
   const title = it.title_cn || "";
   const summary = it.summary || "";
   const company = companyNameOf(title);
@@ -122,7 +122,8 @@ function progressOf(title: string, summary: string): string {
   const exchange = mapBoardToExchange(parseBoard(title));
   const industry = inferIndustry(company);
   const progress = progressOf(title, summary);
-  const parts = [company];
+  // when（相对日）插在公司名之前：「昨天的粤芯半导体，半导体行业，…」（B3，2026-09-28 sc 口径）
+  const parts = [when ? `${when}的${company}` : company];
   if (prov) parts.push(`注册地${prov}`);
   if (industry) parts.push(`${industry}行业`);
   if (exchange) parts.push(`拟在${exchange}IPO`);
@@ -154,12 +155,15 @@ export function isPlainHkListing(it: ReportItem): boolean {
  * **实体语境提及次数**、不等于实体个数（同一主体可能被多次提及）→ 口播说「N 处」会失真。
  * 故口播只说「含广东运营实体」，**计数只在卡片/报告页出现**（那里配原文可核对）。
  */
-function redchipClauseOf(it: ReportItem): string {
+function redchipClauseOf(it: ReportItem, when = ""): string {
   const rc = it.redchip;
   if (!rc) return "";
   const title = it.title_cn || "";
   const company = companyNameOf(title);
-  if (rc.changeSummary) return `${company}红筹线索有更新：${rc.changeSummary}`;
+  // when（相对日）插在公司名之前，**不得**破坏「新增红筹线索：」这类既有前缀语序
+  // （把相对日拼在整句最前面会变成「昨天的新增红筹线索：…」，语义错位）。
+  const subject = when ? `${when}的${company}` : company;
+  if (rc.changeSummary) return `${subject}红筹线索有更新：${rc.changeSummary}`;
   const marks: string[] = [];
   if (rc.domicile) marks.push(`${rc.domicile}注册`);
   if ((rc.gdCityHits ?? 0) > 0) marks.push("含广东运营实体");
@@ -170,7 +174,7 @@ function redchipClauseOf(it: ReportItem): string {
   const progress = progressOf(title, it.summary || "");
   const tail = [exchange ? `拟在${exchange}IPO` : "", progress ? `目前${progress}` : ""].filter(Boolean);
   const prefix = rc.isNew ? "新增红筹线索：" : "";
-  return `${prefix}${company}为红筹线索${inner}${tail.length ? "，" + tail.join("，") : ""}`;
+  return `${prefix}${subject}为红筹线索${inner}${tail.length ? "，" + tail.join("，") : ""}`;
 }
 
 /**
@@ -243,8 +247,16 @@ export function buildGdIpoSpoken(
   opts?: { skipCompanies?: Set<string>; withinDays?: number; today?: string },
 ): string {
   const { selected, totalCandidates } = pickSpokenItems(items, opts);
+  // B3（2026-09-28 sc 口径）：逐条带**相对日**（与卡面徽章「09/27 · 昨天」同口径）——
+  // 此前整段只说「近两日有IPO动态的广东企业」，而卡片已写明「09/27 · 昨天」，
+  // 同一件事两个时间口径 = 听众的认知割裂（sc 实证）。
+  // ⚠️ 不隐式读时钟：调用方必须传 today（报告日）；未传则不加相对日（宁可不说，不许猜）。
+  const refDay = opts?.today ?? "";
   const clauses = selected
-    .map((it) => (it.redchip ? redchipClauseOf(it) : regularClauseOf(it)))
+    .map((it) => {
+      const when = refDay ? spokenRelativeDay(it.date, refDay) : "";
+      return it.redchip ? redchipClauseOf(it, when) : regularClauseOf(it, when);
+    })
     .filter((s) => s.length > 0);
   if (clauses.length === 0) return "";
   let s = clauses.join("；");

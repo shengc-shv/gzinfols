@@ -14,7 +14,7 @@
  *
  * 纯函数，便于单测；daily.ts 在生成报告后调用，结果喂 generateExecutiveSummary。
  */
-import { getReportTz, recentMmddSet, todayKey } from "../../utils/time";
+import { getReportTz, recentMmddSet, spokenRelativeDay, todayKey } from "../../utils/time";
 import type { DailyReport, ReportSectionKey } from "../../contracts/report";
 import { scoreBranchRelevance } from "../select/filters/relevance-score";
 // 广东 IPO 内容判定（与渲染/side-output 同一口径，避免三处判定漂移）
@@ -52,6 +52,28 @@ export interface ExecPoolItem {
   summary?: string;
   subcategory?: string;
   url?: string;
+  /**
+   * 该条目的**可朗读相对日短语**（`今天凌晨` / `昨天上午` / `昨晚` / `昨天` / `前天`）。
+   *
+   * 2026-09-28 sc 口径：**这是 LLM 唯一的时间来源**。此前池里只有 `{title, summary, url}`，
+   * LLM 完全不知道每条是哪天的，只能按「报告日 = 今天」措辞 → 把昨天的条目也写成「今日」，
+   * 与卡面徽章（`09/27 · 昨天`）自相矛盾。
+   *
+   * 口径 = **报道时间**（媒体刊发/官方发布时刻，数据里只有这个）；`00:00:00` 兜底值只给到「日」，
+   * 绝不编造「上午/下午」（见 `utils/time.ts#spokenRelativeDay`）。
+   */
+  when?: string;
+}
+
+/** 给池条目补上 `when`（无法换算 / 报告日缺省则不加该字段，调用方与 LLM 按「未标明」处理）。 */
+function withWhen(
+  item: ExecPoolItem,
+  publishedAt: Date | string | undefined,
+  reportDate: string | undefined,
+): ExecPoolItem {
+  if (!reportDate) return item;
+  const when = spokenRelativeDay(publishedAt, reportDate);
+  return when ? { ...item, when } : item;
 }
 
 export interface ExecPoolResult {
@@ -188,8 +210,9 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     // 必须有真实发布时间且落在两天窗口内；缺发布时间一律排除（遵守时间红线）。
     const p = pubByUrl.get(url);
     if (!p || !inWindow(p)) continue;
-    const entry: ExecPoolItem = { title: info.title, summary: info.summary, url };
-    if (info.subcategory) entry.subcategory = info.subcategory;
+    const base: ExecPoolItem = { title: info.title, summary: info.summary, url };
+    if (info.subcategory) base.subcategory = info.subcategory;
+    const entry = withWhen(base, p, tk);
     (info.cat === "finance" ? finance : gz).push(entry);
   }
 
@@ -282,11 +305,15 @@ function buildRelaxedTwoDayPool(
     seen.add(url);
     cands.push({
       cat,
-      item: {
-        title: raw.title ?? "",
-        summary: summary || (raw.excerpt ?? "").trim() || raw.title || "",
-        url,
-      },
+      item: withWhen(
+        {
+          title: raw.title ?? "",
+          summary: summary || (raw.excerpt ?? "").trim() || raw.title || "",
+          url,
+        },
+        raw.publishedAt,
+        tk,
+      ),
       hasSummary: !!summary,
       prio: TIER_PRIO[scored.tier] ?? 2,
       score: scored.score,
@@ -381,7 +408,7 @@ function buildIpoPool(opts: BuildTwoDayExecPoolOpts): ExecPoolItem[] {
     // ⚠️ 2026-09-10 回检 P1-1：此前把 sections.ipo **不预过滤**整块喂 LLM，而
     // sections.ipo 里含港交所「全国递表」条目（外省企业）→ 可能被写进「广东IPO」口播。
     if (!isGd(title, summary, it.tags)) continue;
-    out.set(it.url, { title, summary, url: it.url });
+    out.set(it.url, withWhen({ title, summary, url: it.url }, it.date, today));
   }
   // 今日抓取的 gd-ipo/ipo 条目（sections 里可能还没有 —— 取决于 side-output 执行顺序）
   for (const a of opts.articles) {
@@ -393,7 +420,7 @@ function buildIpoPool(opts: BuildTwoDayExecPoolOpts): ExecPoolItem[] {
     const title = a.title_cn || a.title || "";
     const summary = (a.summary || a.excerpt || "").slice(0, 120);
     if (!isGd(title, summary)) continue; // 同上：全国 ipo 条目不进广东IPO 口播
-    out.set(a.url, { title, summary, url: a.url });
+    out.set(a.url, withWhen({ title, summary, url: a.url }, a.publishedAt, today));
   }
   return [...out.values()].slice(0, 20);
 }

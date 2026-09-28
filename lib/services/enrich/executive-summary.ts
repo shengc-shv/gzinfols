@@ -76,13 +76,25 @@ export interface ExecRisk {
 
 export interface ExecSummaryInput {
   /** 当日宏观政策条目（title + 摘要 + 源链接） */
-  finance: Array<{ title: string; summary?: string; subcategory?: string; url?: string }>;
+  finance: Array<{
+    title: string;
+    summary?: string;
+    subcategory?: string;
+    url?: string;
+    when?: string;
+  }>;
   /** 当日广州商机条目（title + 摘要 + 源链接） */
-  gz: Array<{ title: string; summary?: string; subcategory?: string; url?: string }>;
+  gz: Array<{
+    title: string;
+    summary?: string;
+    subcategory?: string;
+    url?: string;
+    when?: string;
+  }>;
   /** 市场行情总览（AI 点评，可选） */
   marketOverview?: string;
   /** IPO 板块条目（用于筛广东/广州 IPO 动态口播，可选） */
-  ipo?: Array<{ title?: string; summary?: string; url?: string }>;
+  ipo?: Array<{ title?: string; summary?: string; url?: string; when?: string }>;
   /** B-1：关键词层已识别的风险候选（来自 risk_tracker），喂给 LLM 的 risk 段 */
   riskCandidates?: Array<{ title: string; url?: string; trackers: string[]; priority: string }>;
   /**
@@ -103,6 +115,13 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 业务线全覆盖要求（极重要）：读者是零售分管行长，必读与商机须覆盖零售多条业务线，不得只堆个贷/住房金融。财富管理、私人银行、客群经营与新获客、信用卡、代发、养老、住房金融、消费信贷——这些零售条线地位同等，命中高信号时须与房贷/信贷同优先级置顶；若输入中同时存在房贷政策与财富/私行/获客信号，应分别选取、均衡呈现（例如必读里既有房贷40年新规，也应有财富/私行/获客类高信号）。
 
 时间窗口要求（极重要）：必读与商机须覆盖「今天 + 昨天」两天的信息——既含今日凌晨突发的政策/市场信号，也含昨日白天发布、今天仍在生效的重要条目。不要只基于今天单日挑条目；昨天白天的重要宏观政策、权威机构报告若今天仍具决策价值，应纳入。
+
+时间表述口径（极重要，2026-09-28 sc 口径）：输入里**每条都带 when 字段**（取值如「今天凌晨」「今天一早」「昨天上午」「昨晚」「昨天」「前天」），那是该条新闻**真实的报道/发布相对日**。写 must_read 与 insights 的正文时必须遵守：
+- **按 when 表述**：when=昨天 / 昨晚 / 昨天上午 的条目，正文就写「昨天」「昨日下午」，**严禁**写成「今日 / 今天 / 今日凌晨」；
+- **when 缺失** = 时间未标明 → 不要给它安任何相对日，直接陈述事实即可（宁可不说时间，也不许猜）；
+- **三种时间不得混用**：① **报道时间**（= when，媒体刊发/官方发布时刻）② **事件发生时间**（公告/政策实际发布日，通常与 when 同日；输入另有说明时才以说明为准）③ **报告锚**（本报告出具日 = date 字段，「今天」在报告语境里指报告日）；
+- 「今天」**只**用于 when=今天 的条目；**不得**用「今日」笼统统称跨两天的内容；
+- 例外：描述**未来动作**的时间词（「本周」「今日起」「节前」「下阶段」）是给团队的行动时限，与新闻时间无关，照常用。
 
 口播听觉场景（极重要，2026-09-28 sc 口径）：口播稿的听众是**早上坐在车里听的行领导** —— 他看不见屏幕、**不能回看**、只有一程车的注意力。**口播的内容质量直接决定他会不会点进来看全文**。因此：
 - **开头 15 秒必须给足分量**：让他两三句内就判断出「今天有事值得听」——给量级、给紧迫性、给影响面，不要只报空洞的方向词；
@@ -282,6 +301,8 @@ export async function generateExecutiveSummary(
   // 短 id 替代长 url（2026-09-15 Token 优化）：payload 只带 id（省下每条 ~80 字符的 url），
   // 响应按 id 回填、代码解析回真实 url。url 仍是唯一真源（由 input 提供，模型不得编造）。
   const idToUrl = new Map<string, string>();
+  /** id → 该条目的相对日（A3 时间表述自检用；不写回 exec，只是审计线索）。 */
+  const whenById = new Map<string, string>();
   const knownUrls = new Set<string>();
   for (const it of [...input.finance, ...input.gz, ...(input.ipo ?? [])]) {
     if (it.url) knownUrls.add(it.url);
@@ -293,7 +314,13 @@ export async function generateExecutiveSummary(
   const knownUrl = (u: unknown): string | undefined =>
     typeof u === "string" && knownUrls.has(u) ? u : undefined;
   const enc = <
-    T extends { title?: string; summary?: string; subcategory?: string; url?: string },
+    T extends {
+      title?: string;
+      summary?: string;
+      subcategory?: string;
+      url?: string;
+      when?: string;
+    },
   >(
     items: T[],
     prefix: string,
@@ -302,10 +329,14 @@ export async function generateExecutiveSummary(
     topByRelevance(items, n).map((it, i) => {
       const id = `${prefix}${i + 1}`;
       if (it.url) idToUrl.set(id, it.url);
+      if (it.when) whenById.set(id, it.when);
       return {
         id,
         title: it.title ?? "",
         summary: it.summary ?? "",
+        // 每条自带相对日（`昨天上午` / `今天凌晨` / `前天`）—— LLM 写时间表述的**唯一依据**。
+        // 缺省（无法换算）表示「时间未标明」，此时**不得**给它安上「今天」。
+        ...(it.when ? { when: it.when } : {}),
         ...(it.subcategory ? { subcategory: it.subcategory } : {}),
       };
     });
@@ -404,6 +435,28 @@ export async function generateExecutiveSummary(
     console.log(
       `[exec-llm] parsed 盘点: must_read=${parsed.must_read.length} insights=${parsed.insights.length} hero=${typeof parsed.hero_line === "string" && parsed.hero_line ? 1 : 0} spoken_hero=${typeof parsed.spoken_hero === "string" && parsed.spoken_hero.trim() ? 1 : 0} spoken_must=${typeof parsed.spoken_must_read === "string" && parsed.spoken_must_read.trim() ? 1 : 0} spoken_ins=${typeof parsed.spoken_insights === "string" && parsed.spoken_insights.trim() ? 1 : 0} risk=${parsed.risk && typeof parsed.risk === "object" && typeof (parsed.risk as { topic?: unknown }).topic === "string" ? 1 : 0} spoken_risk=${typeof parsed.spoken_risk === "string" && parsed.spoken_risk.trim() ? 1 : 0} gd_ipo=${parsed.guangdong_ipo && typeof parsed.guangdong_ipo === "object" ? 1 : 0}`,
     );
+    // A3 时间表述自检（2026-09-28 sc 口径）：只告警、不改写 —— 判定错源就会改错事实，
+    // 风险高于收益（见 deliverables/time-accuracy-2026-09-28）。让跑偏在 CI 日志可见。
+    const timeAudit = auditTimeWording([
+      ...parsed.must_read.map((m) => ({
+        text: `${m.title ?? ""} ${m.why ?? ""}`,
+        when: whenById.get(String((m as { id?: unknown }).id ?? "")),
+      })),
+      ...parsed.insights.map((it) => {
+        const first = Array.isArray(it.sources) ? it.sources[0] : undefined;
+        return {
+          text: `${it.topic ?? ""} ${it.impact ?? ""} ${it.action ?? ""}`,
+          when: first ? whenById.get(String((first as { id?: unknown }).id ?? "")) : undefined,
+        };
+      }),
+    ]);
+    if (timeAudit.length) {
+      console.warn(
+        `::warning:: 时间表述与条目实际时间不符 ${timeAudit.length} 处（条目实际为「${timeAudit
+          .map((a) => a.when)
+          .join(" / ")}」，正文却写了「今天」）：${timeAudit.map((a) => a.text).join(" || ")}`,
+      );
+    }
     return {
       hero_line: typeof parsed.hero_line === "string" ? parsed.hero_line : "",
       spoken_hero: typeof parsed.spoken_hero === "string" && parsed.spoken_hero.trim() ? parsed.spoken_hero.trim() : undefined,
@@ -478,6 +531,27 @@ export function synthMustReadWhy(rel: BranchRelevance): string {
     rel.authority >= 0.95 ? "国家核心监管新政" : rel.authority >= 0.8 ? "监管/地方级信号" : "市场信号";
   const tail = rel.override ? "建议分行评估对客与产品影响" : `直击${lines}业务`;
   return `${head}（${lines}）：${tail}`.slice(0, 60);
+}
+
+/**
+ * A3 时间表述自检（2026-09-28 sc 口径）。
+ *
+ * 判据：正文出现「今天 / 今日」，而该条目自带的相对日 `when` 不是「今天」→ 记一条违规。
+ * - `when` 缺省 → **不告警**（时间未标明，无从判定；prompt 已要求此时不得安相对日）；
+ * - `when` 以「今天」开头（今天 / 今天凌晨 / 今天一早）→ 合规。
+ *
+ * ⚠️ 只告警、**绝不自动改写** —— 源判定错一步就会把事实改错，风险远高于「LLM 偶尔写错时间」。
+ */
+export function auditTimeWording(
+  entries: Array<{ text: string; when?: string }>,
+): Array<{ when: string; text: string }> {
+  const out: Array<{ when: string; text: string }> = [];
+  for (const e of entries) {
+    if (!e.when || e.when.startsWith("今天")) continue;
+    if (!/今天|今日/.test(e.text)) continue;
+    out.push({ when: e.when, text: e.text.trim().slice(0, 44) });
+  }
+  return out;
 }
 
 /* ───────── 今日定调：兜底「维度提纲」（2026-09-28 sc 口径） ───────── */
