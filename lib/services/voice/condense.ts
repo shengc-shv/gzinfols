@@ -1,19 +1,25 @@
 /**
- * 口播跨段收敛层（2026-09-25，用户反馈「听起来重复较多」后立项 A+C）。
+ * 口播跨段收敛层（2026-09-25 立项 A+C；**2026-09-28 起只保留 R2**）。
  *
- * ## 病根（实测 2026-09-25 期）
+ * ## 病根（2026-09-25 实测）
  * `must_read`（宏观大信号）与 `insights`（落地动作）**按设计允许共用同一篇素材** ——
- * 见 `enrich/executive-summary.ts#dedupeExecutiveCrossSection` 注释：
- * 「只删 risk：must_read 与 insights 本就是两块、允许共存」。卡面视角下无妨（读者可跳读），
- * 但口播是**线性流**；而 `syncNarration` 又把两段各自 1:1 逐字派生 → 同一事实被念两遍。
- * 实测：定调 + 必读 + 商机三段中，3 个事件合计 622 字 = 全稿 51%
- * （「美元/加息」在定调、必读#2、必读#3、商机#1 里讲了 **4 次**）。
+ * 卡面视角下无妨（读者可跳读），但口播是**线性流**，同一事实被念两遍即重复。
  *
- * ## 本层做什么（只动口播文本，做「视角分工」收敛）
- * - **R1 定调↔必读**：必读里与定调同源的条目，口播**只点题**（保留 title，去掉 why 的解读）。
- *   理由：定调已经是「结论 + 建议」的详述处，why 的「对分行意味着什么」与之重叠度最高。
+ * ## 本层做什么
  * - **R2 必读↔商机**：商机里与必读同源的条目，口播**只留动作**（保留 topic + action，
  *   去掉 impact 的事实复述）。理由：事实已由必读给出，商机的独有价值是「做什么」。
+ *   ⚠️ 2026-09-28 起商机口播由 LLM 按客群归并产出、本就不念 impact，故 R2 退为**安全网**
+ *   （只在「LLM 照抄了卡面 impact」时动手）。
+ *
+ * ## ⛔ 已删除：R1「定调↔必读只点题」（2026-09-28，勿加回）
+ * R1 的设计前提是「定调已经详述了结论 + 应对建议，故与之同源的必读，其 why 属重复」。
+ * 2026-09-28 定调口径改为**维度提纲**（「今天主要看N个方面：X，看点」）后，**该前提消失**：
+ * 定调不再叙述任何事件的结论与建议。更关键的是实测撞车 ——
+ * 定调放宽到 70 字后，维度里会带上含数字的必读标题（09-28 实证：定调含
+ * 「公募基金规模达39.63万亿」维度 → 与必读第 3 条共享硬事实 `#39.63万亿` → R1 命中
+ * → **误把该条 why 剥掉**，必读只剩光秃秃的标题）。
+ * 必读的 why 是口播里**唯一的「为什么重要」来源**（车里听的行领导就靠它判断值不值得点进去），
+ * 任何情况下都不能被剥。故 R1 连同 `echoesHero` / `MUST_READ_ECHO_MODE` 一并删除。
  *
  * ## 边界（不可越）
  * - **不删条**：只压缩单条内部文本，**条数保持 1:1**（否则破坏「几条卡面↔几句口播」的构造保证，
@@ -26,55 +32,14 @@
  * 纯函数、零副作用、零 LLM。
  */
 import type { ExecutiveSummary } from "../enrich/executive-summary";
-import { extractFacts } from "../memory/event-text";
-import { USED_EVENT_TITLE_DICE } from "../memory/event-types";
-import { titleSimilarityDice } from "../select/filters/dedup-similar";
 import { canonicalizeUrl } from "../../utils/url";
 import { endSentence } from "./speech-lines";
 
-/**
- * 必读与定调同源时，口播保留哪半句。
- * - `title`（默认）：只点题，语法最稳（title 按提示词要求是「15 字内自足标题」）。
- * - `why`：保留解读、去掉数字句 —— 若日后更看重「对分行意味着什么」，改这一个常量即可。
- */
-export const MUST_READ_ECHO_MODE: "title" | "why" = "title";
-
 export interface SpeechOverlapStats {
-  /** 必读中与定调同源、被压成点题的条数。 */
-  heroEchoes: number;
   /** 商机中与必读同源、被压成动作的条数。 */
   insightEchoes: number;
   /** 收敛掉的总字数（正数）。 */
   savedChars: number;
-}
-
-/**
- * 硬事实锚点（`#` 数量 / `!` 动作词）。
- *
- * 刻意排除 `@` 机构与主题词：实测 2026-09-23 定调讲「央行重申宽松」，
- * 必读另有「央行在港发行 600 亿央票」—— 两者共享 `@央行` 却是**不同事件**，
- * 用 `@` 判定会误删解读。数量与动作词才是事件的硬标识。
- */
-function hardFacts(text: string | undefined): Set<string> {
-  return new Set(
-    extractFacts(text ?? "").filter((f) => f.startsWith("#") || f.startsWith("!")),
-  );
-}
-
-function overlap(a: Set<string>, b: Set<string>): number {
-  let n = 0;
-  for (const x of a) if (b.has(x)) n++;
-  return n;
-}
-
-/** 定调是否已在讲这条必读（同源判定：标题 Dice 达标 或 共享 ≥1 个硬事实）。 */
-export function echoesHero(heroLine: string, m: { title?: string; why?: string }): boolean {
-  if (!heroLine.trim()) return false;
-  const title = m.title ?? "";
-  if (title && titleSimilarityDice(heroLine, title) >= USED_EVENT_TITLE_DICE) return true;
-  const hero = hardFacts(heroLine);
-  if (hero.size === 0) return false;
-  return overlap(hero, hardFacts(`${title}。${m.why ?? ""}`)) >= 1;
 }
 
 /** 商机是否与某条必读同源（判定：来源 URL 归一后相等 —— 主力信号，可逐条核对）。 */
@@ -93,9 +58,9 @@ export function echoesMustRead(
  * 从 hay 的 `from` 位置起剥离首个 frag（返回剥离后的文本、字数与**新游标**）。
  *
  * 为什么必须定位而不是全局 indexOf：条目在 spoken 文本里顺序出现，剥离目标是
- * 「**某一条**的某半句」。当两条条目的 why/impact 文案恰好相同（LLM 偶发）时，
- * 全局 `indexOf` 会删中**前一条**的解读 —— 调用方因此先用本条自身的锚点
- * （必读=title / 商机=topic）定位到本条在稿中的位置，再从其**之后**找目标片段。
+ * 「**某一条**的某半句」。当两条条目的文本恰好相同（LLM 偶发）时，全局 `indexOf`
+ * 会删中**前一条**的解读 —— 调用方因此先用本条自身的锚点（商机 = topic）定位到
+ * 本条在稿中的位置，再从其**之后**找目标片段。
  */
 function stripOnce(
   hay: string | undefined,
@@ -118,41 +83,11 @@ export function condenseSpeech(exec: ExecutiveSummary): {
   exec: ExecutiveSummary;
   stats: SpeechOverlapStats;
 } {
-  const hero = exec.hero_line ?? "";
   const must = exec.must_read ?? [];
   const insights = exec.insights ?? [];
-  const stats: SpeechOverlapStats = { heroEchoes: 0, insightEchoes: 0, savedChars: 0 };
+  const stats: SpeechOverlapStats = { insightEchoes: 0, savedChars: 0 };
 
-  let spokenMr = exec.spoken_must_read;
   let spokenIns = exec.spoken_insights;
-
-  // —— R1：定调↔必读（口播里必读只点题）——
-  if (spokenMr && hero.trim()) {
-    let cursor = 0;
-    for (const m of must) {
-      // 用本条自身 title 定位（无论是否收敛都要推进游标，否则后面的同名片段会匹配到前面那条）
-      const anchor = m.title ?? "";
-      const at = anchor ? spokenMr.indexOf(anchor, cursor) : cursor;
-      if (at < 0) continue;
-      const after = at + anchor.length;
-      if (echoesHero(hero, m)) {
-        const frag = MUST_READ_ECHO_MODE === "title" ? endSentence(m.why) : endSentence(m.title);
-        // 守卫：剥完不能把这条念成空句（否则宁可不收敛）
-        const rest = MUST_READ_ECHO_MODE === "title" ? m.title : m.why;
-        if (endSentence(rest)) {
-          const r = stripOnce(spokenMr, frag, after);
-          if (r.removed > 0) {
-            spokenMr = r.text;
-            cursor = r.cursor;
-            stats.heroEchoes++;
-            stats.savedChars += r.removed;
-            continue;
-          }
-        }
-      }
-      cursor = after;
-    }
-  }
 
   // —— R2：必读↔商机（口播里商机只留动作）——
   if (spokenIns) {
@@ -184,7 +119,6 @@ export function condenseSpeech(exec: ExecutiveSummary): {
   return {
     exec: {
       ...exec,
-      ...(spokenMr ? { spoken_must_read: spokenMr } : {}),
       ...(spokenIns ? { spoken_insights: spokenIns } : {}),
     },
     stats,
@@ -197,7 +131,7 @@ export function formatOverlapLog(stats: SpeechOverlapStats): string {
     return "口播跨段收敛：未发现同源重复（0 字可省）";
   }
   return (
-    `口播跨段收敛：定调↔必读 ${stats.heroEchoes} 条压成点题 / 必读↔商机 ${stats.insightEchoes} 条压成动作，` +
+    `口播跨段收敛：必读↔商机 ${stats.insightEchoes} 条压成动作，` +
     `省 ${stats.savedChars} 字（约 ${(stats.savedChars / 5.2).toFixed(1)} 秒）`
   );
 }

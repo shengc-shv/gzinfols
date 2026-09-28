@@ -32,10 +32,9 @@ import { applyMemoryGuard } from "../../services/memory/exec-guard";
 import { loadEventMemory, saveEventMemory } from "../../adapters/persistence";
 // 口播逐条拼接口径（2026-09-25 下沉到服务层，与跨段收敛层共用同一份实现）
 import {
-  INSIGHT_CONNECTORS,
   MR_CONNECTORS,
+  groupedInsightsSpeech,
   heroSpeechLine,
-  insightSpeechLine,
   mustReadSpeechLine,
   riskSpeechLine,
 } from "../../services/voice/speech-lines";
@@ -60,16 +59,16 @@ export function syncNarration(exec: ExecutiveSummary): ExecutiveSummary {
   const heroFallback = heroSpeechLine(exec.hero_line);
   out.spoken_hero = exec.spoken_hero?.trim() ? exec.spoken_hero : heroFallback || undefined;
 
+  // 商机口播（2026-09-28 sc 口径）：**LLM 的 spoken_insights 优先** —— 它按客群归并成
+  // 3~4 条、不念商户名（「哪类客群、什么方向、让团队做什么」）；缺失时才由卡面按客群
+  // 归并兜底派生。理由与 hero 同源：逐条 1:1 会既超预算又听不懂重点（09-28 实测
+  // 6 条 662 字，超 520 上限，末条 action 被砍成残句）。
   const ins = exec.insights ?? [];
   out.spoken_insights = ins.length
-    ? ins
-        .map((it, i) => {
-          const conn =
-            i === 0 ? "" : i === ins.length - 1 ? "最后，" : INSIGHT_CONNECTORS[(i - 1) % INSIGHT_CONNECTORS.length];
-          return insightSpeechLine(it, conn);
-        })
-        .join("")
-    : undefined;
+    ? exec.spoken_insights?.trim()
+      ? exec.spoken_insights
+      : groupedInsightsSpeech(ins)
+    : undefined; // 无商机卡 → 口播同步置空（与 risk 同口径，不留孤儿口播）
 
   const mr = exec.must_read ?? [];
   out.spoken_must_read = mr.length

@@ -1,6 +1,22 @@
+/**
+ * 口播派生（`syncNarration`）口径锁（2026-09-28 sc 口径）。
+ *
+ * 三条分工（不再全线 1:1）：
+ *  - 定调  `spoken_hero`：**LLM 优先**（≤70 字维度提纲 + 看点），缺失时由 `heroSpeechLine` 兜底；
+ *  - 必读  `spoken_must_read`：卡面 1:1 确定性派生（`{标题。}{why。}`，句子级不变）；
+ *  - 商机  `spoken_insights`：**LLM 优先**（按客群归并 3~4 条），缺失时由
+ *    `groupedInsightsSpeech` 按客群归并兜底 —— 逐条 1:1 会既超预算（09-28 实测 662 字 >
+ *    520 上限，末条 action 被砍）又听不懂重点（六条里四条都是本地消费获客）。
+ *  - 风险  `spoken_risk`：卡面 1:1；卡面被去重清空则口播同步清空（消除孤儿口播）。
+ */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { syncNarration } from "../lib/pipeline/side-outputs/side-exec-summary";
+import {
+  INSIGHT_GROUP_ACTION_CHARS,
+  INSIGHT_GROUP_TOPIC_MAX,
+  groupedInsightsSpeech,
+} from "../lib/services/voice/speech-lines";
 import type { ExecutiveSummary } from "../lib/services/enrich/executive-summary";
 
 function base(over: Partial<ExecutiveSummary> = {}): ExecutiveSummary {
@@ -12,25 +28,36 @@ function base(over: Partial<ExecutiveSummary> = {}): ExecutiveSummary {
   };
 }
 
-test("口播条数 = 卡面条数（1:1 由构造保证）", () => {
+// ---------- 商机：按客群归并 ----------
+
+test("商机口播：按客群归并 —— 条数不随卡面线性增长（5 卡 → 3 条）", () => {
   const exec = base({
-    insights: Array.from({ length: 8 }, (_, i) => ({
-      topic: `商机${i}`,
-      impact: `影响${i}`,
-      action: `动作${i}`,
-    })),
+    insights: [
+      { topic: "基金代销", impact: "影响1", action: "节前接住到期资金。", segments: ["零售AUM"] },
+      { topic: "含权理财", impact: "影响2", action: "更新配置话术。", segments: ["零售AUM"] },
+      { topic: "私募扩容", impact: "影响3", action: "更新准入清单。", segments: ["中高端客群(过亿资产)"] },
+      { topic: "消费补贴", impact: "影响4", action: "对接补贴平台。" },
+      { topic: "文旅收单", impact: "影响5", action: "走访文旅商户。" },
+    ],
   });
-  const out = syncNarration(exec);
-  // 8 张卡 → 8 条商机均进入口播（每张卡以 topic 锚定，逐条校验不漏播/不重复播）
-  assert.ok(out.spoken_insights, "口播不应为空");
-  for (let i = 0; i < 8; i++) {
-    assert.ok((out.spoken_insights ?? "").includes(`商机${i}`), `商机${i} 应进入口播`);
-  }
-  const hits = (out.spoken_insights ?? "").match(/商机\d/g) ?? [];
-  assert.equal(hits.length, 8, "口播商机条数应等于卡面条数");
+  const text = syncNarration(exec).spoken_insights ?? "";
+  assert.match(text, /^第一，零售 A U M方面，基金代销、含权理财，节前接住到期资金。/, "同客群合并为一条");
+  assert.match(text, /第二，高端客户方面，私募扩容，更新准入清单。/, "客群短标签映射");
+  assert.match(text, /第三，其他机会方面，消费补贴、文旅收单，对接补贴平台。/, "无标签归「其他机会」");
+  assert.equal((text.match(/方面，/g) ?? []).length, 3, "5 条卡面 → 3 条口播");
+  assert.ok(!text.includes("影响1"), "impact 不进商机口播（事实归必读，口播只讲做什么）");
 });
 
-test("多标签卡用『和』连接客群段", () => {
+test("商机口播：组内超 2 条 → 以「首条等N条线索」概括，不罗列", () => {
+  const exec = base({
+    insights: [1, 2, 3, 4].map((i) => ({ topic: `主题${i}`, impact: "i", action: `动作${i}。` })),
+  });
+  const out = syncNarration(exec);
+  assert.equal(out.spoken_insights, "第一，其他机会方面，主题1等4条线索，动作1。");
+  assert.equal(INSIGHT_GROUP_TOPIC_MAX, 2, "上限常量须与实现一致");
+});
+
+test("商机口播：多标签卡取第一段客群（口播只按主客群归并）", () => {
   const exec = base({
     insights: [
       {
@@ -41,9 +68,7 @@ test("多标签卡用『和』连接客群段", () => {
       },
     ],
   });
-  const out = syncNarration(exec);
-  // 零售AUM 口播须按字母发音（空格拆开 → TTS 逐字母读 A U M），展示 chip 仍写「零售AUM」
-  assert.match(out.spoken_insights ?? "", /具备零售 A U M和高端客户商机的/);
+  assert.match(syncNarration(exec).spoken_insights ?? "", /^第一，零售 A U M方面，家族信托升级，跟进私行。$/);
 });
 
 test("零售AUM 口播按字母发音（空格拆 A U M），与展示文案无关", () => {
@@ -51,39 +76,70 @@ test("零售AUM 口播按字母发音（空格拆 A U M），与展示文案无�
     insights: [{ topic: "财富客户提升", impact: "AUM 规模增长", action: "做大客群", segments: ["零售AUM"] }],
   });
   const out = syncNarration(exec);
-  assert.match(out.spoken_insights ?? "", /具备零售 A U M商机的/);
-  assert.ok(!/零售AUM商机的/.test(out.spoken_insights ?? ""), "口播不得出现连写的『零售AUM』");
+  assert.match(out.spoken_insights ?? "", /零售 A U M方面/);
+  assert.ok(!/零售AUM方面/.test(out.spoken_insights ?? ""), "口播不得出现连写的『零售AUM』");
 });
 
-test("单标签卡读【具备X商机】且映射短标签", () => {
+test("商机口播：组内 action 只取「首要动作」片段（不铺陈细节）", () => {
   const exec = base({
-    insights: [{ topic: "小微贷", impact: "扩客", action: "推产品", segments: ["普惠小微贷款客户"] }],
+    insights: [
+      {
+        topic: "文旅收单",
+        impact: "客流回暖",
+        action: "节前走访文旅商户与景区票务方，打包收单、信用卡权益与小额消费贷方案，争取节庆期间独家权益位。",
+      },
+    ],
   });
-  const out = syncNarration(exec);
-  assert.match(out.spoken_insights ?? "", /具备普惠小微商机的/);
+  const text = syncNarration(exec).spoken_insights ?? "";
+  assert.equal(text, "第一，其他机会方面，文旅收单，节前走访文旅商户与景区票务方。");
+  assert.ok(!text.includes("打包收单"), "首个逗号之后的铺陈细节不再念");
+  assert.ok(!text.includes("独家权益位"), "铺陈细节不再念");
+  assert.ok(text.length <= INSIGHT_GROUP_ACTION_CHARS + 20, `单组应短（实际 ${text.length} 字）`);
 });
 
-test("无 insights 时口播置空（不残留旧整块文本）", () => {
-  const exec = base({ spoken_insights: "这是昨天残留的一大段旧口播文本……" });
-  const out = syncNarration(exec);
-  assert.equal(out.spoken_insights, undefined);
+test("商机口播：action 首段过短 → 向后补一段（不产出无信息片段）", () => {
+  const exec = base({
+    insights: [{ topic: "小微贷", impact: "扩客", action: "本周，对接黄埔园区管委会，梳理上下游小微名单。" }],
+  });
+  const text = syncNarration(exec).spoken_insights ?? "";
+  assert.ok(text.includes("本周，对接黄埔园区管委会"), `首段过短应补一段（实际：${text}）`);
 });
+
+test("商机口播：LLM 产出优先（归并稿不被卡面兜底覆盖）", () => {
+  const llm =
+    "第一，零售 A U M方面，基金代销等3条线索，节前接住到期资金与存款迁移。第二，本地场景方面，消费补贴与文旅商圈同时放量，信用卡和消费贷提前进商圈布点。";
+  const exec = base({
+    spoken_insights: llm,
+    insights: [{ topic: "基金代销", impact: "i", action: "a", sources: [{ title: "t", url: "https://example.com/a" }] }],
+  });
+  assert.equal(syncNarration(exec).spoken_insights, llm, "LLM 归并稿比卡面兜底更聚焦，应原样保留");
+});
+
+test("无 insights 时口播置空（不残留旧整块文本 / 不产出孤儿口播）", () => {
+  const exec = base({ spoken_insights: "这是昨天残留的一大段旧口播文本……" });
+  assert.equal(syncNarration(exec).spoken_insights, undefined);
+});
+
+test("归并原语：空数组 / 空白主题 → 不产出残句", () => {
+  assert.equal(groupedInsightsSpeech([]), "");
+  assert.equal(groupedInsightsSpeech([{ topic: "  ", action: "动作" }]), "");
+});
+
+// ---------- 风险 ----------
 
 test("risk 被去重清空 → 口播同步清空（消除孤儿口播）", () => {
   const exec = base({
     risk: undefined,
     spoken_risk: "今天有 1 个需要警惕：某风险，影响，动作。",
   });
-  const out = syncNarration(exec);
-  assert.equal(out.spoken_risk, undefined, "风险卡不存在时口播不得残留");
+  assert.equal(syncNarration(exec).spoken_risk, undefined, "风险卡不存在时口播不得残留");
 });
 
 test("risk 存在 → 派生 1 句风险口播", () => {
   const exec = base({
     risk: { topic: "理财违规", evidence: "通报", impact: "合规风险", action: "关注" },
   });
-  const out = syncNarration(exec);
-  assert.match(out.spoken_risk ?? "", /今天有 1 个需要警惕：理财违规/);
+  assert.match(syncNarration(exec).spoken_risk ?? "", /今天有 1 个需要警惕：理财违规/);
 });
 
 // ---------- 今日定调（2026-09-26：补位后不得丢定调口播） ----------
@@ -102,10 +158,10 @@ test("定调补位：spoken_hero 被清空 → 由 hero_line 兜底派生（不�
   assert.match(out.spoken_hero!, /。$/, "句号收尾");
 });
 
-test("定调：LLM 产出优先（不被卡面 1:1 覆盖，保住建议动作句）", () => {
-  const llm = "美联储10月加息概率已逼近七成。建议分行尽快梳理美元产品货架，同步提示锁汇窗口。";
-  const exec = base({ hero_line: "美联储10月加息概率逼近七成，破4%", spoken_hero: llm });
-  assert.equal(syncNarration(exec).spoken_hero, llm, "LLM 版比卡面更完整，应原样保留");
+test("定调：LLM 产出优先（维度提纲原样保留，不被卡面覆盖）", () => {
+  const llm = "今天主要看四个方面：汇率预期管理、楼市金九银十、财富货架调整、消费场景获客。";
+  const exec = base({ hero_line: "旧的卡面定调", spoken_hero: llm });
+  assert.equal(syncNarration(exec).spoken_hero, llm, "LLM 版是最终稿，应原样保留");
 });
 
 test("定调：标题自带感叹号 → 收尾只有一个句号（不出现「！。」）", () => {
@@ -118,11 +174,16 @@ test("定调：卡面与口播皆无 → 不产出孤立句号（保持 undefine
   assert.equal(syncNarration(exec).spoken_hero, undefined);
 });
 
-test("衔接词轮换缓解逐条拼接生硬感", () => {
+// ---------- 必读：保持句子级 1:1 ----------
+
+test("必读口播：仍按卡面 1:1 派生（标题 + why，不归并）", () => {
   const exec = base({
-    insights: Array.from({ length: 4 }, (_, i) => ({ topic: `t${i}`, impact: `i${i}`, action: `a${i}` })),
+    must_read: [
+      { title: "事件一", why: "解读一", url: "https://example.com/1" },
+      { title: "事件二", why: "解读二", url: "https://example.com/2" },
+      { title: "事件三", why: "解读三", url: "https://example.com/3" },
+    ],
   });
   const out = syncNarration(exec);
-  assert.match(out.spoken_insights ?? "", /此外，/);
-  assert.match(out.spoken_insights ?? "", /最后，/);
+  assert.match(out.spoken_must_read ?? "", /^事件一。解读一。其次，事件二。解读二。此外，事件三。解读三。$/);
 });

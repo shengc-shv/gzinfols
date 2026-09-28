@@ -6,6 +6,8 @@ import path from "node:path";
 import {
   assembleBriefingScript,
   sanitize,
+  stripSpeechGreeting,
+  detectVisualRefs,
   truncateAtSentence,
   detectGdIpo,
   AUDIO_SPEAK_LIMITS,
@@ -48,9 +50,9 @@ test("口播稿：章节引导语 + 收尾语 + 段落时序（gzinfo 口径）"
   const b = await assembleBriefingScript(report(), { exec: exec() });
   assert.ok(b);
   assert.ok(b.script.startsWith("早上好。"), "开场白");
-  assert.ok(b.script.includes("先看今日定调。"));
-  assert.ok(b.script.includes("接下去看今日必读。"));
-  assert.ok(b.script.includes("接下去是商机洞察。"));
+  assert.ok(b.script.includes("先看今天的整体定调。"));
+  assert.ok(b.script.includes("接着看今日必读，共1条。"), "必读过渡语报出条数（「纲」之后进「目」）");
+  assert.ok(b.script.includes("下面是商机洞察，按客群看。"));
   assert.ok(b.script.endsWith("今天播报结束。"), "收尾语");
   assert.ok(b.script.includes(b.parts.must_read!));
   // 段落起点单调递增
@@ -74,16 +76,16 @@ test("口播稿：无 TTS 内容但 hero 存在 → 有稿；risk 段接入（ex
   });
   const b = await assembleBriefingScript(report(), { exec: withRisk });
   assert.ok(b);
-  assert.ok(b.script.includes("接下去是风险预警。"));
+  assert.ok(b.script.includes("最后是风险预警。"));
   assert.ok(b.parts.risk);
 });
 
-test("口径锁定：章节预算与总时长上限为 gzinfo 2026-09-11 版（4 分 10 秒）", async () => {
-  assert.equal(AUDIO_SPEAK_LIMITS.hero, 90);
-  assert.equal(AUDIO_SPEAK_LIMITS.must_read, 250);
-  assert.equal(AUDIO_SPEAK_LIMITS.insights, 520);
+test("口径锁定：章节预算为 2026-09-28 sc 口径重分配（定调缩、必读/商机按新分工）", async () => {
+  assert.equal(AUDIO_SPEAK_LIMITS.hero, 70);
+  assert.equal(AUDIO_SPEAK_LIMITS.must_read, 320);
+  assert.equal(AUDIO_SPEAK_LIMITS.insights, 280);
   assert.equal(AUDIO_SPEAK_LIMITS.ipo, 150);
-  assert.equal(AUDIO_SPEAK_LIMITS.risk, 90);
+  assert.equal(AUDIO_SPEAK_LIMITS.risk, 140);
   assert.equal(AUDIO_SPEAK_LIMITS.stock, 520);
   assert.equal(SCRIPT_MAX_CHARS, 1300); // 250s × 5.2
 });
@@ -137,7 +139,21 @@ test("TTS 归档：返回的路径必须是持久路径且文件存在（回归 
   }
 });
 
-test("定调补位：口播仍含「先看今日定调」（2026-09-26 实证缺陷回归）", async () => {
+test("听觉友好：车里听的稿子不得出现视觉指代词（该政策/上述/如下/见表）", async () => {
+  // 听众是早上在车里听的行领导：看不见屏幕、不能回看，「上述」「该政策」读出来等于没说。
+  // 提示词已明令 LLM 不用这类词；此处是确定性兜底 + 成稿守门。
+  assert.deepEqual(detectVisualRefs("该政策影响分行，上述判断如下"), ["该政策", "上述", "如下"]);
+  assert.deepEqual(
+    detectVisualRefs("今天主要看两个方面：汇率预期管理，结售汇窗口；消费场景获客，补贴叠加节庆。"),
+    [],
+    "正常的维度提纲不触发",
+  );
+  const b = await assembleBriefingScript(report(), { exec: exec() });
+  assert.ok(b);
+  assert.deepEqual(detectVisualRefs(b!.script), [], "成稿不得含视觉指代词");
+});
+
+test("定调补位：口播仍含「先看今天的整体定调」（2026-09-26 实证缺陷回归）", async () => {
   // 复现 exec-guard 补位后的 exec：卡面换成补位标题、spoken_hero 被清空
   const patched = syncNarration(
     exec({ hero_line: "今日分行焦点：券商重罚落地暂停新开户3个月", spoken_hero: undefined }),
@@ -145,6 +161,20 @@ test("定调补位：口播仍含「先看今日定调」（2026-09-26 实证缺
   assert.ok(patched.spoken_hero, "syncNarration 应兜底派生定调口播");
   const b = await assembleBriefingScript(report(), { exec: patched });
   assert.ok(b);
-  assert.ok(b!.script.includes("先看今日定调。"), "补位后不得丢定调口播");
+  assert.ok(b!.script.includes("先看今天的整体定调。"), "补位后不得丢定调口播");
   assert.ok(!b!.script.includes("今日分行焦点"), "口播不重复念卡面的补位前缀");
+});
+
+test("问候语安全网：LLM 稿自带问候 → 只念一次（2026-09-28 实测「早上好。各位早上好。」）", async () => {
+  const withGreeting = exec({
+    spoken_hero: "各位早上好。今天主要看两个方面：汇率预期管理、消费场景获客。",
+  });
+  const b = await assembleBriefingScript(report(), { exec: withGreeting });
+  assert.ok(b);
+  const greets = b!.script.match(/早上好/g) ?? [];
+  assert.equal(greets.length, 1, `全稿只应有一个问候（实际 ${greets.length} 个）`);
+  assert.ok(b!.parts.hero!.startsWith("今天主要看两个方面"), "问候语已从定调段剥离");
+  assert.equal(stripSpeechGreeting("各位早上好。今天看汇率。"), "今天看汇率。");
+  assert.equal(stripSpeechGreeting("大家好，今天看汇率。"), "今天看汇率。");
+  assert.equal(stripSpeechGreeting("今天看汇率。"), "今天看汇率。", "无问候原样返回");
 });

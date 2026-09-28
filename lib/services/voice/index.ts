@@ -67,14 +67,24 @@ export interface AudioBuildResult {
 }
 
 /**
- * 各章节口播字数上限（gzinfo 2026-09-11 版：上限 4 分 10 秒，为 7 条洞察 + 股市段腾预算）。
+ * 各章节口播字数上限（**2026-09-28 sc 口径重分配**）。
+ *
+ * 重分配依据（09-28 实测：opener+定调 212+必读 283+商机 662+风险 ≈ 1303 字，尚未含
+ * IPO 与股市段 → 定调/必读/商机三段全部尾部截断）：
+ *  - `hero` 90 → **70**：定调已改为「维度提纲 + 看点」（≤70 字，含每个维度 3~6 字看点；
+ *    2026-09-28 sc 拍板放宽 —— 听众是车里听的行领导，定调要给足分量才留得住人）；
+ *  - `must_read` 250 → 320：定调不再给理由后，必读的 why 是唯一「为什么重要」来源，不能再被截；
+ *  - `insights` 520 → 280：商机口播改为**按客群归并 3~4 条**（LLM 优先、兜底归并），
+ *    天然比逐条 1:1 短，280 足够；
+ *  - `risk` 90 → 140：原 90 字连 impact 都念不完（09-28 实测 action 被整句砍掉）；
+ *  - `stock` 520：吃「总上限 − 已拼 − 收尾」的剩余额度，自适应让位（不变）。
  */
 export const AUDIO_SPEAK_LIMITS = {
-  hero: 90,
-  must_read: 250,
-  insights: 520,
+  hero: 70,
+  must_read: 320,
+  insights: 280,
   ipo: 150,
-  risk: 90,
+  risk: 140,
   stock: 520,
 } as const;
 
@@ -116,6 +126,21 @@ export function sanitize(t: string): string {
   return s;
 }
 
+/**
+ * 剥离口播稿开头的问候语（2026-09-28 sc 口径安全网）。
+ *
+ * 全稿已有固定开场白 `OPENER`（「早上好。」），若 LLM 的 spoken_hero 又自带问候，
+ * 会念成「早上好。各位早上好。…」（09-28 实测）。提示词已要求「不要问候语」，
+ * 本函数是确定性兜底：只剥**开头一个**问候（不碰正文里的「各位」）。
+ */
+export function stripSpeechGreeting(t: string): string {
+  if (!t) return "";
+  return t.replace(
+    /^(?:各位|大家)?(?:早上好|上午好|中午好|下午好|晚上好|大家好)[，,。！!；;、\s]*/,
+    "",
+  );
+}
+
 /** 在句界（。！？；）截断到 limit 内，避免字数超限时断在半句。 */
 export function truncateAtSentence(text: string, limit: number): string {
   const hard = Math.round(limit * 1.05);
@@ -125,6 +150,20 @@ export function truncateAtSentence(text: string, limit: number): string {
     if ("。！？；".includes(cut[i])) return cut.slice(0, i + 1);
   }
   return cut;
+}
+
+/**
+ * 视觉指代词（2026-09-28 sc 口径）：听众是**早上在车里听的行领导** —— 看不见屏幕、不能回看，
+ * 「该政策 / 上述 / 如下 / 见表」这类依赖视觉上下文的表达，读出来等于没说。
+ *
+ * 用于口播稿的**听觉自检**（只告警、不阻断发布）：提示词已明令 LLM 不用这类词，
+ * 这里是确定性兜底，让跑偏在 CI 日志里可见（同「口播跨段收敛」的可观测思路）。
+ */
+export const VISUAL_REF_RE = /该政策|上述|如下|见表|如下图|见下文|详见正文|前述/g;
+
+/** 找出稿中的视觉指代词（去重；空数组 = 听觉友好）。 */
+export function detectVisualRefs(text: string): string[] {
+  return [...new Set(text.match(VISUAL_REF_RE) ?? [])];
 }
 
 export function estimateDurationSec(chars: number): number {
@@ -198,10 +237,12 @@ export async function assembleBriefingScript(
 
   // —— 今日定调：只读 exec.spoken_hero（gzinfo 口径——口播稿的唯一来源是执行摘要的
   // spoken_* 字段，由 LLM 产出或 syncNarration 由卡面 1:1 确定性派生；不读 report.hero_line）——
-  const hero = sanitize(exec?.spoken_hero ?? "");
+  // 2026-09-28 sc 口径：定调是「今天主要看哪几个方面」的**纲**，过渡语点明「整体」二字，
+  // 与紧接着的必读（讲事件）在听感上分层。
+  const hero = stripSpeechGreeting(sanitize(exec?.spoken_hero ?? ""));
   if (hero) {
     const t = truncateAtSentence(hero, AUDIO_SPEAK_LIMITS.hero);
-    const segText = `先看今日定调。${t}`;
+    const segText = `先看今天的整体定调。${t}`;
     parts.push(segText);
     partMap.hero = t;
     const dur = estimateDurationSec(segText.length);
@@ -211,9 +252,11 @@ export async function assembleBriefingScript(
   }
 
   // —— 今日必读（exec.spoken_must_read 优先：syncNarration 1:1 由卡面派生）——
+  // 过渡语报出条数，让听众知道这一段的体量（「纲」之后进「目」）。
   if (exec?.spoken_must_read) {
     const t = truncateAtSentence(sanitize(exec.spoken_must_read), AUDIO_SPEAK_LIMITS.must_read);
-    const segText = `接下去看今日必读。${t}`;
+    const mrCount = (exec.must_read ?? report.must_read ?? []).length;
+    const segText = `接着看今日必读${mrCount > 0 ? `，共${mrCount}条` : ""}。${t}`;
     parts.push(segText);
     partMap.must_read = t;
     const dur = estimateDurationSec(segText.length);
@@ -223,10 +266,10 @@ export async function assembleBriefingScript(
     found++;
   }
 
-  // —— 商机洞察（exec.spoken_insights 优先）——
+  // —— 商机洞察（exec.spoken_insights 优先：LLM 按客群归并稿，缺失时由 syncNarration 归并兜底）——
   if (exec?.spoken_insights) {
     const t = truncateAtSentence(sanitize(exec.spoken_insights), AUDIO_SPEAK_LIMITS.insights);
-    const segText = `接下去是商机洞察。${t}`;
+    const segText = `下面是商机洞察，按客群看。${t}`;
     parts.push(segText);
     partMap.insights = t;
     const dur = estimateDurationSec(segText.length);
@@ -241,7 +284,7 @@ export async function assembleBriefingScript(
   // —— 风险预警（exec.spoken_risk 优先；M 层，30s 预算；当日无风险 → 跳过）——
   if (exec?.spoken_risk) {
     const t = truncateAtSentence(sanitize(exec.spoken_risk), AUDIO_SPEAK_LIMITS.risk);
-    const segText = `接下去是风险预警。${t}`;
+    const segText = `最后是风险预警。${t}`;
     parts.push(segText);
     partMap.risk = t;
     const dur = estimateDurationSec(segText.length);
@@ -444,6 +487,13 @@ export async function assembleBriefingScript(
 
   if (script.length > SCRIPT_MAX_CHARS) {
     console.warn(`::warning:: 口播稿 ${script.length} 字，超出 ${SCRIPT_MAX_CHARS} 字上限（约 4 分 10 秒）`);
+  }
+  // 听觉自检（2026-09-28）：听众在车里、看不见屏幕 → 视觉指代词必须为 0
+  const visualRefs = detectVisualRefs(script);
+  if (visualRefs.length) {
+    console.warn(
+      `::warning:: 口播稿出现视觉指代词（听众在车里、看不见屏幕，读出来等于没说）：${visualRefs.join(" / ")}`,
+    );
   }
   // C 项：跨段收敛可观测（此前「口播重复」完全不可见，只能靠人耳发现）
   if (overlapStats) {

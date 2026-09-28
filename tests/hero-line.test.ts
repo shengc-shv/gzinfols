@@ -1,15 +1,15 @@
 /**
- * 今日定调：文本口径、兜底派生与消费端标签（2026-09-27 sc 口径落地）。
+ * 今日定调：文本口径、兜底派生与消费端标签（2026-09-28 sc 口径落地）。
  *
- * 口径（sc 2026-09-27）：「今日定调」是**当天关键事件的快速总结**，用于让听众在看正文前
- * 就知道后面「必读」与「商机」里要关注哪几个方面 —— 起**提纲挈领**的引导作用，
- * **不是**把已有内容换个说法复述一遍、也不是「再挑一条事件播报」。且不能只给方向词，
- * 要展开一句「为什么值得关注」。
+ * 口径（sc 2026-09-28）：「今日定调」是**维度提纲 + 看点** —— 回答「今天主要看哪几个方面」
+ * （「今天主要看N个方面：X，看点；Y，看点。」，**≤70 字**），是必读/商机的「目录」。
+ * **不写整句的为什么、不做事件摘要、不复述任何一条必读** —— 完整理由归必读，两者必须听得出分工。
+ * 听众是**车里听的行领导**（看不见屏幕、不能回看），故每个维度可带 3~6 字看点给足分量。
  *
  * 本文件锁住四件事：
  *   ① `stripHeroPrefix`：历史遗留的「今日分行焦点：」前缀统一剥除（页面/企微/口播共用）；
- *   ② `deriveHeroLine`：由本次报告的必读+商机归纳「方向 + 为什么」（交错取用、上限 3 条、
- *      超长先砍主线、空素材回空串）；
+ *   ② `deriveHeroLine`：由本次报告的必读+商机归纳**维度**（交错取用、上限 4 个、
+ *      超长先砍维度、空素材回空串；**理由一字不入**）；
  *   ③ 集成：定调判重命中 → 由归纳兜底（**不再从两天池挑事件**）、清空 spoken_hero；
  *      必读/商机皆空 → 保留原定调（红线：宁可重复，不留空）；
  *   ④ 消费端：页面 / 企微 markdown / 企微 text 各自只加一份标签，不得出现双标签。
@@ -86,18 +86,15 @@ test("stripHeroPrefix：剥掉历史补位前缀，无前缀原样返回，空�
 });
 
 // ---------------------------------------------------------------------------
-// ② deriveHeroLine：方向 + 为什么
+// ② deriveHeroLine：只列维度，不写理由
 // ---------------------------------------------------------------------------
 
-test("deriveHeroLine：必读与商机交替取用，每条都带「为什么值得关注」", () => {
+test("deriveHeroLine：必读与商机交替取维度，句式「今天主要看N个方面：X、Y」", () => {
   const line = deriveHeroLine(mkExec());
-  assert.ok(line.startsWith("今天值得重点关注两个方面："), `句式应含方向数（实际：${line}）`);
-  assert.ok(line.includes("一是上海楼市已止跌回稳，住房金融条线关注度上升"), "必读在前、带理由");
-  assert.ok(line.includes("二是助贷合作方适配排查，消费贷条线获客与分润结构或调整"), "商机在后、带理由");
-  assert.ok(line.endsWith("。"), "整句收口");
+  assert.equal(line, "今天主要看两个方面：上海楼市已止跌回稳、助贷合作方适配排查。");
 });
 
-test("deriveHeroLine：理由只取第一句、超长按标点截断（卡面是导语，不铺陈）", () => {
+test("deriveHeroLine：理由（why）一字不入 —— 定调是纲，理由归必读", () => {
   const line = deriveHeroLine({
     must_read: [
       {
@@ -106,29 +103,41 @@ test("deriveHeroLine：理由只取第一句、超长按标点截断（卡面是
       },
     ],
   });
-  assert.ok(line.startsWith("今天值得重点关注：消费贷贴息扩围，"), `方向应在（实际：${line}）`);
-  assert.ok(!line.includes("需尽快统一口径"), "超出 22 字的部分不得进入导语");
-  assert.ok(line.length <= 90, `单条导语应短（实际 ${line.length} 字）`);
+  assert.equal(line, "今天主要看一个方面：消费贷贴息扩围。");
+  assert.ok(!line.includes("价格战"), "why 的内容不得进入提纲");
+  assert.ok(!line.includes("需尽快统一口径"), "why 的内容不得进入提纲");
+  assert.ok(line.length <= 70, `整句应 ≤70 字（实际 ${line.length}）`);
 });
 
-test("deriveHeroLine：最多 3 条主线、方向去重、空素材回空串", () => {
+test("deriveHeroLine：最多 5 个维度、方向去重、空素材回空串", () => {
   const line = deriveHeroLine({
     must_read: [
       { title: "A方向", why: "理由A" },
       { title: "B方向", why: "理由B" },
       { title: "C方向", why: "理由C" },
       { title: "D方向", why: "理由D" },
+      { title: "E方向", why: "理由E" },
+      { title: "F方向", why: "理由F" },
     ],
     insights: [{ topic: "A方向", impact: "重复方向应被去掉" }],
   });
-  assert.ok(line.includes("三个方面"), "三条时应报「三个方面」");
-  assert.ok(line.includes("一是A方向") && line.includes("三是C方向"), "取前三条");
-  assert.ok(!line.includes("D方向"), "第四条不进导语");
+  assert.ok(line.startsWith("今天主要看五个方面："), `五条时应报「五个方面」（实际：${line}）`);
+  assert.ok(line.includes("A方向") && line.includes("E方向"), "取前五条");
+  assert.ok(!line.includes("F方向"), "第六条不进提纲");
   assert.equal((line.match(/A方向/g) ?? []).length, 1, "同一方向不重复");
 
   assert.equal(deriveHeroLine({ must_read: [], insights: [] }), "", "无素材 → 空串");
   assert.equal(deriveHeroLine({ must_read: [{ title: "  ", why: "x" }] }), "", "空白标题不算素材");
-  assert.equal(HERO_DERIVE_MAX_LINES, 3, "上限常量须与口径一致");
+  assert.equal(HERO_DERIVE_MAX_LINES, 5, "上限常量须与口径一致");
+});
+
+test("deriveHeroLine：整句超 70 字 → 先砍维度再试（硬上限）", () => {
+  const long = "很长的方向词组加起来十五个字";
+  const line = deriveHeroLine({
+    must_read: [1, 2, 3, 4].map((i) => ({ title: `${long}${i}`, why: "x" })),
+  });
+  assert.ok(line.length <= 70, `整句不得超 70 字（实际 ${line.length} 字：${line}）`);
+  assert.ok(line.startsWith("今天主要看"), "句式不变（只是减少维度数）");
 });
 
 // ---------------------------------------------------------------------------
@@ -138,8 +147,10 @@ test("deriveHeroLine：最多 3 条主线、方向去重、空素材回空串", 
 test("定调判重命中 → 由必读+商机归纳今日关注主线（不清空板块、不挑池事件）", () => {
   const g = applyMemoryGuard({ exec: mkExec(), store: storeWithHeroHistory(), today: TODAY, now: NOW });
   const line = g.exec.hero_line ?? "";
-  assert.ok(line.startsWith("今天值得重点关注"), `应改为归纳式导语（实际：${line}）`);
+  assert.ok(line.startsWith("今天主要看"), `应改为维度提纲（实际：${line}）`);
   assert.ok(line.includes("上海楼市已止跌回稳") && line.includes("助贷合作方适配排查"), "两个板块都要点到");
+  assert.ok(!line.includes("住房金融条线关注度上升"), "兜底提纲不得夹带理由（理由归必读）");
+  assert.ok(line.length <= 70, `提纲 ≤70 字（实际 ${line.length} 字）`);
   assert.ok(!line.startsWith("今日分行焦点"), "不带任何标签前缀（各消费端自加）");
   assert.ok(
     !/取水权|河南省|中小银行压降/.test(line),
