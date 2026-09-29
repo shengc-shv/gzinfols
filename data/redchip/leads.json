@@ -1,5 +1,24 @@
 [
   {
+    "appId": "108907",
+    "nameCn": "Shandong Linuo Pharmaceutical Packaging Co.,Ltd.",
+    "nameEn": "",
+    "board": "主板",
+    "status": "A",
+    "submitDate": "2026-09-28",
+    "domicile": "中国(境内)",
+    "isOffshore": false,
+    "gdCityHits": 0,
+    "gdCityMentions": 15,
+    "isGdConnected": false,
+    "vie": "historical",
+    "verdict": "non-redchip",
+    "discoveredAt": "2026-09-29T07:54:12+08:00",
+    "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108907/documents/sehk26092800296.pdf",
+    "leadId": "108907",
+    "lastChangedAt": "2026-09-29T07:54:12+08:00"
+  },
+  {
     "appId": "108906",
     "nameCn": "Voyager Intelligent Systems Limited",
     "nameEn": "",
