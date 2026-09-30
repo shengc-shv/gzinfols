@@ -1,0 +1,894 @@
+{
+  "date": "2026-10-01",
+  "updatedAt": "2026-09-30T22:37:34.699Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：央行下调PSL利率并扩围、房贷贴息客群清单梳理、央行多项货币政策工具协同稳增长、节前理财申赎卡点提示。",
+    "spoken_hero": "今天主要看四个方面：央行下调PSL利率并扩围、房贷贴息客群清单梳理、央行多项货币政策工具协同稳增长、节前理财申赎卡点提示。",
+    "must_read": [
+      {
+        "title": "港股新股破发率近六成",
+        "why": "恒生科技指数9月跌近8%、新股破发率近六成，港股打新与权益类客户风险偏好或受压制，需做好预期管理。",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-30/doc-initqzmc5724433.shtml"
+      },
+      {
+        "title": "地方债结存限额增量政策可期",
+        "why": "地方债结存限额使用被提及，财政增量政策落地预期升温，政银合作与项目类融资机会值得关注。",
+        "url": "https://finance.eastmoney.com/a/202609303886886985.html"
+      },
+      {
+        "title": "财政央行协同延伸至住房消费",
+        "why": "促内需工具延伸至住房消费，住房金融政策组合仍在加码，可跟踪后续细则并提前储备按揭项目。",
+        "url": "https://www.cnfin.com/hg-lb/detail/20260930/4477007_1.html"
+      },
+      {
+        "title": "9月制造业PMI重回扩张区间",
+        "why": "制造业景气边际改善至50.1%，对公授信与供应链金融需求或随之回暖，普惠小微客群经营预期改善。",
+        "url": "https://news.southcn.com/node_812903b83a/03cec3e9a5.shtml"
+      },
+      {
+        "title": "以旧换新资金全部下达",
+        "why": "超长期特别国债支持消费品以旧换新资金全部到位，家电汽车消费场景信贷与分期合作机会值得跟进。",
+        "url": "https://news.southcn.com/node_812903b83a/1f13a7be9e.shtml"
+      }
+    ],
+    "spoken_must_read": "港股新股破发率近六成。恒生科技指数9月跌近8%、新股破发率近六成，港股打新与权益类客户风险偏好或受压制，需做好预期管理。其次，地方债结存限额增量政策可期。地方债结存限额使用被提及，财政增量政策落地预期升温，政银合作与项目类融资机会值得关注。此外，财政央行协同延伸至住房消费。促内需工具延伸至住房消费，住房金融政策组合仍在加码，可跟踪后续细则并提前储备按揭项目。还有，9月制造业PMI重回扩张区间。制造业景气边际改善至50.1%，对公授信与供应链金融需求或随之回暖，普惠小微客群经营预期改善。另外，以旧换新资金全部下达。超长期特别国债支持消费品以旧换新资金全部到位，家电汽车消费场景信贷与分期合作机会值得跟进。",
+    "insights": [
+      {
+        "topic": "节前理财申赎卡点提示",
+        "impact": "节前理财公司抢闲钱升温并提示申赎卡点，客户资金到账时点若未提前告知，易出现收益空档与投诉。",
+        "action": "今日起向理财客户推送节前申赎时间表，重点提示跨节资金到账节点，同步推荐节后可续接的短期限产品。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "抢闲钱大战升温！理财公司提示节前“卡点”",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-30/doc-initqefr2598931.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "拿地房企企业主客群对接",
+        "impact": "广州土拍火热、1宗涉宅用地溢价26.52%成交，房企拿地意愿回升，企业主客群的融资与财富管理需求同步上升。",
+        "action": "本周梳理近期拿地房企的企业主名单，跟进开发贷与按揭合作，同步切入私行与家族信托配置需求。",
+        "tag": [
+          "私行",
+          "住房金融"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "新政实施细则落地稳信心，广州土拍市场火热",
+            "url": "https://news.dayoo.com/guangzhou/202609/30/139995_55009251.htm"
+          },
+          {
+            "title": "广州1宗涉宅用地溢价26.52%成交",
+            "url": "https://www.stcn.com/article/detail/4203790.html"
+          }
+        ]
+      },
+      {
+        "topic": "支农支小再贷款项目储备",
+        "impact": "PSL降息扩围、支农支小再贷款额度增加，普惠小微客群融资成本有望下行，项目储备窗口打开。",
+        "action": "本周对照再贷款支持领域梳理普惠小微项目储备，优先走访广州专业市场与个体工商户客群。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "央行调整完善若干货币政策工具 下调PSL利率并扩大支持领域",
+            "url": "https://www.stcn.com/article/detail/4203242.html"
+          }
+        ]
+      },
+      {
+        "topic": "以旧换新商户分期合作",
+        "impact": "以旧换新资金全部下达，家电汽车等消费场景信贷需求或受带动，商户分期合作机会增加。",
+        "action": "本周对接广州家电与汽车经销商，推分期合作与消费贷产品，叠加节庆补贴做场景获客。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "今年超长期特别国债支持消费品以旧换新资金全部下达",
+            "url": "https://news.southcn.com/node_812903b83a/1f13a7be9e.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "城市合伙人政银合作通道",
+        "impact": "广州公开征集城市合伙人资源合作企业，政银合作与对公客群拓展多了一个切入通道。",
+        "action": "本周评估参与城市合伙人征集的方式，梳理可对接的本地企业与项目资源，带动代发与结算落地。",
+        "tag": [
+          "政银合作",
+          "代发"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "广州公开征集“城市合伙人”资源合作企业",
+            "url": "https://news.dayoo.com/guangzhou/202609/30/139995_55009341.htm"
+          }
+        ]
+      },
+      {
+        "topic": "液冷科技新主体开户对接",
+        "impact": "华翔股份在广东成立液冷科技公司，液冷赛道新增主体，开户、结算与设备融资需求值得跟进。",
+        "action": "本周对接新设液冷科技公司，跟进开户、结算与设备融资需求，争取代发工资与员工个人金融。",
+        "tag": [
+          "科技金融",
+          "代发"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "华翔股份在广东成立液冷科技公司",
+            "url": "https://www.stcn.com/article/detail/4204359.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，节前理财抢闲钱、信托营销新渠道，本周提前告知客户申赎卡点、更新货架准入。高端客户方面，广州土拍火热、现售新政加大融资支持，本周梳理拿地房企企业主名单、跟进家族信托与开发贷。普惠小微方面，PSL降息扩围、支农支小再贷款额度增加，本周对照支持领域梳理项目储备、走访本地制造客群。本地消费场景方面，以旧换新资金全部下达、广东补贴叠加节庆，本周对接家电汽车商户、推分期合作。",
+    "risk": {
+      "topic": "金融产品网络营销新规实施",
+      "evidence": "《金融产品网络营销管理办法》今起正式实施，明确无资质不得开展金融推广，线上获客话术与第三方引流合作需按新规自查。",
+      "impact": "财富与信用卡条线的线上投放、第三方引流合作若资质不全或话术违规，面临下架与处罚风险；个贷条线助贷引流同样受约束。",
+      "action": "合规部应牵头排查线上投放与合作渠道资质，财富与信用卡条线本周完成话术自查，暂停无资质第三方引流。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "无资质不得开展金融推广 金融产品网络营销新规来了",
+          "url": "https://m.21jingji.com/article/20260930/herald/19009e9f4d1859aff77c3179d62a0505.html"
+        },
+        {
+          "title": "《金融产品网络营销管理办法》今起正式实施，带来哪些变化？",
+          "url": "https://m.21jingji.com/article/20260930/herald/eb57fb2983b38ed96b8b0c5a579406f7.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：金融产品网络营销新规实施，财富与信用卡条线的线上投放、第三方引流合作若资质不全或话术违规，面临下架与处罚风险；个贷条线助贷引流同样受约束。合规部应牵头排查线上投放与合作渠道资质，财富与信用卡条线本周完成话术自查，暂停无资质第三方引流。",
+    "guangdong_ipo": {
+      "spoken": "广东有两家企业在审：深圳汉诺医疗拟上科创板，专用设备制造业，目前处于IPO问询中，保荐机构是中信证券；另一家广东企业云豹智能拟上创业板，也已进入问询阶段。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "美股分化，道指跌0.86%，纳指涨0.24%，利率高企压制债市与价值股。",
+      "sectors": [
+        "债券创多年最差单月，利率飙升冲击两大宏观ETF，交易员押注其一反弹。",
+        "标普500近半数成分股呈负贝塔，指数与个股走势明显背离。",
+        "新思科技与亚马逊云签超10亿美元芯片设计授权协议，AI算力链受关注。",
+        "礼来Foundayo在糖尿病试验中显示心血管安全性，减肥药主线延续。",
+        "三季度IPO推迟加速，Anthropic年内IPO押注升温但AI安全警告引争议。"
+      ],
+      "spoken": "美股收盘分化，道指跌百分之零点八六，纳指涨百分之零点二四，标普跌百分之零点二五。利率高企令债券创多年最差单月，并冲击两大宏观ETF。标普近半数成分股负贝塔，指数与个股背离。个股方面，新思科技与亚马逊云签超十亿美元芯片设计协议，礼来糖尿病试验显示心血管安全性。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-01"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "50906.05",
+          "changePct": "-0.86%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26861.06",
+          "changePct": "+0.24%"
+        },
+        {
+          "name": "标普500",
+          "value": "7651.54",
+          "changePct": "-0.25%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "沪指涨0.31%，深成指与创业板走弱，医药走强、半导体领跌。",
+      "sectors": [
+        "CRO概念走强，政策与AI4S共振，融资客抢筹相关标的。",
+        "创新药概念受明星双抗催化，医药股整体走强。",
+        "半导体板块跌幅居前，拖累深市与创业板表现。",
+        "美国8月PCE低于预期，市场削减美联储10月加息押注。",
+        "今日上市新股涨至临停，中一签浮盈超3万元。"
+      ],
+      "spoken": "A股收盘涨跌互现，沪指涨百分之零点三一，深成指跌百分之零点一一，创业板指跌百分之零点二三。医药股走强，CRO概念受政策与AI4S共振带动，创新药受明星双抗催化。半导体板块跌幅居前。海外方面，美国八月PCE低于预期，市场削减美联储十月加息押注。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-01"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3842.20",
+          "changePct": "+0.31%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12887.62",
+          "changePct": "-0.11%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3135.28",
+          "changePct": "-0.23%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒指收报24613.27点涨0.37%，恒生科技涨0.10%，南向年内净买入近4300亿港元。",
+      "sectors": [
+        "南向资金年内净买入近4300亿港元，红利底仓加AI进攻渐成机构共识。",
+        "恒生科技指数9月累跌近8%，当月新股破发率近六成。",
+        "前三季度港股IPO募资超3800亿港元，硬科技与A+H双轮驱动。",
+        "大和称恒瑞医药与诺和诺德许可协议总额及预付款均具吸引力，花旗上调其目标价至120港元。",
+        "大摩维持吉利汽车增持评级，目标价27港元；下调普拉达目标价至40港元。"
+      ],
+      "spoken": "港股收盘，恒指涨百分之零点三七，恒生科技涨百分之零点一。南向资金年内净买入近四千三百亿港元，红利底仓加AI进攻渐成机构共识。恒生科技九月累跌近百分之八，当月新股破发率近六成。个股方面，大和看好恒瑞医药与诺和诺德许可协议，花旗上调其目标价至一百二十港元。",
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-09-30"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24613.27",
+          "changePct": "+0.37%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4253.89",
+          "changePct": "+0.10%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-09-30",
+    "marketStatus": {
+      "reportDate": "2026-10-01",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-09-30"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-09-30"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-09-30"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 9月30日 周三 收盘；港股为 9月30日 周三 收盘；美股为 9月30日 周三 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202609303887734521.html",
+      "title_cn": "加息突变！美联储最新发声！三大变数突袭",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "东方财富报道称美联储最新发声引发加息预期突变，市场面临三大变数。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "货币政策",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609303887667475.html",
+      "title_cn": "沪指收涨0.31%医药股走强半导体板块跌幅居前",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "沪指收涨0.31%，医药股走强，半导体板块跌幅居前。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "医药",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609303887562983.html",
+      "title_cn": "政策+AI4S共振！CRO概念走强融资客最新抢筹股曝光",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "受政策与AI4S共振影响，CRO概念走强，融资客抢筹相关个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "CRO",
+        "AI",
+        "医药",
+        "融资"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609303887647270.html",
+      "title_cn": "突然！抄底资金疯狂涌入！A股“老登”上演超级大反转",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "A股出现抄底资金大量涌入，部分被称'老登'的标的出现大幅反转。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "资金流向"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609303887837189.html",
+      "title_cn": "9月30日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "东方财富汇总9月30日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609303887467393.html",
+      "title_cn": "今日上市新股涨到临停中一签浮盈超3万元",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "当日上市新股大涨触发临停，中一签浮盈超3万元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "新股",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609303887068646.html",
+      "title_cn": "AI眼镜遭遇“散热”拷问：头部品牌被曝长时间使用存在过热烫伤风险海外已启动召回",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "AI眼镜被曝长时间使用存在过热烫伤风险，头部品牌海外已启动召回。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "消费电子",
+        "召回"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609303887868954.html",
+      "title_cn": "美国8月PCE数据低于预期市场削减美联储10月加息的押注",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "美国8月PCE数据低于预期，市场削减对美联储10月加息的押注。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "PCE",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609303887799885.html",
+      "title_cn": "“明星双抗”引爆！创新药概念梳理",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "受'明星双抗'消息带动，创新药概念受到关注，相关标的被梳理。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "创新药",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202609303887655630.html",
+      "title_cn": "特朗普为何要给AI改名？黄仁勋、马斯克都已改口叫“SI”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "报道称特朗普为AI改名，黄仁勋、马斯克等已改口称'SI'。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610013888004879.html",
+      "title_cn": "“长”出消费新活力",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/01",
+      "summary": "报道关注消费领域出现的新活力。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "消费",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610013888004492.html",
+      "title_cn": "中国担当赋能“一带一路”共建",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/01",
+      "summary": "报道关注中国在'一带一路'共建中的担当与作用。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "一带一路",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-30/doc-initpxxr2435916.shtml",
+      "title_cn": "南向资金年内净买入近4300亿港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "南向资金年内净买入接近4300亿港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "南向资金"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-09-30/doc-initqzmc5724433.shtml",
+      "title_cn": "港股9月收官！恒生科技指数月内跌近8% 新股破发率近六成",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "港股9月收官，恒生科技指数月内跌近8%，新股破发率近六成。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生科技",
+        "新股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-30/doc-initppiv6035168.shtml",
+      "title_cn": "多家A股公司赴港上市“踩刹车” 港股IPO门槛抬升",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "多家A股公司赴港上市进程放缓，港股IPO门槛抬升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-30/doc-initpxxi7250687.shtml",
+      "title_cn": "港股IPO市场热度居高不下 369家公司排队聆讯处理中",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "港股IPO市场热度不减，369家公司排队聆讯处理中。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-30/doc-initpxxr2409775.shtml",
+      "title_cn": "港股配置主线浮出水面 “红利底仓+AI进攻”渐成机构共识",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "机构对港股配置主线渐成共识，'红利底仓+AI进攻'受到关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "红利",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-09-30/doc-initptrt5945690.shtml",
+      "title_cn": "硬科技与“A+H”双轮驱动港股前三季度IPO募资超3800亿港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "硬科技与'A+H'双轮驱动下，港股前三季度IPO募资超3800亿港元。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "硬科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-30/doc-initqvcf5789033.shtml",
+      "title_cn": "国泰海通证券：申洲国际维持“增持”评级 目标价52港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "国泰海通证券维持申洲国际'增持'评级，目标价52港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "纺织服装"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-30/doc-initqvci2559044.shtml",
+      "title_cn": "野村：百威亚太目标价下调至7.8港元 维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "野村将百威亚太目标价下调至7.8港元，维持'买入'评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-30/doc-initqzmc5741229.shtml",
+      "title_cn": "大和：恒瑞医药(01276)与诺和诺德就HRS-1596达许可协议 交易总额及预付款均具吸引力",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "大和称恒瑞医药与诺和诺德就HRS-1596达成许可协议，交易总额及预付款均具吸引力。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "授权交易"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-30/doc-initqzmf2481240.shtml",
+      "title_cn": "大摩：维持吉利汽车(00175)“增持”评级 目标价27港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "大摩维持吉利汽车'增持'评级，目标价27港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-30/doc-initqvax6988529.shtml",
+      "title_cn": "大摩：下调普拉达(01913)销售预测 目标价降至40港元 料MiuMiu面临挑战",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "大摩下调普拉达销售预测，目标价降至40港元，预计MiuMiu面临挑战。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "奢侈品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-09-30/doc-initqvcf5833072.shtml",
+      "title_cn": "招商证券国际：人形机器人进入规模交付 供应链迈向平台化与模块化 留意优必选(09880)等",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "招商证券国际称人形机器人进入规模交付阶段，供应链迈向平台化与模块化，提及优必选等。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "人形机器人",
+        "供应链"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/30/kalshi-traders-see-high-odds-anthropics-ipo-is-announced-this-year-.html",
+      "title_cn": "Kalshi traders see high odds Anthropic's IPO is announced this year ",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "Kalshi交易员认为Anthropic今年宣布IPO的概率较高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "IPO",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/29/ipo-postponements-are-accelerating-in-third-quarter-even-beyond-oura.html",
+      "title_cn": "IPO postponements are accelerating in third quarter, even beyond Oura",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/29",
+      "summary": "第三季度IPO推迟现象加速，范围超出Oura。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "IPO"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/29/higher-rates-are-wreaking-havoc-on-these-two-etfs-traders-see-one-bouncing-back.html",
+      "title_cn": "Higher rates are wreaking havoc on these two ETFs. Traders see one bouncing back",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/29",
+      "summary": "利率上升对两只ETF造成冲击，交易员认为其中一只将反弹。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "ETF",
+        "利率"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/28/nearly-half-of-the-stocks-in-the-sp-500-are-working-against-it.html",
+      "title_cn": "Nearly half the stocks in the S&P 500 are at cross purposes with the rest of the market",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "09/28",
+      "summary": "标普500指数中近半数股票走势与市场其余部分背离。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "标普500"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/lillys-foundayo-shows-cardiovascular-safety-in-diabetes-trial-93CH-4926022",
+      "title_cn": "Lilly’s Foundayo shows cardiovascular safety in diabetes trial",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "礼来旗下Foundayo在糖尿病试验中显示出心血管安全性。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "医药",
+        "临床试验"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/tempramed-closes-118m-financing-with-debentures-and-units-93CH-4926021",
+      "title_cn": "TempraMed closes $1.18M financing with debentures and units",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "TempraMed通过债券和单位完成118万美元融资。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/trinity-capital-prices-350-million-notes-offering-at-750-93CH-4926020",
+      "title_cn": "Trinity Capital prices $350 million notes offering at 7.50%",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "Trinity Capital将3.5亿美元票据发行定价为7.50%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券发行"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/synopsys-amazon-web-services-sign-chip-design-licensing-deal-worth-more-than-1-billion-4925241",
+      "title_cn": "Synopsys, Amazon Web Services sign chip design licensing deal worth more than $1 billion",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "Synopsys与亚马逊云服务签署价值超10亿美元的芯片设计授权协议。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "云计算"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/bonds-set-for-bruising-september-stocks-fare-better-4924015",
+      "title_cn": "Bonds post worst month in years; stocks decline for September and oil gains",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "债券录得数年来最差单月表现，美股9月下跌，油价上涨。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "原油"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/mattel-names-roger-lynch-ceo-4925046",
+      "title_cn": "Mattel chief Kreiz to step down, join Paramount Skydance as co-CEO",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "美泰CEO Kreiz将卸任，加入Paramount Skydance担任联席CEO。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "人事变动"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/earnings/progress-earnings-beat-by-017-revenue-fell-short-of-estimates-4926017",
+      "title_cn": "Progress earnings beat by $0.17, revenue fell short of estimates",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "Progress财报每股收益超预期0.17美元，但营收不及预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/tech-ceos-questioned-anthropic-leader-over-ai-safety-warnings-wsj-reports-4926016",
+      "title_cn": "Tech CEOs questioned Anthropic leader over AI safety warnings, WSJ reports",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "09/30",
+      "summary": "据WSJ报道，多位科技公司CEO就AI安全警告质询Anthropic负责人。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "监管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
