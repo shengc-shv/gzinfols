@@ -94,7 +94,10 @@ export const INSIGHT_GROUP_ACTION_CHARS = 34;
 export const INSIGHT_GROUP_MIN_HEAD_CHARS = 8;
 
 export interface InsightSpeechGroup {
-  /** 客群口播标签（零售 A U M / 高端客户 / 普惠小微 / 其他机会）。 */
+  /**
+   * 口播组名。2026-09-30 sc 口径（标签同源）：**优先用卡面的 `insights[].group`（自拟方向名），
+   * 逐字同源**；无 group 时回落客群短名（零售 A U M / 高端客户 / 普惠小微）/ 兜底名（其他机会）。
+   */
   label: string;
   /** 该组要念的主题（已按上限概括）。 */
   topics: string[];
@@ -128,20 +131,27 @@ function firstClause(raw: string | undefined, max: number): string {
 }
 
 /**
- * 按客群段归并商机（组顺序 = 首次出现顺序，组内主题保持原序）。
- * 无 `segments` 的条目归入 `INSIGHT_OTHER_GROUP` 组（口播用中性名，不用卡面的「其他业务线」）。
+ * 按口播组名归并商机（组顺序 = 首次出现顺序，组内主题保持原序）。
+ *
+ * 分组键（2026-09-30 sc 口径「标签同源」）：**优先 `insights[].group`（LLM 自拟方向名，
+ * 卡面 chip 与口播逐字共用同一串字）**；无 group 才退回 `segments[0]`。
+ * 键全空（既无 group 也无 segments）归入 `INSIGHT_OTHER_GROUP` 组。
  */
 export function groupInsightsForSpeech(
-  insights: Array<{ topic?: string; impact?: string; action?: string; segments?: string[] }>,
+  insights: Array<{ topic?: string; impact?: string; action?: string; segments?: string[]; group?: string }>,
 ): InsightSpeechGroup[] {
   const order: string[] = [];
-  const acc = new Map<string, { topics: string[]; action: string }>();
+  const acc = new Map<string, { label: string; topics: string[]; action: string }>();
   for (const it of insights) {
     const topic = (it.topic ?? "").trim();
     if (!topic) continue;
-    const key = (it.segments ?? [])[0] ?? "";
+    const group = (it.group ?? "").trim();
+    const segKey = (it.segments ?? [])[0] ?? "";
+    const key = group || segKey;
     if (!acc.has(key)) {
-      acc.set(key, { topics: [], action: "" });
+      // group：逐字使用（与卡面 chip 同源）；无 group：沿用既有客群短名映射，不凭空造词。
+      const label = group || (segKey ? segSpeak(segKey) : INSIGHT_OTHER_GROUP);
+      acc.set(key, { label, topics: [], action: "" });
       order.push(key);
     }
     const g = acc.get(key)!;
@@ -155,7 +165,7 @@ export function groupInsightsForSpeech(
         ? [`${g.topics[0]}等${g.topics.length}条线索`]
         : g.topics;
     return {
-      label: key ? segSpeak(key) : INSIGHT_OTHER_GROUP,
+      label: g.label,
       topics,
       topicCount: g.topics.length,
       action: g.action,

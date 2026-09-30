@@ -19,7 +19,9 @@ export const AUDIO_SEGMENT_LABELS: Record<string, string> = {
   intro: "开场",
   hero: "今日定调",
   must: "今日必读",
-  insight: "业务启示",
+  // 2026-09-30 sc 口径：与口播念出的段落名逐字同源（口播说「下面是商机洞察，按客群看」）。
+  // 原值「业务启示」是页面上**另一个板块**的 tab 名，读者在提示条里看到会以为在播那个板块。
+  insight: "商机洞察",
   risk: "风险提示",
   stock: "股市动态",
   ipo: "广东IPO",

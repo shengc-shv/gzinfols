@@ -121,10 +121,16 @@ export function renderReportExec(report: DailyReport): string {
     const segs = it.segments && it.segments.length ? it.segments : [OTHER_SEGMENT];
     // C1（2026-09-17）：客群标签**可点** —— 点一下即按该客群筛选下方板块并滚动过去。
     // 从 span 改成 button：此前只展示、没有入口，AI 的客群打标成果读者用不上。
-    const segChips = `<div class="insight-segs">${segs
+    // 2026-09-30 sc 口径（标签同源）：卡上有 `group`（LLM 自拟方向名）时**只渲染这一枚**，
+    // 文案与口播组名逐字相同 —— 行长在车里听到「本地消费场景方面」，页面 chip 就是「本地消费场景」。
+    // `data-seg` 始终取 `segments` 原值：筛选与统计口径不受 `group` 影响。
+    const chips: Array<{ text: string; seg: string }> = it.group?.trim()
+      ? [{ text: it.group.trim(), seg: segs[0]! }]
+      : segs.map((s) => ({ text: SEG_SHORT[s] ?? s, seg: s }));
+    const segChips = `<div class="insight-segs">${chips
       .map(
-        (s) =>
-          `<button type="button" class="seg-chip seg-${SEG_KEY[s] ?? "other"}" data-seg="${escapeHtml(s)}" title="按「${escapeHtml(SEG_SHORT[s] ?? s)}」筛选下方板块">${escapeHtml(SEG_SHORT[s] ?? s)}</button>`,
+        (c) =>
+          `<button type="button" class="seg-chip seg-${SEG_KEY[c.seg] ?? "other"}" data-seg="${escapeHtml(c.seg)}" title="按「${escapeHtml(SEG_SHORT[c.seg] ?? c.seg)}」筛选下方板块">${escapeHtml(c.text)}</button>`,
       )
       .join("")}</div>`;
     return `<article class="insight" data-audio-section="insight">

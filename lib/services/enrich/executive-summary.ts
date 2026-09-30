@@ -1,5 +1,6 @@
 import { extractJson } from "./json-util";
-import { mapSubcategoryToSegments } from "../classify/customer-segment";
+import { mapSubcategoryToSegments, OTHER_SEGMENT } from "../classify/customer-segment";
+import { INSIGHT_OTHER_GROUP, segSpeak } from "../voice/speech-lines";
 import { titleSimilarityDice } from "../select/filters/dedup-similar";
 import {
   rankByRelevance,
@@ -32,6 +33,16 @@ export interface ExecInsight {
   /** 客户客群段（2026-09-08 商机洞察三维细分）：零售AUM / 中高端客群(过亿资产) / 普惠小微贷款客户。
    *  可多段归属（一条商机同时影响多类客群时各填一个）；不属任何优先段则省略本字段。 */
   segments?: string[];
+  /**
+   * 口播与卡面**共用的方向名**（2026-09-30 sc 口径：标签同源）。
+   *
+   * 由来：口播按客群归并时 LLM 会自拟实质方向名（如「本地消费场景」），若卡面 chip 仍只显示
+   * `segments` 原值，行长在车里听到「本地消费场景方面」后、到页面按这四个字找不到入口。
+   * 故要求 LLM 把该方向名**同时**写进本字段 → 卡面 chip 与口播组名读同一串字。
+   * 缺省时两侧各自回落到 `segments` 既有短名（渲染 `SEG_SHORT` / 口播 `segSpeak`）。
+   * 注意：`segments` 仍是筛选/统计口径，`group` 只影响展示名。
+   */
+  group?: string;
   /** 来源链接（可选，1-3 条）：引用输入中相关源文章（title+url 原样复制），供读者溯源 */
   sources?: Array<{ title: string; url: string }>;
 }
@@ -143,7 +154,10 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 
 1. must_read（今日必读，8-10 条）— **偏宏观、市场级大信号**：央行/金融监管总局等全国性政策转向、市场重大变化、行业性新趋势、新产品新玩法。答"今天/本周市场可能怎么走"。**只放宏观，不放具体获客动作**（具体动作归 insights）。
    - title：事件标题（15 字内，中文，可精简）—— **必须自带结论或量级**（如「公募规模近40万亿」优于「公募基金规模变化」）：车里听时这一句就是唯一钩子，务必让人一听就知道「这事有多大」
-   - why：为什么重要——对广州分行经营规划/战略意味着什么（30-50 字）
+   - why：为什么重要——对广州分行经营规划/战略意味着什么（**30~45 字，45 字是硬上限**）
+     ⚠️ 硬上限的理由：口播按「5 条 ×（标题 ≤15 字 + why）」排预算，总预算 320 字。
+     why 写到 60~75 字时，第 5 条的 why 会被截断（2026-09-30 实测：5 条 why 合计 354 字 → 第 5 条只剩标题），
+     等于听众少拿到一条「值不值得点进去」的依据。宁可短而准。
    - id：源条目标识，从下方输入对应条目的 id 字段原样回填（若对不上可省略，留空；禁止编造）
 
   **客户客群聚焦（极重要）**：分行当前最关注的三类客群商机须优先覆盖——① 零售AUM（财富管理/理财/基金/存款/资产配置等零售管理资产）；② 中高端客群(过亿资产)（私行/家族信托/企业主/超高净值）；③ 普惠小微贷款客户（普惠金融/小微企业/个体工商户/经营贷）。生成 insights 时，若输入中存在这三类客群的高信号，应优先选取并分别打上对应 segments 标签，确保三条客群线索在「商机洞察」中都有呈现；不要只堆房贷/宏观而漏掉普惠小微与私行客群。
@@ -153,6 +167,13 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
    - action：建议动作——具体可执行、带时限感（获客方向/产品配置/风险提示，40-60 字），如"本周走访医疗企业客群、今日起推荐放开限购绩优基金"
    - tag：业务线标签数组，从词表选 1-2 个（词表：竞对动态/信贷/代发/私行/政银合作/住房金融/财富/客群/监管/科技金融）
    - segments：客户客群段数组，从固定集合选（可多段）："零售AUM" / "中高端客群(过亿资产)" / "普惠小微贷款客户"。**配额（极重要）**：零售AUM、中高端客群(过亿资产)、普惠小微贷款客户 三类**各最多出现 2 条**，其余（未命中优先段的"其他业务线"）最多 1 条；请在生成 insights 时主动控制数量，同类商机不要堆超过 2 条（必要时合并）。一条商机同时利好多类客群时各填其一（多标签按其优先级归口、各标签配额独立计数，互不挤占）；若都沾不上则省略本字段（渲染时作为"其他业务线"处理）。可参考输入条目的 subcategory 作先验：gz-wealth/cn-wealth 偏零售AUM，gz-private/cn-private 偏中高端客群(过亿资产)，gz-credit 中普惠/小微/经营贷类偏普惠小微贷款客户。
+   - **group（口播与卡面共用的方向名，极重要）**：该条商机所属的**口语方向名**（≤8 字），
+     会**同时**出现在卡片 chip 与口播组名上 —— **必须是同一串字**。这正是你后面写 spoken_insights 时的分组名。
+     优先沿用上面 segments 对应的方向名（零售AUM / 高端客户 / 普惠小微）；
+     若该条不属于这三类（如本地消费类、跨境类），**自己归纳一个实质方向名**（如「本地消费场景」「跨境客群」）——
+     它会被写进卡片，读者能照着找到，所以**不要用「其他业务线」「其他机会」这类占位词**。
+     同方向的多条商机请填写**完全相同**的 group 字符串（这样才能并成一组）。
+     例：group 填「本地消费场景」，或沿用客群名「零售AUM」。
    - sources：来源数组（1-3 条，必填优先）。每条为输入中直接支撑该洞察的源文章，原样复制其 {title,id}（id 从输入对应条目回填，不得编造）。若洞察由多条输入综合得出，列最权威的 1-3 条；若确实无任何输入支撑则该字段省略。
 
 3. risk（M 层：今日风险，1 条或 null）— **偏监管/合规威胁**：今天最值得警惕的 1 件事。**与 must_read/insights 严格错开**：
@@ -182,12 +203,18 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 - **spoken_hero**：见 §0（≤70 字、维度 + 3~6 字看点、不要问候语）。
 - **spoken_insights（商机口播）口径（极重要，2026-09-28 sc 口径）**：把上面 insights **按客群归并**成 **3~4 条**口语线索，整段 **≤260 字**。每条 =「{客群}方面，{一条或两条主题}，{这类客群本周最该做的一件事}」。
    - **{客群}必须是听众直接听得懂的客群或方向名**（如「零售AUM」「高端客户」「普惠小微」「本地消费场景」「跨境客群」）；**禁止**用「其他业务线」「其他机会」这类无信息占位词 —— 归不进三类优先客群时，请**自己归纳一个实质方向名**（如把消费补贴、文旅商圈、金融城、社区零售归为「本地消费场景」）；
+   - 🔴 **组名必须取自 insights 的 group 字段，逐字照抄、不得另起叫法**（2026-09-30 sc 口径：标签同源）。
+     读者是**先听后找**：他听到「本地消费场景方面」，就会在页面上找这四个字；卡片 chip 显示的是同一条的
+     group 字段，所以只有**逐字一致**才找得到。**本段的分组 = 按 group 归并**，同 group 的卡片合成一条。
    - **同类场景必须合并**：例如「消费补贴」「文旅商圈」「金融城地标」「社区零售」都属本地消费获客，应归成一条；**不得**随 insights 条数线性增长（10-12 条卡面 → 3-4 条口播）；
    - **严禁**念具体商户名 / 商场名 / 街区名（如「沃尔玛社区店」「扬韬广场」），也不要罗列动作细节 —— 细节留给卡面，口播只讲「哪类客群、什么方向、让团队做什么」；
    - 动作只取**首要一件**（如「本周更新私行产品准入清单」），不要罗列三四个动作；
-   - 不得引入 insights 之外的新事实。
+   - **禁止引入 insights 之外的新事实**（2026-09-30 实测踩坑）：本段只能讲 insights 里那几条的
+     topic / impact / action。**不得**从输入池或其它板块另取事实来凑内容 ——
+     实测出现过口播讲「理财费率下调」「超七十只新基金定档十月」「黄金ETF方向选择」，而这些在商机卡片里
+     **根本不存在**（只在「业务启示」板块），听众点进去一定找不到。宁少讲，不要另取。
 - 输出 STRICTLY 一个 JSON 对象（无 markdown 代码块）：
-{"hero_line":"...","spoken_hero":"...","spoken_insights":"...","must_read":[{"title":"...","why":"...","id":"..."}],"insights":[{"topic":"...","impact":"...","action":"...","tag":["..."],"segments":["零售AUM"],"sources":[{"title":"...","id":"..."}]}],"risk":{"topic":"...","evidence":"...","impact":"...","action":"...","source":"T1","sources":[{"title":"...","id":"..."}]} 或 null,"guangdong_ipo":{"spoken":"..."} 或 null}
+{"hero_line":"...","spoken_hero":"...","spoken_insights":"...","must_read":[{"title":"...","why":"...","id":"..."}],"insights":[{"topic":"...","impact":"...","action":"...","tag":["..."],"segments":["零售AUM"],"group":"本地消费场景","sources":[{"title":"...","id":"..."}]}],"risk":{"topic":"...","evidence":"...","impact":"...","action":"...","source":"T1","sources":[{"title":"...","id":"..."}]} 或 null,"guangdong_ipo":{"spoken":"..."} 或 null}
 注意：字符串内引号用单引号或中文引号，禁止裸双引号；id 字段原样回填输入中的标识，不要输出 url。`;
 
 /**
@@ -457,6 +484,19 @@ export async function generateExecutiveSummary(
           .join(" / ")}」，正文却写了「今天」）：${timeAudit.map((a) => a.text).join(" || ")}`,
       );
     }
+    // 商机口播覆盖自检（2026-09-30 sc 口径）：听众是**先听后找** —— 口播念到的组名/主题
+    // 必须能在页面上找到，页面上的每条商机也必须被口播覆盖。只告警、不改写（同时间自检策略）。
+    const insAudit = auditSpokenInsightsCoverage({
+      insights: parsed.insights,
+      spokenInsights: parsed.spoken_insights,
+    });
+    if (insAudit.unknownGroups.length || insAudit.uncoveredTopics.length) {
+      console.warn(
+        `::warning:: 商机口播与卡面不同源 —— 口播念了页面没有的组名「${
+          insAudit.unknownGroups.join(" / ") || "无"
+        }」；卡面有但口播未覆盖「${insAudit.uncoveredTopics.join(" / ") || "无"}」`,
+      );
+    }
     return {
       hero_line: typeof parsed.hero_line === "string" ? parsed.hero_line : "",
       spoken_hero: typeof parsed.spoken_hero === "string" && parsed.spoken_hero.trim() ? parsed.spoken_hero.trim() : undefined,
@@ -487,6 +527,8 @@ export async function generateExecutiveSummary(
           action: it.action,
           ...(Array.isArray(it.tag) && it.tag.length > 0 ? { tag: it.tag.slice(0, 2) } : {}),
           ...(Array.isArray(it.segments) && it.segments.length > 0 ? { segments: it.segments } : {}),
+          // 2026-09-30 sc 口径（标签同源）：方向名原样落地 → 卡面 chip 与口播组名读同一串字。
+          ...(typeof it.group === "string" && it.group.trim() ? { group: it.group.trim() } : {}),
           ...(sources.length > 0 ? { sources } : {}),
         };
       }),
@@ -531,6 +573,75 @@ export function synthMustReadWhy(rel: BranchRelevance): string {
     rel.authority >= 0.95 ? "国家核心监管新政" : rel.authority >= 0.8 ? "监管/地方级信号" : "市场信号";
   const tail = rel.override ? "建议分行评估对客与产品影响" : `直击${lines}业务`;
   return `${head}（${lines}）：${tail}`.slice(0, 60);
+}
+
+/** 商机口播覆盖自检结果（2026-09-30 sc 口径）。 */
+export interface SpokenInsightsAudit {
+  /** 口播念了、但不在「卡面可见标签」集合里的组名 —— 听众照这四个字去页面找，找不到。 */
+  unknownGroups: string[];
+  /** 卡面有、口播完全没提到的商机 topic —— 听了却不知道页面有这条。 */
+  uncoveredTopics: string[];
+}
+
+/** 口播分组名抽取：`{方向名}方面，`。 */
+const SPOKEN_GROUP_RE = /([^，,。；;：:\s]{2,10})方面/g;
+/** topic 覆盖判定的共享 bigram 门槛（与回链溯源同一套 bigram，口径一致）。 */
+const COVER_SHARED_BIGRAMS = 3;
+
+/**
+ * 商机口播覆盖自检（2026-09-30 sc 口径：「先听后找」闭环）。
+ *
+ * 为什么需要：听众在车里**先听**，到办公室**再找**。口播按方向名归并时 LLM 会自拟组名
+ * （如「本地消费场景」），若卡面 chip 没有这四个字，他就找不到入口；反过来卡面有的条目
+ * 口播没念，他也不知道页面有。**2026-09-30 实测两类问题同时出现**：口播多讲了 3 件卡面
+ * 没有的事（理财费率下调 / 新基金定档 / 黄金ETF），同时漏讲了卡面 2 条。
+ *
+ * 判定（零 LLM、纯函数）：
+ *  - `unknownGroups`：`{X}方面` 里出现的 X 不在「卡面可见标签」集合
+ *    （各条 `group` ∪ `segments` 原值 ∪ 口播短名 `segSpeak` ∪ 两个兜底名）；
+ *  - `uncoveredTopics`：卡面每条的 `topic` 与口播各子句的共享 bigram < 3（即没被提到）。
+ *
+ * ⚠️ 只告警、**绝不自动改写** —— 与 `auditTimeWording` 同策略：判定错源就会改错事实。
+ */
+export function auditSpokenInsightsCoverage(input: {
+  insights?: Array<{ topic?: string; group?: string; segments?: string[] }>;
+  spokenInsights?: string;
+}): SpokenInsightsAudit {
+  const spoken = (input.spokenInsights ?? "").trim();
+  const items = (input.insights ?? []).filter((it) => (it.topic ?? "").trim());
+  if (!spoken || items.length === 0) return { unknownGroups: [], uncoveredTopics: [] };
+  const norm = (s: string): string => s.replace(/[^\p{L}\p{N}]+/gu, "");
+
+  // 「卡面可见标签」：与 exec-block 的 chip 文案、speech-lines 的 label 同一集合。
+  const known = new Set<string>([INSIGHT_OTHER_GROUP, OTHER_SEGMENT]);
+  for (const it of items) {
+    const g = (it.group ?? "").trim();
+    if (g) known.add(g);
+    const seg = (it.segments ?? [])[0];
+    if (seg) {
+      known.add(seg);
+      known.add(segSpeak(seg));
+    }
+  }
+
+  const unknownGroups: string[] = [];
+  for (const m of spoken.matchAll(SPOKEN_GROUP_RE)) {
+    const name = (m[1] ?? "").trim();
+    if (name && !known.has(name) && !unknownGroups.includes(name)) unknownGroups.push(name);
+  }
+
+  const clauses = spoken
+    .split(/[。；;]/)
+    .map((c) => norm(c))
+    .filter((c) => c.length > 0);
+  const uncoveredTopics: string[] = [];
+  for (const it of items) {
+    const topic = norm((it.topic ?? "").trim());
+    if (!topic) continue;
+    const covered = clauses.some((c) => sharedBigramCount(c, topic) >= COVER_SHARED_BIGRAMS);
+    if (!covered) uncoveredTopics.push((it.topic ?? "").trim());
+  }
+  return { unknownGroups, uncoveredTopics };
 }
 
 /**

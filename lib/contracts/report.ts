@@ -98,6 +98,17 @@ export interface ReportInsight {
   action: string;
   /** 客户群细分（零售AUM / 中高端客群 / 普惠小微）；缺省归其他业务线。 */
   segments?: string[];
+  /**
+   * **口播与卡面共用的「方向名」**（2026-09-30 sc 口径：标签同源）。
+   *
+   * 背景：口播按客群归并时会自拟实质方向名（如「本地消费场景」），而卡面 chip 只认
+   * `segments` 原值 → 行长在车里听到「本地消费场景方面」，到页面按这四个字找不到入口。
+   *
+   * 故由 LLM 在 `insights[]` 上给出 `group`，**卡面 chip 文案与口播组名都读它**（单一真源）；
+   * 缺省时两侧各自回落到 `segments` 的既有短名（渲染 `SEG_SHORT` / 口播 `segSpeak`）。
+   * 注意：`segments` 仍是**筛选/统计口径**（`data-seg` 不受本字段影响）。
+   */
+  group?: string;
   sources?: Array<{ title: string; url: string }>;
   related_url?: string;
   /** A3 增量三态标注。 */
