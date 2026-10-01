@@ -135,18 +135,21 @@ async function main(): Promise<void> {
 
   const projects: RedchipProject[] = records.map((r) => {
     const appId = String(r.id ?? "");
-    return classifyProject({
-      appId,
-      nameCn: r.a,
-      nameEn: r.aEn,
-      board: r.board ?? boardOf(r),
-      status: r.s,
-      stockCode: r.st,
-      submitDate: recordDateKey(r) ?? r.d,
-      docText: r.docText,
-      sourceUrl: r.docUrl,
-      discoveredAt: prevMap.get(appId)?.discoveredAt ?? nowIso,
-    });
+    return {
+      ...classifyProject({
+        appId,
+        nameCn: r.a,
+        nameEn: r.aEn,
+        board: r.board ?? boardOf(r),
+        status: r.s,
+        stockCode: r.st,
+        submitDate: recordDateKey(r) ?? r.d,
+        docText: r.docText,
+        sourceUrl: r.docUrl,
+        discoveredAt: prevMap.get(appId)?.discoveredAt ?? nowIso,
+      }),
+      market: "hk",
+    };
   });
 
   const snap: RedchipSnapshot = { capturedAt: nowIso, count: projects.length, projects };

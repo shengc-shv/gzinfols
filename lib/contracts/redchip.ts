@@ -20,6 +20,8 @@ export type RedchipVerdict = "redchip" | "non-redchip" | "unverified";
 export interface RedchipProject {
   /** 港交所申请编号（去重主键）。 */
   appId: string;
+  /** 来源市场：hk=港股红筹源（披露易）、us=美股红筹源（SEC EDGAR）；缺省视为 hk（兼容既有数据）。 */
+  market?: "hk" | "us";
   nameCn: string;
   nameEn: string;
   board: string;

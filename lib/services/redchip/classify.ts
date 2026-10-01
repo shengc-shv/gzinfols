@@ -53,18 +53,44 @@ export function compactCoverText(text: string): string {
   return (text ?? "").replace(/[^A-Za-z]/g, "").toLowerCase();
 }
 
+/** 法域组（紧凑化后；含 SEC F-1 常见的 BVI）。 */
+const COMPACT_JUR_GROUP =
+  "(caymanislands|bermuda|britishvirginislands|peoplesrepublicofchina|republicofchina|prc|hongkong)";
+
 /** 英文封面句式（紧凑化后匹配）：严格版要求 `with limited liability` 收尾。 */
-const COVER_COMPACT_STRICT_RE =
-  /(?:incorporated|registered|established|continued)(?:asanexemptedcompany)?(?:in|underthelawsof)(?:the)?(caymanislands|bermuda|peoplesrepublicofchina|republicofchina|prc|hongkong)[^.]{0,40}?withlimitedliability/;
+const COVER_COMPACT_STRICT_RE = new RegExp(
+  `(?:incorporated|registered|established|continued)(?:asanexemptedcompany)?(?:in|underthelawsof)(?:the)?${COMPACT_JUR_GROUP}[^.]{0,40}?withlimitedliability`,
+);
 
 /** 放宽版：允许 `with limited liability` 缺失（少数文件用作废句）。 */
-const COVER_COMPACT_RELAXED_RE =
-  /(?:incorporated|registered|established|continued)(?:asanexemptedcompany)?(?:in|underthelawsof)(?:the)?(caymanislands|bermuda|peoplesrepublicofchina|republicofchina|prc|hongkong)/;
+const COVER_COMPACT_RELAXED_RE = new RegExp(
+  `(?:incorporated|registered|established|continued)(?:asanexemptedcompany)?(?:in|underthelawsof)(?:the)?${COMPACT_JUR_GROUP}`,
+);
+
+/**
+ * SEC F-1 封面表格句式（2026-10-01 实测）：
+ *   `Cayman Islands [ ] Not Applicable — State or other jurisdiction of incorporation`
+ * 紧凑后 = `caymanislandsnotapplicablestateorotherjurisdictionofincorporation`。
+ * 港交所申请版本封面无此表格 → 专属于 EDGAR，不会在港股误配。
+ */
+const F1_COVER_TABLE_RE = new RegExp(
+  `${COMPACT_JUR_GROUP}notapplicablestateorotherjurisdictionofincorporation`,
+);
+
+/**
+ * SEC F-1 公司描述句式（2026-10-01 实测，Top Leader）：
+ *   `an exempted company with limited liability incorporated under the laws of the Cayman Islands`
+ * 词序与港股封面相反（`with limited liability` 在 `incorporated` **前**）→ 单独正则。
+ */
+const F1_COMPANY_DESC_RE = new RegExp(
+  `exemptedcompanywithlimitedliabilityincorporated(?:in|underthelawsof)(?:the)?${COMPACT_JUR_GROUP}`,
+);
 
 /** 紧凑匹配到的法域名 → 展示标签（与 OFFSHORE_JURISDICTIONS / 判定口径一致）。 */
 const COMPACT_JUR_LABEL: Record<string, string> = {
   caymanislands: "开曼群岛",
   bermuda: "百慕大",
+  britishvirginislands: "英属维尔京群岛",
   peoplesrepublicofchina: "中国(境内)",
   republicofchina: "中国(境内)",
   prc: "中国(境内)",
@@ -103,9 +129,13 @@ function labelOfDomicile(raw: string): string {
 export function extractDomicile(text: string): string | undefined {
   if (!text) return undefined;
   const compact = compactCoverText(text);
+  const head = compact.slice(0, COMPACT_STRICT_WINDOW);
   const m =
-    COVER_COMPACT_STRICT_RE.exec(compact.slice(0, COMPACT_STRICT_WINDOW)) ??
-    COVER_COMPACT_RELAXED_RE.exec(compact.slice(0, COMPACT_RELAXED_WINDOW));
+    COVER_COMPACT_STRICT_RE.exec(head) ??
+    COVER_COMPACT_RELAXED_RE.exec(compact.slice(0, COMPACT_RELAXED_WINDOW)) ??
+    // SEC F-1 专属句式（封面表格 + 公司描述；均在封面区窗口内）
+    F1_COVER_TABLE_RE.exec(head) ??
+    F1_COMPANY_DESC_RE.exec(head);
   if (m && m[1]) return COMPACT_JUR_LABEL[m[1]];
   // 兜底：**中文**封面句式（仅当 PDF 有可用中文文本层时；港交所中文版常因 CID 抽取失败而拿不到）。
   // 注意：契约里的前两条 COVER_DOMICILE_PATTERNS 其实是**英文**句式，已由上面的紧凑匹配覆盖，
