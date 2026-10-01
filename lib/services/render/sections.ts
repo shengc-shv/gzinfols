@@ -148,7 +148,6 @@ export function renderExecutiveSummary(exec: ExecutiveSummary): string {
           : ""}
         <h3>${escapeHtml(it.topic)}${srcMarks}</h3>
         <p><b>影响：</b>${escapeHtml(it.impact)}</p>
-        <p><b>建议：</b>${escapeHtml(it.action)}</p>
       </article>`;
     })
     .join("");

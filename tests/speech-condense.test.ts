@@ -2,8 +2,9 @@
  * 口播跨段收敛（2026-09-25 立项 A+C；**2026-09-28 起只保留 R2**）。
  *
  * 锁四件事：
- *  1. R2 必读↔商机去事实复述 —— **安全网角色**：09-28 起商机口播由 LLM 按客群归并产出、
- *     本就不念 impact，故只在「LLM 照抄了卡面 impact」时才动手；
+ *  1. R2 必读↔商机去事实复述 —— **安全网角色**：只在「商机口播照抄了卡面 impact」时才动手；
+ *     2026-10-01 起口播句式含「一句影响」，同源商机的 impact 与必读重复时即由本层剥离，
+ *     剥完只留「{客群}方面，{主题}」，**不删条**；
  *  2. ⛔ **R1（定调↔必读点题）已删除** —— 回归锁：定调含必读标题时，必读 why 不得被剥；
  *  3. **不删条**：收敛只压缩单条内部文本，每条 topic/title 仍必须出现在稿中；
  *  4. 幂等 / 不 mutate / 缺省 spoken_* 不凭空生成 / 分端口径（必读 1:1、商机归并）。
@@ -69,22 +70,21 @@ function report(): DailyReport {
   } as unknown as DailyReport;
 }
 
-test("① R2 必读↔商机：同源条目的 impact 复述被剥离（LLM 照抄卡面事实时的安全网）", () => {
-  // 2026-09-28 起商机口播由 LLM 按客群归并产出（本就不念 impact），故此处置入
-  // 「LLM 照抄了卡面 impact」的形态，验证安全网仍生效。
+test("① R2 必读↔商机：同源条目的 impact 复述被剥离（只剩「客群 + 主题」）", () => {
   const synced = syncNarration(exec());
   const withImpact: ExecutiveSummary = {
     ...synced,
     spoken_insights:
-      "第一，零售 A U M方面，美元货架与结汇窗口，美元存款利率超4%、理财基准抬升。本周梳理美元存款与理财货架。" +
-      "第二，其他机会方面，私募高净值配置动向，存续规模达25.75万亿元。梳理存量私行客户持仓。",
+      "第一，零售 A U M方面，美元货架与结汇窗口，美元存款利率超4%、理财基准抬升。" +
+      "第二，其他机会方面，私募高净值配置动向，存续规模达25.75万亿元。",
   };
   const { exec: out, stats } = condenseSpeech(withImpact);
   assert.equal(stats.insightEchoes, 1, "仅商机#1 与必读同源（same URL）");
   assert.ok(out.spoken_insights?.includes("美元货架与结汇窗口"), "topic 保留（读者要知道讲的是哪件事）");
-  assert.ok(out.spoken_insights?.includes("本周梳理美元存款与理财货架"), "action 保留（商机的独有价值）");
   assert.ok(!out.spoken_insights?.includes("美元存款利率超4%、理财基准抬升"), "impact（与必读重复的事实）已剥离");
   assert.ok(out.spoken_insights?.includes("存续规模达25.75万亿元"), "非同源商机的 impact 保持完整");
+  assert.ok(!/窗口，。|窗口，$/.test(out.spoken_insights ?? ""), "剥离时不留下悬空逗号");
+  assert.ok(out.spoken_insights?.includes("第二，其他机会方面，私募高净值配置动向"), "条数不减");
 });
 
 test("② ⛔ R1 回归锁（2026-09-28 实证）：定调含必读标题时，必读 why 不得被剥", () => {
@@ -117,11 +117,11 @@ test("③ 游标前向匹配：两条 impact 文本相同时，删中的必须�
   const same = "同样的影响描述";
   const ex: ExecutiveSummary = {
     hero_line: "",
-    spoken_insights: `第一条，${same}。动作一。第二条，${same}。动作二。`,
+    spoken_insights: `第一条，${same}。第二条，${same}。`,
     must_read: [{ title: "某事件", why: "解读", url: U("dup") }],
     insights: [
-      { topic: "第一条", impact: same, action: "动作一", sources: [{ title: "t", url: U("other") }] },
-      { topic: "第二条", impact: same, action: "动作二", sources: [{ title: "t", url: U("dup") }] },
+      { topic: "第一条", impact: same, sources: [{ title: "t", url: U("other") }] },
+      { topic: "第二条", impact: same, sources: [{ title: "t", url: U("dup") }] },
     ],
   };
   const { exec: out, stats } = condenseSpeech(ex);
@@ -129,7 +129,7 @@ test("③ 游标前向匹配：两条 impact 文本相同时，删中的必须�
   const text = out.spoken_insights!;
   assert.equal((text.match(new RegExp(same, "g")) ?? []).length, 1, "只该剩一条 impact");
   assert.ok(text.indexOf(same) < text.indexOf("第二条"), "留下来的必须是**前一条**（非同源那条）的 impact");
-  assert.ok(text.includes("动作一") && text.includes("动作二"), "两条 action 均保留");
+  assert.ok(text.includes("第一条") && text.includes("第二条"), "两条 topic 均保留（不删条）");
 });
 
 test("④ 不删条：收敛只压缩单条内部文本，每条 topic/title 仍必须出现在稿中", () => {
@@ -179,16 +179,19 @@ test("⑦ 分端口径回归锁：必读逐条 1:1、商机按客群归并（各
   assert.equal(endSentence("  "), "", "空串不产出孤立句号");
 });
 
-test("⑧ 端到端：必读解读完整保留、商机归并稿不触发剥离，且统计对象可观测", async () => {
+test("⑧ 端到端：必读解读完整保留、同源商机只留「客群 + 主题」，统计对象可观测", async () => {
   // 生产链路里 exec 进 assembleBriefingScript 前**已过 syncNarration**，故此处同样先派生。
   const ex = syncNarration(exec());
   const b = await assembleBriefingScript(report(), { exec: ex });
   assert.ok(b);
   assert.ok(b.speechOverlap, "必须回报收敛统计对象（可观测性）");
-  assert.equal(b.speechOverlap!.savedChars, 0, "归并稿不含 impact 复述 → R2 无事可做");
+  assert.equal(b.speechOverlap!.insightEchoes, 1, "商机#1 与必读#2 同源（same URL）");
+  assert.ok(b.speechOverlap!.savedChars > 0, "同源 → 其 impact 复述被剥离");
   assert.ok(b.script.includes("外币产品定价空间打开"), "必读 why 完整保留（R1 已删，不再被剥）");
   assert.ok(b.script.includes("美元资产波动加大"), "第二条 why 同样保留");
-  assert.ok(b.script.includes("本周梳理美元存款与理财货架"), "商机动作在");
+  assert.ok(b.script.includes("美元货架与结汇窗口"), "商机主题在（不删条）");
+  assert.ok(!b.script.includes("本周梳理美元存款与理财货架"), "2026-10-01：action 不再进口播");
+  assert.ok(!b.script.includes("。。"), "不得出现双句号");
 });
 
 test("⑨ 商机口播归并后不再触发 280 字截断（原逐条 520 上限会砍掉末条）", async () => {

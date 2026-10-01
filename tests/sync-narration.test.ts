@@ -6,14 +6,15 @@
  *  - 必读  `spoken_must_read`：卡面 1:1 确定性派生（`{标题。}{why。}`，句子级不变）；
  *  - 商机  `spoken_insights`：**LLM 优先**（按客群归并 3~4 条），缺失时由
  *    `groupedInsightsSpeech` 按客群归并兜底 —— 逐条 1:1 会既超预算（09-28 实测 662 字 >
- *    520 上限，末条 action 被砍）又听不懂重点（六条里四条都是本地消费获客）。
- *  - 风险  `spoken_risk`：卡面 1:1；卡面被去重清空则口播同步清空（消除孤儿口播）。
+ *    520 上限）又听不懂重点（六条里四条都是本地消费获客）。
+ *    ⚠️ 2026-10-01 sc 口径：**只讲事实与影响，不念 action**（全篇不给操作建议/行动指引）。
+ *  - 风险  `spoken_risk`：卡面 1:1（2026-10-01 起同样不念 action）；卡面被去重清空则口播同步清空（消除孤儿口播）。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { syncNarration } from "../lib/pipeline/side-outputs/side-exec-summary";
 import {
-  INSIGHT_GROUP_ACTION_CHARS,
+  INSIGHT_GROUP_IMPACT_CHARS,
   INSIGHT_GROUP_TOPIC_MAX,
   groupedInsightsSpeech,
 } from "../lib/services/voice/speech-lines";
@@ -41,19 +42,19 @@ test("商机口播：按客群归并 —— 条数不随卡面线性增长（5 �
     ],
   });
   const text = syncNarration(exec).spoken_insights ?? "";
-  assert.match(text, /^第一，零售 A U M方面，基金代销、含权理财，节前接住到期资金。/, "同客群合并为一条");
-  assert.match(text, /第二，高端客户方面，私募扩容，更新准入清单。/, "客群短标签映射");
-  assert.match(text, /第三，其他机会方面，消费补贴、文旅收单，对接补贴平台。/, "无标签归「其他机会」");
+  assert.match(text, /^第一，零售 A U M方面，基金代销、含权理财，影响1。/, "同客群合并为一条");
+  assert.match(text, /第二，高端客户方面，私募扩容，影响3。/, "客群短标签映射");
+  assert.match(text, /第三，其他机会方面，消费补贴、文旅收单，影响4。/, "无标签归「其他机会」");
   assert.equal((text.match(/方面，/g) ?? []).length, 3, "5 条卡面 → 3 条口播");
-  assert.ok(!text.includes("影响1"), "impact 不进商机口播（事实归必读，口播只讲做什么）");
+  assert.ok(!/节前接住到期资金|更新配置话术|走访文旅商户/.test(text), "2026-10-01：action 不再进口播");
 });
 
 test("商机口播：组内超 2 条 → 以「首条等N条线索」概括，不罗列", () => {
   const exec = base({
-    insights: [1, 2, 3, 4].map((i) => ({ topic: `主题${i}`, impact: "i", action: `动作${i}。` })),
+    insights: [1, 2, 3, 4].map((i) => ({ topic: `主题${i}`, impact: `影响${i}`, action: `动作${i}。` })),
   });
   const out = syncNarration(exec);
-  assert.equal(out.spoken_insights, "第一，其他机会方面，主题1等4条线索，动作1。");
+  assert.equal(out.spoken_insights, "第一，其他机会方面，主题1等4条线索，影响1。");
   assert.equal(INSIGHT_GROUP_TOPIC_MAX, 2, "上限常量须与实现一致");
 });
 
@@ -68,7 +69,7 @@ test("商机口播：多标签卡取第一段客群（口播只按主客群归�
       },
     ],
   });
-  assert.match(syncNarration(exec).spoken_insights ?? "", /^第一，零售 A U M方面，家族信托升级，跟进私行。$/);
+  assert.match(syncNarration(exec).spoken_insights ?? "", /^第一，零售 A U M方面，家族信托升级，利好高净值。$/);
 });
 
 test("零售AUM 口播按字母发音（空格拆 A U M），与展示文案无关", () => {
@@ -80,29 +81,27 @@ test("零售AUM 口播按字母发音（空格拆 A U M），与展示文案无�
   assert.ok(!/零售AUM方面/.test(out.spoken_insights ?? ""), "口播不得出现连写的『零售AUM』");
 });
 
-test("商机口播：组内 action 只取「首要动作」片段（不铺陈细节）", () => {
+test("商机口播：组内 impact 只取「一句影响」（不铺陈细节）", () => {
   const exec = base({
     insights: [
       {
-        topic: "文旅收单",
-        impact: "客流回暖",
-        action: "节前走访文旅商户与景区票务方，打包收单、信用卡权益与小额消费贷方案，争取节庆期间独家权益位。",
+        topic: "理财申赎卡点",
+        impact: "节前资金搬家集中，客户到期赎回与跨节到账时点若不提前告知，易出现收益空档与投诉。",
       },
     ],
   });
   const text = syncNarration(exec).spoken_insights ?? "";
-  assert.equal(text, "第一，其他机会方面，文旅收单，节前走访文旅商户与景区票务方。");
-  assert.ok(!text.includes("打包收单"), "首个逗号之后的铺陈细节不再念");
-  assert.ok(!text.includes("独家权益位"), "铺陈细节不再念");
-  assert.ok(text.length <= INSIGHT_GROUP_ACTION_CHARS + 20, `单组应短（实际 ${text.length} 字）`);
+  assert.equal(text, "第一，其他机会方面，理财申赎卡点，节前资金搬家集中。");
+  assert.ok(!text.includes("收益空档"), "首个逗号之后的铺陈细节不再念");
+  assert.ok(text.length <= INSIGHT_GROUP_IMPACT_CHARS + 20, `单组应短（实际 ${text.length} 字）`);
 });
 
-test("商机口播：action 首段过短 → 向后补一段（不产出无信息片段）", () => {
+test("商机口播：impact 首段过短 → 向后补一段（不产出无信息片段）", () => {
   const exec = base({
-    insights: [{ topic: "小微贷", impact: "扩客", action: "本周，对接黄埔园区管委会，梳理上下游小微名单。" }],
+    insights: [{ topic: "小微贷", impact: "扩客，园区上下游名单需要重新摸排梳理并同步授信政策与额度方案。" }],
   });
   const text = syncNarration(exec).spoken_insights ?? "";
-  assert.ok(text.includes("本周，对接黄埔园区管委会"), `首段过短应补一段（实际：${text}）`);
+  assert.ok(text.includes("扩客，园区上下游名单需要重新摸排梳理"), `首段过短应补一段（实际：${text}）`);
 });
 
 test("商机口播：LLM 产出优先（归并稿不被卡面兜底覆盖）", () => {
@@ -122,7 +121,7 @@ test("无 insights 时口播置空（不残留旧整块文本 / 不产出孤儿�
 
 test("归并原语：空数组 / 空白主题 → 不产出残句", () => {
   assert.equal(groupedInsightsSpeech([]), "");
-  assert.equal(groupedInsightsSpeech([{ topic: "  ", action: "动作" }]), "");
+  assert.equal(groupedInsightsSpeech([{ topic: "  " }]), "");
 });
 
 // ---------- 风险 ----------

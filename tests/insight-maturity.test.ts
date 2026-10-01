@@ -14,7 +14,7 @@ import {
   maturityOf,
 } from "../lib/services/classify/maturity";
 import { annotateMaturity, maturityMarkOf } from "../lib/services/assemble/maturity";
-import { MATURITY_CSS, renderMaturityBadge, renderNextStep } from "../lib/services/render/maturity-badge";
+import { MATURITY_CSS, renderMaturityBadge } from "../lib/services/render/maturity-badge";
 import type { DailyReport } from "../lib/contracts/report";
 
 test("① 三档判定：完成动作 → 落地；程序动作 → 推进；其余 → 线索", () => {
@@ -56,51 +56,25 @@ test("④ 阶段条与文案：顺序固定，徽章带进度点与可核对的 
   assert.equal(dots(renderMaturityBadge({ stage: "landed" })), 3);
   // 向后兼容：老报告无 maturity → 不渲染
   assert.equal(renderMaturityBadge(undefined), "");
-  assert.equal(renderNextStep(undefined), "");
   assert.ok(MATURITY_CSS.includes(".maturity-landed"));
 });
 
-test("⑤ 下一步按「阶段 × 客群」给，且同一阶段不同客群确实不同", () => {
-  const base = { topic: "广州某产业园开工", impact: "", action: "" };
-  const aum = maturityMarkOf({ ...base, segments: ["零售AUM"] });
-  const hnw = maturityMarkOf({ ...base, segments: ["中高端客群(过亿资产)"] });
-  const inc = maturityMarkOf({ ...base, segments: ["普惠小微贷款客户"] });
-  assert.equal(aum.stage, "progress");
-  assert.ok(aum.nextStep && hnw.nextStep && inc.nextStep);
-  assert.notEqual(aum.nextStep, hnw.nextStep, "不同客群的下一步不该是同一句");
-  assert.notEqual(hnw.nextStep, inc.nextStep);
-  // 未标注客群 → 走兜底文案，不抛错
-  const other = maturityMarkOf(base);
-  assert.ok(other.nextStep && other.nextStep.length > 0);
+test("⑤ ⛔ 已删除：「下一步」动作行不得复活（2026-10-01 sc 口径：全篇不给行动指引）", () => {
+  const m = maturityMarkOf({ topic: "广州某产业园开工", impact: "" });
+  assert.equal(m.stage, "progress", "阶段判定仍保留（客观状态，非行动指令）");
+  assert.equal("nextStep" in m, false, "不得再产出 nextStep（动作库已删）");
+  assert.ok(!MATURITY_CSS.includes(".maturity-next"), "不得再有「下一步」行样式");
+  assert.ok(!renderMaturityBadge(m).includes("下一步"), "徽章不得带行动指引");
 });
 
-test("⑥ 🔴 文案边界：不得暗示行内状态或已介入（成熟度是公开信息阶段）", () => {
-  const marks = [
-    maturityMarkOf({ topic: "项目已开业", segments: ["零售AUM"] }),
-    maturityMarkOf({ topic: "项目获批", segments: ["中高端客群(过亿资产)"] }),
-    maturityMarkOf({ topic: "发布产业规划", segments: ["普惠小微贷款客户"] }),
-    maturityMarkOf({ topic: "发布产业规划" }),
-  ];
-  for (const m of marks) {
-    const text = m.nextStep ?? "";
-    for (const bad of ["我行已", "已落地我行", "已签约我行", "已经营", "存量客户", "内部"]) {
-      assert.ok(!text.includes(bad), `下一步文案不得暗示行内状态：「${bad}」出现在「${text}」`);
-    }
-    // 也不得出现强硬祈使（与 PASS2 既有口径一致）
-    for (const hard of ["必须", "立即", "尽快落实", "务必"]) {
-      assert.ok(!text.includes(hard), `下一步文案须低承诺：「${hard}」`);
-    }
-  }
-});
-
-test("⑦ 报告级标注：幂等、不 mutate 入参、不碰非商机字段", () => {
+test("⑥ 报告级标注：幂等、不 mutate 入参、不碰非商机字段", () => {
   const report = {
     date: "2026-09-17",
     hero_line: "定调",
     must_read: [{ url: "https://e.com/a", why: "w" }],
     insights: [
-      { topic: "某项目开工", tags: [], impact: "i", action: "a", segments: ["零售AUM"] },
-      { topic: "某规划发布", tags: [], impact: "i", action: "a" },
+      { topic: "某项目开工", tags: [], impact: "i", segments: ["零售AUM"] },
+      { topic: "某规划发布", tags: [], impact: "i" },
     ],
     sections: { gz_local: [], biz_insight: [], policy_market: [], tech: [], ipo: [] },
   } as unknown as DailyReport;
@@ -114,20 +88,21 @@ test("⑦ 报告级标注：幂等、不 mutate 入参、不碰非商机字段",
   assert.equal(once.insights[1].maturity?.stage, "clue");
 });
 
-test("⑧ 两个实测坑：中文跨词误配 + action 不参与判定", () => {
+test("⑦ 两个实测坑：中文跨词误配 + 判定取材已结构性收窄", () => {
   // 坑 1（2026-09-17 实测）：中文没有词边界，「存**量产**品业绩基准调整」曾被
   // 跨词匹配成「量产」→ 一条理财信披商机被判成「落地」。词表已加前置否定断言。
   assert.equal(maturityOf("存量产品业绩基准分批调整").stage, "clue");
   assert.equal(maturityOf("库存量产线已调试完毕").stage, "clue");
   assert.equal(maturityOf("该工厂正式量产").stage, "landed", "真正的量产仍应识别");
 
-  // 坑 2：action 是「建议动作」，天然带未来语境，不得参与判定
+  // 坑 2：判定取材只剩 `topic + impact` —— `action` 已从 `maturityMarkOf` 接口移除
+  // （2026-10-01 全篇去 action），「建议动作天然带未来语境」的问题由**接口层面结构性消除**：
+  // 想传也传不进来。此处守住「impact 里没有程序性动作词 → 仍是线索」。
   const m = maturityMarkOf({
     topic: "理财信披调整客户沟通",
     impact: "理财统一信披进入实操、存量产品业绩基准分批调整。",
-    action: "本周完成存量产品披露口径自查，并推动专区分批上线。",
   });
-  assert.equal(m.stage, "clue", "建议动作里的「完成/上线」不得把条目抬成落地");
+  assert.equal(m.stage, "clue", "impact 无程序性动作词 → 不得抬成落地");
 
   // 取材只到影响的首句：后文的延伸分析不参与判定
   const later = maturityMarkOf({

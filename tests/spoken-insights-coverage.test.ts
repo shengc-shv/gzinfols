@@ -70,9 +70,9 @@ test("⑤ 空输入 / 无口播 → 一律不告警（优雅降级）", () => {
 
 test("⑥ 口播组名 = 卡面 group（标签同源）：groupInsightsForSpeech 逐字使用 group", () => {
   const groups = groupInsightsForSpeech([
-    { topic: "房贷贴息客群清单梳理", action: "梳理临穗客群清单", group: "本地消费场景", segments: ["零售AUM"] },
-    { topic: "东莞购房补贴联动按揭", action: "联动家装分期", group: "本地消费场景", segments: ["零售AUM"] },
-    { topic: "支农支小再贷款额度增加", action: "梳理项目储备", group: "普惠小微", segments: ["普惠小微贷款客户"] },
+    { topic: "房贷贴息客群清单梳理", impact: "临穗客群资金留存的窗口在假期前", group: "本地消费场景", segments: ["零售AUM"] },
+    { topic: "东莞购房补贴联动按揭", impact: "按揭与家装的联动需求集中在补贴期内", group: "本地消费场景", segments: ["零售AUM"] },
+    { topic: "支农支小再贷款额度增加", impact: "再贷款额度扩张直接利好小微投放", group: "普惠小微", segments: ["普惠小微贷款客户"] },
   ]);
   assert.equal(groups.length, 2, "同 group 合成一组");
   assert.equal(groups[0]!.label, "本地消费场景", "组名逐字用 group（与卡面 chip 同源）");
@@ -81,8 +81,8 @@ test("⑥ 口播组名 = 卡面 group（标签同源）：groupInsightsForSpeech
 
 test("⑦ 无 group 时回落既有客群短名（行为不变）", () => {
   const groups = groupInsightsForSpeech([
-    { topic: "家族信托升级", action: "跟进私行", segments: ["中高端客群(过亿资产)"] },
-    { topic: "无线索商机", action: "先摸底" },
+    { topic: "家族信托升级", impact: "高净值客户对家族信托的接受度上升", segments: ["中高端客群(过亿资产)"] },
+    { topic: "无线索商机", impact: "线索尚不明确" },
   ]);
   assert.equal(groups[0]!.label, "高端客户");
   assert.equal(groups[1]!.label, "其他机会");

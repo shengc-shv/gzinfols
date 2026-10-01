@@ -3,6 +3,10 @@
  *
  * 纯展示：只读契约里的 `MaturityMark`，判定在 `classify/maturity`（确定性词表）。
  * 文案常量直接从那里取，不在渲染层再抄一份 —— 抄一份就会出现「同一个词两处不一致」。
+ *
+ * ⛔ 2026-10-01 sc 口径：**「下一步：…」行连同动作库一并删除（勿加回）** ——
+ * 全篇只呈现事实与影响，不给操作建议/行动指引。**阶段徽章保留**（它描述信号走到哪一步，
+ * 是客观状态，不是行动指令）。
  */
 import type { MaturityMark, MaturityStage } from "../../contracts/report";
 import { MATURITY_HINT, MATURITY_LABEL, MATURITY_ORDER } from "../classify/maturity";
@@ -32,11 +36,7 @@ export function renderMaturityBadge(m?: MaturityMark): string {
   );
 }
 
-/** 「下一步」行；无 nextStep 时空串。 */
-export function renderNextStep(m?: MaturityMark): string {
-  if (!m?.nextStep) return "";
-  return `<p class="maturity-next"><b>下一步：</b>${escapeHtml(m.nextStep)}</p>`;
-}
+/** 「下一步」行 —— ⛔ 2026-10-01 sc 口径（全篇不给操作建议）**已删除，勿加回**。 */
 
 /**
  * 成熟度样式（拼进既有补丁样式区，不动 THEME_CSS 巨型串）。
@@ -55,6 +55,4 @@ export const MATURITY_CSS = `
   .mt-track { display: inline-flex; gap: 2px; }
   .mt-dot { width: 5px; height: 5px; border-radius: 50%; background: currentColor; opacity: .28; }
   .mt-dot.mt-on { opacity: 1; }
-  .maturity-next { margin: .35rem 0 0; font-size: .82rem; color: var(--fg, #1a1a1f); }
-  .maturity-next b { color: var(--muted, #797986); font-weight: 600; }
 `;

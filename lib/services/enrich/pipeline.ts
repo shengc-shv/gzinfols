@@ -328,9 +328,9 @@ export function degrade(report: DailyReport, blockers: Issue[]): DailyReport {
     );
   }
   report.insights = report.insights.filter((it) => !bannedIn(JSON.stringify(it)));
-  // ⑤ insights 兜底：impact/action 为空的丢弃，截断至 5
+  // ⑤ insights 兜底：impact 为空的丢弃，截断至 5
   report.insights = report.insights
-    .filter((it) => it.impact?.trim() && it.action?.trim())
+    .filter((it) => it.impact?.trim())
     .slice(0, 5);
   // ⑥ R10 非法 tag 兜底（清理而非丢条）
   for (const sec of SECTIONS) {

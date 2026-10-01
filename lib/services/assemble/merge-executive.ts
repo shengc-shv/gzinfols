@@ -4,8 +4,8 @@
  * 把 store 的 ExecutiveSummary（AI/SKIP_AI 双模式产物）适配为 report schema：
  * - must_read：url 缺失时按标题在 report.sections 回匹配（前缀包含 + Dice≥0.4），
  *   仍无则丢弃（宁缺毋滥，避免空链接卡片）；why 保留
- * - insights：tag[] → tags[]，topic/impact/action 照搬；sources 原样透传（生成时已回链）
- * - M 层风险回填（SKIP_AI 复用 store 路径必走）；evidence/impact/action 任一违禁 → 整条丢弃
+ * - insights：tag[] → tags[]，topic/impact 照搬（action 已停止生成，历史值原样透传）；sources 原样透传（生成时已回链）
+ * - M 层风险回填（SKIP_AI 复用 store 路径必走）；evidence/impact 任一违禁 → 整条丢弃
  * - 违禁词过滤：命中 BANNED_WORDS 的 must_read/insights 丢弃（P0 合规，
  *   store 里「加密资产疯涨」这类旧产物不回流）
  */
@@ -23,7 +23,7 @@ export function mergeStoredExecutive(
     insights: Array<{
       topic: string;
       impact: string;
-      action: string;
+      action?: string;
       tag?: string[];
       segments?: string[];
       sources?: Array<{ title: string; url: string }>;
@@ -33,7 +33,7 @@ export function mergeStoredExecutive(
       topic: string;
       evidence: string;
       impact: string;
-      action: string;
+      action?: string;
       url?: string;
       source?: "T1" | "T1.5" | "T2";
       sources?: Array<{ title: string; url: string }>;
@@ -88,17 +88,17 @@ export function mergeStoredExecutive(
       topic: it.topic,
       tags: Array.isArray(it.tag) ? it.tag.slice(0, 6) : [],
       impact: it.impact || "",
-      action: it.action || "",
+      ...(it.action ? { action: it.action } : {}),
       ...(Array.isArray(it.segments) && it.segments.length ? { segments: it.segments } : {}),
       ...(sources.length > 0 ? { sources } : {}),
     });
   }
   if (insights.length > 0) out.insights = insights;
 
-  // M 层：风险回填（store.json 复用路径，SKIP_AI 必走此处）。evidence/impact/action 任一违禁 → 整条丢弃。
+  // M 层：风险回填（store.json 复用路径，SKIP_AI 必走此处）。evidence/impact 任一违禁 → 整条丢弃。
   if (exec.risk && exec.risk.topic) {
     const r = exec.risk;
-    const corpus = `${r.topic} ${r.evidence} ${r.impact} ${r.action}`;
+    const corpus = `${r.topic} ${r.evidence} ${r.impact}`;
     if (!bannedIn(corpus)) {
       const sources =
         Array.isArray(r.sources) && r.sources.length > 0
@@ -108,7 +108,7 @@ export function mergeStoredExecutive(
         topic: r.topic,
         evidence: r.evidence || "",
         impact: r.impact || "",
-        action: r.action || "",
+        ...(r.action ? { action: r.action } : {}),
         ...(r.url ? { url: r.url } : {}),
         ...(r.source ? { source: r.source } : {}),
         ...(sources.length > 0 ? { sources } : {}),

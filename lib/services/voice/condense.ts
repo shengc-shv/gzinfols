@@ -6,10 +6,12 @@
  * 卡面视角下无妨（读者可跳读），但口播是**线性流**，同一事实被念两遍即重复。
  *
  * ## 本层做什么
- * - **R2 必读↔商机**：商机里与必读同源的条目，口播**只留动作**（保留 topic + action，
- *   去掉 impact 的事实复述）。理由：事实已由必读给出，商机的独有价值是「做什么」。
+ * - **R2 必读↔商机**：商机里与必读同源的条目，口播**只留主题**（去掉 impact 的事实复述）。
+ *   理由：事实已由必读给出，商机的独有价值是「这件事指向哪块业务」。
  *   ⚠️ 2026-09-28 起商机口播由 LLM 按客群归并产出、本就不念 impact，故 R2 退为**安全网**
  *   （只在「LLM 照抄了卡面 impact」时动手）。
+ *   ⚠️ 2026-10-01 起全篇不再输出 action（sc 口径：只呈现事实与影响、不给操作建议），
+ *   R2 的落点由「压成动作」改为「压成主题」—— 剥离的仍是 impact，只是留存的尾巴换了语义。
  *
  * ## ⛔ 已删除：R1「定调↔必读只点题」（2026-09-28，勿加回）
  * R1 的设计前提是「定调已经详述了结论 + 应对建议，故与之同源的必读，其 why 属重复」。
@@ -36,7 +38,7 @@ import { canonicalizeUrl } from "../../utils/url";
 import { endSentence } from "./speech-lines";
 
 export interface SpeechOverlapStats {
-  /** 商机中与必读同源、被压成动作的条数。 */
+  /** 商机中与必读同源、被压成「只留主题」的条数。 */
   insightEchoes: number;
   /** 收敛掉的总字数（正数）。 */
   savedChars: number;
@@ -71,7 +73,15 @@ function stripOnce(
   if (!frag || from < 0) return { text: h, removed: 0, cursor: from };
   const i = h.indexOf(frag, from);
   if (i < 0) return { text: h, removed: 0, cursor: from };
-  return { text: h.slice(0, i) + h.slice(i + frag.length), removed: frag.length, cursor: i };
+  // 商机口播句式是「{客群}方面，{主题}，{影响}」：剥离影响后，它前面的那个「，」会裸露
+  // （「…主题，」悬空、或与下一条黏连）。故：若 frag 前一个字符是分句分隔符，则**连它一起吞掉**，
+  // 并用句号收束，避免留下悬空逗号或把两条黏成一句。只吞一个分隔符，不动正文。
+  const prev = h.slice(0, i).match(/[，,]$/);
+  const cut = prev ? i - prev[0].length : i;
+  const text = prev
+    ? h.slice(0, cut) + (frag.endsWith("。") ? "。" : "") + h.slice(i + frag.length)
+    : h.slice(0, i) + h.slice(i + frag.length);
+  return { text, removed: h.length - text.length, cursor: cut };
 }
 
 /**
@@ -89,7 +99,7 @@ export function condenseSpeech(exec: ExecutiveSummary): {
 
   let spokenIns = exec.spoken_insights;
 
-  // —— R2：必读↔商机（口播里商机只留动作）——
+  // —— R2：必读↔商机（口播里商机只留主题）——
   if (spokenIns) {
     const mustUrls = new Set(
       must.map((m) => (m.url ? canonicalizeUrl(m.url) : "")).filter(Boolean),
@@ -100,7 +110,7 @@ export function condenseSpeech(exec: ExecutiveSummary): {
       const at = anchor ? spokenIns.indexOf(anchor, cursor) : cursor;
       if (at < 0) continue;
       const after = at + anchor.length;
-      if (echoesMustRead(it, mustUrls) && endSentence(it.topic) && endSentence(it.action)) {
+      if (echoesMustRead(it, mustUrls) && endSentence(it.topic)) {
         const r = stripOnce(spokenIns, endSentence(it.impact), after);
         if (r.removed > 0) {
           spokenIns = r.text;
@@ -131,7 +141,7 @@ export function formatOverlapLog(stats: SpeechOverlapStats): string {
     return "口播跨段收敛：未发现同源重复（0 字可省）";
   }
   return (
-    `口播跨段收敛：必读↔商机 ${stats.insightEchoes} 条压成动作，` +
+    `口播跨段收敛：必读↔商机 ${stats.insightEchoes} 条压成「只留主题」，` +
     `省 ${stats.savedChars} 字（约 ${(stats.savedChars / 5.2).toFixed(1)} 秒）`
   );
 }

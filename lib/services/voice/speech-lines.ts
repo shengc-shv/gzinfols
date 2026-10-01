@@ -55,12 +55,12 @@ export function mustReadSpeechLine(
   return `${connector}${endSentence(m.title)}${endSentence(m.why)}`;
 }
 
-/** 商机单条口播行：`{衔接词}{客群前缀}{主题}，{impact。}{action。}`。 */
+/** 商机单条口播行：`{衔接词}{客群前缀}{主题}，{impact。}`（2026-10-01：不再念 action）。 */
 export function insightSpeechLine(
-  it: { topic?: string; impact?: string; action?: string; segments?: string[] },
+  it: { topic?: string; impact?: string; segments?: string[] },
   connector: string,
 ): string {
-  return `${connector}${segPhrase(it.segments)}${it.topic ?? ""}，${endSentence(it.impact)}${endSentence(it.action)}`;
+  return `${connector}${segPhrase(it.segments)}${it.topic ?? ""}，${endSentence(it.impact)}`;
 }
 
 /* ───────── 商机口播：按客群归并（2026-09-28 sc 口径） ───────── */
@@ -73,9 +73,10 @@ export function insightSpeechLine(
  * 「消费补贴」「文旅商圈」「金融城地标」「社区零售（沃尔玛社区店）」四条同属本地消费获客，
  * 逐条铺陈到「荔湾扬韬广场周边商户」这种商户级细节，听众抓不住要点。
  *
- * 故口播改为**按客群归并**：同类场景合成一条，只讲「哪类客群、什么方向、让团队做什么」，
- * 具体商户名/动作细节留给卡面。LLM 正常产出 `spoken_insights` 时走 LLM 稿；
- * 本函数是 LLM 缺失时的**确定性兜底**（口径与 LLM 端 §3 一致：3~4 条、不念商户名）。
+ * 故口播改为**按客群归并**：同类场景合成一条，只讲「哪类客群、什么方向、意味着什么」，
+ * 具体商户名/细节留给卡面。2026-10-01 起**不再念 action**（sc 口径：全篇不给操作建议）。
+ * LLM 正常产出 `spoken_insights` 时走 LLM 稿；
+ * 本函数是 LLM 缺失时的**确定性兜底**（口径与 LLM 端 §3 一致：3~4 条、不念商户名、不给动作）。
  */
 
 /**
@@ -88,8 +89,8 @@ export function insightSpeechLine(
 export const INSIGHT_OTHER_GROUP = "其他机会";
 /** 组内主题最多列几个（超出以「X 等 N 条线索」概括，避免罗列）。 */
 export const INSIGHT_GROUP_TOPIC_MAX = 2;
-/** 组内动作的截断长度（字）。 */
-export const INSIGHT_GROUP_ACTION_CHARS = 34;
+/** 组内「一句影响」的截断长度（字）。 */
+export const INSIGHT_GROUP_IMPACT_CHARS = 40;
 /** 首段短于此长度时，向后补一段（避免「本周对接」这种无信息片段）。 */
 export const INSIGHT_GROUP_MIN_HEAD_CHARS = 8;
 
@@ -103,17 +104,20 @@ export interface InsightSpeechGroup {
   topics: string[];
   /** 组内条数（调试用）。 */
   topicCount: number;
-  /** 该组本周最该做的一件事（组内首条 action 的**首要动作片段**）。 */
-  action: string;
+  /**
+   * 该组的「一句影响」（组内首条 `impact` 的首要片段）。
+   *
+   * 2026-10-01 由 `action` 改为 `impact`：sc 口径 —— 全篇**不输出操作建议/行动指引**，
+   * 口播只客观呈现「事实 + 影响」。领导各有自己的工作思路，替他安排动作既越位又啰嗦。
+   */
+  impact: string;
 }
 
 /**
- * 取 action 的「首要动作」片段：先按句号/分号切出首句，再取其第一个逗号段
+ * 取 `impact` 的「一句影响」片段：先按句号/分号切出首句，再取其第一个逗号段
  * （首段过短则向后补一段），最后按标点回退截到 max 字（不产出半截词）。
  *
- * 为什么不止「取首句」：「节前走访文旅商户与景区票务方，打包收单、信用卡权益与小额消费贷方案，
- * 争取节庆期间独家权益位」整句 46 字 —— 作为口播仍太细；取到第一个逗号即「节前走访文旅商户与
- * 景区票务方」（14 字），才是「本周最该做的一件事」（2026-09-28 sc 口径：口播聚焦、去细碎）。
+ * 与旧的 action 取法同一套机械（2026-10-01 改：来源从 action 换成 impact）。
  */
 function firstClause(raw: string | undefined, max: number): string {
   const t = (raw ?? "").trim().replace(/[。．.!！?？；;]+$/g, "");
@@ -138,10 +142,10 @@ function firstClause(raw: string | undefined, max: number): string {
  * 键全空（既无 group 也无 segments）归入 `INSIGHT_OTHER_GROUP` 组。
  */
 export function groupInsightsForSpeech(
-  insights: Array<{ topic?: string; impact?: string; action?: string; segments?: string[]; group?: string }>,
+  insights: Array<{ topic?: string; impact?: string; segments?: string[]; group?: string }>,
 ): InsightSpeechGroup[] {
   const order: string[] = [];
-  const acc = new Map<string, { label: string; topics: string[]; action: string }>();
+  const acc = new Map<string, { label: string; topics: string[]; impact: string }>();
   for (const it of insights) {
     const topic = (it.topic ?? "").trim();
     if (!topic) continue;
@@ -151,12 +155,13 @@ export function groupInsightsForSpeech(
     if (!acc.has(key)) {
       // group：逐字使用（与卡面 chip 同源）；无 group：沿用既有客群短名映射，不凭空造词。
       const label = group || (segKey ? segSpeak(segKey) : INSIGHT_OTHER_GROUP);
-      acc.set(key, { label, topics: [], action: "" });
+      acc.set(key, { label, topics: [], impact: "" });
       order.push(key);
     }
     const g = acc.get(key)!;
     g.topics.push(topic);
-    if (!g.action && it.action) g.action = firstClause(it.action, INSIGHT_GROUP_ACTION_CHARS);
+    // 2026-10-01：取 impact（不再取 action）—— 口播只讲事实与影响，不给行动指引。
+    if (!g.impact && it.impact) g.impact = firstClause(it.impact, INSIGHT_GROUP_IMPACT_CHARS);
   }
   return order.map((key) => {
     const g = acc.get(key)!;
@@ -168,27 +173,27 @@ export function groupInsightsForSpeech(
       label: g.label,
       topics,
       topicCount: g.topics.length,
-      action: g.action,
+      impact: g.impact,
     };
   });
 }
 
-/** 商机口播整段（按客群归并、序数词分条）：`第一，{客群}方面，{主题}，{动作}。`。 */
+/** 商机口播整段（按客群归并、序数词分条）：`第一，{客群}方面，{主题}，{一句影响}。`。 */
 export function groupedInsightsSpeech(
-  insights: Array<{ topic?: string; impact?: string; action?: string; segments?: string[] }>,
+  insights: Array<{ topic?: string; impact?: string; segments?: string[]; group?: string }>,
 ): string {
   const ordinals = ["第一，", "第二，", "第三，", "第四，", "第五，"];
   return groupInsightsForSpeech(insights)
     .map((g, i) => {
       const head = `${ordinals[i] ?? ""}${g.label}方面，${g.topics.join("、")}`;
-      return g.action ? `${head}，${endSentence(g.action)}` : `${head}。`;
+      return g.impact ? `${head}，${endSentence(g.impact)}` : `${head}。`;
     })
     .join("");
 }
 
-/** 风险单条口播行（固定句式，用户口径：不硬编、无风险则整段跳过）。 */
-export function riskSpeechLine(r: { topic?: string; impact?: string; action?: string }): string {
-  return `今天有 1 个需要警惕：${r.topic ?? ""}，${endSentence(r.impact)}${endSentence(r.action)}`;
+/** 风险单条口播行（固定句式；2026-10-01：不再念 action，只讲事件与影响）。 */
+export function riskSpeechLine(r: { topic?: string; impact?: string }): string {
+  return `今天有 1 个需要警惕：${r.topic ?? ""}，${endSentence(r.impact)}`;
 }
 
 /**

@@ -27,7 +27,8 @@ export interface ExecInsight {
   /** 对分行零售/对公业务的潜在影响 */
   impact: string;
   /** 建议动作（获客/产品/风险，可执行） */
-  action: string;
+  /** @deprecated 2026-10-01：全篇不输出操作建议，本字段已停止生成（仅兼容历史数据）。 */
+  action?: string;
   /** 业务线标签（2026-08-21 重构）：从词表选 1-2 个，如 竞对动态/信贷/代发/私行/政银合作/住房金融/财富/客群 */
   tag?: string[];
   /** 客户客群段（2026-09-08 商机洞察三维细分）：零售AUM / 中高端客群(过亿资产) / 普惠小微贷款客户。
@@ -79,7 +80,8 @@ export interface ExecRisk {
   topic: string;
   evidence: string;
   impact: string;
-  action: string;
+  /** @deprecated 2026-10-01：全篇不输出操作建议，本字段已停止生成（仅兼容历史数据）。 */
+  action?: string;
   url?: string;
   source?: "T1" | "T1.5" | "T2";
   sources?: Array<{ title: string; url: string }>;
@@ -143,7 +145,10 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 
 基于输入的当日条目（宏观政策 + 广州商机 + 市场总览 + IPO），输出五部分：
 
-0. hero_line（今日定调，**维度提纲 + 看点**，**不超过 70 字**）：回答「今天主要看哪几个方面」，是下面 must_read 与 insights 的「目录」。听众是**早上坐在车里听的行领导** —— 他看不见屏幕，**定调决定他愿不愿意继续往下听**（2026-09-28 sc 口径）。
+0. hero_line（今日定调，**维度提纲 + 看点**，**不超过 70 字**）：回答「今天主要看哪几个方面」，是下面 must_read 与 insights 的「目录」。（2026-09-28 sc 口径）
+   **写作视角（2026-10-01 sc 口径，全部段落通用）**：听众是**早上上车、路上只有约 5 分钟、全程只能听**的行领导 ——
+   他的注意力是一整段连续的行程，**看不见任何文字、不能回看、不能暂停**。所以每一句都必须在**第一次听到时**就成立：
+   主语清楚、信息自足、不用任何视觉指代词（「如下」「见上文」「表格里」）。
    - 句式：今天主要看N个方面：X，看点；Y，看点。（N = 2~4）
    - {X} = 3~8 字的领域词组（如「汇率预期管理」「楼市金九银十」「财富货架调整」「消费场景获客」），**不要**写具体企业/机构名或事件细节；
    - {看点} = **3~6 字**的**分量提示**，点出量级、紧迫性或影响面（如「结售汇窗口」「补贴叠加节庆」「近四十万亿」「外资抢跑」）—— 只给看点，**不要**写成完整的「为什么」句；
@@ -152,19 +157,21 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
    - 若当日确实无突出主题，可输出空字符串；
    - 并为该定调配套口播稿 spoken_hero：把同一批维度说成**一句口语**，**≤70 字**，**不要问候语、不要自我介绍、不要展开成长句**（如「今天主要看四个方面：汇率预期管理，结售汇窗口；楼市金九银十，按揭接单；财富货架调整，节前配置；消费场景获客，补贴叠加节庆。」）；纯口语、无链接/无Markdown/无emoji，可直接朗读。
 
-1. must_read（今日必读，8-10 条）— **偏宏观、市场级大信号**：央行/金融监管总局等全国性政策转向、市场重大变化、行业性新趋势、新产品新玩法。答"今天/本周市场可能怎么走"。**只放宏观，不放具体获客动作**（具体动作归 insights）。
+1. must_read（今日必读，8-10 条）— **偏宏观、市场级大信号**：央行/金融监管总局等全国性政策转向、市场重大变化、行业性新趋势、新产品新玩法。答"今天/本周市场可能怎么走"。**只放宏观与市场信号，不放具体业务动作**（全篇都不给动作，见文末「不许给建议」）。
    - title：事件标题（15 字内，中文，可精简）—— **必须自带结论或量级**（如「公募规模近40万亿」优于「公募基金规模变化」）：车里听时这一句就是唯一钩子，务必让人一听就知道「这事有多大」
    - why：为什么重要——对广州分行经营规划/战略意味着什么（**30~45 字，45 字是硬上限**）
      ⚠️ 硬上限的理由：口播按「5 条 ×（标题 ≤15 字 + why）」排预算，总预算 320 字。
      why 写到 60~75 字时，第 5 条的 why 会被截断（2026-09-30 实测：5 条 why 合计 354 字 → 第 5 条只剩标题），
      等于听众少拿到一条「值不值得点进去」的依据。宁可短而准。
+     🔴 **只回答「意味着什么」，不回答「该做什么」**（2026-10-01 sc 口径）：结尾**不得**加动作式收尾
+     （如「可跟踪后续细则并提前储备按揭项目」「建议尽早布局」）—— 领导有自己的工作思路与节奏，
+     给他判断的原料即可，不要替他安排动作。
    - id：源条目标识，从下方输入对应条目的 id 字段原样回填（若对不上可省略，留空；禁止编造）
 
   **客户客群聚焦（极重要）**：分行当前最关注的三类客群商机须优先覆盖——① 零售AUM（财富管理/理财/基金/存款/资产配置等零售管理资产）；② 中高端客群(过亿资产)（私行/家族信托/企业主/超高净值）；③ 普惠小微贷款客户（普惠金融/小微企业/个体工商户/经营贷）。生成 insights 时，若输入中存在这三类客群的高信号，应优先选取并分别打上对应 segments 标签，确保三条客群线索在「商机洞察」中都有呈现；不要只堆房贷/宏观而漏掉普惠小微与私行客群。
-2. insights（商机提示，10-12 条）— **偏落地、可执行**：具体可落地的获客/产品/客户线索（"哪个客户/产品/动作该做"）。**不放宏观大信号**（宏观归 must_read）；**不放监管威胁**（威胁归 risk）。**多给候选**：下游会按记忆判重剔除近期已播过的，命中重复时顺延取用靠后候选，故请尽量凑满 10-12 条（宁多勿少）。每条：
+2. insights（商机提示，10-12 条）— **偏落地的事实线索**：哪类客群/客户/产品出现了值得关注的变化（新政策、新资金、新场景、新动向）。**只陈述事实与影响，不给任何行动建议**（见文末「不许给建议」）。**不放宏观大信号**（宏观归 must_read）；**不放监管威胁**（威胁归 risk）。**多给候选**：下游会按记忆判重剔除近期已播过的，命中重复时顺延取用靠后候选，故请尽量凑满 10-12 条（宁多勿少）。每条：
    - topic：主题（15 字内）
-   - impact：对广州分行零售/对公业务的潜在影响（40-60 字）
-   - action：建议动作——具体可执行、带时限感（获客方向/产品配置/风险提示，40-60 字），如"本周走访医疗企业客群、今日起推荐放开限购绩优基金"
+   - impact：对广州分行零售/对公业务的潜在影响（40-60 字）—— **写「这件事会让什么发生变化」，不写「我们该怎么做」**
    - tag：业务线标签数组，从词表选 1-2 个（词表：竞对动态/信贷/代发/私行/政银合作/住房金融/财富/客群/监管/科技金融）
    - segments：客户客群段数组，从固定集合选（可多段）："零售AUM" / "中高端客群(过亿资产)" / "普惠小微贷款客户"。**配额（极重要）**：零售AUM、中高端客群(过亿资产)、普惠小微贷款客户 三类**各最多出现 2 条**，其余（未命中优先段的"其他业务线"）最多 1 条；请在生成 insights 时主动控制数量，同类商机不要堆超过 2 条（必要时合并）。一条商机同时利好多类客群时各填其一（多标签按其优先级归口、各标签配额独立计数，互不挤占）；若都沾不上则省略本字段（渲染时作为"其他业务线"处理）。可参考输入条目的 subcategory 作先验：gz-wealth/cn-wealth 偏零售AUM，gz-private/cn-private 偏中高端客群(过亿资产)，gz-credit 中普惠/小微/经营贷类偏普惠小微贷款客户。
    - **group（口播与卡面共用的方向名，极重要）**：该条商机所属的**口语方向名**（≤8 字），
@@ -185,7 +192,6 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
    - topic：风险主题（15 字内，如"央行重申防止资金空转"）
    - evidence：依据（1 句，事件本身，**禁止"市场波动/不确定性增加"这类虚词**，必须可溯源到输入条目）
    - impact：对广州分行零售/对公业务的影响（40-60 字，**按部门拆解**：个贷/财富/私行/公司/风控 受影响的方式）
-   - action：建议动作（40-60 字，具体可执行，**带部门**："公司部应…/风控部应…"）
    - source：来源权威等级（T1=央妈/金融监管总局/国务院 / T1.5=交易所/行业协会 / T2=媒体智库）
    - sources：来源数组（1-3 条，evidence 依据的输入条目，原样复制 {title,id}）
    ；当日无突出风险时，risk 设为 null（不要硬编）。
@@ -198,23 +204,35 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 - 只基于输入信息，不要编造
 - 广州本地信息（南沙/广州企业/广州政策）优先于泛全国信息
 - 语言精炼，站在分行行长视角，不写空话套话
-- 措辞语气：凡涉及"建议分行开展动作"的表达，**措辞灵活、多样化**，避免每条都用"建议分行"开头（可换用「可考虑…」「值得关注…」「下一步观察…」「提示…」「可能影响…」「需注意…」，或直接陈述事实+隐含行动）；**严禁**「分行应该/分行应/须尽快/需尽快/务必」等强硬祈使语气。适用于 hero_line、spoken_hero、insights.action、risk.action。
+- 🔴 **不许给建议（2026-10-01 sc 口径，全篇适用，最高优先）**：本报告**只客观呈现事实与影响，不输出任何操作建议或行动指引**。
+  行领导各有自己的工作思路与习惯；替他安排动作既越位，又让内容显得啰嗦。因此：
+  - **禁止**出现指向"我们该做什么"的句子，包括但不限于：「建议…」「应…」「需…」「要…」「本周/今日…（做某事）」
+    「重点推进…」「加快对接…」「做好…」「提前储备…」「走访…」「梳理…」「更新…」「跟进…」。
+  - **允许**描述"世界发生了什么、它对业务意味着什么"：如「客户资金到账时点若未提前告知，易出现收益空档与投诉」
+    —— 这是**影响**，不是**动作**。判别法：主语是**客户/市场/业务/彼方**（可写），主语是**分行/某部门/我方**（不可写）。
+  - 也不要写「分行应该/分行应/须尽快/务必」这类祈使句。专有名词引自法规原文的除外（如「应加强适当性管理」）。
+  - 适用范围：hero_line、spoken_hero、must_read.why、insights.impact、risk.impact、spoken_insights。
 - **口播稿只写两段：spoken_hero 与 spoken_insights**。必读/风险两段口播由系统确定性地从去重后的卡面数组派生（1:1 对齐），**不要再输出 spoken_must_read / spoken_risk**（输出也会被覆盖）。两段均为纯文本（无 Markdown/链接/emoji，可直接朗读）。
 - **spoken_hero**：见 §0（≤70 字、维度 + 3~6 字看点、不要问候语）。
-- **spoken_insights（商机口播）口径（极重要，2026-09-28 sc 口径）**：把上面 insights **按客群归并**成 **3~4 条**口语线索，整段 **≤260 字**。每条 =「{客群}方面，{一条或两条主题}，{这类客群本周最该做的一件事}」。
-   - **{客群}必须是听众直接听得懂的客群或方向名**（如「零售AUM」「高端客户」「普惠小微」「本地消费场景」「跨境客群」）；**禁止**用「其他业务线」「其他机会」这类无信息占位词 —— 归不进三类优先客群时，请**自己归纳一个实质方向名**（如把消费补贴、文旅商圈、金融城、社区零售归为「本地消费场景」）；
-   - 🔴 **组名必须取自 insights 的 group 字段，逐字照抄、不得另起叫法**（2026-09-30 sc 口径：标签同源）。
-     读者是**先听后找**：他听到「本地消费场景方面」，就会在页面上找这四个字；卡片 chip 显示的是同一条的
-     group 字段，所以只有**逐字一致**才找得到。**本段的分组 = 按 group 归并**，同 group 的卡片合成一条。
-   - **同类场景必须合并**：例如「消费补贴」「文旅商圈」「金融城地标」「社区零售」都属本地消费获客，应归成一条；**不得**随 insights 条数线性增长（10-12 条卡面 → 3-4 条口播）；
-   - **严禁**念具体商户名 / 商场名 / 街区名（如「沃尔玛社区店」「扬韬广场」），也不要罗列动作细节 —— 细节留给卡面，口播只讲「哪类客群、什么方向、让团队做什么」；
-   - 动作只取**首要一件**（如「本周更新私行产品准入清单」），不要罗列三四个动作；
-   - **禁止引入 insights 之外的新事实**（2026-09-30 实测踩坑）：本段只能讲 insights 里那几条的
-     topic / impact / action。**不得**从输入池或其它板块另取事实来凑内容 ——
-     实测出现过口播讲「理财费率下调」「超七十只新基金定档十月」「黄金ETF方向选择」，而这些在商机卡片里
-     **根本不存在**（只在「业务启示」板块），听众点进去一定找不到。宁少讲，不要另取。
+- **spoken_insights（商机口播）口径（极重要，2026-10-01 sc 口径）**：把上面 insights **按客群归并**成 **3~4 条**口语线索，整段 **≤260 字**。
+  每条 =「{客群}方面，{一条或两条主题}，{一句影响}」。
+    - 🔴 **只讲事实与影响，不讲动作**（与文末「不许给建议」同一条口径）：
+      本段**不得**出现「本周要做什么」「建议分行…」「应…」「需…」「重点推进…」「对接…」「梳理…」这类行动指引。
+      领导各有工作思路，给他事实与影响即可。**实测教训（2026-10-01）**：旧口径要求念「这类客群本周最该做的一件事」，
+      结果整段变成行动清单，既越位又啰嗦。
+    - **{客群}必须是听众直接听得懂的客群或方向名**（如「零售AUM」「高端客户」「普惠小微」「本地消费场景」「跨境客群」）；**禁止**用「其他业务线」「其他机会」这类无信息占位词 —— 归不进三类优先客群时，请**自己归纳一个实质方向名**；
+    - 🔴 **组名必须取自 insights 的 group 字段，逐字照抄、不得另起叫法**（2026-09-30 sc 口径：标签同源）。
+      听众是**先听后找**：他听到「本地消费场景方面」，就会在页面上找这四个字；卡片 chip 显示的是同一条的
+      group 字段，所以只有**逐字一致**才找得到。**本段的分组 = 按 group 归并**，同 group 的卡片合成一条。
+    - **同类场景必须合并**：例如「消费补贴」「文旅商圈」「金融城地标」「社区零售」都属本地消费获客，应归成一条；**不得**随 insights 条数线性增长（10-12 条卡面 → 3-4 条口播）；
+    - **严禁**念具体商户名 / 商场名 / 街区名（如「沃尔玛社区店」「扬韬广场」），也不要罗列细节 —— 细节留给卡面；
+    - **{一句影响}**：整合该组各条的 impact，讲清「这件事会让什么发生变化」，**一句话**、不带动作；
+    - **禁止引入 insights 之外的新事实**（2026-09-30 实测踩坑）：本段只能讲 insights 里那几条的
+      topic / impact。**不得**从输入池或其它板块另取事实来凑内容 ——
+      实测出现过口播讲「理财费率下调」「超七十只新基金定档十月」「黄金ETF方向选择」，而这些在商机卡片里
+      **根本不存在**（只在「业务启示」板块），听众点进去一定找不到。宁少讲，不要另取。
 - 输出 STRICTLY 一个 JSON 对象（无 markdown 代码块）：
-{"hero_line":"...","spoken_hero":"...","spoken_insights":"...","must_read":[{"title":"...","why":"...","id":"..."}],"insights":[{"topic":"...","impact":"...","action":"...","tag":["..."],"segments":["零售AUM"],"group":"本地消费场景","sources":[{"title":"...","id":"..."}]}],"risk":{"topic":"...","evidence":"...","impact":"...","action":"...","source":"T1","sources":[{"title":"...","id":"..."}]} 或 null,"guangdong_ipo":{"spoken":"..."} 或 null}
+{"hero_line":"...","spoken_hero":"...","spoken_insights":"...","must_read":[{"title":"...","why":"...","id":"..."}],"insights":[{"topic":"...","impact":"...","tag":["..."],"segments":["零售AUM"],"group":"本地消费场景","sources":[{"title":"...","id":"..."}]}],"risk":{"topic":"...","evidence":"...","impact":"...","source":"T1","sources":[{"title":"...","id":"..."}]} 或 null,"guangdong_ipo":{"spoken":"..."} 或 null}
 注意：字符串内引号用单引号或中文引号，禁止裸双引号；id 字段原样回填输入中的标识，不要输出 url。`;
 
 /**
@@ -239,11 +257,10 @@ function sharedBigramCount(a: string, b: string): number {
 export function resolveInsightSources(
   topic: string,
   impact: string,
-  action: string,
   inputs: Array<{ title: string; summary?: string; url?: string }>,
 ): Array<{ title: string; url: string }> {
   const norm = (s: string): string => s.replace(/[^\p{L}\p{N}]+/gu, "").toLowerCase();
-  const nh = norm(`${topic} ${impact} ${action}`);
+  const nh = norm(`${topic} ${impact}`);
   if (!nh) return [];
   const scored: Array<{ title: string; url: string; score: number }> = [];
   for (const it of inputs) {
@@ -444,15 +461,13 @@ export async function generateExecutiveSummary(
               ? explicit
               : resolveInsightSources(
                   String(r.topic),
-                  String(r.evidence ?? ""),
-                  String(r.impact ?? ""),
+                  `${String(r.evidence ?? "")} ${String(r.impact ?? "")}`.trim(),
                   [...input.finance, ...input.gz],
                 );
             return {
               topic: String(r.topic),
               evidence: typeof r.evidence === "string" ? r.evidence : "",
               impact: typeof r.impact === "string" ? r.impact : "",
-              action: typeof r.action === "string" ? r.action : "",
               ...(typeof r.url === "string" && r.url ? { url: r.url } : {}),
               ...(r.source === "T1" || r.source === "T1.5" || r.source === "T2" ? { source: r.source } : {}),
               ...(sources.length > 0 ? { sources } : {}),
@@ -472,7 +487,7 @@ export async function generateExecutiveSummary(
       ...parsed.insights.map((it) => {
         const first = Array.isArray(it.sources) ? it.sources[0] : undefined;
         return {
-          text: `${it.topic ?? ""} ${it.impact ?? ""} ${it.action ?? ""}`,
+          text: `${it.topic ?? ""} ${it.impact ?? ""} `,
           when: first ? whenById.get(String((first as { id?: unknown }).id ?? "")) : undefined,
         };
       }),
@@ -520,11 +535,10 @@ export async function generateExecutiveSummary(
               })
               .filter((s): s is { title: string; url: string } => Boolean(s))
           : [];
-        const sources = explicit.length > 0 ? explicit : resolveInsightSources(it.topic, it.impact, it.action, [...input.finance, ...input.gz]);
+        const sources = explicit.length > 0 ? explicit : resolveInsightSources(it.topic, it.impact, [...input.finance, ...input.gz]);
         return {
           topic: it.topic,
           impact: it.impact,
-          action: it.action,
           ...(Array.isArray(it.tag) && it.tag.length > 0 ? { tag: it.tag.slice(0, 2) } : {}),
           ...(Array.isArray(it.segments) && it.segments.length > 0 ? { segments: it.segments } : {}),
           // 2026-09-30 sc 口径（标签同源）：方向名原样落地 → 卡面 chip 与口播组名读同一串字。
@@ -871,7 +885,6 @@ export function buildExecutiveFromScores(
   const insights = ins.map((r) => ({
     topic: r.article.title.slice(0, 15),
     impact: `对广州分行${r.relevance.businessLines.join("/")}业务有潜在影响`,
-    action: `建议分行关注${r.relevance.businessLines[0] ?? "相关"}动向并评估动作`,
     segments: mapSubcategoryToSegments(r.article.subcategory, r.article.title),
   }));
   const risk = rk
@@ -879,7 +892,6 @@ export function buildExecutiveFromScores(
         topic: rk.article.title.slice(0, 15),
         evidence: rk.article.title,
         impact: "对分行相关条线需关注合规与风险敞口",
-        action: "建议对应条线评估并制定应对",
         ...(rk.article.url ? { url: rk.article.url } : {}),
       }
     : undefined;

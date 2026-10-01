@@ -60,7 +60,7 @@ export function renderMarkdown(report: DailyReport, date: string): string {
   if (report.insights.length > 0) {
     blocks.push(
       `## 商机洞察\n\n${report.insights
-        .map((it) => `- **${it.topic}**${it.impact ? `：影响 ${it.impact}` : ""}${it.action ? ` → 动作 ${it.action}` : ""}`)
+        .map((it) => `- **${it.topic}**${it.impact ? `：影响 ${it.impact}` : ""}`)
         .join("\n")}\n`,
     );
   }

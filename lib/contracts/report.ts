@@ -95,7 +95,12 @@ export interface ReportInsight {
   topic: string;
   tags: string[];
   impact: string;
-  action: string;
+  /**
+   * @deprecated 2026-10-01 sc 口径：**全篇不输出操作建议/行动指引** ——
+   * 商机只客观呈现「事实 + 影响」。本字段已停止生成、卡片与口播均不再渲染，
+   * 仅保留以兼容历史 `history/<date>/` 数据（旧数据仍有值，渲染层已忽略）。
+   */
+  action?: string;
   /** 客户群细分（零售AUM / 中高端客群 / 普惠小微）；缺省归其他业务线。 */
   segments?: string[];
   /**
@@ -149,10 +154,9 @@ export interface MaturityMark {
   /** 判定依据词（命中的原词，供读者回原文核对；无把握时缺省）。 */
   evidence?: string;
   /**
-   * 下一步动作（确定性「阶段 × 客群」动作库给出，零 LLM、可测、可追溯）。
-   *
-   * 与 LLM 写的 `action` **并列而非替代**：`action` 是业务建议（面向机会本身），
-   * 本字段是按阶段推进的**即时可执行动作**（面向「现在该做什么」）。
+   * @deprecated 2026-10-01 sc 口径：**「下一步」动作库已删除** ——
+   * 全篇只客观呈现事实与影响，不输出操作建议/行动指引。本字段已停止生成、卡片不再渲染，
+   * 仅保留以兼容历史 `history/<date>/` 数据。
    */
   nextStep?: string;
 }
@@ -225,7 +229,12 @@ export interface RiskItem {
   topic: string;
   evidence: string;
   impact: string;
-  action: string;
+  /**
+   * @deprecated 2026-10-01 sc 口径：**全篇不输出操作建议/行动指引** ——
+   * 风险段只客观呈现「事件 + 依据 + 影响」。本字段已停止生成、卡片与口播均不再渲染，
+   * 仅保留以兼容历史数据。
+   */
+  action?: string;
   url?: string;
   source?: "T1" | "T1.5" | "T2";
   sources?: Array<{ title: string; url: string }>;

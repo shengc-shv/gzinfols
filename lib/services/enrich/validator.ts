@@ -325,9 +325,6 @@ function checkR11(report: DailyReport): Issue[] {
     if (!it.impact?.trim()) {
       issues.push({ level: "block", where: `insights[${i}]`, msg: `R11 impact 为空` });
     }
-    if (!it.action?.trim()) {
-      issues.push({ level: "block", where: `insights[${i}]`, msg: `R11 action 为空` });
-    }
     for (const t of it.tags ?? []) {
       if (!allowed.has(t)) {
         issues.push({ level: "block", where: `insights[${i}]`, msg: `R11 非法 tag「${t}」` });

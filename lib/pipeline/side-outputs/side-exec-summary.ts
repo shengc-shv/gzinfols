@@ -353,7 +353,7 @@ export async function buildExecutiveSummary(
           topic: it.topic,
           tags: it.tag ?? [],
           impact: it.impact,
-          action: it.action,
+          ...(it.action ? { action: it.action } : {}),
           ...(it.segments && it.segments.length ? { segments: it.segments } : {}),
           ...(it.sources && it.sources.length ? { sources: it.sources } : {}),
         }));
@@ -364,7 +364,7 @@ export async function buildExecutiveSummary(
           topic: exec.risk.topic,
           evidence: exec.risk.evidence,
           impact: exec.risk.impact,
-          action: exec.risk.action,
+          ...(exec.risk.action ? { action: exec.risk.action } : {}),
           ...(exec.risk.url ? { url: exec.risk.url } : {}),
           ...(exec.risk.source ? { source: exec.risk.source } : {}),
           ...(exec.risk.sources && exec.risk.sources.length
