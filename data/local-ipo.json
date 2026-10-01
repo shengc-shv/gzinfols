@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "fetchedAt": "2026-09-30T18:33:33+08:00",
+  "fetchedAt": "2026-10-01T18:01:30+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
     "gd-sse-audit": 2,
-    "gd-szse-audit": 3
+    "gd-szse-audit": 2
   },
   "items": [
     {
@@ -46,17 +46,6 @@
       "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004576",
       "excerpt": "注册地：广东｜保荐：中信建投｜受理：2026-06-26｜状态：已问询｜更新：2026-09-28",
       "publishedAt": "2026-09-28",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "时创意：IPO问询中（拟创业板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004571",
-      "excerpt": "注册地：广东｜保荐：中信证券｜受理：2026-06-25｜状态：已问询｜更新：2026-09-24",
-      "publishedAt": "2026-09-24",
       "source": "深交所IPO审核动态",
       "sourceId": "gd-szse-audit",
       "region": "gd",
