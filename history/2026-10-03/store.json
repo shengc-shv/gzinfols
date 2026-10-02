@@ -1,0 +1,878 @@
+{
+  "date": "2026-10-03",
+  "updatedAt": "2026-10-02T22:37:37.929Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：房贷贴息细则，口径落地；营销话术收紧，合规红线；公募近四十万亿，财富迁移；广东文旅回暖，消费获客。",
+    "spoken_hero": "今天主要看四个方面：房贷贴息细则，口径落地；营销话术收紧，合规红线；公募近四十万亿，财富迁移；广东文旅回暖，消费获客。",
+    "must_read": [
+      {
+        "title": "房贷贴息细则落地",
+        "why": "已审未发贷款可办理、五年期满恢复计息，房贷条线对已批未放客户的解释口径有了统一依据。",
+        "url": "https://m.21jingji.com/article/20261002/herald/e815788e924c78bb99b39d0a6fd89bc6.html"
+      },
+      {
+        "title": "公募规模近40万亿",
+        "why": "居民资产向净值化产品迁移趋势延续，广州分行零售AUM的结构与客户陪伴方式面临重估。",
+        "url": "https://news.southcn.com/node_812903b83a/0e6cdb08e9.shtml"
+      },
+      {
+        "title": "多地出台预售现房新规",
+        "why": "商品住房预售与现房销售规则调整，涉房开发贷与按揭项目的准入和资金监管要求可能随之变化。",
+        "url": "https://finance.cctv.com/2026/10/02/ARTItprG1xmytT5KczuuGVYc261002.shtml"
+      },
+      {
+        "title": "30年国债持仓创新高",
+        "why": "长端利率配置需求旺盛，稳健型客户对债市走强的关注度上升，资产配置沟通素材增加。",
+        "url": "https://www.stcn.com/article/detail/4205806.html"
+      },
+      {
+        "title": "金融支持服务业扩能",
+        "why": "服务业信贷与消费场景或迎增量，辖内服务型企业的融资需求结构可能发生变化。",
+        "url": "https://www.stcn.com/article/detail/4205703.html"
+      }
+    ],
+    "spoken_must_read": "房贷贴息细则落地。已审未发贷款可办理、五年期满恢复计息，房贷条线对已批未放客户的解释口径有了统一依据。其次，公募规模近40万亿。居民资产向净值化产品迁移趋势延续，广州分行零售AUM的结构与客户陪伴方式面临重估。此外，多地出台预售现房新规。商品住房预售与现房销售规则调整，涉房开发贷与按揭项目的准入和资金监管要求可能随之变化。还有，30年国债持仓创新高。长端利率配置需求旺盛，稳健型客户对债市走强的关注度上升，资产配置沟通素材增加。另外，金融支持服务业扩能。服务业信贷与消费场景或迎增量，辖内服务型企业的融资需求结构可能发生变化。",
+    "insights": [
+      {
+        "topic": "基金分红超1300亿",
+        "impact": "年内基金分红超1300亿元，分红资金回流存款与理财的承接节奏变化，直接影响零售AUM的季度留存与客户再配置意愿。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "超1300亿元“红包”，基金分红有深意",
+            "url": "https://finance.sina.com.cn/roll/2026-10-02/doc-initwent4384608.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "公募规模逼近40万亿",
+        "impact": "公募规模达39.63万亿元，居民资产向净值化产品迁移延续，零售AUM中基金类占比与客户陪伴需求同步上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "截至8月底我国境内公募基金规模达39.63万亿元",
+            "url": "https://news.southcn.com/node_812903b83a/0e6cdb08e9.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "港股重挫扰动持仓客户",
+        "impact": "港股复市首日三大指数集体重挫、金融股领跌，持有港股类产品的中高端客户账面波动放大，情绪与赎回压力上升。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "港股国庆后首日交易遇冷 三大指数集体重挫 金融股成拖累指数核心力量",
+            "url": "https://m.21jingji.com/article/20261002/herald/ff008442f9d42629a9a38d786c361148.html"
+          }
+        ]
+      },
+      {
+        "topic": "外商股权投资增55%",
+        "impact": "上半年外商股权性质直接投资同比增长55%，外资来华投资回暖，跨境客群的开户、结汇与资金归集需求出现增量。",
+        "tag": [
+          "客群",
+          "政银合作"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "今年上半年外商股权性质直接投资同比增长55%",
+            "url": "https://www.cnfin.com/yw-lb/detail/20261002/4477191_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "民营项目公开推介",
+        "impact": "发改委民营局向民营企业公开推介投资项目，民企项目融资窗口打开，辖内小微与个体工商户的经营贷需求随项目节奏释放。",
+        "tag": [
+          "信贷",
+          "政银合作"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "国家发展改革委民营局向民营企业公开推介投资项目",
+            "url": "https://www.cnfin.com/yw-lb/detail/20261002/4477220_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "服务业扩能提质政策",
+        "impact": "金融支持服务业扩能提质政策落地，辖内服务型企业的融资需求结构变化，普惠小微客群的行业分布随之调整。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "金融支持服务业扩能提质，券商首席解读政策亮点与受益板块",
+            "url": "https://www.stcn.com/article/detail/4205703.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，公募基金规模已到近四十万亿，年内分红超过一千三百亿，居民资产往净值化产品迁移的趋势还在延续，分红资金回流存款和理财的承接变化值得留意。高端客户方面，港股复市首日三大指数集体重挫、金融股领跌，持有港股类产品的客户情绪会受到扰动；同时上半年外商股权投资同比增长五成五，跨境客群的开户与结汇需求在回暖。普惠小微方面，发改委民营局公开推介投资项目，民企项目融资窗口打开，辖内小微与个体工商户的经营贷需求会跟着项目节奏走。本地消费场景方面，国庆首日广东4A级以上景区迎客超过二百九十万人次、同比增长百分之六点一，假期场景下信用卡与消费信贷的获客窗口在放大。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "非农大幅低于预期，纳指涨1.19%领涨三大指数。",
+      "sectors": [
+        "美股三大指数集体收涨，纳指盘中创新高，英伟达盘中刷新纪录高位。",
+        "美国9月非农仅增2.9万人，远低于预期，债市恢复抛售、收益率上行。",
+        "比特币周内小幅上涨，市场削减美联储加息押注。",
+        "欧洲冬季能源紧张或已启动，CNBC点名两只受益美股。",
+        "三季度IPO推迟增多，多家公司选择观望。"
+      ],
+      "spoken": "美股三大指数集体收涨，纳指涨1.19%领涨，道指涨0.49%，标普涨0.73%。美国9月非农仅增2.9万人，大幅低于预期，市场削减加息押注，但债市恢复抛售。盘面上，英伟达盘中刷新纪录高位，纳指盘中创新高。能源方面，欧洲冬季能源紧张或已启动。另外，三季度IPO推迟增多，多家公司选择观望。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-03"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51176.96",
+          "changePct": "+0.49%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27190.86",
+          "changePct": "+1.19%"
+        },
+        {
+          "name": "标普500",
+          "value": "7722.72",
+          "changePct": "+0.73%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证涨0.31%，深成指、创业板微跌，非农数据扰动市场。",
+      "sectors": [
+        "存储龙头获活跃资金爆买超92亿元，三季度加仓股曝光。",
+        "核聚变取得重大进展，相关概念受资金关注。",
+        "固态电池迎重大利好，券商力推设备端，上海洗霸两日涨超25%。",
+        "华为、赛力斯传出大动作，相关个股暴涨超16%。",
+        "今年以来159只翻倍股扎堆两大行业。"
+      ],
+      "spoken": "A股三大指数涨跌互现，上证指数涨0.31%，深证成指跌0.11%，创业板指跌0.23%。板块方面，存储龙头获活跃资金爆买超92亿元，核聚变取得重大进展，固态电池迎重大利好，券商力推设备端，上海洗霸两日涨超25%。华为、赛力斯传出大动作，相关个股暴涨超16%。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-03"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3842.20",
+          "changePct": "+0.31%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12887.62",
+          "changePct": "-0.11%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3135.28",
+          "changePct": "-0.23%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23972.29点（-2.60%）；恒生科技收报4157.94点（-2.26%）。",
+      "sectors": [
+        "科网股、内房股普跌",
+        "光通信板块逆市活跃"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-02"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌2.6% 科指跌2.26% 科网股、内房股普跌 光通信板块逆市活跃",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-02/doc-initvpri7307809.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23972.29",
+          "changePct": "-2.60%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4157.94",
+          "changePct": "-2.26%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-02",
+    "marketStatus": {
+      "reportDate": "2026-10-03",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-09-30",
+          "reason": "数据为 9月30日（距今 3 天）"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-02"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-02"
+        }
+      },
+      "allStale": false,
+      "note": "A股今日无隔夜行情，其余市场为最新收盘",
+      "spokenNote": "A股今日无隔夜行情；港股为 10月2日 周五 收盘；美股为 10月2日 周五 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888385384.html",
+      "title_cn": "美国9月非农就业人数增加2.9万人大幅低于预期",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "美国9月非农就业人数仅增加2.9万人，大幅低于市场预期。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "宏观经济",
+        "就业数据",
+        "美联储"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888319263.html",
+      "title_cn": "暴涨！突传消息：美国将增兵派遣第三艘航母！特朗普最新发声",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "市场传出美国将增派第三艘航母的消息，特朗普就此发表最新表态，相关资产出现暴涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "军工",
+        "市场异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888315811.html",
+      "title_cn": "核聚变重大进展！存储龙头获爆买超92亿元！活跃资金三季度加仓股曝光",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "核聚变领域取得重大进展，某存储龙头获资金爆买超92亿元，活跃资金三季度加仓个股名单曝光。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "核聚变",
+        "存储",
+        "资金流向"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888319837.html",
+      "title_cn": "固态电池迎重大利好！券商力推设备端，上海洗霸两日涨超25％",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "固态电池迎重大利好，券商力推设备端，上海洗霸两日涨超25%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "固态电池",
+        "券商研报",
+        "新能源"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888333021.html",
+      "title_cn": "刚刚暴涨超16%！华为、赛力斯传出大动作！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "华为与赛力斯传出大动作，相关标的一度暴涨超16%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "华为",
+        "赛力斯",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888327984.html",
+      "title_cn": "“史上最大IPO”有新消息！Anthropic被曝感恩节前上市估值剑指2万亿美元",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "被称为“史上最大IPO”的Anthropic被曝将于感恩节前上市，估值剑指2万亿美元。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "IPO",
+        "AI",
+        "Anthropic"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888341394.html",
+      "title_cn": "今年以来159只翻倍股扎堆两大行业",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "今年以来共有159只翻倍股，集中分布于两大行业。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "翻倍股",
+        "行业分布"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888345374.html",
+      "title_cn": "美联储本月加不加息？美国9月非农今晚揭晓全球市场严阵以待",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "市场关注美联储本月是否加息，美国9月非农数据即将公布，全球市场严阵以待。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "非农数据",
+        "宏观经济"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888342081.html",
+      "title_cn": "全球民商火箭位次出炉：SpaceX第一、中科宇航第二国内头部梯队成型",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "全球民商火箭位次出炉，SpaceX排名第一、中科宇航第二，国内头部梯队成型。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "商业航天",
+        "火箭",
+        "产业格局"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888395631.html",
+      "title_cn": "美股三大指数集体收涨纳指盘中创新高英伟达盘中刷新纪录高位",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "美股三大指数集体收涨，纳指盘中创新高，英伟达盘中刷新纪录高位。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "英伟达",
+        "指数"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888331826.html",
+      "title_cn": "全球央行艰难重启加息周期，这次有什么不同|海外市场月报",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "全球央行艰难重启加息周期，海外市场月报分析本轮加息与以往的不同之处。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "央行",
+        "加息",
+        "海外市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610023888317721.html",
+      "title_cn": "开源证券：大模型迭代拓展能力边界应用落地兑现产业价值",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "开源证券发布观点，认为大模型迭代拓展能力边界，应用落地兑现产业价值。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "大模型",
+        "券商研报"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-02/doc-initvpri7307809.shtml",
+      "title_cn": "港股收评：恒指跌2.6% 科指跌2.26% 科网股、内房股普跌 光通信板块逆市活跃",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "港股收评：恒指跌2.6%，科指跌2.26%，科网股、内房股普跌，光通信板块逆市活跃。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "内房股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/2026-10-02/doc-initvpqz4551685.shtml",
+      "title_cn": "恒生科技指数连跌一年，累计跌幅近40%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "恒生科技指数连跌一年，累计跌幅近40%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生科技",
+        "指数"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-02/doc-inituwtp5971270.shtml",
+      "title_cn": "恒指、科指盘中均跌超3%，机构：红利仍是底仓",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "恒指、科指盘中均跌超3%，机构观点认为红利仍是底仓。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "红利"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-02/doc-inituwtm1507636.shtml",
+      "title_cn": "赛力斯港股大涨，华为赛力斯续签五年，问界转向“赛力斯主导”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "赛力斯港股大涨，华为与赛力斯续签五年合作协议，问界转向“赛力斯主导”。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "赛力斯",
+        "华为",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-02/doc-inituwtr7553752.shtml",
+      "title_cn": "快讯：恒指低开2.09% 科指跌1.87% 科网股普跌 中资券商股活跃",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "港股快讯：恒指低开2.09%，科指跌1.87%，科网股普跌，中资券商股活跃。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "券商股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-02/doc-inituwtp5966202.shtml",
+      "title_cn": "香港IPO审计师排行：安永遥遥领先，超出紧随其后的毕马威、德勤之和 (过去两年: 截至2026年9月)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "香港IPO审计师排行显示，安永遥遥领先，业绩超出紧随其后的毕马威与德勤之和（统计区间为截至2026年9月的过去两年）。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "审计"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-02/doc-initvprf5723966.shtml",
+      "title_cn": "里昂：降阿里健康(00241)目标价至3.7港元 营养品监管逆风拖累收入展望",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "里昂将阿里健康目标价下调至3.7港元，称营养品监管逆风拖累收入展望。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "阿里健康",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-02/doc-initvazi1491096.shtml",
+      "title_cn": "花旗：小米集团-W维持“买入”评级 目标价34港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "花旗维持小米集团-W“买入”评级，目标价34港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "小米",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-02/doc-initvazf4718547.shtml",
+      "title_cn": "大摩：吉利汽车维持“增持”评级 目标价27港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "大摩维持吉利汽车“增持”评级，目标价27港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "吉利汽车",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-02/doc-initvazm5891041.shtml",
+      "title_cn": "圣贝拉集团于9月30日斥资19.31万港元回购7万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "圣贝拉集团于9月30日斥资19.31万港元回购7万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购",
+        "圣贝拉"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-02/doc-initvazi1470506.shtml",
+      "title_cn": "华沿机器人拟回购不超过2亿元的H股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "华沿机器人拟回购不超过2亿元的H股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购",
+        "机器人"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-02/doc-initvyez5542202.shtml",
+      "title_cn": "董事会主席雷军增持金山软件(03888)36.16万股 每股作价约24.48港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "金山软件董事会主席雷军增持公司36.16万股，每股作价约24.48港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "金山软件",
+        "增持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/01/europes-winter-energy-crunch-may-already-be-underway-two-us-stocks-that-may-benefit.html",
+      "title_cn": "Europe’s winter energy crunch may already be underway. Two U.S. stocks that may benefit",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/01",
+      "summary": "CNBC报道称欧洲冬季能源紧张可能已经开始，并提及两只可能受益的美股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "美股",
+        "欧洲"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/29/ipo-postponements-are-accelerating-in-third-quarter-even-beyond-oura.html",
+      "title_cn": "IPO postponements are accelerating in third quarter, even beyond Oura",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "第三季度IPO推迟现象加速，范围超出Oura。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "IPO",
+        "美股",
+        "市场动态"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/us-appeals-court-blocks-minnesotas-ainudification-law-for-now-in-xai-lawsuit-4930434",
+      "title_cn": "US appeals court blocks Minnesota law barring ’nudified’ photos in XAI lawsuit",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "美国上诉法院在XAI诉讼中阻止了明尼苏达州禁止“nudified”照片的法律。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "法律诉讼",
+        "XAI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/cardlytics-ceo-amit-gupta-sells-46749-in-common-stock-93CH-4930471",
+      "title_cn": "Cardlytics CEO Amit Gupta sells $46,749 in common stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "Cardlytics CEO Amit Gupta出售46,749美元普通股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管减持",
+        "Cardlytics"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/perseverance-metals-closes-118-million-private-placement-93CH-4930470",
+      "title_cn": "Perseverance Metals closes $11.8 million private placement",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "Perseverance Metals完成1180万美元私募配售。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "私募融资",
+        "金属"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/asian-shares-fall-after-wild-swings-in-bonds-fx-before-us-jobs-data-4928814",
+      "title_cn": "Stocks rise after weak US jobs data but bonds resume selling",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "美国就业数据疲软后股市上涨，但债券恢复抛售。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "就业数据",
+        "债券"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/chinese-auto-show-debuts-in-argentina-as-their-sales-surge-4930114",
+      "title_cn": "Chinese auto show debuts in Argentina as sales surge",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "中国汽车展在阿根廷首次亮相，当地销量激增。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "汽车",
+        "中国车企",
+        "海外市场"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/ceribell-cto-raymond-woo-sells-119145-in-company-stock-93CH-4930457",
+      "title_cn": "Ceribell CTO Raymond Woo sells $119,145 in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "Ceribell CTO Raymond Woo出售119,145美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管减持",
+        "Ceribell"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/oramed-pharmaceuticals-cfo-avraham-gabay-sells-90200-in-stock-93CH-4930456",
+      "title_cn": "Oramed Pharmaceuticals CFO Avraham Gabay sells $90,200 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "Oramed Pharmaceuticals CFO Avraham Gabay出售90,200美元股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管减持",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/oramed-coo--cbo-joshua-hexter-sells-135330-in-shares-93CH-4930455",
+      "title_cn": "Oramed COO & CBO Joshua Hexter sells $135,330 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "Oramed COO兼CBO Joshua Hexter出售135,330美元股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管减持",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/us-faa-finds-boeing-737-max-software-glitch-does-not-pose-safety-issue-4930307",
+      "title_cn": "US FAA says Boeing 737 MAX software glitch poses no safety issue",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "美国联邦航空管理局表示波音737 MAX软件故障不构成安全问题。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "波音",
+        "航空"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/cryptocurrency-news/bitcoin-rises-to-865k-with-uptober-hopes-nonfarm-payrolls-in-focus-4928895",
+      "title_cn": "Bitcoin slightly up for the week on pared Fed rate hike bets, ’uptober’ hopes",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "比特币本周小幅上涨，因市场削减美联储加息押注及对“uptober”行情的期待。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "比特币",
+        "美联储"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}

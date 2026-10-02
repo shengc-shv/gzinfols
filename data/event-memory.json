@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-02",
+  "updatedAt": "2026-10-03",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -5654,8 +5654,164 @@
     }
   },
   "today": {
-    "date": "2026-10-02",
-    "entries": []
+    "date": "2026-10-03",
+    "entries": [
+      {
+        "date": "2026-10-03",
+        "section": "hero",
+        "title": "今天主要看四个方面：房贷贴息细则，口径落地；营销话术收紧，合规红线；公募近四十万亿，财富迁移；广东文旅回暖，消费获客。",
+        "text": "今天主要看四个方面：房贷贴息细则，口径落地；营销话术收紧，合规红线；公募近四十万亿，财富迁移；广东文旅回暖，消费获客。",
+        "facts": [
+          "!落地",
+          "@广东"
+        ],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "score": 83,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-03",
+        "section": "must_read",
+        "title": "房贷贴息细则落地",
+        "text": "房贷贴息细则落地 已审未发贷款可办理、五年期满恢复计息，房贷条线对已批未放客户的解释口径有了统一依据。",
+        "facts": [
+          "!落地"
+        ],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://m.21jingji.com/article/20261002/herald/e815788e924c78bb99b39d0a6fd89bc6.html",
+        "score": 74,
+        "novelty": 0.2955555555555555,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-03",
+        "section": "must_read",
+        "title": "公募规模近40万亿",
+        "text": "公募规模近40万亿 居民资产向净值化产品迁移趋势延续，广州分行零售AUM的结构与客户陪伴方式面临重估。",
+        "facts": [
+          "#40万亿",
+          "@广州"
+        ],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://news.southcn.com/node_812903b83a/0e6cdb08e9.shtml",
+        "score": 61,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-03",
+        "section": "must_read",
+        "title": "多地出台预售现房新规",
+        "text": "多地出台预售现房新规 商品住房预售与现房销售规则调整，涉房开发贷与按揭项目的准入和资金监管要求可能随之变化。",
+        "facts": [
+          "!出台"
+        ],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://finance.cctv.com/2026/10/02/ARTItprG1xmytT5KczuuGVYc261002.shtml",
+        "score": 29,
+        "novelty": 0.9854166666666666,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-03",
+        "section": "must_read",
+        "title": "30年国债持仓创新高",
+        "text": "30年国债持仓创新高 长端利率配置需求旺盛，稳健型客户对债市走强的关注度上升，资产配置沟通素材增加。",
+        "facts": [
+          "#30年"
+        ],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://www.stcn.com/article/detail/4205806.html",
+        "score": 21,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-03",
+        "section": "must_read",
+        "title": "金融支持服务业扩能",
+        "text": "金融支持服务业扩能 服务业信贷与消费场景或迎增量，辖内服务型企业的融资需求结构可能发生变化。",
+        "facts": [],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://www.stcn.com/article/detail/4205703.html",
+        "score": 19,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-03",
+        "section": "insights",
+        "title": "基金分红超1300亿",
+        "text": "基金分红超1300亿 年内基金分红超1300亿元，分红资金回流存款与理财的承接节奏变化，直接影响零售AUM的季度留存与客户再配置意愿。",
+        "facts": [
+          "#1300亿元"
+        ],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-10-02/doc-initwent4384608.shtml",
+        "novelty": 0.4807692307692307,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-03",
+        "section": "insights",
+        "title": "公募规模逼近40万亿",
+        "text": "公募规模逼近40万亿 公募规模达39.63万亿元，居民资产向净值化产品迁移延续，零售AUM中基金类占比与客户陪伴需求同步上升。",
+        "facts": [
+          "#40万亿",
+          "#39.63万亿元"
+        ],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://news.southcn.com/node_812903b83a/0e6cdb08e9.shtml",
+        "novelty": 0.296940205327414,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-03",
+        "section": "insights",
+        "title": "港股重挫扰动持仓客户",
+        "text": "港股重挫扰动持仓客户 港股复市首日三大指数集体重挫、金融股领跌，持有港股类产品的中高端客户账面波动放大，情绪与赎回压力上升。",
+        "facts": [],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://m.21jingji.com/article/20261002/herald/ff008442f9d42629a9a38d786c361148.html",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-03",
+        "section": "insights",
+        "title": "外商股权投资增55%",
+        "text": "外商股权投资增55% 上半年外商股权性质直接投资同比增长55%，外资来华投资回暖，跨境客群的开户、结汇与资金归集需求出现增量。",
+        "facts": [
+          "#55%"
+        ],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261002/4477191_1.html",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-03",
+        "section": "insights",
+        "title": "民营项目公开推介",
+        "text": "民营项目公开推介 发改委民营局向民营企业公开推介投资项目，民企项目融资窗口打开，辖内小微与个体工商户的经营贷需求随项目节奏释放。",
+        "facts": [
+          "@发改委"
+        ],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261002/4477220_1.html",
+        "novelty": 0.5406862745098039,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-03",
+        "section": "insights",
+        "title": "服务业扩能提质政策",
+        "text": "服务业扩能提质政策 金融支持服务业扩能提质政策落地，辖内服务型企业的融资需求结构变化，普惠小微客群的行业分布随之调整。",
+        "facts": [
+          "!落地"
+        ],
+        "broadcastAt": "2026-10-03T06:35:34+08:00",
+        "url": "https://www.stcn.com/article/detail/4205703.html",
+        "novelty": 0.6116666666666666,
+        "angle": "政策变化"
+      }
+    ],
+    "runId": "37073233911"
   },
   "deliveries": [
     {
