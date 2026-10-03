@@ -220,19 +220,12 @@ async function callOnce(
       parsed = JSON.parse(jsonrepair(cleaned));
       console.warn("[trading-commentary] JSON.parse failed, jsonrepair recovered");
     } catch {
-      // Dump raw output for postmortem — symmetric to pipeline.ts logging.
-      try {
-        const fs = await import("node:fs");
-        fs.mkdirSync("logs", { recursive: true });
-        const ts = now.toISOString().replace(/[:.]/g, "-");
-        fs.writeFileSync(`logs/trading-raw-${ts}.txt`, text, "utf8");
-        fs.writeFileSync(`logs/trading-cleaned-${ts}.txt`, cleaned, "utf8");
-        console.warn(
-          `[trading-commentary] both JSON.parse and jsonrepair failed; raw at logs/trading-raw-${ts}.txt`,
-        );
-      } catch {
-        // best-effort
-      }
+      // 原始输出转储（postmortem）—— 走 stderr **不写文件**：
+      // 服务层禁止直连副作用实现（`node:fs`），架构门禁会拦（2026-10-03 补上动态 import 检测后暴露）；
+      // 且 CI 日志同样可下载排查，不需要落盘。截断 400 字控制日志体积。
+      console.warn(
+        `[trading-commentary] ${now.toISOString()} both JSON.parse and jsonrepair failed; raw head: ${text.slice(0, 400)}`,
+      );
       throw strictErr;
     }
   }
