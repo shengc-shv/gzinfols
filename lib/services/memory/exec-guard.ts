@@ -86,6 +86,15 @@ export interface GuardOutput {
   decisions: MemoryDecision[];
   /** 人类可读日志行。 */
   log: string[];
+  /**
+   * 定调被**规则**改写过（悬空维度剔除 / 全悬空重归纳）—— 供上层决定是否再请 LLM 重写一次。
+   *
+   * 为什么需要：规则路径只能拿必读/商机的**标题原文**拼提纲（无看点、偏事件化），
+   * 而 LLM 能写成「维度，看点」。标出这个状态，上层（`side-exec-summary`）在有 LLM 时
+   * 可以用**定稿后的**内容再问一次（2026-10-03 sc 同意的「方案 A：二次 LLM 定调」）；
+   * LLM 不可用时保持规则产出，不阻断发布。
+   */
+  heroRewriteNeeded?: boolean;
 }
 
 /**
@@ -164,6 +173,8 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   let store: EventMemoryStore = beginDay(input.store, today);
   const decisions: MemoryDecision[] = [];
   const next: ExecutiveSummary = { ...exec };
+  /** 定调是否被**规则**改写（详见 `GuardOutput.heroRewriteNeeded`）。 */
+  let heroRewriteNeeded = false;
 
   // ---- 2) must_read（今日必读）----
   {
@@ -317,6 +328,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
       if (derived) {
         next.hero_line = derived;
         next.spoken_hero = undefined;
+        heroRewriteNeeded = true;
         log.push(
           `🧠 定调：全部 ${audit.dims.length} 个维度都无法在必读/商机中回溯 → 改由必读+商机归纳：${derived}`,
         );
@@ -330,6 +342,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
       // 企微「【今日定调】」/口播「先看今天的整体定调。」各端自加，生产者再加会渲染成双标签。
       const rebuilt = rebuildHeroLine(audit.kept);
       next.hero_line = rebuilt;
+      heroRewriteNeeded = true;
       // 口播是围绕**原定调**写的，定调改了就必须清空 → 由 syncNarration 用新 hero_line 兜底派生
       // （`voice/index.ts` 只读 `spoken_hero`；不清空会让口播与卡面不同源）。
       next.spoken_hero = undefined;
@@ -339,7 +352,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     }
   }
 
-  return { exec: next, store, decisions, log };
+  return { exec: next, store, decisions, log, heroRewriteNeeded };
 }
 
 /**

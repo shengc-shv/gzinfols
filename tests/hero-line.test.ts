@@ -94,9 +94,22 @@ test("stripHeroPrefix：剥掉历史补位前缀，无前缀原样返回，空�
 // ② deriveHeroLine：只列维度，不写理由
 // ---------------------------------------------------------------------------
 
-test("deriveHeroLine：必读与商机交替取维度，句式「今天主要看N个方面：X、Y」", () => {
+test("deriveHeroLine：按分行相关性分值降序取（高分在前）—— 定调是「最有价值的几条」", () => {
   const line = deriveHeroLine(mkExec());
-  assert.equal(line, "今天主要看两个方面：上海楼市已止跌回稳、助贷合作方适配排查。");
+  assert.equal(
+    line,
+    "今天主要看两个方面：助贷合作方适配排查、上海楼市已止跌回稳。",
+    "助贷 74 分 > 楼市 66 分 → 高分在前（2026-10-03 sc：定调不是下面内容的目录，只放最有价值的几条）",
+  );
+});
+
+test("deriveHeroLine：context / drop 档不进定调（10-03：低档内容被高分项挤掉）", () => {
+  const line = deriveHeroLine({
+    must_read: [{ title: "多地出台预售现房新规", why: "涉房开发贷与按揭项目的准入和资金监管要求可能随之变化。" }],
+    insights: [{ topic: "本地马拉松赛事报名开启", impact: "全民健身活动，与零售业务无直接关联。" }],
+  });
+  assert.ok(line.includes("多地出台预售现房新规"), "高分项入选");
+  assert.ok(!line.includes("马拉松"), "低档（context/drop）内容不进定调");
 });
 
 test("deriveHeroLine：理由（why）一字不入 —— 定调是纲，理由归必读", () => {

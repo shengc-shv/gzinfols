@@ -681,10 +681,12 @@ export function auditTimeWording(
 
 /* ───────── 今日定调：兜底「维度提纲」（2026-09-28 sc 口径） ───────── */
 
-/** 兜底提纲最多归纳几个维度。 */
+/** 兜底提纲最多归纳几个维度（**上限**，不是目标值 —— 定调只放「最有价值的几条」）。 */
 export const HERO_DERIVE_MAX_LINES = 5;
 /** 提纲整体字数上限（含标点）；超长则先砍掉最后一个维度再试。 */
 export const HERO_DERIVE_MAX_CHARS = 70;
+/** 不进定调的 tier（它们本就不该上卡片，更不该占定调版面）。 */
+const HERO_EXCLUDED_TIERS = new Set<string>(["drop", "context"]);
 
 const HERO_CN_NUM = ["", "一", "两", "三", "四", "五"] as const;
 
@@ -695,38 +697,50 @@ function renderHeroDerived(heads: string[]): string {
 }
 
 /**
- * 今日定调兜底：由**本次报告自身**的必读 + 商机确定性归纳一句「维度提纲」。
+ * 今日定调兜底：由**本次报告自身**的必读 + 商机，按**分行相关性分值**选出最值得看的几条。
  *
- * 为什么需要：定调是「今天主要看哪几个方面」的**纲**（2026-09-28 sc 口径）—— 读者看它
- * 就该知道接下来必读/商机要重点看哪几块。所以「LLM 定调判重命中」后的兜底
- * **不能从两天池另挑一条事件顶上**（旧实现实证 09-27 把「河南省首笔取水权质押贷款落地信阳」
- * 顶成定调：既是不相干的外省琐闻，又与当天必读/商机毫无关系），而应回到**本次报告已定稿的
- * 内容**里做归纳。
+ * 口径（2026-10-03 sc，关键转向）：**定调不是「下面内容的目录」** —— 不必覆盖全部，
+ * 只呈现**最有价值的几条**（甚至可以少于 5 条）。因此取用方式从「交错取用
+ * （必读1 → 商机1 → 必读2 …，不看分）」改为「**按 `scoreBranchRelevance` 分值降序取**」，
+ * 并把 `drop` / `context` 档整体排除（它们本就不该上卡片）。
+ *
+ * 实证（10-03）：旧逻辑把「港股重挫扰动持仓客户」（**19 分、drop 档**）放进了定调；
+ * 排除后定调由 79 / 74 / 74 / 66 / 66 这批真正高相关的内容组成。
  *
  * 素材与口径（不新造内容、不写理由）：
  *  - 维度 head 取 `must_read.title` / `insights.topic`（都 ≤15 字，本身即方向词组）；
- *  - **不取 why / impact 作理由**（2026-09-28 口径：定调只列维度 + 看点，完整理由留给必读）；
- *    兜底路径下 title/topic 自带量级（如「公募基金规模达39.63万亿」），信息量不缺；
- *  - 交错取用（必读 1 → 商机 1 → 必读 2 …），去重，最多 5 条，整句 ≤70 字；
+ *  - **不取 why / impact 作理由**（2026-09-28 口径：理由留给必读）—— 分值只用来判断"谁更该上"；
+ *  - 上限 5 条、整句 ≤70 字，超长先砍最后一条；
  *  - 句式与 LLM 的 §0 口径同构 → 两条路径产出的定调风格一致。
  *
- * ⚠️ 只用于「LLM 定调被判重」的兜底分支；LLM 正常产出的 hero_line 一字不改。
+ * ⚠️ 只用于「LLM 定调不可用 / 判重后需重写」的兜底分支；LLM 正常产出一字不改。
  * @returns 空串 = 无素材可归纳（调用方据此保留原定调，守住「定调永不空」红线）
  */
 export function deriveHeroLine(input: {
   must_read?: Array<{ title?: string; why?: string }>;
   insights?: Array<{ topic?: string; impact?: string }>;
 }): string {
-  const mr = (input.must_read ?? []).filter((m) => (m.title ?? "").trim());
-  const ins = (input.insights ?? []).filter((it) => (it.topic ?? "").trim());
+  const scored: Array<{ head: string; score: number; tier: string }> = [];
+  for (const m of input.must_read ?? []) {
+    const title = (m.title ?? "").trim();
+    if (!title) continue;
+    const r = scoreBranchRelevance({ title, ...(m.why ? { summary: m.why } : {}) });
+    scored.push({ head: title, score: r.score, tier: r.tier });
+  }
+  for (const it of input.insights ?? []) {
+    const topic = (it.topic ?? "").trim();
+    if (!topic) continue;
+    const r = scoreBranchRelevance({ title: topic, ...(it.impact ? { summary: it.impact } : {}) });
+    scored.push({ head: topic, score: r.score, tier: r.tier });
+  }
+  // 排除 drop / context；若全被排除则退回全集（宁可给低分项，也不留空 —— 调用方另有「永不空」红线）
+  const eligible = scored.filter((s) => !HERO_EXCLUDED_TIERS.has(s.tier));
+  const pool = (eligible.length ? eligible : scored).sort((a, b) => b.score - a.score);
   const heads: string[] = [];
-  for (let i = 0; i < Math.max(mr.length, ins.length); i++) {
-    for (const head of [mr[i]?.title, ins[i]?.topic]) {
-      const h = (head ?? "").trim();
-      if (!h || heads.length >= HERO_DERIVE_MAX_LINES) continue;
-      if (heads.includes(h)) continue;
-      heads.push(h);
-    }
+  for (const s of pool) {
+    if (heads.length >= HERO_DERIVE_MAX_LINES) break;
+    if (heads.includes(s.head)) continue;
+    heads.push(s.head);
   }
   while (heads.length > 0) {
     const text = renderHeroDerived(heads);
@@ -830,6 +844,92 @@ export function rebuildHeroLine(kept: string[]): string {
   if (lines.length === 0) return "";
   if (lines.length === 1) return `今天主要看一个方面：${lines[0]}。`;
   return `今天主要看${HERO_CN_NUM[lines.length]}个方面：${lines.join("；")}。`;
+}
+
+/* ───────── 今日定调：二次 LLM 重写（2026-10-03 sc 同意的「方案 A」） ───────── */
+
+/** 二次定调的 system prompt。 */
+const HERO_REWRITE_SYSTEM =
+  "你是银行零售条线的早报编辑，为分行行领导写「今日定调」。只输出一句话，不要任何解释、不要 Markdown、不要 emoji。";
+
+/** 把定稿内容按分行相关性分值降序列进用户提示（分值 = 与分行零售业务的相关度）。 */
+function heroRewriteUserPrompt(input: {
+  must_read?: Array<{ title?: string; why?: string }>;
+  insights?: Array<{ topic?: string; impact?: string }>;
+}): string {
+  const rows: Array<{ kind: string; head: string; score: number }> = [];
+  for (const m of input.must_read ?? []) {
+    const title = (m.title ?? "").trim();
+    if (!title) continue;
+    rows.push({ kind: "必读", head: title, score: scoreBranchRelevance({ title, ...(m.why ? { summary: m.why } : {}) }).score });
+  }
+  for (const it of input.insights ?? []) {
+    const topic = (it.topic ?? "").trim();
+    if (!topic) continue;
+    rows.push({ kind: "商机", head: topic, score: scoreBranchRelevance({ title: topic, ...(it.impact ? { summary: it.impact } : {}) }).score });
+  }
+  rows.sort((a, b) => b.score - a.score);
+  const list = rows.map((r, i) => `${i + 1}. [${r.kind} ${r.score}分] ${r.head}`).join("\n");
+  return [
+    "下面是一份早报**已定稿**的必读与商机，方括号里是「与分行零售业务的相关性分值」（越高越值得让领导看到）。",
+    "请写一句「今日定调」。要求：",
+    "- 只挑**最有价值的 3~5 条**（不必覆盖全部；分值明显低的不要写进去）",
+    "- 每条写成「维度，看点」：维度是 3~8 字领域词组；看点是 3~6 字的量级/紧迫性/影响面",
+    "- 句式：今天主要看N个方面：X，看点；Y，看点；Z，看点",
+    "- 整句不超过 70 字",
+    "- 只写提纲：不写理由、不做事件摘要、不引入下面没有的内容",
+    "- 纯口语、可直接朗读；不要问候语、不要任何符号装饰",
+    "",
+    list,
+  ].join("\n");
+}
+
+/** 清洗 LLM 返回的定调：取首个非空行、去 Markdown/引号/问候语、补句号。 */
+function sanitizeHeroLine(raw: string): string {
+  const firstLine = (raw ?? "")
+    .split(/\r?\n/)
+    .map((l) => l.trim())
+    .find(Boolean);
+  let s = firstLine ?? "";
+  if (!s) return "";
+  s = s.replace(/[*#`>]/g, "").replace(/^["'「『【]+|["'」』】]+$/g, "").trim();
+  s = s.replace(/^(早上好|各位早上好|大家好)[，,。.、：:\s]*/g, "").trim();
+  if (!s) return "";
+  s = s.replace(/[。.]+$/, "") + "。";
+  return s.length >= 12 && s.length <= 120 ? s : "";
+}
+
+/**
+ * 二次 LLM 定调（2026-10-03 sc 同意的「方案 A」）。
+ *
+ * 何时用：`exec-guard` 已用**规则**改写过定调（`GuardOutput.heroRewriteNeeded`）。
+ * 规则路径只能拿必读/商机的**标题原文**拼提纲（无看点、偏事件化）；这里带着
+ * **定稿后的内容 + 各自的分行相关性分值**再请 LLM 写一次，质量可对齐正常路径。
+ *
+ * 守卫（任一不满足即返回空串，调用方保留规则产出，**不阻断发布**）：
+ *  - LLM 异常 / 返回空 / 返回过长或过短；
+ *  - **重写后的每个维度仍须能在定稿内容里回溯**（`auditHeroDimensions`）—— 防止它引入
+ *    下面没有的内容（那正是本轮要治的病）；
+ *  - 维度数 ≥2（一句话提纲至少要有两块）。
+ */
+export async function writeHeroLine(
+  input: {
+    must_read?: Array<{ title?: string; why?: string }>;
+    insights?: Array<{ topic?: string; impact?: string }>;
+  },
+  runner: ExecLlmRunner,
+): Promise<string> {
+  let raw = "";
+  try {
+    raw = await runner(HERO_REWRITE_SYSTEM, heroRewriteUserPrompt(input));
+  } catch {
+    return ""; // LLM 异常 → 回落规则产出
+  }
+  const line = sanitizeHeroLine(raw);
+  if (!line) return "";
+  const audit = auditHeroDimensions(line, input.must_read, input.insights);
+  if (audit.dims.length < 2 || audit.dangling.length > 0) return "";
+  return line;
 }
 
 /**

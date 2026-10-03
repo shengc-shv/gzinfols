@@ -18,6 +18,7 @@ import {
   type ExecutiveSummary,
 
   generateExecutiveSummary,
+  writeHeroLine,
 } from "../../services/enrich/executive-summary";
 import { mergeStoredExecutive } from "../../services/assemble/merge-executive";
 import { loadExecStore, writeExecStore } from "../../adapters/persistence";
@@ -173,8 +174,15 @@ export async function buildExecutiveSummary(
       saveEventMemory(memStore, { today: date });
     }
   };
-  /** 对一份 ExecutiveSummary 跑记忆去重 + 兜底；失败一律放行原产出。 */
-  const guard = (ex: ExecutiveSummary): ExecutiveSummary => {
+  /**
+   * 对一份 ExecutiveSummary 跑记忆去重 + 兜底；失败一律放行原产出。
+   *
+   * 2026-10-03（sc 同意的「方案 A：二次 LLM 定调」）：定调若被**规则**改写过
+   * （`heroRewriteNeeded` —— 悬空维度剔除 / 全悬空重归纳），且有 LLM 可用，就带着
+   * **定稿后的必读 / 商机 + 各自的分行相关性分值**再请它写一次（质量对齐正常路径）。
+   * 重写结果仍须通过「维度可回溯」校验；任一环节失败都保留规则产出 —— **绝不阻断发布**。
+   */
+  const guard = async (ex: ExecutiveSummary): Promise<ExecutiveSummary> => {
     // 去重后统一对齐口播（1:1 由卡面派生，零 LLM）——记忆关闭时也不放过，保证预览一致
     if (!memoryOn || !memStore) return syncNarration(ex);
     try {
@@ -189,7 +197,25 @@ export async function buildExecutiveSummary(
       });
       memStore = g.store;
       for (const line of g.log) ctx.log.info("exec", line);
-      return syncNarration(g.exec);
+      let out = g.exec;
+      if (g.heroRewriteNeeded) {
+        const llm = deps?.llm;
+        const better = llm
+          ? await writeHeroLine(out, (systemPrompt: string, userPrompt: string) =>
+              llm.complete({ system: systemPrompt, prompt: userPrompt, stage: "executive" }),
+            )
+          : "";
+        if (better) {
+          out = { ...out, hero_line: better, spoken_hero: undefined };
+          ctx.log.info("exec", `🧠 定调：规则兜底 → 二次 LLM 重写 → ${better}`);
+        } else {
+          ctx.log.info(
+            "exec",
+            "🧠 定调：二次 LLM 重写未采用（LLM 不可用 / 未通过可回溯校验）→ 保留规则产出",
+          );
+        }
+      }
+      return syncNarration(out);
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
       ctx.log.warn("exec", `⚠️ 内容记忆去重异常（放行原产出）: ${msg}`);
@@ -201,7 +227,7 @@ export async function buildExecutiveSummary(
   if (ctx.mode.kind === "skip-ai") {
     if (stored && (stored.must_read?.length || stored.insights?.length)) {
       const before = { must: report.must_read.length, ins: report.insights.length };
-      const next = mergeStoredExecutive(report, guard(stored));
+      const next = mergeStoredExecutive(report, await guard(stored));
       ctx.log.info(
         "exec",
         `🧠 SKIP_AI 复用 store.json 执行摘要：必读 ${before.must}→${next.must_read.length} / 商机 ${before.ins}→${next.insights.length}`,
@@ -218,7 +244,7 @@ export async function buildExecutiveSummary(
     // 输入用「今天+昨天」两天池（twoDayPool），覆盖凌晨突发与昨日白天重要条目。
     const fallback = buildExecutiveFromScores(twoDayPool, date);
     if (fallback.must_read.length || fallback.insights.length) {
-      const next = mergeStoredExecutive(report, guard(fallback));
+      const next = mergeStoredExecutive(report, await guard(fallback));
       ctx.log.info(
         "exec",
         `🧠 SKIP_AI 评分层兜底生成：必读 ${next.must_read.length} / 商机 ${next.insights.length}`,
@@ -235,7 +261,7 @@ export async function buildExecutiveSummary(
   // REGEN_EXEC=1 显式声明"重生成"，与默认行为等价（用于脚本可读性）
   const regenMode = process.env.REGEN_EXEC ?? "1";  // 默认 "1"（重新生成）
   if (regenMode === "0" && stored && (stored.hero_line || stored.must_read?.length || stored.insights?.length)) {
-    const next = mergeStoredExecutive(report, guard(stored));
+    const next = mergeStoredExecutive(report, await guard(stored));
     if (stored.hero_line) next.hero_line = stored.hero_line;
     ctx.log.info(
       "exec",
@@ -339,7 +365,7 @@ export async function buildExecutiveSummary(
       exec = dedupeExecutiveCrossSection(exec);
       // 内容记忆闸门：过滤「昨天刚说过、今天无增量」的重复表述，
       // 必须重播的强制换角度，板块被去重掏空时分三级兜底补齐。
-      exec = guard(exec);
+      exec = await guard(exec);
       const next: DailyReport = { ...report };
       if (exec.hero_line) next.hero_line = exec.hero_line;
       const mustRead = exec.must_read
@@ -391,7 +417,7 @@ export async function buildExecutiveSummary(
     try {
       const fb = buildExecutiveFromScores(twoDayPool, date);
       if (fb.must_read.length || fb.insights.length) {
-        const next = mergeStoredExecutive(report, guard(fb));
+        const next = mergeStoredExecutive(report, await guard(fb));
         ctx.log.info(
           "exec",
           `🔁 LLM 异常回退 2 天评分兜底：必读 ${next.must_read.length} / 商机 ${next.insights.length}`,
