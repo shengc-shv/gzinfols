@@ -156,7 +156,18 @@ export function findMatchingEvent(
     const td = bestTitleDice(cand.title, rec);
     const st = sharedTags(tags, rec.topicTags);
     // 候选覆盖率：与 Jaccard 并列的硬信号（防历史锚点膨胀导致的漏召回，2026-10-03）
-    const cov = candidateCoverage(anchors, recAnchors);
+    //
+    // 🔴 守卫（2026-10-03 实测追加）：**只在锚点分布不过分悬殊时生效**。
+    // 覆盖率 `|A∩B|/|A|` 在历史事件是「锚点大杂烩」（`|B|` 很大）时必然趋近 1 ——
+    // 因为大杂烩里"什么锚都有"，候选的锚总能被"覆盖"，**信息量归零**。
+    // 10-03 实证三例误召回（`cov=1.00` 而 `aj` 仅 0.15~0.20、标题 Dice = 0）：
+    //   ①「房贷贴息细则落地」→ 匹配到 `按揭`（10 锚 / 9 次，样本是外贸结算、金融城、
+    //      社区零售、东莞购房补贴、城市合伙人等**毫不相干**的内容）；
+    //   ②「30年国债持仓创新高」→ 匹配到 `保险|利率|存款`（10 锚，样本全是**美元**存款话题）；
+    //   ③「民营项目公开推介」→ 匹配到 `信贷|利率|客群`（13 锚，样本含粤芯半导体、大北农）。
+    // 加 `aj ≥ HARD_CORROB` 后三例全部失效，而真正该命中的「公募规模近40万亿」（aj 0.40）
+    // 与「公募规模逼近40万亿」（aj 0.33）**照常命中** —— 因为同事件的锚点分布本就集中。
+    const cov = aj >= HARD_CORROB ? candidateCoverage(anchors, recAnchors) : 0;
     // 主体锚共享数：主题路的「主体」一半（2026-10-03）
     const subj = sharedSubjectAnchors(anchors, recAnchors);
     const hard = Math.max(aj, td, cov);

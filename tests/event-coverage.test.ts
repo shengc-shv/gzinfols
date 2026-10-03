@@ -33,6 +33,7 @@ import {
   candidateFacts,
   extractFacts,
 } from "../lib/services/memory/event-text";
+import { findMatchingEvent } from "../lib/services/memory/event-decide";
 
 /** 09-28「公募基金规模达39.63万亿」事件累积后的锚点（真实值，6 个）。 */
 const REC_PUBLIC_FUND = ["基金", "#39.63万亿", "理财", "存款", "#40万亿", "#1300亿元"];
@@ -61,6 +62,69 @@ test("candidateCoverage 守卫：单锚候选 / 空集 → 0", () => {
   assert.equal(candidateCoverage(["基金", "#40万亿"], ["基金"]), 0, "历史侧锚点 < 2");
   assert.equal(candidateCoverage([], REC_PUBLIC_FUND), 0);
   assert.equal(candidateCoverage(["基金", "#40万亿"], []), 0);
+});
+
+// ---------------------------------------------------------------------------
+// ⑤ 覆盖率守卫：锚点「大杂烩」事件不得被虚高覆盖率误召回（2026-10-03 实证）
+// ---------------------------------------------------------------------------
+
+/** 10-03 实证的「大杂烩」事件：`按揭` —— 10 个锚、9 次播报，样本是 5 件不相干的事。 */
+const BIG_POT_ANCHORS = [
+  "按揭", "客群", "广州", "消费贷", "代发", "信用卡", "房贷", "购房", "贴息", "#3万元",
+];
+
+/** 最小记忆库（仅 long-term events + 空暂存区）。 */
+function storeWith(id: string, anchors: string[], topicTags: string[]): never {
+  return {
+    version: 1,
+    events: {
+      [id]: {
+        id,
+        anchors,
+        topicTags,
+        samples: [{ date: "2026-10-01", section: "insights", title: "某条历史播报", text: "x" }],
+        broadcastedFacts: [],
+        broadcastedTexts: [],
+        kind: "local",
+        firstBroadcastAt: "2026-09-16",
+        lastBroadcastAt: "2026-10-01",
+        broadcastCount: 9,
+        sections: [],
+        anglesUsed: [],
+        peakScore: 0,
+      },
+    },
+    today: { date: "2026-10-03", entries: [] },
+  } as never;
+}
+
+test("覆盖率守卫：大杂烩事件（10 个锚）不得被「虚高覆盖率」误召回", () => {
+  const cand = { title: "房贷贴息细则落地", text: "已审未发贷款可办理、五年期满恢复计息。" };
+  const anchors = candidateAnchors(cand);
+  assert.equal(
+    candidateCoverage(anchors, BIG_POT_ANCHORS),
+    1,
+    "覆盖率本身会虚高到 1（大杂烩里什么锚都有）—— 这正是要防的",
+  );
+  assert.ok(
+    anchorJaccard(anchors, BIG_POT_ANCHORS) < 0.3,
+    "Jaccard 只有 0.2 → 说明两者并非同一事件",
+  );
+  assert.equal(
+    findMatchingEvent(cand as never, storeWith("按揭", BIG_POT_ANCHORS, ["住房金融", "广州本地"])),
+    null,
+    "aj < HARD_CORROB → 覆盖率失效 → 不得误召回（否则正常必读会被冷却期拦掉）",
+  );
+});
+
+test("覆盖率守卫：同事件（锚点分布集中）照常命中 —— 守卫不能把该抓的也放走", () => {
+  const cand = { title: "公募规模近40万亿", text: "居民资产向净值化产品迁移趋势延续。" };
+  const rec = ["基金", "#39.63万亿", "理财", "存款", "#40万亿"];
+  assert.ok(anchorJaccard(candidateAnchors(cand), rec) >= 0.3, "同事件的 Jaccard 应在门槛之上");
+  assert.ok(
+    findMatchingEvent(cand as never, storeWith("#39.63万亿|基金", rec, ["财富管理"])),
+    "锚点分布集中 → 覆盖率生效 → 必须命中（这是本轮要修的漏召回）",
+  );
 });
 
 test("candidateCoverage：无共享锚 → 0；完全覆盖 → 1", () => {

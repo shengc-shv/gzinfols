@@ -10,8 +10,10 @@
  *   ① `stripHeroPrefix`：历史遗留的「今日分行焦点：」前缀统一剥除（页面/企微/口播共用）；
  *   ② `deriveHeroLine`：由本次报告的必读+商机归纳**维度**（交错取用、上限 4 个、
  *      超长先砍维度、空素材回空串；**理由一字不入**）；
- *   ③ 集成：定调判重命中 → 由归纳兜底（**不再从两天池挑事件**）、清空 spoken_hero；
- *      必读/商机皆空 → 保留原定调（红线：宁可重复，不留空）；
+ *   ③ 集成：定调**不参与事件判重**（它是「必读+商机的提纲」、不是事件，2026-10-03 sc 口径
+ *      「下面有出现，提纲就可以出现」）—— 只做**维度可回溯**校验：提纲里每个维度都要能在
+ *      必读/商机里找到对应；悬空维度剔除、全可回溯则原样保留；全悬空则改由必读/商机重归纳，
+ *      归纳不出才保留原定调（红线：宁可重复，不留空）；
  *   ④ 消费端：页面 / 企微 markdown / 企微 text 各自只加一份标签，不得出现双标签。
  *
  * 全部 fixture 时间戳显式带 +08:00（时间红线：不得出现无发布时间的条目）。
@@ -22,7 +24,9 @@ import assert from "node:assert/strict";
 import { stripHeroPrefix } from "../lib/utils/hero-text";
 import {
   HERO_DERIVE_MAX_LINES,
+  auditHeroDimensions,
   deriveHeroLine,
+  rebuildHeroLine,
   type ExecutiveSummary,
 } from "../lib/services/enrich/executive-summary";
 import { applyMemoryGuard } from "../lib/services/memory/exec-guard";
@@ -39,7 +43,7 @@ const TODAY = "2026-09-27";
 const YEST = "2026-09-26";
 const NOW = new Date("2026-09-27T07:30:00+08:00");
 
-/** 与记忆库逐字重复的定调 → 必然命中判重 → 走归纳兜底。 */
+/** 与记忆库逐字重复的定调（回归用：判重已不再影响它）。 */
 const HERO = "理财密集下调费率1667条，财富客群比价压力上升。";
 
 function mkExec(): ExecutiveSummary {
@@ -59,11 +63,12 @@ function mkExec(): ExecutiveSummary {
   };
 }
 
+/** 昨天播过、与定调**同题**的事件（旧行为下定调会因此被判重拦下）。 */
 function storeWithHeroHistory() {
   let store = emptyMemory();
   store = rememberBroadcast(store, {
-    cand: { title: HERO, text: "" },
-    section: "hero",
+    cand: { title: "上海楼市已止跌回稳", text: "" },
+    section: "must_read",
     date: YEST,
     novelty: 1,
     broadcastAt: `${YEST}T08:00:00+08:00`,
@@ -140,45 +145,116 @@ test("deriveHeroLine：整句超 70 字 → 先砍维度再试（硬上限）", 
   assert.ok(line.startsWith("今天主要看"), "句式不变（只是减少维度数）");
 });
 
-// ---------------------------------------------------------------------------
-// ③ 集成：判重命中 → 归纳兜底（不再挑池事件）
-// ---------------------------------------------------------------------------
-
-test("定调判重命中 → 由必读+商机归纳今日关注主线（不清空板块、不挑池事件）", () => {
-  const g = applyMemoryGuard({ exec: mkExec(), store: storeWithHeroHistory(), today: TODAY, now: NOW });
-  const line = g.exec.hero_line ?? "";
-  assert.ok(line.startsWith("今天主要看"), `应改为维度提纲（实际：${line}）`);
-  assert.ok(line.includes("上海楼市已止跌回稳") && line.includes("助贷合作方适配排查"), "两个板块都要点到");
-  assert.ok(!line.includes("住房金融条线关注度上升"), "兜底提纲不得夹带理由（理由归必读）");
-  assert.ok(line.length <= 70, `提纲 ≤70 字（实际 ${line.length} 字）`);
-  assert.ok(!line.startsWith("今日分行焦点"), "不带任何标签前缀（各消费端自加）");
-  assert.ok(
-    !/取水权|河南省|中小银行压降/.test(line),
-    "不得再出现「从池里另挑事件」的结果",
+test("auditHeroDimensions：短词降级 —— 2 字维度不因 bigram 少而恒判悬空", () => {
+  const a = auditHeroDimensions(
+    "今天主要看两个方面：楼市，成交回暖；消费贷，贴息扩围。",
+    [{ title: "楼市成交回暖" }],
+    [{ topic: "消费贷贴息扩围" }],
   );
-  assert.equal(g.exec.spoken_hero, undefined, "旧口播稿围绕原定调写 → 清空，交由 syncNarration 派生");
-  assert.ok(
-    g.log.some((l) => l.includes("改由必读+商机归纳今日关注主线")),
-    `应留归纳日志：${g.log.join(" | ")}`,
-  );
+  assert.equal(a.dangling.length, 0, `两个短维度都应可回溯（实际悬空：${JSON.stringify(a.dangling)}）`);
+  assert.equal(a.kept.length, 2, "看点随维度一起保留");
 });
 
-test("红线：必读与商机皆空 → 保留原定调（宁可重复，不留空）", () => {
-  const exec: ExecutiveSummary = { hero_line: HERO, must_read: [], insights: [] };
-  const g = applyMemoryGuard({ exec, store: storeWithHeroHistory(), today: TODAY, now: NOW });
-  assert.equal(g.exec.hero_line, HERO, "无素材可归纳 → 保留原定调");
-  assert.ok(
-    g.log.some((l) => l.includes("无可归纳")),
-    `应留下留痕日志：${g.log.join(" | ")}`,
+test("auditHeroDimensions：拆维度、摘主词与看点、悬空识别", () => {
+  const a = auditHeroDimensions(
+    "今天主要看两个方面：房贷贴息细则，口径落地；营销话术收紧，合规红线。",
+    [{ title: "房贷贴息细则落地" }],
+    [],
   );
+  assert.deepEqual(
+    a.dims.map((d) => d.key),
+    ["房贷贴息细则", "营销话术收紧"],
+    "按分号拆维度、主词取逗号前",
+  );
+  assert.equal(a.dims[0]!.note, "口径落地", "看点取逗号后");
+  assert.deepEqual(a.dangling.map((d) => d.key), ["营销话术收紧"], "无对应 → 悬空");
+  assert.deepEqual(a.kept, ["房贷贴息细则，口径落地"], "保留维度连同看点");
 });
 
-test("回归：定调未被判重时原样保留，不做任何归纳", () => {
-  const exec = mkExec();
-  exec.hero_line = "全新定调：跨境资金安排与汇率避险窗口同步打开。";
+test("rebuildHeroLine：按保留维度重建、维度数改口、空数组回空串", () => {
+  assert.equal(rebuildHeroLine(["A，看点"]), "今天主要看一个方面：A，看点。");
+  assert.equal(rebuildHeroLine(["A，x", "B，y"]), "今天主要看两个方面：A，x；B，y。");
+  assert.equal(rebuildHeroLine(["A，x", "B，y", "C，z"]), "今天主要看三个方面：A，x；B，y；C，z。");
+  assert.equal(rebuildHeroLine([]), "", "无保留维度 → 空串（调用方据此保留原定调）");
+});
+
+// ---------------------------------------------------------------------------
+// ③ 集成：维度可回溯校验（2026-10-03 sc 口径 —— 定调不再参与事件判重）
+// ---------------------------------------------------------------------------
+
+test("悬空维度剔除：提纲里「下面没出现」的维度 → 从提纲里去掉", () => {
+  const exec: ExecutiveSummary = {
+    hero_line:
+      "今天主要看三个方面：上海楼市已止跌回稳，住房回暖；助贷合作方适配排查，分润调整；营销话术收紧，合规红线。",
+    must_read: [{ title: "上海楼市已止跌回稳", why: "住房金融条线关注度上升", url: "https://example.com/a" }],
+    insights: [
+      {
+        topic: "助贷合作方适配排查",
+        impact: "消费贷条线获客与分润结构或调整。",
+        action: "风控部牵头排查存量合作方适配进度。",
+        sources: [{ title: "助贷新规重塑合作模式", url: "https://example.com/b" }],
+      },
+    ],
+  };
   const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
-  assert.equal(g.exec.hero_line, exec.hero_line, "未命中判重 → 定调原样保留");
-  assert.ok(!g.log.some((l) => l.includes("归纳")), "不该出现归纳日志");
+  assert.equal(
+    g.exec.hero_line,
+    "今天主要看两个方面：上海楼市已止跌回稳，住房回暖；助贷合作方适配排查，分润调整。",
+    "「营销话术收紧」在必读/商机里找不到对应 → 必须剔除，且维度数随之改口",
+  );
+  assert.equal(g.exec.spoken_hero, undefined, "提纲改了 → 清空原口播，交由 syncNarration 派生");
+  assert.ok(
+    g.log.some((l) => l.includes("剔除") && l.includes("营销话术收紧")),
+    `应留剔除日志：${g.log.join(" | ")}`,
+  );
+});
+
+test("维度全部可回溯 → 定调原样保留、口播不动（下面有出现，提纲就可以出现）", () => {
+  const exec = mkExec();
+  exec.hero_line = "今天主要看两个方面：上海楼市已止跌回稳，住房回暖；助贷合作方适配排查，分润调整。";
+  exec.spoken_hero = "今天主要看两个方面，上海楼市和助贷排查。";
+  const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
+  assert.equal(g.exec.hero_line, exec.hero_line, "两个维度都能回溯 → 一字不改");
+  assert.equal(g.exec.spoken_hero, exec.spoken_hero, "未改定调 → 口播保留（卡面与口播同源）");
+});
+
+test("回归：定调不再参与事件判重（与历史同题也不换）", () => {
+  // 旧行为：定调被当事件候选走 findMatchingEvent → 命中历史事件 → cooldown 拦下 → 兜底重写。
+  // 新口径（10-03 sc）：提纲与必读/商机共享主题是**设计使然**，不该因此被换掉。
+  const exec = mkExec();
+  exec.hero_line = "今天主要看两个方面：上海楼市已止跌回稳，住房回暖；助贷合作方适配排查，分润调整。";
+  const g = applyMemoryGuard({ exec, store: storeWithHeroHistory(), today: TODAY, now: NOW });
+  assert.equal(
+    g.exec.hero_line,
+    exec.hero_line,
+    "两个维度都可回溯 → 即使历史有同题事件，定调仍原样保留",
+  );
+});
+
+test("全悬空且有素材 → 改由必读+商机重归纳（防提纲与下方内容脱节）", () => {
+  const exec = mkExec();
+  exec.hero_line = "今天主要看两个方面：量子计算突破，前沿；元宇宙资产配置，新赛道。";
+  const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
+  assert.ok(
+    (g.exec.hero_line ?? "").includes("上海楼市已止跌回稳"),
+    `应改为由必读/商机归纳（实际：${g.exec.hero_line}）`,
+  );
+  assert.equal(g.exec.spoken_hero, undefined, "提纲改了 → 清空原口播");
+  assert.ok(g.log.some((l) => l.includes("改由必读+商机归纳")), `日志：${g.log.join(" | ")}`);
+});
+
+test("红线：全悬空且必读/商机为空 → 保留原定调（宁可重复，不留空）", () => {
+  const exec: ExecutiveSummary = {
+    hero_line: "今天主要看两个方面：量子计算突破，前沿；元宇宙资产配置，新赛道。",
+    must_read: [],
+    insights: [],
+  };
+  const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
+  assert.equal(g.exec.hero_line, exec.hero_line, "无素材可归纳 → 保留原定调");
+  assert.ok(
+    g.log.some((l) => l.includes("必读/商机为空")),
+    `应留留痕日志：${g.log.join(" | ")}`,
+  );
 });
 
 // ---------------------------------------------------------------------------

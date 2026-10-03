@@ -1,7 +1,7 @@
 import { extractJson } from "./json-util";
 import { mapSubcategoryToSegments, OTHER_SEGMENT } from "../classify/customer-segment";
 import { INSIGHT_OTHER_GROUP, segSpeak } from "../voice/speech-lines";
-import { titleSimilarityDice } from "../select/filters/dedup-similar";
+import { titleBigrams, titleSimilarityDice } from "../select/filters/dedup-similar";
 import {
   rankByRelevance,
   scoreBranchRelevance,
@@ -734,6 +734,102 @@ export function deriveHeroLine(input: {
     heads.pop(); // 超长 → 先砍最后一个维度，再试
   }
   return "";
+}
+
+/* ───────── 今日定调：维度可回溯校验（2026-10-03 sc 口径） ───────── */
+
+/** 维度主词与必读/商机主题的 bigram 重合下限：达到即认定「下面有出现」。 */
+export const HERO_DIM_MIN_OVERLAP = 2;
+/** 提纲前缀（「今天主要看四个方面：」）。 */
+const HERO_PREFIX_RE = /^今天主要看[^：:]*[：:]\s*/;
+
+export interface HeroDimensionAudit {
+  /** 逐个维度的审计明细（日志/调试用）。 */
+  dims: Array<{
+    /** 维度主词（逗号前的部分）。 */
+    key: string;
+    /** 看点（逗号后的部分，可为空）。 */
+    note: string;
+    /** 是否能在必读/商机里找到对应。 */
+    grounded: boolean;
+    /** 最佳对应来源（不可回溯时为空）。 */
+    matchedBy: string;
+    /** 最佳对应来源的 bigram 重合数。 */
+    overlap: number;
+  }>;
+  /** 可回溯的维度（保留原措辞，含看点）。 */
+  kept: string[];
+  /** 悬空的维度（提纲里有、下面没有）。 */
+  dangling: Array<{ key: string; note: string }>;
+}
+
+/**
+ * 定调**维度可回溯**审计（2026-10-03 sc 口径）。
+ *
+ * 口径原文：「定调是基于今日必读和商机的**提纲** —— 下面有出现，提纲就可以出现。」
+ * 反过来：**下面没有出现的维度，提纲里就不该出现**。
+ *
+ * 为什么需要（10-03 实证）：定调写了 4 个方面，其中「营销话术收紧」「广东文旅回暖」
+ * 在必读/商机里**找不到任何对应** —— 内容只存在于板块卡，而口播听众只能听定调 + 必读 +
+ * 商机三段，听完提纲却在下面找不到下文（即既有待办 `auditHeroDimensionNames`）。
+ *
+ * 判据：维度主词与任一 `must_read.title` / `insights.topic` 的 **bigram 重合数 ≥ 阈值**
+ * （默认 2；短词按 `key.length - 1` 降级，避免「楼市」这类 2 字词永远判悬空）。
+ * 用 bigram 而非子串/全等，是为了容忍改写（10-03「公募近四十万亿」↔「公募规模近40万亿」
+ * 只共享「公募」「万亿」两个 bigram，恰好达标）。
+ */
+export function auditHeroDimensions(
+  heroLine: string,
+  mustRead?: Array<{ title?: string }>,
+  insights?: Array<{ topic?: string }>,
+): HeroDimensionAudit {
+  const sources = [
+    ...(mustRead ?? []).map((m) => (m.title ?? "").trim()),
+    ...(insights ?? []).map((i) => (i.topic ?? "").trim()),
+  ].filter(Boolean);
+  const body = (heroLine ?? "").replace(HERO_PREFIX_RE, "").replace(/[。．.\s]+$/, "");
+  const dims = body
+    .split(/[；;]/)
+    .map((seg) => seg.trim())
+    .filter(Boolean)
+    .map((seg) => {
+      const ci = seg.search(/[，,]/);
+      const key = (ci >= 0 ? seg.slice(0, ci) : seg).trim();
+      const note = ci >= 0 ? seg.slice(ci + 1).trim() : "";
+      const grams = titleBigrams(key);
+      let overlap = 0;
+      let matchedBy = "";
+      for (const src of sources) {
+        const sg = titleBigrams(src);
+        let n = 0;
+        for (const g of grams) if (sg.has(g)) n++;
+        if (n > overlap) {
+          overlap = n;
+          matchedBy = src;
+        }
+      }
+      const need = Math.min(HERO_DIM_MIN_OVERLAP, Math.max(1, key.length - 1));
+      const grounded = overlap >= need;
+      return { key, note, grounded, matchedBy: grounded ? matchedBy : "", overlap };
+    });
+  return {
+    dims,
+    kept: dims.filter((d) => d.grounded).map((d) => (d.note ? `${d.key}，${d.note}` : d.key)),
+    dangling: dims.filter((d) => !d.grounded).map((d) => ({ key: d.key, note: d.note })),
+  };
+}
+
+/**
+ * 用保留的维度重建提纲句（句式与 §0 同构）。
+ *
+ * 只在「剔除悬空维度」时使用；重建后必须清空 `spoken_hero`（口播是围绕原定调写的），
+ * 交由 `syncNarration` 以新 `hero_line` 兜底派生，保证卡面与口播同源同句。
+ */
+export function rebuildHeroLine(kept: string[]): string {
+  const lines = kept.slice(0, HERO_DERIVE_MAX_LINES);
+  if (lines.length === 0) return "";
+  if (lines.length === 1) return `今天主要看一个方面：${lines[0]}。`;
+  return `今天主要看${HERO_CN_NUM[lines.length]}个方面：${lines.join("；")}。`;
 }
 
 /**

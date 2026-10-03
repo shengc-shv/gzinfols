@@ -25,7 +25,7 @@
  */
 
 import type { ExecutiveSummary, ExecInsight, ExecRisk } from "../enrich/executive-summary";
-import { deriveHeroLine } from "../enrich/executive-summary";
+import { auditHeroDimensions, deriveHeroLine, rebuildHeroLine } from "../enrich/executive-summary";
 import { scoreBranchRelevance } from "../select/filters/relevance-score";
 import { formatBroadcastAt } from "./broadcast-time";
 import {
@@ -165,60 +165,6 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   const decisions: MemoryDecision[] = [];
   const next: ExecutiveSummary = { ...exec };
 
-  // ---- 1) hero（今日定调）----
-  if (exec.hero_line && exec.hero_line.trim()) {
-    // 透传分行相关性分，使「定调」这类重大事件能在跨天结算时拿到真实 peakScore
-    // （否则 peakScore 恒为 0，无法享受「重大事件 ≥60 双倍保留」）。
-    const heroRel = scoreBranchRelevance({ title: exec.hero_line });
-    const cand: MemoryCandidate = {
-      title: exec.hero_line,
-      score: heroRel.score,
-      ...(heroRel.override ? { override: true } : {}),
-    };
-    const d = evaluateCandidate({ cand, section: "hero", today, store });
-    decisions.push(d);
-    if (d.allow) {
-      store = rememberBroadcast(store, {
-        cand,
-        section: "hero",
-        date: today,
-        novelty: d.novelty,
-        broadcastAt,
-        ...(d.requiredAngle ? { angle: d.requiredAngle } : {}),
-      });
-      log.push(`🧠 定调：${d.verdict}（增量 ${d.novelty.toFixed(2)}）— ${d.reason}`);
-    } else {
-      // 定调被去重 → 兜底一句「维度提纲」（红线：定调永不空）
-      //
-      // 2026-09-28 sc 口径（关键转向）：定调只回答「今天主要看哪几个方面」，是 must_read /
-      // insights 的**目录**（不再写「为什么值得关注」——理由归必读）。因此判重命中后
-      // **不再从两天池另挑一条事件顶上**（旧实现实证 09-27 把「河南省首笔取水权质押贷款落地
-      // 信阳」顶成定调：既是不相干的外省琐闻，又与当天必读/商机毫无关系），改为回到
-      // **本次报告自身**已定稿的必读 + 商机做确定性归纳（`deriveHeroLine`：只取方向词组，
-      // 不写理由）—— 天然提纲挈领，也不会引入新事件。
-      //
-      // ⚠️ 随池补位一并删除的旧机制（不要再加回来）：① 09-24「避开当天其他板块已用事件」
-      // （`collectUsedEvents`）—— 归纳素材本就来自当日板块，不存在「与别处撞车」；
-      // ② 09-27「候选地域/层级门槛」（`isHeroFallbackEligible`）—— 不挑事件就不必挑地域。
-      const derived = deriveHeroLine(exec);
-      if (derived) {
-        // 卡面只放正文（**不带任何标签前缀**）：页面「今日定调：」/ 企微「【今日定调】」/
-        // 口播「先看今天的整体定调。」各端自加标签，生产者再加前缀会渲染成双标签（09-27 实证）。
-        next.hero_line = derived;
-        // 口播稿是围绕**原定调**写的，定调换了就必须清空 → 由 syncNarration 用新 hero_line 兜底派生。
-        // ⚠️ 2026-09-26 修复：此处原注释写「由 audio.ts 按 hero_line 重新确定性生成」，
-        //   但那个环节**并不存在**（voice/index.ts 只读 spoken_hero、明写不读 hero_line）
-        //   → 兜底期次的「今日定调」口播段整段消失（实证 09-24 / 09-26 皆缺，非兜底期次正常）。
-        next.spoken_hero = undefined;
-        log.push(`🧠 定调命中去重（${d.verdict}），改由必读+商机归纳今日关注主线：${derived}`);
-      } else {
-        log.push(
-          `🧠 定调命中去重（${d.verdict}），但必读/商机均为空、无可归纳 → 保留原定调（宁可重复，不留空）`,
-        );
-      }
-    }
-  }
-
   // ---- 2) must_read（今日必读）----
   {
     // ① 构造候选：补「与广州分行的关联度」分。池内有对应条目时取其完整 summary 打分
@@ -345,6 +291,51 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
       next.risk = undefined;
       next.spoken_risk = undefined;
       log.push(`🧠 风险命中去重（${d.verdict}，增量 ${d.novelty.toFixed(2)}）→ 今日不重复预警`);
+    }
+  }
+
+  // ---- 5) hero（今日定调）----
+  // ⚠️ 必须放在**最后**（必读/商机定稿之后）：定调是它们的「提纲」，校验依据必须是
+  //    **实际会呈现的**必读/商机 —— 被判重拦掉的内容，其对应维度就是悬空的。
+  //
+  // 口径（2026-10-03 sc）：「定调是基于今日必读和商机的**提纲** —— 下面有出现，提纲就可以出现」。
+  //
+  // 为什么不再走事件判重：提纲与必读/商机共享主题是**设计使然**，但旧行为把它当事件候选走
+  // `findMatchingEvent` —— 10-03 实证被匹配到「按揭」事件（定调含「房贷」「贴息」两个锚 →
+  // sim 0.5，而该事件已播 9 次）→ 判 `cooldown` 拦下 → 兜底重写。
+  // 改为**维度可回溯**校验（`auditHeroDimensions`）：悬空维度剔除；全悬空则改由必读/商机
+  // 重归纳；归纳不出才保留原定调（红线：宁可重复，不留空）。
+  //
+  // ⚠️ 定调**不写入事件记忆**：写进去会变成一个「事件」并被后续必读/商机匹配到（两者本就共享
+  //    主题）→ 反过来把正常必读判成重复。定调的跨天一致性由必读/商机的判重间接保证。
+  if (next.hero_line && next.hero_line.trim()) {
+    const audit = auditHeroDimensions(next.hero_line, next.must_read, next.insights);
+    if (audit.kept.length === 0) {
+      // 一个维度都回溯不到：提纲与下方内容完全脱节 → 用必读/商机重归纳；
+      // 归纳不出（素材为空）则保留原定调（红线：宁可重复，不留空）。
+      const derived = deriveHeroLine(next);
+      if (derived) {
+        next.hero_line = derived;
+        next.spoken_hero = undefined;
+        log.push(
+          `🧠 定调：全部 ${audit.dims.length} 个维度都无法在必读/商机中回溯 → 改由必读+商机归纳：${derived}`,
+        );
+      } else {
+        log.push(`🧠 定调：全部 ${audit.dims.length} 个维度均无法回溯、且必读/商机为空 → 保留原定调`);
+      }
+    } else if (audit.dangling.length === 0) {
+      log.push(`🧠 定调：${audit.kept.length} 个维度均可在必读/商机中回溯 → 保留原定调`);
+    } else {
+      // 剔除悬空维度后重建。卡面只放正文（**不带任何标签前缀**）：页面「今日定调：」/
+      // 企微「【今日定调】」/口播「先看今天的整体定调。」各端自加，生产者再加会渲染成双标签。
+      const rebuilt = rebuildHeroLine(audit.kept);
+      next.hero_line = rebuilt;
+      // 口播是围绕**原定调**写的，定调改了就必须清空 → 由 syncNarration 用新 hero_line 兜底派生
+      // （`voice/index.ts` 只读 `spoken_hero`；不清空会让口播与卡面不同源）。
+      next.spoken_hero = undefined;
+      log.push(
+        `🧠 定调：剔除 ${audit.dangling.length} 个悬空维度（${audit.dangling.map((d) => d.key).join("、")}）→ ${rebuilt}`,
+      );
     }
   }
 
