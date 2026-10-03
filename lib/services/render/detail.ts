@@ -15,7 +15,7 @@ import { itemIdOf } from "../../utils/item-id";
 import { escapeHtml } from "./cards";
 import { THEME_CSS } from "./theme";
 import { stripCssComments } from "./css";
-import { stripCryptoNews } from "../assemble/safety";
+import { sanitizeCrypto } from "../assemble/safety";
 
 /** 板块中文名（与报告页筛选栏同款文案）。 */
 const SECTION_LABEL: Record<ReportSectionKey, string> = {
@@ -141,7 +141,7 @@ export function detailPagesOf(
   // 走同一条红线过滤。2026-09-17 实证：股市快讯纳入详情页后，一条「加密货币…」
   // 被写出了独立页面 —— 报告页早已拦下，详情页却漏了。故在此**兜底再滤一次**
   // （幂等；调用方是否已滤过都不影响结果）。
-  const safe = stripCryptoNews(report);
+  const safe = sanitizeCrypto(report).report;
   const out: Array<{ id: string; html: string }> = [];
   for (const key of Object.keys(safe.sections ?? {}) as ReportSectionKey[]) {
     for (const it of safe.sections[key] ?? []) {

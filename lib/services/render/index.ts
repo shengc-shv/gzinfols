@@ -15,7 +15,7 @@ import {
   renderMarkdown as renderMarkdownFull,
 } from "./full";
 import { assignItemIds } from "../assemble/item-id";
-import { stripCryptoNews } from "../assemble/safety";
+import { sanitizeCrypto } from "../assemble/safety";
 import { recalibrateImportance } from "../assemble/importance";
 
 export * from "./full";
@@ -39,7 +39,7 @@ export function renderHtml(
   // 老报告（JSON 无 id）重渲染时会被补上；已有 id 的一律保留（链接不变）。
   // 顺序：红线过滤（加密零容忍）→ A1b 重要度重标定 → 补条目 ID。
   // 三者都是幂等纯函数，放在渲染入口可覆盖「本次渲染」与「老报告重渲染」两条路径。
-  const prepared = assignItemIds(recalibrateImportance(stripCryptoNews(report)));
+  const prepared = assignItemIds(recalibrateImportance(sanitizeCrypto(report).report));
   return renderHtmlFull(prepared, report.date, opts);
 }
 
