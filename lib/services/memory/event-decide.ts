@@ -25,12 +25,14 @@ import {
   anchorJaccard,
   bestTitleDice,
   candidateAnchors,
+  candidateCoverage,
+  candidateFacts,
   candidateText,
   classifyKind,
-  extractFacts,
   extractTopicTags,
   isUsableRecord,
   normText,
+  sharedSubjectAnchors,
   sharedTags,
 } from "./event-text";
 const MATCH_THRESHOLD = 0.5;
@@ -45,6 +47,26 @@ const HARD_CORROB = 0.3;
  * 「公积金贷款额度上调」）按宽泛标签串味误并。
  */
 const TAG_SOFT_BOOST = 0.35;
+/**
+ * **主题路**（「主体 × 主题」身份）命中时的相似度。
+ *
+ * 2026-10-03 sc 口径：**事件身份应由「主体 + 主题」承担，数值与时点只作「增量证据」**。
+ * 锚点相似度（Jaccard / 覆盖率）会被措辞差异打败 —— 同一件事换个说法、少写一个数字，
+ * 就可能从「老事件」变成「全新事件」，绕过冷却原样重播（10-03「公募 40 万亿」实证）。
+ *
+ * 取值**恰为合并阈**：主题路是**兜底** —— 一旦有真硬信号（Jaccard / 覆盖率 / 标题 Dice）
+ * 命中，分数必然严格高于它，从而优先匹配「更像的那一条」。
+ */
+const THEME_LINE_SCORE = MATCH_THRESHOLD;
+/**
+ * 真硬信号相对主题路的排序优势（极小值）。
+ *
+ * 为什么需要：Jaccard 恰好 = 0.5（如 `{按揭}` vs `{按揭,购房}`）时，硬信号与主题路同分，
+ * 而「选最高分」在同分时取先遍历到的那条 → **匹配结果取决于对象键顺序**（实测 10-03
+ * 「多地出台预售现房新规」因此在 `按揭|购房` 与 `信贷|按揭|消费贷` 之间抖动）。
+ * 加一个极小优势值，保证「有真证据的」永远严格优于「只有主题一致的」。
+ */
+const HARD_EPS = 0.01;
 /** 历史无事实锚点时，newFactRatio 封顶值（防 novelty 虚高误判 progress）。 */
 const NO_FACT_BASELINE_CAP = 0.5;
 
@@ -110,7 +132,11 @@ function todayPseudoRecords(store: EventMemoryStore): Array<{ id: string; record
  * 匹配规则（硬信号优先，标签仅作辅助）：
  *  1. 锚点 Jaccard —— 抓「同事件不同措辞」（如「住房贷款…40年」vs「房贷…40年」）
  *  2. 标题 Dice    —— 抓「媒体改写通稿」这类措辞近似的重复
- *  3. 主题标签共享 ≥2 —— 弱辅助信号：仅当硬信号已具一定置信（≥ HARD_CORROB）时
+ *  3. **候选覆盖率**（2026-10-03 新增）—— `|A∩B| / |A|`。补住「历史 anchors 只增不减 →
+ *     Jaccard 分母膨胀 → 老事件越"丰富"越难被匹配」的自恶化：同一件事讲得越多，
+ *     历史锚点越全，反而越难认出它。实测 10-03「公募规模近40万亿」vs 09-28 事件：
+ *     Jaccard 仅 0.143（被 6 个历史锚稀释），覆盖率 0.5（恰好达标）。
+ *  4. 主题标签共享 ≥2 —— 弱辅助信号：仅当硬信号已具一定置信（≥ HARD_CORROB）时
  *     才抬到合并阈（兜底「同一主题不同切入」）；单独出现不触发合并，防误并。
  */
 export function findMatchingEvent(
@@ -125,15 +151,25 @@ export function findMatchingEvent(
   ): number => {
     const samples = Array.isArray(rec.samples) ? rec.samples : [];
     if (url && samples.some((s) => s && s.url && s.url === url)) return 1;
-    const aj = anchorJaccard(anchors, Array.isArray(rec.anchors) ? rec.anchors : []);
+    const recAnchors = Array.isArray(rec.anchors) ? rec.anchors : [];
+    const aj = anchorJaccard(anchors, recAnchors);
     const td = bestTitleDice(cand.title, rec);
     const st = sharedTags(tags, rec.topicTags);
-    const hard = Math.max(aj, td);
-    // 合并判定：
+    // 候选覆盖率：与 Jaccard 并列的硬信号（防历史锚点膨胀导致的漏召回，2026-10-03）
+    const cov = candidateCoverage(anchors, recAnchors);
+    // 主体锚共享数：主题路的「主体」一半（2026-10-03）
+    const subj = sharedSubjectAnchors(anchors, recAnchors);
+    const hard = Math.max(aj, td, cov);
+    // 合并判定（按证据强度从高到低）：
     //  - 硬信号达合并阈 → 直接合并；
+    //  - **主题路**：硬信号已有基本置信（≥ HARD_CORROB）、**主体锚**（在谈基金？还是房贷？）
+    //    与**主题标签**（财富管理 / 住房金融…）双一致 → 合并。补住「措辞一变、锚点一少
+    //    就认不出老事件」的漏召回；「主体锚」这一半是守卫：只有地域/机构锚（广州、央行）
+    //    凑巧相同、业务主体毫不相干的，不算同一条主题线。
     //  - 硬信号达 HARD_CORROB 且共享 ≥2 主题标签 → 软命中合并（同一主题不同切入兜底）；
     //  - 否则标签共享只给弱辅助值（TAG_SOFT_BOOST），不触发合并，防不同事件误并。
-    if (hard >= MATCH_THRESHOLD) return hard;
+    if (hard >= MATCH_THRESHOLD) return Math.max(hard, MATCH_THRESHOLD + HARD_EPS);
+    if (hard >= HARD_CORROB && subj >= 1 && st >= 1) return THEME_LINE_SCORE;
     if (hard >= HARD_CORROB && st >= 2) return MATCH_THRESHOLD;
     return Math.max(hard, st >= 2 ? TAG_SOFT_BOOST : 0);
   };
@@ -228,7 +264,7 @@ const PERIOD_ADVANCE_WEIGHT = 0.2;
  */
 export function computeNovelty(cand: MemoryCandidate, record: EventRecord): NoveltyResult {
   const text = candidateText(cand);
-  const facts = extractFacts(text);
+  const facts = candidateFacts(cand);
   const histFacts = new Set(record.broadcastedFacts ?? []);
   const newFacts = facts.filter((f) => !histFacts.has(f));
   // 历史无事实锚点时：无基线可比对，「全部为新」不可置信——封顶到 NO_FACT_BASELINE_CAP

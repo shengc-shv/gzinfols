@@ -13,6 +13,36 @@ export function candidateText(c: MemoryCandidate): string {
 }
 
 /**
+ * **地域锚的取材边界**：地域只从**标题**取，正文里的地域词一律不算事件事实。
+ *
+ * 为什么（2026-10-03 sc 实证，本常量存在的唯一理由）：
+ * 候选取文是 `title + why/impact`，而 why/impact 是 LLM 写的**面向我行**的解读
+ * ——「居民资产向净值化产品迁移…**广州分行**零售AUM的结构…」里的「广州」说的是
+ * 「这件事与我行的关系」，**不是**「事件发生在哪」。
+ *
+ * 实测 10-03「公募规模近40万亿」（**全国性数据**，39.63 万亿是全国公募总规模）：
+ *  - 标题锚 `["基金","#40万亿"]` —— 干净；
+ *  - 加上正文后变成 `["基金","广州","#40万亿"]` —— 「广州」纯属噪音；
+ *  - 危害不止于判重：`extractFacts` 会把正文的「广州」抽成 `@广州`，
+ *    而它**不在**历史事件的已播事实里 → 被当成「新事实」→ 一条 `@广州` 就贡献
+ *    `0.45 × (1/2) = 0.225` 的 novelty，把该条从 0.17 抬到 **0.396**，
+ *    正好跨过必读门槛 0.3 → **同一件事在 09-28 播过、10-03 又原样放行**。
+ *
+ * 口径：**事件的地域属性写在标题里**（「广州楼市新政」），标题没写就等于这条不挑地域。
+ */
+const GEO_ANCHORS = ["广州", "广东", "大湾区", "南沙", "粤"];
+
+/** 是否为地域锚（裸词形态，供 `eventFingerprint` 产物比对）。 */
+function isGeoAnchor(a: string): boolean {
+  return GEO_ANCHORS.includes(a);
+}
+
+/** 是否为地域事实（`@` 前缀形态，供 `extractFacts` 产物比对）。 */
+function isGeoFact(f: string): boolean {
+  return f.startsWith("@") && GEO_ANCHORS.some((g) => f === `@${g}`);
+}
+
+/**
  * 事实锚点抽取（信息增量的主要判据）。
  *
  * 三类，分别加前缀区分：
@@ -44,7 +74,7 @@ export function extractFacts(text: string): string[] {
   const out = new Set<string>();
   let m: RegExpExecArray | null;
   NUM_RE.lastIndex = 0;
-  while ((m = NUM_RE.exec(t))) out.add("#" + m[0].replace(/\s+/g, ""));
+  while ((m = NUM_RE.exec(t))) out.add("#" + m[0].replace(/\s+/g, "").replace(/万亿元/g, "万亿"));
   for (const w of STAGE_WORDS) if (t.includes(w)) out.add("!" + w);
   for (const w of ORG_WORDS) if (t.includes(w)) out.add("@" + w);
   return [...out];
@@ -65,7 +95,13 @@ const THEME_RULES: Array<{ tag: string; kws: string[] }> = [
     tag: "资本市场",
     kws: ["IPO", "上市", "过会", "注册", "招股", "申购", "敲钟", "北交所", "科创板", "创业板"],
   },
-  { tag: "财富管理", kws: ["理财", "基金", "黄金", "保险", "资管", "信托", "债基", "ETF", "REITs"] },
+  // 「公募」2026-10-03 补：主体锚词表（EVENT_ANCHORS）与主题词表都漏了它，
+  // 使「公募规模近40万亿」既丢主体锚、也丢主题标签（只剩「广州本地」），
+  // 判重两头都判不出来。词表口径须与 EVENT_ANCHORS 保持一致。
+  {
+    tag: "财富管理",
+    kws: ["理财", "基金", "黄金", "保险", "资管", "信托", "债基", "ETF", "REITs", "公募"],
+  },
   { tag: "私行客群", kws: ["私行", "高净值", "家族信托", "客群", "获客", "新客", "开户"] },
   { tag: "消费信贷", kws: ["消费贷", "经营贷", "小微", "普惠", "信用卡"] },
   { tag: "广州本地", kws: ["广州", "广东", "大湾区", "南沙", "粤"] },
@@ -100,9 +136,37 @@ export function classifyKind(text: string): EventKind {
 // 4) 事件指纹与匹配
 // ---------------------------------------------------------------------------
 
-/** 候选的事件锚点集合（复用展示层同一套指纹，保证口径一致）。 */
+/** 候选的事件锚点集合（复用展示层同一套指纹，保证口径一致）。
+ *
+ *  取材：**标题锚 ∪（正文锚 − 地域锚）** —— 地域只认标题（见 `GEO_ANCHORS`）。
+ *  正文里的「广州分行」既不进锚点集合（免得成为伪共享证据、稀释真信号），
+ *  也不会被 `extractFacts` 当成「新事实」。 */
 export function candidateAnchors(c: MemoryCandidate): string[] {
-  return [...eventFingerprint(candidateText(c))];
+  const out = eventFingerprint(c.title ?? "");
+  for (const a of eventFingerprint(c.text ?? "")) {
+    if (!isGeoAnchor(a)) out.add(a);
+  }
+  return [...out];
+}
+
+/**
+ * 候选事实锚点 = 标题事实 ∪（正文事实 − 地域事实）。
+ *
+ * 与 `extractFacts` 的唯一差别：**正文里的地域词不算「新事实」**（见 `GEO_ANCHORS`）。
+ *
+ * 🔴 判重链路「写入」与「比对」必须同口径：`computeNovelty`（比对历史已播事实）与
+ * `event-settle`（写入 `broadcastedFacts`）都走本函数 —— 否则会重演
+ * 「写进去的」和「拿来比的」不是同一套的老坑。
+ */
+export function candidateFacts(c: MemoryCandidate): string[] {
+  const out = extractFacts(c.title ?? "");
+  const seen = new Set(out);
+  for (const f of extractFacts(c.text ?? "")) {
+    if (isGeoFact(f) || seen.has(f)) continue;
+    seen.add(f);
+    out.push(f);
+  }
+  return out;
 }
 
 /**
@@ -130,11 +194,78 @@ export function anchorJaccard(a: string[], b: string[]): number {
   return inter / (A.size + B.size - inter);
 }
 
+/**
+ * **候选侧锚点覆盖率**：`|A ∩ B| / |A|` —— 候选的锚有多少被历史事件覆盖。
+ *
+ * 为什么要它（2026-10-03 sc 立项，实测驱动）：`record.anchors` **只增不减**
+ * （同一事件每出现一次就把新锚并进去，见 `findMatchingEvent` 的合并逻辑），
+ * 于是老事件的 `|B|` 单调膨胀 → `anchorJaccard` 的分母 `|A∪B|` 越来越大 →
+ * **同一个事件，历史记录越"丰富"，越难被再次匹配**（自我恶化）。
+ *
+ * 实测（10-03 期 vs 09-28 期，同一件事「公募规模 40 万亿」）：
+ *  - 老事件 anchors 已累积 6 个，候选只有 `["广州","#40万亿"]` → Jaccard 仅 **0.143**（远低于 0.5）；
+ *  - 但候选的 2 个锚里有 1 个被覆盖 → 覆盖率 **0.5**，恰好达标。
+ *
+ * 守卫（防误并，实测校准）：
+ *  - **双方锚点数均 ≥ 2** —— 单锚候选信息量不足；
+ *  - **至少共享 2 个锚**（与 `sameEvent` 的 `minShared=2` 同口径）—— 只共享 1 个锚不足以判同：
+ *    实测 10-03 必读#2 只有 2 个锚（`广州` + `#40万亿`，前者是通用地域词），
+ *    只共享 1 个就达标会让它与 **6 个无关事件并列 0.500**（按揭 / 保险 / 客群…），
+ *    而正确的公募事件反而被挤出 —— 这种"锚点本身就缺"的漏判，靠放宽匹配救不了。
+ */
+export function candidateCoverage(a: string[], b: string[]): number {
+  const A = new Set(a);
+  const B = new Set(b);
+  if (A.size < 2 || B.size < 2) return 0;
+  let inter = 0;
+  for (const x of A) if (B.has(x)) inter++;
+  if (inter < 2) return 0;
+  return inter / A.size;
+}
+
 /** 两个标签数组的共享数量。 */
 export function sharedTags(a: string[], b: string[]): number {
   const B = new Set(b);
   let n = 0;
   for (const x of a) if (B.has(x)) n++;
+  return n;
+}
+
+/**
+ * **通用锚**（地域 + 监管机构）：出现频率极高、不承载「这是哪件事」的身份。
+ *
+ * 实测（2026-10-03，全库 83 个事件）：`广州` 出现在 17 个事件里，`央行`/`证监会` 等
+ * 监管机构遍布全部政策类事件。因此它们**不能**单独作为「同一事件」的证据 ——
+ * 「广州某银行被罚」与「广州楼市新政」共享 `@广州`，却是两件事。
+ */
+const GENERIC_ANCHORS = new Set<string>([
+  "央行", "人民银行", "金融监管总局", "金监总局", "国务院", "证监会", "发改委",
+  "财政部", "住建部", "外汇局", "美联储", "交易所", "北交所", "科创板", "创业板",
+  "广州", "广东", "大湾区", "南沙", "粤",
+]);
+
+/** 业务主体锚：锚点里排除**数字锚**（增量证据，不表身份）与**通用锚**后剩下的部分
+ *  （基金 / 理财 / 房贷 / 消费贷 / 私行 …）—— 它们才回答「这是哪件事」。 */
+export function subjectAnchors(anchors: string[]): string[] {
+  return anchors.filter((a) => !a.startsWith("#") && !GENERIC_ANCHORS.has(a));
+}
+
+/**
+ * **主体锚共享数**：「主体 × 主题」身份中的主体一半。
+ *
+ * 为什么要它（2026-10-03 sc 口径：事件身份应由「主体 + 主题」承担，
+ * 数值与时点只作「增量证据」）：锚点相似度会被措辞差异打败，而**业务主体**
+ * （在谈基金？还是在谈房贷？）是最稳定的身份线索。
+ *
+ * 守卫：**至少共享 1 个主体锚**，且双方各自都要有主体锚 —— 两边都空时不是「一致」，
+ * 而是「无从判断」，必须返回 0（否则会把两条都没有主体锚的候选误判为同一主题）。
+ */
+export function sharedSubjectAnchors(a: string[], b: string[]): number {
+  const A = subjectAnchors(a);
+  const B = new Set(subjectAnchors(b));
+  if (A.length === 0 || B.size === 0) return 0;
+  let n = 0;
+  for (const x of A) if (B.has(x)) n++;
   return n;
 }
 

@@ -19,9 +19,9 @@ import type {
 import { MAX_SAMPLES, MAX_TEXTS, SECTION_POLICY } from "./event-types";
 import {
   candidateAnchors,
+  candidateFacts,
   candidateText,
   classifyKind,
-  extractFacts,
   extractTopicTags,
   makeEventId,
   normText,
@@ -117,7 +117,7 @@ function upsertEvent(
   const text = candidateText(cand);
   const anchors = candidateAnchors(cand);
   const tags = extractTopicTags(text);
-  const facts = extractFacts(text);
+  const facts = candidateFacts(cand);
   const angle = sample.angle;
   const match = findMatchingEvent(cand, { version: 1, events });
   const out = { ...events };
@@ -197,7 +197,7 @@ export function rememberBroadcast(
     section,
     title: cand.title,
     text,
-    facts: extractFacts(text),
+    facts: candidateFacts(cand),
     // 播报时刻：播报与展示绑定、几乎同时产生，故默认以当前时刻（≈ 报告页面生成时刻）为准。
     // 用于以 9:00 为界区分客户演示数据与测试重跑数据，并支持按时间段筛选/清理。
     // 测试可注入固定时刻（见 input.broadcastAt），避免用例结果随真实时钟漂移。
