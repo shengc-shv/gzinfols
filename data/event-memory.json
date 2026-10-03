@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-03",
+  "updatedAt": "2026-10-04",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -5972,8 +5972,144 @@
     }
   },
   "today": {
-    "date": "2026-10-03",
-    "entries": []
+    "date": "2026-10-04",
+    "entries": [
+      {
+        "date": "2026-10-04",
+        "section": "must_read",
+        "title": "9月银行业罚没2.07亿",
+        "text": "9月银行业罚没2.07亿 千万级罚单密集落地，信贷与代销是高频罚点，全条线合规成本与展业节奏都会受影响。",
+        "facts": [
+          "#9月",
+          "!落地"
+        ],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://www.stcn.com/article/detail/4206134.html",
+        "score": 71,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-04",
+        "section": "must_read",
+        "title": "贷款明白纸全面铺开",
+        "text": "贷款明白纸全面铺开 年化成本需一目了然，对客披露口径与收费告知流程面临统一，定价透明度成为同业比较项。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://m.21jingji.com/article/20261003/herald/3f9ab083b94b1fa83175946e7f4a6cfe.html",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-04",
+        "section": "must_read",
+        "title": "沪深9月IPO零受理",
+        "text": "沪深9月IPO零受理 三季度IPO节奏明显放缓，拟上市企业融资周期拉长，替代融资与股东资金安排需求上升。",
+        "facts": [
+          "#9月",
+          "!受理"
+        ],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://www.stcn.com/article/detail/4206080.html",
+        "score": 61,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-04",
+        "section": "must_read",
+        "title": "多只基金前三季度业绩逼近腰斩",
+        "text": "多只基金前三季度业绩逼近腰斩 持有客户体验转差，理财经理的持仓沟通与预期管理压力集中释放。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://finance.sina.com.cn/wm/2026-10-03/doc-inityimx4545502.shtml",
+        "score": 61,
+        "novelty": 0.29878048780487804,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "must_read",
+        "title": "美联储鹰派立场软化",
+        "text": "美联储鹰派立场软化 加息预期骤变，汇率与结售汇窗口打开，有外币需求的客户结汇意愿与节奏会先动。",
+        "facts": [
+          "@美联储",
+          "!加息"
+        ],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://finance.eastmoney.com/a/202610033888457516.html",
+        "score": 21,
+        "novelty": 0.2833333333333333,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "基金业绩腰斩客户体验转差",
+        "text": "基金业绩腰斩客户体验转差 多只基金前三季度业绩逼近腰斩，持有客户账面亏损扩大，投诉与赎回压力向理财经理端集中。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://finance.sina.com.cn/wm/2026-10-03/doc-inityimx4545502.shtml",
+        "novelty": 0.15217391304347824,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "散户资金集中流向三类ETF",
+        "text": "散户资金集中流向三类ETF 散户资金集中流向三类主题ETF，客户交易偏好从主动权益转向被动工具，配置行为更趋短线。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://www.stcn.com/article/detail/4206024.html",
+        "novelty": 0.29878048780487804,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "贵金属交投升温水贝断货",
+        "text": "贵金属交投升温水贝断货 金价银价巨震、深圳水贝出现断货，实物金与贵金属相关产品咨询量上升，客户资金向避险资产分流。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://news.southcn.com/node_812903b83a/84f8020ac4.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "险资举牌降温权益逻辑切换",
+        "text": "险资举牌降温权益逻辑切换 险资举牌热度降幅过半，权益投资逻辑切换，代销保险与理财客户的风险偏好正在迁移。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://finance.eastmoney.com/a/202610033888452996.html",
+        "novelty": 0.33249999999999996,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "IPO受理降温融资节奏拉长",
+        "text": "IPO受理降温融资节奏拉长 9月沪深IPO零受理、三季度节奏放缓，拟上市企业融资周期拉长，替代融资与股东资金安排需求上升。",
+        "facts": [
+          "!受理",
+          "#9月"
+        ],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://www.stcn.com/article/detail/4206080.html",
+        "novelty": 0.08020833333333333,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "贷款明白纸全面铺开",
+        "text": "贷款明白纸全面铺开 贷款明白纸全面铺开，年化成本一目了然，小微客户对收费与定价的横向比较更直接。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T06:36:48+08:00",
+        "url": "https://m.21jingji.com/article/20261003/herald/3f9ab083b94b1fa83175946e7f4a6cfe.html",
+        "novelty": 0.0935,
+        "angle": "政策变化"
+      }
+    ],
+    "runId": "37158927609"
   },
   "deliveries": [
     {
