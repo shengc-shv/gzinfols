@@ -170,7 +170,8 @@ export function truncateAtSentence(text: string, limit: number): string {
  * 用于口播稿的**听觉自检**（只告警、不阻断发布）：提示词已明令 LLM 不用这类词，
  * 这里是确定性兜底，让跑偏在 CI 日志里可见（同「口播跨段收敛」的可观测思路）。
  */
-export const VISUAL_REF_RE = /该政策|上述|如下|见表|如下图|见下文|详见正文|前述/g;
+export const VISUAL_REF_RE =
+  /该政策|上述|如下|见表|如下图|见下文|详见正文|前述|参见报告|详见报告|见报告|见附表/g;
 
 /** 找出稿中的视觉指代词（去重；空数组 = 听觉友好）。 */
 export function detectVisualRefs(text: string): string[] {
@@ -448,10 +449,12 @@ export async function assembleBriefingScript(
     const built = buildStockSpoken(stockRecap, { budget: stockBudget, labelChars, maxSectors: 2 });
 
     if (freshKeys.length === 0) {
-      // 三市场均无隔夜行情（休市 / 数据未更新）：按用户 2026-09-20 口径**只说明、不播行情**，
-      // 并引导听众到报告看最近一个工作日的行情（页面照常展示）。
-      const t = ms?.spokenNote?.trim() || "三地股市今日均无隔夜行情";
-      const segText = `${t}，行情详情请参见报告。`;
+      // 三市场均无隔夜行情（休市 / 数据未更新）：按用户 2026-09-20 口径**只说明、不播行情**。
+      // ⚠️ 2026-10-03 口播审查 P0-1：原实现补「，行情详情请参见报告。」—— 听众在**车上、
+      //   看不见屏幕**，指向报告等于没说；且与提示词「严禁…详见报告」的空转句禁令自相矛盾。
+      //   改为**自足表述**（说完就成立，不依赖任何视觉载体）。
+      const t = (ms?.spokenNote?.trim() || "三地股市今日均无隔夜行情").replace(/[。．.]+$/, "");
+      const segText = `${t}。`;
       parts.push(segText);
       partMap.stock_recap = t;
       const dur = estimateDurationSec(segText.length);
@@ -475,8 +478,11 @@ export async function assembleBriefingScript(
       if (segs.length) {
         // 市场之间以「。」连接，末尾补「。」收句（buildStockSpoken 已按预算控制总量）
         const combined = truncateAtSentence(segs.join("。"), AUDIO_SPEAK_LIMITS.stock + 40) + "。";
-        // 有市场因无隔夜行情未播 → 引导听众到报告看其「最近一个工作日」的行情（页面照常展示）
-        const tail = freshKeys.length < 3 ? "其余市场行情详情请参见报告。" : "";
+        // 有市场因无隔夜行情未播 → **直接点名**说明（不再引「请参见报告」）：
+        // 听众在车上、看不见屏幕，只有把「哪个市场今天没行情」说出来才成立。
+        // ⚠️ 2026-10-03 口播审查 P0-1（页面照常展示该市场的日期，不靠口播引导）。
+        const missing = markets.filter((m) => !isFresh(m.key));
+        const tail = missing.length ? `${missing.map((m) => m.label).join("、")}今日无隔夜行情。` : "";
         const segText = `${stockIntro}${combined}${tail}`;
         parts.push(segText);
         partMap.stock_recap = combined;

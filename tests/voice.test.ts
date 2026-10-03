@@ -146,6 +146,10 @@ test("听觉友好：车里听的稿子不得出现视觉指代词（该政策/�
   // 听众是早上在车里听的行领导：看不见屏幕、不能回看，「上述」「该政策」读出来等于没说。
   // 提示词已明令 LLM 不用这类词；此处是确定性兜底 + 成稿守门。
   assert.deepEqual(detectVisualRefs("该政策影响分行，上述判断如下"), ["该政策", "上述", "如下"]);
+  // 2026-10-03 口播审查 P0-1：「请参见报告」同样是视觉指代 —— 听众在**车上打不开报告**，
+  // 说出来等于没说（它曾是股市段末句的硬编码模板，与提示词「严禁…详见报告」自相矛盾）。
+  assert.deepEqual(detectVisualRefs("其余市场行情详情请参见报告。"), ["参见报告"]);
+  assert.deepEqual(detectVisualRefs("详见报告第3页"), ["详见报告"]);
   assert.deepEqual(
     detectVisualRefs("今天主要看两个方面：汇率预期管理，结售汇窗口；消费场景获客，补贴叠加节庆。"),
     [],
@@ -154,6 +158,10 @@ test("听觉友好：车里听的稿子不得出现视觉指代词（该政策/�
   const b = await assembleBriefingScript(report(), { exec: exec() });
   assert.ok(b);
   assert.deepEqual(detectVisualRefs(b!.script), [], "成稿不得含视觉指代词");
+  assert.ok(
+    !b!.script.includes("参见报告") && !b!.script.includes("详见报告"),
+    "末句不得把听众引向报告（页面照常展示，口播必须自足）",
+  );
 });
 
 test("定调补位：口播仍含「先看今天的整体定调」（2026-09-26 实证缺陷回归）", async () => {
