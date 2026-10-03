@@ -24,7 +24,7 @@ import path from "node:path";
 import { classifyProject } from "../lib/services/redchip/classify";
 import { mergeProjects } from "../lib/services/redchip/backfill";
 import { searchF1Filings, resolvePrimaryDocUrl, extractEdgarDoc } from "../lib/adapters/redchip/edgar-client";
-import { readLeads, writeLeads } from "../lib/adapters/redchip/snapshot-store";
+import { readLeads, writeLeads, writeMetaSource } from "../lib/adapters/redchip/snapshot-store";
 import { toLeads } from "../lib/services/redchip/leads";
 import type { RedchipProject, RedchipSnapshot } from "../lib/contracts/redchip";
 import { REPORT_TZ, prevDateKey, todayKey } from "../lib/utils/time";
@@ -100,6 +100,13 @@ async function main(): Promise<void> {
   const redchip = projects.filter((p) => p.verdict === "redchip");
   console.log(`[redchip-us] 窗口命中 ${projects.length} 家 → 判定红筹（广东企业）${redchip.length} 家`);
 
+  // 可观测：源 0 命中必须自己喊出来（本链路常被前端判为「美股 0 条」却无人知晓）
+  if (filings.length === 0) {
+    console.log(`::warning::[redchip-us] SEC 源窗口 ${startDate} ~ ${endDate} 检索到 0 家（源不可达或窗口无申报）`);
+  } else if (redchip.length === 0) {
+    console.log(`::warning::[redchip-us] SEC 源命中 ${projects.length} 家，但无一判定为红筹（离岸 ∧ 广东词频≥3）`);
+  }
+
   if (dryRun) {
     console.log("[redchip-us] --dry-run：不写盘");
     return;
@@ -123,7 +130,14 @@ async function main(): Promise<void> {
   console.log(
     `[redchip-us] 线索库累积：${prevLeads.length} → ${merged.length} 条（本次新增红筹 ${redchip.length}）`,
   );
-  console.log(`[redchip-us] 已写入 data/redchip/leads.json + data/redchip-us/{latest.json, snapshots/${date}-us.json}`);
+
+  // 元信息（**入库**）：与港股源**按源合并**写同一份 meta.json（港股那一格不被覆盖）。
+  writeMetaSource(
+    "us",
+    { capturedAt: nowIso, ok: redchip.length > 0, scanned: filings.length, redchip: redchip.length },
+    nowIso,
+  );
+  console.log(`[redchip-us] 已写入 data/redchip/leads.json + data/redchip/meta.json(源 us) + data/redchip-us/{latest.json, snapshots/${date}-us.json}`);
 }
 
 main();

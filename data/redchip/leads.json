@@ -55,7 +55,8 @@
     "discoveredAt": "2026-09-30T07:24:58+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108908/documents/sehk26092900994.pdf",
     "leadId": "108908",
-    "lastChangedAt": "2026-09-30T07:24:58+08:00"
+    "lastChangedAt": "2026-09-30T07:24:58+08:00",
+    "market": "hk"
   },
   {
     "appId": "108909",
@@ -74,7 +75,8 @@
     "discoveredAt": "2026-09-30T07:24:58+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108909/documents/sehk26092902078.pdf",
     "leadId": "108909",
-    "lastChangedAt": "2026-09-30T07:24:58+08:00"
+    "lastChangedAt": "2026-09-30T07:24:58+08:00",
+    "market": "hk"
   },
   {
     "appId": "108907",
@@ -93,7 +95,8 @@
     "discoveredAt": "2026-09-29T07:54:12+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108907/documents/sehk26092800296.pdf",
     "leadId": "108907",
-    "lastChangedAt": "2026-09-29T07:54:12+08:00"
+    "lastChangedAt": "2026-09-29T07:54:12+08:00",
+    "market": "hk"
   },
   {
     "appId": "108906",
@@ -112,7 +115,8 @@
     "discoveredAt": "2026-09-28T07:40:18+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108906/documents/sehk26092700112.pdf",
     "leadId": "108906",
-    "lastChangedAt": "2026-09-28T07:40:18+08:00"
+    "lastChangedAt": "2026-09-28T07:40:18+08:00",
+    "market": "hk"
   },
   {
     "appId": "108867",
@@ -131,7 +135,8 @@
     "discoveredAt": "2026-09-25T07:31:13+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108867/documents/sehk26091001726.pdf",
     "leadId": "108867",
-    "lastChangedAt": "2026-09-27T07:32:45+08:00"
+    "lastChangedAt": "2026-09-27T07:32:45+08:00",
+    "market": "hk"
   },
   {
     "appId": "108890",
@@ -150,7 +155,8 @@
     "discoveredAt": "2026-09-25T07:31:13+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108890/documents/sehk26092401221.pdf",
     "leadId": "108890",
-    "lastChangedAt": "2026-09-27T07:32:45+08:00"
+    "lastChangedAt": "2026-09-27T07:32:45+08:00",
+    "market": "hk"
   },
   {
     "appId": "108889",
@@ -169,7 +175,8 @@
     "discoveredAt": "2026-09-24T07:35:46+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108889/documents/sehk26092301864.pdf",
     "leadId": "108889",
-    "lastChangedAt": "2026-09-24T07:35:46+08:00"
+    "lastChangedAt": "2026-09-24T07:35:46+08:00",
+    "market": "hk"
   },
   {
     "appId": "108440",
@@ -188,7 +195,8 @@
     "discoveredAt": "2026-09-23T07:38:13+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108440/documents/sehk26041200324.pdf",
     "leadId": "108440",
-    "lastChangedAt": "2026-09-23T07:38:13+08:00"
+    "lastChangedAt": "2026-09-23T07:38:13+08:00",
+    "market": "hk"
   },
   {
     "appId": "108888",
@@ -207,7 +215,8 @@
     "discoveredAt": "2026-09-23T07:38:13+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108888/documents/sehk26092201540.pdf",
     "leadId": "108888",
-    "lastChangedAt": "2026-09-23T07:38:13+08:00"
+    "lastChangedAt": "2026-09-23T07:38:13+08:00",
+    "market": "hk"
   },
   {
     "appId": "108870",
@@ -226,7 +235,8 @@
     "discoveredAt": "2026-09-17T13:13:27+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108870/documents/sehk26091300124.pdf",
     "leadId": "108870",
-    "lastChangedAt": "2026-09-22T07:29:40+08:00"
+    "lastChangedAt": "2026-09-22T07:29:40+08:00",
+    "market": "hk"
   },
   {
     "appId": "108887",
@@ -245,7 +255,8 @@
     "discoveredAt": "2026-09-21T20:58:55+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108887/documents/sehk26092101146.pdf",
     "leadId": "108887",
-    "lastChangedAt": "2026-09-22T07:29:40+08:00"
+    "lastChangedAt": "2026-09-22T07:29:40+08:00",
+    "market": "hk"
   },
   {
     "appId": "108886",
@@ -264,7 +275,8 @@
     "discoveredAt": "2026-09-19T07:48:01+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108886/documents/sehk26091801843.pdf",
     "leadId": "108886",
-    "lastChangedAt": "2026-09-21T07:53:29+08:00"
+    "lastChangedAt": "2026-09-21T07:53:29+08:00",
+    "market": "hk"
   },
   {
     "appId": "108832",
@@ -281,7 +293,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108832/documents/sehk26082804043.pdf",
-    "leadId": "108832"
+    "leadId": "108832",
+    "market": "hk"
   },
   {
     "appId": "108804",
@@ -298,7 +311,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108804/documents/sehk26082101862.pdf",
-    "leadId": "108804"
+    "leadId": "108804",
+    "market": "hk"
   },
   {
     "appId": "108753",
@@ -315,7 +329,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/gem/2026/108753/documents/gem26072401627.pdf",
-    "leadId": "108753"
+    "leadId": "108753",
+    "market": "hk"
   },
   {
     "appId": "108738",
@@ -332,7 +347,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108738/documents/sehk26071600800.pdf",
-    "leadId": "108738"
+    "leadId": "108738",
+    "market": "hk"
   },
   {
     "appId": "108689",
@@ -349,7 +365,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/gem/2026/108689/documents/gem26062900162.pdf",
-    "leadId": "108689"
+    "leadId": "108689",
+    "market": "hk"
   },
   {
     "appId": "108731",
@@ -366,7 +383,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108731/documents/sehk26070801143.pdf",
-    "leadId": "108731"
+    "leadId": "108731",
+    "market": "hk"
   },
   {
     "appId": "108674",
@@ -383,7 +401,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108674/documents/sehk26062401485.pdf",
-    "leadId": "108674"
+    "leadId": "108674",
+    "market": "hk"
   },
   {
     "appId": "108649",
@@ -400,7 +419,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108649/documents/sehk26061601771.pdf",
-    "leadId": "108649"
+    "leadId": "108649",
+    "market": "hk"
   },
   {
     "appId": "108693",
@@ -417,7 +437,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108693/documents/sehk26062902402.pdf",
-    "leadId": "108693"
+    "leadId": "108693",
+    "market": "hk"
   },
   {
     "appId": "108680",
@@ -434,7 +455,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108680/documents/sehk26062502081.pdf",
-    "leadId": "108680"
+    "leadId": "108680",
+    "market": "hk"
   },
   {
     "appId": "108669",
@@ -451,7 +473,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108669/documents/sehk26062201788.pdf",
-    "leadId": "108669"
+    "leadId": "108669",
+    "market": "hk"
   },
   {
     "appId": "108654",
@@ -468,7 +491,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108654/documents/sehk26061701847.pdf",
-    "leadId": "108654"
+    "leadId": "108654",
+    "market": "hk"
   },
   {
     "appId": "108636",
@@ -485,7 +509,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108636/documents/sehk26061201939.pdf",
-    "leadId": "108636"
+    "leadId": "108636",
+    "market": "hk"
   },
   {
     "appId": "108578",
@@ -502,7 +527,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108578/documents/sehk26052701531.pdf",
-    "leadId": "108578"
+    "leadId": "108578",
+    "market": "hk"
   },
   {
     "appId": "108615",
@@ -519,7 +545,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108615/documents/sehk26060502315.pdf",
-    "leadId": "108615"
+    "leadId": "108615",
+    "market": "hk"
   },
   {
     "appId": "108599",
@@ -536,7 +563,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108599/documents/sehk26052903187.pdf",
-    "leadId": "108599"
+    "leadId": "108599",
+    "market": "hk"
   },
   {
     "appId": "108600",
@@ -553,7 +581,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108600/documents/sehk26052903257.pdf",
-    "leadId": "108600"
+    "leadId": "108600",
+    "market": "hk"
   },
   {
     "appId": "108583",
@@ -570,7 +599,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108583/documents/sehk26052801452.pdf",
-    "leadId": "108583"
+    "leadId": "108583",
+    "market": "hk"
   },
   {
     "appId": "108558",
@@ -587,7 +617,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108558/documents/sehk26052001857.pdf",
-    "leadId": "108558"
+    "leadId": "108558",
+    "market": "hk"
   },
   {
     "appId": "108549",
@@ -604,7 +635,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108549/documents/sehk26051901284.pdf",
-    "leadId": "108549"
+    "leadId": "108549",
+    "market": "hk"
   },
   {
     "appId": "108538",
@@ -621,7 +653,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108538/documents/sehk26051401717.pdf",
-    "leadId": "108538"
+    "leadId": "108538",
+    "market": "hk"
   },
   {
     "appId": "108511",
@@ -638,7 +671,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108511/documents/sehk26050600118.pdf",
-    "leadId": "108511"
+    "leadId": "108511",
+    "market": "hk"
   },
   {
     "appId": "108488",
@@ -655,7 +689,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108488/documents/sehk26043002914.pdf",
-    "leadId": "108488"
+    "leadId": "108488",
+    "market": "hk"
   },
   {
     "appId": "108494",
@@ -672,7 +707,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/gem/2026/108494/documents/gem26043004753.pdf",
-    "leadId": "108494"
+    "leadId": "108494",
+    "market": "hk"
   },
   {
     "appId": "108485",
@@ -689,7 +725,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108485/documents/sehk26042906033.pdf",
-    "leadId": "108485"
+    "leadId": "108485",
+    "market": "hk"
   },
   {
     "appId": "108452",
@@ -706,7 +743,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108452/documents/sehk26042001783.pdf",
-    "leadId": "108452"
+    "leadId": "108452",
+    "market": "hk"
   },
   {
     "appId": "108408",
@@ -723,7 +761,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108408/documents/sehk26040203409.pdf",
-    "leadId": "108408"
+    "leadId": "108408",
+    "market": "hk"
   },
   {
     "appId": "108441",
@@ -740,7 +779,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108441/documents/sehk26041301037.pdf",
-    "leadId": "108441"
+    "leadId": "108441",
+    "market": "hk"
   },
   {
     "appId": "108366",
@@ -757,7 +797,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108366/documents/sehk26032900568.pdf",
-    "leadId": "108366"
+    "leadId": "108366",
+    "market": "hk"
   },
   {
     "appId": "108391",
@@ -774,7 +815,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108391/documents/sehk26040103901.pdf",
-    "leadId": "108391"
+    "leadId": "108391",
+    "market": "hk"
   },
   {
     "appId": "108395",
@@ -791,7 +833,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108395/documents/sehk26040104415.pdf",
-    "leadId": "108395"
+    "leadId": "108395",
+    "market": "hk"
   },
   {
     "appId": "108384",
@@ -808,7 +851,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108384/documents/sehk26033103586.pdf",
-    "leadId": "108384"
+    "leadId": "108384",
+    "market": "hk"
   },
   {
     "appId": "108342",
@@ -825,7 +869,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108342/documents/sehk26032703683.pdf",
-    "leadId": "108342"
+    "leadId": "108342",
+    "market": "hk"
   },
   {
     "appId": "108311",
@@ -842,7 +887,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108311/documents/sehk26031600232.pdf",
-    "leadId": "108311"
+    "leadId": "108311",
+    "market": "hk"
   },
   {
     "appId": "108306",
@@ -859,7 +905,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108306/documents/sehk26031500054.pdf",
-    "leadId": "108306"
+    "leadId": "108306",
+    "market": "hk"
   },
   {
     "appId": "108259",
@@ -876,7 +923,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108259/documents/sehk26022702275.pdf",
-    "leadId": "108259"
+    "leadId": "108259",
+    "market": "hk"
   },
   {
     "appId": "108290",
@@ -893,7 +941,8 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108290/documents/sehk26031301894.pdf",
-    "leadId": "108290"
+    "leadId": "108290",
+    "market": "hk"
   },
   {
     "appId": "108257",
@@ -910,6 +959,7 @@
     "verdict": "redchip",
     "discoveredAt": "2026-09-17T12:41:41+08:00",
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108257/documents/sehk26022701969.pdf",
-    "leadId": "108257"
+    "leadId": "108257",
+    "market": "hk"
   }
 ]

@@ -260,6 +260,17 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
   .redchip-ledger a { color: var(--c-redchip); font-weight: 600; text-decoration: none; }
   .redchip-ledger a:hover { text-decoration: underline; }
   .redchip-ledger-hint { margin-left: 0.5rem; color: var(--muted); font-size: 0.68rem; }
+  /* 来源与新鲜度行（2026-10-03）：呈现必须带来源 + 数据时刻，缺失/过期显式说明 */
+  .redchip-provenance { margin: 0.3rem 0 0; font-size: 0.68rem; color: var(--fg-soft); line-height: 1.6; }
+  .redchip-fresh { margin: 0.2rem 0 0; font-size: 0.68rem; color: var(--c-redchip); font-weight: 600; line-height: 1.6; }
+  /* 「非红筹但广东相关」折叠清单（2026-10-03）：只作呈现，不抢红筹列表的注意力 */
+  .redchip-adjacent { margin: 0.55rem 0 0; font-size: 0.72rem; color: var(--fg-soft); }
+  .redchip-adjacent > summary { cursor: pointer; font-weight: 600; line-height: 1.7; }
+  .redchip-adj-list { list-style: none; margin: 0.35rem 0 0; padding: 0; display: grid; gap: 0.25rem; }
+  .redchip-adj-list li { line-height: 1.7; }
+  .redchip-adj-name { font-weight: 600; color: var(--fg); }
+  .redchip-adj-facts { color: var(--muted); font-size: 0.68rem; }
+  .redchip-adj-note { margin: 0.4rem 0 0; font-size: 0.66rem; color: var(--muted); line-height: 1.6; }
   .exec-ipo::after {
     content: ""; position: absolute; top: 1.7rem; right: 0; bottom: 0.5rem;
     width: 3.25rem; pointer-events: none; z-index: 3;

@@ -32,13 +32,14 @@ import {
   writeDatedSnapshot,
   writeLatest,
   writeLeads,
+  writeMetaSource,
 } from "../lib/adapters/redchip/snapshot-store";
 import { classifyProject } from "../lib/services/redchip/classify";
 import { diffSnapshots } from "../lib/services/redchip/diff";
 import { toLeads } from "../lib/services/redchip/leads";
 import { mergeProjects } from "../lib/services/redchip/backfill";
 import type { RedchipProject, RedchipSnapshot } from "../lib/contracts/redchip";
-import { REPORT_TZ, prevDateKey, todayKey } from "../lib/utils/time";
+import { REPORT_TZ, dayGap, prevDateKey, todayKey } from "../lib/utils/time";
 
 /** 当前北京时间的 ISO 串（Asia/Shanghai 无夏令时，固定 +08:00）。 */
 function beijingNowIso(): string {
@@ -66,6 +67,8 @@ async function main(): Promise<void> {
   const live = process.argv.includes("--live");
   const limit = Number(arg("--limit", "5"));
   let records: ListingRecord[];
+  /** 源清单扫描量（诊断口径：**不是**入账量，也不是抓取量）。 */
+  let scanned = 0;
 
   // 采信窗口（**用户 2026-09-15 口径：只抓「今天 + 昨天」两天**）。
   //   · 默认（无 --date）→ 窗口 = [今天, 昨天]，两天合并去重；
@@ -77,6 +80,7 @@ async function main(): Promise<void> {
   if (live) {
     // 实网模式：拉披露易 AP&PHIP **英文**清单 → 按日期窗口筛选 → 抽「申请版本」PDF 文本
     const all = await fetchListingLive();
+    scanned = all.length;
     const onDate = (ds: string) => all.filter((r) => recordDateKey(r) === ds);
     // 去重主键 = 申请编号（同一条可能同时出现在 appactive / applisted / gem 等多份清单里）
     const dedupe = (rs: ListingRecord[]): ListingRecord[] => {
@@ -127,6 +131,7 @@ async function main(): Promise<void> {
     records = enriched;
   } else {
     records = loadSampleListing(samplePath);
+    scanned = records.length;
   }
 
   const prev = readLatest();
@@ -164,6 +169,27 @@ async function main(): Promise<void> {
   console.log("[redchip] 变更 " + changes.length + " 条：" +
     changes.map((c) => c.type + "(" + c.appId + (c.field ? "/" + c.field : "") + ")").join(", "));
 
+  // ---- 可观测（原则 5）：异常必须自己喊出来 ------------------------------------
+  // 本步骤在 workflow 里是 continue-on-error —— 失败会**整段静默吞掉**。
+  // 「面板还是 38 条、日期不动」这类问题此前只能靠人工翻文件发现，故关键异常一律 ::warning::
+  // （::warning:: 会落成 check-run annotation，免鉴权即可离线读到）。
+  const prevCount = prev?.projects?.length ?? 0;
+  if (scanned === 0) {
+    console.log("::warning::[redchip] 港股源清单扫描 0 条（源不可达或页面结构变更）");
+  }
+  if (records.length === 0) {
+    console.log("::warning::[redchip] 港股源本次窗口 " + windowDates.join(" ~ ") + " 命中 0 条 —— 台账不会新增");
+  }
+  if (prev && projects.length < prevCount) {
+    console.log("::warning::[redchip] 港股源条目数下降：" + prevCount + " → " + projects.length + "（核对源或窗口回退）");
+  }
+  if (prev?.capturedAt) {
+    const gap = dayGap(prev.capturedAt.slice(0, 10), date);
+    if (gap > 2) {
+      console.log("::warning::[redchip] 距上次抓取已 " + gap + " 天（上次 " + prev.capturedAt + "）");
+    }
+  }
+
   if (dryRun) {
     console.log("[redchip] --dry-run：不写盘");
     return;
@@ -171,6 +197,15 @@ async function main(): Promise<void> {
   writeLatest(snap);
   writeDatedSnapshot(snap, dataDate);
   appendChanges(changes);
+  // 元信息（**入库**）：报告侧「数据截至」的首选来源。
+  // 为什么不能只靠 latest.json/changelog.jsonl：那两条在 .gitignore 里，CI 从零 checkout
+  // 时不存在 → 面板永远没有日期（2026-10-03 实测 8 期全空）。
+  const ok = records.length > 0;
+  writeMetaSource(
+    "hk",
+    { capturedAt: nowIso, ok, scanned, redchip: projects.filter((p) => p.verdict === "redchip").length },
+    nowIso,
+  );
   // 线索库（**入库**）：渲染侧（side-redchip）唯一读方。含全部判定字段 + 由 changelog
   // 归并的 lastChangedAt（展示/口播的「更新」标记依据）。与快照同源，故紧随其后写。
   //
@@ -185,7 +220,12 @@ async function main(): Promise<void> {
     "[redchip] 线索库累积：" + prevLeads.length + " → 合并后 " + merged.length +
       " 条（本次窗口 " + projects.length + " 条）",
   );
-  console.log("[redchip] 已写入 data/redchip/{leads.json, latest.json, snapshots/" + dataDate + ".json, changelog.jsonl}");
+  console.log(
+    "[redchip] 摘要 源 hk：清单扫描 " + scanned + " → 窗口命中 " + records.length +
+      " → 入账红筹 " + projects.filter((p) => p.verdict === "redchip").length +
+      " ｜ 台账 " + merged.length + " 条 · 数据截至 " + nowIso + "（ok=" + ok + "）",
+  );
+  console.log("[redchip] 已写入 data/redchip/{leads.json, latest.json, meta.json, snapshots/" + dataDate + ".json, changelog.jsonl}");
 }
 
 main();

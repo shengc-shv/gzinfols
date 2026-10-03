@@ -141,6 +141,41 @@ export const REDCHIP_CHANGELOG_PATH = "data/redchip/changelog.jsonl";
 /** 线索库（**须入库**：人工冻结快照，供渲染读取；运行时产物另三条见 .gitignore）。 */
 export const REDCHIP_LEADS_PATH = "data/redchip/leads.json";
 
+/**
+ * 轻量元信息（**须入库**）—— 报告侧「数据新鲜度」的唯一可靠来源。
+ *
+ * 为什么不直接读 `latest.json` / `changelog.jsonl`：那两条在 `.gitignore`
+ * 里（运行时产物），CI runner 从零 checkout 时**不存在** → 报告永远拿不到
+ * 「这批数据是什么时候抓的」。`meta.json` 只有几百字节、不入忽略名单，
+ * 是「报告要读的字段必须住在入库文件里」这条原则的最小落地。
+ *
+ * ⚠️ 缺省不算失败：报告侧仍有一条**台账派生**的回落链
+ * （`meta` → `latest` → `leads.json` 的 `lastChangedAt`/`discoveredAt` 最大值），
+ * 故线下爬虫即使不写 meta.json，面板也不会退化成「无日期」。
+ */
+export const REDCHIP_META_PATH = "data/redchip/meta.json";
+
+/** 单个源的抓取元信息（港/美股各一条）。 */
+export interface RedchipMetaSource {
+  /** 抓取时刻（北京时间 ISO）。 */
+  capturedAt: string;
+  /** 源是否成功返回（false = 抓取失败/0 命中，报告侧须显式降级说明）。 */
+  ok: boolean;
+  /** 源清单扫描量（诊断用；不是入账量）。 */
+  scanned: number;
+  /** 本次入账（判定为红筹并入台账）条数。 */
+  redchip: number;
+}
+
+/**
+ * 元信息文件（按源分别记账；写入须**合并**而非覆盖 —— 港/美两条链路各自写自己那一格）。
+ */
+export interface RedchipMeta {
+  /** 本文件最后写入时刻（北京时间 ISO）。 */
+  updatedAt: string;
+  sources: Record<string, RedchipMetaSource>;
+}
+
 // ---------- 展示侧契约（2026-09-15 · plan-redchip-crawl-push §2）----------
 
 /**
@@ -200,12 +235,38 @@ export interface RedchipPanelEntry {
   gdCityHits: number;
   vie: RedchipVie;
   submitDate?: string;
+  /** 最近变更时刻（`lastChangedAt`，北京时间 ISO）——「本期动向」的判据与排序键。 */
+  changedAt?: string;
   /** 本次 `added` → 「新」角标。 */
   isNew: boolean;
   changedFields?: string[];
   /** 是否已匹配到 IPO 卡片（匹配失败者仅供展示，不参与卡片/口播）。 */
   matched: boolean;
   reportUrl?: string;
+  sourceUrl?: string;
+}
+
+/**
+ * 「非红筹但广东相关」的申请（**只作面板呈现**：不进卡片、不打徽章、不进口播）。
+ *
+ * 为什么需要：判定口径是「境外注册 ∧ 广东词频≥3」，于是境内注册的广东企业**必然**判为
+ * non-redchip —— 但它们是**真实的广东 IPO 商机**（2026-10-03 实测：近 7 日新增 6 家，
+ * 招股书里广东实体语境命中 4~10 次）。这些线索原先在报告里只以 IPO 卡片形式出现，
+ * 与红筹面板完全脱节，读者看不出「爬虫这批工作换来了什么」。
+ * 呈现出来即可（sc 2026-10-03 定：**只展现，不改判定、不进卡片**）。
+ */
+export interface RedchipGdAdjacent {
+  leadId: string;
+  nameCn: string;
+  nameEn: string;
+  submitDate?: string;
+  /** 注册地标签（如「中国(境内)」「香港」）——**这正是它们不是红筹的原因**。 */
+  domicile?: string;
+  /** 集团实体语境下的广东城市命中数（与红筹判定同一计数口径）。 */
+  gdCityHits: number;
+  /** 来源市场（`hk` / `us`）。 */
+  market?: string;
+  /** 申请版本直链（回原文核对入口）。 */
   sourceUrl?: string;
 }
 
@@ -222,6 +283,30 @@ export interface RedchipPanel {
    * 「面板里没有 = 没有红筹商机」—— 而事实可能是「有 30 多家在册，只是近期无新动向」。
    */
   ledgerCount?: number;
+  /**
+   * `capturedAt` 的来源（呈现层据此给出诚实的措辞）：
+   * - `snapshot`：来自抓取元信息（`meta.json` / `latest.json`）→ 写「数据截至」；
+   * - `ledger`：回落自台账派生的最近变更时刻 → 写「台账更新至」。
+   *   **两者含义不同**：后者只证明「台账里有这个时间的记录」，不等于「那一刻跑过抓取」。
+   */
+  capturedSource?: "snapshot" | "ledger";
+  /** 台账最近变更时刻（`lastChangedAt` 最大值；判定/口播的「更新」依据）。 */
+  lastChangedAt?: string;
+  /** 在册线索按来源市场分布（`hk` / `us`），用于呈现「数据来源」。 */
+  ledgerByMarket?: Record<string, number>;
+  /**
+   * 新鲜度降级说明（如「台账已 16 天无新增记录」）。
+   *
+   * 红线：**数据缺失或过期必须显式说明**，不得静默沿用旧数字让读者误以为是今天的。
+   */
+  freshnessNote?: string;
+  /**
+   * 近窗内「**非红筹但广东相关**」的申请（境内/香港注册的广东企业）。
+   *
+   * 只作呈现 —— 它们是判定口径下的 non-redchip（不进卡片、不打徽章、不进口播），
+   * 但确实是真实的广东 IPO 商机。**不改判定口径**，仅让爬虫的这部分工作可见。
+   */
+  gdAdjacent?: RedchipGdAdjacent[];
 }
 
 /**

@@ -114,14 +114,38 @@ export function leadDateKey(lead: RedchipLead): string | undefined {
 }
 
 /**
+ * 进窗候选键（**台账属性 + 近期动向，任一命中即算在窗内**）。
+ *
+ * 为什么需要第二路：`submitDate` 是**递表日**，它只描述「这家什么时候递的表」。
+ * 一家 8 月递表、10 月才被受理/更新状态的在册线索，用递表日判窗会永远判「出窗」
+ * → 面板恒空（线上实测：38 家在册的最晚递表日 08-28，已出 7 天窗 36 天）。
+ * 而 `lastChangedAt`（由 changelog 归并、**持久化在入库的 `leads.json` 里**）
+ * 才是「今天有没有新动向」的那个量。
+ *
+ * 时间红线：`lastChangedAt` 是真实变更时刻，不是抓取日兜底。
+ */
+export function leadWindowKeys(lead: RedchipLead): string[] {
+  const keys: string[] = [];
+  const dk = leadDateKey(lead);
+  if (dk) keys.push(dk);
+  const ck = lead.lastChangedAt?.slice(0, 10);
+  if (ck && /^\d{4}-\d{2}-\d{2}$/.test(ck) && ck !== dk) keys.push(ck);
+  return keys;
+}
+
+/**
  * 窗口判定：**日差 ≤ days**（今天-days ~ 今天），与 `IPO_LIST_WINDOW_DAYS` 的
  * 2026-09-10 实锤口径一致（**不是**「含今天共 N 个日历日」）。
+ *
+ * 候选键见 `leadWindowKeys`（递表/发现日 **或** 最近变更日）—— 任一落在窗内即算。
  */
 export function inRedchipWindow(lead: RedchipLead, today: string, days: number): boolean {
-  const key = leadDateKey(lead);
-  if (!key) return false;
-  const gap = dayGap(key, today);
-  return gap >= 0 && gap <= days;
+  const keys = leadWindowKeys(lead);
+  if (!keys.length) return false;
+  return keys.some((k) => {
+    const gap = dayGap(k, today);
+    return gap >= 0 && gap <= days;
+  });
 }
 
 /** 进「IPO 动态」列表卡片的窗口（§3.2）。 */
