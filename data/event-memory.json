@@ -6229,7 +6229,141 @@
   },
   "today": {
     "date": "2026-10-04",
-    "entries": []
+    "entries": [
+      {
+        "date": "2026-10-04",
+        "section": "must_read",
+        "title": "蓝佛安发表署名文章",
+        "text": "蓝佛安发表署名文章 财政政策取向表述值得关注，后续对公与零售业务的政策衔接窗口打开。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://www.stcn.com/article/detail/4206109.html",
+        "score": 74,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-04",
+        "section": "must_read",
+        "title": "港交所拟推人民币黄金期货",
+        "text": "港交所拟推人民币黄金期货 人民币计价避险工具有望扩容，跨境客群的结售汇与套保需求结构可能随之变化。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://m.21jingji.com/article/20261004/herald/4c5262ed4cfba606ee05a5cb36616bc9.html",
+        "score": 66,
+        "novelty": 0.3255813953488372,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "must_read",
+        "title": "欧洲能源涨价传导股债承压",
+        "text": "欧洲能源涨价传导股债承压 外需与跨境资产波动上升，外贸客群的结算与避险需求随之变化。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261003/4477304_1.html",
+        "score": 64,
+        "novelty": 0.26710526315789473,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "must_read",
+        "title": "金价银价巨震 水贝断货",
+        "text": "金价银价巨震 水贝断货 贵金属交投与实物需求升温，相关客群资金流向与产品咨询量出现明显变化。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://news.southcn.com/node_812903b83a/84f8020ac4.shtml",
+        "score": 61,
+        "novelty": 0.32439024390243903,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "must_read",
+        "title": "广东景区单日游客超400万",
+        "text": "广东景区单日游客超400万 假日客流高位运行，文旅商圈与首店场景的消费与结算活跃度显著抬升。",
+        "facts": [
+          "@广东"
+        ],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://www.stcn.com/article/detail/4206174.html",
+        "score": 30,
+        "novelty": 0.3416666666666666,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "多只基金业绩逼近腰斩",
+        "text": "多只基金业绩逼近腰斩 持有客户体验转差，理财经理面临持仓沟通与预期管理压力，客户赎回与调仓意愿可能上升。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://finance.sina.com.cn/wm/2026-10-03/doc-inityimx4545502.shtml",
+        "novelty": 0.09126976284584978,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "沪深9月IPO零受理",
+        "text": "沪深9月IPO零受理 拟上市企业融资节奏拉长，部分企业的替代融资需求上升，普惠小微客群的信贷结构随之变化。",
+        "facts": [
+          "#9月",
+          "!受理"
+        ],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://www.stcn.com/article/detail/4206080.html",
+        "novelty": 0.09206521739130435,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "南沙口岸汽车出口顺畅",
+        "text": "南沙口岸汽车出口顺畅 汽车出口链条上的贸易与物流类企业资金周转需求延续，相关客群结算量保持高位。",
+        "facts": [
+          "@南沙"
+        ],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009808.htm",
+        "novelty": 0.5237804878048781,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "假日首店潮点燃消费",
+        "text": "假日首店潮点燃消费 商圈首店场景带动新业态消费热度，消费信贷与信用卡权益的联动获客空间扩大。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/03/139995_55009710.htm",
+        "novelty": 0.2602564102564103,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "铁路优化老年人购票优惠",
+        "text": "铁路优化老年人购票优惠 养老客群出行场景扩容，适老支付与出行权益的配套需求上升，银发客群活跃度提高。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261003/4477315_1.html",
+        "novelty": 0.31744186046511624,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-04",
+        "section": "insights",
+        "title": "险资举牌热度降幅过半",
+        "text": "险资举牌热度降幅过半 权益投资逻辑切换，代销保险与理财客户的风险偏好迁移，产品货架结构面临调整。",
+        "facts": [],
+        "broadcastAt": "2026-10-04T12:05:52+08:00",
+        "url": "https://finance.eastmoney.com/a/202610033888452996.html",
+        "novelty": 0.3255813953488372,
+        "angle": "政策变化"
+      }
+    ],
+    "runId": "37175941147"
   },
   "deliveries": [
     {
