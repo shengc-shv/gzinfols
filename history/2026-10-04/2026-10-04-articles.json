@@ -175,13 +175,11 @@
       "title": "将24小时面向全社会普惠开放，广州琶洲南CBD高空立体公共客厅项目获批",
       "url": "https://m.21jingji.com/article/20261003/herald/fb59deae4ac94179aa3ca75c64453893.html",
       "excerpt": "【21财经·粤港澳】将24小时面向全社会普惠开放，广州琶洲南CBD高空立体公共客厅项目获批",
-      "category": "finance",
-      "subcategory": "cn-finance",
       "publishedAt": "2026-10-03T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
+      "category": "finance",
       "source": "21世纪经济报道·金融",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "cn-finance"
     },
     {
       "sourceId": "stcn",
@@ -191,55 +189,47 @@
       "publishedAt": "2026-10-03T12:25:00.000Z",
       "category": "finance",
       "summary": "9月银行业罚没2.07亿元、千万级罚单密集落地，提示对照罚点排查信贷、代销等高频违规环节。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "21jingji-finance",
       "title": "银行“贷款明白纸”全面铺开，年化成本一目了然",
       "url": "https://m.21jingji.com/article/20261003/herald/3f9ab083b94b1fa83175946e7f4a6cfe.html",
       "excerpt": "【21财经·金融】银行“贷款明白纸”全面铺开，年化成本一目了然",
-      "category": "finance",
-      "subcategory": "cn-finance",
       "publishedAt": "2026-10-03T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "21世纪经济报道·金融",
+      "category": "finance",
       "summary": "贷款明白纸全面铺开，年化成本需一目了然，可考虑提前梳理对客披露口径与收费告知流程。",
-      "relevant": true,
-      "fetchedToday": true
+      "source": "21世纪经济报道·金融",
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "sina-money",
       "title": "多只基金，前三季度业绩逼近腰斩",
       "url": "https://finance.sina.com.cn/wm/2026-10-03/doc-inityimx4545502.shtml",
       "excerpt": "【财富管理】多只基金，前三季度业绩逼近腰斩",
-      "category": "finance",
-      "subcategory": "cn-finance",
       "publishedAt": "2026-10-03T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
-      "source": "新浪财经·理财保险",
+      "category": "finance",
       "summary": "多只基金前三季度业绩逼近腰斩，持有客户体验转差，提示理财经理提前准备持仓沟通与预期管理话术。",
-      "relevant": true,
-      "fetchedToday": true
+      "source": "新浪财经·理财保险",
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "sina-money",
       "title": "黄金XAUUSD，白银XAGUSD - 03-10-2026 周末分析",
       "url": "https://video.sina.com.cn/p/finance/2026-10-03/detail-initxwvz0644538.d.html",
       "excerpt": "【财富管理】黄金XAUUSD，白银XAGUSD - 03-10-2026 周末分析",
-      "category": "finance",
-      "subcategory": "cn-finance",
       "publishedAt": "2026-10-03T00:00:00.000Z",
-      "tier": "T2",
-      "isIpo": false,
+      "category": "finance",
       "source": "新浪财经·理财保险",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "cn-finance"
     },
     {
       "sourceId": "stcn",
@@ -249,12 +239,10 @@
       "publishedAt": "2026-10-03T07:09:00.000Z",
       "category": "finance",
       "summary": "9月沪深IPO零受理、三季度节奏放缓，拟上市企业融资节奏拉长，可关注相关客群的替代融资需求。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "stcn",
@@ -263,11 +251,8 @@
       "excerpt": "山东因地制宜打造各具特色的消费场景 产业家底厚 县域活力足（活力中国调研行）",
       "publishedAt": "2026-10-03T03:49:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -277,12 +262,9 @@
       "excerpt": "万亿CPO龙头收购A股公司股权有新进展！",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "eastmoney-stock",
@@ -291,12 +273,9 @@
       "excerpt": "药明康德获扎堆推荐机构看好节后A股反弹",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "eastmoney-stock",
@@ -305,12 +284,9 @@
       "excerpt": "A股节后上涨胜率超60%机构：持股过节或更合算！外围股市上涨股民盼着开门红",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "sina-a-stock",
@@ -319,12 +295,9 @@
       "excerpt": "A股龙虎榜透视：7家营业部成交额破千亿，资金青睐这些赛道",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·A股频道",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "sina-a-stock",
@@ -333,12 +306,9 @@
       "excerpt": "4家A股公司，筹划重要收购",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·A股频道",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "dayoo-gz",
@@ -347,11 +317,8 @@
       "excerpt": "冷空气明天夜间抵达！广州有望解锁秋意",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -361,11 +328,8 @@
       "excerpt": "国庆假期第三天，国铁广州局预计发送旅客249.4万人次",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -375,11 +339,8 @@
       "excerpt": "广州地铁：因客流较大，APM线海心沙站只出不进",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -389,11 +350,8 @@
       "excerpt": "电竞粤超赛区对抗赛广州收官，广州星光电竞队王者荣耀项目夺冠",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -403,11 +361,8 @@
       "excerpt": "广州南站三大“绝招”，造就全国首个“百万巨站”",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -417,11 +372,8 @@
       "excerpt": "广东省彩宝首饰商会第五届理事会完成换届工作",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "央广网·广东频道",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -431,11 +383,8 @@
       "excerpt": "浙江绍兴市上虞区深入实施“人工智能+”行动 因地制宜发展具身智能产业",
       "publishedAt": "2026-10-03T03:49:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -444,14 +393,10 @@
       "url": "https://www.investing.com/news/stock-market-news/how-muse-stacks-up-vs-openai-dots-4930890",
       "excerpt": "How Muse Stacks up Vs. OpenAI Dots",
       "publishedAt": "2026-10-03T22:24:00.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "investing-news",
@@ -459,14 +404,10 @@
       "url": "https://www.investing.com/news/stock-market-news/nestle-india-product-sample-declared-unsafe-by-food-regulator-93CH-4930889",
       "excerpt": "Nestle India product sample declared unsafe by food regulator",
       "publishedAt": "2026-10-03T21:52:01.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "investing-news",
@@ -474,14 +415,10 @@
       "url": "https://www.investing.com/news/stock-market-news/russia-stocks-lower-at-close-of-trade-moex-russia-index-unchanged-4930887",
       "excerpt": "Russia stocks lower at close of trade; MOEX Russia Index unchanged",
       "publishedAt": "2026-10-03T21:20:04.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "investing-news",
@@ -489,14 +426,10 @@
       "url": "https://www.investing.com/news/commodities-news/iraqs-state-tanker-firm-moves-crude-through-hormuz-strait-93CH-4930883",
       "excerpt": "Iraq’s state tanker firm moves crude through Hormuz strait",
       "publishedAt": "2026-10-03T20:38:15.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "investing-news",
@@ -504,14 +437,10 @@
       "url": "https://www.investing.com/news/commodities-news/yemens-houthis-say-they-attacked-aramco-facility-in-riyadh-with-missiles-drones-4930877",
       "excerpt": "Yemen’s Houthis say they attacked Aramco facility in Riyadh with missiles, drones",
       "publishedAt": "2026-10-03T20:36:26.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "investing-news",
@@ -519,14 +448,10 @@
       "url": "https://www.investing.com/news/stock-market-news/us-midterms-breaking-down-expected-impact-on-equities-4930882",
       "excerpt": "U.S. midterms: Breaking down expected impact on equities",
       "publishedAt": "2026-10-03T20:33:43.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "investing-news",
@@ -534,14 +459,10 @@
       "url": "https://www.investing.com/news/stock-market-news/how-ai-investment-has-unusually-large-multiplier-effects-4930881",
       "excerpt": "How AI investment has unusually large multiplier effects",
       "publishedAt": "2026-10-03T20:21:01.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "investing-news",
@@ -549,14 +470,10 @@
       "url": "https://www.investing.com/news/forex-news/irans-rial-hits-fresh-low-as-2-billion-currency-intervention-fails-to-stem-slide-4930880",
       "excerpt": "Iran’s rial hits fresh low as $2 billion currency intervention fails to stem slide",
       "publishedAt": "2026-10-03T20:13:19.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "investing-news",
@@ -564,14 +481,10 @@
       "url": "https://www.investing.com/news/economy-news/openai-safety-employee-quits-says-time-for-trial-and-error-is-over-4930874",
       "excerpt": "OpenAI safety employee quits, says ’time for trial and error is over’",
       "publishedAt": "2026-10-03T19:30:33.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "Investing.com News",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "cnbc-top",
@@ -579,14 +492,11 @@
       "url": "https://www.cnbc.com/2026/10/03/lula-or-bolsonaro-wall-street-braces-for-two-wildly-different-results-in-brazil-election.html",
       "excerpt": "With the first round of Brazil's presidential election taking place Sunday, Wall Street is gearing up with starkly different market predictions.",
       "publishedAt": "2026-10-03T13:12:27.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
       "summary": "With the first round of Brazil's presidential election taking place Sunday, Wall Street is gearing up with starkly different market predictions.",
-      "tier": "T2",
-      "isIpo": false,
       "source": "CNBC Investing",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "cnbc-top",
@@ -594,14 +504,11 @@
       "url": "https://www.cnbc.com/2026/10/03/berkshire-buys-more-lennar-shares-but-pace-of-purchases-slows.html",
       "excerpt": "Berkshire Hathaway added to its bet on Lennar this week, raising its stake in the homebuilder to 11.2%, although the pace of its buying appears to be slowing.",
       "publishedAt": "2026-10-03T12:55:31.000Z",
-      "fetchedAt": "2026-10-03T22:36:48.085Z",
       "category": "stocks",
-      "subcategory": "us",
       "summary": "Berkshire Hathaway added to its bet on Lennar this week, raising its stake in the homebuilder to 11.2%, although the pace of its buying appears to be slowing.",
-      "tier": "T2",
-      "isIpo": false,
       "source": "CNBC Investing",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "us"
     },
     {
       "sourceId": "stcn",
@@ -610,11 +517,8 @@
       "excerpt": "陈家齐再被委任为港投公司行政总裁！",
       "publishedAt": "2026-10-03T12:23:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -625,12 +529,10 @@
       "publishedAt": "2026-10-03T12:17:00.000Z",
       "category": "gz",
       "summary": "金价银价巨震、水贝出现断货，贵金属交投与实物需求升温，提示关注相关客群资金流向与产品咨询量。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "南方网·南方经济",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "gz-media"
+      "fetchedToday": false,
+      "subcategory": "gz-media",
+      "relevant": true
     },
     {
       "sourceId": "stcn",
@@ -639,11 +541,8 @@
       "excerpt": "量产大提速，商业化破晓时刻 ！智能机器人，高成长潜力股出炉",
       "publishedAt": "2026-10-03T10:42:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -654,12 +553,10 @@
       "publishedAt": "2026-10-03T09:18:00.000Z",
       "category": "finance",
       "summary": "财政部主要负责人发表署名文章，财政政策取向表述值得关注，可留意后续对公与零售业务的政策衔接。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "southcn",
@@ -668,11 +565,8 @@
       "excerpt": "佛山别墅家具选购，买手甄选源头工厂攻略",
       "publishedAt": "2026-10-03T08:55:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "南方网·南方经济",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -682,11 +576,8 @@
       "excerpt": "苹果，突发！新iPhone，重大网络故障！",
       "publishedAt": "2026-10-03T07:51:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -696,11 +587,8 @@
       "excerpt": "超话车｜美国各界热议“要不要对中国车开放”",
       "publishedAt": "2026-10-03T07:03:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -710,11 +598,8 @@
       "excerpt": "688279，筹划收购股权！",
       "publishedAt": "2026-10-03T06:41:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -724,11 +609,8 @@
       "excerpt": "5000亿农商行行长获提拔，拟任市管企业一把手",
       "publishedAt": "2026-10-03T04:58:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -738,11 +620,8 @@
       "excerpt": "韩国天价离婚！顶级大佬卖股票，筹集47亿“分手费”！",
       "publishedAt": "2026-10-03T04:58:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -752,11 +631,8 @@
       "excerpt": "蔚来：充电服务突破1亿次",
       "publishedAt": "2026-10-03T04:57:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -766,11 +642,8 @@
       "excerpt": "谷歌搭载AI芯片测试卫星发射升空",
       "publishedAt": "2026-10-03T04:08:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -780,11 +653,8 @@
       "excerpt": "长征精神永传承 昂扬奋进启新程",
       "publishedAt": "2026-10-03T03:49:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -794,11 +664,8 @@
       "excerpt": "为新中国取得的举世瞩目成就无比自豪",
       "publishedAt": "2026-10-03T03:49:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -809,12 +676,10 @@
       "publishedAt": "2026-10-03T02:57:00.000Z",
       "category": "finance",
       "summary": "散户资金集中流向三类主题ETF，可关注客户交易偏好变化，作为ETF配置与投教内容的选题参考。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "cnfin",
@@ -824,12 +689,10 @@
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
       "summary": "铁路优化老年人购票优惠，养老客群服务场景扩容，可考虑在适老支付与出行权益上做配套跟进。",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "cnfin",
@@ -838,11 +701,8 @@
       "excerpt": "开创智能网联新能源汽车全球产业合作新局面这样发力",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -852,11 +712,8 @@
       "excerpt": "全国服务业扩能提质推进有力、态势向好",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -866,11 +723,8 @@
       "excerpt": "商务部：对原产于欧盟的进口对硝基甲苯发起反倾销立案调查",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -880,12 +734,9 @@
       "excerpt": "商务部新闻发言人就对原产于欧盟的进口对硝基甲苯发起反倾销调查答记者问",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "cnfin",
@@ -894,11 +745,8 @@
       "excerpt": "【环球财经】七国集团将释放1亿桶战略石油储备 初期集中释放柴油",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -908,11 +756,8 @@
       "excerpt": "新华财经早报：10月3日",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -922,11 +767,8 @@
       "excerpt": "10月2日全社会跨区域人员流动量30550.4万人次",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -936,11 +778,8 @@
       "excerpt": "新消费派丨年轻玩家汇聚“痛岛”，上海国庆消费玩法升级",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -950,11 +789,8 @@
       "excerpt": "综述｜厄尔尼诺“放大”非洲气候风险",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -964,11 +800,8 @@
       "excerpt": "阿根廷推出“投资换国籍”计划",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -978,11 +811,8 @@
       "excerpt": "科技文旅新业态走热 AI+元宇宙加速商业化",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -992,11 +822,8 @@
       "excerpt": "城记丨跳出“千镇一面”，朱家角书写另一重江南水乡答卷",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -1006,11 +833,8 @@
       "excerpt": "国庆高速出行，警惕“三超一疲劳”，防范二次事故",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -1021,12 +845,10 @@
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
       "summary": "假日首店潮带动新业态消费热度，可考虑围绕商圈首店场景做消费信贷与信用卡权益的联动获客。",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "gz-media"
+      "fetchedToday": false,
+      "subcategory": "gz-media",
+      "relevant": true
     },
     {
       "sourceId": "dayoo-gz",
@@ -1035,11 +857,8 @@
       "excerpt": "爱达·花城号迎来船员进驻",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -1049,11 +868,8 @@
       "excerpt": "全省高速公路网10月1日车流量约1066.87万车次",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "广州日报·大洋网(广州频道)",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -1063,11 +879,8 @@
       "excerpt": "以诗忆先烈 学子齐诵《梅岭三章》",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "央广网·广东频道",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -1077,11 +890,8 @@
       "excerpt": "铁路民航国庆假期迎来客流高峰",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "央广网·广东频道",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -1091,12 +901,9 @@
       "excerpt": "特朗普：与伊朗的战事将“很快结束”",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "eastmoney-stock",
@@ -1105,12 +912,9 @@
       "excerpt": "马斯克与四孩母亲分手女方：一周之内从相爱到放手",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "eastmoney-stock",
@@ -1120,12 +924,10 @@
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
       "summary": "险资举牌热度降幅过半，权益投资逻辑切换，提示关注代销保险与理财客户的风险偏好迁移。",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "relevant": true,
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share",
+      "relevant": true
     },
     {
       "sourceId": "eastmoney-stock",
@@ -1135,12 +937,10 @@
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
       "summary": "美联储官员鹰派立场软化、加息预期骤变，汇率与结售汇窗口值得提示有外币需求的客户关注。",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "relevant": true,
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share",
+      "relevant": true
     },
     {
       "sourceId": "eastmoney-stock",
@@ -1149,12 +949,9 @@
       "excerpt": "夜读投资｜“AI投资神话”最大的破绽",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "a-share",
-      "tier": "T2",
-      "isIpo": false,
       "source": "东方财富·A股股市新闻",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "a-share"
     },
     {
       "sourceId": "sina-hk-stock",
@@ -1163,12 +960,9 @@
       "excerpt": "恒指牛熊街货比(62:38)︱10月3日",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
-      "summary": "",
-      "subcategory": "hk",
-      "tier": "T2",
-      "isIpo": false,
       "source": "新浪财经·港股频道",
-      "fetchedToday": true
+      "fetchedToday": false,
+      "subcategory": "hk"
     },
     {
       "sourceId": "stcn",
@@ -1177,11 +971,8 @@
       "excerpt": "同比增24.51% 南方电网统一充电服务平台单日充电量首破千万千瓦时",
       "publishedAt": "2026-10-03T09:43:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "证券时报",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -1191,11 +982,8 @@
       "excerpt": "前8个月全国电力市场交易电量同比增长19.2%",
       "publishedAt": "2026-10-03T02:12:00.000Z",
       "category": "gz",
-      "summary": "",
-      "tier": "T2",
-      "isIpo": false,
       "source": "南方网·南方经济",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "gz-media"
     },
     {
@@ -1206,12 +994,10 @@
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
       "summary": "欧洲能源涨价传导至股债承压，外需与跨境资产波动上升，提示关注外贸客群结算与避险需求变化。",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "relevant": true,
-      "fetchedToday": true,
-      "subcategory": "cn-finance"
+      "fetchedToday": false,
+      "subcategory": "cn-finance",
+      "relevant": true
     },
     {
       "sourceId": "cnfin",
@@ -1220,11 +1006,8 @@
       "excerpt": "【财经分析】法国缘何成为欧洲债市动荡关注焦点",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -1234,11 +1017,8 @@
       "excerpt": "10月3日全社会跨区域人员流动量预计30829万人次 比2025年同期增长1.2%",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "finance",
-      "summary": "",
-      "tier": "T1.5",
-      "isIpo": false,
       "source": "新华财经",
-      "fetchedToday": true,
+      "fetchedToday": false,
       "subcategory": "cn-finance"
     },
     {
@@ -1246,6 +1026,70 @@
       "title": "特斯拉、SpaceX大涨！马斯克利好突袭",
       "url": "https://finance.eastmoney.com/a/202610033888453274.html",
       "excerpt": "特斯拉、SpaceX大涨！马斯克利好突袭",
+      "publishedAt": "2026-10-03T00:00:00.000Z",
+      "category": "stocks",
+      "source": "东方财富·A股股市新闻",
+      "fetchedToday": false,
+      "subcategory": "a-share"
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "普京说中美俄领导人可能在APEC峰会期间举行三方会晤中方回应",
+      "url": "https://finance.eastmoney.com/a/202610033888498390.html",
+      "excerpt": "普京说中美俄领导人可能在APEC峰会期间举行三方会晤中方回应",
+      "publishedAt": "2026-10-03T00:00:00.000Z",
+      "category": "stocks",
+      "source": "东方财富·A股股市新闻",
+      "fetchedToday": false,
+      "subcategory": "a-share"
+    },
+    {
+      "sourceId": "21jingji-finance",
+      "title": "港交所：要推出人民币计价黄金期货",
+      "url": "https://m.21jingji.com/article/20261004/herald/4c5262ed4cfba606ee05a5cb36616bc9.html",
+      "excerpt": "【21财经·金融】港交所：要推出人民币计价黄金期货",
+      "category": "finance",
+      "subcategory": "cn-finance",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "21世纪经济报道·金融",
+      "summary": "港交所拟推人民币计价黄金期货，跨境人民币避险工具有望扩容，可关注对跨境客群结售汇与套保需求的带动。",
+      "relevant": true,
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "sina-money",
+      "title": "ETF #股票#财经 #投资 #基金 #ETF",
+      "url": "http://finance.sina.com.cn/money/fund/video/2026-10-04/detail-initzrfi3956444.d.html",
+      "excerpt": "【财富管理】ETF #股票#财经 #投资 #基金 #ETF",
+      "category": "finance",
+      "subcategory": "cn-finance",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "新浪财经·理财保险",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "环球下周看点：美股进入传统强势季节美联储纪要登场财报季开始预热",
+      "url": "https://finance.eastmoney.com/a/202610043888513254.html",
+      "excerpt": "环球下周看点：美股进入传统强势季节美联储纪要登场财报季开始预热",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "东方财富·A股股市新闻",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "特朗普“单方面”官宣500亿美元投资转头又威胁韩国：再不快点签就把费用翻倍",
+      "url": "https://finance.eastmoney.com/a/202610033888474385.html",
+      "excerpt": "特朗普“单方面”官宣500亿美元投资转头又威胁韩国：再不快点签就把费用翻倍",
       "publishedAt": "2026-10-03T00:00:00.000Z",
       "category": "stocks",
       "summary": "",
@@ -1257,10 +1101,581 @@
     },
     {
       "sourceId": "eastmoney-stock",
-      "title": "普京说中美俄领导人可能在APEC峰会期间举行三方会晤中方回应",
-      "url": "https://finance.eastmoney.com/a/202610033888498390.html",
-      "excerpt": "普京说中美俄领导人可能在APEC峰会期间举行三方会晤中方回应",
+      "title": "灵魂拷问！万一股市“超期”不反弹投资该如何坚守？",
+      "url": "https://finance.eastmoney.com/a/202610043888519631.html",
+      "excerpt": "灵魂拷问！万一股市“超期”不反弹投资该如何坚守？",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "东方财富·A股股市新闻",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "sina-a-stock",
+      "title": "A股前三季度新股上市首日零破发，4只“大肉签",
+      "url": "https://finance.sina.com.cn/roll/2026-10-04/doc-initzrfn0466288.shtml",
+      "excerpt": "A股前三季度新股上市首日零破发，4只“大肉签",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "前三季度A股新股上市首日零破发，打新赚钱效应延续，可关注客户打新与新股配售相关服务需求。",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "新浪财经·A股频道",
+      "relevant": true,
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "title": "广州​白云湖公园，白鹭成群，赏心悦目",
+      "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009799.htm",
+      "excerpt": "广州​白云湖公园，白鹭成群，赏心悦目",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "广州日报·大洋网(广州频道)",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "title": "国庆假期，广州中欧班列“奔驰”不停",
+      "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009806.htm",
+      "excerpt": "国庆假期，广州中欧班列“奔驰”不停",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "广州日报·大洋网(广州频道)",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "stcn",
+      "title": "国庆假期第三天广东省4A级及以上景区接待游客超400万人次",
+      "url": "https://www.stcn.com/article/detail/4206174.html",
+      "excerpt": "国庆假期第三天广东省4A级及以上景区接待游客超400万人次",
+      "publishedAt": "2026-10-04T01:22:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "证券时报",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "stcn",
+      "title": "问界调整引发波动，鸿蒙智行九月销量跌三成",
+      "url": "https://www.stcn.com/article/detail/4206185.html",
+      "excerpt": "问界调整引发波动，鸿蒙智行九月销量跌三成",
+      "publishedAt": "2026-10-04T03:06:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "证券时报",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "title": "国庆假期期间，广州南沙口岸汽车出口顺畅",
+      "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009808.htm",
+      "excerpt": "国庆假期期间，广州南沙口岸汽车出口顺畅",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "广州日报·大洋网(广州频道)",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Trump’s new AI czar outlines U.S. strategy for AI risks and leadership, WSJ says",
+      "url": "https://www.investing.com/news/economy-news/trumps-new-ai-czar-outlines-us-strategy-for-ai-risks-and-leadership-wsj-says-4930900",
+      "excerpt": "Trump’s new AI czar outlines U.S. strategy for AI risks and leadership, WSJ says",
+      "publishedAt": "2026-10-04T03:30:13.000Z",
+      "fetchedAt": "2026-10-04T04:05:52.291Z",
+      "category": "stocks",
+      "subcategory": "us",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "Australia’s Chalmers blames U.S.-Iran war for higher inflation, borrowing costs",
+      "url": "https://www.investing.com/news/economy-news/australias-chalmers-blames-usiran-war-for-higher-inflation-borrowing-costs-4930899",
+      "excerpt": "Australia’s Chalmers blames U.S.-Iran war for higher inflation, borrowing costs",
+      "publishedAt": "2026-10-04T02:41:39.000Z",
+      "fetchedAt": "2026-10-04T04:05:52.291Z",
+      "category": "stocks",
+      "subcategory": "us",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "stcn",
+      "title": "占比超八成！个人投资者大举涌入新上市ETF",
+      "url": "https://www.stcn.com/article/detail/4206183.html",
+      "excerpt": "占比超八成！个人投资者大举涌入新上市ETF",
+      "publishedAt": "2026-10-04T02:28:00.000Z",
+      "category": "finance",
+      "summary": "个人投资者占新上市ETF超八成，零售资金借道ETF入市特征明显，可关注客户ETF配置与投顾服务需求。",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "证券时报",
+      "relevant": true,
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "AI deal boom drives Hong Kong fundraising to record summer - Bloomberg",
+      "url": "https://www.investing.com/news/stock-market-news/ai-deal-boom-drives-hong-kong-fundraising-to-record-summer--bloomberg-4930898",
+      "excerpt": "AI deal boom drives Hong Kong fundraising to record summer - Bloomberg",
+      "publishedAt": "2026-10-04T02:12:05.000Z",
+      "fetchedAt": "2026-10-04T04:05:52.291Z",
+      "category": "stocks",
+      "subcategory": "us",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "FlyDubai copilot lost earlier job over radical views",
+      "url": "https://www.investing.com/news/company-news/flydubai-copilot-lost-earlier-job-over-radical-views-4930895",
+      "excerpt": "FlyDubai copilot lost earlier job over radical views",
+      "publishedAt": "2026-10-04T00:52:07.000Z",
+      "fetchedAt": "2026-10-04T04:05:52.291Z",
+      "category": "stocks",
+      "subcategory": "us",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "stcn",
+      "title": "62家百亿私募，集体调研！电子行业成“香饽饽",
+      "url": "https://www.stcn.com/article/detail/4206168.html",
+      "excerpt": "62家百亿私募，集体调研！电子行业成“香饽饽",
+      "publishedAt": "2026-10-04T00:05:00.000Z",
+      "category": "finance",
+      "summary": "62家百亿私募集中调研电子行业，机构关注度向科技板块倾斜，提示关注相关客群与产品的联动机会。",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "证券时报",
+      "relevant": true,
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "OpenAI safety employee quits, criticizes company’s approach to AI risks",
+      "url": "https://www.investing.com/news/company-news/openai-safety-employee-quits-criticizes-companys-approach-to-ai-risks-4930894",
+      "excerpt": "OpenAI safety employee quits, criticizes company’s approach to AI risks",
+      "publishedAt": "2026-10-04T00:04:22.000Z",
+      "fetchedAt": "2026-10-04T04:05:52.291Z",
+      "category": "stocks",
+      "subcategory": "us",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "【环球财经】巴西总统选举为何引发国际关注",
+      "url": "https://www.cnfin.com/yw-lb/detail/20261004/4477348_1.html",
+      "excerpt": "【环球财经】巴西总统选举为何引发国际关注",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "“塞外粮仓”丰收忙——内蒙古秋粮生产一线观察",
+      "url": "https://www.cnfin.com/yw-lb/detail/20261004/4477347_1.html",
+      "excerpt": "“塞外粮仓”丰收忙——内蒙古秋粮生产一线观察",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "红色装点 壮游山河——国庆节假期掀起旅游热潮",
+      "url": "https://www.cnfin.com/yw-lb/detail/20261004/4477346_1.html",
+      "excerpt": "红色装点 壮游山河——国庆节假期掀起旅游热潮",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "国庆假期第三天全国道路交通平稳有序",
+      "url": "https://www.cnfin.com/yw-lb/detail/20261004/4477338_1.html",
+      "excerpt": "国庆假期第三天全国道路交通平稳有序",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "埃及总统呼吁非洲深化经济一体化应对全球挑战",
+      "url": "https://www.cnfin.com/hg-lb/detail/20261004/4477329_1.html",
+      "excerpt": "埃及总统呼吁非洲深化经济一体化应对全球挑战",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "stcn",
+      "title": "霍尔木兹海峡，最新消息！",
+      "url": "https://www.stcn.com/article/detail/4206164.html",
+      "excerpt": "霍尔木兹海峡，最新消息！",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "证券时报",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "title": "海心沙亚运公园10月4日至10月23日暂停音乐喷泉表演",
+      "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009816.htm",
+      "excerpt": "海心沙亚运公园10月4日至10月23日暂停音乐喷泉表演",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "广州日报·大洋网(广州频道)",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "title": "国庆假期，多个重点项目“进度条”持续刷新",
+      "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009794.htm",
+      "excerpt": "国庆假期，多个重点项目“进度条”持续刷新",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "广州日报·大洋网(广州频道)",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "title": "6万吨玉米运抵新沙港",
+      "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009812.htm",
+      "excerpt": "6万吨玉米运抵新沙港",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "广州日报·大洋网(广州频道)",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "title": "国内首型！绿色新船“安德烈”轮顺利启航",
+      "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009809.htm",
+      "excerpt": "国内首型！绿色新船“安德烈”轮顺利启航",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "广州日报·大洋网(广州频道)",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "title": "扶胥古运河两岸推出光影游园活动",
+      "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009807.htm",
+      "excerpt": "扶胥古运河两岸推出光影游园活动",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "广州日报·大洋网(广州频道)",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "title": "全城抢“鲜” “食”力爆棚",
+      "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009802.htm",
+      "excerpt": "全城抢“鲜” “食”力爆棚",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "广州日报·大洋网(广州频道)",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "cnr-gd",
+      "title": "深中融湾聚商力 同心赋能“百千万”",
+      "url": "https://www.cnr.cn/gd/guangdongyaowen/20261004/t20261004_527833674.shtml",
+      "excerpt": "深中融湾聚商力 同心赋能“百千万”",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "央广网·广东频道",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "cnr-gd",
+      "title": "阳江海陵湾金秋音乐季电音派对激情开演",
+      "url": "https://www.cnr.cn/gd/guangdonglueying/20261004/t20261004_527833726.shtml",
+      "excerpt": "阳江海陵湾金秋音乐季电音派对激情开演",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "央广网·广东频道",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "cnr-gd",
+      "title": "国庆假期，云浮新兴文旅市场热度高涨",
+      "url": "https://www.cnr.cn/gd/guangdonglueying/20261004/t20261004_527833702.shtml",
+      "excerpt": "国庆假期，云浮新兴文旅市场热度高涨",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "gz",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "央广网·广东频道",
+      "fetchedToday": true,
+      "subcategory": "gz-media"
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "人民日报金轩：加快建设强大国内市场",
+      "url": "https://finance.eastmoney.com/a/202610043888514672.html",
+      "excerpt": "人民日报金轩：加快建设强大国内市场",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "人民日报金轩发文强调加快建设强大国内市场，扩内需政策信号延续，可关注消费与内贸相关客群的融资需求。",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "东方财富·A股股市新闻",
+      "relevant": true,
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "经济日报金观平：释放历史经典产业消费潜能",
+      "url": "https://finance.eastmoney.com/a/202610043888515221.html",
+      "excerpt": "经济日报金观平：释放历史经典产业消费潜能",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "经济日报金观平提出释放历史经典产业消费潜能，传统消费赛道获政策关注，值得关注相关商户的经营与结算需求。",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "东方财富·A股股市新闻",
+      "relevant": true,
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "商务部新闻发言人就二十国集团贸易部长会议及相关情况答记者问",
+      "url": "https://finance.eastmoney.com/a/202610043888534289.html",
+      "excerpt": "商务部新闻发言人就二十国集团贸易部长会议及相关情况答记者问",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "东方财富·A股股市新闻",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "连续10天《人民日报》刊发金轩署名文章",
+      "url": "https://finance.eastmoney.com/a/202610043888530481.html",
+      "excerpt": "连续10天《人民日报》刊发金轩署名文章",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "东方财富·A股股市新闻",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "特朗普“AI沙皇”人选曝光：现任美国国家情报总监明确反对暂停AI开发",
+      "url": "https://finance.eastmoney.com/a/202610043888530855.html",
+      "excerpt": "特朗普“AI沙皇”人选曝光：现任美国国家情报总监明确反对暂停AI开发",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "东方财富·A股股市新闻",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "sina-a-stock",
+      "title": "三季度机构调研热度不减！澜起科技最受关注，",
+      "url": "https://finance.sina.com.cn/roll/2026-10-04/doc-initzkxi0192156.shtml",
+      "excerpt": "三季度机构调研热度不减！澜起科技最受关注，",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "新浪财经·A股频道",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "sina-a-stock",
+      "title": "中国出版机构向印尼国家图书馆捐赠图书",
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-04/doc-initzkxi0171959.shtml",
+      "excerpt": "中国出版机构向印尼国家图书馆捐赠图书",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "新浪财经·A股频道",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "investing-news",
+      "title": "White House forms AI task force to assess technology risks - WSJ",
+      "url": "https://www.investing.com/news/economy-news/white-house-forms-ai-task-force-to-assess-technology-risks--wsj-4930893",
+      "excerpt": "White House forms AI task force to assess technology risks - WSJ",
+      "publishedAt": "2026-10-03T22:59:47.000Z",
+      "fetchedAt": "2026-10-04T04:05:52.291Z",
+      "category": "stocks",
+      "subcategory": "us",
+      "summary": "",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "Investing.com News",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "油市又传利空：沙特关键“生命线”输送量恢复至80%以上上月曾遭袭停运",
+      "url": "https://finance.eastmoney.com/a/202610033888477541.html",
+      "excerpt": "油市又传利空：沙特关键“生命线”输送量恢复至80%以上上月曾遭袭停运",
       "publishedAt": "2026-10-03T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "东方财富·A股股市新闻",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "苹果确认！存在缺陷免费更换新机",
+      "url": "https://finance.eastmoney.com/a/202610033888501073.html",
+      "excerpt": "苹果确认！存在缺陷免费更换新机",
+      "publishedAt": "2026-10-03T00:00:00.000Z",
+      "category": "stocks",
+      "summary": "",
+      "subcategory": "a-share",
+      "tier": "T2",
+      "isIpo": false,
+      "source": "东方财富·A股股市新闻",
+      "fetchedToday": true
+    },
+    {
+      "sourceId": "cnfin",
+      "title": "【财经分析】产量仍高，全球粮价为何还在涨？",
+      "url": "https://www.cnfin.com/yw-lb/detail/20261004/4477352_1.html",
+      "excerpt": "【财经分析】产量仍高，全球粮价为何还在涨？",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
+      "category": "finance",
+      "summary": "",
+      "tier": "T1.5",
+      "isIpo": false,
+      "source": "新华财经",
+      "fetchedToday": true,
+      "subcategory": "cn-finance"
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "title": "AI数据中心建设加速之际地方阻力从美国蔓延至欧洲和亚洲",
+      "url": "https://finance.eastmoney.com/a/202610043888509563.html",
+      "excerpt": "AI数据中心建设加速之际地方阻力从美国蔓延至欧洲和亚洲",
+      "publishedAt": "2026-10-04T00:00:00.000Z",
       "category": "stocks",
       "summary": "",
       "subcategory": "a-share",
