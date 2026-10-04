@@ -1,9 +1,10 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-04T06:33:57+08:00",
+  "fetchedAt": "2026-10-04T12:11:25+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
+    "gd-bse-audit": 1,
     "gd-sse-audit": 2,
     "gd-szse-audit": 2
   },
@@ -29,6 +30,17 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-reviewing"
+    },
+    {
+      "title": "邦泽创科：IPO注册生效（拟北交所）",
+      "url": "https://www.bse.cn/audit/project_news_select.html#874249@P07",
+      "excerpt": "注册地：广东省东莞市｜保荐：东莞证券股份有限公司｜代码：874249｜状态：IPO注册生效｜更新：2026-09-29",
+      "publishedAt": "2026-09-29",
+      "source": "北交所IPO审核动态",
+      "sourceId": "gd-bse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-registered"
     },
     {
       "title": "龙行天下：IPO问询中（拟主板）",
