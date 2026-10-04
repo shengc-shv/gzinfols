@@ -231,6 +231,27 @@ test("维度全部可回溯 → 定调原样保留、口播不动（下面有出
   assert.equal(g.exec.spoken_hero, exec.spoken_hero, "未改定调 → 口播保留（卡面与口播同源）");
 });
 
+test("定调下限：只给 1 个方面 → 标记二次 LLM 重写，但**不**用规则复读必读标题", () => {
+  // 实证场景：当日有 5 条必读 + 5 条商机，LLM 却只输出
+  // 「今天主要看一个方面：贵金属异动，资金搬家。」—— 整句 23 字、离 70 字上限还差 47 字。
+  //
+  // 🔴 关键：**不得**用 `deriveHeroLine` 补足 —— 它取的是 must_read.title/insights.topic **原文**，
+  //    补出来的就是「把下面必读标题抄一遍」（实测与「今日必读」列表逐字相同），
+  //    违反 §0 自己的禁令「不做事件摘要、不得换个说法复述某一条必读 —— 定调是纲、必读是目」。
+  //    sc 判断：「如果是重复下面的内容，还不如原来的那一条总结」。
+  const exec = mkExec();
+  exec.hero_line = "今天主要看一个方面：上海楼市已止跌回稳，住房回暖。";
+  exec.spoken_hero = "今天主要看一个方面，上海楼市。";
+  const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
+  assert.equal(g.exec.hero_line, exec.hero_line, "原定调必须原样保留（1 条精炼的纲 > 5 条复读的目）");
+  assert.equal(g.exec.spoken_hero, exec.spoken_hero, "定调未改 → 口播保留（卡面与口播同源）");
+  assert.equal(g.heroRewriteNeeded, true, "但要标记「需二次 LLM 重写」，由 LLM 把维度补齐");
+  assert.ok(
+    g.log.some((l) => l.includes("下限")),
+    `日志应说明是下限触发：${g.log.join(" | ")}`,
+  );
+});
+
 test("回归：定调不再参与事件判重（与历史同题也不换）", () => {
   // 旧行为：定调被当事件候选走 findMatchingEvent → 命中历史事件 → cooldown 拦下 → 兜底重写。
   // 新口径（10-03 sc）：提纲与必读/商机共享主题是**设计使然**，不该因此被换掉。

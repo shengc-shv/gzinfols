@@ -25,7 +25,12 @@
  */
 
 import type { ExecutiveSummary, ExecInsight, ExecRisk } from "../enrich/executive-summary";
-import { auditHeroDimensions, deriveHeroLine, rebuildHeroLine } from "../enrich/executive-summary";
+import {
+  HERO_MIN_DIMENSIONS,
+  auditHeroDimensions,
+  deriveHeroLine,
+  rebuildHeroLine,
+} from "../enrich/executive-summary";
 import { scoreBranchRelevance } from "../select/filters/relevance-score";
 import { formatBroadcastAt } from "./broadcast-time";
 import {
@@ -335,8 +340,26 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
       } else {
         log.push(`🧠 定调：全部 ${audit.dims.length} 个维度均无法回溯、且必读/商机为空 → 保留原定调`);
       }
-    } else if (audit.dangling.length === 0) {
+    } else if (audit.dangling.length === 0 && audit.kept.length >= HERO_MIN_DIMENSIONS) {
       log.push(`🧠 定调：${audit.kept.length} 个维度均可在必读/商机中回溯 → 保留原定调`);
+    } else if (audit.dangling.length === 0) {
+      // 全部可回溯，但**维度数低于下限**（2026-10-04 实测：LLM 只给 1 个方面）。
+      //
+      // 🔴 **只标记、不用规则替换**（2026-10-04 sc 纠正）：
+      //    `deriveHeroLine` 取的是 `must_read.title` / `insights.topic` **原文**，
+      //    用它补足的结果 = **把下面的必读标题抄一遍**（实测输出「今天主要看五个方面：9月银行业罚没2.07亿、
+      //    贷款明白纸全面铺开、…」—— 与「今日必读」列表逐字相同）。
+      //    这**恰好违反 §0 自己的禁令**：「不做事件摘要、不得换个说法复述某一条必读 —— 定调是纲、必读是目」。
+      //    sc 的判断：**「如果是重复下面的内容，还不如原来的那一条总结」** ——
+      //    1 条精炼的纲 > 5 条复读的目。
+      //
+      //    ∴ 这里只置 `heroRewriteNeeded`，让**二次 LLM 定调**去补（它有能力把维度概括成
+      //    「领域词组 + 看点」）；LLM 不可用时**保留原定调**（宁可少，不要复读）。
+      heroRewriteNeeded = true;
+      log.push(
+        `🧠 定调：仅 ${audit.kept.length} 个维度（下限 ${HERO_MIN_DIMENSIONS}）→ 标记二次 LLM 重写` +
+          `（不采用规则补足：那只是把必读标题抄一遍，反而不如这条精炼的总结）`,
+      );
     } else {
       // 剔除悬空维度后重建。卡面只放正文（**不带任何标签前缀**）：页面「今日定调：」/
       // 企微「【今日定调】」/口播「先看今天的整体定调。」各端自加，生产者再加会渲染成双标签。
