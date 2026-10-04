@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-04T12:11:25+08:00",
+  "fetchedAt": "2026-10-05T06:31:55+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
     "gd-bse-audit": 1,
-    "gd-sse-audit": 2,
-    "gd-szse-audit": 2
+    "gd-sse-audit": 1,
+    "gd-szse-audit": 1
   },
   "items": [
     {
@@ -41,28 +41,6 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-registered"
-    },
-    {
-      "title": "龙行天下：IPO问询中（拟主板）",
-      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2193@2",
-      "excerpt": "注册地：广东东莞市｜保荐：招商证券股份有限公司｜受理：2026-05-29｜状态：IPO问询中｜更新：2026-09-28｜行业：皮革、毛皮、羽毛及其制品和制鞋业",
-      "publishedAt": "2026-09-28",
-      "source": "上交所IPO审核动态",
-      "sourceId": "gd-sse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "科杰技术：IPO问询中（拟创业板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004576",
-      "excerpt": "注册地：广东｜保荐：中信建投｜受理：2026-06-26｜状态：已问询｜更新：2026-09-28",
-      "publishedAt": "2026-09-28",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
     }
   ]
 }
