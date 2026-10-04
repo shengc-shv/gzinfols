@@ -9,36 +9,24 @@
  * 并把采集分类映射到新管线的五个渲染板块。与 pipeline.ts 的 categoryToSection 保持一致。
  */
 import type { ArticleInput } from "../../contracts/article";
-import type {
-  DailyReport,
-  ReportItem,
-  ReportSectionKey,
-} from "../../contracts/report";
+import type { DailyReport, ReportItem } from "../../contracts/report";
 import { rollUpTags } from "../enrich/tag-rollup";
 import { dedupeSections } from "../enrich/dedupe-sections";
-import {
-  isGdIpoCandidate,
-  isGzLocalCandidate,
-  isPolicyMarketCandidate,
-} from "./cards";
+import { isGzLocalCandidate } from "./cards";
 
 /**
  * 旧采集分类 → 新管线渲染板块（无 AI 兜底映射）。
- * 无状态源架构红线（2026-08-29 用户）：板块归属一律由**内容判定**，数据源分类
- * 只是采集元数据。tech/ipo 是独立内容栏目按类别归栏；其余统一内容判定：
- *  广东企业 IPO 进展（名单+阶段词）→ ipo；广州锚+业务线 → gz_local；
- *  外地地名/政策动作/全国市场信号 → policy_market；否则 biz_insight。
+ *
+ * **单一真源已回归 `enrich/heuristics#categoryToSection`**（2026-10-04，sc「检查全部归栏逻辑」）：
+ * 本文件此前自带一份实现，与 `enrich/pipeline.ts` 的那份**已经漂移**
+ * —— 此处多一条 `isGdIpoCandidate → ipo` 判定（即「同一条广东 IPO 媒体报道，
+ * `npm run render` 归 IPO 栏目、生产管线归业务启示」）。现统一由 heuristics 提供，
+ * 本处保留同名导出以兼容既有 import 路径（`tests/report-from-articles.test.ts` 等）。
+ *
+ * 无状态源架构红线（2026-08-29 用户）：板块归属一律由**内容判定**，数据源分类只是采集元数据。
  */
-export function categoryToSection(cat?: string, title = "", excerpt = ""): ReportSectionKey {
-  if (cat === "tech") return "tech";
-  if (cat === "ipo" || cat === "gd-ipo") return "ipo";
-  // 2026-08-30：媒体源报道的广东企业 IPO 动态（注册生效/辅导备案/过会等，
-  // 东财在审表状态滞后时由媒体报道补位）→ 内容判定归 IPO 动态板块。
-  if (isGdIpoCandidate(title, excerpt)) return "ipo";
-  if (isGzLocalCandidate(title, excerpt)) return "gz_local";
-  if (isPolicyMarketCandidate(title, excerpt)) return "policy_market";
-  return "biz_insight";
-}
+import { categoryToSection } from "../enrich/heuristics";
+export { categoryToSection };
 
 function mmdd(d: Date | undefined): string {
   if (!d) return "";

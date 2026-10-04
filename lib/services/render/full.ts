@@ -87,7 +87,7 @@ import { topGdIpo, gdIpoStageOf, companyNameOf } from "../classify/gd-ipo-spoken
 import { IPO_LIST_WINDOW_DAYS } from "../../ipo-config";
 
 // ----- C-1 Phase3：执行摘要 / 股市区块已外移到独立模块（纯搬移，行为零变化）-----
-import { resolveTitleMap, renderReportExec, FOREIGN_REGION_RE } from "./exec-block";
+import { resolveTitleMap, renderReportExec } from "./exec-block";
 import {
   renderStockIndexBlock,
   renderStockRecap,

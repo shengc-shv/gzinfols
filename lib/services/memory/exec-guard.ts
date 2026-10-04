@@ -25,7 +25,12 @@
  */
 
 import type { ExecutiveSummary, ExecInsight, ExecRisk } from "../enrich/executive-summary";
-import { auditHeroDimensions, deriveHeroLine, rebuildHeroLine } from "../enrich/executive-summary";
+import {
+  HERO_MIN_DIMENSIONS,
+  auditHeroDimensions,
+  auditHeroGrounding,
+  deriveHeroLine,
+} from "../enrich/executive-summary";
 import { scoreBranchRelevance } from "../select/filters/relevance-score";
 import { formatBroadcastAt } from "./broadcast-time";
 import {
@@ -146,6 +151,34 @@ export function pickUntilTarget<T>(opts: {
 }
 
 /**
+ * 构建定调**防编造**的比对素材面（2026-10-04 sc T4）。
+ *
+ * 为什么素材面要用「**两天 exec 池**」而不是仅必读/商机：
+ * 综述式定调会引用**被必读/商机筛掉**的当日信息（如数字人民币当天上过版面但未进必读）。
+ * 10-04 实测三种素材面的差异：
+ *  - 仅必读/商机 `title+topic` → 合规综述**可**通过，但编造检测偏弱；
+ *  - 必读/商机 `+why/impact` → 🔴 **编造检测完全失效**（越界数归零，因 LLM 写的 why 就在讲那些内容）；
+ *  - **两天 exec 池全量** → 合规综述与编造用例 4/4 判对 ✅（采用）。
+ *
+ * 拼 `title + summary` 是为了给主体锚更多命中面（`eventFingerprint` 是子串匹配）。
+ * ⚠️ 池为空时返回空数组 → `auditHeroGrounding` 会**放行**（宁可保留，不误杀真实内容）。
+ */
+function buildDailyGroundingTexts(next: ExecutiveSummary, pool: readonly GuardPoolItem[]): string[] {
+  const seen = new Set<string>();
+  const out: string[] = [];
+  const push = (t?: string) => {
+    const v = (t ?? "").trim();
+    if (!v || seen.has(v)) return;
+    seen.add(v);
+    out.push(v);
+  };
+  for (const it of next.must_read ?? []) push(`${it.title ?? ""} ${it.why ?? ""}`);
+  for (const it of next.insights ?? []) push(`${it.topic ?? ""} ${it.impact ?? ""}`);
+  for (const p of pool) push(`${p.title ?? ""} ${p.summary ?? ""}`);
+  return out;
+}
+
+/**
  * 主入口：对四大板块执行记忆去重 + 兜底补齐。
  * 纯函数（不改入参），返回新 exec 与更新后的记忆库。
  */
@@ -236,14 +269,52 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   //   洞察板块内容腰斩、口播时长掉到 128s。与 09-17「3 件事只剩 2 件」是同一个病。
   // 顺序：保持 LLM 给出的优先级顺序（不额外打分排序，避免改动相关性口径）；判重复用 evaluateCandidate。
   {
-    const cands: Array<{ it: ExecInsight; cand: MemoryCandidate }> = (exec.insights ?? []).map((it) => ({
-      it,
-      cand: {
-        title: it.topic,
-        text: `${it.impact ?? ""} ${it.action ?? ""}`.trim(),
-        ...(it.sources?.[0]?.url ? { url: it.sources[0].url } : {}),
-      },
-    }));
+    // 🔴 商机与必读**互斥**（2026-10-04 sc「R4 以 2 为主」= 代码层，授权实施）
+    //
+    // sc 口径：「商机原则上不应与今日必读重复 —— 行领导在阅读今日必读时也会产生相应想法，
+    // 重复出现等于白占一个位」。
+    //
+    // 为什么必须代码层：此前**只有 `risk` 有互斥约束**（prompt §3「不能同一条事件又当
+    // must_read 又当 risk」），`insights` **完全没有** —— 属约束缺口，不是模型失误。
+    // 实测 10-04：商机 6 条里 **3 条与必读重复**（贷款明白纸同条 / 基金业绩腰斩同源 /
+    // IPO 受理降温同源）＝ 50%，纯靠 prompt 叮嘱挡不住。
+    //
+    // 判据只有两条：**同 URL** + **标题逐字相同**（2026-10-04 sc 选 A）。
+    //
+    // ⛔ 曾试过再加一层 `sameEvent`（事件指纹共享 ≥2 锚点），**已移除** ——
+    // 实测 10-04 它对真实场景**零收益**却带风险：
+    //  ① 抓不到：当天 3 条真重复的 `sameEvent` 全部为 false。商机 `topic` 是 LLM 改写后的
+    //     短语，锚点被改写稀释 ——「贷款明白纸」两条锚点都是 `[]`；「沪深9月IPO零受理」vs
+    //     「IPO受理降温」只共享 1 个锚（阈值 2）。`titleSimilarity` 同样不可靠
+    //     （同源三条 Dice 实测 1.00 / 0.17 / 0.14）。
+    //  ② 误并风险：`sameEvent` 走 `eventFingerprint`（**地域锚照算**），于是
+    //     「泛化主体词 + 地域」就能凑满 2 锚点 —— 实测「市政项目获批」与「普惠金融改革试点」
+    //     被判同一事件（同「按揭」大杂烩的病根）。
+    // 改用「同 URL + 逐字相同标题」后：覆盖当天 3/3、零误伤。代价是「不同 URL 的同一事件」
+    // 会漏判 —— 但那类条目改写后锚点本就变了，本就判不出。
+    const mrUrls = new Set((next.must_read ?? []).map((m) => m.url ?? "").filter(Boolean));
+    const mrTitles = new Set((next.must_read ?? []).map((m) => (m.title ?? "").trim()).filter(Boolean));
+    const allInsights = exec.insights ?? [];
+    const cands: Array<{ it: ExecInsight; cand: MemoryCandidate }> = allInsights
+      .filter((it) => {
+        const u = it.sources?.[0]?.url ?? "";
+        if (u && mrUrls.has(u)) return false;
+        return !mrTitles.has((it.topic ?? "").trim());
+      })
+      .map((it) => ({
+        it,
+        cand: {
+          title: it.topic,
+          text: `${it.impact ?? ""} ${it.action ?? ""}`.trim(),
+          ...(it.sources?.[0]?.url ? { url: it.sources[0].url } : {}),
+        },
+      }));
+    if (cands.length < allInsights.length) {
+      log.push(
+        `🧠 商机互斥：剔除与必读重复的 ${allInsights.length - cands.length} 条（同 URL / 同事件）` +
+          `（sc 口径：行领导读完必读已产生想法，重复占位无意义）`,
+      );
+    }
 
     // 依次取：未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延下一条候补，直到选满
     // INSIGHT_PLAY_TARGET。候补用尽仍不足 → 按实际剩余，不强拉池内条目凑数（宁缺勿滥）。
@@ -306,48 +377,78 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   }
 
   // ---- 5) hero（今日定调）----
-  // ⚠️ 必须放在**最后**（必读/商机定稿之后）：定调是它们的「提纲」，校验依据必须是
-  //    **实际会呈现的**必读/商机 —— 被判重拦掉的内容，其对应维度就是悬空的。
+  // ⚠️ 必须放在**最后**（必读/商机定稿之后）：校验依据必须是**实际会呈现的内容**。
   //
-  // 口径（2026-10-03 sc）：「定调是基于今日必读和商机的**提纲** —— 下面有出现，提纲就可以出现」。
+  // 口径演进：
+  //  · 10-03 sc「定调是必读/商机的提纲」→ **维度可回溯**校验（`auditHeroDimensions`）；
+  //  · 10-04 sc「定调是**综合提炼**，不需要一一匹配信息源」→ 改为**防编造**校验
+  //    （`auditHeroGrounding`）：定调里的业务主体锚必须都能在**当天全量信息源**里找到。
   //
-  // 为什么不再走事件判重：提纲与必读/商机共享主题是**设计使然**，但旧行为把它当事件候选走
+  // 为什么必须改（10-04 实测）：可回溯会**误剔合理的跨条目综述** ——
+  // 「合规成本上行 / 涉外窗口打开 / 存量压力集中在基金客户体验」被剔掉 2/3 个维度
+  // （它们是对多条信息的提炼，不是任一条的复述）。而 10-04 实测的线上定调只有 1 个方面，
+  // 与该守卫削维度直接相关。
+  //
+  // 为什么不走事件判重：提纲与必读/商机共享主题是**设计使然**，但旧行为把它当事件候选走
   // `findMatchingEvent` —— 10-03 实证被匹配到「按揭」事件（定调含「房贷」「贴息」两个锚 →
   // sim 0.5，而该事件已播 9 次）→ 判 `cooldown` 拦下 → 兜底重写。
-  // 改为**维度可回溯**校验（`auditHeroDimensions`）：悬空维度剔除；全悬空则改由必读/商机
-  // 重归纳；归纳不出才保留原定调（红线：宁可重复，不留空）。
   //
   // ⚠️ 定调**不写入事件记忆**：写进去会变成一个「事件」并被后续必读/商机匹配到（两者本就共享
   //    主题）→ 反过来把正常必读判成重复。定调的跨天一致性由必读/商机的判重间接保证。
   if (next.hero_line && next.hero_line.trim()) {
-    const audit = auditHeroDimensions(next.hero_line, next.must_read, next.insights);
-    if (audit.kept.length === 0) {
-      // 一个维度都回溯不到：提纲与下方内容完全脱节 → 用必读/商机重归纳；
-      // 归纳不出（素材为空）则保留原定调（红线：宁可重复，不留空）。
+    // 防编造素材面 = **当天全量信息源**（必读/商机 + 板块在版面内的全部条目）。
+    // 🔴 必须是「全量」而非仅必读/商机：综述式定调会引用**被必读/商机筛掉**的当日信息
+    //    （如数字人民币当天上过版面但未进必读）。实测若改用「必读+商机的 why/impact」，
+    //    编造检测会**完全失效**（越界数归零）—— LLM 写的 why 本身就在讲那些内容。
+    const dailyTexts = buildDailyGroundingTexts(next, pool);
+    const grounding = auditHeroGrounding(next.hero_line, dailyTexts);
+    // 可回溯**降级为诊断信息**（仍算，供日志观察「综述式定调有几个维度能在下方找到对应」）
+    const trace = auditHeroDimensions(next.hero_line, next.must_read, next.insights);
+    if (!grounding.grounded) {
+      // 🔴 防编造不过：定调里有当天素材中不存在的业务主体锚 → **改由必读/商机重归纳**。
+      // 归纳不出则**保留原定调**（红线：宁可重复，也不留空、更不发布编造内容）。
       const derived = deriveHeroLine(next);
       if (derived) {
         next.hero_line = derived;
         next.spoken_hero = undefined;
         heroRewriteNeeded = true;
         log.push(
-          `🧠 定调：全部 ${audit.dims.length} 个维度都无法在必读/商机中回溯 → 改由必读+商机归纳：${derived}`,
+          `🧠 定调：出现当天素材中不存在的主体锚 ${JSON.stringify(grounding.escapedAnchors)}` +
+            `（比对 ${grounding.sourceCount} 条当日信息）→ 改由必读+商机归纳：${derived}`,
         );
       } else {
-        log.push(`🧠 定调：全部 ${audit.dims.length} 个维度均无法回溯、且必读/商机为空 → 保留原定调`);
+        log.push(
+          `🧠 定调：出现越界主体锚 ${JSON.stringify(grounding.escapedAnchors)}、` +
+            `且必读/商机为空 → 保留原定调（宁重复，不发布编造）`,
+        );
       }
-    } else if (audit.dangling.length === 0) {
-      log.push(`🧠 定调：${audit.kept.length} 个维度均可在必读/商机中回溯 → 保留原定调`);
-    } else {
-      // 剔除悬空维度后重建。卡面只放正文（**不带任何标签前缀**）：页面「今日定调：」/
-      // 企微「【今日定调】」/口播「先看今天的整体定调。」各端自加，生产者再加会渲染成双标签。
-      const rebuilt = rebuildHeroLine(audit.kept);
-      next.hero_line = rebuilt;
-      heroRewriteNeeded = true;
-      // 口播是围绕**原定调**写的，定调改了就必须清空 → 由 syncNarration 用新 hero_line 兜底派生
-      // （`voice/index.ts` 只读 `spoken_hero`；不清空会让口播与卡面不同源）。
-      next.spoken_hero = undefined;
+    } else if (trace.dims.length >= HERO_MIN_DIMENSIONS) {
+      // 🔴 下限守卫必须用**实际维度数**（`dims.length`），不能用「可在下方回溯的维度数」
+      // （`kept.length`）—— 后者是 10-03「维度可回溯」口径的遗留，与 T4 冲突：
+      // 10-04 实测合规综述「合规成本上行 / 涉外窗口打开 / 存量压力集中在基金客户体验」
+      // 三个维度**都**不回溯到任一条必读/商机（它们是跨条目提炼，正是 T4 要放行的形态），
+      // 若拿 kept=0 去比下限 → **误判为「维度不足」**，白白触发二次 LLM 重写。
       log.push(
-        `🧠 定调：剔除 ${audit.dangling.length} 个悬空维度（${audit.dangling.map((d) => d.key).join("、")}）→ ${rebuilt}`,
+        `🧠 定调：防编造通过（无越界主体锚，比对 ${grounding.sourceCount} 条当日信息）｜` +
+          `${trace.dims.length} 个维度中 ${trace.kept.length} 个可在下方回溯（综述式属正常）→ 保留原定调`,
+      );
+    } else {
+      // 防编造通过，但**维度数低于下限**（2026-10-04 实测：LLM 只给 1 个方面）。
+      //
+      // 🔴 **只标记、不用规则替换**（2026-10-04 sc 纠正）：
+      //    `deriveHeroLine` 取的是 `must_read.title` / `insights.topic` **原文**，
+      //    用它补足的结果 = **把下面的必读标题抄一遍**（实测输出「今天主要看五个方面：9月银行业罚没2.07亿、
+      //    贷款明白纸全面铺开、…」—— 与「今日必读」列表逐字相同）。
+      //    这**恰好违反 §0 自己的禁令**：「不做事件摘要、不得换个说法复述某一条必读 —— 定调是纲、必读是目」。
+      //    sc 的判断：**「如果是重复下面的内容，还不如原来的那一条总结」** ——
+      //    1 条精炼的纲 > 5 条复读的目。
+      //
+      //    ∴ 这里只置 `heroRewriteNeeded`，让**二次 LLM 定调**去补（它有能力把维度概括成
+      //    「领域词组 + 看点」）；LLM 不可用时**保留原定调**（宁可少，不要复读）。
+      heroRewriteNeeded = true;
+      log.push(
+        `🧠 定调：防编造通过、但仅 ${trace.dims.length} 个维度（下限 ${HERO_MIN_DIMENSIONS}）→ 标记二次 LLM 重写` +
+          `（不采用规则补足：那只是把必读标题抄一遍，反而不如这条精炼的总结）`,
       );
     }
   }

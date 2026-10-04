@@ -32,8 +32,10 @@ import {
   candidateCoverage,
   candidateFacts,
   extractFacts,
+  extractTopicTags,
 } from "../lib/services/memory/event-text";
 import { findMatchingEvent } from "../lib/services/memory/event-decide";
+import { sameEvent } from "../lib/services/select/filters/dedup-similar";
 
 /** 09-28「公募基金规模达39.63万亿」事件累积后的锚点（真实值，6 个）。 */
 const REC_PUBLIC_FUND = ["基金", "#39.63万亿", "理财", "存款", "#40万亿", "#1300亿元"];
@@ -201,4 +203,60 @@ test("事实锚单位归一：「万亿元」与「万亿」不得算作两个�
     0,
     "对 09-28 已播事实零新增 → 不再冒领「增量」",
   );
+});
+
+// ---------------------------------------------------------------------------
+// 2026-10-04 sc：「普惠」在 THEME_RULES / EVENT_ANCHORS 去裸词（配对词）
+// ---------------------------------------------------------------------------
+
+test("「普惠」去裸词：市政语境不再误挂消费信贷主题、也不再产事件锚", () => {
+  // 实证（10-04）：一条**市政项目**「广州琶洲南 CBD 高空立体公共客厅项目获批」，
+  // 标题含「面向全社会普惠开放」。裸词「普惠」使它拿到锚 ["普惠","广州"]，
+  // 被归到「消费信贷」主题 —— 而它与银行业务毫无关系。
+  const T = "将24小时面向全社会普惠开放，广州琶洲南CBD高空立体公共客厅项目获批";
+  assert.ok(
+    !extractTopicTags(T).includes("消费信贷"),
+    `市政项目不该归消费信贷主题（实际 ${JSON.stringify(extractTopicTags(T))}）`,
+  );
+  assert.ok(
+    !candidateAnchors({ title: T } as never).includes("普惠"),
+    "「普惠」不是事件锚（泛化词：金融语境与市政语境共用）",
+  );
+  for (const t of ["普惠性文化服务扩容", "面向全体市民的普惠开放"]) {
+    assert.deepEqual(extractTopicTags(t), [], `「${t}」不该产生任何主题标签`);
+  }
+});
+
+test("「普惠」配对词：真实普惠金融新闻仍命中主题与锚点（去裸词不能丢召回）", () => {
+  const CASES: Array<[string, string[]]> = [
+    ["央行普惠小微再贷款额度上调", ["央行", "普惠小微"]],
+    ["普惠金融指标下调", ["普惠金融"]],
+    ["普惠小微贷款新政落地", ["小微贷", "普惠小微"]],
+    ["普惠信贷投放提速", ["信贷", "普惠信贷"]],
+  ];
+  for (const [t, wantAnchors] of CASES) {
+    assert.ok(
+      extractTopicTags(t).includes("消费信贷"),
+      `「${t}」应仍归消费信贷主题（实际 ${JSON.stringify(extractTopicTags(t))}）`,
+    );
+    const anchors = candidateAnchors({ title: t } as never);
+    for (const a of wantAnchors) {
+      assert.ok(anchors.includes(a), `「${t}」应含锚「${a}」（实际 ${JSON.stringify(anchors)}）`);
+    }
+  }
+});
+
+test("「普惠」泛化词 + 地域不得凑满判重阈值（与「按揭大杂烩」同型）", () => {
+  // 这两条**毫不相干**（市政项目 vs 金融政策），但裸词时代共享 ["普惠","广州"] 两个锚，
+  // 恰好凑满 `sameEvent` 的 `minShared=2` → 被判同一事件。泛化词 + 地域即可定罪，
+  // 是「按揭」大杂烩（5 件无关的事并成一个事件）的同一病根。
+  const MUNI = "将24小时面向全社会普惠开放，广州琶洲南CBD高空立体公共客厅项目获批";
+  const POLICY = "广州普惠金融改革试点扩围，三家银行参与";
+  assert.equal(
+    sameEvent(MUNI, POLICY),
+    false,
+    "市政项目与普惠金融政策不得被判为同一事件（泛化词 + 地域凑满阈值）",
+  );
+  // 配对词版本下两者仍各自保有自己的锚，判重身份不因去词而丢失
+  assert.ok(candidateAnchors({ title: POLICY } as never).includes("普惠金融"), "政策侧仍应保有配对锚");
 });

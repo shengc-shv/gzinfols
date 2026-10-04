@@ -1,7 +1,12 @@
 import { extractJson } from "./json-util";
 import { mapSubcategoryToSegments, OTHER_SEGMENT } from "../classify/customer-segment";
 import { INSIGHT_OTHER_GROUP, segSpeak } from "../voice/speech-lines";
-import { titleBigrams, titleSimilarityDice } from "../select/filters/dedup-similar";
+import {
+  titleBigrams,
+  titleSimilarityDice,
+  eventFingerprint,
+  subjectAnchors,
+} from "../select/filters/dedup-similar";
 import {
   rankByRelevance,
   scoreBranchRelevance,
@@ -16,8 +21,11 @@ import { MUST_READ_CANDIDATE_POOL, INSIGHT_CANDIDATE_POOL } from "../memory/even
  *
  * 每天一次 LLM 调用，基于当日 宏观政策(finance) + 广州商机(gz) 的高信号条目
  * 与市场点评，产出：
- *  - must_read：今日必读 3-5 条（高影响事件 + 对分行意味着什么）
- *  - insights：商机提示 10-12 条（候选池；对广州分行零售/对公的潜在影响 + 建议动作；每客群段≤2、其他≤1）
+ *  - must_read：今日必读 —— **候选 8-10 条**（以 prompt §1 为准），判重后**播出 5 条**
+ *    （`MUST_READ_CANDIDATE_POOL=10` → `MUST_READ_PLAY_TARGET=5`；候补用尽按实际剩余，不凑数）
+ *  - insights：商机洞察 —— **候选 10-12 条**（prompt §2），判重后**播出 6 条**
+ *    （`INSIGHT_CANDIDATE_POOL=12` → `INSIGHT_PLAY_TARGET=6`）；每客群段≤2
+ *    ⚠️ 与必读**互斥**（2026-10-04 sc）：同 URL / 同事件的条目不进商机（`exec-guard` 代码层剔除）
  * 把「看新闻」升级为「看结论」。任何失败 → 返回 null，页面不渲染该板块。
  */
 
@@ -149,12 +157,16 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
    **写作视角（2026-10-01 sc 口径，全部段落通用）**：听众是**早上上车、路上只有约 5 分钟、全程只能听**的行领导 ——
    他的注意力是一整段连续的行程，**看不见任何文字、不能回看、不能暂停**。所以每一句都必须在**第一次听到时**就成立：
    主语清楚、信息自足、不用任何视觉指代词（「如下」「见上文」「表格里」）。
-   - 句式：今天主要看N个方面：X，看点；Y，看点。（N = 2~4）
+   - 句式：今天主要看N个方面：X，看点；Y，看点。
+   - 🔴 **方面数 N 是硬约束：N ≥ 2**；输入条目 ≥5 条时**应 ≥3**。
+     ⛔ 反例（禁止）：「今天主要看**一个**方面：X」—— 除「输入确实只有 1 条突出信号」外，一律输出 2~4 个方面。
+     （2026-10-04 实测：当日有 5 条必读 + 5 条商机，LLM 却只给 1 个方面、整句仅 23 字收工 ——
+      问题不在「装不下」（离 70 字上限还差 47 字），而在 prompt 此前**只有上限、没有下限**。）
    - {X} = 3~8 字的领域词组（如「汇率预期管理」「楼市金九银十」「财富货架调整」「消费场景获客」），**不要**写具体企业/机构名或事件细节；
    - {看点} = **3~6 字**的**分量提示**，点出量级、紧迫性或影响面（如「结售汇窗口」「补贴叠加节庆」「近四十万亿」「外资抢跑」）—— 只给看点，**不要**写成完整的「为什么」句；
    - **不做事件摘要、不得换个说法复述某一条必读** —— 定调是纲、必读是目，听众必须能听出分工；
-   - 硬约束：整句 **≤70 字**（含标点）；写不下就减少方面数或缩短词组，**不得超**；
-   - 若当日确实无突出主题，可输出空字符串；
+   - 硬约束：整句 **≤70 字**（含标点）；写不下就减少方面数或缩短词组，**不得超**，**但也不得少于 2 个方面**；
+   - ⚠️ **仅在输入条目不足 3 条时**才允许输出空字符串 —— 内容充足却写空、或只写一个方面，都视为**未完成任务**；
    - 并为该定调配套口播稿 spoken_hero：把同一批维度说成**一句口语**，**≤70 字**，**不要问候语、不要自我介绍、不要展开成长句**（如「今天主要看四个方面：汇率预期管理，结售汇窗口；楼市金九银十，按揭接单；财富货架调整，节前配置；消费场景获客，补贴叠加节庆。」）；纯口语、无链接/无Markdown/无emoji，可直接朗读。
 
 1. must_read（今日必读，8-10 条）— **偏宏观、市场级大信号**：央行/金融监管总局等全国性政策转向、市场重大变化、行业性新趋势、新产品新玩法。答"今天/本周市场可能怎么走"。**只放宏观与市场信号，不放具体业务动作**（全篇都不给动作，见文末「不许给建议」）。
@@ -754,8 +766,84 @@ export function deriveHeroLine(input: {
 
 /** 维度主词与必读/商机主题的 bigram 重合下限：达到即认定「下面有出现」。 */
 export const HERO_DIM_MIN_OVERLAP = 2;
+
+/**
+ * 提纲**维度数下限**（2026-10-04）。
+ *
+ * 为什么需要：`auditHeroDimensions` 原本只校验「悬空」（维度是不是下面没出现），
+ * **不校验「过少」**。实测 10-04：当日有 5 条必读 + 5 条商机，LLM 却只输出
+ * 「今天主要看一个方面：贵金属异动，资金搬家。」（整句 23 字、离 70 字上限差 47 字）
+ * —— 不是装不下，而是 prompt 此前只有上限、没有下限，LLM 减到 1 个不违规。
+ *
+ * 语义：低于此值 → 交由 `deriveHeroLine` 按分行相关性分值补足（并触发二次 LLM 定调）。
+ * ⚠️ 只约束**下限**，不动上限行为（10-03 sc 口径「不一定 5 条、打不过就打不过」依旧成立）。
+ */
+export const HERO_MIN_DIMENSIONS = 2;
 /** 提纲前缀（「今天主要看四个方面：」）。 */
 const HERO_PREFIX_RE = /^今天主要看[^：:]*[：:]\s*/;
+
+// ---------------------------------------------------------------------------
+// T4 · 定调审计：可回溯（10-03）→ 防编造（10-04 sc）
+// ---------------------------------------------------------------------------
+
+/**
+ * **编造审计**（2026-10-04 sc 口径：定调是「综合提炼」，不需一一匹配信息源）。
+ *
+ * 为什么要改（10-04 实测）：旧「维度可回溯」要求每个维度与某条必读/商机
+ * bigram 重合 ≥2，于是**合理的跨条目综述会被误剔** —— 实测「合规成本上行 / 涉外窗口打开 /
+ * 存量压力集中在基金客户体验」被剔掉 2/3 个维度（它们是对多条信息的提炼，不是任一条的复述）。
+ * 这与 10-04 sc「定调不必一一对应信息源」直接冲突。
+ *
+ * 改成校验**防编造**：定调里出现的**业务主体锚**必须都能在**当天的信息源**里找到。
+ *
+ * 为什么用「主体锚」而不是 `extractFacts` 的事实锚（实测踩过）：
+ *  - 事实锚**抓不到编造**。实测「数字人民币鸿蒙生态落地」在宽素材（必读+商机的
+ *    `why`/`impact`）下**零越界** —— 因为 LLM 写的 `why` 本身就在讲数字人民币；
+ *  - 主体锚来自 `EVENT_ANCHORS` 词表（基金/理财/罚/降息…），它回答「在谈什么」，
+ *    且**素材面越宽越可靠**。
+ *
+ * 🔴 素材面必须是「**当天全量存活条目**」而不是必读/商机：
+ * 综述式定调会引用**被必读/商机筛掉**的当日信息（如数字人民币当天上过版面但没进必读）。
+ * 10-04 实测两种素材面的差异：宽素材（+why/impact）下编造检测**完全失效**（越界数归零），
+ * 全量存活条目标题下 4/4 用例判对。
+ */
+export interface HeroGroundingAudit {
+  /** 定调里出现、但**当天素材中找不到**的业务主体锚（= 编造嫌疑）。 */
+  escapedAnchors: string[];
+  /** 是否通过防编造校验（无越界主体锚）。 */
+  grounded: boolean;
+  /** 参与校验的当天信息源条数（日志用）。 */
+  sourceCount: number;
+}
+
+/**
+ * 定调**防编造**审计：定调的业务主体锚是否都存在于当天信息源中。
+ *
+ * @param heroLine 定调整句
+ * @param dailyTexts 当天**全量存活条目的文本**（标题即可；建议含标题+摘要，口径更宽更可靠）
+ */
+export function auditHeroGrounding(
+  heroLine: string,
+  dailyTexts: readonly string[],
+): HeroGroundingAudit {
+  const body = (heroLine ?? "")
+    .replace(HERO_PREFIX_RE, "")
+    .replace(/[。．.\s]+$/, "");
+  if (!body.trim() || dailyTexts.length === 0) {
+    // 无素材可比 → 无法判定编造，**放行**（红线：宁可保留，不误杀当天真实内容）
+    return { escapedAnchors: [], grounded: true, sourceCount: dailyTexts.length };
+  }
+  const source = new Set<string>();
+  for (const t of dailyTexts) {
+    for (const a of subjectAnchors([...eventFingerprint(t ?? "")])) source.add(a);
+  }
+  const escapedAnchors = subjectAnchors([...eventFingerprint(body)]).filter((a) => !source.has(a));
+  return {
+    escapedAnchors,
+    grounded: escapedAnchors.length === 0,
+    sourceCount: dailyTexts.length,
+  };
+}
 
 export interface HeroDimensionAudit {
   /** 逐个维度的审计明细（日志/调试用）。 */

@@ -1,7 +1,6 @@
 /**
  * 执行摘要区块渲染（2026-09-14 C-1 Phase3 自 `render/full.ts` **纯搬移**，行为零变化）：
- * `resolveTitleMap`（must_read 回写标题）· `renderReportExec`（摘要主区块）·
- * `FOREIGN_REGION_RE`（广州本地严格过滤的外地地名锚）。
+ * `resolveTitleMap`（must_read 回写标题）· `renderReportExec`（摘要主区块）。
  *
  * 注意：`mergeStoredExecutive` **不在本文件** —— 它是业务规则，唯一实现在
  * `services/assemble/merge-executive.ts`（生产由 `side-exec-summary` 调用）；
@@ -251,10 +250,8 @@ export function renderReportExec(report: DailyReport): string {
   </section>`;
 }
 
-/**
- * 外地地名锚（广州本地严格过滤用）：标题命中任一外地省/市/地名 → 该条为全国/外地
- * 政策（上海/北京/深圳/江苏/浙江…），即使 category=gz 也不进 gz_local，归政策与市场。
- * 广州本地板块宁缺毋滥：领导冲着「广州」点进来，看到的必须是广州事件本身。
- */
-export const FOREIGN_REGION_RE =
-  /上海|北京|深圳|江苏|浙江|南京|苏州|杭州|宁波|成都|重庆|天津|武汉|长沙|合肥|青岛|济南|福州|厦门|昆明|西安|郑州|东莞|佛山|珠海|中山|惠州|汕头|湛江|茂名|肇庆|江门|清远|韶关|梅州|河源|阳江|揭阳|汕尾|潮州|云浮|广东/;
+// 2026-10-04（sc「检查全部归栏逻辑」）：原此处的 `FOREIGN_REGION_RE` **副本已删除**。
+// 它是**死代码** —— 本文件无任何使用处，唯一 importer `render/full.ts` 也只是
+// import 未使用（已一并清理）。
+// 真源 = `enrich/heuristics.ts#FOREIGN_REGION_RE`；`render/cards.ts` 亦从该处 re-export。
+// 教训同「测试测的不是生产代码」：同一词表两份定义，改一份不会生效，还会让人误判行为。

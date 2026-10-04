@@ -7,7 +7,7 @@
 import { runPass1, type LlmRunner, type Pass1Input } from "./pass1";
 import { runPass2, ensureSchema, finalizeRanks } from "./pass2";
 import { rollUpTags } from "./tag-rollup";
-import { isGzLocalCandidate, isPolicyMarketCandidate } from "./heuristics";
+import { categoryToSection, isGzLocalCandidate } from "./heuristics";
 import {
   validateReport,
   ALLOWED_TAGS,
@@ -28,17 +28,16 @@ const HERO_FALLBACK = "今日暂无可推送重点，详见各板块资讯。";
 
 /**
  * SKIP_AI 模式（无 LLM）下的文章原始分类 → 板块启发式映射。
- * 无状态源架构红线（2026-08-29 用户）：板块归属一律由**内容判定**，数据源分类只是
- * 采集元数据。tech/ipo 是独立内容栏目按类别归栏；其余统一内容判定：
- *  广州锚+业务线 → gz_local；外地地名/政策动作/全国市场信号 → policy_market；否则 biz_insight。
+ *
+ * **单一真源已上移到 `./heuristics#categoryToSection`**（2026-10-04，sc「检查全部归栏逻辑」）：
+ * 该函数此前此处与 `render/report-from-articles.ts` **各有一份，且已漂移**
+ * —— render 版多一条 `isGdIpoCandidate → ipo` 判定，即「同一条广东 IPO 媒体报道，
+ * 预览脚本归 IPO 栏目、生产管线归业务启示」。现统一由 heuristics 提供，此处保留
+ * 同名导出仅为兼容既有 import 路径（`tests/assignSection.test.ts` 等）。
+ *
+ * 无状态源架构红线（2026-08-29 用户）：板块归属一律由**内容判定**，数据源分类只是采集元数据。
  */
-export function categoryToSection(cat?: string, title = "", excerpt = ""): ReportSectionKey {
-  if (cat === "tech") return "tech";
-  if (cat === "ipo" || cat === "gd-ipo") return "ipo";
-  if (isGzLocalCandidate(title, excerpt)) return "gz_local";
-  if (isPolicyMarketCandidate(title, excerpt)) return "policy_market";
-  return "biz_insight";
-}
+export { categoryToSection };
 
 /**
  * SKIP_AI 确定性降级 runner 工厂：不调用任何 LLM，纯靠输入池字段构造合法 JSON。
