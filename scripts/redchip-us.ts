@@ -64,7 +64,18 @@ async function main(): Promise<void> {
   const endDate = date; // 今天
 
   const nowIso = beijingNowIso();
-  const filings = await searchF1Filings(startDate, endDate);
+  // 🔴 源失败与「真的 0 命中」必须区分：检索失败时**直接退出、不写盘**，
+  //    否则会用 `count:0` 的空快照覆盖上一份有效数据（实测 10-01~10-04 连 4 天空快照，
+  //    根因就是 SEC 间歇 500 被当成「0 命中」）。台账与 meta 均保持上一份有效状态。
+  let filings: Awaited<ReturnType<typeof searchF1Filings>>;
+  try {
+    filings = await searchF1Filings(startDate, endDate);
+  } catch (err) {
+    console.error(`[redchip-us] ❌ ${(err as Error).message}`);
+    console.error("[redchip-us] 本轮放弃写盘（保留上一份有效快照与台账）");
+    process.exitCode = 1;
+    return;
+  }
   console.log(
     `[redchip-us] 窗口 ${startDate} ~ ${endDate}（今天+昨天）检索 F-1/F-1A 主文档 ${filings.length} 家（按 CIK 去重）`,
   );

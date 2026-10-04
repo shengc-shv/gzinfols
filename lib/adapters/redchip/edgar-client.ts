@@ -22,6 +22,13 @@ import { extractEdgarHtmlText } from "./html-text";
 export const EDGAR_UA =
   "gzinfols-local/1.0 (local redchip us sync; contact: admin@example.com)";
 
+/** 检索重试退避间隔（ms）。SEC 全文检索实测会间歇性 500，重试即恢复。 */
+export const EDGAR_RETRY_DELAYS_MS = [800, 2000] as const;
+
+function sleepMs(ms: number): Promise<void> {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
 export interface EdgarFiling {
   /** 发行人 CIK（去前导零，如 2050183）。 */
   cik: string;
@@ -40,10 +47,36 @@ export async function searchF1Filings(startDate: string, endDate: string): Promi
   const url =
     `https://efts.sec.gov/LATEST/search-index?q=%22F-1%22` +
     `&dateRange=custom&startdt=${startDate}&enddt=${endDate}&forms=F-1`;
-  const res = await fetch(url, { headers: { "User-Agent": EDGAR_UA } });
-  if (!res.ok) {
-    console.warn(`[edgar] 检索失败 HTTP ${res.status}`);
-    return [];
+  // 🔴 2026-10-04：SEC 全文检索**间歇性返回 HTTP 500**（实测同一 URL 重试即恢复）。
+  //    原实现只 warn 后 `return []` → 与「窗口内真的 0 命中」**不可区分**，
+  //    于是美股源连续 4 天空快照（`data/redchip-us/*.json` 全是 `count:0`）而无人察觉。
+  //    现在：5xx / 网络错 → 按 `EDGAR_RETRY_DELAYS_MS` 退避重试；仍失败则**抛错**，
+  //    由调用方决定不写盘（绝不用空快照覆盖上一份有效数据）。
+  let res: Response | null = null;
+  let lastErr = "";
+  for (let attempt = 0; attempt <= EDGAR_RETRY_DELAYS_MS.length; attempt++) {
+    if (attempt > 0) await sleepMs(EDGAR_RETRY_DELAYS_MS[attempt - 1]!);
+    try {
+      res = await fetch(url, { headers: { "User-Agent": EDGAR_UA } });
+    } catch (err) {
+      lastErr = (err as Error).message;
+      console.warn(`[edgar] 检索异常（第 ${attempt + 1} 次）：${lastErr}`);
+      continue;
+    }
+    if (res.ok) break;
+    // 4xx（除 429）是请求本身有问题，重试无意义 → 立刻失败
+    if (res.status < 500 && res.status !== 429) {
+      throw new Error(`[edgar] 检索失败 HTTP ${res.status}（不可重试的客户端错误）`);
+    }
+    lastErr = `HTTP ${res.status}`;
+    console.warn(`[edgar] 检索失败 ${lastErr}（第 ${attempt + 1} 次）`);
+    res = null;
+  }
+  if (!res) {
+    throw new Error(
+      `[edgar] 检索连续 ${EDGAR_RETRY_DELAYS_MS.length + 1} 次失败（${lastErr}）——` +
+        `已放弃本轮，**不写空快照**（避免覆盖上一份有效数据）`,
+    );
   }
   const data = (await res.json()) as {
     hits?: { hits?: { _source?: Record<string, unknown> }[] };
