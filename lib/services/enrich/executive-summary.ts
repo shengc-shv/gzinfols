@@ -1,7 +1,12 @@
 import { extractJson } from "./json-util";
 import { mapSubcategoryToSegments, OTHER_SEGMENT } from "../classify/customer-segment";
 import { INSIGHT_OTHER_GROUP, segSpeak } from "../voice/speech-lines";
-import { titleBigrams, titleSimilarityDice } from "../select/filters/dedup-similar";
+import {
+  titleBigrams,
+  titleSimilarityDice,
+  eventFingerprint,
+  subjectAnchors,
+} from "../select/filters/dedup-similar";
 import {
   rankByRelevance,
   scoreBranchRelevance,
@@ -776,6 +781,69 @@ export const HERO_DIM_MIN_OVERLAP = 2;
 export const HERO_MIN_DIMENSIONS = 2;
 /** 提纲前缀（「今天主要看四个方面：」）。 */
 const HERO_PREFIX_RE = /^今天主要看[^：:]*[：:]\s*/;
+
+// ---------------------------------------------------------------------------
+// T4 · 定调审计：可回溯（10-03）→ 防编造（10-04 sc）
+// ---------------------------------------------------------------------------
+
+/**
+ * **编造审计**（2026-10-04 sc 口径：定调是「综合提炼」，不需一一匹配信息源）。
+ *
+ * 为什么要改（10-04 实测）：旧「维度可回溯」要求每个维度与某条必读/商机
+ * bigram 重合 ≥2，于是**合理的跨条目综述会被误剔** —— 实测「合规成本上行 / 涉外窗口打开 /
+ * 存量压力集中在基金客户体验」被剔掉 2/3 个维度（它们是对多条信息的提炼，不是任一条的复述）。
+ * 这与 10-04 sc「定调不必一一对应信息源」直接冲突。
+ *
+ * 改成校验**防编造**：定调里出现的**业务主体锚**必须都能在**当天的信息源**里找到。
+ *
+ * 为什么用「主体锚」而不是 `extractFacts` 的事实锚（实测踩过）：
+ *  - 事实锚**抓不到编造**。实测「数字人民币鸿蒙生态落地」在宽素材（必读+商机的
+ *    `why`/`impact`）下**零越界** —— 因为 LLM 写的 `why` 本身就在讲数字人民币；
+ *  - 主体锚来自 `EVENT_ANCHORS` 词表（基金/理财/罚/降息…），它回答「在谈什么」，
+ *    且**素材面越宽越可靠**。
+ *
+ * 🔴 素材面必须是「**当天全量存活条目**」而不是必读/商机：
+ * 综述式定调会引用**被必读/商机筛掉**的当日信息（如数字人民币当天上过版面但没进必读）。
+ * 10-04 实测两种素材面的差异：宽素材（+why/impact）下编造检测**完全失效**（越界数归零），
+ * 全量存活条目标题下 4/4 用例判对。
+ */
+export interface HeroGroundingAudit {
+  /** 定调里出现、但**当天素材中找不到**的业务主体锚（= 编造嫌疑）。 */
+  escapedAnchors: string[];
+  /** 是否通过防编造校验（无越界主体锚）。 */
+  grounded: boolean;
+  /** 参与校验的当天信息源条数（日志用）。 */
+  sourceCount: number;
+}
+
+/**
+ * 定调**防编造**审计：定调的业务主体锚是否都存在于当天信息源中。
+ *
+ * @param heroLine 定调整句
+ * @param dailyTexts 当天**全量存活条目的文本**（标题即可；建议含标题+摘要，口径更宽更可靠）
+ */
+export function auditHeroGrounding(
+  heroLine: string,
+  dailyTexts: readonly string[],
+): HeroGroundingAudit {
+  const body = (heroLine ?? "")
+    .replace(HERO_PREFIX_RE, "")
+    .replace(/[。．.\s]+$/, "");
+  if (!body.trim() || dailyTexts.length === 0) {
+    // 无素材可比 → 无法判定编造，**放行**（红线：宁可保留，不误杀当天真实内容）
+    return { escapedAnchors: [], grounded: true, sourceCount: dailyTexts.length };
+  }
+  const source = new Set<string>();
+  for (const t of dailyTexts) {
+    for (const a of subjectAnchors([...eventFingerprint(t ?? "")])) source.add(a);
+  }
+  const escapedAnchors = subjectAnchors([...eventFingerprint(body)]).filter((a) => !source.has(a));
+  return {
+    escapedAnchors,
+    grounded: escapedAnchors.length === 0,
+    sourceCount: dailyTexts.length,
+  };
+}
 
 export interface HeroDimensionAudit {
   /** 逐个维度的审计明细（日志/调试用）。 */

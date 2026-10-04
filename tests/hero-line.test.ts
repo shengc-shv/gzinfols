@@ -195,31 +195,58 @@ test("rebuildHeroLine：按保留维度重建、维度数改口、空数组回�
 // ③ 集成：维度可回溯校验（2026-10-03 sc 口径 —— 定调不再参与事件判重）
 // ---------------------------------------------------------------------------
 
-test("悬空维度剔除：提纲里「下面没出现」的维度 → 从提纲里去掉", () => {
+test("T4 防编造：合规的**跨条目综述**定调不再被误剔（10-04 sc 口径：定调是综合提炼）", () => {
+  // 旧口径「维度逐条可回溯」会误剔合理综述：这三个维度都是对**多条**信息的提炼，
+  // 不是任一条必读/商机的复述。实测旧守卫把它们判成悬空 → 只剩 1 个维度。
+  // 这与 10-04 sc「定调偏综合性、不需一一匹配信息源」直接冲突。
   const exec: ExecutiveSummary = {
     hero_line:
-      "今天主要看三个方面：上海楼市已止跌回稳，住房回暖；助贷合作方适配排查，分润调整；营销话术收紧，合规红线。",
-    must_read: [{ title: "上海楼市已止跌回稳", why: "住房金融条线关注度上升", url: "https://example.com/a" }],
+      "今天主要看三个方面：合规成本上行，罚没密集；涉外窗口打开，美联储转向；存量压力集中在基金客户体验。",
+    must_read: [
+      { title: "9月银行业罚没2.07亿", why: "千万级罚单密集落地，信贷与代销是高频罚点。", url: "https://example.com/mr1" },
+      { title: "美联储鹰派立场软化", why: "加息预期骤变，汇率与结售汇窗口打开。", url: "https://example.com/mr2" },
+    ],
     insights: [
       {
-        topic: "助贷合作方适配排查",
-        impact: "消费贷条线获客与分润结构或调整。",
-        action: "风控部牵头排查存量合作方适配进度。",
-        sources: [{ title: "助贷新规重塑合作模式", url: "https://example.com/b" }],
+        topic: "基金业绩腰斩客户体验转差",
+        impact: "持有客户账面亏损扩大，投诉与赎回压力向理财经理端集中。",
+        sources: [{ title: "t", url: "https://example.com/in1" }],
       },
     ],
   };
   const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
   assert.equal(
     g.exec.hero_line,
-    "今天主要看两个方面：上海楼市已止跌回稳，住房回暖；助贷合作方适配排查，分润调整。",
-    "「营销话术收紧」在必读/商机里找不到对应 → 必须剔除，且维度数随之改口",
+    exec.hero_line,
+    "三个维度（罚没/美联储/基金）的主体锚都在当天信息源里 → 定调应原样保留，不得剔除",
   );
-  assert.equal(g.exec.spoken_hero, undefined, "提纲改了 → 清空原口播，交由 syncNarration 派生");
+  assert.equal(g.exec.spoken_hero, exec.spoken_hero, "未改写 → 口播不动（保持同源）");
   assert.ok(
-    g.log.some((l) => l.includes("剔除") && l.includes("营销话术收紧")),
-    `应留剔除日志：${g.log.join(" | ")}`,
+    g.log.some((l) => l.includes("防编造通过")),
+    `应留防编造日志：${g.log.join(" | ")}`,
   );
+});
+
+test("T4 防编造：定调出现当天素材里不存在的业务主体锚 → 拦下并重归纳", () => {
+  // 「跨境理财通」不在当日任何信息里 → 属编造，必须拦下。
+  const exec: ExecutiveSummary = {
+    hero_line: "今天主要看两个方面：合规成本上行，罚没密集；跨境理财通额度扩容。",
+    must_read: [
+      { title: "9月银行业罚没2.07亿", why: "千万级罚单密集落地。", url: "https://example.com/mr1" },
+    ],
+    insights: [],
+  };
+  const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
+  assert.ok(
+    g.log.some((l) => l.includes("不存在的主体锚") && l.includes("理财")),
+    `应指出越界主体锚「理财」：${g.log.join(" | ")}`,
+  );
+  assert.equal(
+    g.exec.hero_line,
+    "今天主要看一个方面：9月银行业罚没2.07亿。",
+    "含编造的定调不得原样发布 → 应改由必读/商机重归纳",
+  );
+  assert.equal(g.exec.spoken_hero, undefined, "定调改了 → 清空原口播，交由 syncNarration 派生");
 });
 
 test("维度全部可回溯 → 定调原样保留、口播不动（下面有出现，提纲就可以出现）", () => {
@@ -265,29 +292,38 @@ test("回归：定调不再参与事件判重（与历史同题也不换）", ()
   );
 });
 
-test("全悬空且有素材 → 改由必读+商机重归纳（防提纲与下方内容脱节）", () => {
+test("T4 防编造的边界：定调无任何主体锚（「量子计算」等纯抽象词）→ 判为无越界，放行", () => {
+  // ⚠️ 诚实的边界（10-04 实测）：`subjectAnchors` 靠 EVENT_ANCHORS 词表，**纯抽象词不产生锚点**。
+  // 于是「量子计算突破」「元宇宙资产配置」这类完全编造的定调，**抓不到**。
+  // 本用例把该边界**显式锁住**，避免后人误以为防编造是万能的：
+  //   它能拦「借真实业务词编造」（如「跨境理财通额度扩容」而当天无理财通消息），
+  //   但拦不住「凭空造一个词表里没有的概念」。
+  // 补强手段（未实施）：把主体锚之外再校验**数字锚**，或引入专名识别 —— 二者都会带误伤，
+  // 需单独评估（见 diagnostics 报告「四种修法」）。
   const exec = mkExec();
   exec.hero_line = "今天主要看两个方面：量子计算突破，前沿；元宇宙资产配置，新赛道。";
   const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
-  assert.ok(
-    (g.exec.hero_line ?? "").includes("上海楼市已止跌回稳"),
-    `应改为由必读/商机归纳（实际：${g.exec.hero_line}）`,
+  assert.equal(
+    g.exec.hero_line,
+    exec.hero_line,
+    "定调无主体锚 → 无从判定编造 → 放行（宁保留，不误杀）",
   );
-  assert.equal(g.exec.spoken_hero, undefined, "提纲改了 → 清空原口播");
-  assert.ok(g.log.some((l) => l.includes("改由必读+商机归纳")), `日志：${g.log.join(" | ")}`);
+  // 注：本 fixture 的维度数低于下限，`heroRewriteNeeded` 会因「维度不足」而置位 ——
+  // 那与编造判定是**两条独立分支**，不由本用例守护。
 });
 
-test("红线：全悬空且必读/商机为空 → 保留原定调（宁可重复，不留空）", () => {
+test("红线：无素材可比 → 保留原定调（宁可重复，不留空、也不误杀真实内容）", () => {
   const exec: ExecutiveSummary = {
     hero_line: "今天主要看两个方面：量子计算突破，前沿；元宇宙资产配置，新赛道。",
     must_read: [],
     insights: [],
   };
+  // 必读/商机与两天池都为空 → 无法判定编造 → **放行**（`auditHeroGrounding` 的空素材分支）
   const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
-  assert.equal(g.exec.hero_line, exec.hero_line, "无素材可归纳 → 保留原定调");
+  assert.equal(g.exec.hero_line, exec.hero_line, "无素材可校验 → 保留原定调");
   assert.ok(
-    g.log.some((l) => l.includes("必读/商机为空")),
-    `应留留痕日志：${g.log.join(" | ")}`,
+    g.log.some((l) => l.includes("防编造通过")),
+    `应留防编造日志：${g.log.join(" | ")}`,
   );
 });
 
@@ -421,5 +457,35 @@ test("商机互斥判据不用事件指纹：泛化词+地域不得导致误剔�
     (g.exec.insights ?? []).length,
     1,
     "不同 URL、不同标题的商机不得因共享「普惠/广州」锚点被误剔",
+  );
+});
+
+test("T4 回归：综述式定调「一个维度都回溯不到」**不得**被判为维度不足（2026-04 实测踩坑）", () => {
+  // 🔴 10-04 实测：合规综述「合规成本上行 / 涉外窗口打开 / 存量压力集中在基金客户体验」
+  //    三个维度**都**不回溯到任一条必读/商机 —— 这正是 T4 要放行的「跨条目提炼」形态。
+  //    若下限守卫仍用 `kept.length`（可回溯数）→ 0 < 2 → **误判为维度不足**，
+  //    白白触发二次 LLM 重写（浪费一次调用，且可能被改写成复读）。
+  //    正确口径：下限只看**实际维度数** `dims.length`。
+  const exec: ExecutiveSummary = {
+    hero_line:
+      "今天主要看三个方面：合规成本上行，罚没密集；涉外窗口打开，美联储转向；存量压力集中在基金客户体验。",
+    must_read: [
+      { title: "9月银行业罚没2.07亿", why: "千万级罚单密集落地。", url: "https://example.com/mr1" },
+      { title: "美联储鹰派立场软化", why: "加息预期骤变。", url: "https://example.com/mr2" },
+    ],
+    insights: [
+      {
+        topic: "基金业绩腰斩客户体验转差",
+        impact: "客户账面亏损扩大。",
+        sources: [{ title: "t", url: "https://example.com/in1" }],
+      },
+    ],
+  };
+  const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
+  assert.equal(g.exec.hero_line, exec.hero_line, "3 个维度 → 不得因「回溯不到」被改写");
+  assert.equal(
+    g.heroRewriteNeeded,
+    false,
+    "综述式定调不应触发二次重写（否则浪费一次 LLM 调用，且可能被改成必读标题复读）",
   );
 });
