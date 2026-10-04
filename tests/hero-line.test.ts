@@ -328,3 +328,98 @@ test("企微推送：同样剥前缀，只留【今日定调】标签", () => {
   );
   assert.ok(!tx.includes("今日分行焦点"), "text 版不得出现补位前缀");
 });
+
+// ---------------------------------------------------------------------------
+// 2026-10-04 sc「R4 以 2 为主」：商机与必读互斥（代码层，方案 A）
+// ---------------------------------------------------------------------------
+
+/** 构造一份「必读 2 条 + 商机 4 条」的 exec：其中 2 条商机与必读同源。 */
+function mkExclExec(): ExecutiveSummary {
+  return {
+    hero_line: "今天主要看两个方面：楼市分化，信贷收紧；跨境结算便利化提速。",
+    must_read: [
+      {
+        title: "多地出台预售现房新规",
+        why: "涉房开发贷与按揭项目的准入和资金监管要求可能随之变化。",
+        url: "https://example.com/mr1",
+      },
+      {
+        title: "贷款明白纸全面铺开",
+        why: "年化成本需一目了然，对客披露口径与收费告知流程面临统一。",
+        url: "https://example.com/mr2",
+      },
+    ],
+    insights: [
+      {
+        // ① 与必读同 URL（LLM 改写过标题）
+        topic: "现房销售改革落地",
+        impact: "按揭与开发贷准入口径需同步核对。",
+        sources: [{ title: "t", url: "https://example.com/mr1" }],
+      },
+      {
+        // ② 与必读同 URL 且标题逐字相同
+        topic: "贷款明白纸全面铺开",
+        impact: "对客披露口径面临统一。",
+        sources: [{ title: "t", url: "https://example.com/mr2" }],
+      },
+      {
+        // ③ 应当保留：内容相近但**不同源**，不是同一条信息
+        topic: "预售资金监管细则征求意见",
+        impact: "房企现金流与按揭放款节奏需跟踪。",
+        sources: [{ title: "t", url: "https://example.com/other1" }],
+      },
+      {
+        // ④ 应当保留：完全独立
+        topic: "跨境结算便利化提速",
+        impact: "大湾区跨境客群资金周转效率提升。",
+        sources: [{ title: "t", url: "https://example.com/other2" }],
+      },
+    ],
+  } as ExecutiveSummary;
+}
+
+test("商机与必读互斥：同 URL / 标题逐字相同的商机被剔除（2026-10-04 sc R4-②）", () => {
+  const g = applyMemoryGuard({
+    exec: mkExclExec(),
+    store: emptyMemory(),
+    today: TODAY,
+    now: NOW,
+  });
+  const topics = (g.exec.insights ?? []).map((i) => i.topic);
+  assert.equal(topics.length, 2, `应剩 2 条（实际 ${topics.length}：${topics.join(" / ") || "空"}）`);
+  assert.ok(!topics.includes("现房销售改革落地"), "同 URL 的商机必须剔除（哪怕标题被改写过）");
+  assert.ok(!topics.includes("贷款明白纸全面铺开"), "标题逐字相同 + 同 URL 的商机必须剔除");
+  assert.ok(topics.includes("预售资金监管细则征求意见"), "不同源、不同标题的商机必须保留（不得误伤）");
+  assert.ok(topics.includes("跨境结算便利化提速"), "独立商机必须保留");
+});
+
+test("商机互斥判据不用事件指纹：泛化词+地域不得导致误剔（回归：sameEvent 层已移除）", () => {
+  // 旧实现叠了 `sameEvent`（事件指纹共享 ≥2 锚点）。它有两个问题，实测均已确认：
+  //  ① **抓不到**：商机 topic 是 LLM 改写后的短语，锚点被稀释 → 当天 3 条真重复一条没抓到；
+  //  ② **误并**：`eventFingerprint` 地域锚照算 → 「泛化主体词 + 地域」就凑满 2 锚点。
+  //     下面两条标题共享「广州」+「普惠」两个锚，若走 sameEvent 会被误判为同一事件。
+  const exec = {
+    hero_line: "今天主要看两个方面：市政项目获批，普惠开放；普惠金融改革试点扩围。",
+    must_read: [
+      {
+        title: "将24小时面向全社会普惠开放，广州琶洲南CBD项目获批",
+        why: "市政公共服务扩容。",
+        url: "https://example.com/p1",
+      },
+    ],
+    insights: [
+      {
+        // 共享「普惠」+「广州」两个锚，但**是完全不同的两件事**（市政 vs 金融政策）
+        topic: "广州普惠金融改革试点扩围",
+        impact: "普惠信贷投放口径变化。",
+        sources: [{ title: "t", url: "https://example.com/p2" }],
+      },
+    ],
+  } as unknown as ExecutiveSummary;
+  const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
+  assert.equal(
+    (g.exec.insights ?? []).length,
+    1,
+    "不同 URL、不同标题的商机不得因共享「普惠/广州」锚点被误剔",
+  );
+});

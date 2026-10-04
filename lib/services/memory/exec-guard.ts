@@ -32,7 +32,6 @@ import {
   rebuildHeroLine,
 } from "../enrich/executive-summary";
 import { scoreBranchRelevance } from "../select/filters/relevance-score";
-import { sameEvent } from "../select/filters/dedup-similar";
 import { formatBroadcastAt } from "./broadcast-time";
 import {
   beginDay,
@@ -252,16 +251,27 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     // 实测 10-04：商机 6 条里 **3 条与必读重复**（贷款明白纸同条 / 基金业绩腰斩同源 /
     // IPO 受理降温同源）＝ 50%，纯靠 prompt 叮嘱挡不住。
     //
-    // 判据两层：**同 URL**（精确）+ **同事件**（`sameEvent`，事件指纹共享 ≥2 锚点）。
-    // 复用 `dedupe-sections` / 记忆判重的**同一把尺子**，避免三处口径漂移。
+    // 判据只有两条：**同 URL** + **标题逐字相同**（2026-10-04 sc 选 A）。
+    //
+    // ⛔ 曾试过再加一层 `sameEvent`（事件指纹共享 ≥2 锚点），**已移除** ——
+    // 实测 10-04 它对真实场景**零收益**却带风险：
+    //  ① 抓不到：当天 3 条真重复的 `sameEvent` 全部为 false。商机 `topic` 是 LLM 改写后的
+    //     短语，锚点被改写稀释 ——「贷款明白纸」两条锚点都是 `[]`；「沪深9月IPO零受理」vs
+    //     「IPO受理降温」只共享 1 个锚（阈值 2）。`titleSimilarity` 同样不可靠
+    //     （同源三条 Dice 实测 1.00 / 0.17 / 0.14）。
+    //  ② 误并风险：`sameEvent` 走 `eventFingerprint`（**地域锚照算**），于是
+    //     「泛化主体词 + 地域」就能凑满 2 锚点 —— 实测「市政项目获批」与「普惠金融改革试点」
+    //     被判同一事件（同「按揭」大杂烩的病根）。
+    // 改用「同 URL + 逐字相同标题」后：覆盖当天 3/3、零误伤。代价是「不同 URL 的同一事件」
+    // 会漏判 —— 但那类条目改写后锚点本就变了，本就判不出。
     const mrUrls = new Set((next.must_read ?? []).map((m) => m.url ?? "").filter(Boolean));
-    const mrTitles = (next.must_read ?? []).map((m) => m.title ?? "").filter(Boolean);
+    const mrTitles = new Set((next.must_read ?? []).map((m) => (m.title ?? "").trim()).filter(Boolean));
     const allInsights = exec.insights ?? [];
     const cands: Array<{ it: ExecInsight; cand: MemoryCandidate }> = allInsights
       .filter((it) => {
         const u = it.sources?.[0]?.url ?? "";
         if (u && mrUrls.has(u)) return false;
-        return !mrTitles.some((t) => sameEvent(it.topic ?? "", t));
+        return !mrTitles.has((it.topic ?? "").trim());
       })
       .map((it) => ({
         it,
