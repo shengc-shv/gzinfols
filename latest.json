@@ -2,44 +2,44 @@
   "date": "2026-10-04",
   "report": {
     "date": "2026-10-04",
-    "hero_line": "今天主要看一个方面：贵金属异动，资金搬家。",
+    "hero_line": "今天主要看四个方面：财政政策取向，衔接窗口；贵金属与ETF资金，交投升温；跨境人民币工具，避险扩容；假日消费场景，客流叠加首店。",
     "must_read": [
       {
-        "title": "9月银行业罚没2.07亿",
-        "why": "千万级罚单密集落地，信贷与代销是高频罚点，全条线合规成本与展业节奏都会受影响。",
-        "url": "https://www.stcn.com/article/detail/4206134.html",
+        "title": "蓝佛安发表署名文章",
+        "why": "财政政策取向表述值得关注，后续对公与零售业务的政策衔接窗口打开。",
+        "url": "https://www.stcn.com/article/detail/4206109.html",
         "delta": {
           "state": "followup"
         }
       },
       {
-        "title": "贷款明白纸全面铺开",
-        "why": "年化成本需一目了然，对客披露口径与收费告知流程面临统一，定价透明度成为同业比较项。",
-        "url": "https://m.21jingji.com/article/20261003/herald/3f9ab083b94b1fa83175946e7f4a6cfe.html",
+        "title": "港交所拟推人民币黄金期货",
+        "why": "人民币计价避险工具有望扩容，跨境客群的结售汇与套保需求结构可能随之变化。",
+        "url": "https://m.21jingji.com/article/20261004/herald/4c5262ed4cfba606ee05a5cb36616bc9.html",
         "delta": {
           "state": "followup"
         }
       },
       {
-        "title": "沪深9月IPO零受理",
-        "why": "三季度IPO节奏明显放缓，拟上市企业融资周期拉长，替代融资与股东资金安排需求上升。",
-        "url": "https://www.stcn.com/article/detail/4206080.html",
+        "title": "欧洲能源涨价传导股债承压",
+        "why": "外需与跨境资产波动上升，外贸客群的结算与避险需求随之变化。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261003/4477304_1.html",
         "delta": {
           "state": "followup"
         }
       },
       {
-        "title": "多只基金前三季度业绩逼近腰斩",
-        "why": "持有客户体验转差，理财经理的持仓沟通与预期管理压力集中释放。",
-        "url": "https://finance.sina.com.cn/wm/2026-10-03/doc-inityimx4545502.shtml",
+        "title": "金价银价巨震 水贝断货",
+        "why": "贵金属交投与实物需求升温，相关客群资金流向与产品咨询量出现明显变化。",
+        "url": "https://news.southcn.com/node_812903b83a/84f8020ac4.shtml",
         "delta": {
           "state": "followup"
         }
       },
       {
-        "title": "美联储鹰派立场软化",
-        "why": "加息预期骤变，汇率与结售汇窗口打开，有外币需求的客户结汇意愿与节奏会先动。",
-        "url": "https://finance.eastmoney.com/a/202610033888457516.html",
+        "title": "广东景区单日游客超400万",
+        "why": "假日客流高位运行，文旅商圈与首店场景的消费与结算活跃度显著抬升。",
+        "url": "https://www.stcn.com/article/detail/4206174.html",
         "delta": {
           "state": "followup"
         }
@@ -47,17 +47,17 @@
     ],
     "insights": [
       {
-        "topic": "基金业绩腰斩客户体验转差",
+        "topic": "多只基金业绩逼近腰斩",
         "tags": [
           "财富"
         ],
-        "impact": "多只基金前三季度业绩逼近腰斩，持有客户账面亏损扩大，投诉与赎回压力向理财经理端集中。",
+        "impact": "持有客户体验转差，理财经理面临持仓沟通与预期管理压力，客户赎回与调仓意愿可能上升。",
         "segments": [
           "零售AUM"
         ],
         "sources": [
           {
-            "title": "多只基金前三季度业绩逼近腰斩",
+            "title": "多只基金，前三季度业绩逼近腰斩",
             "url": "https://finance.sina.com.cn/wm/2026-10-03/doc-inityimx4545502.shtml"
           }
         ],
@@ -69,78 +69,11 @@
         }
       },
       {
-        "topic": "散户资金集中流向三类ETF",
-        "tags": [
-          "财富"
-        ],
-        "impact": "散户资金集中流向三类主题ETF，客户交易偏好从主动权益转向被动工具，配置行为更趋短线。",
-        "segments": [
-          "零售AUM"
-        ],
-        "sources": [
-          {
-            "title": "散户疯抢！哪三类主题ETF最受青睐？",
-            "url": "https://www.stcn.com/article/detail/4206024.html"
-          }
-        ],
-        "delta": {
-          "state": "followup"
-        },
-        "maturity": {
-          "stage": "progress",
-          "evidence": "动工"
-        }
-      },
-      {
-        "topic": "贵金属交投升温水贝断货",
-        "tags": [
-          "财富"
-        ],
-        "impact": "金价银价巨震、深圳水贝出现断货，实物金与贵金属相关产品咨询量上升，客户资金向避险资产分流。",
-        "segments": [
-          "中高端客群(过亿资产)"
-        ],
-        "sources": [
-          {
-            "title": "金价银价“巨震”，深圳水贝商家：已出现断货",
-            "url": "https://news.southcn.com/node_812903b83a/84f8020ac4.shtml"
-          }
-        ],
-        "delta": {
-          "state": "followup"
-        },
-        "maturity": {
-          "stage": "clue"
-        }
-      },
-      {
-        "topic": "险资举牌降温权益逻辑切换",
-        "tags": [
-          "财富"
-        ],
-        "impact": "险资举牌热度降幅过半，权益投资逻辑切换，代销保险与理财客户的风险偏好正在迁移。",
-        "segments": [
-          "中高端客群(过亿资产)"
-        ],
-        "sources": [
-          {
-            "title": "降幅过半！险资举牌热度骤降 权益投资逻辑悄然切换",
-            "url": "https://finance.eastmoney.com/a/202610033888452996.html"
-          }
-        ],
-        "delta": {
-          "state": "followup"
-        },
-        "maturity": {
-          "stage": "clue"
-        }
-      },
-      {
-        "topic": "IPO受理降温融资节奏拉长",
+        "topic": "沪深9月IPO零受理",
         "tags": [
           "信贷"
         ],
-        "impact": "9月沪深IPO零受理、三季度节奏放缓，拟上市企业融资周期拉长，替代融资与股东资金安排需求上升。",
+        "impact": "拟上市企业融资节奏拉长，部分企业的替代融资需求上升，普惠小微客群的信贷结构随之变化。",
         "segments": [
           "普惠小微贷款客户"
         ],
@@ -154,23 +87,89 @@
           "state": "followup"
         },
         "maturity": {
-          "stage": "progress",
-          "evidence": "受理"
+          "stage": "clue"
         }
       },
       {
-        "topic": "贷款明白纸全面铺开",
+        "topic": "南沙口岸汽车出口顺畅",
         "tags": [
           "信贷"
         ],
-        "impact": "贷款明白纸全面铺开，年化成本一目了然，小微客户对收费与定价的横向比较更直接。",
+        "impact": "汽车出口链条上的贸易与物流类企业资金周转需求延续，相关客群结算量保持高位。",
         "segments": [
           "普惠小微贷款客户"
         ],
         "sources": [
           {
-            "title": "银行“贷款明白纸”全面铺开，年化成本一目了然",
-            "url": "https://m.21jingji.com/article/20261003/herald/3f9ab083b94b1fa83175946e7f4a6cfe.html"
+            "title": "国庆假期期间，广州南沙口岸汽车出口顺畅",
+            "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009808.htm"
+          }
+        ],
+        "delta": {
+          "state": "followup"
+        },
+        "maturity": {
+          "stage": "clue"
+        }
+      },
+      {
+        "topic": "假日首店潮点燃消费",
+        "tags": [
+          "客群"
+        ],
+        "impact": "商圈首店场景带动新业态消费热度，消费信贷与信用卡权益的联动获客空间扩大。",
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "首店潮启 点燃假日“三新”消费活力",
+            "url": "https://news.dayoo.com/guangzhou/202610/03/139995_55009710.htm"
+          }
+        ],
+        "delta": {
+          "state": "followup"
+        },
+        "maturity": {
+          "stage": "landed",
+          "evidence": "首店"
+        }
+      },
+      {
+        "topic": "铁路优化老年人购票优惠",
+        "tags": [
+          "客群"
+        ],
+        "impact": "养老客群出行场景扩容，适老支付与出行权益的配套需求上升，银发客群活跃度提高。",
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "新华财经晚报：铁路部门优化老年人购票优惠措施",
+            "url": "https://www.cnfin.com/yw-lb/detail/20261003/4477315_1.html"
+          }
+        ],
+        "delta": {
+          "state": "followup"
+        },
+        "maturity": {
+          "stage": "clue"
+        }
+      },
+      {
+        "topic": "险资举牌热度降幅过半",
+        "tags": [
+          "财富"
+        ],
+        "impact": "权益投资逻辑切换，代销保险与理财客户的风险偏好迁移，产品货架结构面临调整。",
+        "segments": [
+          "零售AUM"
+        ],
+        "sources": [
+          {
+            "title": "降幅过半！险资举牌热度骤降权益投资逻辑悄然切换",
+            "url": "https://finance.eastmoney.com/a/202610033888452996.html"
           }
         ],
         "delta": {
@@ -185,130 +184,34 @@
       "gz_local": [],
       "biz_insight": [
         {
-          "url": "https://finance.sina.com.cn/wm/2026-10-03/doc-inityimx4545502.shtml",
-          "title_cn": "多只基金前三季度业绩逼近腰斩",
-          "title_orig": "多只基金前三季度业绩逼近腰斩",
-          "source": "新浪财经·理财保险",
+          "url": "https://www.stcn.com/article/detail/4206168.html",
+          "title_cn": "62家百亿私募，集体调研！电子行业成“香饽饽”",
+          "title_orig": "",
+          "source": "证券时报",
           "source_type": "media",
-          "date": "10/03",
-          "summary": "多只基金前三季度业绩逼近腰斩，持有客户体验转差，提示理财经理提前准备持仓沟通与预期管理话术。",
+          "date": "10/04",
+          "summary": "62家百亿私募集中调研电子行业，机构关注度向科技板块倾斜，提示关注相关客群与产品的联动机会。",
           "importance": 2,
           "rank": 1,
           "tags": [
-            "财富",
             "市场",
+            "科技金融",
             "客群"
           ],
           "locale": "national"
         },
         {
-          "url": "https://www.stcn.com/article/detail/4206024.html",
-          "title_cn": "散户疯抢！哪三类主题ETF最受青睐？",
-          "title_orig": "散户疯抢！哪三类主题ETF最受青睐？",
+          "url": "https://www.stcn.com/article/detail/4206183.html",
+          "title_cn": "占比超八成！个人投资者大举涌入新上市ETF",
+          "title_orig": "",
           "source": "证券时报",
           "source_type": "media",
-          "date": "10/03",
-          "summary": "散户资金集中流向三类主题ETF，可关注客户交易偏好变化，作为ETF配置与投教内容的选题参考。",
+          "date": "10/04",
+          "summary": "个人投资者占新上市ETF超八成，零售资金借道ETF入市特征明显，可关注客户ETF配置与投顾服务需求。",
           "importance": 2,
           "rank": 2,
           "tags": [
             "财富",
-            "客群",
-            "市场"
-          ],
-          "locale": "national"
-        },
-        {
-          "url": "https://news.dayoo.com/guangzhou/202610/03/139995_55009710.htm",
-          "title_cn": "首店潮启 点燃假日“三新”消费活力",
-          "title_orig": "首店潮启 点燃假日“三新”消费活力",
-          "source": "广州日报·大洋网(广州频道)",
-          "source_type": "media",
-          "date": "10/03",
-          "summary": "假日首店潮带动新业态消费热度，可考虑围绕商圈首店场景做消费信贷与信用卡权益的联动获客。",
-          "importance": 2,
-          "rank": 3,
-          "tags": [
-            "客群",
-            "消费贷",
-            "信贷"
-          ],
-          "locale": "national"
-        },
-        {
-          "url": "https://www.cnbc.com/2026/09/29/ipo-postponements-are-accelerating-in-third-quarter-even-beyond-oura.html",
-          "title_cn": "IPO postponements are accelerating in third quarter, even beyond Oura",
-          "source": "CNBC Investing",
-          "source_type": "media",
-          "tier": "T2",
-          "date": "10/03",
-          "summary": "It's been a strong year for IPOs. But now, more companies are deciding to stay on the sidelines.",
-          "importance": 2,
-          "rank": 4,
-          "tags": [],
-          "locale": "national"
-        }
-      ],
-      "policy_market": [
-        {
-          "url": "https://www.stcn.com/article/detail/4206134.html",
-          "title_cn": "监管从严！9月银行业罚没2.07亿元，千万级罚单密集落地",
-          "title_orig": "监管从严！9月银行业罚没2.07亿元，千万级罚单密集落地",
-          "source": "证券时报",
-          "source_type": "media",
-          "date": "10/03",
-          "summary": "9月银行业罚没2.07亿元、千万级罚单密集落地，提示对照罚点排查信贷、代销等高频违规环节。",
-          "importance": 3,
-          "rank": 1,
-          "tags": [
-            "监管合规"
-          ],
-          "locale": "national"
-        },
-        {
-          "url": "https://www.cnfin.com/yw-lb/detail/20261003/4477304_1.html",
-          "title_cn": "【财经分析】从能源涨价到股债承压 欧洲经济面临新一轮冲击",
-          "title_orig": "【财经分析】从能源涨价到股债承压 欧洲经济面临新一轮冲击",
-          "source": "新华财经",
-          "source_type": "media",
-          "date": "10/03",
-          "summary": "欧洲能源涨价传导至股债承压，外需与跨境资产波动上升，提示关注外贸客群结算与避险需求变化。",
-          "importance": 2,
-          "rank": 2,
-          "tags": [
-            "市场",
-            "客群"
-          ],
-          "locale": "national"
-        },
-        {
-          "url": "https://finance.eastmoney.com/a/202610033888457516.html",
-          "title_cn": "加息预期骤变！美联储官员鹰派立场软化 又一大行“撕报告”",
-          "title_orig": "加息预期骤变！美联储官员鹰派立场软化 又一大行“撕报告”",
-          "source": "东方财富·A股股市新闻",
-          "source_type": "media",
-          "date": "10/03",
-          "summary": "美联储官员鹰派立场软化、加息预期骤变，汇率与结售汇窗口值得提示有外币需求的客户关注。",
-          "importance": 2,
-          "rank": 3,
-          "tags": [
-            "市场",
-            "客群"
-          ],
-          "locale": "national"
-        },
-        {
-          "url": "https://www.cnfin.com/yw-lb/detail/20261003/4477315_1.html",
-          "title_cn": "新华财经晚报：铁路部门优化老年人购票优惠措施",
-          "title_orig": "新华财经晚报：铁路部门优化老年人购票优惠措施",
-          "source": "新华财经",
-          "source_type": "official",
-          "date": "10/03",
-          "summary": "铁路优化老年人购票优惠，养老客群服务场景扩容，可考虑在适老支付与出行权益上做配套跟进。",
-          "importance": 2,
-          "rank": 4,
-          "tags": [
-            "养老",
             "客群"
           ],
           "locale": "national"
@@ -316,89 +219,207 @@
         {
           "url": "https://www.stcn.com/article/detail/4206109.html",
           "title_cn": "蓝佛安最新署名文章",
-          "title_orig": "蓝佛安最新署名文章",
           "source": "证券时报",
-          "source_type": "official",
+          "source_type": "media",
+          "tier": "T2",
           "date": "10/03",
           "summary": "财政部主要负责人发表署名文章，财政政策取向表述值得关注，可留意后续对公与零售业务的政策衔接。",
           "importance": 2,
+          "rank": 3,
+          "tags": [],
+          "locale": "national"
+        },
+        {
+          "url": "https://www.stcn.com/article/detail/4206024.html",
+          "title_cn": "散户疯抢！哪三类主题ETF最受青睐？",
+          "source": "证券时报",
+          "source_type": "media",
+          "tier": "T2",
+          "date": "10/03",
+          "summary": "散户资金集中流向三类主题ETF，可关注客户交易偏好变化，作为ETF配置与投教内容的选题参考。",
+          "importance": 2,
           "rank": 5,
           "tags": [
-            "监管合规",
+            "财富"
+          ],
+          "locale": "national"
+        },
+        {
+          "url": "https://finance.sina.com.cn/wm/2026-10-03/doc-inityimx4545502.shtml",
+          "title_cn": "多只基金，前三季度业绩逼近腰斩",
+          "source": "新浪财经·理财保险",
+          "source_type": "media",
+          "tier": "T2",
+          "date": "10/03",
+          "summary": "多只基金前三季度业绩逼近腰斩，持有客户体验转差，提示理财经理提前准备持仓沟通与预期管理话术。",
+          "importance": 2,
+          "rank": 6,
+          "tags": [
+            "财富"
+          ],
+          "locale": "national"
+        },
+        {
+          "url": "https://www.cnfin.com/yw-lb/detail/20261003/4477315_1.html",
+          "title_cn": "新华财经晚报：铁路部门优化老年人购票优惠措施",
+          "source": "新华财经",
+          "source_type": "official",
+          "tier": "T1.5",
+          "date": "10/03",
+          "summary": "铁路优化老年人购票优惠，养老客群服务场景扩容，可考虑在适老支付与出行权益上做配套跟进。",
+          "importance": 2,
+          "rank": 7,
+          "tags": [],
+          "locale": "national"
+        },
+        {
+          "url": "https://news.dayoo.com/guangzhou/202610/03/139995_55009710.htm",
+          "title_cn": "首店潮启 点燃假日“三新”消费活力",
+          "source": "广州日报·大洋网(广州频道)",
+          "source_type": "media",
+          "tier": "T2",
+          "date": "10/03",
+          "summary": "假日首店潮带动新业态消费热度，可考虑围绕商圈首店场景做消费信贷与信用卡权益的联动获客。",
+          "importance": 2,
+          "rank": 8,
+          "tags": [],
+          "locale": "national"
+        },
+        {
+          "url": "https://finance.eastmoney.com/a/202610033888452996.html",
+          "title_cn": "降幅过半！险资举牌热度骤降权益投资逻辑悄然切换",
+          "source": "东方财富·A股股市新闻",
+          "source_type": "media",
+          "tier": "T2",
+          "date": "10/03",
+          "summary": "险资举牌热度降幅过半，权益投资逻辑切换，提示关注代销保险与理财客户的风险偏好迁移。",
+          "importance": 2,
+          "rank": 9,
+          "tags": [],
+          "locale": "national"
+        }
+      ],
+      "policy_market": [
+        {
+          "url": "https://m.21jingji.com/article/20261004/herald/4c5262ed4cfba606ee05a5cb36616bc9.html",
+          "title_cn": "港交所：要推出人民币计价黄金期货",
+          "title_orig": "",
+          "source": "21世纪经济报道·金融",
+          "source_type": "media",
+          "date": "10/04",
+          "summary": "港交所拟推人民币计价黄金期货，跨境人民币避险工具有望扩容，可关注对跨境客群结售汇与套保需求的带动。",
+          "importance": 3,
+          "rank": 1,
+          "tags": [
+            "市场",
+            "跨境",
+            "客群",
+            "财富"
+          ],
+          "locale": "national"
+        },
+        {
+          "url": "https://finance.eastmoney.com/a/202610043888514672.html",
+          "title_cn": "人民日报金轩：加快建设强大国内市场",
+          "title_orig": "",
+          "source": "东方财富·A股股市新闻",
+          "source_type": "media",
+          "date": "10/04",
+          "summary": "人民日报金轩发文强调加快建设强大国内市场，扩内需政策信号延续，可关注消费与内贸相关客群的融资需求。",
+          "importance": 2,
+          "rank": 2,
+          "tags": [
             "市场",
             "客群"
           ],
+          "locale": "national"
+        },
+        {
+          "url": "https://finance.eastmoney.com/a/202610043888515221.html",
+          "title_cn": "经济日报金观平：释放历史经典产业消费潜能",
+          "title_orig": "",
+          "source": "东方财富·A股股市新闻",
+          "source_type": "media",
+          "date": "10/04",
+          "summary": "经济日报金观平提出释放历史经典产业消费潜能，传统消费赛道获政策关注，值得关注相关商户的经营与结算需求。",
+          "importance": 2,
+          "rank": 3,
+          "tags": [
+            "市场",
+            "客群"
+          ],
+          "locale": "national"
+        },
+        {
+          "url": "https://www.stcn.com/article/detail/4206134.html",
+          "title_cn": "监管从严！9月银行业罚没2.07亿元，千万级罚单密集落地",
+          "source": "证券时报",
+          "source_type": "media",
+          "tier": "T2",
+          "date": "10/03",
+          "summary": "9月银行业罚没2.07亿元、千万级罚单密集落地，提示对照罚点排查信贷、代销等高频违规环节。",
+          "importance": 2,
+          "rank": 4,
+          "tags": [],
           "locale": "national"
         },
         {
           "url": "https://news.southcn.com/node_812903b83a/84f8020ac4.shtml",
           "title_cn": "金价银价“巨震”，深圳水贝商家：已出现断货",
-          "title_orig": "金价银价“巨震”，深圳水贝商家：已出现断货",
           "source": "南方网·南方经济",
           "source_type": "media",
+          "tier": "T2",
           "date": "10/03",
           "summary": "金价银价巨震、水贝出现断货，贵金属交投与实物需求升温，提示关注相关客群资金流向与产品咨询量。",
           "importance": 2,
-          "rank": 6,
-          "tags": [
-            "市场",
-            "财富",
-            "客群"
-          ],
+          "rank": 5,
+          "tags": [],
           "locale": "national"
         },
         {
           "url": "https://m.21jingji.com/article/20261003/herald/3f9ab083b94b1fa83175946e7f4a6cfe.html",
           "title_cn": "银行“贷款明白纸”全面铺开，年化成本一目了然",
-          "title_orig": "银行“贷款明白纸”全面铺开，年化成本一目了然",
           "source": "21世纪经济报道·金融",
           "source_type": "media",
+          "tier": "T2",
           "date": "10/03",
           "summary": "贷款明白纸全面铺开，年化成本需一目了然，可考虑提前梳理对客披露口径与收费告知流程。",
           "importance": 2,
-          "rank": 7,
+          "rank": 6,
           "tags": [
-            "信贷",
-            "监管合规"
+            "信贷"
           ],
           "locale": "national"
         },
         {
-          "url": "https://finance.eastmoney.com/a/202610033888452996.html",
-          "title_cn": "降幅过半！险资举牌热度骤降 权益投资逻辑悄然切换",
-          "title_orig": "降幅过半！险资举牌热度骤降 权益投资逻辑悄然切换",
+          "url": "https://finance.eastmoney.com/a/202610033888457516.html",
+          "title_cn": "加息预期骤变！美联储官员鹰派立场软化又一大行“撕报告”",
           "source": "东方财富·A股股市新闻",
           "source_type": "media",
+          "tier": "T2",
           "date": "10/03",
-          "summary": "险资举牌热度降幅过半，权益投资逻辑切换，提示关注代销保险与理财客户的风险偏好迁移。",
+          "summary": "美联储官员鹰派立场软化、加息预期骤变，汇率与结售汇窗口值得提示有外币需求的客户关注。",
+          "importance": 2,
+          "rank": 7,
+          "tags": [],
+          "locale": "national"
+        },
+        {
+          "url": "https://www.cnfin.com/yw-lb/detail/20261003/4477304_1.html",
+          "title_cn": "【财经分析】从能源涨价到股债承压 欧洲经济面临新一轮冲击",
+          "source": "新华财经",
+          "source_type": "official",
+          "tier": "T1.5",
+          "date": "10/03",
+          "summary": "欧洲能源涨价传导至股债承压，外需与跨境资产波动上升，提示关注外贸客群结算与避险需求变化。",
           "importance": 2,
           "rank": 8,
-          "tags": [
-            "市场",
-            "财富",
-            "客群"
-          ],
+          "tags": [],
           "locale": "national"
         }
       ],
       "tech": [],
       "ipo": [
-        {
-          "url": "https://www.stcn.com/article/detail/4206080.html",
-          "title_cn": "IPO受理降温！9月沪深“零受理”，三季度节奏明显放缓",
-          "title_orig": "IPO受理降温！9月沪深“零受理”，三季度节奏明显放缓",
-          "source": "证券时报",
-          "source_type": "media",
-          "date": "10/03",
-          "summary": "9月沪深IPO零受理、三季度节奏放缓，拟上市企业融资节奏拉长，可关注相关客群的替代融资需求。",
-          "importance": 3,
-          "rank": 1,
-          "tags": [
-            "市场",
-            "客群"
-          ],
-          "locale": "national"
-        },
         {
           "url": "https://www1.hkexnews.hk/app/sehk/2026/108912/2026100203474_c.htm",
           "title_cn": "基滙資本房地產私募債務開放式基金型公司（主板递表）",
@@ -412,36 +433,20 @@
           "officialLabel": "申請版本（第一次呈交）",
           "ipoMeta": "",
           "importance": 2,
-          "rank": 2,
+          "rank": 1,
           "tags": [],
           "locale": "national"
         },
         {
-          "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004360",
-          "title_cn": "云豹智能：IPO问询中（拟创业板）",
-          "title_orig": "云豹智能：IPO问询中（拟创业板）",
-          "source": "深交所审核项目动态(官方)",
-          "source_type": "official",
-          "date": "09/30",
-          "summary": "云豹智能创业板IPO已问询，中信证券保荐，可留意其上市进程带来的对公与员工金融服务机会。",
-          "importance": 2,
-          "rank": 3,
-          "tags": [
-            "粤"
-          ],
-          "locale": "national",
-          "locale_evidence": "注册地：广东"
-        },
-        {
           "url": "https://www.sse.com.cn/listing/renewal/ipo/#2148@2",
           "title_cn": "汉诺医疗：IPO问询中（拟科创板）",
-          "title_orig": "汉诺医疗：IPO问询中（拟科创板）",
+          "title_orig": "",
           "source": "上交所审核项目动态(官方)",
           "source_type": "official",
           "date": "09/30",
-          "summary": "深圳专用设备制造企业汉诺医疗科创板IPO进入问询，中信证券保荐，可关注募投与结算账户的营销窗口。",
+          "summary": "深圳企业汉诺医疗科创板IPO进入问询，深圳科创后备企业融资进程推进，可关注其后续募投与账户服务需求。",
           "importance": 2,
-          "rank": 4,
+          "rank": 2,
           "tags": [
             "粤"
           ],
@@ -449,66 +454,33 @@
           "locale_evidence": "注册地：广东深圳市"
         },
         {
-          "url": "https://www1.hkexnews.hk/app/sehk/2026/108910/2026093002648_c.htm",
-          "title_cn": "北京百普賽斯生物科技股份有限公司（主板递表）",
-          "source": "港交所新股递表(主板/GEM·全国参考)",
+          "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004360",
+          "title_cn": "云豹智能：IPO问询中（拟创业板）",
+          "source": "深交所审核项目动态(官方)",
           "source_type": "official",
           "tier": "T1",
           "date": "09/30",
-          "summary": "市场：主板｜递表日：2026-09-30｜港股在审（全国参考）",
+          "summary": "注册地：广东｜保荐：中信证券｜受理：2026-06-30｜状态：已问询｜更新：2026-09-30",
           "ipoStage": "stage-reviewing",
-          "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108910/2026093002648_c.htm",
-          "officialLabel": "申請版本（第一次呈交）",
-          "ipoMeta": "",
+          "ipoMeta": "保荐 中信证券 ｜ 拟上市创业板 ｜ 受理 2026-06-30",
+          "ipoCity": "广东",
           "importance": 2,
-          "rank": 5,
-          "tags": [],
-          "locale": "national"
-        },
-        {
-          "url": "https://www1.hkexnews.hk/app/sehk/2026/108908/2026092900758_c.htm",
-          "title_cn": "北京九章雲極科技股份有限公司（主板递表）",
-          "source": "港交所新股递表(主板/GEM·全国参考)",
-          "source_type": "official",
-          "tier": "T1",
-          "date": "09/29",
-          "summary": "市场：主板｜递表日：2026-09-29｜港股在审（全国参考）",
-          "ipoStage": "stage-reviewing",
-          "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108908/2026092900758_c.htm",
-          "officialLabel": "申請版本（第一次呈交）",
-          "ipoMeta": "",
-          "importance": 2,
-          "rank": 6,
-          "tags": [],
-          "locale": "national"
-        },
-        {
-          "url": "https://www1.hkexnews.hk/app/sehk/2026/108909/2026092902074_c.htm",
-          "title_cn": "柳道實業控股有限公司（主板递表）",
-          "source": "港交所新股递表(主板/GEM·全国参考)",
-          "source_type": "official",
-          "tier": "T1",
-          "date": "09/29",
-          "summary": "市场：主板｜递表日：2026-09-29｜港股在审（全国参考）",
-          "ipoStage": "stage-reviewing",
-          "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108909/2026092902074_c.htm",
-          "officialLabel": "申請版本（第一次呈交）",
-          "ipoMeta": "",
-          "importance": 2,
-          "rank": 7,
-          "tags": [],
+          "rank": 3,
+          "tags": [
+            "粤"
+          ],
           "locale": "national"
         },
         {
           "url": "https://www.sse.com.cn/listing/renewal/ipo/#2193@2",
           "title_cn": "龙行天下：IPO问询中（拟主板）",
-          "title_orig": "龙行天下：IPO问询中（拟主板）",
+          "title_orig": "",
           "source": "上交所审核项目动态(官方)",
           "source_type": "official",
           "date": "09/28",
-          "summary": "东莞制鞋企业龙行天下主板IPO进入问询，招商证券保荐，可关注其募投安排与上下游结算合作机会。",
+          "summary": "东莞企业龙行天下主板IPO进入问询，传统制造企业上市推进，可关注其募资账户与供应链结算需求。",
           "importance": 2,
-          "rank": 8,
+          "rank": 4,
           "tags": [
             "粤"
           ],
@@ -527,58 +499,108 @@
           "ipoMeta": "保荐 中信建投 ｜ 拟上市创业板 ｜ 受理 2026-06-26",
           "ipoCity": "广东",
           "importance": 2,
-          "rank": 9,
+          "rank": 5,
           "tags": [
             "粤"
           ],
           "locale": "national"
         },
         {
-          "url": "https://www1.hkexnews.hk/app/sehk/2026/108907/2026092800292_c.htm",
-          "title_cn": "山東力諾醫藥包裝股份有限公司（主板递表）",
+          "url": "https://www.bse.cn/audit/project_news_select.html#874249@P07",
+          "title_cn": "邦泽创科：IPO注册生效（拟北交所）",
+          "title_orig": "",
+          "source": "北交所审核项目动态(官方)",
+          "source_type": "official",
+          "date": "09/29",
+          "summary": "东莞企业邦泽创科北交所IPO注册生效，东莞本地上市后备资源持续释放，可关注其募资与结算等综合服务机会。",
+          "importance": 2,
+          "rank": 6,
+          "tags": [
+            "粤"
+          ],
+          "locale": "national",
+          "locale_evidence": "注册地：广东省东莞市"
+        },
+        {
+          "url": "https://finance.sina.com.cn/roll/2026-10-04/doc-initzrfn0466288.shtml",
+          "title_cn": "A股前三季度新股上市首日零破发，4只“大肉签”",
+          "title_orig": "",
+          "source": "新浪财经·A股频道",
+          "source_type": "media",
+          "date": "10/04",
+          "summary": "前三季度A股新股上市首日零破发，打新赚钱效应延续，可关注客户打新与新股配售相关服务需求。",
+          "importance": 2,
+          "rank": 7,
+          "tags": [
+            "市场",
+            "客群"
+          ],
+          "locale": "national"
+        },
+        {
+          "url": "https://www1.hkexnews.hk/app/sehk/2026/108910/2026093002648_c.htm",
+          "title_cn": "百普赛斯生物科技（港股主板递表）",
+          "title_orig": "",
           "source": "港交所新股递表(主板/GEM·全国参考)",
           "source_type": "official",
-          "tier": "T1",
-          "date": "09/28",
-          "summary": "市场：主板｜递表日：2026-09-28｜港股在审（全国参考）",
-          "ipoStage": "stage-reviewing",
-          "officialUrl": "https://www1.hkexnews.hk/app/sehk/2026/108907/2026092800292_c.htm",
-          "officialLabel": "申請版本（第一次呈交）",
-          "ipoMeta": "",
+          "date": "09/30",
+          "summary": "百普赛斯生物科技递表港交所主板，生物科技企业赴港上市延续，可关注相关跨境融资与结算服务机会。",
+          "importance": 2,
+          "rank": 8,
+          "tags": [],
+          "locale": "national"
+        },
+        {
+          "url": "https://www1.hkexnews.hk/app/sehk/2026/108908/2026092900758_c.htm",
+          "title_cn": "九章云极科技（港股主板递表）",
+          "title_orig": "",
+          "source": "港交所新股递表(主板/GEM·全国参考)",
+          "source_type": "official",
+          "date": "09/29",
+          "summary": "九章云极科技递表港交所主板，科技企业赴港上市热度延续，可关注其跨境资金与账户服务需求。",
+          "importance": 2,
+          "rank": 9,
+          "tags": [],
+          "locale": "national"
+        },
+        {
+          "url": "https://www1.hkexnews.hk/app/sehk/2026/108909/2026092902074_c.htm",
+          "title_cn": "柳道实业控股（港股主板递表）",
+          "title_orig": "",
+          "source": "港交所新股递表(主板/GEM·全国参考)",
+          "source_type": "official",
+          "date": "09/29",
+          "summary": "柳道实业控股递表港交所主板，实业企业赴港上市推进，可关注其跨境结算与综合金融需求。",
           "importance": 2,
           "rank": 10,
           "tags": [],
           "locale": "national"
         },
         {
-          "url": "https://www.bse.cn/audit/project_news_select.html#874249@P07",
-          "title_cn": "邦泽创科：IPO注册生效（拟北交所）",
-          "title_orig": "邦泽创科：IPO注册生效（拟北交所）",
-          "source": "北交所审核项目动态(官方)",
+          "url": "https://www1.hkexnews.hk/app/sehk/2026/108907/2026092800292_c.htm",
+          "title_cn": "力诺医药包装（港股主板递表）",
+          "title_orig": "",
+          "source": "港交所新股递表(主板/GEM·全国参考)",
           "source_type": "official",
-          "date": "09/29",
-          "summary": "东莞企业邦泽创科北交所IPO注册生效，代码874249，东莞证券保荐，可关注发行前后的资金归集与结算需求。",
+          "date": "09/28",
+          "summary": "力诺医药包装递表港交所主板，医药包装企业赴港上市推进，可关注其跨境融资与结算服务机会。",
           "importance": 2,
           "rank": 11,
-          "tags": [
-            "粤"
-          ],
-          "locale": "national",
-          "locale_evidence": "注册地：广东省东莞市"
+          "tags": [],
+          "locale": "national"
         }
       ]
     },
     "stock_recap": {
       "us": {
-        "overview": "纳指涨1.19%领涨，AI投资与巴西大选预期共同提振风险偏好。",
+        "overview": "纳指涨1.19%领涨，标普涨0.73%，AI交易与财报季预热提振。",
         "sectors": [
-          "伯克希尔增持Lennar至11.2%，但买入节奏放缓，地产链受关注。",
-          "巴西大选首轮投票临近，华尔街押注两种结果，相关资产波动预期升温。",
-          "欧洲冬季能源紧张或已启动，BP获25年最大油田发现，能源股受关注。",
-          "三季度IPO推迟增多，Oura等企业选择观望，一级市场降温信号显现。",
-          "胡塞武装称袭击利雅得阿美设施，中东地缘扰动油价与能源板块。"
+          "伯克希尔增持莱纳股份至11.2%，但买入节奏放缓，地产链受关注。",
+          "巴西大选首轮投票临近，华尔街对两种结果预判分化，拉美资产波动。",
+          "三季度IPO推迟加速，多家公司选择观望，一级市场情绪转谨慎。",
+          "白宫组建AI特别工作组评估技术风险，AI监管动向牵动科技股。"
         ],
-        "spoken": "美股三大指数集体收涨，纳指涨1.19%领涨，道指涨0.49%，标普涨0.73%。板块方面，伯克希尔增持Lennar至11.2%但节奏放缓，地产链受关注。巴西大选临近，华尔街押注两种结果。欧洲能源紧张叠加BP大发现，能源股活跃。三季度IPO推迟增多，一级市场降温。",
+        "spoken": "美股三大指数集体收涨，纳指涨1.19%，标普500涨0.73%，道指涨0.49%。板块方面，伯克希尔增持莱纳至11.2%但节奏放缓；巴西大选临近，华尔街预判分化；三季度IPO推迟加速，一级市场转谨慎；白宫组建AI特别工作组，AI监管动向受关注。",
         "meta": {
           "source": "CNBC Investing",
           "quoteSource": "新浪行情",
@@ -603,19 +625,18 @@
         ]
       },
       "aShare": {
-        "overview": "上证涨0.31%，深成指与创业板微跌，芯片算力与三季报预喜成主线。",
+        "overview": "沪指涨0.31%，深成指跌0.11%，节后开门红预期升温。",
         "sectors": [
-          "中原证券称国产芯片发布计划大幅提前，算力投入加速，芯片链受关注。",
-          "三季报抢先看26只业绩预喜股出炉，业绩确定性方向获资金聚焦。",
-          "药明康德获机构扎堆推荐，看好节后A股反弹，医药外包情绪回暖。",
-          "万亿CPO龙头收购A股公司股权有新进展，光模块并购题材升温。",
-          "险资举牌热度骤降、降幅过半，权益投资逻辑悄然切换。"
+          "机构三季度调研近3万次，建议后市均衡配置，成长与价值兼顾。",
+          "9月沪深IPO零受理，三季度节奏放缓，供给端压力边际减轻。",
+          "公募长跑成绩单出炉，最牛产品暴涨超924%，明星基金经理调仓受关注。",
+          "人民日报金轩发文加快建设强大国内市场，内需政策预期升温。"
         ],
-        "spoken": "A股收盘涨跌互现，上证指数涨0.31%，深证成指跌0.11%，创业板指跌0.23%。板块方面，国产芯片发布计划提前、算力投入加速，芯片链受关注。三季报26只预喜股出炉，业绩确定性方向获资金聚焦。药明康德获机构扎堆推荐，医药外包情绪回暖。险资举牌热度骤降，权益投资逻辑切换。",
+        "spoken": "A股收盘涨跌互现，上证指数涨0.31%，深证成指跌0.11%，创业板指跌0.23%。板块方面，机构三季度调研近3万次，建议均衡配置；9月沪深IPO零受理，供给压力减轻；公募长跑成绩单最牛产品涨超924%；人民日报发文加快建设强大国内市场，内需预期升温。",
         "meta": {
           "source": "东方财富",
           "quoteSource": "新浪行情",
-          "date": "2026-10-03"
+          "date": "2026-10-04"
         },
         "indices": [
           {
@@ -691,52 +712,52 @@
     },
     "stock_news": [
       {
-        "url": "https://finance.eastmoney.com/a/202610033888453274.html",
-        "title_cn": "特斯拉、SpaceX大涨！马斯克利好突袭",
+        "url": "https://finance.eastmoney.com/a/202610043888520859.html",
+        "title_cn": "最新！朱少醒、邓晓峰等明星基金经理盯上这些股",
         "source": "东方财富",
         "source_type": "media",
-        "date": "10/03",
-        "summary": "特斯拉与SpaceX股价大涨，市场消息面出现与马斯克相关的利好。",
-        "importance": 2,
+        "date": "10/04",
+        "summary": "东方财富报道称，朱少醒、邓晓峰等明星基金经理近期关注的部分个股被披露。",
+        "importance": 1,
         "rank": 0,
         "tags": [
-          "美股",
-          "特斯拉",
-          "SpaceX"
+          "基金",
+          "机构持仓",
+          "A股"
         ],
         "locale": "national",
         "market": "a-share"
       },
       {
-        "url": "https://finance.eastmoney.com/a/202610033888454548.html",
-        "title_cn": "三季报抢先看26只业绩预喜股出炉！",
+        "url": "https://finance.eastmoney.com/a/202610023888341096.html",
+        "title_cn": "最牛暴涨超924%！公募“长跑成绩单”来了",
         "source": "东方财富",
         "source_type": "media",
-        "date": "10/03",
-        "summary": "三季报披露前，已有26只个股业绩预喜。",
-        "importance": 2,
+        "date": "10/02",
+        "summary": "东方财富报道，公募基金长期业绩榜单出炉，最高涨幅超过924%。",
+        "importance": 1,
         "rank": 0,
         "tags": [
-          "A股",
-          "财报",
-          "业绩预告"
+          "基金",
+          "业绩",
+          "A股"
         ],
         "locale": "national",
         "market": "a-share"
       },
       {
-        "url": "https://finance.eastmoney.com/a/202610033888455079.html",
-        "title_cn": "特朗普：与伊朗的战事将“很快结束”",
+        "url": "https://finance.eastmoney.com/a/202610033888482424.html",
+        "title_cn": "IPO受理降温！9月沪深“零受理”三季度“节奏”明显放缓",
         "source": "东方财富",
         "source_type": "media",
         "date": "10/03",
-        "summary": "特朗普表示与伊朗的战事将“很快结束”。",
+        "summary": "东方财富报道，9月沪深交易所IPO受理为零，三季度受理节奏较此前明显放缓。",
         "importance": 2,
         "rank": 0,
         "tags": [
-          "地缘政治",
-          "伊朗",
-          "能源"
+          "IPO",
+          "监管",
+          "A股"
         ],
         "locale": "national",
         "market": "a-share"
@@ -747,8 +768,8 @@
         "source": "新浪财经·港股",
         "source_type": "media",
         "date": "10/02",
-        "summary": "港股收评：恒指跌2.6%，科指跌2.26%，科网股与内房股普跌，光通信板块逆市活跃。",
-        "importance": 3,
+        "summary": "港股收评显示，恒指跌2.6%，恒生科技指数跌2.26%，科网股与内房股普跌，光通信板块逆市活跃。",
+        "importance": 2,
         "rank": 0,
         "tags": [
           "港股",
@@ -765,7 +786,7 @@
         "source": "新浪财经·港股",
         "source_type": "media",
         "date": "10/03",
-        "summary": "10月3日恒指牛熊街货比为62:38。",
+        "summary": "10月3日数据显示，恒指牛熊街货比为62:38。",
         "importance": 1,
         "rank": 0,
         "tags": [
@@ -782,57 +803,24 @@
         "source": "新浪财经·港股",
         "source_type": "media",
         "date": "10/02",
-        "summary": "恒生科技指数连跌一年，累计跌幅近40%。",
-        "importance": 3,
+        "summary": "恒生科技指数连续一年下跌，累计跌幅接近40%。",
+        "importance": 2,
         "rank": 0,
         "tags": [
           "港股",
           "恒生科技",
-          "科技股"
+          "市场表现"
         ],
         "locale": "national",
         "market": "hk"
-      },
-      {
-        "url": "https://www.investing.com/news/stock-market-news/russia-stocks-lower-at-close-of-trade-moex-russia-index-unchanged-4930887",
-        "title_cn": "Russia stocks lower at close of trade; MOEX Russia Index unchanged",
-        "source": "Investing.com News",
-        "source_type": "media",
-        "date": "10/03",
-        "summary": "俄罗斯股市收低，MOEX俄罗斯指数持平。",
-        "importance": 1,
-        "rank": 0,
-        "tags": [
-          "美股",
-          "俄罗斯股市"
-        ],
-        "locale": "overseas",
-        "market": "us"
-      },
-      {
-        "url": "https://www.investing.com/news/forex-news/irans-rial-hits-fresh-low-as-2-billion-currency-intervention-fails-to-stem-slide-4930880",
-        "title_cn": "Iran’s rial hits fresh low as $2 billion currency intervention fails to stem slide",
-        "source": "Investing.com News",
-        "source_type": "media",
-        "date": "10/03",
-        "summary": "伊朗里亚尔跌至新低，20亿美元货币干预未能阻止跌势。",
-        "importance": 2,
-        "rank": 0,
-        "tags": [
-          "外汇",
-          "伊朗",
-          "宏观"
-        ],
-        "locale": "overseas",
-        "market": "us"
       }
     ],
     "redchipPanel": {
       "entries": [],
-      "capturedAt": "2026-10-04T06:36:46+08:00",
+      "capturedAt": "2026-10-04T12:05:51+08:00",
       "capturedSource": "snapshot",
       "ledgerCount": 38,
-      "lastChangedAt": "2026-10-04T06:36:46+08:00",
+      "lastChangedAt": "2026-10-04T12:05:51+08:00",
       "ledgerByMarket": {
         "hk": 38
       },
@@ -905,12 +893,12 @@
         "sourceId": "cnr-gd",
         "inflow": 58,
         "kept": 3,
-        "avgScore": 24
+        "avgScore": 21
       },
       {
         "sourceId": "cnfin",
         "inflow": 46,
-        "kept": 15,
+        "kept": 6,
         "avgScore": 21
       },
       {
@@ -928,26 +916,26 @@
       {
         "sourceId": "southcn",
         "inflow": 33,
-        "kept": 3,
-        "avgScore": 20
+        "kept": 0,
+        "avgScore": null
       },
       {
         "sourceId": "cnbc-top",
         "inflow": 30,
-        "kept": 2,
-        "avgScore": 21
+        "kept": 0,
+        "avgScore": null
       },
       {
         "sourceId": "stcn",
         "inflow": 30,
-        "kept": 18,
-        "avgScore": 29
+        "kept": 5,
+        "avgScore": 24
       },
       {
         "sourceId": "dayoo-gz",
         "inflow": 29,
         "kept": 9,
-        "avgScore": 27
+        "avgScore": 24
       },
       {
         "sourceId": "cctv-finance",
@@ -958,14 +946,14 @@
       {
         "sourceId": "sina-hk-stock",
         "inflow": 21,
-        "kept": 1,
-        "avgScore": 21
+        "kept": 0,
+        "avgScore": null
       },
       {
         "sourceId": "sina-money",
         "inflow": 20,
-        "kept": 2,
-        "avgScore": 65
+        "kept": 1,
+        "avgScore": 66
       },
       {
         "sourceId": "fed-press",
@@ -977,19 +965,13 @@
         "sourceId": "eastmoney-stock",
         "inflow": 18,
         "kept": 11,
-        "avgScore": 31
+        "avgScore": 33
       },
       {
         "sourceId": "investing-news",
         "inflow": 10,
-        "kept": 9,
+        "kept": 6,
         "avgScore": 21
-      },
-      {
-        "sourceId": "21jingji-finance",
-        "inflow": 10,
-        "kept": 2,
-        "avgScore": 75
       },
       {
         "sourceId": "crunchbase-news",
@@ -998,22 +980,28 @@
         "avgScore": null
       },
       {
+        "sourceId": "21jingji-finance",
+        "inflow": 9,
+        "kept": 1,
+        "avgScore": 70
+      },
+      {
         "sourceId": "govcn-policy",
         "inflow": 8,
         "kept": 0,
         "avgScore": null
       },
       {
-        "sourceId": "sina-a-stock",
-        "inflow": 7,
-        "kept": 2,
-        "avgScore": 61
-      },
-      {
         "sourceId": "hk-filing",
         "inflow": 6,
         "kept": 5,
         "avgScore": 29
+      },
+      {
+        "sourceId": "sina-a-stock",
+        "inflow": 5,
+        "kept": 3,
+        "avgScore": 34
       },
       {
         "sourceId": "gd-sse-audit",
@@ -1041,7 +1029,8 @@
       }
     ],
     "heroDelta": {
-      "state": "new"
+      "state": "followup",
+      "issueNo": 5
     },
     "productCoverage": [
       {
@@ -1051,8 +1040,9 @@
       },
       {
         "line": "信用卡",
-        "count": 1,
+        "count": 2,
         "examples": [
+          "假日首店潮点燃消费",
           "首店潮启"
         ]
       },
