@@ -197,15 +197,15 @@ jobs:
             echo "gh-pages 分支不存在 — 首次发布"
           fi
 
-      # ---------- 红筹监测（抓取→判定→存储）----------
-      # 🔴 2026-10-03 前移到「生成每日简报」**之前**（原先在报告之后、归档之前）：
-      #   报告侧读 `data/redchip/{leads.json, meta.json}` 产面板；监测排在报告之后，
-      #   则当日抓到的成果最早次日才可能进报告 —— 同一次运行的产物自己看不见。
-      #   前移后「数据截至」天然就是当天，这是线下爬虫之外、数据新鲜度的第二道保险。
-      # 台账缺失时脚本只记日志、不阻断发布（continue-on-error）。
-      - name: 红筹监测（抓取→判定→存储）
-        run: npx tsx scripts/redchip-monitor.ts --live --limit 20
-        continue-on-error: true
+      # ---------- 红筹监测：已移交本地爬虫（2026-10-04 sc）----------
+      # 🔴 原先这里跑 `redchip-monitor --live --limit 20` 抓披露易（港股红筹 IPO 申请），
+      #    与 IPO 源一样已由**本地爬虫**负责，故 CI 不再重复执行。
+      #    报告侧仍读 `data/redchip/{leads.json, meta.json}` —— 本地爬虫提交那两个文件即可，
+      #    报告与面板逻辑**零改动**。
+      #    如需临时在 CI 侧补跑（排查用），手动 dispatch 时把下面一行取消注释：
+      # - name: 红筹监测（抓取→判定→存储）
+      #   run: npx tsx scripts/redchip-monitor.ts --live --limit 20
+      #   continue-on-error: true
 
       # 生成当日报告（全 AI 流程）。
       # PUBLISH_RUN：本 run 的内容是否算「正式交付口径」→ 内容记忆（side-exec-summary 的
@@ -316,9 +316,10 @@ jobs:
       #   ③ 无 archive.html → 报告页里的「归档」链接（WEB_MODE）落空。
       # 同时它也是 publishReport 扁平站点布局与归档链接不兼容问题的收敛点（现统一为子目录布局）。
       #
-      # 注：红筹监测（redchip-monitor）已在「生成每日简报」之前跑，见上方同名步骤 ——
-      # 它必须在报告**之前**且提交**之前**跑：报告要读当日新抓的 leads.json/meta.json，
-      # 而归档要把它一并提交入库（否则线上又退回「有数、但说不出这批数是什么时候的」）。
+      # 注：红筹监测（redchip-monitor）已于 2026-10-04 移交本地爬虫，CI 不再跑（见上方注释）——
+      # 报告读的 `data/redchip/{leads.json, meta.json}` 由**本地爬虫提交**，
+      # 故「必须在报告之前且提交之前」这个约束由**提交顺序**天然满足：
+      # 本地爬虫先提交 → CI 的 rebase/归档把它带进 history/。
 
       # B1 检索索引（2026-09-17）：必须在 build-site **之前**跑 —— build-site 只读现成索引
       # 并据此生成 site/search.html（缺索引时会现跑一次兜底，但显式跑更可控、日志更清楚）。

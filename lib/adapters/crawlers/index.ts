@@ -4,11 +4,21 @@
  * 双采集系统的爬虫腿：由管线经 CrawlerRegistry 端口进程内调用（不 shell、不写 JSON 中间文件）。
  * 每个爬虫独立 try/catch 隔离（单源失败不连坐），结果按 URL 去重。
  *
+<<<<<<< HEAD
  * 源集合（与 gzinfo 2026-09-11 状态对齐）：
  * - IPO 在线源：港交所递表（CI 可达）
  * - IPO 本地专供源：证监会辅导 csrcfd + 深交所审核动态 + 上交所审核动态 + 北交所审核动态
  *   （前三个 WAF 拦海外 IP，北交所 2026-10-04 起随本地补数统一供数；CI 跳过本组，
  *   由 data/local-ipo.json 补数，见 lib/adapters/local-ipo.ts）
+=======
+ * 源集合（2026-10-04 起 CI 不跑任何 IPO 源）：
+ * - **IPO 源全部由本地爬虫负责**：`npm run ipo:local` 抓证监会辅导备案 / 深交所审核 /
+ *   上交所审核 / 北交所审核 / 港交所递表，写入 `data/local-ipo.json` 并提交；
+ *   `daily` CI 只消费该文件（见 `selectIpoCrawlersForRun`）。
+ *   下面的 `CsrcCoachCrawler` / `SzseAuditCrawler` / `SseAuditCrawler` /
+ *   `BseAuditCrawler` / `HkFilingCrawler` **仍被本地脚本 `scripts/ipo-local.ts` 使用**，
+ *   不是死代码，改动前务必确认调用方。
+>>>>>>> 04270c9 (refactor(ipo): IPO 源全部移交本地爬虫 —— CI 不再执行任何 IPO 爬虫)
  * - 广州商机/财经媒体：新华财经/证券时报/新浪银行/观察者网 + 大洋网/南方经济/央广网广东
  * - 昨日股市：东方财富A股 + 新浪A股（交叉验证）+ 新浪港股解读
  * （gz-gov/gz-stats/hkex-stock/chinanews-gd 等已停用源未移植；退役源需要时自 gzinfo 取回）
@@ -76,21 +86,24 @@ export function buildOnlineIpoCrawlers(): BaseCrawler[] {
   return [new HkFilingCrawler()];
 }
 
-/** 本次 run 实际要跑的 IPO 源 = 在线源 +（非 CI 环境才跑本地专供源）。逃生口 IPO_LOCAL_ONLY_IN_REMOTE=1。 */
+/** 本次 run 实际要跑的 IPO 源。
+ *
+ *  🔴 2026-10-04 sc：CI（`daily`）**不再执行任何 IPO 爬虫** ——
+ *  证监会辅导备案 / 深交所审核 / 上交所审核 / 北交所审核 / 港交所递表 全部改由
+ *  **本地爬虫**跑 `npm run ipo:local` 并提交 `data/local-ipo.json`，CI 只消费该文件。
+ *  原因：① 这些源 WAF 拦海外 IP，CI 本就大量失败（`selectIpoCrawlersForRun` 此前
+ *  已在 CI 跳过其中 3 个，只剩北交所 + 港交所在线跑）；② 既然已有本地补数通道，
+ *  CI 再抓一遍是**重复劳动**且会把「同一条 IPO 动态的两个版本」同时带进批次。
+ *
+ *  `buildLocalOnlyIpoCrawlers()` / `buildOnlineIpoCrawlers()` **保留** ——
+ *  它们是本地脚本 `scripts/ipo-local.ts` 与注册一致性测试的依赖，不是死代码。
+ */
 export function selectIpoCrawlersForRun(): BaseCrawler[] {
-  const forceRemoteTry = process.env.IPO_LOCAL_ONLY_IN_REMOTE === "1";
-  const isCi = process.env.CI === "true" || process.env.CI === "1";
-  const online = buildOnlineIpoCrawlers();
-  if (isCi && !forceRemoteTry) {
-    const names = buildLocalOnlyIpoCrawlers()
-      .map((c) => c.name)
-      .join(" / ");
-    console.log(
-      `[daily] ⏭ CI 环境跳过本地专供 IPO 源（${names}）→ 由 data/local-ipo.json 补数`,
-    );
-    return online;
-  }
-  return [...buildLocalOnlyIpoCrawlers(), ...online];
+  console.log(
+    "[daily] ⏭ IPO 源不在 CI 执行（证监会辅导/深交所/上交所/北交所/港交所递表）" +
+      "→ 由本地 `npm run ipo:local` 提交 data/local-ipo.json 补数",
+  );
+  return [];
 }
 
 /** listed-check 是 IPO 候选的 post-process（非 BaseCrawler 子类），单独导出供测试遍历。 */
