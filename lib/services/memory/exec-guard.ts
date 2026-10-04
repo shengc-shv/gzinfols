@@ -32,6 +32,7 @@ import {
   rebuildHeroLine,
 } from "../enrich/executive-summary";
 import { scoreBranchRelevance } from "../select/filters/relevance-score";
+import { sameEvent } from "../select/filters/dedup-similar";
 import { formatBroadcastAt } from "./broadcast-time";
 import {
   beginDay,
@@ -241,14 +242,41 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   //   洞察板块内容腰斩、口播时长掉到 128s。与 09-17「3 件事只剩 2 件」是同一个病。
   // 顺序：保持 LLM 给出的优先级顺序（不额外打分排序，避免改动相关性口径）；判重复用 evaluateCandidate。
   {
-    const cands: Array<{ it: ExecInsight; cand: MemoryCandidate }> = (exec.insights ?? []).map((it) => ({
-      it,
-      cand: {
-        title: it.topic,
-        text: `${it.impact ?? ""} ${it.action ?? ""}`.trim(),
-        ...(it.sources?.[0]?.url ? { url: it.sources[0].url } : {}),
-      },
-    }));
+    // 🔴 商机与必读**互斥**（2026-10-04 sc「R4 以 2 为主」= 代码层，授权实施）
+    //
+    // sc 口径：「商机原则上不应与今日必读重复 —— 行领导在阅读今日必读时也会产生相应想法，
+    // 重复出现等于白占一个位」。
+    //
+    // 为什么必须代码层：此前**只有 `risk` 有互斥约束**（prompt §3「不能同一条事件又当
+    // must_read 又当 risk」），`insights` **完全没有** —— 属约束缺口，不是模型失误。
+    // 实测 10-04：商机 6 条里 **3 条与必读重复**（贷款明白纸同条 / 基金业绩腰斩同源 /
+    // IPO 受理降温同源）＝ 50%，纯靠 prompt 叮嘱挡不住。
+    //
+    // 判据两层：**同 URL**（精确）+ **同事件**（`sameEvent`，事件指纹共享 ≥2 锚点）。
+    // 复用 `dedupe-sections` / 记忆判重的**同一把尺子**，避免三处口径漂移。
+    const mrUrls = new Set((next.must_read ?? []).map((m) => m.url ?? "").filter(Boolean));
+    const mrTitles = (next.must_read ?? []).map((m) => m.title ?? "").filter(Boolean);
+    const allInsights = exec.insights ?? [];
+    const cands: Array<{ it: ExecInsight; cand: MemoryCandidate }> = allInsights
+      .filter((it) => {
+        const u = it.sources?.[0]?.url ?? "";
+        if (u && mrUrls.has(u)) return false;
+        return !mrTitles.some((t) => sameEvent(it.topic ?? "", t));
+      })
+      .map((it) => ({
+        it,
+        cand: {
+          title: it.topic,
+          text: `${it.impact ?? ""} ${it.action ?? ""}`.trim(),
+          ...(it.sources?.[0]?.url ? { url: it.sources[0].url } : {}),
+        },
+      }));
+    if (cands.length < allInsights.length) {
+      log.push(
+        `🧠 商机互斥：剔除与必读重复的 ${allInsights.length - cands.length} 条（同 URL / 同事件）` +
+          `（sc 口径：行领导读完必读已产生想法，重复占位无意义）`,
+      );
+    }
 
     // 依次取：未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延下一条候补，直到选满
     // INSIGHT_PLAY_TARGET。候补用尽仍不足 → 按实际剩余，不强拉池内条目凑数（宁缺勿滥）。

@@ -130,6 +130,15 @@ const MIN_STRICT_ITEMS = 3;
 /** 宽松兜底池上限，控制 LLM 提示词体积（实测两天窗口内约 132 条候选）。 */
 const MAX_RELAXED_ITEMS = 24;
 
+/**
+ * 严格池上限（2026-10-04 sc「R2 修复」引入 kept 一路后新增）。
+ *
+ * 补进 kept 后池子从「sections 的 ~25 条」涨到「kept 的 ~92 条」—— 全量灌进去会让
+ * 提示词体积 ×3.7。取 **40** 是权衡：够覆盖到高分段（当天 Top40 里已包含全部
+ * `insight` 及以上档位），又不至于让 LLM 在噪声里翻找。
+ */
+const MAX_STRICT_ITEMS = 40;
+
 export interface BuildTwoDayExecPoolOpts {
   history: Record<string, ExecPoolHistoryEntry>;
   articles: ExecPoolArticle[];
@@ -188,6 +197,40 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     }
   }
 
+  // 今日补一路：**漏斗后 kept**（2026-10-04 sc「R2 修复」，授权实施）
+  //
+  // 为什么必须补：上面那路取自 `report.sections`，而 sections 是 **`display-cap` 之后**
+  // 的产物（每源 ≤4 + 板块限额 gz10/biz8/policy12）。于是被展示限额砍掉的**高分条目
+  // 永远进不了池** → sc 新口径「必读 = 价值最高（一般分数最高）的 5 条」在当前架构下
+  // **不可能达成**。实测 10-04：当天最高分 **80**（广州琶洲南 CBD 公共客厅，业务线[信贷/跨境]）
+  // 归 `gz_local`，而该栏当天展示 **0 条** → 从未进池 → 不可能被选为必读。
+  //
+  // 为什么摘要用 `excerpt` 兜底：kept 里绝大多数条目**没有 AI 摘要**（摘要由 PASS2 生成，
+  // 只有进了 sections 的条目才有）→ 不兜底就等于什么都补不进来。
+  // `excerpt` 是真实原文截断（实测 305/305 有），信息质量足以让 LLM 选题。
+  for (const a of opts.articles) {
+    if (items.has(a.url)) continue;
+    const cat = RELEVANT_CAT.has(a.category ?? "") ? (a.category as "finance" | "gz") : null;
+    if (!cat) continue;
+    const summary = (a.summary ?? "").trim() || (a.excerpt ?? "").trim();
+    if (!summary) continue;
+    // 档位门槛（与宽松池 `buildRelaxedTwoDayPool` 同一把尺子）：**drop 档不进池**。
+    // 必要性（实测）：kept 里有大量「过了确定性漏斗但没通过 PASS1 相关性筛选」的条目，
+    // 不设门槛时池内 57 条里 29 条（51%）业务线为空 —— 气象预警、交通管制、电竞赛事、
+    // 「长征精神永传承」这类内容都会进池。档位门槛挡掉其中最明确无用的 drop 档。
+    const scored = scoreBranchRelevance({
+      title: a.title_cn || a.title || "",
+      ...(summary ? { summary } : {}),
+      ...(a.category ? { category: a.category } : {}),
+    });
+    if (scored.tier === "drop") continue;
+    items.set(a.url, {
+      title: a.title_cn || a.title || "",
+      summary,
+      cat,
+    });
+  }
+
   // 昨日（及更早，但窗口会滤掉）：history 中已打标相关、有摘要
   for (const [url, e] of Object.entries(opts.history)) {
     if (items.has(url)) continue;
@@ -215,6 +258,33 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     const entry = withWhen(base, p, tk);
     (info.cat === "finance" ? finance : gz).push(entry);
   }
+
+  // 按「分行相关性分值」降序排列（2026-10-04 sc「R3 先做第 1 步」）
+  //
+  // 为什么在**代码里排**而不是靠 prompt 叮嘱「请按分值选」：LLM 天然倾向选靠前的条目
+  // （位置偏置），把高分条目前置比任何措辞都有效，而且**零额外 LLM 成本、随时可回退**。
+  // 排序不改变任何判定口径 —— LLM 仍可自由取舍，只是先看到的是高分条目。
+  //
+  // 截断到 MAX_STRICT_ITEMS：控制提示词体积（见该常量注释）。
+  const scoreCache = new Map<string, number>();
+  const scoreOf = (it: ExecPoolItem): number => {
+    const key = it.url ?? it.title;
+    let v = scoreCache.get(key);
+    if (v === undefined) {
+      v = scoreBranchRelevance({
+        title: it.title,
+        ...(it.summary ? { summary: it.summary } : {}),
+        ...(it.subcategory ? { subcategory: it.subcategory } : {}),
+      }).score;
+      scoreCache.set(key, v);
+    }
+    return v;
+  };
+  const byScoreDesc = (a: ExecPoolItem, b: ExecPoolItem): number => scoreOf(b) - scoreOf(a);
+  finance.sort(byScoreDesc);
+  gz.sort(byScoreDesc);
+  if (finance.length > MAX_STRICT_ITEMS) finance.length = MAX_STRICT_ITEMS;
+  if (gz.length > MAX_STRICT_ITEMS) gz.length = MAX_STRICT_ITEMS;
 
   // 兜底：严格池过薄 → 用「今天 + 昨天」两天汇总补齐（2026-08-31 修复）。
   // 噪声控制沿用展示层滚动并入（D-008）的三态门槛，避免灌入个股半年报/外文股市噪声。
