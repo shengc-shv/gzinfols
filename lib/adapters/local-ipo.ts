@@ -33,8 +33,14 @@ export const LOCAL_IPO_STALE_DAYS = 2;
 /** 只能本地抓到的 IPO 源 sourceId 白名单（唯一权威清单），与 buildLocalOnlyIpoCrawlers 一一对应。
  *  2026-09-21 新增 `gd-sse-audit`（上交所审核项目动态）：CI 2026-09-21 起全挂
  *  （`query.sse.com.cn` 全部 market/status 组合 × 4 次重试均 fetch failed），而本机 curl 200/0.3s
- *  —— 与深交所/证监会同因（地域 CDN/WAF），故并入本地补数。 */
-export const LOCAL_ONLY_IPO_SOURCE_IDS = ["gd-csrc-tutoring", "gd-szse-audit", "gd-sse-audit"] as const;
+ *  —— 与深交所/证监会同因（地域 CDN/WAF），故并入本地补数。
+ *  2026-10-04 新增 `gd-bse-audit`（北交所审核项目动态）：IPO 官方源统一由本地补数供数（用户拍板）。 */
+export const LOCAL_ONLY_IPO_SOURCE_IDS = [
+  "gd-csrc-tutoring",
+  "gd-szse-audit",
+  "gd-sse-audit",
+  "gd-bse-audit",
+] as const;
 
 export interface LocalIpoFile {
   version: number;

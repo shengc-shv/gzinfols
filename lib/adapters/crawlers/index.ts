@@ -5,8 +5,9 @@
  * 每个爬虫独立 try/catch 隔离（单源失败不连坐），结果按 URL 去重。
  *
  * 源集合（与 gzinfo 2026-09-11 状态对齐）：
- * - IPO 在线源：上交所/北交所审核动态 + 港交所递表（CI 可达）
- * - IPO 本地专供源：证监会辅导 csrcfd + 深交所审核动态（WAF 拦海外 IP，CI 跳过，
+ * - IPO 在线源：港交所递表（CI 可达）
+ * - IPO 本地专供源：证监会辅导 csrcfd + 深交所审核动态 + 上交所审核动态 + 北交所审核动态
+ *   （前三个 WAF 拦海外 IP，北交所 2026-10-04 起随本地补数统一供数；CI 跳过本组，
  *   由 data/local-ipo.json 补数，见 lib/adapters/local-ipo.ts）
  * - 广州商机/财经媒体：新华财经/证券时报/新浪银行/观察者网 + 大洋网/南方经济/央广网广东
  * - 昨日股市：东方财富A股 + 新浪A股（交叉验证）+ 新浪港股解读
@@ -58,14 +59,21 @@ export function buildIpoCrawlers(): BaseCrawler[] {
 
 /** 只能本地抓取的官方 IPO 源（WAF 拦海外 IP，CI 恒失败；数据由 data/local-ipo.json 补齐）。
  *  2026-09-21 把上交所审核（`SseAuditCrawler`）从「在线源」移入本组：CI 自该日起全挂
- *  （全部 market/status 组合 × 4 次重试均 fetch failed），而本机 curl 200 —— 与深交所/证监会同因。 */
+ *  （全部 market/status 组合 × 4 次重试均 fetch failed），而本机 curl 200 —— 与深交所/证监会同因。
+ *  2026-10-04 把北交所审核（`BseAuditCrawler`）从「在线源」移入本组：IPO 官方源统一由
+ *  本地补数供数（用户拍板），在线源仅保留港交所递表。 */
 export function buildLocalOnlyIpoCrawlers(): BaseCrawler[] {
-  return [new CsrcCoachCrawler(), new SzseAuditCrawler(), new SseAuditCrawler()];
+  return [
+    new CsrcCoachCrawler(),
+    new SzseAuditCrawler(),
+    new SseAuditCrawler(),
+    new BseAuditCrawler(),
+  ];
 }
 
 /** CI 可达的在线 IPO 源（与本地专供源互补；两集合互斥且并集 = buildIpoCrawlers()）。 */
 export function buildOnlineIpoCrawlers(): BaseCrawler[] {
-  return [new BseAuditCrawler(), new HkFilingCrawler()];
+  return [new HkFilingCrawler()];
 }
 
 /** 本次 run 实际要跑的 IPO 源 = 在线源 +（非 CI 环境才跑本地专供源）。逃生口 IPO_LOCAL_ONLY_IN_REMOTE=1。 */
