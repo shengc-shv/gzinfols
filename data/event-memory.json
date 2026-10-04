@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-04",
+  "updatedAt": "2026-10-05",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -6228,142 +6228,150 @@
     }
   },
   "today": {
-    "date": "2026-10-04",
+    "date": "2026-10-05",
     "entries": [
       {
-        "date": "2026-10-04",
+        "date": "2026-10-05",
         "section": "must_read",
-        "title": "蓝佛安发表署名文章",
-        "text": "蓝佛安发表署名文章 财政政策取向表述值得关注，后续对公与零售业务的政策衔接窗口打开。",
-        "facts": [],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://www.stcn.com/article/detail/4206109.html",
-        "score": 74,
+        "title": "美联储消息公布在即",
+        "text": "美联储消息公布在即 汇率与外币资产波动可能放大，持有外币存款与外币理财的客户预期分化，结售汇与外币配置的时点敏感度上升。",
+        "facts": [
+          "@美联储"
+        ],
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://www.stcn.com/article/detail/4206210.html",
+        "score": 66,
+        "novelty": 0.301,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-05",
+        "section": "must_read",
+        "title": "10月A股解禁超3100亿元",
+        "text": "10月A股解禁超3100亿元 5只个股解禁比例超70%，涉及标的的股东客群资金安排集中释放，对私行与高端客户的资产再配置形成扰动。",
+        "facts": [
+          "#10月",
+          "#3100亿元",
+          "#70%"
+        ],
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://finance.eastmoney.com/a/202610043888521337.html",
+        "score": 61,
+        "novelty": 0.9124999999999999,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-05",
+        "section": "must_read",
+        "title": "62家百亿私募集中调研电子",
+        "text": "62家百亿私募集中调研电子 机构关注度向科技板块倾斜，相关主题产品与高端客户的配置偏好可能同步迁移，影响财富货架结构。",
+        "facts": [
+          "#62家"
+        ],
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://www.stcn.com/article/detail/4206168.html",
+        "score": 61,
         "novelty": 1
       },
       {
-        "date": "2026-10-04",
+        "date": "2026-10-05",
         "section": "must_read",
-        "title": "港交所拟推人民币黄金期货",
-        "text": "港交所拟推人民币黄金期货 人民币计价避险工具有望扩容，跨境客群的结售汇与套保需求结构可能随之变化。",
+        "title": "前三季度新股首日零破发",
+        "text": "前三季度新股首日零破发 打新赚钱效应延续，客户打新与新股配售相关服务需求上升，对券商与银行代销渠道的资金留存形成分流。",
         "facts": [],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://m.21jingji.com/article/20261004/herald/4c5262ed4cfba606ee05a5cb36616bc9.html",
-        "score": 66,
-        "novelty": 0.3255813953488372,
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-10-04/doc-initzrfn0466288.shtml",
+        "score": 61,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-05",
+        "section": "must_read",
+        "title": "黄金四季度交易机会受关注",
+        "text": "黄金四季度交易机会受关注 机构集中讨论贵金属方向，黄金类产品客户问询升温，价格波动与客户风险承受度的匹配问题凸显。",
+        "facts": [
+          "!问询"
+        ],
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://www.stcn.com/article/detail/4206267.html",
+        "score": 61,
+        "novelty": 0.923,
         "angle": "数据验证"
       },
       {
-        "date": "2026-10-04",
-        "section": "must_read",
-        "title": "欧洲能源涨价传导股债承压",
-        "text": "欧洲能源涨价传导股债承压 外需与跨境资产波动上升，外贸客群的结算与避险需求随之变化。",
-        "facts": [],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20261003/4477304_1.html",
-        "score": 64,
-        "novelty": 0.26710526315789473,
-        "angle": "政策变化"
+        "date": "2026-10-05",
+        "section": "insights",
+        "title": "个人资金借道ETF入市",
+        "text": "个人资金借道ETF入市 个人投资者占新上市ETF超八成，零售客户对指数配置与投顾服务的问询增多，代销渠道的承接与陪伴能力成为客户留存的关键变量。",
+        "facts": [
+          "!问询"
+        ],
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://www.stcn.com/article/detail/4206183.html",
+        "novelty": 0.9555555555555555,
+        "angle": "数据验证"
       },
       {
-        "date": "2026-10-04",
-        "section": "must_read",
-        "title": "金价银价巨震 水贝断货",
-        "text": "金价银价巨震 水贝断货 贵金属交投与实物需求升温，相关客群资金流向与产品咨询量出现明显变化。",
-        "facts": [],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://news.southcn.com/node_812903b83a/84f8020ac4.shtml",
-        "score": 61,
-        "novelty": 0.32439024390243903,
+        "date": "2026-10-05",
+        "section": "insights",
+        "title": "5年期大额存单返场",
+        "text": "5年期大额存单返场 长期限存单返场但非行业普遍现象，本地同业定价差异会牵动代发与财富客群的资金搬家，客户对长期限产品的问询热度上升。",
+        "facts": [
+          "#5年",
+          "!问询"
+        ],
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://m.21jingji.com/article/20261004/herald/bde0c489d1e87e525173c54e3370c933.html",
+        "novelty": 0.96875,
         "angle": "市场反应"
       },
       {
-        "date": "2026-10-04",
-        "section": "must_read",
-        "title": "广东景区单日游客超400万",
-        "text": "广东景区单日游客超400万 假日客流高位运行，文旅商圈与首店场景的消费与结算活跃度显著抬升。",
+        "date": "2026-10-05",
+        "section": "insights",
+        "title": "中欧班列货运量2.73万标箱",
+        "text": "中欧班列货运量2.73万标箱 广州国际港中欧班列前9月监管2.73万标箱，班列相关小微企业的结算与贸易融资需求持续累积，跨境结算场景的客户黏性增强。",
         "facts": [
-          "@广东"
+          "#9月"
         ],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://www.stcn.com/article/detail/4206174.html",
-        "score": 30,
-        "novelty": 0.3416666666666666,
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://www.stcn.com/article/detail/4206202.html",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-05",
+        "section": "insights",
+        "title": "强大国内市场信号延续",
+        "text": "强大国内市场信号延续 人民日报金轩强调加快建设强大国内市场，扩内需政策信号延续，消费与内贸相关小微客群的融资需求具备延续性。",
+        "facts": [],
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://finance.eastmoney.com/a/202610043888514672.html",
+        "novelty": 0.33541666666666664,
         "angle": "政策变化"
       },
       {
-        "date": "2026-10-04",
+        "date": "2026-10-05",
         "section": "insights",
-        "title": "多只基金业绩逼近腰斩",
-        "text": "多只基金业绩逼近腰斩 持有客户体验转差，理财经理面临持仓沟通与预期管理压力，客户赎回与调仓意愿可能上升。",
+        "title": "人民币计价黄金期货将推出",
+        "text": "人民币计价黄金期货将推出 港交所拟推人民币计价黄金期货，跨境人民币避险工具扩容，有跨境结算与套保需求的客群对汇率与贵金属组合的关注度上升。",
         "facts": [],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://finance.sina.com.cn/wm/2026-10-03/doc-inityimx4545502.shtml",
-        "novelty": 0.09126976284584978,
-        "angle": "受影响人群"
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://m.21jingji.com/article/20261004/herald/4c5262ed4cfba606ee05a5cb36616bc9.html",
+        "novelty": 0.32358490566037734,
+        "angle": "政策变化"
       },
       {
-        "date": "2026-10-04",
+        "date": "2026-10-05",
         "section": "insights",
-        "title": "沪深9月IPO零受理",
-        "text": "沪深9月IPO零受理 拟上市企业融资节奏拉长，部分企业的替代融资需求上升，普惠小微客群的信贷结构随之变化。",
-        "facts": [
-          "#9月",
-          "!受理"
-        ],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://www.stcn.com/article/detail/4206080.html",
-        "novelty": 0.09206521739130435,
+        "title": "黄金走势异动",
+        "text": "黄金走势异动 贵金属价格波动加大，持有黄金类产品的客户情绪易波动，财富条线在产品说明与风险匹配上的沟通压力上升。",
+        "facts": [],
+        "broadcastAt": "2026-10-05T06:33:34+08:00",
+        "url": "https://video.sina.com.cn/p/finance/2026-10-04/detail-iniuahce0273526.d.html",
+        "novelty": 0.24791666666666667,
         "angle": "市场反应"
-      },
-      {
-        "date": "2026-10-04",
-        "section": "insights",
-        "title": "南沙口岸汽车出口顺畅",
-        "text": "南沙口岸汽车出口顺畅 汽车出口链条上的贸易与物流类企业资金周转需求延续，相关客群结算量保持高位。",
-        "facts": [
-          "@南沙"
-        ],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202610/04/139995_55009808.htm",
-        "novelty": 0.5237804878048781,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-10-04",
-        "section": "insights",
-        "title": "假日首店潮点燃消费",
-        "text": "假日首店潮点燃消费 商圈首店场景带动新业态消费热度，消费信贷与信用卡权益的联动获客空间扩大。",
-        "facts": [],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202610/03/139995_55009710.htm",
-        "novelty": 0.2602564102564103,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-10-04",
-        "section": "insights",
-        "title": "铁路优化老年人购票优惠",
-        "text": "铁路优化老年人购票优惠 养老客群出行场景扩容，适老支付与出行权益的配套需求上升，银发客群活跃度提高。",
-        "facts": [],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20261003/4477315_1.html",
-        "novelty": 0.31744186046511624,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-10-04",
-        "section": "insights",
-        "title": "险资举牌热度降幅过半",
-        "text": "险资举牌热度降幅过半 权益投资逻辑切换，代销保险与理财客户的风险偏好迁移，产品货架结构面临调整。",
-        "facts": [],
-        "broadcastAt": "2026-10-04T12:05:52+08:00",
-        "url": "https://finance.eastmoney.com/a/202610033888452996.html",
-        "novelty": 0.3255813953488372,
-        "angle": "政策变化"
       }
     ],
-    "runId": "37175941147"
+    "runId": "37240426800"
   },
   "deliveries": [
     {
