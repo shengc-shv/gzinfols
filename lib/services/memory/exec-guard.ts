@@ -290,6 +290,10 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     //  ② 误并风险：`sameEvent` 走 `eventFingerprint`（**地域锚照算**），于是
     //     「泛化主体词 + 地域」就能凑满 2 锚点 —— 实测「市政项目获批」与「普惠金融改革试点」
     //     被判同一事件（同「按揭」大杂烩的病根）。
+    //     ℹ️ 2026-10-05：该项风险**已消除** —— `sameEvent` 现额外要求「共享 ≥1 个主体锚」
+    //     （`sharedSubjectAnchors` 守卫，见 dedup-similar.ts）。**但 ① 仍未解决**（锚点被
+    //     LLM 改写稀释、真重复抓不到），故本处「商机互斥」继续用「同 URL + 逐字相同标题」，
+    //     不因 ② 修好而重新引入 sameEvent。
     // 改用「同 URL + 逐字相同标题」后：覆盖当天 3/3、零误伤。代价是「不同 URL 的同一事件」
     // 会漏判 —— 但那类条目改写后锚点本就变了，本就判不出。
     const mrUrls = new Set((next.must_read ?? []).map((m) => m.url ?? "").filter(Boolean));

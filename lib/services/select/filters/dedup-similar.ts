@@ -172,6 +172,10 @@ export function eventFingerprint(title: string): Set<string> {
  * 2026-10-04（T4）从 `memory/event-text.ts` **下沉到此处**：它与 `EVENT_ANCHORS`
  * 同属「事件身份词表口径」，而记忆判重与摘要层（定调防编造）都要用 —— 放在
  * memory 层会让生成层反向依赖判断层（触犯架构门禁方向规则）。
+ *
+ * ❗ 2026-10-05 起**真正被消费**：`sameEvent` 通过 `sharedSubjectAnchors` 要求
+ * 「共享 ≥1 个主体锚」，本表也就是「哪些锚不算身份」的唯一定义 —— 改动它会直接
+ * 改变判重的合并率（改前须按 R12 先出对照）。
  */
 const GENERIC_ANCHORS = new Set<string>([
   "央行", "人民银行", "金融监管总局", "金监总局", "国务院", "证监会", "发改委",
@@ -204,7 +208,17 @@ export function sharedSubjectAnchors(a: string[], b: string[]): number {
   return n;
 }
 
-/** 两标题是否为「同一事件」：共享锚点数 ≥ minShared（默认 2）。 */
+/**
+ * 两标题是否为「同一事件」：共享锚点数 ≥ minShared（默认 2），**且必须共享 ≥1 个主体锚**。
+ *
+ * 🔴 2026-10-05 sc 口径（`sharedSubjectAnchors` 正式接入）：原先只数「共享锚点总数」，
+ * 于是**纯泛用锚**（地域 + 监管机构）凑满 2 个就能判同事件 —— 实测 10-05 的池里，
+ * 靠 `sameEvent` 入簇的 15 对中有 **6 对属此类误并**，且每一对都只共享地域锚：
+ *   · 「国庆假期期间，广州南沙口岸汽车出口顺畅」↔「广州南沙发布十四五统计现代化改革成绩单」{广州,南沙}
+ *   · 「来广东，乐选未来｜百万英才汇南粤」↔「南粤遍地丰收景…岭南产业兴旺」{广东,粤}
+ *   · 「249项标准…广州书写粤港澳大湾区软联通新篇章」↔ 4 条毫不相干的大湾区稿 {大湾区,粤}
+ * 另 9 对共享 ≥1 个主体锚，**不受本守卫影响**（召回不变）。
+ */
 export function sameEvent(a: string, b: string, minShared = 2): boolean {
   if (!a || !b) return false;
   const fa = eventFingerprint(a);
@@ -212,7 +226,9 @@ export function sameEvent(a: string, b: string, minShared = 2): boolean {
   if (fa.size === 0 || fb.size === 0) return false;
   let shared = 0;
   for (const k of fa) if (fb.has(k)) shared++;
-  return shared >= minShared;
+  if (shared < minShared) return false;
+  // 主体锚（排除数字锚与泛用锚）必须至少共享 1 个 —— 否则「地域+地域」即构成伪身份。
+  return sharedSubjectAnchors([...fa], [...fb]) >= 1;
 }
 
 /** tier 优先级排序权重（越小越优先保留）。 */

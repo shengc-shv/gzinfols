@@ -9,6 +9,7 @@ import assert from "node:assert/strict";
 import {
   dedupeByTitleSimilarity,
   titleSimilarity,
+  sameEvent,
 } from "../lib/services/select/filters/dedup-similar";
 import type { ArticleInput } from "../lib/contracts/article";
 import type { SourceTier } from "../lib/contracts/source";
@@ -34,6 +35,37 @@ test("titleSimilarity：同主题变体标题相似度高，不同主题低", ()
   assert.ok(hi >= 0.7, `同主题变体应 ≥0.7，实际 ${hi.toFixed(2)}`);
   const lo = titleSimilarity("央行降准释放流动性", "美联储宣布加息25个基点");
   assert.ok(lo < 0.7, `不同主题应 <0.7，实际 ${lo.toFixed(2)}`);
+});
+
+test("sameEvent：只有**地域等泛用锚**凑满 2 锚 → 不得判同事件（sharedSubjectAnchors 守卫）", () => {
+  // 全部为 2026-10-05 真实池中的误并样例（原口径 sameEvent=true，把毫不相干的两条并成一簇）
+  const cases: Array<[string, string]> = [
+    ["国庆假期期间，广州南沙口岸汽车出口顺畅", "广州南沙发布“十四五”统计现代化改革成绩单"],
+    ["来广东，乐选未来｜百万英才汇南粤", "南粤遍地丰收景 中国银行广东省分行赋能岭南产业兴旺"],
+    ["249项标准，39张认证，广州书写粤港澳大湾区“软联通”新篇章", "粤港澳大湾区“一城一策”自然教育“各展所长”"],
+    ["249项标准，39张认证，广州书写粤港澳大湾区“软联通”新篇章", "4月25日截止！2026年粤港澳大湾区律师执业考试即将开始报名"],
+    ["249项标准，39张认证，广州书写粤港澳大湾区“软联通”新篇章", "粤港澳大湾区融合加速 带旺港澳旅客假期“经深飞”"],
+    ["249项标准，39张认证，广州书写粤港澳大湾区“软联通”新篇章", "助力粤港澳大湾区清洁能源建设 国内最大换流站导管架发运"],
+  ];
+  for (const [a, b] of cases) {
+    assert.equal(sameEvent(a, b), false, `只有泛用锚（地域）不应判同事件：${a.slice(0, 18)} ↔ ${b.slice(0, 18)}`);
+  }
+});
+
+test("sameEvent：共享 ≥1 主体锚时仍判同事件（守卫不得伤召回）", () => {
+  assert.equal(
+    sameEvent(
+      "多家银行跟进！房贷贴息操作细则陆续披露",
+      "某大行广东省分行：国庆假期前三天已受理符合贴息条件的房贷申请逾百户",
+    ),
+    true,
+    "共享主体锚 {房贷, 贴息} → 仍应同事件（价值取舍依赖它把两条聚成同族）",
+  );
+  assert.equal(
+    sameEvent("两部门：个人住房贷款期限最长可贷40年", "个人房贷最长可贷40年"),
+    true,
+    "同义词归一后共享 {房贷} + 数字锚 → 仍应同事件",
+  );
 });
 
 test("同 tier + 注入 scoreOf：**按内容分取舍，不看时间**（高分那条更旧也必须留）", () => {
