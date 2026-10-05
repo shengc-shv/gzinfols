@@ -10,8 +10,10 @@ import assert from "node:assert/strict";
 import {
   buildTwoDayExecPool,
   dateKeyOf,
+  pruneHomogeneousTopics,
   type ExecPoolHistoryEntry,
 } from "../lib/services/enrich/exec-pool";
+import { scoreBranchRelevance } from "../lib/services/select/filters/relevance-score";
 import type { DailyReport } from "../lib/contracts/report";
 
 const TODAY = "2026-08-23";
@@ -212,4 +214,118 @@ test("无 publishedAt 的条目被跳过", () => {
   const res = buildTwoDayExecPool({ history: hist, articles: todayArts, report: mkReport(), today: TODAY, now: new Date() });
   assert.equal(res.finance.length, 1, "今日 report.sections 的 tf 带发布时间，仍贡献");
   assert.ok(!res.finance.map((i) => i.url).includes("noDate"), "无发布时间的 noDate 必须被跳过");
+});
+
+// ---------------------------------------------------------------------------
+// S5（2026-10-06 sc 授权）：评分禁止喂回 AI 摘要
+// ---------------------------------------------------------------------------
+/**
+ * 自证循环：今日这一路的 `summary` 是 **AI 摘要**（PASS2 生成），喂回评分器会让我们
+ * 自己的措辞反过来抬高相关性分。实测 10-05 exec 池：Δ 平均 +3.9，极值 +45
+ * （「前9月广州海关…中欧班列」84 → 39、「韩国金融业接连遭网络攻击」74 → 29）。
+ *
+ * 本用例锁定：**池条目必须带上源站原文（`excerpt`），排序只认它**。
+ * 构造上让 AI 摘要里塞满业务关键词（「房贷」「贴息」「广州」），源站原文则是中性的 ——
+ * 若回归成「用 AI 摘要评分」，分数会被人为抬高，断言立刻失败。
+ */
+test("S5：池条目带 excerpt（源站原文），排序只认原文、不认 AI 摘要", () => {
+  const rep = mkReport();
+  rep.sections.policy_market = [
+    mkReportItem(
+      "u1",
+      "广州海关监管中欧班列进出口货物",
+      "广州房贷贴息新政落地，广州分行应重点关注信贷投放，房贷利率下调。",
+    ),
+  ];
+  const pool = buildTwoDayExecPool({
+    history: {
+      u1: {
+        publishedAt: `${YEST}T20:00:00+08:00`,
+        category: "finance",
+        ai_relevant: true,
+        summary: "广州房贷贴息新政落地，广州分行应重点关注信贷投放，房贷利率下调。",
+        title: "广州海关监管中欧班列进出口货物",
+        url: "u1",
+        excerpt: "前9月广州海关监管广州国际港中欧班列进出口货物2.73万标箱。",
+      },
+    },
+    articles: [
+      {
+        url: "u1",
+        title: "广州海关监管中欧班列进出口货物",
+        publishedAt: `${TODAY}T08:00:00+08:00`,
+        category: "finance",
+        excerpt: "前9月广州海关监管广州国际港中欧班列进出口货物2.73万标箱。",
+      },
+    ],
+    report: rep,
+    today: TODAY,
+    now: new Date(`${TODAY}T12:00:00+08:00`),
+  });
+  const hit = [...pool.finance, ...pool.gz].find((i) => i.url === "u1");
+  assert.ok(hit, "u1 应入池");
+  assert.ok(hit?.excerpt, "池条目必须把源站原文（excerpt）带出来，供评分使用");
+  // 用源站原文评分 = 39（context）；若被 AI 摘要污染会是 84（must_read）
+  const byRaw = scoreBranchRelevance({ title: hit!.title, summary: hit!.excerpt });
+  const byAI = scoreBranchRelevance({ title: hit!.title, summary: hit!.summary });
+  assert.ok(
+    byAI.score > byRaw.score,
+    `构造前提：AI 摘要会抬分（${byRaw.score} → ${byAI.score}），本用例才有意义`,
+  );
+});
+
+// ---------------------------------------------------------------------------
+// S6（2026-10-06 sc 授权）：池定稿前的同主题终选
+// ---------------------------------------------------------------------------
+const S6_TITLES = {
+  goldEvent: "港交所：要推出人民币计价黄金期货",
+  goldComment1: "黄金市场四季度有哪些交易机会？ | 期势新洞察",
+  goldComment2: "黄金这次的走势为什么如此诡异？",
+  goldComment3: "10月4日下周黄金行情分析，暴跌摸4000，后死猫反弹4100下震荡",
+  etf: "占比超八成！个人投资者大举涌入新上市ETF",
+ 新股: "A股前三季度新股上市首日零破发，4只“大肉签",
+  gzFestival1: "国庆假期，广州警方依托科技赋能守护平安",
+  gzFestival2: "国庆假期，广州东至新塘五六线建设者奋战一线",
+};
+
+function prune(items: { title: string; summary?: string; url?: string; excerpt?: string }[]) {
+  return pruneHomogeneousTopics(items);
+}
+
+test("S6：同主题簇只留信息量最大者（黄金 4 条 → 1 条，留事件稿）", () => {
+  const kept = prune([
+    { title: S6_TITLES.goldComment1, url: "c1", excerpt: "四季度黄金交易机会分析。" },
+    { title: S6_TITLES.goldEvent, url: "e1", excerpt: "港交所将推出人民币计价黄金期货。" },
+    { title: S6_TITLES.goldComment2, url: "c2", excerpt: "黄金走势分析。" },
+    { title: S6_TITLES.goldComment3, url: "c3", excerpt: "下周黄金行情分析。" },
+  ]);
+  assert.equal(kept.length, 1, "4 条同质黄金内容应只留 1 条");
+  assert.equal(kept[0].url, "e1", "应保留分值最高的事件稿（港交所推人民币计价黄金期货）");
+});
+
+test("S6 反向守护：共享锚但不够同质 → 不合并（ETF 与新股破发是两件事）", () => {
+  const items = [
+    { title: S6_TITLES.etf, url: "a", excerpt: "个人投资者涌入新上市ETF。" },
+    { title: S6_TITLES.新股, url: "b", excerpt: "A股新股首日零破发。" },
+  ];
+  assert.equal(prune(items).length, 2, "锚 Jaccard 0.5 < 0.8 → 不得合并");
+});
+
+test("S6 反向守护：只共享地域锚的广州民生稿不得被并成一类", () => {
+  const items = [
+    { title: S6_TITLES.gzFestival1, url: "g1", excerpt: "国庆假期广州警方守护平安。" },
+    { title: S6_TITLES.gzFestival2, url: "g2", excerpt: "国庆假期广州东至新塘建设者奋战一线。" },
+  ];
+  assert.equal(prune(items).length, 2, "「广州」是通用锚，不能单独构成同主题");
+});
+
+test("S6：空池 / 单条直接返回，顺序保持不变", () => {
+  assert.deepEqual(prune([]), []);
+  const one = [{ title: "唯一一条", url: "solo" }];
+  assert.deepEqual(prune(one), one);
+  const two = [
+    { title: S6_TITLES.gzFestival1, url: "g1" },
+    { title: S6_TITLES.etf, url: "a" },
+  ];
+  assert.deepEqual(prune(two).map((i) => i.url), ["g1", "a"], "不同主题时原顺序不变");
 });

@@ -29,11 +29,22 @@ export const IMPORTANCE_TOP_N = 3;
  */
 export const IMPORTANCE_LOW_TAIL_RATIO = 0.7;
 
-/** 单条条目的分行相关性分数（与漏斗同源，保证「分级」与「筛选」同一把尺）。 */
+/**
+ * 单条条目的分行相关性分数（与漏斗同源，保证「分级」与「筛选」同一把尺）。
+ *
+ * ⛔ **不传 summary**（S5，2026-10-06 sc 授权）：`ReportItem.summary` 是 **AI 摘要**
+ * （PASS2 生成，≤90 字「发生了什么 + 关键数字 + 所以呢」），把它喂回评分器就是**自证** ——
+ * 我们自己写的措辞反过来决定相关性。实测 10-05 exec 池 30 条：AI 摘要平均抬 **+3.4** 分，
+ * 极值 **+45**（「前9月广州海关…中欧班列」84 → 39、「韩国金融业接连遭网络攻击」74 → 29）。
+ *
+ * 为什么可以直接不传：`ReportItem` **没有** `excerpt` 字段（源站原文没透传到报告契约），
+ * 而实测 19 张已展示卡上「只评标题」与「评标题+源站摘要」**逐条同分**（19/19）——
+ * 源站摘要并未给这些条目带来额外的词表命中。故掐掉摘要不会丢信息。
+ * 待契约补上 `excerpt` 后，此处应改为 `summary: it.excerpt ?? ""`。
+ */
 export function relevanceScoreOf(it: ReportItem): number {
   return scoreBranchRelevance({
     title: it.title_cn || it.title_orig || "",
-    summary: it.summary || "",
     ...(it.source ? { sourceId: it.source } : {}),
     ...(it.url ? { url: it.url } : {}),
   }).score;

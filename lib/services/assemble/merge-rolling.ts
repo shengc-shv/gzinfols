@@ -159,7 +159,9 @@ export function mergeRollingIntoReport(
         category: a.category,
         subcategory: a.subcategory,
         sourceId: a.sourceId,
-        summary: a.summary,
+        // S5（2026-10-06）：评分只用**源站原文**（excerpt），AI 摘要不回喂（自证）。
+        // 与上面 `isGzLocalCandidate` 只看标题同一道理 —— AI 解读视角不代表事实归属。
+        summary: (a.excerpt ?? "").trim() || a.summary || "",
       });
       if (rel.tier === "drop") {
         bump("droppedByScore");

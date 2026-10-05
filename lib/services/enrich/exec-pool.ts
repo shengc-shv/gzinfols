@@ -17,6 +17,12 @@
 import { getReportTz, recentMmddSet, spokenRelativeDay, todayKey } from "../../utils/time";
 import type { DailyReport, ReportSectionKey } from "../../contracts/report";
 import { scoreBranchRelevance } from "../select/filters/relevance-score";
+// S6 同主题终选：事件指纹 / 主体锚 / 集合相似度（与判重层同一套词表，不另起炉灶）
+import {
+  eventFingerprint,
+  jaccard,
+  sharedSubjectAnchors,
+} from "../select/filters/dedup-similar";
 // 广东 IPO 内容判定（与渲染/side-output 同一口径，避免三处判定漂移）
 import { isGdIpoCandidate } from "./heuristics";
 import { IPO_VOICE_WINDOW_DAYS } from "../../ipo-config";
@@ -50,6 +56,16 @@ export interface ExecPoolArticle {
 export interface ExecPoolItem {
   title: string;
   summary?: string;
+  /**
+   * 采集侧**原文摘要**（源站 excerpt）—— S5（2026-10-06 sc 授权）后**评分只认它**。
+   *
+   * 为什么单列一份：`summary` 在今日这一路是 **AI 摘要**（PASS2 生成），把它喂回
+   * 评分器会形成**自证循环** —— 我们自己写的「对广州分行…有影响」反过来抬高相关性分，
+   * 高分又让它排在池前、更容易被 LLM 选进必读。实测 10-05 exec 池 30 条：
+   *   「前9月广州海关…中欧班列」84 → **39**、「韩国金融业接连遭网络攻击」74 → **29**（Δ45）。
+   * ⛔ 该字段**不进 LLM**：`enc()` 是字段白名单（id/title/summary/when/subcategory）。
+   */
+  excerpt?: string;
   subcategory?: string;
   url?: string;
   /**
@@ -127,6 +143,12 @@ const RELEVANT_CAT = new Set(["finance", "gz"]);
  */
 const MIN_STRICT_ITEMS = 3;
 
+/**
+ * S6 同主题合并阈值（2026-10-06）：锚集合 Jaccard ≥ 0.8 + 共享 ≥1 个主体锚。
+ * 阈值由 10-05 exec 池 30 条实测标定（0.7 / 0.8 / 0.9 结果一致，取 0.8 留余量）。
+ */
+const TOPIC_MERGE_JACCARD = 0.8;
+
 /** 宽松兜底池上限，控制 LLM 提示词体积（实测两天窗口内约 132 条候选）。 */
 const MAX_RELAXED_ITEMS = 24;
 
@@ -177,10 +199,26 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     if (a.publishedAt) pubByUrl.set(a.url, a.publishedAt);
   }
 
+  // excerpt 查表（url → 源站原文摘要）：S5 后评分只认它（AI 摘要不回喂）。
+  // 优先 articles（本次抓取，含源站 excerpt），补 history。
+  const excerptByUrl = new Map<string, string>();
+  for (const a of opts.articles) {
+    if (a.excerpt?.trim()) excerptByUrl.set(a.url, a.excerpt);
+  }
+  for (const [url, e] of Object.entries(opts.history)) {
+    if (!excerptByUrl.has(url) && e.excerpt?.trim()) excerptByUrl.set(url, e.excerpt);
+  }
+
   // 汇总「有摘要」的候选（今日来自 report.sections，昨日来自 history）。
   const items = new Map<
     string,
-    { title: string; summary: string; cat: "finance" | "gz"; subcategory?: string }
+    {
+      title: string;
+      summary: string;
+      cat: "finance" | "gz";
+      subcategory?: string;
+      excerpt?: string;
+    }
   >();
 
   // 今日：report.sections（PASS2 已富集摘要）
@@ -193,6 +231,8 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
         title: it.title_cn || it.title_orig || "",
         summary: it.summary,
         cat,
+        // S5：今日这一路的 summary 是 AI 摘要，另存源站原文供评分使用。
+        ...(excerptByUrl.get(it.url) ? { excerpt: excerptByUrl.get(it.url) } : {}),
       });
     }
   }
@@ -220,7 +260,12 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     // 「长征精神永传承」这类内容都会进池。档位门槛挡掉其中最明确无用的 drop 档。
     const scored = scoreBranchRelevance({
       title: a.title_cn || a.title || "",
-      ...(summary ? { summary } : {}),
+      // S5：评分优先用源站原文；没有原文时才用（AI）摘要兜底。
+      ...(a.excerpt?.trim()
+        ? { summary: a.excerpt }
+        : summary
+          ? { summary }
+          : {}),
       ...(a.category ? { category: a.category } : {}),
     });
     if (scored.tier === "drop") continue;
@@ -228,6 +273,7 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
       title: a.title_cn || a.title || "",
       summary,
       cat,
+      ...(a.excerpt?.trim() ? { excerpt: a.excerpt } : {}),
     });
   }
 
@@ -243,6 +289,7 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
       summary: e.summary,
       cat,
       ...(e.subcategory ? { subcategory: e.subcategory } : {}),
+      ...(e.excerpt?.trim() ? { excerpt: e.excerpt } : {}),
     });
   }
 
@@ -255,6 +302,8 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     if (!p || !inWindow(p)) continue;
     const base: ExecPoolItem = { title: info.title, summary: info.summary, url };
     if (info.subcategory) base.subcategory = info.subcategory;
+    // S5：把源站原文带进池条目，供评分使用（不进 LLM —— enc() 是字段白名单）
+    if (info.excerpt) base.excerpt = info.excerpt;
     const entry = withWhen(base, p, tk);
     (info.cat === "finance" ? finance : gz).push(entry);
   }
@@ -273,7 +322,12 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     if (v === undefined) {
       v = scoreBranchRelevance({
         title: it.title,
-        ...(it.summary ? { summary: it.summary } : {}),
+        // S5：只喂**采集侧原文**；无原文时才退回（AI）摘要。
+        ...(it.excerpt?.trim()
+          ? { summary: it.excerpt }
+          : it.summary
+            ? { summary: it.summary }
+            : {}),
         ...(it.subcategory ? { subcategory: it.subcategory } : {}),
       }).score;
       scoreCache.set(key, v);
@@ -296,7 +350,68 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     }
   }
 
-  return { finance, gz, ipo: buildIpoPool(opts) };
+  // S6（2026-10-06 sc 授权）：池定稿前做一次**同主题终选** —— 每簇只留信息量最大者。
+  return {
+    finance: pruneHomogeneousTopics(finance),
+    gz: pruneHomogeneousTopics(gz),
+    ipo: buildIpoPool(opts),
+  };
+}
+
+/**
+ * 同主题终选（S6）：同一主题簇里只保留**分值最高**的一条。
+ *
+ * ## 为什么是「做减法」而不是「给重复内容设 penalty」
+ * 惩罚项要调阈值、要解释、还会在不同池规模下漂移；而池子本来就是「候选集」——
+ * 同质条目多占一个位置，就等于把另一个主题挤出去。直接砍掉更省心也更好解释。
+ *
+ * ## 判据（10-05 exec 池 30 条实测标定）
+ *  **共享 ≥1 个主体锚 + 锚集合 Jaccard ≥ 0.8**
+ *  - 主体锚 = `subjectAnchors()`：排除数字锚与 `GENERIC_ANCHORS`（广州/广东/央行…）。
+ *    没有它，「国庆假期，广州警方…」与「国庆假期，广州东至新塘…」会因共享 `广州` 被并成一类。
+ *  - Jaccard ≥0.8：光有「共享 1 个主体锚」太宽 —— 实测「个人投资者涌入新上市ETF」与
+ *    「A股新股首日零破发」共享锚 `上市`（Jaccard 0.5）会被**误并**；抬到 0.8 后该误并消失，
+ *    而真同质的黄金簇（4 条锚集合都是 `{黄金}`，Jaccard 1.0）照常合并。
+ *
+ * 实测效果（10-05 池）：黄金 4 条 → 留 1（「港交所推出人民币计价黄金期货」74 分，
+ * 是事件性新闻；被砍的 3 条是行情评论/技术分析）。其余 26 条一条未动。
+ *
+ * ⚠️ 只在**同一栏内**合并（finance 与 gz 不互相合并）—— 两栏喂给不同槽位，跨栏合并会丢信息。
+ * ⚠️ 保留原顺序（只标记删除，不重排）：上游已按「档位 → 分值」排好，重排会破坏既有优先级。
+ */
+export function pruneHomogeneousTopics(items: ExecPoolItem[]): ExecPoolItem[] {
+  if (items.length < 2) return items;
+  const info = items.map((it) => ({
+    fp: eventFingerprint(it.title),
+    score: scoreBranchRelevance({
+      title: it.title,
+      ...(it.excerpt?.trim()
+        ? { summary: it.excerpt }
+        : it.summary
+          ? { summary: it.summary }
+          : {}),
+      ...(it.subcategory ? { subcategory: it.subcategory } : {}),
+    }).score,
+  }));
+  const drop = new Set<number>();
+  for (let i = 0; i < info.length; i++) {
+    if (drop.has(i)) continue;
+    for (let j = i + 1; j < info.length; j++) {
+      if (drop.has(j)) continue;
+      if (!isSameTopic(info[i].fp, info[j].fp)) continue;
+      // 同主题 → 砍掉分值低的那条；同分时砍**后面**那条（保持确定性 + 靠前者优先）
+      drop.add(info[i].score >= info[j].score ? j : i);
+      if (drop.has(i)) break;
+    }
+  }
+  return items.filter((_, i) => !drop.has(i));
+}
+
+/** 同主题判定：共享 ≥1 个主体锚 + 锚集合 Jaccard ≥ 0.8（见 `pruneHomogeneousTopics` 注释）。 */
+function isSameTopic(a: Set<string>, b: Set<string>): boolean {
+  if (a.size === 0 || b.size === 0) return false;
+  if (sharedSubjectAnchors([...a], [...b]) < 1) return false;
+  return jaccard(a, b) >= TOPIC_MERGE_JACCARD;
 }
 
 /**
@@ -364,9 +479,11 @@ function buildRelaxedTwoDayPool(
       if (!inWindow(raw.publishedAt)) return; // 只看今天 + 昨天（缺发布时间 → 不在窗口）
     }
     const summary = (raw.summary ?? "").trim();
+    const rawExcerpt = (raw.excerpt ?? "").trim();
     const scored = scoreBranchRelevance({
       title: raw.title ?? "",
-      ...(summary ? { summary } : {}),
+      // S5：评分优先用源站原文，AI 摘要只作兜底。
+      ...(rawExcerpt ? { summary: rawExcerpt } : summary ? { summary } : {}),
       ...(raw.category ? { category: raw.category } : {}),
       ...(raw.subcategory ? { subcategory: raw.subcategory } : {}),
     });
@@ -378,8 +495,9 @@ function buildRelaxedTwoDayPool(
       item: withWhen(
         {
           title: raw.title ?? "",
-          summary: summary || (raw.excerpt ?? "").trim() || raw.title || "",
+          summary: summary || rawExcerpt || raw.title || "",
           url,
+          ...(rawExcerpt ? { excerpt: rawExcerpt } : {}),
         },
         raw.publishedAt,
         tk,
