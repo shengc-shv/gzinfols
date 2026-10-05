@@ -79,6 +79,24 @@ test("① 非空板块的条目必须出现在产物中（板块不得静默吞�
   );
 });
 
+test("①b 展示层地域标签不得露出简称「粤」——统一为「广东」或注册城市", () => {
+  const r = report();
+  r.sections.ipo = [
+    item("甲：IPO问询中（拟创业板）", { tags: ["粤"] }), // 无 ipoCity → 广东
+    item("乙：IPO注册生效（拟北交所）", { tags: ["粤"], ipoCity: "深圳市" }), // 有 → 城市
+    item("丙：IPO已受理（拟主板）", { tags: ["粤"], ipoCity: "广东" }),
+  ];
+  r.sections.gz_local = [item("广州首套房贷利率下调", { tags: ["粤"] })];
+  const html = renderHtml(r);
+  const labels = [...html.matchAll(/class="tag t-gd">([^<]*)</g)].map((m) => m[1]);
+  assert.ok(labels.length >= 4, `应渲染出地域标签，实际 ${labels.length}：${labels.join("/")}`);
+  assert.ok(!labels.includes("粤"), `地域标签不得再显示简称「粤」：${labels.join("/")}`);
+  assert.ok(labels.includes("广东"), "无 ipoCity 时回落「广东」");
+  assert.ok(labels.includes("深圳市"), "有 ipoCity 时保留注册城市（既有设计，勿回退）");
+  // 内部标识不变：data-tags 仍是「粤」（音频识别 / exec-pool / 筛选依赖它）
+  assert.ok(html.includes('data-tags="粤"'), "内部 data-tags 必须保留「粤」，只改展示文案");
+});
+
 test("② 空板块不得渲染面板，但 gz_local 常驻（避免静默消失）", () => {
   const r = report();
   r.sections.biz_insight = [item("银行理财规模回升")];

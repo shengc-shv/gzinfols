@@ -29,9 +29,11 @@ export function renderReportItemHtml(
   const badge = official ? { label: "官方", cls: "src-official" } : { label: "媒体", cls: "src-media" };
   const tags = (item.tags ?? [])
     .map((t) => {
-      // IPO 卡片：把「粤」地域标记的显示文案替换为注册城市（ipoCity），保留 t-gd 样式；
-      // 其它板块（gz_local 等）的「粤」标无 ipoCity 字段，原样展示，不受影响。
-      const label = t === "粤" && item.ipoCity ? item.ipoCity : t;
+      // 地域标记的**展示文案**：IPO 卡有 ipoCity → 显示注册城市（2026-09-11 既有设计）；
+      // 否则回落「广东」。🔴 2026-10-05 sc：展示层统一用「广东」，**不得再露出简称「粤」**
+      // —— 同页正文与卡片同时出现「粤 / 广东」两种叫法显得不专业。
+      // ⚠️ 只改展示文案；内部标识（`data-tags`、音频识别、exec-pool、筛选）仍用「粤」，勿动。
+      const label = t === "粤" ? item.ipoCity || "广东" : t;
       return `<span class="tag ${tagClsOf(t)}">${escapeHtml(label)}</span>`;
     })
     .join("");
