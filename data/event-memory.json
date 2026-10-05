@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-05",
+  "updatedAt": "2026-10-06",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -6480,8 +6480,155 @@
     }
   },
   "today": {
-    "date": "2026-10-05",
-    "entries": []
+    "date": "2026-10-06",
+    "entries": [
+      {
+        "date": "2026-10-06",
+        "section": "must_read",
+        "title": "台积电市值达2.5万亿美元",
+        "text": "台积电市值达2.5万亿美元 全球科技龙头市值再上台阶，科技主题资产热度延续，对高净值客户全球配置沟通形成新素材。",
+        "facts": [
+          "#2.5万亿"
+        ],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://www.stcn.com/article/detail/4206532.html",
+        "score": 66,
+        "novelty": 0.500531914893617,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-06",
+        "section": "must_read",
+        "title": "低空经济规模突破3.5万亿",
+        "text": "低空经济规模突破3.5万亿 政策与出海双重共振下低空经济站上3.5万亿量级，相关产业链企业主客群与股权融资需求值得关注。",
+        "facts": [
+          "#3.5万亿"
+        ],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://www.stcn.com/article/detail/4206447.html",
+        "score": 66,
+        "novelty": 0.553125,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-06",
+        "section": "must_read",
+        "title": "港股尾盘异动两大板块爆发",
+        "text": "港股尾盘异动两大板块爆发 港股尾盘异动显示资金对特定板块的短期偏好切换，跨境投资类客户的持仓与咨询行为可能随之变化。",
+        "facts": [],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://www.stcn.com/article/detail/4206491.html",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-06",
+        "section": "must_read",
+        "title": "珠海房产新政扩至港澳人士",
+        "text": "珠海房产新政扩至港澳人士 湾区跨境置业补贴范围首次覆盖港澳客群，珠海与广州南沙的港澳按揭、跨境结算服务衔接空间打开。",
+        "facts": [],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://www.cnr.cn/gd/guangdongyaowen/20261005/t20261005_527834291.shtml",
+        "score": 30,
+        "novelty": 0.3428571428571428,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-06",
+        "section": "must_read",
+        "title": "纳指涨超1%创收盘新高",
+        "text": "纳指涨超1%创收盘新高 海外风险偏好回升，客户对QDII及海外权益类产品的咨询热度可能同步走高，财富货架面临再平衡。",
+        "facts": [
+          "#1%"
+        ],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://finance.eastmoney.com/a/202610063888706547.html",
+        "score": 21,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-06",
+        "section": "insights",
+        "title": "广州家电数码补贴扩容",
+        "text": "广州家电数码补贴扩容 补贴扩容叠加新品上市，机器人单日卖出4台，消费热度向中高端迁移，以旧换新场景的分期与信用卡权益匹配度上升。",
+        "facts": [
+          "@广州"
+        ],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/05/139995_55010012.htm",
+        "novelty": 0.29272727272727267,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-06",
+        "section": "insights",
+        "title": "交银国际10月研选防御兼顾",
+        "text": "交银国际10月研选防御兼顾 机构10月配置强调防御与收益兼顾，覆盖科技、新能源与保险标的，成为客户资产配置沟通的现成参考素材。",
+        "facts": [
+          "#10月"
+        ],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniuekzz2748694.shtml",
+        "novelty": 0.7615384615384615,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-06",
+        "section": "insights",
+        "title": "大华继显料10月市场波动",
+        "text": "大华继显料10月市场波动 机构预计10月市场持续波动并纳入出行与地产标的，客户沟通中的波动预期管理需求上升。",
+        "facts": [
+          "#10月"
+        ],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniueeuf4459822.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-06",
+        "section": "insights",
+        "title": "花都三大村工业集聚区焕新",
+        "text": "花都三大村工业集聚区焕新 花都新雅三大村工业集聚区首拆启动，片区小微企业主与个体工商户的经营场所与资金安排将随之变动。",
+        "facts": [],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/05/139995_55010034.htm",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-06",
+        "section": "insights",
+        "title": "假期后消费信贷还款观察",
+        "text": "假期后消费信贷还款观察 国庆假期过半消费市场平稳有序，假期后消费信贷还款与额度使用情况将集中体现，客群还款能力分化值得留意。",
+        "facts": [],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261005/4477413_1.html",
+        "novelty": 0.3347826086956522,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-06",
+        "section": "insights",
+        "title": "北京商超银行福利叠满",
+        "text": "北京商超银行福利叠满 北京商超国庆档银行福利密集叠加，信用卡场景营销竞争加剧，同业权益投放力度与本地商圈合作节奏面临对标。",
+        "facts": [],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "url": "https://m.21jingji.com/article/20261005/herald/205d899b46a1e888423f9448f6b38417.html",
+        "novelty": 0.315,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-06",
+        "section": "risk",
+        "title": "韩国多家银行客户数据泄露",
+        "text": "韩国多家银行客户数据泄露 韩国多家银行遭黑客攻击致客户数据泄露，金融业数据安全风险再度暴露。 零售客户信息保护与系统防护的合规审查节奏将受关注，科技与风控条线面临数据安全自查压力，财富与私行客户对信息安全的敏感度上升。",
+        "facts": [],
+        "broadcastAt": "2026-10-06T06:45:44+08:00",
+        "score": 59,
+        "novelty": 0.30304878048780487,
+        "angle": "同业动作"
+      }
+    ],
+    "runId": "37383454675"
   },
   "deliveries": [
     {

@@ -1,0 +1,866 @@
+{
+  "date": "2026-10-06",
+  "updatedAt": "2026-10-05T22:47:04.716Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：湾区楼市，补贴扩容；跨境客群，口岸新高；消费场景，家电数码；海外市场，纳指新高。",
+    "spoken_hero": "今天主要看四个方面：湾区楼市，补贴扩容；跨境客群，口岸新高；消费场景，家电数码；海外市场，纳指新高。",
+    "must_read": [
+      {
+        "title": "台积电市值达2.5万亿美元",
+        "why": "全球科技龙头市值再上台阶，科技主题资产热度延续，对高净值客户全球配置沟通形成新素材。",
+        "url": "https://www.stcn.com/article/detail/4206532.html"
+      },
+      {
+        "title": "低空经济规模突破3.5万亿",
+        "why": "政策与出海双重共振下低空经济站上3.5万亿量级，相关产业链企业主客群与股权融资需求值得关注。",
+        "url": "https://www.stcn.com/article/detail/4206447.html"
+      },
+      {
+        "title": "港股尾盘异动两大板块爆发",
+        "why": "港股尾盘异动显示资金对特定板块的短期偏好切换，跨境投资类客户的持仓与咨询行为可能随之变化。",
+        "url": "https://www.stcn.com/article/detail/4206491.html"
+      },
+      {
+        "title": "珠海房产新政扩至港澳人士",
+        "why": "湾区跨境置业补贴范围首次覆盖港澳客群，珠海与广州南沙的港澳按揭、跨境结算服务衔接空间打开。",
+        "url": "https://www.cnr.cn/gd/guangdongyaowen/20261005/t20261005_527834291.shtml"
+      },
+      {
+        "title": "纳指涨超1%创收盘新高",
+        "why": "海外风险偏好回升，客户对QDII及海外权益类产品的咨询热度可能同步走高，财富货架面临再平衡。",
+        "url": "https://finance.eastmoney.com/a/202610063888706547.html"
+      }
+    ],
+    "spoken_must_read": "台积电市值达2.5万亿美元。全球科技龙头市值再上台阶，科技主题资产热度延续，对高净值客户全球配置沟通形成新素材。其次，低空经济规模突破3.5万亿。政策与出海双重共振下低空经济站上3.5万亿量级，相关产业链企业主客群与股权融资需求值得关注。此外，港股尾盘异动两大板块爆发。港股尾盘异动显示资金对特定板块的短期偏好切换，跨境投资类客户的持仓与咨询行为可能随之变化。还有，珠海房产新政扩至港澳人士。湾区跨境置业补贴范围首次覆盖港澳客群，珠海与广州南沙的港澳按揭、跨境结算服务衔接空间打开。另外，纳指涨超1%创收盘新高。海外风险偏好回升，客户对QDII及海外权益类产品的咨询热度可能同步走高，财富货架面临再平衡。",
+    "insights": [
+      {
+        "topic": "广州家电数码补贴扩容",
+        "impact": "补贴扩容叠加新品上市，机器人单日卖出4台，消费热度向中高端迁移，以旧换新场景的分期与信用卡权益匹配度上升。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "补贴扩容、新品扎堆、一天卖出4台机器人……广州黄金周家电数码消费又“新”又“热”",
+            "url": "https://news.dayoo.com/guangzhou/202610/05/139995_55010012.htm"
+          }
+        ]
+      },
+      {
+        "topic": "交银国际10月研选防御兼顾",
+        "impact": "机构10月配置强调防御与收益兼顾，覆盖科技、新能源与保险标的，成为客户资产配置沟通的现成参考素材。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "交银国际：10月研选配置兼顾防御与收益 看好英伟达、协鑫科技、中国太平",
+            "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniuekzz2748694.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "大华继显料10月市场波动",
+        "impact": "机构预计10月市场持续波动并纳入出行与地产标的，客户沟通中的波动预期管理需求上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "大华继显：大中华区选股纳入滴滴、信和置业及携程集团 料10月市场持续波动",
+            "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniueeuf4459822.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "花都三大村工业集聚区焕新",
+        "impact": "花都新雅三大村工业集聚区首拆启动，片区小微企业主与个体工商户的经营场所与资金安排将随之变动。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "首拆启动！花都新雅三大村工业集聚区焕新",
+            "url": "https://news.dayoo.com/guangzhou/202610/05/139995_55010034.htm"
+          }
+        ]
+      },
+      {
+        "topic": "假期后消费信贷还款观察",
+        "impact": "国庆假期过半消费市场平稳有序，假期后消费信贷还款与额度使用情况将集中体现，客群还款能力分化值得留意。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "国庆假期过半消费市场平稳有序",
+            "url": "https://www.cnfin.com/yw-lb/detail/20261005/4477413_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "北京商超银行福利叠满",
+        "impact": "北京商超国庆档银行福利密集叠加，信用卡场景营销竞争加剧，同业权益投放力度与本地商圈合作节奏面临对标。",
+        "tag": [
+          "竞对动态"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "北京商超国庆档：银行福利“buff”叠满",
+            "url": "https://m.21jingji.com/article/20261005/herald/205d899b46a1e888423f9448f6b38417.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，美股三大指数集体收涨、纳指创收盘新高，海外风险偏好回升，客户对海外固收与QDII类产品的风险偏好正在变化。高端客户方面，金价回调遇上国庆消费旺季，深圳水贝黄金消费人气火爆，贵金属实物与积存金类产品咨询量可能上升。普惠小微方面，国庆假期过半消费市场平稳有序，假期后消费信贷还款与额度使用情况值得留意。本地消费场景方面，广州家电数码补贴扩容叠加新品上市，机器人单日卖出四台，消费热度向中高端迁移；北京商超国庆档银行福利密集叠加，同业信用卡场景营销竞争加剧。跨境客群方面，横琴口岸单日客流突破十五万人次创口岸启用以来新高，珠海房产新政将补贴范围扩至港澳人士，湾区跨境置业与资金结算需求受到提振。",
+    "risk": {
+      "topic": "韩国多家银行客户数据泄露",
+      "evidence": "韩国多家银行遭黑客攻击致客户数据泄露，金融业数据安全风险再度暴露。",
+      "impact": "零售客户信息保护与系统防护的合规审查节奏将受关注，科技与风控条线面临数据安全自查压力，财富与私行客户对信息安全的敏感度上升。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "突发！多家银行客户数据泄露！韩国金融业炸锅，系统遭黑客攻击",
+          "url": "https://m.21jingji.com/article/20261005/herald/698ca6d93b9600bd0adf62ad5f11c575.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：韩国多家银行客户数据泄露，零售客户信息保护与系统防护的合规审查节奏将受关注，科技与风控条线面临数据安全自查压力，财富与私行客户对信息安全的敏感度上升。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨1.05%领涨，标普涨0.66%，道指涨0.18%，英伟达冲6万亿市值预期提振科技股。",
+      "sectors": [
+        "期权交易员预计英伟达本月末市值将突破6万亿美元，AI龙头热度延续。",
+        "伯克希尔增持Lennar，持股升至11.2%，但买入节奏放缓。",
+        "三季度IPO推迟案例增多，部分公司选择继续观望。",
+        "也门政府军将胡塞武装逐出曼德海峡，中东地缘局势受关注。"
+      ],
+      "spoken": "美股收涨，纳指涨1.05%领涨，标普500涨0.66%，道指涨0.18%。期权交易员预计英伟达本月末市值将突破6万亿美元，AI龙头热度延续。伯克希尔增持Lennar，持股升至11.2%，但买入节奏放缓。三季度IPO推迟案例增多，部分公司选择继续观望。也门政府军将胡塞武装逐出曼德海峡，中东地缘局势受关注。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-06"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51267.90",
+          "changePct": "+0.18%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27477.31",
+          "changePct": "+1.05%"
+        },
+        {
+          "name": "标普500",
+          "value": "7773.95",
+          "changePct": "+0.66%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证涨0.31%，深成指、创业板小幅收跌，华为高通协议与地产新周期表态提振情绪。",
+      "sectors": [
+        "华为与高通达成重磅协议，产业链关注度升温，具体条款待披露。",
+        "PCB关键材料供需缺口或延续至2027年，建滔系两股均涨超7%。",
+        "中信证券假期喊话积极迎接房地产新周期，地产链情绪获提振。",
+        "南向资金爆买个股，8股南向持股量环比增长超100%。"
+      ],
+      "spoken": "A股收盘涨跌互现，上证指数涨0.31%，深证成指跌0.11%，创业板指跌0.23%。板块方面，华为与高通达成重磅协议，产业链关注度升温。PCB关键材料供需缺口或延续至2027年，建滔系两股均涨超7%。中信证券喊话积极迎接房地产新周期，地产链情绪获提振。南向资金爆买个股，8股南向持股量环比增长超100%。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-06"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3842.20",
+          "changePct": "+0.31%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12887.62",
+          "changePct": "-0.11%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3135.28",
+          "changePct": "-0.23%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24040.34点（+0.28%）；恒生科技收报4183.68点（+0.62%）。",
+      "sectors": [
+        "科网股分化",
+        "PCB概念股强势"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-05"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.28% 科指涨0.62% 科网股分化 PCB概念股强势",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-05/doc-iniueeuf9677601.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24040.34",
+          "changePct": "+0.28%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4183.68",
+          "changePct": "+0.62%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-05",
+    "marketStatus": {
+      "reportDate": "2026-10-06",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-09-30",
+          "reason": "数据为 9月30日（距今 6 天）"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-05"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-05"
+        }
+      },
+      "allStale": false,
+      "note": "A股今日无隔夜行情，其余市场为最新收盘",
+      "spokenNote": "A股今日无隔夜行情；港股为 10月5日 周一 收盘；美股为 10月5日 周一 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610053888623413.html",
+      "title_cn": "官宣！华为和美国高通达成重磅协议",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "华为与高通宣布达成一项重磅协议。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "科技",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610053888603814.html",
+      "title_cn": "供需缺口或延续至2027年！PCB关键材料紧缺蔓延建滔系两股均涨超7%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "PCB关键材料供应紧缺，供需缺口或延续至2027年，建滔系两只股票均涨超7%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "PCB",
+        "半导体",
+        "供应链"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610053888645696.html",
+      "title_cn": "2026年诺贝尔生理学或医学奖揭晓",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "2026年诺贝尔生理学或医学奖获奖者揭晓。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "科研"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610053888586015.html",
+      "title_cn": "DeepSeekHarness国庆假期上新！90后负责人回应：希望做出让世界AI巨头跟进的创新",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "DeepSeek在国庆假期发布Harness新产品，90后负责人回应称希望做出让世界AI巨头跟进的创新。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610053888600180.html",
+      "title_cn": "大涨超1700点！日股、美股、黄金、白银、比特币全线拉升",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "日股大涨超1700点，美股、黄金、白银、比特币全线拉升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "全球市场",
+        "黄金",
+        "加密货币"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610053888582720.html",
+      "title_cn": "美股开盘、收盘时间可能要变特朗普呼吁民众施压推动永久夏令时法案通过",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "特朗普呼吁民众施压推动永久夏令时法案通过，美股开盘、收盘时间可能因此改变。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610053888599515.html",
+      "title_cn": "中信证券假期喊话：积极迎接房地产新周期",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "中信证券在假期发布观点，称应积极迎接房地产新周期。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地产",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610053888585917.html",
+      "title_cn": "霍尔木兹海峡、也门局势最新消息！伊朗就美伊问题表态强硬",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "霍尔木兹海峡及也门局势出现最新进展，伊朗就美伊问题表态强硬。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "能源"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610053888584410.html",
+      "title_cn": "南向资金爆买这只股！8股南向资金持股量环比增长超100%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "南向资金大幅买入某只个股，8只股票南向资金持股量环比增长超100%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "南向资金",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610053888605362.html",
+      "title_cn": "彻底退出历史舞台、大降价？一汽丰田最新回应",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "针对车型彻底退出历史舞台及大降价的传闻，一汽丰田作出最新回应。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "汽车",
+        "公司回应"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610063888709219.html",
+      "title_cn": "拧紧水龙头用好水资源",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "报道聚焦水资源管理，提出拧紧水龙头、用好水资源。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610063888707315.html",
+      "title_cn": "AI投资能否对美国经济形成新支撑",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "报道探讨AI投资能否对美国经济形成新的支撑。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "宏观经济"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-05/doc-iniueeuf9677601.shtml",
+      "title_cn": "港股收评：恒指涨0.28% 科指涨0.62% 科网股分化 PCB概念股强势",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "港股收评：恒指涨0.28%，科指涨0.62%，科网股分化，PCB概念股表现强势。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "PCB",
+        "科网股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-10-05/doc-iniucpwm3115956.shtml",
+      "title_cn": "港交所的锣又不够敲了？8只同日上市，密集程度为年内仅见",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "港交所同日有8只新股上市，密集程度为年内仅见。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-05/doc-iniucuep6568163.shtml",
+      "title_cn": "港股光通信板块强势，摩根士丹利：FCC限制非全面封杀",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "港股光通信板块走强，摩根士丹利称FCC限制并非全面封杀。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "光通信",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-05/doc-iniucynm6505242.shtml",
+      "title_cn": "前三季香港IPO约八成来自3大行业",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "前三季度香港IPO约八成来自三大行业。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniuekzz2748694.shtml",
+      "title_cn": "交银国际：10月研选配置兼顾防御与收益 看好英伟达(NVDA.US)协鑫科技(03800)中国太平(00966)等",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "交银国际发布10月研选配置，兼顾防御与收益，看好英伟达、协鑫科技、中国太平。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniuemaf6352883.shtml",
+      "title_cn": "瑞银：降普拉达(01913)目标价至36.3港元 重申“中性”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "瑞银将普拉达目标价下调至36.3港元，重申中性评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniueeui6449062.shtml",
+      "title_cn": "瑞银：升新秀丽(01910)目标价至21.4港元 维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "瑞银将新秀丽目标价上调至21.4港元，维持买入评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniueeuf4459822.shtml",
+      "title_cn": "大华继显：大中华区选股纳入滴滴(DIDIY.US)、信和置业(00083)及携程集团-S(09961) 料10月市场持续波动",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "大华继显将滴滴、信和置业及携程集团纳入大中华区选股，预计10月市场持续波动。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "中概股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniueeuf4445998.shtml",
+      "title_cn": "花旗：双节出行需求稳步上升 维持同程旅行(00780)及携程(TCOM.US)“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "花旗称双节出行需求稳步上升，维持同程旅行及携程买入评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "旅游"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniueeuf9633590.shtml",
+      "title_cn": "高盛：降统一企业中国(00220)目标价至8.36港元 料第三季销售稳健",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "高盛将统一企业中国目标价下调至8.36港元，预计第三季销售稳健。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniueeuc2825025.shtml",
+      "title_cn": "小摩：香港8月零售销售轻微改善 维持领展房产基金(00823)及九龙仓置业(01997)“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "摩根大通称香港8月零售销售轻微改善，维持领展房产基金及九龙仓置业增持评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "地产"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniucynf2949541.shtml",
+      "title_cn": "花旗：降金界控股(03918)目标价至4.1港元 第三季博彩收入逊预期",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "花旗将金界控股目标价下调至4.1港元，因第三季博彩收入逊预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "博彩"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/05/nvidias-6-trillion-milestone-looms-heres-when-options-traders-see-it-happening.html",
+      "title_cn": "Nvidia's $6 trillion milestone looms. Here's when options traders see it happening",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "英伟达6万亿美元市值里程碑临近，报道分析期权交易者预期的时间点。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "半导体"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/04/top-analysts-are-upbeat-about-the-prospects-for-these-3-stocks.html",
+      "title_cn": "Top Wall Street analysts are upbeat about the prospects for these 3 stocks",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/04",
+      "summary": "华尔街顶级分析师对三只股票的前景表示乐观。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/03/lula-or-bolsonaro-wall-street-braces-for-two-wildly-different-results-in-brazil-election.html",
+      "title_cn": "Lula or Bolsonaro: Wall Street braces for two wildly different results in Brazil election",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/03",
+      "summary": "巴西大选结果或为卢拉或博索纳罗，华尔街准备应对两种截然不同的结果。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "地缘政治",
+        "宏观经济"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/03/berkshire-buys-more-lennar-shares-but-pace-of-purchases-slows.html",
+      "title_cn": "Berkshire buys more Lennar shares, but pace of purchases slows",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/04",
+      "summary": "伯克希尔增持Lennar股票，但购买速度放缓。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "地产"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/09/29/ipo-postponements-are-accelerating-in-third-quarter-even-beyond-oura.html",
+      "title_cn": "IPO postponements are accelerating in third quarter, even beyond Oura",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/02",
+      "summary": "第三季度IPO推迟现象加速，范围超出Oura。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "IPO"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/coupang-chief-accounting-officer-jonathan-lee-sells-75338-in-stock-93CH-4933035",
+      "title_cn": "Coupang chief accounting officer Jonathan Lee sells $75,338 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "Coupang首席会计官Jonathan Lee卖出价值75,338美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/pubmatic-chairman-amar-goel-sells-138545-in-shares-93CH-4933032",
+      "title_cn": "PubMatic chairman Amar Goel sells $138,545 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "PubMatic董事长Amar Goel卖出价值138,545美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/tango-therapeutics-rd-president-adam-crystal-sells-660k-in-shares-93CH-4933033",
+      "title_cn": "Tango therapeutics R&D president Adam Crystal sells $660k in shares.",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "Tango Therapeutics研发总裁Adam Crystal卖出价值66万美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管交易",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/coinbase-director-marc-andreessen-sells-39m-in-shares-93CH-4933034",
+      "title_cn": "Coinbase director Marc Andreessen sells $3.9m in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "Coinbase董事Marc Andreessen卖出价值390万美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管交易",
+        "加密货币"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/yemeni-government-forces-seize-district-by-bab-elmandeb-military-sources-say-4931376",
+      "title_cn": "Yemeni government forces drive Houthis from Bab el-Mandeb Strait",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "也门政府军将胡塞武装逐出曼德海峡。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/cargurus-cpo-ismail-elshareef-sells-79174-in-shares-93CH-4933021",
+      "title_cn": "CarGurus CPO Ismail Elshareef sells $79,174 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "CarGurus首席产品官Ismail Elshareef卖出价值79,174美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/fortitude-mining-signs-letter-of-intent-for-bitmain-equipment-93CH-4933017",
+      "title_cn": "Fortitude Mining signs letter of intent for Bitmain equipment",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "Fortitude Mining签署意向书，采购比特大陆设备。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "加密货币",
+        "矿业"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
