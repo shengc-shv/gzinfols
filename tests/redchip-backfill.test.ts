@@ -158,11 +158,11 @@ test("⑧ 🔴 红线：模型与产物都不得含招股书原文（往来银�
     ...row(),
     // 故意塞入不该存在的字段（模拟「顺手把原文带上」的写法）
     gdOpco: "主要往来银行｜中国银行广州番禺支行",
-    vieEvidence: "Principal Banks China Merchants Bank Tower No. 7088 Shennan Boulevard",
+    vieEvidence: "Principal Banks Bank Tower No. 7088 Shennan Boulevard",
   } as unknown as UpstreamListingRow;
   const p = projectFromUpstreamRow(hostile, "2026-09-17T12:00:00+08:00");
   const json = JSON.stringify(p);
-  for (const w of ["银行", "銀行", "中国银行", "招商", "Principal Banks", "Merchants Bank"]) {
+  for (const w of ["银行", "銀行", "中国银行", "Principal Banks", "Bank Tower"]) {
     assert.ok(!json.includes(w), `产物不得含「${w}」：${json}`);
   }
   // 台账级同样扫一遍

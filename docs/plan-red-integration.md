@@ -85,7 +85,7 @@
 `gd_opco` / `vie_evidence` 是招股书**原文片段**，其中包含「主要往来银行」披露，实测样例：
 
 ```
-108395 XREAL Ltd.    → "Principal Banks China Merchants Bank Tower No. 7088 Shennan Boulevard Shenzhen"
+108395 XREAL Ltd.    → "Principal Banks Bank Tower No. 7088 Shennan Boulevard Shenzhen"
 108804 錢大媽          → "主要往来银行｜中国银行广州番禺支行"
 ```
 
