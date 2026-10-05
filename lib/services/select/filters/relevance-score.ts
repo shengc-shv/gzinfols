@@ -58,6 +58,17 @@ export interface ScorableArticle {
   url?: string;
   tags?: string[];
   locale?: string;
+  /**
+   * 发布时间；时效衰减用，缺省则不衰减。
+   * 两种形态都收：`ArticleInput` 用 `Date`、`ReportItem` 用 ISO 串。
+   */
+  publishedAt?: string | Date;
+}
+
+/** 评分可选项（注入式，服务层不得自己取时间 —— 红线 R1/R5） */
+export interface ScoreOptions {
+  /** 「现在」由组合根注入（如 FilterContext.startTime()）。不传 = 不做时效衰减。 */
+  now?: Date;
 }
 
 // ---------------------------------------------------------------------------
@@ -95,12 +106,35 @@ const BUSINESS_LINES: LineRule[] = [
   //   而后者正是 10-04 定调「贵金属异动，资金搬家」的来源之一 —— 素材在定调里有、
   //   在分值排序里却被整条排掉。**同「A股 vs 港股」的教训：换个说法就差两个档位。**
   // ⚠️ 刻意不收裸词「金银」（「金银花」会误配 —— 实测探针已锁定）。
-  { line: "财富", weight: 0.9, kws: ["财富", "理财", "基金", "保险", "黄金", "存款", "资管", "AUM", "贵金属", "债基", "新股", "IPO", "打新", "申购", "发行价", "招股", "路演", "上市申购", "A股", "Ａ股", "股市", "大盘", "两市", "股指", "上证", "深证", "创业板", "科创板", "开门红", "持股", "股民", "金价", "银价", "金饰"] },
+  // S1 补词（2026-10-06 sc 授权）：**存单 / ETF / 私募**
+  // 背景（10-05 独立评估实测）：当天 5 张最具业务价值的卡**业务线权重为 0 → 一律 25 分 context**，
+  //   而它们恰恰是 importance 最高的几张卡。根因是词表只收「存款」不收「存单」等**同族异说**
+  //   —— 与已修的「金价 vs 黄金」「A股 vs 港股」是**同一类病**。
+  // 配对探针（全池 465 条真标题，2026-10-06 实测，逐条人工判误配）：
+  //   「存单」2 条 —— ①多家银行重启5年期大额存单（目标 ✓）
+  //     ②男子存1万定期…丢失**存单**挂失…起诉银行（存款纠纷；标题已含「存款」，本就命中财富线 → **无新增误配**）
+  //   「ETF」3 条 —— ①占比超八成！个人投资者大举涌入新上市ETF（目标 ✓）
+  //     ②「ETF #股票#财经 #投资 #基金 #ETF」标签稿（已含「基金」，无新增影响）③英文稿 two ETFs（漏斗外）
+  //   「私募」5 条 —— ①62家百亿私募集体调研（目标 ✓）②百亿私募增至159家 ③中基协私募月报（规模25.75万亿）
+  //     ④券商搭台、私募出壳…涉千万雪球违规（原已命中监管合规 0.85 → 加词后 0.9，仅 +2 分，可接受）
+  //     ⑤私募基金规模达23.66万亿（✓）
+  // ⛔ 刻意**不收 0 召回的词**：etf(小写 0)、被动投资(0)、指数基金(0)、反催收(0)、盗用支付(0)
+  //    —— 零召回只增加词表面积与未来误配风险，不带来收益。
+  // ⛔ 「大额存单」「百亿私募」为**子串冗余**（已由「存单」「私募」覆盖），不重复列举。
+  { line: "财富", weight: 0.9, kws: ["财富", "理财", "基金", "保险", "黄金", "存款", "资管", "AUM", "贵金属", "债基", "新股", "IPO", "打新", "申购", "发行价", "招股", "路演", "上市申购", "A股", "Ａ股", "股市", "大盘", "两市", "股指", "上证", "深证", "创业板", "科创板", "开门红", "持股", "股民", "金价", "银价", "金饰", "存单", "ETF", "私募"] },
   { line: "私行", weight: 0.9, kws: ["私行", "家族", "高净值", "企业主", "家族信托", "家族办公室"] },
-  { line: "信用卡", weight: 0.7, kws: ["信用卡", "借记卡", "刷卡"] },
+  // S1 补词（2026-10-06）：**盗刷 / 刷走**
+  // 原表只有「刷卡」→「随手连公共Wi-Fi误点弹窗，银行卡被**刷走**850元！紧急提醒」
+  //   （防盗刷提醒，对零售客群有直接执行关联）业务线权重 0 → **25 分 drop**。
+  // 探针：盗刷 1 条（万事达卡批量境外**盗刷**调查 ✓）、刷走 1 条（即目标 ✓），**零误配**。
+  { line: "信用卡", weight: 0.7, kws: ["信用卡", "借记卡", "刷卡", "盗刷", "刷走"] },
   { line: "代发", weight: 0.7, kws: ["代发", "代发工资", "工资代发"] },
   { line: "养老", weight: 0.6, kws: ["养老", "养老金融", "个人养老金"] },
-  { line: "监管合规", weight: 0.85, kws: ["罚", "处罚", "违规", "整改", "通报", "不良", "逾期", "催收", "风险敞口", "压降", "踩雷", "爆雷"] },
+  // S1 补词（2026-10-06）：**代理维权**
+  // 原表「催收」不含「代理维权」→「抽取50%提成、恶意索赔遭整肃 金融领域"代理维权"打击持续」
+  //   业务线权重 0 → **25 分 drop**，而它是对公/零售双线都直接相关的合规整肃信号。
+  // 探针：命中 1 条（即目标条），**零误配**。⛔ 不收裸词「维权」（非金融维权威权会误配）。
+  { line: "监管合规", weight: 0.85, kws: ["罚", "处罚", "违规", "整改", "通报", "不良", "逾期", "催收", "风险敞口", "压降", "踩雷", "爆雷", "代理维权"] },
   { line: "竞对动态", weight: 0.7, kws: ["竞对", "他行", "工行", "建行", "中行", "农行", "邮储", "兴业", "平安银行", "中信", "民生", "光大", "华夏", "浦发", "国有大行", "股份行"] },
   { line: "政银合作", weight: 0.6, kws: ["政银", "政务", "银政", "财政补贴"] },
   { line: "科技金融", weight: 0.6, kws: ["科技金融", "数字人民币", "金融科技", "数字银行"] },
@@ -191,8 +225,16 @@ function sourceScore(sourceId?: string, subcategory?: string): number {
 // ---------------------------------------------------------------------------
 // 3) 可行动性：这条能不能让分行「做点什么」
 // ---------------------------------------------------------------------------
+// ⛔ 「重组」已移出（2026-10-06 sc 授权 S2）：它是**企业动作**，不是政策动作，
+//    留在表里会让任何含「重组」的企业稿戴上政策光环（可行动性 0.9，与央行发文同级）。
+//    实测 10-05：全池 465 条里含「重组」的仅 1 条 ——
+//      「港股异动 | 百威亚太(01876)跌超2% 内部重组及计提拨备将影响三季度利润」
+//      原分 **74 must_read**（含「港股」→ 跨境线 1.0 + policy_action 0.9）；
+//      移出后可行动性落到 default 0.5 → **66 insight**，与同类港股快讯同档。
+//    影响面极小（1/465），但修的是**系统性倾向**：企业动作 ≠ 政策动作。
+//    ⚠️ 真·政策语境的重组（如监管发文要求重组）会由「发文/通知/办法」等词接管，不受影响。
 const POLICY_ACTION_RE =
-  /新规|发文|意见|办法|通知|印发|出台|发布|延长|下调|上调|降息|降准|贴息|重组|宽松|收紧|扩容|提额|试点|调整|落地|实施|监管/;
+  /新规|发文|意见|办法|通知|印发|出台|发布|延长|下调|上调|降息|降准|贴息|宽松|收紧|扩容|提额|试点|调整|落地|实施|监管/;
 const RISK_ACTION_RE = /罚|处罚|违规|整改|通报|不良|逾期|违约|风险敞口/;
 const DATA_CONTEXT_RE = /数据|统计|同比|环比|回落|增长|下跌|大涨|大跌|震荡|分析|解读|回顾|展望|波动/;
 // 软资讯：获奖/榜单/出口 之外，重点是**银行自家营销活动与 PR 通告**
@@ -234,9 +276,68 @@ function localityScore(text: string, locale?: string): number {
 const CHANNEL_TAG_RE = /【[^】]{0,12}·[^】]{0,12}】[ \t]*/g;
 
 // ---------------------------------------------------------------------------
+// 5) 时效衰减（2026-10-06 sc 授权 S3）
+// ---------------------------------------------------------------------------
+/**
+ * 问题（10-05 独立评估实测）：评分器**完全没有时效项**，导致
+ *   ρ(发布时间, 分数) = **−0.38** —— 越新鲜反而越低分。
+ *   09-29 的央行降息 PSL 稿拿全池最高 **87**，2024 年的旧稿 74，
+ *   而当天真新闻因不含关键词只有 21 分。分数因此**同时服务不了两个场景**：
+ *   滚动库存（要长期可比）与当日排序（要新鲜优先）。
+ *
+ * 设计：**单调衰减 + 注入 now**。now 由组合根注入（服务层禁 `Date.now()` / 裸 `new Date()`，红线 R1/R5）。
+ *   age ≤ 1 天 ×1.00 · ≤ 2 天 ×0.90 · 3 天及以上 ×0.80
+ *
+ * ⚠️ **只在传入 now 时生效**：不传 = 不衰减，保持纯函数与既有调用点行为逐字不变
+ *    （`exec-guard` / `importance` / `exec-pool` 等调用点拿不到注入时间，保持原样）。
+ * ⚠️ **IPO 状态稿豁免**：IPO 是「受理/辅导/过会/递表」的**状态**而非新闻，本身就有
+ *    独立窗口（IPO_VOICE_WINDOW_DAYS=2 / exec 池 7 天）；对它做衰减会把「刚披露的
+ *    辅导备案」与「上周的老状态」人为拉开，不符合状态类内容的语义。
+ * ⚠️ 硬规则 A/B 的 override 用 `Math.max(score, 84)`，因此**不受时效衰减影响** ——
+ *    这是刻意取舍（国家核心监管政策置顶优先于新鲜度），如需让旧政策稿也让位需另行授权。
+ */
+const AGE_TIERS: { maxDays: number; factor: number }[] = [
+  { maxDays: 1, factor: 1.0 },
+  { maxDays: 2, factor: 0.9 },
+  { maxDays: Number.POSITIVE_INFINITY, factor: 0.8 },
+];
+
+/** IPO 状态稿判定（category 取值见 contracts/article.ts；subcategory 见 sources.config） */
+function isIpoStateDoc(a: ScorableArticle): boolean {
+  return (
+    a.category === "ipo" ||
+    a.category === "gd-ipo" ||
+    /^(ipo-|gz-ipo|stage-listed)/.test(a.subcategory ?? "")
+  );
+}
+
+export function timelinessFactor(
+  article: ScorableArticle,
+  now?: Date,
+): { factor: number; ageDays?: number; exempt?: boolean } {
+  if (!now || !article.publishedAt) return { factor: 1 };
+  if (isIpoStateDoc(article)) return { factor: 1, exempt: true };
+  const t =
+    typeof article.publishedAt === "string"
+      ? Date.parse(article.publishedAt)
+      : article.publishedAt.getTime();
+  if (Number.isNaN(t)) return { factor: 1 };
+  const ageDays = (now.getTime() - t) / 86_400_000;
+  // 未来时间戳（源站时区错乱）：不衰减也不抬升，避免反向激励
+  if (ageDays < 0) return { factor: 1, ageDays };
+  for (const tier of AGE_TIERS) {
+    if (ageDays <= tier.maxDays) return { factor: tier.factor, ageDays };
+  }
+  return { factor: 0.8, ageDays };
+}
+
+// ---------------------------------------------------------------------------
 // 主函数
 // ---------------------------------------------------------------------------
-export function scoreBranchRelevance(article: ScorableArticle): BranchRelevance {
+export function scoreBranchRelevance(
+  article: ScorableArticle,
+  opts?: ScoreOptions,
+): BranchRelevance {
   const text = [article.title, article.summary ?? "", article.subcategory ?? ""].join(" ");
   // 业务线匹配专用文本：**剥掉 RSS 栏目标识**（2026-10-04 sc 选「局部剥离」）。
   //
@@ -293,9 +394,16 @@ export function scoreBranchRelevance(article: ScorableArticle): BranchRelevance 
   const base = Math.round(
     100 * (0.45 * lineW + 0.25 * authW + 0.2 * actW + 0.1 * locW),
   );
+  // 时效衰减（S3）：只在注入 now 且非 IPO 状态稿时生效
+  const tl = timelinessFactor(article, opts?.now);
+  if (tl.exempt) signals.push("IPO 状态稿 → 豁免时效衰减");
+  else if (tl.factor < 1 && tl.ageDays !== undefined) {
+    signals.push(`时效衰减 ×${tl.factor}（距今 ${tl.ageDays.toFixed(1)} 天）`);
+  }
+  const baseTl = Math.round(base * tl.factor);
   // 外埠区域性银行（他省城商行/农商行）→ 仅参考意义，降权；本地(广州/广东)语境下不降
   const foreignRegional = FOREIGN_REGIONAL_BANK_RE.test(text) && locW < 0.9;
-  const score = foreignRegional ? Math.round(base * 0.72) : base;
+  const score = foreignRegional ? Math.round(baseTl * 0.72) : baseTl;
   if (foreignRegional) signals.push("外埠区域性银行（仅参考意义）降权 0.72");
 
   // 风险向判定
@@ -374,9 +482,9 @@ export interface RankedArticle {
   relevance: BranchRelevance;
 }
 
-export function rankByRelevance(articles: ScorableArticle[]): RankedArticle[] {
+export function rankByRelevance(articles: ScorableArticle[], opts?: ScoreOptions): RankedArticle[] {
   return articles
-    .map((a) => ({ article: a, relevance: scoreBranchRelevance(a) }))
+    .map((a) => ({ article: a, relevance: scoreBranchRelevance(a, opts) }))
     .sort((x, y) => {
       if (y.relevance.score !== x.relevance.score) return y.relevance.score - x.relevance.score;
       return y.relevance.authority - x.relevance.authority;

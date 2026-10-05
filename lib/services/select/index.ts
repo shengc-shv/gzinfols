@@ -54,15 +54,21 @@ import { GLOBAL_TOP_N, PER_SOURCE_SOFT_CAP, takeGlobalTopByValue } from "./filte
  * ⚠️ `sourceId` 传 `a.source` —— 与 select 原实现逐字一致（relevance-score 内部按源名归类），
  * 改动会影响排序结果，需连带核对 tests/select 与 light-ai 测试。
  */
-function relevanceScoreOf(a: ArticleInput): number {
-  return scoreBranchRelevance({
-    title: a.title_cn ?? a.title ?? "",
-    summary: a.summary ?? "",
-    sourceId: a.source,
-    category: a.category,
-    subcategory: a.subcategory,
-    url: a.url,
-  }).score;
+function relevanceScoreOf(a: ArticleInput, now?: Date): number {
+  return scoreBranchRelevance(
+    {
+      title: a.title_cn ?? a.title ?? "",
+      summary: a.summary ?? "",
+      sourceId: a.source,
+      category: a.category,
+      subcategory: a.subcategory,
+      url: a.url,
+      ...(a.publishedAt ? { publishedAt: a.publishedAt } : {}),
+    },
+    // 时效衰减（S3：2026-10-06 sc 授权）：now 由 FilterContext.startTime() 注入，
+    // 服务层不自己取时间（红线 R1/R5）。不传 = 不衰减。
+    ...(now ? [{ now }] : []),
+  ).score;
 }
 
 export interface SelectDeps {
@@ -207,7 +213,7 @@ const titleSimilarityStage: FilterStage = {
     const { kept, removed } = dedupeByTitleSimilarity(others, {
       threshold: dd.threshold,
       maxPerTheme: dd.maxPerTheme,
-      scoreOf: relevanceScoreOf,
+      scoreOf: (a) => relevanceScoreOf(a, ctx.startTime()),
     });
     const out = [...ipo, ...kept];
     if (removed.length > 0) {
@@ -230,7 +236,7 @@ const crossDayDedupStage: FilterStage = {
     const before = articles.length;
     const { kept, removed } = dedupeAgainstHistory(others, histSim, {
       maxPerTheme: 2,
-      scoreOf: relevanceScoreOf,
+      scoreOf: (a) => relevanceScoreOf(a, ctx.startTime()),
     });
     const out = [...ipo, ...kept];
     if (removed.length > 0) {
@@ -254,7 +260,12 @@ const globalValueCapStage: FilterStage = {
   name: "global-value-cap",
   apply: (articles, ctx) => {
     const before = articles.length;
-    const out = takeGlobalTopByValue(articles, GLOBAL_TOP_N, PER_SOURCE_SOFT_CAP, relevanceScoreOf);
+    const out = takeGlobalTopByValue(
+      articles,
+      GLOBAL_TOP_N,
+      PER_SOURCE_SOFT_CAP,
+      (a) => relevanceScoreOf(a, ctx.startTime()),
+    );
     if (out.length < before) {
       ctx.log.info(
         "filter",
@@ -374,7 +385,7 @@ function logPerSourceYield(
   for (const a of survivors) {
     const k = a.sourceId || "(无源)";
     const arr = kept.get(k) ?? [];
-    arr.push(relevanceScoreOf(a));
+    arr.push(relevanceScoreOf(a, ctx.startTime));
     kept.set(k, arr);
   }
   const rows = [...inflow.entries()]

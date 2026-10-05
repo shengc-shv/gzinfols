@@ -208,3 +208,34 @@ test("B-1 filterResults：商机/风险命中条目建表（risks-only 超集，
   assert.ok(r.filterResults.get("opp")?.opportunities?.length === 1);
   assert.equal(r.filterResults.get("plain"), undefined, "未命中 opp/risks 的条目不入表（gzinfo B-1 语义）");
 });
+
+/**
+ * S3（2026-10-06 sc 授权）：**select 链路真的把注入时间喂给了评分器**。
+ *
+ * 为什么需要这条端到端守护：时效衰减是**可选**的（不传 now 就不衰减），
+ * 单测只能证明 `timelinessFactor` 本身正确，证明不了组合根有没有把
+ * `FilterContext.startTime()` 传下去 —— 漏传的话代码照样绿、线上照样不生效。
+ *
+ * 构造的是**反向对照**：两条同主题、同 tier、改前**同分**（都是 87）的稿，
+ * 按「同分保持输入顺序」本该留**先输入的 older**；注入 startTime 后
+ * older 因时效 ×0.9 降到 78 → 换成 fresh。**换人 = 注入生效**。
+ */
+test("S3：select 链路注入 startTime，同簇内更新的一条优先（时效生效的端到端证明）", async () => {
+  const now = new Date("2026-09-11T08:00:00Z");
+  const fresh = article({
+    url: "fresh",
+    sourceId: "s1",
+    tier: "T2",
+    title: "央行宣布降准 0.5 个百分点释放流动性",
+    publishedAt: new Date(now.getTime() - 0.4 * 86_400_000),
+  });
+  const older = article({
+    url: "older",
+    sourceId: "s2",
+    tier: "T2",
+    title: "央行宣布降准0.5个百分点 释放长期流动性",
+    publishedAt: new Date(now.getTime() - 1.5 * 86_400_000),
+  });
+  const r = await runSelect([older, fresh], makeCtx({ startTime: now }));
+  assert.deepEqual(r.articles.map((a) => a.url), ["fresh"]);
+});

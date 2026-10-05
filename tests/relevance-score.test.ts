@@ -8,7 +8,11 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { scoreBranchRelevance, rankByRelevance } from "../lib/services/select/filters/relevance-score";
+import {
+  scoreBranchRelevance,
+  rankByRelevance,
+  timelinessFactor,
+} from "../lib/services/select/filters/relevance-score";
 
 // 真实同题报道（2026-08-28 央行、金监总局联合发文）
 const MORTGAGE_40Y = {
@@ -184,4 +188,102 @@ test("通讯社署名（不含「·」）不被剥离 —— 权威度判定依�
     "【新华社】不参与业务线匹配 → 加与不加署名分数应一致",
   );
   assert.ok(withTag.businessLines.includes("信贷"), "降准仍应命中信贷线（业务线判定未被削弱）");
+});
+
+// ---------------------------------------------------------------------------
+// S2（2026-10-06 sc 授权）：「重组」移出 POLICY_ACTION_RE
+// ---------------------------------------------------------------------------
+/**
+ * 「重组」是**企业动作**不是政策动作，留在表里会让任何含它的企业稿戴上政策光环
+ * （可行动性 0.9，与央行发文同级）。实测 10-05：全池 465 条含「重组」的仅 1 条 ——
+ * 百威亚太内部重组 74 **must_read** → 66 **insight**（与同类港股快讯同档）。
+ */
+test("S2：「重组」不再算政策动作 —— 企业稿不戴政策光环", () => {
+  const r = scoreBranchRelevance({
+    title: "港股异动 | 百威亚太(01876)跌超2% 内部重组及计提拨备将影响三季度利润",
+  });
+  assert.equal(r.actionability, 0.5, "可行动性应回落到 default，不再是 policy_action 的 0.9");
+  assert.ok(
+    !r.signals.some((s) => s.includes("政策/新规动作")),
+    "不再触发 policy_action 信号",
+  );
+  assert.equal(r.tier, "insight", "改前为 must_read(74)，改后应与同类港股快讯同档");
+  assert.equal(r.score, 66);
+});
+
+test("S2 反向守护：真·政策语境的「重组」仍由「发布/办法/通知」接管", () => {
+  const r = scoreBranchRelevance({
+    title: "金融监管总局发布金融机构重组办法",
+  });
+  assert.equal(r.actionability, 0.9, "「发布」「办法」仍在 POLICY_ACTION_RE 内");
+  assert.ok(r.signals.some((s) => s.includes("政策/新规动作")));
+});
+
+// ---------------------------------------------------------------------------
+// S3（2026-10-06 sc 授权）：时效衰减
+// ---------------------------------------------------------------------------
+const NOW = new Date("2026-10-05T12:00:00+08:00");
+const ago = (days: number) => new Date(NOW.getTime() - days * 86_400_000).toISOString();
+const TITLE = "广州出台房贷贴息操作细则";
+
+test("S3：衰减系数单调 —— ≤1天 1.0 / ≤2天 0.9 / 3天以上 0.8", () => {
+  const f = (d: number) => timelinessFactor({ title: "x", publishedAt: ago(d) }, NOW).factor;
+  assert.equal(f(0.2), 1.0);
+  assert.equal(f(0.99), 1.0);
+  assert.equal(f(1.01), 0.9);
+  assert.equal(f(1.99), 0.9);
+  assert.equal(f(2.01), 0.8);
+  assert.equal(f(30), 0.8);
+});
+
+test("S3：缺发布时间 / 未来时间戳 / 未注入 now → 一律不衰减", () => {
+  assert.equal(timelinessFactor({ title: "x" }, NOW).factor, 1, "缺发布时间");
+  assert.equal(
+    timelinessFactor({ title: "x", publishedAt: ago(-3) }, NOW).factor,
+    1,
+    "未来时间戳（源站时区错乱）不衰减也不抬升",
+  );
+  assert.equal(
+    timelinessFactor({ title: "x", publishedAt: ago(9) }, undefined).factor,
+    1,
+    "未注入 now：保持纯函数与既有调用点行为逐字不变",
+  );
+});
+
+test("S3：IPO 状态稿豁免时效衰减（状态 ≠ 新闻）", () => {
+  const byCat = timelinessFactor({ title: "x", publishedAt: ago(9), category: "gd-ipo" }, NOW);
+  assert.equal(byCat.factor, 1);
+  assert.equal(byCat.exempt, true);
+  assert.equal(
+    timelinessFactor({ title: "x", publishedAt: ago(9), subcategory: "ipo-tutoring" }, NOW).factor,
+    1,
+    "subcategory 以 ipo- 开头同样豁免",
+  );
+  // 反向：普通新闻不豁免
+  assert.equal(
+    timelinessFactor({ title: "x", publishedAt: ago(9), subcategory: "cn-finance" }, NOW).factor,
+    0.8,
+  );
+});
+
+test("S3 端到端：同一条内容越旧分越低；不传 now 与改前逐字一致", () => {
+  const fresh = scoreBranchRelevance({ title: TITLE, publishedAt: ago(0.5) }, { now: NOW });
+  const day2 = scoreBranchRelevance({ title: TITLE, publishedAt: ago(1.5) }, { now: NOW });
+  const old = scoreBranchRelevance({ title: TITLE, publishedAt: ago(9) }, { now: NOW });
+  assert.ok(fresh.score > day2.score && day2.score > old.score, "分数应随年龄单调下降");
+  assert.ok(old.signals.some((s) => s.startsWith("时效衰减")), "衰减要写进 signals（可解释性）");
+
+  const legacy = scoreBranchRelevance({ title: TITLE, publishedAt: ago(9) });
+  assert.equal(
+    legacy.score,
+    fresh.score,
+    "不传 now：9 天前的稿与新鲜稿同分（既有调用点行为不变）",
+  );
+});
+
+test("S3 已知取舍：硬规则置顶优先于新鲜度（锁定现状，非 bug）", () => {
+  const stale = scoreBranchRelevance({ ...MORTGAGE_40Y, publishedAt: ago(9) }, { now: NOW });
+  assert.equal(stale.tier, "must_read", "override 用 Math.max(score, 84)，不受时效衰减影响");
+  assert.equal(stale.score, 84);
+  // 如需让旧政策稿也让位，需另行授权修改 finalScore 的兜底逻辑
 });
