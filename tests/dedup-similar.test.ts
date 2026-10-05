@@ -1,7 +1,8 @@
 /**
- * 标题相似度判重（lib/ingest/dedup-similar.ts）单测。
+ * 标题相似度判重（lib/services/select/filters/dedup-similar.ts）单测。
  * 规则：同主题（相似度≥阈值）最多 maxPerTheme 条，同 tier 只留 1 条；
- * 保留优先级 T1 > T1.5 > T2 > 无等级，同 tier 内取 publishedAt 最新。
+ * 保留优先级 T1 > T1.5 > T2 > 无等级；
+ * 🔴 2026-10-05 改口径：**同 tier 内按内容价值分（scoreOf 注入）取舍，⛔ 不再按 publishedAt 最新**。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -35,14 +36,54 @@ test("titleSimilarity：同主题变体标题相似度高，不同主题低", ()
   assert.ok(lo < 0.7, `不同主题应 <0.7，实际 ${lo.toFixed(2)}`);
 });
 
-test("同 tier：两个政府源（T1）发同一主题 → 只留 1 条", () => {
-  const { kept, removed } = dedupeByTitleSimilarity([
+test("同 tier + 注入 scoreOf：**按内容分取舍，不看时间**（高分那条更旧也必须留）", () => {
+  const SCORE: Record<string, number> = {
+    "LPR下调，广州多家银行跟进": 83, // 分高，但更旧（08:00）
+    "广州多家银行跟进LPR下调": 78, // 分低，却更新（09:00）
+  };
+  const { kept, removed } = dedupeByTitleSimilarity(
+    [
+      mk("LPR下调，广州多家银行跟进", { tier: "T1", publishedAt: "2026-08-19T08:00:00Z" }),
+      mk("广州多家银行跟进LPR下调", { tier: "T1", publishedAt: "2026-08-19T09:00:00Z" }),
+    ],
+    { scoreOf: (a) => SCORE[a.title] ?? 0 },
+  );
+  assert.equal(kept.length, 1, "同 tier 只留 1 条");
+  assert.equal(removed.length, 1);
+  assert.equal(
+    kept[0].title,
+    "LPR下调，广州多家银行跟进",
+    "留高分那条（更旧也留）—— publishedAt 不参与取舍",
+  );
+  assert.equal(removed[0].title, "广州多家银行跟进LPR下调");
+});
+
+test("同 tier 且未注入 scoreOf：退化为**输入顺序**（确定性，且仍然不使用时间）", () => {
+  const { kept } = dedupeByTitleSimilarity([
     mk("LPR下调，广州多家银行跟进", { tier: "T1", publishedAt: "2026-08-19T08:00:00Z" }),
     mk("广州多家银行跟进LPR下调", { tier: "T1", publishedAt: "2026-08-19T09:00:00Z" }),
   ]);
-  assert.equal(kept.length, 1, "同 tier 只留 1 条");
-  assert.equal(removed.length, 1);
-  assert.ok(kept[0].title.includes("跟进LPR下调"), "同 tier 内取 publishedAt 最新（09:00）");
+  assert.equal(kept.length, 1);
+  assert.equal(
+    kept[0].title,
+    "LPR下调，广州多家银行跟进",
+    "同分保持输入顺序（第一条），而**不是** publishedAt 最新的那条",
+  );
+});
+
+test("同 tier + scoreOf：分值反序也不会选到更新的低分条目（反向对照）", () => {
+  const SCORE: Record<string, number> = {
+    "LPR下调，广州多家银行跟进": 40,
+    "广州多家银行跟进LPR下调": 90,
+  };
+  const { kept } = dedupeByTitleSimilarity(
+    [
+      mk("LPR下调，广州多家银行跟进", { tier: "T2", publishedAt: "2026-08-19T09:00:00Z" }),
+      mk("广州多家银行跟进LPR下调", { tier: "T2", publishedAt: "2026-08-19T08:00:00Z" }),
+    ],
+    { scoreOf: (a) => SCORE[a.title] ?? 0 },
+  );
+  assert.equal(kept[0].title, "广州多家银行跟进LPR下调", "高分胜出（即便它更旧）");
 });
 
 test("跨 tier：政府（T1）+ 媒体（T2）→ 各留 1 条，共 2", () => {
@@ -184,4 +225,21 @@ test("跨天判重：历史无 tier 条目视为独立等级，可补 1 条", ()
   );
   assert.equal(kept.length, 1, "历史为无等级、新来 T2，等级不同且未满 2 → 保留");
   assert.equal(removed.length, 0);
+});
+
+test("跨天判重：同 tier 两个新条目争同一空缺 → 按内容分取舍（不看时间）", () => {
+  const A = "LPR下调，广州多家银行跟进";
+  const B = "广州多家银行跟进LPR下调";
+  const SCORE: Record<string, number> = { [A]: 83, [B]: 78 };
+  const { kept, removed } = dedupeAgainstHistory(
+    [
+      mk(A, { tier: "T2", publishedAt: "2026-08-19T08:00:00Z" }), // 高分、更旧
+      mk(B, { tier: "T2", publishedAt: "2026-08-19T09:00:00Z" }), // 低分、更新
+    ],
+    [hist("LPR下调，广州多家银行已跟进", "T1")], // 历史占 T1 → T2 只剩 1 个席位
+    { scoreOf: (a) => SCORE[a.title] ?? 0 },
+  );
+  assert.equal(kept.length, 1, "T2 只有 1 个空缺");
+  assert.equal(removed.length, 1);
+  assert.equal(kept[0].title, A, "补位按内容分取舍：高分那条胜出（与 publishedAt 无关）");
 });

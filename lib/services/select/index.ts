@@ -207,12 +207,13 @@ const titleSimilarityStage: FilterStage = {
     const { kept, removed } = dedupeByTitleSimilarity(others, {
       threshold: dd.threshold,
       maxPerTheme: dd.maxPerTheme,
+      scoreOf: relevanceScoreOf,
     });
     const out = [...ipo, ...kept];
     if (removed.length > 0) {
       ctx.log.info(
         "filter",
-        `🔁 标题相似度判重: ${before} → ${out.length} 条（阈值 ${dd.threshold}、每主题 ≤${dd.maxPerTheme}、同 tier 只留 1；移除 ${removed.length} 条重复报道；IPO 类豁免）`,
+        `🔁 标题相似度判重: ${before} → ${out.length} 条（阈值 ${dd.threshold}、每主题 ≤${dd.maxPerTheme}、同 tier 只留 1、同 tier 内按内容分取舍；移除 ${removed.length} 条重复报道；IPO 类豁免）`,
       );
     }
     return out;
@@ -227,12 +228,15 @@ const crossDayDedupStage: FilterStage = {
     const ipo = articles.filter((a) => a.isIpo === true);
     const others = articles.filter((a) => a.isIpo !== true);
     const before = articles.length;
-    const { kept, removed } = dedupeAgainstHistory(others, histSim, { maxPerTheme: 2 });
+    const { kept, removed } = dedupeAgainstHistory(others, histSim, {
+      maxPerTheme: 2,
+      scoreOf: relevanceScoreOf,
+    });
     const out = [...ipo, ...kept];
     if (removed.length > 0) {
       ctx.log.info(
         "filter",
-        `🔄 跨天标题判重: ${before} → ${out.length} 条（历史库已覆盖 ${removed.length} 条重复主题；IPO 类豁免）`,
+        `🔄 跨天标题判重: ${before} → ${out.length} 条（历史库已覆盖 ${removed.length} 条重复主题；新条目补位按内容分取舍；IPO 类豁免）`,
       );
     }
     return out;

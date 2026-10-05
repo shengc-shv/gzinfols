@@ -6,6 +6,12 @@
  * 一消息只留 1；政府 + 媒体 = 政府留 1 + 媒体留 1（共 2）。保留优先级按
  * 来源等级：T1 官方一手 > T1.5 准官方·机构一手 > T2 媒体·智库 > 无等级。
  *
+ * ❗ 2026-10-05 sc 口径（**簇内取舍改用价值**）：tier 优先不变，但**同 tier 争同一席位时
+ * 按内容价值分取舍，⛔ 不再按 publishedAt** —— 时间只能证明「谁先发」，证明不了
+ * 「谁更有信息量」。实测：83 分「某大行广东省分行已受理贴息房贷逾百户」被晚 4 分钟的
+ * 78 分「多家银行跟进！房贷贴息操作细则陆续披露」挤掉。分差门槛不再设（惟一并列判据
+ * 就是分值）；分值相同则保持输入顺序，保证确定性。
+ *
  * 与 URL 精确判重（dedupeByUrl）互补：URL 判重管"同一条"，本模块管
  * "同一事件的多家报道"（不同 URL、相似标题）。放在 AI 之前执行，
  * 让 LLM 只处理保留条目（省钱）。
@@ -19,6 +25,17 @@ export interface SimilarDedupOptions {
   threshold?: number;
   /** 每个主题最多保留条数。默认 2。 */
   maxPerTheme?: number;
+  /**
+   * **内容价值函数**（分行相关性分）。同 tier 竞争同一席位时按它降序取舍。
+   *
+   * 2026-10-05 sc 口径：**簇内取舍只按价值，⛔ 不用时间** —— 时间只能证明「谁先发」，
+   * 证明不了「谁更有信息量」。实测反例：83 分「某大行广东省分行已受理贴息房贷逾百户」
+   * 被晚 4 分钟的 78 分「多家银行跟进！房贷贴息操作细则陆续披露」挤掉。
+   *
+   * 注入式（而非本模块 import 评分器）：保持本模块纯函数、可单测、零词表耦合。
+   * 未注入时全部记 0 分 → 退化为**输入顺序**（确定性，且仍然不使用时间）。
+   */
+  scoreOf?: (a: ArticleInput) => number;
 }
 
 export interface SimilarDedupResult {
@@ -208,7 +225,10 @@ function tierWeight(tier: SourceTier | undefined): number {
 /**
  * 标题相似度判重：把标题相似度 ≥ threshold 的条目聚为同一主题，
  * 每主题保留 ≤ maxPerTheme 条，且同一 tier 只留 1 条（不同 tier 可各留 1）。
- * 簇内选择：按 (tier 优先级, publishedAt 新→旧) 排序，贪心取不重复 tier 的条目。
+ *
+ * 簇内选择（2026-10-05 改口径）：按 (tier 优先级, **内容价值分降序**) 排序，
+ * 贪心取不重复 tier 的条目。⛔ **不再使用 publishedAt** —— 同 tier 内「谁留下」
+ * 由价值决定；分值相同则保持输入顺序（`Array#sort` 稳定排序，确定性）。
  */
 export function dedupeByTitleSimilarity(
   articles: ArticleInput[],
@@ -216,6 +236,7 @@ export function dedupeByTitleSimilarity(
 ): SimilarDedupResult {
   const threshold = opts.threshold ?? 0.7;
   const maxPerTheme = opts.maxPerTheme ?? 2;
+  const scoreOf = opts.scoreOf ?? (() => 0);
   if (articles.length <= 1 || maxPerTheme < 1) {
     return { kept: articles, removed: [] };
   }
@@ -264,13 +285,12 @@ export function dedupeByTitleSimilarity(
       kept.push(...cluster);
       continue;
     }
-    // 排序：tier 优先级升序，其次 publishedAt 新→旧（undefined 垫底）
+    // 排序：tier 优先级升序，其次**内容价值分降序**（⛔ 不看 publishedAt）。
+    // 分值相同 → 保持输入顺序（sort 稳定），保证确定性、可复现。
     const sorted = [...cluster].sort((a, b) => {
       const tw = tierWeight(a.tier) - tierWeight(b.tier);
       if (tw !== 0) return tw;
-      const at = a.publishedAt ? a.publishedAt.getTime() : -Infinity;
-      const bt = b.publishedAt ? b.publishedAt.getTime() : -Infinity;
-      return bt - at;
+      return scoreOf(b) - scoreOf(a);
     });
     // 同 tier 只留 1（总是生效，与簇大小无关）；总上限 maxPerTheme。
     // 例：T1+T1 → 留 1；T1+T1.5 → 留 2；T1+T1.5+T2 → 留 T1+T1.5（2 条上限，T2 移除）。
@@ -307,17 +327,19 @@ export interface HistorySimilarEntry {
  * 总数 < 上限时才补充 1 条（T2），同 tier 的新条目互相去重只留 1，其余视为无效。
  *
  * 实现：历史 + 新条目混合贪心聚簇（历史先加入、作簇代表 = 先来后到），
- * 簇内按「历史占位 → 新条目按 (tier 优先级, 时间新) 填补空缺」选择。
+ * 簇内按「历史占位 → 新条目按 (tier 优先级, **内容价值分降序**) 填补空缺」选择
+ * （2026-10-05：新条目排序不再看 publishedAt）。
  * 相似度用 bigram Dice（对措辞改写更宽容），默认阈值 0.6（低于当日内部判重
  * 的 0.7——跨天抓的是「媒体改写政府通稿」这类措辞近似的重复报道）。
  */
-export function dedupeAgainstHistory<T extends { title: string; tier?: SourceTier; publishedAt?: Date }>(
+export function dedupeAgainstHistory<T extends { title: string; tier?: SourceTier }>(
   articles: T[],
   history: HistorySimilarEntry[],
-  opts: SimilarDedupOptions = {},
+  opts: { threshold?: number; maxPerTheme?: number; scoreOf?: (a: T) => number } = {},
 ): { kept: T[]; removed: T[] } {
   const threshold = opts.threshold ?? 0.6;
   const maxPerTheme = opts.maxPerTheme ?? 2;
+  const scoreOf = opts.scoreOf ?? (() => 0);
   if (articles.length === 0) return { kept: articles, removed: [] };
 
   type Cand = {
@@ -366,13 +388,14 @@ export function dedupeAgainstHistory<T extends { title: string; tier?: SourceTie
     for (const h of cluster) {
       if (h.kind === "hist") occupied.add(h.tier ?? "none");
     }
-    // 新条目按 (tier 优先级, publishedAt 新→旧) 排序，填补空缺；同 tier 只补 1 个
+    // 新条目按 (tier 优先级, **内容价值分降序**) 排序，填补空缺；同 tier 只补 1 个。
+    // 2026-10-05：与当日判重同口径 —— ⛔ 不再用 publishedAt 决定谁补位。
+    // 注：「历史先来者占位」是**跨天不重复**机制（不是「两条并存比时间」），保持不变。
+    const scoreOfCand = (c: Cand): number => (c.item ? scoreOf(c.item) : 0);
     const sorted = [...newItems].sort((a, b) => {
       const tw = tierWeight(a.tier) - tierWeight(b.tier);
       if (tw !== 0) return tw;
-      const at = a.item?.publishedAt?.getTime() ?? -Infinity;
-      const bt = b.item?.publishedAt?.getTime() ?? -Infinity;
-      return bt - at;
+      return scoreOfCand(b) - scoreOfCand(a);
     });
     for (const c of sorted) {
       const key: SourceTier | "none" = c.tier ?? "none";
