@@ -1,0 +1,852 @@
+{
+  "date": "2026-10-07",
+  "hero_line": "今天主要看四个方面：楼市复苏节奏，看核心城市与广州改善盘；外资对华配置，看跨境资金与QDII；黄金与汇率，看避险咨询口径；银发与消费场景，看节后客群承接。",
+  "must_read": [
+    {
+      "title": "央行官员谈黄金投资",
+      "why": "央行官员谈黄金投资，理由从分散风险到数字资产策略不一，客户对黄金类配置的咨询口径出现分歧。",
+      "url": "https://finance.sina.com.cn/world/2026-10-07/doc-iniuimev5374085.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "港股内房股拉升，花旗看2027年",
+      "why": "花旗判断2027年为核心城市楼价复苏关键一年，涉房资产质量预期与开发贷策略可据此观察，广州改善盘节奏与之呼应。",
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-06/doc-iniufxcp5842911.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "国铁广州局加开702列",
+      "why": "国铁广州局今日计划加开列车702列，涉京广等线路，返程客流高峰带来出行支付与消费场景的短期集中。",
+      "url": "https://www.stcn.com/article/detail/4206622.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "牛市旗手利好来袭",
+      "why": "牛市旗手相关利好来袭、评级突然上调，市场情绪与券商板块预期变化，影响权益类产品客户的风险偏好。",
+      "url": "https://www.stcn.com/article/detail/4206720.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "外资机构上调对华配置",
+      "why": "多家外资机构升级对华配置观点，跨境资金与外资客户动向变化，直接关系广州分行跨境托管与结算类业务的外部环境。",
+      "url": "https://www.stcn.com/article/detail/4206645.html",
+      "delta": {
+        "state": "followup"
+      }
+    }
+  ],
+  "insights": [
+    {
+      "topic": "元岗村安置房11月开放",
+      "tags": [
+        "住房金融",
+        "政银合作"
+      ],
+      "impact": "天河元岗村安置房样板间11月开放参观，城市更新安置客群的按揭与资金监管需求在积累，涉及回迁家庭资产安置。",
+      "segments": [
+        "普惠小微贷款客户"
+      ],
+      "sources": [
+        {
+          "title": "天河元岗村安置房样板间11月开放参观",
+          "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010085.htm"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "QDII节后表现受关注",
+      "tags": [
+        "财富"
+      ],
+      "impact": "国庆假期海外市场先行波动，QDII节后表现受关注，持有跨境配置客户的净值波动与沟通需求上升。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "国庆假期海外市场先行波动，这些QDII节后表现受关注",
+          "url": "https://www.stcn.com/article/detail/4206680.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "公募四季度主线研判",
+      "tags": [
+        "财富"
+      ],
+      "impact": "多家公募发布四季度投资主线研判，客户资产配置沟通素材更新，财富条线产品排期与客户预期管理随之调整。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "四季度投资主线来了！多家公募最新研判",
+          "url": "https://finance.eastmoney.com/a/202610063888715971.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "信托原董事长掌千亿平台",
+      "tags": [
+        "财富",
+        "竞对动态"
+      ],
+      "impact": "某信托原董事长出任千亿级平台总经理，财富管理行业高管流动，头部机构战略与产品线可能随之调整。",
+      "segments": [
+        "中高端客群(过亿资产)"
+      ],
+      "sources": [
+        {
+          "title": "某信托原董事长出任“千亿级”平台总经理！",
+          "url": "https://finance.sina.com.cn/trust/roll/2026-10-06/doc-iniuhyra6769616.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "银发消费新场景遍地开花",
+      "tags": [
+        "客群",
+        "财富"
+      ],
+      "impact": "银发消费新场景遍地开花，养老客群的支付、理财与适老服务需求上升，节后客群经营窗口打开。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "老年人假期有了新去处！银发消费新场景遍地开花",
+          "url": "https://www.stcn.com/article/detail/4206755.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "返程客流高峰",
+      "tags": [
+        "客群"
+      ],
+      "impact": "国庆假期第六天国铁广州局迎来返程小高峰，出行支付与消费场景短期集中，异地资金回流节奏加快。",
+      "segments": [
+        "普惠小微贷款客户"
+      ],
+      "sources": [
+        {
+          "title": "国庆假期第六天，国铁广州局迎来客流返程小高峰",
+          "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010152.htm"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    }
+  ],
+  "sections": {
+    "gz_local": [
+      {
+        "url": "https://www.stcn.com/article/detail/4206676.html",
+        "title_cn": "实探国庆假期广州楼市：看房客“拖家带口”前来询盘",
+        "title_orig": "实探国庆假期广州楼市：看房客“拖家带口”前来询盘",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "国庆广州看房客“拖家带口”询盘，改善型与家庭客群活跃度回升，按揭与家庭综合金融需求可提前备好承接方案。",
+        "importance": 3,
+        "rank": 1,
+        "tags": [
+          "住房金融",
+          "市场",
+          "信贷",
+          "客群"
+        ],
+        "locale": "gz",
+        "locale_evidence": "实探国庆假期广州楼市：看房客“拖家带口”前来询盘"
+      },
+      {
+        "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010085.htm",
+        "title_cn": "天河元岗村安置房样板间11月开放参观",
+        "title_orig": "天河元岗村安置房样板间11月开放参观",
+        "source": "广州日报·大洋网(广州频道)",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "天河元岗村安置房样板间11月开放参观，城市更新安置客群的按揭与资金监管需求值得提前摸排。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "住房金融",
+          "政银合作",
+          "信贷",
+          "客群"
+        ],
+        "locale": "gz",
+        "locale_evidence": "天河元岗村安置房样板间11月开放参观"
+      },
+      {
+        "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010116.htm",
+        "title_cn": "荔湾挂牌两宗优质地块 均位于白鹅潭东沙国际商贸港",
+        "title_orig": "荔湾挂牌两宗优质地块 均位于白鹅潭东沙国际商贸港",
+        "source": "广州日报·大洋网(广州频道)",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "荔湾白鹅潭东沙国际商贸港挂牌两宗优质地块，后续开发主体与项目融资机会值得持续观察。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "住房金融",
+          "政银合作",
+          "信贷",
+          "客群"
+        ],
+        "locale": "gz",
+        "locale_evidence": "荔湾挂牌两宗优质地块 均位于白鹅潭东沙国际商贸港"
+      },
+      {
+        "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010084.htm",
+        "title_cn": "补贴扩容、新品扎堆有效激活广州家电数码消费市场",
+        "title_orig": "补贴扩容、新品扎堆有效激活广州家电数码消费市场",
+        "source": "广州日报·大洋网(广州频道)",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "补贴扩容叠加新品扎堆，广州家电数码消费被有效激活，消费贷与分期场景可考虑同步跟进承接。",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "消费贷",
+          "客群",
+          "信贷"
+        ],
+        "locale": "gz",
+        "locale_evidence": "补贴扩容、新品扎堆有效激活广州家电数码消费市场"
+      }
+    ],
+    "biz_insight": [
+      {
+        "url": "https://www.stcn.com/article/detail/4206680.html",
+        "title_cn": "国庆假期海外市场先行波动，这些QDII节后表现受关注",
+        "title_orig": "国庆假期海外市场先行波动，这些QDII节后表现受关注",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "假期海外市场先行波动，QDII节后表现受关注，持有跨境配置客户的净值波动提示与沟通可提前准备。",
+        "importance": 2,
+        "rank": 1,
+        "tags": [
+          "财富",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.stcn.com/article/detail/4206755.html",
+        "title_cn": "老年人假期有了新去处！银发消费新场景遍地开花",
+        "title_orig": "老年人假期有了新去处！银发消费新场景遍地开花",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "银发消费新场景遍地开花，养老客群的支付、理财与适老服务需求值得纳入四季度客群经营重点。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "养老",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202610063888734158.html",
+        "title_cn": "券商“金股”出炉！10月这些标的更受关注",
+        "title_orig": "券商“金股”出炉！10月这些标的更受关注",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "券商10月“金股”出炉，关注度集中度变化可作客户交流话题，仅作信息参考不作推荐。",
+        "importance": 1,
+        "rank": 4,
+        "tags": [
+          "市场",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202610063888715971.html",
+        "title_cn": "四季度投资主线来了！多家公募最新研判",
+        "title_orig": "四季度投资主线来了！多家公募最新研判",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "多家公募发布四季度投资主线研判，可作为客户资产配置沟通的参考素材，注意不做方向性引导。",
+        "importance": 1,
+        "rank": 5,
+        "tags": [
+          "财富",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202610063888733417.html",
+        "title_cn": "国信策略：牛市正处第三阶段 秋色渐浓再登高",
+        "title_orig": "国信策略：牛市正处第三阶段 秋色渐浓再登高",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "国信策略判断市场处于第三阶段，属卖方观点，客户沟通中可作背景信息引用，不宜作为操作依据。",
+        "importance": 1,
+        "rank": 6,
+        "tags": [
+          "市场",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      }
+    ],
+    "policy_market": [
+      {
+        "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-06/doc-iniufxcp5842911.shtml",
+        "title_cn": "港股内房股拉升，花旗：2027年将是核心城市楼价复苏关键一年",
+        "title_orig": "港股内房股拉升，花旗：2027年将是核心城市楼价复苏关键一年",
+        "source": "新浪财经·港股频道",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "港股内房股拉升，花旗称2027年为核心城市楼价复苏关键一年，涉房资产质量预期与开发贷策略可据此观察。",
+        "importance": 3,
+        "rank": 1,
+        "tags": [
+          "住房金融",
+          "市场",
+          "信贷",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.stcn.com/article/detail/4206645.html",
+        "title_cn": "对华配置升级！多家外资机构最新观点",
+        "title_orig": "对华配置升级！多家外资机构最新观点",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "多家外资机构上调对华配置观点，跨境资金与外资客户动向值得关注，可留意相关托管与结算需求。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "市场",
+          "跨境",
+          "客群",
+          "财富"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202610063888706547.html",
+        "title_cn": "全球市场：美股三大指数集体收涨纳指涨超1%创收盘新高",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "tier": "T2",
+        "date": "10/06",
+        "summary": "美股三大指数集体收涨，纳指涨超1%创收盘新高，海外风险偏好回升。可关注QDII类产品客户咨询热度变化。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [],
+        "locale": "national"
+      }
+    ],
+    "tech": [
+      {
+        "url": "https://arxiv.org/abs/2608.01494",
+        "title_cn": "When Marginal Coverage Transfers and the Economics Do Not: A Pre-Registered Study of Conformal Interval Widths as Position-Sizing Scales",
+        "source": "arXiv 量化金融论文 (q-fin.PM·RM·GN)",
+        "source_type": "media",
+        "tier": "T2",
+        "date": "10/06",
+        "summary": "arXiv:2608.01494v2 Announce Type: replace \nAbstract: We size portfolio positions from conformal prediction intervals, reading the interval half-width as the scale in a capped fractional-Kelly rule (Conformal Kelly), and evaluate the rule under a pre-registered protocol. The development record is an autonomous LLM-agent search over roughly 200 configurations on a single six-year window (2016-2021) of eight US-listed ETFs. All later data was sealed before the search, and two final configurations, nine comparison books and the mapping from outcomes to conclusions were registered before unsealing. On the sealed 2022-2024 window, realized coverage was 0.745 against a 0.750 target, but the two configurations' annualised net log growth was 8.5% and 7.0% (28.5% and 25.8% in development), below an unlevered equal-weight book (9.5%), the leveraged passive books (15.6-16.8%) and a registered hindsight four-equity book (10.8%, at a 46% drawdown); both ranked last of eleven entries on Sharpe and Calmar. A post-hoc split, outside the registered protocol, shows the passing coverage averaging 0.592 in 2022 and 0.842 afterwards, with the entire loss in the under-covered year. The split does not show that under-coverage caused the loss: the leverage cap bound on every 2022 trading day, so narrow intervals could not enlarge the book, and a long-equity book in an equity bear market is the simpler account. But the registered acceptance test passed a sixteen-point conditional failure, which motivates, without establishing, conditional coverage as an endpoint for rules that read interval width as a scale. On the development window, a slow per-asset conformal quantile out-grew every locally adaptive alternative tested, but only under a binding leverage cap, and block-bootstrap intervals include zero for 11 of the 13 contrasts we could re-derive.",
+        "importance": 2,
+        "rank": 1,
+        "tags": [],
+        "locale": "national"
+      }
+    ],
+    "ipo": []
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "三大指数集体收涨，标普涨0.58%领涨，AI与英伟达题材支撑情绪。",
+      "sectors": [
+        "英伟达逼近6万亿美元市值，期权交易员预计月底前触及。",
+        "伯克希尔增持Lennar至11.2%，但买入节奏放缓。",
+        "油价持稳，市场权衡中东供应风险与出口上升。",
+        "波士顿动力任命前亚马逊高管Rohit Prasad为CEO。",
+        "顶级分析师看好三只股票长期前景，AI牛市持续性存疑。"
+      ],
+      "spoken": "美股三大指数集体收涨，道指涨0.49%，纳指涨0.45%，标普涨0.58%。板块方面，英伟达逼近6万亿美元市值，期权市场预计月底前触及。伯克希尔继续增持Lennar至11.2%，但买入节奏放缓。油价持稳，市场关注中东供应风险。波士顿动力任命前亚马逊高管出任CEO。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-07"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51521.28",
+          "changePct": "+0.49%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27599.89",
+          "changePct": "+0.45%"
+        },
+        {
+          "name": "标普500",
+          "value": "7818.93",
+          "changePct": "+0.58%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "沪指涨0.31%，深成指跌0.11%，成交跌破1.5万亿，四季度主线待明。",
+      "sectors": [
+        "两市成交额跌破1.5万亿，量能萎缩，券商策略聚焦四季度投资主线。",
+        "多家公募发布四季度研判，金股名单出炉，10月标的关注度升温。",
+        "特朗普宣布超级智能相关消息，AI及科技题材受关注。",
+        "光遗传学获2026年诺奖，相关药企布局进展受市场关注。",
+        "国信策略称牛市正处第三阶段，秋色渐浓再登高。"
+      ],
+      "spoken": "A股今日分化，沪指涨0.31%，深成指跌0.11%，创业板指跌0.23%，成交额跌破1.5万亿。板块方面，公募和券商密集发布四季度策略，金股名单出炉，AI题材受特朗普超级智能消息带动，光遗传学获诺奖带动相关药企关注。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-07"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3842.20",
+          "changePct": "+0.31%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12887.62",
+          "changePct": "-0.11%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3135.28",
+          "changePct": "-0.23%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24280.56点（+1.00%）；恒生科技收报4223.08点（+0.94%）。",
+      "sectors": [
+        "科网股普涨",
+        "智谱涨超7%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-06"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨1% 科指涨0.94% 科网股普涨 智谱涨超7%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-06/doc-iniuhpzf5658031.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24280.56",
+          "changePct": "+1.00%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4223.08",
+          "changePct": "+0.94%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-06",
+    "marketStatus": {
+      "reportDate": "2026-10-07",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-09-30",
+          "reason": "数据为 9月30日（距今 7 天）"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-06"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-06"
+        }
+      },
+      "allStale": false,
+      "note": "A股今日无隔夜行情，其余市场为最新收盘",
+      "spokenNote": "A股今日无隔夜行情；港股为 10月6日 周二 收盘；美股为 10月6日 周二 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610063888715755.html",
+      "title_cn": "特朗普重大宣布！涉及超级智能",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "特朗普宣布一项涉及超级智能的重大决定，具体内容尚未在标题中披露。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610063888763449.html",
+      "title_cn": "港股两大板块爆发！明星科网股普涨",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "港股两大板块爆发，明星科网股普遍上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610063888722240.html",
+      "title_cn": "光遗传学斩获2026年诺奖哪些药企有布局？进展如何？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "光遗传学获得2026年诺贝尔奖，市场关注哪些药企在该领域有布局及进展。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "诺奖"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-06/doc-iniuhpzf5658031.shtml",
+      "title_cn": "港股收评：恒指涨1% 科指涨0.94% 科网股普涨 智谱涨超7%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "港股收评：恒指涨1%，科指涨0.94%，科网股普涨，智谱涨超7%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "科技",
+        "指数"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-06/doc-iniufxci2082167.shtml",
+      "title_cn": "亚马逊云科技接入智谱GLM-5.3，港股“大模型双雄”齐涨",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "亚马逊云科技接入智谱GLM-5.3，港股'大模型双雄'齐涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "AI",
+        "大模型"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-06/doc-iniufxcp5842911.shtml",
+      "title_cn": "港股内房股盘初拉升，融信中国涨超8%，花旗：2027年将是核心城市楼价复苏的关键一年",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "港股内房股盘初拉升，融信中国涨超8%；花旗称2027年将是核心城市楼价复苏的关键一年。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "地产"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/05/nvidias-6-trillion-milestone-looms-heres-when-options-traders-see-it-happening.html",
+      "title_cn": "Nvidia's $6 trillion milestone looms. Here's when options traders see it happening",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "英伟达逼近6万亿美元市值里程碑，期权交易员给出预期时间。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "英伟达"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-progressive-planet-posts-record-q1-2027-revenue-as-margins-narrow-93CH-4935349",
+      "title_cn": "Earnings call transcript: Progressive Planet posts record Q1 2027 revenue as margins narrow",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "Progressive Planet财报电话会议显示2027财年Q1营收创纪录，但利润率收窄。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ],
+  "redchipPanel": {
+    "entries": [],
+    "capturedAt": "2026-10-07T06:33:43+08:00",
+    "capturedSource": "snapshot",
+    "ledgerCount": 38,
+    "lastChangedAt": "2026-10-03T06:34:10+08:00",
+    "ledgerByMarket": {
+      "hk": 38
+    },
+    "freshnessNote": "⚠️ 本期未取到美股数据",
+    "gdAdjacent": [
+      {
+        "leadId": "108910",
+        "nameCn": "ACROBIOSYSTEMS CO., LTD",
+        "nameEn": "",
+        "submitDate": "2026-09-30",
+        "domicile": "中国(境内)",
+        "gdCityHits": 5,
+        "market": "hk",
+        "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108910/documents/sehk26093002652.pdf"
+      },
+      {
+        "leadId": "108909",
+        "nameCn": "YUDO HOLDINGS CO., LIMITED",
+        "nameEn": "",
+        "submitDate": "2026-09-29",
+        "domicile": "香港",
+        "gdCityHits": 6,
+        "market": "hk",
+        "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108909/documents/sehk26092902078.pdf"
+      },
+      {
+        "leadId": "108908",
+        "nameCn": "DataCanvas Co., Ltd.",
+        "nameEn": "",
+        "submitDate": "2026-09-29",
+        "domicile": "中国(境内)",
+        "gdCityHits": 4,
+        "market": "hk",
+        "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108908/documents/sehk26092900994.pdf"
+      }
+    ]
+  },
+  "sourceStats": [
+    {
+      "sourceId": "cnr-gd",
+      "inflow": 58,
+      "kept": 2,
+      "avgScore": 26
+    },
+    {
+      "sourceId": "cnfin",
+      "inflow": 46,
+      "kept": 14,
+      "avgScore": 20
+    },
+    {
+      "sourceId": "sina-bank",
+      "inflow": 44,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "guancha",
+      "inflow": 44,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "southcn",
+      "inflow": 33,
+      "kept": 1,
+      "avgScore": 15
+    },
+    {
+      "sourceId": "cnbc-top",
+      "inflow": 30,
+      "kept": 1,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "stcn",
+      "inflow": 29,
+      "kept": 13,
+      "avgScore": 37
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "inflow": 29,
+      "kept": 11,
+      "avgScore": 27
+    },
+    {
+      "sourceId": "sina-hk-stock",
+      "inflow": 28,
+      "kept": 8,
+      "avgScore": 60
+    },
+    {
+      "sourceId": "cctv-finance",
+      "inflow": 25,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "sina-money",
+      "inflow": 20,
+      "kept": 2,
+      "avgScore": 72
+    },
+    {
+      "sourceId": "fed-press",
+      "inflow": 20,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "inflow": 18,
+      "kept": 16,
+      "avgScore": 32
+    },
+    {
+      "sourceId": "investing-news",
+      "inflow": 10,
+      "kept": 6,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "crunchbase-news",
+      "inflow": 10,
+      "kept": 1,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "inflow": 10,
+      "kept": 10,
+      "avgScore": 25
+    },
+    {
+      "sourceId": "sina-a-stock",
+      "inflow": 9,
+      "kept": 4,
+      "avgScore": 51
+    },
+    {
+      "sourceId": "govcn-policy",
+      "inflow": 8,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "21jingji-finance",
+      "inflow": 7,
+      "kept": 2,
+      "avgScore": 46
+    }
+  ],
+  "heroDelta": {
+    "state": "changed",
+    "issueNo": 5,
+    "highlights": [
+      "@广州"
+    ]
+  },
+  "productCoverage": [
+    {
+      "line": "按揭",
+      "count": 1,
+      "examples": [
+        "元岗村安置房11月开放"
+      ]
+    },
+    {
+      "line": "信用卡",
+      "count": 0,
+      "examples": []
+    },
+    {
+      "line": "代发",
+      "count": 0,
+      "examples": []
+    }
+  ]
+}
