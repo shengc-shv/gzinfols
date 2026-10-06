@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-06",
+  "updatedAt": "2026-10-07",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -6742,8 +6742,143 @@
     }
   },
   "today": {
-    "date": "2026-10-06",
-    "entries": []
+    "date": "2026-10-07",
+    "entries": [
+      {
+        "date": "2026-10-07",
+        "section": "must_read",
+        "title": "央行官员谈黄金投资",
+        "text": "央行官员谈黄金投资 央行官员谈黄金投资，理由从分散风险到数字资产策略不一，客户对黄金类配置的咨询口径出现分歧。",
+        "facts": [
+          "@央行"
+        ],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://finance.sina.com.cn/world/2026-10-07/doc-iniuimev5374085.shtml",
+        "score": 74,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-07",
+        "section": "must_read",
+        "title": "港股内房股拉升，花旗看2027年",
+        "text": "港股内房股拉升，花旗看2027年 花旗判断2027年为核心城市楼价复苏关键一年，涉房资产质量预期与开发贷策略可据此观察，广州改善盘节奏与之呼应。",
+        "facts": [
+          "#2027年"
+        ],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-06/doc-iniufxcp5842911.shtml",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-07",
+        "section": "must_read",
+        "title": "国铁广州局加开702列",
+        "text": "国铁广州局加开702列 国铁广州局今日计划加开列车702列，涉京广等线路，返程客流高峰带来出行支付与消费场景的短期集中。",
+        "facts": [
+          "@广州"
+        ],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://www.stcn.com/article/detail/4206622.html",
+        "score": 31,
+        "novelty": 0.7851063829787235,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-07",
+        "section": "must_read",
+        "title": "牛市旗手利好来袭",
+        "text": "牛市旗手利好来袭 牛市旗手相关利好来袭、评级突然上调，市场情绪与券商板块预期变化，影响权益类产品客户的风险偏好。",
+        "facts": [
+          "!上调"
+        ],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://www.stcn.com/article/detail/4206720.html",
+        "score": 29,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-07",
+        "section": "must_read",
+        "title": "外资机构上调对华配置",
+        "text": "外资机构上调对华配置 多家外资机构升级对华配置观点，跨境资金与外资客户动向变化，直接关系广州分行跨境托管与结算类业务的外部环境。",
+        "facts": [
+          "!上调"
+        ],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://www.stcn.com/article/detail/4206645.html",
+        "score": 21,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-07",
+        "section": "insights",
+        "title": "元岗村安置房11月开放",
+        "text": "元岗村安置房11月开放 天河元岗村安置房样板间11月开放参观，城市更新安置客群的按揭与资金监管需求在积累，涉及回迁家庭资产安置。",
+        "facts": [
+          "#11月"
+        ],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010085.htm",
+        "novelty": 0.9635416666666667,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-07",
+        "section": "insights",
+        "title": "QDII节后表现受关注",
+        "text": "QDII节后表现受关注 国庆假期海外市场先行波动，QDII节后表现受关注，持有跨境配置客户的净值波动与沟通需求上升。",
+        "facts": [],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://www.stcn.com/article/detail/4206680.html",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-07",
+        "section": "insights",
+        "title": "公募四季度主线研判",
+        "text": "公募四季度主线研判 多家公募发布四季度投资主线研判，客户资产配置沟通素材更新，财富条线产品排期与客户预期管理随之调整。",
+        "facts": [
+          "!发布"
+        ],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://finance.eastmoney.com/a/202610063888715971.html",
+        "novelty": 0.9627659574468084,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-07",
+        "section": "insights",
+        "title": "信托原董事长掌千亿平台",
+        "text": "信托原董事长掌千亿平台 某信托原董事长出任千亿级平台总经理，财富管理行业高管流动，头部机构战略与产品线可能随之调整。",
+        "facts": [],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://finance.sina.com.cn/trust/roll/2026-10-06/doc-iniuhyra6769616.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-07",
+        "section": "insights",
+        "title": "银发消费新场景遍地开花",
+        "text": "银发消费新场景遍地开花 银发消费新场景遍地开花，养老客群的支付、理财与适老服务需求上升，节后客群经营窗口打开。",
+        "facts": [],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://www.stcn.com/article/detail/4206755.html",
+        "novelty": 0.2763157894736842,
+        "angle": "同业动作"
+      },
+      {
+        "date": "2026-10-07",
+        "section": "insights",
+        "title": "返程客流高峰",
+        "text": "返程客流高峰 国庆假期第六天国铁广州局迎来返程小高峰，出行支付与消费场景短期集中，异地资金回流节奏加快。",
+        "facts": [],
+        "broadcastAt": "2026-10-07T06:35:02+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010152.htm",
+        "novelty": 1
+      }
+    ],
+    "runId": "37541406248"
   },
   "deliveries": [
     {
