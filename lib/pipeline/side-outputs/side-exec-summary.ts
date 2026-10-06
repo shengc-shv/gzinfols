@@ -10,7 +10,8 @@
  */
 
 import type { ArticleInput } from "../../contracts/article";
-import type { DailyReport } from "../../contracts/report";
+import type { DailyReport, ReportItem } from "../../contracts/report";
+import { applyDisplayCaps } from "../../services/assemble/display-cap";
 import {
   buildExecutiveFromScores,
   applyRelevanceGuardrail,
@@ -118,6 +119,33 @@ function extractRiskCandidates(
 }
 
 /**
+ * 定调审计的「展示清单」素材（2026-10-06 sc 口径）。
+ *
+ * sc 口径原文：「他的内容，虽然不一定出现在必读和商机里面，但还是得出现在展示出来的
+ * 资讯清单里面的。」
+ *
+ * 组成（与页面最终呈现同口径）：
+ *  - 板块卡：`applyDisplayCaps` 的**预测结果** —— exec 摘要生成在展示限额**之前**，
+ *    这一步让素材面等于最终页面，避免拿「将被限额砍掉的条目」当作出处（纯函数，无副作用）；
+ *  - 必读 / 商机 / 风险：用**本次定稿**的（它们同样展示在页面上）。
+ */
+function buildDisplayGroundingTexts(
+  report: DailyReport,
+  ex: ExecutiveSummary,
+  ctx: PipelineContext,
+): string[] {
+  const out: string[] = [];
+  const capped = applyDisplayCaps(report, ctx);
+  for (const arr of Object.values(capped.sections as unknown as Record<string, ReportItem[]>)) {
+    for (const it of arr ?? []) out.push(`${it.title_cn ?? ""} ${it.summary ?? ""}`);
+  }
+  for (const m of ex.must_read ?? []) out.push(`${m.title ?? ""} ${m.why ?? ""}`);
+  for (const it of ex.insights ?? []) out.push(`${it.topic ?? ""} ${it.impact ?? ""}`);
+  if (ex.risk) out.push(`${ex.risk.topic ?? ""} ${ex.risk.evidence ?? ""} ${ex.risk.impact ?? ""}`);
+  return out.filter((t) => t.trim());
+}
+
+/**
  * 应用执行摘要到 report。
  * 返回新 report（不 mutate 入参）。
  * 失败不抛错（与原 main 一致：生成失败时沿用 PASS2 产出）。
@@ -185,6 +213,10 @@ export async function buildExecutiveSummary(
   const guard = async (ex: ExecutiveSummary): Promise<ExecutiveSummary> => {
     // 去重后统一对齐口播（1:1 由卡面派生，零 LLM）——记忆关闭时也不放过，保证预览一致
     if (!memoryOn || !memStore) return syncNarration(ex);
+    // 展示清单素材（2026-10-06 sc 口径）：定调只能引用**页面真的会展示**的内容。
+    // 板块卡用 `applyDisplayCaps` 的预测结果（纯函数，与最终页面同口径，宁准勿多）；
+    // 必读/商机/风险用**本次定稿**的（也在页面上展示）。
+    const displayTexts = buildDisplayGroundingTexts(report, ex, ctx);
     try {
       const g = applyMemoryGuard({
         exec: ex,
@@ -192,6 +224,8 @@ export async function buildExecutiveSummary(
         today: date,
         // 必读段按 url 回查池内 summary 重算关联度（定调兜底已改为「必读+商机归纳」，不再用池）
         pool: twoDayPool,
+        // 定调审计素材面 = 展示清单（更严；缺省时 exec-guard 退回两天池口径）
+        displayTexts,
         // 2026-09-14（C-3）：播报时刻由组合根注入的时刻显式换算（服务层不隐式读时钟）
         now: ctx.startTime,
       });
@@ -201,17 +235,19 @@ export async function buildExecutiveSummary(
       if (g.heroRewriteNeeded) {
         const llm = deps?.llm;
         const better = llm
-          ? await writeHeroLine(out, (systemPrompt: string, userPrompt: string) =>
-              llm.complete({ system: systemPrompt, prompt: userPrompt, stage: "executive" }),
+          ? await writeHeroLine(
+              { ...out, displayTexts },
+              (systemPrompt: string, userPrompt: string) =>
+                llm.complete({ system: systemPrompt, prompt: userPrompt, stage: "executive" }),
             )
           : "";
         if (better) {
           out = { ...out, hero_line: better, spoken_hero: undefined };
-          ctx.log.info("exec", `🧠 定调：规则兜底 → 二次 LLM 重写 → ${better}`);
+          ctx.log.info("exec", `🧠 定调：标记重写 → 二次 LLM 重写 → ${better}`);
         } else {
           ctx.log.info(
             "exec",
-            "🧠 定调：二次 LLM 重写未采用（LLM 不可用 / 未通过可回溯校验）→ 保留规则产出",
+            "🧠 定调：二次 LLM 重写未采用（LLM 不可用 / 重写后仍有方面在展示清单里找不到出处）→ 保留原定调",
           );
         }
       }

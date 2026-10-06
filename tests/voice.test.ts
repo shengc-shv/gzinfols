@@ -83,8 +83,8 @@ test("口播稿：无 TTS 内容但 hero 存在 → 有稿；risk 段接入（ex
   assert.ok(b.parts.risk);
 });
 
-test("口径锁定：章节预算为 2026-09-28 sc 口径重分配（定调缩、必读/商机按新分工）", async () => {
-  assert.equal(AUDIO_SPEAK_LIMITS.hero, 70);
+test("口径锁定：章节预算（2026-09-28 重分配 + 2026-10-06 定调放宽到 90 字 ≈ 20 秒）", async () => {
+  assert.equal(AUDIO_SPEAK_LIMITS.hero, 90);
   assert.equal(AUDIO_SPEAK_LIMITS.must_read, 320);
   assert.equal(AUDIO_SPEAK_LIMITS.insights, 280);
   assert.equal(AUDIO_SPEAK_LIMITS.ipo, 150);

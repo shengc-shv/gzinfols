@@ -28,6 +28,7 @@ import type { ExecutiveSummary, ExecInsight, ExecRisk } from "../enrich/executiv
 import {
   HERO_MIN_DIMENSIONS,
   auditHeroDimensions,
+  auditHeroDisplayGrounding,
   auditHeroGrounding,
   deriveHeroLine,
 } from "../enrich/executive-summary";
@@ -76,6 +77,14 @@ export interface GuardInput {
   today: string;
   /** 两天可评分池（必读段按 url 回查完整 summary 重算关联度；不再用于定调补位）。 */
   pool?: GuardPoolItem[];
+  /**
+   * 当天**页面真的会展示**的资讯清单（板块卡 + 必读/商机），2026-10-06 sc 口径。
+   *
+   * 用途：定调审计的素材面。给了就用它（更严），没给则退回「两天池 + 必读/商机」的旧口径。
+   * 为什么必须收窄：旧口径下池内**有**、页面**无**的内容会被放行 —— 10-06 实测定调写了
+   * 「口岸新高」，而其素材「横琴口岸单日客流突破15万人次」从未进任何卡片。
+   */
+  displayTexts?: readonly string[];
   /**
    * 参照时刻（**必填**，2026-09-14 C-3）。由编排层注入 `ctx.startTime`：
    * 用于计算记忆库的播报时刻 `broadcastAt`（服务层不隐式读系统时钟）。
@@ -183,7 +192,7 @@ function buildDailyGroundingTexts(next: ExecutiveSummary, pool: readonly GuardPo
  * 纯函数（不改入参），返回新 exec 与更新后的记忆库。
  */
 export function applyMemoryGuard(input: GuardInput): GuardOutput {
-  const { exec, today, pool = [] } = input;
+  const { exec, today, pool = [], displayTexts = [] } = input;
   // 播报时刻：由注入的 now 显式换算（不再回落 new Date()）
   const broadcastAt = formatBroadcastAt(input.now);
   const log: string[] = [];
@@ -400,14 +409,20 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   // ⚠️ 定调**不写入事件记忆**：写进去会变成一个「事件」并被后续必读/商机匹配到（两者本就共享
   //    主题）→ 反过来把正常必读判成重复。定调的跨天一致性由必读/商机的判重间接保证。
   if (next.hero_line && next.hero_line.trim()) {
-    // 防编造素材面 = **当天全量信息源**（必读/商机 + 板块在版面内的全部条目）。
-    // 🔴 必须是「全量」而非仅必读/商机：综述式定调会引用**被必读/商机筛掉**的当日信息
-    //    （如数字人民币当天上过版面但未进必读）。实测若改用「必读+商机的 why/impact」，
-    //    编造检测会**完全失效**（越界数归零）—— LLM 写的 why 本身就在讲那些内容。
-    const dailyTexts = buildDailyGroundingTexts(next, pool);
+    // 防编造素材面（2026-10-06 sc 口径收窄）= **当天页面真的会展示的清单**。
+    // 旧口径用「两天 exec 池全量」→ 会放行「池内有、页面无」的内容（10-06 实测：
+    // 定调写了「跨境客群，口岸新高」，其素材「横琴口岸…创口岸启用以来新高」从未进任何卡片）。
+    // 🔴 仍必须是**全量**清单而非仅必读/商机：综述式定调会引用被必读/商机筛掉的当日资讯。
+    // ⚠️ 调用方未提供清单时退回旧素材面（不误杀）。
+    const dailyTexts =
+      displayTexts.length > 0 ? [...displayTexts] : buildDailyGroundingTexts(next, pool);
     const grounding = auditHeroGrounding(next.hero_line, dailyTexts);
     // 可回溯**降级为诊断信息**（仍算，供日志观察「综述式定调有几个维度能在下方找到对应」）
     const trace = auditHeroDimensions(next.hero_line, next.must_read, next.insights);
+    // 展示落点（2026-10-06 sc 口径）：每个方面都要能在展示清单里找到出处。
+    const displayAudit =
+      displayTexts.length > 0 ? auditHeroDisplayGrounding(next.hero_line, displayTexts) : null;
+    const ungrounded = displayAudit && !displayAudit.skipped ? displayAudit.ungrounded : [];
     if (!grounding.grounded) {
       // 🔴 防编造不过：定调里有当天素材中不存在的业务主体锚 → **改由必读/商机重归纳**。
       // 归纳不出则**保留原定调**（红线：宁可重复，也不留空、更不发布编造内容）。
@@ -426,6 +441,20 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
             `且必读/商机为空 → 保留原定调（宁重复，不发布编造）`,
         );
       }
+    } else if (ungrounded.length > 0) {
+      // 🔴 防编造通过，但**某些方面在展示清单里找不到出处**（2026-10-06 sc 口径）。
+      // 这些词多是抽象概括（「跨境客群」「海外市场」）→ 抽不出主体锚，主体锚审计拦不住，
+      // 必须靠与本清单逐条的实义 bigram 比对才能发现。
+      //
+      // 🔴 同样**只标记、不用规则替换**（10-04 sc 口径）：`deriveHeroLine` 取的是必读/商机
+      //    **标题原文**，替换结果 = 把下面的清单抄一遍，反而不如这条精炼的总结。
+      //    重写后仍无出处 → 保留原定调（宁重复，不给复读），日志留痕供人工核查。
+      heroRewriteNeeded = true;
+      log.push(
+        `🧠 定调：防编造通过，但 ${ungrounded.length}/${displayAudit!.dims.length} 个方面` +
+          `在当天展示清单里找不到出处 ${JSON.stringify(ungrounded)} → 标记二次 LLM 重写` +
+          `（不采用规则替换：那只是把必读标题抄一遍）`,
+      );
     } else if (trace.dims.length >= HERO_MIN_DIMENSIONS) {
       // 🔴 下限守卫必须用**实际维度数**（`dims.length`），不能用「可在下方回溯的维度数」
       // （`kept.length`）—— 后者是 10-03「维度可回溯」口径的遗留，与 T4 冲突：

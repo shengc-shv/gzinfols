@@ -59,7 +59,7 @@ export interface ExecInsight {
 export interface ExecutiveSummary {
   /**
    * 今日定调（**2026-09-28 sc 口径：维度提纲 + 看点**）：回答「今天主要看哪几个方面」——
-   * 「今天主要看N个方面：X，看点；Y，看点。」，**≤70 字**，不写整句的为什么、不做事件摘要、
+   * 「今天主要看N个方面：X，看点；Y，看点。」，**≤90 字**，不写整句的为什么、不做事件摘要、
    * 不复述必读；每个维度可跟 **3~6 字看点**（量级/紧迫性/影响面）。
    * 它是 must_read / insights 的「目录」，且**决定车里听的行领导愿不愿意继续听下去**。
    * 无则页面不渲染 hero-line。判重命中时由 `deriveHeroLine` 从必读/商机兜底派生。
@@ -73,7 +73,7 @@ export interface ExecutiveSummary {
   risk?: ExecRisk;
   /** 广东/广州 IPO 企业动态口播（≤60字）；当日无相关动态时为 null */
   guangdong_ipo?: { spoken?: string } | null;
-  /** 口播稿：今日定调（**LLM 优先**：≤70 字、维度 + 看点、不要问候语；缺失时由 `heroSpeechLine` 兜底派生） */
+  /** 口播稿：今日定调（**LLM 优先**：≤90 字、维度 + 看点、不要问候语；缺失时由 `heroSpeechLine` 兜底派生） */
   spoken_hero?: string;
   /** 口播稿：今日必读（由 `syncNarration` 从去重后的卡面 1:1 确定性派生，不来自 LLM） */
   spoken_must_read?: string;
@@ -153,7 +153,7 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 
 基于输入的当日条目（宏观政策 + 广州商机 + 市场总览 + IPO），输出五部分：
 
-0. hero_line（今日定调，**维度提纲 + 看点**，**不超过 70 字**）：回答「今天主要看哪几个方面」，是下面 must_read 与 insights 的「目录」。（2026-09-28 sc 口径）
+0. hero_line（今日定调，**维度提纲 + 看点**，**不超过 90 字**）：回答「今天主要看哪几个方面」，是下面 must_read 与 insights 的「目录」。（2026-09-28 sc 口径；**2026-10-06 sc 放宽到 90 字** —— 口播 20 秒以内都可以）
    **写作视角（2026-10-01 sc 口径，全部段落通用）**：听众是**早上上车、路上只有约 5 分钟、全程只能听**的行领导 ——
    他的注意力是一整段连续的行程，**看不见任何文字、不能回看、不能暂停**。所以每一句都必须在**第一次听到时**就成立：
    主语清楚、信息自足、不用任何视觉指代词（「如下」「见上文」「表格里」）。
@@ -163,11 +163,16 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
      （2026-10-04 实测：当日有 5 条必读 + 5 条商机，LLM 却只给 1 个方面、整句仅 23 字收工 ——
       问题不在「装不下」（离 70 字上限还差 47 字），而在 prompt 此前**只有上限、没有下限**。）
    - {X} = 3~8 字的领域词组（如「汇率预期管理」「楼市金九银十」「财富货架调整」「消费场景获客」），**不要**写具体企业/机构名或事件细节；
-   - {看点} = **3~6 字**的**分量提示**，点出量级、紧迫性或影响面（如「结售汇窗口」「补贴叠加节庆」「近四十万亿」「外资抢跑」）—— 只给看点，**不要**写成完整的「为什么」句；
+   - {看点} = 3~10 字的**分量提示**，点出量级、数字、时点或影响面（如「结售汇窗口」「每月省息近五万」「近四十万亿」「细则已落地」）—— 只给看点，**不要**写成完整的「为什么」句；
    - **不做事件摘要、不得换个说法复述某一条必读** —— 定调是纲、必读是目，听众必须能听出分工；
-   - 硬约束：整句 **≤70 字**（含标点）；写不下就减少方面数或缩短词组，**不得超**，**但也不得少于 2 个方面**；
+   - ⛔ **不要写成整齐的对仗顺口溜**（2026-10-06 sc 实测）：若把 3~4 个方面**全部**压成「四字，四字」，
+     整句会读成打油诗，听感热闹但**信息量为零**。正解是**每条看点落到具体量级 / 数字 / 口径 / 时点**；
+     各个方面的字数**不必等长**，允许一条明显更重、其余略轻 —— 整齐划一反而是减分项；
+   - 🔴 **每个方面都必须能在下方必读 / 商机 / 资讯板块里找到出处**（2026-10-06 sc 口径）：
+     可以概括提炼，但**不得引入下方完全没有的话题** —— 听众听完提纲会在下面找下文，找不到就是空话。
+   - 硬约束：整句 **≤90 字**（含标点）；写不下就减少方面数或缩短词组，**不得超**，**但也不得少于 2 个方面**；
    - ⚠️ **仅在输入条目不足 3 条时**才允许输出空字符串 —— 内容充足却写空、或只写一个方面，都视为**未完成任务**；
-   - 并为该定调配套口播稿 spoken_hero：把同一批维度说成**一句口语**，**≤70 字**，**不要问候语、不要自我介绍、不要展开成长句**（如「今天主要看四个方面：汇率预期管理，结售汇窗口；楼市金九银十，按揭接单；财富货架调整，节前配置；消费场景获客，补贴叠加节庆。」）；纯口语、无链接/无Markdown/无emoji，可直接朗读。
+   - 并为该定调配套口播稿 spoken_hero：把同一批维度说成**一句口语**，**≤90 字**，**不要问候语、不要自我介绍、不要展开成长句**（示例：「今天主要看三个方面：房贷贴息细则落地，首套每月省息近五万；贵金属与汇率剧烈波动，避险资金在找出口；节后新基金排期密集，财富货架要做配置衔接。」—— 注意示例里各条**长短不一、看点带数字**，这才是合格形态）；纯口语、无链接/无Markdown/无emoji，可直接朗读。
 
 1. must_read（今日必读，8-10 条）— **偏宏观、市场级大信号**：央行/金融监管总局等全国性政策转向、市场重大变化、行业性新趋势、新产品新玩法。答"今天/本周市场可能怎么走"。**只放宏观与市场信号，不放具体业务动作**（全篇都不给动作，见文末「不许给建议」）。
    - title：事件标题（15 字内，中文，可精简）—— **必须自带结论或量级**（如「公募规模近40万亿」优于「公募基金规模变化」）：车里听时这一句就是唯一钩子，务必让人一听就知道「这事有多大」
@@ -225,7 +230,7 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
   - 也不要写「分行应该/分行应/须尽快/务必」这类祈使句。专有名词引自法规原文的除外（如「应加强适当性管理」）。
   - 适用范围：hero_line、spoken_hero、must_read.why、insights.impact、risk.impact、spoken_insights。
 - **口播稿只写两段：spoken_hero 与 spoken_insights**。必读/风险两段口播由系统确定性地从去重后的卡面数组派生（1:1 对齐），**不要再输出 spoken_must_read / spoken_risk**（输出也会被覆盖）。两段均为纯文本（无 Markdown/链接/emoji，可直接朗读）。
-- **spoken_hero**：见 §0（≤70 字、维度 + 3~6 字看点、不要问候语）。
+- **spoken_hero**：见 §0（≤90 字、维度 + 3~10 字看点、不要问候语）。
 - **spoken_insights（商机口播）口径（极重要，2026-10-01 sc 口径）**：把上面 insights **按客群归并**成 **3~4 条**口语线索，整段 **≤260 字**。
   每条 =「{客群}方面，{一条或两条主题}，{一句影响}」。
     - 🔴 **只讲事实与影响，不讲动作**（与文末「不许给建议」同一条口径）：
@@ -695,8 +700,8 @@ export function auditTimeWording(
 
 /** 兜底提纲最多归纳几个维度（**上限**，不是目标值 —— 定调只放「最有价值的几条」）。 */
 export const HERO_DERIVE_MAX_LINES = 5;
-/** 提纲整体字数上限（含标点）；超长则先砍掉最后一个维度再试。 */
-export const HERO_DERIVE_MAX_CHARS = 70;
+/** 提纲整体字数上限（含标点）；超长则先砍掉最后一个维度再试。口径随 §0（2026-10-06：70 → 90）。 */
+export const HERO_DERIVE_MAX_CHARS = 90;
 /** 不进定调的 tier（它们本就不该上卡片，更不该占定调版面）。 */
 const HERO_EXCLUDED_TIERS = new Set<string>(["drop", "context"]);
 
@@ -722,7 +727,7 @@ function renderHeroDerived(heads: string[]): string {
  * 素材与口径（不新造内容、不写理由）：
  *  - 维度 head 取 `must_read.title` / `insights.topic`（都 ≤15 字，本身即方向词组）；
  *  - **不取 why / impact 作理由**（2026-09-28 口径：理由留给必读）—— 分值只用来判断"谁更该上"；
- *  - 上限 5 条、整句 ≤70 字，超长先砍最后一条；
+ *  - 上限 5 条、整句 ≤90 字，超长先砍最后一条；
  *  - 句式与 LLM 的 §0 口径同构 → 两条路径产出的定调风格一致。
  *
  * ⚠️ 只用于「LLM 定调不可用 / 判重后需重写」的兜底分支；LLM 正常产出一字不改。
@@ -921,6 +926,102 @@ export function auditHeroDimensions(
   };
 }
 
+/* ───────── 今日定调：展示落点审计（2026-10-06 sc 口径） ───────── */
+
+/**
+ * 不能单独构成落点证据的泛化 bigram。
+ *
+ * 为什么必须排除：定调用的是概括词（「海外市场」「消费场景」），而这些二字组合在清单里
+ * 遍地都是（单是「市场」就能蒙中十几条）—— 不排除的话判据等于失效（v1 探针实测：
+ * 全清单并集口径下 25/25 个维度全部「通过」）。
+ */
+const HERO_GENERIC_GRAMS = new Set<string>([
+  "市场", "新高", "政策", "规模", "数据", "资金", "客户", "业务", "行业", "公司",
+  "今天", "昨日", "增长", "下滑", "突破", "升温", "扩容", "落地", "场景", "客群",
+  "动向", "情况", "影响", "相关", "值得", "关注", "分析", "报告", "整体", "主要",
+  "方面", "领域", "趋势", "变化", "持续", "结构", "水平", "压力",
+]);
+
+/** 每个方面（主词 / 看点）各自所需的最小实义 bigram 落点数。 */
+export const HERO_DISPLAY_MIN_OVERLAP = 1;
+
+export interface HeroDisplayAudit {
+  /** 逐方面结果（日志/调试用）。 */
+  dims: Array<{
+    dim: string;
+    /** 维度主词的落点数。 */
+    keyHit: number;
+    /** 看点的落点数（无看点时为 -1）。 */
+    noteHit: number;
+    grounded: boolean;
+  }>;
+  /** 无出处的方面（原文，含看点）。 */
+  ungrounded: string[];
+  /** 无法判定（定调无维度 / 清单为空）→ 放行标记，调用方据此不触发重写。 */
+  skipped: boolean;
+}
+
+/**
+ * 定调**展示落点**审计（2026-10-06 sc 口径）。
+ *
+ * 口径原文：「他的内容，虽然不一定出现在必读和商机里面，但还是得出现在展示出来的
+ * 资讯清单里面的。」
+ *
+ * 与 `auditHeroGrounding`（主体锚防编造）的分工：
+ *  - 后者只看**业务主体锚**（公司 / 机构 / 地域专名）→ 拦不住「跨境客群」「海外市场」
+ *    这类**纯抽象概括词**（抽不出主体锚 → 直接放行；10-06 线上正是这种情况）；
+ *  - 本函数把每个方面拆成「维度，看点」两半，**各半**都要求在展示清单里有 ≥1 个实义
+ *    bigram 落点（两半可指向不同条目）—— 对应 sc 口径「每个方面都能找到出处」。
+ *
+ * 判据为什么是「双半」而不是「整条 best≥2」（v2，已废弃）：
+ *  v2 要求整条方面与**同一条**清单重合 ≥2，遇到「两半各自有出处、但指向不同条目」时
+ *  会误判（实测：「跨境客群，口岸新高」即使清单里**有**横琴口岸那条，整条 best 仍只有 1）。
+ *
+ * 阈值标定（历史 8 天 25 个真实方面；脚本 `deliverables/density-quality/_hero-grounding-probe3.ts`）：
+ *  - **双半判据 → 3/25 不合格**：09-30「货币政策加码」、10-03「营销话术收紧」（措辞与素材
+ *    词面不对齐，属可接受的「逼措辞对齐」）、**10-06「跨境客群，口岸新高」（真阳：其素材
+ *    「横琴口岸」从未进任何卡片）**；
+ *  - 代价类型：不合格只会**触发一次二次 LLM 重写**（不替换定调），重写仍不合格则保留原定调
+ *    —— 误伤成本 = 一次额外调用 + 日志，不会改坏内容。
+ *
+ * 同时排除**泛化 bigram**（`HERO_GENERIC_GRAMS`）：否则「海外市场」能靠清单里任意
+ * 一条含「市场」的条目蒙混过关，判据等于失效（v1 探针实测：全清单并集口径 25/25 全过）。
+ */
+export function auditHeroDisplayGrounding(
+  heroLine: string,
+  displayTexts: readonly string[],
+): HeroDisplayAudit {
+  const dims = (heroLine ?? "")
+    .replace(HERO_PREFIX_RE, "")
+    .replace(/[。．.\s]+$/, "")
+    .split(/[；;]/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  if (dims.length === 0 || displayTexts.length === 0) {
+    // 无法判定 → 放行（红线：宁可保留，不误杀当天真实内容）
+    return { dims: [], ungrounded: [], skipped: true };
+  }
+  const displayGrams = new Set<string>();
+  for (const t of displayTexts) for (const g of titleBigrams(t ?? "")) if (!HERO_GENERIC_GRAMS.has(g)) displayGrams.add(g);
+
+  const out: HeroDisplayAudit["dims"] = [];
+  for (const dim of dims) {
+    const ci = dim.search(/[，,]/);
+    const key = (ci >= 0 ? dim.slice(0, ci) : dim).trim();
+    const note = ci >= 0 ? dim.slice(ci + 1).trim() : "";
+    const hits = (s: string) =>
+      [...titleBigrams(s)].filter((g) => !HERO_GENERIC_GRAMS.has(g) && displayGrams.has(g)).length;
+    const keyHit = hits(key);
+    const noteHit = note ? hits(note) : -1;
+    out.push({ dim, keyHit, noteHit, grounded: keyHit >= HERO_DISPLAY_MIN_OVERLAP && noteHit !== 0 });
+  }
+  return {
+    dims: out,
+    ungrounded: out.filter((d) => !d.grounded).map((d) => d.dim),
+    skipped: false,
+  };
+}
+
 /**
  * 用保留的维度重建提纲句（句式与 §0 同构）。
  *
@@ -944,6 +1045,8 @@ const HERO_REWRITE_SYSTEM =
 function heroRewriteUserPrompt(input: {
   must_read?: Array<{ title?: string; why?: string }>;
   insights?: Array<{ topic?: string; impact?: string }>;
+  /** 已在页面展示的资讯清单（板块卡 + 必读 + 商机）；给了就要求每个方面都能在此找到出处。 */
+  displayTexts?: readonly string[];
 }): string {
   const rows: Array<{ kind: string; head: string; score: number }> = [];
   for (const m of input.must_read ?? []) {
@@ -958,17 +1061,26 @@ function heroRewriteUserPrompt(input: {
   }
   rows.sort((a, b) => b.score - a.score);
   const list = rows.map((r, i) => `${i + 1}. [${r.kind} ${r.score}分] ${r.head}`).join("\n");
+  const displayList = (input.displayTexts ?? [])
+    .map((t) => (t ?? "").trim().slice(0, 60))
+    .filter(Boolean)
+    .slice(0, 40)
+    .map((t, i) => `${i + 1}. ${t}`)
+    .join("\n");
   return [
     "下面是一份早报**已定稿**的必读与商机，方括号里是「与分行零售业务的相关性分值」（越高越值得让领导看到）。",
     "请写一句「今日定调」。要求：",
-    "- 只挑**最有价值的 3~5 条**（不必覆盖全部；分值明显低的不要写进去）",
-    "- 每条写成「维度，看点」：维度是 3~8 字领域词组；看点是 3~6 字的量级/紧迫性/影响面",
+    "- 只挑**最有价值的 2~4 条**（不必覆盖全部；分值明显低的不要写进去）",
+    "- 每条写成「维度，看点」：维度是 3~8 字领域词组；看点是 3~10 字的量级/数字/时点/影响面",
     "- 句式：今天主要看N个方面：X，看点；Y，看点；Z，看点",
-    "- 整句不超过 70 字",
+    "- 整句不超过 90 字",
+    "- ⛔ 不要写成整齐的四字对仗顺口溜；各条长短不必一致，看点要落到具体数字或口径",
+    "- 🔴 每个方面都必须能在下面清单（含板块资讯）里找到出处；不得引入清单外的话题",
     "- 只写提纲：不写理由、不做事件摘要、不引入下面没有的内容",
     "- 纯口语、可直接朗读；不要问候语、不要任何符号装饰",
     "",
     list,
+    ...(displayList ? ["", "下面是当天**已在页面展示**的资讯清单（你的每个方面都要能在这里找到出处）：", displayList] : []),
   ].join("\n");
 }
 
@@ -1004,6 +1116,8 @@ export async function writeHeroLine(
   input: {
     must_read?: Array<{ title?: string; why?: string }>;
     insights?: Array<{ topic?: string; impact?: string }>;
+    /** 已在页面展示的资讯清单；给了就按「每个方面都要有出处」校验（2026-10-06）。 */
+    displayTexts?: readonly string[];
   },
   runner: ExecLlmRunner,
 ): Promise<string> {
@@ -1016,7 +1130,19 @@ export async function writeHeroLine(
   const line = sanitizeHeroLine(raw);
   if (!line) return "";
   const audit = auditHeroDimensions(line, input.must_read, input.insights);
-  if (audit.dims.length < 2 || audit.dangling.length > 0) return "";
+  if (audit.dims.length < 2) return "";
+  // 2026-10-06 sc 口径：重写后的**每个方面**都要能在展示清单里找到出处。
+  // ⚠️ 换判据的理由：旧的 `dangling > 0`（对必读/商机做 bigram 回溯）在综述式定调上
+  //    几乎必然落败 —— 10-06 线上那条 4 个维度对必读/商机 overlap 全为 0，
+  //    若沿用旧判据，二次重写**每次都会白调一次 LLM 再被判无效**。
+  // 清单缺失时退回旧判据（不误杀）。
+  const display = input.displayTexts ?? [];
+  if (display.length > 0) {
+    const g = auditHeroDisplayGrounding(line, display);
+    if (!g.skipped && g.ungrounded.length > 0) return "";
+  } else if (audit.dangling.length > 0) {
+    return "";
+  }
   return line;
 }
 

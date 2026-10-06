@@ -25,6 +25,7 @@ import { stripHeroPrefix } from "../lib/utils/hero-text";
 import {
   HERO_DERIVE_MAX_LINES,
   auditHeroDimensions,
+  auditHeroDisplayGrounding,
   deriveHeroLine,
   rebuildHeroLine,
   type ExecutiveSummary,
@@ -124,7 +125,7 @@ test("deriveHeroLine：理由（why）一字不入 —— 定调是纲，理由�
   assert.equal(line, "今天主要看一个方面：消费贷贴息扩围。");
   assert.ok(!line.includes("价格战"), "why 的内容不得进入提纲");
   assert.ok(!line.includes("需尽快统一口径"), "why 的内容不得进入提纲");
-  assert.ok(line.length <= 70, `整句应 ≤70 字（实际 ${line.length}）`);
+  assert.ok(line.length <= 90, `整句应 ≤90 字（实际 ${line.length}）`);
 });
 
 test("deriveHeroLine：最多 5 个维度、方向去重、空素材回空串", () => {
@@ -149,13 +150,14 @@ test("deriveHeroLine：最多 5 个维度、方向去重、空素材回空串", 
   assert.equal(HERO_DERIVE_MAX_LINES, 5, "上限常量须与口径一致");
 });
 
-test("deriveHeroLine：整句超 70 字 → 先砍维度再试（硬上限）", () => {
-  const long = "很长的方向词组加起来十五个字";
+test("deriveHeroLine：整句超 90 字 → 先砍维度再试（硬上限）", () => {
+  const long = "很长的方向词组加起来要二十一个字才够长";
   const line = deriveHeroLine({
     must_read: [1, 2, 3, 4].map((i) => ({ title: `${long}${i}`, why: "x" })),
   });
-  assert.ok(line.length <= 70, `整句不得超 70 字（实际 ${line.length} 字：${line}）`);
+  assert.ok(line.length <= 90, `整句不得超 90 字（实际 ${line.length} 字：${line}）`);
   assert.ok(line.startsWith("今天主要看"), "句式不变（只是减少维度数）");
+  assert.ok(!line.includes("4"), "超长时最后一个维度被砍掉");
 });
 
 test("auditHeroDimensions：短词降级 —— 2 字维度不因 bigram 少而恒判悬空", () => {
@@ -487,5 +489,100 @@ test("T4 回归：综述式定调「一个维度都回溯不到」**不得**被�
     g.heroRewriteNeeded,
     false,
     "综述式定调不应触发二次重写（否则浪费一次 LLM 调用，且可能被改成必读标题复读）",
+  );
+});
+
+// ---------------------------------------------------------------------------
+// 展示落点（2026-10-06 sc 口径）：定调的每个方面都要在**展示出来的资讯清单**里有出处
+//
+// sc 口径：「他的内容，虽然不一定出现在必读和商机里面，但还是得出现在展示出来的资讯清单
+// 里面的。」—— 可以概括提炼，但不得引入页面完全没有的话题（听众听完提纲会往下找下文）。
+// ---------------------------------------------------------------------------
+
+/** 10-06 线上真实场景：定调 4 个方面，但「横琴口岸」那条从未进任何卡片。 */
+const HERO_1006 =
+  "今天主要看四个方面：湾区楼市，补贴扩容；跨境客群，口岸新高；消费场景，家电数码；海外市场，纳指新高。";
+const DISPLAY_1006 = [
+  "珠海出房产新政，港澳人士亦可同享补贴 湾区楼市跨境置业补贴范围首次覆盖港澳客群。",
+  "补贴扩容、新品扎堆、一天卖出4台机器人……广州黄金周家电数码消费又新又热。",
+  "全球市场：美股三大指数集体收涨，纳指涨超1%创收盘新高 海外风险偏好回升，客户对QDII及海外权益类产品的咨询热度可能走高。",
+];
+
+test("展示落点：10-06 线上实例 ——「跨境客群，口岸新高」在展示清单里找不到出处", () => {
+  const a = auditHeroDisplayGrounding(HERO_1006, DISPLAY_1006);
+  assert.equal(a.skipped, false);
+  assert.deepEqual(
+    a.ungrounded,
+    ["跨境客群，口岸新高"],
+    `只有这条无出处（其素材「横琴口岸」未进卡片）：${JSON.stringify(a.dims)}`,
+  );
+  assert.equal(a.dims.filter((d) => d.grounded).length, 3, "其余 3 个方面应有出处");
+});
+
+test("展示落点反向守护：把「横琴口岸」那条放进清单 → 该方面即有出处", () => {
+  const withKouAn = [...DISPLAY_1006, "横琴口岸单日客流突破15万人次 创口岸启用以来新高。"];
+  const a = auditHeroDisplayGrounding(HERO_1006, withKouAn);
+  assert.deepEqual(a.ungrounded, [], "补齐出处后不应再判无落点");
+});
+
+test("展示落点：泛化词不得单独充当出处（「海外市场」不能靠「市场」蒙过）", () => {
+  const genericOnly = [
+    "A股市场震荡走高 成交额创阶段新高。",
+    "房地产市场政策持续优化 新房成交回升。",
+  ];
+  const a = auditHeroDisplayGrounding("今天主要看一个方面：海外市场，纳指新高。", genericOnly);
+  assert.equal(
+    a.ungrounded.length,
+    1,
+    `泛化词不构成落点证据（实际 ${JSON.stringify(a.dims)}）`,
+  );
+});
+
+test("展示落点：清单为空 → 放行（不误杀真实内容）", () => {
+  const a = auditHeroDisplayGrounding(HERO_1006, []);
+  assert.equal(a.skipped, true);
+  assert.deepEqual(a.ungrounded, []);
+});
+
+test("展示落点：定调无维度 → 放行（与空清单同属无法判定）", () => {
+  const a = auditHeroDisplayGrounding("", DISPLAY_1006);
+  assert.equal(a.skipped, true);
+});
+
+test("展示落点：exec-guard 集成 —— 有方面无出处 → 标记二次重写，且**不**用规则替换定调", () => {
+  const exec: ExecutiveSummary = {
+    hero_line: HERO_1006,
+    must_read: [{ title: "纳指涨超1%创收盘新高", why: "海外风险偏好回升。" }],
+    insights: [{ topic: "广州家电数码补贴扩容", impact: "以旧换新场景热度上升。" }],
+  };
+  const g = applyMemoryGuard({
+    exec,
+    store: emptyMemory(),
+    today: TODAY,
+    now: NOW,
+    displayTexts: DISPLAY_1006,
+  });
+  assert.equal(
+    g.exec.hero_line,
+    HERO_1006,
+    "只标记重写：不得用规则把定调换成必读标题复读（10-04 sc 口径）",
+  );
+  assert.equal(g.heroRewriteNeeded, true, "应触发二次 LLM 重写");
+  assert.ok(
+    g.log.some((l) => l.includes("找不到出处")),
+    `应有落点日志：${g.log.join(" | ")}`,
+  );
+});
+
+test("展示落点：exec-guard 未传清单 → 不启用新判据（既有调用点行为不变）", () => {
+  const exec: ExecutiveSummary = {
+    hero_line: HERO_1006,
+    must_read: [{ title: "纳指涨超1%创收盘新高", why: "海外风险偏好回升。" }],
+    insights: [],
+  };
+  const g = applyMemoryGuard({ exec, store: emptyMemory(), today: TODAY, now: NOW });
+  assert.ok(
+    !g.log.some((l) => l.includes("找不到出处")),
+    `未传清单时不应出现落点告警：${g.log.join(" | ")}`,
   );
 });
