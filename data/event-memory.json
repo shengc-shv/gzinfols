@@ -155,15 +155,16 @@
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-09-16",
-      "lastBroadcastAt": "2026-10-06",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 4,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
         "市场反应",
-        "政策变化"
+        "政策变化",
+        "受影响人群"
       ],
       "samples": [
         {
@@ -212,16 +213,31 @@
           "url": "https://www.cnfin.com/yw-lb/detail/20261005/4477413_1.html",
           "novelty": 0.3347826086956522,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-07",
+          "section": "insights",
+          "title": "元岗村安置房11月开放",
+          "text": "元岗村安置房11月开放 天河元岗村安置房样板间11月开放参观，城市更新安置客群的按揭与资金监管需求在积累，涉及回迁家庭资产安置。",
+          "facts": [
+            "#11月"
+          ],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010085.htm",
+          "novelty": 0.9635416666666667,
+          "angle": "受影响人群"
         }
       ],
       "broadcastedTexts": [
         "8月信贷结构生变 8月信贷结构生变 对公强、零售弱格局延续，零售条线需重估按揭与消费贷增长动能，调整投放节奏与资源配置。",
         "季末零售信贷投放冲刺 季末零售信贷投放冲刺 季末银行资产冲刺，零售信贷与客群指标承压，节前最后窗口的投放节奏与定价安排影响季度收官。 节前梳理待放款按揭与消费贷清单，优先处理已批未放件，同步确认节后定价策略。",
         "珠海房产新政扩至港澳人士 珠海房产新政扩至港澳人士 湾区跨境置业补贴范围首次覆盖港澳客群，珠海与广州南沙的港澳按揭、跨境结算服务衔接空间打开。",
-        "假期后消费信贷还款观察 假期后消费信贷还款观察 国庆假期过半消费市场平稳有序，假期后消费信贷还款与额度使用情况将集中体现，客群还款能力分化值得留意。"
+        "假期后消费信贷还款观察 假期后消费信贷还款观察 国庆假期过半消费市场平稳有序，假期后消费信贷还款与额度使用情况将集中体现，客群还款能力分化值得留意。",
+        "元岗村安置房11月开放 元岗村安置房11月开放 天河元岗村安置房样板间11月开放参观，城市更新安置客群的按揭与资金监管需求在积累，涉及回迁家庭资产安置。"
       ],
       "broadcastedFacts": [
-        "#8月"
+        "#8月",
+        "#11月"
       ],
       "peakScore": 66
     },
@@ -1437,12 +1453,13 @@
       "anchors": [
         "理财",
         "客群",
-        "央行"
+        "央行",
+        "养老"
       ],
       "kind": "market",
       "firstBroadcastAt": "2026-09-17",
-      "lastBroadcastAt": "2026-09-28",
-      "broadcastCount": 5,
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 6,
       "sections": [
         "insights",
         "must_read"
@@ -1451,22 +1468,10 @@
         "政策变化",
         "市场反应",
         "受影响人群",
-        "数据验证"
+        "数据验证",
+        "同业动作"
       ],
       "samples": [
-        {
-          "date": "2026-09-18",
-          "section": "insights",
-          "title": "含权理财配置话术调整",
-          "text": "含权理财配置话术调整 理财规模8月再创新高、含权产品增量突出，客户对净值波动接受度在变，是提升AUM与中收的配置窗口。 值得关注本周更新含权产品配置话术，对风险等级匹配客户做分批建仓建议，同步准备波动期客户沟通口径。",
-          "facts": [
-            "#8月"
-          ],
-          "broadcastAt": "2026-09-18T07:34:51+08:00",
-          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-17/doc-inisatui4286974.shtml",
-          "novelty": 0.5383720930232558,
-          "angle": "政策变化"
-        },
         {
           "date": "2026-09-25",
           "section": "must_read",
@@ -1532,6 +1537,17 @@
           "score": 34,
           "novelty": 0.47358490566037736,
           "angle": "数据验证"
+        },
+        {
+          "date": "2026-10-07",
+          "section": "insights",
+          "title": "银发消费新场景遍地开花",
+          "text": "银发消费新场景遍地开花 银发消费新场景遍地开花，养老客群的支付、理财与适老服务需求上升，节后客群经营窗口打开。",
+          "facts": [],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://www.stcn.com/article/detail/4206755.html",
+          "novelty": 0.2763157894736842,
+          "angle": "同业动作"
         }
       ],
       "broadcastedTexts": [
@@ -1541,7 +1557,8 @@
         "含权理财控回撤配置 含权理财控回撤配置 9月理财规模高增、含权类为扩容主力，行业共识转向控波动控回撤，客户比价敏感度上升。 今日起在货架主推控回撤型含权产品，以配置能力而非费率做差异点，配套客户经理话术更新。",
         "理财密集下调费率1667条 理财密集下调费率1667条 多家银行理财集中下调费率，财富客群比价压力上升，产品货架与定价策略需同步评估调整。",
         "理财费率下调应对 理财费率下调应对 多家银行理财集中下调费率，财富客群比价压力上升，产品货架与定价策略需同步评估调整。 本周评估在售理财产品费率竞争力，对高敏感客群提前沟通，避免节前资金流失。",
-        "央行例会删去跨周期加码稳汇率 央行例会删去跨周期加码稳汇率 汇率预期管理强化，结售汇与外币理财窗口打开，对分行跨境客群经营与外币资产配置节奏有直接指引。"
+        "央行例会删去跨周期加码稳汇率 央行例会删去跨周期加码稳汇率 汇率预期管理强化，结售汇与外币理财窗口打开，对分行跨境客群经营与外币资产配置节奏有直接指引。",
+        "银发消费新场景遍地开花 银发消费新场景遍地开花 银发消费新场景遍地开花，养老客群的支付、理财与适老服务需求上升，节后客群经营窗口打开。"
       ],
       "broadcastedFacts": [
         "#8月",
@@ -5973,12 +5990,14 @@
       ],
       "kind": "ipo",
       "firstBroadcastAt": "2026-10-02",
-      "lastBroadcastAt": "2026-10-02",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 2,
       "sections": [
         "insights"
       ],
-      "anglesUsed": [],
+      "anglesUsed": [
+        "政策变化"
+      ],
       "samples": [
         {
           "date": "2026-10-02",
@@ -5991,13 +6010,28 @@
           "broadcastAt": "2026-10-02T06:39:32+08:00",
           "url": "https://www.stcn.com/article/detail/4205677.html",
           "novelty": 1
+        },
+        {
+          "date": "2026-10-07",
+          "section": "insights",
+          "title": "公募四季度主线研判",
+          "text": "公募四季度主线研判 多家公募发布四季度投资主线研判，客户资产配置沟通素材更新，财富条线产品排期与客户预期管理随之调整。",
+          "facts": [
+            "!发布"
+          ],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://finance.eastmoney.com/a/202610063888715971.html",
+          "novelty": 0.9627659574468084,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "基金发行遇冷指数产品滞销 基金发行遇冷指数产品滞销 客户申购意愿偏弱，存量客户持仓陪伴与逆周期产品储备节奏受到影响，财富条线销售难度上升。"
+        "基金发行遇冷指数产品滞销 基金发行遇冷指数产品滞销 客户申购意愿偏弱，存量客户持仓陪伴与逆周期产品储备节奏受到影响，财富条线销售难度上升。",
+        "公募四季度主线研判 公募四季度主线研判 多家公募发布四季度投资主线研判，客户资产配置沟通素材更新，财富条线产品排期与客户预期管理随之调整。"
       ],
       "broadcastedFacts": [
-        "!申购"
+        "!申购",
+        "!发布"
       ],
       "peakScore": 0
     },
@@ -6739,146 +6773,300 @@
       ],
       "broadcastedFacts": [],
       "peakScore": 0
+    },
+    "央行|黄金": {
+      "id": "央行|黄金",
+      "topicTags": [
+        "财富管理"
+      ],
+      "anchors": [
+        "央行",
+        "黄金"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-10-07",
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-07",
+          "section": "must_read",
+          "title": "央行官员谈黄金投资",
+          "text": "央行官员谈黄金投资 央行官员谈黄金投资，理由从分散风险到数字资产策略不一，客户对黄金类配置的咨询口径出现分歧。",
+          "facts": [
+            "@央行"
+          ],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://finance.sina.com.cn/world/2026-10-07/doc-iniuimev5374085.shtml",
+          "score": 74,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "央行官员谈黄金投资 央行官员谈黄金投资 央行官员谈黄金投资，理由从分散风险到数字资产策略不一，客户对黄金类配置的咨询口径出现分歧。"
+      ],
+      "broadcastedFacts": [
+        "@央行"
+      ],
+      "peakScore": 74
+    },
+    "#2027年": {
+      "id": "#2027年",
+      "topicTags": [
+        "广州本地"
+      ],
+      "anchors": [
+        "#2027年"
+      ],
+      "kind": "local",
+      "firstBroadcastAt": "2026-10-07",
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-07",
+          "section": "must_read",
+          "title": "港股内房股拉升，花旗看2027年",
+          "text": "港股内房股拉升，花旗看2027年 花旗判断2027年为核心城市楼价复苏关键一年，涉房资产质量预期与开发贷策略可据此观察，广州改善盘节奏与之呼应。",
+          "facts": [
+            "#2027年"
+          ],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-06/doc-iniufxcp5842911.shtml",
+          "score": 66,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "港股内房股拉升，花旗看2027年 港股内房股拉升，花旗看2027年 花旗判断2027年为核心城市楼价复苏关键一年，涉房资产质量预期与开发贷策略可据此观察，广州改善盘节奏与之呼应。"
+      ],
+      "broadcastedFacts": [
+        "#2027年"
+      ],
+      "peakScore": 66
+    },
+    "广州": {
+      "id": "广州",
+      "topicTags": [
+        "广州本地"
+      ],
+      "anchors": [
+        "广州"
+      ],
+      "kind": "local",
+      "firstBroadcastAt": "2026-10-07",
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [
+        "政策变化"
+      ],
+      "samples": [
+        {
+          "date": "2026-10-07",
+          "section": "must_read",
+          "title": "国铁广州局加开702列",
+          "text": "国铁广州局加开702列 国铁广州局今日计划加开列车702列，涉京广等线路，返程客流高峰带来出行支付与消费场景的短期集中。",
+          "facts": [
+            "@广州"
+          ],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://www.stcn.com/article/detail/4206622.html",
+          "score": 31,
+          "novelty": 0.7851063829787235,
+          "angle": "政策变化"
+        }
+      ],
+      "broadcastedTexts": [
+        "国铁广州局加开702列 国铁广州局加开702列 国铁广州局今日计划加开列车702列，涉京广等线路，返程客流高峰带来出行支付与消费场景的短期集中。"
+      ],
+      "broadcastedFacts": [
+        "@广州"
+      ],
+      "peakScore": 31
+    },
+    "ev-z67jhz": {
+      "id": "ev-z67jhz",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-10-07",
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-07",
+          "section": "must_read",
+          "title": "牛市旗手利好来袭",
+          "text": "牛市旗手利好来袭 牛市旗手相关利好来袭、评级突然上调，市场情绪与券商板块预期变化，影响权益类产品客户的风险偏好。",
+          "facts": [
+            "!上调"
+          ],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://www.stcn.com/article/detail/4206720.html",
+          "score": 29,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "牛市旗手利好来袭 牛市旗手利好来袭 牛市旗手相关利好来袭、评级突然上调，市场情绪与券商板块预期变化，影响权益类产品客户的风险偏好。"
+      ],
+      "broadcastedFacts": [
+        "!上调"
+      ],
+      "peakScore": 29
+    },
+    "ev-m9gbix": {
+      "id": "ev-m9gbix",
+      "topicTags": [
+        "广州本地"
+      ],
+      "anchors": [],
+      "kind": "local",
+      "firstBroadcastAt": "2026-10-07",
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-07",
+          "section": "must_read",
+          "title": "外资机构上调对华配置",
+          "text": "外资机构上调对华配置 多家外资机构升级对华配置观点，跨境资金与外资客户动向变化，直接关系广州分行跨境托管与结算类业务的外部环境。",
+          "facts": [
+            "!上调"
+          ],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://www.stcn.com/article/detail/4206645.html",
+          "score": 21,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "外资机构上调对华配置 外资机构上调对华配置 多家外资机构升级对华配置观点，跨境资金与外资客户动向变化，直接关系广州分行跨境托管与结算类业务的外部环境。"
+      ],
+      "broadcastedFacts": [
+        "!上调"
+      ],
+      "peakScore": 21
+    },
+    "ev-z9m8p1": {
+      "id": "ev-z9m8p1",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-07",
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-07",
+          "section": "insights",
+          "title": "QDII节后表现受关注",
+          "text": "QDII节后表现受关注 国庆假期海外市场先行波动，QDII节后表现受关注，持有跨境配置客户的净值波动与沟通需求上升。",
+          "facts": [],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://www.stcn.com/article/detail/4206680.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "QDII节后表现受关注 QDII节后表现受关注 国庆假期海外市场先行波动，QDII节后表现受关注，持有跨境配置客户的净值波动与沟通需求上升。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "信托": {
+      "id": "信托",
+      "topicTags": [
+        "财富管理"
+      ],
+      "anchors": [
+        "信托"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-07",
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-07",
+          "section": "insights",
+          "title": "信托原董事长掌千亿平台",
+          "text": "信托原董事长掌千亿平台 某信托原董事长出任千亿级平台总经理，财富管理行业高管流动，头部机构战略与产品线可能随之调整。",
+          "facts": [],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://finance.sina.com.cn/trust/roll/2026-10-06/doc-iniuhyra6769616.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "信托原董事长掌千亿平台 信托原董事长掌千亿平台 某信托原董事长出任千亿级平台总经理，财富管理行业高管流动，头部机构战略与产品线可能随之调整。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-mq42ni": {
+      "id": "ev-mq42ni",
+      "topicTags": [
+        "广州本地"
+      ],
+      "anchors": [],
+      "kind": "local",
+      "firstBroadcastAt": "2026-10-07",
+      "lastBroadcastAt": "2026-10-07",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-07",
+          "section": "insights",
+          "title": "返程客流高峰",
+          "text": "返程客流高峰 国庆假期第六天国铁广州局迎来返程小高峰，出行支付与消费场景短期集中，异地资金回流节奏加快。",
+          "facts": [],
+          "broadcastAt": "2026-10-07T06:35:02+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010152.htm",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "返程客流高峰 返程客流高峰 国庆假期第六天国铁广州局迎来返程小高峰，出行支付与消费场景短期集中，异地资金回流节奏加快。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
     }
   },
   "today": {
     "date": "2026-10-07",
-    "entries": [
-      {
-        "date": "2026-10-07",
-        "section": "must_read",
-        "title": "央行官员谈黄金投资",
-        "text": "央行官员谈黄金投资 央行官员谈黄金投资，理由从分散风险到数字资产策略不一，客户对黄金类配置的咨询口径出现分歧。",
-        "facts": [
-          "@央行"
-        ],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://finance.sina.com.cn/world/2026-10-07/doc-iniuimev5374085.shtml",
-        "score": 74,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-07",
-        "section": "must_read",
-        "title": "港股内房股拉升，花旗看2027年",
-        "text": "港股内房股拉升，花旗看2027年 花旗判断2027年为核心城市楼价复苏关键一年，涉房资产质量预期与开发贷策略可据此观察，广州改善盘节奏与之呼应。",
-        "facts": [
-          "#2027年"
-        ],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-06/doc-iniufxcp5842911.shtml",
-        "score": 66,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-07",
-        "section": "must_read",
-        "title": "国铁广州局加开702列",
-        "text": "国铁广州局加开702列 国铁广州局今日计划加开列车702列，涉京广等线路，返程客流高峰带来出行支付与消费场景的短期集中。",
-        "facts": [
-          "@广州"
-        ],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://www.stcn.com/article/detail/4206622.html",
-        "score": 31,
-        "novelty": 0.7851063829787235,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-10-07",
-        "section": "must_read",
-        "title": "牛市旗手利好来袭",
-        "text": "牛市旗手利好来袭 牛市旗手相关利好来袭、评级突然上调，市场情绪与券商板块预期变化，影响权益类产品客户的风险偏好。",
-        "facts": [
-          "!上调"
-        ],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://www.stcn.com/article/detail/4206720.html",
-        "score": 29,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-07",
-        "section": "must_read",
-        "title": "外资机构上调对华配置",
-        "text": "外资机构上调对华配置 多家外资机构升级对华配置观点，跨境资金与外资客户动向变化，直接关系广州分行跨境托管与结算类业务的外部环境。",
-        "facts": [
-          "!上调"
-        ],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://www.stcn.com/article/detail/4206645.html",
-        "score": 21,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-07",
-        "section": "insights",
-        "title": "元岗村安置房11月开放",
-        "text": "元岗村安置房11月开放 天河元岗村安置房样板间11月开放参观，城市更新安置客群的按揭与资金监管需求在积累，涉及回迁家庭资产安置。",
-        "facts": [
-          "#11月"
-        ],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010085.htm",
-        "novelty": 0.9635416666666667,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-10-07",
-        "section": "insights",
-        "title": "QDII节后表现受关注",
-        "text": "QDII节后表现受关注 国庆假期海外市场先行波动，QDII节后表现受关注，持有跨境配置客户的净值波动与沟通需求上升。",
-        "facts": [],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://www.stcn.com/article/detail/4206680.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-07",
-        "section": "insights",
-        "title": "公募四季度主线研判",
-        "text": "公募四季度主线研判 多家公募发布四季度投资主线研判，客户资产配置沟通素材更新，财富条线产品排期与客户预期管理随之调整。",
-        "facts": [
-          "!发布"
-        ],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://finance.eastmoney.com/a/202610063888715971.html",
-        "novelty": 0.9627659574468084,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-10-07",
-        "section": "insights",
-        "title": "信托原董事长掌千亿平台",
-        "text": "信托原董事长掌千亿平台 某信托原董事长出任千亿级平台总经理，财富管理行业高管流动，头部机构战略与产品线可能随之调整。",
-        "facts": [],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://finance.sina.com.cn/trust/roll/2026-10-06/doc-iniuhyra6769616.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-07",
-        "section": "insights",
-        "title": "银发消费新场景遍地开花",
-        "text": "银发消费新场景遍地开花 银发消费新场景遍地开花，养老客群的支付、理财与适老服务需求上升，节后客群经营窗口打开。",
-        "facts": [],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://www.stcn.com/article/detail/4206755.html",
-        "novelty": 0.2763157894736842,
-        "angle": "同业动作"
-      },
-      {
-        "date": "2026-10-07",
-        "section": "insights",
-        "title": "返程客流高峰",
-        "text": "返程客流高峰 国庆假期第六天国铁广州局迎来返程小高峰，出行支付与消费场景短期集中，异地资金回流节奏加快。",
-        "facts": [],
-        "broadcastAt": "2026-10-07T06:35:02+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010152.htm",
-        "novelty": 1
-      }
-    ],
-    "runId": "37541406248"
+    "entries": []
   },
   "deliveries": [
     {
@@ -7026,6 +7214,13 @@
       "runId": "37391522447",
       "reportRunId": "37383454675",
       "reportSha": "a35250ed400da1f4b5b478e89284169c2b409036"
+    },
+    {
+      "date": "2026-10-07",
+      "pushedAt": "2026-10-07T08:01:35+08:00",
+      "runId": "37549712690",
+      "reportRunId": "37541406248",
+      "reportSha": "7c13bb5b478cdc74e6662def84978f1ba4501300"
     }
   ],
   "ipoVoicing": {
