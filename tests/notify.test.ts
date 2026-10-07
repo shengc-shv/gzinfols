@@ -11,6 +11,7 @@ import assert from "node:assert/strict";
 import {
   buildWecomMarkdown,
   buildWecomText,
+  marketLinesOf,
   pushWecomWebhook,
 } from "../lib/adapters/notify/wecom";
 
@@ -71,4 +72,94 @@ test("文案组装：markdown / text 都含定调、广东IPO 行与链接，且
   // 超长 IPO 行截断 80 字
   const longIpo = buildWecomText("A", "2026-09-01", "https://x", "广".repeat(100));
   assert.ok(longIpo.includes("…"));
+});
+
+// ---------------------------------------------------------------------------
+// 2026-10-07 sc 口径：新增「风险行」（30 字截断）与「股市通报行」（每市场一行），均可选
+// ---------------------------------------------------------------------------
+
+test("风险行：有主题才出现，30 字截断；无风险 → 整行不出现（可选）", () => {
+  const withRisk = buildWecomText("定调A", "2026-10-01", "https://x", undefined, {
+    riskTopic: "韩国多家银行客户数据泄露",
+  });
+  assert.ok(withRisk.includes("🚨 风险提示｜韩国多家银行客户数据泄露"));
+
+  // 30 字截断
+  const long = buildWecomText("定调A", "2026-10-01", "https://x", undefined, {
+    riskTopic: "风".repeat(40),
+  });
+  assert.ok(long.includes(`🚨 风险提示｜${"风".repeat(30)}…`), `应截到 30 字：${long}`);
+
+  const noRisk = buildWecomText("定调A", "2026-10-01", "https://x", undefined, { riskTopic: "" });
+  assert.ok(!noRisk.includes("风险提示"), "无风险主题 → 不出风险行");
+  // 完全不传 extra（既有调用点）→ 同样不出
+  assert.ok(!buildWecomText("A", "2026-10-01", "https://x").includes("风险提示"));
+});
+
+test("股市行：三市场各一行，未开市状态取自数据自带的 fresh 标记", () => {
+  const lines = marketLinesOf({
+    aShare: { indices: [{ name: "上证指数", value: "3842.20", changePct: "+0.31%" }] },
+    hk: { indices: [{ name: "恒生指数", value: "24280.56", changePct: "+1.00%" }] },
+    us: { indices: [{ name: "纳斯达克", value: "27599.89", changePct: "+0.45%" }] },
+    marketStatus: {
+      markets: {
+        aShare: { fresh: false, dataDate: "2026-09-30" },
+        hk: { fresh: true, dataDate: "2026-10-06" },
+        us: { fresh: true, dataDate: "2026-10-06" },
+      },
+    },
+  });
+  assert.deepEqual(lines, [
+    "📈 A股｜未开市（最近 9月30日 收盘）",
+    "📈 港股｜恒指 ▲1.00%",
+    "📈 美股｜纳指 ▲0.45%",
+  ]);
+});
+
+test("股市行：涨跌符号与指数简称（▲涨 / ▼跌，中国口径不依赖颜色）", () => {
+  const [line] = marketLinesOf({
+    aShare: {
+      indices: [
+        { name: "上证指数", changePct: "+0.31%" },
+        { name: "深证成指", changePct: "-0.11%" },
+        { name: "创业板指", changePct: "-0.23%" },
+      ],
+    },
+  });
+  assert.equal(line, "📈 A股｜上证 ▲0.31% · 深成 ▼0.11% · 创业板 ▼0.23%");
+});
+
+test("股市行：无 indices 退到 overview（50 字截断）；完全没有数据写「暂无数据」而非「未开市」", () => {
+  const lines = marketLinesOf({ us: { overview: "三大指数集体收涨，标普领涨。" } });
+  assert.equal(lines[2], "📈 美股｜三大指数集体收涨，标普领涨。");
+
+  const noData = marketLinesOf({});
+  assert.deepEqual(noData, ["📈 A股｜暂无数据", "📈 港股｜暂无数据", "📈 美股｜暂无数据"]);
+  // 整个 stock_recap 缺失 → 整块不出现（可选）
+  assert.deepEqual(marketLinesOf(null), []);
+  assert.deepEqual(marketLinesOf(undefined), []);
+});
+
+test("组装顺序：定调 → 股市 → 风险 → 广东IPO → 链接；各类缺省时自动收缩", () => {
+  const full = buildWecomText("定调A", "2026-10-07", "https://x", "广东IPO一行", {
+    riskTopic: "某风险主题",
+    stockRecap: { aShare: { indices: [{ name: "上证指数", changePct: "+0.31%" }] } },
+  });
+  const iHero = full.indexOf("【今日定调】");
+  const iMarket = full.indexOf("📈 A股");
+  const iRisk = full.indexOf("🚨 风险提示");
+  const iIpo = full.indexOf("🏦 广东IPO");
+  const iLink = full.indexOf("👉 点击查看完整简报");
+  assert.ok(
+    iHero < iMarket && iMarket < iRisk && iRisk < iIpo && iIpo < iLink,
+    `顺序应为 定调 → 股市 → 风险 → IPO → 链接：\n${full}`,
+  );
+
+  // markdown 版同样含股市/风险行，且不带 4 个市场以外的噪音
+  const md = buildWecomMarkdown("定调A", "2026-10-07", "https://x", undefined, {
+    riskTopic: "某风险主题",
+    stockRecap: { hk: { indices: [{ name: "恒生科技", changePct: "-0.94%" }] } },
+  });
+  assert.ok(md.includes("📈 港股｜恒生科技 ▼0.94%"));
+  assert.ok(md.includes("🚨 风险提示｜某风险主题"));
 });

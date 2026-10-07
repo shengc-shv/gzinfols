@@ -28,6 +28,7 @@ import path from "node:path";
 import {
   buildWecomMarkdown,
   buildWecomText,
+  marketLinesOf,
   pushWecomWebhook,
 } from "../lib/adapters/notify/wecom";
 import { REPORT_TZ } from "../lib/utils/time";
@@ -37,24 +38,39 @@ function log(msg: string) {
 }
 
 /**
- * 读 store.json 的执行摘要（宽松解析，缺字段返回空，绝不抛错）。
- * - heroLine：今日定调（模板消息 / markdown 正文主体）；
+ * 读 store.json 的推送素材（宽松解析，缺字段返回空，绝不抛错）。
+ * - heroLine：今日定调（推送正文主体）；
  * - ipoLine：当日「广东IPO」口播稿（推送正文补一行广东IPO，
- *   否则领导必须点开简报才知道当天有没有可跟进的 IPO 商机）。
+ *   否则领导必须点开简报才知道当天有没有可跟进的 IPO 商机）；
+ * - riskTopic：当日风险主题（2026-10-07 sc 口径，**可选**：30 字截断成「🚨 风险提示」行）；
+ * - stockRecap：股市复盘（2026-10-07 sc 口径，**可选**：A股/港股/美股各一行涨跌总结，
+ *   未开市的市场由数据自带的 marketStatus.fresh 判定后写「未开市」）。
  */
-function loadExecSummary(storePath: string): { heroLine: string; ipoLine: string } {
-  const empty = { heroLine: "", ipoLine: "" };
+function loadStoreDigest(storePath: string): {
+  heroLine: string;
+  ipoLine: string;
+  riskTopic: string;
+  stockRecap: unknown;
+} {
+  const empty = { heroLine: "", ipoLine: "", riskTopic: "", stockRecap: null };
   if (!fs.existsSync(storePath)) {
     log(`未找到 ${storePath}，使用默认数据`);
     return empty;
   }
   try {
     const store = JSON.parse(fs.readFileSync(storePath, "utf8")) as {
-      executive?: { hero_line?: string; guangdong_ipo?: { spoken?: string } };
+      executive?: {
+        hero_line?: string;
+        guangdong_ipo?: { spoken?: string };
+        risk?: { topic?: string };
+      };
+      stock_recap?: unknown;
     };
     return {
       heroLine: store.executive?.hero_line ?? "",
       ipoLine: store.executive?.guangdong_ipo?.spoken ?? "",
+      riskTopic: store.executive?.risk?.topic ?? "",
+      stockRecap: store.stock_recap ?? null,
     };
   } catch (e) {
     log(`store.json 解析失败，使用默认数据: ${e instanceof Error ? e.message : String(e)}`);
@@ -66,16 +82,19 @@ async function pushWecomViaWebhook(cfg: {
   webhookUrl: string;
   heroLine: string;
   ipoLine?: string;
+  riskTopic?: string;
+  stockRecap?: unknown;
   dateStr: string;
   reportUrl: string;
 }): Promise<boolean> {
   // 默认 text：markdown 在个人微信显示「暂不支持此消息类型，请在企业微信中查看」，
   // text 才能在个人微信直接阅读。想要企业微信内的富文本排版时设 WECOM_WEBHOOK_MSGTYPE=markdown。
   const msgtype = (process.env.WECOM_WEBHOOK_MSGTYPE || "text").toLowerCase() === "markdown" ? "markdown" : "text";
+  const extra = { riskTopic: cfg.riskTopic, stockRecap: cfg.stockRecap };
   const content =
     msgtype === "markdown"
-      ? buildWecomMarkdown(cfg.heroLine, cfg.dateStr, cfg.reportUrl, cfg.ipoLine)
-      : buildWecomText(cfg.heroLine, cfg.dateStr, cfg.reportUrl, cfg.ipoLine);
+      ? buildWecomMarkdown(cfg.heroLine, cfg.dateStr, cfg.reportUrl, cfg.ipoLine, extra)
+      : buildWecomText(cfg.heroLine, cfg.dateStr, cfg.reportUrl, cfg.ipoLine, extra);
   const result = await pushWecomWebhook(cfg.webhookUrl, content, cfg.reportUrl, undefined, msgtype);
   log(`消息格式: ${msgtype}`);
   if (result.error) {
@@ -100,12 +119,20 @@ async function main(): Promise<void> {
     day: "2-digit",
   }).format(new Date());
 
-  const { heroLine, ipoLine } = loadExecSummary(path.join("history", dateStr, "store.json"));
+  const { heroLine, ipoLine, riskTopic, stockRecap } = loadStoreDigest(
+    path.join("history", dateStr, "store.json"),
+  );
   if (heroLine) {
     log(`读取定调: ${heroLine.slice(0, 40)}${heroLine.length > 40 ? "…" : ""}`);
   }
   if (ipoLine) {
     log(`读取广东IPO: ${ipoLine.slice(0, 40)}${ipoLine.length > 40 ? "…" : ""}`);
+  }
+  log(riskTopic ? `读取风险主题: ${riskTopic}` : "风险主题为空 → 不出风险行（可选）");
+  if (stockRecap && typeof stockRecap === "object") {
+    log(`读取股市复盘: ${marketLinesOf(stockRecap).length} 个市场 → 逐行输出`);
+  } else {
+    log("股市复盘缺失 → 不出股市行（可选）");
   }
 
   const base = (process.env.REPORT_BASE_URL || "https://shengc-shv.github.io/gzinfols").replace(/\/+$/, "");
@@ -118,7 +145,15 @@ async function main(): Promise<void> {
     process.exitCode = 1;
     return;
   }
-  const okWecomWebhook = await pushWecomViaWebhook({ webhookUrl, heroLine, ipoLine, dateStr, reportUrl });
+  const okWecomWebhook = await pushWecomViaWebhook({
+    webhookUrl,
+    heroLine,
+    ipoLine,
+    riskTopic,
+    stockRecap,
+    dateStr,
+    reportUrl,
+  });
 
   log(`报告链接: ${reportUrl}`);
 

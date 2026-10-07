@@ -39,6 +39,111 @@ function ipoLineOf(ipoLine?: string): string {
 }
 
 /**
+ * 风险预警行（可选，2026-10-07 sc 口径）：只放**风险主题**，30 字截断。
+ *
+ * 为什么只放主题不放 impact：推送是「钩子」，30 字只够说清「今天要警惕什么」；
+ * 「对我意味着什么」留给页面/口播。风险为空（当天没识别到风险）→ 整行不出现。
+ */
+export function riskLineOf(riskTopic?: string, max = 30): string {
+  const t = (riskTopic || "").replace(/\s+/g, " ").trim();
+  if (!t) return "";
+  return `🚨 风险提示｜${t.length > max ? `${t.slice(0, max)}…` : t}`;
+}
+
+/** 指数名简写（推送里每个字都值钱，统一用市场俗称）。 */
+const INDEX_SHORT: Record<string, string> = {
+  上证指数: "上证",
+  深证成指: "深成",
+  创业板指: "创业板",
+  恒生指数: "恒指",
+  恒生科技: "恒生科技",
+  道琼斯: "道指",
+  纳斯达克: "纳指",
+  标普500: "标普",
+};
+
+/** 三市场固定顺序（与页面「股市复盘」栏一致：A股 → 港股 → 美股）。 */
+const MARKET_SLOTS: Array<{ key: string; label: string }> = [
+  { key: "aShare", label: "A股" },
+  { key: "hk", label: "港股" },
+  { key: "us", label: "美股" },
+];
+
+/** `+1.05%` → `▲1.05%`；`-0.11%` → `▼0.11%`（▲/▼ 对应「红涨绿跌」的语义，不依赖颜色）。 */
+function arrowOf(changePct?: string): string {
+  const s = (changePct ?? "").trim();
+  if (!s) return "";
+  if (s.startsWith("-")) return `▼${s.slice(1)}`;
+  if (s.startsWith("+")) return `▲${s.slice(1)}`;
+  return s;
+}
+
+/** `2026-09-30` → `9月30日`（推送里不写年份，省版面）。 */
+function shortDateOf(iso?: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec((iso ?? "").trim());
+  return m ? `${Number(m[2])}月${Number(m[3])}日` : (iso ?? "").trim();
+}
+
+/**
+ * 股市通报行（可选，2026-10-07 sc 口径）：**每个市场一行**，只给涨跌。
+ *
+ * 三种状态（口径来自数据本身，不自己造判据）：
+ *   - `marketStatus.markets[key].fresh === false`（假期/无隔夜行情）→ 「未开市（最近 X月X日 收盘）」；
+ *   - 有 `indices` → 拼结构化涨跌（最多 3 个指数，用 ▲/▼）；
+ *   - 只有 `overview` → 用它（截 50 字）；都没有 → 「暂无数据」。
+ *
+ * 整个 `stock_recap` 缺失 → 返回空数组（整块不出现）。
+ * 入参放宽为 `unknown`（调用方从 store.json 读，天然是 unknown）→ 内部窄化。
+ */
+export function marketLinesOf(stockRecap?: unknown): string[] {
+  if (!stockRecap || typeof stockRecap !== "object") return [];
+  const sr = stockRecap as Record<string, unknown>;
+  const status = (sr.marketStatus ?? {}) as {
+    markets?: Record<string, { fresh?: boolean; dataDate?: string }>;
+  };
+  const out: string[] = [];
+  for (const { key, label } of MARKET_SLOTS) {
+    const m = sr[key] as
+      | { indices?: Array<{ name?: string; changePct?: string }>; overview?: string }
+      | undefined;
+    const st = status.markets?.[key];
+    const prefix = `📈 ${label}｜`;
+    // ① 未开市 / 无隔夜行情（数据自身的 fresh 标记优先）
+    if (st && st.fresh === false) {
+      const d = shortDateOf(st.dataDate);
+      out.push(`${prefix}未开市${d ? `（最近 ${d} 收盘）` : ""}`);
+      continue;
+    }
+    // ② 结构化涨跌
+    const idx = (m?.indices ?? []).filter((i) => i && (i.name || i.changePct)).slice(0, 3);
+    if (idx.length > 0) {
+      out.push(
+        prefix +
+          idx.map((i) => `${INDEX_SHORT[i.name ?? ""] ?? i.name ?? ""} ${arrowOf(i.changePct)}`.trim()).join(" · "),
+      );
+      continue;
+    }
+    // ③ 退到 overview（已有成文一句）
+    const ov = (m?.overview ?? "").replace(/\s+/g, " ").trim();
+    if (ov) {
+      out.push(`${prefix}${ov.length > 50 ? `${ov.slice(0, 50)}…` : ov}`);
+      continue;
+    }
+    // ④ 该市场完全没有数据（数据源缺失，≠ 休市，故与①文案区分）
+    out.push(`${prefix}暂无数据`);
+  }
+  return out;
+}
+
+/** 推送里可选的补充信息（都没有时整行/整块不出现）。 */
+export interface WecomExtra {
+  /** 风险主题（`executive.risk.topic`），30 字截断。 */
+  riskTopic?: string;
+  /** 股市复盘（`store.stock_recap`），每市场一行。 */
+  stockRecap?: unknown;
+}
+
+/**
  * 组装 markdown 正文（不被 40 字截断；完整定调 + 跳转链接）。
  * 企业微信 markdown 语法有限：# 标题 / **加粗** / [链接](url) / > 引用 / <font color>。
  */
@@ -47,6 +152,7 @@ export function buildWecomMarkdown(
   dateStr: string,
   url: string,
   ipoLine?: string,
+  extra?: WecomExtra,
 ): string {
   const weekday = WEEKDAY_CN[new Date(`${dateStr}T12:00:00+08:00`).getDay()] ?? "";
   const title = "# 📢 今日分行简报已生成";
@@ -55,8 +161,20 @@ export function buildWecomMarkdown(
     ? `> **【今日定调】** ${stripHeroPrefix(heroLine)}`
     : "> ⚠️ 今日暂无定调，点击查看完整简报";
   const ipo = ipoLineOf(ipoLine);
+  const markets = marketLinesOf(extra?.stockRecap);
+  const risk = riskLineOf(extra?.riskTopic);
   const link = `[点击查看完整简报 →](${url})`;
-  return [title, dateLine, "", hero, ...(ipo ? ["", ipo] : []), "", link].join("\n");
+  return [
+    title,
+    dateLine,
+    "",
+    hero,
+    ...(markets.length > 0 ? ["", ...markets] : []),
+    ...(risk ? ["", risk] : []),
+    ...(ipo ? ["", ipo] : []),
+    "",
+    link,
+  ].join("\n");
 }
 
 /**
@@ -76,17 +194,22 @@ export function buildWecomText(
   dateStr: string,
   url: string,
   ipoLine?: string,
+  extra?: WecomExtra,
 ): string {
   const weekday = WEEKDAY_CN[new Date(`${dateStr}T12:00:00+08:00`).getDay()] ?? "";
   const title = "📢 今日分行简报已生成";
   const dateLine = `📅 ${dateStr}（${weekday}）`;
   const hero = heroLine ? `【今日定调】${stripHeroPrefix(heroLine)}` : "【今日定调】今日暂无定调，请点击下方链接查看完整简报";
   const ipo = ipoLineOf(ipoLine);
+  const markets = marketLinesOf(extra?.stockRecap);
+  const risk = riskLineOf(extra?.riskTopic);
   return [
     title,
     dateLine,
     "",
     hero,
+    ...(markets.length > 0 ? ["", ...markets] : []),
+    ...(risk ? ["", risk] : []),
     ...(ipo ? ["", ipo] : []),
     "",
     "👉 点击查看完整简报：",
