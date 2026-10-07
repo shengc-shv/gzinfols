@@ -1,0 +1,970 @@
+{
+  "date": "2026-10-08",
+  "hero_line": "今天主要看四个方面：楼市贴息细则落地，按揭受理量待验；外储与黄金双稳，结售汇窗口在开；节后A股量价齐升预期，权益咨询升温；广州文旅消费145亿，消费金融资产待接。",
+  "must_read": [
+    {
+      "title": "央行连续23个月增持黄金",
+      "why": "9月末外储34002.51亿美元、黄金储备连增23个月，客户贵金属与外币资产配置的询价基础在变。",
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-07/doc-iniuknsi4998289.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "房贷贴息细则覆盖已审未发",
+      "why": "多家银行明确贴息操作细节并覆盖已审未发贷款，按揭客户咨询量与受理放款衔接节奏将同步变化。",
+      "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-07/doc-iniuksyh6034892.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "国庆楼市热度攀升",
+      "why": "政策红利集中释放带动假期楼市升温，按揭与开发贷需求阶段性回暖，节后受理量是观察窗口。",
+      "url": "https://news.southcn.com/node_812903b83a/9a7ee398bb.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "布油重回每桶百美元",
+      "why": "布油期价重回百美元、欧洲通胀压力难消，输入型价格因素对国内利率与资产比价的扰动在累积。",
+      "url": "https://www.cnfin.com/yw-lb/detail/20261007/4477721_1.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "十大机构看节后A股量价齐升",
+      "why": "机构一致给出量价齐升判断，客户权益类咨询升温，财富条线的产品供给与投教节奏面临考验。",
+      "url": "https://finance.eastmoney.com/a/202610073888915179.html",
+      "delta": {
+        "state": "followup"
+      }
+    }
+  ],
+  "insights": [
+    {
+      "topic": "广州文旅消费145亿",
+      "tags": [
+        "信贷",
+        "客群"
+      ],
+      "impact": "国庆广州接待游客1605万人次、文旅消费145亿元，文旅商户结算流水与消费信贷需求集中释放，收单与信贷客群活跃度同步抬升。",
+      "segments": [
+        "普惠小微贷款客户"
+      ],
+      "sources": [
+        {
+          "title": "国庆假期广州累计接待游客1605万人次 实现文旅消费总额145亿元",
+          "url": "https://www.stcn.com/article/detail/4207072.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "ETF募集冷热分化",
+      "tags": [
+        "财富"
+      ],
+      "impact": "ETF募集冷热分化反映公募转型，客户对被动产品接受度提升，代销货架结构与投教内容的适配度面临调整。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "从ETF募集冷热分化看公募行业转型",
+          "url": "https://finance.eastmoney.com/a/202610083889016150.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "非农爆冷，外币再平衡",
+      "tags": [
+        "私行",
+        "财富"
+      ],
+      "impact": "非农数据意外爆冷、美联储10月加息概率骤降，美元与美债波动加大，高净值客户外币资产再平衡需求上升。",
+      "segments": [
+        "中高端客群(过亿资产)"
+      ],
+      "sources": [
+        {
+          "title": "假期要闻汇总：非农数据意外“爆冷” 美联储10月加息概率骤降",
+          "url": "https://finance.eastmoney.com/a/202610073888840232.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "杭州新政看房人增加",
+      "tags": [
+        "住房金融"
+      ],
+      "impact": "杭州新政后刚需盘看房人明显增加，房贷贴息与新政叠加对按揭投放节奏有参照，本地同类客群行为或同步变化。",
+      "segments": [
+        "普惠小微贷款客户"
+      ],
+      "sources": [
+        {
+          "title": "实探“新政”下的杭州楼市：“刚需盘”看房人明显增加",
+          "url": "https://www.stcn.com/article/detail/4207077.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "传音控股港股招股",
+      "tags": [
+        "财富",
+        "私行"
+      ],
+      "impact": "传音控股今起招股、基石认购超12.45亿港元、预计10月15日挂牌，港股打新与跨境资金划转需求上升。",
+      "segments": [
+        "中高端客群(过亿资产)"
+      ],
+      "sources": [
+        {
+          "title": "传音控股今起招股，基石认购超12.45亿港元，预计10月15日挂牌",
+          "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-10-07/doc-iniukaap5122799.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    }
+  ],
+  "sections": {
+    "gz_local": [
+      {
+        "url": "https://news.dayoo.com/guangzhou/202610/07/139995_55010363.htm",
+        "title_cn": "国庆假期全市在地消费同比增长4.8%：广州国庆消费“新”意十足",
+        "title_orig": "",
+        "source": "广州日报·大洋网(广州频道)",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "广州在地消费同比增4.8%，信用卡与消费贷客群活跃度提升，提示关注节后消费金融资产投放节奏。",
+        "importance": 3,
+        "rank": 1,
+        "tags": [
+          "客群",
+          "信用卡",
+          "消费贷",
+          "信贷"
+        ],
+        "locale": "gz",
+        "locale_evidence": "国庆假期全市在地消费同比增长4.8%：广州国庆消费“新”意十足"
+      },
+      {
+        "url": "https://www.stcn.com/article/detail/4207072.html",
+        "title_cn": "国庆假期广州累计接待游客1605万人次 实现文旅消费总额145亿元",
+        "title_orig": "",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "广州国庆文旅消费总额145亿元，文旅商户结算与消费信贷需求集中释放，可考虑对文旅类商户加大收单与信贷支持。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "客群"
+        ],
+        "locale": "gz",
+        "locale_evidence": "国庆假期广州累计接待游客1605万人次 实现文旅消费总额145亿元"
+      },
+      {
+        "url": "https://news.dayoo.com/guangzhou/202610/07/139995_55010313.htm",
+        "title_cn": "花城盛景喜迎八方来客！国庆黄金周期间，广州累计接待游客1605万人次",
+        "title_orig": "",
+        "source": "广州日报·大洋网(广州频道)",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "广州国庆接待游客1605万人次，客流高峰带来支付结算与信用卡消费活跃，可关注节后消费贷与分期需求跟进。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "客群"
+        ],
+        "locale": "gz",
+        "locale_evidence": "国庆黄金周期间，广州累计接待游客1605万人次"
+      }
+    ],
+    "biz_insight": [
+      {
+        "url": "https://www.cnfin.com/hg-lb/detail/20261007/4477741_1.html",
+        "title_cn": "中秋国庆文旅消费火爆 长线游出行需求集中释放",
+        "title_orig": "",
+        "source": "新华财经",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "中秋国庆文旅消费火爆、长线游需求集中释放，信用卡境外与出行类交易或走高，提示关注出行场景营销窗口。",
+        "importance": 2,
+        "rank": 1,
+        "tags": [
+          "信用卡",
+          "消费贷",
+          "客群",
+          "信贷"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202610083889016150.html",
+        "title_cn": "从ETF募集冷热分化看公募行业转型",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "10/08",
+        "summary": "ETF募集冷热分化反映公募转型方向，客户对被动产品接受度提升，可考虑优化代销产品货架与投教内容。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "财富",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/jjxw/2026-10-08/doc-iniunezp4426353.shtml",
+        "title_cn": "前三季度科技类基金净值增长居前",
+        "title_orig": "",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "10/08",
+        "summary": "前三季度科技类基金净值增长居前，客户权益类配置偏好或向科技主题集中，可关注相关产品持营与客户陪伴。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "财富",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.stcn.com/article/detail/4207077.html",
+        "title_cn": "实探“新政”下的杭州楼市：“刚需盘”看房人明显增加",
+        "title_orig": "",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "杭州新政后刚需盘看房人明显增加，房贷贴息与新政叠加对按揭投放节奏有参考，可关注本地同类客群变化。",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "住房金融",
+          "市场",
+          "信贷",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.stcn.com/article/detail/4206998.html",
+        "title_cn": "实探成都楼市：国庆看房热度回升 楼盘服务改善甚至提供简餐",
+        "title_orig": "",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "成都国庆看房热度回升，楼盘服务竞争加剧，提示关注按揭受理量与客户到访转化，评估本地楼市热度传导。",
+        "importance": 2,
+        "rank": 5,
+        "tags": [
+          "住房金融",
+          "市场",
+          "信贷",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnfin.com/hg-lb/detail/20261007/4477763_1.html",
+        "title_cn": "新消费派 | “一价全包”国庆升温，“省心”消费拼体验",
+        "title_orig": "",
+        "source": "新华财经",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "“一价全包”式省心消费国庆升温，体验型消费信贷场景值得关注，可考虑围绕打包类消费设计分期权益。",
+        "importance": 2,
+        "rank": 6,
+        "tags": [
+          "消费贷",
+          "客群",
+          "信贷"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://news.crunchbase.com/venture/ai-startup-investors-raising-bar-ipo-farid-leo/",
+        "title_cn": "There Was Never An Easy AI Era, And Investors Are Raising The Bar",
+        "source": "Crunchbase News",
+        "source_type": "media",
+        "tier": "T2",
+        "date": "10/07",
+        "summary": "As AI IPOs bring greater scrutiny, argues guest author Maor Farid, founder and CEO of Leo AI, investors will increasingly prioritize customer spending growth, sustainable margins and deployment efficiency over rapid revenue growth alone.",
+        "importance": 2,
+        "rank": 7,
+        "tags": [],
+        "locale": "national"
+      }
+    ],
+    "policy_market": [
+      {
+        "url": "https://finance.eastmoney.com/a/202610073888917970.html",
+        "title_cn": "10月7日晚间沪深上市公司重大事项公告汇总",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "official",
+        "date": "10/07",
+        "summary": "10月7日晚间沪深上市公司重大事项公告汇总，节后首个交易日信息密集，提示关注客户持仓相关公告解读需求。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202610073888840232.html",
+        "title_cn": "假期要闻汇总：非农数据意外“爆冷” 美联储10月加息概率骤降",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "非农数据意外爆冷、美联储10月加息概率骤降，美元与美债波动或加大，提示关注客户外币资产再平衡需求。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202610073888915179.html",
+        "title_cn": "十大机构论市：节后A股有望“量价齐升”",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "十大机构对节后A股给出量价齐升判断，客户权益类咨询或升温，可提前准备投教与产品说明材料。",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202610083889016918.html",
+        "title_cn": "存量政策提质增效、增量政策精准加码 经济增长动能有望持续积聚",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "date": "10/08",
+        "summary": "存量政策提质增效、增量政策精准加码，经济增长动能预期积聚，可关注对公与零售信贷需求端的传导节奏。",
+        "importance": 2,
+        "rank": 6,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.stcn.com/article/detail/4206826.html",
+        "title_cn": "密集补充资本！一个月内多家险企宣布增资",
+        "title_orig": "",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "一个月内多家险企宣布增资，保险资本补充节奏加快，可关注代销保险产品供给与客户保障类配置机会。",
+        "importance": 2,
+        "rank": 7,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://news.southcn.com/node_812903b83a/9a7ee398bb.shtml",
+        "title_cn": "政策红利集中释放 国庆假期楼市热度攀升",
+        "title_orig": "",
+        "source": "南方网·南方经济",
+        "source_type": "media",
+        "date": "10/06",
+        "summary": "政策红利集中释放带动国庆楼市热度攀升，按揭与开发贷需求或阶段性回暖，可关注节后受理量变化。",
+        "importance": 2,
+        "rank": 8,
+        "tags": [
+          "住房金融",
+          "市场",
+          "信贷",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnfin.com/yw-lb/detail/20261007/4477749_1.html",
+        "title_cn": "新华财经晚报：9月末我国外汇储备为34003亿美元",
+        "title_orig": "",
+        "source": "新华财经",
+        "source_type": "official",
+        "date": "10/07",
+        "summary": "9月末外储34003亿美元，规模总体平稳，对客户结售汇与外币资产配置的含义值得在节后沟通中提示。",
+        "importance": 2,
+        "rank": 9,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.federalreserve.gov/newsevents/pressreleases/monetary20261007a.htm",
+        "title_cn": "美联储FOMC会议纪要（2026年9月15-16日）",
+        "title_orig": "Minutes of the Federal Open Market Committee, September 15-16, 2026",
+        "source": "Federal Reserve Press Releases",
+        "source_type": "official",
+        "date": "10/07",
+        "summary": "美联储9月会议纪要发布，利率路径表述影响美元与美债走势，提示关注客户外币存款与结售汇时点选择。",
+        "importance": 2,
+        "rank": 10,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.stcn.com/article/detail/4207069.html",
+        "title_cn": "财政部部长蓝佛安发声；节后增量资金来袭——假期重要消息纵览",
+        "title_orig": "",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "财政部部长蓝佛安发声、节后增量资金预期升温，财政与资金面信号值得关注，可留意对客户资产配置的传导。",
+        "importance": 2,
+        "rank": 11,
+        "tags": [
+          "市场",
+          "监管合规",
+          "客群"
+        ],
+        "locale": "national"
+      }
+    ],
+    "tech": [],
+    "ipo": [
+      {
+        "url": "https://www.stcn.com/article/detail/4207053.html",
+        "title_cn": "粤芯半导体：网上投资者放弃认购46.9万股",
+        "title_orig": "",
+        "source": "证券时报",
+        "source_type": "media",
+        "date": "10/07",
+        "summary": "粤芯半导体网上投资者放弃认购46.9万股，新股认购情绪分化，提示关注科技类打新客户的资金留存与再配置。",
+        "importance": 2,
+        "rank": 1,
+        "tags": [
+          "科技金融"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-10-07/doc-iniukaap5122799.shtml",
+        "title_cn": "传音控股今起招股，基石认购超12.45亿港元，预计10月15日挂牌",
+        "title_orig": "",
+        "source": "新浪财经·港股频道",
+        "source_type": "official",
+        "date": "10/07",
+        "summary": "传音控股今起招股、基石认购超12.45亿港元，预计10月15日挂牌，港股打新与跨境资金需求值得关注。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      }
+    ]
+  },
+  "risk": {
+    "topic": "房贷贴息操作口径待统一",
+    "evidence": "多家银行继续明确房贷贴息操作细节，覆盖已审未发贷款，各行受理与放款衔接口径存在差异。",
+    "impact": "个贷条线受理与放款衔接若口径不一，易引发客户对贴息资格与生效时点的争议；财富条线在按揭客户交叉销售中亦面临适当性与告知义务的合规压力。",
+    "source": "T2",
+    "sources": [
+      {
+        "title": "多家银行继续明确房贷贴息操作细节：已审未发贷款",
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-07/doc-iniuksyh6034892.shtml"
+      }
+    ],
+    "delta": {
+      "state": "followup"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "道指跌0.66%，纳指跌0.22%，AI主线支撑但大盘承压回落。",
+      "sectors": [
+        "英伟达逼近6万亿美元市值，期权交易员预计月底前触及，AI龙头续创新高。",
+        "Levi Strauss三季度每股收益超预期但营收不及预期，股价走低。",
+        "Levi Strauss因关税退款与假日需求上调全年利润指引，服装板块分化。",
+        "债券收益率处多年最佳性价比，资金对AI牛市持续性存疑，避险配置升温。",
+        "TikTok因未成年人安全功能实验遭纽约州指控，科技监管风险再起。"
+      ],
+      "spoken": "美股三大指数集体收跌，道指跌0.66%，纳指跌0.22%，标普跌0.22%。板块上，英伟达逼近6万亿美元市值，期权市场预计月底前触及，AI龙头仍是主线；Levi Strauss每股收益超预期但营收不及预期，股价走低，不过公司上调全年利润指引。债券性价比处于多年最佳，部分资金对AI牛市持续性存疑。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-08"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51179.87",
+          "changePct": "-0.66%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27538.69",
+          "changePct": "-0.22%"
+        },
+        {
+          "name": "标普500",
+          "value": "7801.77",
+          "changePct": "-0.22%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证涨0.31%，深成指跌0.11%，节后开门红预期与科技主线共振。",
+      "sectors": [
+        "机构称节后A股有望量价齐升，科技主线或重新占优，成长风格受关注。",
+        "DRAM传南亚科计划涨价最高20%，存储芯片迎超级成长周期预期升温。",
+        "央行连续23个月增持黄金，购金力度创新高，贵金属板块获资金关注。",
+        "医药工业十五五规划部署25项重点任务，创新药与医药制造方向受政策提振。",
+        "假期非农爆冷、美联储10月加息概率骤降，外围流动性预期改善利好风险偏好。"
+      ],
+      "spoken": "A股节后首日分化，上证涨0.31%，深成指跌0.11%，创业板跌0.23%。板块上，机构看好节后量价齐升，科技主线重新占优；存储芯片受涨价消息提振，黄金板块因央行连续增持走强，医药受十五五规划政策利好。海外非农爆冷、美联储加息概率骤降，外围环境偏暖。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-08"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3842.20",
+          "changePct": "+0.31%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12887.62",
+          "changePct": "-0.11%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3135.28",
+          "changePct": "-0.23%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24130.50点（-0.62%）；恒生科技收报4194.49点（-0.68%）。",
+      "sectors": [
+        "科网股低迷",
+        "存储概念股走弱"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-07"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.62% 科指跌0.68% 科网股低迷 存储概念股走弱",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-07/doc-iniuksyf4997287.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24130.50",
+          "changePct": "-0.62%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4194.49",
+          "changePct": "-0.68%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-07",
+    "marketStatus": {
+      "reportDate": "2026-10-08",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-09-30",
+          "reason": "数据为 9月30日（距今 8 天）"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-07"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-07"
+        }
+      },
+      "allStale": false,
+      "note": "A股今日无隔夜行情，其余市场为最新收盘",
+      "spokenNote": "A股今日无隔夜行情；港股为 10月7日 周三 收盘；美股为 10月7日 周三 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888840232.html",
+      "title_cn": "假期要闻汇总：非农数据意外“爆冷”美联储10月加息概率骤降",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "假期要闻汇总显示，美国非农就业数据意外低于预期，市场对美联储10月加息的概率预期大幅下降。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "美联储",
+        "非农数据"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888917970.html",
+      "title_cn": "10月7日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "东方财富汇总了10月7日晚间沪深上市公司发布的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888841036.html",
+      "title_cn": "油价V形反转！局势升温200多人伤亡！IMF发出警告！纳指创新高",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "油价出现V形反转，某地区局势升温造成200多人伤亡，IMF发出警告，同时纳斯达克指数创下新高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "地缘政治",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-07/doc-iniuksyf4997287.shtml",
+      "title_cn": "港股收评：恒指跌0.62% 科指跌0.68% 科网股低迷 存储概念股走弱",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "港股收评显示，恒指跌0.62%，恒生科技指数跌0.68%，科网股表现低迷，存储概念股走弱。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "科网股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/relnews/cn/2026-10-07/doc-iniukaap5107317.shtml",
+      "title_cn": "港股反弹！基金经理：估值洼地已在眼前",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "港股出现反弹，基金经理表示估值洼地已在眼前。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "估值",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-07/doc-iniukhkm5047383.shtml",
+      "title_cn": "港股盘初跌幅扩大，恒生科技指数跌超1%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "港股盘初跌幅扩大，恒生科技指数跌超1%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/05/nvidias-6-trillion-milestone-looms-heres-when-options-traders-see-it-happening.html",
+      "title_cn": "Nvidia's $6 trillion milestone looms. Here's when options traders see it happening",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "英伟达市值逼近6万亿美元里程碑，期权交易员预测了实现时间。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "英伟达",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-levi-strauss-tops-eps-in-q3-2026-shares-fall-on-revenue-miss-93CH-4937645",
+      "title_cn": "Earnings call transcript: Levi Strauss tops EPS in Q3 2026, shares fall on revenue miss",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "Levi Strauss第三季度每股收益超预期，但营收不及预期，股价下跌。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "零售"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/ajb-investment-fund-ii-lp-buys-41-of-jewett-cameron-trading-co-shares-93CH-4937629",
+      "title_cn": "AJB investment fund II, LP buys $41 of Jewett Cameron Trading Co shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "AJB投资基金II LP买入价值41美元的Jewett Cameron Trading Co股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ],
+  "redchipPanel": {
+    "entries": [],
+    "capturedAt": "2026-10-08T06:26:38+08:00",
+    "capturedSource": "snapshot",
+    "ledgerCount": 38,
+    "lastChangedAt": "2026-10-03T06:34:10+08:00",
+    "ledgerByMarket": {
+      "hk": 38
+    },
+    "freshnessNote": "⚠️ 本期未取到美股数据",
+    "gdAdjacent": [
+      {
+        "leadId": "108910",
+        "nameCn": "ACROBIOSYSTEMS CO., LTD",
+        "nameEn": "",
+        "submitDate": "2026-09-30",
+        "domicile": "中国(境内)",
+        "gdCityHits": 5,
+        "market": "hk",
+        "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108910/documents/sehk26093002652.pdf"
+      }
+    ]
+  },
+  "sourceStats": [
+    {
+      "sourceId": "cnr-gd",
+      "inflow": 58,
+      "kept": 3,
+      "avgScore": 27
+    },
+    {
+      "sourceId": "cnfin",
+      "inflow": 46,
+      "kept": 19,
+      "avgScore": 26
+    },
+    {
+      "sourceId": "sina-bank",
+      "inflow": 45,
+      "kept": 1,
+      "avgScore": 74
+    },
+    {
+      "sourceId": "guancha",
+      "inflow": 44,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "southcn",
+      "inflow": 33,
+      "kept": 4,
+      "avgScore": 34
+    },
+    {
+      "sourceId": "cnbc-top",
+      "inflow": 30,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "stcn",
+      "inflow": 29,
+      "kept": 18,
+      "avgScore": 31
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "inflow": 29,
+      "kept": 12,
+      "avgScore": 33
+    },
+    {
+      "sourceId": "sina-hk-stock",
+      "inflow": 28,
+      "kept": 11,
+      "avgScore": 56
+    },
+    {
+      "sourceId": "cctv-finance",
+      "inflow": 25,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "sina-money",
+      "inflow": 20,
+      "kept": 2,
+      "avgScore": 72
+    },
+    {
+      "sourceId": "fed-press",
+      "inflow": 20,
+      "kept": 1,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "inflow": 20,
+      "kept": 19,
+      "avgScore": 34
+    },
+    {
+      "sourceId": "sina-a-stock",
+      "inflow": 12,
+      "kept": 5,
+      "avgScore": 61
+    },
+    {
+      "sourceId": "investing-news",
+      "inflow": 10,
+      "kept": 5,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "crunchbase-news",
+      "inflow": 10,
+      "kept": 3,
+      "avgScore": 34
+    },
+    {
+      "sourceId": "govcn-policy",
+      "inflow": 8,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "21jingji-finance",
+      "inflow": 7,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "arxiv-fintech",
+      "inflow": 7,
+      "kept": 7,
+      "avgScore": 21
+    }
+  ],
+  "heroDelta": {
+    "state": "followup"
+  },
+  "productCoverage": [
+    {
+      "line": "按揭",
+      "count": 3,
+      "examples": [
+        "杭州新政看房人增加",
+        "实探“新政”下的杭州楼市：“刚需盘”看房人明显增加"
+      ]
+    },
+    {
+      "line": "信用卡",
+      "count": 2,
+      "examples": [
+        "中秋国庆文旅消费火爆",
+        "新消费派"
+      ]
+    },
+    {
+      "line": "代发",
+      "count": 0,
+      "examples": []
+    }
+  ]
+}

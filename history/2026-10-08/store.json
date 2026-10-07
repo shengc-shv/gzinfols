@@ -1,0 +1,862 @@
+{
+  "date": "2026-10-08",
+  "updatedAt": "2026-10-07T22:29:28.027Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：楼市贴息细则落地，按揭受理量待验；外储与黄金双稳，结售汇窗口在开；节后A股量价齐升预期，权益咨询升温；广州文旅消费145亿，消费金融资产待接。",
+    "spoken_hero": "今天主要看四个方面：房贷贴息细则落地，已审未发贷款也覆盖；外储三万四千亿美元、央行连续二十三个月增持黄金，结售汇窗口在开；节后A股被看多，客户权益咨询升温；广州国庆文旅消费一百四十五亿，消费金融资产要接得住。",
+    "must_read": [
+      {
+        "title": "央行连续23个月增持黄金",
+        "why": "9月末外储34002.51亿美元、黄金储备连增23个月，客户贵金属与外币资产配置的询价基础在变。",
+        "url": "https://finance.sina.com.cn/jjxw/2026-10-07/doc-iniuknsi4998289.shtml"
+      },
+      {
+        "title": "房贷贴息细则覆盖已审未发",
+        "why": "多家银行明确贴息操作细节并覆盖已审未发贷款，按揭客户咨询量与受理放款衔接节奏将同步变化。",
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-07/doc-iniuksyh6034892.shtml"
+      },
+      {
+        "title": "国庆楼市热度攀升",
+        "why": "政策红利集中释放带动假期楼市升温，按揭与开发贷需求阶段性回暖，节后受理量是观察窗口。",
+        "url": "https://news.southcn.com/node_812903b83a/9a7ee398bb.shtml"
+      },
+      {
+        "title": "布油重回每桶百美元",
+        "why": "布油期价重回百美元、欧洲通胀压力难消，输入型价格因素对国内利率与资产比价的扰动在累积。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261007/4477721_1.html"
+      },
+      {
+        "title": "十大机构看节后A股量价齐升",
+        "why": "机构一致给出量价齐升判断，客户权益类咨询升温，财富条线的产品供给与投教节奏面临考验。",
+        "url": "https://finance.eastmoney.com/a/202610073888915179.html"
+      }
+    ],
+    "spoken_must_read": "央行连续23个月增持黄金。9月末外储34002.51亿美元、黄金储备连增23个月，客户贵金属与外币资产配置的询价基础在变。其次，房贷贴息细则覆盖已审未发。多家银行明确贴息操作细节并覆盖已审未发贷款，按揭客户咨询量与受理放款衔接节奏将同步变化。此外，国庆楼市热度攀升。政策红利集中释放带动假期楼市升温，按揭与开发贷需求阶段性回暖，节后受理量是观察窗口。还有，布油重回每桶百美元。布油期价重回百美元、欧洲通胀压力难消，输入型价格因素对国内利率与资产比价的扰动在累积。另外，十大机构看节后A股量价齐升。机构一致给出量价齐升判断，客户权益类咨询升温，财富条线的产品供给与投教节奏面临考验。",
+    "insights": [
+      {
+        "topic": "广州文旅消费145亿",
+        "impact": "国庆广州接待游客1605万人次、文旅消费145亿元，文旅商户结算流水与消费信贷需求集中释放，收单与信贷客群活跃度同步抬升。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "国庆假期广州累计接待游客1605万人次 实现文旅消费总额145亿元",
+            "url": "https://www.stcn.com/article/detail/4207072.html"
+          }
+        ]
+      },
+      {
+        "topic": "ETF募集冷热分化",
+        "impact": "ETF募集冷热分化反映公募转型，客户对被动产品接受度提升，代销货架结构与投教内容的适配度面临调整。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "从ETF募集冷热分化看公募行业转型",
+            "url": "https://finance.eastmoney.com/a/202610083889016150.html"
+          }
+        ]
+      },
+      {
+        "topic": "非农爆冷，外币再平衡",
+        "impact": "非农数据意外爆冷、美联储10月加息概率骤降，美元与美债波动加大，高净值客户外币资产再平衡需求上升。",
+        "tag": [
+          "私行",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "假期要闻汇总：非农数据意外“爆冷” 美联储10月加息概率骤降",
+            "url": "https://finance.eastmoney.com/a/202610073888840232.html"
+          }
+        ]
+      },
+      {
+        "topic": "杭州新政看房人增加",
+        "impact": "杭州新政后刚需盘看房人明显增加，房贷贴息与新政叠加对按揭投放节奏有参照，本地同类客群行为或同步变化。",
+        "tag": [
+          "住房金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "实探“新政”下的杭州楼市：“刚需盘”看房人明显增加",
+            "url": "https://www.stcn.com/article/detail/4207077.html"
+          }
+        ]
+      },
+      {
+        "topic": "传音控股港股招股",
+        "impact": "传音控股今起招股、基石认购超12.45亿港元、预计10月15日挂牌，港股打新与跨境资金划转需求上升。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "传音控股今起招股，基石认购超12.45亿港元，预计10月15日挂牌",
+            "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-10-07/doc-iniukaap5122799.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，节后A股被机构看多、科技类基金净值领先，ETF募集冷热分化，客户权益咨询和被动产品接受度都在变。高端客户方面，央行连续二十三个月增持黄金、外储三万四千亿美元，贵金属与外币资产的配置咨询明显增多。普惠小微方面，广州国庆文旅消费一百四十五亿、在地消费同比增四点八，文旅商户和出行场景的结算与信贷需求集中释放。本地消费场景方面，一价全包式省心消费升温，信用卡与分期在打包类消费上的活跃度走高。",
+    "risk": {
+      "topic": "房贷贴息操作口径待统一",
+      "evidence": "多家银行继续明确房贷贴息操作细节，覆盖已审未发贷款，各行受理与放款衔接口径存在差异。",
+      "impact": "个贷条线受理与放款衔接若口径不一，易引发客户对贴息资格与生效时点的争议；财富条线在按揭客户交叉销售中亦面临适当性与告知义务的合规压力。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "多家银行继续明确房贷贴息操作细节：已审未发贷款",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-07/doc-iniuksyh6034892.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：房贷贴息操作口径待统一，个贷条线受理与放款衔接若口径不一，易引发客户对贴息资格与生效时点的争议；财富条线在按揭客户交叉销售中亦面临适当性与告知义务的合规压力。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "道指跌0.66%，纳指跌0.22%，AI主线支撑但大盘承压回落。",
+      "sectors": [
+        "英伟达逼近6万亿美元市值，期权交易员预计月底前触及，AI龙头续创新高。",
+        "Levi Strauss三季度每股收益超预期但营收不及预期，股价走低。",
+        "Levi Strauss因关税退款与假日需求上调全年利润指引，服装板块分化。",
+        "债券收益率处多年最佳性价比，资金对AI牛市持续性存疑，避险配置升温。",
+        "TikTok因未成年人安全功能实验遭纽约州指控，科技监管风险再起。"
+      ],
+      "spoken": "美股三大指数集体收跌，道指跌0.66%，纳指跌0.22%，标普跌0.22%。板块上，英伟达逼近6万亿美元市值，期权市场预计月底前触及，AI龙头仍是主线；Levi Strauss每股收益超预期但营收不及预期，股价走低，不过公司上调全年利润指引。债券性价比处于多年最佳，部分资金对AI牛市持续性存疑。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-08"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51179.87",
+          "changePct": "-0.66%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27538.69",
+          "changePct": "-0.22%"
+        },
+        {
+          "name": "标普500",
+          "value": "7801.77",
+          "changePct": "-0.22%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证涨0.31%，深成指跌0.11%，节后开门红预期与科技主线共振。",
+      "sectors": [
+        "机构称节后A股有望量价齐升，科技主线或重新占优，成长风格受关注。",
+        "DRAM传南亚科计划涨价最高20%，存储芯片迎超级成长周期预期升温。",
+        "央行连续23个月增持黄金，购金力度创新高，贵金属板块获资金关注。",
+        "医药工业十五五规划部署25项重点任务，创新药与医药制造方向受政策提振。",
+        "假期非农爆冷、美联储10月加息概率骤降，外围流动性预期改善利好风险偏好。"
+      ],
+      "spoken": "A股节后首日分化，上证涨0.31%，深成指跌0.11%，创业板跌0.23%。板块上，机构看好节后量价齐升，科技主线重新占优；存储芯片受涨价消息提振，黄金板块因央行连续增持走强，医药受十五五规划政策利好。海外非农爆冷、美联储加息概率骤降，外围环境偏暖。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-08"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3842.20",
+          "changePct": "+0.31%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12887.62",
+          "changePct": "-0.11%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3135.28",
+          "changePct": "-0.23%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24130.50点（-0.62%）；恒生科技收报4194.49点（-0.68%）。",
+      "sectors": [
+        "科网股低迷",
+        "存储概念股走弱"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-07"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.62% 科指跌0.68% 科网股低迷 存储概念股走弱",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-07/doc-iniuksyf4997287.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24130.50",
+          "changePct": "-0.62%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4194.49",
+          "changePct": "-0.68%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-07",
+    "marketStatus": {
+      "reportDate": "2026-10-08",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-09-30",
+          "reason": "数据为 9月30日（距今 8 天）"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-07"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-07"
+        }
+      },
+      "allStale": false,
+      "note": "A股今日无隔夜行情，其余市场为最新收盘",
+      "spokenNote": "A股今日无隔夜行情；港股为 10月7日 周三 收盘；美股为 10月7日 周三 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888840232.html",
+      "title_cn": "假期要闻汇总：非农数据意外“爆冷”美联储10月加息概率骤降",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "假期要闻汇总显示，美国非农就业数据意外低于预期，市场对美联储10月加息的概率预期大幅下降。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "美联储",
+        "非农数据"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888917970.html",
+      "title_cn": "10月7日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "东方财富汇总了10月7日晚间沪深上市公司发布的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888841036.html",
+      "title_cn": "油价V形反转！局势升温200多人伤亡！IMF发出警告！纳指创新高",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "油价出现V形反转，某地区局势升温造成200多人伤亡，IMF发出警告，同时纳斯达克指数创下新高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "地缘政治",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888895471.html",
+      "title_cn": "日股领涨美股屡创新高！假期大类资产表现一览",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "假期期间大类资产表现显示，日股领涨，美股多次创下新高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "全球市场",
+        "大类资产"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888915179.html",
+      "title_cn": "十大机构论市：节后A股有望“量价齐升”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "十大机构发布市场观点，认为节后A股有望实现量价齐升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888851580.html",
+      "title_cn": "购金力度创新高！央行再出手连续23个月增持黄金",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "央行连续第23个月增持黄金，购金力度创下新高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "央行",
+        "黄金",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888845081.html",
+      "title_cn": "DRAM迎超级成长周期传南亚科计划涨价涨幅最高达20%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "DRAM行业迎来超级成长周期，传南亚科计划涨价，涨幅最高达20%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "存储",
+        "涨价"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888845424.html",
+      "title_cn": "中国电信回应郑季衍举报：与事实不符今年8月已与其解除劳动关系",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "中国电信回应郑季衍举报称与事实不符，并表示已于今年8月与其解除劳动关系。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "公司",
+        "中国电信"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888848892.html",
+      "title_cn": "纳指、英伟达连创新高！A股节后怎么走？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "纳斯达克指数和英伟达股价连创新高，市场关注A股节后走势。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "A股",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610073888844485.html",
+      "title_cn": "医药工业“十五五”规划部署25项重点任务释放了哪些信号？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "医药工业“十五五”规划部署25项重点任务，释放行业发展信号。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889028211.html",
+      "title_cn": "机构：科技主线或重新占优",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "机构观点认为科技主线可能重新占据市场优势。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "科技",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889026827.html",
+      "title_cn": "跃升更高能级冲刺一流投行",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "某机构提出跃升更高能级、冲刺一流投行的目标。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "券商",
+        "机构"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-07/doc-iniuksyf4997287.shtml",
+      "title_cn": "港股收评：恒指跌0.62% 科指跌0.68% 科网股低迷 存储概念股走弱",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "港股收评显示，恒指跌0.62%，恒生科技指数跌0.68%，科网股表现低迷，存储概念股走弱。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "科网股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/relnews/cn/2026-10-07/doc-iniukaap5107317.shtml",
+      "title_cn": "港股反弹！基金经理：估值洼地已在眼前",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "港股出现反弹，基金经理表示估值洼地已在眼前。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "估值",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-10-07/doc-iniuknsp4832026.shtml",
+      "title_cn": "香港投资推广署：“左手开店、右手上市” 餐饮品牌“借港出海” 加速 香港“橱窗效应” 重塑估值逻辑",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "香港投资推广署表示，餐饮品牌借港出海加速，香港橱窗效应重塑估值逻辑。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "香港经济",
+        "餐饮"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-07/doc-iniukhkm5047383.shtml",
+      "title_cn": "港股盘初跌幅扩大，恒生科技指数跌超1%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "港股盘初跌幅扩大，恒生科技指数跌超1%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-07/doc-iniukaam8322740.shtml",
+      "title_cn": "香港继续获评为全球最自由经济体",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "香港继续获评为全球最自由经济体。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "香港经济",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-10-07/doc-iniukaap5122799.shtml",
+      "title_cn": "传音控股今起招股，获GIC、易方达、比亚迪等基石认购超12.45亿港元，预计10月15日挂牌上市",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "传音控股今起招股，获GIC、易方达、比亚迪等基石认购超12.45亿港元，预计10月15日挂牌上市。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "传音控股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-07/doc-iniukaam8355873.shtml",
+      "title_cn": "香港财政司司长表示经济中长期向上发展的动能与趋势依然坚挺",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "香港财政司司长表示，经济中长期向上发展的动能与趋势依然坚挺。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "香港经济",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-07/doc-iniuknsi5037045.shtml",
+      "title_cn": "富瑞：新秀丽维持“买入”评级 目标价上调至19.9港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "富瑞维持新秀丽“买入”评级，目标价上调至19.9港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "新秀丽"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-07/doc-iniukxhe5922936.shtml",
+      "title_cn": "大和：重申泉峰控股(02285)“买入”评级 目标价40港元 再招聘4名创科及Milwaukee旧将",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "大和重申泉峰控股“买入”评级，目标价40港元，并再招聘4名创科及Milwaukee旧将。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "泉峰控股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-07/doc-iniukxhe5913357.shtml",
+      "title_cn": "花旗：重申大族数控(03200)“买入”评级 目标价189港元 PCB设备同业收入增长加快",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "花旗重申大族数控“买入”评级，目标价189港元，指出PCB设备同业收入增长加快。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "PCB"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-07/doc-iniukxhi4639327.shtml",
+      "title_cn": "小摩：维持恒瑞医药(01276)“增持”评级 目标价65港元 EADV数据反映公司加强免疫学业务发展",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "小摩维持恒瑞医药“增持”评级，目标价65港元，EADV数据反映公司加强免疫学业务发展。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-07/doc-iniuksym4750054.shtml",
+      "title_cn": "小摩：内险第三季度疲弱业绩大致被市场消化 建议趁弱增持中国平安(02318)及中国人寿",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "小摩认为内险第三季度疲弱业绩大致被市场消化，建议趁弱增持中国平安及中国人寿。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "保险"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/06/unsure-how-long-this-ai-bull-has-bonds-now-offer-a-cushion-at-the-best-values-in-years.html",
+      "title_cn": "Unsure how long this AI bull has? Bonds now offer a cushion at the best values in years",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "CNBC投资栏目讨论AI牛市持续时间的不确定性，并指出债券目前提供多年最佳价值缓冲。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "债券"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/05/nvidias-6-trillion-milestone-looms-heres-when-options-traders-see-it-happening.html",
+      "title_cn": "Nvidia's $6 trillion milestone looms. Here's when options traders see it happening",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/05",
+      "summary": "英伟达市值逼近6万亿美元里程碑，期权交易员预测了实现时间。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "英伟达",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/tiktok-gave-teens-children-placebo-safety-feature-in-experiment-new-york-alleges-4937622",
+      "title_cn": "TikTok gave teens, children placebo safety feature in experiment, New York alleges",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "纽约指控TikTok在实验中向青少年和儿童提供安慰剂安全功能。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "TikTok",
+        "监管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/tropical-stormisaias-forecast-to-hit-us-gulf-coast-as-hurricane-early-saturday-4937254",
+      "title_cn": "Tropical Storm Isaias forecast to hit US Gulf coast as hurricane early Saturday",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "热带风暴Isaias预计周六早些时候以飓风形式袭击美国墨西哥湾沿岸。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "天气",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/ptc-therapeutics-clo-mark-boulding-sells-132790-in-shares-93CH-4937646",
+      "title_cn": "PTC Therapeutics CLO Mark Boulding sells $132,790 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "PTC Therapeutics首席法务官Mark Boulding出售价值132,790美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-levi-strauss-tops-eps-in-q3-2026-shares-fall-on-revenue-miss-93CH-4937645",
+      "title_cn": "Earnings call transcript: Levi Strauss tops EPS in Q3 2026, shares fall on revenue miss",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "Levi Strauss第三季度每股收益超预期，但营收不及预期，股价下跌。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "零售"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/american-eagle-director-cary-mcmillan-sells-65829-of-aeo-stock-93CH-4937644",
+      "title_cn": "American Eagle director Cary McMillan sells $65,829 of AEO stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "American Eagle董事Cary McMillan出售价值65,829美元的AEO股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "零售"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/levi-strauss-lifts-annual-profit-outlook-on-tariff-refunds-holiday-demand-4937465",
+      "title_cn": "Levi Strauss lifts annual profit outlook on tariff refunds, holiday demand",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "Levi Strauss因关税退款和假日需求上调年度利润展望。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "零售"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/hayward-holdings-ceo-kevin-holleran-sells-620045-in-common-stock-93CH-4937631",
+      "title_cn": "Hayward Holdings CEO Kevin Holleran sells $620,045 in common stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "Hayward Holdings CEO Kevin Holleran出售价值620,045美元的普通股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/generac-home-president-taffe-sells-119184-in-generac-stock-93CH-4937630",
+      "title_cn": "Generac home president Taffe sells $119,184 in Generac stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "Generac家居部门总裁Taffe出售价值119,184美元的Generac股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/ajb-investment-fund-ii-lp-buys-41-of-jewett-cameron-trading-co-shares-93CH-4937629",
+      "title_cn": "AJB investment fund II, LP buys $41 of Jewett Cameron Trading Co shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "AJB投资基金II LP买入价值41美元的Jewett Cameron Trading Co股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/clean-air-metals-plans-private-placement-of-flowthrough-shares-93CH-4937628",
+      "title_cn": "Clean Air Metals plans private placement of flow-through shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/07",
+      "summary": "Clean Air Metals计划进行流转股份的私募配售。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "融资",
+        "矿业"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
