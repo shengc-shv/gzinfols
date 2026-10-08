@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-08",
+  "updatedAt": "2026-10-09",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -7247,8 +7247,138 @@
     }
   },
   "today": {
-    "date": "2026-10-08",
-    "entries": []
+    "date": "2026-10-09",
+    "entries": [
+      {
+        "date": "2026-10-09",
+        "section": "must_read",
+        "title": "央行定调货币政策",
+        "text": "央行定调货币政策 农行500亿二级资本债利率创新低，负债成本下行趋势明确，零售存款定价与理财收益率的联动关系生变。",
+        "facts": [
+          "@央行"
+        ],
+        "broadcastAt": "2026-10-09T06:55:42+08:00",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_10_08_903516.shtml",
+        "score": 79,
+        "novelty": 0.2826923076923077,
+        "angle": "同业动作"
+      },
+      {
+        "date": "2026-10-09",
+        "section": "must_read",
+        "title": "5年期注资特别国债利率1.37%",
+        "text": "5年期注资特别国债利率1.37% 低利率环境确认，尚有1500亿元待下月发行，债券配置与承销机会同步显现，机构资金配置需求上升。",
+        "facts": [
+          "#5年",
+          "#1.37%",
+          "#1500亿元"
+        ],
+        "broadcastAt": "2026-10-09T06:55:42+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261008/4478213_1.html",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-09",
+        "section": "must_read",
+        "title": "壁仞科技配股融资逾40亿港元",
+        "text": "壁仞科技配股融资逾40亿港元 科技企业港股融资活跃，新一代产品进入流片后验证，科创类企业主的财富管理与股权激励需求上升。",
+        "facts": [],
+        "broadcastAt": "2026-10-09T06:55:42+08:00",
+        "url": "https://www.stcn.com/article/detail/4208943.html",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-09",
+        "section": "must_read",
+        "title": "贸易优势不靠汇率贬值",
+        "text": "贸易优势不靠汇率贬值 政策立场明确，出口企业汇率预期趋稳，结汇节奏与套保比例的选择空间扩大。",
+        "facts": [],
+        "broadcastAt": "2026-10-09T06:55:42+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261009/4478309_1.html",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-09",
+        "section": "insights",
+        "title": "存款利率进入1%时代",
+        "text": "存款利率进入1%时代 客户资金搬家意愿上升，理财与保险的承接需求增加，零售AUM结构从存款向净值型产品迁移的节奏加快。",
+        "facts": [
+          "#1%"
+        ],
+        "broadcastAt": "2026-10-09T06:55:42+08:00",
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-08/doc-iniuphpf7622686.shtml",
+        "novelty": 0.7730769230769231,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-09",
+        "section": "insights",
+        "title": "9月集合信托发行回暖",
+        "text": "9月集合信托发行回暖 基建与证券市场为主力，信托代销与高净值客户资产配置的联动机会增多，产品货架丰富度提升。",
+        "facts": [
+          "#9月"
+        ],
+        "broadcastAt": "2026-10-09T06:55:42+08:00",
+        "url": "https://finance.sina.com.cn/trust/2026-10-08/doc-iniupnvc7547108.shtml",
+        "novelty": 0.7604166666666667,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-09",
+        "section": "insights",
+        "title": "广州商贸经济区9.86平方公里",
+        "text": "广州商贸经济区9.86平方公里 片区商户与专业市场客群集中，收单、结算及小微融资需求上升，商贸类客群获客场景明确。",
+        "facts": [
+          "@广州"
+        ],
+        "broadcastAt": "2026-10-09T06:55:42+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/08/139995_55010743.htm",
+        "novelty": 0.2916666666666667,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-10-09",
+        "section": "insights",
+        "title": "广州国际商业港全球招商",
+        "text": "广州国际商业港全球招商 商贸企业集聚带来开户、结算与融资需求，招商名单中的本地商户资源成为批量获客入口。",
+        "facts": [
+          "@广州"
+        ],
+        "broadcastAt": "2026-10-09T06:55:42+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/08/139995_55010633.htm",
+        "novelty": 0.2891304347826087,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-09",
+        "section": "insights",
+        "title": "国庆广州消费供需两旺",
+        "text": "国庆广州消费供需两旺 餐饮零售商户流水回暖，节后信用卡分期与消费贷的客户触达窗口打开，消费类客群活跃度提升。",
+        "facts": [
+          "@广州"
+        ],
+        "broadcastAt": "2026-10-09T06:55:42+08:00",
+        "url": "https://www.cnr.cn/gd/guangdonglueying/20261008/t20261008_527835901.shtml",
+        "novelty": 0.3202127659574468,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-09",
+        "section": "insights",
+        "title": "白云机场口岸客流增17.9%",
+        "text": "白云机场口岸客流增17.9% 跨境出行客群活跃，结售汇与外币兑换需求上升，跨境消费与境外用卡场景的交易量增加。",
+        "facts": [
+          "#17.9%"
+        ],
+        "broadcastAt": "2026-10-09T06:55:42+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/08/139995_55010615.htm",
+        "novelty": 1
+      }
+    ],
+    "runId": "37856396817"
   },
   "deliveries": [
     {
