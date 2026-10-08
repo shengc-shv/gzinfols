@@ -1,0 +1,851 @@
+{
+  "date": "2026-10-09",
+  "updatedAt": "2026-10-08T22:57:18.529Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：汇率立场定调，不预设目标水平；美联储纪要偏鹰，年内或再加息；楼市银十开局良好，按揭投放回暖；广州商贸新增长极落地，9.86平方公里招商启动。",
+    "spoken_hero": "今天主要看四个方面：央行明确不预设汇率目标，双向波动预期强化；美联储纪要偏鹰，年内可能再加息一次；楼市银十开局良好，按揭投放回暖；广州9.86平方公里商贸经济区启动招商。",
+    "must_read": [
+      {
+        "title": "央行定调货币政策",
+        "why": "农行500亿二级资本债利率创新低，负债成本下行趋势明确，零售存款定价与理财收益率的联动关系生变。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_10_08_903516.shtml"
+      },
+      {
+        "title": "5年期注资特别国债利率1.37%",
+        "why": "低利率环境确认，尚有1500亿元待下月发行，债券配置与承销机会同步显现，机构资金配置需求上升。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261008/4478213_1.html"
+      },
+      {
+        "title": "壁仞科技配股融资逾40亿港元",
+        "why": "科技企业港股融资活跃，新一代产品进入流片后验证，科创类企业主的财富管理与股权激励需求上升。",
+        "url": "https://www.stcn.com/article/detail/4208943.html"
+      },
+      {
+        "title": "贸易优势不靠汇率贬值",
+        "why": "政策立场明确，出口企业汇率预期趋稳，结汇节奏与套保比例的选择空间扩大。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261009/4478309_1.html"
+      }
+    ],
+    "spoken_must_read": "央行定调货币政策。农行500亿二级资本债利率创新低，负债成本下行趋势明确，零售存款定价与理财收益率的联动关系生变。其次，5年期注资特别国债利率1.37%。低利率环境确认，尚有1500亿元待下月发行，债券配置与承销机会同步显现，机构资金配置需求上升。此外，壁仞科技配股融资逾40亿港元。科技企业港股融资活跃，新一代产品进入流片后验证，科创类企业主的财富管理与股权激励需求上升。还有，贸易优势不靠汇率贬值。政策立场明确，出口企业汇率预期趋稳，结汇节奏与套保比例的选择空间扩大。",
+    "insights": [
+      {
+        "topic": "存款利率进入1%时代",
+        "impact": "客户资金搬家意愿上升，理财与保险的承接需求增加，零售AUM结构从存款向净值型产品迁移的节奏加快。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "存款利率进入“1%时代”，普通人的钱往哪搬",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-08/doc-iniuphpf7622686.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "9月集合信托发行回暖",
+        "impact": "基建与证券市场为主力，信托代销与高净值客户资产配置的联动机会增多，产品货架丰富度提升。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "零售AUM",
+          "中高端客群(过亿资产)"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "9月集合信托市场月报：发行回暖 基础建设与证券市场挑大梁",
+            "url": "https://finance.sina.com.cn/trust/2026-10-08/doc-iniupnvc7547108.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "广州商贸经济区9.86平方公里",
+        "impact": "片区商户与专业市场客群集中，收单、结算及小微融资需求上升，商贸类客群获客场景明确。",
+        "tag": [
+          "信贷",
+          "政银合作"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "9.86平方公里，广州聚力打造商贸经济全新增长极",
+            "url": "https://news.dayoo.com/guangzhou/202610/08/139995_55010743.htm"
+          }
+        ]
+      },
+      {
+        "topic": "广州国际商业港全球招商",
+        "impact": "商贸企业集聚带来开户、结算与融资需求，招商名单中的本地商户资源成为批量获客入口。",
+        "tag": [
+          "政银合作",
+          "客群"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "千年商都 广贸天下：广州国际商业港全球招商发布活动高光启幕！",
+            "url": "https://news.dayoo.com/guangzhou/202610/08/139995_55010633.htm"
+          }
+        ]
+      },
+      {
+        "topic": "国庆广州消费供需两旺",
+        "impact": "餐饮零售商户流水回暖，节后信用卡分期与消费贷的客户触达窗口打开，消费类客群活跃度提升。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "国庆假期广州消费市场供需两旺",
+            "url": "https://www.cnr.cn/gd/guangdonglueying/20261008/t20261008_527835901.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "白云机场口岸客流增17.9%",
+        "impact": "跨境出行客群活跃，结售汇与外币兑换需求上升，跨境消费与境外用卡场景的交易量增加。",
+        "tag": [
+          "客群",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "同比增长超17.9%！国庆假期白云机场口岸出入境客流持续高位运行",
+            "url": "https://news.dayoo.com/guangzhou/202610/08/139995_55010615.htm"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，存款利率进入1%时代，客户资金搬家意愿上升，理财与保险的承接需求明显增加；9月集合信托发行回暖，基建与证券市场挑大梁。高端客户方面，黄金盘中跌破4100美元但实物购金热度不减，贵金属咨询量上升；信托代销与高净值资产配置联动机会增多。普惠小微方面，广州9.86平方公里商贸经济区规划落地，专业市场商户集中，收单结算与小微融资需求上升；农信系统改革推进，区域同业格局变化影响小微客群竞争。本地消费场景方面，国庆广州消费供需两旺，白云机场口岸出入境客流同比增长超17.9%，跨境出行客群结售汇与外币兑换需求活跃。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌1.25%领跌，AI概念降温叠加债券吸引力上升。",
+      "sectors": [
+        "纳指跌1.25%、标普跌0.47%，道指微涨0.10%，科技股承压分化。",
+        "英伟达支持的Firmus取消50亿美元IPO，AI数据中心融资遇冷。",
+        "星巴克拒评Chipotle收购报道，称专注转型，消费并购传闻扰动。",
+        "Pharvaris HAE药物研究显示症状缓解更快，生物医药个股异动。"
+      ],
+      "spoken": "美股收盘涨跌互现，纳指跌1.25%，标普跌0.47%，道指微涨0.10%。科技股和AI概念承压，英伟达支持的Firmus取消50亿美元IPO，显示AI数据中心融资降温。星巴克拒评被Chipotle收购报道，称专注转型。生物医药方面，Pharvaris的HAE药物研究显示症状缓解更快。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-09"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51231.64",
+          "changePct": "+0.10%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27193.34",
+          "changePct": "-1.25%"
+        },
+        {
+          "name": "标普500",
+          "value": "7765.36",
+          "changePct": "-0.47%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "创业板指冲高回落跌超3%。",
+      "sectors": [
+        "CPO概念股集体调整"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-09"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3811.90",
+          "changePct": "-0.79%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12620.90",
+          "changePct": "-2.07%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3036.66",
+          "changePct": "-3.15%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23785.79点（-1.43%）；恒生科技收报4073.38点（-2.89%）。",
+      "sectors": [
+        "科网股低迷",
+        "石油股集体上涨"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-08"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.43% 科指跌2.89% 科网股低迷 石油股集体上涨",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-08/doc-iniupafi7716993.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23785.79",
+          "changePct": "-1.43%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4073.38",
+          "changePct": "-2.89%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-08",
+    "marketStatus": {
+      "reportDate": "2026-10-09",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-10-08"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-08"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-08"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 10月8日 周四 收盘；港股为 10月8日 周四 收盘；美股为 10月8日 周四 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889426557.html",
+      "title_cn": "光芯片巨头集体跌停！竟是一则研报惹的祸？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "光芯片板块集体跌停，市场消息称与一则研报有关。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "光芯片",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889431473.html",
+      "title_cn": "“尊界V800刹车踏板支架断裂”冲上热搜江淮汽车股价跌停",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "「尊界V800刹车踏板支架断裂」话题冲上热搜，江淮汽车股价跌停。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "汽车",
+        "A股",
+        "舆情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889577351.html",
+      "title_cn": "A股三大指数集体收跌电池板块逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "A股三大指数集体收跌，电池板块逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "电池"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889406887.html",
+      "title_cn": "重磅利好叠加技术突破电池板块逆势大涨行业高质量发展新周期将启(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "受重磅利好叠加技术突破影响，电池板块逆势大涨，报道称行业或进入高质量发展新周期。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "电池",
+        "A股",
+        "新能源"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889045517.html",
+      "title_cn": "美联储会议纪要：加息理由存在分歧年内或将再上调利率一次",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "美联储会议纪要显示官员对加息理由存在分歧，年内或再加息一次。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "货币政策",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889431822.html",
+      "title_cn": "工行、中行、杭州银行盘中齐创历史新高！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "工商银行、中国银行、杭州银行盘中股价齐创历史新高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "银行",
+        "A股",
+        "股价"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889053595.html",
+      "title_cn": "华为与高通达成专利合作概念股或迎催化融资客提前埋伏多股(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "华为与高通达成专利合作，相关概念股或迎催化，融资客提前布局多只个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "华为",
+        "高通",
+        "半导体",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889597079.html",
+      "title_cn": "封死跌停！江淮汽车最新回应！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "江淮汽车股价封死跌停，公司发布最新回应。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "汽车",
+        "A股",
+        "舆情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889805035.html",
+      "title_cn": "10月8日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "汇总10月8日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610083889143497.html",
+      "title_cn": "大单频现、巨头“结盟”MLCC高景气延续这5股业绩倍增可期",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "MLCC行业大单频现、巨头结盟，高景气延续，报道称5只相关个股业绩有望倍增。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "电子元件",
+        "MLCC",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610093890045460.html",
+      "title_cn": "券商最新研判：静待盈利验证建议均衡配置",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/09",
+      "summary": "券商最新研判认为应静待盈利验证，建议均衡配置。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "券商",
+        "A股",
+        "策略"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610093890065678.html",
+      "title_cn": "上下协同稳投资要把握三个维度",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/09",
+      "summary": "评论文章提出上下协同稳投资需把握三个维度。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "投资",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-08/doc-iniupafi7716993.shtml",
+      "title_cn": "港股收评：恒指跌1.43% 科指跌2.89% 科网股低迷 石油股集体上涨",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "港股收评：恒指跌1.43%，科指跌2.89%，科网股低迷，石油股集体上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "石油"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-08/doc-iniumqct7953874.shtml",
+      "title_cn": "四大因素影响港股公司“回A”路径与成败",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "文章分析影响港股公司「回A」路径与成败的四大因素。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "中概股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-08/doc-iniunezm7711753.shtml",
+      "title_cn": "港交所：前9月IPO集资金额为3880亿港元 同比上升106%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "港交所数据显示，前9月IPO集资金额为3880亿港元，同比上升106%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "港交所"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-08/doc-iniunmii7583579.shtml",
+      "title_cn": "央行开展万亿买断式逆回购，月之暗面完成融资推进港交所IPO",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "央行开展万亿买断式逆回购；月之暗面完成融资并推进港交所IPO。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "央行",
+        "港股",
+        "IPO",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/s/2026-10-08/doc-iniunezt4068320.shtml",
+      "title_cn": "港股成交额不足1000亿，金融遗址的鬼故事又要来了",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "港股成交额不足1000亿港元，市场关注流动性低迷。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "成交额",
+        "流动性"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-08/doc-iniuphnz4311294.shtml",
+      "title_cn": "首只地产私募债基金闯关港股：基汇资本的机会与考验",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "首只地产私募债基金闯关港股，基汇资本面临机会与考验。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "地产",
+        "基金"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-08/doc-iniunvxf4400460.shtml",
+      "title_cn": "大和：泉峰控股重申“买入”评级 目标价40港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "大和重申泉峰控股「买入」评级，目标价40港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-08/doc-iniupafi7736381.shtml",
+      "title_cn": "信达证券：李斌就任中烟香港(06055)董事会主席 中长期公司增长动力充沛",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "信达证券称李斌就任中烟香港董事会主席，中长期公司增长动力充沛。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "人事变动",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-08/doc-iniupafi7732039.shtml",
+      "title_cn": "广发证券：维持赢家时尚(03709)“买入”评级 合理价值6.95港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "广发证券维持赢家时尚「买入」评级，合理价值6.95港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-08/doc-iniupafi3773419.shtml",
+      "title_cn": "浙商证券：铝价上行成本改善 沙特项目助力持续成长 维持创新实业(02788)“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "浙商证券称铝价上行、成本改善及沙特项目助力成长，维持创新实业「买入」评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "铝"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-08/doc-iniupafi3756617.shtml",
+      "title_cn": "小摩：上调潍柴动力(02338)目标价至57港元 看好数据中心等业务增长",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "小摩上调潍柴动力目标价至57港元，看好数据中心等业务增长。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "数据中心"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-08/doc-iniupafi3748787.shtml",
+      "title_cn": "美银证券：上调中远海能(01138)目标价16.3% 看好下半年业绩及派息",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "美银证券上调中远海能目标价16.3%，看好下半年业绩及派息。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "航运"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/06/unsure-how-long-this-ai-bull-has-bonds-now-offer-a-cushion-at-the-best-values-in-years.html",
+      "title_cn": "Unsure how long this AI bull has? Bonds now offer a cushion at the best values in years",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/06",
+      "summary": "CNBC文章讨论AI牛市持续时间的不确定性，并称债券当前估值处于多年最佳水平、可提供缓冲。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "债券"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/hb-fuller-prices-850-million-notes-offering-at-7625-93CH-4939950",
+      "title_cn": "H.B. Fuller prices $850 million notes offering at 7.625%",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "H.B. Fuller 定价8.5亿美元票据发行，票面利率7.625%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "公司融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/relay-therapeutics-ceo-sanjiv-patel-sells-872401-company-stock-93CH-4939949",
+      "title_cn": "Relay Therapeutics CEO Sanjiv Patel sells $872,401 company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "Relay Therapeutics CEO Sanjiv Patel 出售价值872,401美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/relay-therapeutics-cfo-catinazzo-sells-329k-in-shares-93CH-4939948",
+      "title_cn": "Relay Therapeutics CFO Catinazzo sells $329k in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "Relay Therapeutics CFO Catinazzo 出售价值32.9万美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/apple-svp-jennifer-newstead-sells-796491-in-stock-93CH-4939946",
+      "title_cn": "Apple SVP Jennifer Newstead sells $796,491 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "苹果高级副总裁 Jennifer Newstead 出售价值796,491美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易",
+        "苹果"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/australian-nvidiabacked-ai-data-centre-operator-firmus-shelves-ipo-4939919",
+      "title_cn": "Australian Nvidia-backed AI data centre operator Firmus scraps $5 billion IPO",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "英伟达支持的澳大利亚AI数据中心运营商 Firmus 取消50亿美元IPO。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "IPO",
+        "AI",
+        "数据中心"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/starbucks-explored-chipotle-takeover-ft-reports-4939307",
+      "title_cn": "Starbucks declines comment on Chipotle takeover report, says laser focused on turnaround",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "星巴克拒绝对Chipotle收购报道置评，称专注自身转型。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "并购",
+        "餐饮"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/pharvaris-hae-drug-shows-faster-symptom-relief-in-lancet-study-93CH-4939938",
+      "title_cn": "Pharvaris HAE drug shows faster symptom relief in Lancet study",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "Pharvaris 的HAE药物在《柳叶刀》研究中显示更快缓解症状。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "医药",
+        "研发"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/immersions-ceo-eric-singer-buys-292799-in-company-stock-93CH-4939933",
+      "title_cn": "Immersion’s CEO Eric Singer buys $292,799 in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "Immersion CEO Eric Singer 买入价值292,799美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/coreweave-cfo-nitin-agrawal-sells-265-in-company-stock-93CH-4939932",
+      "title_cn": "CoreWeave CFO Nitin Agrawal sells $265 in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "CoreWeave CFO Nitin Agrawal 出售价值265美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/canyon-capital-advisors-sells-682-million-in-cbl--associates-shares-93CH-4939931",
+      "title_cn": "Canyon Capital Advisors sells $68.2 million in CBL & Associates shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/08",
+      "summary": "Canyon Capital Advisors 出售价值6820万美元的 CBL & Associates 股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易",
+        "地产"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
