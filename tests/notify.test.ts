@@ -111,12 +111,12 @@ test("股市行：三市场各一行，未开市状态取自数据自带的 fres
   });
   assert.deepEqual(lines, [
     "📈 A股｜未开市（最近 9月30日 收盘）",
-    "📈 港股｜恒指 ▲1.00%",
-    "📈 美股｜纳指 ▲0.45%",
+    "📈 港股｜恒指 🔴▲1.00%",
+    "📈 美股｜纳指 🔴▲0.45%",
   ]);
 });
 
-test("股市行：涨跌符号与指数简称（▲涨 / ▼跌，中国口径不依赖颜色）", () => {
+test("股市行：text 版三角不着色，颜色用 🔴/🟢 圆点标在数字上（中国口径红涨绿跌）", () => {
   const [line] = marketLinesOf({
     aShare: {
       indices: [
@@ -126,7 +126,7 @@ test("股市行：涨跌符号与指数简称（▲涨 / ▼跌，中国口径�
       ],
     },
   });
-  assert.equal(line, "📈 A股｜上证 ▲0.31% · 深成 ▼0.11% · 创业板 ▼0.23%");
+  assert.equal(line, "📈 A股｜上证 🔴▲0.31% · 深成 🟢▼0.11% · 创业板 🟢▼0.23%");
 });
 
 test("股市行：无 indices 退到 overview（50 字截断）；完全没有数据写「暂无数据」而非「未开市」", () => {
@@ -155,11 +155,56 @@ test("组装顺序：定调 → 股市 → 风险 → 广东IPO → 链接；各
     `顺序应为 定调 → 股市 → 风险 → IPO → 链接：\n${full}`,
   );
 
-  // markdown 版同样含股市/风险行，且不带 4 个市场以外的噪音
+  // markdown 版同样含股市/风险行（涨跌在 markdown 里带颜色标记）
   const md = buildWecomMarkdown("定调A", "2026-10-07", "https://x", undefined, {
     riskTopic: "某风险主题",
     stockRecap: { hk: { indices: [{ name: "恒生科技", changePct: "-0.94%" }] } },
   });
-  assert.ok(md.includes("📈 港股｜恒生科技 ▼0.94%"));
+  assert.ok(md.includes('📈 港股｜恒生科技 ▼<font color="info">0.94%</font>'));
   assert.ok(md.includes("🚨 风险提示｜某风险主题"));
+});
+
+// ---------------------------------------------------------------------------
+// 2026-10-08 sc 口径：涨用红色三角、跌用绿色三角
+// ---------------------------------------------------------------------------
+
+test("涨跌着色：markdown 版三角不着色、数字着色（涨 warning 红 / 跌 info 绿）", () => {
+  const md = buildWecomMarkdown("定调A", "2026-10-08", "https://x", undefined, {
+    stockRecap: {
+      hk: {
+        indices: [
+          { name: "恒生指数", changePct: "+1.00%" },
+          { name: "恒生科技", changePct: "-0.94%" },
+        ],
+      },
+    },
+  });
+  assert.ok(md.includes('▲<font color="warning">1.00%</font>'), "涨 → 三角无色、数字红");
+  assert.ok(md.includes('▼<font color="info">0.94%</font>'), "跌 → 三角无色、数字绿");
+  assert.ok(!/<font color="[a-z]+">[▲▼]<\/font>/.test(md), "三角本身不得被着色");
+  // 企业微信 markdown 只认 info/comment/warning 三个颜色值，不得出现 hex 或其它值
+  assert.ok(!/<font color="(?!info|comment|warning)/.test(md), "不得用企微不认的颜色值");
+});
+
+test("text 版不得出现 <font> 标签（微信端会原样显示成噪音），颜色只能用 emoji 圆点表达", () => {
+  const txt = buildWecomText("定调A", "2026-10-08", "https://x", undefined, {
+    stockRecap: { us: { indices: [{ name: "纳斯达克", changePct: "+0.45%" }] } },
+  });
+  assert.ok(txt.includes("📈 美股｜纳指 🔴▲0.45%"));
+  assert.ok(txt.includes("🟢▼") === false, "本用例只有上涨，不应出现绿点");
+  assert.ok(!txt.includes("<font"), "text 消息不支持颜色，不得带 font 标签");
+  assert.ok(!txt.includes("</font>"));
+});
+
+test("未开市 / 暂无数据 / 退 overview 的行不带任何颜色标记", () => {
+  const md = buildWecomMarkdown("定调A", "2026-10-08", "https://x", undefined, {
+    stockRecap: {
+      us: { overview: "三大指数集体收涨。" },
+      marketStatus: { markets: { aShare: { fresh: false, dataDate: "2026-09-30" } } },
+    },
+  });
+  assert.ok(md.includes("📈 A股｜未开市（最近 9月30日 收盘）"));
+  assert.ok(md.includes("📈 美股｜三大指数集体收涨。"));
+  assert.ok(!md.includes("未开市（最近 9月30日 收盘）<font"), "未开市行不着色");
+  assert.ok(!/\|\|.*<font/.test(md));
 });

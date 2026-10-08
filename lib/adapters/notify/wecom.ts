@@ -69,13 +69,32 @@ const MARKET_SLOTS: Array<{ key: string; label: string }> = [
   { key: "us", label: "美股" },
 ];
 
-/** `+1.05%` → `▲1.05%`；`-0.11%` → `▼0.11%`（▲/▼ 对应「红涨绿跌」的语义，不依赖颜色）。 */
-function arrowOf(changePct?: string): string {
+/** 推送载体（决定涨跌怎么表达色）。 */
+export type WecomStyle = "text" | "markdown";
+
+/**
+ * 涨跌 token（2026-10-08 sc 口径：**三角形不着色、数字带颜色**）。
+ *
+ * 载体差异（硬约束，不是选择）：
+ *   - **text 消息不支持任何富文本**（只有 content + mentioned_list）→ 数字**无法真着色**；
+ *     唯一可行解是用**彩色 emoji 圆点**给数字做颜色标记（emoji 自带颜色，text 也能显示）；
+ *   - **markdown 消息**支持 `<font color>`，但企业微信**只认三个值**：
+ *     `info`（绿）/ `warning`（橙红）/ `comment`（灰）—— 正好用于「红涨绿跌」。
+ *
+ * @param style markdown → 三角保持默认色、数字包 `<font>`；text → `🔴/🟢` 圆点 + 三角 + 数字。
+ */
+function arrowToken(changePct: string | undefined, style: WecomStyle): string {
   const s = (changePct ?? "").trim();
   if (!s) return "";
-  if (s.startsWith("-")) return `▼${s.slice(1)}`;
-  if (s.startsWith("+")) return `▲${s.slice(1)}`;
-  return s;
+  const up = !s.startsWith("-");
+  const pct = s.startsWith("-") || s.startsWith("+") ? s.slice(1) : s;
+  const tri = up ? "▲" : "▼";
+  if (style === "markdown") {
+    // 三角**不着色**；颜色落在数字上（涨 = 红 warning、跌 = 绿 info）
+    return `${tri}<font color="${up ? "warning" : "info"}">${pct}</font>`;
+  }
+  // text：三角同样不着色；用彩色圆点为数字标色（🔴 涨 / 🟢 跌）
+  return `${up ? "🔴" : "🟢"}${tri}${pct}`;
 }
 
 /** `2026-09-30` → `9月30日`（推送里不写年份，省版面）。 */
@@ -95,7 +114,7 @@ function shortDateOf(iso?: string): string {
  * 整个 `stock_recap` 缺失 → 返回空数组（整块不出现）。
  * 入参放宽为 `unknown`（调用方从 store.json 读，天然是 unknown）→ 内部窄化。
  */
-export function marketLinesOf(stockRecap?: unknown): string[] {
+export function marketLinesOf(stockRecap?: unknown, style: WecomStyle = "text"): string[] {
   if (!stockRecap || typeof stockRecap !== "object") return [];
   const sr = stockRecap as Record<string, unknown>;
   const status = (sr.marketStatus ?? {}) as {
@@ -114,12 +133,14 @@ export function marketLinesOf(stockRecap?: unknown): string[] {
       out.push(`${prefix}未开市${d ? `（最近 ${d} 收盘）` : ""}`);
       continue;
     }
-    // ② 结构化涨跌
+    // ② 结构化涨跌（三角不着色，颜色落在数字上；由 arrowToken 按载体实现）
     const idx = (m?.indices ?? []).filter((i) => i && (i.name || i.changePct)).slice(0, 3);
     if (idx.length > 0) {
       out.push(
         prefix +
-          idx.map((i) => `${INDEX_SHORT[i.name ?? ""] ?? i.name ?? ""} ${arrowOf(i.changePct)}`.trim()).join(" · "),
+          idx
+            .map((i) => `${INDEX_SHORT[i.name ?? ""] ?? i.name ?? ""} ${arrowToken(i.changePct, style)}`.trim())
+            .join(" · "),
       );
       continue;
     }
@@ -161,7 +182,7 @@ export function buildWecomMarkdown(
     ? `> **【今日定调】** ${stripHeroPrefix(heroLine)}`
     : "> ⚠️ 今日暂无定调，点击查看完整简报";
   const ipo = ipoLineOf(ipoLine);
-  const markets = marketLinesOf(extra?.stockRecap);
+  const markets = marketLinesOf(extra?.stockRecap, "markdown"); // 三角不着色、数字着色（<font color>）
   const risk = riskLineOf(extra?.riskTopic);
   const link = `[点击查看完整简报 →](${url})`;
   return [
