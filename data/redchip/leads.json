@@ -1,5 +1,25 @@
 [
   {
+    "appId": "108926",
+    "nameCn": "Pinnacle Marine Holdings Ltd",
+    "nameEn": "",
+    "board": "主板",
+    "status": "A",
+    "submitDate": "2026-10-08",
+    "domicile": "开曼群岛",
+    "isOffshore": true,
+    "gdCityHits": 0,
+    "gdCityMentions": 0,
+    "isGdConnected": false,
+    "vie": "historical",
+    "verdict": "non-redchip",
+    "discoveredAt": "2026-10-09T06:54:25+08:00",
+    "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108926/documents/sehk26100801298.pdf",
+    "market": "hk",
+    "leadId": "108926",
+    "lastChangedAt": "2026-10-09T06:54:25+08:00"
+  },
+  {
     "appId": "108912",
     "nameCn": "Gaw Capital Real Estate Private Debt OFC",
     "nameEn": "",
@@ -16,7 +36,7 @@
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108912/documents/sehk26100203578.pdf",
     "market": "hk",
     "leadId": "108912",
-    "lastChangedAt": "2026-10-03T06:34:10+08:00"
+    "lastChangedAt": "2026-10-09T06:54:25+08:00"
   },
   {
     "appId": "108910",
