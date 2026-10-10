@@ -1,8 +1,44 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-10T06:27:12+08:00",
+  "fetchedAt": "2026-10-11T06:25:44+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
-  "sourceCounts": {},
-  "items": []
+  "sourceCounts": {
+    "gd-csrc-tutoring": 3
+  },
+  "items": [
+    {
+      "title": " (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/11/PREIPO_F0101_V01_20261011_36530_Q/423366B976D44341B093B5B4CFDD484E/关于广东东阳光药业股份有限公司首次公开发行股票并上市辅导工作进展报告（第十二期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中国国际金融股份有限公司 | 备案时间: 2023-07-25 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-11",
+      "publishedAt": "2026-10-11",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "广东东阳光药业股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/11/PREIPO_F0101_V01_20261011_36541_Q/C3189915D90F4F62911C45BADAAFE87E/关于广东东阳光药业股份有限公司首次公开发行股票并上市辅导工作进展报告（第十三期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中国国际金融股份有限公司 | 备案时间: 2023-07-25 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-11",
+      "publishedAt": "2026-10-11",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "中星微技术股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/11/PREIPO_F0101_V01_20261011_36542_Q/E29CEE400DE342A097E8F1A6531BCFF8/关于中星微技术股份有限公司首次公开发行股票并上市辅导工作进展报告（第五期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中国银河证券股份有限公司 | 备案时间: 2025-08-08 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-11",
+      "publishedAt": "2026-10-11",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    }
+  ]
 }
