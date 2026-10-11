@@ -87,6 +87,18 @@ export function extractDisclosureDate(row: CoachRow): string | null {
   return `${m[1]}-${String(+m[2]).padStart(2, "0")}-${String(+m[3]).padStart(2, "0")}`;
 }
 
+/**
+ * 从 PDF 文件名提取公司名：`/.../关于广东东阳光药业股份有限公司首次公开发行股票...（第十二期）.pdf` → `广东东阳光药业股份有限公司`。
+ *
+ * 用途（2026-10-11 方案B）：源站对同一企业历史期次行做「合并单元格」——辅导对象列置空，
+ * 只有最新一期显示企业名。company 为空的行须从文件名补出公司名，作为「同日同公司去重」的键。
+ * 提取失败返回空串（调用方保守处理，不误删）。
+ */
+export function extractCompanyFromPdfPath(pdfPath: string): string {
+  const m = pdfPath.match(/关于([^/]+?)(?:首次公开发行|公开发行)/);
+  return m ? m[1].trim() : "";
+}
+
 /** 广东判定：派出机构 ∈ {广东/深圳证监局}，或 企业名/备案时间 含广东城市。 */
 export function isGuangdong(row: CoachRow): boolean {
   if (GD_DISPATCH_ORGS.includes(row.dispatchOrg)) return true;
@@ -197,7 +209,14 @@ export class CsrcCoachCrawler extends BaseCrawler {
     let page = 1;
     let consecutiveStale = 0;
     let withdrawn = 0; // 「撤回辅导备案」计数（非商机，丢弃后仅进日志，便于观测）
+    let sameDayDropped = 0; // 方案B「同日同公司重复披露」丢弃计数（2026-10-11）
     const allDates: string[] = []; // 新鲜度哨兵输入（含窗口外日期）
+    // 方案B（2026-10-11 用户拍板）：同日同公司仅保留最新一期。
+    // 成因：csrcfd 源站对同一企业历史期次行做「合并单元格」——辅导对象列置空，只有最新一期显示企业名
+    // （实测 2026-10-11 东阳光同日披露第十二/十三期：第十三期行有名字，第十二期起辅导对象列为空）。
+    // 列表按披露时间倒序 → 首次出现即最新一期；company 为空的行用 PDF 文件名提取公司名作去重键。
+    // 命中已见键 → 该行是同日历史期次，丢弃（避免「同日同公司重复披露 + 空标题」污染日报）。
+    const seenCompanyDay = new Set<string>();
 
     while (page <= MAX_PAGES) {
       let html = "";
@@ -226,6 +245,14 @@ export class CsrcCoachCrawler extends BaseCrawler {
         // 时间真实性红线：优先披露日期，次选备案时间（源真实字段，非伪造）；皆无则废弃。
         const disclosure = extractDisclosureDate(r) || r.recordDate;
         if (!disclosure) continue;
+        // 方案B 去重：同日同公司仅保留最新一期（company 为空时用 PDF 文件名补键）。
+        const companyKey = r.company || extractCompanyFromPdfPath(r.pdfPath);
+        const dedupKey = companyKey ? `${companyKey}|${disclosure}` : "";
+        if (dedupKey && seenCompanyDay.has(dedupKey)) {
+          sameDayDropped++;
+          continue;
+        }
+        if (dedupKey) seenCompanyDay.add(dedupKey);
         this.results.push({
           title: `${r.company}${r.status ? ` (${r.status})` : ""}${r.dispatchOrg ? ` [${r.dispatchOrg}]` : ""}`,
           // PDF 存储根在 http://eid.csrc.gov.cn/mnt/storage/...（不含 /csrcfd 路径段）；
@@ -273,6 +300,11 @@ export class CsrcCoachCrawler extends BaseCrawler {
     if (withdrawn > 0) {
       console.log(
         `[${this.name}] 已丢弃「撤回辅导备案」${withdrawn} 条（企业终止本次 IPO，非商机）`,
+      );
+    }
+    if (sameDayDropped > 0) {
+      console.log(
+        `[${this.name}] 已丢弃同日同公司重复披露 ${sameDayDropped} 条（方案B：仅保留最新一期）`,
       );
     }
     return this.results;

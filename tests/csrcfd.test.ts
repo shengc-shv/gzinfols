@@ -5,6 +5,7 @@ import assert from "node:assert/strict";
 import {
   parseCoachRows,
   extractDisclosureDate,
+  extractCompanyFromPdfPath,
   isGuangdong,
   decidePage,
   coachStageOf,
@@ -22,10 +23,12 @@ function coachTr(opts: {
   recordDate?: string;
   status?: string;
   tutorOrg?: string;
+  /** PDF 文件名中的公司名（模拟源站历史期次行：辅导对象列空、文件名含公司名）；默认空 → x.pdf */
+  pdfCompany?: string;
 }): string {
-  const { company, dispatchOrg = "广东证监局", disclosure, recordDate = disclosure || "", status = "辅导备案", tutorOrg = "兴业证券" } = opts;
+  const { company, dispatchOrg = "广东证监局", disclosure, recordDate = disclosure || "", status = "辅导备案", tutorOrg = "兴业证券", pdfCompany = "" } = opts;
   const pdf = disclosure
-    ? `<script>downloadPdf1('/mnt/storage/stock/pre_ipo/${disclosure.replace(/-/g, "/")}/x.pdf')</script>`
+    ? `<script>downloadPdf1('/mnt/storage/stock/pre_ipo/${disclosure.replace(/-/g, "/")}/${pdfCompany ? `关于${pdfCompany}首次公开发行股票并上市辅导工作进展报告（第N期）.pdf` : "x.pdf"}')</script>`
     : "";
   return `<tr><td>1</td><td>${company}</td><td>${tutorOrg}</td><td>${recordDate}</td><td>${status}</td><td>${dispatchOrg}</td><td>辅导备案报告</td><td>title${pdf}</td></tr>`;
 }
@@ -258,5 +261,79 @@ describe("辅导状态 → 上市阶段", () => {
     const res = await crawler.run();
     assert.equal(res.length, 1);
     assert.equal(res[0].ipoStage, "stage-coach-done");
+  });
+});
+
+// —— 2026-10-11 方案B：同日同公司仅保留最新一期 ——
+// 成因：csrcfd 源站对同一企业历史期次行做「合并单元格」——辅导对象列置空，只有最新一期显示企业名
+// （实测东阳光同日披露第十二/十三期：第十三期行有名字，第十二期起辅导对象列为空，导致空标题 + 同日重复）。
+describe("extractCompanyFromPdfPath", () => {
+  test("从 PDF 文件名提取公司名（东阳光第十二期）", () => {
+    assert.equal(
+      extractCompanyFromPdfPath(
+        "/mnt/storage/stock/pre_ipo/2026/10/11/PREIPO_F0101_V01_20261011_36530_Q/423366B976D44341B093B5B4CFDD484E/关于广东东阳光药业股份有限公司首次公开发行股票并上市辅导工作进展报告（第十二期）.pdf",
+      ),
+      "广东东阳光药业股份有限公司",
+    );
+  });
+  test("无公司名（UUID 文件名）返回空", () => {
+    assert.equal(
+      extractCompanyFromPdfPath("/mnt/storage/stock/pre_ipo/2024/1/16/x/A32FF0A3C1E742D888AE0C50ABF7409E.pdf"),
+      "",
+    );
+  });
+});
+
+describe("run (方案B：同日同公司去重，保留最新一期)", () => {
+  test("同日同公司两条（历史期次行辅导对象列空）→ 仅保留最新一期（先到的有名字行）", async () => {
+    const crawler = new MockCrawler([
+      pageHtml([
+        // 最新一期（第十三期）：辅导对象列有名字
+        coachTr({ company: "广东东阳光药业股份有限公司", disclosure: TODAY, pdfCompany: "广东东阳光药业股份有限公司" }),
+        // 历史期次（第十二期）：辅导对象列为空（源站合并单元格），PDF 文件名含公司名
+        coachTr({ company: "", disclosure: TODAY, pdfCompany: "广东东阳光药业股份有限公司" }),
+        // 另一家公司同日（不受影响）
+        coachTr({ company: "中星微技术股份有限公司", disclosure: TODAY, pdfCompany: "中星微技术股份有限公司" }),
+      ]),
+    ]);
+    const res = await crawler.run();
+    assert.equal(res.length, 2, "同日同公司只保留最新一期，另一家公司保留");
+    assert.match(res[0].title || "", /广东东阳光药业股份有限公司/);
+    assert.ok(!res.some((r) => !r.title || /^\s*\(辅导备案\)/.test(r.title)), "不得再出现空标题条目");
+    assert.match(res[1].title || "", /中星微技术股份有限公司/);
+  });
+
+  test("同公司不同日 → 都保留（窗口内不误删）", async () => {
+    const crawler = new MockCrawler([
+      pageHtml([
+        coachTr({ company: "广州A", disclosure: TODAY }),
+        coachTr({ company: "广州A", disclosure: YESTERDAY }),
+      ]),
+    ]);
+    const res = await crawler.run();
+    assert.equal(res.length, 2, "不同披露日不算同日重复，均应保留");
+  });
+
+  test("不同公司同日 → 都保留", async () => {
+    const crawler = new MockCrawler([
+      pageHtml([
+        coachTr({ company: "广州A", disclosure: TODAY }),
+        coachTr({ company: "深圳B", disclosure: TODAY }),
+        coachTr({ company: "东莞C", disclosure: TODAY }),
+      ]),
+    ]);
+    const res = await crawler.run();
+    assert.equal(res.length, 3);
+  });
+
+  test("company 为空且 PDF 无公司名 → 保守保留（提取不到键不误删）", async () => {
+    const crawler = new MockCrawler([
+      pageHtml([
+        coachTr({ company: "", disclosure: TODAY }),
+        coachTr({ company: "广州A", disclosure: TODAY }),
+      ]),
+    ]);
+    const res = await crawler.run();
+    assert.equal(res.length, 2, "提取不到公司名的行不去重（保守不误删），但标题可能为空");
   });
 });
