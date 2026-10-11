@@ -1,0 +1,889 @@
+{
+  "date": "2026-10-12",
+  "updatedAt": "2026-10-11T22:29:25.919Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：新质生产力顶层文件落地，科创客群授信窗口打开；公募运作制度系统性优化，基金代销与配置节奏生变；广交会叠加边检16项便利举措，跨境结算需求集中释放；广州本地芯片企业明日上市，科创客群关注度抬升。",
+    "spoken_hero": "今天主要看四个方面：新质生产力顶层文件落地，科创客群授信窗口打开；公募运作制度系统性优化，基金代销与配置节奏生变；广交会叠加边检十六项便利举措，跨境结算需求集中释放；广州本地芯片企业明天上市，科创客群关注度抬升。",
+    "must_read": [
+      {
+        "title": "美联储加息搅动全球债市",
+        "why": "外部冲击有限、内生需求是关键，但全球债市波动仍会传导至客户避险情绪与外币资产配置选择。",
+        "url": "https://www.stcn.com/article/detail/4211402.html"
+      },
+      {
+        "title": "新质生产力顶层文件印发",
+        "why": "科技与产业升级方向明确，科创、先进制造客群的授信与综合服务空间打开，广州本地科创企业密集，客群结构或加速向新质生产力倾斜。",
+        "url": "https://finance.eastmoney.com/a/202610113892043722.html"
+      },
+      {
+        "title": "证监会座谈问计市场",
+        "why": "后续政策预期升温，资本市场客群情绪与产品配置节奏的传导值得关注，财富条线客户风险偏好或现拐点。",
+        "url": "https://www.stcn.com/article/detail/4211507.html"
+      },
+      {
+        "title": "广州边检16项举措服务广交会",
+        "why": "境外客商来穗便利度提升，外卡、结售汇等跨境金融需求集中释放，广交会窗口期的跨境客群经营价值抬升。",
+        "url": "https://news.dayoo.com/guangzhou/202610/11/139995_55011777.htm"
+      },
+      {
+        "title": "三季度高频数据折射经济向好",
+        "why": "实体融资需求与零售信贷投放环境或有改善，客群经营节奏与信贷投放窗口的匹配度提升。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261011/4479197_1.html"
+      }
+    ],
+    "spoken_must_read": "美联储加息搅动全球债市。外部冲击有限、内生需求是关键，但全球债市波动仍会传导至客户避险情绪与外币资产配置选择。其次，新质生产力顶层文件印发。科技与产业升级方向明确，科创、先进制造客群的授信与综合服务空间打开，广州本地科创企业密集，客群结构或加速向新质生产力倾斜。此外，证监会座谈问计市场。后续政策预期升温，资本市场客群情绪与产品配置节奏的传导值得关注，财富条线客户风险偏好或现拐点。还有，广州边检16项举措服务广交会。境外客商来穗便利度提升，外卡、结售汇等跨境金融需求集中释放，广交会窗口期的跨境客群经营价值抬升。另外，三季度高频数据折射经济向好。实体融资需求与零售信贷投放环境或有改善，客群经营节奏与信贷投放窗口的匹配度提升。",
+    "insights": [
+      {
+        "topic": "信托单方面降薪被否",
+        "impact": "财富管理行业用工与激励机制争议显性化，客户对信托类产品发行方稳健性的关注度上升，私行客户尽调问询或增多。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "某信托以“经营困难”单方面降薪被否了！",
+            "url": "https://finance.sina.com.cn/trust/roll/2026-10-11/doc-iniuwkhc7264336.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "老鼠仓遭双重处罚",
+        "impact": "资管从业人员违规被查，客户对代销产品管理人的合规记录敏感度提升，高净值客户在产品选择上的问询趋于细化。",
+        "tag": [
+          "财富",
+          "监管"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "“老鼠仓”被抓！“90后”投资经理助理，遭双重处罚！",
+            "url": "https://www.stcn.com/article/detail/4211469.html"
+          }
+        ]
+      },
+      {
+        "topic": "同业算力贷转向深耕",
+        "impact": "算力贷竞争焦点从抢滩转向场景与风控能力，本地算力与科创客群的融资方案同质化加剧，差异化定价空间收窄。",
+        "tag": [
+          "信贷",
+          "科技金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "银行扎堆推算力贷 赛道从抢滩转向深耕",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_10_11_903795.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "广交会一期聚焦先进制造",
+        "impact": "17个专区集结新兴产业硬核科技，外贸与跨境客群的结算、结售汇需求集中释放，广交会窗口期客群活跃度显著抬升。",
+        "tag": [
+          "客群",
+          "政银合作"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "第140届广交会第一期以“先进制造”为主题，17个专区集结未来新兴产业硬核科技",
+            "url": "https://news.dayoo.com/guangzhou/202610/11/139995_55011776.htm"
+          }
+        ]
+      },
+      {
+        "topic": "头部房企加仓广州土地",
+        "impact": "本地土地市场热度回升，按揭与开发贷需求出现边际变化，广州区域楼市预期与购房客群的入市节奏值得跟踪。",
+        "tag": [
+          "住房金融"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "头部房企真金白银加仓广州",
+            "url": "https://news.dayoo.com/guangzhou/202610/11/139995_55011587.htm"
+          }
+        ]
+      },
+      {
+        "topic": "广州第一芯13日上市",
+        "impact": "本地芯片企业上市带动科创客群关注度提升，其上下游企业与员工客群的账户、代发与投融资需求同步显现。",
+        "tag": [
+          "科技金融",
+          "代发"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "“广州第一芯”13日上市",
+            "url": "https://www.stcn.com/article/detail/4211484.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，公募运作制度系统性优化、期指国债期货可轧差计入股债资产，基金代销与客户资产配置的规则基础在变，高净值客户对冲类产品需求上升。高端客户方面，黄金定价权向亚洲转移、美联储加息搅动全球债市，避险与对冲类配置需求同步抬升。普惠小微方面，三季度高频数据折射经济向好，实体融资需求与零售信贷投放环境边际改善。本地消费与跨境场景方面，广交会一期聚焦先进制造、边检十六项举措提升境外客商来穗便利度，外卡与结售汇需求集中释放；头部房企加仓广州，本地按揭与开发贷需求出现边际变化。",
+    "risk": {
+      "topic": "资管从业人员违规遭双重处罚",
+      "evidence": "“90后”投资经理助理因老鼠仓被抓并遭双重处罚，资管从业人员合规问题再度暴露。",
+      "impact": "财富与私行条线代销产品的管理人合规审查压力上升，客户对产品尽调的问询增多；风控条线对合作机构人员资质的排查要求趋严。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "“老鼠仓”被抓！“90后”投资经理助理，遭双重处罚！",
+          "url": "https://www.stcn.com/article/detail/4211469.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：资管从业人员违规遭双重处罚，财富与私行条线代销产品的管理人合规审查压力上升，客户对产品尽调的问询增多；风控条线对合作机构人员资质的排查要求趋严。",
+    "guangdong_ipo": {
+      "spoken": "广东晟辉科技披露IPO辅导进展第八期，辅导机构为申万宏源承销保荐，注册地广东，属科技类拟上市企业；广东东阳光药业同步披露辅导进展报告，辅导机构中金公司，两家均处于辅导备案阶段。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "三大指数集体收涨，道指涨0.83%领跑，亚马逊洽购AI公司提振科技情绪。",
+      "sectors": [
+        "亚马逊洽谈约70亿美元收购AI初创Decart，AI并购交易升温。",
+        "高收益债利差走阔现'黄灯'预警，信用市场风险偏好边际转弱。",
+        "保证金债务升至历史新高，散户加杠杆放大波动风险。",
+        "沙特利雅得机场再遭袭，FAA要求美航司赴沙航班保持警惕。"
+      ],
+      "spoken": "美股三大指数集体收涨，道指涨百分之零点八三，纳指涨百分之零点六四，标普涨百分之零点五九。板块方面，亚马逊洽谈约七十亿美元收购AI初创公司，AI并购交易升温。高收益债利差走阔现黄灯预警，信用市场风险偏好边际转弱。保证金债务升至历史新高，散户加杠杆放大波动风险。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-12"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51654.95",
+          "changePct": "+0.83%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27366.17",
+          "changePct": "+0.64%"
+        },
+        {
+          "name": "标普500",
+          "value": "7811.54",
+          "changePct": "+0.59%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "沪指微涨0.05%，深成指涨0.17%，新质生产力政策文件落地提振预期。",
+      "sectors": [
+        "中共中央、国务院印发《关于发展新质生产力的意见》，政策主线明确。",
+        "十大券商策略称积极信号累积，看好四季度做多窗口期。",
+        "连续高股息加高ROE稳健增长股23只上榜，长线资金配置方向清晰。",
+        "前三季度韩国投资者借ETF加仓A股港股，长鑫科技登顶扫货名单。",
+        "沙特利雅得机场遭袭致12死309伤，地缘风险扰动油价相关板块。"
+      ],
+      "spoken": "A股三大指数小幅收涨，上证指数涨百分之零点零五，深证成指涨百分之零点一七，创业板指涨百分之零点二二。政策面上，中共中央、国务院印发关于发展新质生产力的意见，主线明确。十大券商策略认为积极信号逐渐累积，看好四季度做多窗口。高股息高ROE稳健增长股受长线资金关注，韩国投资者借ETF加仓A股港股。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-12"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3813.79",
+          "changePct": "+0.05%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12641.86",
+          "changePct": "+0.17%"
+        },
+        {
+          "name": "创业板指",
+          "value": "3043.34",
+          "changePct": "+0.22%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒指涨1.79%收报24211点，恒生科技涨3.06%，科技股领涨大市。",
+      "sectors": [
+        "恒生科技指数涨3.06%，明显跑赢恒指，科技板块资金流入居前。",
+        "富瑞维持阿里巴巴买入评级，目标价微升至186港元。",
+        "瑞银重申贝壳买入评级，目标价升至69.4港元，地产链获关注。",
+        "小摩上调紫金黄金国际目标价至165港元，下调山东黄金至15港元。",
+        "港交所SPAC报告显示5家上市、3单De-SPAC落地，制度运作渐成熟。"
+      ],
+      "spoken": "港股表现强势，恒生指数涨百分之一点七九，恒生科技指数涨百分之三点零六，科技股领涨大市。个股方面，富瑞维持阿里巴巴买入评级，目标价微升至一百八十六港元。瑞银重申贝壳买入评级，目标价升至六十九点四港元。小摩上调紫金黄金国际目标价至一百六十五港元，下调山东黄金至十五港元。",
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-11"
+      },
+      "sourceReport": {
+        "title": "港交所SPAC报告：5家上市、3单De-SPAC落地与制度复盘",
+        "url": "https://finance.sina.com.cn/trust/2026-10-10/doc-iniustfv7473900.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24211.35",
+          "changePct": "+1.79%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4197.84",
+          "changePct": "+3.06%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-09",
+    "marketStatus": {
+      "reportDate": "2026-10-12",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-10-09",
+          "reason": "数据为 10月9日（距今 3 天）"
+        },
+        "hk": {
+          "fresh": false,
+          "dataDate": "2026-10-09",
+          "reason": "数据为 10月9日（距今 3 天）"
+        },
+        "us": {
+          "fresh": false,
+          "dataDate": "2026-10-09",
+          "reason": "数据为 10月9日（距今 3 天）"
+        }
+      },
+      "allStale": true,
+      "note": "三地股市均无隔夜行情（休市或数据未更新），以下为最近一次收盘数据",
+      "spokenNote": "三地股市今日均无隔夜行情"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892015782.html",
+      "title_cn": "沙特首都利雅得机场遭袭致12死309伤美或将介入打击行动",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "沙特首都利雅得机场遭袭，造成12人死亡、309人受伤，报道称美国或将介入打击行动。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "能源",
+        "中东"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892086857.html",
+      "title_cn": "10月11日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "东方财富汇总10月11日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892043722.html",
+      "title_cn": "周末要闻汇总：中共中央、国务院印发《关于发展新质生产力的意见》",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "中共中央、国务院印发《关于发展新质生产力的意见》，为周末重要政策要闻。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "新质生产力",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892030727.html",
+      "title_cn": "跻身顶级富豪！46岁“数学家”AI炒股、做市一年大赚超640亿",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "报道称一名46岁数学家通过AI炒股与做市，一年大赚超640亿元，跻身顶级富豪。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "量化投资",
+        "财富"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892021948.html",
+      "title_cn": "人民日报：一辆汽车的刹车踏板绝不应该在驾驶中出现“断裂”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "人民日报发文指出，汽车刹车踏板绝不应在驾驶中出现断裂，涉及汽车质量安全议题。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "汽车",
+        "质量安全",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892046742.html",
+      "title_cn": "明天重磅打新“航天线缆第一股”来了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "被称为“航天线缆第一股”的新股将于次日进行重磅打新。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "IPO",
+        "航天",
+        "新股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892018684.html",
+      "title_cn": "长鑫科技登顶！ETF成加仓主渠道前三季度韩国投资者A股、港股“扫货”名单来了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "报道称长鑫科技登顶，ETF成为加仓主渠道，并披露前三季度韩国投资者买入A股、港股的名单。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "ETF",
+        "外资"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892027420.html",
+      "title_cn": "马斯克向印度首富“道歉”：我太眼拙了没认出您的真实身份",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "马斯克向印度首富公开“道歉”，称自己此前未认出对方真实身份。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "科技",
+        "公司动态"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892016319.html",
+      "title_cn": "连续高股息+高ROE的稳健增长股23股上榜耐心资本长线配置（附名单）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "报道列出连续高股息、高ROE的稳健增长股名单，共23只个股上榜，供长线配置参考。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "高股息",
+        "A股",
+        "选股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892031042.html",
+      "title_cn": "美国主动松绑俄油制裁！影响有多大？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "美国主动松绑对俄罗斯石油的制裁，报道分析其潜在影响。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "制裁",
+        "俄罗斯"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610113892124764.html",
+      "title_cn": "十大券商策略：市场积极信号逐渐累积把握好四季度做多窗口期",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "十大券商发布策略观点，认为市场积极信号逐渐累积，四季度存在做多窗口期。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "券商策略",
+        "A股",
+        "市场展望"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610123892147752.html",
+      "title_cn": "向新发展也是包容性发展（人民时评）——正确认识中国经济的阶段特征与长远趋势①",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/12",
+      "summary": "人民日报发表评论，论述向新发展也是包容性发展，解读中国经济的阶段特征与长远趋势。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "政策",
+        "经济"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/trust/2026-10-10/doc-iniustfv7473900.shtml",
+      "title_cn": "港交所SPAC报告：5家上市、3单De-SPAC落地与制度复盘",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "港交所SPAC报告显示，已有5家SPAC上市、3单De-SPAC落地，并对相关制度进行复盘。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "SPAC",
+        "上市制度"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-10-11/doc-iniuvpar8932745.shtml",
+      "title_cn": "港股IPO的“年轻化”革命：新经济企业募资超七成，平均上市年限缩短4.1年",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "港股IPO呈现“年轻化”特征，新经济企业募资占比超七成，平均上市年限缩短4.1年。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "新经济"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-10/doc-iniusaix2650458.shtml",
+      "title_cn": "港股IPO新经济企业募资超七成 发行人“年轻化”特征很鲜明",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "报道称港股IPO新经济企业募资超七成，发行人“年轻化”特征鲜明。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "新经济"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/observe/2026-10-10/doc-iniututi7455223.shtml",
+      "title_cn": "传音控股港股IPO：“非洲之王”的定价之惑——AH折价仅三成余 存储涨价背后的增长压力待解",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "传音控股推进港股IPO，报道关注其AH折价仅三成余及存储涨价带来的增长压力。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "传音控股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-10/doc-iniutqmk0588839.shtml",
+      "title_cn": "首程控股于10月9日斥资159.83万港元回购124.4万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "首程控股于10月9日斥资159.83万港元回购124.4万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购",
+        "公司动态"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-10/doc-iniusxpp6210976.shtml",
+      "title_cn": "富瑞：阿里巴巴-W维持“买入”评级 目标价微升至186港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "富瑞维持阿里巴巴-W“买入”评级，目标价微升至186港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "阿里巴巴"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-10/doc-iniusxpp6210964.shtml",
+      "title_cn": "瑞银：贝壳-W重申“买入”评级 目标价升至69.4港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "瑞银重申贝壳-W“买入”评级，目标价升至69.4港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "贝壳"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-10/doc-iniusxpt7458605.shtml",
+      "title_cn": "花旗：思格新能源维持“买入”评级 目标价500港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "花旗维持思格新能源“买入”评级，目标价500港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "新能源"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-10/doc-iniusxpp6210893.shtml",
+      "title_cn": "大和：壁仞科技重申“买入”评级 对公司40亿港元配股计划持正面看法",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "大和重申壁仞科技“买入”评级，并对公司40亿港元配股计划持正面看法。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-10/doc-iniusxpp6210879.shtml",
+      "title_cn": "小摩：紫金黄金国际目标价升至165港元 山东黄金目标价降至15港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "小摩将紫金黄金国际目标价升至165港元，同时将山东黄金目标价降至15港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "黄金"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-10/doc-iniusxpp6210861.shtml",
+      "title_cn": "小摩：长实集团维持“增持”评级 目标价52港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "小摩维持长实集团“增持”评级，目标价52港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "地产"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-10/doc-iniusxpp6210831.shtml",
+      "title_cn": "里昂：安踏体育维持“跑赢大市”评级 目标价110港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/10",
+      "summary": "里昂维持安踏体育“跑赢大市”评级，目标价110港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/11/top-analysts-prefer-these-3-dividend-stocks-for-stable-income.html",
+      "title_cn": "Top Wall Street analysts prefer these 3 dividend stocks for stable income",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "CNBC报道称，华尔街顶级分析师偏好3只股息股以获取稳定收益。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "股息股",
+        "分析师观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/09/junk-bonds-are-flashing-yellow-watch-these-warning-signs.html",
+      "title_cn": "Junk bonds are 'flashing yellow.' Watch these warning signs",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/09",
+      "summary": "CNBC报道称垃圾债市场正“闪烁黄灯”，并列出需关注的警示信号。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "信用风险"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/09/margin-debt-stock-market-risk.html",
+      "title_cn": "Living with Mom and trading on margin. The regular investor gets in on Wall Street's record stock borrowing binge",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/09",
+      "summary": "CNBC报道称，普通投资者通过保证金交易参与华尔街创纪录的股票借贷热潮。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "保证金交易",
+        "散户"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/faa-tells-us-airlines-to-exercise-caution-in-saudi-arabia-flights-citing-safety-risks-4942859",
+      "title_cn": "FAA tells US airlines to exercise caution in Saudi Arabia flights, citing safety risks",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "美国联邦航空管理局以安全风险为由，要求美国航空公司飞往沙特航班保持谨慎。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "航空",
+        "地缘政治",
+        "监管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/amazon-in-talks-to-buy-ai-startup-decart-for-around-7-billion-wsj-reports-4942850",
+      "title_cn": "Amazon in talks to buy AI startup Decart for around $7 billion, WSJ reports",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "据WSJ报道，亚马逊正洽谈以约70亿美元收购AI初创公司Decart。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "并购"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/russia-stocks-lower-at-close-of-trade-moex-russia-index-unchanged-4942851",
+      "title_cn": "Russia stocks lower at close of trade; MOEX Russia Index unchanged",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "俄罗斯股市收低，MOEX俄罗斯指数基本持平。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "俄罗斯",
+        "股市",
+        "指数"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/mirum-pharmaceuticals-to-share-phase-3-livmarli-study-results-93CH-4942847",
+      "title_cn": "Mirum Pharmaceuticals to share phase 3 LIVMARLI study results",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "Mirum Pharmaceuticals将公布LIVMARLI三期临床研究结果。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "临床研究",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/first-commonwealth-evpcfo-james-reske-disposes-of-42512-in-stock-93CH-4942846",
+      "title_cn": "First Commonwealth EVP/CFO James Reske disposes of $42,512 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "First Commonwealth执行副总裁兼CFO James Reske出售价值42,512美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "银行"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/prominent-republican-senator-says-trumps-russian-diesel-deal-may-be-illegal-4942755",
+      "title_cn": "US Republicans, Democrats want Trump to reverse course on Russia diesel",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "美国共和党与民主党议员希望特朗普改变对俄罗斯柴油的政策立场。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "政策",
+        "俄罗斯"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/astera-labs-director-dyckerhoff-sells-47-million-in-shares-93CH-4942843",
+      "title_cn": "Astera Labs director Dyckerhoff sells $4.7 million in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "Astera Labs董事Dyckerhoff出售价值470万美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "半导体"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/investors-are-likely-to-focus-on-spacexs-starship-tech-milestones-not-results-4942839",
+      "title_cn": "Investors are likely to focus on SpaceX’s Starship tech milestones, not results",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "报道称投资者可能更关注SpaceX星舰的技术里程碑，而非财务业绩。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "航天",
+        "SpaceX",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/yemens-houthis-renew-warning-over-saudi-airports-after-deadly-riyadh-attack-4942575",
+      "title_cn": "Saudi Arabia reports injuries in new attack at Riyadh airport, day after strike kills 13",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "沙特阿拉伯报告利雅得机场再次遭袭并出现人员受伤，此前一天袭击已致13人死亡。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "中东",
+        "航空"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
