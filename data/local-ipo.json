@@ -1,12 +1,23 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-11T14:07:28+08:00",
+  "fetchedAt": "2026-10-12T06:26:21+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-csrc-tutoring": 2
+    "gd-csrc-tutoring": 3
   },
   "items": [
+    {
+      "title": "广东晟辉科技股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/12/PREIPO_F0101_V01_20261012_36549_Q/6FBA208ABBDB4564A18D4622394CA6F3/关于广东晟辉科技股份有限公司首次公开发行股票并上市辅导工作进展报告（第八期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 申万宏源证券承销保荐有限责任公司 | 备案时间: 2024-09-25 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-12",
+      "publishedAt": "2026-10-12",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
     {
       "title": "广东东阳光药业股份有限公司 (辅导备案) [广东证监局]",
       "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/11/PREIPO_F0101_V01_20261011_36541_Q/C3189915D90F4F62911C45BADAAFE87E/关于广东东阳光药业股份有限公司首次公开发行股票并上市辅导工作进展报告（第十三期）.pdf",
