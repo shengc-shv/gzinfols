@@ -1,12 +1,34 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-12T06:26:21+08:00",
+  "fetchedAt": "2026-10-13T06:26:52+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-csrc-tutoring": 3
+    "gd-csrc-tutoring": 5
   },
   "items": [
+    {
+      "title": "广州众山新材料股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/13/PREIPO_F0101_V01_20261013_36555_Q/72EB80DCE5944E8E848EA8D850D7B3EF/关于广州众山新材料股份有限公司首次公开发行股票并上市辅导工作进展报告（第五期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 华泰联合证券有限责任公司 | 备案时间: 2025-07-10 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-13",
+      "publishedAt": "2026-10-13",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "深圳市兆兴博拓科技股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/13/PREIPO_F0101_V01_20261013_36560_Q/9386643E70014D4BAE079AACF464B2EB/关于深圳市兆兴博拓科技股份有限公司首次公开发行股票并上市辅导工作进展报告（第十六期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 兴业证券股份有限公司 | 备案时间: 2022-11-21 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-13",
+      "publishedAt": "2026-10-13",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
     {
       "title": "广东晟辉科技股份有限公司 (辅导备案) [广东证监局]",
       "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/12/PREIPO_F0101_V01_20261012_36549_Q/6FBA208ABBDB4564A18D4622394CA6F3/关于广东晟辉科技股份有限公司首次公开发行股票并上市辅导工作进展报告（第八期）.pdf",
