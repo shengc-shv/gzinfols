@@ -4242,23 +4242,26 @@
     "保险": {
       "id": "保险",
       "topicTags": [
-        "财富管理"
+        "财富管理",
+        "监管合规"
       ],
       "anchors": [
         "保险",
-        "理财"
+        "理财",
+        "罚"
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-09-22",
-      "lastBroadcastAt": "2026-10-06",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 4,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
         "受影响人群",
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -4295,17 +4298,33 @@
           "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-05/doc-iniuekzz2748694.shtml",
           "novelty": 0.7615384615384615,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-13",
+          "section": "must_read",
+          "title": "四部门发布贷款罚息理财担责案例",
+          "text": "四部门发布贷款罚息理财担责案例 四部门联合发布贷款罚息、理财亏损担责典型案例，销售适当性与合同条款争议成焦点，话术与留痕面临复核。",
+          "facts": [
+            "!发布"
+          ],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://finance.sina.com.cn/roll/2026-10-12/doc-iniuyhwz5267205.shtml",
+          "score": 74,
+          "novelty": 0.9927083333333333,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "保险短视频营销迎强监管 保险短视频营销迎强监管 代销合作方展业合规风险上升，代销准入与宣传物料审核需同步收紧，防范声誉风险。",
         "险资举牌降温权益逻辑切换 险资举牌降温权益逻辑切换 险资举牌热度降幅过半，权益投资逻辑切换，代销保险与理财客户的风险偏好正在迁移。",
-        "交银国际10月研选防御兼顾 交银国际10月研选防御兼顾 机构10月配置强调防御与收益兼顾，覆盖科技、新能源与保险标的，成为客户资产配置沟通的现成参考素材。"
+        "交银国际10月研选防御兼顾 交银国际10月研选防御兼顾 机构10月配置强调防御与收益兼顾，覆盖科技、新能源与保险标的，成为客户资产配置沟通的现成参考素材。",
+        "四部门发布贷款罚息理财担责案例 四部门发布贷款罚息理财担责案例 四部门联合发布贷款罚息、理财亏损担责典型案例，销售适当性与合同条款争议成焦点，话术与留痕面临复核。"
       ],
       "broadcastedFacts": [
-        "#10月"
+        "#10月",
+        "!发布"
       ],
-      "peakScore": 69
+      "peakScore": 74
     },
     "代发|客群|私行": {
       "id": "代发|客群|私行",
@@ -4889,17 +4908,19 @@
       ],
       "anchors": [
         "按揭",
-        "购房"
+        "购房",
+        "楼市"
       ],
       "kind": "ipo",
       "firstBroadcastAt": "2026-09-24",
-      "lastBroadcastAt": "2026-10-03",
-      "broadcastCount": 2,
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 3,
       "sections": [
         "must_read"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -4928,11 +4949,24 @@
           "score": 29,
           "novelty": 0.9854166666666666,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-13",
+          "section": "must_read",
+          "title": "深圳楼市银十开局良好",
+          "text": "深圳楼市银十开局良好 深圳楼市银十开局良好、政策组合拳见效，珠三角购房需求边际回暖，周边城市客户外溢迹象显现。",
+          "facts": [],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://www.stcn.com/article/detail/4213054.html",
+          "score": 66,
+          "novelty": 0.32375,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "多地加码买房补贴 多地加码买房补贴 金九银十购房成本下降，按揭咨询量或抬升，需提前备好补贴政策问答与受理口径。",
-        "多地出台预售现房新规 多地出台预售现房新规 商品住房预售与现房销售规则调整，涉房开发贷与按揭项目的准入和资金监管要求可能随之变化。"
+        "多地出台预售现房新规 多地出台预售现房新规 商品住房预售与现房销售规则调整，涉房开发贷与按揭项目的准入和资金监管要求可能随之变化。",
+        "深圳楼市银十开局良好 深圳楼市银十开局良好 深圳楼市银十开局良好、政策组合拳见效，珠三角购房需求边际回暖，周边城市客户外溢迹象显现。"
       ],
       "broadcastedFacts": [
         "!受理",
@@ -4983,21 +5017,25 @@
     "存款": {
       "id": "存款",
       "topicTags": [
-        "利率流动性"
+        "利率流动性",
+        "私行客群"
       ],
       "anchors": [
-        "存款"
+        "存款",
+        "#22%",
+        "客群"
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-09-24",
-      "lastBroadcastAt": "2026-10-11",
-      "broadcastCount": 2,
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 3,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -5021,13 +5059,29 @@
           "url": "https://m.21jingji.com/article/20261010/herald/6917084f0098da52e2e18e2b6ffe8f91.html",
           "novelty": 0.3208333333333333,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-13",
+          "section": "insights",
+          "title": "香港高息存款年化达22%",
+          "text": "香港高息存款年化达22% 香港多家银行推高息存款、部分年化达22%，跨境客群咨询量上升，但换汇赴港存在汇率与期限错配，客户实际到手收益可能被侵蚀。",
+          "facts": [
+            "#22%"
+          ],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://m.21jingji.com/article/20261012/herald/cf0dc63a42e014a7ba450727aafbe6e5.html",
+          "novelty": 0.55,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "人民币升破6.7 人民币升破6.7 前期配置美元存款客户出现汇兑浮亏，客户沟通与结汇时点提醒成为近期财富条线重点。",
-        "2字头大额存单重现 2字头大额存单重现 揽储逻辑转向精细化，存款到期客户的承接方式发生变化，期限匹配与收益比较成为客户决策焦点。"
+        "2字头大额存单重现 2字头大额存单重现 揽储逻辑转向精细化，存款到期客户的承接方式发生变化，期限匹配与收益比较成为客户决策焦点。",
+        "香港高息存款年化达22% 香港高息存款年化达22% 香港多家银行推高息存款、部分年化达22%，跨境客群咨询量上升，但换汇赴港存在汇率与期限错配，客户实际到手收益可能被侵蚀。"
       ],
-      "broadcastedFacts": [],
+      "broadcastedFacts": [
+        "#22%"
+      ],
       "peakScore": 61
     },
     "ev-woq4z8": {
@@ -7401,10 +7455,11 @@
       ],
       "kind": "local",
       "firstBroadcastAt": "2026-10-07",
-      "lastBroadcastAt": "2026-10-07",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 2,
       "sections": [
-        "must_read"
+        "must_read",
+        "insights"
       ],
       "anglesUsed": [
         "政策变化"
@@ -7423,10 +7478,24 @@
           "score": 31,
           "novelty": 0.7851063829787235,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-13",
+          "section": "insights",
+          "title": "广州站枢纽运能扩容",
+          "text": "广州站枢纽运能扩容 广州站新增广湛跨线列车、广州东站开行列车365列，广交会期间客流与商旅活动升温，沿线消费与支付场景活跃度提升。",
+          "facts": [
+            "@广州"
+          ],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202610/12/139995_55012148.htm",
+          "novelty": 0.7936363636363637,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "国铁广州局加开702列 国铁广州局加开702列 国铁广州局今日计划加开列车702列，涉京广等线路，返程客流高峰带来出行支付与消费场景的短期集中。"
+        "国铁广州局加开702列 国铁广州局加开702列 国铁广州局今日计划加开列车702列，涉京广等线路，返程客流高峰带来出行支付与消费场景的短期集中。",
+        "广州站枢纽运能扩容 广州站枢纽运能扩容 广州站新增广湛跨线列车、广州东站开行列车365列，广交会期间客流与商旅活动升温，沿线消费与支付场景活跃度提升。"
       ],
       "broadcastedFacts": [
         "@广州"
@@ -7959,151 +8028,263 @@
         "@证监会"
       ],
       "peakScore": 42
+    },
+    "#0.25%|#0.67%": {
+      "id": "#0.25%|#0.67%",
+      "topicTags": [],
+      "anchors": [
+        "#0.25%",
+        "#0.67%"
+      ],
+      "kind": "market",
+      "firstBroadcastAt": "2026-10-13",
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-13",
+          "section": "must_read",
+          "title": "港股内银走强科指下挫",
+          "text": "港股内银走强科指下挫 恒指涨0.25%、科指跌0.67%，内银股走强而光通信下挫，港股通客户持仓结构分化加剧。",
+          "facts": [
+            "#0.25%",
+            "#0.67%"
+          ],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-12/doc-iniuyarm8497706.shtml",
+          "score": 66,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "港股内银走强科指下挫 港股内银走强科指下挫 恒指涨0.25%、科指跌0.67%，内银股走强而光通信下挫，港股通客户持仓结构分化加剧。"
+      ],
+      "broadcastedFacts": [
+        "#0.25%",
+        "#0.67%"
+      ],
+      "peakScore": 66
+    },
+    "#33.5万亿|理财": {
+      "id": "#33.5万亿|理财",
+      "topicTags": [
+        "财富管理"
+      ],
+      "anchors": [
+        "理财",
+        "#33.5万亿"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-13",
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [
+        "政策变化"
+      ],
+      "samples": [
+        {
+          "date": "2026-10-13",
+          "section": "must_read",
+          "title": "理财规模33.5万亿收益走低",
+          "text": "理财规模33.5万亿收益走低 9月末理财规模维稳33.5万亿，但收益与兑付率全线走低，四季度行业转向控波动控回撤，客户对净值回撤更敏感。",
+          "facts": [
+            "#33.5万亿",
+            "#9月"
+          ],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://finance.sina.com.cn/roll/2026-10-12/doc-iniuyhxf7381239.shtml",
+          "score": 59,
+          "novelty": 0.9929999999999999,
+          "angle": "政策变化"
+        }
+      ],
+      "broadcastedTexts": [
+        "理财规模33.5万亿收益走低 理财规模33.5万亿收益走低 9月末理财规模维稳33.5万亿，但收益与兑付率全线走低，四季度行业转向控波动控回撤，客户对净值回撤更敏感。"
+      ],
+      "broadcastedFacts": [
+        "#33.5万亿",
+        "#9月"
+      ],
+      "peakScore": 59
+    },
+    "ev-1rnmfs": {
+      "id": "ev-1rnmfs",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-10-13",
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-13",
+          "section": "must_read",
+          "title": "银行板块新高茅台重夺股王",
+          "text": "银行板块新高茅台重夺股王 银行板块创新高、茅台重回股王，资金风格向大盘蓝筹集中，客户持仓风格切换迹象明显。",
+          "facts": [],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://finance.sina.com.cn/stock/roll/2026-10-12/doc-iniuyhwz5268050.shtml",
+          "score": 21,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "银行板块新高茅台重夺股王 银行板块新高茅台重夺股王 银行板块创新高、茅台重回股王，资金风格向大盘蓝筹集中，客户持仓风格切换迹象明显。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 21
+    },
+    "ev-s7kc5c": {
+      "id": "ev-s7kc5c",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-13",
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-13",
+          "section": "insights",
+          "title": "宜信停兑称或已资不抵债",
+          "text": "宜信停兑称或已资不抵债 宜信停兑四个多月后致歉并称可能已资不抵债，第三方财富机构风险持续暴露，存量代销与客户转介关联敞口面临排查压力。",
+          "facts": [],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://finance.cctv.com/2026/10/12/ARTIYYWno0Fq8yCp2bQxYfIj261012.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "宜信停兑称或已资不抵债 宜信停兑称或已资不抵债 宜信停兑四个多月后致歉并称可能已资不抵债，第三方财富机构风险持续暴露，存量代销与客户转介关联敞口面临排查压力。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-q9uzag": {
+      "id": "ev-q9uzag",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-13",
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-13",
+          "section": "insights",
+          "title": "积存金手续费率降至零",
+          "text": "积存金手续费率降至零 中行、工行等以限时优惠抢积存金市场、部分手续费率降至0，贵金属类产品价格战升温，客户比价行为加剧，留存压力上升。",
+          "facts": [],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://finance.sina.com.cn/jinrong/yh/2026-10-12/doc-iniuyhxe0564461.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "积存金手续费率降至零 积存金手续费率降至零 中行、工行等以限时优惠抢积存金市场、部分手续费率降至0，贵金属类产品价格战升温，客户比价行为加剧，留存压力上升。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "#190%": {
+      "id": "#190%",
+      "topicTags": [
+        "广州本地"
+      ],
+      "anchors": [
+        "#190%"
+      ],
+      "kind": "local",
+      "firstBroadcastAt": "2026-10-13",
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-13",
+          "section": "insights",
+          "title": "新沙港汽车出口增190%",
+          "text": "新沙港汽车出口增190% 广州港新沙港区前三季度铁海联运出口汽车超7万辆、同比增190%，汽车出口链条上的跨境结算与供应链融资需求集中释放。",
+          "facts": [
+            "#190%"
+          ],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202610/12/139995_55012028.htm",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "新沙港汽车出口增190% 新沙港汽车出口增190% 广州港新沙港区前三季度铁海联运出口汽车超7万辆、同比增190%，汽车出口链条上的跨境结算与供应链融资需求集中释放。"
+      ],
+      "broadcastedFacts": [
+        "#190%"
+      ],
+      "peakScore": 0
+    },
+    "ev-cpl494": {
+      "id": "ev-cpl494",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-10-13",
+      "lastBroadcastAt": "2026-10-13",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-13",
+          "section": "insights",
+          "title": "腾讯连续40日回购",
+          "text": "腾讯连续40日回购 腾讯控股10月12日回购1亿港元、已连续40日回购，港股通客户持仓集中度上升，相关标的的市值管理与客户沟通需求增加。",
+          "facts": [
+            "#40日",
+            "#10月",
+            "#12日"
+          ],
+          "broadcastAt": "2026-10-13T06:28:35+08:00",
+          "url": "https://www.stcn.com/article/detail/4213342.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "腾讯连续40日回购 腾讯连续40日回购 腾讯控股10月12日回购1亿港元、已连续40日回购，港股通客户持仓集中度上升，相关标的的市值管理与客户沟通需求增加。"
+      ],
+      "broadcastedFacts": [
+        "#40日",
+        "#10月",
+        "#12日"
+      ],
+      "peakScore": 0
     }
   },
   "today": {
     "date": "2026-10-13",
-    "entries": [
-      {
-        "date": "2026-10-13",
-        "section": "must_read",
-        "title": "四部门发布贷款罚息理财担责案例",
-        "text": "四部门发布贷款罚息理财担责案例 四部门联合发布贷款罚息、理财亏损担责典型案例，销售适当性与合同条款争议成焦点，话术与留痕面临复核。",
-        "facts": [
-          "!发布"
-        ],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://finance.sina.com.cn/roll/2026-10-12/doc-iniuyhwz5267205.shtml",
-        "score": 74,
-        "novelty": 0.9927083333333333,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-10-13",
-        "section": "must_read",
-        "title": "港股内银走强科指下挫",
-        "text": "港股内银走强科指下挫 恒指涨0.25%、科指跌0.67%，内银股走强而光通信下挫，港股通客户持仓结构分化加剧。",
-        "facts": [
-          "#0.25%",
-          "#0.67%"
-        ],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-12/doc-iniuyarm8497706.shtml",
-        "score": 66,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-13",
-        "section": "must_read",
-        "title": "深圳楼市银十开局良好",
-        "text": "深圳楼市银十开局良好 深圳楼市银十开局良好、政策组合拳见效，珠三角购房需求边际回暖，周边城市客户外溢迹象显现。",
-        "facts": [],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://www.stcn.com/article/detail/4213054.html",
-        "score": 66,
-        "novelty": 0.32375,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-10-13",
-        "section": "must_read",
-        "title": "理财规模33.5万亿收益走低",
-        "text": "理财规模33.5万亿收益走低 9月末理财规模维稳33.5万亿，但收益与兑付率全线走低，四季度行业转向控波动控回撤，客户对净值回撤更敏感。",
-        "facts": [
-          "#33.5万亿",
-          "#9月"
-        ],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://finance.sina.com.cn/roll/2026-10-12/doc-iniuyhxf7381239.shtml",
-        "score": 59,
-        "novelty": 0.9929999999999999,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-10-13",
-        "section": "must_read",
-        "title": "银行板块新高茅台重夺股王",
-        "text": "银行板块新高茅台重夺股王 银行板块创新高、茅台重回股王，资金风格向大盘蓝筹集中，客户持仓风格切换迹象明显。",
-        "facts": [],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://finance.sina.com.cn/stock/roll/2026-10-12/doc-iniuyhwz5268050.shtml",
-        "score": 21,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-13",
-        "section": "insights",
-        "title": "香港高息存款年化达22%",
-        "text": "香港高息存款年化达22% 香港多家银行推高息存款、部分年化达22%，跨境客群咨询量上升，但换汇赴港存在汇率与期限错配，客户实际到手收益可能被侵蚀。",
-        "facts": [
-          "#22%"
-        ],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://m.21jingji.com/article/20261012/herald/cf0dc63a42e014a7ba450727aafbe6e5.html",
-        "novelty": 0.55,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-10-13",
-        "section": "insights",
-        "title": "宜信停兑称或已资不抵债",
-        "text": "宜信停兑称或已资不抵债 宜信停兑四个多月后致歉并称可能已资不抵债，第三方财富机构风险持续暴露，存量代销与客户转介关联敞口面临排查压力。",
-        "facts": [],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://finance.cctv.com/2026/10/12/ARTIYYWno0Fq8yCp2bQxYfIj261012.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-13",
-        "section": "insights",
-        "title": "积存金手续费率降至零",
-        "text": "积存金手续费率降至零 中行、工行等以限时优惠抢积存金市场、部分手续费率降至0，贵金属类产品价格战升温，客户比价行为加剧，留存压力上升。",
-        "facts": [],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://finance.sina.com.cn/jinrong/yh/2026-10-12/doc-iniuyhxe0564461.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-13",
-        "section": "insights",
-        "title": "新沙港汽车出口增190%",
-        "text": "新沙港汽车出口增190% 广州港新沙港区前三季度铁海联运出口汽车超7万辆、同比增190%，汽车出口链条上的跨境结算与供应链融资需求集中释放。",
-        "facts": [
-          "#190%"
-        ],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202610/12/139995_55012028.htm",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-13",
-        "section": "insights",
-        "title": "广州站枢纽运能扩容",
-        "text": "广州站枢纽运能扩容 广州站新增广湛跨线列车、广州东站开行列车365列，广交会期间客流与商旅活动升温，沿线消费与支付场景活跃度提升。",
-        "facts": [
-          "@广州"
-        ],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202610/12/139995_55012148.htm",
-        "novelty": 0.7936363636363637,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-10-13",
-        "section": "insights",
-        "title": "腾讯连续40日回购",
-        "text": "腾讯连续40日回购 腾讯控股10月12日回购1亿港元、已连续40日回购，港股通客户持仓集中度上升，相关标的的市值管理与客户沟通需求增加。",
-        "facts": [
-          "#40日",
-          "#10月",
-          "#12日"
-        ],
-        "broadcastAt": "2026-10-13T06:28:35+08:00",
-        "url": "https://www.stcn.com/article/detail/4213342.html",
-        "novelty": 1
-      }
-    ],
-    "runId": "38316783783"
+    "entries": []
   },
   "deliveries": [
     {
@@ -8293,6 +8474,13 @@
       "runId": "38185576491",
       "reportRunId": "38180474813",
       "reportSha": "0f736199ffab6a3f826c8ba75121ce6eb801d7fd"
+    },
+    {
+      "date": "2026-10-13",
+      "pushedAt": "2026-10-13T07:47:27+08:00",
+      "runId": "38323946292",
+      "reportRunId": "38316783783",
+      "reportSha": "abf92a457f577d14491c1dbad0417db755742303"
     }
   ],
   "ipoVoicing": {
