@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-12",
+  "updatedAt": "2026-10-13",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -7962,8 +7962,148 @@
     }
   },
   "today": {
-    "date": "2026-10-12",
-    "entries": []
+    "date": "2026-10-13",
+    "entries": [
+      {
+        "date": "2026-10-13",
+        "section": "must_read",
+        "title": "四部门发布贷款罚息理财担责案例",
+        "text": "四部门发布贷款罚息理财担责案例 四部门联合发布贷款罚息、理财亏损担责典型案例，销售适当性与合同条款争议成焦点，话术与留痕面临复核。",
+        "facts": [
+          "!发布"
+        ],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-10-12/doc-iniuyhwz5267205.shtml",
+        "score": 74,
+        "novelty": 0.9927083333333333,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-13",
+        "section": "must_read",
+        "title": "港股内银走强科指下挫",
+        "text": "港股内银走强科指下挫 恒指涨0.25%、科指跌0.67%，内银股走强而光通信下挫，港股通客户持仓结构分化加剧。",
+        "facts": [
+          "#0.25%",
+          "#0.67%"
+        ],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-12/doc-iniuyarm8497706.shtml",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-13",
+        "section": "must_read",
+        "title": "深圳楼市银十开局良好",
+        "text": "深圳楼市银十开局良好 深圳楼市银十开局良好、政策组合拳见效，珠三角购房需求边际回暖，周边城市客户外溢迹象显现。",
+        "facts": [],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://www.stcn.com/article/detail/4213054.html",
+        "score": 66,
+        "novelty": 0.32375,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-13",
+        "section": "must_read",
+        "title": "理财规模33.5万亿收益走低",
+        "text": "理财规模33.5万亿收益走低 9月末理财规模维稳33.5万亿，但收益与兑付率全线走低，四季度行业转向控波动控回撤，客户对净值回撤更敏感。",
+        "facts": [
+          "#33.5万亿",
+          "#9月"
+        ],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-10-12/doc-iniuyhxf7381239.shtml",
+        "score": 59,
+        "novelty": 0.9929999999999999,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-13",
+        "section": "must_read",
+        "title": "银行板块新高茅台重夺股王",
+        "text": "银行板块新高茅台重夺股王 银行板块创新高、茅台重回股王，资金风格向大盘蓝筹集中，客户持仓风格切换迹象明显。",
+        "facts": [],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://finance.sina.com.cn/stock/roll/2026-10-12/doc-iniuyhwz5268050.shtml",
+        "score": 21,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-13",
+        "section": "insights",
+        "title": "香港高息存款年化达22%",
+        "text": "香港高息存款年化达22% 香港多家银行推高息存款、部分年化达22%，跨境客群咨询量上升，但换汇赴港存在汇率与期限错配，客户实际到手收益可能被侵蚀。",
+        "facts": [
+          "#22%"
+        ],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://m.21jingji.com/article/20261012/herald/cf0dc63a42e014a7ba450727aafbe6e5.html",
+        "novelty": 0.55,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-13",
+        "section": "insights",
+        "title": "宜信停兑称或已资不抵债",
+        "text": "宜信停兑称或已资不抵债 宜信停兑四个多月后致歉并称可能已资不抵债，第三方财富机构风险持续暴露，存量代销与客户转介关联敞口面临排查压力。",
+        "facts": [],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://finance.cctv.com/2026/10/12/ARTIYYWno0Fq8yCp2bQxYfIj261012.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-13",
+        "section": "insights",
+        "title": "积存金手续费率降至零",
+        "text": "积存金手续费率降至零 中行、工行等以限时优惠抢积存金市场、部分手续费率降至0，贵金属类产品价格战升温，客户比价行为加剧，留存压力上升。",
+        "facts": [],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://finance.sina.com.cn/jinrong/yh/2026-10-12/doc-iniuyhxe0564461.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-13",
+        "section": "insights",
+        "title": "新沙港汽车出口增190%",
+        "text": "新沙港汽车出口增190% 广州港新沙港区前三季度铁海联运出口汽车超7万辆、同比增190%，汽车出口链条上的跨境结算与供应链融资需求集中释放。",
+        "facts": [
+          "#190%"
+        ],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/12/139995_55012028.htm",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-13",
+        "section": "insights",
+        "title": "广州站枢纽运能扩容",
+        "text": "广州站枢纽运能扩容 广州站新增广湛跨线列车、广州东站开行列车365列，广交会期间客流与商旅活动升温，沿线消费与支付场景活跃度提升。",
+        "facts": [
+          "@广州"
+        ],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/12/139995_55012148.htm",
+        "novelty": 0.7936363636363637,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-13",
+        "section": "insights",
+        "title": "腾讯连续40日回购",
+        "text": "腾讯连续40日回购 腾讯控股10月12日回购1亿港元、已连续40日回购，港股通客户持仓集中度上升，相关标的的市值管理与客户沟通需求增加。",
+        "facts": [
+          "#40日",
+          "#10月",
+          "#12日"
+        ],
+        "broadcastAt": "2026-10-13T06:28:35+08:00",
+        "url": "https://www.stcn.com/article/detail/4213342.html",
+        "novelty": 1
+      }
+    ],
+    "runId": "38316783783"
   },
   "deliveries": [
     {
@@ -8170,6 +8310,15 @@
     ],
     "中星微技术股份有限公司IPO辅导进展": [
       "2026-10-12"
+    ],
+    "广州众山新材料股份有限公司": [
+      "2026-10-13"
+    ],
+    "深圳市兆兴博拓科技股份有限公司": [
+      "2026-10-13"
+    ],
+    "广东晟辉科技股份有限公司": [
+      "2026-10-13"
     ],
     "汉诺医疗": [
       "2026-10-01"
