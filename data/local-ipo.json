@@ -1,10 +1,11 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-13T06:26:52+08:00",
+  "fetchedAt": "2026-10-14T06:26:58+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-csrc-tutoring": 5
+    "gd-csrc-tutoring": 5,
+    "gd-sse-audit": 1
   },
   "items": [
     {
@@ -28,6 +29,17 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "龙行天下：IPO问询中（拟主板）",
+      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2193@2",
+      "excerpt": "注册地：广东东莞市｜保荐：招商证券股份有限公司｜受理：2026-05-29｜状态：IPO问询中｜更新：2026-10-13｜行业：皮革、毛皮、羽毛及其制品和制鞋业",
+      "publishedAt": "2026-10-13",
+      "source": "上交所IPO审核动态",
+      "sourceId": "gd-sse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
     },
     {
       "title": "广东晟辉科技股份有限公司 (辅导备案) [广东证监局]",
