@@ -1,0 +1,875 @@
+{
+  "date": "2026-10-14",
+  "updatedAt": "2026-10-13T22:30:26.330Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：存款定价逆势上调，3年期大额存单重回2%；跨境金融沪上提速，离岸试点首单落地；广州未来产业方案与粤芯上市，本地科创客群扩容。",
+    "spoken_hero": "今天主要看三个方面：存款定价出现分化，三年期大额存单利率重回百分之二；跨境金融在上海提速，离岸试点首单落地；广州未来产业方案出台，粤芯半导体登陆创业板，本地科创客群在扩容。",
+    "must_read": [
+      {
+        "title": "3年期大额存单利率重回2%",
+        "why": "部分中小行逆势上调存款利率，广州存款定价竞争加剧，客户资金留存与付息成本两端同时承压。",
+        "url": "https://finance.cctv.com/2026/10/13/ARTI9RIdTF7ZnRPMHTlGN4ky261013.shtml"
+      },
+      {
+        "title": "上海离岸金融试点首单落地",
+        "why": "离岸试点落地、企业外汇套保签约率近四成，跨境金融开放节奏加快，广州跨境客群的对标空间被打开。",
+        "url": "https://m.21jingji.com/article/20261013/herald/d5ca02ba7fe684fdb06b4eca541cb42b.html"
+      },
+      {
+        "title": "公募新规打开2.52万亿理财空间",
+        "why": "两万五千亿理财资金的投资工具空间被打开，理财子与公募的能力接口进度直接影响产品供给。",
+        "url": "https://finance.sina.com.cn/roll/2026-10-13/doc-inivasef8035064.shtml"
+      },
+      {
+        "title": "港交所押注人民币产品",
+        "why": "港交所加码人民币产品吸引全球资金，跨境客户的人民币资产配置与结算需求出现联动变化。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_10_13_904102.shtml"
+      },
+      {
+        "title": "广州未来产业先导区方案印发",
+        "why": "方案明确2029年形成全国影响力产业集群，本地科创企业的融资与结算需求进入扩容期。",
+        "url": "https://news.dayoo.com/guangzhou/202610/13/139995_55012495.htm"
+      }
+    ],
+    "spoken_must_read": "3年期大额存单利率重回2%。部分中小行逆势上调存款利率，广州存款定价竞争加剧，客户资金留存与付息成本两端同时承压。其次，上海离岸金融试点首单落地。离岸试点落地、企业外汇套保签约率近四成，跨境金融开放节奏加快，广州跨境客群的对标空间被打开。此外，公募新规打开2.52万亿理财空间。两万五千亿理财资金的投资工具空间被打开，理财子与公募的能力接口进度直接影响产品供给。还有，港交所押注人民币产品。港交所加码人民币产品吸引全球资金，跨境客户的人民币资产配置与结算需求出现联动变化。另外，广州未来产业先导区方案印发。方案明确2029年形成全国影响力产业集群，本地科创企业的融资与结算需求进入扩容期。",
+    "insights": [
+      {
+        "topic": "北交所新三板一体化推进",
+        "impact": "中小企业上市路径变化，科创客群的融资、结算与股权服务需求链条被拉长。",
+        "tag": [
+          "科技金融",
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "证监会：推动北交所新三板一体化高质量发展",
+            "url": "https://finance.sina.com.cn/jjxw/2026-10-13/doc-iniuzeax8211924.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "千亿财政撬动消费场景",
+        "impact": "财政资金带动三倍消费增量，消费贷与场景分期的获客窗口打开，本地消费类商户的资金密度上升。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "中央财政千亿资金落地 已带动三千亿消费增长",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_10_13_903991.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "公积金提取新政落地",
+        "impact": "多城提取便利化改变住房金融客群的资金到账节奏，按揭与消费贷的联动关系随之变化。",
+        "tag": [
+          "住房金融"
+        ],
+        "group": "住房金融",
+        "sources": [
+          {
+            "title": "多城住房公积金提取新政落地",
+            "url": "https://www.stcn.com/article/detail/4214911.html"
+          }
+        ]
+      },
+      {
+        "topic": "粤芯上市带动产业链客群",
+        "impact": "广州首家晶圆制造企业上市首日涨223%，本地半导体上下游客户的结算与融资需求延伸。",
+        "tag": [
+          "科技金融",
+          "客群"
+        ],
+        "group": "科创产业链",
+        "sources": [
+          {
+            "title": "“广州第一芯”登陆创业板！首日涨223%，3家理财公司24只产品浮盈近千万",
+            "url": "https://finance.sina.com.cn/jjxw/2026-10-13/doc-inivasec7360595.shtml"
+          },
+          {
+            "title": "粤芯半导体登陆A股创业板 迎来首家晶圆制造企业",
+            "url": "https://finance.eastmoney.com/a/202610143894529796.html"
+          }
+        ]
+      },
+      {
+        "topic": "中小行重启理财代销",
+        "impact": "徐州农商行恢复代销理财，区域代销渠道重启，产品准入节奏与区域竞争格局出现变化。",
+        "tag": [
+          "竞对动态",
+          "财富"
+        ],
+        "group": "财富代销",
+        "sources": [
+          {
+            "title": "徐州农商银行恢复代销理财业务，百亿注册资本新行开启常态运营",
+            "url": "https://m.21jingji.com/article/20261013/herald/db370cd26f52fe7d34b01f7950ca9c5f.html"
+          }
+        ]
+      },
+      {
+        "topic": "银行校招转向技术复合岗",
+        "impact": "零售条线数字化岗位配置与人才储备的竞争前移，懂金融的技术人成为同业争夺焦点。",
+        "tag": [
+          "科技金融",
+          "竞对动态"
+        ],
+        "group": "人才与科技",
+        "sources": [
+          {
+            "title": "银行校招大变局，“懂金融的技术人”最吃香！哪些岗位在扩招？哪些在消失？",
+            "url": "https://finance.cctv.com/2026/10/13/ARTI7vV5h6DNh8EX8gp4wXu5261013.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，公募新规为两万五千亿理财资金打开投资工具空间，理财普惠在往最后一公里走，长尾客群的线上化产品渗透在加快。高端客户方面，海外通胀对冲工具讨论升温，通胀挂钩和另类配置的咨询需求在变多；港交所加码人民币产品，跨境客户的人民币资产配置与结算需求也在联动。普惠小微方面，证监会推动北交所新三板一体化，中小企业上市路径在变，科创客群的综合服务需求跟着走；广州未来产业先导区方案明确到二〇二九年的目标，本地科创企业的融资与结算需求在扩容。本地消费场景方面，中央财政千亿资金已带动三千亿消费增长，消费贷与场景分期的获客窗口在打开。",
+    "risk": {
+      "topic": "理财适当性义务认定收紧",
+      "evidence": "四部门发布买理财亏损案例，明确“无诱导”不等于银行已尽适当性义务。",
+      "impact": "财富与私行条线的双录、风险揭示与客户匹配环节面临更严认定标准，销售环节的合规举证责任加重。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "四部门发布买理财亏损案例：无诱导不等于银行已尽适当性义务",
+          "url": "https://finance.cctv.com/2026/10/13/ARTImtUXkiKXqq7ovqYYhXUL261013.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：理财适当性义务认定收紧，财富与私行条线的双录、风险揭示与客户匹配环节面临更严认定标准，销售环节的合规举证责任加重。",
+    "guangdong_ipo": {
+      "spoken": "广东广州企业IPO方面，广州众山新材料已在广东证监局完成辅导备案，辅导机构为华泰联合证券；东莞的龙行天下拟上主板，目前处于IPO问询中，保荐机构为招商证券。此外，广州粤芯半导体昨天登陆深交所创业板，成为首家晶圆制造上市企业。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "美股三大指数小幅收跌，道指跌0.35%领跌，银行财报前市场观望。",
+      "sectors": [
+        "银行股承压：美银因反洗钱监管失职被罚12亿美元，股价走低。",
+        "银行财报周临近，期权市场押注金融板块大幅波动，利率影响受关注。",
+        "Snap期权出现大额交易，押注股价上涨30%，看涨情绪升温。",
+        "联合健康财报前股价异动，医疗保险公司成本压力受关注。",
+        "AT&T以20亿美元出售墨西哥业务予Televisa，后者股价大涨。"
+      ],
+      "spoken": "美股三大指数小幅收跌，道指跌百分之零点三五，纳指跌百分之零点一五，标普基本持平。板块方面，美银因反洗钱监管被罚十二亿美元，股价走低，银行财报周临近，期权市场押注金融板块大幅波动。Snap期权出现大额看涨交易，联合健康财报前股价异动，AT&T出售墨西哥业务，Televisa股价大涨。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-14"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51670.10",
+          "changePct": "-0.35%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "27204.38",
+          "changePct": "-0.15%"
+        },
+        {
+          "name": "标普500",
+          "value": "7805.45",
+          "changePct": "-0.02%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3800.86点（+0.10%）；深证成指收报12353.70点（-0.25%）；创业板指收报2958.34点（-0.18%）。",
+      "sectors": [
+        "上证指数探底回升收复3800点",
+        "算力硬件股集体反弹"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-14"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3800.86",
+          "changePct": "+0.10%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12353.70",
+          "changePct": "-0.25%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2958.34",
+          "changePct": "-0.18%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24345.22点（+0.30%）；恒生科技收报4136.63点（-0.79%）。",
+      "sectors": [
+        "科网股、存储股低迷",
+        "石油股活跃"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-14"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.3% 科指跌0.79% 科网股、存储股低迷 石油股活跃",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-13/doc-inivamwi8060952.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24345.22",
+          "changePct": "+0.30%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4136.63",
+          "changePct": "-0.79%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-13",
+    "marketStatus": {
+      "reportDate": "2026-10-14",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-10-13"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-13"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-13"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 10月13日 周二 收盘；港股为 10月13日 周二 收盘；美股为 10月13日 周二 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610133893096930.html",
+      "title_cn": "清晨集体跳水！股市“吹哨人”突然发声！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "10月13日A股开盘集体跳水，有“股市吹哨人”之称的人士突然发声，引发市场关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "市场波动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610133893620056.html",
+      "title_cn": "尊界V800公布制动踏板第三方检测结果",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "尊界V800公布制动踏板第三方检测结果。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "汽车",
+        "检测"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610133893962818.html",
+      "title_cn": "A股突然全线拉升！发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "10月13日A股突然全线拉升，市场关注拉升原因。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "市场波动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610133893327494.html",
+      "title_cn": "美联储突发大消息！日韩股市闪崩",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "美联储突发大消息，日韩股市出现闪崩。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "日韩股市",
+        "海外市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610133894110684.html",
+      "title_cn": "宽基ETF显著放量大资金托底信号再现",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "宽基ETF显著放量，市场再现大资金托底信号。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "ETF",
+        "资金面",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610133894110332.html",
+      "title_cn": "A股三大指数震荡整理电子元件板块掀涨停潮",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "A股三大指数震荡整理，电子元件板块掀起涨停潮。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "电子元件",
+        "指数"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610133893376093.html",
+      "title_cn": "前“股王”净利预增超20倍！三季报业绩预增潮来了（附名单）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "前“股王”预告净利润同比增长超20倍，三季报业绩预增潮来临。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "业绩预增",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610133894298526.html",
+      "title_cn": "10月13日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "10月13日晚间沪深上市公司重大事项公告汇总发布。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "公告",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610133893322432.html",
+      "title_cn": "科技日报：新质生产力不应成为资本炒作噱头！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "科技日报发文指出，新质生产力不应成为资本炒作的噱头。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "新质生产力",
+        "监管"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610133893965138.html",
+      "title_cn": "元件突发拉升！AI引发结构性紧缺国产替代加速",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "电子元件板块突发拉升，AI引发结构性紧缺，国产替代加速。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "电子元件",
+        "AI",
+        "国产替代"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143894566285.html",
+      "title_cn": "以投资优化支撑产业升级——正确认识中国经济的阶段特征与长远趋势③（人民时评）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "人民时评发文称，应以投资优化支撑产业升级，正确认识中国经济的阶段特征与长远趋势。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "宏观经济",
+        "产业升级"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143894565589.html",
+      "title_cn": "中欧该打造怎样的“伙伴逻辑”？（环球走笔）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "环球走笔评论探讨中欧应打造怎样的“伙伴逻辑”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "中欧关系",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-13/doc-inivamwi8060952.shtml",
+      "title_cn": "港股收评：恒指涨0.3% 科指跌0.79% 科网股、存储股低迷 石油股活跃",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "港股收评：恒指涨0.3%，科指跌0.79%，科网股、存储股低迷，石油股活跃。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "科网股",
+        "石油股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-14/doc-inivctrq0434941.shtml",
+      "title_cn": "恒指牛熊街货比(48:52)︱10月14日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "10月14日恒指牛熊街货比为48:52。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/roll/2026-10-13/doc-inivamwf7267804.shtml",
+      "title_cn": "香港证监会紧急叫停茶百道交易！IPO疑遭人为操纵，逾46亿资金被冻结",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "香港证监会紧急叫停茶百道交易，IPO疑遭人为操纵，逾46亿资金被冻结。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "监管",
+        "茶百道"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-13/doc-inivafqh0492073.shtml",
+      "title_cn": "海底捞向张勇提供1亿港元贷款 股价盘中创近四年新低 其妻月前套现27.5亿港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "海底捞向张勇提供1亿港元贷款，股价盘中创近四年新低，其妻月前套现27.5亿港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "海底捞",
+        "公司治理"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-13/doc-iniuzuyn0433580.shtml",
+      "title_cn": "恒生科技指数跌幅扩大逾2%，较去年10月高点回调39%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "恒生科技指数跌幅扩大逾2%，较去年10月高点回调39%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生科技指数",
+        "市场波动"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-13/doc-iniuzuyn0442311.shtml",
+      "title_cn": "赛力斯港股盘中再涨超9%，昨日已大涨逾15%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "赛力斯港股盘中再涨超9%，前一日已大涨逾15%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "赛力斯",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-10-13/doc-iniuzqst8191922.shtml",
+      "title_cn": "港股概念追踪 | 产能持续去化猪价弱复苏 明年二季度有望迎来上行拐点(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "港股概念追踪显示，生猪产能持续去化、猪价弱复苏，明年二季度有望迎来上行拐点。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "生猪",
+        "农业"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-13/doc-iniuzkkv8273658.shtml",
+      "title_cn": "一家港股IPO终止！",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "一家港股IPO终止。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-13/doc-iniuzqst8184384.shtml",
+      "title_cn": "关于延长港股交易时间，香港证监会发声！",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "香港证监会就延长港股交易时间发声。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "监管",
+        "交易制度"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-10-13/doc-inivamwf7227008.shtml",
+      "title_cn": "IMF亚太部副主任：港元稳定币的市场接受度有提升空间 稳定币全球应用规模仍有限 投资者需要时间熟悉",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "IMF亚太部副主任表示，港元稳定币市场接受度有提升空间，稳定币全球应用规模仍有限，投资者需要时间熟悉。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "稳定币",
+        "IMF",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-13/doc-inivafqm8130320.shtml",
+      "title_cn": "小摩：阿里巴巴-W目标价下调至195港元 维持“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "摩根大通将阿里巴巴-W目标价下调至195港元，维持“增持”评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "阿里巴巴",
+        "机构评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-13/doc-inivamwi8111408.shtml",
+      "title_cn": "大和：继续看好百胜中国(09987)及古茗(01364) 国庆黄金周餐饮表现分化",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "大和表示继续看好百胜中国及古茗，国庆黄金周餐饮表现分化。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "餐饮",
+        "机构评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/13/inflation-hedge-tips-commodities-infrastructure.html",
+      "title_cn": "Don't let inflation bite — how to hedge with TIPS, commodities and infrastructure funds",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "CNBC文章讨论如何通过TIPS、大宗商品和基础设施基金对冲通胀风险。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "通胀",
+        "投资策略"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/12/a-massive-trade-just-happens-in-surging-shares-of-snap.html",
+      "title_cn": "A massive trade just happened in surging shares of Snap",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/12",
+      "summary": "Snap股价上涨之际出现一笔大规模交易。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "Snap",
+        "交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/12/unitedhealth-shares-are-doing-something-unusual-ahead-of-earnings.html",
+      "title_cn": "UnitedHealth shares are doing something unusual ahead of earnings",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/12",
+      "summary": "联合健康股价在财报发布前出现异常走势。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "联合健康",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/12/banks-are-set-to-report-this-week-heres-what-the-options-market-expects.html",
+      "title_cn": "Banks are set to report this week. Here's what the options market expects",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/12",
+      "summary": "美国银行业本周将发布财报，期权市场对其表现有所预期。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "银行",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/11/top-analysts-prefer-these-3-dividend-stocks-for-stable-income.html",
+      "title_cn": "Top Wall Street analysts prefer these 3 dividend stocks for stable income",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/11",
+      "summary": "华尔街顶级分析师推荐三只股息股以获取稳定收益。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "股息股",
+        "机构观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/fbi-arrests-former-openai-employee-for-planting-listening-device-4947422",
+      "title_cn": "Saudi OpenAI engineer arrested by FBI for planting covert recording device, US DOJ says",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "美国司法部称，沙特OpenAI工程师因安装隐蔽录音设备被FBI逮捕。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "OpenAI",
+        "司法"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/att-to-sell-mexico-unit-for-2-billion-4947508",
+      "title_cn": "AT&T sells Mexico unit to Televisa, Fintech for $2 billion ",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "AT&T以20亿美元将墨西哥业务出售给Televisa和Fintech。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AT&T",
+        "并购"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/targa-resources-declares-125-quarterly-dividend-per-share-93CH-4947639",
+      "title_cn": "Targa Resources declares $1.25 quarterly dividend per share",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "Targa Resources宣布每股1.25美元的季度股息。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "股息",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/bofa-fined-12-billion-by-us-government-for-failing-to-police-suspicious-activity-4947537",
+      "title_cn": "BofA fined $1.2 billion by US government for failing to police suspicious activity",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "美国银行因未能有效监控可疑活动被美国政府罚款12亿美元。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "美国银行",
+        "监管",
+        "罚款"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/ggl-resources-completes-1for4-share-consolidation-93CH-4947638",
+      "title_cn": "GGL Resources completes 1-for-4 share consolidation",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "GGL Resources完成1拆4的股份合并。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "股份合并"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/why-is-grupo-televisa-stock-surging-today-93CH-4947635",
+      "title_cn": "Why is Grupo Televisa stock surging today?",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "Grupo Televisa股价今日大幅上涨。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "Grupo Televisa",
+        "市场波动"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/why-is-bank-of-america-stock-sliding-today-93CH-4947634",
+      "title_cn": "Why is Bank of America stock sliding today?",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/13",
+      "summary": "美国银行股价今日下滑。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "美国银行",
+        "市场波动"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
