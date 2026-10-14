@@ -1,5 +1,25 @@
 [
   {
+    "appId": "108946",
+    "nameCn": "Shandong Sinder Technology Co., Ltd",
+    "nameEn": "",
+    "board": "主板",
+    "status": "A",
+    "submitDate": "2026-10-14",
+    "domicile": "中国(境内)",
+    "isOffshore": false,
+    "gdCityHits": 0,
+    "gdCityMentions": 8,
+    "isGdConnected": false,
+    "vie": "historical",
+    "verdict": "non-redchip",
+    "discoveredAt": "2026-10-15T06:26:41+08:00",
+    "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108946/documents/sehk26101400166.pdf",
+    "market": "hk",
+    "leadId": "108946",
+    "lastChangedAt": "2026-10-15T06:26:41+08:00"
+  },
+  {
     "appId": "108906",
     "nameCn": "Voyager Intelligent Systems Limited",
     "nameEn": "",
@@ -17,7 +37,7 @@
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108906/documents/sehk26092700112.pdf",
     "market": "hk",
     "leadId": "108906",
-    "lastChangedAt": "2026-10-13T06:27:17+08:00"
+    "lastChangedAt": "2026-10-15T06:26:41+08:00"
   },
   {
     "appId": "108908",
@@ -37,7 +57,7 @@
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108908/documents/sehk26092900994.pdf",
     "market": "hk",
     "leadId": "108908",
-    "lastChangedAt": "2026-10-13T06:27:17+08:00"
+    "lastChangedAt": "2026-10-15T06:26:41+08:00"
   },
   {
     "appId": "108926",
