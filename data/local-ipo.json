@@ -1,13 +1,68 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-14T06:26:58+08:00",
+  "fetchedAt": "2026-10-15T06:26:20+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-csrc-tutoring": 5,
+    "gd-csrc-tutoring": 10,
     "gd-sse-audit": 1
   },
   "items": [
+    {
+      "title": "佛山市青松科技股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/15/PREIPO_F0101_V01_20261015_36819_Q/6A7461A185594405B3B162A0A5D43FC8/关于佛山市青松科技股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作进展报告（第十二期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 东方证券股份有限公司 | 备案时间: 2023-10-09 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-15",
+      "publishedAt": "2026-10-15",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "广东松田科技股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/15/PREIPO_F0101_V01_20261015_36823_Q/E5CFE974B2CF424D9A9F6791A9C20E06/关于广东松田科技股份有限公司首次公开发行股票并上市辅导工作进展报告（第一期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 东方证券股份有限公司 | 备案时间: 2026-07-30 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-15",
+      "publishedAt": "2026-10-15",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "安美科技股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/15/PREIPO_F0101_V01_20261015_36885_Q/5837D0672C174C3C97564EFC39C2ABDA/关于安美科技股份有限公司首次公开发行股票并上市辅导工作进展报告（第十一期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 华林证券股份有限公司 | 备案时间: 2023-12-26 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-15",
+      "publishedAt": "2026-10-15",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "广东科视光学技术股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/15/PREIPO_F0101_V01_20261015_36922_Q/1EEC8C6DEB88461EBFD3BB379FC25FA3/关于广东科视光学技术股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作进展报告（第十六期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 国联民生证券承销保荐有限公司 | 备案时间: 2022-11-04 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-15",
+      "publishedAt": "2026-10-15",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "顺科智连技术股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/15/PREIPO_F0101_V01_20261015_36932_Q/B1CA4601E6A742AC888134CB03B3F2FB/关于顺科智连技术股份有限公司首次公开发行股票并上市辅导工作进展报告（第一期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 东莞证券股份有限公司 | 备案时间: 2026-08-12 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-15",
+      "publishedAt": "2026-10-15",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
     {
       "title": "广州众山新材料股份有限公司 (辅导备案) [广东证监局]",
       "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/13/PREIPO_F0101_V01_20261013_36555_Q/72EB80DCE5944E8E848EA8D850D7B3EF/关于广州众山新材料股份有限公司首次公开发行股票并上市辅导工作进展报告（第五期）.pdf",
