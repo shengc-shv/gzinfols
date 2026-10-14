@@ -1,0 +1,880 @@
+{
+  "date": "2026-10-15",
+  "updatedAt": "2026-10-14T22:29:46.044Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：社融信贷总量扩张，看点27万亿；流动性持续投放，看点7000亿逆回购；黄金与港股情绪升温，看点5000美元；广东IPO辅导密集，看点五家同日披露。",
+    "spoken_hero": "今天主要看四个方面：社融信贷总量扩张，近二十七万亿；央行七千亿逆回购投放流动性；黄金看多到五千美元、港股科技回暖；广东五家企业同日披露IPO辅导进展。",
+    "must_read": [
+      {
+        "title": "社融增量27.46万亿",
+        "why": "前三季度信贷总量保持扩张，四季度投放节奏与结构安排的空间随之打开，零售条线的资产配置与信贷摆布有了总量参照。",
+        "url": "https://finance.eastmoney.com/a/202610143895517426.html"
+      },
+      {
+        "title": "恒生科技午后涨超2%",
+        "why": "港股科技情绪回暖，相关基金代销的客户申赎动向会先于业绩体现，财富货架的港股产品关注度抬升。",
+        "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-14/doc-inivekps4427049.shtml"
+      },
+      {
+        "title": "银行业反内卷转向硬约束",
+        "why": "监管对内卷转向硬机制约束，涉及考核激励与非理性定价，零售条线的定价行为与营销费用面临机制性调整。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_10_14_904289.shtml"
+      },
+      {
+        "title": "Visa获批筹备独资清算公司",
+        "why": "银行卡清算主体扩容，外卡受理与跨境消费场景的竞争格局生变，广州跨境消费客群的支付体验面临重排。",
+        "url": "https://finance.sina.com.cn/jjxw/2026-10-14/doc-inivchzu0508314.shtml"
+      },
+      {
+        "title": "监管关注不当返佣返利",
+        "why": "不当考核激励、非理性定价与返佣返利被点名，代销与营销费用安排的合规边界收紧，财富条线的费用结构面临重估。",
+        "url": "https://finance.sina.com.cn/jjxw/2026-10-14/doc-inivctrt7886635.shtml"
+      }
+    ],
+    "spoken_must_read": "社融增量27.46万亿。前三季度信贷总量保持扩张，四季度投放节奏与结构安排的空间随之打开，零售条线的资产配置与信贷摆布有了总量参照。其次，恒生科技午后涨超2%。港股科技情绪回暖，相关基金代销的客户申赎动向会先于业绩体现，财富货架的港股产品关注度抬升。此外，银行业反内卷转向硬约束。监管对内卷转向硬机制约束，涉及考核激励与非理性定价，零售条线的定价行为与营销费用面临机制性调整。还有，Visa获批筹备独资清算公司。银行卡清算主体扩容，外卡受理与跨境消费场景的竞争格局生变，广州跨境消费客群的支付体验面临重排。另外，监管关注不当返佣返利。不当考核激励、非理性定价与返佣返利被点名，代销与营销费用安排的合规边界收紧，财富条线的费用结构面临重估。",
+    "insights": [
+      {
+        "topic": "浮动费率产品扩围",
+        "impact": "中型基金公司迎来窗口期，代销货架上浮动费率产品的供给增加，客户对费率的敏感度与比价行为随之变化。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "浮动费率产品扩围，中型基金公司迎窗口期",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_10_14_904265.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "信用卡高端权益缩水",
+        "impact": "多家银行贵宾厅、接送机门槛抬升，高端卡权益成本压力显现，高端客群对权益价值的感知与留存意愿发生变化。",
+        "tag": [
+          "客群"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "高端红利退潮？多家银行信用卡权益“缩水”，贵宾厅、接送机门槛抬升",
+            "url": "https://finance.sina.com.cn/jinrong/yh/2026-10-14/doc-inivevcf7757143.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "政信类信托再逾期",
+        "impact": "万向信托政信产品逾期9820万元，信托手续费收入连续下滑，持有信托类产品的客户对底层资产与兑付节奏的关注度上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "9820万元！万向信托政信类信托产品再逾期，信托手续费收入连续下滑",
+            "url": "https://finance.sina.com.cn/jjxw/2026-10-14/doc-inivffth4469167.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "罚息上浮条款被判无效",
+        "impact": "法院认定银行未提示则罚息上浮条款不生效，消费贷合同罚息条款的告知留痕成为签约与贷后环节的关注点。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "75万元贷款逾期15天利率从6.9%飙至23.1%？法院：银行未提示，该条款不算数",
+            "url": "https://finance.sina.com.cn/roll/2026-10-14/doc-inivekpm7752982.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "粤芯半导体登陆创业板",
+        "impact": "广东迎来首家晶圆制造上市企业，本地半导体产业链客户的融资与结算延伸机会随之出现。",
+        "tag": [
+          "科技金融"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "本地产业客群",
+        "sources": [
+          {
+            "title": "粤芯半导体登陆A股创业板迎来首家晶圆制造企业",
+            "url": "https://finance.eastmoney.com/a/202610143894529796.html"
+          }
+        ]
+      },
+      {
+        "topic": "广州东部枢纽出口超百亿",
+        "impact": "中欧班列发运列数全省第一，前三季度外贸出口额超百亿元，枢纽内货代与外贸客群的跨境结算与贸易融资需求上升。",
+        "tag": [
+          "政银合作"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "本地产业客群",
+        "sources": [
+          {
+            "title": "中欧班列发运列数全省第一！广州东部公铁联运枢纽前三季度外贸出口额超百亿元",
+            "url": "https://news.dayoo.com/guangzhou/202610/14/139995_55012847.htm"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，浮动费率产品扩围、理财量化定档回撤与修复期，客户对费率与净值波动的敏感度在变；黄金积存扎堆促销叠加机构看多到五千美元，客户咨询升温。高端客户方面，多家银行信用卡贵宾厅、接送机门槛抬升，高端卡权益成本压力显现，权益对标与留存话术空间在变。普惠小微方面，央行征信中心声明未授权第三方开展动产融资登记，小微与供应链融资的登记渠道合规性成为关注点。本地产业与跨境方面，粤芯半导体登陆创业板、广州东部公铁联运枢纽前三季度出口超百亿，本地半导体与外贸客群的融资结算需求在延伸。",
+    "guangdong_ipo": {
+      "spoken": "广东五家企业同日披露IPO辅导进展：佛山市青松科技、广东松田科技、安美科技、广东科视光学技术、顺科智连技术，均处于辅导备案阶段，辅导机构分别为东方证券、华林证券、国联民生承销保荐和东莞证券。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌1.88%领跌，AI概念股集体重挫拖累大盘。",
+      "sectors": [
+        "AI云概念CoreWeave等neocloud股大跌，交易员买入看跌期权押注继续下行。",
+        "Snap期权现大额交易，交易员押注其股价上涨30%。",
+        "联合健康财报前股价异动，期权成本攀升反映市场担忧。",
+        "银行股本周将发财报，期权市场定价利率上升带来大幅波动。",
+        "美联储Daly称或需加息但不必急于行动，利率预期扰动市场。"
+      ],
+      "spoken": "美股收盘涨跌互现，纳指跌1.88%领跌，标普跌1.11%，道指微跌0.09%。AI云概念股集体重挫，CoreWeave等neocloud股大跌，交易员买入看跌期权押注继续下行。Snap期权出现大额交易，押注股价上涨三成。银行股本周发财报，期权市场预期利率上升带来大幅波动。美联储官员称或需加息但不必急于行动。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-15"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51621.48",
+          "changePct": "-0.09%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26692.87",
+          "changePct": "-1.88%"
+        },
+        {
+          "name": "标普500",
+          "value": "7718.94",
+          "changePct": "-1.11%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "双创业板指数均跌超3%。",
+      "sectors": [
+        "下跌个股超4400只"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-15"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3767.23",
+          "changePct": "-0.88%"
+        },
+        {
+          "name": "深证成指",
+          "value": "12110.59",
+          "changePct": "-1.97%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2866.76",
+          "changePct": "-3.10%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数跌0.13%，恒生科技指数涨0.91%。",
+      "sectors": [
+        "科网股活跃",
+        "光通信板块下挫"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-15"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.13% 科指涨0.91% 科网股活跃 光通信板块下挫",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-14/doc-iniveqvq4522802.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24307.67",
+          "changePct": "-0.15%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4169.02",
+          "changePct": "+0.78%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-14",
+    "marketStatus": {
+      "reportDate": "2026-10-15",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-10-14"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-14"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-14"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 10月14日 周三 收盘；港股为 10月14日 周三 收盘；美股为 10月14日 周三 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610143894662392.html",
+      "title_cn": "硬科技股谁可能被“错杀”（附股）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "东方财富发布报道，讨论硬科技股中可能被市场「错杀」的标的，并附相关个股名单。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "硬科技",
+        "个股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143895414976.html",
+      "title_cn": "A股三大指数收跌成交额1.43万亿游戏板块逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "A股三大指数当日收跌，全市场成交额1.43万亿元，游戏板块逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "游戏"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143895021553.html",
+      "title_cn": "国家统计局：9月CPI同比上涨0.9%PPI同比上涨5%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "国家统计局公布，9月CPI同比上涨0.9%，PPI同比上涨5%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "CPI",
+        "PPI",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143895658536.html",
+      "title_cn": "美国9月CPI通胀再度升温强化美联储加息预期现货黄金跌破4100美元关口",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "美国9月CPI通胀数据再度升温，强化市场对美联储加息的预期，现货黄金跌破4100美元关口。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "通胀",
+        "美联储",
+        "黄金"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143895379126.html",
+      "title_cn": "求主力拉上去拿钱给孩子动手术？七匹狼5分钟垂直涨停",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "七匹狼股价在5分钟内垂直涨停，市场消息面提及有投资者在互动平台请求主力拉抬股价以筹资为孩子手术。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "个股",
+        "七匹狼"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143895619732.html",
+      "title_cn": "10月14日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "东方财富汇总10月14日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143895048460.html",
+      "title_cn": "填补空白！国内首创脑机接口康复系统产业落地有望提速(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "国内首创的脑机接口康复系统实现产业落地，相关报道称有望提速并附相关个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "脑机接口",
+        "医药",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143894581247.html",
+      "title_cn": "清晨！加息突变！中国资产强势飘红",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "报道称加息预期出现变化，中国资产表现强势飘红。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "中国资产",
+        "加息"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143895406747.html",
+      "title_cn": "科技股裂痕已现？华尔街示警：小心一场更大规模的平仓潮",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "华尔街机构示警科技股出现裂痕，提示可能面临更大规模的平仓潮。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "科技股",
+        "风险"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143895517426.html",
+      "title_cn": "央行：前三季度社会融资规模增量累计为27.46万亿元人民币贷款增加11.52万亿元",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "央行公布前三季度社会融资规模增量累计27.46万亿元，人民币贷款增加11.52万亿元。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "社融",
+        "信贷",
+        "央行"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610143895780088.html",
+      "title_cn": "央行披露前三季度金融统计数据透露货币政策什么信号？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "央行披露前三季度金融统计数据，市场解读其中透露的货币政策信号。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "货币政策",
+        "央行"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610153895895843.html",
+      "title_cn": "“大师”摘牌的三重启示（微观）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/15",
+      "summary": "东方财富刊发评论文章，总结「大师」摘牌事件带来的三重启示。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "评论"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-14/doc-iniveqvq4522802.shtml",
+      "title_cn": "港股收评：恒指跌0.13% 科指涨0.91% 科网股活跃 光通信板块下挫",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "港股收评：恒指跌0.13%，恒生科技指数涨0.91%，科网股活跃，光通信板块下挫。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "科网股",
+        "光通信"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-15/doc-inivfwqv8253929.shtml",
+      "title_cn": "恒指牛熊街货比(47:53)︱10月15日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/15",
+      "summary": "10月15日恒指牛熊街货比为47:53。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-14/doc-inivevcf7736000.shtml",
+      "title_cn": "香港证监会：保荐人工作有所改善，前三季叫停65宗上市申请",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "香港证监会表示保荐人工作有所改善，前三季度叫停65宗上市申请。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "监管",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-10-14/doc-inivekps4453722.shtml",
+      "title_cn": "美银降京东港股目标价2.7% 料京东零售收入于第三季转正 重申买入评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "美银将京东港股目标价下调2.7%，预计京东零售收入第三季转正，并重申买入评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "京东",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/observe/2026-10-14/doc-inivekpm7759876.shtml",
+      "title_cn": "港股IPO操纵透视：茶百道停牌背后 Harvest名称背后两套投资路径 主体已完成切割 真嘉实与投行能否脱离干系",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "报道梳理港股IPO操纵情况，涉及茶百道停牌及Harvest名称背后两套投资路径，主体已完成切割。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "监管",
+        "茶百道"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-14/doc-inivekps4427049.shtml",
+      "title_cn": "恒生科技指数午后涨超2%，小米、美团涨超5%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "恒生科技指数午后涨超2%，小米、美团股价涨超5%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生科技",
+        "小米",
+        "美团"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-14/doc-inivekpp8567018.shtml",
+      "title_cn": "江波龙H股股价再创上市新低 上市以来累跌30%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "江波龙H股股价再创上市新低，上市以来累计下跌30%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "江波龙",
+        "个股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-14/doc-inivctrv8618038.shtml",
+      "title_cn": "港股震荡反弹如何配置 关注红利与成长机会",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "报道讨论港股震荡反弹背景下的配置方向，关注红利与成长机会。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "配置",
+        "红利"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-14/doc-inivctrv8605383.shtml",
+      "title_cn": "港股分拆上市趋热：三种路径、双重定价、一场考验",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "报道称港股分拆上市趋热，涉及三种路径、双重定价及相应考验。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "分拆上市",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-14/doc-inivcxxr7808577.shtml",
+      "title_cn": "【看新股】9月港股IPO透视：希音、江波龙等募资规模靠前 排队企业数量超过370家",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "9月港股IPO透视显示，希音、江波龙等募资规模靠前，排队企业数量超过370家。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "希音",
+        "江波龙"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/y/2026-10-14/doc-inivcxxp7146588.shtml",
+      "title_cn": "财经早报丨重磅打虎！黄奇帆涉嫌严重违纪违法被查，香港股市大案“揭盖子”丨2026年10月14日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "财经早报报道，黄奇帆涉嫌严重违纪违法被查，香港股市大案「揭盖子」。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "监管",
+        "反腐"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-14/doc-inivchzz8683092.shtml",
+      "title_cn": "打破“逢新必配”思维 港股IPO基石认购降温",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "报道称港股IPO基石认购降温，市场打破「逢新必配」思维。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "基石投资"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/14/coreweave-put-options-ai-trade.html",
+      "title_cn": "Traders pile into 'bubble puts' on CoreWeave as neocloud stocks plunge",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "随着neocloud类股票大幅下挫，交易员大举买入CoreWeave的「泡沫看跌期权」。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "CoreWeave",
+        "期权",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/13/inflation-hedge-tips-commodities-infrastructure.html",
+      "title_cn": "Don't let inflation bite — how to hedge with TIPS, commodities and infrastructure funds",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "CNBC报道介绍如何通过TIPS、大宗商品和基础设施基金对冲通胀风险。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "通胀",
+        "对冲"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/12/a-massive-trade-just-happens-in-surging-shares-of-snap.html",
+      "title_cn": "A massive trade just happened in surging shares of Snap",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/12",
+      "summary": "Snap股价上涨期间出现一笔大规模交易。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "Snap",
+        "交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/12/unitedhealth-shares-are-doing-something-unusual-ahead-of-earnings.html",
+      "title_cn": "UnitedHealth shares are doing something unusual ahead of earnings",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/12",
+      "summary": "联合健康（UnitedHealth）股价在财报发布前出现异常走势。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "联合健康",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/12/banks-are-set-to-report-this-week-heres-what-the-options-market-expects.html",
+      "title_cn": "Banks are set to report this week. Here's what the options market expects",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/12",
+      "summary": "报道称多家银行将于本周发布财报，并梳理期权市场对银行股的预期。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "银行",
+        "财报",
+        "期权"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/president-and-ceo-alison-moore-sells-8619-in-codexis-stock-93CH-4950196",
+      "title_cn": "President and CEO Alison Moore sells $8,619 in Codexis stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "Codexis总裁兼CEO Alison Moore出售价值8,619美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "Codexis",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/block-director-anthony-eisen-sells-138-million-in-xyz-shares-93CH-4950195",
+      "title_cn": "Block director Anthony Eisen sells $1.38 million in XYZ shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "Block董事Anthony Eisen出售价值138万美元的XYZ股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "Block",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/director-eric-oliver-buys-74644-in-cross-timbers-royalty-trust-93CH-4950194",
+      "title_cn": "Director Eric Oliver buys $74,644 in Cross Timbers Royalty Trust",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "董事Eric Oliver买入价值74,644美元的Cross Timbers Royalty Trust股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "Cross Timbers",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/c3ai-ceo-thomas-siebel-sells-51m-in-shares-93CH-4950193",
+      "title_cn": "C3.ai CEO Thomas Siebel sells $5.1m in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "C3.ai CEO Thomas Siebel出售价值510万美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "C3.ai",
+        "内部人交易",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economic-indicators/exclusivefeds-daly-says-rate-hikes-likely-needed-but-not-urgently-4950157",
+      "title_cn": "Exclusive-Fed’s Daly says rate hikes likely needed, but not urgently",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "美联储官员Daly表示可能需要加息，但并不紧迫。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "美联储",
+        "加息"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/mexico-to-require-digital-platforms-to-protect-minors-from-violent-sexual-content-4949581",
+      "title_cn": "Mexico to require digital platforms to shield minors from harmful content",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "墨西哥将要求数字平台保护未成年人免受有害内容影响。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "监管",
+        "数字平台"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/everpure-cvo-john-colgrove-sells-308-million-in-shares-93CH-4950185",
+      "title_cn": "Everpure CVO John Colgrove sells $30.8 million in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/14",
+      "summary": "Everpure CVO John Colgrove出售价值3,080万美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "Everpure",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
