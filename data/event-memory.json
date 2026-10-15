@@ -2085,15 +2085,16 @@
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-09-18",
-      "lastBroadcastAt": "2026-09-27",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 4,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
         "政策变化",
-        "市场反应"
+        "市场反应",
+        "受影响人群"
       ],
       "samples": [
         {
@@ -2133,12 +2134,24 @@
           "url": "https://m.21jingji.com/article/20260926/herald/a6a696c115fd76f2d88e3894ce36f505.html",
           "novelty": 0.31865671641791044,
           "angle": "市场反应"
+        },
+        {
+          "date": "2026-10-16",
+          "section": "insights",
+          "title": "中行医e畅同赛道切入",
+          "text": "中行医e畅同赛道切入 高端客群的非金融权益比拼升级，医疗健康类增值服务成为私行获客的新抓手。",
+          "facts": [],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://www.cnr.cn/gd/xgyxgd/20261015/t20261015_527843068.shtml",
+          "novelty": 0.2916666666666667,
+          "angle": "受影响人群"
         }
       ],
       "broadcastedTexts": [
         "美国贷款参考利率升至7% 美国贷款参考利率升至7% 美元融资成本上行，有美元负债或跨境融资需求的客户提前锁定成本意愿增强，是切入跨境客群的时机。",
         "1610家上市公司开展套保 1610家上市公司开展套保 衍生品业务提速，对公客户汇率利率避险需求上升，可联动零售私行端服务企业主客群的资产避险配置。",
-        "股东客群权益经营 股东客群权益经营 同业以股东权益福利抢客，零售获客竞争加剧，股东客群交叉销售与权益设计存在挖掘空间。 梳理本地上市公司股东名单，设计权益福利与交叉销售方案，本周内完成首批客户触达。"
+        "股东客群权益经营 股东客群权益经营 同业以股东权益福利抢客，零售获客竞争加剧，股东客群交叉销售与权益设计存在挖掘空间。 梳理本地上市公司股东名单，设计权益福利与交叉销售方案，本周内完成首批客户触达。",
+        "中行医e畅同赛道切入 中行医e畅同赛道切入 高端客群的非金融权益比拼升级，医疗健康类增值服务成为私行获客的新抓手。"
       ],
       "broadcastedFacts": [
         "#7%",
@@ -2469,14 +2482,16 @@
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-09-19",
-      "lastBroadcastAt": "2026-09-26",
-      "broadcastCount": 2,
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 3,
       "sections": [
-        "must_read"
+        "must_read",
+        "insights"
       ],
       "anglesUsed": [
         "政策变化",
-        "市场反应"
+        "市场反应",
+        "受影响人群"
       ],
       "samples": [
         {
@@ -2519,12 +2534,24 @@
           "score": 34,
           "novelty": 0.2333333333333333,
           "angle": "市场反应"
+        },
+        {
+          "date": "2026-10-16",
+          "section": "insights",
+          "title": "老存单到期自动降档",
+          "text": "老存单到期自动降档 中小行长期限存款供给收缩，客户到期资金再配置需求上升，零售AUM的承接窗口打开。",
+          "facts": [],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://finance.sina.com.cn/roll/2026-10-15/doc-iniviekf8056688.shtml",
+          "novelty": 0.3340909090909091,
+          "angle": "受影响人群"
         }
       ],
       "broadcastedTexts": [
         "央行回应信贷失速 央行回应信贷失速 央行强调长钱筑牢市场根基，信贷投放节奏与市场预期趋稳，对客沟通口径可据此统一。",
         "央行三季度例会首现新提法 央行三季度例会首现新提法 货币政策最新部署释放结构性信号，信贷投向与负债成本走向将直接影响分行零售资产端与存款定价安排。",
-        "央行最新部署货币政策 央行最新部署货币政策 政策基调延续，后续操作节奏影响零售信贷投放与存款成本，需纳入四季度经营规划考量。"
+        "央行最新部署货币政策 央行最新部署货币政策 政策基调延续，后续操作节奏影响零售信贷投放与存款成本，需纳入四季度经营规划考量。",
+        "老存单到期自动降档 老存单到期自动降档 中小行长期限存款供给收缩，客户到期资金再配置需求上升，零售AUM的承接窗口打开。"
       ],
       "broadcastedFacts": [
         "@央行"
@@ -2783,19 +2810,21 @@
       ],
       "anchors": [
         "高净值",
-        "获客"
+        "获客",
+        "客群"
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-09-19",
-      "lastBroadcastAt": "2026-10-02",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 4,
       "sections": [
         "insights",
         "must_read"
       ],
       "anglesUsed": [
         "政策变化",
-        "市场反应"
+        "市场反应",
+        "受影响人群"
       ],
       "samples": [
         {
@@ -2835,12 +2864,24 @@
           "score": 29,
           "novelty": 0.2930232558139535,
           "angle": "市场反应"
+        },
+        {
+          "date": "2026-10-16",
+          "section": "insights",
+          "title": "跨境医疗直付平台首发",
+          "text": "跨境医疗直付平台首发 跨境就医支付通道成型，高净值与跨境客群的健康金融场景竞争升级。",
+          "facts": [],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://m.21jingji.com/article/20261015/herald/de8eb3a80362fb5f04e28fa04d8a4c2d.html",
+          "novelty": 0.33055555555555555,
+          "angle": "受影响人群"
         }
       ],
       "broadcastedTexts": [
         "经纪客户迁移获客窗口 经纪客户迁移获客窗口 中金吸并东兴、信达进入实施阶段，548万经纪客户待迁移，财富条线存在客户流动带来的获客窗口。 可关注迁移期间客户服务断点，针对性推出转户与资产配置承接方案，重点触达高净值经纪客户。",
         "上海推银行业AI应用措施 上海推银行业AI应用措施 监管导向明确，科技条线可关注同业AI落地路径与合规边界，为数字化获客蓄力。",
-        "券商线上展业逻辑重塑 券商线上展业逻辑重塑 线上获客与销售合规边界变化，对银行线上财富业务的展业方式与合规标准具有参照意义。"
+        "券商线上展业逻辑重塑 券商线上展业逻辑重塑 线上获客与销售合规边界变化，对银行线上财富业务的展业方式与合规标准具有参照意义。",
+        "跨境医疗直付平台首发 跨境医疗直付平台首发 跨境就医支付通道成型，高净值与跨境客群的健康金融场景竞争升级。"
       ],
       "broadcastedFacts": [
         "!实施",
@@ -3473,15 +3514,16 @@
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-09-21",
-      "lastBroadcastAt": "2026-09-28",
-      "broadcastCount": 2,
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 3,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
         "政策变化",
-        "市场反应"
+        "市场反应",
+        "受影响人群"
       ],
       "samples": [
         {
@@ -3522,16 +3564,33 @@
           "score": 66,
           "novelty": 0.154,
           "angle": "市场反应"
+        },
+        {
+          "date": "2026-10-16",
+          "section": "must_read",
+          "title": "四大一线楼市新政全落地",
+          "text": "四大一线楼市新政全落地 一线城市政策口径统一后，按揭受理量与提前还款节奏可能同步变化，直接影响四季度房贷投放与额度排布。",
+          "facts": [
+            "!落地",
+            "!受理"
+          ],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://www.cnfin.com/hg-lb/detail/20261015/4481424_1.html",
+          "score": 74,
+          "novelty": 0.7037037037037037,
+          "angle": "受影响人群"
         }
       ],
       "broadcastedTexts": [
         "多家银行落地40年房贷 多家银行落地40年房贷 按揭期限竞争加剧并设45岁年龄门槛，本行期限与年龄政策覆盖差异需评估。",
         "40年房贷期限竞争 40年房贷期限竞争 多家银行推出40年房贷并设45岁年龄门槛，按揭期限竞争加剧，中年置业客群覆盖差异显现。 值得关注本行期限与年龄政策与同业的差距，评估对45岁以上客群的覆盖空间。",
-        "北上广深楼市带看成交回温 北上广深楼市带看成交回温 金九银十活跃度提升，按揭投放节奏与改善型客群接单准备需提前安排，关系四季度房贷储备。"
+        "北上广深楼市带看成交回温 北上广深楼市带看成交回温 金九银十活跃度提升，按揭投放节奏与改善型客群接单准备需提前安排，关系四季度房贷储备。",
+        "四大一线楼市新政全落地 四大一线楼市新政全落地 一线城市政策口径统一后，按揭受理量与提前还款节奏可能同步变化，直接影响四季度房贷投放与额度排布。"
       ],
       "broadcastedFacts": [
         "#40年",
-        "!落地"
+        "!落地",
+        "!受理"
       ],
       "peakScore": 74
     },
@@ -4194,18 +4253,20 @@
         "广东",
         "#6.1%",
         "经营贷",
-        "广州"
+        "广州",
+        "代发"
       ],
       "kind": "local",
       "firstBroadcastAt": "2026-09-22",
-      "lastBroadcastAt": "2026-09-22",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 2,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -4236,11 +4297,25 @@
           "url": "https://www.stcn.com/article/detail/4192879.html",
           "novelty": 0.33918918918918917,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-16",
+          "section": "insights",
+          "title": "广东美妆产业链对接",
+          "text": "广东美妆产业链对接 营收超1518亿居全国首位，供应链融资与代发客群可顺势切入。",
+          "facts": [
+            "@广东"
+          ],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202610/15/139995_55013322.htm",
+          "novelty": 0.31111111111111106,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "广东规上工业增加值增6.1% 广东规上工业增加值增6.1% 制造业景气好于投资端，制造业小微与供应链客群授信机会相对确定，可优先配置资源。",
-        "制造业小微与供应链授信 制造业小微与供应链授信 广东规上工业增加值增6.1%，制造业景气好于投资端，制造业小微与供应链客群的经营贷需求相对确定。 下一步可梳理广州本地制造业核心企业上下游名单，本周启动供应链小微批量授信走访。"
+        "制造业小微与供应链授信 制造业小微与供应链授信 广东规上工业增加值增6.1%，制造业景气好于投资端，制造业小微与供应链客群的经营贷需求相对确定。 下一步可梳理广州本地制造业核心企业上下游名单，本周启动供应链小微批量授信走访。",
+        "广东美妆产业链对接 广东美妆产业链对接 营收超1518亿居全国首位，供应链融资与代发客群可顺势切入。"
       ],
       "broadcastedFacts": [
         "#6.1%",
@@ -6564,12 +6639,14 @@
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-10-02",
-      "lastBroadcastAt": "2026-10-02",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 2,
       "sections": [
         "must_read"
       ],
-      "anglesUsed": [],
+      "anglesUsed": [
+        "政策变化"
+      ],
       "samples": [
         {
           "date": "2026-10-02",
@@ -6584,16 +6661,31 @@
           "url": "https://finance.eastmoney.com/a/202610013888208241.html",
           "score": 34,
           "novelty": 1
+        },
+        {
+          "date": "2026-10-16",
+          "section": "must_read",
+          "title": "财政部注资金融央企",
+          "text": "财政部注资金融央企 工行、农行、人保同步公告，大行资本补充推进，同业竞争格局与定价策略或生变。",
+          "facts": [
+            "@财政部"
+          ],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_10_15_904442.shtml",
+          "score": 73,
+          "novelty": 0.33249999999999996,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "财政将出增量政策扩内需 财政将出增量政策扩内需 财政部长明确研究增量政策、扩大有效需求，后续工具落地节奏直接影响零售资产投放与消费场景的宏观环境。"
+        "财政将出增量政策扩内需 财政将出增量政策扩内需 财政部长明确研究增量政策、扩大有效需求，后续工具落地节奏直接影响零售资产投放与消费场景的宏观环境。",
+        "财政部注资金融央企 财政部注资金融央企 工行、农行、人保同步公告，大行资本补充推进，同业竞争格局与定价策略或生变。"
       ],
       "broadcastedFacts": [
         "!落地",
         "@财政部"
       ],
-      "peakScore": 34
+      "peakScore": 73
     },
     "ev-rsvz2f": {
       "id": "ev-rsvz2f",
@@ -7371,16 +7463,19 @@
       "id": "#1%",
       "topicTags": [],
       "anchors": [
-        "#1%"
+        "#1%",
+        "#4%"
       ],
       "kind": "market",
       "firstBroadcastAt": "2026-10-06",
-      "lastBroadcastAt": "2026-10-06",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 2,
       "sections": [
         "must_read"
       ],
-      "anglesUsed": [],
+      "anglesUsed": [
+        "政策变化"
+      ],
       "samples": [
         {
           "date": "2026-10-06",
@@ -7394,15 +7489,32 @@
           "url": "https://finance.eastmoney.com/a/202610063888706547.html",
           "score": 21,
           "novelty": 1
+        },
+        {
+          "date": "2026-10-16",
+          "section": "must_read",
+          "title": "美股三大指数收跌",
+          "text": "美股三大指数收跌 纳指、标普跌超1%，费城半导体跌超4%，海外风险偏好回落，QDII类产品客户沟通压力前置。",
+          "facts": [
+            "#1%",
+            "#4%"
+          ],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://finance.eastmoney.com/a/202610153895886595.html",
+          "score": 64,
+          "novelty": 0.4636363636363636,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "纳指涨超1%创收盘新高 纳指涨超1%创收盘新高 海外风险偏好回升，客户对QDII及海外权益类产品的咨询热度可能同步走高，财富货架面临再平衡。"
+        "纳指涨超1%创收盘新高 纳指涨超1%创收盘新高 海外风险偏好回升，客户对QDII及海外权益类产品的咨询热度可能同步走高，财富货架面临再平衡。",
+        "美股三大指数收跌 美股三大指数收跌 纳指、标普跌超1%，费城半导体跌超4%，海外风险偏好回落，QDII类产品客户沟通压力前置。"
       ],
       "broadcastedFacts": [
-        "#1%"
+        "#1%",
+        "#4%"
       ],
-      "peakScore": 21
+      "peakScore": 64
     },
     "ev-t6eyrw": {
       "id": "ev-t6eyrw",
@@ -7755,16 +7867,18 @@
       "id": "信托",
       "topicTags": [
         "财富管理",
-        "私行客群"
+        "私行客群",
+        "利率流动性"
       ],
       "anchors": [
         "信托",
-        "高净值"
+        "高净值",
+        "存款"
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-10-07",
-      "lastBroadcastAt": "2026-10-09",
-      "broadcastCount": 2,
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 3,
       "sections": [
         "insights"
       ],
@@ -7794,11 +7908,23 @@
           "url": "https://finance.sina.com.cn/trust/2026-10-08/doc-iniupnvc7547108.shtml",
           "novelty": 0.7604166666666667,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-16",
+          "section": "insights",
+          "title": "信托货架更新",
+          "text": "信托货架更新 高净值客户非存款类配置的比价参考更丰富，期限与底层资产披露差异成为选择关键。",
+          "facts": [],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://finance.sina.com.cn/trust/2026-10-15/doc-iniviksh4743061.shtml",
+          "novelty": 0.31585365853658537,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
         "信托原董事长掌千亿平台 信托原董事长掌千亿平台 某信托原董事长出任千亿级平台总经理，财富管理行业高管流动，头部机构战略与产品线可能随之调整。",
-        "9月集合信托发行回暖 9月集合信托发行回暖 基建与证券市场为主力，信托代销与高净值客户资产配置的联动机会增多，产品货架丰富度提升。"
+        "9月集合信托发行回暖 9月集合信托发行回暖 基建与证券市场为主力，信托代销与高净值客户资产配置的联动机会增多，产品货架丰富度提升。",
+        "信托货架更新 信托货架更新 高净值客户非存款类配置的比价参考更丰富，期限与底层资产披露差异成为选择关键。"
       ],
       "broadcastedFacts": [
         "#9月"
@@ -8720,148 +8846,107 @@
         "#9820万元"
       ],
       "peakScore": 0
+    },
+    "ev-ehg49a": {
+      "id": "ev-ehg49a",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-10-16",
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-16",
+          "section": "must_read",
+          "title": "A股缩量调整分化加剧",
+          "text": "A股缩量调整分化加剧 权益类产品净值波动放大，客户持有体验与风险等级匹配成为沟通焦点。",
+          "facts": [],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://finance.sina.com.cn/roll/2026-10-15/doc-inivfmyz8321034.shtml",
+          "score": 69,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "A股缩量调整分化加剧 A股缩量调整分化加剧 权益类产品净值波动放大，客户持有体验与风险等级匹配成为沟通焦点。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 69
+    },
+    "ev-tzdv0t": {
+      "id": "ev-tzdv0t",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-16",
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-16",
+          "section": "must_read",
+          "title": "美国PPI大超预期",
+          "text": "美国PPI大超预期 加息预期再升温，美元与美债波动加大，有美元敞口客户的避险安排需求上升。",
+          "facts": [
+            "!加息"
+          ],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://finance.eastmoney.com/a/202610153897225376.html",
+          "score": 66,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "美国PPI大超预期 美国PPI大超预期 加息预期再升温，美元与美债波动加大，有美元敞口客户的避险安排需求上升。"
+      ],
+      "broadcastedFacts": [
+        "!加息"
+      ],
+      "peakScore": 66
+    },
+    "ev-o4ye53": {
+      "id": "ev-o4ye53",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-10-16",
+      "lastBroadcastAt": "2026-10-16",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-16",
+          "section": "insights",
+          "title": "香港银行业收入预增",
+          "text": "香港银行业收入预增 跨境财富与南向资金活跃度或回升，湾区客户联动的业务机会增加。",
+          "facts": [],
+          "broadcastAt": "2026-10-16T06:29:17+08:00",
+          "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-15/doc-inivhyaq1364308.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "香港银行业收入预增 香港银行业收入预增 跨境财富与南向资金活跃度或回升，湾区客户联动的业务机会增加。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
     }
   },
   "today": {
     "date": "2026-10-16",
-    "entries": [
-      {
-        "date": "2026-10-16",
-        "section": "must_read",
-        "title": "四大一线楼市新政全落地",
-        "text": "四大一线楼市新政全落地 一线城市政策口径统一后，按揭受理量与提前还款节奏可能同步变化，直接影响四季度房贷投放与额度排布。",
-        "facts": [
-          "!落地",
-          "!受理"
-        ],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://www.cnfin.com/hg-lb/detail/20261015/4481424_1.html",
-        "score": 74,
-        "novelty": 0.7037037037037037,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-10-16",
-        "section": "must_read",
-        "title": "财政部注资金融央企",
-        "text": "财政部注资金融央企 工行、农行、人保同步公告，大行资本补充推进，同业竞争格局与定价策略或生变。",
-        "facts": [
-          "@财政部"
-        ],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://www.guancha.cn/GuanJinRong/2026_10_15_904442.shtml",
-        "score": 73,
-        "novelty": 0.33249999999999996,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-10-16",
-        "section": "must_read",
-        "title": "A股缩量调整分化加剧",
-        "text": "A股缩量调整分化加剧 权益类产品净值波动放大，客户持有体验与风险等级匹配成为沟通焦点。",
-        "facts": [],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://finance.sina.com.cn/roll/2026-10-15/doc-inivfmyz8321034.shtml",
-        "score": 69,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-16",
-        "section": "must_read",
-        "title": "美国PPI大超预期",
-        "text": "美国PPI大超预期 加息预期再升温，美元与美债波动加大，有美元敞口客户的避险安排需求上升。",
-        "facts": [
-          "!加息"
-        ],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://finance.eastmoney.com/a/202610153897225376.html",
-        "score": 66,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-16",
-        "section": "must_read",
-        "title": "美股三大指数收跌",
-        "text": "美股三大指数收跌 纳指、标普跌超1%，费城半导体跌超4%，海外风险偏好回落，QDII类产品客户沟通压力前置。",
-        "facts": [
-          "#1%",
-          "#4%"
-        ],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://finance.eastmoney.com/a/202610153895886595.html",
-        "score": 64,
-        "novelty": 0.4636363636363636,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-10-16",
-        "section": "insights",
-        "title": "老存单到期自动降档",
-        "text": "老存单到期自动降档 中小行长期限存款供给收缩，客户到期资金再配置需求上升，零售AUM的承接窗口打开。",
-        "facts": [],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://finance.sina.com.cn/roll/2026-10-15/doc-iniviekf8056688.shtml",
-        "novelty": 0.3340909090909091,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-10-16",
-        "section": "insights",
-        "title": "信托货架更新",
-        "text": "信托货架更新 高净值客户非存款类配置的比价参考更丰富，期限与底层资产披露差异成为选择关键。",
-        "facts": [],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://finance.sina.com.cn/trust/2026-10-15/doc-iniviksh4743061.shtml",
-        "novelty": 0.31585365853658537,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-10-16",
-        "section": "insights",
-        "title": "跨境医疗直付平台首发",
-        "text": "跨境医疗直付平台首发 跨境就医支付通道成型，高净值与跨境客群的健康金融场景竞争升级。",
-        "facts": [],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://m.21jingji.com/article/20261015/herald/de8eb3a80362fb5f04e28fa04d8a4c2d.html",
-        "novelty": 0.33055555555555555,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-10-16",
-        "section": "insights",
-        "title": "中行医e畅同赛道切入",
-        "text": "中行医e畅同赛道切入 高端客群的非金融权益比拼升级，医疗健康类增值服务成为私行获客的新抓手。",
-        "facts": [],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://www.cnr.cn/gd/xgyxgd/20261015/t20261015_527843068.shtml",
-        "novelty": 0.2916666666666667,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-10-16",
-        "section": "insights",
-        "title": "香港银行业收入预增",
-        "text": "香港银行业收入预增 跨境财富与南向资金活跃度或回升，湾区客户联动的业务机会增加。",
-        "facts": [],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-15/doc-inivhyaq1364308.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-16",
-        "section": "insights",
-        "title": "广东美妆产业链对接",
-        "text": "广东美妆产业链对接 营收超1518亿居全国首位，供应链融资与代发客群可顺势切入。",
-        "facts": [
-          "@广东"
-        ],
-        "broadcastAt": "2026-10-16T06:29:17+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202610/15/139995_55013322.htm",
-        "novelty": 0.31111111111111106,
-        "angle": "市场反应"
-      }
-    ],
-    "runId": "38817336156"
+    "entries": []
   },
   "deliveries": [
     {
@@ -9072,6 +9157,13 @@
       "runId": "38656187280",
       "reportRunId": "38647720115",
       "reportSha": "435fbd05c6c925f96bc5925b403d3451bb959f53"
+    },
+    {
+      "date": "2026-10-16",
+      "pushedAt": "2026-10-16T07:51:21+08:00",
+      "runId": "38826010733",
+      "reportRunId": "38817336156",
+      "reportSha": "45bce143817ddb99e5519baf091a9e77a0b5aae0"
     }
   ],
   "ipoVoicing": {
