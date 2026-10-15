@@ -16,7 +16,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { pruneInsightEchoes } from "../lib/services/voice/condense";
+import { pruneInsightEchoes, condenseSpeech, formatOverlapLog } from "../lib/services/voice/condense";
 
 test("R2b：纯复读句整句删除；带新维度的句子保留", () => {
   const must = "三季度高频数据折射经济向好。实体融资需求与零售信贷投放环境或有改善。";
@@ -65,4 +65,62 @@ test("R2b：幂等 + 不 mutate 入参 + 缺省不凭空生成", () => {
   assert.ok(ins.includes("美联储加息搅动全球债市"), "入参未被 mutate");
   assert.equal(pruneInsightEchoes(undefined, must).text, "");
   assert.equal(pruneInsightEchoes(ins, undefined).text, ins, "无必读段 → 原样返回");
+});
+
+// ---------------------------------------------------------------------------
+// 安全剥点守卫（2026-10-15 sc 定案 A + 结构守卫）：
+// 10-14 线上实测 R2b 剥出 3 处**语义残缺**（比复读更伤 —— 口播只能听不能回看）：
+//   ① 「公募新规为~~两万五千亿理财资金~~打开投资工具空间」→ 缺宾语
+//   ② 「港交所加码人民币产品，~~跨境客户的人民币资产配置与结算需求~~也在联动」→ 缺主语
+//   ③ 「…明确到二〇二九年的目标，~~本地科创企业的融资与结算需求~~在扩容」→ 缺主语
+// ⚠️ 关键教训：②③ 的剥点前一个字符**正是「，」** → 纯标点判据救不了；
+// 根因 = 被剥片段是后随谓词的**主语** / 前述介词的**宾语** → 补两道结构守卫。
+// ---------------------------------------------------------------------------
+
+test("安全剥点：被剥片段是宾语（前接悬空介词「为」）→ 保守跳过，句子原样保留", () => {
+  const must = "三季度社融数据发布。公募新规落地，两万五千亿理财资金迎来新规。";
+  const ins = "零售AUM方面，公募新规为两万五千亿理财资金打开投资工具空间，长尾客群渗透在加快。";
+  const r = pruneInsightEchoes(ins, must);
+  assert.equal(r.skippedStruct, 1, `应因剥点不安全而跳过：${JSON.stringify(r)}`);
+  assert.ok(r.text.includes("公募新规为两万五千亿理财资金打开投资工具空间"), "残宾语风险 → 原句保留");
+  assert.ok(!r.text.includes("公募新规为打开投资工具空间"), "不得剥成缺宾语残句");
+});
+
+test("安全剥点：被剥片段是主语（后接悬空谓词「也在联动」「在扩容」）→ 保守跳过", () => {
+  const must =
+    "跨境客户的人民币资产配置与结算需求是重点。本地科创企业的融资与结算需求值得关注。";
+  const ins =
+    "高端客户方面，港交所加码人民币产品，跨境客户的人民币资产配置与结算需求也在联动。" +
+    "普惠小微方面，广州未来产业先导区方案明确到二〇二九年的目标，本地科创企业的融资与结算需求在扩容。";
+  const r = pruneInsightEchoes(ins, must);
+  assert.ok(r.skippedStruct >= 2, `两处都应因剥点不安全而跳过：${JSON.stringify({ s: r.skippedStruct, e: r.echoes, d: r.removedSentences })}`);
+  assert.ok(r.text.includes("跨境客户的人民币资产配置与结算需求也在联动"), "不得剥成「也在联动」缺主语残句");
+  assert.ok(r.text.includes("本地科创企业的融资与结算需求在扩容"), "不得剥成「在扩容」缺主语残句");
+});
+
+test("安全剥点：后侧切在词中间（「市场|情绪」）→ 跳过；「、」+「，」双标点的真增量仍正常剥离", () => {
+  const must = "美债收益率大幅波动。美联储加息预期反复扰动市场。";
+  // ① 后侧剥点在词中间：片段后紧跟「情绪」无标点 → 跳过
+  const r1 = pruneInsightEchoes("跨境联动方面，美联储加息预期反复扰动市场情绪，外币资产的咨询在增多。", must);
+  assert.ok(r1.skippedStruct >= 1, `词中剥点应跳过：${JSON.stringify(r1)}`);
+  assert.ok(r1.text.includes("扰动市场情绪"), "不得把「市场情绪」剥断");
+  // ② 对照：前侧「、」+ 后侧「，」→ 四条守卫全过，仍剥离
+  const r2 = pruneInsightEchoes("高端客户方面，黄金定价权向亚洲转移、美联储加息预期反复扰动市场，避险配置需求抬升。", must);
+  assert.equal(r2.trimmedSentences, 1, "安全剥点的真增量仍应剥离");
+  assert.ok(r2.text.includes("黄金定价权向亚洲转移"));
+  assert.ok(!r2.text.includes("美联储加息预期反复扰动市场"));
+});
+
+test("安全剥点：skippedStruct 进日志（只拦不剥时可观测，不得隐形）", () => {
+  const must = "三季度社融数据发布。公募新规落地，两万五千亿理财资金迎来新规。";
+  const ins = "零售AUM方面，公募新规为两万五千亿理财资金打开投资工具空间，渗透在加快。";
+  const { stats } = condenseSpeech({
+    spoken_insights: ins,
+    spoken_must_read: must,
+    must_read: [],
+    insights: [],
+  });
+  assert.equal(stats.skippedStruct, 1, "stats 必须记录 skippedStruct");
+  const log = formatOverlapLog(stats);
+  assert.ok(log.includes("1 句剥点不安全保守跳过"), `日志应含守卫计数：${log}`);
 });

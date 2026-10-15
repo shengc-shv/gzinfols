@@ -48,6 +48,8 @@ export interface SpeechOverlapStats {
   trimmedSentences?: number;
   /** R2b：判定为复读的片段（日志与测试可核对）。 */
   pruneEchoes?: string[];
+  /** R2b（2026-10-15）：因剥点不安全（会悬空宾语/主语）而保守跳过的句数。 */
+  skippedStruct?: number;
 }
 
 /** 商机是否与某条必读同源（判定：来源 URL 归一后相等 —— 主力信号，可逐条核对）。 */
@@ -133,6 +135,9 @@ export function condenseSpeech(exec: ExecutiveSummary): {
   // —— R2b：文本级复读裁剪（2026-10-13 sc 口径；R2 的 URL 判据抓不到的场景）——
   if (spokenIns) {
     const pruned = pruneInsightEchoes(spokenIns, exec.spoken_must_read);
+    // ⚠️ skippedStruct 必须**无条件**记录：只拦不剥时 removedChars 仍为 0，
+    // 若写在下面的 if 里，这类「保守跳过」就在 CI 日志里隐形了（不可观测 = 无法回归）。
+    stats.skippedStruct = (stats.skippedStruct ?? 0) + pruned.skippedStruct;
     if (pruned.removedChars > 0) {
       spokenIns = pruned.text;
       stats.savedChars += pruned.removedChars;
@@ -142,7 +147,7 @@ export function condenseSpeech(exec: ExecutiveSummary): {
     }
   }
 
-  if (stats.savedChars === 0) return { exec, stats };
+  if (stats.savedChars === 0 && !stats.skippedStruct) return { exec, stats };
 
   return {
     exec: {
@@ -156,11 +161,16 @@ export function condenseSpeech(exec: ExecutiveSummary): {
 /** 可观测日志行（C 项：让重复率在 CI 日志可见，此前完全不可观测）。 */
 export function formatOverlapLog(stats: SpeechOverlapStats): string {
   if (stats.savedChars === 0) {
+    // ⚠️ 只拦不剥（removedChars=0）也必须可见 —— 否则守卫的拦截量在 CI 日志里隐形（2026-10-15 教训）。
+    if (stats.skippedStruct) {
+      return `口播跨段收敛：${stats.skippedStruct} 句剥点不安全保守跳过（0 字可省，宁留重复不留残句）`;
+    }
     return "口播跨段收敛：未发现同源重复（0 字可省）";
   }
   const r2b: string[] = [];
   if (stats.prunedSentences) r2b.push(`${stats.prunedSentences} 句纯复读删除`);
   if (stats.trimmedSentences) r2b.push(`${stats.trimmedSentences} 句剥离复读片段`);
+  if (stats.skippedStruct) r2b.push(`${stats.skippedStruct} 句剥点不安全保守跳过`);
   return (
     `口播跨段收敛：必读↔商机 ${stats.insightEchoes} 条压成「只留主题」` +
     (r2b.length ? `、${r2b.join("、")}` : "") +
@@ -221,6 +231,8 @@ export interface PruneEchoResult {
   trimmedSentences: number;
   /** 因片段边界会切断数字而**保守跳过**的句子数（宁可留着重复，不留残句）。 */
   skippedNumeric: number;
+  /** 因剥点不安全（会悬空宾语/主语、或剥点在词中间）而**保守跳过**的句子数。 */
+  skippedStruct: number;
   /** 被判定为复读的原文片段（日志/测试可核对）。 */
   echoes: string[];
 }
@@ -258,6 +270,50 @@ function longestSpan(a: string, b: string, min: number): { len: number; ai: numb
   return best;
 }
 
+/**
+ * 「安全剥点」判据（2026-10-15 sc 定案 A 方案 + 两个结构守卫）。
+ *
+ * 背景：R2b 首版只判「复用率」，结果把句中片段整体剥掉，产生**比复读更伤的残句**
+ * （口播只能听不能回看）—— 10-14 实测 3 处：
+ *   ① 「公募新规为~~两万五千亿理财资金~~打开投资工具空间」→ 缺宾语
+ *   ② 「港交所加码人民币产品，~~跨境客户的人民币资产配置与结算需求~~也在联动」→ 缺主语
+ *   ③ 「…明确到二〇二九年的目标，~~本地科创企业的融资与结算需求~~在扩容」→ 缺主语
+ *
+ * ⚠️ 注意：②③ 的剥点前一个字符**正是「，」**（合法标点）→ **纯标点判据救不了它们**。
+ * 根因是被剥片段是**后随谓词的主语** / **前述介词的宾语**，故补两道结构守卫。
+ *
+ * 三条全过才允许剥离，任一不过 → **保守跳过**（宁可留着重复，不留残句）：
+ *   1. **前侧剥点在标点**：片段起于句首，或其前一个字符是 `，。；、`（否则剥在词中间）；
+ *   2. **后侧剥点在标点**：片段后是标点或抵句尾（否则把「市场|情绪」这类词拆断）；
+ *   3. **不悬空宾语**：剥点之前（跳过标点）不得以 `为/把/将/对/向/从/围绕/随着` 等结尾
+ *      （否则被剥的是宾语 → 剩「为打开投资工具空间」）；
+ *   4. **不悬空主语**：剥点之后（跳过标点）不得以 `在/也/都/就/同步/持续` 等开头
+ *      （否则被剥的是主语 → 剩「也在联动」「在扩容」）。
+ *
+ * 对照（守卫不误伤的案例，已锁测试）：「黄金定价权向亚洲转移、~~美联储加息搅动全球债市~~，
+ * 避险与对冲类配置需求同步抬升」—— 前侧「、」/ 后侧「，」/ 前尾「移」/ 后首「避」→ 四条全过，照常剥离。
+ */
+const SAFE_PEEL_PUNCT = /^[，。；、]$/;
+/** 剥点之前以这些结尾 → 被剥片段是宾语，剥离会悬空。 */
+const DANGLING_OBJECT_TAIL = /(为|把|将|对|向|从|围绕|随着|按|依据|通过|基于)$/;
+/** 剥点之后以这些开头 → 被剥片段是主语，剥离会悬空。 */
+const DANGLING_SUBJECT_HEAD = /^(在|也|都|就|将|会|能|要|正|持续|同步|跟着|同时|以及|并|而|且|进一步|有所|得以|正在|依然|仍然)/;
+
+function safePeelPoint(raw: string, start: number, end: number): boolean {
+  // ① 前侧：剥点必须落在标点上（或片段起于句首）
+  if (start > 0 && !SAFE_PEEL_PUNCT.test(raw[start - 1] ?? "")) return false;
+  // ② 后侧：剥点后必须落在标点上（或片段抵句尾）
+  const afterRaw = raw.slice(end).replace(/^\s+/, "");
+  if (afterRaw && !SAFE_PEEL_PUNCT.test(afterRaw[0] ?? "")) return false;
+  // ③ 剥点前不得悬空介词（被剥的是宾语）
+  const before = raw.slice(0, start).replace(/[\s，。；、！？]+$/, "");
+  if (DANGLING_OBJECT_TAIL.test(before)) return false;
+  // ④ 剥点后不得悬空谓词（被剥的是主语）
+  const after = afterRaw.replace(/^[，。；、！？]+/, "");
+  if (after && DANGLING_SUBJECT_HEAD.test(after)) return false;
+  return true;
+}
+
 /** 清理剥离后可能出现的悬空标点与悬空助词（「，。」「，的」「强调，」等）。 */
 function tidySentence(s: string): string {
   return s
@@ -289,6 +345,7 @@ export function pruneInsightEchoes(
     removedSentences: 0,
     trimmedSentences: 0,
     skippedNumeric: 0,
+    skippedStruct: 0,
     echoes: [],
   };
   if (!src || !must) return res;
@@ -329,6 +386,15 @@ export function pruneInsightEchoes(
     const after = sm.chars[span.ai + span.len];
     if (isNumberish(before) || isNumberish(after)) {
       res.skippedNumeric++;
+      kept.push(raw);
+      continue;
+    }
+
+    // ⚠️ 安全剥点（2026-10-15 sc 定案 A + 结构守卫）：剥离后不得留下残句。
+    // 纯标点判据不够 —— 10-14 实测 3 处残句里有 2 处剥点前正是「，」，真正原因是
+    // 被剥片段充当了后随谓词的主语 / 前述介词的宾语。见 safePeelPoint 注释。
+    if (!safePeelPoint(raw, start, end)) {
+      res.skippedStruct++;
       kept.push(raw);
       continue;
     }
