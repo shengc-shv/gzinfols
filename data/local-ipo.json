@@ -1,13 +1,80 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-15T06:26:20+08:00",
+  "fetchedAt": "2026-10-16T06:27:31+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-csrc-tutoring": 10,
-    "gd-sse-audit": 1
+    "gd-csrc-tutoring": 16,
+    "gd-sse-audit": 1,
+    "gd-szse-audit": 2
   },
   "items": [
+    {
+      "title": "深圳市爱协生科技股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/16/PREIPO_F0101_V01_20261016_36950_Q/C8749C9C5CB54E5BAAB9E834E789831E/关于深圳市爱协生科技股份有限公司首次公开发行股票并上市辅导工作进展报告（第十六期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中信建投证券股份有限公司 | 备案时间: 2022-09-29 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-16",
+      "publishedAt": "2026-10-16",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "深圳市辰卓科技股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/16/PREIPO_F0101_V01_20261016_36953_Q/C91129AE112145F594B0D0A763A8D0F6/关于深圳市辰卓科技股份有限公司首次公开发行股票并上市辅导工作进展报告（第三期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中信建投证券股份有限公司 | 备案时间: 2025-12-29 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-16",
+      "publishedAt": "2026-10-16",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "深圳市紫光同创电子股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/16/PREIPO_F0101_V01_20261016_37020_Q/5324F536ACD54EC9AB9B85FAE7BACFD7/关于深圳市紫光同创电子股份有限公司首次公开发行股票并上市辅导工作进展报告（第六期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中信证券股份有限公司 | 备案时间: 2025-04-29 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-16",
+      "publishedAt": "2026-10-16",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "中软国际有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/16/PREIPO_F0101_V01_20261016_37025_Q/0A152FA0151A4A10AA1F37CDD2872260/关于中软国际有限公司首次公开发行存托凭证并上市辅导工作进展报告（第二十二期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 华泰联合证券有限责任公司 | 备案时间: 2021-01-29 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-16",
+      "publishedAt": "2026-10-16",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "广东奥科特新材料科技股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/16/PREIPO_F0101_V01_20261016_37155_Q/BCE6F7F358C949B98BB522BBCE90EF2A/关于广东奥科特新材料科技股份有限公司首次公开发行股票并上市辅导工作进展报告（第二十二期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 金元证券股份有限公司 | 备案时间: 2021-05-10 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-16",
+      "publishedAt": "2026-10-16",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "广东水晶岛智能健康股份有限公司 (辅导备案) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/16/PREIPO_F0101_V01_20261016_37196_Q/E3C09ADE5F86414DB14A707350B088D6/关于广东水晶岛智能健康股份有限公司首次公开发行股票并上市辅导工作进展报告（第十五期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 广发证券股份有限公司 | 备案时间: 2023-01-03 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-16",
+      "publishedAt": "2026-10-16",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
     {
       "title": "佛山市青松科技股份有限公司 (辅导备案) [广东证监局]",
       "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/15/PREIPO_F0101_V01_20261015_36819_Q/6A7461A185594405B3B162A0A5D43FC8/关于佛山市青松科技股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作进展报告（第十二期）.pdf",
@@ -62,6 +129,28 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "思索技术：IPO问询中（拟创业板）",
+      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004309",
+      "excerpt": "注册地：广东｜保荐：光大证券｜受理：2026-04-02｜状态：已问询｜更新：2026-10-15",
+      "publishedAt": "2026-10-15",
+      "source": "深交所IPO审核动态",
+      "sourceId": "gd-szse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
+    },
+    {
+      "title": "时创意：IPO问询中（拟创业板）",
+      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004571",
+      "excerpt": "注册地：广东｜保荐：中信证券｜受理：2026-06-25｜状态：已问询｜更新：2026-10-15",
+      "publishedAt": "2026-10-15",
+      "source": "深交所IPO审核动态",
+      "sourceId": "gd-szse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
     },
     {
       "title": "广州众山新材料股份有限公司 (辅导备案) [广东证监局]",
