@@ -2734,15 +2734,16 @@
       ],
       "kind": "market",
       "firstBroadcastAt": "2026-09-19",
-      "lastBroadcastAt": "2026-09-29",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-10-18",
+      "broadcastCount": 4,
       "sections": [
         "insights",
         "must_read"
       ],
       "anglesUsed": [
         "政策变化",
-        "市场反应"
+        "市场反应",
+        "受影响人群"
       ],
       "samples": [
         {
@@ -2793,13 +2794,25 @@
           "url": "https://www.stcn.com/article/detail/4200075.html",
           "novelty": 0.24791666666666667,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-18",
+          "section": "insights",
+          "title": "金饰消费逼近历史最高",
+          "text": "金饰消费逼近历史最高 黄金类配置意愿处于高位，高净值客户对实物金与挂钩产品的询价增多，财富货架的结构性偏好发生偏移。",
+          "facts": [],
+          "broadcastAt": "2026-10-18T07:27:34+08:00",
+          "url": "https://news.southcn.com/node_812903b83a/de0a44ebc8.shtml",
+          "novelty": 0.2575471698113207,
+          "angle": "受影响人群"
         }
       ],
       "broadcastedTexts": [
         "黄金配置需求切换 黄金配置需求切换 加息背景下金价不降反涨，黄金定价逻辑切换，瑞银维持长期看涨、4000美元附近视为增持窗口，客户黄金类资产配置需求上升。 可结合瑞银分阶段目标价更新客户沟通口径，为私行及财富客户提供黄金类资产再平衡建议，同步做好贵金属业务合规提示。",
         "黄金配置需求再起 黄金配置需求再起 加息落地后金价反弹、黄金ETF持续吸金，私行与中高端客户对黄金类资产的咨询与配置意愿上升，是AUM结构优化的抓手。 可考虑本周上线黄金配置专题沟通材料，对私行及高净值客户做一对一适当性匹配，同步提示短期波动风险。",
         "险资投港股通ETF口径明确 险资投港股通ETF口径明确 长期资金配置通道拓宽，机构与高净值客户的跨境配置需求上升，财富与私行可提前准备对接方案。",
-        "私行跨境配置需求升温 私行跨境配置需求升温 险资投资港股通ETF口径明确，高净值客户跨境资产再平衡咨询增多，私行产品准入与合规说明需同步更新。 本周更新私行跨境产品准入清单，对过亿资产客户逐户梳理港股通ETF等配置需求。"
+        "私行跨境配置需求升温 私行跨境配置需求升温 险资投资港股通ETF口径明确，高净值客户跨境资产再平衡咨询增多，私行产品准入与合规说明需同步更新。 本周更新私行跨境产品准入清单，对过亿资产客户逐户梳理港股通ETF等配置需求。",
+        "金饰消费逼近历史最高 金饰消费逼近历史最高 黄金类配置意愿处于高位，高净值客户对实物金与挂钩产品的询价增多，财富货架的结构性偏好发生偏移。"
       ],
       "broadcastedFacts": [
         "!加息",
@@ -2907,13 +2920,14 @@
       ],
       "kind": "ipo",
       "firstBroadcastAt": "2026-09-19",
-      "lastBroadcastAt": "2026-09-24",
-      "broadcastCount": 2,
+      "lastBroadcastAt": "2026-10-18",
+      "broadcastCount": 3,
       "sections": [
         "insights"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -2940,11 +2954,25 @@
           "url": "https://www.cnfin.com/hg-lb/detail/20260924/4474402_1.html",
           "novelty": 0.9820512820512821,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-18",
+          "section": "insights",
+          "title": "解禁潮与新股申购并行",
+          "text": "解禁潮与新股申购并行 超千亿解禁叠加新股申购，客户持仓结构调整与打新资金调度需求上升，证券保证金流动加快。",
+          "facts": [
+            "!申购"
+          ],
+          "broadcastAt": "2026-10-18T07:27:34+08:00",
+          "url": "https://finance.sina.com.cn/stock/zqgd/2026-10-17/doc-inivpspz6395396.shtml",
+          "novelty": 0.2863636363636364,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "打新客户资金安排 打新客户资金安排 力勤资源今日申购，有打新需求的客户存在资金调度与短期理财衔接需求。 可提示打新客户关注申购时间与资金安排，配套短期理财与资金归集服务。",
-        "理财费率竞争应对 理财费率竞争应对 理财机构密集下调管理费率、0费率可持续性存疑，客户比价敏感度上升，单纯价格战难留客。 可考虑以资产配置服务与投顾陪伴作为差异点，本周更新客户沟通口径，弱化费率单一卖点。"
+        "理财费率竞争应对 理财费率竞争应对 理财机构密集下调管理费率、0费率可持续性存疑，客户比价敏感度上升，单纯价格战难留客。 可考虑以资产配置服务与投顾陪伴作为差异点，本周更新客户沟通口径，弱化费率单一卖点。",
+        "解禁潮与新股申购并行 解禁潮与新股申购并行 超千亿解禁叠加新股申购，客户持仓结构调整与打新资金调度需求上升，证券保证金流动加快。"
       ],
       "broadcastedFacts": [
         "!申购",
@@ -9183,79 +9211,141 @@
         "!落地"
       ],
       "peakScore": 0
+    },
+    "普惠小微": {
+      "id": "普惠小微",
+      "topicTags": [
+        "消费信贷"
+      ],
+      "anchors": [
+        "普惠小微"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-10-18",
+      "lastBroadcastAt": "2026-10-18",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-18",
+          "section": "must_read",
+          "title": "商业保理监管办法将出",
+          "text": "商业保理监管办法将出 供应链金融合作方合规门槛提高，普惠小微相关合作机构的资质面临重新评估。",
+          "facts": [],
+          "broadcastAt": "2026-10-18T07:27:34+08:00",
+          "url": "https://m.21jingji.com/article/20261017/herald/da8b6587503fda7cf8c6fc87ab372704.html",
+          "score": 78,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "商业保理监管办法将出 商业保理监管办法将出 供应链金融合作方合规门槛提高，普惠小微相关合作机构的资质面临重新评估。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 78
+    },
+    "ev-k1zxbo": {
+      "id": "ev-k1zxbo",
+      "topicTags": [
+        "科技金融"
+      ],
+      "anchors": [],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-10-18",
+      "lastBroadcastAt": "2026-10-18",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-18",
+          "section": "must_read",
+          "title": "国常会深化拓展人工智能+",
+          "text": "国常会深化拓展人工智能+ 科技金融政策导向明确，AI相关企业的结算与融资需求成为对公零售联动的观察点。",
+          "facts": [],
+          "broadcastAt": "2026-10-18T07:27:34+08:00",
+          "url": "https://finance.eastmoney.com/a/202610173899018611.html",
+          "score": 21,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "国常会深化拓展人工智能+ 国常会深化拓展人工智能+ 科技金融政策导向明确，AI相关企业的结算与融资需求成为对公零售联动的观察点。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 21
+    },
+    "ev-rwnhv5": {
+      "id": "ev-rwnhv5",
+      "topicTags": [
+        "消费信贷"
+      ],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-18",
+      "lastBroadcastAt": "2026-10-18",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-18",
+          "section": "insights",
+          "title": "广交会智造出海融资需求",
+          "text": "广交会智造出海融资需求 无人经济新品与智造设备出口带动收付汇与设备融资需求，外贸型小微企业的结算场景与融资时点更集中。",
+          "facts": [],
+          "broadcastAt": "2026-10-18T07:27:34+08:00",
+          "url": "https://www.cnr.cn/gd/xgyxgd/20261017/t20261017_527845085.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "广交会智造出海融资需求 广交会智造出海融资需求 无人经济新品与智造设备出口带动收付汇与设备融资需求，外贸型小微企业的结算场景与融资时点更集中。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-n0a0ij": {
+      "id": "ev-n0a0ij",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-18",
+      "lastBroadcastAt": "2026-10-18",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-18",
+          "section": "insights",
+          "title": "境外采购商回流广交会",
+          "text": "境外采购商回流广交会 境外客商集中到会，外卡收单、结售汇与跨境消费场景的交易量上升，涉外服务触点密度提高。",
+          "facts": [],
+          "broadcastAt": "2026-10-18T07:27:34+08:00",
+          "url": "https://www.stcn.com/article/detail/4223795.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "境外采购商回流广交会 境外采购商回流广交会 境外客商集中到会，外卡收单、结售汇与跨境消费场景的交易量上升，涉外服务触点密度提高。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
     }
   },
   "today": {
     "date": "2026-10-18",
-    "entries": [
-      {
-        "date": "2026-10-18",
-        "section": "must_read",
-        "title": "商业保理监管办法将出",
-        "text": "商业保理监管办法将出 供应链金融合作方合规门槛提高，普惠小微相关合作机构的资质面临重新评估。",
-        "facts": [],
-        "broadcastAt": "2026-10-18T07:27:34+08:00",
-        "url": "https://m.21jingji.com/article/20261017/herald/da8b6587503fda7cf8c6fc87ab372704.html",
-        "score": 78,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-18",
-        "section": "must_read",
-        "title": "国常会深化拓展人工智能+",
-        "text": "国常会深化拓展人工智能+ 科技金融政策导向明确，AI相关企业的结算与融资需求成为对公零售联动的观察点。",
-        "facts": [],
-        "broadcastAt": "2026-10-18T07:27:34+08:00",
-        "url": "https://finance.eastmoney.com/a/202610173899018611.html",
-        "score": 21,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-18",
-        "section": "insights",
-        "title": "金饰消费逼近历史最高",
-        "text": "金饰消费逼近历史最高 黄金类配置意愿处于高位，高净值客户对实物金与挂钩产品的询价增多，财富货架的结构性偏好发生偏移。",
-        "facts": [],
-        "broadcastAt": "2026-10-18T07:27:34+08:00",
-        "url": "https://news.southcn.com/node_812903b83a/de0a44ebc8.shtml",
-        "novelty": 0.2575471698113207,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-10-18",
-        "section": "insights",
-        "title": "广交会智造出海融资需求",
-        "text": "广交会智造出海融资需求 无人经济新品与智造设备出口带动收付汇与设备融资需求，外贸型小微企业的结算场景与融资时点更集中。",
-        "facts": [],
-        "broadcastAt": "2026-10-18T07:27:34+08:00",
-        "url": "https://www.cnr.cn/gd/xgyxgd/20261017/t20261017_527845085.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-18",
-        "section": "insights",
-        "title": "境外采购商回流广交会",
-        "text": "境外采购商回流广交会 境外客商集中到会，外卡收单、结售汇与跨境消费场景的交易量上升，涉外服务触点密度提高。",
-        "facts": [],
-        "broadcastAt": "2026-10-18T07:27:34+08:00",
-        "url": "https://www.stcn.com/article/detail/4223795.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-18",
-        "section": "insights",
-        "title": "解禁潮与新股申购并行",
-        "text": "解禁潮与新股申购并行 超千亿解禁叠加新股申购，客户持仓结构调整与打新资金调度需求上升，证券保证金流动加快。",
-        "facts": [
-          "!申购"
-        ],
-        "broadcastAt": "2026-10-18T07:27:34+08:00",
-        "url": "https://finance.sina.com.cn/stock/zqgd/2026-10-17/doc-inivpspz6395396.shtml",
-        "novelty": 0.2863636363636364,
-        "angle": "市场反应"
-      }
-    ],
-    "runId": "39079052111"
+    "entries": []
   },
   "deliveries": [
     {
@@ -9480,6 +9570,13 @@
       "runId": "38983230399",
       "reportRunId": "38981559806",
       "reportSha": "e04dc42db942ed687bdc3da1dcceea2deedb68be"
+    },
+    {
+      "date": "2026-10-18",
+      "pushedAt": "2026-10-18T07:47:26+08:00",
+      "runId": "39080340194",
+      "reportRunId": "39079052111",
+      "reportSha": "65d0b789d9fd11363596bd0f632e5b28e599bade"
     }
   ],
   "ipoVoicing": {
