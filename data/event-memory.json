@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-17",
+  "updatedAt": "2026-10-18",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -9186,8 +9186,76 @@
     }
   },
   "today": {
-    "date": "2026-10-17",
-    "entries": []
+    "date": "2026-10-18",
+    "entries": [
+      {
+        "date": "2026-10-18",
+        "section": "must_read",
+        "title": "商业保理监管办法将出",
+        "text": "商业保理监管办法将出 供应链金融合作方合规门槛提高，普惠小微相关合作机构的资质面临重新评估。",
+        "facts": [],
+        "broadcastAt": "2026-10-18T07:27:34+08:00",
+        "url": "https://m.21jingji.com/article/20261017/herald/da8b6587503fda7cf8c6fc87ab372704.html",
+        "score": 78,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-18",
+        "section": "must_read",
+        "title": "国常会深化拓展人工智能+",
+        "text": "国常会深化拓展人工智能+ 科技金融政策导向明确，AI相关企业的结算与融资需求成为对公零售联动的观察点。",
+        "facts": [],
+        "broadcastAt": "2026-10-18T07:27:34+08:00",
+        "url": "https://finance.eastmoney.com/a/202610173899018611.html",
+        "score": 21,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-18",
+        "section": "insights",
+        "title": "金饰消费逼近历史最高",
+        "text": "金饰消费逼近历史最高 黄金类配置意愿处于高位，高净值客户对实物金与挂钩产品的询价增多，财富货架的结构性偏好发生偏移。",
+        "facts": [],
+        "broadcastAt": "2026-10-18T07:27:34+08:00",
+        "url": "https://news.southcn.com/node_812903b83a/de0a44ebc8.shtml",
+        "novelty": 0.2575471698113207,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-18",
+        "section": "insights",
+        "title": "广交会智造出海融资需求",
+        "text": "广交会智造出海融资需求 无人经济新品与智造设备出口带动收付汇与设备融资需求，外贸型小微企业的结算场景与融资时点更集中。",
+        "facts": [],
+        "broadcastAt": "2026-10-18T07:27:34+08:00",
+        "url": "https://www.cnr.cn/gd/xgyxgd/20261017/t20261017_527845085.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-18",
+        "section": "insights",
+        "title": "境外采购商回流广交会",
+        "text": "境外采购商回流广交会 境外客商集中到会，外卡收单、结售汇与跨境消费场景的交易量上升，涉外服务触点密度提高。",
+        "facts": [],
+        "broadcastAt": "2026-10-18T07:27:34+08:00",
+        "url": "https://www.stcn.com/article/detail/4223795.html",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-18",
+        "section": "insights",
+        "title": "解禁潮与新股申购并行",
+        "text": "解禁潮与新股申购并行 超千亿解禁叠加新股申购，客户持仓结构调整与打新资金调度需求上升，证券保证金流动加快。",
+        "facts": [
+          "!申购"
+        ],
+        "broadcastAt": "2026-10-18T07:27:34+08:00",
+        "url": "https://finance.sina.com.cn/stock/zqgd/2026-10-17/doc-inivpspz6395396.shtml",
+        "novelty": 0.2863636363636364,
+        "angle": "市场反应"
+      }
+    ],
+    "runId": "39079052111"
   },
   "deliveries": [
     {
