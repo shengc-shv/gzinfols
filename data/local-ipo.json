@@ -1,14 +1,80 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-18T07:25:46+08:00",
+  "fetchedAt": "2026-10-19T07:25:44+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-csrc-tutoring": 14,
+    "gd-csrc-tutoring": 19,
     "gd-sse-audit": 1,
     "gd-szse-audit": 2
   },
   "items": [
+    {
+      "title": "深圳昂湃技术股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/19/PREIPO_F0101_V01_20261019_37363_Q/009A55A291294BF1A8FC47AF9BC89771/关于深圳昂湃技术股份有限公司首次公开发行股票并上市辅导工作进展报告（第十期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 国信证券股份有限公司 | 备案时间: 2024-04-30 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-19",
+      "publishedAt": "2026-10-19",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "银河电力集团股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/19/PREIPO_F0101_V01_20261019_37364_Q/835B1BE7395442F1ABD04FBFC8865140/关于银河电力集团股份有限公司首次公开发行股票并上市辅导工作进展报告（第十一期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 广发证券股份有限公司 | 备案时间: 2024-02-22 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-19",
+      "publishedAt": "2026-10-19",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "深圳市国天电子股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/19/PREIPO_F0101_V01_20261019_37365_Q/0C66DA1E48DF4E1FA7915EBE7C8E9931/关于深圳市国天电子股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作进展报告（第二十一期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 华创证券有限责任公司 | 备案时间: 2021-09-07 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-19",
+      "publishedAt": "2026-10-19",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "富兰克科技（深圳）股份有限公司 (辅导验收) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/19/PREIPO_F0101_V01_20261019_37366_Q/DBCA8000CCAF40B0B7ED68C4B80859F6/关于富兰克科技（深圳）股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作进展报告（第四期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中银国际证券股份有限公司 | 备案时间: 2025-10-11 | 状态: 辅导验收 | 报告: 辅导进展情况报告 | 披露: 2026-10-19",
+      "publishedAt": "2026-10-19",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-coach-done"
+    },
+    {
+      "title": "深圳市道元工业股份有限公司 (辅导验收) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/19/PREIPO_F0101_V01_20261019_37367_Q/767F02E690AB49EF96B018A2AF9BD5DB/关于深圳市道元工业股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作进展报告（第十一期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 国联民生证券承销保荐有限公司 | 备案时间: 2024-01-08 | 状态: 辅导验收 | 报告: 辅导进展情况报告 | 披露: 2026-10-19",
+      "publishedAt": "2026-10-19",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-coach-done"
+    },
+    {
+      "title": "深圳市斯比特技术股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/19/PREIPO_F0101_V01_20261019_37368_Q/F963F6ECA50B4BE9AA9C9CDA7976A8B2/关于深圳市斯比特技术股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作进展报告（第二期）.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中国银河证券股份有限公司 | 备案时间: 2026-03-26 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-19",
+      "publishedAt": "2026-10-19",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
     {
       "title": "深圳市爱协生科技股份有限公司 (辅导备案) [深圳证监局]",
       "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/16/PREIPO_F0101_V01_20261016_36950_Q/C8749C9C5CB54E5BAAB9E834E789831E/关于深圳市爱协生科技股份有限公司首次公开发行股票并上市辅导工作进展报告（第十六期）.pdf",
@@ -184,17 +250,6 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "广东晟辉科技股份有限公司 (辅导备案) [广东证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/12/PREIPO_F0101_V01_20261012_36549_Q/6FBA208ABBDB4564A18D4622394CA6F3/关于广东晟辉科技股份有限公司首次公开发行股票并上市辅导工作进展报告（第八期）.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 申万宏源证券承销保荐有限责任公司 | 备案时间: 2024-09-25 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-12",
-      "publishedAt": "2026-10-12",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
     }
   ]
 }
