@@ -1,0 +1,854 @@
+{
+  "date": "2026-10-19",
+  "updatedAt": "2026-10-18T23:29:22.101Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：金融街论坛监管表态，政策信号密集；广交会与咖啡保税新业态，外贸客群活跃；养老与财富货架竞对动作，客群分流在即。",
+    "spoken_hero": "今天主要看三个方面：金融街论坛监管密集发声，政策信号集中；广交会和咖啡保税新业态，外贸客群明显活跃；养老金融和财富货架竞对动作频频，客群分流压力在上升。",
+    "must_read": [
+      {
+        "title": "润建股份签2亿美元AI词元大单",
+        "why": "单笔两亿美元AI词元订单落地，算力与AI服务采购进入大额合同阶段，科技类客户结算与融资需求上行。",
+        "url": "https://www.stcn.com/article/detail/4224351.html"
+      },
+      {
+        "title": "统计失信企业公示最长三年",
+        "why": "统计严重失信企业信用管理办法新修，失信公示最长三年，企业信用画像与授信准入口径随之变化。",
+        "url": "https://www.stcn.com/article/detail/4224322.html"
+      },
+      {
+        "title": "食品安全国标累计1775项",
+        "why": "食品安全国家标准累计发布一千七百余项，食品餐饮类商户合规门槛抬升，影响小微商户经营与授信。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261018/4482609_1.html"
+      },
+      {
+        "title": "人工智能+文旅试点落地",
+        "why": "AI加文旅试点开启场景化赛道，广州文旅商圈与商户数字化改造需求上升，牵动本地消费获客格局。",
+        "url": "https://www.cnfin.com/hg-lb/detail/20261019/4482669_1.html"
+      },
+      {
+        "title": "深市科技龙头提议回购，逾千亿",
+        "why": "深市科技龙头密集提议回购，逾千亿增持计划加速落地，科技类上市公司股东与员工财富效应值得关注。",
+        "url": "https://www.stcn.com/article/detail/4224298.html"
+      }
+    ],
+    "spoken_must_read": "润建股份签2亿美元AI词元大单。单笔两亿美元AI词元订单落地，算力与AI服务采购进入大额合同阶段，科技类客户结算与融资需求上行。其次，统计失信企业公示最长三年。统计严重失信企业信用管理办法新修，失信公示最长三年，企业信用画像与授信准入口径随之变化。此外，食品安全国标累计1775项。食品安全国家标准累计发布一千七百余项，食品餐饮类商户合规门槛抬升，影响小微商户经营与授信。还有，人工智能+文旅试点落地。AI加文旅试点开启场景化赛道，广州文旅商圈与商户数字化改造需求上升，牵动本地消费获客格局。另外，深市科技龙头提议回购，逾千亿。深市科技龙头密集提议回购，逾千亿增持计划加速落地，科技类上市公司股东与员工财富效应值得关注。",
+    "insights": [
+      {
+        "topic": "多家机构集中上架产品",
+        "impact": "多家金融机构密集上架产品，财富货架同质化竞争加剧，客户比价周期缩短，费率与起购门槛成为分流关键变量。",
+        "tag": [
+          "财富",
+          "竞对动态"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "集中上架！多家金融机构密集布局",
+            "url": "https://m.21jingji.com/article/20261018/herald/27a36f5f06fc86ae5e62b76c85fe402d.html"
+          }
+        ]
+      },
+      {
+        "topic": "广交会机器人订单迸发",
+        "impact": "广交会机器人展馆多个赛道订单迸发，广州科创与外贸产业链客户订单与备货资金需求同步上升，结算与融资节奏加快。",
+        "tag": [
+          "信贷",
+          "科技金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "多个赛道订单迸发 广交会机器人展馆火热出圈",
+            "url": "https://www.cnfin.com/hg-lb/detail/20261019/4482656_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "咖啡生豆保税整进零出",
+        "impact": "广州咖啡生豆保税整进零出落地，企业资金占用成本降两成以上，咖啡贸易与烘焙商户的跨境结算和备货融资需求上升。",
+        "tag": [
+          "信贷",
+          "政银合作"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "广州商品交易所总经理许阳：广州落地咖啡生豆“整进零出”保税交易，帮企业降低资金占用成本20%以上",
+            "url": "https://news.dayoo.com/guangzhou/202610/18/139995_55014102.htm"
+          }
+        ]
+      },
+      {
+        "topic": "海丝文旅周商旅福利",
+        "impact": "海丝文旅周在越秀推出多项商旅福利，商圈客流与消费券使用集中，本地文旅商户收单与结算活跃度提升。",
+        "tag": [
+          "客群",
+          "政银合作"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "海丝文旅周｜ 越秀超多商旅福利解锁新体验",
+            "url": "https://news.dayoo.com/guangzhou/202610/18/139995_55014257.htm"
+          }
+        ]
+      },
+      {
+        "topic": "交行布局湾区品质享老",
+        "impact": "交行广东省分行布局湾区品质享老，养老金融产品与服务模式先行落地，本地养老客群面临分流压力。",
+        "tag": [
+          "养老",
+          "竞对动态"
+        ],
+        "group": "养老金融",
+        "sources": [
+          {
+            "title": "交行广东省分行绘就湾区品质享老新画卷",
+            "url": "https://www.cnr.cn/gd/guangdongyaowen/20261018/t20261018_527845632.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "广交会多项指标创历史新高",
+        "impact": "广交会多项指标创历史新高，境外采购商与外贸企业活跃度提升，跨境结算、汇率避险与外币兑换需求集中释放。",
+        "tag": [
+          "客群",
+          "信贷"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "中国外贸风向标，广交会创多项历史新高！",
+            "url": "https://news.dayoo.com/guangzhou/202610/18/139995_55014118.htm"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，多家金融机构集中上架产品，基金规模增长仍靠业绩说话，客户选品更看长期业绩，货架与费率竞争在加剧。高端客户方面，AI重构资产管理的讨论升温，智能投顾工具的效率变化会直接影响高净值客户的配置体验。普惠小微方面，广交会机器人展馆订单迸发，广州科创与外贸产业链客户的融资需求在升温。本地消费场景方面，咖啡生豆保税整进零出落地，企业资金占用成本降两成以上，重阳银发错峰游和海丝文旅福利也在带动本地消费客群活跃。",
+    "guangdong_ipo": {
+      "spoken": "深圳证监局今日披露六家深圳企业辅导进展：昂湃技术、银河电力、国天电子、斯比特技术处于辅导备案，富兰克科技、道元工业进入辅导验收，保荐机构涉及国信、广发、中银国际等。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌2.14%，标普跌1.09%，道指跌0.34%，AI债务担忧与利率压力主导。",
+      "sectors": [
+        "CoreWeave信用违约互换升至困境水平，投资者对AI债务转趋悲观。",
+        "CoreWeave股价自上周五收盘一度跌27.5%，随后反弹17%，波动剧烈。",
+        "分析师称实物油价因油轮费率飙升，交付成本或高出约38美元/桶。",
+        "特朗普对俄制裁豁免或增加俄燃料供应，油价回落。",
+        "IMF称若通胀超预期，日本央行或需更快收紧。"
+      ],
+      "spoken": "美股收跌，纳指跌2.14%，标普跌1.09%，道指跌0.34%。AI债务担忧升温，CoreWeave信用违约互换升至困境水平，股价大幅波动。油价因俄供应可能增加而回落，市场同时关注利率与日本央行收紧预期。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-19"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52002.41",
+          "changePct": "-0.34%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26140.03",
+          "changePct": "-2.14%"
+        },
+        {
+          "name": "标普500",
+          "value": "7659.44",
+          "changePct": "-1.09%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证涨0.24%，深成指跌0.12%，创业板跌0.39%，指数分化震荡。",
+      "sectors": [
+        "科技股密集回购：生益科技、海光信息、中科曙光、澜起科技出手，提振板块情绪。",
+        "光模块高景气，光迅科技三季度净利润增长超预期，并继续押注扩产。",
+        "国常会部署深化拓展人工智能+，政策面利好AI相关方向。",
+        "十大机构论市称调整尾声信号已现，短期可能见底。",
+        "半导体方面，韩财长称繁荣至少持续至明年，但2029年或现内存红海。"
+      ],
+      "spoken": "A股今日分化震荡，上证涨0.24%，深成指跌0.12%，创业板跌0.39%。板块上，科技股密集回购，生益科技、海光信息等出手；光模块景气度高，光迅科技三季度净利增长超预期；国常会部署人工智能加，政策面偏暖。机构认为调整接近尾声。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-19"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3716.28",
+          "changePct": "+0.24%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11802.46",
+          "changePct": "-0.12%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2772.38",
+          "changePct": "-0.39%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24186.83点（+0.52%）；恒生科技收报4108.24点（+1.16%）。",
+      "sectors": [
+        "科网股普涨",
+        "军工股走强",
+        "联想涨超8%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-18"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.52% 科指涨1.16% 科网股普涨 军工股走强 联想涨超8%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-16/doc-inivmazi7774326.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24186.83",
+          "changePct": "+0.52%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4108.24",
+          "changePct": "+1.16%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-16",
+    "marketStatus": {
+      "reportDate": "2026-10-19",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-10-16",
+          "reason": "数据为 10月16日（距今 3 天）"
+        },
+        "hk": {
+          "fresh": false,
+          "dataDate": "2026-10-16",
+          "reason": "数据为 10月16日（距今 3 天）"
+        },
+        "us": {
+          "fresh": false,
+          "dataDate": "2026-10-16",
+          "reason": "数据为 10月16日（距今 3 天）"
+        }
+      },
+      "allStale": true,
+      "note": "三地股市均无隔夜行情（休市或数据未更新），以下为最近一次收盘数据",
+      "spokenNote": "三地股市今日均无隔夜行情"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610183899096732.html",
+      "title_cn": "最新警报！对冲基金大举撤退什么信号？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "东方财富报道对冲基金出现大举撤退动向，标题以「最新警报」提示相关信号。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "对冲基金",
+        "资金流向"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610183899121284.html",
+      "title_cn": "黑天鹅突袭！席卷80万人巴黎、马赛、里昂发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "东方财富报道巴黎、马赛、里昂三地发生涉及约80万人的事件，标题以「黑天鹅突袭」描述。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "海外"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610183899163691.html",
+      "title_cn": "10月18日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "东方财富汇总10月18日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "公告",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610183899123734.html",
+      "title_cn": "周末要闻汇总：深化拓展“人工智能+”国常会最新部署",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "国常会就深化拓展「人工智能+」作出最新部署，为周末要闻汇总中的重点内容。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610183899160468.html",
+      "title_cn": "十大机构论市：调整尾声阶段信号已现短期可能见底",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "十大机构发布论市观点，认为调整已进入尾声阶段、短期可能见底。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610183899134033.html",
+      "title_cn": "科技股密集回购来袭！生益科技、海光信息、中科曙光、澜起科技出手",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "生益科技、海光信息、中科曙光、澜起科技等科技股密集推出回购。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "半导体",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610183899112429.html",
+      "title_cn": "女研究员“老鼠仓”：操控两个账户3年8个月最终亏损收场还被罚了50万",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "一名女研究员操控两个账户进行老鼠仓交易，历时3年8个月最终亏损，并被罚款50万元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "监管",
+        "处罚"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610183899110080.html",
+      "title_cn": "光模块高景气光迅科技三季度净利润增长超预期继续押注扩产",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "光迅科技三季度净利润增长超出预期，公司继续押注扩产，光模块行业维持高景气。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "光模块",
+        "光通信"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610183899101832.html",
+      "title_cn": "2029年将现内存“红海”？韩财长发声：半导体繁荣至少持续至明年",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "韩国财长表示半导体繁荣至少持续至明年，同时提及2029年可能出现内存「红海」。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "存储",
+        "海外"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610183899110241.html",
+      "title_cn": "事关资本市场重磅论坛明日开幕！连跌4周后A股会反弹吗？回测来了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "资本市场重磅论坛将于次日开幕；报道在A股连跌4周后回顾历史回测，讨论反弹可能。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "论坛",
+        "市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610193899246615.html",
+      "title_cn": "当我们在谈论AI重构资产管理时到底在谈论什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/19",
+      "summary": "东方财富刊文讨论AI重构资产管理行业的相关议题。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "资管"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610193899232150.html",
+      "title_cn": "改革发展并重塑造新型生产关系——把握好发展新质生产力实践的总要求③",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/19",
+      "summary": "文章围绕发展新质生产力的实践要求，论述改革发展并重与塑造新型生产关系。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-18/doc-inivrzvi7788838.shtml",
+      "title_cn": "药师帮于10月16日耗资约153.12万港元回购45.8万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "药师帮于10月16日耗资约153.12万港元回购45.8万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-18/doc-inivrzvh0993254.shtml",
+      "title_cn": "高盛：比亚迪股份维持“买入”评级 目标价134港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "高盛维持比亚迪股份「买入」评级，目标价134港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "汽车",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-18/doc-inivrzvp7237399.shtml",
+      "title_cn": "花旗：比亚迪股份维持“买入”评级 目标价142港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "花旗维持比亚迪股份「买入」评级，目标价142港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "汽车",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-18/doc-inivrzvm6505203.shtml",
+      "title_cn": "美银证券：海信家电维持“中性”评级 目标价削4%至23.4港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "美银证券维持海信家电「中性」评级，目标价下调4%至23.4港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "家电",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-18/doc-inivrzvm6499536.shtml",
+      "title_cn": "中信证券：复宏汉霖维持“买入”评级 目标价122港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "中信证券维持复宏汉霖「买入」评级，目标价122港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "医药",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-18/doc-inivrzvh0979978.shtml",
+      "title_cn": "瑞银：天工国际维持“买入”评级 目标价5.00港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "瑞银维持天工国际「买入」评级，目标价5.00港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-18/doc-inivrzvh0978544.shtml",
+      "title_cn": "申万宏源：Momenta维持“买入”评级 目标价上调至408港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "申万宏源维持Momenta「买入」评级，并将目标价上调至408港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-18/doc-inivrzvi7788254.shtml",
+      "title_cn": "威胜控股于10月16日斥资306.09万港元回购25万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "威胜控股于10月16日斥资306.09万港元回购25万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-18/doc-inivrzvh1015202.shtml",
+      "title_cn": "卓越教育集团于10月16日斥资22.72万港元回购9.5万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "卓越教育集团于10月16日斥资22.72万港元回购9.5万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-18/doc-inivrzvh1014233.shtml",
+      "title_cn": "创科实业于10月16日斥资约719.29万港元回购5.5万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "创科实业于10月16日斥资约719.29万港元回购5.5万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-18/doc-inivrzvi7786313.shtml",
+      "title_cn": "中裕能源于10月16日斥资107.74万港元回购40万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "中裕能源于10月16日斥资107.74万港元回购40万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-18/doc-inivrzvi7784402.shtml",
+      "title_cn": "碧桂园服务于10月16日耗资约154.33万港元回购30万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "碧桂园服务于10月16日耗资约154.33万港元回购30万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "地产",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/18/top-analysts-are-bullish-on-the-growth-potential-of-these-3-stocks.html",
+      "title_cn": "Top Wall Street analysts are bullish on the growth potential of these 3 stocks",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "CNBC报道华尔街顶级分析师看好三只股票的增长潜力。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/16/playing-the-coreweave-disconnect.html",
+      "title_cn": "The Austin Powers steamroller: How to trade CoreWeave's slow moving crisis",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/16",
+      "summary": "CNBC文章讨论CoreWeave缓慢演进的危机及其交易层面影响。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/15/brian-sullivan-why-the-real-price-of-oil-is-likely-30-40-higher-than-where-it-is-now.html",
+      "title_cn": "Brian Sullivan: Why the 'real' price of oil is likely $30-$40 higher than where it is now",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/15",
+      "summary": "CNBC评论员Brian Sullivan称，石油的「真实」价格可能比当前水平高出30至40美元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "原油"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/15/coreweave-credit-default-swaps-hit-distress-levels-as-investors-sour-on-ai-debt.html",
+      "title_cn": "CoreWeave credit default swaps hit distress levels as investors sour on AI debt",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/15",
+      "summary": "CoreWeave信用违约互换（CDS）升至困境水平，投资者对AI相关债务态度转差。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "信用风险",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/boj-may-need-to-tighten-faster-if-inflation-beats-forecast-imf-says-4956113",
+      "title_cn": "BOJ may need to tighten faster if inflation beats forecast, IMF says",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "IMF表示，若通胀超出预期，日本央行可能需要更快收紧货币政策。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "央行",
+        "通胀",
+        "海外"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/oil-slips-as-trumps-sanction-waiver-may-lead-to-more-russian-fuel-supplies-4956112",
+      "title_cn": "Oil slips as Trump’s sanction waiver may lead to more Russian fuel supplies",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "油价下跌，因特朗普的制裁豁免可能带来更多俄罗斯燃料供应。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "原油",
+        "制裁"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/veradermics-to-present-phase-3-hair-loss-trial-results-monday-93CH-4956109",
+      "title_cn": "Veradermics to present phase 3 hair loss trial results Monday",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "Veradermics将于周一公布其脱发治疗三期临床试验结果。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "临床"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/australias-challenger-gets-takeover-bid-from-unit-of-japans-daiichi-life-4956101",
+      "title_cn": "Australia’s Challenger gets takeover bid from unit of Japan’s Daiichi Life",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "澳大利亚Challenger收到日本第一生命旗下单位的收购要约。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "并购",
+        "海外"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/russia-stocks-lower-at-close-of-trade-moex-russia-index-unchanged-4956082",
+      "title_cn": "Russia stocks lower at close of trade; MOEX Russia Index unchanged",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "俄罗斯股市收低，MOEX俄罗斯指数持平。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "海外市场"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/disc-medicine-to-present-phase-3-trial-results-for-bitopertin-93CH-4956077",
+      "title_cn": "Disc Medicine to present Phase 3 trial results for bitopertin",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "Disc Medicine将公布bitopertin的三期临床试验结果。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "临床"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/mink-brook-asset-management-10-owner-rebalances-736666-in-dlh-stock-93CH-4956076",
+      "title_cn": "Mink Brook asset management, 10% owner, rebalances $736,666 in DLH stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "Mink Brook资产管理公司作为10%股东，对DLH股票进行736,666美元的持仓再平衡。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "股东变动"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/rubio-says-trump-to-take-up-to-60-days-to-weigh-russia-sanctions-4955750",
+      "title_cn": "Rubio says Trump to take up to 60 days to weigh Russia sanctions",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/18",
+      "summary": "鲁比奥表示，特朗普将用最多60天评估对俄罗斯的制裁。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "制裁",
+        "地缘",
+        "海外"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
