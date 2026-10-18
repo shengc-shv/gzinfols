@@ -1507,8 +1507,8 @@
       ],
       "kind": "market",
       "firstBroadcastAt": "2026-09-17",
-      "lastBroadcastAt": "2026-10-17",
-      "broadcastCount": 10,
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 11,
       "sections": [
         "insights",
         "must_read"
@@ -1518,23 +1518,10 @@
         "市场反应",
         "受影响人群",
         "数据验证",
-        "同业动作"
+        "同业动作",
+        "客户行动"
       ],
       "samples": [
-        {
-          "date": "2026-09-28",
-          "section": "must_read",
-          "title": "央行例会删去跨周期加码稳汇率",
-          "text": "央行例会删去跨周期加码稳汇率 汇率预期管理强化，结售汇与外币理财窗口打开，对分行跨境客群经营与外币资产配置节奏有直接指引。",
-          "facts": [
-            "@央行"
-          ],
-          "broadcastAt": "2026-09-28T07:36:24+08:00",
-          "url": "https://finance.cctv.com/2026/09/27/ARTISJbkHpcHxIOukhL3os13260927.shtml",
-          "score": 34,
-          "novelty": 0.47358490566037736,
-          "angle": "数据验证"
-        },
         {
           "date": "2026-10-07",
           "section": "insights",
@@ -1598,24 +1585,38 @@
           "url": "https://www.cnr.cn/gd/xgyxgd/20261016/t20261016_527843873.shtml",
           "novelty": 0.73,
           "angle": "数据验证"
+        },
+        {
+          "date": "2026-10-19",
+          "section": "insights",
+          "title": "交行布局湾区品质享老",
+          "text": "交行布局湾区品质享老 交行广东省分行布局湾区品质享老，养老金融产品与服务模式先行落地，本地养老客群面临分流压力。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://www.cnr.cn/gd/guangdongyaowen/20261018/t20261018_527845632.shtml",
+          "novelty": 0.5546341463414635,
+          "angle": "客户行动"
         }
       ],
       "broadcastedTexts": [
-        "理财密集下调费率1667条 理财密集下调费率1667条 多家银行理财集中下调费率，财富客群比价压力上升，产品货架与定价策略需同步评估调整。",
         "理财费率下调应对 理财费率下调应对 多家银行理财集中下调费率，财富客群比价压力上升，产品货架与定价策略需同步评估调整。 本周评估在售理财产品费率竞争力，对高敏感客群提前沟通，避免节前资金流失。",
         "央行例会删去跨周期加码稳汇率 央行例会删去跨周期加码稳汇率 汇率预期管理强化，结售汇与外币理财窗口打开，对分行跨境客群经营与外币资产配置节奏有直接指引。",
         "银发消费新场景遍地开花 银发消费新场景遍地开花 银发消费新场景遍地开花，养老客群的支付、理财与适老服务需求上升，节后客群经营窗口打开。",
         "广州敬老月系列活动启动 广州敬老月系列活动启动 养老客群营销窗口打开，养老金账户与适老理财的社区触达场景增加，银发客群关注度上升。",
         "广州边检16项举措服务广交会 广州边检16项举措服务广交会 境外客商来穗便利度提升，外卡、结售汇等跨境金融需求集中释放，广交会窗口期的跨境客群经营价值抬升。",
         "广州东部枢纽出口超百亿 广州东部枢纽出口超百亿 中欧班列发运列数全省第一，前三季度外贸出口额超百亿元，枢纽内货代与外贸客群的跨境结算与贸易融资需求上升。",
-        "中行广州办全球贸易大会 中行广州办全球贸易大会 中行在广州办全球贸易合作大会，直接对撞广交会跨境客群，结算与融资产品的客户争夺节奏明显加快。"
+        "中行广州办全球贸易大会 中行广州办全球贸易大会 中行在广州办全球贸易合作大会，直接对撞广交会跨境客群，结算与融资产品的客户争夺节奏明显加快。",
+        "交行布局湾区品质享老 交行布局湾区品质享老 交行广东省分行布局湾区品质享老，养老金融产品与服务模式先行落地，本地养老客群面临分流压力。"
       ],
       "broadcastedFacts": [
         "#8月",
         "#9月",
         "!下调",
         "@央行",
-        "@广州"
+        "@广州",
+        "!落地"
       ],
       "peakScore": 69
     },
@@ -2823,7 +2824,8 @@
     "获客|高净值": {
       "id": "获客|高净值",
       "topicTags": [
-        "私行客群"
+        "私行客群",
+        "广州本地"
       ],
       "anchors": [
         "高净值",
@@ -2832,8 +2834,8 @@
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-09-19",
-      "lastBroadcastAt": "2026-10-16",
-      "broadcastCount": 4,
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 5,
       "sections": [
         "insights",
         "must_read"
@@ -2841,7 +2843,8 @@
       "anglesUsed": [
         "政策变化",
         "市场反应",
-        "受影响人群"
+        "受影响人群",
+        "数据验证"
       ],
       "samples": [
         {
@@ -2892,17 +2895,34 @@
           "url": "https://m.21jingji.com/article/20261015/herald/de8eb3a80362fb5f04e28fa04d8a4c2d.html",
           "novelty": 0.33055555555555555,
           "angle": "受影响人群"
+        },
+        {
+          "date": "2026-10-19",
+          "section": "must_read",
+          "title": "人工智能+文旅试点落地",
+          "text": "人工智能+文旅试点落地 AI加文旅试点开启场景化赛道，广州文旅商圈与商户数字化改造需求上升，牵动本地消费获客格局。",
+          "facts": [
+            "!落地",
+            "!试点"
+          ],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://www.cnfin.com/hg-lb/detail/20261019/4482669_1.html",
+          "score": 29,
+          "novelty": 0.7303191489361702,
+          "angle": "数据验证"
         }
       ],
       "broadcastedTexts": [
         "经纪客户迁移获客窗口 经纪客户迁移获客窗口 中金吸并东兴、信达进入实施阶段，548万经纪客户待迁移，财富条线存在客户流动带来的获客窗口。 可关注迁移期间客户服务断点，针对性推出转户与资产配置承接方案，重点触达高净值经纪客户。",
         "上海推银行业AI应用措施 上海推银行业AI应用措施 监管导向明确，科技条线可关注同业AI落地路径与合规边界，为数字化获客蓄力。",
         "券商线上展业逻辑重塑 券商线上展业逻辑重塑 线上获客与销售合规边界变化，对银行线上财富业务的展业方式与合规标准具有参照意义。",
-        "跨境医疗直付平台首发 跨境医疗直付平台首发 跨境就医支付通道成型，高净值与跨境客群的健康金融场景竞争升级。"
+        "跨境医疗直付平台首发 跨境医疗直付平台首发 跨境就医支付通道成型，高净值与跨境客群的健康金融场景竞争升级。",
+        "人工智能+文旅试点落地 人工智能+文旅试点落地 AI加文旅试点开启场景化赛道，广州文旅商圈与商户数字化改造需求上升，牵动本地消费获客格局。"
       ],
       "broadcastedFacts": [
         "!实施",
-        "!落地"
+        "!落地",
+        "!试点"
       ],
       "peakScore": 79
     },
@@ -7257,14 +7277,15 @@
       ],
       "kind": "ipo",
       "firstBroadcastAt": "2026-10-04",
-      "lastBroadcastAt": "2026-10-04",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 2,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -7294,15 +7315,31 @@
           "url": "https://www.stcn.com/article/detail/4206080.html",
           "novelty": 0.08020833333333333,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-19",
+          "section": "must_read",
+          "title": "深市科技龙头提议回购，逾千亿",
+          "text": "深市科技龙头提议回购，逾千亿 深市科技龙头密集提议回购，逾千亿增持计划加速落地，科技类上市公司股东与员工财富效应值得关注。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://www.stcn.com/article/detail/4224298.html",
+          "score": 29,
+          "novelty": 0.7587209302325582,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "沪深9月IPO零受理 沪深9月IPO零受理 三季度IPO节奏明显放缓，拟上市企业融资周期拉长，替代融资与股东资金安排需求上升。",
-        "IPO受理降温融资节奏拉长 IPO受理降温融资节奏拉长 9月沪深IPO零受理、三季度节奏放缓，拟上市企业融资周期拉长，替代融资与股东资金安排需求上升。"
+        "IPO受理降温融资节奏拉长 IPO受理降温融资节奏拉长 9月沪深IPO零受理、三季度节奏放缓，拟上市企业融资周期拉长，替代融资与股东资金安排需求上升。",
+        "深市科技龙头提议回购，逾千亿 深市科技龙头提议回购，逾千亿 深市科技龙头密集提议回购，逾千亿增持计划加速落地，科技类上市公司股东与员工财富效应值得关注。"
       ],
       "broadcastedFacts": [
         "#9月",
-        "!受理"
+        "!受理",
+        "!落地"
       ],
       "peakScore": 61
     },
@@ -9341,144 +9378,272 @@
       ],
       "broadcastedFacts": [],
       "peakScore": 0
+    },
+    "ev-gu18sc": {
+      "id": "ev-gu18sc",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-10-19",
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-19",
+          "section": "must_read",
+          "title": "润建股份签2亿美元AI词元大单",
+          "text": "润建股份签2亿美元AI词元大单 单笔两亿美元AI词元订单落地，算力与AI服务采购进入大额合同阶段，科技类客户结算与融资需求上行。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://www.stcn.com/article/detail/4224351.html",
+          "score": 66,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "润建股份签2亿美元AI词元大单 润建股份签2亿美元AI词元大单 单笔两亿美元AI词元订单落地，算力与AI服务采购进入大额合同阶段，科技类客户结算与融资需求上行。"
+      ],
+      "broadcastedFacts": [
+        "!落地"
+      ],
+      "peakScore": 66
+    },
+    "ev-7g1iwt": {
+      "id": "ev-7g1iwt",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-10-19",
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-19",
+          "section": "must_read",
+          "title": "统计失信企业公示最长三年",
+          "text": "统计失信企业公示最长三年 统计严重失信企业信用管理办法新修，失信公示最长三年，企业信用画像与授信准入口径随之变化。",
+          "facts": [],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://www.stcn.com/article/detail/4224322.html",
+          "score": 29,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "统计失信企业公示最长三年 统计失信企业公示最长三年 统计严重失信企业信用管理办法新修，失信公示最长三年，企业信用画像与授信准入口径随之变化。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 29
+    },
+    "ev-p333h4": {
+      "id": "ev-p333h4",
+      "topicTags": [
+        "消费信贷"
+      ],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-19",
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-19",
+          "section": "must_read",
+          "title": "食品安全国标累计1775项",
+          "text": "食品安全国标累计1775项 食品安全国家标准累计发布一千七百余项，食品餐饮类商户合规门槛抬升，影响小微商户经营与授信。",
+          "facts": [
+            "!发布"
+          ],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20261018/4482609_1.html",
+          "score": 29,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "食品安全国标累计1775项 食品安全国标累计1775项 食品安全国家标准累计发布一千七百余项，食品餐饮类商户合规门槛抬升，影响小微商户经营与授信。"
+      ],
+      "broadcastedFacts": [
+        "!发布"
+      ],
+      "peakScore": 29
+    },
+    "ev-ajngjx": {
+      "id": "ev-ajngjx",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-19",
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-19",
+          "section": "insights",
+          "title": "多家机构集中上架产品",
+          "text": "多家机构集中上架产品 多家金融机构密集上架产品，财富货架同质化竞争加剧，客户比价周期缩短，费率与起购门槛成为分流关键变量。",
+          "facts": [],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://m.21jingji.com/article/20261018/herald/27a36f5f06fc86ae5e62b76c85fe402d.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "多家机构集中上架产品 多家机构集中上架产品 多家金融机构密集上架产品，财富货架同质化竞争加剧，客户比价周期缩短，费率与起购门槛成为分流关键变量。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-mtijb1": {
+      "id": "ev-mtijb1",
+      "topicTags": [
+        "广州本地"
+      ],
+      "anchors": [],
+      "kind": "local",
+      "firstBroadcastAt": "2026-10-19",
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-19",
+          "section": "insights",
+          "title": "广交会机器人订单迸发",
+          "text": "广交会机器人订单迸发 广交会机器人展馆多个赛道订单迸发，广州科创与外贸产业链客户订单与备货资金需求同步上升，结算与融资节奏加快。",
+          "facts": [],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://www.cnfin.com/hg-lb/detail/20261019/4482656_1.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "广交会机器人订单迸发 广交会机器人订单迸发 广交会机器人展馆多个赛道订单迸发，广州科创与外贸产业链客户订单与备货资金需求同步上升，结算与融资节奏加快。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-dekc5q": {
+      "id": "ev-dekc5q",
+      "topicTags": [
+        "广州本地"
+      ],
+      "anchors": [],
+      "kind": "local",
+      "firstBroadcastAt": "2026-10-19",
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-19",
+          "section": "insights",
+          "title": "咖啡生豆保税整进零出",
+          "text": "咖啡生豆保税整进零出 广州咖啡生豆保税整进零出落地，企业资金占用成本降两成以上，咖啡贸易与烘焙商户的跨境结算和备货融资需求上升。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202610/18/139995_55014102.htm",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "咖啡生豆保税整进零出 咖啡生豆保税整进零出 广州咖啡生豆保税整进零出落地，企业资金占用成本降两成以上，咖啡贸易与烘焙商户的跨境结算和备货融资需求上升。"
+      ],
+      "broadcastedFacts": [
+        "!落地"
+      ],
+      "peakScore": 0
+    },
+    "ev-q8orb7": {
+      "id": "ev-q8orb7",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-19",
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-19",
+          "section": "insights",
+          "title": "海丝文旅周商旅福利",
+          "text": "海丝文旅周商旅福利 海丝文旅周在越秀推出多项商旅福利，商圈客流与消费券使用集中，本地文旅商户收单与结算活跃度提升。",
+          "facts": [],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202610/18/139995_55014257.htm",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "海丝文旅周商旅福利 海丝文旅周商旅福利 海丝文旅周在越秀推出多项商旅福利，商圈客流与消费券使用集中，本地文旅商户收单与结算活跃度提升。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-6vfvd1": {
+      "id": "ev-6vfvd1",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-19",
+      "lastBroadcastAt": "2026-10-19",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-19",
+          "section": "insights",
+          "title": "广交会多项指标创历史新高",
+          "text": "广交会多项指标创历史新高 广交会多项指标创历史新高，境外采购商与外贸企业活跃度提升，跨境结算、汇率避险与外币兑换需求集中释放。",
+          "facts": [],
+          "broadcastAt": "2026-10-19T07:27:34+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202610/18/139995_55014118.htm",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "广交会多项指标创历史新高 广交会多项指标创历史新高 广交会多项指标创历史新高，境外采购商与外贸企业活跃度提升，跨境结算、汇率避险与外币兑换需求集中释放。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
     }
   },
   "today": {
     "date": "2026-10-19",
-    "entries": [
-      {
-        "date": "2026-10-19",
-        "section": "must_read",
-        "title": "润建股份签2亿美元AI词元大单",
-        "text": "润建股份签2亿美元AI词元大单 单笔两亿美元AI词元订单落地，算力与AI服务采购进入大额合同阶段，科技类客户结算与融资需求上行。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://www.stcn.com/article/detail/4224351.html",
-        "score": 66,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-19",
-        "section": "must_read",
-        "title": "统计失信企业公示最长三年",
-        "text": "统计失信企业公示最长三年 统计严重失信企业信用管理办法新修，失信公示最长三年，企业信用画像与授信准入口径随之变化。",
-        "facts": [],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://www.stcn.com/article/detail/4224322.html",
-        "score": 29,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-19",
-        "section": "must_read",
-        "title": "食品安全国标累计1775项",
-        "text": "食品安全国标累计1775项 食品安全国家标准累计发布一千七百余项，食品餐饮类商户合规门槛抬升，影响小微商户经营与授信。",
-        "facts": [
-          "!发布"
-        ],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20261018/4482609_1.html",
-        "score": 29,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-19",
-        "section": "must_read",
-        "title": "人工智能+文旅试点落地",
-        "text": "人工智能+文旅试点落地 AI加文旅试点开启场景化赛道，广州文旅商圈与商户数字化改造需求上升，牵动本地消费获客格局。",
-        "facts": [
-          "!落地",
-          "!试点"
-        ],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://www.cnfin.com/hg-lb/detail/20261019/4482669_1.html",
-        "score": 29,
-        "novelty": 0.7303191489361702,
-        "angle": "数据验证"
-      },
-      {
-        "date": "2026-10-19",
-        "section": "must_read",
-        "title": "深市科技龙头提议回购，逾千亿",
-        "text": "深市科技龙头提议回购，逾千亿 深市科技龙头密集提议回购，逾千亿增持计划加速落地，科技类上市公司股东与员工财富效应值得关注。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://www.stcn.com/article/detail/4224298.html",
-        "score": 29,
-        "novelty": 0.7587209302325582,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-10-19",
-        "section": "insights",
-        "title": "多家机构集中上架产品",
-        "text": "多家机构集中上架产品 多家金融机构密集上架产品，财富货架同质化竞争加剧，客户比价周期缩短，费率与起购门槛成为分流关键变量。",
-        "facts": [],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://m.21jingji.com/article/20261018/herald/27a36f5f06fc86ae5e62b76c85fe402d.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-19",
-        "section": "insights",
-        "title": "广交会机器人订单迸发",
-        "text": "广交会机器人订单迸发 广交会机器人展馆多个赛道订单迸发，广州科创与外贸产业链客户订单与备货资金需求同步上升，结算与融资节奏加快。",
-        "facts": [],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://www.cnfin.com/hg-lb/detail/20261019/4482656_1.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-19",
-        "section": "insights",
-        "title": "咖啡生豆保税整进零出",
-        "text": "咖啡生豆保税整进零出 广州咖啡生豆保税整进零出落地，企业资金占用成本降两成以上，咖啡贸易与烘焙商户的跨境结算和备货融资需求上升。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202610/18/139995_55014102.htm",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-19",
-        "section": "insights",
-        "title": "海丝文旅周商旅福利",
-        "text": "海丝文旅周商旅福利 海丝文旅周在越秀推出多项商旅福利，商圈客流与消费券使用集中，本地文旅商户收单与结算活跃度提升。",
-        "facts": [],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202610/18/139995_55014257.htm",
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-19",
-        "section": "insights",
-        "title": "交行布局湾区品质享老",
-        "text": "交行布局湾区品质享老 交行广东省分行布局湾区品质享老，养老金融产品与服务模式先行落地，本地养老客群面临分流压力。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://www.cnr.cn/gd/guangdongyaowen/20261018/t20261018_527845632.shtml",
-        "novelty": 0.5546341463414635,
-        "angle": "客户行动"
-      },
-      {
-        "date": "2026-10-19",
-        "section": "insights",
-        "title": "广交会多项指标创历史新高",
-        "text": "广交会多项指标创历史新高 广交会多项指标创历史新高，境外采购商与外贸企业活跃度提升，跨境结算、汇率避险与外币兑换需求集中释放。",
-        "facts": [],
-        "broadcastAt": "2026-10-19T07:27:34+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202610/18/139995_55014118.htm",
-        "novelty": 1
-      }
-    ],
-    "runId": "39176531170"
+    "entries": []
   },
   "deliveries": [
     {
@@ -9710,6 +9875,13 @@
       "runId": "39080340194",
       "reportRunId": "39079052111",
       "reportSha": "65d0b789d9fd11363596bd0f632e5b28e599bade"
+    },
+    {
+      "date": "2026-10-19",
+      "pushedAt": "2026-10-19T07:47:32+08:00",
+      "runId": "39177960509",
+      "reportRunId": "39176531170",
+      "reportSha": "7683519927ec3f9eaf3b643f09797868f5083075"
     }
   ],
   "ipoVoicing": {
