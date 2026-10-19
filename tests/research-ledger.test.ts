@@ -87,3 +87,57 @@ test("幂等：同一批数据合并两次结果不变", () => {
   const twice = mergeResearchLedger(once, batch, { today: "2026-10-19" });
   assert.deepEqual(twice, once);
 });
+
+// —— 台账 IO 三态（2026-10-19 加固）：坏文件绝不能被当成「空台账」→ 覆盖写回 ——
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
+import { readResearchLedger, writeResearchLedger } from "../lib/adapters/research/ledger-store";
+
+function tmpLedgerFile(content?: string): string {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "research-ledger-"));
+  const f = path.join(dir, "research-ledger.json");
+  if (content !== undefined) fs.writeFileSync(f, content, "utf8");
+  return f;
+}
+
+test("台账不存在 → missing（首跑允许在空台账上合并）", () => {
+  const f = tmpLedgerFile();
+  const r = readResearchLedger(f);
+  assert.equal(r.state, "missing");
+  assert.equal(r.ledger.items.length, 0);
+});
+
+test("台账正常 → ok，条目完整读回", () => {
+  const f = tmpLedgerFile(JSON.stringify({ version: 1, updatedAt: "2026-10-19", items: [it("A", "2026-10-19")] }));
+  const r = readResearchLedger(f);
+  assert.equal(r.state, "ok");
+  assert.equal(r.ledger.items.length, 1);
+});
+
+test("台账坏 JSON / 半写截断 → corrupt（调用方据此拒绝写回）", () => {
+  const full = JSON.stringify({ version: 1, updatedAt: "2026-10-19", items: [it("A", "2026-10-19"), it("B", "2026-10-18")] });
+  const f = tmpLedgerFile(full.slice(0, Math.floor(full.length * 0.7)));
+  const r = readResearchLedger(f);
+  assert.equal(r.state, "corrupt");
+  assert.ok(r.error && r.error.length > 0, "corrupt 必须带错误原因供告警");
+  // 关键：原文件必须原样保留（腐坏内容也比被空台账覆盖好）
+  assert.equal(fs.readFileSync(f, "utf8"), full.slice(0, Math.floor(full.length * 0.7)));
+});
+
+test("结构不符（items 非数组）→ corrupt，不冒充空台账", () => {
+  const f = tmpLedgerFile(JSON.stringify({ version: 1, items: { oops: 1 } }));
+  assert.equal(readResearchLedger(f).state, "corrupt");
+});
+
+test("写入可指定路径（测试注入），内容可回读", () => {
+  const f = tmpLedgerFile();
+  // 台账条目比面板条目多一个 firstSeen（首见抓取日）
+  writeResearchLedger(
+    { version: 1, updatedAt: "2026-10-19", items: [{ ...it("C", "2026-10-19"), firstSeen: "2026-10-19" }] },
+    f,
+  );
+  const r = readResearchLedger(f);
+  assert.equal(r.state, "ok");
+  assert.equal(r.ledger.items[0].title, "C");
+});

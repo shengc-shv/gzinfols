@@ -38,6 +38,22 @@ const SRC_DIRS = ["daily_reports", "history"];
 const OUT = "site";
 /** 分享缩略图源（拷贝到发布根，供 og:image 的绝对地址 `${REPORT_BASE_URL}/og-image.png` 使用）。 */
 const OG_SRC = "assets/og-image.png";
+
+/**
+ * 极简兜底页（2026-10-19）：仅用于「独立页渲染失败」时保证入口不 404。
+ * 不依赖任何渲染器 —— 渲染器本身出错时它仍可用。
+ */
+function fallbackPage(title, hint, latestDate) {
+  const back = latestDate ? `./${latestDate}/${latestDate}.html` : "./index.html";
+  return `<!DOCTYPE html><html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>${title}</title>
+<style>body{margin:0;padding:56px 20px;background:#f5f6f8;color:#1a1a1c;
+font:15px/1.8 -apple-system,"PingFang SC",sans-serif;text-align:center}
+h1{font-size:19px;margin:0 0 10px}p{color:#6b6b73;font-size:14px;margin:0 0 22px}
+a{display:inline-block;min-height:44px;line-height:44px;padding:0 20px;border-radius:10px;
+background:#fff;border:1px solid #e4e4e9;color:#2c5f9e;text-decoration:none;font-size:14px}</style>
+</head><body><h1>${title}</h1><p>${hint}</p><a href="${back}">← 返回</a></body></html>`;
+}
 /** 音频滚动清理窗口（只作用于 daily_reports，不作用于发布根）。 */
 const AUDIO_KEEP_DAYS = 3;
 /** 报告时区（与 lib/utils/time.ts 的 REPORT_TZ 同口径；本脚本为 plain node，故内联常量）。 */
@@ -335,41 +351,72 @@ try {
     `[build-site] search.html（${days.length} 期 / ${days.reduce((n, d) => n + d.items.length, 0)} 条可检索）`,
   );
 
-  // ---------- 5.8b) 主题跟踪时间线页（B2）：site/topics.html ----------
-  // 主题由**独立子模块** `scripts/topics-cluster.ts` 产出（10-19 拆出，零 LLM）。
-  // 数据源优先级（三级兜底，2026-10-19）：
-  //   ① `data/topics.json` —— 周更/聚类提交回 main 的正式数据（首选，跨期语料最完整）；
-  //   ② `build/search-index/topics.json` —— 老路径（拆分前的构建产物，兼容过渡期）；
-  //   ③ 都没有 → 跳过本页并打印原因（**绝不因主题模块缺失而让构建失败** ——
-  //      sc 硬要求：主题跟踪不得干扰主项目其他板块）。
-  try {
-    const candidates = [path.resolve("data/topics.json"), path.join(IDX_SRC, "topics.json")];
-    const topicsPath = candidates.find((p) => fs.existsSync(p));
-    if (topicsPath) {
-      const bundle = JSON.parse(fs.readFileSync(topicsPath, "utf8"));
-      console.log(`[build-site] 主题数据源 = ${topicsPath === candidates[0] ? "data/topics.json（子模块）" : "构建索引（老路径）"}`);
-      // 只保留主题节点指向的期次确实存在的（防老期次被清理后留下死链）
-      const known = new Set(days.map((d) => d.date));
-      const topics = (bundle.topics || [])
-        .map((t) => ({ ...t, nodes: (t.nodes || []).filter((n) => known.has(n.date)) }))
-        .filter((t) => t.nodes.length >= 2);
-      fs.writeFileSync(path.join(dataDir, "topics.json"), JSON.stringify(bundle, null, 0), "utf8");
-      fs.writeFileSync(
-        path.join(OUT, "topics.html"),
-        renderTopicsPage({ topics, generatedAt: bundle.generatedAt, latest, corpus: bundle.corpus }),
-        "utf8",
-      );
-      console.log(
-        `[build-site] topics.html（${topics.length} 个跨期主题 / ${topics.reduce((n, t) => n + t.nodes.length, 0)} 个节点）`,
-      );
-    } else {
-      console.log("[build-site] 无主题数据（data/topics.json 与构建索引均缺）→ 跳过主题跟踪页");
-    }
-  } catch (e) {
-    console.log(`[build-site] 主题跟踪页跳过：${e && e.message ? e.message : e}`);
-  }
 } catch (e) {
   console.log(`[build-site] 检索页跳过：${e && e.message ? e.message : e}`);
+}
+
+// ---------- 5.8b) 主题跟踪时间线页（B2）：site/topics.html ----------
+// 主题由**独立子模块** `scripts/topics-cluster.ts` 产出（10-19 拆出，零 LLM）。
+// 🔴 2026-10-19 加固：本段已从「检索索引」的 try 中解耦。
+//    旧版嵌在 5.8 里，检索索引一坏（build:index 本身 continue-on-error）就整块被跳过 →
+//    日报页的「🧭 主题追踪」入口变 404。现在独立 try，且任何失败都写空态页兜底。
+// 期次存在性改为**直接扫发布根**（不依赖 manifest，检索失败也能正确过滤死链）。
+// 数据源优先级：① data/topics.json（子模块）→ ② build/search-index/topics.json（老路径）→ ③ 空态页。
+try {
+  const known = new Set(
+    fs
+      .readdirSync(OUT, { withFileTypes: true })
+      .filter((e) => e.isDirectory() && /^\d{4}-\d{2}-\d{2}$/.test(e.name))
+      .filter((e) => fs.existsSync(path.join(OUT, e.name, `${e.name}.html`)))
+      .map((e) => e.name),
+  );
+  const candidates = [path.resolve("data/topics.json"), path.join(IDX_SRC, "topics.json")];
+  const topicsPath = candidates.find((p) => fs.existsSync(p));
+  let writeEmpty = true;
+  if (topicsPath) {
+    const bundle = JSON.parse(fs.readFileSync(topicsPath, "utf8"));
+    console.log(
+      `[build-site] 主题数据源 = ${topicsPath === candidates[0] ? "data/topics.json（子模块）" : "构建索引（老路径）"}`,
+    );
+    // 只保留主题节点指向的期次确实存在的（防老期次被清理后留下死链）
+    const topics = (bundle.topics || [])
+      .map((t) => ({ ...t, nodes: (t.nodes || []).filter((n) => known.has(n.date)) }))
+      .filter((t) => t.nodes.length >= 2);
+    const dataDir = path.join(OUT, "data");
+    fs.mkdirSync(dataDir, { recursive: true });
+    fs.writeFileSync(path.join(dataDir, "topics.json"), JSON.stringify(bundle, null, 0), "utf8");
+    fs.writeFileSync(
+      path.join(OUT, "topics.html"),
+      renderTopicsPage({ topics, generatedAt: bundle.generatedAt, latest, corpus: bundle.corpus }),
+      "utf8",
+    );
+    writeEmpty = false;
+    console.log(
+      `[build-site] topics.html（${topics.length} 个跨期主题 / ${topics.reduce((n, t) => n + t.nodes.length, 0)} 个节点）`,
+    );
+  } else {
+    console.log("[build-site] 无主题数据（data/topics.json 与构建索引均缺）→ 产出空态页");
+  }
+  if (writeEmpty) {
+    fs.writeFileSync(
+      path.join(OUT, "topics.html"),
+      renderTopicsPage({ topics: [], latest }),
+      "utf8",
+    );
+    console.log("[build-site] topics.html（空态：暂无跨期主题）");
+  }
+} catch (e) {
+  // 渲染器也失败时写极简兜底页 —— 唯一的硬要求是「入口不 404」
+  console.log(`[build-site] 主题跟踪页渲染失败，写兜底页：${e && e.message ? e.message : e}`);
+  try {
+    fs.writeFileSync(
+      path.join(OUT, "topics.html"),
+      fallbackPage("🧭 主题追踪", "本期主题页暂不可用，请稍后从日报页重新进入。", latest),
+      "utf8",
+    );
+  } catch {
+    /* 连兜底页都写不了 → 交给第 7 步链接自检告警，不阻断构建 */
+  }
 }
 
 // ---------- 5.8c) 研报解读页（2026-10-19）：site/research.html ----------
@@ -432,7 +479,26 @@ try {
     `[build-site] research.html（${reports.length} 期 / ${reports.reduce((n, r) => n + r.items.length, 0)} 篇研报）`,
   );
 } catch (e) {
-  console.log(`[build-site] 研报解读页跳过：${e && e.message ? e.message : e}`);
+  // 渲染失败也要写页面：日报页的「📐 研报解读」入口是渲染期无条件输出的，
+  // 页面缺失就会变成 404（数据无损，但读者体验断裂）。
+  console.log(`[build-site] 研报解读页渲染失败，写空态页兜底：${e && e.message ? e.message : e}`);
+  try {
+    fs.writeFileSync(
+      path.join(OUT, "research.html"),
+      renderResearchPage({ reports: [], generatedAt: todayInReportTz(), latest }),
+      "utf8",
+    );
+  } catch {
+    try {
+      fs.writeFileSync(
+        path.join(OUT, "research.html"),
+        fallbackPage("📐 研报解读", "本期研报页暂不可用，请稍后从日报页重新进入。", latest),
+        "utf8",
+      );
+    } catch {
+      /* 交给第 7 步链接自检告警，不阻断构建 */
+    }
+  }
 }
 }
 

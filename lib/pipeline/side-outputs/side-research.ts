@@ -10,6 +10,10 @@
  *
  * P17（失败必须可见）：源不可达时写 ctx.log.warn 并在 panel.note 留痕，
  * 绝不静默返回空面板让读者误以为「今天没有深度研报」。
+ *
+ * 🔴 2026-10-19 加固：本函数是旁路，**任何异常都不许冒到 runPipeline**（否则当天整天无报告）。
+ * 最外层包一层 try 兜底，异常 → 空面板 + note。
+ * 另：台账读不懂（corrupt）时**拒绝写回**，绝不拿空台账覆盖历史（见 ledger-store 注释）。
  */
 import type { DailyReport } from "../../contracts/report";
 import type { PipelineContext } from "../../contracts/pipeline";
@@ -21,6 +25,9 @@ import { mergeResearchLedger } from "../../services/research/ledger";
 
 /** 面板最多展示条数（参考区，不做信息轰炸）。 */
 export const RESEARCH_PANEL_MAX = 12;
+
+/** 面板/台账窗口天数缺省值（异常兜底时用于 note，正常路径取各爬虫的最大 windowDays）。 */
+const DEFAULT_WINDOW_DAYS = 3;
 
 /** excerpt 契约 `机构｜研究员｜行业` 的拆分（见爬虫注释）。 */
 function splitExcerpt(excerpt: string): Pick<ResearchPanelItem, "org" | "researchers" | "industry"> {
@@ -56,12 +63,36 @@ export function buildResearchPanel(
   };
 }
 
-/** IO 包装：抓两个研报源（东财行业/策略 + 新浪宏观/策略）→ 合并进固定台账。任何单源失败不阻断。 */
+/** IO 包装：抓两个研报源（东财行业/策略 + 新浪宏观）→ 合并进固定台账。任何单源失败不阻断。 */
 export async function buildResearchFromSource(
   report: DailyReport,
   ctx: PipelineContext,
 ): Promise<DailyReport> {
   const now = new Date();
+  try {
+    return await collectAndMerge(report, ctx, now);
+  } catch (e) {
+    // 🔴 旁路兜底：宁可不产出参考区，也绝不拖垮主报告（buildSideOutputs 调用点无 try）。
+    const msg = e instanceof Error ? e.message : String(e);
+    ctx.log.warn("research", `研报旁路异常（参考区留空，不影响主报告）: ${msg}`);
+    return {
+      ...report,
+      researchPanel: {
+        items: [],
+        scanned: 0,
+        windowDays: DEFAULT_WINDOW_DAYS,
+        capturedAt: now.toISOString(),
+        note: `本期研报旁路异常：${msg}`,
+      },
+    };
+  }
+}
+
+async function collectAndMerge(
+  report: DailyReport,
+  ctx: PipelineContext,
+  now: Date,
+): Promise<DailyReport> {
   const sources = [new EastMoneyResearchCrawler(), new SinaResearchCrawler()];
   const items: ResearchPanelItem[] = [];
   let scanned = 0;
@@ -88,19 +119,27 @@ export async function buildResearchFromSource(
     }
   }
 
-  const windowDays = Math.max(...sources.map((c) => c.windowDays));
+  const windowDays = Math.max(DEFAULT_WINDOW_DAYS, ...sources.map((c) => c.windowDays));
   const panel = buildResearchPanel(items, { scanned, windowDays, now });
 
-  // 固定台账：读 → 并集合并（url 主键 + 标题归一化兜底 + 90 天滚动）→ 写回。
+  // 固定台账：读（三态）→ 并集合并（url 主键 + 标题归一化兜底 + 90 天滚动）→ 写回。
   if (items.length) {
     try {
-      const ledger = readResearchLedger();
-      const merged = mergeResearchLedger(ledger, items, { today: report.date });
-      writeResearchLedger(merged);
-      ctx.log.info(
-        "research",
-        `研报台账：本次抓 ${items.length} 条 · 新增 ${merged.items.length - ledger.items.length} 条 · 累计 ${merged.items.length} 条`,
-      );
+      const read = readResearchLedger();
+      if (read.state === "corrupt") {
+        // 🔴 拒写回：空台账 + 写回 = 历史被静默清空。原文件原样保留，等人工处理。
+        ctx.log.warn(
+          "research",
+          `研报台账解析失败，本次拒绝写回（历史保留，本期只出面板）: ${read.error}`,
+        );
+      } else {
+        const merged = mergeResearchLedger(read.ledger, items, { today: report.date });
+        writeResearchLedger(merged);
+        ctx.log.info(
+          "research",
+          `研报台账：本次抓 ${items.length} 条 · 新增 ${merged.items.length - read.ledger.items.length} 条 · 累计 ${merged.items.length} 条`,
+        );
+      }
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
       ctx.log.warn("research", `研报台账写入失败（本期面板仍可用）: ${msg}`);
