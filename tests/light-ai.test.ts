@@ -67,7 +67,8 @@ test("takeGlobalTopByValue：打通排名 —— 大源高分条目挤掉小源�
   // 旧口径（每源等额 1）：A90/A85 + B60/B20 全保留（4 条）
   // 新口径（总量 3 + 每源软上限 1）：按分取 A90 → B60（A 已满、B20 分低被跳过）
   const arts = [mkScored("a1", "A", 90), mkScored("a2", "A", 85), mkScored("b1", "B", 60), mkScored("b2", "B", 20)];
-  const out = takeGlobalTopByValue(arts, 3, 1, (a) => (a as ScoredFake).score);
+  // 第 5 参 0 = 关闭「高分豁免」，本用例专测软上限本身
+  const out = takeGlobalTopByValue(arts, 3, 1, (a) => (a as ScoredFake).score, 0);
   assert.deepEqual(
     out.map((a) => a.url),
     ["a1", "b1"],
@@ -80,7 +81,7 @@ test("takeGlobalTopByValue：总量 topN 生效（软上限允许时也最多取
     mkScored("a1", "A", 90), mkScored("a2", "A", 85), mkScored("a3", "A", 80),
     mkScored("b1", "B", 70), mkScored("b2", "B", 60),
   ];
-  const out = takeGlobalTopByValue(arts, 3, 2, (a) => (a as ScoredFake).score);
+  const out = takeGlobalTopByValue(arts, 3, 2, (a) => (a as ScoredFake).score, 0);
   assert.equal(out.length, 3);
   assert.deepEqual(out.map((a) => a.url), ["a1", "a2", "b1"], "按分降序收满 3 条（A 软上限 2）");
 });
@@ -102,4 +103,30 @@ test("takeGlobalTopByValue：同分按发布时间倒序（与候选池其它排
   ];
   const out = takeGlobalTopByValue(arts, 1, 1, (a) => (a as ScoredFake).score);
   assert.deepEqual(out.map((a) => a.url), ["new"], "同分取更新者");
+});
+
+test("高分豁免（2026-10-19 sc）：分数 ≥60 可突破每源软上限，低分仍受约束", () => {
+  const arts = [
+    mkScored("a1", "A", 90), mkScored("a2", "A", 85), mkScored("a3", "A", 30),
+    mkScored("b1", "B", 55),
+  ];
+  // 软上限 1、阈值 60：a1 收 → a2（85）豁免照收 → a3（30）不豁免被跳过 → b1 收
+  const out = takeGlobalTopByValue(arts, 10, 1, (a) => (a as ScoredFake).score);
+  assert.deepEqual(
+    out.map((a) => a.url),
+    ["a1", "a2", "b1"],
+    "高分豁免只放宽 A 的高分条，A 的低分条（30）仍被软上限拦住",
+  );
+});
+
+test("高分豁免仍受全局总量约束（豁免的是每源上限，不是总量）", () => {
+  const arts = [mkScored("a1", "A", 90), mkScored("a2", "A", 85), mkScored("a3", "A", 80)];
+  const out = takeGlobalTopByValue(arts, 2, 1, (a) => (a as ScoredFake).score);
+  assert.equal(out.length, 2, "totalN=2 时即便都可豁免也只收 2 条");
+});
+
+test("阈值可关：exemptScore=0 时全员受每源软上限约束", () => {
+  const arts = [mkScored("a1", "A", 90), mkScored("a2", "A", 85)];
+  const out = takeGlobalTopByValue(arts, 10, 1, (a) => (a as ScoredFake).score, 0);
+  assert.deepEqual(out.map((a) => a.url), ["a1"], "关闭豁免后 A 只能留 1 条");
 });

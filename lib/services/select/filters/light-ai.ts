@@ -136,17 +136,31 @@ export const GLOBAL_TOP_N = 200;
 export const PER_SOURCE_SOFT_CAP = 20;
 
 /**
+ * 高分豁免阈值（2026-10-19 sc：**价值分超过 60 的条目不受每源软上限约束**）。
+ *
+ * 为什么：软上限的目的是「防止单一源用低价值内容霸榜」，不是「砍掉高价值内容」。
+ * 实测（10-05）评分器二值取舍可信、分值只作参考，因此这里只做**单向放宽**：
+ * 高分条即便该源已满 20 条也照收，低分条仍受上限约束。
+ * 全局 `totalN`（200）仍然生效 —— 豁免的是**每源**上限，不是总量。
+ */
+export const HIGH_VALUE_EXEMPT_SCORE = 60;
+
+/**
  * 全局按分行相关性取 Top N + 每源软上限（新口径）。
  *
  * 排序：相关性分降序，同分按发布时间倒序（与候选池其它排序同口径）。
  * 收录：自上而下逐条收取；某源已达软上限则**跳过该条**（不影响后续其它源），
  * 直到收满 `totalN` 或遍历完。软上限传 0/负数 = 不限制。
+ *
+ * 高分豁免：`score >= exemptScore`（默认 60）的条目**不受每源上限约束**，
+ * 但仍占全局 `totalN` 名额、仍计入该源已用条数（同源后续低分条目照旧被拦）。
  */
 export function takeGlobalTopByValue<T extends LightAiArticle>(
   articles: T[],
   totalN: number,
   perSourceSoft: number,
   scorer?: (a: T) => number,
+  exemptScore: number = HIGH_VALUE_EXEMPT_SCORE,
 ): T[] {
   const scored = articles.map((a) => ({
     a,
@@ -161,7 +175,8 @@ export function takeGlobalTopByValue<T extends LightAiArticle>(
     if (kept.length >= totalN) break;
     const sid = s.a.sourceId ?? "";
     const n = used.get(sid) ?? 0;
-    if (perSourceSoft > 0 && n >= perSourceSoft) continue;
+    const exempt = exemptScore > 0 && s.score >= exemptScore;
+    if (perSourceSoft > 0 && n >= perSourceSoft && !exempt) continue;
     used.set(sid, n + 1);
     kept.push(s.a);
   }
