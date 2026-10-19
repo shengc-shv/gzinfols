@@ -1496,7 +1496,29 @@
     .player-card.compact .player-title { display: none; }
     .player-card.compact audio { margin-top: 0; }
   }
-  </style>
+  <style>
+
+  
+  .module-links {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;
+    margin: 0.75rem 0 0.15rem;
+  }
+  .module-link {
+    display: flex; align-items: center; gap: 0.55rem;
+    min-height: 56px; padding: 0.6rem 0.75rem;
+    border: 1px solid var(--rule); border-radius: 12px;
+    background: var(--card, #fff); color: var(--fg); text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color .15s ease, transform .12s ease, background .15s ease;
+  }
+  .module-link-icon { font-size: 1.12rem; line-height: 1; flex: none; }
+  .module-link-body { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+  .module-link-title { font-size: 0.95rem; font-weight: 700; line-height: 1.3; }
+  .module-link-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.35; }
+  .module-link-arrow { margin-left: auto; color: var(--muted); flex: none; }
+    .module-links { grid-template-columns: 1fr; gap: 0.5rem; }
+    .module-link { min-height: 58px; padding: 0.7rem 0.8rem; }</style>
+</style>
 </head>
 <body>
 <main>
@@ -1522,6 +1544,21 @@
     <h1>10月19日 星期一</h1>
     <p class="hero-line">今日定调：今天主要看三个方面：金融街论坛监管表态，政策信号密集；广交会与咖啡保税新业态，外贸客群活跃；养老与财富货架竞对动作，客群分流在即。<span class="delta-badge delta-followup" title="本期已提及过（同一次生成内重复）">续报</span></p>
     <p class="meta-line">数据截至 07:27 · 去重后资讯 13 条 · 商机 6 条 · <a class="archive" href="../archive.html">← 历史归档</a></p>
+  <nav class="module-links" aria-label="模块入口"><a class="module-link" href="../topics.html">
+      <span class="module-link-icon" aria-hidden="true">🧭</span>
+      <span class="module-link-body">
+        <span class="module-link-title">主题追踪</span>
+        <span class="module-link-desc">一件事后来怎么样了</span>
+      </span>
+      <span class="module-link-arrow" aria-hidden="true">→</span>
+    </a><a class="module-link" href="../research.html">
+      <span class="module-link-icon" aria-hidden="true">📐</span>
+      <span class="module-link-body">
+        <span class="module-link-title">研报解读</span>
+        <span class="module-link-desc">同业深度打法与框架</span>
+      </span>
+      <span class="module-link-arrow" aria-hidden="true">→</span>
+    </a></nav>
     <details class="coverage">
     <summary>覆盖度与来源分布</summary>
     <div class="cov-grid">
