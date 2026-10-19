@@ -287,3 +287,49 @@ test("S3 已知取舍：硬规则置顶优先于新鲜度（锁定现状，非 b
   assert.equal(stale.score, 84);
   // 如需让旧政策稿也让位，需另行授权修改 finalScore 的兜底逻辑
 });
+
+// —— 2026-10-19 P0 补词（sc 授权）：7 期实测漏判 92 条里，业务线为空占 100% ——
+
+test("竞对动态补银行全称：农业银行/交通银行 这类标题不再落 drop", () => {
+  const cases = [
+    "农业银行：完成发行400亿元总损失吸收能力非资本债券",
+    "交通银行全方位护航第140届广交会",
+    "中国银行赋能全球贸易双向畅通合作大会在广州举行",
+  ];
+  for (const title of cases) {
+    const r = scoreBranchRelevance({ title, category: "finance" });
+    assert.ok(r.businessLines.includes("竞对动态"), `「${title}」应命中竞对动态`);
+    assert.ok(r.score >= 45, `「${title}」应脱离 drop/context 低位，实际 ${r.score}`);
+  }
+});
+
+test("政策信号线（权重 0.5 保守档）：命中后脱离 drop，权威/地域强的可到 insight", () => {
+  // 0.5 权重 = +22.5 分：原来的 21 分档升到 ~43（context），原文 42 分的能跨到 insight。
+  // sc 选 0.5 是保守起步；要覆盖更多需提到 0.6（+27），见 7 期回放数据。
+  const guo = scoreBranchRelevance({ title: "国常会部署深化拓展人工智能+", category: "finance" });
+  assert.ok(guo.businessLines.includes("政策信号"), "国常会应命中政策信号");
+  assert.notEqual(guo.tier, "drop", `应脱离 drop，实际 ${guo.score}`);
+  assert.ok(guo.score >= 40, `应较补词前（21 分）明显提升，实际 ${guo.score}`);
+
+  const pbc = scoreBranchRelevance({ title: "央行发布前三季度金融统计数据", category: "finance" });
+  assert.ok(pbc.businessLines.includes("政策信号"));
+  assert.ok(pbc.score >= 45, `权威发文方应能到 insight，实际 ${pbc.score}`);
+});
+
+test("政策信号不与信贷抢分：降准类仍按信贷（权重更高）计", () => {
+  const r = scoreBranchRelevance({ title: "央行降准0.5个百分点，释放长期资金约1万亿", category: "finance" });
+  assert.equal(r.businessLines[0], "信贷", "最高权重线仍是信贷，政策信号不应顶替");
+});
+
+test("地域锚补本地场景名：广交会不再 loc=0", () => {
+  const r = scoreBranchRelevance({ title: "第140届广交会吸引境外采购商约34万名", category: "gz" });
+  assert.equal(r.locality, 1.0, "广交会应按广州本地计");
+});
+
+test("回归保护：港澳类仍按跨境线强词计（sc 2026-10-03 口径不得被削弱）", () => {
+  const hk = scoreBranchRelevance({ title: "港股收评：恒指涨0.25% 内银股走强", category: "finance" });
+  assert.equal(hk.businessLines[0], "跨境");
+  assert.ok(hk.score >= 60, `港股类应保持高位，实际 ${hk.score}`);
+  const fed = scoreBranchRelevance({ title: "美联储官员集体警示通胀依旧过高", category: "finance" });
+  assert.equal(fed.businessLines[0], "跨境", "国际宏观仍走跨境线（未降级）");
+});
