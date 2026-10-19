@@ -136,3 +136,51 @@ test("不 mutate 入参", () => {
   applyDisplayCaps(r, ctx);
   assert.equal(JSON.stringify(r.sections.gz_local.length), before, "入参不得被修改");
 });
+
+// —— 高分豁免（2026-10-19 sc：花了成本算出来的高价值资讯，最后一道不许再砍）——
+import { EXEMPT_SCORE, SECTION_OVERFLOW_MAX } from "../lib/services/assemble/display-cap";
+import { relevanceScoreOf } from "../lib/services/assemble/importance";
+
+/** 经实测校准的高分标题（≥60）。改评分词表后若跌破线，本文件会第一时间报错。 */
+const HI_TITLES = [
+  "广州分行落地首笔跨境理财通业务，额度扩容至300万元",
+  "央行降准0.5个百分点，释放长期资金约1万亿",
+  "六大行下调存款利率，零售客户加速转向理财与保险",
+];
+
+test("fixture 校准：HI_TITLES 确实达到豁免线（防评分器改动后测试失真）", () => {
+  for (const t of HI_TITLES) {
+    const s = relevanceScoreOf(item({ url: `https://x/${encodeURIComponent(t)}`, title_cn: t, source: "源A" }));
+    assert.ok(s >= EXEMPT_SCORE, `「${t}」应 ≥${EXEMPT_SCORE}，实际 ${s}`);
+  }
+});
+
+test("高分豁免：同源 6 条时，超出每源 4 条的高分条不被砍", () => {
+  const normal = [1, 2, 3, 4].map((i) => item({ url: `https://x/n${i}`, title_cn: `源A稿件${i}`, source: "源A", rank: i }));
+  const high = HI_TITLES.slice(0, 2).map((t, i) =>
+    item({ url: `https://x/h${i}`, title_cn: t, source: "源A", rank: 10 + i }),
+  );
+  const out = applyDisplayCaps(mkReport({ biz_insight: [...normal, ...high] }), ctx);
+  assert.equal(out.sections.biz_insight.length, 6, "4 条常规 + 2 条高分豁免");
+});
+
+test("低分仍受每源 4 条限制（豁免只看分数，不看豁免本身）", () => {
+  const six = [1, 2, 3, 4, 5, 6].map((i) => item({ url: `https://x/n${i}`, title_cn: `源A稿件${i}`, source: "源A", rank: i }));
+  const out = applyDisplayCaps(mkReport({ biz_insight: six }), ctx);
+  assert.equal(out.sections.biz_insight.length, 4, "全低分时行为不变：只留 4 条");
+});
+
+test("板块溢出有界：高分再多也只放宽 SECTION_OVERFLOW_MAX 条", () => {
+  const sections: Record<string, ReportItem[]> = { biz_insight: [] };
+  let rank = 1;
+  for (const src of ["源A", "源B", "源C"]) {
+    for (let i = 0; i < 6; i++) {
+      sections.biz_insight.push(
+        item({ url: `https://x/${src}${i}`, title_cn: HI_TITLES[i % HI_TITLES.length], source: src, rank: rank++ }),
+      );
+    }
+  }
+  const out = applyDisplayCaps(mkReport(sections), ctx);
+  // biz 板块上限 8 + 溢出额度 4 = 12 硬天花板（18 条高分候选也只能进 12 条）
+  assert.equal(out.sections.biz_insight.length, 8 + SECTION_OVERFLOW_MAX);
+});

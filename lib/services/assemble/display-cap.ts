@@ -12,6 +12,25 @@
  */
 import type { DailyReport, ReportItem } from "../../contracts/report";
 import type { PipelineContext } from "../../contracts/pipeline";
+import { relevanceScoreOf } from "./importance";
+
+/**
+ * 高分豁免阈值（2026-10-19 sc：**「花了成本算出来高价值的资讯，还是要用起来的」**）。
+ *
+ * 为什么卡在这一层而不是更前面：前面的限额（全局 Top200 / 每源 20）在 **LLM 之前**，
+ * 那里放宽只会让更多条进模型 = 更贵；而这里已经付过 PASS1/PASS2 的钱，
+ * 再因为「每源 ≤4 / 板块 ≤N」把高分条扔掉，等于把已花的成本直接作废。
+ *
+ * ⛔ 与「display-cap 不看 tier」不冲突：这里看的是**分数**不是档位，
+ *    低档里混着高价值国际宏观（10-05 结论），所以不设档位下限。
+ */
+export const EXEMPT_SCORE = 60;
+
+/**
+ * 板块上限的高分溢出额度：≥ EXEMPT_SCORE 的条目最多让每个板块再多收这么多条。
+ * 防失控 —— 板块上限本来是「行长 5 分钟」的阅读约束，不能因为豁免变成无底洞。
+ */
+export const SECTION_OVERFLOW_MAX = 4;
 
 /** 业务线挂钩 tags（命中加 3 分） */
 const BIZ_TAGS = new Set(["财富", "信贷", "私行", "客群", "贵金属", "保险", "对公", "财富管理"]);
@@ -56,8 +75,19 @@ function valueScore(it: ReportItem): number {
   return s;
 }
 
-/** 每源按价值排序选取 ≤perSrc 条，再按板块 rank 恢复顺序后取 maxTotal。 */
-function capSrc(items: ReportItem[], perSrc: number, maxTotal: number): ReportItem[] {
+/**
+ * 每源按价值排序选取 ≤perSrc 条，再按板块 rank 恢复顺序后取 maxTotal。
+ *
+ * 2026-10-19 sc：**≥ EXEMPT_SCORE 的条目不受每源上限约束**——
+ * 该源前 perSrc 条照旧按价值选，超出部分只有高分条能补进来；
+ * 板块总量最多放宽到 maxTotal + SECTION_OVERFLOW_MAX（有界，不是无底洞）。
+ */
+function capSrc(
+  items: ReportItem[],
+  perSrc: number,
+  maxTotal: number,
+  exemptScore: number = EXEMPT_SCORE,
+): ReportItem[] {
   const bySrc = new Map<string, ReportItem[]>();
   for (const it of items) {
     const s = it.source || "?";
@@ -65,13 +95,28 @@ function capSrc(items: ReportItem[], perSrc: number, maxTotal: number): ReportIt
     bySrc.get(s)!.push(it);
   }
   const selected: ReportItem[] = [];
+  /** 超出每源上限、但分数达豁免线的条目（待定是否补入） */
+  const exempt: ReportItem[] = [];
   for (const list of bySrc.values()) {
     const ranked = [...list].sort((a, b) => valueScore(b) - valueScore(a));
     selected.push(...ranked.slice(0, perSrc));
+    for (const it of ranked.slice(perSrc)) {
+      if (relevanceScoreOf(it) >= exemptScore) exempt.push(it);
+    }
   }
-  return selected
+  const base = selected
     .sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0))
     .slice(0, maxTotal);
+  if (exempt.length === 0) return base;
+
+  // 豁免条按分数降序补入，受「板块上限 + 溢出额度」这个硬天花板约束
+  const baseKeys = new Set(base.map((it) => it.id ?? it.url));
+  const budget = Math.max(0, maxTotal + SECTION_OVERFLOW_MAX - base.length);
+  const add = exempt
+    .filter((it) => !baseKeys.has(it.id ?? it.url))
+    .sort((a, b) => relevanceScoreOf(b) - relevanceScoreOf(a))
+    .slice(0, budget);
+  return [...base, ...add].sort((a, b) => (a.rank ?? 0) - (b.rank ?? 0));
 }
 
 /**
