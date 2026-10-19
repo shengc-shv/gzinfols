@@ -63,6 +63,10 @@ const SERVICE_LAYERS: Record<string, number> = {
   render: 4,
   voice: 4,
   publish: 4,
+  // 主题跟踪（2026-10-19 独立子模块）：与 render/voice 同层（消费层）——
+  // 它复用 assemble 的无副作用纯函数（itemIdOf / stripCryptoNews / recalibrateImportance）
+  // 产出「呈现用数据」，语义上正是消费层。定同层可避免为复用登记低层反向依赖豁免。
+  topics: 4,
 };
 
 /**
@@ -326,6 +330,17 @@ export function checkArchitectureDetailed(
             outs.push(stripTs(to));
             const toDomain = serviceDomainOf(to);
             if (fromDomain && toDomain && fromDomain !== toDomain) {
+              // 🔴 单向依赖规则（2026-10-19 sc 架构指示）：**主项目不得 import topics**。
+              // 主题跟踪是独立子模块（不干扰 daily 管线是硬要求）—— 若允许主项目反向依赖，
+              // 主题模块的任何改动都会连带 daily，隔离就名存实亡。topics 自己可自由消费上游。
+              if (toDomain === "topics" && fromDomain !== "topics") {
+                violations.push(
+                  `${rel}: 主项目禁止依赖 topics 子模块（${fromDomain} → topics）→ ${stripTs(to)}：` +
+                    `主题跟踪必须保持独立（sc 2026-10-19：不得干扰主项目其他板块）。` +
+                    `若确需共享，把共用逻辑下沉到 vocab/classify 等底层，而非让主项目反向依赖`,
+                );
+                continue;
+              }
               const selfL = SERVICE_LAYERS[fromDomain];
               const depL = SERVICE_LAYERS[toDomain];
               if (selfL === undefined || depL === undefined) {

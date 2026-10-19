@@ -100,10 +100,15 @@ console.log(
   `[build-site] 汇集 ${copied} 期 → ${OUT}/（来源 ${SRC_DIRS.join(" / ")}；发布根现有 ${dates.length} 期）`,
 );
 
-// ---------- 2) 音频滚动清理（只作用于 daily_reports，发布根每次重建无需清理）----------
+// ---------- 2) 音频滚动清理（**只作用于 daily_reports**；发布根每次重建无需清理）----------
+// 🔴 2026-10-19 修：原先遍历 SRC_DIRS（= daily_reports + history）→ **误删 history/ 下的
+// 归档音频**（history 是长期归档，音频不该被「保留 3 天」的规则裁掉；注释早已写明
+// 「只作用于 daily_reports」，实现却遍历了 SRC_DIRS —— 注释与代码不符）。
+// 实测：本地跑一次 build-site 就删掉 history/ 里 5 个 mp3，须 git checkout 才能恢复。
+const AUDIO_PRUNE_DIRS = ["daily_reports"];
 const audioCutoff = new Date(Date.now() - AUDIO_KEEP_DAYS * 86_400_000);
 let audioCleaned = 0;
-for (const src of SRC_DIRS) {
+for (const src of AUDIO_PRUNE_DIRS) {
   for (const d of datesIn(src)) {
     const ad = path.join(src, d, "audio");
     if (!fs.existsSync(ad)) continue;
@@ -330,11 +335,18 @@ try {
   );
 
   // ---------- 5.8b) 主题跟踪时间线页（B2）：site/topics.html ----------
-  // 主题由构建期跨期聚类产出（零 LLM）；缺 topics.json 时跳过而不报错（老产物兼容）。
+  // 主题由**独立子模块** `scripts/topics-cluster.ts` 产出（10-19 拆出，零 LLM）。
+  // 数据源优先级（三级兜底，2026-10-19）：
+  //   ① `data/topics.json` —— 周更/聚类提交回 main 的正式数据（首选，跨期语料最完整）；
+  //   ② `build/search-index/topics.json` —— 老路径（拆分前的构建产物，兼容过渡期）；
+  //   ③ 都没有 → 跳过本页并打印原因（**绝不因主题模块缺失而让构建失败** ——
+  //      sc 硬要求：主题跟踪不得干扰主项目其他板块）。
   try {
-    const topicsPath = path.join(IDX_SRC, "topics.json");
-    if (fs.existsSync(topicsPath)) {
+    const candidates = [path.resolve("data/topics.json"), path.join(IDX_SRC, "topics.json")];
+    const topicsPath = candidates.find((p) => fs.existsSync(p));
+    if (topicsPath) {
       const bundle = JSON.parse(fs.readFileSync(topicsPath, "utf8"));
+      console.log(`[build-site] 主题数据源 = ${topicsPath === candidates[0] ? "data/topics.json（子模块）" : "构建索引（老路径）"}`);
       // 只保留主题节点指向的期次确实存在的（防老期次被清理后留下死链）
       const known = new Set(days.map((d) => d.date));
       const topics = (bundle.topics || [])
@@ -343,14 +355,14 @@ try {
       fs.writeFileSync(path.join(dataDir, "topics.json"), JSON.stringify(bundle, null, 0), "utf8");
       fs.writeFileSync(
         path.join(OUT, "topics.html"),
-        renderTopicsPage({ topics, generatedAt: bundle.generatedAt, latest }),
+        renderTopicsPage({ topics, generatedAt: bundle.generatedAt, latest, corpus: bundle.corpus }),
         "utf8",
       );
       console.log(
         `[build-site] topics.html（${topics.length} 个跨期主题 / ${topics.reduce((n, t) => n + t.nodes.length, 0)} 个节点）`,
       );
     } else {
-      console.log("[build-site] 无 topics.json → 跳过主题跟踪页");
+      console.log("[build-site] 无主题数据（data/topics.json 与构建索引均缺）→ 跳过主题跟踪页");
     }
   } catch (e) {
     console.log(`[build-site] 主题跟踪页跳过：${e && e.message ? e.message : e}`);

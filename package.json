@@ -19,6 +19,7 @@
     "test": "node --import tsx --test \"tests/**/*.test.ts\"",
     "build-site": "node scripts/build-site.mjs",
     "build:index": "tsx scripts/build-search-index.ts",
+    "topics:cluster": "tsx scripts/topics-cluster.ts",
     "og:image": "node scripts/make-og-image.mjs",
     "cleanup:history": "node scripts/cleanup-history.mjs",
     "tts:fallback": "tsx scripts/tts-fallback.ts",

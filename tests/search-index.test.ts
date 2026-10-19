@@ -8,7 +8,9 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { buildSlimDay, anchorsOfHtml, filterToAnchors } from "../scripts/build-search-index";
+import { anchorsOfHtml, filterToAnchors } from "../scripts/build-search-index";
+// slim 数据层 2026-10-19 迁到 topics 子模块（搜索侧改为消费共享实现，与主题侧同源不漂移）
+import { buildSlimDay } from "../lib/services/topics/slim";
 import { renderSearchPage } from "../scripts/lib/search-page.mjs";
 import type { SearchPageDay } from "../scripts/lib/search-page.mjs";
 import type { DailyReport } from "../lib/contracts/report";

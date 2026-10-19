@@ -1,17 +1,15 @@
 /**
- * B2 主题跟踪时间线（2026-09-17）。
+ * B2 主题跟踪时间线（2026-09-17 建立；2026-10-19 迁移至独立子模块）。
  *
- * 锁五件事：
- *  ① 只保留**跨期**主题（单期出现的谈不上「跟踪」），且节点按日期升序（= 进展顺序）；
- *  ② 泛标签（出现率过高）不参与建主题 —— 否则「客群」会吞掉半个版面；
- *  ③ 聚类阈值保守（标签交集 ≥3 或标题前 12 字相同），并且**同名主题合并**、id/label 唯一；
- *  ④ 同标题节点跨期只留最早一条并记 `repeat`（时间线是「进展」，不是同一行刷两遍）；
- *  ⑤ 页面渲染走 DOM（textContent），外部标题不得拼进 innerHTML。
+ * 2026-10-19 变更：主题聚类已从 `scripts/build-search-index.ts` 拆到
+ * `lib/services/topics/cluster.ts`（sc 架构指示：主题跟踪是独立子模块，不得与主项目互相干扰）。
+ * 本测试随迁；治理版语义（A 型去重 / 禁裸标签 / 单归属 / 白名单命名）的专项锁测在
+ * `tests/topics-cluster.test.ts`，此处只保留**通用不变量**（跨期门槛、泛标签、唯一性、repeat、XSS）。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { clusterTopics, dedupeNodesByTitle } from "../scripts/build-search-index";
-import type { SlimDay, SlimItem } from "../scripts/build-search-index";
+import { clusterTopics, dedupeById } from "../lib/services/topics/cluster";
+import type { SlimDay, SlimItem } from "../lib/services/topics/slim";
 import { renderTopicsPage } from "../scripts/lib/topics-page.mjs";
 
 function it(id: string, title: string, g: string[], k = "biz_insight"): SlimItem {
@@ -19,7 +17,7 @@ function it(id: string, title: string, g: string[], k = "biz_insight"): SlimItem
 }
 
 function day(date: string, items: SlimItem[]): SlimDay {
-  return { date, items, hero: "", anchored: true };
+  return { date, items, hero: "" };
 }
 
 // 夹具刻意「足够大」：真实期次每期 30+ 条，只有样本够大，主题标签的出现率才不会被
@@ -39,19 +37,20 @@ const FIXTURE: SlimDay[] = [
   ]),
   day("2026-09-17", [
     it("itm-b1", "跨境理财通首月数据出炉", ["跨境", "财富", "零售AUM"]),
-    it("itm-b2", "跨境理财通额度扩容", ["跨境", "财富", "零售AUM"]), // 与 a1 同标题 → 去重为 repeat
+    // 与 a1 **同 id**（同 url）跨期再现、标题被改写 → A 型判据仍能认出是同一件事
+    it("itm-a1", "跨境理财通额度扩容", ["跨境", "财富", "零售AUM"]),
     it("itm-b3", "泛标签条目二", ["客群"]),
     ...NOISE,
   ]),
 ];
 
-test("① 只保留跨期主题，节点按日期升序", () => {
+test("① 只保留跨期主题，节点按日期**降序**（最新在上）", () => {
   const topics = clusterTopics(FIXTURE);
   assert.equal(topics.length, 1, "只有「跨境理财通」这一组跨期主题成立");
   const t = topics[0];
   assert.equal(t.dates.length, 2);
   const dates = t.nodes.map((n) => n.date);
-  assert.deepEqual([...dates].sort(), dates, "节点必须按日期升序（= 进展顺序）");
+  assert.deepEqual([...dates].sort().reverse(), dates, "节点必须按日期降序（2026-10-19 sc：打开先看后来怎么样了）");
   assert.ok(t.spanDays >= 2, "跨度天数在构建期算好（页面不再解析日期）");
 });
 
@@ -87,21 +86,20 @@ test("③ 同名合并 + id/label 唯一 + label 取区分度最高的标签", (
   }
 });
 
-test("④ 同标题跨期节点合并：留最早一条 + repeat 计数", () => {
-  const deduped = dedupeNodesByTitle([
-    { date: "2026-09-16", i: "x", t: "跨境理财通额度扩容", k: "biz_insight" },
-    { date: "2026-09-17", i: "y", t: "跨境理财通额度扩容", k: "biz_insight" },
-    { date: "2026-09-17", i: "z", t: "另一条", k: "biz_insight" },
+test("④ 同 url 跨期节点合并：留一条 + repeat 计数（A 型：按条目 id，不按标题）", () => {
+  const deduped = dedupeById([
+    { date: "2026-09-16", d: "09/16", i: "x", t: "跨境理财通额度扩容", k: "biz_insight", tags: ["跨境"] },
+    { date: "2026-09-17", d: "09/17", i: "x", t: "跨境理财通新增试点城市", k: "biz_insight", tags: ["跨境"] },
+    { date: "2026-09-17", d: "09/17", i: "z", t: "另一条", k: "biz_insight", tags: ["跨境"] },
   ]);
-  assert.equal(deduped.length, 2, "同标题只留一条");
+  assert.equal(deduped.length, 2, "同 id 只留一条（标题被改写也认得出 —— A 型修复）");
   assert.equal(deduped[0].date, "2026-09-16", "保留最早出现的期次");
   assert.equal(deduped[0].repeat, 2, "记下共出现 2 期（读者据此判断「持续」）");
 
   const topics = clusterTopics(FIXTURE);
   const t = topics[0];
-  const repeated = t.nodes.find((n) => n.t === "跨境理财通额度扩容");
+  const repeated = t.nodes.find((n) => n.i === "itm-a1");
   assert.equal(repeated?.repeat, 2, "聚类结果里也要保留 repeat 计数");
-  assert.equal(repeated?.i, "itm-a1", "节点 id 指向最早那条（可点回当期卡片）");
 });
 
 test("⑤ 页面：时间线渲染 + 类型安全（外部标题不拼 innerHTML）", () => {
@@ -112,8 +110,8 @@ test("⑤ 页面：时间线渲染 + 类型安全（外部标题不拼 innerHTML
     dates: ["2026-09-16", "2026-09-17"],
     spanDays: 2,
     nodes: [
-      { date: "2026-09-16", i: "itm-a1", t: "<script>alert(1)</script>", k: "biz_insight", s: "来源" },
-      { date: "2026-09-17", i: "itm-b1", t: "正常标题", k: "biz_insight", s: "来源", repeat: 2 },
+      { date: "2026-09-16", d: "09/16", i: "itm-a1", t: "<script>alert(1)</script>", k: "biz_insight", s: "来源" },
+      { date: "2026-09-17", d: "09/17", i: "itm-b1", t: "正常标题", k: "biz_insight", s: "来源", repeat: 2 },
     ],
   };
   const html = renderTopicsPage({ topics: [evil], generatedAt: "2026-09-17T12:00:00", latest: "2026-09-17" });
@@ -128,4 +126,30 @@ test("⑤ 页面：时间线渲染 + 类型安全（外部标题不拼 innerHTML
   // 空态不报错
   const empty = renderTopicsPage({ topics: [], latest: "2026-09-17" });
   assert.ok(empty.includes("topics-data"));
+});
+
+test("⑥ 页面：主题过滤按 id 唯一锚定，不按标签集合（2026-10-19 sc 实测反馈）", () => {
+  // 两张卡共享「财富」标签 —— 若按标签过滤，点「财富管理与产品」会把「监管合规动态」也带出来
+  const mk = (id: string, label: string, tags: string[]) => ({
+    id,
+    label,
+    tags,
+    dates: ["2026-09-16", "2026-09-17"],
+    spanDays: 2,
+    nodes: [{ date: "2026-09-17", d: "09/17", i: "itm-" + id, t: "某条进展", k: "biz_insight", s: "来源" }],
+  });
+  const html = renderTopicsPage({
+    topics: [mk("tp-a", "财富管理与产品", ["财富"]), mk("tp-b", "监管合规动态", ["监管合规", "财富"])],
+    latest: "2026-09-17",
+  });
+  assert.ok(html.includes("t.id !== state.topic"), "主题过滤必须按 id 精确匹配（唯一锚定）");
+  assert.ok(!/state\.tag/.test(html), "不得残留 state.tag（旧版按标签集合过滤，会带出无关主题）");
+  assert.ok(html.includes("'topic=' + encodeURIComponent"), "hash 用 topic=<主题id>");
+  assert.ok(html.includes(".slice(1)"), "卡片标签须排除主标签（否则与卡片标题重复）");
+  // 旧链接 #tag= 只在唯一命中时才采用，否则忽略（避免把旧的歧义语义带回来）
+  assert.ok(html.includes("cand.length === 1"), "旧 #tag= 参数须「唯一命中才采用」");
+  // 2026-10-19 sc：去掉「排序」「板块」两个控件 —— 主题是唯一过滤入口
+  assert.ok(!/state\.sec/.test(html), "不得残留 state.sec（板块过滤已移除）");
+  assert.ok(!/state\.sort/.test(html), "不得残留 state.sort（排序控件已移除，固定质量分降序）");
+  assert.ok(html.includes("只看本周有新进展"), "默认视图开关须保留");
 });

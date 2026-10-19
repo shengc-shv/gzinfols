@@ -52,3 +52,10 @@ coverage/
 
 # 构建期中间产物（检索索引；由 npm run build:index 生成，build-site 搬进 site/data）
 build/
+# 注意：data/topics.json 与 data/topics-corpus.json **必须入库**（2026-10-19 sc 指示）——
+#   · data/topics.json        —— 主题跟踪聚类产物，daily 的 build-site 读它渲染 topics.html
+#   · data/topics-corpus.json —— 主题跟踪**自有语料快照**（永久保留）
+#     ⚠️ 为什么不能只靠 history/：cleanup-history 对 history/ 设计保留 7 天，
+#     而主题跟踪是长窗口趋势观察 —— 语料跟着被裁会让主题「越跟越短」。
+#     故语料由 topics 子模块单独维护增量快照（与 data/redchip/leads.json 同模式）。
+#     ⛔ 不要把它们加进忽略名单。

@@ -363,3 +363,48 @@ test("架构门禁：真实 Date.now() 的报错行号必须准确（词法方�
     rmSync(dir, { recursive: true, force: true });
   }
 });
+
+/**
+ * 单向依赖（2026-10-19 sc 架构指示）：**主项目不得 import topics 子模块**。
+ *
+ * 背景：主题跟踪是独立子模块，「不干扰主项目其他板块」是硬要求。若允许主项目反向依赖，
+ * 主题模块任何改动都会连带 daily —— 隔离名存实亡。故用门禁锁死单向：
+ * topics 可自由消费上游（slim.ts 复用 assemble 纯函数），主项目一律不得反向 import。
+ */
+test("架构门禁：主项目 import topics 子模块被判违规（单向依赖）", () => {
+  const dir = mkdtempSync(join(tmpdir(), "arch-gate-"));
+  try {
+    mkdirSync(join(dir, "lib/services/topics"), { recursive: true });
+    writeFileSync(join(dir, "lib/services/topics/cluster.ts"), "export const x = 1;\n", "utf8");
+    mkdirSync(join(dir, "lib/services/render"), { recursive: true });
+    writeFileSync(
+      join(dir, "lib/services/render/bad.ts"),
+      'import { x } from "../topics/cluster";\nexport const y = x;\n',
+      "utf8",
+    );
+    const v = checkArchitecture(dir);
+    assert.equal(v.length, 1, `应报 1 处违规，实际 ${v.length}：${v.join(" | ")}`);
+    assert.match(v[0], /主项目禁止依赖 topics/, "应指出单向依赖违规");
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("架构门禁：topics 自身 import 上游（assemble）不算违规", () => {
+  const dir = mkdtempSync(join(tmpdir(), "arch-gate-"));
+  try {
+    mkdirSync(join(dir, "lib/services/topics"), { recursive: true });
+    writeFileSync(join(dir, "lib/services/topics/cluster.ts"), "export const x = 1;\n", "utf8");
+    mkdirSync(join(dir, "lib/services/assemble"), { recursive: true });
+    writeFileSync(join(dir, "lib/services/assemble/item-id.ts"), "export const id = (u: string) => u;\n", "utf8");
+    writeFileSync(
+      join(dir, "lib/services/topics/slim.ts"),
+      'import { id } from "../assemble/item-id";\nexport const use = id;\n',
+      "utf8",
+    );
+    const v = checkArchitecture(dir);
+    assert.deepEqual(v, [], `topics 消费上游应放行，实际：${v.join(" | ")}`);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
