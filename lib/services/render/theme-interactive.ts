@@ -170,6 +170,18 @@ export const THEME_INTERACTIVE_CSS = `  /* ===== 2026-08-21 交互重构（demo 
     background: var(--bg-elevated, var(--card)); border: 1px solid var(--rule);
     border-radius: 999px; padding: 0 0.4rem; line-height: 1.5;
   }
+  /* 季度例行报送组（2026-10-19 sc）：默认折叠 + 组头标注「非新增备案」 */
+  .ipo-group[data-routine] > summary { list-style: none; cursor: pointer; }
+  .ipo-group[data-routine] > summary::-webkit-details-marker { display: none; }
+  .ipo-group[data-routine] > summary::before {
+    content: "▸"; flex: none; width: 0.72rem; color: var(--muted); font-size: 0.78rem;
+  }
+  .ipo-group[data-routine][open] > summary::before { content: "▾"; }
+  .ipo-group[data-routine] > summary:hover { color: var(--accent-brand); }
+  .ipo-group-note {
+    margin-left: auto; font-size: 0.72rem; font-weight: 500; color: var(--muted);
+    white-space: nowrap;
+  }
   /* 同企业阶段进展条（P2-6）：09/03 在审 → 09/07 注册发行 */
   .ipo-progress {
     display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem;

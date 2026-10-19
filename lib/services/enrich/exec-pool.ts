@@ -25,6 +25,8 @@ import {
 } from "../select/filters/dedup-similar";
 // 广东 IPO 内容判定（与渲染/side-output 同一口径，避免三处判定漂移）
 import { isGdIpoCandidate } from "./heuristics";
+import { isRoutineTutoringReport } from "../classify/gd-ipo";
+import { isRoutineIpoItem } from "../classify/gd-ipo-spoken";
 import { IPO_VOICE_WINDOW_DAYS } from "../../ipo-config";
 
 /** 持久化历史库条目（article-history.json 单条子集）。 */
@@ -596,6 +598,10 @@ function buildIpoPool(opts: BuildTwoDayExecPoolOpts): ExecPoolItem[] {
     // ⚠️ 2026-09-10 回检 P1-1：此前把 sections.ipo **不预过滤**整块喂 LLM，而
     // sections.ipo 里含港交所「全国递表」条目（外省企业）→ 可能被写进「广东IPO」口播。
     if (!isGd(title, summary, it.tags)) continue;
+    // 🔴 2026-10-19 sc：「例行的，都不配进入口播。」本池喂给 exec 的 guangdong_ipo 槽位，
+    // 其产出直接变成推送里的「广东IPO」段 → 必须与 `buildGdIpoSpoken` 同一排除口径，
+    // 否则口播稿不念、推送却仍在说「多家企业披露辅导进展」= 两条外发通道口径打架。
+    if (isRoutineIpoItem(it)) continue;
     out.set(it.url, withWhen({ title, summary, url: it.url }, it.date, today));
   }
   // 今日抓取的 gd-ipo/ipo 条目（sections 里可能还没有 —— 取决于 side-output 执行顺序）
@@ -608,6 +614,8 @@ function buildIpoPool(opts: BuildTwoDayExecPoolOpts): ExecPoolItem[] {
     const title = a.title_cn || a.title || "";
     const summary = (a.summary || a.excerpt || "").slice(0, 120);
     if (!isGd(title, summary)) continue; // 同上：全国 ipo 条目不进广东IPO 口播
+    // 同口径排除季度例行报送（这一路没有 ReportItem → 用文本版判定，终态与本函数上方一致）
+    if (isRoutineTutoringReport(title, summary)) continue;
     out.set(a.url, withWhen({ title, summary, url: a.url }, a.publishedAt, today));
   }
   return [...out.values()].slice(0, 20);

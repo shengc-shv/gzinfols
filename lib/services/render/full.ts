@@ -736,6 +736,8 @@ ${stripCssComments(MOBILE_OPT_CSS)}
       panel.classList.remove('expanded');
       if (btn) btn.style.display = '';
       panel.querySelectorAll('.brief').forEach(function (card) { card.classList.remove('filtered-out'); });
+      // 季度例行报送组恢复默认折叠（2026-10-19 sc：「例行的不配抢注意力」）
+      panel.querySelectorAll('.ipo-group[data-routine]').forEach(function (d) { d.open = false; });
       syncGroups();
       recountChips(panel, bar);
       return;
@@ -748,6 +750,8 @@ ${stripCssComments(MOBILE_OPT_CSS)}
     panel.querySelectorAll('.brief').forEach(function (card) {
       card.classList.toggle('filtered-out', !cardPasses(card, selByGroup, null));
     });
+    // 筛选生效时展开季度例行组：用户主动筛「辅导进展」却因默认收起看不到 = 假筛选
+    panel.querySelectorAll('.ipo-group[data-routine]').forEach(function (d) { d.open = true; });
     syncGroups();
     recountChips(panel, bar);
   }

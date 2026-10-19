@@ -205,7 +205,13 @@ export const IPO_STAGE_ORDER: GdStage[] = [
   "stage-listed",
 ];
 
-/** 阶段展示标签（徽章 / 分栏标题 / 筛选条共用；`""` = 无阶段信号的待定组）。 */
+/**
+ * 阶段展示标签（徽章 / 分栏标题 / 筛选条共用；`""` = 无阶段信号的待定组）。
+ *
+ * 🔴 本表是**契约阶段**（GdStage）的标签真源 → 键数必须恒等于 `GD_STAGES.size + 1`
+ * （`tests/gd-ipo-stage.test.ts` 钉死）。展示层派生值（如「辅导进展」）**不得**混进来，
+ * 否则「枚举四处同步」的守卫会被稀释 —— 派生值一律进 `IPO_DISPLAY_STAGE_LABEL`。
+ */
 export const GD_IPO_STAGE_LABEL: Record<string, string> = {
   "stage-tutoring": "辅导备案",
   "stage-coach-done": "辅导完成",
@@ -214,6 +220,84 @@ export const GD_IPO_STAGE_LABEL: Record<string, string> = {
   "stage-listed": "已上市",
   "": "IPO",
 };
+
+/**
+ * 辅导进展报告的期次（2026-10-19）。
+ *
+ * 🔴 为什么需要它：证监会辅导源披露的是「辅导工作**进展**报告（第 N 期）」，而 crawler 把
+ * 这类标题统一标成「(辅导备案)」→ 展示层据此判成「刚备案的 Pre-IPO」，把
+ * 「已辅导多年的老企业按期交作业」误读成「今天有新备案」。
+ *
+ * 实测证据（2026-10-19，22 条）：备案年份横跨 2021~2026（最早 2021 年），
+ * 其中 19 条 excerpt 都写着「报告: 辅导进展情况报告」；官网 PDF 原文亦为
+ * 「辅导工作进展情况报告（第五期）」。所谓「IPO 备案激增」由此产生。
+ *
+ * @returns 「第 N 期」原文；非进展报告返回 ""（即首次备案）。
+ */
+export function tutoringProgressOf(text: string): string {
+  // 措辞有两种（都来自同一批披露）：
+  //   「辅导工作进展情况报告（第五期）」—— csrcfd 的 excerpt / 官网 PDF 正文
+  //   「辅导备案进展（第二十二期）」  —— 部分标题的写法
+  if (!/辅导[^，。；|]{0,4}进展/.test(text)) return "";
+  const m = text.match(/第\s*([0-9一二三四五六七八九十百]+)\s*期/);
+  return m ? `第${m[1]}期` : "进展中";
+}
+
+/**
+ * 「辅导进展（第 N 期）」= **季度例行报送**，不是今天的新事件。
+ *
+ * 🔴 2026-10-19 sc 口径：「例行的，都不配进入口播。让行长关注真正有价值的商机。」
+ *   - 展示层：单独成组并**默认折叠**（`ipo-panel.ts`），组头标注「季度例行报送」；
+ *   - 口播/横滑：整类排除（`gd-ipo-spoken.gdIpoCandidates` 的 `excludeRoutine`）。
+ * ⛔ 底部完整列表仍保留（可回溯「哪家还在辅导期」这个事实），只是不抢注意力。
+ */
+export const IPO_ROUTINE_STAGE = "stage-tutoring-progress";
+
+/** 例行组说明（组头副文案 / 折叠提示，单一真源）。 */
+export const IPO_ROUTINE_NOTE = "季度例行报送 · 非新增备案";
+
+/**
+ * 展示层阶段顺序（含「辅导进展」）。
+ *
+ * ⚠️ 与 `IPO_STAGE_ORDER` 的关系：后者是**契约阶段**（GdStage，五值，口播/商机评分同源）；
+ * 本常量是**展示分组**，多一个「辅导进展」派生值 —— 不扩契约，避免影响商机排序与口播口径。
+ *
+ * 🔴 2026-10-19：`stage-tutoring-progress` 由「紧跟辅导备案」**改为排在最后** ——
+ * 板块首屏应当先给「真有动静的几家」（首次备案 → 辅导验收 → 在审 → 注册 → 上市），
+ * 季度例行报送沉底并折叠。顺序同时决定筛选条 chip 顺序（两处同源，勿各写一份）。
+ */
+export const IPO_DISPLAY_STAGE_ORDER: string[] = [
+  "stage-tutoring",
+  "stage-coach-done",
+  "stage-registered",
+  "stage-reviewing",
+  "stage-listed",
+  IPO_ROUTINE_STAGE,
+];
+
+/**
+ * 展示层阶段标签（= 契约标签 + 展示派生值）。
+ *
+ * 分栏组头、筛选条 chip 一律读本表；`GD_IPO_STAGE_LABEL` 保持「只管契约阶段」，
+ * 让枚举一致性测试（键数 = 合法阶段数 + 1）继续有效。
+ */
+export const IPO_DISPLAY_STAGE_LABEL: Record<string, string> = {
+  ...GD_IPO_STAGE_LABEL,
+  [IPO_ROUTINE_STAGE]: "辅导进展",
+};
+
+/**
+ * 是否「季度例行的辅导进展报告」（纯文本版，供没有 `ReportItem` 的链路使用）。
+ *
+ * ⚠️ 与 `gd-ipo-spoken.isRoutineIpoItem(it)` 的分工：
+ *   - 有 `ReportItem` → 用 `isRoutineIpoItem`（会先看官方 `ipoStage` 结构化字段）；
+ *   - 只有原始标题/摘要（如 exec 池的 articles 分支）→ 用本函数（回退 `inferStage`）。
+ * 二者终态都是「阶段=辅导中 ∧ 说明这是第 N 期例行报送」，⛔ 不要各写一套期次正则。
+ */
+export function isRoutineTutoringReport(title: string, excerpt?: string): boolean {
+  if (inferStage(title, excerpt) !== "stage-tutoring") return false;
+  return tutoringProgressOf(`${title} ${excerpt || ""}`) !== "";
+}
 
 /**
  * 阶段词表（**唯一**实现，P0-1 收敛）。
@@ -233,18 +317,26 @@ export function inferStage(title: string, excerpt?: string): GdStage {
   // 3) 在审 / 已受理：受理 / 问询 / 上会 / 审核 / 上市委 / 反馈意见 / 问询函 / 问询回复 / 暂缓审议
   if (/(受理|问询|上会|审核|上市委|反馈意见|问询函|问询回复|暂缓审议)/.test(text))
     return "stage-reviewing";
-  // 4) 辅导备案 / Pre-IPO：辅导备案 / 辅导验收 / IPO辅导 / 辅导机构 / 辅导协议 / 股份制改造 / 备案登记
-  if (/(辅导备案|辅导验收|IPO辅导|辅导机构|辅导协议|股份制改造|备案登记|pre-?ipo)/i.test(text))
+  // 4) 辅导验收 / 辅导工作完成（2026-10-19 sc）：与「辅导备案」是**两个进程节点**——
+  //    备案 = 刚起步（最佳 Pre-IPO 商机），验收 = 辅导期结束、即将申报（授信落地窗口）。
+  //    此前二者被同一行判成 stage-tutoring，实测「富兰克科技（辅导验收）」被归进「辅导进展」组，
+  //    商机排序也把「已完成辅导」当成「刚起步」。
+  //    ⚠️ 必须排在下面「辅导备案」之前：csrcfd 的 excerpt 形如
+  //    「辅导机构：华泰联合｜辅导验收」，「辅导机构」会先命中 rule 5 的辅导词表。
+  if (/(辅导验收|辅导完成|辅导工作完成|验收通过|已完成辅导)/.test(text))
+    return "stage-coach-done";
+  // 5) 辅导备案 / Pre-IPO：辅导备案 / IPO辅导 / 辅导机构 / 辅导协议 / 股份制改造 / 备案登记
+  if (/(辅导备案|IPO辅导|辅导机构|辅导协议|股份制改造|备案登记|pre-?ipo)/i.test(text))
     return "stage-tutoring";
-  // 5) 已上市信号（精准词，避免"拟上市/即将上市"误判）
+  // 6) 已上市信号（精准词，避免"拟上市/即将上市"误判）
   if (
     /(挂牌|上市公告|新股上市|发行结果|中签结果|敲钟|首日|上市交易|已上市|成功上市|正式上市|登陆(沪|深|京|港)交易所)/.test(
       text,
     )
   )
     return "stage-listed";
-  // 6) 裸"上市"（无未上市信号）→ 默认已上市（多数语境即已上市）
+  // 7) 裸"上市"（无未上市信号）→ 默认已上市（多数语境即已上市）
   if (/上市/.test(text)) return "stage-listed";
-  // 7) 完全无阶段词：预备上市兜底归 Pre-IPO
+  // 8) 完全无阶段词：预备上市兜底归 Pre-IPO
   return "stage-tutoring";
 }

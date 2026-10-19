@@ -8,7 +8,7 @@
 
 import type { ArticleInput } from "../../contracts/article";
 import type { ReportItem } from "../../contracts/report";
-import { inferStage, isGdStage, type GdStage } from "./gd-ipo";
+import { inferStage, isGdStage, tutoringProgressOf, IPO_ROUTINE_STAGE, type GdStage } from "./gd-ipo";
 import { hkexAppIdOf } from "./redchip";
 import { isGdIpoCandidate } from "../enrich/heuristics";
 import { recentMmddSet, spokenRelativeDay, todayKey } from "../../utils/time";
@@ -224,6 +224,8 @@ export function pickSpokenItems(
     uniqueCompany: true, // 口播不把同一家企业念两遍（P1-4）
     today: opts?.today,
     excludePlainHk: true, // 单纯赴港上市不播（2026-09-16 用户口径）
+    // 季度例行报送不进口播（2026-10-19 sc）——与展示层折叠同一判定（isRoutineIpoItem）
+    excludeRoutine: true,
   }).filter((it) => !rcCompanies.has(companyNameOf(it.title_cn || "")));
   const seats = Math.max(0, 3 - redchip.length);
   return {
@@ -311,6 +313,35 @@ export function gdIpoStageOf(it: ReportItem): GdStage | "" {
 }
 
 /**
+ * **展示用**阶段（2026-10-19）：在 `gdIpoStageOf` 之上把「辅导进展报告」从「辅导备案」里拆出来。
+ *
+ * ⛔ 为什么不改 `GdStage` 契约：契约值同时驱动口播候选排序与商机评分（`BIZ_VALUE_RANK`），
+ * 加一个值会连带改动播报口径；而本次要解决的只是「读者分不清这是新备案还是老企业交作业」。
+ * 故只在展示分组/徽章这一层派生，返回类型是 string。
+ *
+ * 判定依据：`excerpt` 里明写「报告: 辅导进展情况报告」，标题亦可能带「（第 N 期）」。
+ */
+export function gdIpoDisplayStageOf(it: ReportItem): string {
+  const st = gdIpoStageOf(it);
+  if (st !== "stage-tutoring") return st;
+  return tutoringProgressOf(`${it.title_cn || ""} ${it.summary || ""}`)
+    ? IPO_ROUTINE_STAGE
+    : st;
+}
+
+/**
+ * 是否「季度例行报送」条目（辅导工作进展报告第 N 期）。
+ *
+ * 🔴 2026-10-19 sc：「例行的，都不配进入口播。让行长关注真正有价值的商机。」
+ * 判定完全复用展示阶段（单一真源）—— 凡页面被折叠进「辅导进展（例行）」组的，口播一律不念。
+ * ⛔ 不要在这里另写一套正则：`tutoringProgressOf` 的措辞口径（「辅导工作进展情况报告（第五期）」
+ * 与「辅导备案进展（第二十二期）」）只该有一份。
+ */
+export function isRoutineIpoItem(it: ReportItem): boolean {
+  return gdIpoDisplayStageOf(it) === IPO_ROUTINE_STAGE;
+}
+
+/**
  * 广东 IPO 候选（「粤」标或 isGdIpoCandidate），按 skipCompanies 过滤，
  * 可选按 withinDays 限定「近 N 天」（含今天）——口播/今日必读传 2，底部列表传 7。
  * 按 商机价值优先 + 日期倒序 排序（不截断，供口播「等N家」计数）。
@@ -323,7 +354,7 @@ export function gdIpoCandidates(
   items: ReportItem[],
   skip?: Set<string>,
   withinDays?: number,
-  opts?: { uniqueCompany?: boolean; today?: string; excludePlainHk?: boolean },
+  opts?: { uniqueCompany?: boolean; today?: string; excludePlainHk?: boolean; excludeRoutine?: boolean },
 ): ReportItem[] {
   const allowed =
     withinDays && withinDays > 0 ? recentMmddSet(withinDays, opts?.today ?? todayKey()) : null;
@@ -332,6 +363,9 @@ export function gdIpoCandidates(
       (it) =>
         // 单纯赴港上市（非红筹）不进口播/横滑（2026-09-16 用户口径；底部列表直调本函数时传 false）
         !(opts?.excludePlainHk === true && isPlainHkListing(it)) &&
+        // 季度例行报送（辅导进展第 N 期）不进口播/横滑（2026-10-19 sc）；
+        // ⛔ 底部完整列表必须传 false —— 折叠展示仍有回溯价值。
+        !(opts?.excludeRoutine === true && isRoutineIpoItem(it)) &&
         (it.tags?.includes("粤") ||
           isGdIpoCandidate(it.title_cn || "", it.summary || "") ||
           // 红筹线索（T2 已实体匹配）同样进池：其广东相关性由判定链给出，不依赖标题词表。
@@ -375,12 +409,13 @@ export function topGdIpo(
   skip?: Set<string>,
   n = 3,
   withinDays: number = IPO_VOICE_WINDOW_DAYS,
-  opts?: { uniqueCompany?: boolean; today?: string; excludePlainHk?: boolean },
+  opts?: { uniqueCompany?: boolean; today?: string; excludePlainHk?: boolean; excludeRoutine?: boolean },
 ): ReportItem[] {
   return gdIpoCandidates(items, skip, withinDays, {
     uniqueCompany: opts?.uniqueCompany ?? true,
     today: opts?.today,
     excludePlainHk: opts?.excludePlainHk,
+    excludeRoutine: opts?.excludeRoutine,
   }).slice(0, n);
 }
 

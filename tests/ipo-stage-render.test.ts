@@ -14,9 +14,9 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { todayKey } from "../lib/utils/time";
-import { inferStage, GD_STAGES } from "../lib/services/classify/gd-ipo";
+import { inferStage, GD_STAGES, IPO_ROUTINE_STAGE } from "../lib/services/classify/gd-ipo";
 import { buildGdIpo } from "../lib/pipeline/side-outputs/side-gd-ipo";
-import { gdIpoCandidates } from "../lib/services/classify/gd-ipo-spoken";
+import { gdIpoCandidates, gdIpoDisplayStageOf, isRoutineIpoItem } from "../lib/services/classify/gd-ipo-spoken";
 import { gdIpoStageOf } from "../lib/services/classify/gd-ipo-spoken";
 import { buildTwoDayExecPool } from "../lib/services/enrich/exec-pool";
 import type { PipelineContext } from "../lib/contracts/pipeline";
@@ -30,6 +30,7 @@ import {
   relativeDayLabel,
   IPO_STAGE_ORDER } from "../lib/services/render";
 import type { ReportItem } from "../lib/contracts/report";
+import { GD_IPO_STAGE_BIZ } from "../lib/services/render/cards";
 
 /** 今天的 MM/DD（候选有 2/7 天窗，硬编码会随真实日期漂移）。 */
 function mmdd(offset: number): string {
@@ -69,6 +70,42 @@ test("inferStage：注册生效归「注册发行」（待发行，非已上市�
 test("inferStage：上市委会议通过 = 过会 → 注册发行；上市委审议（未过）→ 在审", () => {
   assert.equal(inferStage("某某：上市委会议通过（拟主板）"), "stage-registered");
   assert.equal(inferStage("某某：上市委审议中（拟主板）"), "stage-reviewing");
+});
+
+test("inferStage：辅导验收 → 辅导完成（2026-10-19 与「辅导备案」拆开）", () => {
+  // 此前 rule 4 把「辅导验收」和「辅导备案」判成同一个 stage-tutoring ——
+  // 实测「富兰克科技（辅导验收）」被归进「辅导进展」组，商机排序也把「已完成辅导」
+  // 当成「刚起步」。两者是两个进程节点（刚起步 vs 即将申报）。
+  assert.equal(inferStage("富兰克科技：辅导验收（拟创业板）"), "stage-coach-done");
+  assert.equal(inferStage("某某：辅导工作完成，拟申报创业板"), "stage-coach-done");
+  // ⚠️ excerpt 里的「辅导机构」不得把「辅导验收」拉回 stage-tutoring（顺序敏感）
+  assert.equal(
+    inferStage("某某 (辅导备案)", "IPO辅导备案 | 辅导机构: 华泰联合证券 | 状态: 辅导验收"),
+    "stage-coach-done",
+  );
+  assert.equal(inferStage("某某：辅导备案（广东省）"), "stage-tutoring", "首次备案仍是辅导备案");
+});
+
+test("gdIpoDisplayStageOf：辅导工作进展报告（第 N 期）→ 季度例行阶段", () => {
+  const it = ipo({
+    title_cn: "深圳昂湃技术股份有限公司 (辅导备案) [深圳证监局]",
+    summary: "IPO辅导备案 | 辅导机构: 国信证券 | 报告: 辅导进展情况报告 | 披露: 2026-10-19",
+  });
+  assert.equal(gdIpoStageOf(it), "stage-tutoring", "契约阶段不变（不扩 GdStage）");
+  assert.equal(gdIpoDisplayStageOf(it), IPO_ROUTINE_STAGE, "展示层派生为「辅导进展（例行）」");
+  assert.equal(isRoutineIpoItem(it), true);
+  // 首次备案（无「进展报告」字样）不是例行
+  const first = ipo({ title_cn: "某某：辅导备案（广东省）", summary: "状态：辅导备案" });
+  assert.equal(gdIpoDisplayStageOf(first), "stage-tutoring");
+  assert.equal(isRoutineIpoItem(first), false);
+});
+
+test("GD_IPO_STAGE_BIZ：每个合法阶段都有商机文案（枚举同步守卫）", () => {
+  // 2026-10-19 实锤：`stage-coach-done` 自 09-11 进入契约后本表漏键，
+  // 渲染层 `GD_IPO_STAGE_BIZ[stage] || ""` 静默吞掉 → 辅导验收卡的商机文案恒为空，不报错。
+  for (const s of GD_STAGES) {
+    assert.ok(GD_IPO_STAGE_BIZ[s], "阶段 " + s + " 缺商机文案（新增阶段须同步 cards.GD_IPO_STAGE_BIZ）");
+  }
 });
 
 // —— 2. gdIpoStageOf 单一入口 ——
@@ -140,6 +177,35 @@ test("renderIpoPanelHtml：组头带家数", () => {
   ];
   const html = renderIpoPanelHtml(items);
   assert.match(html, /<span class="ipo-group-n">2<\/span>/);
+});
+
+test("renderIpoPanelHtml：季度例行报送沉底 + 默认折叠 + 组头标注「非新增备案」", () => {
+  const items = [
+    ipo({ title_cn: "甲公司：辅导备案（广东省）", summary: "状态：辅导备案" }),
+    ipo({ title_cn: "乙公司：IPO已受理", summary: "", ipoStage: "stage-reviewing" }),
+    ipo({ title_cn: "丙公司 (辅导备案)", summary: "报告: 辅导进展情况报告 | 披露: 2026-10-19" }),
+  ];
+  const html = renderIpoPanelHtml(items);
+  const order = [...html.matchAll(/ipo-group" data-stage="([^"]*)"/g)].map((m) => m[1]);
+  assert.equal(order[order.length - 1], IPO_ROUTINE_STAGE, "例行组必须排在最后（里程碑优先）");
+  assert.match(
+    html,
+    /<details class="ipo-group" data-stage="stage-tutoring-progress" data-routine="1">/,
+    "例行组用 details 折叠（同时仍是 .ipo-group，客户端 syncGroups 才能隐藏空组）",
+  );
+  assert.doesNotMatch(html, /data-routine="1"[^>]*\sopen/, "默认必须收起");
+  assert.match(html, /季度例行报送 · 非新增备案/, "组头须点明这是季度例行，不是今天新增");
+});
+
+test("gdIpoCandidates：excludeRoutine 排除例行；底部列表默认保留（仅不进口播/横滑）", () => {
+  const items = [
+    ipo({ title_cn: "甲公司 (辅导备案)", summary: "报告: 辅导进展情况报告 | 披露: 2026-10-19" }),
+    ipo({ title_cn: "乙公司：IPO已受理", summary: "" }),
+  ];
+  assert.equal(gdIpoCandidates(items, undefined, 7).length, 2, "底部完整列表必须保留例行条目");
+  const voiced = gdIpoCandidates(items, undefined, 7, { excludeRoutine: true });
+  assert.equal(voiced.length, 1);
+  assert.match(voiced[0].title_cn, /已受理/);
 });
 
 // —— 5. 阶段筛选条（复用同级「官方/媒体」机制） ——
@@ -291,8 +357,32 @@ test("buildIpoPool（经 buildTwoDayExecPool）：港交所全国递表（外省
   assert.ok(!urls.includes("cn-1"), "外省条目不得进「广东IPO」口播素材池");
 });
 
-// —— 10. 同企业阶段进展条（P2-6：把 uniqueCompany:false 保留的多阶段素材渲染为推进过程） ——
+test("buildIpoPool：季度例行报送不进 exec 池（推送「广东IPO」段与口播同口径）", () => {
+  // 该池喂给 exec 的 guangdong_ipo 槽位，其产出（spoken）直接进企微推送。
+  // 若不排除例行条目，会出现「口播稿不念、推送仍在说『多家企业披露辅导进展』」的口径打架。
+  process.env.REPORT_TZ = "Asia/Shanghai";
+  const report = emptyReport();
+  report.sections.ipo = [
+    {
+      ...ipo({
+        title_cn: "甲公司 (辅导备案)",
+        summary: "IPO辅导备案 | 辅导机构: 国信证券 | 报告: 辅导进展情况报告 | 披露: 2026-10-19",
+      }),
+      url: "routine-1" },
+    { ...ipo({ title_cn: "乙公司：辅导验收（拟创业板）", summary: "状态：辅导验收" }), url: "milestone-1" },
+  ];
+  const res = buildTwoDayExecPool({
+    history: {},
+    articles: [],
+    report,
+    today: todayKey(),
+    now: new Date() });
+  const urls = res.ipo.map((i) => i.url);
+  assert.ok(urls.includes("milestone-1"), "辅导验收是里程碑，应进池");
+  assert.ok(!urls.includes("routine-1"), "季度例行报送不得进 exec 池");
+});
 
+// —— 10. 同企业阶段进展条（P2-6：把 uniqueCompany:false 保留的多阶段素材渲染为推进过程） ——
 test("renderIpoProgress：同企业多阶段 → 按日期升序连成进展条，且仅最新一条卡渲染", () => {
   const items = [
     ipo({ title_cn: "某某科技：IPO问询中（拟创业板）", date: mmdd(-5), ipoStage: "stage-reviewing" }),

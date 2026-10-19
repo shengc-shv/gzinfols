@@ -56,6 +56,22 @@ test("pickGdIpoCompanies 返回跳过后的前 2 家", () => {
   assert.deepEqual(picked, ["粤芯半导体", "格林美"]);
 });
 
+test("buildGdIpoSpoken：季度例行报送不进口播（2026-10-19 sc）", () => {
+  // 「辅导工作进展报告（第 N 期）」= 老企业按季交作业，不是今天的新事件。
+  // sc 口径：「例行的，都不配进入口播。让行长关注真正有价值的商机。」
+  const routine = item("深圳昂湃技术 (辅导备案)", {
+    summary: "IPO辅导备案 | 辅导机构: 国信证券 | 报告: 辅导进展情况报告 | 披露: 2026-10-19",
+  });
+  const milestone = item("富兰克科技：辅导验收（拟创业板）");
+  // 全是例行 → 整段不输出（空则整行消失，不念「今日无」）
+  assert.equal(buildGdIpoSpoken([routine], {}), "");
+  // 例会与里程碑混排 → 只念里程碑，且「等N家」不把例行算进候选数
+  const spoken = buildGdIpoSpoken([routine, milestone], {});
+  assert.ok(!spoken.includes("深圳昂湃"), "例行报送不得被念出来");
+  assert.ok(spoken.includes("富兰克科技"), "辅导验收是里程碑，应播报");
+  assert.ok(!spoken.includes("等2家"), "候选计数不得包含被排除的例行条目");
+});
+
 test("ipoShouldSkip：窗口内口播满 2 天即跳过", () => {
   let mem = emptyMemory();
   mem = recordIpoVoicing(mem, ["尚睿科技"], "2026-09-09");

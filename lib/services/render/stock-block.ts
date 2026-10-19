@@ -132,8 +132,13 @@ export function renderStockRecap(report: DailyReport): string {
  * 无广东 IPO 命中（report.sections.ipo 无「粤」标条目）→ 返回空串，不渲染。
  */
 export function renderGdIpoStrip(items: ReportItem[], opts?: { section?: "must" | "stock" }): string {
-  // 顶部横滑＝口播同源池：同样排除「单纯赴港上市」（非红筹），与 pickSpokenItems 口径一致
-  const picks = topGdIpo(items, undefined, 3, undefined, { uniqueCompany: true, excludePlainHk: true });
+  // 顶部横滑＝口播同源池：同样排除「单纯赴港上市」（非红筹）与「季度例行报送」，
+  // 与 pickSpokenItems 口径一致（看到的就是听到的；2026-10-19 sc）
+  const picks = topGdIpo(items, undefined, 3, undefined, {
+    uniqueCompany: true,
+    excludePlainHk: true,
+    excludeRoutine: true,
+  });
   if (picks.length === 0) return "";
   const cards = picks
     .map((it) => {

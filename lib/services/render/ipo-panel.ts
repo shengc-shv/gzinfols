@@ -3,8 +3,15 @@
  *
  * 2026-09-14（C-1 Phase1）：自 `full.ts` **纯搬移**（行为零变化）。
  */
-import { GD_IPO_STAGE_LABEL, IPO_STAGE_ORDER, type GdStage } from "../classify/gd-ipo";
-import { gdIpoStageOf, companyNameOf } from "../classify/gd-ipo-spoken";
+import {
+  GD_IPO_STAGE_LABEL,
+  IPO_DISPLAY_STAGE_LABEL,
+  IPO_DISPLAY_STAGE_ORDER,
+  IPO_ROUTINE_NOTE,
+  IPO_ROUTINE_STAGE,
+  type GdStage,
+} from "../classify/gd-ipo";
+import { gdIpoDisplayStageOf, gdIpoStageOf, companyNameOf } from "../classify/gd-ipo-spoken";
 import { escapeHtml } from "./cards";
 import {
   renderFilterBar,
@@ -15,8 +22,8 @@ import { renderReportItemHtml } from "./report-item";
 import type { ReportItem } from "../../contracts/report";
 
 /** 阶段组标题（「阶段待定」= 无阶段信号的条目，有数据才渲染）。 */
-export function ipoStageGroupLabel(s: GdStage | ""): string {
-  return s === "" ? "阶段待定" : GD_IPO_STAGE_LABEL[s] || "IPO";
+export function ipoStageGroupLabel(s: string): string {
+  return s === "" ? "阶段待定" : IPO_DISPLAY_STAGE_LABEL[s] || "IPO";
 }
 
 /**
@@ -36,9 +43,10 @@ export function renderIpoFilterBar(items: ReportItem[]): string {
       ],
     },
   ];
-  const present = new Set<string>(items.map((it) => gdIpoStageOf(it)));
-  const stageChips: FilterChipDef[] = IPO_STAGE_ORDER.filter((s) => present.has(s)).map((s) => ({
-    label: GD_IPO_STAGE_LABEL[s],
+  // 2026-10-19：筛选条与分栏同口径 —— 用「展示阶段」（含「辅导进展」），否则筛了看不到分组
+  const present = new Set<string>(items.map((it) => gdIpoDisplayStageOf(it)));
+  const stageChips: FilterChipDef[] = IPO_DISPLAY_STAGE_ORDER.filter((s) => present.has(s)).map((s) => ({
+    label: IPO_DISPLAY_STAGE_LABEL[s],
     value: s,
     group: "stage",
   }));
@@ -50,7 +58,7 @@ export function renderIpoFilterBar(items: ReportItem[]): string {
 /**
  * 广东IPO 面板正文：**四阶段分栏**（2026-09-10 用户决策③落地）。
  *
- * - 组顺序 = `IPO_STAGE_ORDER`（商机价值优先，与横滑同序）；
+ * - 组顺序 = `IPO_DISPLAY_STAGE_ORDER`（里程碑优先；季度例行报送沉底并折叠，2026-10-19）；
  * - 空阶段整组不渲染（不出现「辅导备案 0 家」这类空标题）；
  * - 组内卡片由 `renderReportItemHtml(it, true, stage)` 渲染，带 `data-stage` 供筛选条过滤；
  * - 组头带阶段色点 + 家数，便于「哪家在哪个阶段」一眼可读。
@@ -100,21 +108,38 @@ export function renderIpoProgress(item: ReportItem, all: ReportItem[]): string {
 export function renderIpoPanelHtml(items: ReportItem[]): string {
   const byStage = new Map<string, ReportItem[]>();
   for (const it of items) {
-    const s = gdIpoStageOf(it);
+    // 「辅导进展」独立成组：老企业按期交作业 ≠ 今天新备案（2026-10-19 sc 指出）
+    const s = gdIpoDisplayStageOf(it);
     const arr = byStage.get(s);
     if (arr) arr.push(it);
     else byStage.set(s, [it]);
   }
-  const order: Array<GdStage | ""> = [...IPO_STAGE_ORDER, ""];
+  const order: string[] = [...IPO_DISPLAY_STAGE_ORDER, ""];
   return order
     .filter((s) => (byStage.get(s)?.length ?? 0) > 0)
     .map((s) => {
       const list = byStage.get(s)!;
+      const head = `<span class="ipo-group-dot ipo-stage--${s || "none"}"></span>${escapeHtml(
+        ipoStageGroupLabel(s),
+      )}<span class="ipo-group-n">${list.length}</span>`;
+      const body = list
+        .map((it) => renderReportItemHtml(it, true, s, renderIpoProgress(it, items)))
+        .join("\n");
+      // 🔴 2026-10-19 sc：季度例行报送**默认折叠**并标注 —— 板块首屏先给「真有动静的几家」。
+      // ⛔ 不要直接删掉这些条目：它们仍是「哪家还在辅导期」的事实依据，只是不抢注意力。
+      // 用 `<details data-routine>` 而不是额外 class：客户端 `syncGroups` 按 `.ipo-group`
+      // 的 `filtered-out` 隐藏空组，外壳必须是同一个选择器目标，否则会留下空标题。
+      if (s === IPO_ROUTINE_STAGE) {
+        return `<details class="ipo-group" data-stage="${s}" data-routine="1">
+    <summary class="ipo-group-head">${head}<span class="ipo-group-note">${escapeHtml(
+      IPO_ROUTINE_NOTE,
+    )}</span></summary>
+    ${body}
+  </details>`;
+      }
       return `<section class="ipo-group" data-stage="${s}">
-    <h4 class="ipo-group-head"><span class="ipo-group-dot ipo-stage--${s || "none"}"></span>${escapeHtml(
-      ipoStageGroupLabel(s),
-    )}<span class="ipo-group-n">${list.length}</span></h4>
-    ${list.map((it) => renderReportItemHtml(it, true, s, renderIpoProgress(it, items))).join("\n")}
+    <h4 class="ipo-group-head">${head}</h4>
+    ${body}
   </section>`;
     })
     .join("\n");
