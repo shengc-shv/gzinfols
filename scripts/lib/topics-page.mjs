@@ -319,11 +319,14 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus, monthly 
     //    两者普遍差一天：10-01 那期里大量条目其实是 09/30 发布的，
     //    按期次分组会把它们整批算进 10 月（sc 2026-10-19 实测指出）。
     //    年份由期次日期推断：发布月 > 期次月 → 跨年（12/31 出现在 01-01 那期）。
+    // ⚠️ 这里必须用字符串切分，⛔ 不要写正则 —— 页面脚本本身住在模板字符串里，
+    //    正则的 \d / \/ 会被模板字符串吃掉反斜杠，导致整段 JS 语法错误、页面白屏
+    //    （2026-10-19 实际踩过：/^(d{1,2})/(d{1,2})$/ 直接把脚本打断）。
     function ymOf(n) {
       var date = String(n.date || '');
-      var m = String(n.d || '').match(/^(\d{1,2})\/(\d{1,2})$/);
-      if (!m || !/^\d{4}-\d{2}/.test(date)) return date.slice(0, 7) || '未知日期';
-      var dm = parseInt(m[1], 10);
+      var parts = String(n.d || '').split('/');
+      var dm = parts.length === 2 ? parseInt(parts[0], 10) : NaN;
+      if (isNaN(dm) || !date || date.length < 7) return date.slice(0, 7) || '未知日期';
       var baseM = parseInt(date.slice(5, 7), 10);
       var y = parseInt(date.slice(0, 4), 10);
       if (dm > baseM) y -= 1;
