@@ -370,6 +370,14 @@ try {
       .filter((e) => fs.existsSync(path.join(OUT, e.name, `${e.name}.html`)))
       .map((e) => e.name),
   );
+  // 月度一句话分析（2026-10-19 sc：每月一次由 WorkBuddy 阅读节点后撰写；缺失则页面不显示）
+  let monthly = {};
+  try {
+    const mf = path.resolve("data/topics-monthly.json");
+    if (fs.existsSync(mf)) monthly = JSON.parse(fs.readFileSync(mf, "utf8")).months || {};
+  } catch (e) {
+    console.log(`[build-site] 月度分析读取失败（不影响渲染）：${e && e.message ? e.message : e}`);
+  }
   const candidates = [path.resolve("data/topics.json"), path.join(IDX_SRC, "topics.json")];
   const topicsPath = candidates.find((p) => fs.existsSync(p));
   let writeEmpty = true;
@@ -387,7 +395,7 @@ try {
     fs.writeFileSync(path.join(dataDir, "topics.json"), JSON.stringify(bundle, null, 0), "utf8");
     fs.writeFileSync(
       path.join(OUT, "topics.html"),
-      renderTopicsPage({ topics, generatedAt: bundle.generatedAt, latest, corpus: bundle.corpus }),
+      renderTopicsPage({ topics, generatedAt: bundle.generatedAt, latest, corpus: bundle.corpus, monthly }),
       "utf8",
     );
     writeEmpty = false;

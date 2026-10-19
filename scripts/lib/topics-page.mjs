@@ -40,7 +40,7 @@ function esc(s) {
 /** 质量四因子的中文名（页面可解释「为什么排这里」）。 */
 const QD_LABELS = { continuity: "连续性", recency: "新近度", importance: "重要性", density: "密度" };
 
-export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
+export function renderTopicsPage({ topics, generatedAt, latest, corpus, monthly }) {
   const kept = (topics || []).slice(0, MAX_TOPICS);
   const totalNodes = kept.reduce((n, t) => n + (t.nodes?.length || 0), 0);
   const activeCount = kept.filter((t) => t.active && !t.dormant).length;
@@ -49,6 +49,8 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
     sections: SECTIONS,
     qdLabels: QD_LABELS,
     corpus: corpus || null,
+    // 月度一句话分析（2026-10-19 sc：由 WorkBuddy 每月阅读节点后撰写，零运行时 LLM）
+    monthly: monthly || {},
   }).replace(/</g, "\\u003c");
 
   return `<!doctype html>
@@ -115,6 +117,8 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
   .mh-b[aria-expanded="false"] .ar { transform:rotate(-90deg); }
   .mh-b .cnt { margin-left:auto; font-variant-numeric:tabular-nums; }
   .mh-b .ar { transition:transform .15s ease; font-size:.7rem; }
+  .mh-s { margin:.3rem .1rem 0; padding:0 .15rem; font-size:.76rem; line-height:1.6;
+          color:var(--muted); border-left:2px solid var(--rule); padding-left:.55rem; }
   .repeat { display:inline-block; margin-left:.35rem; font-size:.68rem; padding:0 .35rem; border-radius:8px; background:#eceef1; color:#5b6472; }
   .empty { color:var(--muted); font-size:.9rem; }
   .dormant-h { font-size:.78rem; color:var(--muted); margin:1.1rem 0 .5rem; cursor:pointer; user-select:none; }
@@ -139,6 +143,7 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
   var DATA = {};
   try { DATA = JSON.parse(el.textContent || '{}'); } catch(e) { DATA = {}; }
   var topics = DATA.topics || [], SECTIONS = DATA.sections || {}, QD = DATA.qdLabels || {};
+  var MONTHLY = DATA.monthly || {};
   var list = document.getElementById('list');
   var bar = document.getElementById('bar');
   if (!topics.length) { document.getElementById('empty').hidden = false; return; }
@@ -330,6 +335,12 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
         btn.setAttribute('aria-expanded', open ? 'false' : 'true');
       });
       mh.appendChild(btn);
+      // 月度分析：读取当期该主题的一句话（没有就不占位）
+      var sum = (MONTHLY[ym] || {})[t.label];
+      if (sum) {
+        var sd = document.createElement('div'); sd.className = 'mh-s'; sd.textContent = sum;
+        mh.appendChild(sd);
+      }
       ol.appendChild(mh);
       bucket.forEach(function(x) { ol.appendChild(x); });
     });
