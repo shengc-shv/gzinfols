@@ -122,7 +122,11 @@ test("⑤ 页面：时间线渲染 + 类型安全（外部标题不拼 innerHTML
   // 结构齐备
   assert.ok(html.includes("ol") || html.includes("tl"), "须有时间线结构");
   assert.ok(html.includes("renderTopicsPage") === false, "页面不应残留服务端函数名");
-  assert.ok(html.includes("./index.html") && html.includes("./search.html"), "须有回退入口");
+  // 🔴 2026-10-19 sc 口径变更：主题页只保留「← 返回」（回来源期次），
+  //   不再挂「最新一期 / 检索 / 归档」——它是独立全量页，不兼任站内导航门户。
+  assert.ok(html.includes('class="back"'), "须有返回按钮");
+  assert.ok(html.includes("./2026-09-17/2026-09-17.html"), "返回须兜底到最新一期");
+  assert.ok(!html.includes("search.html") && !html.includes("archive.html"), "不挂站内导航（2026-10-19 口径）");
   // 空态不报错
   const empty = renderTopicsPage({ topics: [], latest: "2026-09-17" });
   assert.ok(empty.includes("topics-data"));
