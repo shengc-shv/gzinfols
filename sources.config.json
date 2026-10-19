@@ -1094,5 +1094,35 @@
       "zh"
     ],
     "note": "同上接口，按繁体申请人名识别广东企业（廣東/深圳/廣州/東莞等），归 gd-ipo 作为跨境融资商机。category/subcategory 仅采集元数据，渲染归属经内容判定。"
+  },
+  {
+    "id": "gz-sw",
+    "tier": "T1",
+    "name": "广州市商务局·通知公告",
+    "type": "scrape",
+    "url": "http://sw.gz.gov.cn/xxgk/tzgg/index.html",
+    "category": "finance",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "广州市级一手政策源（2026-10-19 接入，待启用）：消费环境试点/商贸业奖励/出口许可/餐饮纳统资金。补商户收单、消费信贷、跨境结算、外贸客群线索。实测约 0.4 条/天，只抓通知公告栏目（首页多为会议报道）。",
+    "subcategory": "gz-policy"
+  },
+  {
+    "id": "gd-gii",
+    "tier": "T1",
+    "name": "广东省工信厅·通知公告",
+    "type": "scrape",
+    "url": "https://gdii.gd.gov.cn/zwgk/tzgg1011/index.html",
+    "category": "finance",
+    "enabled": false,
+    "lang": "zh",
+    "locales": [
+      "zh"
+    ],
+    "notes": "省级产业政策源（2026-10-19 接入，待启用）：专精特新/产业技术平台申报/绿色工厂/单项冠军。补普惠小微与科技金融的申报名单。实测约 0.9 条/天，只抓通知公告栏目。",
+    "subcategory": "cn-policy"
   }
 ]

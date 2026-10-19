@@ -33,6 +33,9 @@ export const REGION_IPO: ArticleCategory = "ipo";
 export const SOURCE_ROUTE: Record<string, { category: ArticleCategory; subcategory?: string }> = {
   "gz-stats": { category: "gz", subcategory: "gz-customer" },
   "gz-gov": { category: "finance", subcategory: "gz-policy" },
+  // 2026-10-19 新增两个政府「通知公告」源（商机补偏：本地商户/消费/外贸/普惠）
+  "gz-sw": { category: "finance", subcategory: "gz-policy" },
+  "gd-gii": { category: "finance", subcategory: "cn-policy" },
   "nfra": { category: "finance", subcategory: "cn-policy" },
   "pbc": { category: "finance", subcategory: "cn-policy" },
   "cnfin": { category: "finance", subcategory: "cn-finance" },
