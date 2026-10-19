@@ -258,10 +258,22 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
       d.textContent = n.d || n.date || '';   // MM/DD（B 型修复后有值）
       li.appendChild(d);
       var tw = document.createElement('span'); tw.className = 't';
-      var a = document.createElement('a');
-      a.href = './' + n.date + '/' + n.date + '.html#itm-' + String(n.i || '').replace(/^itm-/, '');
-      a.textContent = n.t || '(无标题)';
-      tw.appendChild(a);
+      // 落点：摘要卡（必读/商机/风险）节点带 ref → 跳到**它引用的那条资讯卡**；
+      // 无 ref（LLM 归纳多源、没有单一来源）→ 落回摘要卡自身（渲染层已给锚点）。
+      // 「itm-0」= 既无 url 也无文案可派生（历史遗留条目）→ 不给链接，避免点了落空。
+      var tgtDate = (n.ref && n.ref.date) || n.date;
+      var tgtId = (n.ref && n.ref.id) || n.i;
+      if (tgtId && tgtId !== 'itm-0') {
+        var a = document.createElement('a');
+        a.href = './' + tgtDate + '/' + tgtDate + '.html#itm-' + String(tgtId || '').replace(/^itm-/, '');
+        a.textContent = n.t || '(无标题)';
+        tw.appendChild(a);
+      } else {
+        var sp = document.createElement('span');
+        sp.textContent = n.t || '(无标题)';
+        sp.title = '该条无原文来源，无法定位到具体卡片';
+        tw.appendChild(sp);
+      }
       li.appendChild(tw);
       var meta = document.createElement('span'); meta.className = 'tag2';
       meta.textContent = (SECTIONS[n.k] || n.k) + (n.s ? ' · ' + n.s : '');

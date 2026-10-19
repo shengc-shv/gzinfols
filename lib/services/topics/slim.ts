@@ -16,7 +16,7 @@ import type { DailyReport, ReportItem } from "../../contracts/report";
 import { recalibrateImportance } from "../assemble/importance";
 import { stripCryptoNews } from "../assemble/safety";
 import { assignItemIds } from "../assemble/item-id";
-import { itemIdOf } from "../../utils/item-id";
+import { itemIdOf, summaryAnchorId } from "../../utils/item-id";
 
 /** 摘要截断长度（主题卡只显示首句，全文在原文/详情页）。 */
 export const SUMMARY_MAX = 90;
@@ -152,10 +152,21 @@ export function buildSlimDay(report: DailyReport): SlimDay {
   }
 
   // ④ 商机洞察：客群段位并入标签（与 C1 客群视图同一数据源）
+  //
+  // 🔴 落点口径（2026-10-19 sc）：商机卡是 LLM 的二次加工，读者点进去应落到**正文那张资讯卡**。
+  // 原实现只取 `sources[0].url` —— 实测 61 条商机里大量 sources[0] 并不在正文，
+  // 而 sources[1]/[2] 才是正文条目，于是节点 id 与正文卡对不上（点了只能落在摘要区）。
+  // 现改为：**优先取「第一个在正文 sections 里的来源」**，没有才退回 sources[0]。
+  // 命中时 id = 正文卡 id → dedupeById 自动合并成一条（商机内容 + 客群标签并进去），
+  // 读者点进去就是那条资讯卡；未命中则保持独立节点（页面上摘要卡本身也有锚点）。
+  const bodyUrls = new Set<string>();
+  for (const [, list] of secs) for (const it of list ?? []) if (it.url) bodyUrls.add(it.url);
   for (const ins of prepared.insights ?? []) {
-    const url = ins.sources?.[0]?.url ?? "";
+    const urls = (ins.sources ?? []).map((s) => s?.url).filter((u): u is string => Boolean(u));
+    const url = urls.find((u) => bodyUrls.has(u)) ?? urls[0] ?? "";
     items.push({
-      i: itemIdOf(url),
+      // 无 url 时不能用 itemIdOf("")（恒 itm-0，多张卡会撞成同一条）→ 用卡片文案派生
+      i: url ? itemIdOf(url) : summaryAnchorId("insight", ins.topic ?? ""),
       t: ins.topic ?? "",
       s: "商机洞察",
       d: prepared.date?.slice(5).replace("-", "/") ?? "",

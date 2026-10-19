@@ -17,6 +17,7 @@ import assert from "node:assert/strict";
 import { renderHtml } from "../lib/services/render";
 import type { DailyReport, ReportItem } from "../lib/contracts/report";
 import { todayKey } from "../lib/utils/time";
+import { itemIdOf } from "../lib/utils/item-id";
 
 // ⚠️ 时间红线：fixture 日期必须相对「今天」动态生成（与 tests/render.test.ts 同源教训）。
 // 本文件断言 p-ipo 面板，而 IPO 面板走 topGdIpo 的 IPO_LIST_WINDOW_DAYS 窗口判定
@@ -55,6 +56,35 @@ function report(over: Partial<DailyReport> = {}): DailyReport {
 function panelIds(html: string): string[] {
   return [...new Set(html.match(/id="p-[a-z]+"/g) ?? [])].map((s) => s.slice(4, -1));
 }
+
+test("④ 摘要区卡片必须有站内锚点（主题跟踪节点靠它点回具体卡片）", () => {
+  // 2026-10-19 实测：主题页 118 个节点里 17 个点进去**找不到锚点**，其中 14 个是摘要区的
+  // 商机/必读卡 —— 渲染层当时只给板块卡加了 id（report-item.ts），摘要区三处（必读/
+  // 商机/风险）漏了 → 主题时间线点回原文只能落在页面顶部。
+  const bodyUrl = "https://e.com/body-article";
+  const mustOnlyUrl = "https://e.com/must-not-in-body";
+  const insUrl = "https://e.com/insight-src-not-in-body";
+  const r = report({
+    sections: { gz_local: [item("正文一条", { url: bodyUrl })], biz_insight: [], policy_market: [], tech: [], ipo: [] },
+    must_read: [
+      { title: "必读·正文没有", url: mustOnlyUrl, why: "理由" },
+      { title: "必读·正文已有", url: bodyUrl, why: "理由" },
+    ],
+    insights: [
+      { topic: "商机·来源不在正文", impact: "影响", sources: [{ title: "来源", url: insUrl }], tags: [] },
+      { topic: "商机·来源在正文", impact: "影响", sources: [{ title: "来源", url: bodyUrl }], tags: [] },
+    ],
+  } as unknown as Partial<DailyReport>);
+
+  const html = renderHtml(r);
+  assert.ok(html.includes(`id="${itemIdOf(mustOnlyUrl)}"`), "必读卡（正文没有）必须带锚点 id");
+  assert.ok(html.includes(`id="${itemIdOf(insUrl)}"`), "商机卡（来源不在正文）必须带锚点 id");
+
+  // HTML 的 id 必须唯一：正文已有的条目，摘要区不得再挂一次同样的 id，
+  // 否则锚点会跳到摘要副本上（读者以为点错了）。
+  const bodyIdCount = (html.match(new RegExp(`id="${itemIdOf(bodyUrl)}"`, "g")) ?? []).length;
+  assert.equal(bodyIdCount, 1, "同一 url 全页只能有一个 id（正文卡），摘要区不得重复");
+});
 
 test("① 非空板块的条目必须出现在产物中（板块不得静默吞条）", () => {
   const titles: Record<string, string> = {

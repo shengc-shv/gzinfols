@@ -20,6 +20,7 @@ import { STR } from "./i18n";
 import { escapeHtml } from "./cards";
 import { renderStockIndexBlock, renderStockRecap, renderGdIpoStrip } from "./stock-block";
 import { tagClsOf, itemAnchorId } from "./atoms";
+import { summaryAnchorId } from "../../utils/item-id";
 import { renderDeltaBadge } from "./delta-badge";
 import { renderMaturityBadge } from "./maturity-badge";
 import type { ProductLineCoverage } from "../../contracts/report";
@@ -112,7 +113,12 @@ export function renderReportExec(report: DailyReport): string {
       // A1a：首屏只留 Top3，其余按序下沉（折叠），避免摘要区过长挤掉下方板块
       const moreCls = i >= MUST_HEAD_COUNT ? " must-more" : "";
       const cls = (isTop ? "must-card must-top" : "must-card") + moreCls;
-      return `<li class="${cls}" data-audio-section="must" ${isTop ? 'data-top-must="true"' : ""}><span class="must-index">${i + 1}</span>${inner}${topBadge}${renderDeltaBadge(m.delta)}</li>`;
+      // 站内锚点（2026-10-19）：主题跟踪要能点回**具体卡片**（实测 118 个节点里 17 个
+      // 点进去找不到锚点，14 个是摘要区的商机/必读）。
+      // ⚠️ 仅当「正文里没有这条」才加 id —— 否则与正文卡 id 重复，锚点会跳到摘要副本上，
+      // 读者以为点错了；`inBody` 时本卡已有「见正文」链接指向正文锚点。
+      const anchor = m.url && !inBody ? ` id="${itemAnchorId(m.url)}"` : "";
+      return `<li class="${cls}"${anchor} data-audio-section="must" ${isTop ? 'data-top-must="true"' : ""}><span class="must-index">${i + 1}</span>${inner}${topBadge}${renderDeltaBadge(m.delta)}</li>`;
     })
     .join("");
   const renderInsightCard = (it: ReportInsight): string => {
@@ -132,7 +138,16 @@ export function renderReportExec(report: DailyReport): string {
           `<button type="button" class="seg-chip seg-${SEG_KEY[c.seg] ?? "other"}" data-seg="${escapeHtml(c.seg)}" title="按「${escapeHtml(SEG_SHORT[c.seg] ?? c.seg)}」筛选下方板块">${escapeHtml(c.text)}</button>`,
       )
       .join("")}</div>`;
-    return `<article class="insight" data-audio-section="insight">
+    // 站内锚点（2026-10-19）：主题/搜索的商机条目要能点回**正文那张资讯卡**。
+    // 口径必须与 slim 完全同源：
+    //   · 任一 source 在正文 → 该条目 id 由那条正文 url 派生（= 正文卡 id）→ **本卡不加 id**
+    //     （加了就重复；读者/搜索点过来落在正文卡上，正是要的效果）；
+    //   · 全部 source 都不在正文 → 本卡自己带 id（有 url 用它，没有用文案派生）。
+    const insUrl = it.sources?.[0]?.url ?? "";
+    const insInBody = (it.sources ?? []).some((s) => s?.url && bodyUrls.has(s.url));
+    const insId = insUrl ? itemAnchorId(insUrl) : summaryAnchorId("insight", it.topic ?? "");
+    const insAnchor = insInBody ? "" : ` id="${insId}"`;
+    return `<article class="insight"${insAnchor} data-audio-section="insight">
       ${(it.tags ?? []).length > 0
         ? `<div class="insight-tags">${(it.tags ?? [])
             .map((t) => `<span class="tag ${tagClsOf(t)}">${escapeHtml(t)}</span>`)
@@ -201,7 +216,10 @@ export function renderReportExec(report: DailyReport): string {
       ? `<span class="risk-source-badge risk-source-${r.source.toLowerCase()}">${r.source === "T1" ? "官方" : r.source === "T1.5" ? "准官方" : "媒体"}</span>`
       : "";
     const fbKey = (r.sources && r.sources[0]?.url) || r.url || `risk:${r.topic}`;
-    return `<article class="risk-card" data-audio-section="risk">
+    // 站内锚点（2026-10-19）：与 slim 的 itemIdOf(risk.sources[0].url) 同源。
+    const riskUrl = r.sources?.[0]?.url ?? "";
+    const riskAnchor = riskUrl && !bodyUrls.has(riskUrl) ? ` id="${itemAnchorId(riskUrl)}"` : "";
+    return `<article class="risk-card"${riskAnchor} data-audio-section="risk">
         <div class="risk-header">⚠️ 风险预警${sourceBadge}${renderDeltaBadge(r.delta)}${srcMarks}</div>
         <h3>${escapeHtml(r.topic)}</h3>
         ${r.evidence ? `<p><b>依据：</b>${escapeHtml(r.evidence)}</p>` : ""}

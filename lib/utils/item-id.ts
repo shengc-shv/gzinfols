@@ -28,3 +28,18 @@ export function itemIdOf(url: string | undefined): string {
  * 两者**必须同源**，否则摘要区「见正文」跳转与详情页链接会指向不同目标。
  */
 export const itemAnchorId = itemIdOf;
+
+/**
+ * **无原文 url 的摘要卡**锚点 id（必读 / 商机 / 风险）。
+ *
+ * 为什么不能直接用 `itemIdOf("")`：那会返回固定的 `itm-0` —— 多张「无来源」的摘要卡
+ * 会撞成同一个 id，既互相覆盖锚点，又会在主题侧被误认成同一条而合并（2026-10-19 实测：
+ * 一条「跨境融资商机」就是这么变成 `itm-0` 的，页面里根本没有该锚点）。
+ *
+ * 口径：`kind` 区分卡片类型（insight/must/risk），`text` 用卡片自身文案（商机用 topic）——
+ * 纯函数、不读时钟，同一张卡跨构建稳定。⚠️ **渲染层与 slim 层必须同源**（都调本函数），
+ * 否则主题节点会指向一个页面上不存在的 id。
+ */
+export function summaryAnchorId(kind: "insight" | "must" | "risk", text: string): string {
+  return itemIdOf(`${kind}:${text ?? ""}`);
+}

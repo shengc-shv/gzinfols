@@ -48,6 +48,16 @@ export interface TopicNode {
    * 真正的跨期跟踪误杀（实测 fixture 暴露；真实语料因簇内还有其他节点而被掩盖）。
    */
   seenDates?: string[];
+  /**
+   * **落点重定向**（2026-10-19 sc 口径）：摘要卡（必读/商机/风险）节点本身是 LLM 的
+   * 二次加工，读者点进去应当落到**它引用的那条资讯卡**，而不是摘要卡。
+   *
+   * 为什么保留摘要卡节点而不直接删掉：sc 明确「LLM 做的商机分析产生了价值，不能丢」——
+   * 「普惠小微与经营贷」「零售AUM经营」两个业务视角完全靠商机卡支撑，删了视角就消失。
+   * 故节点仍按自己的标签归组（保住视角），只用 ref 把**跳转目标**指回真实资讯卡。
+   * ref 缺失 = 该摘要卡无来源 url（LLM 归纳多源）→ 落回摘要卡自身（渲染层已给锚点）。
+   */
+  ref?: { date: string; id: string };
 }
 
 /** 带内部字段的节点（入簇过程用）。 */
@@ -124,6 +134,15 @@ export const BANNED_TOPIC_LABELS = new Set(["市场", "客群", "政策", "宏�
  * （如「粤」之于 IPO），**不因出现率高而判泛**。见 clusterTopics ② 的实测修正说明。
  */
 export const SECTION_LABEL_CONCENTRATION = 0.8;
+
+/**
+ * 摘要卡的板块键（必读 / 商机洞察 / 风险预警）—— 这三类**不是资讯卡**，是 LLM 的二次加工。
+ *
+ * 用途只有两处，⚠️ 都不含「删掉它们」：
+ *   · 落点重定向：它们的 `ref` 指向自己引用的那条资讯卡（读者点进去落到真资讯）；
+ *   · 泛标签统计时不计入（它们自带客群段位，会把标签频次带偏）。
+ */
+export const SUMMARY_KINDS = new Set(["must", "insight", "risk"]);
 
 /**
  * 主题卡「相关标签」的三个限制（2026-10-19 修正）：
@@ -268,6 +287,24 @@ export function clusterTopics(days: SlimDay[], opts: ClusterOpts = {}): Topic[] 
   // ① A 型去重（聚类前）：同 id 只留一个节点（含 seenDates，供跨期判定）
   const nodes = dedupeById(all);
 
+  // ①.5 落点索引（2026-10-19 sc）：「摘要卡 → 它引用的资讯卡」。
+  //
+  // 摘要卡（必读/商机/风险）是 LLM 的二次加工，读者点进去应落到**真实资讯卡**。
+  // 但节点本身仍按摘要卡自身的标签归组 —— 因为「普惠小微」「零售AUM」两个业务视角
+  // 完全靠商机卡支撑（实测：移除摘要卡后这两个主题整块消失），sc 明确「价值不能丢」。
+  // 故只重定向**跳转目标**（ref），不动归属。
+  const articleByUrl = new Map<string, { date: string; id: string }>();
+  for (const n of nodes) {
+    if (SUMMARY_KINDS.has(n.k) || !n.u || !n.i) continue;
+    if (!articleByUrl.has(n.u)) articleByUrl.set(n.u, { date: n.date, id: n.i });
+  }
+  for (const n of nodes) {
+    if (!SUMMARY_KINDS.has(n.k) || !n.u) continue;
+    const hit = articleByUrl.get(n.u);
+    // 指回自己不算重定向（同 id 的极端情形）
+    if (hit && hit.id !== n.i) n.ref = hit;
+  }
+
   // ② 标签频次 + 板块分布 → 泛标签
   const tagFreq = new Map<string, number>();
   const tagSections = new Map<string, Map<string, number>>();
@@ -360,6 +397,7 @@ export function clusterTopics(days: SlimDay[], opts: ClusterOpts = {}): Topic[] 
         u: n.u,
         repeat: n.repeat,
         seenDates: [...(n.seenDates ?? [n.date])].sort(),
+        ...(n.ref ? { ref: n.ref } : {}),
       })),
     });
   }
