@@ -117,8 +117,10 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus, monthly 
   .mh-b[aria-expanded="false"] .ar { transform:rotate(-90deg); }
   .mh-b .cnt { margin-left:auto; font-variant-numeric:tabular-nums; }
   .mh-b .ar { transition:transform .15s ease; font-size:.7rem; }
-  .mh-s { margin:.3rem .1rem 0; padding:0 .15rem; font-size:.76rem; line-height:1.6;
-          color:var(--muted); border-left:2px solid var(--rule); padding-left:.55rem; }
+  .mh-s { margin:.35rem .1rem 0; padding:0 .55rem; font-size:.79rem; line-height:1.55;
+          font-weight:600; color:var(--fg); opacity:.86;
+          border-left:2px solid var(--rule);
+          display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   .repeat { display:inline-block; margin-left:.35rem; font-size:.68rem; padding:0 .35rem; border-radius:8px; background:#eceef1; color:#5b6472; }
   .empty { color:var(--muted); font-size:.9rem; }
   .dormant-h { font-size:.78rem; color:var(--muted); margin:1.1rem 0 .5rem; cursor:pointer; user-select:none; }
@@ -313,9 +315,23 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus, monthly 
     }
     // 按月分组（2026-10-19 sc：**数据全量下发，不做截断**；按月「收起来」，默认展开）。
     // 排序沿用原顺序（最新在上），分组头按年月倒序。
+    // 🔴 按月归属用**条目自身的发布日**（n.d = MM/DD），⛔ 不是期次日期 n.date。
+    //    两者普遍差一天：10-01 那期里大量条目其实是 09/30 发布的，
+    //    按期次分组会把它们整批算进 10 月（sc 2026-10-19 实测指出）。
+    //    年份由期次日期推断：发布月 > 期次月 → 跨年（12/31 出现在 01-01 那期）。
+    function ymOf(n) {
+      var date = String(n.date || '');
+      var m = String(n.d || '').match(/^(\d{1,2})\/(\d{1,2})$/);
+      if (!m || !/^\d{4}-\d{2}/.test(date)) return date.slice(0, 7) || '未知日期';
+      var dm = parseInt(m[1], 10);
+      var baseM = parseInt(date.slice(5, 7), 10);
+      var y = parseInt(date.slice(0, 4), 10);
+      if (dm > baseM) y -= 1;
+      return y + '-' + (dm < 10 ? '0' : '') + dm;
+    }
     var monthGroups = {};
     (t.nodes || []).forEach(function(n) {
-      var ym = String(n.date || '').slice(0, 7) || '未知日期';
+      var ym = ymOf(n);
       (monthGroups[ym] = monthGroups[ym] || []).push(n);
     });
     Object.keys(monthGroups).sort().reverse().forEach(function(ym) {
