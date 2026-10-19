@@ -100,6 +100,17 @@ function collectIncoming(): SlimDay[] {
   return out;
 }
 
+/** 上一版产物里的主题数（读不到 / 损坏 → 0，表示「没有可保护的历史版本」）。 */
+function previousTopicCount(): number {
+  try {
+    if (!fs.existsSync(DATA_OUT)) return 0;
+    const prev = JSON.parse(fs.readFileSync(DATA_OUT, "utf8")) as { topics?: unknown[] };
+    return Array.isArray(prev?.topics) ? prev.topics.length : 0;
+  } catch {
+    return 0;
+  }
+}
+
 function main(): number {
   const { dryRun } = parseArgs();
   const today = todayKey();
@@ -129,7 +140,23 @@ function main(): number {
     return 0;
   }
 
-  // ③ 写语料快照（提交回 main）
+  // ③ 失败保护（P17 同类红线：**「0 主题」必须能与「真的没有」区分**）
+  //   语料快照损坏 / 报告全读不到时，`emptyCorpus()` 会让主题数变 0 —— 若无条件写盘，
+  //   就会用「空主题列表」覆盖上一版有效产物（SEC 曾照写空快照覆盖有效数据）。
+  //   → 上次有主题、本次算 0：判定异常，**放弃写盘并退出 1**（CI 侧 continue-on-error，
+  //     页面继续用上一版 data/topics.json，主题页不会突然变空）。
+  if (topics.length === 0) {
+    const prev = previousTopicCount();
+    if (prev > 0) {
+      console.error(
+        `[topics] ✗ 本次聚类 0 个主题（上一版 ${prev} 个）→ 判定异常，放弃写盘、保留上一版 ${DATA_OUT}`,
+      );
+      return 1;
+    }
+    console.warn("[topics] ⚠ 本次 0 个主题且无上一版产物 —— 按「真的没有」写盘");
+  }
+
+  // ④ 写语料快照（提交回 main）
   fs.mkdirSync(path.dirname(CORPUS_PATH), { recursive: true });
   fs.writeFileSync(CORPUS_PATH, JSON.stringify(corpus, null, 0) + "\n", "utf8");
 
