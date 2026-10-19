@@ -117,14 +117,22 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus, monthly 
   .mh-b[aria-expanded="false"] .ar { transform:rotate(-90deg); }
   .mh-b .cnt { margin-left:auto; font-variant-numeric:tabular-nums; }
   .mh-b .ar { transition:transform .15s ease; font-size:.7rem; }
-  .mh-s { margin:.4rem .1rem 0; padding:0 .55rem; font-size:.9rem; line-height:1.6;
-          font-weight:600; color:var(--fg); opacity:.9;
-          border-left:2px solid var(--rule);
+  /* 月度分析：淡蓝底 + 左侧高亮条（高亮但不刺眼，2026-10-19 sc） */
+  .mh-s { margin:.45rem 0 0; padding:.45rem .62rem; font-size:.9rem; line-height:1.6;
+          font-weight:600; color:var(--fg);
+          background:rgba(37,99,235,.065);
+          border-left:3px solid rgba(37,99,235,.5);
+          border-radius:0 8px 8px 0;
           display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   .repeat { display:inline-block; margin-left:.35rem; font-size:.68rem; padding:0 .35rem; border-radius:8px; background:#eceef1; color:#5b6472; }
   .empty { color:var(--muted); font-size:.9rem; }
   .dormant-h { font-size:.78rem; color:var(--muted); margin:1.1rem 0 .5rem; cursor:pointer; user-select:none; }
-  @media (prefers-color-scheme: dark) { :root { --bg:#141414; --card:#1e1e1e; --fg:#e8e8e8; --rule:#2e2e2e; } .repeat { background:#2a2a2a; color:#aaa; } }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#141414; --card:#1e1e1e; --fg:#e8e8e8; --rule:#2e2e2e; }
+    .repeat { background:#2a2a2a; color:#aaa; }
+    /* 深色下淡蓝底会看不见 → 提高不透明度、竖线提亮 */
+    .mh-s { background:rgba(96,165,250,.13); border-left-color:rgba(96,165,250,.62); }
+  }
 </style>
 </head>
 <body>
