@@ -117,8 +117,8 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus, monthly 
   .mh-b[aria-expanded="false"] .ar { transform:rotate(-90deg); }
   .mh-b .cnt { margin-left:auto; font-variant-numeric:tabular-nums; }
   .mh-b .ar { transition:transform .15s ease; font-size:.7rem; }
-  .mh-s { margin:.35rem .1rem 0; padding:0 .55rem; font-size:.79rem; line-height:1.55;
-          font-weight:600; color:var(--fg); opacity:.86;
+  .mh-s { margin:.4rem .1rem 0; padding:0 .55rem; font-size:.9rem; line-height:1.6;
+          font-weight:600; color:var(--fg); opacity:.9;
           border-left:2px solid var(--rule);
           display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   .repeat { display:inline-block; margin-left:.35rem; font-size:.68rem; padding:0 .35rem; border-radius:8px; background:#eceef1; color:#5b6472; }
