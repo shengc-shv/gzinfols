@@ -142,14 +142,15 @@ test("B 型：TopicNode 必须带 MM/DD（旧版漏传致全部节点日期 unde
   }
 });
 
-test("maxNodes 参数化：按 opts 截断（默认 12）", () => {
+test("节点默认不截断（2026-10-19 sc：数据全量，折叠交给渲染层）；maxNodes 仍可显式收口", () => {
   const items: SlimItem[] = [];
   for (let i = 0; i < 30; i++) {
     items.push(item({ i: `itm-cap${i}`, t: `房贷进展${i}`, g: ["住房金融"], k: "biz_insight" }));
   }
   const days: SlimDay[] = [day("2026-10-14", items.slice(0, 15)), day("2026-10-15", items.slice(15))];
-  assert.equal(clusterTopics(days)[0].nodes.length, 12, "默认截断 12");
-  assert.equal(clusterTopics(days, { maxNodes: 20 })[0].nodes.length, 20, "opts.maxNodes 生效");
+  // 旧口径默认截 12，会把时间线中段整段砍掉（房贷主题 9-18~10-12 曾因此消失）
+  assert.equal(clusterTopics(days)[0].nodes.length, 30, "默认保留全部节点");
+  assert.equal(clusterTopics(days, { maxNodes: 20 })[0].nodes.length, 20, "显式 maxNodes 仍生效（保首尾）");
 });
 
 test("质量分：大主题不得被小主题靠「连续性饱和」反超（实测信用卡 3 节点曾拿 99 分第一）", () => {

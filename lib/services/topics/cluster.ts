@@ -261,7 +261,10 @@ function capNodes<T>(sorted: T[], cap: number): T[] {
 export function clusterTopics(days: SlimDay[], opts: ClusterOpts = {}): Topic[] {
   const minDates = opts.minDates ?? 2;
   const maxTopics = opts.maxTopics ?? 30;
-  const maxNodes = opts.maxNodes ?? 12;
+  // 🔴 2026-10-19 sc：**数据层不截断** —— 节点是「一件事后来怎么样了」的全部证据，
+  // 砍掉中段等于伪造时间线。旧上限 12 在语料补齐到 36 期后，把房贷主题 9-18~10-12 整段吞掉，
+  // 读者以为数据缺失。现在全量保留，**折叠交给渲染层**（按月「收起来」，需要时可展开）。
+  const maxNodes = opts.maxNodes ?? Number.POSITIVE_INFINITY;
   const commonRatio = opts.commonRatio ?? 0.35;
 
   type RawNode = TopicNode & { tags: string[] };

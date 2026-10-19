@@ -102,6 +102,19 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
   .t a { color:inherit; text-decoration:none; }
   .t a:hover { color:var(--brand); text-decoration:underline; }
   .tag2 { font-size:.7rem; color:var(--muted); margin-left:.4rem; }
+  /* 月份分组（2026-10-19 sc：数据全量下发，按月折叠，默认展开 —— 不截断） */
+  ol.tl li.mh { border-left:0; padding:0; margin:.6rem 0 .35rem; }
+  ol.tl li.mh::before { display:none; }
+  ol.tl li.mh:first-child { margin-top:.2rem; }
+  .mh-b { display:flex; align-items:center; gap:.5rem; width:100%; min-height:38px;
+          padding:.25rem .7rem; border:1px solid var(--rule); border-radius:8px;
+          background:var(--card); color:var(--muted); font:inherit; font-size:.78rem;
+          cursor:pointer; -webkit-tap-highlight-color:transparent; }
+  .mh-b:hover { border-color:var(--brand); color:var(--brand); }
+  .mh-b:active { transform:scale(.995); }
+  .mh-b[aria-expanded="false"] .ar { transform:rotate(-90deg); }
+  .mh-b .cnt { margin-left:auto; font-variant-numeric:tabular-nums; }
+  .mh-b .ar { transition:transform .15s ease; font-size:.7rem; }
   .repeat { display:inline-block; margin-left:.35rem; font-size:.68rem; padding:0 .35rem; border-radius:8px; background:#eceef1; color:#5b6472; }
   .empty { color:var(--muted); font-size:.9rem; }
   .dormant-h { font-size:.78rem; color:var(--muted); margin:1.1rem 0 .5rem; cursor:pointer; user-select:none; }
@@ -260,7 +273,7 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
       box.appendChild(chips);
     }
     var ol = document.createElement('ol'); ol.className = 'tl';
-    (t.nodes || []).forEach(function(n) {
+    function nodeLi(n) {
       var li = document.createElement('li');
       var d = document.createElement('span'); d.className = 'd';
       d.textContent = n.d || n.date || '';   // MM/DD（B 型修复后有值）
@@ -291,7 +304,34 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
         r.textContent = '持续 ' + n.repeat + ' 期';
         li.appendChild(r);
       }
-      ol.appendChild(li);
+      return li;
+    }
+    // 按月分组（2026-10-19 sc：**数据全量下发，不做截断**；按月「收起来」，默认展开）。
+    // 排序沿用原顺序（最新在上），分组头按年月倒序。
+    var monthGroups = {};
+    (t.nodes || []).forEach(function(n) {
+      var ym = String(n.date || '').slice(0, 7) || '未知日期';
+      (monthGroups[ym] = monthGroups[ym] || []).push(n);
+    });
+    Object.keys(monthGroups).sort().reverse().forEach(function(ym) {
+      var arr = monthGroups[ym];
+      var mh = document.createElement('li'); mh.className = 'mh';
+      var btn = document.createElement('button'); btn.type = 'button'; btn.className = 'mh-b';
+      btn.setAttribute('aria-expanded', 'true');
+      var lbl = document.createElement('span');
+      lbl.textContent = /^\d{4}-\d{2}$/.test(ym) ? ym.replace('-', ' 年 ') + ' 月' : ym;
+      var cnt = document.createElement('span'); cnt.className = 'cnt'; cnt.textContent = arr.length + ' 条';
+      var ar = document.createElement('span'); ar.className = 'ar'; ar.textContent = '▾';
+      btn.appendChild(lbl); btn.appendChild(cnt); btn.appendChild(ar);
+      var bucket = arr.map(function(n) { return nodeLi(n); });
+      btn.addEventListener('click', function() {
+        var open = btn.getAttribute('aria-expanded') !== 'false';
+        bucket.forEach(function(x) { x.hidden = open; });
+        btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      });
+      mh.appendChild(btn);
+      ol.appendChild(mh);
+      bucket.forEach(function(x) { ol.appendChild(x); });
     });
     box.appendChild(ol);
     return box;
