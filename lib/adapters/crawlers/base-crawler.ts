@@ -49,6 +49,11 @@ export interface CrawlerOptions {
   keywords?: string[];
   timeout?: number;
   retries?: number;
+  /**
+   * 响应编码（默认 utf-8）。新浪等老站是 **gbk**，必须显式声明 ——
+   * 否则 `resp.text()` 按 UTF-8 解码，中文全成乱码（2026-10-19 加新浪研报时实测）。
+   */
+  encoding?: "utf-8" | "gbk";
 }
 
 export class BaseCrawler {
@@ -56,6 +61,8 @@ export class BaseCrawler {
   keywords: string[];
   timeout: number;
   retries: number;
+  /** 响应编码（默认 utf-8；gbk 站点需显式声明，见 CrawlerOptions.encoding）。 */
+  encoding: "utf-8" | "gbk";
   userAgent: string;
   results: CrawlerResult[];
   /**
@@ -73,6 +80,7 @@ export class BaseCrawler {
     this.timeout = options.timeout || 15000;
     // 抓取失败后的重试次数（不含首次）。默认 0；易被反爬/WAF 掐断的源可设高，如 3。
     this.retries = options.retries ?? 0;
+    this.encoding = options.encoding ?? "utf-8";
     this.userAgent =
       "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36";
     this.results = [];
@@ -159,7 +167,10 @@ export class BaseCrawler {
             break;
           }
 
-          const text = await resp.text();
+          const text =
+            this.encoding === "gbk"
+              ? new TextDecoder("gbk").decode(await resp.arrayBuffer())
+              : await resp.text();
           articles = await this.parseArticle(text, targetUrl);
           ok = true;
           break;

@@ -299,7 +299,9 @@ jobs:
           git add history/
           # 主题跟踪的两个数据文件（2026-10-19）：语料快照必须回流 main，
           # 否则每次 CI 都从仓库旧版开始 → 「永久保留」失效、主题越跟越短。
-          for f in data/article-history.json data/article-history-backup.json data/event-memory.json data/redchip/leads.json data/redchip/meta.json data/topics.json data/topics-corpus.json; do
+          # 主题跟踪 + 研报台账（2026-10-19）：都是「独立 + 全量」的固定数据文件，
+          # 必须回流 main，否则每次 CI 都从旧版开始 → 累积失效。
+          for f in data/article-history.json data/article-history-backup.json data/event-memory.json data/redchip/leads.json data/redchip/meta.json data/topics.json data/topics-corpus.json data/research-ledger.json; do
             [ -f "$f" ] && git add "$f" || true
           done
           if git diff --cached --quiet; then

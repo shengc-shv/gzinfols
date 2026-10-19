@@ -30,6 +30,7 @@ import { renderRedchipPage } from "./lib/redchip-page.mjs";
 import { renderRedchipReport } from "./lib/redchip-report.mjs";
 import { renderSearchPage } from "./lib/search-page.mjs";
 import { renderTopicsPage } from "./lib/topics-page.mjs";
+import { renderResearchPage } from "./lib/research-page.mjs";
 
 /** 汇集来源（按优先级：前一个命中即不再看后面的）。 */
 const SRC_DIRS = ["daily_reports", "history"];
@@ -209,7 +210,7 @@ const archiveHtml = `<!doctype html>
   <h1>每日资信简报 — 归档</h1>
   <p class="meta">共 ${dates.length} 期 · 最新在前 · 生成于 ${todayInReportTz()}</p>
   <div class="top">
-    <a href="./index.html">→ 最新一期（${latest}）</a> · <a href="./search.html">🔍 检索与两期对比</a> · <a href="./topics.html">🧭 主题跟踪</a>
+    <a href="./index.html">→ 最新一期（${latest}）</a> · <a href="./search.html">🔍 检索与两期对比</a> · <a href="./topics.html">🧭 主题跟踪</a> · <a href="./research.html">📐 研报解读</a>
   </div>
   <ul>
 ${rows}
@@ -369,6 +370,70 @@ try {
   }
 } catch (e) {
   console.log(`[build-site] 检索页跳过：${e && e.message ? e.message : e}`);
+}
+
+// ---------- 5.8c) 研报解读页（2026-10-19）：site/research.html ----------
+// 数据源：各期 report JSON 的 `researchPanel`（daily_reports 优先，回落 history）。
+// 与主题页同口径：模块缺失 / 单期坏 JSON 绝不阻断构建。
+// RESEARCH_PANEL=off → 不生成页面（首页入口同步隐藏，见 renderInjectionFromEnv）。
+if (process.env.RESEARCH_PANEL === "off") {
+  console.log("[build-site] RESEARCH_PANEL=off → 跳过研报解读页");
+} else {
+try {
+  const ledgerPath = path.resolve("data/research-ledger.json");
+  let reports = [];
+  if (fs.existsSync(ledgerPath)) {
+    // 固定台账（独立 + 全量，不随 history/ 7 天保留期裁剪）——2026-10-19 sc 口径
+    const ledger = JSON.parse(fs.readFileSync(ledgerPath, "utf8"));
+    const groups = new Map();
+    for (const it of ledger.items || []) {
+      const d = it && it.publishedAt;
+      if (!d) continue;
+      const arr = groups.get(d) || [];
+      arr.push(it);
+      groups.set(d, arr);
+    }
+    reports = [...groups.entries()]
+      .sort((a, b) => b[0].localeCompare(a[0]))
+      // 不再按 14 天截断：宏观侧已收敛为「季度级以上大窗口」，内容天然低频（90 天约 10~20 篇）
+      .map(([date, items]) => ({ date, items }));
+    const shown = reports.reduce((n, r) => n + r.items.length, 0);
+    console.log(
+      `[build-site] 研报台账 = data/research-ledger.json（累计 ${(ledger.items || []).length} 篇 · 页面展示 ${shown} 篇 / ${reports.length} 个发布日）`,
+    );
+  } else {
+    // 兜底老路径：各期 report JSON 的 researchPanel（台账尚未生成的首跑场景）
+    for (const date of dates) {
+      const candidates = [
+        path.join("daily_reports", date, `${date}.json`),
+        path.join("history", date, `${date}.json`),
+        path.join("daily_reports", `${date}.json`),
+      ];
+      const f = candidates.find((p) => fs.existsSync(p));
+      if (!f) continue;
+      try {
+        const j = JSON.parse(fs.readFileSync(f, "utf8"));
+        const items = j && j.researchPanel && j.researchPanel.items;
+        if (Array.isArray(items) && items.length) {
+          reports.push({ date, items, windowDays: j.researchPanel.windowDays || 3 });
+        }
+      } catch {
+        /* 单期坏 JSON 跳过，不影响整页 */
+      }
+    }
+    if (reports.length) console.log("[build-site] 研报台账缺失 → 用各期 report JSON 兜底");
+  }
+  fs.writeFileSync(
+    path.join(OUT, "research.html"),
+    renderResearchPage({ reports, generatedAt: todayInReportTz(), latest }),
+    "utf8",
+  );
+  console.log(
+    `[build-site] research.html（${reports.length} 期 / ${reports.reduce((n, r) => n + r.items.length, 0)} 篇研报）`,
+  );
+} catch (e) {
+  console.log(`[build-site] 研报解读页跳过：${e && e.message ? e.message : e}`);
+}
 }
 
 // ---------- 6) .nojekyll：阻止 GitHub Pages 跑 Jekyll（否则下划线开头的目录会被吞）----------

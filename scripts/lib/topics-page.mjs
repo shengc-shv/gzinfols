@@ -64,6 +64,13 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
   h1 { font-size:1.3rem; margin:0 0 .2rem; }
   .meta { color:var(--muted); font-size:.82rem; margin-bottom:1.1rem; }
   .meta a { color:var(--brand); }
+  /* —— 返回按钮（2026-10-19 sc：手机端必须能回来源页）—— */
+  .back { display:inline-flex; align-items:center; gap:.25rem; min-height:36px; padding:.3rem .7rem;
+    margin:0 0 .55rem; border:1px solid var(--rule); border-radius:999px; background:var(--card);
+    color:var(--fg); font-size:.82rem; text-decoration:none; -webkit-tap-highlight-color:transparent; }
+  .back:hover { border-color:var(--brand); color:var(--brand); }
+  .back:active { transform:scale(.98); }
+  @media (max-width:719.98px) { .back { min-height:44px; padding:.4rem .9rem; font-size:.9rem; } }
   /* —— 控制条：主题过滤（唯一维度）+ 只看有新进展 —— */
   .bar { display:flex; flex-wrap:wrap; gap:.4rem; align-items:center; margin:0 0 .9rem; }
   .bar .grp { display:flex; flex-wrap:wrap; gap:.3rem; align-items:center; }
@@ -102,8 +109,9 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus }) {
 </style>
 </head>
 <body>
+  <a class="back" href="./${esc(latest)}/${esc(latest)}.html" onclick="if(document.referrer&&document.referrer.indexOf(location.host)>=0){history.back();return false;}">← 返回</a>
   <h1>🧭 主题跟踪</h1>
-  <p class="meta">${kept.length} 个跨期主题 / ${totalNodes} 个进展节点 · 本周有进展 <b>${activeCount}</b> 个${corpus ? ` · 语料 ${esc(corpus.span)}（${esc(String(corpus.days))} 期 / ${esc(String(corpus.items))} 条）` : ""}${generatedAt ? ` · 生成于 ${esc(generatedAt)}` : ""} · <a href="./index.html">最新一期（${esc(latest)}）</a> · <a href="./search.html">🔍 检索</a> · <a href="./archive.html">归档</a></p>
+  <p class="meta">${kept.length} 个跨期主题 / ${totalNodes} 个进展节点 · 本周有进展 <b>${activeCount}</b> 个${corpus ? ` · 语料 ${esc(corpus.span)}（${esc(String(corpus.days))} 期 / ${esc(String(corpus.items))} 条）` : ""}${generatedAt ? ` · 生成于 ${esc(generatedAt)}` : ""}</p>
 
   <div class="bar" id="bar"></div>
   <div id="list"></div>

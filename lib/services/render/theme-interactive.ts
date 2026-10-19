@@ -200,5 +200,32 @@ export const THEME_INTERACTIVE_CSS = `  /* ===== 2026-08-21 交互重构（demo 
   .market-bullets { margin: 0.35rem 0 0; padding-left: 1.1rem; font-size: 0.92rem; color: var(--fg-soft); line-height: 1.7; }
   .market-bullets b { color: var(--fg); }
 
+  /* 模块入口双卡（2026-10-19）：主题追踪 / 研报解读 —— 手机端单列堆叠、触摸热区 ≥56px */
+  .module-links {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;
+    margin: 0.75rem 0 0.15rem;
+  }
+  .module-link {
+    display: flex; align-items: center; gap: 0.55rem;
+    min-height: 56px; padding: 0.6rem 0.75rem;
+    border: 1px solid var(--rule); border-radius: 12px;
+    background: var(--card, #fff); color: var(--fg); text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: border-color .15s ease, transform .12s ease, background .15s ease;
+  }
+  .module-link:visited { color: var(--fg); }
+  .module-link:hover { border-color: var(--accent-brand); }
+  .module-link:active { transform: scale(0.985); background: #f2f6fb; }
+  .module-link:focus-visible { outline: 2px solid var(--accent-brand); outline-offset: 2px; }
+  .module-link-icon { font-size: 1.12rem; line-height: 1; flex: none; }
+  .module-link-body { display: flex; flex-direction: column; gap: 0.1rem; min-width: 0; }
+  .module-link-title { font-size: 0.95rem; font-weight: 700; line-height: 1.3; }
+  .module-link-desc { font-size: 0.76rem; color: var(--muted); line-height: 1.35; }
+  .module-link-arrow { margin-left: auto; color: var(--muted); flex: none; }
+  @media (max-width: 719.98px) {
+    .module-links { grid-template-columns: 1fr; gap: 0.5rem; }
+    .module-link { min-height: 58px; padding: 0.7rem 0.8rem; }
+  }
+
   footer p { margin: 0.25rem 0; line-height: 1.7; }
 `;

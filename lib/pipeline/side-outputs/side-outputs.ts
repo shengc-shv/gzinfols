@@ -25,6 +25,7 @@ import { buildStockNews } from "./side-stock-news";
 
 import { buildGdIpo } from "./side-gd-ipo";
 import { buildRedchipFromStore } from "./side-redchip";
+import { buildResearchFromSource } from "./side-research";
 import { sanitizeCrypto } from "../../services/assemble/safety";
 
 /**
@@ -54,6 +55,10 @@ export async function buildSideOutputs(
   //    必须排在 gd-ipo 之后：只能给「已存在的 IPO 条目」挂标，绝不反过来凭空造条目
   //    （无状态源红线）；匹配失败 → 不打标（T7）。
   report = buildRedchipFromStore(report, ctx);
+
+  // 5.5 高客前瞻·研报参考区（2026-10-19）：零 LLM 旁路，不进主信息流/exec/口播。
+  //     排在红筹之后、加密兜底之前——旁路产物统一过加密咽喉（本面板标题也过一道 sanitizeCrypto 之外的兜底）。
+  report = await buildResearchFromSource(report, ctx);
 
   // 6. 🔴 加密红线兜底（2026-10-03 前移）：旁路产物 **不经过 enrich 的违禁词早筛**，
   //    是真实漏网路径（09-16 stock_news「加密货币…」、10-03 stock_recap「比特币…」均已上线）。

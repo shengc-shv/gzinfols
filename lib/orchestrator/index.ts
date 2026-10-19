@@ -76,6 +76,8 @@ export function renderInjectionFromEnv(now: Date = new Date()): RenderInjection 
   return {
     baseUrl: process.env.REPORT_BASE_URL?.trim() || "",
     webMode: process.env.WEB_MODE === "true",
+    // 高客前瞻参考区：默认显示；RESEARCH_PANEL=off 一键首页屏蔽（数据仍照常入库，只控渲染）
+    hideResearchPanel: process.env.RESEARCH_PANEL === "off",
     now,
   };
 }

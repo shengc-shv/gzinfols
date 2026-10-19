@@ -8,6 +8,7 @@
 /** 地域标记（gzinfo types.ts Locale 同名）：gz=广州辖区 / national=全国 / overseas=海外。 */
 import type { IndexQuote, TickerAnalysis, WatchlistPick } from "./market";
 import type { RedchipBadge, RedchipPanel } from "./redchip";
+import type { ResearchPanel } from "./research";
 export type Locale = "gz" | "national" | "overseas";
 
 /** 报告板块键（5 个 tab）。 */
@@ -294,6 +295,11 @@ export interface DailyReport {
   /** 红筹线索面板（plan-redchip-crawl-push §5.1；渲染期派生，不入库）。 */
   redchipPanel?: RedchipPanel;
   /**
+   * 高客前瞻·研报参考区（2026-10-19 sc 拍板建模块）。旁路产物，零 LLM；
+   * 不进主信息流 / exec 池 / 口播，空则整块不渲染。
+   */
+  researchPanel?: ResearchPanel;
+  /**
    * 产品条线覆盖（C4，2026-09-17）：按揭 / 信用卡 / 代发 三条线的命中情况。
    * 由 `assemble/product-coverage.ts` 纯函数统计（零 LLM）；`count = 0` 即「本期无」，
    * 页面显式标注而不是留白 —— 让读者知道是「真没有」而非「系统漏了」。
@@ -347,6 +353,11 @@ export interface RenderInjection {
   baseUrl?: string;
   /** Web 模式（WEB_MODE=true → 渲染「归档」链接）。缺省 = 不渲染。 */
   webMode?: boolean;
+  /**
+   * 隐藏「高客前瞻·研报参考区」（`RESEARCH_PANEL=off` 一键首页屏蔽；缺省 = 显示）。
+   * 数据照常抓取入库（零 LLM 成本），只控制渲染 —— 想恢复不用重跑管线。
+   */
+  hideResearchPanel?: boolean;
   /** 渲染时刻（页面「数据截至 HH:mm」）。缺省 = 不显示时刻，禁止服务层回落到 `new Date()`。 */
   now?: Date;
 }
