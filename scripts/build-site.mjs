@@ -164,6 +164,12 @@ const latestHtml = fs
   .replace(/href="\.\.\/redchip\//g, 'href="./redchip/')
   // 搜索入口同理（2026-09-17）：报告页写 `../search.html`，发布根副本须改为 `./search.html`。
   .replace(/href="\.\.\/search\.html"/g, 'href="./search.html"')
+  // 🔴 2026-10-20：**主题追踪 / 研报解读两个模块入口**同理（2026-10-19 漏改）。
+  //    报告页在 `<date>/` 子目录里写 `../topics.html` / `../research.html`；
+  //    首页副本搬到发布根后 `..` 越界。虽然浏览器会把根上的 `../x` 兜回 `/x`（偶然能开），
+  //    但 file:// 预览、子路径部署、严格 CSP 下都会真的 404 —— sc 2026-10-20 实测两个入口 404。
+  .replace(/href="\.\.\/topics\.html"/g, 'href="./topics.html"')
+  .replace(/href="\.\.\/research\.html"/g, 'href="./research.html"')
   // B1：最新一期的「归档」旁补一个「检索」入口（检索页只对发布根的相对路径成立）
   .replace(
     /(<a class="archive" href="\.\/archive\.html">[^<]*<\/a>)/,
