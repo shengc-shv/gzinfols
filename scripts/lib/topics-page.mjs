@@ -117,13 +117,16 @@ export function renderTopicsPage({ topics, generatedAt, latest, corpus, monthly 
   .mh-b[aria-expanded="false"] .ar { transform:rotate(-90deg); }
   .mh-b .cnt { margin-left:auto; font-variant-numeric:tabular-nums; }
   .mh-b .ar { transition:transform .15s ease; font-size:.7rem; }
-  /* 月度分析：淡蓝底 + 左侧高亮条（高亮但不刺眼，2026-10-19 sc） */
+  /* 月度分析：淡蓝底 + 左侧高亮条（高亮但不刺眼，2026-10-19 sc）
+     🔴 2026-10-20 sc：手机端第三行被裁。clamp 从 2 → 3（窄屏每行约 23 字，
+     45~50 字正好 3 行；PC 端文本只有 1~2 行，clamp 3 不改变视觉）。
+     ⚠️ 月度小结请控制在约 55 字内 —— 超出仍会被裁，且无展开入口。 */
   .mh-s { margin:.45rem 0 0; padding:.45rem .62rem; font-size:.9rem; line-height:1.6;
           font-weight:600; color:var(--fg);
           background:rgba(37,99,235,.065);
           border-left:3px solid rgba(37,99,235,.5);
           border-radius:0 8px 8px 0;
-          display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+          display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
   .repeat { display:inline-block; margin-left:.35rem; font-size:.68rem; padding:0 .35rem; border-radius:8px; background:#eceef1; color:#5b6472; }
   .empty { color:var(--muted); font-size:.9rem; }
   .dormant-h { font-size:.78rem; color:var(--muted); margin:1.1rem 0 .5rem; cursor:pointer; user-select:none; }
