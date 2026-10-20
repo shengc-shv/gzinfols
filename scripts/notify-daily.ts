@@ -30,6 +30,7 @@ import {
   buildWecomText,
   marketLinesOf,
   pushWecomWebhook,
+  riskBriefOf,
 } from "../lib/adapters/notify/wecom";
 import { REPORT_TZ } from "../lib/utils/time";
 
@@ -42,7 +43,8 @@ function log(msg: string) {
  * - heroLine：今日定调（推送正文主体）；
  * - ipoLine：当日「广东IPO」口播稿（推送正文补一行广东IPO，
  *   否则领导必须点开简报才知道当天有没有可跟进的 IPO 商机）；
- * - riskTopic：当日风险主题（2026-10-07 sc 口径，**可选**：30 字截断成「🚨 风险提示」行）；
+ * - riskTopic：风险**一句话**（2026-10-20 sc：要「谁 + 什么事情 + 影响什么」，
+ *   由 `riskBriefOf` 从 evidence + impact 落点提炼；此前只取 topic 15 字，读不出主体与影响）；
  * - stockRecap：股市复盘（2026-10-07 sc 口径，**可选**：A股/港股/美股各一行涨跌总结，
  *   未开市的市场由数据自带的 marketStatus.fresh 判定后写「未开市」）。
  */
@@ -62,14 +64,14 @@ function loadStoreDigest(storePath: string): {
       executive?: {
         hero_line?: string;
         guangdong_ipo?: { spoken?: string };
-        risk?: { topic?: string };
+        risk?: { topic?: string; evidence?: string; impact?: string };
       };
       stock_recap?: unknown;
     };
     return {
       heroLine: store.executive?.hero_line ?? "",
       ipoLine: store.executive?.guangdong_ipo?.spoken ?? "",
-      riskTopic: store.executive?.risk?.topic ?? "",
+      riskTopic: riskBriefOf(store.executive?.risk),
       stockRecap: store.stock_recap ?? null,
     };
   } catch (e) {

@@ -13,6 +13,8 @@ import {
   buildWecomText,
   marketLinesOf,
   pushWecomWebhook,
+  riskBriefOf,
+  RISK_BRIEF_MAX,
 } from "../lib/adapters/notify/wecom";
 
 type FetchInput = Parameters<typeof fetch>[0];
@@ -78,22 +80,57 @@ test("文案组装：markdown / text 都含定调、广东IPO 行与链接，且
 // 2026-10-07 sc 口径：新增「风险行」（30 字截断）与「股市通报行」（每市场一行），均可选
 // ---------------------------------------------------------------------------
 
-test("风险行：有主题才出现，30 字截断；无风险 → 整行不出现（可选）", () => {
+test("风险行：一句话含「谁 + 什么事 + 影响什么」，影响面不得被截掉（2026-10-20 sc）", () => {
+  // 真实样本（10-20 store.json）。此前推送只取 topic「差异化考核或收紧零售指标」，
+  // 读不出是谁说的、会影响什么 → sc 判为「太简洁」。
+  const brief = riskBriefOf({
+    topic: "差异化考核或收紧零售指标",
+    evidence: "金融监管总局局长丁向群表示将研究完善差异化考核评价体系，考核导向存在调整可能。",
+    impact:
+      "若考核口径调整，个贷投放规模诉求、财富代销收入考核与风控不良容忍度的平衡方式都会变，分行指标分解与资源配置面临重估。",
+  });
+  assert.equal(
+    brief,
+    "金融监管总局局长丁向群表示将研究完善差异化考核评价体系，考核导向存在调整可能；分行指标分解与资源配置面临重估",
+    "证据句（谁+什么事）+ 影响落点，用「；」连成一句",
+  );
+  const line = buildWecomText("定调A", "2026-10-01", "https://x", undefined, { riskTopic: brief });
+  assert.ok(line.includes("🚨 风险提示｜金融监管总局局长丁向群"), `应带主体：${line}`);
+  assert.ok(line.includes("分行指标分解与资源配置面临重估"), "影响面必须保留");
+});
+
+test("风险行：有主题才出现；无风险 → 整行不出现；老数据只有 topic 时回退", () => {
   const withRisk = buildWecomText("定调A", "2026-10-01", "https://x", undefined, {
     riskTopic: "韩国多家银行客户数据泄露",
   });
   assert.ok(withRisk.includes("🚨 风险提示｜韩国多家银行客户数据泄露"));
 
-  // 30 字截断
-  const long = buildWecomText("定调A", "2026-10-01", "https://x", undefined, {
-    riskTopic: "风".repeat(40),
-  });
-  assert.ok(long.includes(`🚨 风险提示｜${"风".repeat(30)}…`), `应截到 30 字：${long}`);
-
   const noRisk = buildWecomText("定调A", "2026-10-01", "https://x", undefined, { riskTopic: "" });
-  assert.ok(!noRisk.includes("风险提示"), "无风险主题 → 不出风险行");
+  assert.ok(!noRisk.includes("风险提示"), "无风险 → 不出风险行");
   // 完全不传 extra（既有调用点）→ 同样不出
   assert.ok(!buildWecomText("A", "2026-10-01", "https://x").includes("风险提示"));
+
+  // 老数据（缺 evidence/impact）→ 回退 topic；无 risk 对象 → 空
+  assert.equal(riskBriefOf({ topic: "某风险主题" }), "某风险主题");
+  assert.equal(riskBriefOf(null), "");
+});
+
+test("风险行：超长在分句边界截断，不硬切成半句", () => {
+  const long = buildWecomText("定调A", "2026-10-01", "https://x", undefined, {
+    riskTopic: "风".repeat(120),
+  });
+  const body = long.split("🚨 风险提示｜")[1].split("\n")[0];
+  assert.ok(body.endsWith("…"), `超长应带省略号：${body}`);
+  assert.ok(body.length <= RISK_BRIEF_MAX + 1, `截断后不应超过 ${RISK_BRIEF_MAX} 字：${body.length}`);
+
+  // 断在标点：拼装后超长时，最后一个逗号之后的内容被丢弃（不留半句）
+  const cut = riskBriefOf({
+    topic: "T",
+    evidence: "甲".repeat(50) + "，" + "乙".repeat(50),
+    impact: "丙".repeat(30),
+  });
+  assert.ok(cut.endsWith("…"), "超长应有省略号");
+  assert.ok(!cut.includes("乙"), "标点后过长内容应整体丢弃，而不是硬切出半句「乙」");
 });
 
 test("股市行：三市场各一行，未开市状态取自数据自带的 fresh 标记", () => {

@@ -38,16 +38,62 @@ function ipoLineOf(ipoLine?: string): string {
   return `🏦 广东IPO｜${t.length > 80 ? `${t.slice(0, 80)}…` : t}`;
 }
 
-/**
- * 风险预警行（可选，2026-10-07 sc 口径）：只放**风险主题**，30 字截断。
- *
- * 为什么只放主题不放 impact：推送是「钩子」，30 字只够说清「今天要警惕什么」；
- * 「对我意味着什么」留给页面/口播。风险为空（当天没识别到风险）→ 整行不出现。
- */
-export function riskLineOf(riskTopic?: string, max = 30): string {
-  const t = (riskTopic || "").replace(/\s+/g, " ").trim();
+/** 风险一句话上限（2026-10-20 sc：要「谁 + 什么事情 + 影响什么」，30 字装不下）。 */
+export const RISK_BRIEF_MAX = 90;
+
+/** 影响段的「落点」：取最后一个逗号/分号之后的分句（通常是「分行…面临…」那一句）。 */
+function impactTailOf(impact: string): string {
+  const t = (impact || "").replace(/\s+/g, " ").trim().replace(/[。；;]\s*$/, "");
   if (!t) return "";
-  return `🚨 风险提示｜${t.length > max ? `${t.slice(0, max)}…` : t}`;
+  const parts = t
+    .split(/[，,；;]/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+  return parts.length ? parts[parts.length - 1] : t;
+}
+
+/** 超长时优先在标点处断开（避免半句话），标点太靠前才硬切。 */
+function clampClause(s: string, max: number): string {
+  if (s.length <= max) return s;
+  const cut = s.slice(0, max);
+  const p = Math.max(cut.lastIndexOf("，"), cut.lastIndexOf("；"), cut.lastIndexOf("。"));
+  return `${p >= max * 0.5 ? cut.slice(0, p) : cut}…`;
+}
+
+/**
+ * 风险提示的「一句话」（2026-10-20 sc 反馈：只给 topic 太简洁）。
+ *
+ * 口径：**谁 + 什么事情 + 影响什么**，一句读完即可判断要不要点进去。
+ * 取材：`evidence`（LLM 产的「事件本身」，自带主体与事件）+ `impact` 的落点分句（影响面）。
+ *   实测 10-20：金融监管总局局长丁向群表示将研究完善差异化考核评价体系，考核导向存在调整可能；
+ *              分行指标分解与资源配置面临重估
+ *
+ * ⛔ 不要再退回「只取 topic」——15 字的主题读不出主体与影响，行长无从判断这件事跟自己什么关系。
+ * `topic` 仅作为老数据（缺 evidence/impact）的兜底。
+ */
+export function riskBriefOf(
+  risk?: { topic?: string; evidence?: string; impact?: string } | null,
+): string {
+  if (!risk) return "";
+  const ev = (risk.evidence || "").replace(/\s+/g, " ").trim().replace(/[。；;]\s*$/, "");
+  const tail = impactTailOf(risk.impact || "");
+  const tp = (risk.topic || "").replace(/\s+/g, " ").trim();
+  if (ev && tail) return clampClause(`${ev}；${tail}`, RISK_BRIEF_MAX);
+  if (ev) return clampClause(ev, RISK_BRIEF_MAX);
+  if (tail) return clampClause(`${tp ? `${tp}；` : ""}${tail}`, RISK_BRIEF_MAX);
+  return tp;
+}
+
+/**
+ * 风险预警行（可选）。入参已是 `riskBriefOf` 算好的**一句话**（谁/什么事/影响什么）。
+ *
+ * 为什么不再在这里截 30 字：截断发生在「一句话」之后会把影响面砍掉，等于回到只报主题。
+ * 真正的长度控制由 `riskBriefOf` 在**分句边界**完成。风险为空 → 整行不出现。
+ */
+export function riskLineOf(riskBrief?: string, max = RISK_BRIEF_MAX): string {
+  const t = (riskBrief || "").replace(/\s+/g, " ").trim();
+  if (!t) return "";
+  return `🚨 风险提示｜${clampClause(t, max)}`;
 }
 
 /** 指数名简写（推送里每个字都值钱，统一用市场俗称）。 */
@@ -158,7 +204,7 @@ export function marketLinesOf(stockRecap?: unknown, style: WecomStyle = "text"):
 
 /** 推送里可选的补充信息（都没有时整行/整块不出现）。 */
 export interface WecomExtra {
-  /** 风险主题（`executive.risk.topic`），30 字截断。 */
+  /** 风险一句话（由 `riskBriefOf` 从 `executive.risk` 提炼：谁 + 什么事 + 影响什么）。 */
   riskTopic?: string;
   /** 股市复盘（`store.stock_recap`），每市场一行。 */
   stockRecap?: unknown;
