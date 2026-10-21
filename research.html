@@ -27,8 +27,18 @@
           border-radius:12px; }
   .item:active { background:#f2f6fb; }
   .title { color:var(--accent); text-decoration:none; font-size:16px; line-height:1.5; display:block; }
-  .title::after { content:""; position:absolute; inset:0; }  /* 整卡可点 */
-  .meta { margin:5px 0 0; font-size:13px; color:var(--muted); line-height:1.55; }
+  .title::after { content:""; position:absolute; inset:0; z-index:0; }  /* 整卡可点（显式 0，让次级链接能盖上来） */
+  .meta { position:relative; z-index:1; margin:5px 0 0; font-size:13px; color:var(--muted); line-height:1.55; }
+  /* PDF 徽章（2026-10-21 sc：点标题直接开文件，徽章提前告知形态，避免误解为跳网页） */
+  .pdf { display:inline-block; margin-left:.35rem; padding:0 .32rem; border:1px solid #b9cdf0;
+         border-radius:5px; background:#eef4fd; color:#185fa5; font-size:11px; font-weight:600;
+         line-height:1.5; vertical-align:2px; }
+  /* 「原页面」次级出口：必须盖在 stretched 链接之上，否则整卡可点会把它吃掉。
+     🔴 display:inline-block + padding 不只是好看——inline 元素的命中盒在 Chrome 里
+     会与整卡覆盖层抢层，实测有一张卡片的「原页面」点不到（elementFromPoint 落到 .title）。 */
+  .alt { position:relative; z-index:2; display:inline-block; padding:3px 0; color:var(--muted);
+         font-size:12.5px; text-decoration:none; border-bottom:1px dashed var(--line); }
+  .alt:hover { color:var(--accent); }
   .empty { padding:28px 18px; text-align:center; color:var(--muted); font-size:14px;
            background:var(--card); border:1px dashed var(--line); border-radius:12px; line-height:1.8; }
   footer { margin-top:22px; font-size:12px; color:#9a9aa2; line-height:1.8; }
@@ -43,7 +53,7 @@
 <div class="wrap">
   <a class="back" href="./2026-10-21/2026-10-21.html" onclick="if(document.referrer&&document.referrer.indexOf(location.host)>=0){history.back();return false;}">← 返回</a>
   <h1>📐 研报解读</h1>
-  <p class="sub">券商研报索引 · 覆盖 5 期 · 共 59 篇 · 生成于 2026-10-21<br>仅作深度参考，点击标题查看原文。</p>
+  <p class="sub">券商研报索引 · 覆盖 5 期 · 共 59 篇 · 生成于 2026-10-21T00:56:14.439Z<br>仅作深度参考；带 <b>PDF</b> 标记的点击标题直接打开研报文件。</p>
   <section class="group">
       <h2 class="day">2026-10-20<span class="n">32 篇</span></h2>
       <ul class="list"><li class="item">
@@ -56,8 +66,8 @@
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845804179796/index.phtml" target="_blank" rel="noopener">2026年9月宏观数据分析：出口再提速、物价回升 内需依然偏弱</a>
       <p class="meta">西南期货有限公司 · 万亮 · 宏观 ｜ 10-20</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830716066" target="_blank" rel="noopener">2026年9月经济数据点评：宏观政策调节力度加大，经济运行积极因素增多</a>
-      <p class="meta">诚通证券 · 邢曙光 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610201830716066_1.pdf" target="_blank" rel="noopener">2026年9月经济数据点评：宏观政策调节力度加大，经济运行积极因素增多<span class="pdf">PDF</span></a>
+      <p class="meta">诚通证券 · 邢曙光 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830716066" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845822838007/index.phtml" target="_blank" rel="noopener">2026年9月经济数据点评：名义GDP逐季回升 居民财政企业收入分化</a>
       <p class="meta">西部证券股份有限公司 · 边泉水 · 宏观 ｜ 10-20</p>
@@ -68,11 +78,11 @@
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845815380104/index.phtml" target="_blank" rel="noopener">2026年9月经济数据点评：内需修复亮点增多</a>
       <p class="meta">东方证券股份有限公司 · 黄汝南/孙金霞/陈至奕/孙国翔/刘姜枫 · 宏观 ｜ 10-20</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830720999" target="_blank" rel="noopener">2026年9月经济数据点评：外强内弱延续，政策脉冲待传导</a>
-      <p class="meta">联合资信评估 · 主权部 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610201830720999_1.pdf" target="_blank" rel="noopener">2026年9月经济数据点评：外强内弱延续，政策脉冲待传导<span class="pdf">PDF</span></a>
+      <p class="meta">联合资信评估 · 主权部 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830720999" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830718235" target="_blank" rel="noopener">2026年9月经济数据点评：总量企稳的读数，结构分化的底色</a>
-      <p class="meta">西南证券 · 叶凡 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610201830718235_1.pdf" target="_blank" rel="noopener">2026年9月经济数据点评：总量企稳的读数，结构分化的底色<span class="pdf">PDF</span></a>
+      <p class="meta">西南证券 · 叶凡 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830718235" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845813859735/index.phtml" target="_blank" rel="noopener">2026年前三季度经济增长数据点评：增长动能回稳</a>
       <p class="meta">平安证券股份有限公司 · 钟正生/张璐/常艺馨 · 宏观 ｜ 10-20</p>
@@ -83,29 +93,29 @@
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845817284144/index.phtml" target="_blank" rel="noopener">9月经济数据点评：假期错位带来消费改善</a>
       <p class="meta">华创证券有限责任公司 · 张瑜/陆银波 · 宏观 ｜ 10-20</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830720939" target="_blank" rel="noopener">9月经济数据点评：生产偏强、需求渐进修复</a>
-      <p class="meta">联储证券 · 魏争,沈夏宜 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610201830720939_1.pdf" target="_blank" rel="noopener">9月经济数据点评：生产偏强、需求渐进修复<span class="pdf">PDF</span></a>
+      <p class="meta">联储证券 · 魏争,沈夏宜 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830720939" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830693173" target="_blank" rel="noopener">房地产行业2026年1-9月统计局数据点评：9月商品房销售与投资同比降幅扩大；前三季度商品房+二手房成交11.8亿平，同比下降2%</a>
-      <p class="meta">中银证券 · 夏亦丰,许佳璐 · 房地产开发 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610191830693173_1.pdf" target="_blank" rel="noopener">房地产行业2026年1-9月统计局数据点评：9月商品房销售与投资同比降幅扩大；前三季度商品房+二手房成交11.8亿平，同比下降2%<span class="pdf">PDF</span></a>
+      <p class="meta">中银证券 · 夏亦丰,许佳璐 · 房地产开发 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830693173" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830693165" target="_blank" rel="noopener">房地产行业2026年9月70个大中城市房价数据点评：70城新房房价环比跌幅收窄，二手房房价跌幅持平；一线城市二手房房价环比涨幅扩大</a>
-      <p class="meta">中银证券 · 夏亦丰,许佳璐 · 房地产开发 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610191830693165_1.pdf" target="_blank" rel="noopener">房地产行业2026年9月70个大中城市房价数据点评：70城新房房价环比跌幅收窄，二手房房价跌幅持平；一线城市二手房房价环比涨幅扩大<span class="pdf">PDF</span></a>
+      <p class="meta">中银证券 · 夏亦丰,许佳璐 · 房地产开发 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830693165" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830704522" target="_blank" rel="noopener">房地产行业点评报告：单月销售降幅扩大，待售三年以下面积同比下降</a>
-      <p class="meta">开源证券 · 齐东,胡耀文 · 房地产开发 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610201830704522_1.pdf" target="_blank" rel="noopener">房地产行业点评报告：单月销售降幅扩大，待售三年以下面积同比下降<span class="pdf">PDF</span></a>
+      <p class="meta">开源证券 · 齐东,胡耀文 · 房地产开发 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830704522" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830700358" target="_blank" rel="noopener">国内经济数据解读（2026年第三季度）：动能向新但结构问题突出</a>
-      <p class="meta">浙商期货 · 朱枭鹏 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610201830700358_1.pdf" target="_blank" rel="noopener">国内经济数据解读（2026年第三季度）：动能向新但结构问题突出<span class="pdf">PDF</span></a>
+      <p class="meta">浙商期货 · 朱枭鹏 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830700358" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830693364" target="_blank" rel="noopener">宏观点评：三重拐点的信号初现——三季度和9月经济数据点评</a>
-      <p class="meta">东吴证券 · 芦哲,占烁 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610191830693364_1.pdf" target="_blank" rel="noopener">宏观点评：三重拐点的信号初现——三季度和9月经济数据点评<span class="pdf">PDF</span></a>
+      <p class="meta">东吴证券 · 芦哲,占烁 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830693364" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845838832908/index.phtml" target="_blank" rel="noopener">宏观点评报告：金融街论坛年会的六大关注点</a>
       <p class="meta">华源证券股份有限公司 · 孙苏雨/冯逸华 · 宏观 ｜ 10-20</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830723080" target="_blank" rel="noopener">宏观经济深度研究：承压的韧性与加速的分化</a>
-      <p class="meta">工银国际证券 · 程实,周烨 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610201830723080_1.pdf" target="_blank" rel="noopener">宏观经济深度研究：承压的韧性与加速的分化<span class="pdf">PDF</span></a>
+      <p class="meta">工银国际证券 · 程实,周烨 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830723080" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845831297808/index.phtml" target="_blank" rel="noopener">宏观深度：全球K型分化的三大驱动：AI、利率与债务</a>
       <p class="meta">粤开证券股份有限公司 · 罗志恒/范城恺 · 宏观 ｜ 10-20</p>
@@ -119,8 +129,8 @@
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845808359502/index.phtml" target="_blank" rel="noopener">宏观专题报告：人民币的持续升值-历史与当下的外部时刻</a>
       <p class="meta">招商期货有限公司 · 赵嘉瑜 · 宏观 ｜ 10-20</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830722115" target="_blank" rel="noopener">金融街论坛年会开幕致辞点评：稳市机制系统成型，利率锚切换重塑定价框架</a>
-      <p class="meta">山西证券 · 赵晨希 ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610201830722115_1.pdf" target="_blank" rel="noopener">金融街论坛年会开幕致辞点评：稳市机制系统成型，利率锚切换重塑定价框架<span class="pdf">PDF</span></a>
+      <p class="meta">山西证券 · 赵晨希 ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830722115" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845829900428/index.phtml" target="_blank" rel="noopener">三季度及9月宏观数据点评：增长动能边际回升 政策效果初步显现</a>
       <p class="meta">银泰证券有限责任公司 · 陈建华 · 宏观 ｜ 10-20</p>
@@ -131,8 +141,8 @@
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845828078089/index.phtml" target="_blank" rel="noopener">深度*宏观*2026年金融街论坛学习体会：货币政策传导效率进一步提升</a>
       <p class="meta">中银国际证券股份有限公司 · 陈琦/朱启兵 · 宏观 ｜ 10-20</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830723984" target="_blank" rel="noopener">银行业简评：利率市场化更进一步</a>
-      <p class="meta">东海证券 · 王鸿行 · 银行Ⅱ ｜ 10-20</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610201830723984_1.pdf" target="_blank" rel="noopener">银行业简评：利率市场化更进一步<span class="pdf">PDF</span></a>
+      <p class="meta">东海证券 · 王鸿行 · 银行Ⅱ ｜ 10-20 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610201830723984" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845813580218/index.phtml" target="_blank" rel="noopener">政策半月观：四季度有5件大事</a>
       <p class="meta">国盛证券股份有限公司 · 熊园/薛舒宁 · 宏观 ｜ 10-20</p>
@@ -149,8 +159,8 @@
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845745816742/index.phtml" target="_blank" rel="noopener">2026年9月宏观数据解读：外需托底 内需承压：经济回暖背后的结构性温差</a>
       <p class="meta">浙商证券股份有限公司 · 李超/林成炜/费瑾/王瑞明/汤子玉 · 宏观 ｜ 10-19</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830674433" target="_blank" rel="noopener">2026年9月金融数据点评：社融新增超预期增长，政府债券发行提速</a>
-      <p class="meta">开源证券 · 陈曦,王帅中 ｜ 10-19</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610191830674433_1.pdf" target="_blank" rel="noopener">2026年9月金融数据点评：社融新增超预期增长，政府债券发行提速<span class="pdf">PDF</span></a>
+      <p class="meta">开源证券 · 陈曦,王帅中 ｜ 10-19 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830674433" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845755114618/index.phtml" target="_blank" rel="noopener">2026年9月经济数据点评：三季度经济企稳回升预计全年走势“前高中低后稳”</a>
       <p class="meta">德邦证券股份有限公司 · 程强/卢柯源/何明洋 · 宏观 ｜ 10-19</p>
@@ -158,8 +168,8 @@
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845746624376/index.phtml" target="_blank" rel="noopener">2026年前三季度与9月宏观经济数据</a>
       <p class="meta">冠通期货股份有限公司 · 王静 · 宏观 ｜ 10-19</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830687860" target="_blank" rel="noopener">9月和三季度经济数据点评：内需出现向好迹象</a>
-      <p class="meta">中银证券 · 张晓娇,朱启兵 ｜ 10-19</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610191830687860_1.pdf" target="_blank" rel="noopener">9月和三季度经济数据点评：内需出现向好迹象<span class="pdf">PDF</span></a>
+      <p class="meta">中银证券 · 张晓娇,朱启兵 ｜ 10-19 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830687860" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845750143771/index.phtml" target="_blank" rel="noopener">9月经济数据点评：动能边际改善 内需修复待加强</a>
       <p class="meta">中国国际金融股份有限公司 · 张文朗/黄文静/郑宇驰/邓巧锋/段玉柱/潘治东 · 宏观 ｜ 10-19</p>
@@ -167,17 +177,17 @@
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845739848698/index.phtml" target="_blank" rel="noopener">9月经济数据分析：消费随物价抬升小幅改善 投资需求依然疲弱 有待政策发力</a>
       <p class="meta">中国国际金融股份有限公司 · 范阳阳/耿安琪/薛丰昀/陈健恒 · 宏观 ｜ 10-19</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830690820" target="_blank" rel="noopener">9月经济数据跟踪：经济寻底接近尾声，政策托举四季度增速</a>
-      <p class="meta">万联证券 · 于天旭 ｜ 10-19</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610191830690820_1.pdf" target="_blank" rel="noopener">9月经济数据跟踪：经济寻底接近尾声，政策托举四季度增速<span class="pdf">PDF</span></a>
+      <p class="meta">万联证券 · 于天旭 ｜ 10-19 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830690820" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830687362" target="_blank" rel="noopener">策略跟踪报告：我国外贸延续高增长，PPI、CPI同比涨幅均扩大</a>
-      <p class="meta">万联证券 · 宫慧菁 ｜ 10-19</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610191830687362_1.pdf" target="_blank" rel="noopener">策略跟踪报告：我国外贸延续高增长，PPI、CPI同比涨幅均扩大<span class="pdf">PDF</span></a>
+      <p class="meta">万联证券 · 宫慧菁 ｜ 10-19 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830687362" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845714207912/index.phtml" target="_blank" rel="noopener">地产专题分析报告：成交热度仍高</a>
       <p class="meta">国金证券股份有限公司 · 宋雪涛/张馨月 · 宏观 ｜ 10-19</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830691349" target="_blank" rel="noopener">国内观察：2026年三季度GDP及9月经济数据-单月经济修复，全年目标无忧</a>
-      <p class="meta">东海证券 · 刘思佳,李嘉豪 ｜ 10-19</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610191830691349_1.pdf" target="_blank" rel="noopener">国内观察：2026年三季度GDP及9月经济数据-单月经济修复，全年目标无忧<span class="pdf">PDF</span></a>
+      <p class="meta">东海证券 · 刘思佳,李嘉豪 ｜ 10-19 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830691349" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845734084770/index.phtml" target="_blank" rel="noopener">宏观点评：前三季度经济形势快评</a>
       <p class="meta">粤开证券股份有限公司 · 罗志恒 · 宏观 ｜ 10-19</p>
@@ -206,8 +216,8 @@
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845755114497/index.phtml" target="_blank" rel="noopener">深度*宏观*9月和三季度经济数据点评：内需出现向好迹象</a>
       <p class="meta">中银国际证券股份有限公司 · 张晓娇/朱启兵 · 宏观 ｜ 10-19</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830675518" target="_blank" rel="noopener">银行行业深度报告：价值银行甄选宝典：RAROC五因子分析框架</a>
-      <p class="meta">开源证券 · 刘呈祥,朱晓云,张意宣 · 银行Ⅱ ｜ 10-19</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610191830675518_1.pdf" target="_blank" rel="noopener">银行行业深度报告：价值银行甄选宝典：RAROC五因子分析框架<span class="pdf">PDF</span></a>
+      <p class="meta">开源证券 · 刘呈祥,朱晓云,张意宣 · 银行Ⅱ ｜ 10-19 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830675518" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845762254324/index.phtml" target="_blank" rel="noopener">粤开宏观：回升中的分化：三季度经济回顾与四季度展望</a>
       <p class="meta">粤开证券股份有限公司 · 罗志恒/马家进 · 宏观 ｜ 10-19</p>
@@ -218,8 +228,8 @@
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845673861662/index.phtml" target="_blank" rel="noopener">9月通胀数据点评：上游价格延续强势 低位行业边际修复</a>
       <p class="meta">联储证券股份有限公司 · 魏争/沈夏宜 · 宏观 ｜ 10-18</p>
     </li><li class="item">
-      <a class="title" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610181830661076" target="_blank" rel="noopener">宏观经济点评：当美欧成为金融风险之源</a>
-      <p class="meta">国金证券 · 钟天,宋雪涛 ｜ 10-18</p>
+      <a class="title" href="https://pdf.dfcfw.com/pdf/H3_AP202610181830661076_1.pdf" target="_blank" rel="noopener">宏观经济点评：当美欧成为金融风险之源<span class="pdf">PDF</span></a>
+      <p class="meta">国金证券 · 钟天,宋雪涛 ｜ 10-18 <a class="alt" href="https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610181830661076" target="_blank" rel="noopener">原页面</a></p>
     </li><li class="item">
       <a class="title" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845673216659/index.phtml" target="_blank" rel="noopener">宏观深度报告：AI如何影响我国就业？与美国有何差异？</a>
       <p class="meta">东吴证券股份有限公司 · 芦哲/李昌萌 · 宏观 ｜ 10-18</p>
