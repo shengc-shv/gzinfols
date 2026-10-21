@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-21",
+  "updatedAt": "2026-10-22",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -10152,8 +10152,164 @@
     }
   },
   "today": {
-    "date": "2026-10-21",
-    "entries": []
+    "date": "2026-10-22",
+    "entries": [
+      {
+        "date": "2026-10-22",
+        "section": "must_read",
+        "title": "扩大内需实施方案在研",
+        "text": "扩大内需实施方案在研 发改委正研究制定扩大内需战略实施方案，消费与民生类信贷需求的政策支撑口径进一步明确，后续细则节奏是关键变量。",
+        "facts": [
+          "!实施",
+          "@发改委"
+        ],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://www.cnfin.com/hg-lb/detail/20261021/4484010_1.html",
+        "score": 87,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-22",
+        "section": "must_read",
+        "title": "寿险利差损风险被点名",
+        "text": "寿险利差损风险被点名 监管在长期低利率环境下直接警示寿险利差损，代销保险的期限与收益假设面临重估，银保货架结构随之调整。",
+        "facts": [],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://m.21jingji.com/article/20261021/herald/b6950c2fc13781de1b1c5b1a2a104777.html",
+        "score": 87,
+        "novelty": 0.33627450980392154,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-22",
+        "section": "must_read",
+        "title": "保险要精准对接薄弱环节",
+        "text": "保险要精准对接薄弱环节 监管要求保险业精准对接重点领域和薄弱环节，银保渠道产品结构可能调整，养老与普惠类产品供给方向被明确。",
+        "facts": [],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://www.stcn.com/article/detail/4229310.html",
+        "score": 84,
+        "novelty": 0.3142857142857143,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-22",
+        "section": "must_read",
+        "title": "北交所拟引入市值配售",
+        "text": "北交所拟引入市值配售 北交所拟引入新股发行市值配售并推进北证50ETF落地，打新与指数工具供给增加，客户产品配置需求结构随之变化。",
+        "facts": [
+          "@北交所",
+          "!落地"
+        ],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://www.stcn.com/article/detail/4232273.html",
+        "score": 69,
+        "novelty": 0.7278846153846155,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-22",
+        "section": "must_read",
+        "title": "隔夜逆回购首日800亿",
+        "text": "隔夜逆回购首日800亿 央行启动连续隔夜逆回购、首日投放800亿元，短端流动性调节方式生变，资金价格预期与存款定价窗口同步受影响。",
+        "facts": [
+          "#800亿元",
+          "@央行"
+        ],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261022/4484559_1.html",
+        "score": 56,
+        "novelty": 0.505,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-10-22",
+        "section": "insights",
+        "title": "主动ETF发行火速定档",
+        "text": "主动ETF发行火速定档 首批主动ETF发行档期落地，场内产品供给扩容，代销与托管条线的产品准入节奏和客户适配口径随之变化。",
+        "facts": [
+          "!落地"
+        ],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://www.stcn.com/article/detail/4229314.html",
+        "novelty": 0.2785714285714285,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-22",
+        "section": "insights",
+        "title": "信托货架期限定价变动",
+        "text": "信托货架期限定价变动 当日信托产品概览显示同类产品期限与定价出现变化，高净值客户资金在货架间的比价与留存随之波动。",
+        "facts": [],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://finance.sina.com.cn/trust/2026-10-21/doc-inivyxhf5443553.shtml",
+        "novelty": 0.24791666666666667,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-22",
+        "section": "insights",
+        "title": "高质量债券现历史性机会",
+        "text": "高质量债券现历史性机会 贝莱德固收CIO称高质量债券存在历史性机会，跨境配置客户的沟通素材增多，海外固收关注度上升。",
+        "facts": [],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://www.cnbc.com/2026/10/21/rick-rieder-investment-grade-bonds.html",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-22",
+        "section": "insights",
+        "title": "日元12月加息预期升温",
+        "text": "日元12月加息预期升温 路透调查显示日本央行预计12月加息至1.50%，日元汇率波动可能加大，有日元结算或配置需求的客户敞口随之变化。",
+        "facts": [
+          "#12月",
+          "!加息",
+          "#1.50%",
+          "@央行"
+        ],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://www.investing.com/news/economy-news/boj-to-raise-rates-to-150-in-december-sticking-to-quarterly-pace-reuters-poll-4961275",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-22",
+        "section": "insights",
+        "title": "低总价房源成交加速",
+        "text": "低总价房源成交加速 广深150万元以下房源成交加速，房贷贴息效果显现，刚需按揭需求前移，低总价段客户接单节奏发生变化。",
+        "facts": [
+          "#150万元"
+        ],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://www.stcn.com/article/detail/4232308.html",
+        "novelty": 0.266304347826087,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-22",
+        "section": "insights",
+        "title": "卖旧买新补贴再放567人",
+        "text": "卖旧买新补贴再放567人 广州商品房卖旧买新补贴第二批次公示567人，置换链条持续放量，置换客户的按揭与资金监管需求同步增加。",
+        "facts": [],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/21/139995_55015464.htm",
+        "novelty": 0.32857142857142857,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-22",
+        "section": "risk",
+        "title": "寿险利差损与适当性收紧",
+        "text": "寿险利差损与适当性收紧 金融监管总局丛林在昨日表态中明确要高度警惕长期低利率环境下寿险利差损风险。 财富与私行条线的保险代销面临产品期限与收益假设重估，适当性管理与双录环节的合规压力上升，风控需同步复核代销准入。",
+        "facts": [
+          "@金融监管总局"
+        ],
+        "broadcastAt": "2026-10-22T07:51:44+08:00",
+        "score": 87,
+        "novelty": 0.48369565217391297,
+        "angle": "政策变化"
+      }
+    ],
+    "runId": "39696003900"
   },
   "deliveries": [
     {

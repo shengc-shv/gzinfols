@@ -1,0 +1,878 @@
+{
+  "date": "2026-10-22",
+  "updatedAt": "2026-10-21T23:53:18.965Z",
+  "executive": {
+    "hero_line": "今天主要看3个方面：扩大内需，实施方案在研；寿险利差损，代销货架面临重估；隔夜逆回购，首日投放800亿。",
+    "spoken_hero": "今天主要看3个方面：扩大内需，实施方案在研；寿险利差损，代销货架面临重估；隔夜逆回购，首日投放800亿。",
+    "must_read": [
+      {
+        "title": "扩大内需实施方案在研",
+        "why": "发改委正研究制定扩大内需战略实施方案，消费与民生类信贷需求的政策支撑口径进一步明确，后续细则节奏是关键变量。",
+        "url": "https://www.cnfin.com/hg-lb/detail/20261021/4484010_1.html"
+      },
+      {
+        "title": "寿险利差损风险被点名",
+        "why": "监管在长期低利率环境下直接警示寿险利差损，代销保险的期限与收益假设面临重估，银保货架结构随之调整。",
+        "url": "https://m.21jingji.com/article/20261021/herald/b6950c2fc13781de1b1c5b1a2a104777.html"
+      },
+      {
+        "title": "保险要精准对接薄弱环节",
+        "why": "监管要求保险业精准对接重点领域和薄弱环节，银保渠道产品结构可能调整，养老与普惠类产品供给方向被明确。",
+        "url": "https://www.stcn.com/article/detail/4229310.html"
+      },
+      {
+        "title": "北交所拟引入市值配售",
+        "why": "北交所拟引入新股发行市值配售并推进北证50ETF落地，打新与指数工具供给增加，客户产品配置需求结构随之变化。",
+        "url": "https://www.stcn.com/article/detail/4232273.html"
+      },
+      {
+        "title": "隔夜逆回购首日800亿",
+        "why": "央行启动连续隔夜逆回购、首日投放800亿元，短端流动性调节方式生变，资金价格预期与存款定价窗口同步受影响。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261022/4484559_1.html"
+      }
+    ],
+    "spoken_must_read": "扩大内需实施方案在研。发改委正研究制定扩大内需战略实施方案，消费与民生类信贷需求的政策支撑口径进一步明确，后续细则节奏是关键变量。其次，寿险利差损风险被点名。监管在长期低利率环境下直接警示寿险利差损，代销保险的期限与收益假设面临重估，银保货架结构随之调整。此外，保险要精准对接薄弱环节。监管要求保险业精准对接重点领域和薄弱环节，银保渠道产品结构可能调整，养老与普惠类产品供给方向被明确。还有，北交所拟引入市值配售。北交所拟引入新股发行市值配售并推进北证50ETF落地，打新与指数工具供给增加，客户产品配置需求结构随之变化。另外，隔夜逆回购首日800亿。央行启动连续隔夜逆回购、首日投放800亿元，短端流动性调节方式生变，资金价格预期与存款定价窗口同步受影响。",
+    "insights": [
+      {
+        "topic": "主动ETF发行火速定档",
+        "impact": "首批主动ETF发行档期落地，场内产品供给扩容，代销与托管条线的产品准入节奏和客户适配口径随之变化。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "主动ETF发行火速定档 场内投资生态迎来革新",
+            "url": "https://www.stcn.com/article/detail/4229314.html"
+          }
+        ]
+      },
+      {
+        "topic": "信托货架期限定价变动",
+        "impact": "当日信托产品概览显示同类产品期限与定价出现变化，高净值客户资金在货架间的比价与留存随之波动。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "信托产品概览（2026年10月21日）",
+            "url": "https://finance.sina.com.cn/trust/2026-10-21/doc-inivyxhf5443553.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "高质量债券现历史性机会",
+        "impact": "贝莱德固收CIO称高质量债券存在历史性机会，跨境配置客户的沟通素材增多，海外固收关注度上升。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "贝莱德固收CIO Rieder：高质量债券现“历史性”机会",
+            "url": "https://www.cnbc.com/2026/10/21/rick-rieder-investment-grade-bonds.html"
+          }
+        ]
+      },
+      {
+        "topic": "日元12月加息预期升温",
+        "impact": "路透调查显示日本央行预计12月加息至1.50%，日元汇率波动可能加大，有日元结算或配置需求的客户敞口随之变化。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "BOJ to raise rates to 1.50% in December, sticking to quarterly pace: Reuters poll",
+            "url": "https://www.investing.com/news/economy-news/boj-to-raise-rates-to-150-in-december-sticking-to-quarterly-pace-reuters-poll-4961275"
+          }
+        ]
+      },
+      {
+        "topic": "低总价房源成交加速",
+        "impact": "广深150万元以下房源成交加速，房贷贴息效果显现，刚需按揭需求前移，低总价段客户接单节奏发生变化。",
+        "tag": [
+          "住房金融"
+        ],
+        "group": "住房金融",
+        "sources": [
+          {
+            "title": "广州、深圳150万元以下房源成交加速 房贷贴息效果显现",
+            "url": "https://www.stcn.com/article/detail/4232308.html"
+          }
+        ]
+      },
+      {
+        "topic": "卖旧买新补贴再放567人",
+        "impact": "广州商品房卖旧买新补贴第二批次公示567人，置换链条持续放量，置换客户的按揭与资金监管需求同步增加。",
+        "tag": [
+          "住房金融"
+        ],
+        "group": "住房金融",
+        "sources": [
+          {
+            "title": "567人！广州商品房“卖旧买新”补贴第二批次发放名单公示",
+            "url": "https://news.dayoo.com/guangzhou/202610/21/139995_55015464.htm"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，主动ETF发行定档、信托货架比价变化，客户场内配置和资金留存都在动。高端客户方面，高质量债券被海外机构称为历史性机会，日元十二月加息预期升温，跨境配置沟通素材变多。普惠小微方面，扩大内需方案在研究、科创融合意见落地，小微和科创客群的融资需求口径在变。本地消费场景方面，公积金可提装修、从化民生梯有国补，家装分期和社区场景在扩。",
+    "risk": {
+      "topic": "寿险利差损与适当性收紧",
+      "evidence": "金融监管总局丛林在昨日表态中明确要高度警惕长期低利率环境下寿险利差损风险。",
+      "impact": "财富与私行条线的保险代销面临产品期限与收益假设重估，适当性管理与双录环节的合规压力上升，风控需同步复核代销准入。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "金融监管总局丛林：要高度警惕长期低利率环境下寿险利差损风险",
+          "url": "https://m.21jingji.com/article/20261021/herald/b6950c2fc13781de1b1c5b1a2a104777.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：寿险利差损与适当性收紧，财富与私行条线的保险代销面临产品期限与收益假设重估，适当性管理与双录环节的合规压力上升，风控需同步复核代销准入。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨1.05%领涨三大指数，SpaceX与超微提振AI情绪。",
+      "sectors": [
+        "纳指领涨，SpaceX、超微带动AI板块情绪回暖。",
+        "康卡斯特据报计划大幅裁员，媒体股承压。",
+        "阿斯利康罕见肾病药物获FDA批准，医药股获提振。",
+        "金德摩根拟投47亿美元建两条天然气管道，需求旺盛。"
+      ],
+      "spoken": "美股收涨，纳指涨1.05%领涨，道指涨0.69%，标普涨0.58%。SpaceX和超微提振AI情绪，科技股走强。个股方面，康卡斯特计划大幅裁员，阿斯利康肾病新药获FDA批准，金德摩根加码天然气管道投资。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-22"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52856.09",
+          "changePct": "+0.69%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26702.86",
+          "changePct": "+1.05%"
+        },
+        {
+          "name": "标普500",
+          "value": "7757.17",
+          "changePct": "+0.58%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "三大指数集体收跌，创业板指跌1.62%，成交额不足1.5万亿。",
+      "sectors": [
+        "尾盘多只宽基ETF放量拉升，近2000亿元资金入市。",
+        "宁德时代A+H双双重挫，回应称2027年行业需求依旧可期。",
+        "IT服务板块逆市走强，数据国家队等细分领域受关注。",
+        "中国国新三季度500亿增持投向揭晓，新进多只个股。"
+      ],
+      "spoken": "A股三大指数集体收跌，上证跌0.60%，深成指跌0.82%，创业板指跌1.62%，成交额不足1.5万亿。尾盘多只宽基ETF放量拉升，近2000亿元资金入市。板块上，IT服务逆市走强，宁德时代A+H双双重挫拖累新能源。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-22"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3713.03",
+          "changePct": "-0.60%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11704.35",
+          "changePct": "-0.82%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2694.71",
+          "changePct": "-1.62%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒指收报23651.87点跌0.90%，恒生科技跌1.26%。",
+      "sectors": [
+        "恒生科技跌1.26%，科技股整体走弱拖累大盘。",
+        "瑞银下调宁德时代目标价至730港元，锂电股承压。",
+        "花旗降联想集团目标价两成至40港元，维持买入。",
+        "大摩维持中国铁塔增持评级，目标价11.5港元。"
+      ],
+      "spoken": "港股收跌，恒指跌0.90%，恒生科技跌1.26%。科技股整体走弱拖累大盘。个股方面，瑞银下调宁德时代目标价，锂电股承压；花旗下调联想目标价两成；大摩维持中国铁塔增持评级。",
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-22"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23651.87",
+          "changePct": "-0.90%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3994.77",
+          "changePct": "-1.26%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-21",
+    "marketStatus": {
+      "reportDate": "2026-10-22",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-10-21"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-21"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-21"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 10月21日 周三 收盘；港股为 10月21日 周三 收盘；美股为 10月21日 周三 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610213902475873.html",
+      "title_cn": "发生了什么？宁王“A+H”双双重挫最新回应来了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "宁德时代A股与H股同步大幅下挫，公司就股价异动作出最新回应。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "新能源",
+        "锂电池",
+        "A股",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610213902629343.html",
+      "title_cn": "最后10分钟进场！多只宽基ETF放量拉升近2000亿元入市",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "多只宽基ETF在尾盘最后10分钟放量拉升，报道称近2000亿元资金入市。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "ETF",
+        "资金面",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610213902586860.html",
+      "title_cn": "A股三大指数收跌成交额不足1.5万亿IT服务板块逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "A股三大指数收跌，全市场成交额不足1.5万亿元，IT服务板块逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "IT服务"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610213902819633.html",
+      "title_cn": "泽连斯基：愿在保留75%领土控制权的基础上达成和平协议",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "泽连斯基表示愿在保留75%领土控制权的基础上达成和平协议。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "俄乌"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610213902588767.html",
+      "title_cn": "500亿增持投向来了！中国国新三季度增持、新进个股揭晓",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "中国国新披露三季度增持及新进个股情况，涉及500亿元增持投向。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "国资",
+        "增持",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610213902550321.html",
+      "title_cn": "利空暴击！突然狂跌44%澳洲AI“风向标”闪崩",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "澳洲AI“风向标”公司股价突然闪崩，单日暴跌44%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "海外市场",
+        "个股异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610213902807821.html",
+      "title_cn": "10月21日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "汇总10月21日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "公告",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610213902237682.html",
+      "title_cn": "最新！美伊谈判传来大消息！美股、日股、韩股全线大涨",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "美伊谈判传出重大消息，美股、日股、韩股全线大涨。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "全球股市"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610213902416869.html",
+      "title_cn": "宁德时代回应“投资者对明年行业需求担忧”：2027年行业需求依旧可期",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "宁德时代回应投资者对明年行业需求的担忧，称2027年行业需求依旧可期。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "新能源",
+        "锂电池",
+        "公司回应"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610213902755243.html",
+      "title_cn": "数据“国家队”登场！九大细分领域梳理",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "报道梳理数据领域“国家队”登场情况，并归纳九大细分领域。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "数据要素",
+        "政策",
+        "产业"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223903103737.html",
+      "title_cn": "美国铜关税政策悬而未决沪铜如何走？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "美国铜关税政策尚未落地，市场关注沪铜后续走势。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "大宗商品",
+        "铜",
+        "关税"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223903081123.html",
+      "title_cn": "新兴领域良性循环加快形成",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "报道称新兴领域良性循环正加快形成。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "产业",
+        "宏观经济"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-22/doc-inivzqcx5305294.shtml",
+      "title_cn": "开渠引水 港股IPO市场火热",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "港股IPO市场表现火热，呈现开渠引水态势。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-22/doc-inivzytt5179202.shtml",
+      "title_cn": "恒指牛熊街货比(48:52)︱10月22日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "10月22日恒指牛熊街货比为48:52。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-21/doc-inivwyrc5697501.shtml",
+      "title_cn": "港交所主席唐家成：亚洲将继续成为全球资本配置目的地",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "港交所主席唐家成表示，亚洲将继续成为全球资本配置目的地。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "港交所",
+        "资本市场"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-21/doc-inivwyqy0949813.shtml",
+      "title_cn": "东山精密、微亿智造启动招股，多家硬科技企业推进港股上市",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "东山精密、微亿智造启动招股，多家硬科技企业推进港股上市。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "硬科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/wm/2026-10-21/doc-inivxrpa4763442.shtml",
+      "title_cn": "传香港金管调整副总裁职能分工，涉四万亿外汇基金管理层",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "传香港金管局调整副总裁职能分工，涉及四万亿外汇基金管理层。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "香港金管局",
+        "外汇基金",
+        "人事"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-21/doc-inivysyi5385348.shtml",
+      "title_cn": "中金：下调中国铁塔(00788)2026/27年净利润预测 维持“跑赢行业”评级及11港元目标价",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "中金下调中国铁塔2026/27年净利润预测，维持“跑赢行业”评级及11港元目标价。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "中国铁塔"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-21/doc-inivynsm5480470.shtml",
+      "title_cn": "大摩：维持中国移动(00941)“大市同步”评级 目标价80港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "大摩维持中国移动“大市同步”评级，目标价80港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "中国移动"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-21/doc-inivynsp6206650.shtml",
+      "title_cn": "花旗：降联想集团(00992)目标价两成至40港元 维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "花旗将联想集团目标价下调两成至40港元，维持“买入”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "联想集团"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-21/doc-inivynsm5469536.shtml",
+      "title_cn": "花旗：中国移动(00941)第三季度业绩略逊预期 维持“买入”评级 H股目标价97港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "花旗称中国移动第三季度业绩略逊预期，维持“买入”评级，H股目标价97港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "中国移动",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-21/doc-inivynsp6200950.shtml",
+      "title_cn": "大摩：维持中国铁塔(00788)“增持”评级 目标价11.5港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "大摩维持中国铁塔“增持”评级，目标价11.5港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "中国铁塔"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-21/doc-inivynsp6183576.shtml",
+      "title_cn": "大摩：维持MiniMax-W(00100)“增持”评级 目标价900港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "大摩维持MiniMax-W“增持”评级，目标价900港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-21/doc-inivynss4843657.shtml",
+      "title_cn": "瑞银：下调宁德时代(03750)目标价至730港元 下调2026至2028年净利润预测11%至14%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "瑞银将宁德时代H股目标价下调至730港元，并下调2026至2028年净利润预测11%至14%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "宁德时代",
+        "新能源"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/21/rick-rieder-investment-grade-bonds.html",
+      "title_cn": "BlackRock's Rick Rieder sees 'historic' opportunity in high-quality bonds",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "贝莱德Rick Rieder认为高质量债券存在“历史性”机会。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "机构观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/20/coreweave-debt-janus-henderson-lloyd.html",
+      "title_cn": "This Janus Henderson fund manager owns CoreWeave debt — here's why he's sticking with it",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "Janus Henderson一位基金经理持有CoreWeave债务，并解释继续持有的原因。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "债券",
+        "机构观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/norfolk-southern-declares-135-quarterly-dividend-93CH-4964420",
+      "title_cn": "Norfolk Southern declares $1.35 quarterly dividend",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "Norfolk Southern宣布每股1.35美元的季度股息。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "股息",
+        "铁路"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/comcast-planning-significant-jobs-cuts-bloomberg-news-reports-4964417",
+      "title_cn": "Comcast planning significant jobs cuts, Bloomberg News reports",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "据彭博报道，康卡斯特计划进行大规模裁员。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "裁员",
+        "传媒"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/cognizant-to-acquire-sap-partner-dyflex-solutions-93CH-4964407",
+      "title_cn": "Cognizant to acquire SAP partner DyFlex Solutions",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "Cognizant宣布收购SAP合作伙伴DyFlex Solutions。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "并购",
+        "IT服务"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/from-groceries-to-home-loans-high-oil-prices-permeate-daily-life-4964403",
+      "title_cn": "From groceries to home loans, high oil prices permeate daily life ",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "报道称高油价从日常食品杂货到住房贷款全面渗透日常生活。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "能源",
+        "通胀"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/astrazeneca-says-us-fda-approves-rare-kidney-disease-drug-93CH-4964404",
+      "title_cn": "AstraZeneca says U.S. FDA approves rare kidney disease drug",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "阿斯利康称美国FDA批准其一款罕见肾病药物。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "医药",
+        "FDA"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/exclusiveus-preparing-to-issue-ordered-departure-of-some-personnel-from-gulf-embassies--us-officials-4963834",
+      "title_cn": "US orders diplomats to depart Saudi Arabia amid Houthi strikes",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "在胡塞武装袭击背景下，美国下令驻沙特阿拉伯外交人员撤离。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "中东"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/nasdaq-futures-lead-gains-as-spacex-super-micro-results-lift-ai-trade-4962357",
+      "title_cn": "Nasdaq leads Wall Street gains as SpaceX, Super Micro boost AI sentiment",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "纳指领涨华尔街，SpaceX与Super Micro提振AI市场情绪。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "纳指"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/adaptive-biotechnologies-president-and-coo-julie-rubinstein-sells-879088-in-shares-93CH-4964395",
+      "title_cn": "Adaptive Biotechnologies president and coo Julie Rubinstein sells $879,088 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "Adaptive Biotechnologies总裁兼COO Julie Rubinstein出售价值879,088美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "生物科技",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/kinder-morgan-to-invest-47-billion-in-two-gas-pipeline-projects-as-demand-surges-4964384",
+      "title_cn": "Kinder Morgan to invest $4.7 billion in two gas pipeline projects as demand surges",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "Kinder Morgan计划在两个天然气管道项目上投资47亿美元，以应对需求激增。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "能源",
+        "天然气",
+        "资本开支"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/australias-fortescue-posts-6-fall-in-quarterly-iron-ore-shipments-4964323",
+      "title_cn": "Australia’s Fortescue warns of operations hit as China state buyer talks rumble on",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "澳大利亚Fortescue警告运营可能受影响，其与中国国有买家的谈判仍在持续。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "海外市场",
+        "铁矿石",
+        "中澳贸易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
