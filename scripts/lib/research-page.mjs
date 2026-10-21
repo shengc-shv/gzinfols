@@ -110,6 +110,9 @@ const DETAIL_CSS = `
   .note { padding:14px 16px; background:var(--card); border:1px dashed var(--line); border-radius:12px;
           font-size:13px; color:var(--muted); line-height:1.8; }
   footer { margin-top:20px; font-size:12px; color:#9a9aa2; line-height:1.8; }
+  /* 手机端专属提示（JS 解除 hidden）：东财源页在手机浏览器必然被改写，提前说明 */
+  .m-note { margin:0 0 14px; padding:12px 14px; background:#fff8e6; border:1px solid #f0e0b0;
+            border-radius:12px; font-size:13px; color:#7a5b12; line-height:1.75; }
 `;
 
 export function renderResearchDetailPage(it, { latest } = {}) {
@@ -128,8 +131,13 @@ export function renderResearchDetailPage(it, { latest } = {}) {
   const pdfBtn = it.pdfUrl
     ? `<a class="act act--pdf" href="${esc(it.pdfUrl)}" target="_blank" rel="noopener">📄 打开 PDF 文件</a>`
     : "";
+  // 🔴 2026-10-21 sc：东财的 PC 详情页在手机浏览器下会被前端改写到「研报中心」列表
+  //（实测跳 emdata.eastmoney.com/ybzx/index.html，infocode 丢失）→ 手机端点这个按钮
+  // 必然跳错地方。故：**只有东财条目**（有 pdfUrl）的源站按钮带 data-mobile-hide，
+  // 由页内 JS 在手机 UA 下隐藏；PC 端仍保留（PC 上该地址是好的）。
+  // 新浪源在手机端可达（改写为 paper.php?reportid=...），不隐藏。
   const srcBtn = it.url
-    ? `<a class="act act--src" href="${esc(it.url)}" target="_blank" rel="noopener">🔗 查看源站页面</a>`
+    ? `<a class="act act--src" href="${esc(it.url)}" target="_blank" rel="noopener"${it.pdfUrl ? ' data-mobile-hide="1"' : ""}>🔗 查看源站页面</a>`
     : "";
   const acts = pdfBtn || srcBtn ? pdfBtn + srcBtn : '<p class="note">本篇研报暂无可用链接。</p>';
 
@@ -146,10 +154,20 @@ export function renderResearchDetailPage(it, { latest } = {}) {
   <a class="back" href="${backHref}" onclick="if(document.referrer&&document.referrer.indexOf(location.host)>=0){history.back();return false;}">← 返回</a>
   <h1>${esc(it.title)}</h1>
   <p class="meta">${meta}</p>
+  <p class="m-note" hidden>手机浏览器打开东财源页会被重定向到它的研报中心，故已隐藏该入口；请直接点上方 PDF，或改用电脑查看源页。</p>
   <div class="acts">${acts}</div>
   <div class="note">本页仅作索引。研报内容请点上方按钮前往源站查看；<br>若按钮打开异常（安全验证/需登录），请稍后重试或改用电脑访问。</div>
   <footer>研报标题与机构信息来自公开研报索引；本页不构成投资建议。</footer>
 </div>
+<script>
+(function(){
+  if (!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) return;
+  var hid = document.querySelectorAll('[data-mobile-hide]');
+  for (var i = 0; i < hid.length; i++) hid[i].hidden = true;
+  var note = document.querySelector('.m-note');
+  if (note) note.hidden = false;
+})();
+</script>
 </body>
 </html>`;
 }
