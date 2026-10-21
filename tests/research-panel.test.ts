@@ -8,7 +8,6 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { buildResearchPanel, RESEARCH_PANEL_MAX } from "../lib/pipeline/side-outputs/side-research";
 import type { ResearchPanelItem } from "../lib/contracts/research";
-import { eastmoneyPdfUrlOf } from "../lib/adapters/crawlers/sources/eastmoney-research";
 import { researchItemId, researchKeyOf } from "../lib/services/research/item-id";
 
 const NOW = new Date("2026-10-19T07:00:00+08:00");
@@ -51,24 +50,6 @@ test("空输入产出空面板（渲染层据此整块不渲染）", () => {
   assert.equal(panel.items.length, 0);
   assert.equal(panel.windowDays, 3);
   assert.equal(panel.capturedAt, NOW.toISOString());
-});
-
-test("eastmoneyPdfUrlOf：东财 infoCode → PDF 文件直链；非东财/异常形态返回空", () => {
-  const url = "https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830674433";
-  assert.equal(
-    eastmoneyPdfUrlOf(url),
-    "https://pdf.dfcfw.com/pdf/H3_AP202610191830674433_1.pdf",
-    "东财 PDF 规则 = H3_<infoCode>_1.pdf",
-  );
-  // 新浪正文页没有 PDF → 空（渲染层据此回退 url，不硬造）
-  assert.equal(
-    eastmoneyPdfUrlOf("https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845745816742/index.phtml"),
-    "",
-  );
-  // 形态不对（过短/纯数字）→ 不猜
-  assert.equal(eastmoneyPdfUrlOf("https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP1"), "");
-  assert.equal(eastmoneyPdfUrlOf("https://data.eastmoney.com/report/zw_industry.jshtml"), "");
-  assert.equal(eastmoneyPdfUrlOf(""), "");
 });
 
 test("researchItemId：源站主键派生，跨构建稳定且唯一", () => {

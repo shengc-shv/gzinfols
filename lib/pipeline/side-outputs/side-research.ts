@@ -18,7 +18,6 @@
 import type { DailyReport } from "../../contracts/report";
 import type { PipelineContext } from "../../contracts/pipeline";
 import type { ResearchPanel, ResearchPanelItem } from "../../contracts/research";
-import { EastMoneyResearchCrawler, eastmoneyPdfUrlOf } from "../../adapters/crawlers/sources/eastmoney-research";
 import { SinaResearchCrawler } from "../../adapters/crawlers/sources/sina-research";
 import { readResearchLedger, writeResearchLedger } from "../../adapters/research/ledger-store";
 import { mergeResearchLedger } from "../../services/research/ledger";
@@ -93,7 +92,12 @@ async function collectAndMerge(
   ctx: PipelineContext,
   now: Date,
 ): Promise<DailyReport> {
-  const sources = [new EastMoneyResearchCrawler(), new SinaResearchCrawler()];
+  // 🔴 2026-10-21 sc：**东财源已停用，只留新浪**。
+  // 原因（实测）：① 手机浏览器打开东财 PC 详情页会被前端改写到研报中心（infocode 丢失）；
+  // ② PDF 直链 pdf.dfcfw.com 在部分网络下被 EdgeOne 安全策略拦截（sc 实测截图）。
+  // 新浪源在手机端可达（改写为 paper.php?reportid=...），故保留。
+  // `eastmoney-research.ts` 已删除；如需恢复，从 git 历史取回并加回本数组。
+  const sources = [new SinaResearchCrawler()];
   const items: ResearchPanelItem[] = [];
   let scanned = 0;
   let okSources = 0;
@@ -111,10 +115,6 @@ async function collectAndMerge(
           publishedAt: r.publishedAt ?? "",
           ...splitExcerpt(r.excerpt ?? ""),
         };
-        // PDF 文件直链（2026-10-21 sc）：东财条目按 infoCode 派生；新浪正文页无 PDF → ""
-        // 规则定义在东财源文件里（与源强绑定，换源格式只改一处），这里只做装配。
-        const pdf = eastmoneyPdfUrlOf(it.url);
-        if (pdf) it.pdfUrl = pdf;
         if (it.title && it.url && it.publishedAt) items.push(it);
       }
     } catch (e) {

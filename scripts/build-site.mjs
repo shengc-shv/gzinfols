@@ -446,8 +446,13 @@ try {
   if (fs.existsSync(ledgerPath)) {
     // 固定台账（独立 + 全量，不随 history/ 7 天保留期裁剪）——2026-10-19 sc 口径
     const ledger = JSON.parse(fs.readFileSync(ledgerPath, "utf8"));
+    // 🔴 2026-10-21 sc：**东财源已停用，只留新浪**（东财 PC 页在手机被前端改写成研报中心、
+    // PDF 直链被 EdgeOne 拦）。台账历史条目**不删**（保留可恢复性），只在读取处过滤。
+    const kept = (ledger.items || []).filter((it) => !/data\.eastmoney\.com/.test(it.url || ""));
+    const dropped = (ledger.items || []).length - kept.length;
+    if (dropped > 0) console.log(`[build-site] 已过滤东财历史条目 ${dropped} 条（源停用，仅不入页面）`);
     const groups = new Map();
-    for (const it of ledger.items || []) {
+    for (const it of kept) {
       const d = it && it.publishedAt;
       if (!d) continue;
       const arr = groups.get(d) || [];
@@ -460,7 +465,7 @@ try {
       .map(([date, items]) => ({ date, items }));
     const shown = reports.reduce((n, r) => n + r.items.length, 0);
     console.log(
-      `[build-site] 研报台账 = data/research-ledger.json（累计 ${(ledger.items || []).length} 篇 · 页面展示 ${shown} 篇 / ${reports.length} 个发布日）`,
+      `[build-site] 研报台账 = data/research-ledger.json（累计 ${kept.length} 篇 · 页面展示 ${shown} 篇 / ${reports.length} 个发布日）`,
     );
   } else {
     // 兜底老路径：各期 report JSON 的 researchPanel（台账尚未生成的首跑场景）
