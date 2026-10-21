@@ -27,6 +27,9 @@
   .note { padding:14px 16px; background:var(--card); border:1px dashed var(--line); border-radius:12px;
           font-size:13px; color:var(--muted); line-height:1.8; }
   footer { margin-top:20px; font-size:12px; color:#9a9aa2; line-height:1.8; }
+  /* 手机端专属提示（JS 解除 hidden）：东财源页在手机浏览器必然被改写，提前说明 */
+  .m-note { margin:0 0 14px; padding:12px 14px; background:#fff8e6; border:1px solid #f0e0b0;
+            border-radius:12px; font-size:13px; color:#7a5b12; line-height:1.75; }
 </style>
 </head>
 <body>
@@ -34,9 +37,19 @@
   <a class="back" href="../research.html" onclick="if(document.referrer&&document.referrer.indexOf(location.host)>=0){history.back();return false;}">← 返回</a>
   <h1>政策简评：我国前三季度外贸数据公布 全球科技股普遍调整 国常会深化“人工智能+”并推进低价无序竞争治理</h1>
   <p class="meta">发布机构 <b>中信建投证券股份有限公司</b>　·　研究员 <b>胡玉玮/杨旭泽</b>　·　行业 <b>宏观</b>　·　发布日期 <b>2026-10-17</b></p>
+  <p class="m-note" hidden>手机浏览器打开东财源页会被重定向到它的研报中心，故已隐藏该入口；请直接点上方 PDF，或改用电脑查看源页。</p>
   <div class="acts"><a class="act act--src" href="https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845587860103/index.phtml" target="_blank" rel="noopener">🔗 查看源站页面</a></div>
   <div class="note">本页仅作索引。研报内容请点上方按钮前往源站查看；<br>若按钮打开异常（安全验证/需登录），请稍后重试或改用电脑访问。</div>
   <footer>研报标题与机构信息来自公开研报索引；本页不构成投资建议。</footer>
 </div>
+<script>
+(function(){
+  if (!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)) return;
+  var hid = document.querySelectorAll('[data-mobile-hide]');
+  for (var i = 0; i < hid.length; i++) hid[i].hidden = true;
+  var note = document.querySelector('.m-note');
+  if (note) note.hidden = false;
+})();
+</script>
 </body>
 </html>
