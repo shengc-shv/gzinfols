@@ -158,3 +158,19 @@ test("老条目补缺失 pdfUrl（2026-10-21：确定性派生值，不覆盖已
   assert.equal(again.items[0].pdfUrl, pdf, "缺失字段应被补上");
   assert.equal(again.items[0].firstSeen, "2026-10-19", "补字段不得改动首见日");
 });
+
+test("老条目补 id 与 pdfUrl（2026-10-21：确定性派生值，幂等）", () => {
+  const url = "https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830674433";
+  const existing = mergeResearchLedger(emptyResearchLedger(), [it("银行深度A", "2026-10-19", url)], {
+    today: "2026-10-19",
+  });
+  assert.equal(existing.items[0].id, "rs-AP202610191830674433", "新条目入库即带 id");
+
+  // 老条目（无 id/pdfUrl）再合并一次 → 两项都补上，且不重复入库
+  const again = mergeResearchLedger(existing, [it("银行深度A", "2026-10-19", url)], {
+    today: "2026-10-20",
+  });
+  assert.equal(again.items.length, 1);
+  assert.equal(again.items[0].id, "rs-AP202610191830674433");
+  assert.equal(again.items[0].firstSeen, "2026-10-19", "补字段不得改动首见日");
+});

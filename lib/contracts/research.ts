@@ -58,6 +58,16 @@ export interface ResearchPanel {
 export interface ResearchLedgerItem extends ResearchPanelItem {
   /** 首次入库日（抓取日 YYYY-MM-DD，不是发布日期） */
   firstSeen: string;
+  /**
+   * 站内详情页 id（2026-10-21 sc：研报要有站内详情页）。
+   *
+   * 🔴 为什么必须自建详情页：手机浏览器打开东财 PC 详情页会被前端改写到「研报中心」
+   * （infocode 丢失，实测 `emdata.eastmoney.com/ybzx/index.html`），PDF 直链在部分
+   * 网络下被 EdgeOne 安全策略拦截（sc 实测截图）。→ 主链改为站内 `r/<id>.html`，
+   * 源站地址降为详情页里的出口，手机端才稳定可用。
+   * 由 `researchItemId(url)` 确定性派生；老数据缺省时由调用方补。
+   */
+  id?: string;
 }
 
 /** 研报台账（`data/research-ledger.json`）——固定路径、全量累积、并集合并。 */

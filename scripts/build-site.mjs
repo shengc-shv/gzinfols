@@ -30,7 +30,7 @@ import { renderRedchipPage } from "./lib/redchip-page.mjs";
 import { renderRedchipReport } from "./lib/redchip-report.mjs";
 import { renderSearchPage } from "./lib/search-page.mjs";
 import { renderTopicsPage } from "./lib/topics-page.mjs";
-import { renderResearchPage } from "./lib/research-page.mjs";
+import { renderResearchPage, renderResearchDetailPage } from "./lib/research-page.mjs";
 
 /** 汇集来源（按优先级：前一个命中即不再看后面的）。 */
 const SRC_DIRS = ["daily_reports", "history"];
@@ -489,8 +489,26 @@ try {
     renderResearchPage({ reports, generatedAt: todayInReportTz(), latest }),
     "utf8",
   );
+  // 2026-10-21 sc：研报站内详情页 r/<id>.html —— 源站在手机端都不可靠
+  //（东财 PC 页被前端改写成研报中心、PDF 被 EdgeOne 拦），列表页改为链到站内详情页。
+  // 幂等：同一 id 每次重建覆盖写，不留孤儿文件由「先清目录再写」保证。
+  const rDir = path.join(OUT, "r");
+  fs.rmSync(rDir, { recursive: true, force: true });
+  fs.mkdirSync(rDir, { recursive: true });
+  let detailCount = 0;
+  for (const r of reports) {
+    for (const it of r.items || []) {
+      if (!it.id) continue;
+      fs.writeFileSync(
+        path.join(rDir, `${it.id}.html`),
+        renderResearchDetailPage(it, { latest }),
+        "utf8",
+      );
+      detailCount++;
+    }
+  }
   console.log(
-    `[build-site] research.html（${reports.length} 期 / ${reports.reduce((n, r) => n + r.items.length, 0)} 篇研报）`,
+    `[build-site] research.html（${reports.length} 期 / ${reports.reduce((n, r) => n + r.items.length, 0)} 篇研报 · 站内详情页 ${detailCount} 个）`,
   );
 } catch (e) {
   // 渲染失败也要写页面：日报页的「📐 研报解读」入口是渲染期无条件输出的，

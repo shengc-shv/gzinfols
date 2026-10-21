@@ -15,6 +15,7 @@
  *  - **保留首见版本的元数据**（机构/研究员可能被源修正，但标题口径以首见为准，避免同文两版并存）。
  */
 import type { ResearchLedger, ResearchLedgerItem, ResearchPanelItem } from "../../contracts/research";
+import { researchItemId } from "./item-id";
 
 /** 台账保留天数（按 publishedAt 滚动）。 */
 export const RESEARCH_LEDGER_DAYS = 90;
@@ -64,13 +65,17 @@ export function mergeResearchLedger(
       //    正确口径：拿本次抓取日 opts.today 与已有首见日比较，只有补跑更早批次才前移。
       const prev = byKey.get(hit) as ResearchLedgerItem;
       const seen = prev.firstSeen || opts.today;
-      if (opts.today < seen) byKey.set(hit, { ...prev, firstSeen: opts.today });
-      // 2026-10-21：老条目**补缺失的 pdfUrl**（确定性派生值，不存在「两版冲突」，
-      // 故不受「元数据以首见为准」约束）；不覆盖已有值。
-      if (!prev.pdfUrl && it.pdfUrl) byKey.set(hit, { ...prev, pdfUrl: it.pdfUrl });
+      const patch: Partial<ResearchLedgerItem> = {};
+      if (opts.today < seen) patch.firstSeen = opts.today;
+      // 2026-10-21：老条目**补缺失的 pdfUrl 与 id** —— 二者都是**确定性派生值**
+      //（pdf 由 infoCode、id 由源站主键），不存在「两版冲突」，故不受「元数据以首见为准」
+      // 约束；已有一律不覆盖。
+      if (!prev.pdfUrl && it.pdfUrl) patch.pdfUrl = it.pdfUrl;
+      if (!prev.id) patch.id = researchItemId(prev.url);
+      if (Object.keys(patch).length) byKey.set(hit, { ...prev, ...patch });
       continue;
     }
-    byKey.set(uk, { ...it, firstSeen: opts.today });
+    byKey.set(uk, { ...it, id: researchItemId(it.url), firstSeen: opts.today });
     titleIndex.set(tk, uk);
   }
 

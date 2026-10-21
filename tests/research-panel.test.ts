@@ -9,6 +9,7 @@ import assert from "node:assert/strict";
 import { buildResearchPanel, RESEARCH_PANEL_MAX } from "../lib/pipeline/side-outputs/side-research";
 import type { ResearchPanelItem } from "../lib/contracts/research";
 import { eastmoneyPdfUrlOf } from "../lib/adapters/crawlers/sources/eastmoney-research";
+import { researchItemId, researchKeyOf } from "../lib/services/research/item-id";
 
 const NOW = new Date("2026-10-19T07:00:00+08:00");
 
@@ -68,4 +69,27 @@ test("eastmoneyPdfUrlOf：东财 infoCode → PDF 文件直链；非东财/异�
   assert.equal(eastmoneyPdfUrlOf("https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP1"), "");
   assert.equal(eastmoneyPdfUrlOf("https://data.eastmoney.com/report/zw_industry.jshtml"), "");
   assert.equal(eastmoneyPdfUrlOf(""), "");
+});
+
+test("researchItemId：源站主键派生，跨构建稳定且唯一", () => {
+  // 东财 infoCode
+  assert.equal(
+    researchItemId("https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830674433"),
+    "rs-AP202610191830674433",
+  );
+  // 新浪两种形态（query rptid / path rptid）
+  assert.equal(
+    researchItemId("https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845745816742/index.phtml"),
+    "rs-845745816742",
+  );
+  // 无主键 → 回退散列，仍确定性（同 url 永远同 id）
+  const noKey = researchItemId("https://example.com/report/abc");
+  assert.ok(/^rs-[0-9a-z]+$/.test(noKey), `回退形态应为 rs-<base36>：${noKey}`);
+  assert.equal(researchItemId("https://example.com/report/abc"), noKey, "同 url 必须同 id");
+  assert.equal(researchKeyOf("https://example.com/report/abc"), "", "无主键返回空");
+  // 东财 vs 新浪不会相撞（主键前缀不同源）
+  assert.notEqual(
+    researchItemId("https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830674433"),
+    researchItemId("https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/845745816742/index.phtml"),
+  );
 });

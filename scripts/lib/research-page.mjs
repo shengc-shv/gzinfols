@@ -64,18 +64,94 @@ const CSS = `
 
 function itemHtml(it) {
   const meta = [it.org, it.researchers, it.industry].filter(Boolean).map(esc).join(" · ");
-  // 2026-10-21 sc：主链走 PDF 文件直链（有则用），「原页面」降为次级出口。
-  // 无 pdfUrl（新浪源 / 老数据未回填）→ 主链仍是详情页，不出现次级链接。
-  const href = it.pdfUrl || it.url;
-  const badge = it.pdfUrl ? '<span class="pdf">PDF</span>' : "";
-  const alt =
-    it.pdfUrl && it.url
-      ? ` <a class="alt" href="${esc(it.url)}" target="_blank" rel="noopener">原页面</a>`
-      : "";
+  // 2026-10-21 sc：主链走**站内详情页**（r/<id>.html）。
+  // 🔴 为什么不直接外链源站：手机浏览器打开东财 PC 详情页会被前端改写到「研报中心」
+  //（infocode 丢失，实测跳 emdata.eastmoney.com/ybzx/index.html），PDF 直链在部分网络下
+  // 被 EdgeOne 安全策略拦截（sc 实测截图）→ 两条外链在手机端都不可靠，自建详情页才稳。
+  // 无 id（老数据未回填）→ 退回 pdfUrl || url，至少 PC 端可用。
+  const href = it.id ? `./r/${encodeURIComponent(it.id)}.html` : it.pdfUrl || it.url;
+  const badge = it.id ? "" : it.pdfUrl ? '<span class="pdf">PDF</span>' : "";
   return `<li class="item">
-      <a class="title" href="${esc(href)}" target="_blank" rel="noopener">${esc(it.title)}${badge}</a>
-      <p class="meta">${meta}${meta ? " ｜ " : ""}${esc(String(it.publishedAt).slice(5))}${alt}</p>
+      <a class="title" href="${esc(href)}"${it.id ? "" : ' target="_blank" rel="noopener"'}>${esc(it.title)}${badge}</a>
+      <p class="meta">${meta}${meta ? " ｜ " : ""}${esc(String(it.publishedAt).slice(5))}</p>
     </li>`;
+}
+
+/**
+ * 研报站内详情页（2026-10-21 sc）。
+ *
+ * 存在意义：源站在手机端都不可靠（东财 PC 页被改写成研报中心、PDF 被 EdgeOne 拦、
+ * 新浪页有 App 导流）→ 读者先落到我们自己的页面，再自选出口。
+ *
+ * 页面只做「信息 + 两个出口」，不复制研报正文（版权 + 体量都不合适）：
+ *   - 「打开 PDF 文件」：东财条目直接给文件（PC/可用网络下体验最好）；
+ *   - 「查看源站页面」：给原始地址（新浪条目只有这一个）。
+ */
+const DETAIL_CSS = `
+  :root { --bg:#f6f6f8; --card:#fff; --ink:#1a1a1c; --muted:#6b6b73; --line:#e4e4e9; --accent:#185fa5; }
+  * { box-sizing:border-box; }
+  body { margin:0; padding:20px 14px 48px; background:var(--bg); color:var(--ink);
+         font:16px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif; }
+  .wrap { max-width:680px; margin:0 auto; }
+  .back { display:inline-flex; align-items:center; gap:.25rem; min-height:36px; padding:6px 14px;
+          margin:0 0 14px; border:1px solid var(--line); border-radius:999px; background:var(--card);
+          color:var(--ink); font-size:14px; text-decoration:none; -webkit-tap-highlight-color:transparent; }
+  .back:hover { border-color:var(--accent); color:var(--accent); }
+  h1 { margin:0 0 10px; font-size:20px; line-height:1.5; }
+  .meta { margin:0 0 18px; font-size:13.5px; color:var(--muted); line-height:1.8; }
+  .meta b { color:var(--ink); font-weight:600; }
+  .acts { display:flex; flex-direction:column; gap:10px; margin:0 0 18px; }
+  .act { display:flex; align-items:center; justify-content:center; gap:.4rem; min-height:48px;
+         padding:12px 16px; border-radius:12px; font-size:15px; font-weight:600;
+         text-decoration:none; -webkit-tap-highlight-color:transparent; }
+  .act:active { transform:scale(.99); }
+  .act--pdf { background:var(--accent); color:#fff; }
+  .act--src { background:var(--card); color:var(--ink); border:1px solid var(--line); }
+  .note { padding:14px 16px; background:var(--card); border:1px dashed var(--line); border-radius:12px;
+          font-size:13px; color:var(--muted); line-height:1.8; }
+  footer { margin-top:20px; font-size:12px; color:#9a9aa2; line-height:1.8; }
+`;
+
+export function renderResearchDetailPage(it, { latest } = {}) {
+  const rows = [
+    ["发布机构", it.org],
+    ["研究员", it.researchers],
+    ["行业", it.industry],
+    ["发布日期", it.publishedAt],
+  ].filter((r) => r[1]);
+  const meta = rows
+    .map(([k, v]) => `${esc(k)} <b>${esc(v)}</b>`)
+    .join("　·　");
+  // 返回：详情页在 site/r/ 子目录，上级就是研报列表页 → 固定指 ../research.html
+  // （此前指向 latest 日报页，从列表点进来的人会被扔去日报，回不去研报页）。
+  const backHref = "../research.html";
+  const pdfBtn = it.pdfUrl
+    ? `<a class="act act--pdf" href="${esc(it.pdfUrl)}" target="_blank" rel="noopener">📄 打开 PDF 文件</a>`
+    : "";
+  const srcBtn = it.url
+    ? `<a class="act act--src" href="${esc(it.url)}" target="_blank" rel="noopener">🔗 查看源站页面</a>`
+    : "";
+  const acts = pdfBtn || srcBtn ? pdfBtn + srcBtn : '<p class="note">本篇研报暂无可用链接。</p>';
+
+  return `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>${esc(it.title)} · 研报解读</title>
+<style>${DETAIL_CSS}</style>
+</head>
+<body>
+<div class="wrap">
+  <a class="back" href="${backHref}" onclick="if(document.referrer&&document.referrer.indexOf(location.host)>=0){history.back();return false;}">← 返回</a>
+  <h1>${esc(it.title)}</h1>
+  <p class="meta">${meta}</p>
+  <div class="acts">${acts}</div>
+  <div class="note">本页仅作索引。研报内容请点上方按钮前往源站查看；<br>若按钮打开异常（安全验证/需登录），请稍后重试或改用电脑访问。</div>
+  <footer>研报标题与机构信息来自公开研报索引；本页不构成投资建议。</footer>
+</div>
+</body>
+</html>`;
 }
 
 export function renderResearchPage({ reports, generatedAt, latest }) {
