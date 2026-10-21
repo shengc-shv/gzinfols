@@ -18,7 +18,7 @@
 import type { DailyReport } from "../../contracts/report";
 import type { PipelineContext } from "../../contracts/pipeline";
 import type { ResearchPanel, ResearchPanelItem } from "../../contracts/research";
-import { EastMoneyResearchCrawler } from "../../adapters/crawlers/sources/eastmoney-research";
+import { EastMoneyResearchCrawler, eastmoneyPdfUrlOf } from "../../adapters/crawlers/sources/eastmoney-research";
 import { SinaResearchCrawler } from "../../adapters/crawlers/sources/sina-research";
 import { readResearchLedger, writeResearchLedger } from "../../adapters/research/ledger-store";
 import { mergeResearchLedger } from "../../services/research/ledger";
@@ -111,6 +111,10 @@ async function collectAndMerge(
           publishedAt: r.publishedAt ?? "",
           ...splitExcerpt(r.excerpt ?? ""),
         };
+        // PDF 文件直链（2026-10-21 sc）：东财条目按 infoCode 派生；新浪正文页无 PDF → ""
+        // 规则定义在东财源文件里（与源强绑定，换源格式只改一处），这里只做装配。
+        const pdf = eastmoneyPdfUrlOf(it.url);
+        if (pdf) it.pdfUrl = pdf;
         if (it.title && it.url && it.publishedAt) items.push(it);
       }
     } catch (e) {

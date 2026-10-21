@@ -40,8 +40,18 @@ const CSS = `
           border-radius:12px; }
   .item:active { background:#f2f6fb; }
   .title { color:var(--accent); text-decoration:none; font-size:16px; line-height:1.5; display:block; }
-  .title::after { content:""; position:absolute; inset:0; }  /* 整卡可点 */
-  .meta { margin:5px 0 0; font-size:13px; color:var(--muted); line-height:1.55; }
+  .title::after { content:""; position:absolute; inset:0; z-index:0; }  /* 整卡可点（显式 0，让次级链接能盖上来） */
+  .meta { position:relative; z-index:1; margin:5px 0 0; font-size:13px; color:var(--muted); line-height:1.55; }
+  /* PDF 徽章（2026-10-21 sc：点标题直接开文件，徽章提前告知形态，避免误解为跳网页） */
+  .pdf { display:inline-block; margin-left:.35rem; padding:0 .32rem; border:1px solid #b9cdf0;
+         border-radius:5px; background:#eef4fd; color:#185fa5; font-size:11px; font-weight:600;
+         line-height:1.5; vertical-align:2px; }
+  /* 「原页面」次级出口：必须盖在 stretched 链接之上，否则整卡可点会把它吃掉。
+     🔴 display:inline-block + padding 不只是好看——inline 元素的命中盒在 Chrome 里
+     会与整卡覆盖层抢层，实测有一张卡片的「原页面」点不到（elementFromPoint 落到 .title）。 */
+  .alt { position:relative; z-index:2; display:inline-block; padding:3px 0; color:var(--muted);
+         font-size:12.5px; text-decoration:none; border-bottom:1px dashed var(--line); }
+  .alt:hover { color:var(--accent); }
   .empty { padding:28px 18px; text-align:center; color:var(--muted); font-size:14px;
            background:var(--card); border:1px dashed var(--line); border-radius:12px; line-height:1.8; }
   footer { margin-top:22px; font-size:12px; color:#9a9aa2; line-height:1.8; }
@@ -54,9 +64,17 @@ const CSS = `
 
 function itemHtml(it) {
   const meta = [it.org, it.researchers, it.industry].filter(Boolean).map(esc).join(" · ");
+  // 2026-10-21 sc：主链走 PDF 文件直链（有则用），「原页面」降为次级出口。
+  // 无 pdfUrl（新浪源 / 老数据未回填）→ 主链仍是详情页，不出现次级链接。
+  const href = it.pdfUrl || it.url;
+  const badge = it.pdfUrl ? '<span class="pdf">PDF</span>' : "";
+  const alt =
+    it.pdfUrl && it.url
+      ? ` <a class="alt" href="${esc(it.url)}" target="_blank" rel="noopener">原页面</a>`
+      : "";
   return `<li class="item">
-      <a class="title" href="${esc(it.url)}" target="_blank" rel="noopener">${esc(it.title)}</a>
-      <p class="meta">${meta}${meta ? " ｜ " : ""}${esc(String(it.publishedAt).slice(5))}</p>
+      <a class="title" href="${esc(href)}" target="_blank" rel="noopener">${esc(it.title)}${badge}</a>
+      <p class="meta">${meta}${meta ? " ｜ " : ""}${esc(String(it.publishedAt).slice(5))}${alt}</p>
     </li>`;
 }
 
@@ -85,7 +103,7 @@ export function renderResearchPage({ reports, generatedAt, latest }) {
 <div class="wrap">
   <a class="back" href="${latest ? `./${esc(latest)}/${esc(latest)}.html` : "./index.html"}" onclick="if(document.referrer&&document.referrer.indexOf(location.host)>=0){history.back();return false;}">← 返回</a>
   <h1>📐 研报解读</h1>
-  <p class="sub">券商研报索引 · 覆盖 ${list.length} 期 · 共 ${total} 篇${generatedAt ? ` · 生成于 ${esc(generatedAt)}` : ""}<br>仅作深度参考，点击标题查看原文。</p>
+  <p class="sub">券商研报索引 · 覆盖 ${list.length} 期 · 共 ${total} 篇${generatedAt ? ` · 生成于 ${esc(generatedAt)}` : ""}<br>仅作深度参考；带 <b>PDF</b> 标记的点击标题直接打开研报文件。</p>
   ${total ? groups : empty}
   <footer>研报标题与机构信息来自公开研报索引；本页不构成投资建议。</footer>
 </div>

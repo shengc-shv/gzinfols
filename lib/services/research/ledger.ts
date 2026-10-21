@@ -65,6 +65,9 @@ export function mergeResearchLedger(
       const prev = byKey.get(hit) as ResearchLedgerItem;
       const seen = prev.firstSeen || opts.today;
       if (opts.today < seen) byKey.set(hit, { ...prev, firstSeen: opts.today });
+      // 2026-10-21：老条目**补缺失的 pdfUrl**（确定性派生值，不存在「两版冲突」，
+      // 故不受「元数据以首见为准」约束）；不覆盖已有值。
+      if (!prev.pdfUrl && it.pdfUrl) byKey.set(hit, { ...prev, pdfUrl: it.pdfUrl });
       continue;
     }
     byKey.set(uk, { ...it, firstSeen: opts.today });

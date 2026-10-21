@@ -22,6 +22,28 @@ import { isResearchTitleWorthy } from "./research-filters";
 const API = "https://reportapi.eastmoney.com/report/list";
 
 /**
+ * 东财研报的 PDF 文件直链（2026-10-21 sc：手机端点标题要直接打开文件）。
+ *
+ * 🔴 为什么需要它：本源此前把 `url` 拼成 PC 端网页
+ * `data.eastmoney.com/report/zw_industry.jshtml?infocode=...`，手机浏览器打开后
+ * 落在东财自己的「数据中心」页面里（title 带「_ 数据中心 _ 东方财富网」），
+ * 读者看到的是网站而不是研报文件（sc 实测反馈）。
+ *
+ * 规则：`https://pdf.dfcfw.com/pdf/H3_<infoCode>_1.pdf`
+ *   - 实测：HTTP 200、`content-type: application/pdf`、约 680KB；
+ *   - infoCode 全局唯一且格式稳定（`AP` + 14 位数字），故**纯派生、不发额外请求**。
+ *
+ * ⛔ 非东财链接（如新浪正文页）返回 "" —— 渲染层据此回退 `url`，不硬造 PDF。
+ */
+export function eastmoneyPdfUrlOf(url: string): string {
+  const m = /[?&]infocode=([A-Za-z0-9]+)/.exec(url || "");
+  if (!m) return "";
+  const code = m[1];
+  if (!/^[A-Z]{2}\d{6,}$/.test(code)) return ""; // 形态不对 → 不猜
+  return `https://pdf.dfcfw.com/pdf/H3_${code}_1.pdf`;
+}
+
+/**
  * 标题白名单：命中任一即视为「与零售银行相关」（宁可少收，不放进无关行业）。
  *
  * 🔴 泛化词必须配对（踩坑实录 2026-10-19 首跑）：裸词「零售」命中「批发和零售贸易行业研究」、

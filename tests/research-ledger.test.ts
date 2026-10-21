@@ -141,3 +141,20 @@ test("写入可指定路径（测试注入），内容可回读", () => {
   assert.equal(r.state, "ok");
   assert.equal(r.ledger.items[0].title, "C");
 });
+
+test("老条目补缺失 pdfUrl（2026-10-21：确定性派生值，不覆盖已有值）", () => {
+  const url = "https://data.eastmoney.com/report/zw_industry.jshtml?infocode=AP202610191830674433";
+  const pdf = "https://pdf.dfcfw.com/pdf/H3_AP202610191830674433_1.pdf";
+  // 老台账：同 url 已存在但无 pdfUrl
+  const existing = mergeResearchLedger(emptyResearchLedger(), [it("银行深度A", "2026-10-19", url)], {
+    today: "2026-10-19",
+  });
+  assert.equal(existing.items[0].pdfUrl, undefined, "老条目入库时本就没有该字段");
+
+  const again = mergeResearchLedger(existing, [{ ...it("银行深度A", "2026-10-19", url), pdfUrl: pdf }], {
+    today: "2026-10-20",
+  });
+  assert.equal(again.items.length, 1, "同 url 不重复入库");
+  assert.equal(again.items[0].pdfUrl, pdf, "缺失字段应被补上");
+  assert.equal(again.items[0].firstSeen, "2026-10-19", "补字段不得改动首见日");
+});

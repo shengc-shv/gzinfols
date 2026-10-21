@@ -17,6 +17,16 @@ export interface ResearchPanelItem {
   title: string;
   /** 详情页链接（infoCode 拼接，数据来自东财研报详情页） */
   url: string;
+  /**
+   * 研报 PDF 文件直链（2026-10-21 sc：手机端点标题应直接打开文件，而不是东财网页）。
+   *
+   * 为什么单独一个字段而不是直接把 `url` 换成 PDF：
+   *   - 东财 PDF 地址由 infoCode 确定性派生（`pdf.dfcfw.com/pdf/H3_<infoCode>_1.pdf`）；
+   *   - 新浪源没有 PDF（其 url 是 GBK 正文网页）→ 该字段为空，渲染层回退 `url`；
+   *   - 保留 `url` 才能同时给出「原页面」次级出口（与 IPO 卡的官方源双链接同构）。
+   * ⛔ 不影响主项目：本契约只被研报旁路三个文件 import（side-research / research/ledger / research/ledger-store）。
+   */
+  pdfUrl?: string;
   /** 券商简称（orgSName） */
   org: string;
   /** 研究员（researcher，可能多人逗号分隔） */
