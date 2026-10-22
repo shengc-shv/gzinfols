@@ -73,13 +73,13 @@ test("④ added → isNew 角标；changed → 字段标记 + 人话摘要（§3
 test("⑤ T5/T6：报告入口 —— 缺省无入口；传入 pre-meeting 为默认；deep 覆盖生效", () => {
   assert.equal(redchipBadgeOf(lead(), { today: TODAY })?.reportUrl, undefined);
 
-  const pre = redchipBadgeOf(lead(), { today: TODAY, reportUrl: "redchip/r/108870.html" });
-  assert.equal(pre?.reportUrl, "redchip/r/108870.html");
+  const pre = redchipBadgeOf(lead(), { today: TODAY, reportUrl: "../redchip/r/108870.html" });
+  assert.equal(pre?.reportUrl, "../redchip/r/108870.html");
   assert.equal(pre?.reportKind, "pre-meeting", "未指定 kind → 默认会前版本");
 
   const deep = redchipBadgeOf(lead(), {
     today: TODAY,
-    reportUrl: "redchip/deep/108870.html",
+    reportUrl: "../redchip/deep/108870.html",
     reportKind: "deep",
   });
   assert.equal(deep?.reportKind, "deep", "深度版存在时应覆盖会前版本");

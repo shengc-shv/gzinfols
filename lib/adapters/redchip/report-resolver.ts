@@ -64,7 +64,10 @@ export function resolveReports(
       if (!st.isFile()) continue;
       refs.push({
         kind,
-        url: `redchip/${rel}`,
+        // 站内相对路径以**期次页**（site/<date>/<date>.html）为基准，须带 `../`；
+        // 发布根副本由 build-site 的 `../redchip/ → ./redchip/` 改写规则校正
+        // （2026-10-22：与 entryRefOf 的会前版路径同源修正，此前期次页内 404）。
+        url: `../redchip/${rel}`,
         title: KIND_TITLES[kind],
         generatedAt: st.mtime.toISOString(),
       });

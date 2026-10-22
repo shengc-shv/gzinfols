@@ -83,7 +83,7 @@ test("① 线索归并：leadId / lastChangedAt（取最大 at）/ 报告引用"
   );
 
   const reports = new Map([
-    ["108870", [{ kind: "deep" as const, url: "redchip/deep/108870.html", title: "t", generatedAt: "2026-09-15T08:00:00+08:00" }]],
+    ["108870", [{ kind: "deep" as const, url: "../redchip/deep/108870.html", title: "t", generatedAt: "2026-09-15T08:00:00+08:00" }]],
   ]);
   const leads = toLeads([{ ...lead() }], changes, reports);
   assert.equal(leads[0].leadId, "108870");
@@ -125,14 +125,14 @@ test("③ T2：匹配到条目 → 挂徽章（含报告入口与按钮文案）
   const it = out.report.sections.ipo[0];
   assert.ok(it.redchip, "应挂徽章");
   assert.equal(it.redchip.label, "红筹线索");
-  assert.equal(it.redchip.reportUrl, "redchip/r/108870.html", "缺 depth/manual 时回落确定性会前版路径");
+  assert.equal(it.redchip.reportUrl, "../redchip/r/108870.html", "缺 depth/manual 时回落确定性会前版路径（期次页基准）");
   assert.equal(it.redchip.reportKind, "pre-meeting");
   assert.deepEqual([...out.matchedIds], ["108870"]);
 });
 
 test("④ T6：存在深度版 → 卡片入口指向深度版（覆盖会前版本）", () => {
   const reports = new Map([
-    ["108870", [{ kind: "deep" as const, url: "redchip/deep/108870.html", title: "t", generatedAt: "x" }]],
+    ["108870", [{ kind: "deep" as const, url: "../redchip/deep/108870.html", title: "t", generatedAt: "x" }]],
   ]);
   const out = applyRedchip(report([hkItem("108870")]), {
     leads: [lead()],
@@ -140,7 +140,7 @@ test("④ T6：存在深度版 → 卡片入口指向深度版（覆盖会前版
     reports,
     today: TODAY,
   });
-  assert.equal(out.report.sections.ipo[0].redchip?.reportUrl, "redchip/deep/108870.html");
+  assert.equal(out.report.sections.ipo[0].redchip?.reportUrl, "../redchip/deep/108870.html");
   assert.equal(out.report.sections.ipo[0].redchip?.reportKind, "deep");
 });
 

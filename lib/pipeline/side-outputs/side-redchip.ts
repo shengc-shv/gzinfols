@@ -51,8 +51,14 @@ export interface RedchipInputs {
 /**
  * 选定报告入口（T6：`manual` > `deep` > 会前版本）。
  *
- * 会前版本**不依赖探测**：其路径是确定性的（`redchip/r/<leadId>.html`），
+ * 会前版本**不依赖探测**：其路径是确定性的（`../redchip/r/<leadId>.html`），
  * 由 `build-site` 对本轮所有 `verdict ≠ non-redchip` 的线索保证生成（100% 覆盖）。
+ *
+ * 🔴 路径基准（2026-10-22 修）：面板/徽章渲染在**期次页** `site/<date>/<date>.html` 里，
+ *    故站内链接必须带 `../` 才是站点红筹根。此前写成 `redchip/r/...`（发布根口径），
+ *    在期次页深度下解析成 `/<date>/redchip/...` → 404；只因面板长期 0 条目未暴露。
+ *    发布根副本（`site/index.html`）由 build-site 既有的 `../redchip/ → ./redchip/`
+ *    改写规则自动校正，与 `LEDGER_HREF` 同款处理。
  */
 function entryRefOf(
   leadId: string,
@@ -62,7 +68,7 @@ function entryRefOf(
   const best =
     refs.find((r) => r.kind === "manual") ?? refs.find((r) => r.kind === "deep");
   if (best) return { url: best.url, kind: best.kind };
-  return { url: `redchip/r/${leadId}.html`, kind: "pre-meeting" };
+  return { url: `../redchip/r/${leadId}.html`, kind: "pre-meeting" };
 }
 
 /** 单个线索的可展示面板条目（判定档为空 = 不打徽章 → 不进面板）。 */

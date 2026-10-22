@@ -184,7 +184,7 @@ export interface RedchipMeta {
  */
 export interface RedchipReportRef {
   kind: "pre-meeting" | "deep" | "manual";
-  /** 站内相对路径（如 `redchip/r/108804.html`）。 */
+  /** 站内相对路径（以期次页为基准，如 `../redchip/r/108804.html`；发布根副本由 build-site 改写）。 */
   url: string;
   title: string;
   /** 生成时刻（北京时间 ISO）。 */
@@ -323,7 +323,7 @@ export interface RedchipBadge {
   isNew: boolean;
   /** 本次 `changed` 的字段标签（如「状态」「注册地」）。 */
   changedFields?: string[];
-  /** 站内相对路径：`redchip/r/<leadId>.html`（深度版存在时指向深度版）。 */
+  /** 站内相对路径（以期次页为基准）：`../redchip/r/<leadId>.html`（深度版存在时指向深度版）。 */
   reportUrl?: string;
   reportKind?: RedchipReportRef["kind"];
   // —— 以下为口播拼装所需的最小结构化数据（免 LLM）——
