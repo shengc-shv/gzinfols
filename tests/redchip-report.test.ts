@@ -123,6 +123,8 @@ function makeFixture(opts?: { usSnapshotProjects?: unknown[]; usSnapshotCaptured
       JSON.stringify({ at: "2026-09-15T09:00:00+08:00", type: "changed", appId: "108870", field: "状态", from: "处理中", to: "已受理" }),
     ].join("\n") + "\n",
   );
+  // 港股链路快照（data/redchip/latest.json）：总览页自 2026-10-22 起**不再读它**（改累计
+  // 台账口径，见下方 meta.json 注释）；此处仍保留，仅供报告页「抓取时刻」回退路径使用。
   // projects 必须非空：总览页据此渲染清单与「报告」列（空数组 → 空态页，验证不到链接）
   write(
     "data/redchip/latest.json",
@@ -132,9 +134,26 @@ function makeFixture(opts?: { usSnapshotProjects?: unknown[]; usSnapshotCaptured
       projects: [LEAD_RED, LEAD_NON, LEAD_INJECTED],
     }),
   );
-  // 美股链路快照（data/redchip-us/，与港股两条独立链路；总览页 2026-10-22 起合并）。
-  // 注意：总览页美股段自 2026-10-22 起改读**累计台账**（见 makeFixture 参数说明），
-  // 此快照只再承担「抓取时刻标注」职责——故项目清单可空而页面不得清盘。
+  // 抓取元信息（入库）：总览页快照时间标注的双源来源（与日报面板「数据截至」同口径）。
+  // us.capturedAt 与美股快照同步（真实脚本同一 run 写同一时间戳），故跟随夹具参数。
+  write(
+    "data/redchip/meta.json",
+    JSON.stringify({
+      updatedAt: "2026-10-22T09:55:20+08:00",
+      sources: {
+        hk: { capturedAt: "2026-09-15T08:30:00+08:00", ok: true, scanned: 100, redchip: 1 },
+        us: {
+          capturedAt: opts?.usSnapshotCapturedAt ?? "2026-10-22T09:55:20+08:00",
+          ok: true,
+          scanned: 1,
+          redchip: 1,
+        },
+      },
+    }),
+  );
+  // 美股链路快照（data/redchip-us/，与港股两条独立链路）。总览页自 2026-10-22 起两条
+  // 链路都改读累计台账、标注改读 meta.json——此快照只剩报告页「抓取时刻」回退职责，
+  // 故项目清单可空而总览页不得清盘（累计口径契约，见文末用例）。
   const usSnapshotProjects = opts?.usSnapshotProjects ?? [LEAD_US];
   write(
     "data/redchip-us/latest.json",
@@ -252,31 +271,43 @@ test("美股红筹码：报告页来源标注走 SEC EDGAR（不是港交所披�
   }
 });
 
-test("美股总览段累计口径：零命中日（快照空数组）不清盘在册美股线索", () => {
-  // 契约（2026-10-22 用户拍板「跟港股一样」）：总览页美股段读共享台账 leads.json 里
-  // market==="us" 的全部在册线索，而非 data/redchip-us/latest.json 的两日窗口快照——
-  // 后者在安静窗口（零命中日）会把美股段整段滚掉，而报告页 r/*.html 与日报面板条目
-  // 仍在，三处口径不一致（10-22 明日生效性回检实证）。
+test("红筹总览段累计口径：两条链路都读台账，零命中日不清盘、non-redchip 不入段", () => {
+  // 契约（2026-10-22 用户拍板「往体验一致方向修改」）：总览页项目清单两条链路**都**读共享
+  // 台账 leads.json 按 market 分列（缺省 hk），而非各自链路的两日窗口快照——
+  //   · 港股旧读 data/redchip/latest.json：被 gitignore 且 CI 不跑 monitor → CI 构建恒空；
+  //   · 美股旧读 data/redchip-us/latest.json：零命中日把在册线索整段滚掉。
+  // 台账同时是报告页与日报面板的唯一数据源，三处口径自此一致。过滤与面板 redchipLabelOf
+  // 同口径：verdict ∈ {redchip, unverified} 展示，non-redchip（每日窗口噪声）不进总览段。
   const dir = makeFixture({ usSnapshotProjects: [], usSnapshotCapturedAt: "2026-10-23T07:05:00+08:00" });
   try {
     const r = spawnSync(process.execPath, [SCRIPT], { cwd: dir, encoding: "utf8" });
     assert.equal(r.status, 0, `build-site 应成功退出：\n${r.stdout}\n${r.stderr}`);
 
-    // 报告页照常产出（与总览页解耦：读台账，不读美股快照）
+    // 报告页照常产出（与总览页解耦：读台账，不读各自链路快照）
     assert.ok(fs.existsSync(path.join(dir, "site/redchip/r/us-2087307.html")), "美股线索报告页仍应产出");
+    assert.ok(fs.existsSync(path.join(dir, "site/redchip/r/108870.html")), "港股线索报告页仍应产出");
 
     const index = fs.readFileSync(path.join(dir, "site/redchip/index.html"), "utf8");
-    // 在册线索不因零命中日滚出总览页（旧快照口径下此处会整段消失）
+    // ① 港股段：台账累计（38 家量级的口径在夹具里 = LEAD_RED 红筹 + LEAD_INJECTED 待核验）
+    assert.ok(index.includes("海柔創新"), "港股段应读累计台账（不再依赖 gitignore 的 latest.json）");
+    assert.ok(index.includes("&lt;script&gt;"), "待核验（unverified）线索属可展示口径，应入总览段");
+    // ② 美股段：零命中日不清盘
     assert.ok(index.includes("Sensing4D AI Ltd"), "零命中日总览页美股段不得清盘（累计口径）");
     assert.ok(index.includes('href="r/us-2087307.html"'), "在册美股线索的「报告」列链接仍在");
-    // 统计行把在册美股线索计入总数：港股 3（夹具快照）+ 美股 1（台账）= 4 家，红筹 2
-    assert.ok(index.includes("共 4 家（红筹 2）"), "零命中日统计仍应包含在册美股线索");
-    // 抓取时刻标注仍取当日美股快照 capturedAt（数据新鲜度语义不变）
-    assert.ok(index.includes("美股 2026-10-23T07:05:00+08:00"), "快照时间应取当日美股抓取时刻");
-    // 港股段不受影响
-    assert.ok(index.includes("海柔創新"), "港股段不受本次改动影响");
-    // 源码级契约：美股段必须读累计台账，防回归为快照口径
+    // ③ non-redchip 是每日窗口噪声，不进总览段（与面板 redchipLabelOf 同口径）
+    assert.ok(!index.includes("某境内企业股份有限公司"), "non-redchip 线索不得进总览页项目清单");
+    // ④ 统计行：港股 2（台账可展示）+ 美股 1 = 3 家，红筹 2（LEAD_RED + LEAD_US）
+    assert.ok(index.includes("共 3 家（红筹 2）"), "统计应同时计入两条链路的台账可展示线索");
+    // ⑤ 快照时间标注双源均取入库 meta.json（港股标注在旧口径 CI 构建里根本没有）
+    assert.ok(index.includes("港股 2026-09-15T08:30:00+08:00"), "港股标注应取 meta.sources.hk.capturedAt");
+    assert.ok(index.includes("美股 2026-10-23T07:05:00+08:00"), "美股标注应取 meta.sources.us.capturedAt");
+    // ⑥ 源码级契约：两条链路都必须读累计台账，防各自回退到快照口径
     const src = fs.readFileSync(path.join(ROOT, "scripts", "build-site.mjs"), "utf8");
+    assert.match(
+      src,
+      /const hkProjects = rcLeads\.filter/,
+      "港股总览段必须读共享台账（累计口径），不得回退到 data/redchip/latest.json 快照",
+    );
     assert.match(
       src,
       /const usProjects = rcLeads\.filter/,
