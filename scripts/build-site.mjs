@@ -262,6 +262,13 @@ try {
       .map((l) => { try { return JSON.parse(l); } catch { return null; } })
       .filter(Boolean);
   }
+  // 美股红筹码快照（data/redchip-us/latest.json）——与港股 data/redchip/ 是两条独立链路
+  // （2026-10-22 起并入总览页与报告页口径；缺失时不影响港股渲染）。
+  const rcUsLatestPath = path.join(process.cwd(), "data", "redchip-us", "latest.json");
+  let rcUsSnap = null;
+  if (fs.existsSync(rcUsLatestPath)) {
+    try { rcUsSnap = JSON.parse(fs.readFileSync(rcUsLatestPath, "utf8")); } catch { rcUsSnap = null; }
+  }
   const rcOutDir = path.join(OUT, "redchip");
   fs.mkdirSync(rcOutDir, { recursive: true });
 
@@ -293,7 +300,17 @@ try {
     if (!lead || lead.verdict === "non-redchip") continue;
     fs.writeFileSync(
       path.join(rcReportDir, `${leadId}.html`),
-      renderRedchipReport({ ...lead, leadId }, { changes: rcChanges, capturedAt: rcSnap ? rcSnap.capturedAt : "" }),
+      renderRedchipReport(
+        { ...lead, leadId },
+        {
+          changes: rcChanges,
+          // 抓取时刻按市场取所属那条链的快照（美股线索曾拿到港股时间/空值，2026-10-22 修）
+          capturedAt:
+            lead.market === "us"
+              ? rcUsSnap?.capturedAt ?? ""
+              : rcSnap?.capturedAt ?? "",
+        },
+      ),
       "utf8",
     );
     rcPages++;
@@ -307,12 +324,32 @@ try {
   console.log(`[build-site] redchip/r/*.html（${rcPages} 页 / 线索 ${rcLeads.length} 条，零 LLM）`);
 
   // ---------- 5.5b) 红筹监测总览页：site/redchip/index.html ----------
+  // 总览页合并两条链路（2026-10-22）：港股快照（data/redchip/latest.json）∪ 美股快照
+  // （data/redchip-us/latest.json），按 appId 去重。此前只渲染港股快照 → 美股线索
+  // 「有报告页但项目清单里看不见」。两侧快照都缺失时保持空态（rcSnap=null 原样传）。
+  const hkProjects = rcSnap?.projects ?? [];
+  const usProjects = rcUsSnap?.projects ?? [];
+  const seenAppIds = new Set(hkProjects.map((p) => String(p.appId ?? p.leadId ?? "")));
+  const mergedProjects = [
+    ...hkProjects,
+    ...usProjects.filter((p) => !seenAppIds.has(String(p.appId ?? p.leadId ?? ""))),
+  ];
+  const snapLabels = [
+    rcSnap?.capturedAt ? `港股 ${rcSnap.capturedAt}` : "",
+    rcUsSnap?.capturedAt ? `美股 ${rcUsSnap.capturedAt}` : "",
+  ].filter(Boolean);
+  const rcIndexSnap =
+    mergedProjects.length > 0 || snapLabels.length > 0
+      ? { capturedAt: snapLabels.join(" · "), count: mergedProjects.length, projects: mergedProjects }
+      : rcSnap;
   fs.writeFileSync(
     path.join(rcOutDir, "index.html"),
-    renderRedchipPage({ snapshot: rcSnap, changes: rcChanges, reportHrefs: rcReportHrefs }),
+    renderRedchipPage({ snapshot: rcIndexSnap, changes: rcChanges, reportHrefs: rcReportHrefs }),
     "utf8",
   );
-  console.log(`[build-site] redchip/index.html (${rcSnap ? rcSnap.count : 0} 家 / ${rcChanges.length} 条变更 / ${rcPages} 份报告)`);
+  console.log(
+    `[build-site] redchip/index.html (港股 ${hkProjects.length} 家 / 美股 ${usProjects.length} 家 / ${rcChanges.length} 条变更 / ${rcPages} 份报告)`,
+  );
 } catch (e) {
   console.log(`[build-site] 红筹展示页跳过：${e && e.message ? e.message : e}`);
 }

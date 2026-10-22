@@ -66,6 +66,27 @@ const LEAD_INJECTED = {
   verdict: "unverified",
 };
 
+/** 美股红筹码夹具（2026-10-22 真实命中：Sensing4D AI Ltd，CIK 2087307，F-1 开曼）。 */
+const LEAD_US = {
+  leadId: "us-2087307",
+  appId: "us-2087307",
+  nameCn: "Sensing4D AI Ltd",
+  nameEn: "",
+  board: "美股",
+  status: "F-1/F-1A",
+  submitDate: "2026-10-21",
+  domicile: "开曼群岛",
+  isOffshore: true,
+  gdCityHits: 16,
+  gdCityMentions: 107,
+  isGdConnected: true,
+  vie: "historical",
+  verdict: "redchip",
+  discoveredAt: "2026-10-22T09:55:20+08:00",
+  sourceUrl: "https://www.sec.gov/Archives/edgar/data/2087307/000121390026111161/ea0256781-12.htm",
+  market: "us",
+};
+
 function makeFixture(): string {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "redchip-report-"));
   const write = (rel: string, content: string) => {
@@ -83,6 +104,8 @@ function makeFixture(): string {
         LEAD_RED,
         LEAD_NON,
         LEAD_INJECTED,
+        // 美股线索进**共享台账**（market:"us" 区分，与 redchip-us.ts 的合并口径一致）
+        LEAD_US,
       ],
       null,
       2,
@@ -102,6 +125,15 @@ function makeFixture(): string {
       capturedAt: "2026-09-15T08:30:00+08:00",
       count: 3,
       projects: [LEAD_RED, LEAD_NON, LEAD_INJECTED],
+    }),
+  );
+  // 美股链路快照（data/redchip-us/，与港股两条独立链路；总览页 2026-10-22 起合并）
+  write(
+    "data/redchip-us/latest.json",
+    JSON.stringify({
+      capturedAt: "2026-10-22T09:55:20+08:00",
+      count: 1,
+      projects: [LEAD_US],
     }),
   );
   write("daily_reports/2026-09-15/2026-09-15.html", "<!doctype html><html><body><p>x</p></body></html>");
@@ -172,6 +204,41 @@ test("会前报告页：逐条产出（T5）+ 深度版共存（T6）+ 字段转
       "深度版存在时入口优先指向 deep（与 report-resolver 同口径 manual > deep > r）",
     );
     assert.ok(!index2.includes('href="r/108870.html"'), "存在深度版时不应再指向会前版本");
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("美股红筹码：报告页来源标注走 SEC EDGAR（不是港交所披露易）+ 抓取时刻取美股快照", () => {
+  const dir = makeFixture();
+  try {
+    const r = spawnSync(process.execPath, [SCRIPT], { cwd: dir, encoding: "utf8" });
+    assert.equal(r.status, 0, `build-site 应成功退出：\n${r.stdout}\n${r.stderr}`);
+
+    const page = fs.readFileSync(path.join(dir, "site/redchip/r/us-2087307.html"), "utf8");
+    assert.ok(page.includes("Sensing4D AI Ltd"), "美股线索必须产出会前版本报告页");
+    // 来源口径分流（2026-10-22）：F-1 招股书来自 SEC EDGAR，不得写成港交所披露易
+    assert.ok(page.includes("F-1 申请版本（SEC EDGAR）"), "官方入口应标注 SEC EDGAR");
+    assert.ok(page.includes("数据来源：SEC EDGAR 全文检索"), "页脚来源应标注 SEC EDGAR");
+    assert.ok(!page.includes("港交所披露易"), "美股线索页不得出现港股专属来源标注");
+    assert.ok(
+      page.includes("sec.gov/Archives/edgar/data/2087307"),
+      "应给回 SEC Archives 原文直链",
+    );
+    // 抓取时刻按市场取所属链路：美股线索拿美股快照时间，不是港股快照时间/空值
+    assert.ok(page.includes("抓取时刻：2026-10-22T09:55:20+08:00"), "应取美股快照的抓取时刻");
+    assert.ok(!page.includes("抓取时刻：2026-09-15T08:30:00+08:00"), "不得错拿港股快照时间");
+
+    // 总览页合并两条链路：美股线索进项目清单，「报告」列可点，快照时间双源并列
+    const index = fs.readFileSync(path.join(dir, "site/redchip/index.html"), "utf8");
+    assert.ok(index.includes("Sensing4D AI Ltd"), "总览页项目清单应包含美股线索");
+    assert.ok(index.includes('href="r/us-2087307.html"'), "美股线索应链接到会前版本报告");
+    assert.ok(index.includes("港股 2026-09-15T08:30:00+08:00"), "快照时间应含港股源");
+    assert.ok(index.includes("美股 2026-10-22T09:55:20+08:00"), "快照时间应含美股源");
+    // 港股线索不受影响：仍拿自己的快照时间与披露易标注
+    const hk = fs.readFileSync(path.join(dir, "site/redchip/r/108870.html"), "utf8");
+    assert.ok(hk.includes("抓取时刻：2026-09-15T08:30:00+08:00"), "港股线索抓取时刻不变");
+    assert.ok(hk.includes("申请版本 PDF（港交所披露易）"), "港股线索来源标注不变");
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

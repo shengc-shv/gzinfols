@@ -84,8 +84,12 @@ export function renderRedchipReport(lead, opts = {}) {
     .join("");
   const arch = (lead.archNotes ?? []).map((n) => `<li>${esc(n)}</li>`).join("");
 
+  // 来源口径按市场分流（2026-10-22）：美股线索走 SEC EDGAR，港股走披露易——
+  // 两条源共用本渲染器，文案写死港股会把 F-1 标成「港交所披露易」（事实错误）。
+  const isUs = lead.market === "us";
+  const docLabel = isUs ? "F-1 申请版本（SEC EDGAR）" : "申请版本 PDF（港交所披露易）";
   const pdfLink = lead.sourceUrl
-    ? `<a class="cta" href="${esc(lead.sourceUrl)}" target="_blank" rel="noopener">申请版本 PDF（港交所披露易）→</a>`
+    ? `<a class="cta" href="${esc(lead.sourceUrl)}" target="_blank" rel="noopener">${docLabel}→</a>`
     : `<span class="muted">未记录申请版本链接</span>`;
   const deepLink = (lead.reports ?? [])
     .filter((r) => r.kind === "deep" || r.kind === "manual")
@@ -175,7 +179,7 @@ export function renderRedchipReport(lead, opts = {}) {
   </section>
 
   <footer>
-    <p>数据来源：港交所披露易「新上市申請版本及相關資料」（公开静态清单）。判定为**机器口径**：封面页固定句式取注册地 ∈ 离岸法域 ∧ 集团实体语境下广东城市命中 ≥ 3；「线索」不代表已确认的结论，亦不构成任何投资建议。</p>
+    <p>数据来源：${isUs ? "SEC EDGAR 全文检索（efts.sec.gov）F-1/F-1A 主文档（公开）" : "港交所披露易「新上市申請版本及相關資料」（公开静态清单）"}。判定为**机器口径**：封面页固定句式取注册地 ∈ 离岸法域 ∧ 集团实体语境下广东城市命中 ≥ 3；「线索」不代表已确认的结论，亦不构成任何投资建议。</p>
     <p>抓取时刻：${esc(opts.capturedAt || "—")}${lead.lastChangedAt ? ` ｜ 最近变更：${esc(lead.lastChangedAt)}` : ""}</p>
   </footer>
 </div>

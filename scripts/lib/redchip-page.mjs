@@ -138,7 +138,7 @@ a{color:#2f4cdd}
 <h2>项目清单</h2>
 <div class="bar">
   <select id="fVerdict"><option value="">全部判定</option><option value="redchip">红筹</option><option value="non-redchip">非红筹</option><option value="unverified">待核验</option></select>
-  <select id="fBoard"><option value="">全部板块</option><option value="主板">主板</option><option value="GEM">GEM</option></select>
+  <select id="fBoard"><option value="">全部板块</option><option value="主板">主板</option><option value="GEM">GEM</option><option value="美股">美股</option></select>
   <select id="fOff"><option value="">离岸不限</option><option value="true">仅离岸</option><option value="false">仅非离岸</option></select>
   <select id="fGd"><option value="">广东不限</option><option value="true">粤连接达标</option><option value="false">未达标</option></select>
   <input id="fName" placeholder="企业名称关键词" />
