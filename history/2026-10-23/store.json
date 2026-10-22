@@ -1,0 +1,808 @@
+{
+  "date": "2026-10-23",
+  "updatedAt": "2026-10-22T23:18:21.643Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：广东金融五篇大文章贷款14.1万亿，占比近五成；房贷贴息拉动广深低总价房源成交；理财规模重回35万亿上方，债基限购收紧；广州七大场景入选国家队，撬动万亿级投资。",
+    "spoken_hero": "今天主要看四个方面：广东五篇大文章贷款十四点一万亿，占比近五成；房贷贴息拉动广深低总价房源成交；理财规模重回三十五万亿上方，债基限购收紧；广州七大场景入选国家队，撬动万亿级投资。",
+    "must_read": [
+      {
+        "title": "广东五篇大文章贷款14.1万亿",
+        "why": "占全省贷款近五成，科技、绿色、普惠口径是考核主线，我行结构差距直接关系全年信贷投放位次。",
+        "url": "https://m.21jingji.com/article/20261023/herald/bceab965ea5786317809a5801c0b20e6.html"
+      },
+      {
+        "title": "债基限购潮再起，近一月150只收紧",
+        "why": "固收类可选面收窄，客户资产配置选择被动改变，理财经理面对的解释成本上升。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_10_22_905383.shtml"
+      },
+      {
+        "title": "政策利率拟换锚，债市冲高回落",
+        "why": "国债期货冲高回落、数十只债基扎堆限购，固收净值波动加大，客户预期管理难度上升。",
+        "url": "https://m.21jingji.com/article/20261022/herald/627fa2a6143af545bdbfbab31b1ef4d9.html"
+      },
+      {
+        "title": "理财规模重回35万亿上方",
+        "why": "单季缩水1.38万亿后连涨两季，客户资金回流仍在延续，存款到期承接与货架结构随之变化。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_10_22_905361.shtml"
+      },
+      {
+        "title": "产业基础能力十五五规划发布",
+        "why": "制造业基础环节获政策倾斜，相关产业链中小企业的授信与结算需求随之变化。",
+        "url": "https://www.cnfin.com/hg-lb/detail/20261023/4485166_1.html"
+      }
+    ],
+    "spoken_must_read": "广东五篇大文章贷款14.1万亿。占全省贷款近五成，科技、绿色、普惠口径是考核主线，我行结构差距直接关系全年信贷投放位次。其次，债基限购潮再起，近一月150只收紧。固收类可选面收窄，客户资产配置选择被动改变，理财经理面对的解释成本上升。此外，政策利率拟换锚，债市冲高回落。国债期货冲高回落、数十只债基扎堆限购，固收净值波动加大，客户预期管理难度上升。还有，理财规模重回35万亿上方。单季缩水1.38万亿后连涨两季，客户资金回流仍在延续，存款到期承接与货架结构随之变化。另外，产业基础能力十五五规划发布。制造业基础环节获政策倾斜，相关产业链中小企业的授信与结算需求随之变化。",
+    "insights": [
+      {
+        "topic": "海外科技股大幅回撤",
+        "impact": "纳指与半导体指数重挫，QDII及科技主题持仓客户账面回撤明显，跨境配置客户的再平衡诉求上升。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "美股三大指数涨跌不一，纳指跌超2%，费城半导体指数跌超6%",
+            "url": "https://finance.eastmoney.com/a/202610233904666253.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，银行理财规模连涨两季重回三十五万亿上方，客户资金回流仍在延续；近一个月至少一百五十只债基收紧申购，固收可选面收窄，客户配置选择正在发生变化。高端客户方面，政策利率拟换锚后国债期货冲高回落，固收类净值波动加大；美股纳指跌超百分之二、费城半导体指数跌超百分之六，QDII与科技主题持仓客户的账面波动同步放大。普惠小微方面，广东五篇大文章贷款十四点一万亿、占比近五成，科技绿色普惠口径是考核主线；产业基础能力十五五规划发布，制造业基础环节中小企业授信与结算需求随之变化。本地消费与住房方面，房贷贴息落地后广深一百五十万以下房源成交提速，刚需按揭需求前移；公积金政策升级覆盖灵活就业者，缴存与贷款客群扩容；商务部分类施策促消费，本地商圈与商户的消费贷、收单场景在扩容。",
+    "risk": {
+      "topic": "存单到期默认转活期引合规质疑",
+      "evidence": "存单到期不再默认转活期，银行相关操作被质疑合规，到期提醒与客户授权流程是否留痕成为焦点。",
+      "impact": "财富与柜面条线面临到期处理规则排查压力，个贷与私行客户的到期资金授权链条若留痕不足，易引发投诉与合规问责。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "存单到期不再默认转活期，银行操作面临合规质疑",
+          "url": "https://finance.sina.com.cn/roll/2026-10-22/doc-iniwaezr5196100.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：存单到期默认转活期引合规质疑，财富与柜面条线面临到期处理规则排查压力，个贷与私行客户的到期资金授权链条若留痕不足，易引发投诉与合规问责。",
+    "guangdong_ipo": {
+      "spoken": "广东深圳企业裕富照明正在北交所IPO问询中，由招商证券保荐，代码874736，注册地深圳，属照明行业，最新状态为问询阶段。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌2.60%，Meta财报重燃AI担忧，美债走强。",
+      "sectors": [
+        "纳指领跌2.60%，Meta财报引发AI资本开支担忧，科技股承压。",
+        "标普500跌1.21%，道指微涨0.02%，资金转向防御与债券。",
+        "美债走强，贝莱德Rieder称高质量债券现历史性机会。",
+        "纽蒙特Q3现金流创纪录，Red Chris项目临近决策。",
+        "FCC给予英特尔外产机器人设备豁免，利好其相关业务。"
+      ],
+      "spoken": "美股收盘，纳指跌2.60%，标普500跌1.21%，道指微涨0.02%。Meta财报重燃AI担忧，科技股承压，资金转向债券，美债走强。板块方面，纽蒙特Q3现金流创纪录，英特尔获FCC外产机器人设备豁免。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-23"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52867.98",
+          "changePct": "+0.02%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26008.86",
+          "changePct": "-2.60%"
+        },
+        {
+          "name": "标普500",
+          "value": "7663.43",
+          "changePct": "-1.21%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "创业板指大跌超4%失守2600点。",
+      "sectors": [
+        "创业板指大跌超4%失守2600点",
+        "下跌个股近5000只"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-23"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3658.03",
+          "changePct": "-1.48%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11357.32",
+          "changePct": "-2.97%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2576.90",
+          "changePct": "-4.37%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报22934.68点（-3.03%）；恒生科技收报3793.93点（-5.03%）。",
+      "sectors": [
+        "科网股普跌",
+        "锂电池股下挫",
+        "宁德时代跌超7%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-23"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌3.03% 科指大跌5.03% 科网股普跌 锂电池股下挫 宁德时代跌超7%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-22/doc-iniwavxm5873588.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22934.68",
+          "changePct": "-3.03%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3793.93",
+          "changePct": "-5.03%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-22",
+    "marketStatus": {
+      "reportDate": "2026-10-23",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-10-22"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-22"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-22"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 10月22日 周四 收盘；港股为 10月22日 周四 收盘；美股为 10月22日 周四 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610223904060740.html",
+      "title_cn": "昨日重现！多只宽基ETF尾盘10分钟爆量已有超2100亿资金借道“扫货”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "多只宽基ETF在尾盘10分钟内成交放量，已有超过2100亿元资金通过ETF渠道流入市场。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "ETF",
+        "资金流向",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223903824131.html",
+      "title_cn": "17分钟30%涨停！重磅利好突袭火热赛道",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "某热门赛道个股在17分钟内封涨停，涨幅达30%，受重磅利好消息刺激。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "涨停",
+        "题材股",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223904043160.html",
+      "title_cn": "沪深300ETF尾盘爆量",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "沪深300ETF尾盘成交显著放量。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "ETF",
+        "沪深300",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223904049940.html",
+      "title_cn": "A股三大指数收跌医疗美容与机器人板块逆市上涨",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "A股三大指数收跌，医疗美容与机器人板块逆市上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "大盘",
+        "医美",
+        "机器人",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223903856569.html",
+      "title_cn": "全线崩跌！“易中天”集体重挫“光”要熄灭了？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "被称为“易中天”的相关个股集体大幅下挫，光通信板块走弱引发市场关注。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "光通信",
+        "板块下跌",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223904160095.html",
+      "title_cn": "＂黑色星期四＂两大原因曝光！机构：投资者重新评估AI相关资产",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "市场出现“黑色星期四”式下跌，机构称投资者正在重新评估AI相关资产。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "大盘",
+        "机构观点",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223903972758.html",
+      "title_cn": "半导体板块盘中快速反弹华天科技直线涨停",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "半导体板块盘中快速反弹，华天科技直线涨停。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "涨停",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223904316464.html",
+      "title_cn": "10月22日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "汇总10月22日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "公告",
+        "上市公司",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223903857754.html",
+      "title_cn": "券商多重利好共振！板块迎政策与资金催化(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "券商板块受政策与资金多重利好共振催化，市场关注相关个股名单。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "券商",
+        "政策",
+        "资金流向",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610223904306997.html",
+      "title_cn": "不实！AI龙头股未出现网传连锁强平现象",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "针对网传AI龙头股出现连锁强平的说法，相关方回应称不实，未出现该现象。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "传闻澄清",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233904687077.html",
+      "title_cn": "21评论丨筑牢债券市场稳定防线",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "评论文章提出筑牢债券市场稳定防线，强调债市稳定相关议题。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "债券",
+        "政策",
+        "评论"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233904686978.html",
+      "title_cn": "21评论丨推动新动能的价值创造转化为居民购买力",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "评论文章讨论推动新动能的价值创造转化为居民购买力。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "消费",
+        "评论"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-22/doc-iniwavxm5873588.shtml",
+      "title_cn": "港股收评：恒指跌3.03% 科指大跌5.03% 科网股普跌 锂电池股下挫 宁德时代跌超7%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "港股收评：恒指跌3.03%，恒生科技指数大跌5.03%，科网股普跌，锂电池股下挫，宁德时代跌超7%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生指数",
+        "科网股",
+        "锂电池"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-23/doc-iniwecst4960785.shtml",
+      "title_cn": "恒指牛熊街货比(58:42)︱10月23日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "10月23日恒指牛熊街货比为58:42。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "牛熊证",
+        "恒指"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-22/doc-iniwarrm5158787.shtml",
+      "title_cn": "恒生科技指数跌超5% 几乎回吐“924”以来全部涨幅",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "恒生科技指数跌超5%，几乎回吐“924”行情以来全部涨幅。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生科技",
+        "大盘"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-22/doc-iniwaezu8030607.shtml",
+      "title_cn": "布鲁可放量大跌超15% 控股股东折让6%大宗减持套现2.51亿港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "布鲁可放量大跌超15%，控股股东以折让6%的大宗交易减持，套现2.51亿港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "减持",
+        "个股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-22/doc-inivzqcx5305294.shtml",
+      "title_cn": "开渠引水 港股IPO市场火热",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "港股IPO市场表现火热，被视为开渠引水之举。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "融资"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-22/doc-inivzyty4806624.shtml",
+      "title_cn": "芯德半导体通过港交所聆讯，小米、OPPO、联发科为股东，今年前四个月收入3.6亿元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "芯德半导体通过港交所聆讯，小米、OPPO、联发科为其股东，今年前四个月收入3.6亿元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-10-22/doc-iniwchpc5196827.shtml",
+      "title_cn": "大华继显降宁德时代H股目标价40.7%及A股目标价41.4%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "大华继显下调宁德时代H股目标价40.7%、A股目标价41.4%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "宁德时代",
+        "机构评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-22/doc-iniwcafi5938369.shtml",
+      "title_cn": "长城证券：仙工智能(06106)前瞻布局卡位具身智能赛道 首予“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "长城证券首次覆盖仙工智能（06106），看好其具身智能赛道布局，给予“增持”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "具身智能"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-22/doc-iniwavxi5206755.shtml",
+      "title_cn": "小摩：中国建筑国际(03311)第三季盈利逊预期 盈利下行风险仍存 重申“减持”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "摩根大通称中国建筑国际第三季盈利逊于预期，盈利下行风险仍存，重申“减持”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "业绩"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-22/doc-iniwavxi5182233.shtml",
+      "title_cn": "瑞银：降联邦制药(03933)评级至“中性” 重申先声药业(02096)为首选",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "瑞银将联邦制药评级下调至“中性”，并重申先声药业为首选。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-22/doc-iniwavxi5176392.shtml",
+      "title_cn": "大摩：天齐锂业(09696)第三季初步净利润符预期 维持“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "摩根士丹利称天齐锂业第三季初步净利润符合预期，维持“增持”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "锂业"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-22/doc-iniwavxm5890480.shtml",
+      "title_cn": "大和：降福耀玻璃(03606)目标价至68港元并降盈利预测 管理层强调三大增长引擎",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "大和下调福耀玻璃目标价至68港元并下调盈利预测，管理层强调三大增长引擎。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "汽车零部件"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/21/rick-rieder-investment-grade-bonds.html",
+      "title_cn": "BlackRock's Rick Rieder sees 'historic' opportunity in high-quality bonds",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "贝莱德Rick Rieder认为高质量债券存在“历史性”机会。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "机构观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/20/coreweave-debt-janus-henderson-lloyd.html",
+      "title_cn": "This Janus Henderson fund manager owns CoreWeave debt — here's why he's sticking with it",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "Janus Henderson一位基金经理持有CoreWeave债务，并解释其继续持有的理由。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/provident-financial-authorizes-5-stock-buyback-program-93CH-4967794",
+      "title_cn": "Provident Financial authorizes 5% stock buyback program",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "Provident Financial批准5%的股票回购计划。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "回购",
+        "公司公告"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/apple-svp-jennifer-newstead-sells-814748-in-aapl-stock-93CH-4967792",
+      "title_cn": "Apple SVP Jennifer Newstead sells $814,748 in AAPL stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "苹果高级副总裁Jennifer Newstead出售价值814,748美元的苹果股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "苹果"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/glenbrook-capital-management-purchases-74838-of-senestech-stock-93CH-4967791",
+      "title_cn": "Glenbrook Capital Management purchases $74,838 of SenesTech stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "Glenbrook Capital Management买入价值74,838美元的SenesTech股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "增持",
+        "机构持仓"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/block-director-anthony-eisen-sells-141m-in-block-xyz-shares-93CH-4967790",
+      "title_cn": "Block director Anthony Eisen sells $1.41m in Block (XYZ) shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "Block董事Anthony Eisen出售价值141万美元的Block（XYZ）股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "公司公告"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/pc-connection-chairman-gallup-sells-132m-in-shares-93CH-4967789",
+      "title_cn": "PC Connection chairman Gallup sells $1.32m in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "PC Connection董事长Gallup出售价值132万美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "公司公告"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/asian-markets-dip-as-investors-weigh-tech-earnings-gulf-tensions-4964558",
+      "title_cn": "Stocks drop as Meta fans AI worries, Treasuries gain",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "Meta引发市场对AI的担忧，美股下跌，美国国债上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "大盘",
+        "美债"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/newmont-q3-2026-slides-record-cash-flow-red-chris-nears-decision-93CH-4967786",
+      "title_cn": "Newmont Q3 2026 slides: record cash flow, Red Chris nears decision",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "Newmont第三季度业绩材料显示创纪录现金流，Red Chris项目接近决策阶段。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "黄金"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/provident-financial-declares-014-quarterly-dividend-93CH-4967785",
+      "title_cn": "Provident Financial declares $0.14 quarterly dividend",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "Provident Financial宣布每股0.14美元的季度股息。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "分红",
+        "公司公告"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/tredegar-director-john-gottwald-sells-267530-in-company-stock-93CH-4967782",
+      "title_cn": "Tredegar director John Gottwald sells $267,530 in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "Tredegar董事John Gottwald出售价值267,530美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "公司公告"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/fcc-grants-intel-waiver-for-foreignmade-robotic-devices-4967773",
+      "title_cn": "FCC grants Intel waiver for foreign-made robotic devices",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/22",
+      "summary": "美国FCC批准英特尔关于外国制造机器人设备的豁免申请。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "英特尔",
+        "监管",
+        "机器人"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
