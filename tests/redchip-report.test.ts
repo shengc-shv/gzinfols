@@ -87,7 +87,12 @@ const LEAD_US = {
   market: "us",
 };
 
-function makeFixture(): string {
+/**
+ * @param opts.usSnapshotProjects 美股链路快照的项目清单——默认 [LEAD_US]（有命中）；
+ *   传 [] 模拟**零命中日**（窗口无新红筹递表），用于锁累计口径不清盘。
+ * @param opts.usSnapshotCapturedAt 美股快照抓取时刻，默认与 LEAD_US.discoveredAt 一致。
+ */
+function makeFixture(opts?: { usSnapshotProjects?: unknown[]; usSnapshotCapturedAt?: string }): string {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), "redchip-report-"));
   const write = (rel: string, content: string) => {
     const p = path.join(dir, rel);
@@ -127,13 +132,16 @@ function makeFixture(): string {
       projects: [LEAD_RED, LEAD_NON, LEAD_INJECTED],
     }),
   );
-  // 美股链路快照（data/redchip-us/，与港股两条独立链路；总览页 2026-10-22 起合并）
+  // 美股链路快照（data/redchip-us/，与港股两条独立链路；总览页 2026-10-22 起合并）。
+  // 注意：总览页美股段自 2026-10-22 起改读**累计台账**（见 makeFixture 参数说明），
+  // 此快照只再承担「抓取时刻标注」职责——故项目清单可空而页面不得清盘。
+  const usSnapshotProjects = opts?.usSnapshotProjects ?? [LEAD_US];
   write(
     "data/redchip-us/latest.json",
     JSON.stringify({
-      capturedAt: "2026-10-22T09:55:20+08:00",
-      count: 1,
-      projects: [LEAD_US],
+      capturedAt: opts?.usSnapshotCapturedAt ?? "2026-10-22T09:55:20+08:00",
+      count: usSnapshotProjects.length,
+      projects: usSnapshotProjects,
     }),
   );
   write("daily_reports/2026-09-15/2026-09-15.html", "<!doctype html><html><body><p>x</p></body></html>");
@@ -239,6 +247,41 @@ test("美股红筹码：报告页来源标注走 SEC EDGAR（不是港交所披�
     const hk = fs.readFileSync(path.join(dir, "site/redchip/r/108870.html"), "utf8");
     assert.ok(hk.includes("抓取时刻：2026-09-15T08:30:00+08:00"), "港股线索抓取时刻不变");
     assert.ok(hk.includes("申请版本 PDF（港交所披露易）"), "港股线索来源标注不变");
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("美股总览段累计口径：零命中日（快照空数组）不清盘在册美股线索", () => {
+  // 契约（2026-10-22 用户拍板「跟港股一样」）：总览页美股段读共享台账 leads.json 里
+  // market==="us" 的全部在册线索，而非 data/redchip-us/latest.json 的两日窗口快照——
+  // 后者在安静窗口（零命中日）会把美股段整段滚掉，而报告页 r/*.html 与日报面板条目
+  // 仍在，三处口径不一致（10-22 明日生效性回检实证）。
+  const dir = makeFixture({ usSnapshotProjects: [], usSnapshotCapturedAt: "2026-10-23T07:05:00+08:00" });
+  try {
+    const r = spawnSync(process.execPath, [SCRIPT], { cwd: dir, encoding: "utf8" });
+    assert.equal(r.status, 0, `build-site 应成功退出：\n${r.stdout}\n${r.stderr}`);
+
+    // 报告页照常产出（与总览页解耦：读台账，不读美股快照）
+    assert.ok(fs.existsSync(path.join(dir, "site/redchip/r/us-2087307.html")), "美股线索报告页仍应产出");
+
+    const index = fs.readFileSync(path.join(dir, "site/redchip/index.html"), "utf8");
+    // 在册线索不因零命中日滚出总览页（旧快照口径下此处会整段消失）
+    assert.ok(index.includes("Sensing4D AI Ltd"), "零命中日总览页美股段不得清盘（累计口径）");
+    assert.ok(index.includes('href="r/us-2087307.html"'), "在册美股线索的「报告」列链接仍在");
+    // 统计行把在册美股线索计入总数：港股 3（夹具快照）+ 美股 1（台账）= 4 家，红筹 2
+    assert.ok(index.includes("共 4 家（红筹 2）"), "零命中日统计仍应包含在册美股线索");
+    // 抓取时刻标注仍取当日美股快照 capturedAt（数据新鲜度语义不变）
+    assert.ok(index.includes("美股 2026-10-23T07:05:00+08:00"), "快照时间应取当日美股抓取时刻");
+    // 港股段不受影响
+    assert.ok(index.includes("海柔創新"), "港股段不受本次改动影响");
+    // 源码级契约：美股段必须读累计台账，防回归为快照口径
+    const src = fs.readFileSync(path.join(ROOT, "scripts", "build-site.mjs"), "utf8");
+    assert.match(
+      src,
+      /const usProjects = rcLeads\.filter/,
+      "美股总览段必须读共享台账（累计口径），不得回退到 data/redchip-us/latest.json 快照",
+    );
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });
   }

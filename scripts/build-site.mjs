@@ -324,11 +324,23 @@ try {
   console.log(`[build-site] redchip/r/*.html（${rcPages} 页 / 线索 ${rcLeads.length} 条，零 LLM）`);
 
   // ---------- 5.5b) 红筹监测总览页：site/redchip/index.html ----------
-  // 总览页合并两条链路（2026-10-22）：港股快照（data/redchip/latest.json）∪ 美股快照
-  // （data/redchip-us/latest.json），按 appId 去重。此前只渲染港股快照 → 美股线索
-  // 「有报告页但项目清单里看不见」。两侧快照都缺失时保持空态（rcSnap=null 原样传）。
+  // 总览页合并两条链路（2026-10-22）：港股快照（data/redchip/latest.json）∪ 美股
+  // **累计台账**（data/redchip/leads.json 里 market==="us" 的全部在册线索），按 appId 去重。
+  // 此前只渲染港股快照 → 美股线索「有报告页但项目清单里看不见」。
+  //
+  // 🔴 美股段为何改累计口径（2026-10-22 用户拍板「跟港股一样」）：data/redchip-us/latest.json
+  //    只是「今天+昨天」两日窗口快照——零命中日会把在册美股线索**整段滚掉**（10-22 回检
+  //    实证：安静窗口总览页美股行消失，而报告页 r/*.html 与日报面板条目仍在，三处口径不
+  //    一致）。共享台账 data/redchip/leads.json 才是累积语义（mergeProjects 按 appId 并集、
+  //    只增不减），与港股面板（side-redchip 唯一读方）完全同源。
+  //    过滤与快照同口径：redchip-us.ts 只把 verdict=redchip 合并进台账（脚本内
+  //    `projects.filter(p => p.verdict === "redchip")` → mergeProjects），故台账内美股条目
+  //    天然全是红筹；此处显式再过一道 verdict，防未来口径变化把非红筹漏进总览段。
+  //    港股段维持快照口径未动：latest.json 被 .gitignore 且 CI 不跑 redchip-monitor
+  //    （2026-10-04 起移交本地），港股段在 CI 构建里本就为空——属另一处既有问题，
+  //    不在本次改动范围（已向用户报告，待拍板）。
   const hkProjects = rcSnap?.projects ?? [];
-  const usProjects = rcUsSnap?.projects ?? [];
+  const usProjects = rcLeads.filter((l) => l && l.market === "us" && l.verdict === "redchip");
   const seenAppIds = new Set(hkProjects.map((p) => String(p.appId ?? p.leadId ?? "")));
   const mergedProjects = [
     ...hkProjects,
@@ -348,7 +360,7 @@ try {
     "utf8",
   );
   console.log(
-    `[build-site] redchip/index.html (港股 ${hkProjects.length} 家 / 美股 ${usProjects.length} 家 / ${rcChanges.length} 条变更 / ${rcPages} 份报告)`,
+    `[build-site] redchip/index.html (港股 ${hkProjects.length} 家[快照] / 美股 ${usProjects.length} 家[累计台账] / ${rcChanges.length} 条变更 / ${rcPages} 份报告)`,
   );
 } catch (e) {
   console.log(`[build-site] 红筹展示页跳过：${e && e.message ? e.message : e}`);
