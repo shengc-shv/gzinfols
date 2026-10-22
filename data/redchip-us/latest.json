@@ -1,5 +1,24 @@
 {
-  "capturedAt": "2026-10-21T07:30:45+08:00",
-  "count": 0,
-  "projects": []
+  "capturedAt": "2026-10-22T09:55:20+08:00",
+  "count": 1,
+  "projects": [
+    {
+      "appId": "us-2087307",
+      "nameCn": "Sensing4D AI Ltd",
+      "nameEn": "",
+      "board": "美股",
+      "status": "F-1/F-1A",
+      "submitDate": "2026-10-21",
+      "domicile": "开曼群岛",
+      "isOffshore": true,
+      "gdCityHits": 16,
+      "gdCityMentions": 107,
+      "isGdConnected": true,
+      "vie": "historical",
+      "verdict": "redchip",
+      "discoveredAt": "2026-10-22T09:55:20+08:00",
+      "sourceUrl": "https://www.sec.gov/Archives/edgar/data/2087307/000121390026111161/ea0256781-12.htm",
+      "market": "us"
+    }
+  ]
 }
