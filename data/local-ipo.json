@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-23T07:06:58+08:00",
+  "fetchedAt": "2026-10-23T07:37:29+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
     "gd-bse-audit": 2,
     "gd-csrc-tutoring": 15,
     "gd-sse-audit": 1,
-    "gd-szse-audit": 1
+    "gd-szse-audit": 2
   },
   "items": [
     {
@@ -17,6 +17,17 @@
       "publishedAt": "2026-10-22",
       "source": "北交所IPO审核动态",
       "sourceId": "gd-bse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
+    },
+    {
+      "title": "微容科技：IPO问询中（拟创业板）",
+      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004348",
+      "excerpt": "注册地：广东｜保荐：华泰联合｜受理：2026-04-28｜状态：已问询｜更新：2026-10-22",
+      "publishedAt": "2026-10-22",
+      "source": "深交所IPO审核动态",
+      "sourceId": "gd-szse-audit",
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-reviewing"
