@@ -143,9 +143,18 @@ async function main(): Promise<void> {
   );
 
   // 元信息（**入库**）：与港股源**按源合并**写同一份 meta.json（港股那一格不被覆盖）。
+  //
+  // 🔴 meta.ok 口径（2026-10-22 修）：**能走到这里 = EDGAR 检索成功返回**——真失败
+  //    （5xx/网络错）已在上方 catch 里抛错退出、根本不写盘。零命中不是源故障：
+  //    美股「今天+昨天」两日窗口没有新递表是常态（如 10-23 承接 10-21 递表的
+  //    Sensing4D 之后）。旧口径 `ok: redchip.length > 0` 把零命中日标成源失败 →
+  //    日报面板经 `resolveRedchipCaptured → failedSources` 显示「⚠️ 本期未取到美股数据」，
+  //    数据完全正常时误告警（10-22 午间刚线上去掉该警告，次日零命中即会复发）。
+  //    与港股 `ok = records.length > 0` 的差异是源特性：港股申请列表永不为空，
+  //    美股两日窗口可以为 0；可观测性由 scanned / redchip 两个计数承担。
   writeMetaSource(
     "us",
-    { capturedAt: nowIso, ok: redchip.length > 0, scanned: filings.length, redchip: redchip.length },
+    { capturedAt: nowIso, ok: true, scanned: filings.length, redchip: redchip.length },
     nowIso,
   );
   console.log(`[redchip-us] 已写入 data/redchip/leads.json + data/redchip/meta.json(源 us) + data/redchip-us/{latest.json, snapshots/${date}-us.json}`);

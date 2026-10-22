@@ -53,3 +53,20 @@ test("美股红筹源失败语义：源不可达时不得写成「0 命中」的
   );
   assert.match(catchBlock, /exitCode = 1/, "源失败应以非零退出码告警（CI 可见）");
 });
+
+test("美股红筹源 meta.ok 口径：检索成功即 ok=true（零命中 ≠ 源失败）", () => {
+  // 契约（2026-10-22）：`writeMetaSource("us", ...)` 的 ok 必须恒为 true——
+  // 走到写盘 = searchF1Filings 已成功返回（失败在上方 catch 抛错、不写盘）。
+  // 零命中是美股两日窗口的常态；旧口径 `ok: redchip.length > 0` 会把零命中日
+  // 标成源失败，日报面板经 failedSources 误显示「⚠️ 本期未取到美股数据」。
+  const src = readFileSync(join(process.cwd(), "scripts/redchip-us.ts"), "utf8");
+  const i = src.indexOf("writeMetaSource(");
+  assert.ok(i > 0, "应存在 writeMetaSource 调用");
+  const call = src.slice(i, src.indexOf(");", i) + 2);
+  assert.match(call, /ok:\s*true/, "美股源 meta.ok 必须为 true（检索成功即健康，零命中不降级）");
+  assert.doesNotMatch(
+    call,
+    /ok:\s*redchip\.length/,
+    "不得再用红筹条数当 ok —— 零命中日误告警的根因",
+  );
+});
