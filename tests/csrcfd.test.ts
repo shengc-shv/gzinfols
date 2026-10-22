@@ -10,6 +10,7 @@ import {
   decidePage,
   coachStageOf,
   isWithdrawn,
+  isProgressReport,
   CsrcCoachCrawler,
   type CoachRow,
 } from "../lib/adapters/crawlers/sources/csrcfd";
@@ -23,14 +24,16 @@ function coachTr(opts: {
   recordDate?: string;
   status?: string;
   tutorOrg?: string;
+  /** 列6 报告类型（默认辅导备案报告；阶段性报告剔除测试用） */
+  reportType?: string;
   /** PDF 文件名中的公司名（模拟源站历史期次行：辅导对象列空、文件名含公司名）；默认空 → x.pdf */
   pdfCompany?: string;
 }): string {
-  const { company, dispatchOrg = "广东证监局", disclosure, recordDate = disclosure || "", status = "辅导备案", tutorOrg = "兴业证券", pdfCompany = "" } = opts;
+  const { company, dispatchOrg = "广东证监局", disclosure, recordDate = disclosure || "", status = "辅导备案", tutorOrg = "兴业证券", reportType = "辅导备案报告", pdfCompany = "" } = opts;
   const pdf = disclosure
     ? `<script>downloadPdf1('/mnt/storage/stock/pre_ipo/${disclosure.replace(/-/g, "/")}/${pdfCompany ? `关于${pdfCompany}首次公开发行股票并上市辅导工作进展报告（第N期）.pdf` : "x.pdf"}')</script>`
     : "";
-  return `<tr><td>1</td><td>${company}</td><td>${tutorOrg}</td><td>${recordDate}</td><td>${status}</td><td>${dispatchOrg}</td><td>辅导备案报告</td><td>title${pdf}</td></tr>`;
+  return `<tr><td>1</td><td>${company}</td><td>${tutorOrg}</td><td>${recordDate}</td><td>${status}</td><td>${dispatchOrg}</td><td>${reportType}</td><td>title${pdf}</td></tr>`;
 }
 
 function pageHtml(rows: string[]): string {
@@ -97,10 +100,13 @@ describe("decidePage", () => {
     pdfPath: disclosure ? `/pre_ipo/${disclosure.replace(/-/g, "/")}/x.pdf` : "",
   });
 
-  test("页内最早 < 昨天 → 停止", () => {
-    // 倒序：第一条最新、最后一条最早。最后一条早于昨天 → stop
+  // 2026-10-22 起判据改为「整页最大更新日期 < 下界才停」（源站按报告更新排序，非备案时间）：
+  // 页内仍有 ≥ 下界的记录 → 后续页可能还有窗内数据，必须继续翻（旧逻辑用页内末条，被老报告行带偏）。
+
+  test("页内含今天记录（末条是前天老行）→ 继续（修复：不再被页尾老行带停）", () => {
+    // 复现实测 bug 场景：页首新、页尾穿插老报告行。旧逻辑取末条有效日期（前天）→ 误停
     const rows = [mk(TODAY), mk(BEFORE_YESTERDAY)];
-    assert.deepEqual(decidePage(rows, YESTERDAY), { stop: true, staleHit: false });
+    assert.deepEqual(decidePage(rows, YESTERDAY), { stop: false, staleHit: false });
   });
 
   test("页内最早 = 昨天 → 继续（不停止）", () => {
@@ -113,18 +119,24 @@ describe("decidePage", () => {
     assert.deepEqual(decidePage(rows, YESTERDAY), { stop: false, staleHit: false });
   });
 
+  test("整页都早于窗口下界 → 停止", () => {
+    const rows = [mk(BEFORE_YESTERDAY), mk(BEFORE_YESTERDAY)];
+    assert.deepEqual(decidePage(rows, YESTERDAY), { stop: true, staleHit: false });
+  });
+
+  test("末几行无日期但前面有窗内记录 → 继续（历史期次行不参与判定）", () => {
+    const rows = [mk(TODAY), mk(), mk(BEFORE_YESTERDAY)];
+    assert.deepEqual(decidePage(rows, YESTERDAY), { stop: false, staleHit: false });
+  });
+
   test("全页无有效披露日期 → staleHit", () => {
     const rows = [mk(), mk()];
     assert.deepEqual(decidePage(rows, YESTERDAY), { stop: false, staleHit: true });
   });
-
-  test("末几行无日期但前面有 → 取最后有效日期判定", () => {
-    const rows = [mk(TODAY), mk(), mk(BEFORE_YESTERDAY)];
-    assert.deepEqual(decidePage(rows, YESTERDAY), { stop: true, staleHit: false });
-  });
 });
 
-// —— run 集成测试：用 mock fetchPage 验证倒序早停 + 广东过滤 + stale 兜底 ——
+// —— run 集成测试：用 mock fetchPage 验证更新日期早停 + 广东过滤 + stale 兜底 ——
+// （2026-10-22：「倒序早停」改为「更新日期早停」：源站按报告更新排序，页尾老报告行不再触发误停）
 class MockCrawler extends CsrcCoachCrawler {
   private pages: string[];
   private idx = 0;
@@ -138,19 +150,47 @@ class MockCrawler extends CsrcCoachCrawler {
   }
 }
 
-describe("run (倒序早停 + 广东过滤)", () => {
-  test("页内最早=前天 → 只抓 1 页即停", async () => {
+describe("run (更新日期早停 + 广东过滤)", () => {
+  test("页1 含今天记录、页2 整页早于窗口 → 抓 2 页后停", async () => {
     const crawler = new MockCrawler([
       pageHtml([
         coachTr({ company: "广州A", disclosure: TODAY }),
         coachTr({ company: "深圳B", disclosure: YESTERDAY }),
-        coachTr({ company: "东莞C", disclosure: BEFORE_YESTERDAY }), // 最早→触发早停
+        coachTr({ company: "东莞C", disclosure: BEFORE_YESTERDAY }), // 页1末条老行，不触发停（2026-10-22 修复）
+      ]),
+      pageHtml([
+        coachTr({ company: "佛山D", disclosure: BEFORE_YESTERDAY }), // 页2 整页早于窗口 → 停
+        coachTr({ company: "珠海E", disclosure: BEFORE_YESTERDAY }),
       ]),
     ]);
     const res = await crawler.run();
-    // 全为广东企业，但早停只抓了 1 页（3 条）
-    assert.equal(res.length, 3);
+    // 两页全为广东企业，共 5 条（修复前只抓页1 的 3 条）
+    assert.equal(res.length, 5);
     assert.ok(res.every((r) => r.region === "gd"));
+  });
+
+  test("乱序混合页：页尾老报告行（2026-04-08 更新）不导致早停，续抓第 2 页的广东新备案", async () => {
+    // 复现实测 bug（2026-10-22）：第 1 页按更新排序含老报告行，旧逻辑在此误停，
+    // 漏掉第 2 页的广东奔达（10-20）/ 深圳微见（10-19）
+    const crawler = new MockCrawler([
+      pageHtml([
+        coachTr({ company: "安徽创瑞技术股份有限公司", dispatchOrg: "安徽证监局", disclosure: TODAY }),
+        coachTr({ company: "某2022年备案老企业", dispatchOrg: "北京证监局", disclosure: TODAY }),
+        coachTr({ company: "某4月更新的老企业", dispatchOrg: "江苏证监局", disclosure: BEFORE_YESTERDAY }), // 页尾老行
+      ]),
+      pageHtml([
+        coachTr({ company: "广东奔达精密工业股份有限公司", disclosure: YESTERDAY }),
+        coachTr({ company: "深圳微见先进封装技术股份有限公司", disclosure: BEFORE_YESTERDAY }),
+      ]),
+      pageHtml([
+        coachTr({ company: "某全老页企业", dispatchOrg: "北京证监局", disclosure: BEFORE_YESTERDAY }),
+      ]),
+    ]);
+    const res = await crawler.run();
+    // 广东 2 条必须被抓到（修复前第 1 页即停，res=0）
+    assert.equal(res.length, 2);
+    assert.match(res[0].title || "", /广东奔达精密工业/);
+    assert.match(res[1].title || "", /深圳微见先进封装/);
   });
 
   test("sourceId=gd-csrc-tutoring（IPO 体系重设计，弃用 em-ipo 防 render 白名单静默丢弃）", async () => {
@@ -163,19 +203,22 @@ describe("run (倒序早停 + 广东过滤)", () => {
     assert.notEqual(res[0].sourceId, "em-ipo");
   });
 
-  test("页内最早=昨天 → 续抓第 2 页（第2页含前天→停）", async () => {
+  test("页1 最早=昨天 → 续抓第 2 页，第 3 页整页早于窗口 → 停", async () => {
     const crawler = new MockCrawler([
       pageHtml([
         coachTr({ company: "广州A", disclosure: TODAY }),
-        coachTr({ company: "佛山B", disclosure: YESTERDAY }), // 页1最早=昨天→续抓
+        coachTr({ company: "佛山B", disclosure: YESTERDAY }), // 页1 有窗内记录 → 续抓
       ]),
       pageHtml([
         coachTr({ company: "珠海C", disclosure: YESTERDAY }),
-        coachTr({ company: "中山D", disclosure: BEFORE_YESTERDAY }), // 页2最早=前天→停
+        coachTr({ company: "中山D", disclosure: BEFORE_YESTERDAY }), // 页2 仍有窗内记录 → 续抓
+      ]),
+      pageHtml([
+        coachTr({ company: "惠州F", disclosure: BEFORE_YESTERDAY }), // 页3 整页早于窗口 → 停
       ]),
     ]);
     const res = await crawler.run();
-    assert.equal(res.length, 4);
+    assert.equal(res.length, 5, "三页全收（页3 虽整页早于窗口仍整页收集，下游才裁窗）");
   });
 
   test("混合全国+广东 → 仅保留广东", async () => {
@@ -242,6 +285,14 @@ describe("辅导状态 → 上市阶段", () => {
     assert.equal(isWithdrawn(mk("辅导验收")), false);
   });
 
+  test("isProgressReport：阶段性报告剔除、节点事件保留（2026-10-22 用户拍板）", () => {
+    const row = (reportType: string): CoachRow => ({ ...mk("辅导备案"), reportType });
+    assert.equal(isProgressReport(row("辅导进展情况报告")), true, "第N期进展=阶段性噪音，剔除");
+    assert.equal(isProgressReport(row("辅导备案报告")), false, "新进入辅导=商机，保留");
+    assert.equal(isProgressReport(row("辅导工作完成报告")), false, "完成辅导=即将申报，重大节点保留");
+    assert.equal(isProgressReport(row("辅导情况报告")), false, "非进展类，保守保留");
+  });
+
   test("run：撤回辅导备案不产出（非商机）", async () => {
     const crawler = new MockCrawler([
       pageHtml([
@@ -252,6 +303,20 @@ describe("辅导状态 → 上市阶段", () => {
     const res = await crawler.run();
     assert.equal(res.length, 1, "撤回条目应被丢弃，只留正常辅导中的");
     assert.match(res[0].title || "", /广州A/);
+  });
+
+  test("run：阶段性报告不产出，备案/完成报告保留（2026-10-22 用户拍板）", async () => {
+    const crawler = new MockCrawler([
+      pageHtml([
+        coachTr({ company: "广州A", disclosure: TODAY, reportType: "辅导备案报告" }),
+        coachTr({ company: "深圳B", disclosure: TODAY, reportType: "辅导进展情况报告" }),
+        coachTr({ company: "东莞C", disclosure: TODAY, reportType: "辅导工作完成报告" }),
+      ]),
+    ]);
+    const res = await crawler.run();
+    assert.equal(res.length, 2, "进展报告剔除，备案+完成保留");
+    assert.match(res[0].title || "", /广州A/);
+    assert.match(res[1].title || "", /东莞C/);
   });
 
   test("run：辅导验收 → ipoStage=stage-coach-done（此前被硬编码成 tutoring）", async () => {

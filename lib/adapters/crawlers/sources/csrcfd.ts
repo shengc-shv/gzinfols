@@ -31,7 +31,10 @@ import type { GdStage } from "../../../services/classify/gd-ipo";
  */
 
 const SOURCE_BASE = "http://eid.csrc.gov.cn/csrcfd";
-const MAX_PAGES = 10; // 兜底：最多抓 10 页（约 2000 条），防死循环
+// 2026-10-22：10 → 20。源站按「报告更新日期」排序，存量库中大量企业的报告期集中在近几日，
+// 每页都混入约 20 行窗内记录；实测（2026-10-22）翻到第 16 页仍见 10-16 的记录，10 页兜底会截断数据。
+// 20 页 ≈ 8MB/次，单次抓取约 40 秒，可接受；仍保留防死循环语义。
+const MAX_PAGES = 20; // 兜底：最多抓 20 页，防死循环
 const CONSECUTIVE_STALE_LIMIT = 2; // 兜底：连续 2 页无有效披露日期即停
 /** 早停窗口（日差，含今天）：与底部「广东IPO动态」7 天展示窗对齐（2026-09-10 用户拍板）。 */
 const CSRC_WINDOW_DAYS = IPO_SOURCE_WINDOW_DAYS;
@@ -127,6 +130,15 @@ export function isWithdrawn(row: CoachRow): boolean {
   return (row.status || "").includes("撤回");
 }
 
+/**
+ * 是否阶段性报告（2026-10-22 用户拍板剔除）：报告类型为「辅导进展情况报告」（第N期）——
+ * 同一企业的周期性进展披露，不产生新商机，纯噪音（实测窗口内广东企业 667 条中 91% 是此类）。
+ * 保留：辅导备案报告（新进入辅导）、辅导工作完成报告（完成辅导=即将申报，重大节点）。
+ */
+export function isProgressReport(row: CoachRow): boolean {
+  return (row.reportType || "").includes("进展");
+}
+
 /** 阶段：已知状态按表映射，未知回退 stage-tutoring。 */
 export function coachStageOf(row: CoachRow): GdStage {
   return COACH_STAGE_BY_STATUS[row.status] ?? "stage-tutoring";
@@ -141,10 +153,19 @@ export function decidePage(
   rows: CoachRow[],
   floor: string,
 ): { stop: boolean; staleHit: boolean } {
-  const pageEarliest = [...rows].reverse().find((r) => extractDisclosureDate(r) !== null);
-  const d = pageEarliest ? extractDisclosureDate(pageEarliest) : null;
-  if (d === null) return { stop: false, staleHit: true };
-  if (d < floor) return { stop: true, staleHit: false };
+  // 2026-10-22 修复：排序键是「报告更新日期」（PDF 路径日期），不是备案时间列——
+  // 源站按「最近有报告更新的企业」倒序，2022 年备案但今日有进展报告的企业排在页首
+  // （实测：备案 2022-08-02 / PDF 更新 2026-10-22 排第 2 行）。
+  // 旧逻辑取「页内从后往前第一条有日期的行」当页内最早，会被穿插的历史期次合并行 / 老报告行带偏：
+  // 实测第 1 页末条为 2026-04-08 更新的老记录 → 误判早停 → 第 2 页起的广东数据全漏
+  // （漏掉广东奔达 10-20、深圳微见 10-19 等，豆包侧台账有、本地补数 0 条）。
+  // 新判据：整页最大更新日期仍 ≥ 窗口下界 → 后续页仍可能有窗内记录，继续翻；整页都早于下界才停。
+  const dates = rows
+    .map((r) => extractDisclosureDate(r))
+    .filter((d): d is string => d !== null);
+  if (dates.length === 0) return { stop: false, staleHit: true };
+  const pageNewest = dates.reduce((a, b) => (b > a ? b : a));
+  if (pageNewest < floor) return { stop: true, staleHit: false };
   return { stop: false, staleHit: false };
 }
 
@@ -209,6 +230,7 @@ export class CsrcCoachCrawler extends BaseCrawler {
     let page = 1;
     let consecutiveStale = 0;
     let withdrawn = 0; // 「撤回辅导备案」计数（非商机，丢弃后仅进日志，便于观测）
+    let progressDropped = 0; // 「辅导进展情况报告」计数（阶段性报告，2026-10-22 用户拍板剔除）
     let sameDayDropped = 0; // 方案B「同日同公司重复披露」丢弃计数（2026-10-11）
     const allDates: string[] = []; // 新鲜度哨兵输入（含窗口外日期）
     // 方案B（2026-10-11 用户拍板）：同日同公司仅保留最新一期。
@@ -240,6 +262,12 @@ export class CsrcCoachCrawler extends BaseCrawler {
         // 实测占比约 14%（120 行采样 17 条），不过滤会持续污染商机列表。
         if (isWithdrawn(r)) {
           withdrawn++;
+          continue;
+        }
+        // 阶段性报告剔除（2026-10-22 用户拍板）：辅导进展情况报告（第N期）不产生新商机，
+        // 667 条窗口内广东企业里 91% 是此类；保留备案（新入辅导）与完成（即将申报）两类节点事件。
+        if (isProgressReport(r)) {
+          progressDropped++;
           continue;
         }
         // 时间真实性红线：优先披露日期，次选备案时间（源真实字段，非伪造）；皆无则废弃。
@@ -278,10 +306,11 @@ export class CsrcCoachCrawler extends BaseCrawler {
         });
       }
 
-      // 再判是否继续翻页（倒序早停：页内最早一条越过 7 天窗口则不再抓下一页；当前页已收）。
+      // 再判是否继续翻页（更新日期早停：整页最大报告更新日期越过 7 天窗口才不再抓下一页；当前页已收）。
+      // 注意不能用「页内末条」判定——源站穿插历史期次合并行 / 老报告行，会把末条带到窗口外（2026-10-22 修复）。
       const dec = decidePage(rows, floor);
       if (dec.stop) {
-        console.log(`[${this.name}] 第 ${page} 页最早披露已越过 7 天窗口（${floor}），早停（不再翻页）`);
+        console.log(`[${this.name}] 第 ${page} 页整页最大更新日期已越过 7 天窗口（${floor}），早停（不再翻页）`);
         break;
       }
       if (dec.staleHit) {
@@ -300,6 +329,11 @@ export class CsrcCoachCrawler extends BaseCrawler {
     if (withdrawn > 0) {
       console.log(
         `[${this.name}] 已丢弃「撤回辅导备案」${withdrawn} 条（企业终止本次 IPO，非商机）`,
+      );
+    }
+    if (progressDropped > 0) {
+      console.log(
+        `[${this.name}] 已丢弃「辅导进展情况报告」${progressDropped} 条（阶段性报告无新商机，2026-10-22 用户拍板剔除）`,
       );
     }
     if (sameDayDropped > 0) {
