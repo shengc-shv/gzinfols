@@ -34,18 +34,38 @@ a{color:#2f4cdd}
 </style></head><body>
 <p class="topnav"><a href="../index.html">← 返回最新一期简报</a></p>
 <h1>红筹项目监测</h1>
-<div class="sub">快照时间 — · 共 0 家（红筹 0）· 口径：境外注册 ∧ 广东运营实体词频 ≥ 3</div>
+<div class="sub">快照时间 美股 2026-10-22T09:55:20+08:00 · 共 1 家（红筹 1）· 口径：境外注册 ∧ 广东运营实体词频 ≥ 3</div>
 
 <h2>项目清单</h2>
 <div class="bar">
   <select id="fVerdict"><option value="">全部判定</option><option value="redchip">红筹</option><option value="non-redchip">非红筹</option><option value="unverified">待核验</option></select>
-  <select id="fBoard"><option value="">全部板块</option><option value="主板">主板</option><option value="GEM">GEM</option></select>
+  <select id="fBoard"><option value="">全部板块</option><option value="主板">主板</option><option value="GEM">GEM</option><option value="美股">美股</option></select>
   <select id="fOff"><option value="">离岸不限</option><option value="true">仅离岸</option><option value="false">仅非离岸</option></select>
   <select id="fGd"><option value="">广东不限</option><option value="true">粤连接达标</option><option value="false">未达标</option></select>
   <input id="fName" placeholder="企业名称关键词" />
   <select id="sortBy"><option value="discovered">按发现时间</option><option value="submit">按递表日</option><option value="name">按企业名</option></select>
 </div>
-<div class="empty">暂无数据（尚未生成快照）。</div>
+<table id="tbl">
+  <thead><tr>
+    <th data-k="name">企业名称</th><th>板块</th><th>状态</th><th data-k="submit">递表日</th>
+    <th>注册地</th><th>广东词频</th><th>VIE</th><th>判定</th><th data-k="discovered">发现时间</th><th>来源</th><th>报告</th>
+  </tr></thead>
+  <tbody>
+      <tr data-verdict="redchip" data-board="美股" data-offshore="true" data-gd="true" data-name="Sensing4D AI Ltd" data-discovered="2026-10-22T09:55:20+08:00" data-submit="2026-10-21">
+        <td class="nm">Sensing4D AI Ltd<div class="en"></div></td>
+        <td>美股</td>
+        <td>F-1/F-1A</td>
+        <td>2026-10-21</td>
+        <td>开曼群岛 <span class="tag t-off">离岸</span></td>
+        <td class="num">16 <span class="tag t-gd">粤</span></td>
+        <td>已终止</td>
+        <td><span class="tag t-redchip">红筹</span></td>
+        <td class="dt">2026-10-22</td>
+        <td><a href="https://www.sec.gov/Archives/edgar/data/2087307/000121390026111161/ea0256781-12.htm" target="_blank" rel="noopener noreferrer">原文</a></td>
+        <td><a class="rpt" href="r/us-2087307.html">报告</a></td>
+      </tr>
+  </tbody>
+</table>
 
 <h2>变更历史</h2>
 <div class="empty">暂无变更记录。</div>
