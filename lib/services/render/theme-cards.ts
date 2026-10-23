@@ -55,6 +55,14 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
      full.ts 内联段里 .delta-badge 的 margin-left: 6px（那段在样式表更靠后，
      同权重会胜出）。 */
   .must-card .must-top-badge, .must-card .delta-badge { margin-left: calc(1.2rem + 0.55rem); }
+  /* 双视角标记（2026-10-23 sc）：商机卡与今日必读是**同一事件的另一面** ——
+     不是重复刷屏，而是「宏观面看必读、落地面看这张」。低调灰底，不加视觉重量。 */
+  .dual-badge {
+    display: inline-block; margin-left: 0.4rem; padding: 1px 6px;
+    font-size: 0.66rem; font-weight: 600; color: var(--muted, #6b6b73);
+    background: color-mix(in srgb, var(--muted, #6b6b73) 12%, transparent);
+    border-radius: 3px; vertical-align: middle; white-space: nowrap;
+  }
   /* N 层：top 3 必读卡片 — "今日三件事" 视觉强调（行长音频重点） */
   .must-card.must-top {
     background: color-mix(in srgb, var(--accent-brand) 6%, var(--card));

@@ -147,6 +147,10 @@ export function renderReportExec(report: DailyReport): string {
     const insInBody = (it.sources ?? []).some((s) => s?.url && bodyUrls.has(s.url));
     const insId = insUrl ? itemAnchorId(insUrl) : summaryAnchorId("insight", it.topic ?? "");
     const insAnchor = insInBody ? "" : ` id="${insId}"`;
+    // 双视角标记（2026-10-23 sc）：与今日必读**同一事件**（同 url）→ 标「同今日必读」。
+    // 这不是重复刷屏，而是在告诉读者「宏观面看必读、这张看落地面」。
+    const dualWithMust =
+      !!insUrl && (report.must_read ?? []).some((m) => m && m.url === insUrl);
     return `<article class="insight"${insAnchor} data-audio-section="insight">
       ${(it.tags ?? []).length > 0
         ? `<div class="insight-tags">${(it.tags ?? [])
@@ -154,7 +158,7 @@ export function renderReportExec(report: DailyReport): string {
             .join("")}</div>`
         : ""}
       ${segChips}
-      <h3>${escapeHtml(it.topic)}${renderDeltaBadge(it.delta)}${renderMaturityBadge(it.maturity)}${srcMarks}</h3>
+      <h3>${escapeHtml(it.topic)}${dualWithMust ? `<span class="dual-badge" title="同一事件的另一面：宏观面见上方今日必读，这里是客群/产品侧的落地含义">同今日必读</span>` : ""}${renderDeltaBadge(it.delta)}${renderMaturityBadge(it.maturity)}${srcMarks}</h3>
       ${it.impact ? `<p><b>影响：</b>${escapeHtml(it.impact)}</p>` : ""}
     </article>`;
   };

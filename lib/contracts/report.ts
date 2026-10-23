@@ -312,6 +312,32 @@ export interface DailyReport {
    * 展开显示「各源抓取/收录条数」，让读者能判断内容覆盖是否完整、哪个源本期偏弱。
    */
   sourceStats?: SourceStat[];
+  /**
+   * 商机漏斗埋点（2026-10-23 sc：定位「商机怎么突然只剩 1 条」不再靠翻 CI 日志）。
+   *
+   * 背景：10-23 期商机从 6 条塌到 1 条，根因是「必读互斥」单边剔除；但当时只能从
+   * event-memory 反推（首播 1 条），花了五六步才定位。这个字段把关键计数直接落盘。
+   */
+  insightFunnel?: InsightFunnel;
+}
+
+/** 商机漏斗计数（见 `DailyReport.insightFunnel`）。 */
+export interface InsightFunnel {
+  /** LLM 给出的商机候选数 */
+  candidates: number;
+  /** 按商机视角分选入的条数（= 最终卡片数） */
+  played: number;
+  /** 命中内容记忆判重被跳过的条数 */
+  skippedByMemory: number;
+  /** 双视角候选数（biz 与 macro 均 ≥ 阈值 —— 按商机侧文本自身打分） */
+  dualCandidates: number;
+  /**
+   * 与今日必读**同源**（同 url）而**仍被保留**的商机条数 —— 卡片上标「同今日必读」。
+   * 旧口径下这批会被互斥剔除；新口径下它们是「同一事件的另一面」，予以双呈现。
+   */
+  sameAsMustRead: number;
+  /** 定调/必读目标上限（便于一眼看出「缺口」） */
+  target: number;
 }
 
 /**

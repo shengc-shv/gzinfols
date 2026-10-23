@@ -416,7 +416,10 @@ function mkExclExec(): ExecutiveSummary {
   } as ExecutiveSummary;
 }
 
-test("商机与必读互斥：同 URL / 标题逐字相同的商机被剔除（2026-10-04 sc R4-②）", () => {
+test("双视角新口径：同 URL 的商机不再剔除，允许与必读双呈现（2026-10-23 sc）", () => {
+  // 2026-10-04 曾要求「商机与必读同 URL 互斥」；10-23 线上事故（商机 6→1）证明该口径
+  // 会让商机板块为 LLM 的分类失误买单 —— sc 改为「同一批事实的两个解读视角」，
+  // 两侧都可呈现，口播层的重复由 spoken_insights 侧兜底。
   const g = applyMemoryGuard({
     exec: mkExclExec(),
     store: emptyMemory(),
@@ -424,11 +427,18 @@ test("商机与必读互斥：同 URL / 标题逐字相同的商机被剔除（2
     now: NOW,
   });
   const topics = (g.exec.insights ?? []).map((i) => i.topic);
-  assert.equal(topics.length, 2, `应剩 2 条（实际 ${topics.length}：${topics.join(" / ") || "空"}）`);
-  assert.ok(!topics.includes("现房销售改革落地"), "同 URL 的商机必须剔除（哪怕标题被改写过）");
-  assert.ok(!topics.includes("贷款明白纸全面铺开"), "标题逐字相同 + 同 URL 的商机必须剔除");
-  assert.ok(topics.includes("预售资金监管细则征求意见"), "不同源、不同标题的商机必须保留（不得误伤）");
-  assert.ok(topics.includes("跨境结算便利化提速"), "独立商机必须保留");
+  // 3 条而非 4：「贷款明白纸全面铺开」与必读**标题逐字相同** → 被**内容记忆判重**挡掉
+  //（同一份报告里同一条文案念两遍毫无意义）。这与「互斥剔除」是两回事 ——
+  // 互斥删的是「同 URL 但标题已改写」的双视角条目（现房销售改革落地），那条被保留。
+  assert.equal(topics.length, 3, `实际 ${topics.length}：${topics.join(" / ") || "空"}`);
+  assert.ok(topics.includes("现房销售改革落地"), "同 URL 但标题改写过 → 双视角保留（宏观面在必读，落地面在这里）");
+  assert.ok(!topics.includes("贷款明白纸全面铺开"), "标题逐字相同 → 由记忆判重挡掉（不是互斥）");
+  assert.ok(topics.includes("预售资金监管细则征求意见"), "不同源商机保留");
+  assert.ok(topics.includes("跨境结算便利化提速"), "独立商机保留");
+  // 埋点：候选 4 → 播出 3，损耗来自记忆判重（skippedByMemory=1），不再有互斥损耗
+  assert.equal(g.insightFunnel?.candidates, 4);
+  assert.equal(g.insightFunnel?.played, 3);
+  assert.equal(g.insightFunnel?.skippedByMemory, 1);
 });
 
 test("商机互斥判据不用事件指纹：泛化词+地域不得导致误剔（回归：sameEvent 层已移除）", () => {

@@ -10,7 +10,7 @@
  */
 
 import type { ArticleInput } from "../../contracts/article";
-import type { DailyReport, ReportItem } from "../../contracts/report";
+import type { DailyReport, InsightFunnel, ReportItem } from "../../contracts/report";
 import { applyDisplayCaps } from "../../services/assemble/display-cap";
 import {
   buildExecutiveFromScores,
@@ -37,6 +37,7 @@ import {
   MR_CONNECTORS,
   groupedInsightsSpeech,
   heroSpeechLine,
+  insightSpeechAligned,
   mustReadSpeechLine,
   riskSpeechLine,
 } from "../../services/voice/speech-lines";
@@ -61,17 +62,7 @@ export function syncNarration(exec: ExecutiveSummary): ExecutiveSummary {
   const heroFallback = heroSpeechLine(exec.hero_line);
   out.spoken_hero = exec.spoken_hero?.trim() ? exec.spoken_hero : heroFallback || undefined;
 
-  // 商机口播（2026-09-28 sc 口径）：**LLM 的 spoken_insights 优先** —— 它按客群归并成
-  // 3~4 条、不念商户名（「哪类客群、什么方向、让团队做什么」）；缺失时才由卡面按客群
-  // 归并兜底派生。理由与 hero 同源：逐条 1:1 会既超预算又听不懂重点（09-28 实测
-  // 6 条 662 字，超 520 上限，末条 action 被砍成残句）。
-  const ins = exec.insights ?? [];
-  out.spoken_insights = ins.length
-    ? exec.spoken_insights?.trim()
-      ? exec.spoken_insights
-      : groupedInsightsSpeech(ins)
-    : undefined; // 无商机卡 → 口播同步置空（与 risk 同口径，不留孤儿口播）
-
+  // ---- 必读段先算（商机口播要用它做「事实锚去重」的兜底）----
   const mr = exec.must_read ?? [];
   out.spoken_must_read = mr.length
     ? mr
@@ -80,6 +71,28 @@ export function syncNarration(exec: ExecutiveSummary): ExecutiveSummary {
         )
         .join("")
     : undefined;
+
+  // 商机口播（2026-09-28 sc 口径）：**LLM 的 spoken_insights 优先** —— 它按客群归并成
+  // 3~4 条、不念商户名（「哪类客群、什么方向」）；缺失时才由卡面按客群归并兜底派生。
+  //
+  // 🔴 2026-10-23 sc 修订：LLM 稿不再**无条件**采用 —— 必须先与最终卡片**对齐**
+  //（`insightSpeechAligned`：防漏 + 防多讲）。10-23 事故：稿子讲了 6 条、卡片经互斥过滤
+  // 只剩 1 条，领导听到 6 条翻手机只看到 1 条 → 口播与卡面不同源。
+  // 不对齐时回退确定性派生，并把「必读已念的数字事实」从商机段剔除（B 修订版：
+  // 同一事件双视角都保留，但事实本身不重复念）。
+  const ins = exec.insights ?? [];
+  const detSpeech = ins.length ? groupedInsightsSpeech(ins, { mustReadSpeech: out.spoken_must_read }) : "";
+  if (!ins.length) {
+    out.spoken_insights = undefined; // 无商机卡 → 口播同步置空（与 risk 同口径，不留孤儿口播）
+  } else {
+    const llmSpeech = exec.spoken_insights?.trim() ?? "";
+    if (llmSpeech && insightSpeechAligned(llmSpeech, ins)) {
+      out.spoken_insights = llmSpeech;
+    } else {
+      // 回退确定性派生；若剔除事实锚后整段为空 → 保持 undefined（不产出孤儿口播）
+      out.spoken_insights = detSpeech || undefined;
+    }
+  }
 
   // risk 1:1（去重清空则口播同步清空，消除孤儿口播）
   if (exec.risk) {
@@ -210,6 +223,8 @@ export async function buildExecutiveSummary(
    * **定稿后的必读 / 商机 + 各自的分行相关性分值**再请它写一次（质量对齐正常路径）。
    * 重写结果仍须通过「维度可回溯」校验；任一环节失败都保留规则产出 —— **绝不阻断发布**。
    */
+  /** 商机漏斗埋点（guard 内产生，写 report 时落盘；2026-10-23 sc）。 */
+  let lastInsightFunnel: InsightFunnel | undefined;
   const guard = async (ex: ExecutiveSummary): Promise<ExecutiveSummary> => {
     // 去重后统一对齐口播（1:1 由卡面派生，零 LLM）——记忆关闭时也不放过，保证预览一致
     if (!memoryOn || !memStore) return syncNarration(ex);
@@ -230,6 +245,7 @@ export async function buildExecutiveSummary(
         now: ctx.startTime,
       });
       memStore = g.store;
+      if (g.insightFunnel) lastInsightFunnel = g.insightFunnel;
       for (const line of g.log) ctx.log.info("exec", line);
       let out = g.exec;
       if (g.heroRewriteNeeded) {
@@ -403,6 +419,8 @@ export async function buildExecutiveSummary(
       // 必须重播的强制换角度，板块被去重掏空时分三级兜底补齐。
       exec = await guard(exec);
       const next: DailyReport = { ...report };
+      // 商机漏斗埋点（2026-10-23 sc）：直接落盘，下次定位「商机为什么变少」不用翻日志
+      if (lastInsightFunnel) next.insightFunnel = lastInsightFunnel;
       if (exec.hero_line) next.hero_line = exec.hero_line;
       const mustRead = exec.must_read
         .filter((m) => !!m.url)

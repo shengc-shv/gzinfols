@@ -25,6 +25,7 @@
  */
 
 import type { ExecutiveSummary, ExecInsight, ExecRisk } from "../enrich/executive-summary";
+import type { InsightFunnel } from "../../contracts/report";
 import {
   HERO_MIN_DIMENSIONS,
   auditHeroDimensions,
@@ -33,6 +34,7 @@ import {
   deriveHeroLine,
 } from "../enrich/executive-summary";
 import { scoreBranchRelevance } from "../select/filters/relevance-score";
+import { scoreDualPerspective, DUAL_THRESHOLD } from "../select/filters/dual-perspective";
 import { formatBroadcastAt } from "./broadcast-time";
 import {
   beginDay,
@@ -109,6 +111,8 @@ export interface GuardOutput {
    * LLM 不可用时保持规则产出，不阻断发布。
    */
   heroRewriteNeeded?: boolean;
+  /** 商机漏斗计数（2026-10-23 sc：直接落盘，不再靠翻 CI 日志反推）。 */
+  insightFunnel?: InsightFunnel;
 }
 
 /**
@@ -217,6 +221,8 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   const next: ExecutiveSummary = { ...exec };
   /** 定调是否被**规则**改写（详见 `GuardOutput.heroRewriteNeeded`）。 */
   let heroRewriteNeeded = false;
+  /** 商机漏斗计数（insights 段填，末尾随 GuardOutput 返回）。 */
+  let insightFunnel: InsightFunnel | undefined;
 
   // ---- 2) must_read（今日必读）----
   {
@@ -225,6 +231,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     const cands: Array<{
       m: { title: string; why: string; url?: string };
       cand: MemoryCandidate;
+      macro: number;
     }> = (exec.must_read ?? []).map((m) => {
       const cand: MemoryCandidate = {
         title: m.title,
@@ -241,11 +248,19 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
       cand.score = rel.score;
       cand.tier = rel.tier;
       if (rel.override) cand.override = true;
-      return { m, cand };
+      // 2026-10-23 sc：必读榜改按**宏观视角分**降序（原为分行关联度）。
+      // 分行关联度仍写进 cand.score —— 记忆判重的「重大事件打破冷却」要用 peakScore，
+      // 那套口径不变，只是**排序键**换成宏观分，让「市场/政策怎么变」的内容排前面。
+      const macro = scoreDualPerspective(
+        meta
+          ? { title: meta.title, ...(meta.summary ? { summary: meta.summary } : {}) }
+          : { title: m.title, summary: m.why },
+      ).macro;
+      return { m, cand, macro };
     });
 
-    // ② 按「与广州分行的关联度」从高到低排序（规则 2）
-    cands.sort((a, b) => (b.cand.score ?? 0) - (a.cand.score ?? 0));
+    // ② 按**宏观视角分**从高到低排序（同分保持 LLM 原序 —— 稳定排序）
+    cands.sort((a, b) => b.macro - a.macro);
 
     // ③ 顺序判重：依次取，未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延下一条候补，
     //    直到选满 MUST_READ_PLAY_TARGET（规则 3）。候补用尽仍不足 → 按实际剩余（规则 4），
@@ -265,7 +280,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
 
     if (r.skipped.length > 0 || r.chosen.length < MUST_READ_PLAY_TARGET) {
       log.push(
-        `🧠 必读：候选 ${cands.length} 条（按关联度降序）→ 播出 ${r.chosen.length}/${MUST_READ_PLAY_TARGET} 条` +
+        `🧠 必读：候选 ${cands.length} 条（按宏观视角分降序）→ 播出 ${r.chosen.length}/${MUST_READ_PLAY_TARGET} 条` +
           `（命中重复跳过 ${r.skipped.length} 条：${r.skipped.map((d) => d.verdict).join(",") || "无"}）`,
       );
     }
@@ -305,29 +320,32 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     //     不因 ② 修好而重新引入 sameEvent。
     // 改用「同 URL + 逐字相同标题」后：覆盖当天 3/3、零误伤。代价是「不同 URL 的同一事件」
     // 会漏判 —— 但那类条目改写后锚点本就变了，本就判不出。
-    const mrUrls = new Set((next.must_read ?? []).map((m) => m.url ?? "").filter(Boolean));
-    const mrTitles = new Set((next.must_read ?? []).map((m) => (m.title ?? "").trim()).filter(Boolean));
+    // 🔴 2026-10-23 sc 授权改版：**双视角独立选榜**，撤销 2026-10-04 的「商机与必读同 URL 互斥」。
+    // 撤销理由（10-23 线上事故）：LLM 把「债基限购」「理财规模」等**既是市场信号又是落地商机**
+    //   的素材同时写进两个板块，互斥规则单边删商机侧 → 6 条塌成 1 条；而口播稿不走该过滤，
+    //   仍讲 5~6 条 → 卡片与口播双重失真。
+    // 根因：两个板块本是**同一批事实的两个解读视角**（must_read = 市场/政策怎么变；
+    //   insights = 客群/产品怎么动），不该互斥删除，而应各自按视角分选优、同事件可双呈现。
+    //   （10-04 那条互斥口径的完整论证见 git 历史，此处不复述。）
+    //
+    // 新逻辑：① 商机候选按 **biz 视角分**降序（同分保持 LLM 原序，稳定排序）；
+    //   ② 与 must_read 同 url **不再剔除**；③ 口播层重复由 spoken_insights 侧兜底
+    //   （锚点重叠度，见 side-exec-summary）。
+    const bizOf = (it: ExecInsight): number =>
+      scoreDualPerspective({ title: it.topic, summary: it.impact }).biz;
     const allInsights = exec.insights ?? [];
-    const cands: Array<{ it: ExecInsight; cand: MemoryCandidate }> = allInsights
-      .filter((it) => {
-        const u = it.sources?.[0]?.url ?? "";
-        if (u && mrUrls.has(u)) return false;
-        return !mrTitles.has((it.topic ?? "").trim());
-      })
-      .map((it) => ({
+    const cands: Array<{ it: ExecInsight; biz: number; cand: MemoryCandidate }> = allInsights.map(
+      (it) => ({
         it,
+        biz: bizOf(it),
         cand: {
           title: it.topic,
           text: `${it.impact ?? ""} ${it.action ?? ""}`.trim(),
           ...(it.sources?.[0]?.url ? { url: it.sources[0].url } : {}),
         },
-      }));
-    if (cands.length < allInsights.length) {
-      log.push(
-        `🧠 商机互斥：剔除与必读重复的 ${allInsights.length - cands.length} 条（同 URL / 同事件）` +
-          `（sc 口径：行领导读完必读已产生想法，重复占位无意义）`,
-      );
-    }
+      }),
+    );
+    cands.sort((a, b) => b.biz - a.biz);
 
     // 依次取：未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延下一条候补，直到选满
     // INSIGHT_PLAY_TARGET。候补用尽仍不足 → 按实际剩余，不强拉池内条目凑数（宁缺勿滥）。
@@ -346,10 +364,32 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
 
     if (r.skipped.length > 0 || r.chosen.length < INSIGHT_PLAY_TARGET) {
       log.push(
-        `🧠 商机：候选 ${cands.length} 条 → 播出 ${r.chosen.length}/${INSIGHT_PLAY_TARGET} 条` +
+        `🧠 商机：候选 ${cands.length} 条（按商机视角分降序）→ 播出 ${r.chosen.length}/${INSIGHT_PLAY_TARGET} 条` +
           `（命中重复跳过 ${r.skipped.length} 条：${r.skipped.map((d) => d.verdict).join(",") || "无"}）`,
       );
     }
+    // 可观测：双视角候选量（biz ≥ 阈值 且 macro ≥ 阈值 → 与必读同源时卡片双呈现）
+    const dualCands = cands.filter(
+      (c) =>
+        c.biz >= DUAL_THRESHOLD &&
+        scoreDualPerspective({ title: c.it.topic, summary: c.it.impact }).macro >= DUAL_THRESHOLD,
+    ).length;
+    if (dualCands > 0) {
+      log.push(`🧠 双视角候选 ${dualCands} 条（与必读同源者按 10-23 新口径双呈现，不再互斥剔除）`);
+    }
+    insightFunnel = {
+      candidates: cands.length,
+      played: r.chosen.length,
+      skippedByMemory: r.skipped.length,
+      dualCandidates: dualCands,
+      // 与必读同源且仍被保留的条数：旧口径下它们会被互斥删掉，新口径下双呈现
+      sameAsMustRead: r.chosen.filter((c) =>
+        (c.item.it.sources ?? []).some(
+          (s) => s?.url && (next.must_read ?? []).some((m) => m.url === s.url),
+        ),
+      ).length,
+      target: INSIGHT_PLAY_TARGET,
+    };
   }
 
   // ---- 4) risk（风险提示）----
@@ -486,7 +526,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     }
   }
 
-  return { exec: next, store, decisions, log, heroRewriteNeeded };
+  return { exec: next, store, decisions, log, heroRewriteNeeded, ...(insightFunnel ? { insightFunnel } : {}) };
 }
 
 /**

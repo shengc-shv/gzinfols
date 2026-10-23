@@ -141,8 +141,42 @@ function firstClause(raw: string | undefined, max: number): string {
  * 卡面 chip 与口播逐字共用同一串字）**；无 group 才退回 `segments[0]`。
  * 键全空（既无 group 也无 segments）归入 `INSIGHT_OTHER_GROUP` 组。
  */
+/**
+ * 商机口播的**事实锚**提取（数字 + 单位）——用于「必读已念过的事实，商机段不再复述」。
+ *
+ * 2026-10-23 sc 口径（B 修订版）：同一事件双视角**都念**，但两段各有职责边界——
+ *   必读段讲「市场/政策发生了什么」，商机段讲「客群/产品侧怎么变」。
+ * 若商机段把事实本身（数字锚）又念一遍，就是车轱辘话 → 该组只留卡片、不进口播。
+ *
+ * ⚠️ 只认**数字锚**（150 只 / 35 万亿 / 14.1 万亿 / 4.5% 这类），不认主体词：
+ *    主体词在商机侧常以不同说法出现（「固收货架」vs「债基」），判了就会误杀
+ *    真正该念的客群侧面。数字锚是「事实复述」最可靠的特征。
+ */
+const FACT_ANCHOR_RE = /\d+(?:\.\d+)?\s*(?:万亿|亿|万|百分点|%|只|家|个|人次|户)/g;
+
+function factAnchorsOf(text: string): Set<string> {
+  const out = new Set<string>();
+  for (const m of (text ?? "").matchAll(FACT_ANCHOR_RE)) out.add(m[0].replace(/\s+/g, ""));
+  return out;
+}
+
+function sharesFactAnchor(a: string, b: string): boolean {
+  const ba = factAnchorsOf(a);
+  if (ba.size === 0) return false;
+  const bb = factAnchorsOf(b);
+  for (const x of ba) if (bb.has(x)) return true;
+  return false;
+}
+
 export function groupInsightsForSpeech(
   insights: Array<{ topic?: string; impact?: string; segments?: string[]; group?: string }>,
+  opts?: {
+    /**
+     * 必读段口播全文（`spoken_must_read`）。给了就做「事实锚重叠」兜底：
+     * 商机组若复述必读已念的数字事实 → 该组不进口播（卡片仍展示，信息不丢）。
+     */
+    mustReadSpeech?: string;
+  },
 ): InsightSpeechGroup[] {
   const order: string[] = [];
   const acc = new Map<string, { label: string; topics: string[]; impact: string }>();
@@ -163,7 +197,7 @@ export function groupInsightsForSpeech(
     // 2026-10-01：取 impact（不再取 action）—— 口播只讲事实与影响，不给行动指引。
     if (!g.impact && it.impact) g.impact = firstClause(it.impact, INSIGHT_GROUP_IMPACT_CHARS);
   }
-  return order.map((key) => {
+  const groups = order.map((key) => {
     const g = acc.get(key)!;
     const topics =
       g.topics.length > INSIGHT_GROUP_TOPIC_MAX
@@ -176,19 +210,57 @@ export function groupInsightsForSpeech(
       impact: g.impact,
     };
   });
+  // 事实锚兜底（2026-10-23 sc B 修订）：复述必读已念数字的组 → 只留卡片不念。
+  // 🔴 只查 **topic**（真正被念出来的主题词），**不查 impact**：
+  //    impact 是「影响描述」，与必读事实重叠的概率低；若连 impact 一起查，
+  //    会把「美元货架与结汇窗口」这类主题全新的组误杀（实测 10-23 回归 lock 抓出）。
+  if (opts?.mustReadSpeech) {
+    return groups.filter((g) => !sharesFactAnchor(g.topics.join(""), opts.mustReadSpeech!));
+  }
+  return groups;
 }
 
 /** 商机口播整段（按客群归并、序数词分条）：`第一，{客群}方面，{主题}，{一句影响}。`。 */
 export function groupedInsightsSpeech(
   insights: Array<{ topic?: string; impact?: string; segments?: string[]; group?: string }>,
+  opts?: { mustReadSpeech?: string },
 ): string {
   const ordinals = ["第一，", "第二，", "第三，", "第四，", "第五，"];
-  return groupInsightsForSpeech(insights)
+  return groupInsightsForSpeech(insights, opts)
     .map((g, i) => {
       const head = `${ordinals[i] ?? ""}${g.label}方面，${g.topics.join("、")}`;
       return g.impact ? `${head}，${endSentence(g.impact)}` : `${head}。`;
     })
     .join("");
+}
+
+/**
+ * LLM 商机口播稿与**最终卡片**是否对齐（2026-10-23 sc：口播与卡面必须同源）。
+ *
+ * 背景（10-23 线上事故）：LLM 稿讲了 6 条素材（338 字），而卡片经互斥过滤只剩 1 条 →
+ * 领导听到 6 条、翻手机只看到 1 条。口播稿此前是「LLM 优先、无条件采用」。
+ *
+ * 判据 = **长度比值双界**（与确定性派生稿比较）：
+ *   · 上界：稿长 ≤ 确定稿 × 1.6 + 40 —— 超出说明它在讲卡片之外的内容
+ *     （典型是复述 must_read 的宏观事实，那属必读段职责）；
+ *   · 下界：稿长 ≥ 确定稿 × 0.55 —— 低于说明漏讲了卡片内容（实测「2 条卡片只念 1 条」= 0.5）。
+ *
+ * 🔴 为什么**不用**「每条 topic 前 4 字必须出现在稿中」：
+ *    实测三天真实稿，10-21（220 字/6 卡）与 10-22（171 字/6 卡）这两期**质量是好的**，
+ *    却因 LLM 归并时改写说法（「12月」写成「十二月」、「低总价房源」写成「公积金可提装修」）
+ *    被判漏 → 好稿子被误退。长度比值能干净区分：
+ *      10-21 220/229 = 0.96 ✓ · 10-22 171/153 = 1.12 ✓ · 10-23 338/31 = 10.9 ✗
+ */
+export function insightSpeechAligned(
+  spoken: string,
+  insights: Array<{ topic?: string; impact?: string; segments?: string[]; group?: string }>,
+): boolean {
+  const text = (spoken ?? "").replace(/\s+/g, "");
+  if (!text || !insights.length) return false;
+  const deterministic = groupedInsightsSpeech(insights);
+  if (!deterministic) return true; // 卡片无线索可念 → 稿子有内容也算对齐（不误杀）
+  const det = deterministic.replace(/\s+/g, "").length;
+  return text.length <= det * 1.6 + 40 && text.length >= det * 0.55;
 }
 
 /** 风险单条口播行（固定句式；2026-10-01：不再念 action，只讲事件与影响）。 */
