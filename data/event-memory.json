@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-23",
+  "updatedAt": "2026-10-24",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -10556,8 +10556,144 @@
     }
   },
   "today": {
-    "date": "2026-10-23",
-    "entries": []
+    "date": "2026-10-24",
+    "entries": [
+      {
+        "date": "2026-10-24",
+        "section": "must_read",
+        "title": "外汇局扩跨境融资便利主体",
+        "text": "外汇局扩跨境融资便利主体 资本项目收入可直接结汇支付、便利主体扩围，跨境资金结算与融资的规则边界明显放宽。",
+        "facts": [
+          "@外汇局",
+          "!扩围"
+        ],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261023/4485826_1.html",
+        "score": 87,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-24",
+        "section": "must_read",
+        "title": "国常会优化家庭财税住房支持",
+        "text": "国常会优化家庭财税住房支持 面向家庭的财税、社保、住房举措优化，稳定生育与家庭消费的政策组合继续加码。",
+        "facts": [],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://finance.eastmoney.com/a/202610233906441021.html",
+        "score": 61,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-24",
+        "section": "must_read",
+        "title": "国办重磅发布AI相关政策",
+        "text": "国办重磅发布AI相关政策 人工智能上升到国家政策层面，科技类企业与产业链的金融需求将随政策落地加速释放。",
+        "facts": [
+          "!发布",
+          "!落地"
+        ],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://finance.eastmoney.com/a/202610233906391576.html",
+        "score": 42,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-24",
+        "section": "must_read",
+        "title": "广州跨境电商条例表决通过",
+        "text": "广州跨境电商条例表决通过 地方立法落地，跨境电商的结算、融资与合规框架定型，本地外贸新业态获制度支撑。",
+        "facts": [
+          "@广州",
+          "!落地"
+        ],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/23/139995_55015965.htm",
+        "score": 76,
+        "novelty": 0.6583333333333332,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-24",
+        "section": "must_read",
+        "title": "贷款定价基准走向多元",
+        "text": "贷款定价基准走向多元 定价锚从单一基准转向多元，银行报价与客户分层的精细度直接决定息差表现。",
+        "facts": [],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-23/doc-iniwctca8168551.shtml",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-24",
+        "section": "insights",
+        "title": "金价跌破4000美元",
+        "text": "金价跌破4000美元 国际金价回落、金饰单日最高降30元，贵金属持仓客户的浮盈收窄，配置型与消费型需求的此消彼长在加速。",
+        "facts": [
+          "#30元"
+        ],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_10_23_905528.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-24",
+        "section": "insights",
+        "title": "家庭养老韧性框架首提",
+        "text": "家庭养老韧性框架首提 养老金融从单一产品转向家庭整体规划，长期配置与代际传承的对话场景增多，高净值家庭的养老安排成为新议题。",
+        "facts": [],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://finance.cctv.com/2026/10/23/ARTIBBvfcXVgi2gUK1dCHkh2261023.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-24",
+        "section": "insights",
+        "title": "涉农贷款数据报送趋严",
+        "text": "涉农贷款数据报送趋严 涉农贷款数据不真实被罚，普惠与涉农口径的统计报送面临更细核查，小微客群的分类归集准确性直接影响考核结果。",
+        "facts": [],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://finance.sina.com.cn/jryx/bank/2026-10-23/doc-iniwffeq1907686.shtml",
+        "novelty": 0.33627450980392154,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-24",
+        "section": "insights",
+        "title": "信用卡中心人事密集调整",
+        "text": "信用卡中心人事密集调整 多家股份行信用卡中心高管变动，竞对的客群策略与权益体系可能随之调整，信用卡获客与活客的竞争格局生变。",
+        "facts": [],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://m.21jingji.com/article/20261023/herald/916a50fea254384eabcef0e95570ed5a.html",
+        "novelty": 0.27999999999999997,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-10-24",
+        "section": "insights",
+        "title": "本地竞对绿色信贷首单",
+        "text": "本地竞对绿色信贷首单 同业绿色信贷首单落地，绿色土修类场景的产品对标出现参照，同类客群的竞争位次面临重新评估。",
+        "facts": [
+          "!首单",
+          "!落地"
+        ],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://m.21jingji.com/article/20261023/herald/a37fe7d6f56a550e8b341ad0f3a83fe2.html",
+        "novelty": 0.7511363636363637,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-24",
+        "section": "insights",
+        "title": "跨境电商地方立法通过",
+        "text": "跨境电商地方立法通过 跨境电商的结算、融资与合规框架定型，外贸新业态客群的账户与资金流场景更加清晰，跨境结算需求集中释放。",
+        "facts": [],
+        "broadcastAt": "2026-10-24T07:33:02+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202610/23/139995_55015965.htm",
+        "novelty": 0.189,
+        "angle": "政策变化"
+      }
+    ],
+    "runId": "40040240733"
   },
   "deliveries": [
     {
