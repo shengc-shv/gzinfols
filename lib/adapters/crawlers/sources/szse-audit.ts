@@ -11,7 +11,9 @@ import { GD_CITIES, shortName, windowFloor } from "./ipo-shared";
  * 数据价值：官方「在审企业全量 + 审核状态 + 更新日期」即时源，替代东财在审代理
  * （东财 RPT_IPO_DECORGNEWEST 广东近 7 天仅 1 条 → 旧体系「一周一条」根因之一）。
  * 参考《广东上市商机监测_实施方案.md》源 A2（2026-09-09 实测）：
- *   - GET `https://www.szse.cn/api/ras/projectrends/query`（POST 报 9240000 系统异常）
+ *   - GET `/api/ras/projectrends/query`（POST 报 9240000 系统异常）
+ *   - ⚠️ 协议顺序（2026-10-23 起）：**先 HTTP，失败再 HTTPS**——部分出口网络对
+ *     szse.cn 的 HTTPS 通道返回 502 而 HTTP 可用，详见 SZSE_BASES 注释
  *   - 参数 bizType=1&pageIndex=N&pageSize=50&random=…；响应 JSON { totalSize, data[] }
  *   - 全量约 1461 家，**按 updtdt 严格倒序**（实测 09-09→07-18）→ 倒序早停成立
  *   - 关键字段：cmpnm 全称 / cmpsnm 简称 / prjst 中文状态 / prjstatus 代码 /
@@ -44,7 +46,19 @@ import { GD_CITIES, shortName, windowFloor } from "./ipo-shared";
  * 红线：本文件非红线 7 文件。
  */
 
-const SZSE_API = "https://www.szse.cn/api/ras/projectrends/query";
+const SZSE_API_PATH = "/api/ras/projectrends/query";
+/**
+ * 协议顺序（2026-10-23 用户拍板）：**先 HTTP，失败再 HTTPS**。
+ *
+ * 实测背景：部分出口网络（如云端沙箱的透明代理）对 szse.cn 的 **HTTPS** 通道
+ * 返回 502（首页 + API 全挂），而 **HTTP** 通道数据完整可用（totalSize=1461）；
+ * 深交所全球服务本身正常（HTTPS 首页经其他路径验证无误）→ 属出口侧限制。
+ *
+ * 每个协议各自重试 `retries + 1` 次；5xx/429/403 视为瞬时错误重试，其余
+ * （4xx 等）快速放弃当前协议换下一个，保证公网/CI 环境下 HTTP 被拒时
+ * 能无缝回落到 HTTPS，不会因协议顺序变化而漏数。
+ */
+const SZSE_BASES = ["http://www.szse.cn", "https://www.szse.cn"] as const;
 const SZSE_LIST = "https://www.szse.cn/listing/projectdynamic/ipo/index.html";
 const PAGE_SIZE = 50;
 const MAX_PAGES = 5; // 兜底：最多抓 5 页（250 条），防死循环
@@ -141,7 +155,13 @@ export class SzseAuditCrawler extends BaseCrawler {
     super({ name: "深交所IPO审核动态", timeout: 20000, retries: 3 });
   }
 
-  /** 单页抓取（GET + JSON；protected 便于测试 mock）。 */
+  /**
+   * 单页抓取（GET + JSON；protected 便于测试 mock）。
+   *
+   * ⚠️ 协议顺序（2026-10-23 用户拍板）：**先 HTTP，失败再 HTTPS**（SZSE_BASES）。
+   *   部分出口网络对 szse.cn 的 HTTPS 通道返回 502 而 HTTP 可用；两个协议
+   *   各自重试 `retries + 1` 次，任一协议成功即返回，全失败才抛错。
+   */
   protected async fetchPage(pageIndex: number): Promise<string> {
     const params = new URLSearchParams({
       bizType: "1",
@@ -149,33 +169,35 @@ export class SzseAuditCrawler extends BaseCrawler {
       pageSize: String(PAGE_SIZE),
       random: String(Math.random()),
     });
-    const url = `${SZSE_API}?${params.toString()}`;
     const headers = {
       "User-Agent": this.userAgent,
       Referer: SZSE_LIST,
       Accept: "application/json",
       "X-Requested-With": "XMLHttpRequest",
     };
+    const perProtocol = this.retries + 1;
     let lastErr: unknown;
-    for (let attempt = 1; attempt <= this.retries + 1; attempt++) {
-      try {
-        const resp = await fetch(url, { headers, signal: AbortSignal.timeout(this.timeout) });
-        if (!resp.ok) {
+    for (const base of SZSE_BASES) {
+      const scheme = base.startsWith("https") ? "HTTPS" : "HTTP";
+      const url = `${base}${SZSE_API_PATH}?${params.toString()}`;
+      for (let attempt = 1; attempt <= perProtocol; attempt++) {
+        try {
+          const resp = await fetch(url, { headers, signal: AbortSignal.timeout(this.timeout) });
+          if (resp.ok) return await resp.text();
           const retriable = resp.status >= 500 || resp.status === 429 || resp.status === 403;
           console.warn(
-            `[${this.name}] ${url} 返回 ${resp.status}（尝试 ${attempt}/${this.retries + 1}）${retriable ? "，将重试" : "，放弃"}`,
+            `[${this.name}] ${url} 返回 ${resp.status}（${scheme} 尝试 ${attempt}/${perProtocol}）` +
+              `${retriable ? "，将重试" : "，放弃该协议"}`,
           );
-          if (retriable && attempt < this.retries + 1) {
-            await this._backoff(attempt);
-            continue;
-          }
-          break;
+          if (!retriable) break; // 非瞬时错误 → 不再重试本协议，换下一个
+          if (attempt < perProtocol) await this._backoff(attempt);
+        } catch (err) {
+          lastErr = err;
+          console.warn(
+            `[${this.name}] ${url} 抓取失败（${scheme} 尝试 ${attempt}/${perProtocol}）: ${(err as Error).message}`,
+          );
+          if (attempt < perProtocol) await this._backoff(attempt);
         }
-        return await resp.text();
-      } catch (err) {
-        lastErr = err;
-        console.warn(`[${this.name}] ${url} 抓取失败（尝试 ${attempt}/${this.retries + 1}）: ${(err as Error).message}`);
-        if (attempt < this.retries + 1) await this._backoff(attempt);
       }
     }
     throw new Error(`fetch SZSE page ${pageIndex} failed: ${String(lastErr)}`);
