@@ -1,0 +1,866 @@
+{
+  "date": "2026-10-24",
+  "updatedAt": "2026-10-23T23:36:03.234Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：广东经济增速创五年新高，基本面支撑强；AI与跨境政策双落地，科技金融和跨境客群有新窗口；理财规模破35万亿，财富货架回暖；公积金扩围灵活就业者，住房金融客群扩容。",
+    "spoken_hero": "今天主要看四个方面：广东前三季度增速创五年同期新高，本地信贷基本面有支撑；国办AI政策和外汇局跨境便利化同日落地，科技与跨境客群有新窗口；理财规模首破三十五万亿，财富货架在回暖；公积金政策扩到灵活就业者，住房金融客群在扩容。",
+    "must_read": [
+      {
+        "title": "外汇局扩跨境融资便利主体",
+        "why": "资本项目收入可直接结汇支付、便利主体扩围，跨境资金结算与融资的规则边界明显放宽。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261023/4485826_1.html"
+      },
+      {
+        "title": "国常会优化家庭财税住房支持",
+        "why": "面向家庭的财税、社保、住房举措优化，稳定生育与家庭消费的政策组合继续加码。",
+        "url": "https://finance.eastmoney.com/a/202610233906441021.html"
+      },
+      {
+        "title": "国办重磅发布AI相关政策",
+        "why": "人工智能上升到国家政策层面，科技类企业与产业链的金融需求将随政策落地加速释放。",
+        "url": "https://finance.eastmoney.com/a/202610233906391576.html"
+      },
+      {
+        "title": "广州跨境电商条例表决通过",
+        "why": "地方立法落地，跨境电商的结算、融资与合规框架定型，本地外贸新业态获制度支撑。",
+        "url": "https://news.dayoo.com/guangzhou/202610/23/139995_55015965.htm"
+      },
+      {
+        "title": "贷款定价基准走向多元",
+        "why": "定价锚从单一基准转向多元，银行报价与客户分层的精细度直接决定息差表现。",
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-23/doc-iniwctca8168551.shtml"
+      }
+    ],
+    "spoken_must_read": "外汇局扩跨境融资便利主体。资本项目收入可直接结汇支付、便利主体扩围，跨境资金结算与融资的规则边界明显放宽。其次，国常会优化家庭财税住房支持。面向家庭的财税、社保、住房举措优化，稳定生育与家庭消费的政策组合继续加码。此外，国办重磅发布AI相关政策。人工智能上升到国家政策层面，科技类企业与产业链的金融需求将随政策落地加速释放。还有，广州跨境电商条例表决通过。地方立法落地，跨境电商的结算、融资与合规框架定型，本地外贸新业态获制度支撑。另外，贷款定价基准走向多元。定价锚从单一基准转向多元，银行报价与客户分层的精细度直接决定息差表现。",
+    "insights": [
+      {
+        "topic": "金价跌破4000美元",
+        "impact": "国际金价回落、金饰单日最高降30元，贵金属持仓客户的浮盈收窄，配置型与消费型需求的此消彼长在加速。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "国际金价跌破4000美元关口，国内品牌金饰单日最高降30元",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_10_23_905528.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "家庭养老韧性框架首提",
+        "impact": "养老金融从单一产品转向家庭整体规划，长期配置与代际传承的对话场景增多，高净值家庭的养老安排成为新议题。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "《2026中国家庭养老金融健康指数调研报告》发布 首提家庭“养老韧性”",
+            "url": "https://finance.cctv.com/2026/10/23/ARTIBBvfcXVgi2gUK1dCHkh2261023.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "涉农贷款数据报送趋严",
+        "impact": "涉农贷款数据不真实被罚，普惠与涉农口径的统计报送面临更细核查，小微客群的分类归集准确性直接影响考核结果。",
+        "tag": [
+          "信贷",
+          "监管"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "建设银行玉田支行被罚25万元：涉农贷款数据不真实",
+            "url": "https://finance.sina.com.cn/jryx/bank/2026-10-23/doc-iniwffeq1907686.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "信用卡中心人事密集调整",
+        "impact": "多家股份行信用卡中心高管变动，竞对的客群策略与权益体系可能随之调整，信用卡获客与活客的竞争格局生变。",
+        "tag": [
+          "竞对动态"
+        ],
+        "group": "信用卡竞对",
+        "sources": [
+          {
+            "title": "任洪斌执掌兴业信用卡 交行、招行卡中心同步获批新副总",
+            "url": "https://m.21jingji.com/article/20261023/herald/916a50fea254384eabcef0e95570ed5a.html"
+          }
+        ]
+      },
+      {
+        "topic": "本地竞对绿色信贷首单",
+        "impact": "同业绿色信贷首单落地，绿色土修类场景的产品对标出现参照，同类客群的竞争位次面临重新评估。",
+        "tag": [
+          "竞对动态",
+          "信贷"
+        ],
+        "group": "绿色信贷竞对",
+        "sources": [
+          {
+            "title": "广州银行净土贷首单成功落地",
+            "url": "https://m.21jingji.com/article/20261023/herald/a37fe7d6f56a550e8b341ad0f3a83fe2.html"
+          }
+        ]
+      },
+      {
+        "topic": "跨境电商地方立法通过",
+        "impact": "跨境电商的结算、融资与合规框架定型，外贸新业态客群的账户与资金流场景更加清晰，跨境结算需求集中释放。",
+        "tag": [
+          "客群",
+          "政银合作"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "《广州市跨境电子商务促进条例》表决通过",
+            "url": "https://news.dayoo.com/guangzhou/202610/23/139995_55015965.htm"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，理财规模重回扩容、稳债市工具给理财公司垫了缓冲，客户对净值波动的容忍度在回升，固收产品的沟通口径和货架排期都跟着变。高端客户方面，国际金价跌破四千美元、金饰单日降三十元，贵金属配置诉求在升温；家庭养老韧性框架首次提出，长期配置的对话有了新抓手。普惠小微方面，绿色金融正往小微延伸，涉农与绿色口径的核算要求同步收紧，小微客户的绿色信贷账本要算得更细。本地消费与跨境方面，广州跨境电商条例表决通过、七大场景集中发布，跨境结算和场景类客群的项目线索在增加。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "道指跌1.23%领跌，纳指跌0.21%，AI云需求与信用市场扰动交织。",
+      "sectors": [
+        "亚马逊云容量售罄至2027年，AI算力需求预期获支撑",
+        "SpaceX 400亿美元AI债务交易遇阻，信用市场动荡压制风险偏好",
+        "JetBlue债权人联手重组顾问PJT，航空股信用压力升温",
+        "贝莱德Rieder称高质量债券现历史性机会，避险资金转向固收"
+      ],
+      "spoken": "美股三大指数集体收跌，道指跌1.23%领跌，纳指跌0.21%。板块方面，亚马逊称云容量售罄至2027年，AI算力需求获支撑；SpaceX四百亿美元AI债务交易遇阻，信用市场动荡压制风险偏好；JetBlue债权人联手重组顾问，航空信用压力升温。贝莱德看好高质量债券机会。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-24"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52215.16",
+          "changePct": "-1.23%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25955.34",
+          "changePct": "-0.21%"
+        },
+        {
+          "name": "标普500",
+          "value": "7623.68",
+          "changePct": "-0.52%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "创业板指大涨逾4%。",
+      "sectors": [
+        "上涨个股超4500只"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-24"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3690.47",
+          "changePct": "+0.89%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11673.83",
+          "changePct": "+2.79%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2684.10",
+          "changePct": "+4.16%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23093.37点（+0.69%）；恒生科技收报3871.66点（+2.05%）。",
+      "sectors": [
+        "科网股普涨",
+        "应用软件板块大涨",
+        "MINIMAX涨超16%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-23"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.69% 科指涨2.05% 科网股普涨 应用软件板块大涨 MINIMAX涨超16%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-23/doc-iniweywq4999654.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23093.37",
+          "changePct": "+0.69%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3871.66",
+          "changePct": "+2.05%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-23",
+    "marketStatus": {
+      "reportDate": "2026-10-24",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-10-23"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-23"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-23"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 10月23日 周五 收盘；港股为 10月23日 周五 收盘；美股为 10月23日 周五 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610233906143455.html",
+      "title_cn": "大奇迹日！“易中天”午后直线拉升多只宽基ETF同步爆量！市场底已经确认？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "A股午后多只宽基ETF同步放量，被市场称为「大奇迹日」，部分个股直线拉升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "ETF",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233906109617.html",
+      "title_cn": "宇树科技涨停本周累计涨超46%市值重返2500亿",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "宇树科技涨停，本周累计涨幅超46%，市值重返2500亿元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "机器人",
+        "个股行情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233906208954.html",
+      "title_cn": "A股三大指数探底回升创业板指大涨超4%逾4500只股上涨",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "A股三大指数探底回升，创业板指大涨超4%，逾4500只个股上涨。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "指数",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233904965554.html",
+      "title_cn": "科技股调整高增长逻辑还在吗？科创板龙头公司发声：订单饱满、景气向上",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "科技股调整之际，科创板龙头公司发声表示订单饱满、行业景气向上，回应高增长逻辑是否延续。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "科技",
+        "科创板"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233904892125.html",
+      "title_cn": "内存市场将从“芯荒”变“红海”？黄仁勋发声：2029年过剩可能性不大",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "针对内存市场供需，黄仁勋表示2029年出现过剩的可能性不大。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "存储",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233905807762.html",
+      "title_cn": "多只宽基ETF出现集中放量多个积极信号已显现",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "多只宽基ETF出现集中放量，市场关注其中显现的积极信号。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "ETF",
+        "资金面"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233905507157.html",
+      "title_cn": "沪深300ETF集中放量沪深300ETF华泰柏瑞成交超55亿",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "沪深300ETF集中放量，华泰柏瑞沪深300ETF成交额超55亿元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "ETF",
+        "沪深300"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233906272574.html",
+      "title_cn": "证监会：核准设立花旗证券（中国）有限公司",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "证监会核准设立花旗证券（中国）有限公司。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "券商",
+        "外资"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233905405562.html",
+      "title_cn": "黄仁勋：没有哪个国家在制造业方面比中国更强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "黄仁勋表示，没有哪个国家在制造业方面比中国更强。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "制造业",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610233906498144.html",
+      "title_cn": "10月23日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "汇总10月23日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610243906858719.html",
+      "title_cn": "21社论丨为投资“走出去”筑牢保障网",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/24",
+      "summary": "21社论发文，论述为投资「走出去」筑牢保障网。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "宏观",
+        "对外投资"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610243906859398.html",
+      "title_cn": "21评论丨本轮AI投资热潮能持续多久？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/24",
+      "summary": "21评论探讨本轮AI投资热潮能持续多久。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "评论",
+        "市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-23/doc-iniweywq4999654.shtml",
+      "title_cn": "港股收评：恒指涨0.69% 科指涨2.05% 科网股普涨 应用软件板块大涨 MINIMAX涨超16%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "港股收评：恒指涨0.69%，科指涨2.05%，科网股普涨，应用软件板块大涨，MINIMAX涨超16%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "科技",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-23/doc-iniwecst4974904.shtml",
+      "title_cn": "港股调整背后：机构操作分化 静待“黄金坑”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "报道称港股调整背后机构操作出现分化，市场静待「黄金坑」。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-23/doc-iniweiyr4958521.shtml",
+      "title_cn": "小米集团盘初拉升涨超5% 公司回购1.05亿港元 年内累计回购逾127亿港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "小米集团盘初拉升涨超5%，公司回购1.05亿港元，年内累计回购逾127亿港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购",
+        "小米"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-10-23/doc-iniwfmnn1903983.shtml",
+      "title_cn": "香港金融科技周 x StartmeupHK 2026聚焦「金融+」、「AI+」及全球拓展三大增长引擎",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "香港金融科技周与StartmeupHK 2026活动聚焦「金融+」、「AI+」及全球拓展三大增长引擎。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "金融科技",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-23/doc-iniweywu2708511.shtml",
+      "title_cn": "招商证券国际：安踏体育维持“增持”评级 目标价为93港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "招商证券国际维持安踏体育「增持」评级，目标价93港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-23/doc-iniweywu2708449.shtml",
+      "title_cn": "小摩：港交所目标价下调至490港元 维持“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "摩根大通将港交所目标价下调至490港元，维持「增持」评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "港交所"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-23/doc-iniweywu2708408.shtml",
+      "title_cn": "大华继显：宁德时代目标价下调40.7%至400港元 维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "大华继显将宁德时代目标价下调40.7%至400港元，维持「买入」评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "新能源"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-23/doc-iniweywu2708369.shtml",
+      "title_cn": "大摩：兖矿能源维持“增持”评级 目标价15.9港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "摩根士丹利维持兖矿能源「增持」评级，目标价15.9港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "能源"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-23/doc-iniweyws1976908.shtml",
+      "title_cn": "高盛：壁仞科技目标价上升至92港元 重申“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "高盛将壁仞科技目标价上调至92港元，重申「买入」评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-23/doc-iniweyws1976846.shtml",
+      "title_cn": "大和：福耀玻璃目标价下调至68港元 维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "大和将福耀玻璃目标价下调至68港元，维持「买入」评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "汽车零部件"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-23/doc-iniweyws1976821.shtml",
+      "title_cn": "大摩：天齐锂业维持“增持”评级 目标价44.3港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "摩根士丹利维持天齐锂业「增持」评级，目标价44.3港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "锂电"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-23/doc-iniweywu2692797.shtml",
+      "title_cn": "中信里昂：周大福(01929)发盈喜有利股价 维持目标价10.7港元及“持有”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "中信里昂称周大福发盈喜有利股价，维持目标价10.7港元及「持有」评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/21/rick-rieder-investment-grade-bonds.html",
+      "title_cn": "BlackRock's Rick Rieder sees 'historic' opportunity in high-quality bonds",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "贝莱德Rick Rieder认为高质量债券存在「历史性」机会。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "机构观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/20/coreweave-debt-janus-henderson-lloyd.html",
+      "title_cn": "This Janus Henderson fund manager owns CoreWeave debt — here's why he's sticking with it",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/21",
+      "summary": "Janus Henderson一位基金经理持有CoreWeave债务，并解释其继续持有的原因。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "债券"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/lumen-technologies-updates-executive-severance-plan-and-ceo-agreement-93CH-4970507",
+      "title_cn": "Lumen Technologies updates executive severance plan and CEO agreement",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "Lumen Technologies更新高管遣散计划及CEO协议。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司治理",
+        "电信"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/amazon-cloud-capacity-sold-out-through-2027-ceo-jassy-says-4970506",
+      "title_cn": "Amazon cloud capacity sold out through 2027, CEO Jassy says",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "亚马逊CEO Jassy表示，公司云容量已售罄至2027年。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "云计算",
+        "亚马逊"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/pnc-financial-services-completes-15-billion-senior-notes-offering-93CH-4970505",
+      "title_cn": "PNC Financial Services completes $1.5 billion senior notes offering",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "PNC金融服务完成15亿美元高级票据发行。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "金融"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/wynn-resorts-subsidiary-to-invest-up-to-mop137-billion-in-macau-government-fund-93CH-4970504",
+      "title_cn": "Wynn Resorts subsidiary to invest up to MOP1.37 billion in Macau government fund",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "永利度假村子公司拟向澳门政府基金投资至多13.7亿澳门元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "博彩",
+        "澳门"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/picard-medical-exchanges-warrants-for-200000-shares-of-common-stock-93CH-4970503",
+      "title_cn": "Picard Medical exchanges warrants for 200,000 shares of common stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "Picard Medical以认股权证交换20万股普通股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司公告",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/acadia-pharmaceuticals-announces-retirement-of-rd-head-names-interim-consultant-93CH-4970500",
+      "title_cn": "Acadia Pharmaceuticals announces retirement of R&D head, names interim consultant",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "Acadia Pharmaceuticals宣布研发负责人退休，并任命临时顾问。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "人事变动",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/arc-group-securities-acquisition-i-receives-nasdaq-notice-on-warrant-listing-93CH-4970499",
+      "title_cn": "Arc Group Securities Acquisition I receives Nasdaq notice on warrant listing",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "Arc Group Securities Acquisition I收到纳斯达克关于认股权证上市的通知。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "监管",
+        "SPAC"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/jetblue-creditors-working-with-restructuring-adviser-pjt-partners-wsj-reports-4970498",
+      "title_cn": "JetBlue creditors working with restructuring adviser PJT Partners, WSJ reports",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "据WSJ报道，捷蓝航空债权人正与重组顾问PJT Partners合作。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "航空",
+        "债务重组"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/spacexs-40bn-ai-debt-deal-faces-hurdles-amid-credit-market-turmoil--bloomberg-4970497",
+      "title_cn": "SpaceX’s $40bn AI debt deal faces hurdles amid credit market turmoil - Bloomberg",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "据彭博报道，SpaceX 400亿美元AI债务交易在信贷市场动荡中面临障碍。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "债务融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/graphano-energy-amends-private-placement-to-add-flowthrough-shares-93CH-4970496",
+      "title_cn": "Graphano Energy amends private placement to add flow-through shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/23",
+      "summary": "Graphano Energy修订私募配售方案，增加流通股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "融资",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
