@@ -52,7 +52,17 @@ import {
  * 口播跨段收敛层（`services/voice/condense.ts`）要按**同一口径**定位重复片段，
  * 两处各写一套必然漂移，故单一实现在服务层，此处只做编排。
  */
-export function syncNarration(exec: ExecutiveSummary): ExecutiveSummary {
+export function syncNarration(
+  exec: ExecutiveSummary,
+  opts?: {
+    /**
+     * 商机候选里**未入选**的 topic（记忆判重跳过 + 选满即停未评估）。
+     * 2026-10-24 实测：LLM 稿会讲这些已被去重挡掉的条目（「理财规模重回扩容」），
+     * 导致口播与卡片不一致 —— 拿这个清单做「防讲被去重内容」判据。
+     */
+    unplayedInsightTopics?: readonly string[];
+  },
+): ExecutiveSummary {
   const out: ExecutiveSummary = { ...exec };
 
   // hero（2026-09-26）：**LLM 产出优先** —— 它比卡面 hero_line 多出建议动作句（09-25 实证），
@@ -86,7 +96,7 @@ export function syncNarration(exec: ExecutiveSummary): ExecutiveSummary {
     out.spoken_insights = undefined; // 无商机卡 → 口播同步置空（与 risk 同口径，不留孤儿口播）
   } else {
     const llmSpeech = exec.spoken_insights?.trim() ?? "";
-    if (llmSpeech && insightSpeechAligned(llmSpeech, ins)) {
+    if (llmSpeech && insightSpeechAligned(llmSpeech, ins, opts?.unplayedInsightTopics)) {
       out.spoken_insights = llmSpeech;
     } else {
       // 回退确定性派生；若剔除事实锚后整段为空 → 保持 undefined（不产出孤儿口播）
@@ -267,7 +277,7 @@ export async function buildExecutiveSummary(
           );
         }
       }
-      return syncNarration(out);
+      return syncNarration(out, { unplayedInsightTopics: g.unplayedInsightTopics });
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e);
       ctx.log.warn("exec", `⚠️ 内容记忆去重异常（放行原产出）: ${msg}`);

@@ -240,27 +240,41 @@ export function groupedInsightsSpeech(
  * 背景（10-23 线上事故）：LLM 稿讲了 6 条素材（338 字），而卡片经互斥过滤只剩 1 条 →
  * 领导听到 6 条、翻手机只看到 1 条。口播稿此前是「LLM 优先、无条件采用」。
  *
- * 判据 = **长度比值双界**（与确定性派生稿比较）：
- *   · 上界：稿长 ≤ 确定稿 × 1.6 + 40 —— 超出说明它在讲卡片之外的内容
- *     （典型是复述 must_read 的宏观事实，那属必读段职责）；
- *   · 下界：稿长 ≥ 确定稿 × 0.55 —— 低于说明漏讲了卡片内容（实测「2 条卡片只念 1 条」= 0.5）。
+ * 判据三条（都过才采用 LLM 稿，否则回退确定性派生）：
+ *  ① **防多讲（长度上界）**：稿长 ≤ 确定稿 × 1.6 + 40；
+ *  ② **防漏讲（长度下界）**：稿长 ≥ 确定稿 × 0.55；
+ *  ③ **防讲被去重挡掉的内容**（10-24 新增）：稿子里不得出现**未入选候选**的主题词
+ *     （典型：昨天刚播过、今天被记忆判重跳过的条目 —— LLM 写稿时看不到去重结果）。
  *
- * 🔴 为什么**不用**「每条 topic 前 4 字必须出现在稿中」：
+ * 🔴 为什么不用「每条卡片 topic 前 4 字必须出现在稿中」：
  *    实测三天真实稿，10-21（220 字/6 卡）与 10-22（171 字/6 卡）这两期**质量是好的**，
  *    却因 LLM 归并时改写说法（「12月」写成「十二月」、「低总价房源」写成「公积金可提装修」）
  *    被判漏 → 好稿子被误退。长度比值能干净区分：
  *      10-21 220/229 = 0.96 ✓ · 10-22 171/153 = 1.12 ✓ · 10-23 338/31 = 10.9 ✗
+ *
+ * 🔴 为什么加第③条（10-24 实测）：长度判据抓不到「换主题」——
+ *    10-24 期 LLM 稿讲了「理财规模重回扩容」（被记忆判重挡掉的条目），
+ *    漏讲了一条入选卡片，两者长度接近（约 250 字 vs 约 250 字）→ 长度双界全过。
+ *    只有拿「未入选候选清单」去比才能发现。这条判据**不会误杀正常期** ——
+ *    正常期未被选中的条目本就少，且 LLM 稿通常不会去讲它们。
  */
 export function insightSpeechAligned(
   spoken: string,
   insights: Array<{ topic?: string; impact?: string; segments?: string[]; group?: string }>,
+  unplayedTopics?: readonly string[],
 ): boolean {
   const text = (spoken ?? "").replace(/\s+/g, "");
   if (!text || !insights.length) return false;
   const deterministic = groupedInsightsSpeech(insights);
   if (!deterministic) return true; // 卡片无线索可念 → 稿子有内容也算对齐（不误杀）
   const det = deterministic.replace(/\s+/g, "").length;
-  return text.length <= det * 1.6 + 40 && text.length >= det * 0.55;
+  if (text.length > det * 1.6 + 40 || text.length < det * 0.55) return false;
+  // ③ 讲了未入选候选 → 不对齐（用前 6 字做粗键：既抗改写又不易误命中）
+  for (const t of unplayedTopics ?? []) {
+    const key = (t ?? "").replace(/\s+/g, "").slice(0, 6);
+    if (key && text.includes(key)) return false;
+  }
+  return true;
 }
 
 /** 风险单条口播行（固定句式；2026-10-01：不再念 action，只讲事件与影响）。 */

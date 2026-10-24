@@ -113,6 +113,12 @@ export interface GuardOutput {
   heroRewriteNeeded?: boolean;
   /** 商机漏斗计数（2026-10-23 sc：直接落盘，不再靠翻 CI 日志反推）。 */
   insightFunnel?: InsightFunnel;
+  /**
+   * 商机候选里**未入选**的 topic 清单（被记忆判重跳过 + 选满即停后未评估的）。
+   * 用途：口播稿校验的「防讲被去重内容」判据 —— LLM 写稿时看不到去重结果，
+   * 会把它已经写进候选、但被判重挡掉的条目又讲一遍（10-24 实测：「理财规模重回扩容」）。
+   */
+  unplayedInsightTopics?: string[];
 }
 
 /**
@@ -223,6 +229,8 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   let heroRewriteNeeded = false;
   /** 商机漏斗计数（insights 段填，末尾随 GuardOutput 返回）。 */
   let insightFunnel: InsightFunnel | undefined;
+  /** 商机候选里未入选的 topic 清单（insights 段填，末尾随 GuardOutput 返回）。 */
+  let unplayedInsightTopics: string[] = [];
 
   // ---- 2) must_read（今日必读）----
   {
@@ -361,6 +369,12 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     store = r.store;
     decisions.push(...r.chosen.map((c) => c.decision), ...r.skipped);
     next.insights = r.chosen.map((c) => c.item.it);
+
+    // 未入选候选的 topic（判重跳过 + 选满即停后未评估的）→ 供口播稿「防讲被去重内容」判据
+    const chosenSet = new Set(r.chosen.map((c) => c.item.it));
+    unplayedInsightTopics = cands
+      .filter((c) => !chosenSet.has(c.it))
+      .map((c) => c.it.topic ?? "");
 
     if (r.skipped.length > 0 || r.chosen.length < INSIGHT_PLAY_TARGET) {
       log.push(
@@ -526,7 +540,15 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     }
   }
 
-  return { exec: next, store, decisions, log, heroRewriteNeeded, ...(insightFunnel ? { insightFunnel } : {}) };
+  return {
+    exec: next,
+    store,
+    decisions,
+    log,
+    heroRewriteNeeded,
+    ...(insightFunnel ? { insightFunnel } : {}),
+    ...(unplayedInsightTopics.length ? { unplayedInsightTopics } : {}),
+  };
 }
 
 /**
