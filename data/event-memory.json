@@ -161,8 +161,8 @@
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-09-16",
-      "lastBroadcastAt": "2026-10-24",
-      "broadcastCount": 9,
+      "lastBroadcastAt": "2026-10-25",
+      "broadcastCount": 10,
       "sections": [
         "must_read",
         "insights"
@@ -174,19 +174,6 @@
         "数据验证"
       ],
       "samples": [
-        {
-          "date": "2026-10-07",
-          "section": "insights",
-          "title": "元岗村安置房11月开放",
-          "text": "元岗村安置房11月开放 天河元岗村安置房样板间11月开放参观，城市更新安置客群的按揭与资金监管需求在积累，涉及回迁家庭资产安置。",
-          "facts": [
-            "#11月"
-          ],
-          "broadcastAt": "2026-10-07T06:35:02+08:00",
-          "url": "https://news.dayoo.com/guangzhou/202610/06/139995_55010085.htm",
-          "novelty": 0.9635416666666667,
-          "angle": "受影响人群"
-        },
         {
           "date": "2026-10-12",
           "section": "must_read",
@@ -252,17 +239,28 @@
           "url": "https://m.21jingji.com/article/20261023/herald/a37fe7d6f56a550e8b341ad0f3a83fe2.html",
           "novelty": 0.7511363636363637,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-10-25",
+          "section": "insights",
+          "title": "深圳算力信贷超千亿",
+          "text": "深圳算力信贷超千亿 深圳算力相关四大行业获超千亿贷款，大湾区科技产业链信贷竞争加剧，本地科创客群的同业争夺更激烈。",
+          "facts": [],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://m.21jingji.com/article/20261024/herald/813c3e27d49a641bc3229b99c4e09041.html",
+          "novelty": 0.29673913043478256,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "珠海房产新政扩至港澳人士 珠海房产新政扩至港澳人士 湾区跨境置业补贴范围首次覆盖港澳客群，珠海与广州南沙的港澳按揭、跨境结算服务衔接空间打开。",
         "假期后消费信贷还款观察 假期后消费信贷还款观察 国庆假期过半消费市场平稳有序，假期后消费信贷还款与额度使用情况将集中体现，客群还款能力分化值得留意。",
         "元岗村安置房11月开放 元岗村安置房11月开放 天河元岗村安置房样板间11月开放参观，城市更新安置客群的按揭与资金监管需求在积累，涉及回迁家庭资产安置。",
         "三季度高频数据折射经济向好 三季度高频数据折射经济向好 实体融资需求与零售信贷投放环境或有改善，客群经营节奏与信贷投放窗口的匹配度提升。",
         "公积金提取新政落地 公积金提取新政落地 多城提取便利化改变住房金融客群的资金到账节奏，按揭与消费贷的联动关系随之变化。",
         "白云180家企业出海抢单 白云180家企业出海抢单 白云180家中小企业组团出海抢订单，中小外贸客群活跃度提升，其结算、汇率避险与出口信贷需求同步上升。",
         "11部门定制科技金融政策 11部门定制科技金融政策 11部门为三大国际科创中心出台定制版科技金融政策，科创信贷与投贷联动空间打开，本地科创客群适配度提升。",
-        "本地竞对绿色信贷首单 本地竞对绿色信贷首单 同业绿色信贷首单落地，绿色土修类场景的产品对标出现参照，同类客群的竞争位次面临重新评估。"
+        "本地竞对绿色信贷首单 本地竞对绿色信贷首单 同业绿色信贷首单落地，绿色土修类场景的产品对标出现参照，同类客群的竞争位次面临重新评估。",
+        "深圳算力信贷超千亿 深圳算力信贷超千亿 深圳算力相关四大行业获超千亿贷款，大湾区科技产业链信贷竞争加剧，本地科创客群的同业争夺更激烈。"
       ],
       "broadcastedFacts": [
         "#8月",
@@ -3022,14 +3020,15 @@
       ],
       "kind": "ipo",
       "firstBroadcastAt": "2026-09-19",
-      "lastBroadcastAt": "2026-10-18",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-10-25",
+      "broadcastCount": 4,
       "sections": [
         "insights"
       ],
       "anglesUsed": [
         "政策变化",
-        "市场反应"
+        "市场反应",
+        "受影响人群"
       ],
       "samples": [
         {
@@ -3069,16 +3068,31 @@
           "url": "https://finance.sina.com.cn/stock/zqgd/2026-10-17/doc-inivpspz6395396.shtml",
           "novelty": 0.2863636363636364,
           "angle": "市场反应"
+        },
+        {
+          "date": "2026-10-25",
+          "section": "insights",
+          "title": "理财控回撤新招落地",
+          "text": "理财控回撤新招落地 理财引入量化定档与限时修复管理净值波动，稳健型客户对回撤修复节奏的敏感度上升，产品间差异更需讲清。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://m.21jingji.com/article/20261024/herald/8069cb0c7a1ab6b5438b65947dd65174.html",
+          "novelty": 0.7200980392156864,
+          "angle": "受影响人群"
         }
       ],
       "broadcastedTexts": [
         "打新客户资金安排 打新客户资金安排 力勤资源今日申购，有打新需求的客户存在资金调度与短期理财衔接需求。 可提示打新客户关注申购时间与资金安排，配套短期理财与资金归集服务。",
         "理财费率竞争应对 理财费率竞争应对 理财机构密集下调管理费率、0费率可持续性存疑，客户比价敏感度上升，单纯价格战难留客。 可考虑以资产配置服务与投顾陪伴作为差异点，本周更新客户沟通口径，弱化费率单一卖点。",
-        "解禁潮与新股申购并行 解禁潮与新股申购并行 超千亿解禁叠加新股申购，客户持仓结构调整与打新资金调度需求上升，证券保证金流动加快。"
+        "解禁潮与新股申购并行 解禁潮与新股申购并行 超千亿解禁叠加新股申购，客户持仓结构调整与打新资金调度需求上升，证券保证金流动加快。",
+        "理财控回撤新招落地 理财控回撤新招落地 理财引入量化定档与限时修复管理净值波动，稳健型客户对回撤修复节奏的敏感度上升，产品间差异更需讲清。"
       ],
       "broadcastedFacts": [
         "!申购",
-        "!下调"
+        "!下调",
+        "!落地"
       ],
       "peakScore": 0
     },
@@ -8787,7 +8801,8 @@
       "topicTags": [
         "科技金融",
         "私行客群",
-        "广州本地"
+        "广州本地",
+        "消费信贷"
       ],
       "anchors": [
         "客群",
@@ -8795,15 +8810,17 @@
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-10-11",
-      "lastBroadcastAt": "2026-10-21",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-10-25",
+      "broadcastCount": 4,
       "sections": [
-        "must_read"
+        "must_read",
+        "insights"
       ],
       "anglesUsed": [
         "政策变化",
         "市场反应",
-        "受影响人群"
+        "受影响人群",
+        "数据验证"
       ],
       "samples": [
         {
@@ -8860,19 +8877,36 @@
           "score": 74,
           "novelty": 0.6829268292682926,
           "angle": "受影响人群"
+        },
+        {
+          "date": "2026-10-25",
+          "section": "insights",
+          "title": "科技金融周明日启动",
+          "text": "科技金融周明日启动 广东科技金融周10月26日启动，本地科创企业集中亮相，科技型小微与科创客群的融资对接窗口打开。",
+          "facts": [
+            "#10月",
+            "#26日"
+          ],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://www.cnr.cn/gd/guangdonglueying/20261024/t20261024_527851559.shtml",
+          "novelty": 0.6875,
+          "angle": "数据验证"
         }
       ],
       "broadcastedTexts": [
         "新质生产力顶层文件出台 新质生产力顶层文件出台 科技金融投向与考核导向明确，同时强调不走偏不冒进不泡沫化，科创授信风险偏好需重新校准。",
         "新质生产力顶层文件印发 新质生产力顶层文件印发 科技与产业升级方向明确，科创、先进制造客群的授信与综合服务空间打开，广州本地科创企业密集，客群结构或加速向新质生产力倾斜。",
         "证监会座谈问计市场 证监会座谈问计市场 后续政策预期升温，资本市场客群情绪与产品配置节奏的传导值得关注，财富条线客户风险偏好或现拐点。",
-        "跨境碳交易试点破题 跨境碳交易试点破题 跨境碳交易试点破题、券商碳交易版图扩张，碳资产与跨境绿色金融成为新的业务接口，客群边界向外延伸。"
+        "跨境碳交易试点破题 跨境碳交易试点破题 跨境碳交易试点破题、券商碳交易版图扩张，碳资产与跨境绿色金融成为新的业务接口，客群边界向外延伸。",
+        "科技金融周明日启动 科技金融周明日启动 广东科技金融周10月26日启动，本地科创企业集中亮相，科技型小微与科创客群的融资对接窗口打开。"
       ],
       "broadcastedFacts": [
         "!出台",
         "!印发",
         "@证监会",
-        "!试点"
+        "!试点",
+        "#10月",
+        "#26日"
       ],
       "peakScore": 74
     },
@@ -10828,142 +10862,233 @@
       ],
       "broadcastedFacts": [],
       "peakScore": 0
+    },
+    "ev-dr7gz3": {
+      "id": "ev-dr7gz3",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-25",
+      "lastBroadcastAt": "2026-10-25",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-25",
+          "section": "must_read",
+          "title": "信息化十五五规划释放信号",
+          "text": "信息化十五五规划释放信号 智能体应用普及率目标超九成、6G适时商用，科技产业链的中长期融资需求轮廓更清晰。",
+          "facts": [],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://finance.eastmoney.com/a/202610243907012127.html",
+          "score": 21,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "信息化十五五规划释放信号 信息化十五五规划释放信号 智能体应用普及率目标超九成、6G适时商用，科技产业链的中长期融资需求轮廓更清晰。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 21
+    },
+    "利率|黄金": {
+      "id": "利率|黄金",
+      "topicTags": [
+        "利率流动性",
+        "财富管理"
+      ],
+      "anchors": [
+        "黄金",
+        "利率"
+      ],
+      "kind": "market",
+      "firstBroadcastAt": "2026-10-25",
+      "lastBroadcastAt": "2026-10-25",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read",
+        "insights"
+      ],
+      "anglesUsed": [
+        "政策变化"
+      ],
+      "samples": [
+        {
+          "date": "2026-10-25",
+          "section": "must_read",
+          "title": "黄金大跌后如何判断转强",
+          "text": "黄金大跌后如何判断转强 利率、资金、价格三笔账的分析框架受关注，反映客户在贵金属回调中的判断分歧加大。",
+          "facts": [],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://video.sina.com.cn/p/finance/2026-10-24/detail-iniwiuth4640613.d.html",
+          "score": 64,
+          "novelty": 1
+        },
+        {
+          "date": "2026-10-25",
+          "section": "insights",
+          "title": "黄金定价逻辑生变",
+          "text": "黄金定价逻辑生变 金价在4300美元附近反复争夺，客户对贵金属的持有理由从避险转向利率与资金面，配置诉求分化明显。",
+          "facts": [],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://video.sina.com.cn/p/finance/2026-10-24/detail-iniwiutn1781331.d.html",
+          "novelty": 0.30288461538461536,
+          "angle": "政策变化"
+        }
+      ],
+      "broadcastedTexts": [
+        "黄金大跌后如何判断转强 黄金大跌后如何判断转强 利率、资金、价格三笔账的分析框架受关注，反映客户在贵金属回调中的判断分歧加大。",
+        "黄金定价逻辑生变 黄金定价逻辑生变 金价在4300美元附近反复争夺，客户对贵金属的持有理由从避险转向利率与资金面，配置诉求分化明显。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 64
+    },
+    "代发": {
+      "id": "代发",
+      "topicTags": [],
+      "anchors": [
+        "代发"
+      ],
+      "kind": "market",
+      "firstBroadcastAt": "2026-10-25",
+      "lastBroadcastAt": "2026-10-25",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-10-25",
+          "section": "must_read",
+          "title": "前三季度财政收支运行平稳",
+          "text": "前三季度财政收支运行平稳 财政资金投放节奏平稳推进，对公端项目资金流转与代发等零售联动机会的时点值得跟踪。",
+          "facts": [],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://news.southcn.com/node_812903b83a/681aad85ef.shtml",
+          "score": 21,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "前三季度财政收支运行平稳 前三季度财政收支运行平稳 财政资金投放节奏平稳推进，对公端项目资金流转与代发等零售联动机会的时点值得跟踪。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 21
+    },
+    "ev-rs723k": {
+      "id": "ev-rs723k",
+      "topicTags": [
+        "私行客群"
+      ],
+      "anchors": [
+        "高净值"
+      ],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-10-25",
+      "lastBroadcastAt": "2026-10-25",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read",
+        "insights"
+      ],
+      "anglesUsed": [
+        "政策变化"
+      ],
+      "samples": [
+        {
+          "date": "2026-10-25",
+          "section": "must_read",
+          "title": "金融开放转向规则对接",
+          "text": "金融开放转向规则对接 开放重心从准入放宽转向规则与监管能力对接，跨境业务的合规要求趋细，客户准入标准可能调整。",
+          "facts": [],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://m.21jingji.com/article/20261024/herald/e3df7904a43ae204759098c345e7580b.html",
+          "score": 29,
+          "novelty": 1
+        },
+        {
+          "date": "2026-10-25",
+          "section": "insights",
+          "title": "金融开放转向规则对接",
+          "text": "金融开放转向规则对接 开放重心转向规则与监管能力对接，跨境客户准入与业务边界趋细，高净值客户跨境安排的确定性下降。",
+          "facts": [],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://m.21jingji.com/article/20261024/herald/e3df7904a43ae204759098c345e7580b.html",
+          "novelty": 0.08555555555555555,
+          "angle": "政策变化"
+        }
+      ],
+      "broadcastedTexts": [
+        "金融开放转向规则对接 金融开放转向规则对接 开放重心从准入放宽转向规则与监管能力对接，跨境业务的合规要求趋细，客户准入标准可能调整。",
+        "金融开放转向规则对接 金融开放转向规则对接 开放重心转向规则与监管能力对接，跨境客户准入与业务边界趋细，高净值客户跨境安排的确定性下降。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 29
+    },
+    "ev-il1kbo": {
+      "id": "ev-il1kbo",
+      "topicTags": [
+        "私行客群"
+      ],
+      "anchors": [
+        "私行"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-10-25",
+      "lastBroadcastAt": "2026-10-25",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read",
+        "insights"
+      ],
+      "anglesUsed": [
+        "政策变化"
+      ],
+      "samples": [
+        {
+          "date": "2026-10-25",
+          "section": "must_read",
+          "title": "美方新版对外投资限制拟议",
+          "text": "美方新版对外投资限制拟议 涉美投资限制规则进入征求意见阶段，跨境投资类客户的合规不确定性上升，影响相关业务节奏。",
+          "facts": [],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://finance.eastmoney.com/a/202610243907116474.html",
+          "score": 29,
+          "novelty": 1
+        },
+        {
+          "date": "2026-10-25",
+          "section": "insights",
+          "title": "涉美投资合规关注升温",
+          "text": "涉美投资合规关注升温 涉美投资限制拟议规则出台，跨境资产配置客户的合规问询增多，私行端跨境方案的沟通链条拉长。",
+          "facts": [
+            "!问询",
+            "!出台"
+          ],
+          "broadcastAt": "2026-10-25T07:11:40+08:00",
+          "url": "https://finance.eastmoney.com/a/202610243907116474.html",
+          "novelty": 0.673888888888889,
+          "angle": "政策变化"
+        }
+      ],
+      "broadcastedTexts": [
+        "美方新版对外投资限制拟议 美方新版对外投资限制拟议 涉美投资限制规则进入征求意见阶段，跨境投资类客户的合规不确定性上升，影响相关业务节奏。",
+        "涉美投资合规关注升温 涉美投资合规关注升温 涉美投资限制拟议规则出台，跨境资产配置客户的合规问询增多，私行端跨境方案的沟通链条拉长。"
+      ],
+      "broadcastedFacts": [
+        "!问询",
+        "!出台"
+      ],
+      "peakScore": 29
     }
   },
   "today": {
     "date": "2026-10-25",
-    "entries": [
-      {
-        "date": "2026-10-25",
-        "section": "must_read",
-        "title": "信息化十五五规划释放信号",
-        "text": "信息化十五五规划释放信号 智能体应用普及率目标超九成、6G适时商用，科技产业链的中长期融资需求轮廓更清晰。",
-        "facts": [],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://finance.eastmoney.com/a/202610243907012127.html",
-        "score": 21,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-25",
-        "section": "must_read",
-        "title": "黄金大跌后如何判断转强",
-        "text": "黄金大跌后如何判断转强 利率、资金、价格三笔账的分析框架受关注，反映客户在贵金属回调中的判断分歧加大。",
-        "facts": [],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://video.sina.com.cn/p/finance/2026-10-24/detail-iniwiuth4640613.d.html",
-        "score": 64,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-25",
-        "section": "must_read",
-        "title": "前三季度财政收支运行平稳",
-        "text": "前三季度财政收支运行平稳 财政资金投放节奏平稳推进，对公端项目资金流转与代发等零售联动机会的时点值得跟踪。",
-        "facts": [],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://news.southcn.com/node_812903b83a/681aad85ef.shtml",
-        "score": 21,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-25",
-        "section": "must_read",
-        "title": "金融开放转向规则对接",
-        "text": "金融开放转向规则对接 开放重心从准入放宽转向规则与监管能力对接，跨境业务的合规要求趋细，客户准入标准可能调整。",
-        "facts": [],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://m.21jingji.com/article/20261024/herald/e3df7904a43ae204759098c345e7580b.html",
-        "score": 29,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-25",
-        "section": "must_read",
-        "title": "美方新版对外投资限制拟议",
-        "text": "美方新版对外投资限制拟议 涉美投资限制规则进入征求意见阶段，跨境投资类客户的合规不确定性上升，影响相关业务节奏。",
-        "facts": [],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://finance.eastmoney.com/a/202610243907116474.html",
-        "score": 29,
-        "novelty": 1
-      },
-      {
-        "date": "2026-10-25",
-        "section": "insights",
-        "title": "黄金定价逻辑生变",
-        "text": "黄金定价逻辑生变 金价在4300美元附近反复争夺，客户对贵金属的持有理由从避险转向利率与资金面，配置诉求分化明显。",
-        "facts": [],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://video.sina.com.cn/p/finance/2026-10-24/detail-iniwiutn1781331.d.html",
-        "novelty": 0.30288461538461536,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-10-25",
-        "section": "insights",
-        "title": "涉美投资合规关注升温",
-        "text": "涉美投资合规关注升温 涉美投资限制拟议规则出台，跨境资产配置客户的合规问询增多，私行端跨境方案的沟通链条拉长。",
-        "facts": [
-          "!问询",
-          "!出台"
-        ],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://finance.eastmoney.com/a/202610243907116474.html",
-        "novelty": 0.673888888888889,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-10-25",
-        "section": "insights",
-        "title": "理财控回撤新招落地",
-        "text": "理财控回撤新招落地 理财引入量化定档与限时修复管理净值波动，稳健型客户对回撤修复节奏的敏感度上升，产品间差异更需讲清。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://m.21jingji.com/article/20261024/herald/8069cb0c7a1ab6b5438b65947dd65174.html",
-        "novelty": 0.7200980392156864,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-10-25",
-        "section": "insights",
-        "title": "科技金融周明日启动",
-        "text": "科技金融周明日启动 广东科技金融周10月26日启动，本地科创企业集中亮相，科技型小微与科创客群的融资对接窗口打开。",
-        "facts": [
-          "#10月",
-          "#26日"
-        ],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://www.cnr.cn/gd/guangdonglueying/20261024/t20261024_527851559.shtml",
-        "novelty": 0.6875,
-        "angle": "数据验证"
-      },
-      {
-        "date": "2026-10-25",
-        "section": "insights",
-        "title": "深圳算力信贷超千亿",
-        "text": "深圳算力信贷超千亿 深圳算力相关四大行业获超千亿贷款，大湾区科技产业链信贷竞争加剧，本地科创客群的同业争夺更激烈。",
-        "facts": [],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://m.21jingji.com/article/20261024/herald/813c3e27d49a641bc3229b99c4e09041.html",
-        "novelty": 0.29673913043478256,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-10-25",
-        "section": "insights",
-        "title": "金融开放转向规则对接",
-        "text": "金融开放转向规则对接 开放重心转向规则与监管能力对接，跨境客户准入与业务边界趋细，高净值客户跨境安排的确定性下降。",
-        "facts": [],
-        "broadcastAt": "2026-10-25T07:11:40+08:00",
-        "url": "https://m.21jingji.com/article/20261024/herald/e3df7904a43ae204759098c345e7580b.html",
-        "novelty": 0.08555555555555555,
-        "angle": "政策变化"
-      }
-    ],
-    "runId": "40141647182"
+    "entries": []
   },
   "deliveries": [
     {
@@ -11236,6 +11361,13 @@
       "runId": "40041985301",
       "reportRunId": "40040240733",
       "reportSha": "1e19dd8e5feb5f5d9e166008af8c59c7b853d590"
+    },
+    {
+      "date": "2026-10-25",
+      "pushedAt": "2026-10-25T07:50:47+08:00",
+      "runId": "40144360321",
+      "reportRunId": "40141647182",
+      "reportSha": "fff83b0371ca55bf22a9e585749b0aced636dda8"
     }
   ],
   "ipoVoicing": {
