@@ -56,6 +56,9 @@ export function beginDay(store: EventMemoryStore, today: string): EventMemorySto
     today: { date: today, entries: [] },
     ...(store.deliveries ? { deliveries: store.deliveries } : {}),
     ...(store.ipoVoicing ? { ipoVoicing: store.ipoVoicing } : {}),
+    // 昨日定调原文（2026-10-25 sc）：beginDay 开新一天时**保留**上一轮存的值，
+    // 因为对本次运行而言它就是「昨日定调」（exec-guard 定稿后会覆写成今日的）。
+    ...(store.lastHeroLine ? { lastHeroLine: store.lastHeroLine } : {}),
   };
 }
 

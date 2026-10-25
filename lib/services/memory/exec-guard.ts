@@ -198,6 +198,73 @@ function buildDailyGroundingTexts(next: ExecutiveSummary, pool: readonly GuardPo
 }
 
 /**
+ * 定调跨天重复判据（2026-10-25 sc）。
+ *
+ * 为什么需要：定调不走事件判重、不写事件记忆，跨天重复无人发现（10-25 实测：
+ * 定调第一个方面与昨日逐字相同）。本条只做**标记**（触发 `heroRewriteNeeded`
+ * 让二次 LLM 重写），不做规则替换 —— 与 10-04「绝不用规则替换」同口径。
+ *
+ * 判据 = **按「方面」切分后取最大 bigram Jaccard**：
+ *   定调形如「今天主要看三个方面：A；B；C。」，按「；」切成各方面，
+ *   今日任一方面与昨日任一方面相似度 ≥ HERO_REPEAT_JACCARD → 判重复。
+ *
+ * 🔴 为什么不用数字锚：实测 10-24/10-25 那两个重复方面（「广东经济增速创五年新高」）
+ *   **都不含数字」——总量类表述常写作「创五年新高」而非「增长 5.2%」。
+ *   数字锚在这里反而抓不到，必须靠实义 bigram。
+ *
+ * 🔴 为什么按「方面」而不是整句比：整句 Jaccard 会被「今天主要看 N 个方面」的
+ *   固定前缀与无关方面稀释；且只要**有一个方面**重复就已构成「行长昨天听过」。
+ *
+ * 阈值依据（四期真实数据实测，见 tests/hero-repeat.test.ts）：
+ *   10-25 vs 10-24 重复方面 = 0.68；同期非重复方面 ≤ 0.18 → 阈值取 0.35。
+ */
+export const HERO_REPEAT_JACCARD = 0.35;
+
+/** 文本 → bigram 集合（去标点后按连续两字切；单字文本退化为自身）。 */
+function bigramsOf(text: string): Set<string> {
+  const clean = (text ?? "").replace(/[^\p{L}\p{N}]+/gu, "");
+  const out = new Set<string>();
+  for (let i = 0; i < clean.length - 1; i++) out.add(clean.slice(i, i + 2));
+  if (clean.length === 1) out.add(clean);
+  return out;
+}
+
+/** 按「；」切分方面（兼容「，」分隔的短定调：无分隔符时整句视为一个方面）。 */
+export function heroAspectsOf(heroLine: string): string[] {
+  const body = (heroLine ?? "").replace(/^.*?：/, "");
+  return body
+    .split(/[；;]/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+/** 今日定调是否与昨日定调存在重复方面（返回命中的方面对，供日志留痕）。 */
+export function heroRepeatsPrev(
+  today: string,
+  prev: string,
+): { repeat: boolean; matched?: string } {
+  const a = heroAspectsOf(today);
+  const b = heroAspectsOf(prev);
+  let best = 0;
+  let matched: string | undefined;
+  for (const x of a) {
+    const bx = bigramsOf(x);
+    if (bx.size === 0) continue;
+    for (const y of b) {
+      const by = bigramsOf(y);
+      let inter = 0;
+      for (const g of bx) if (by.has(g)) inter++;
+      const j = inter / (bx.size + by.size - inter);
+      if (j > best) {
+        best = j;
+        matched = `${x.slice(0, 18)} ↔ ${y.slice(0, 18)}`;
+      }
+    }
+  }
+  return { repeat: best >= HERO_REPEAT_JACCARD, ...(matched ? { matched } : {}) };
+}
+
+/**
  * 主入口：对四大板块执行记忆去重 + 兜底补齐。
  * 纯函数（不改入参），返回新 exec 与更新后的记忆库。
  */
@@ -538,6 +605,30 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
           `（不采用规则补足：那只是把必读标题抄一遍，反而不如这条精炼的总结）`,
       );
     }
+
+    // 🔴 跨天重复判据（2026-10-25 sc）—— **独立于上面三道审计**，放在最后：
+    //    上面的 grounding/displayAudit 判「有没有出处」，本条判「昨天是不是讲过」。
+    //    10-25 实测：定调第一个方面与昨日逐字相同，但它在当天板块卡里有出处 →
+    //    三道审计全过，只有本条能发现。
+    //    ⚠️ 只标记、不用规则替换（与 10-04 口径一致）：重写交给二次 LLM，
+    //       LLM 不可用时保留原定调（宁重复，不复读必读标题）。
+    const prevHero = input.store.lastHeroLine;
+    if (prevHero && !heroRewriteNeeded) {
+      const rep = heroRepeatsPrev(next.hero_line, prevHero);
+      if (rep.repeat) {
+        heroRewriteNeeded = true;
+        log.push(
+          `🧠 定调：与昨日定调存在重复方面（${rep.matched}，Jaccard ≥ ${HERO_REPEAT_JACCARD}）` +
+            ` → 标记二次 LLM 重写（行长昨天听过，今天须有新增量）`,
+        );
+      }
+    }
+  }
+
+  // 今日定稿的定调覆写回 store —— 下一次运行读到它就是「昨日定调」
+  // （10-25 sc：定调跨天一致性依赖这一份原文；此前系统里根本不存）。
+  if (next.hero_line && next.hero_line.trim()) {
+    store = { ...store, lastHeroLine: next.hero_line };
   }
 
   return {

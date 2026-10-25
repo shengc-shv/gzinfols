@@ -95,6 +95,10 @@ export function buildMemoryBrief(
  * 必须换一个切入角度」——而不是「禁止提及」。
  * 硬禁会让模型在只有旧事件可说时编造内容（历史教训：LLM 宁可编也不留空），
  * 因此保留「换角度重说」的合法出口。
+ *
+ * 🔴 `lastHeroLine`（2026-10-25 sc）：昨日定调原文。定调不走事件判重、不写事件记忆，
+ *    所以上面那份「已播事件清单」**覆盖不到定调本身**—— 10-25 实测定调第一个方面与
+ *    昨日逐字相同，而 brief 里没有任何提示能让 LLM 避开。故单独注入一段。
  */
 export function formatMemoryBrief(
   brief: Array<{
@@ -105,13 +109,26 @@ export function formatMemoryBrief(
     suggestedAngle: EventAngle;
     angleGuide: string;
   }>,
+  lastHeroLine?: string,
 ): string {
-  if (brief.length === 0) return "";
+  const hero = (lastHeroLine ?? "").trim();
+  const heroBlock = hero
+    ? [
+        "",
+        "【昨日定调】行长昨天听过的开篇是：",
+        `「${hero.length > 120 ? `${hero.slice(0, 120)}…` : hero}」`,
+        "- 今天写 hero_line 时，**不要原样重复昨日的任何一个方面**；",
+        "- 若某个事件今天仍是主线（如出现新数据/新进展），必须写出**新增量**，",
+        "  而不是换几个近义词复述（例：昨天说「广东经济增速创五年新高」，今天就别再说一遍）。",
+      ].join("\n")
+    : "";
+  if (brief.length === 0) return heroBlock;
   const lines = brief.map((b) => {
     const when = b.daysSince === 0 ? "今天已播报过" : `${b.daysSince} 天前播报过`;
     return `- 「${b.title.slice(0, 40)}」（${when}，累计 ${b.count} 次）→ 如需再讲，请改从「${b.suggestedAngle}」切入：${b.angleGuide}`;
   });
   return [
+    ...(heroBlock ? [heroBlock] : []),
     "",
     "【内容记忆·去重约束】以下是近期已播报过的事件，行长已经听过：",
     ...lines,
