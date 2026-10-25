@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-25",
+  "updatedAt": "2026-10-26",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -11087,8 +11087,154 @@
     }
   },
   "today": {
-    "date": "2026-10-25",
-    "entries": []
+    "date": "2026-10-26",
+    "entries": [
+      {
+        "date": "2026-10-26",
+        "section": "must_read",
+        "title": "国常会加力服务业扩能提质",
+        "text": "国常会加力服务业扩能提质 服务业准入与监管适配并进，服务业在广州经济中占比高，相关小微客群的融资与结算需求面临扩容。",
+        "facts": [],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261026/4486120_1.html",
+        "score": 51,
+        "novelty": 0.23422932330827065,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-10-26",
+        "section": "must_read",
+        "title": "国常会研究人口与经济发展",
+        "text": "国常会研究人口与经济发展 人口与家庭结构议题进入国务院议程，养老、生育与家庭保障类政策预期升温，长期客群结构面临重估。",
+        "facts": [
+          "@国务院"
+        ],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://finance.eastmoney.com/a/202610253907169967.html",
+        "score": 61,
+        "novelty": 1
+      },
+      {
+        "date": "2026-10-26",
+        "section": "must_read",
+        "title": "香港引进企业投资283亿港元",
+        "text": "香港引进企业投资283亿港元 重点企业实际投资落地，粤港澳跨境产业与资金流动增强，跨境客群与家族办公室需求外溢。",
+        "facts": [
+          "!落地"
+        ],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://www.cnfin.com/hg-lb/detail/20261025/4486073_1.html",
+        "score": 75,
+        "novelty": 0.7604166666666667,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-26",
+        "section": "must_read",
+        "title": "上证、科创综指拟修订",
+        "text": "上证、科创综指拟修订 指数编制规则明起调整，跟踪指数的理财与基金产品基准随之变化，被动配置的业绩可比性受影响。",
+        "facts": [],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261025/4485988_1.html",
+        "score": 69,
+        "novelty": 0.2916666666666667,
+        "angle": "同业动作"
+      },
+      {
+        "date": "2026-10-26",
+        "section": "must_read",
+        "title": "人民币汇率创4年新高",
+        "text": "人民币汇率创4年新高 汇率升破关键位，跨境结算与结售汇的量价同时变化，涉外企业与高净值客户的汇率敏感度抬升。",
+        "facts": [
+          "#4年"
+        ],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://m.21jingji.com/article/20261025/herald/7c0429bb68fca65dcfaf17d4cca59390.html",
+        "score": 66,
+        "novelty": 0.5377659574468084,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-10-26",
+        "section": "insights",
+        "title": "长期限存单密集上新",
+        "text": "长期限存单密集上新 客户锁息诉求集中释放，三年期以上存款与理财的期限搭配出现空档，到期资金在货架间的迁移节奏加快。",
+        "facts": [],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://m.21jingji.com/article/20261025/herald/5d4d799602e2e33e584d9f7747e4f4cc.html",
+        "novelty": 0.34313725490196073,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-26",
+        "section": "insights",
+        "title": "金价跌破四千美元",
+        "text": "金价跌破四千美元 贵金属持仓客户浮盈回吐，赎回与调仓咨询量上升，避险资金在黄金与固收之间重新寻找落点。",
+        "facts": [],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://finance.sina.com.cn/jjxw/2026-10-26/doc-iniwnzcz9288329.shtml",
+        "novelty": 0.258695652173913,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-26",
+        "section": "insights",
+        "title": "汇率新高下的跨境配置",
+        "text": "汇率新高下的跨境配置 人民币走强使境外资产折算成本下降，私行客户的跨境配置与结售汇报价敏感度同步抬升。",
+        "facts": [],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://m.21jingji.com/article/20261025/herald/7c0429bb68fca65dcfaf17d4cca59390.html",
+        "novelty": 0.2441860465116279,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-26",
+        "section": "insights",
+        "title": "财富牌照扩容竞逐",
+        "text": "财富牌照扩容竞逐 三类机构竞逐牌照扩容，财富管理供给主体增加，高净值客户的产品选择面与分流压力同步扩大。",
+        "facts": [],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://m.21jingji.com/article/20261025/herald/5ef3b6e4b998dd45c4ee6e97b0252329.html",
+        "novelty": 0.3083333333333333,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-26",
+        "section": "insights",
+        "title": "数字经济企业名单扩容",
+        "text": "数字经济企业名单扩容 深圳32家企业拟入选省首批数字经济创新型企业，可获上市融资支持，科创类企业主的财富管理需求外溢。",
+        "facts": [
+          "#32家"
+        ],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://m.21jingji.com/article/20261025/herald/c631cfc125a5aec1c1d31e0983f1176a.html",
+        "novelty": 0.5385416666666667,
+        "angle": "同业动作"
+      },
+      {
+        "date": "2026-10-26",
+        "section": "insights",
+        "title": "港股回购升温",
+        "text": "港股回购升温 港股回购活跃带动权益持仓客户交易意愿回升，基金与理财的权益仓位咨询量增加。",
+        "facts": [],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261026/4486104_1.html",
+        "novelty": 0.33055555555555555,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-10-26",
+        "section": "risk",
+        "title": "国企穿透式监管趋严",
+        "text": "国企穿透式监管趋严 国资委昨日明确推进国资国企改革、加快穿透式监管，涉国企授信与合规审查口径可能收紧。 公司条线涉国企上下游授信审查趋严；供应链与代发客群准入成本上升；风控需重估关联交易识别口径；个贷与财富端涉国企员工团办业务节奏受影响。",
+        "facts": [],
+        "broadcastAt": "2026-10-26T07:33:52+08:00",
+        "score": 87,
+        "novelty": 0.3276595744680851,
+        "angle": "受影响人群"
+      }
+    ],
+    "runId": "40245217286"
   },
   "deliveries": [
     {
