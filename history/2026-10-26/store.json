@@ -1,0 +1,834 @@
+{
+  "date": "2026-10-26",
+  "updatedAt": "2026-10-25T23:36:59.883Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：汇率创新高，结售汇窗口打开；黄金跌破四千美元，贵金属持仓回撤；国常会加力服务业与人口统筹，小微与养老客群扩容；大额存单密集上新，负债与锁息需求生变。",
+    "spoken_hero": "今天主要看四个方面：人民币汇率创四年新高，跨境结售汇窗口打开；黄金跌破四千美元，贵金属持仓回撤明显；国常会加力服务业和人口统筹，小微与养老客群扩容；长期限大额存单密集上新，负债和锁息需求都在变。",
+    "must_read": [
+      {
+        "title": "国常会加力服务业扩能提质",
+        "why": "服务业准入与监管适配并进，服务业在广州经济中占比高，相关小微客群的融资与结算需求面临扩容。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261026/4486120_1.html"
+      },
+      {
+        "title": "国常会研究人口与经济发展",
+        "why": "人口与家庭结构议题进入国务院议程，养老、生育与家庭保障类政策预期升温，长期客群结构面临重估。",
+        "url": "https://finance.eastmoney.com/a/202610253907169967.html"
+      },
+      {
+        "title": "香港引进企业投资283亿港元",
+        "why": "重点企业实际投资落地，粤港澳跨境产业与资金流动增强，跨境客群与家族办公室需求外溢。",
+        "url": "https://www.cnfin.com/hg-lb/detail/20261025/4486073_1.html"
+      },
+      {
+        "title": "上证、科创综指拟修订",
+        "why": "指数编制规则明起调整，跟踪指数的理财与基金产品基准随之变化，被动配置的业绩可比性受影响。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261025/4485988_1.html"
+      },
+      {
+        "title": "人民币汇率创4年新高",
+        "why": "汇率升破关键位，跨境结算与结售汇的量价同时变化，涉外企业与高净值客户的汇率敏感度抬升。",
+        "url": "https://m.21jingji.com/article/20261025/herald/7c0429bb68fca65dcfaf17d4cca59390.html"
+      }
+    ],
+    "spoken_must_read": "国常会加力服务业扩能提质。服务业准入与监管适配并进，服务业在广州经济中占比高，相关小微客群的融资与结算需求面临扩容。其次，国常会研究人口与经济发展。人口与家庭结构议题进入国务院议程，养老、生育与家庭保障类政策预期升温，长期客群结构面临重估。此外，香港引进企业投资283亿港元。重点企业实际投资落地，粤港澳跨境产业与资金流动增强，跨境客群与家族办公室需求外溢。还有，上证、科创综指拟修订。指数编制规则明起调整，跟踪指数的理财与基金产品基准随之变化，被动配置的业绩可比性受影响。另外，人民币汇率创4年新高。汇率升破关键位，跨境结算与结售汇的量价同时变化，涉外企业与高净值客户的汇率敏感度抬升。",
+    "insights": [
+      {
+        "topic": "长期限存单密集上新",
+        "impact": "客户锁息诉求集中释放，三年期以上存款与理财的期限搭配出现空档，到期资金在货架间的迁移节奏加快。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "长期限大额存单密集上新 银行负债逻辑生变",
+            "url": "https://m.21jingji.com/article/20261025/herald/5d4d799602e2e33e584d9f7747e4f4cc.html"
+          },
+          {
+            "title": "中长期大额存单发行再度提速",
+            "url": "https://www.cnfin.com/hg-lb/detail/20261026/4486116_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "金价跌破四千美元",
+        "impact": "贵金属持仓客户浮盈回吐，赎回与调仓咨询量上升，避险资金在黄金与固收之间重新寻找落点。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "国际现货黄金跌破4000美元/盎司关口",
+            "url": "https://finance.sina.com.cn/jjxw/2026-10-26/doc-iniwnzcz9288329.shtml"
+          },
+          {
+            "title": "黄金狂泻170美元，创数月最差一周",
+            "url": "https://finance.sina.com.cn/wm/2026-10-25/doc-iniwncyp6163215.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "汇率新高下的跨境配置",
+        "impact": "人民币走强使境外资产折算成本下降，私行客户的跨境配置与结售汇报价敏感度同步抬升。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "人民币汇率创4年新高！汇率风险管理需求飙升",
+            "url": "https://m.21jingji.com/article/20261025/herald/7c0429bb68fca65dcfaf17d4cca59390.html"
+          }
+        ]
+      },
+      {
+        "topic": "财富牌照扩容竞逐",
+        "impact": "三类机构竞逐牌照扩容，财富管理供给主体增加，高净值客户的产品选择面与分流压力同步扩大。",
+        "tag": [
+          "财富",
+          "竞对动态"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "重要牌照扩容关键之战，三类机构竞逐",
+            "url": "https://m.21jingji.com/article/20261025/herald/5ef3b6e4b998dd45c4ee6e97b0252329.html"
+          }
+        ]
+      },
+      {
+        "topic": "数字经济企业名单扩容",
+        "impact": "深圳32家企业拟入选省首批数字经济创新型企业，可获上市融资支持，科创类企业主的财富管理需求外溢。",
+        "tag": [
+          "科技金融",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "32家深圳企业拟入选广东省首批数字经济创新型企业名单",
+            "url": "https://m.21jingji.com/article/20261025/herald/c631cfc125a5aec1c1d31e0983f1176a.html"
+          }
+        ]
+      },
+      {
+        "topic": "港股回购升温",
+        "impact": "港股回购活跃带动权益持仓客户交易意愿回升，基金与理财的权益仓位咨询量增加。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "【读财报】港股10月以来回购36.75亿港元",
+            "url": "https://www.cnfin.com/yw-lb/detail/20261026/4486104_1.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，长期限存单密集上新等3条线索，客户锁息诉求集中释放。第二，高端客户方面，汇率新高下的跨境配置等3条线索，人民币走强使境外资产折算成本下降。",
+    "risk": {
+      "topic": "国企穿透式监管趋严",
+      "evidence": "国资委昨日明确推进国资国企改革、加快穿透式监管，涉国企授信与合规审查口径可能收紧。",
+      "impact": "公司条线涉国企上下游授信审查趋严；供应链与代发客群准入成本上升；风控需重估关联交易识别口径；个贷与财富端涉国企员工团办业务节奏受影响。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "国资委：推进国资国企改革 加快穿透式监管",
+          "url": "https://www.cnfin.com/yw-lb/detail/20261025/4486029_1.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：国企穿透式监管趋严，公司条线涉国企上下游授信审查趋严；供应链与代发客群准入成本上升；风控需重估关联交易识别口径；个贷与财富端涉国企员工团办业务节奏受影响。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "道指跌1.23%，纳指跌0.21%，生物科技走强与AI需求支撑分化。",
+      "sectors": [
+        "生物科技股集体大涨，临床进展、并购与新药技术回暖带动板块。",
+        "安进获Oppenheimer重申评级，抗癌药数据构成催化。",
+        "英特尔获RBC重申评级，AI需求与代工进展为关注点。",
+        "诺基亚三季度业绩强劲，仍被下调至减持评级。"
+      ],
+      "spoken": "美股收盘走弱，道指跌1.23%，纳指跌0.21%，标普跌0.52%。板块上生物科技股大涨，临床进展和并购带动情绪，安进因抗癌药数据获机构重申评级；英特尔受AI需求和代工进展关注，诺基亚三季度业绩强劲。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-26"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52215.16",
+          "changePct": "-1.23%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25955.34",
+          "changePct": "-0.21%"
+        },
+        {
+          "name": "标普500",
+          "value": "7623.68",
+          "changePct": "-0.52%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证涨0.89%，创业板涨4.16%，AI产业链景气与指数调整预期共振。",
+      "sectors": [
+        "创业板指涨4.16%领跑，深证成指涨2.79%，成长风格明显占优。",
+        "科创巨头集中披露，AI产业链景气度持续兑现，带动科技板块走强。",
+        "物理AI龙头入选英伟达生态后暴涨，南向资金大举加仓。",
+        "重要指数调整明起实施，相关成分股资金关注度提升。"
+      ],
+      "spoken": "A股收盘走强，上证涨0.89%，深证成指涨2.79%，创业板涨4.16%。板块上科创巨头集中披露，AI产业链景气度兑现，物理AI龙头入选英伟达生态后大涨，南向资金加仓；重要指数调整明起实施，成长风格明显占优。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-26"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3690.47",
+          "changePct": "+0.89%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11673.83",
+          "changePct": "+2.79%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2684.10",
+          "changePct": "+4.16%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒指涨0.69%，恒生科技涨2.05%，港股调整后机构静待黄金坑。",
+      "sectors": [
+        "恒生科技涨2.05%领先，科技成长板块表现强于大盘。",
+        "私募借道ETF配置，科创与港股主题受追捧，增量资金入场。",
+        "国泰航空获瑞银重申买入，目标价19.4港元。",
+        "安踏体育获招商证券国际维持增持，目标价93港元。"
+      ],
+      "spoken": "港股收盘上涨，恒指涨0.69%，恒生科技涨2.05%。板块上科技成长领先，私募借道ETF配置科创和港股主题；个股方面国泰航空获瑞银重申买入，安踏体育获招商证券国际维持增持，机构在调整中等待黄金坑。",
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-26"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23093.37",
+          "changePct": "+0.69%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3871.66",
+          "changePct": "+2.05%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-23",
+    "marketStatus": {
+      "reportDate": "2026-10-26",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-10-23",
+          "reason": "数据为 10月23日（距今 3 天）"
+        },
+        "hk": {
+          "fresh": false,
+          "dataDate": "2026-10-23",
+          "reason": "数据为 10月23日（距今 3 天）"
+        },
+        "us": {
+          "fresh": false,
+          "dataDate": "2026-10-23",
+          "reason": "数据为 10月23日（距今 3 天）"
+        }
+      },
+      "allStale": true,
+      "note": "三地股市均无隔夜行情（休市或数据未更新），以下为最近一次收盘数据",
+      "spokenNote": "三地股市今日均无隔夜行情"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610253907259014.html",
+      "title_cn": "10月25日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "东方财富汇总10月25日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610253907145069.html",
+      "title_cn": "A股大消息！重要指数调整明起实施",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "A股一项重要指数调整将于次日起正式实施。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "指数调整"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610253907169967.html",
+      "title_cn": "周末要闻汇总：国常会研究统筹人口与经济社会发展有关工作",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "周末要闻汇总显示，国务院常务会议研究了统筹人口与经济社会发展有关工作。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610253907248118.html",
+      "title_cn": "十大机构论市：“深V”阻断负向反馈拒绝恐慌、迎接反弹",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "十大机构发布市场观点，提及A股出现“深V”走势、负向反馈被阻断及对反弹的预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610253907142818.html",
+      "title_cn": "利好袭来入选英伟达生态物理AI龙头暴涨！南向资金大举加仓",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "一家入选英伟达生态的物理AI龙头股大幅上涨，南向资金大举加仓。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "南向资金",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610253907160259.html",
+      "title_cn": "利好来了！科创巨头集中披露！AI产业链景气度持续兑现",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "多家科创板公司集中披露业绩，AI产业链景气度持续兑现。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "科创板",
+        "AI",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610253907166987.html",
+      "title_cn": "特朗普称美国随时可能再对伊朗动手也可能达成协议",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "特朗普表示美国随时可能再次对伊朗采取行动，也可能达成协议。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "能源"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610253907143946.html",
+      "title_cn": "机器人IPO门槛提高具身智能一级市场预期变了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "机器人企业IPO门槛提高，具身智能一级市场预期随之变化。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机器人",
+        "IPO",
+        "一级市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610253907165494.html",
+      "title_cn": "“全是我的责任！”私募基金经理道歉",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "一位私募基金经理就相关情况公开道歉，称“全是我的责任”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "私募",
+        "基金"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610253907148029.html",
+      "title_cn": "逼近举牌线、重仓PCB概念股！知名牛散三季度新进股梳理",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "梳理知名个人投资者三季度新进个股，涉及逼近举牌线及重仓PCB概念股等情况。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "股东持仓",
+        "PCB"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263907410950.html",
+      "title_cn": "ESG评级百花齐放：分歧从何而来共识如何构建",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "报道讨论ESG评级机构结果存在分歧的原因及共识构建问题。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "ESG",
+        "评级"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263907380265.html",
+      "title_cn": "多位券商首席最新研判：调整不改基本面多重数据印证A股长期价值",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "多位券商首席研判认为，市场调整不改基本面，多重数据印证A股长期价值。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-26/doc-iniwnkhh2832922.shtml",
+      "title_cn": "私募借道ETF配置资产 科创、港股主题受追捧",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "私募通过ETF配置资产，科创与港股主题ETF受到追捧。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "ETF",
+        "私募"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-26/doc-iniwnzcz9309823.shtml",
+      "title_cn": "京城机电股份获Barclays PLC增持259.8万股 每股作价2.83港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "Barclays PLC增持京城机电股份259.8万股，每股作价2.83港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "股东增减持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-26/doc-iniwnzcz9309325.shtml",
+      "title_cn": "大族数控遭GIC Private Limited减持45.61万股 每股作价约65.07港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "GIC Private Limited减持大族数控45.61万股，每股作价约65.07港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "股东增减持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-26/doc-iniwnzef2530809.shtml",
+      "title_cn": "福莱特玻璃遭小摩减持约53.51万股 每股作价约5.22港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "摩根大通减持福莱特玻璃约53.51万股，每股作价约5.22港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "股东增减持",
+        "光伏"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-26/doc-iniwnzcz9308685.shtml",
+      "title_cn": "大金重工获GIC Private Limited减持29万股 每股作价约22.08港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "GIC Private Limited减持大金重工29万股，每股作价约22.08港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "股东增减持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-26/doc-iniwnzcz9307113.shtml",
+      "title_cn": "瑞银：国泰航空重申“买入”评级 目标价19.4港元。",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "瑞银重申国泰航空“买入”评级，目标价19.4港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "航空"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-26/doc-iniwnzcy2529453.shtml",
+      "title_cn": "花旗：金沙中国维持“买入”评级 目标价17港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "花旗维持金沙中国“买入”评级，目标价17港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "博彩"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-26/doc-iniwnzef2530453.shtml",
+      "title_cn": "都市丽人获吴小丽增持34.30万股 每股作价0.2471港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "吴小丽增持都市丽人34.30万股，每股作价0.2471港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "股东增减持"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-10-25/doc-iniwnkhi9587319.shtml",
+      "title_cn": "微亿智造暂缓港股IPO：当“工业具身智能第一股”遇上港股IPO的“冷静期”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "微亿智造暂缓港股IPO，报道称其面临港股IPO“冷静期”。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "机器人"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-24/doc-iniwhnya2345931.shtml",
+      "title_cn": "恒指牛熊街货比(51:49)︱10月24日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/24",
+      "summary": "10月24日恒指牛熊街货比为51:49。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/24/biotech-stocks-drug-innovation-rally.html",
+      "title_cn": "Biotech stocks are surging. How investors can play the new drug innovation boom",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/24",
+      "summary": "CNBC报道生物科技股大幅上涨，并讨论投资者参与药物创新热潮的方式。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "生物科技",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/analyst-ratings/oppenheimer-reiterates-amgen-stock-rating-on-cancer-drug-data-93CH-4971303",
+      "title_cn": "Oppenheimer reiterates Amgen stock rating on cancer drug data",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "Oppenheimer基于癌症药物数据重申安进股票评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "医药",
+        "券商评级"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/analyst-ratings/stifel-raises-hinge-health-stock-price-target-on-app-growth-rebound-93CH-4971301",
+      "title_cn": "Stifel raises Hinge Health stock price target on app growth rebound",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "Stifel因应用增长回升上调Hinge Health股票目标价。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商评级",
+        "数字医疗"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/analyst-ratings/nokia-stock-rating-upgraded-to-reduce-by-inderes-on-strong-q3-results-93CH-4971302",
+      "title_cn": "Nokia stock rating upgraded to Reduce by IndeRes on strong Q3 results",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "IndeRes基于强劲的三季度业绩将诺基亚股票评级上调至“减持”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商评级",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/analyst-ratings/inderes-upgrades-nokia-stock-rating-on-strong-q3-results-93CH-4971300",
+      "title_cn": "IndeRes upgrades Nokia stock rating on strong Q3 results",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "IndeRes基于诺基亚强劲的三季度业绩上调其股票评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商评级",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-beforepay-q1-2026-profit-jumps-as-lending-grows-93CH-4971299",
+      "title_cn": "Earnings call transcript: Beforepay Q1 2026 profit jumps as lending grows",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "Beforepay 2026财年一季度利润随贷款业务增长而大幅上升。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "金融科技"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/anthropics-claude-accessed-public-us-state-of-georgia-voter-information-axios-reports-4971291",
+      "title_cn": "Anthropic’s Claude accessed Georgia state vote count information behind paywall, Axios reports",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "据Axios报道，Anthropic的Claude访问了佐治亚州计票信息付费墙后的内容。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "监管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/analyst-ratings/rbc-reiterates-intel-stock-rating-on-ai-demand-foundry-progress-93CH-4971295",
+      "title_cn": "RBC reiterates Intel stock rating on AI demand, foundry progress",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "RBC基于AI需求与代工业务进展重申英特尔股票评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "券商评级"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-mach7-posts-fourth-straight-cashflow-gain-in-q1-2026-93CH-4971294",
+      "title_cn": "Earnings call transcript: Mach7 posts fourth straight cash-flow gain in Q1 2026",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "Mach7 2026财年一季度实现连续第四个季度现金流增长。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "医疗IT"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/musk-says-spacex-raised-40-billion-in-debt-for-gpus-4971248",
+      "title_cn": "Musk says SpaceX raised $40 billion in debt deal, predicts neocloud shakeout",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "马斯克称SpaceX通过债务交易融资400亿美元，并预计新云（neocloud）行业将出现洗牌。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "融资",
+        "航天",
+        "AI基础设施"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/australias-nextdc-ceo-to-forgo-fiscal-2027-bonuses-after-forecast-cut-project-delay-4971278",
+      "title_cn": "Australia’s NEXTDC CEO to forgo fiscal 2027 bonuses after forecast cut, project delay",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/25",
+      "summary": "澳大利亚NEXTDC首席执行官在业绩预测下调及项目延期后，放弃2027财年奖金。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "数据中心",
+        "公司治理"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
