@@ -194,34 +194,47 @@ jobs:
       - name: Ensure ffmpeg (timeout 280s → hard fail)
         run: |
           set -euo pipefail
+          T0=$(date +%s)
+          SRC="unknown"
+
           if command -v ffmpeg >/dev/null 2>&1; then
+            SRC="镜像自带"
             echo "ffmpeg 已随镜像存在: $(ffmpeg -version 2>/dev/null | head -1)"
-            exit 0
-          fi
-
-          if [ -x "$HOME/.cache/ffmpeg/ffmpeg" ]; then
+          elif [ -x "$HOME/.cache/ffmpeg/ffmpeg" ]; then
+            SRC="cache-hit"
             echo "✅ 缓存命中（零网络）: $("$HOME/.cache/ffmpeg/ffmpeg" -version | head -1)"
-          else
-            echo "::notice::缓存未命中 → 下载静态二进制（41MB，限时 280s；超时即失败）"
-            mkdir -p "$HOME/.cache/ffmpeg"
-            if timeout 280 curl -fsSL --retry 2 --retry-delay 3 -o /tmp/ff.tar.xz \
+            sudo ln -sf "$HOME/.cache/ffmpeg/ffmpeg" /usr/local/bin/ffmpeg
+          elif timeout 280 curl -fsSL --retry 2 --retry-delay 3 -o /tmp/ff.tar.xz \
                  https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz; then
-              timeout 60 tar -xJf /tmp/ff.tar.xz -C /tmp
-              cp /tmp/ffmpeg-*-static/ffmpeg "$HOME/.cache/ffmpeg/ffmpeg"
-              chmod +x "$HOME/.cache/ffmpeg/ffmpeg"
-              echo "✅ 静态二进制就绪: $("$HOME/.cache/ffmpeg/ffmpeg" -version | head -1)"
-            else
-              echo "::warning::静态二进制下载失败/超时 → 退回 apt（限时 200s）"
-              sudo timeout 200 apt-get update -qq \
-                && sudo timeout 200 apt-get install -y --no-install-recommends ffmpeg
-            fi
+            SRC="downloaded"
+            echo "::notice::缓存未命中 → 静态二进制已下载（41MB）"
+            mkdir -p "$HOME/.cache/ffmpeg"
+            timeout 60 tar -xJf /tmp/ff.tar.xz -C /tmp
+            cp /tmp/ffmpeg-*-static/ffmpeg "$HOME/.cache/ffmpeg/ffmpeg"
+            chmod +x "$HOME/.cache/ffmpeg/ffmpeg"
+            sudo ln -sf "$HOME/.cache/ffmpeg/ffmpeg" /usr/local/bin/ffmpeg
+          else
+            SRC="apt"
+            echo "::warning::静态二进制下载失败/超时 → 退回 apt（限时 200s）"
+            sudo timeout 200 apt-get update -qq \
+              && sudo timeout 200 apt-get install -y --no-install-recommends ffmpeg
           fi
 
-          command -v ffmpeg >/dev/null 2>&1 \
-            || sudo ln -sf "$HOME/.cache/ffmpeg/ffmpeg" /usr/local/bin/ffmpeg
           command -v ffmpeg >/dev/null 2>&1 \
             || { echo "::error::ffmpeg 不可用（缓存未命中且两条下载路径均失败）—— 快速失败，请重跑"; exit 1; }
-          ffmpeg -version 2>/dev/null | head -1
+
+          T1=$(date +%s)
+          COST=$((T1 - T0))
+          echo "ffmpeg 就绪：来源=${SRC} · 耗时=${COST}s · $(ffmpeg -version 2>/dev/null | head -1)"
+          # 2026-10-26 sc：把「来源 / 耗时 / 版本」落进 job summary ——
+          # 否则日志里只有一行「已存在」，看不出到底是命中缓存还是又下了 41MB，
+          # 下次再卡就没法判断是哪条路径出的问题。
+          {
+            echo "### ffmpeg"
+            echo "- 来源: **${SRC}**"
+            echo "- 耗时: **${COST}s**"
+            echo "- 版本: \`$(ffmpeg -version 2>/dev/null | head -1)\`"
+          } >> "$GITHUB_STEP_SUMMARY"
 
       # ---------- 恢复 gh-pages 历史到 site/（发布根只保留最近 7 天 history/ 之外的长期归档）----------
       # gh-pages 分支是**长期归档**：history/ 只留 7 天，靠本步把更早期的报告带进发布根，
