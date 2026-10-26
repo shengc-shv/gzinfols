@@ -1,0 +1,854 @@
+{
+  "date": "2026-10-27",
+  "updatedAt": "2026-10-26T23:11:24.382Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：汇率结售汇窗口，人民币四年新高；流动性投放七千亿，存贷定价有变；广州经济数据，南沙增11.2%；财富货架承压，金价跌破四千。",
+    "spoken_hero": "今天主要看四个方面：人民币升到四年新高，结售汇窗口打开；央行投放七千亿，存贷定价跟着动；广州前三季度增5.7%，南沙增11.2%；金价跌破四千，财富货架在承压。",
+    "must_read": [
+      {
+        "title": "广州前三季度GDP增5.7%",
+        "why": "增速创近五年同期新高，本地经济景气度对零售信贷需求与消费金融投放形成基本面支撑。",
+        "url": "https://news.southcn.com/node_812903b83a/d0f97081a0.shtml"
+      },
+      {
+        "title": "广州社零增2.5%领跑一线",
+        "why": "消费复苏在一线城市中领先，本地商圈客流与商户经营回暖，消费场景的金融需求随之抬升。",
+        "url": "https://news.dayoo.com/guangzhou/202610/26/139995_55016923.htm"
+      }
+    ],
+    "spoken_must_read": "广州前三季度GDP增5.7%。增速创近五年同期新高，本地经济景气度对零售信贷需求与消费金融投放形成基本面支撑。其次，广州社零增2.5%领跑一线。消费复苏在一线城市中领先，本地商圈客流与商户经营回暖，消费场景的金融需求随之抬升。",
+    "insights": [
+      {
+        "topic": "固收产品客户情绪待安抚",
+        "impact": "赎回互换便利落地后净值波动传导减弱，但前期回撤已让部分固收客户形成观望心态，产品续投与陪伴诉求上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "央行设立债市非银大额赎回互换便利 防范“赎回潮”再现",
+            "url": "https://finance.sina.com.cn/roll/2026-10-26/doc-iniwqhxk2413264.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "港险分流高净值资金",
+        "impact": "分红险与保费融资双轮驱动下，跨境保险对高净值客户的吸引力增强，本地私行客户的资产配置出现外流迹象。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "上半年港险新单保费激增六成：分红险与保费融资双轮驱动",
+            "url": "https://m.21jingji.com/article/20261026/herald/7fdafde2afb9579889919ee5a414f3a5.html"
+          }
+        ]
+      },
+      {
+        "topic": "南沙人口产业导入提速",
+        "impact": "南沙GDP增11.2%，新增就业与居住人口带来按揭与消费信贷的增量客群，区域网点客群结构在变化。",
+        "tag": [
+          "住房金融",
+          "信贷"
+        ],
+        "group": "区域楼市",
+        "sources": [
+          {
+            "title": "GDP增长11.2%，“湾区棋眼”南沙经济延续高速增势",
+            "url": "https://news.dayoo.com/guangzhou/202610/26/139995_55017017.htm"
+          }
+        ]
+      },
+      {
+        "topic": "科技型小微批量扩容",
+        "impact": "广州每年新增五千家以上科技型企业，科创小微的账户开立、代发与经营贷需求形成持续增量客源。",
+        "tag": [
+          "科技金融",
+          "客群"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "力争每年培育新增5000家以上科技型企业！广州加快打通科产融合通道",
+            "url": "https://news.dayoo.com/guangzhou/202610/26/139995_55016942.htm"
+          }
+        ]
+      },
+      {
+        "topic": "社零领跑带动商户经营",
+        "impact": "社零增2.5%领跑一线城市，餐饮零售类商户流水回暖，收单与经营周转类需求随之活跃。",
+        "tag": [
+          "客群"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "领跑一线城市！前三季度广州社会消费品零售总额同比增长2.5%",
+            "url": "https://news.dayoo.com/guangzhou/202610/26/139995_55016923.htm"
+          }
+        ]
+      },
+      {
+        "topic": "工业投资超1400亿",
+        "impact": "规上工业增加值增5.5%、工业投资超1400亿元，制造业客群的技改与设备更新融资需求在积累。",
+        "tag": [
+          "信贷",
+          "科技金融"
+        ],
+        "group": "制造业客群",
+        "sources": [
+          {
+            "title": "广州前三季度规上工业增加值同比增长5.5%，工业投资超1400亿元",
+            "url": "https://news.dayoo.com/guangzhou/202610/26/139995_55016943.htm"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，央行设了债市赎回互换便利，固收类产品的净值波动传导在边际缓释，但客户对回撤的敏感度仍高；同时金价跌破四千美元，持仓客户的浮盈回吐明显，资产配置诉求在往避险和稳健方向挪。高端客户方面，上半年港险新单保费激增六成，分红险与保费融资双轮驱动，跨境财富客群的资金流向值得留意；信托产品货架同期也在更新。普惠小微方面，国常会加力服务业扩能提质，准入与监管适配并进，服务业小微的融资需求在抬头；广州每年新增五千家以上科技型企业，科创客群在扩容。本地消费场景方面，广州社零增2.5%领跑一线城市，消费系统升级在把流量变增量，商圈与商户资源加速整合。",
+    "risk": {
+      "topic": "信用卡中心消保代销被罚",
+      "evidence": "兴业、浦发等多家银行信用卡中心因涉消保、保险代销问题被监管处罚。",
+      "impact": "信用卡条线的营销话术与代销适当性面临直接检查压力，财富代销的双录与信息披露环节风险上升，风控需复核销售留痕。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "涉消保、保险代销问题，兴业、浦发等多家银行信用卡中心被罚",
+          "url": "https://m.21jingji.com/article/20261026/herald/38e67d3016b36caec96c6af6ba35faf7.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：信用卡中心消保代销被罚，信用卡条线的营销话术与代销适当性面临直接检查压力，财富代销的双录与信息披露环节风险上升，风控需复核销售留痕。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨0.82%领涨，AI交易分化但科技股整体走强。",
+      "sectors": [
+        "AI板块分化，AMD逆势突出，Anthropic递交S-1拟上市，AI交易现裂痕。",
+        "不含AI股的标普500指数跑赢传统指数，资金转向非AI板块。",
+        "生物科技股走强，临床进展、并购与新药技术回暖带动板块反弹。",
+        "阿波罗拟收购阿布扎比Mubadala Capital近10%股权，另类资管扩张。",
+        "美加磋商放宽钢铁与汽车关税，相关板块受关注。"
+      ],
+      "spoken": "美股三大指数集体收涨，纳指涨0.82%领涨，标普涨0.70%，道指涨0.28%。盘面上AI交易出现分化，AMD表现突出，Anthropic递交上市申请；不含AI股的标普组合反而跑赢大盘。生物科技股走强，临床进展和并购带动反弹。阿波罗拟入股Mubadala Capital近一成。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-27"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52361.58",
+          "changePct": "+0.28%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26169.38",
+          "changePct": "+0.82%"
+        },
+        {
+          "name": "标普500",
+          "value": "7676.77",
+          "changePct": "+0.70%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3697.52点（+0.19%）；深证成指收报11534.38点（-1.19%）；创业板指收报2638.23点（-1.71%）。",
+      "sectors": [
+        "三大指数涨跌不一",
+        "机器人板块活跃"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-27"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3697.52",
+          "changePct": "+0.19%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11534.38",
+          "changePct": "-1.19%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2638.23",
+          "changePct": "-1.71%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23211.81点（+0.51%）；恒生科技收报3857.53点（-0.36%）。",
+      "sectors": [
+        "石油股活跃",
+        "光通信板块走弱"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-27"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.51% 科指跌0.36% 石油股活跃 光通信板块走弱",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-26/doc-iniwpwiv2216681.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23211.81",
+          "changePct": "+0.51%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3857.53",
+          "changePct": "-0.36%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-26",
+    "marketStatus": {
+      "reportDate": "2026-10-27",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-10-26"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-26"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-26"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 10月26日 周一 收盘；港股为 10月26日 周一 收盘；美股为 10月26日 周一 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610263907445470.html",
+      "title_cn": "AI芯片突传重磅！马斯克重大宣布！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "马斯克宣布与AI芯片相关的重大消息，引发市场关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "半导体",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263907915447.html",
+      "title_cn": "长鑫硬气拒绝苹果：中国本土的订单都接不完不伺候",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "长鑫存储据称拒绝苹果订单，表示中国本土订单已接满、无余力承接。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "存储",
+        "供应链"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263907928792.html",
+      "title_cn": "中国石油创18年新高！油气景气向好多股业绩有望翻倍(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "中国石油股价创18年新高，油气行业景气向好，多只个股业绩有望翻倍。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "石油",
+        "业绩"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263907816765.html",
+      "title_cn": "直线拉升！3分钟20%涨停！抄底资金涌入机器人赛道",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "机器人板块直线拉升，有股票3分钟内20%涨停，抄底资金涌入该赛道。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机器人",
+        "A股",
+        "资金流向"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263907922657.html",
+      "title_cn": "A股三大指数涨跌不一游戏、医药商业、白酒板块涨幅居前",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "A股三大指数涨跌不一，游戏、医药商业、白酒板块涨幅居前。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "板块"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263908116724.html",
+      "title_cn": "突然直线下挫！伊朗突传大消息！特朗普最新表态",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "市场突然直线下挫，与伊朗传出的大消息及特朗普最新表态相关。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "市场波动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263908299310.html",
+      "title_cn": "10月26日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "汇总10月26日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263907876018.html",
+      "title_cn": "宇树科技股价重回700元本月累计涨幅超56%总市值突破2850亿",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "宇树科技股价重回700元，本月累计涨幅超56%，总市值突破2850亿元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机器人",
+        "A股",
+        "个股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263907522187.html",
+      "title_cn": "售罄至2027年！AWS云计算“爆单”行业景气有望持续上行(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "AWS云计算订单售罄至2027年，行业景气有望持续上行。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "云计算",
+        "AI",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610263907436537.html",
+      "title_cn": "“超级央行周”来临：美欧日央行将同步暂缓加息？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "“超级央行周”来临，市场关注美欧日央行是否同步暂缓加息。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "央行",
+        "货币政策",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273908736849.html",
+      "title_cn": "AI越便宜中国企业越该算清哪几笔账？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "讨论AI成本下降背景下中国企业需要算清的几笔账。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "企业"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273908708674.html",
+      "title_cn": "人工智能交易规模惊人城堡证券称到了“没有容错空间”的地步",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "城堡证券称人工智能交易规模惊人，已到“没有容错空间”的地步。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-26/doc-iniwpwiv2216681.shtml",
+      "title_cn": "港股收评：恒指涨0.51% 科指跌0.36% 石油股活跃 光通信板块走弱",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "港股收评：恒指涨0.51%，科指跌0.36%，石油股活跃，光通信板块走弱。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "石油"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-27/doc-iniwrecf1682312.shtml",
+      "title_cn": "恒指牛熊街货比(46:54)︱10月27日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "10月27日恒指牛熊街货比为46:54。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-26/doc-iniwprzt9212485.shtml",
+      "title_cn": "科大智能再闯港交所",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "科大智能再次向港交所递交上市申请。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-26/doc-iniwnqqf9506784.shtml",
+      "title_cn": "港股头部公司屡现大手笔回购",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "港股头部公司近期屡现大手笔回购。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-26/doc-iniwprzt9212066.shtml",
+      "title_cn": "段永平重仓泡泡玛特浮亏超18亿港元，仍表示“会再买一些”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "段永平重仓泡泡玛特浮亏超18亿港元，仍表示“会再买一些”。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "个股",
+        "投资"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-26/doc-iniwpfmx9306198.shtml",
+      "title_cn": "金价调整！港股黄金股全线下挫，赤峰黄金大跌逾11%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "金价调整，港股黄金股全线下挫，赤峰黄金大跌逾11%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "黄金",
+        "大宗商品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-10-26/doc-iniwnzec5755859.shtml",
+      "title_cn": "华泰港股策略：等待恐慌出清后的反弹契机",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "华泰发布港股策略，称等待恐慌出清后的反弹契机。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构观点",
+        "策略"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-26/doc-iniwnkhh2832922.shtml",
+      "title_cn": "私募借道ETF配置资产 科创、港股主题受追捧",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "私募借道ETF配置资产，科创与港股主题ETF受追捧。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "ETF",
+        "资金流向"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-10-26/doc-iniwprzx2279705.shtml",
+      "title_cn": "3家新晋港股绿鞋落地：1家全部行使，1家部分行使，1家未行使",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "3家新晋港股绿鞋机制落地：1家全部行使、1家部分行使、1家未行使。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-26/doc-iniwnzec5743077.shtml",
+      "title_cn": "港股10月以来回购36.75亿港元 思摩尔国际、李宁年内首度回购",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "港股10月以来回购36.75亿港元，思摩尔国际、李宁年内首度回购。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-26/doc-iniwnzcy2526088.shtml",
+      "title_cn": "港股本周要闻前瞻｜全球多家央行公布利率决议 中际旭创等公司披露业绩",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "港股本周前瞻：全球多家央行公布利率决议，中际旭创等公司披露业绩。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "央行",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-26/doc-iniwpwiq2515724.shtml",
+      "title_cn": "美银证券：紫金矿业(02899)第三季纯利逊预期 产量偏软及成本上升",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "美银证券称紫金矿业第三季纯利逊于预期，因产量偏软及成本上升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "矿业"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/-as-ai-becomes-more-fractured-one-names-stands-out-amd.html",
+      "title_cn": " As AI becomes more fractured, one names stands out: AMD",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "CNBC指出在AI格局日益分化背景下，AMD成为突出标的。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "半导体",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/prediction-markets-think-anthropic-ipo-near-certain-in-2026.html",
+      "title_cn": "Prediction market traders say an Anthropic IPO is near-certain this year after company filed with SEC ",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "预测市场交易者称，Anthropic向SEC提交文件后，今年IPO近乎确定。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "IPO",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/sp-500-ex-ai-index-tech-selloff.html",
+      "title_cn": "Investors are doing just as well this year by shunning AI. How to invest if the tech trade keeps fizzling",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "报道称今年回避AI的投资者收益同样不俗，并讨论科技交易持续走弱时的投资方式。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股",
+        "投资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/top-wall-street-analysts-prefer-these-3-dividend-stocks-for-stable-income.html",
+      "title_cn": "Top Wall Street analysts prefer these 3 dividend stocks for stable income",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "华尔街顶级分析师推荐3只股息股以获取稳定收益。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "机构观点",
+        "股息"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/apollo-mubadala-capital-stake.html",
+      "title_cn": "Apollo to buy nearly 10% stake in Abu Dhabi-backed alternative asset manager Mubadala Capital",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "Apollo将收购阿布扎比支持的另类资产管理公司Mubadala Capital近10%股权。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "并购",
+        "资管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/24/biotech-stocks-drug-innovation-rally.html",
+      "title_cn": "Biotech stocks are surging. How investors can play the new drug innovation boom",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/24",
+      "summary": "生物科技股大涨，报道讨论投资者如何参与新一轮药物创新热潮。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "生物科技",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/korro-bio-10-owner-lynx1-capital-management-lp-buys-884751-stock-93CH-4973925",
+      "title_cn": "Korro Bio: 10% owner Lynx1 Capital Management LP buys $884,751 stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "Korro Bio的10%股东Lynx1 Capital Management LP买入价值884,751美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "生物科技",
+        "股东交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/britain-will-not-join-canadaled-defence-bank-initiative-4973915",
+      "title_cn": "Britain will not join Canada-led defence bank initiative",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "英国表示不会加入由加拿大牵头的防务银行倡议。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "防务",
+        "国际"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/united-rentals-subsidiary-prices-25-billion-debt-offering-93CH-4973904",
+      "title_cn": "United Rentals subsidiary prices $2.5 billion debt offering",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "United Rentals子公司为25亿美元债券发行定价。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/elemental-royalty-completes-188m-acquisition-from-orion-93CH-4973903",
+      "title_cn": "Elemental Royalty completes $188M acquisition from Orion",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "Elemental Royalty完成从Orion手中1.88亿美元的收购。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "并购",
+        "矿业"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/exclusiveus-canada-working-on-deal-to-ease-steel-auto-tariffs-sources-say-4973470",
+      "title_cn": "Exclusive-US, Canada working on deal to ease steel, auto tariffs, sources say",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "据消息人士，美加正就缓解钢铁与汽车关税进行交易谈判。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "关税",
+        "贸易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/perseus-q1-fy27-slides-cash-flow-strong-despite-lower-output-93CH-4973900",
+      "title_cn": "Perseus Q1 FY27 slides: cash flow strong despite lower output",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "Perseus发布2027财年一季度演示材料，产量下降但现金流强劲。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "矿业"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
