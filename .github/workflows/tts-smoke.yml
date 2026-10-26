@@ -54,6 +54,19 @@ jobs:
       - name: Install deps
         run: npm ci
 
+      # 先解析日期并输出，供后续步骤与 artifact 名复用 ——
+      # 否则 artifact 名会退化成字面量「today」，同日多次运行无法区分。
+      - name: Resolve date (Asia/Shanghai)
+        id: rd
+        run: |
+          D="${{ inputs.date }}"
+          if [ -z "$D" ]; then
+            D=$(TZ=Asia/Shanghai date +%F)
+            echo "::notice::未指定 date → 取北京今天 ${D}"
+          fi
+          echo "date=$D" >> "$GITHUB_OUTPUT"
+          echo "解析日期: ${D}"
+
       # ---------- ffmpeg：与 daily.yml 完全同一套方案（本例就是要验证它）----------
       - name: Cache ffmpeg static binary
         id: ffmpeg-cache
@@ -114,11 +127,7 @@ jobs:
           DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
         run: |
           set -euo pipefail
-          DATE="${{ inputs.date }}"
-          if [ -z "$DATE" ]; then
-            DATE=$(TZ=Asia/Shanghai date +%F)
-            echo "::notice::未指定 date → 取北京今天 ${DATE}"
-          fi
+          DATE="${{ steps.rd.outputs.date }}"
           echo "### 合成结果（${DATE} / ${{ inputs.tts_backend }}）" >> "$GITHUB_STEP_SUMMARY"
           npx tsx scripts/tts-smoke.ts "$DATE" 2>&1 | tee /tmp/smoke.log
           {
@@ -131,7 +140,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: tts-smoke-${{ inputs.date || 'today' }}
+          name: tts-smoke-${{ steps.rd.outputs.date }}
           path: outputs/tts-smoke/*.mp3
           retention-days: 7
           if-no-files-found: warn
