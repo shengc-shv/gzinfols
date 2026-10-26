@@ -269,10 +269,34 @@ function splitText(t: string, limit: number): string[] {
   return chunks;
 }
 
+/** ffmpeg 是否可用（模块级缓存，避免每次合并都 spawn 一次）。 */
+let ffmpegAvailable: boolean | undefined;
+
+export function hasFfmpeg(): boolean {
+  if (ffmpegAvailable !== undefined) return ffmpegAvailable;
+  const r = spawnSync("ffmpeg", ["-version"], { stdio: "ignore" });
+  ffmpegAvailable = r.status === 0;
+  return ffmpegAvailable;
+}
+
 /** ffmpeg concat 拼接多个 mp3 分片：重编码拼接，避免 -codec copy 的位储备/帧对齐边界噪声。 */
 export function mergeMp3(parts: Buffer[], outPath: string): void {
   if (parts.length === 1) {
     fs.writeFileSync(outPath, parts[0]);
+    return;
+  }
+  // 🔴 2026-10-26 sc：这里保留「缺 ffmpeg → 字节拼接」的兜底，但**不是** CI 的主路径。
+  //
+  // 现状：语音后端就是腾讯 TTS，多片拼接每次都需要 ffmpeg —— CI 已改为
+  //   **静态二进制 + actions/cache 预加载 + 280s 超时硬失败**（见 daily.yml），
+  //   所以 CI 里跑到这里时 ffmpeg 必然可用。
+  // 保留兜底是为了**本地开发**：本机没装 ffmpeg 时仍能跑通全链路（只损音质），
+  //   与 `scripts/tts-probe.ts` 的既有做法一致（mp3 是帧流，顺序拼通常可播）。
+  if (!hasFfmpeg()) {
+    console.warn(
+      "::warning::[tts] 本机无 ffmpeg → 多片 mp3 降级为字节顺序拼接（段边界可能有轻微衔接音；CI 不会走这里）",
+    );
+    fs.writeFileSync(outPath, Buffer.concat(parts));
     return;
   }
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tts-merge-"));
@@ -581,6 +605,14 @@ export function looksLikeMp3(b: Buffer): boolean {
 
 /** 非 mp3 音频 → mp3（ffmpeg）。仅当 `DASHSCOPE_TTS_FORMAT` 被改成 wav/pcm/opus 时才会走到。 */
 function transcodeToMp3(buf: Buffer): Buffer {
+  // 🔴 2026-10-26 sc：这里**不能**像 mergeMp3 那样降级 —— 容器不对就是不对，
+  // 硬拼会产出「名为 .mp3 的非 mp3」，播放器直接报错。但缺 ffmpeg 时要给**清晰**错误，
+  // 而不是 spawnSync 的 ENOENT 堆栈（那正是 CI 卡住时最让人抓瞎的报错形态）。
+  if (!hasFfmpeg()) {
+    throw new Error(
+      "ffmpeg 不可用，无法把非 mp3 容器转成 mp3（仅当 DASHSCOPE_TTS_FORMAT 被改成 wav/pcm/opus 时才会发生）",
+    );
+  }
   const tmp = fs.mkdtempSync(path.join(os.tmpdir(), "tts-xcode-"));
   const src = path.join(tmp, "in.bin");
   const dst = path.join(tmp, "out.mp3");

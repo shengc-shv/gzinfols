@@ -1,0 +1,137 @@
+name: TTS Smoke (Manual)
+
+# 单独验证「ffmpeg 就绪 + 腾讯多片合成」这条链路，不碰主流程。
+#
+# 为什么要有这条（2026-10-26 sc）：
+#   10-25 两次卡在 `apt-get install ffmpeg`（run 94 卡 19 分钟被取消）。
+#   daily.yml 已改成「静态二进制 + actions/cache + timeout 280 硬失败」，
+#   但那条改动要等下一次 daily 全量跑才验证得到 —— 出问题就得等一天。
+#   本 workflow 用今日口播稿做**最小闭环**：装 ffmpeg → 合成 → 上传音频，
+#   5 分钟内就能确认可行，失败也只影响这一条，不动生产数据。
+#
+# 手动触发：Actions → TTS Smoke (Manual) → Run workflow
+#   date 留空 = 北京今天；tts_backend 默认 tencent（当前线上口径）。
+#
+# 第一次运行：ffmpeg 缓存未命中 → 下载 41MB 静态二进制（限时 280s）
+# 第二次运行：缓存命中 → 零网络、秒级就绪
+#   ⚠️ 请**连跑两次**：第一次验证下载路径，第二次验证缓存命中路径。
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "报告日期 YYYY-MM-DD（留空 = 北京今天）"
+        required: false
+        default: ""
+      tts_backend:
+        description: "TTS 后端"
+        required: false
+        default: "tencent"
+        type: choice
+        options:
+          - tencent
+          - cosyvoice
+
+concurrency:
+  group: tts-smoke
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install deps
+        run: npm ci
+
+      # ---------- ffmpeg：与 daily.yml 完全同一套方案（本例就是要验证它）----------
+      - name: Cache ffmpeg static binary
+        id: ffmpeg-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ffmpeg/ffmpeg
+          key: ffmpeg-static-linux64-${{ runner.arch }}-7.0
+          restore-keys: |
+            ffmpeg-static-linux64-${{ runner.arch }}-
+
+      - name: Ensure ffmpeg (timeout 280s → hard fail)
+        run: |
+          set -euo pipefail
+          T0=$(date +%s)
+          if command -v ffmpeg >/dev/null 2>&1; then
+            echo "ffmpeg 已随镜像存在: $(ffmpeg -version 2>/dev/null | head -1)"
+            exit 0
+          fi
+
+          CACHE_HIT=no
+          if [ -x "$HOME/.cache/ffmpeg/ffmpeg" ]; then
+            CACHE_HIT=yes
+            echo "✅ 缓存命中（零网络）: $("$HOME/.cache/ffmpeg/ffmpeg" -version | head -1)"
+          else
+            echo "::notice::缓存未命中 → 下载静态二进制（41MB，限时 280s；超时即失败）"
+            mkdir -p "$HOME/.cache/ffmpeg"
+            if timeout 280 curl -fsSL --retry 2 --retry-delay 3 -o /tmp/ff.tar.xz \
+                 https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz; then
+              timeout 60 tar -xJf /tmp/ff.tar.xz -C /tmp
+              cp /tmp/ffmpeg-*-static/ffmpeg "$HOME/.cache/ffmpeg/ffmpeg"
+              chmod +x "$HOME/.cache/ffmpeg/ffmpeg"
+            else
+              echo "::warning::静态二进制下载失败/超时 → 退回 apt（限时 200s）"
+              sudo timeout 200 apt-get update -qq \
+                && sudo timeout 200 apt-get install -y --no-install-recommends ffmpeg
+            fi
+          fi
+
+          command -v ffmpeg >/dev/null 2>&1 \
+            || sudo ln -sf "$HOME/.cache/ffmpeg/ffmpeg" /usr/local/bin/ffmpeg
+          command -v ffmpeg >/dev/null 2>&1 \
+            || { echo "::error::ffmpeg 不可用（缓存未命中且两条下载路径均失败）—— 快速失败，请重跑"; exit 1; }
+
+          T1=$(date +%s)
+          echo "ffmpeg 就绪耗时: $((T1 - T0))s · cache_hit=${CACHE_HIT}"
+          echo "版本: $(ffmpeg -version 2>/dev/null | head -1)"
+          echo "### ffmpeg 状态" >> "$GITHUB_STEP_SUMMARY"
+          echo "- cache_hit: **${CACHE_HIT}**" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 就绪耗时: **$((T1 - T0))s**" >> "$GITHUB_STEP_SUMMARY"
+          echo "- 版本: \`$(ffmpeg -version 2>/dev/null | head -1)\`" >> "$GITHUB_STEP_SUMMARY"
+
+      # ---------- 合成今日口播稿（线上同一路径：腾讯分片 → mergeMp3 重编码）----------
+      - name: Synthesize today's briefing
+        env:
+          TTS_BACKEND: ${{ inputs.tts_backend }}
+          TENCENTCLOUD_SECRET_ID: ${{ secrets.TENCENTCLOUD_SECRET_ID }}
+          TENCENTCLOUD_SECRET_KEY: ${{ secrets.TENCENTCLOUD_SECRET_KEY }}
+          DASHSCOPE_API_KEY: ${{ secrets.DASHSCOPE_API_KEY }}
+        run: |
+          set -euo pipefail
+          DATE="${{ inputs.date }}"
+          if [ -z "$DATE" ]; then
+            DATE=$(TZ=Asia/Shanghai date +%F)
+            echo "::notice::未指定 date → 取北京今天 ${DATE}"
+          fi
+          echo "### 合成结果（${DATE} / ${{ inputs.tts_backend }}）" >> "$GITHUB_STEP_SUMMARY"
+          npx tsx scripts/tts-smoke.ts "$DATE" 2>&1 | tee /tmp/smoke.log
+          {
+            echo '```'
+            grep -E "口播稿|ffmpeg|合成完成|耗时|线上成品|冒烟通过" /tmp/smoke.log || true
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload audio artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tts-smoke-${{ inputs.date || 'today' }}
+          path: outputs/tts-smoke/*.mp3
+          retention-days: 7
+          if-no-files-found: warn

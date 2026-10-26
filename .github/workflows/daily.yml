@@ -164,15 +164,64 @@ jobs:
             echo "::notice::未配置 DASHSCOPE_API_KEY — 跳过百炼，语音播报直接用腾讯云 TTS"
           fi
 
-      # ---------- ffmpeg（腾讯分片重编码 concat 必需，始终安装）----------
-      - name: Install ffmpeg
+      # ---------- ffmpeg（腾讯 TTS 多片拼接**必需**）----------
+      # 🔴 2026-10-26 sc 定案：当前语音后端**就是腾讯**，多片拼接每次都要 ffmpeg，
+      #    所以它是硬依赖，不能降级。
+      #
+      # 原写法的问题：每次 `apt-get update && apt-get install ffmpeg` —— 拉几十 MB 索引
+      #   + 整棵依赖树（Ubuntu 24.04 的 ffmpeg 带 x264/x265 等），10-25 实测 run 94
+      #   卡在这一步 19 分钟后被取消。runner 镜像（ubuntu-24.04）**不自带 ffmpeg**。
+      #
+      # 新做法（sc 两条要求）：
+      #   ① **预加载、不每次全量拉**：改用**静态二进制**（41MB，比 apt 依赖树小一半以上）
+      #      并落到 `~/.cache/ffmpeg/` 由 actions/cache 缓存 —— 命中后是**本地文件拷贝**，
+      #      秒级可用、零网络。首次 miss 才下载，之后每天都命中。
+      #   ② **超时即失败**：全链路 `timeout 280`（下载）+ `timeout 60`（解压），
+      #      超时 = exit 124 → 步骤失败 → 整轮快速失败重跑。不再傻等。
+      #      常规 5 分钟内必能完成（41MB / GitHub CDN 级带宽），卡住就是异常，应当立刻暴露。
+      #
+      # 下载源优先级：johnvansickle 静态构建（41MB）→ 失败退 apt（限时 200s）→ 都失败即失败。
+      #   许可：该构建为 GPL，仅作 CI 内部工具使用、不随产物分发，合规。
+      - name: Cache ffmpeg static binary
+        id: ffmpeg-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ffmpeg/ffmpeg
+          key: ffmpeg-static-linux64-${{ runner.arch }}-7.0
+          restore-keys: |
+            ffmpeg-static-linux64-${{ runner.arch }}-
+
+      - name: Ensure ffmpeg (timeout 280s → hard fail)
         run: |
+          set -euo pipefail
           if command -v ffmpeg >/dev/null 2>&1; then
-            echo "ffmpeg already present: $(ffmpeg -version 2>/dev/null | head -1)"
-          else
-            sudo apt-get update && sudo apt-get install -y ffmpeg
+            echo "ffmpeg 已随镜像存在: $(ffmpeg -version 2>/dev/null | head -1)"
+            exit 0
           fi
-          command -v ffmpeg >/dev/null 2>&1 || { echo "::error::ffmpeg 安装失败"; exit 1; }
+
+          if [ -x "$HOME/.cache/ffmpeg/ffmpeg" ]; then
+            echo "✅ 缓存命中（零网络）: $("$HOME/.cache/ffmpeg/ffmpeg" -version | head -1)"
+          else
+            echo "::notice::缓存未命中 → 下载静态二进制（41MB，限时 280s；超时即失败）"
+            mkdir -p "$HOME/.cache/ffmpeg"
+            if timeout 280 curl -fsSL --retry 2 --retry-delay 3 -o /tmp/ff.tar.xz \
+                 https://johnvansickle.com/ffmpeg/releases/ffmpeg-release-amd64-static.tar.xz; then
+              timeout 60 tar -xJf /tmp/ff.tar.xz -C /tmp
+              cp /tmp/ffmpeg-*-static/ffmpeg "$HOME/.cache/ffmpeg/ffmpeg"
+              chmod +x "$HOME/.cache/ffmpeg/ffmpeg"
+              echo "✅ 静态二进制就绪: $("$HOME/.cache/ffmpeg/ffmpeg" -version | head -1)"
+            else
+              echo "::warning::静态二进制下载失败/超时 → 退回 apt（限时 200s）"
+              sudo timeout 200 apt-get update -qq \
+                && sudo timeout 200 apt-get install -y --no-install-recommends ffmpeg
+            fi
+          fi
+
+          command -v ffmpeg >/dev/null 2>&1 \
+            || sudo ln -sf "$HOME/.cache/ffmpeg/ffmpeg" /usr/local/bin/ffmpeg
+          command -v ffmpeg >/dev/null 2>&1 \
+            || { echo "::error::ffmpeg 不可用（缓存未命中且两条下载路径均失败）—— 快速失败，请重跑"; exit 1; }
+          ffmpeg -version 2>/dev/null | head -1
 
       # ---------- 恢复 gh-pages 历史到 site/（发布根只保留最近 7 天 history/ 之外的长期归档）----------
       # gh-pages 分支是**长期归档**：history/ 只留 7 天，靠本步把更早期的报告带进发布根，
