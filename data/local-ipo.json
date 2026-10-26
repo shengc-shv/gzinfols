@@ -1,12 +1,11 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-26T07:07:41+08:00",
+  "fetchedAt": "2026-10-27T07:04:13+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
     "gd-bse-audit": 2,
-    "gd-csrc-tutoring": 9,
-    "gd-sse-audit": 1,
+    "gd-csrc-tutoring": 2,
     "gd-szse-audit": 1
   },
   "items": [
@@ -64,94 +63,6 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-tutoring"
-    },
-    {
-      "title": "东莞市晶博光电股份有限公司 (辅导备案) [广东证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/20/PREIPO_F0101_V01_20261020_37375_Q/D3275DEEFD0746C2903FADB204307781/关于东莞市晶博光电股份有限公司首次公开发行股票并上市辅导工作进展报告（第二十四期）.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 招商证券股份有限公司 | 备案时间: 2020-09-14 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-20",
-      "publishedAt": "2026-10-20",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
-    },
-    {
-      "title": "高景太阳能股份有限公司 (辅导备案) [广东证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/20/PREIPO_F0101_V01_20261020_37381_Q/9B4DAD7A4ED540419CE8EF985E12443D/关于高景太阳能股份有限公司首次公开发行股票并上市辅导工作进展报告（第十二期）.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 中国国际金融股份有限公司 | 备案时间: 2023-11-28 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-20",
-      "publishedAt": "2026-10-20",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
-    },
-    {
-      "title": "广东省交通规划设计研究院集团股份有限公司 (辅导备案) [广东证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/20/PREIPO_F0101_V01_20261020_37382_Q/446A1A2016024FEC9049144A9686C252/关于广东省交通规划设计研究院集团股份有限公司首次公开发行股票并上市辅导工作进展报告（第十七期）.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 广发证券股份有限公司 | 备案时间: 2022-08-02 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-20",
-      "publishedAt": "2026-10-20",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
-    },
-    {
-      "title": "广东肯富来泵业股份有限公司 (辅导备案) [广东证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/20/PREIPO_F0101_V01_20261020_37384_Q/5BB0736B968E409D9574BDE6608FF0D8/关于广东肯富来泵业股份有限公司首次公开发行股票并上市辅导工作进展报告（第十七期）.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 国联民生证券承销保荐有限公司 | 备案时间: 2022-08-15 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-20",
-      "publishedAt": "2026-10-20",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
-    },
-    {
-      "title": "极海微电子股份有限公司 (辅导备案) [广东证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/20/PREIPO_F0101_V01_20261020_37388_Q/7A461AC140054B7D9EB6FFEDD21AD305/关于极海微电子股份有限公司首次公开发行股票并上市辅导工作进展报告（第十五期）.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 中信证券股份有限公司 | 备案时间: 2023-02-16 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-20",
-      "publishedAt": "2026-10-20",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
-    },
-    {
-      "title": "广东林氏家居股份有限公司 (辅导备案) [广东证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/20/PREIPO_F0101_V01_20261020_37392_Q/EBCBBC76A23B4EAB8EECA333A518532E/关于广东林氏家居股份有限公司首次公开发行股票并上市辅导工作进展报告（第十九期）.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 广发证券股份有限公司 | 备案时间: 2021-11-11 | 状态: 辅导备案 | 报告: 辅导进展情况报告 | 披露: 2026-10-20",
-      "publishedAt": "2026-10-20",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
-    },
-    {
-      "title": "深圳微见先进封装技术股份有限公司 (辅导备案) [深圳证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/20/PREIPO_F0101_V01_20261020_37396_Q/3BC8E9628A3D4E0FB2681AF52E24BED5/关于深圳微见先进封装技术股份有限公司首次公开发行股票并上市辅导备案报告.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 华泰联合证券有限责任公司 | 备案时间: 2026-10-19 | 状态: 辅导备案 | 报告: 辅导备案报告 | 披露: 2026-10-20",
-      "publishedAt": "2026-10-20",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
-    },
-    {
-      "title": "保伦股份：IPO问询中（拟主板）",
-      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2189@2",
-      "excerpt": "注册地：广东广州市｜保荐：广发证券股份有限公司｜受理：2026-05-13｜状态：IPO问询中｜更新：2026-10-20｜行业：计算机、通信和其他电子设备制造业",
-      "publishedAt": "2026-10-20",
-      "source": "上交所IPO审核动态",
-      "sourceId": "gd-sse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
     }
   ]
 }
