@@ -1,0 +1,884 @@
+{
+  "date": "2026-10-28",
+  "updatedAt": "2026-10-27T23:19:49.462Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：货币政策框架转型，利率传导在变；住房销售制度多城落地，按揭与房企逻辑重塑；存款与理财货架比价加剧，客户资金在挪。",
+    "spoken_hero": "今天主要看三个方面：货币政策框架转型，利率传导机制在变；住房销售制度至少十三城落地，按揭和房企逻辑在重塑；长期限存单密集返场，客户资金比价在加剧。",
+    "must_read": [
+      {
+        "title": "A股缩量银行股逆势强",
+        "why": "三大指数收跌、成交额不足1.5万亿而银行股逆市走强，权益情绪偏谨慎，红利与防御类配置的相对吸引力上升。",
+        "url": "https://finance.eastmoney.com/a/202610273909730882.html"
+      },
+      {
+        "title": "广州社零8363亿元",
+        "why": "广州前三季度社零8363亿元，消费基本盘稳固，是本地商户经营与消费信贷场景的基本面支撑。",
+        "url": "https://www.cnr.cn/gd/guangdongyaowen/20261027/t20261027_527853873.shtml"
+      },
+      {
+        "title": "美联储本周料按兵不动",
+        "why": "美联储本周大概率维持利率不变、12月或转向加息，外盘利率路径反复，跨境资产与汇率预期随之重定价。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_10_27_905986.shtml"
+      },
+      {
+        "title": "存单返场利率达1.85%",
+        "why": "中长期大额存单密集返场、部分利率达1.85%，存款产品的比价基准被抬高，到期资金的留存难度上升。",
+        "url": "https://m.21jingji.com/article/20261027/herald/1a9393b732ee7fd133e2e964e564891e.html"
+      },
+      {
+        "title": "加力扩内需促利润修复",
+        "why": "权威社论定调加力扩大内需、推动工业利润均衡修复，消费端政策预期延续，零售场景的政策环境仍在宽松一侧。",
+        "url": "https://finance.eastmoney.com/a/202610283910686371.html"
+      }
+    ],
+    "spoken_must_read": "A股缩量银行股逆势强。三大指数收跌、成交额不足1.5万亿而银行股逆市走强，权益情绪偏谨慎，红利与防御类配置的相对吸引力上升。其次，广州社零8363亿元。广州前三季度社零8363亿元，消费基本盘稳固，是本地商户经营与消费信贷场景的基本面支撑。此外，美联储本周料按兵不动。美联储本周大概率维持利率不变、12月或转向加息，外盘利率路径反复，跨境资产与汇率预期随之重定价。还有，存单返场利率达1.85%。中长期大额存单密集返场、部分利率达1.85%，存款产品的比价基准被抬高，到期资金的留存难度上升。另外，加力扩内需促利润修复。权威社论定调加力扩大内需、推动工业利润均衡修复，消费端政策预期延续，零售场景的政策环境仍在宽松一侧。",
+    "insights": [
+      {
+        "topic": "存单返场抬高比价基准",
+        "impact": "长期限存单密集返场但利率优势弱化、流动性成卖点，存款到期客户的比价行为更频繁，资金在存款与理财之间的挪动加快。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "长期限大额存单密集返场：利率优势弱化 流动性成卖点",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-27/doc-iniwrecc4893291.shtml"
+          },
+          {
+            "title": "中长期大额存单密集返场！有银行利率达1.85%",
+            "url": "https://m.21jingji.com/article/20261027/herald/1a9393b732ee7fd133e2e964e564891e.html"
+          }
+        ]
+      },
+      {
+        "topic": "外资行收缩聚焦财富",
+        "impact": "外资行年内33家分支机构退出并集中资源做财富管理，高净值客户的服务供给更集中，客户在机构间的流动加快。",
+        "tag": [
+          "竞对动态",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "外资行布局深度调整：年内33家分支机构退出市场，发力财富管理主线",
+            "url": "https://finance.sina.com.cn/jinrong/yh/2026-10-27/doc-iniwsfqw3861903.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "从化城中村安置房供地",
+        "impact": "从化两宗城中村改造复建安置房完成供地，改造片区居民的回迁时点明确，按揭与装修类资金需求在片区集中形成。",
+        "tag": [
+          "住房金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "广州从化两宗城中村改造复建安置房完成供地",
+            "url": "https://news.dayoo.com/guangzhou/202610/27/139995_55017387.htm"
+          }
+        ]
+      },
+      {
+        "topic": "村镇银行调整客群重分",
+        "impact": "东营银行拟接盘异地发起行村镇银行、贷款回广东存款留本地，跨区域机构调整带来本地客群与资产在机构间的重新分布。",
+        "tag": [
+          "竞对动态",
+          "客群"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "东营银行拟“接盘”异地发起行村镇银行：贷款回广东、存款留本地",
+            "url": "https://finance.sina.com.cn/roll/2026-10-27/doc-iniwsmws7034161.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "Visa准入影响外卡收单",
+        "impact": "Visa相关准入取得进展，外卡收单与跨境支付格局可能调整，信用卡与收单条线的合作空间出现变化。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "Visa拿到“准考证”对你我有何影响？",
+            "url": "https://finance.sina.com.cn/money/bank/gsdt/2026-10-27/doc-iniwrqsu2114944.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "林票信托拓宽资产供给",
+        "impact": "林票2.0信托试水让山林变成可交易资产，另类与绿色主题产品的可投品类增加，高净值客户的配置选项更宽。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "沉睡的山林变成可交易资产，林票2.0信托试水让山林“流动”起来",
+            "url": "https://finance.sina.com.cn/roll/2026-10-27/doc-iniwsmwp4451300.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，存单返场抬高比价基准，长期限存单密集返场但利率优势弱化、流动性成卖点。第二，高端客户方面，外资行收缩聚焦财富、林票信托拓宽资产供给，外资行年内33家分支机构退出并集中资源做财富管理。第三，普惠小微方面，从化城中村安置房供地、村镇银行调整客群重分，从化两宗城中村改造复建安置房完成供地。第四，跨境客群方面，Visa准入影响外卡收单，Visa相关准入取得进展。",
+    "risk": {
+      "topic": "监管压降导向持续",
+      "evidence": "监管层近期释放压降相关窗口指导信号，涉及部分业务规模的节奏控制。",
+      "impact": "个贷与消费信贷的投放节奏可能受规模约束，财富端代销与通道类业务面临压降压力，风控需同步收紧合规审查口径。",
+      "source": "T2"
+    },
+    "spoken_risk": "今天有 1 个需要警惕：监管压降导向持续，个贷与消费信贷的投放节奏可能受规模约束，财富端代销与通道类业务面临压降压力，风控需同步收紧合规审查口径。",
+    "guangdong_ipo": {
+      "spoken": "广东广州的保伦股份，做计算机通信和其他电子设备制造，由广发证券保荐，昨天IPO提交注册，拟上主板；另外珠海菲高科技今天完成辅导备案，辅导机构是东方证券。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨1.18%领涨，AI债务担忧缓解叠加科技股走强。",
+      "sectors": [
+        "Robinhood跌4%，加密市场低迷拖累利润，抵消新业务增长。",
+        "AI债务担忧缓解，市场等待甲骨文、Alphabet、亚马逊本周财报。",
+        "Anthropic已向SEC提交S-1文件，预测市场押注其年内IPO近乎确定。",
+        "生物科技股大涨，临床进展、并购与新药技术带动板块走强。",
+        "Visa业绩超预期，消费者支出保持韧性。"
+      ],
+      "spoken": "美股收盘，纳指涨1.18%，标普涨0.60%，道指微涨0.03%。AI债务担忧缓解，科技股走强带动纳指领涨。板块方面，Robinhood因加密市场低迷跌4%，生物科技股大涨，Visa业绩超预期。市场等待甲骨文等科技巨头本周财报。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-28"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52377.57",
+          "changePct": "+0.03%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26477.81",
+          "changePct": "+1.18%"
+        },
+        {
+          "name": "标普500",
+          "value": "7722.60",
+          "changePct": "+0.60%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "科创50大跌4.81%，创业板指跌超3%。",
+      "sectors": [
+        "下跌个股超4900只"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-28"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3648.30",
+          "changePct": "-1.33%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11245.73",
+          "changePct": "-2.50%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2548.15",
+          "changePct": "-3.41%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23041.32点（-0.73%）；恒生科技收报3800.43点（-1.48%）。",
+      "sectors": [
+        "科网股、汽车股低迷",
+        "智谱逆势涨超8%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-28"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.73% 科指跌1.48% 科网股、汽车股低迷 智谱逆势涨超8%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-27/doc-iniwrzhw7075844.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23041.32",
+          "changePct": "-0.73%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3800.43",
+          "changePct": "-1.48%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-27",
+    "marketStatus": {
+      "reportDate": "2026-10-28",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-10-27"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-27"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-27"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 10月27日 周二 收盘；港股为 10月27日 周二 收盘；美股为 10月27日 周二 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610273909730882.html",
+      "title_cn": "A股三大指数收跌成交额不足1.5万亿银行股逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "A股三大指数收跌，全市场成交额不足1.5万亿元，银行股逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273909646661.html",
+      "title_cn": "朱少醒、刘彦春、傅鹏博、张坤等又一批知名基金经理调仓“曝光”！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "朱少醒、刘彦春、傅鹏博、张坤等多位知名基金经理的调仓情况被曝光。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "基金",
+        "持仓"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273909469726.html",
+      "title_cn": "物理AI成关注焦点！人形机器人概念密集涨停融资客抢筹股曝光",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "物理AI成为市场关注焦点，人形机器人概念股密集涨停，融资客抢筹相关个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "AI",
+        "机器人",
+        "融资"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273909677245.html",
+      "title_cn": "联讯仪器盘中跌破1000元千元股仅剩贵州茅台",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "联讯仪器盘中股价跌破1000元，A股千元股仅剩贵州茅台一只。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "个股",
+        "股价"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273910278461.html",
+      "title_cn": "10月27日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "汇总10月27日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273909469584.html",
+      "title_cn": "3万亿巨头创新高总市值重回A股第一！银行股逆势走强红利资产再获资金青睐",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "一家3万亿市值巨头股价创新高，总市值重回A股第一；银行股逆势走强，红利资产再获资金青睐。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "银行",
+        "红利资产"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273910141573.html",
+      "title_cn": "物理AI刷屏！机构力推“新中天”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "物理AI话题刷屏，机构力推相关标的（“新中天”）。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "AI",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273909170946.html",
+      "title_cn": "上海重磅方案落地！卫星互联网组网提速多股获融资客抢筹(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "上海相关重磅方案落地，卫星互联网组网提速，多只个股获融资客抢筹。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "政策",
+        "卫星互联网",
+        "融资"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273908806489.html",
+      "title_cn": "高阶智驾催化不断！L3准入试点扩容提速这5股业绩有望翻倍增长(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "高阶智驾催化不断，L3准入试点扩容提速，报道列出5只业绩有望翻倍增长的个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "智能驾驶",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273909770516.html",
+      "title_cn": "尾盘加速下探！宽基ETF已连续“吸金”3500亿元",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "A股尾盘加速下探，宽基ETF已连续吸金合计3500亿元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "ETF",
+        "资金流向"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610273910521817.html",
+      "title_cn": "机构：当前A股明显超调估值已具备较好的中长期性价比",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "机构观点称当前A股明显超调，估值已具备较好的中长期性价比。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "机构观点",
+        "估值"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610283910686371.html",
+      "title_cn": "21社论丨加力扩大内需，推动工业利润均衡修复",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/28",
+      "summary": "社论提出加力扩大内需，推动工业利润均衡修复。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "政策",
+        "内需"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-27/doc-iniwrzhw7075844.shtml",
+      "title_cn": "港股收评：恒指跌0.73% 科指跌1.48% 科网股、汽车股低迷 智谱逆势涨超8%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "港股收评：恒指跌0.73%，恒生科技指数跌1.48%，科网股与汽车股低迷，智谱逆势涨超8%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "科技股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-28/doc-iniwtpiz3942060.shtml",
+      "title_cn": "恒指牛熊街货比(46:54)︱10月28日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/28",
+      "summary": "10月28日恒指牛熊街货比为46:54。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-27/doc-iniwruyv4681077.shtml",
+      "title_cn": "新吉奥房车盘中暴跌近37%，香港证监会点名股权高度集中",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "新吉奥房车盘中暴跌近37%，香港证监会点名其股权高度集中。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "个股",
+        "监管"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-27/doc-iniwrqsz1504196.shtml",
+      "title_cn": "Anthropic冲刺史上最大IPO！港股大模型双雄盘中走强，智谱涨超11%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "Anthropic冲刺史上最大IPO，港股大模型双雄盘中走强，智谱涨超11%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "AI",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-10-27/doc-iniwrzhv1383553.shtml",
+      "title_cn": "美银证券重申百度“买入”评级 下调目标价6.57%至128港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "美银证券重申百度“买入”评级，目标价下调6.57%至128港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "百度"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-27/doc-iniwrecf1688905.shtml",
+      "title_cn": "新股消息 | 港澳文旅通过港交所聆讯 拥有“喷射飞航”及“中旅巴士”两个主要跨境客运品牌",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "港澳文旅通过港交所聆讯，旗下拥有“喷射飞航”及“中旅巴士”两个跨境客运品牌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "文旅"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/observe/2026-10-27/doc-iniwsfqw3840060.shtml",
+      "title_cn": "微亿智造港股IPO临门止步：具身智能概念加持难掩盈利薄弱 外部市况与内部发行短板阻碍上市",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "微亿智造港股IPO终止，具身智能概念加持下仍面临盈利薄弱、外部市况与发行短板等问题。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "机器人"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-27/doc-iniwrzht4613934.shtml",
+      "title_cn": "香港凑凑火锅涉违规，遭劳工处行政制裁",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "香港凑凑火锅因违规遭劳工处行政制裁。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "餐饮",
+        "监管"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-27/doc-iniwrzhw7057265.shtml",
+      "title_cn": "国信证券：首次覆盖粤港湾智算给予“优于大市”评级 合理估值15.53港元至17.09港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "国信证券首次覆盖粤港湾智算，给予“优于大市”评级，合理估值区间15.53至17.09港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "算力"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-27/doc-iniwsfqt1282838.shtml",
+      "title_cn": "花旗：下调大金重工(01081)目标价21% 仍维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "花旗下调大金重工目标价21%，仍维持“买入”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "新能源"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-27/doc-iniwsfqr4495159.shtml",
+      "title_cn": "瑞银：汇丰控股(00005)第三季拨备前利润逊预期 维持“中性”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "瑞银称汇丰控股第三季拨备前利润逊于预期，维持“中性”评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-27/doc-iniwsfqu6968608.shtml",
+      "title_cn": "高盛：汇丰控股(00005)第三季基本除税前利润低于该行预期 净利息收益表现略为失望",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "高盛称汇丰控股第三季基本除税前利润低于其预期，净利息收益表现略令人失望。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
+      "title_cn": "Robinhood shares fall 4% as crypto slump weighs on profits, offsetting gains in new businesses",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "Robinhood股价下跌4%，加密市场低迷拖累其利润，抵消了新业务的增长。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "加密货币"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/27/ai-debt-hyperscaler-earnings.html",
+      "title_cn": "AI debt fears ease ahead of Oracle, Alphabet and Amazon updates. Here's what to watch. ",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "在甲骨文、Alphabet和亚马逊发布财报前，市场对AI相关债务的担忧有所缓解。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/27/ripple-strikes-deal-with-robinhood-to-expand-its-rlusd-digital-dollar.html",
+      "title_cn": "Ripple strikes deal with Robinhood to expand its RLUSD digital dollar",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "Ripple与Robinhood达成协议，扩大其RLUSD数字美元的应用。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "加密货币",
+        "合作"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/-as-ai-becomes-more-fractured-one-names-stands-out-amd.html",
+      "title_cn": " As AI becomes more fractured, one names stands out: AMD",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "报道称随着AI格局趋于分化，AMD成为突出标的。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "半导体"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/prediction-markets-think-anthropic-ipo-near-certain-in-2026.html",
+      "title_cn": "Prediction market traders say an Anthropic IPO is near-certain this year after company filed with SEC ",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "预测市场交易者认为，在Anthropic向SEC提交文件后，其今年IPO几乎确定。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "IPO"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/sp-500-ex-ai-index-tech-selloff.html",
+      "title_cn": "Investors are doing just as well this year by shunning AI. How to invest if the tech trade keeps fizzling",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "报道称今年回避AI的投资者收益同样不俗，并讨论若科技行情持续走弱时的投资思路。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "投资策略"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/top-wall-street-analysts-prefer-these-3-dividend-stocks-for-stable-income.html",
+      "title_cn": "Top Wall Street analysts prefer these 3 dividend stocks for stable income",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "华尔街顶级分析师偏好3只股息股，用于获取稳定收益。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "机构观点",
+        "股息"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/apollo-mubadala-capital-stake.html",
+      "title_cn": "Apollo to buy nearly 10% stake in Abu Dhabi-backed alternative asset manager Mubadala Capital",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "Apollo将收购阿布扎比支持的另类资产管理公司Mubadala Capital近10%股权。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "并购",
+        "资管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/24/biotech-stocks-drug-innovation-rally.html",
+      "title_cn": "Biotech stocks are surging. How investors can play the new drug innovation boom",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/24",
+      "summary": "生物科技股大涨，报道讨论投资者如何参与新一轮药物创新热潮。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "医药",
+        "生物科技"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/lpl-financial-q3-2026-slides-strong-growth-amid-integration-concerns-93CH-4977194",
+      "title_cn": "LPL Financial Q3 2026 slides: strong growth amid integration concerns",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "LPL Financial发布2026年第三季度业绩材料，显示增长强劲但存在整合担忧。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/visa-quarterly-profit-rises-on-resilient-consumer-spending-4976822",
+      "title_cn": "Visa results beat estimates as resilient customers keep up spending",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "Visa业绩超出预期，客户消费保持韧性。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "支付"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/alexander-brothers-get-30-years-each-in-prison-after-sex-trafficking-convictions-4977193",
+      "title_cn": "Alexander brothers get 30 years each in prison after sex trafficking convictions",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "Alexander兄弟因性贩运罪名成立，各被判处30年监禁。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "法律"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
