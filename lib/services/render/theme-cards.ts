@@ -181,6 +181,15 @@ export const THEME_CARDS_CSS = `  /* ===== 执行摘要板块（今日必读 + �
   .risk-source-t1\.5 { background: #f0ad4e; color: white; }
   .risk-source-t2 { background: #ddd; color: #666; }
   .risk-srcs { display: inline-flex; gap: 4px; margin-left: auto; }
+  /* 「原文（站外）」标记（2026-10-27 sc）：风险源在下方板块没有卡片时明确告知，
+     避免读者翻不到具体卡以为系统漏报。低饱和描边样式，不抢风险本身的视觉重量。 */
+  .risk-external {
+    display: inline-block; margin-left: 6px; padding: 1px 6px;
+    font-size: 0.65rem; font-weight: 600; border-radius: 3px;
+    color: var(--muted, #6b6b73); border: 1px dashed var(--rule, #d8d8de);
+    text-decoration: none;
+  }
+  .risk-external:hover { color: var(--accent-brand, #c33); border-color: currentColor; }
   .risk-src { color: var(--muted); font-size: 0.72rem; padding: 0 4px; border-radius: 3px; border: 1px solid var(--rule); text-decoration: none; }
   .exec-risk::after {
     content: ""; position: absolute; top: 1.7rem; right: 0; bottom: 0.5rem;

@@ -25,7 +25,7 @@
  */
 
 import type { ExecutiveSummary, ExecInsight, ExecRisk } from "../enrich/executive-summary";
-import type { InsightFunnel } from "../../contracts/report";
+import type { InsightFunnel, MustReadFunnel } from "../../contracts/report";
 import {
   HERO_MIN_DIMENSIONS,
   auditHeroDimensions,
@@ -113,6 +113,8 @@ export interface GuardOutput {
   heroRewriteNeeded?: boolean;
   /** 商机漏斗计数（2026-10-23 sc：直接落盘，不再靠翻 CI 日志反推）。 */
   insightFunnel?: InsightFunnel;
+  /** 必读漏斗计数（2026-10-27 sc：必读塌到 2 条时能直接看出原因）。 */
+  mustReadFunnel?: MustReadFunnel;
   /**
    * 商机候选里**未入选**的 topic 清单（被记忆判重跳过 + 选满即停后未评估的）。
    * 用途：口播稿校验的「防讲被去重内容」判据 —— LLM 写稿时看不到去重结果，
@@ -296,6 +298,8 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   let heroRewriteNeeded = false;
   /** 商机漏斗计数（insights 段填，末尾随 GuardOutput 返回）。 */
   let insightFunnel: InsightFunnel | undefined;
+  /** 必读漏斗计数（must_read 段填）。 */
+  let mustReadFunnel: MustReadFunnel | undefined;
   /** 商机候选里未入选的 topic 清单（insights 段填，末尾随 GuardOutput 返回）。 */
   let unplayedInsightTopics: string[] = [];
 
@@ -359,6 +363,12 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
           `（命中重复跳过 ${r.skipped.length} 条：${r.skipped.map((d) => d.verdict).join(",") || "无"}）`,
       );
     }
+    mustReadFunnel = {
+      candidates: cands.length,
+      played: r.chosen.length,
+      skippedByMemory: r.skipped.length,
+      target: MUST_READ_PLAY_TARGET,
+    };
   }
 
   // ---- 3) insights（商机洞察）----
@@ -368,33 +378,6 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
   //   洞察板块内容腰斩、口播时长掉到 128s。与 09-17「3 件事只剩 2 件」是同一个病。
   // 顺序：保持 LLM 给出的优先级顺序（不额外打分排序，避免改动相关性口径）；判重复用 evaluateCandidate。
   {
-    // 🔴 商机与必读**互斥**（2026-10-04 sc「R4 以 2 为主」= 代码层，授权实施）
-    //
-    // sc 口径：「商机原则上不应与今日必读重复 —— 行领导在阅读今日必读时也会产生相应想法，
-    // 重复出现等于白占一个位」。
-    //
-    // 为什么必须代码层：此前**只有 `risk` 有互斥约束**（prompt §3「不能同一条事件又当
-    // must_read 又当 risk」），`insights` **完全没有** —— 属约束缺口，不是模型失误。
-    // 实测 10-04：商机 6 条里 **3 条与必读重复**（贷款明白纸同条 / 基金业绩腰斩同源 /
-    // IPO 受理降温同源）＝ 50%，纯靠 prompt 叮嘱挡不住。
-    //
-    // 判据只有两条：**同 URL** + **标题逐字相同**（2026-10-04 sc 选 A）。
-    //
-    // ⛔ 曾试过再加一层 `sameEvent`（事件指纹共享 ≥2 锚点），**已移除** ——
-    // 实测 10-04 它对真实场景**零收益**却带风险：
-    //  ① 抓不到：当天 3 条真重复的 `sameEvent` 全部为 false。商机 `topic` 是 LLM 改写后的
-    //     短语，锚点被改写稀释 ——「贷款明白纸」两条锚点都是 `[]`；「沪深9月IPO零受理」vs
-    //     「IPO受理降温」只共享 1 个锚（阈值 2）。`titleSimilarity` 同样不可靠
-    //     （同源三条 Dice 实测 1.00 / 0.17 / 0.14）。
-    //  ② 误并风险：`sameEvent` 走 `eventFingerprint`（**地域锚照算**），于是
-    //     「泛化主体词 + 地域」就能凑满 2 锚点 —— 实测「市政项目获批」与「普惠金融改革试点」
-    //     被判同一事件（同「按揭」大杂烩的病根）。
-    //     ℹ️ 2026-10-05：该项风险**已消除** —— `sameEvent` 现额外要求「共享 ≥1 个主体锚」
-    //     （`sharedSubjectAnchors` 守卫，见 dedup-similar.ts）。**但 ① 仍未解决**（锚点被
-    //     LLM 改写稀释、真重复抓不到），故本处「商机互斥」继续用「同 URL + 逐字相同标题」，
-    //     不因 ② 修好而重新引入 sameEvent。
-    // 改用「同 URL + 逐字相同标题」后：覆盖当天 3/3、零误伤。代价是「不同 URL 的同一事件」
-    // 会漏判 —— 但那类条目改写后锚点本就变了，本就判不出。
     // 🔴 2026-10-23 sc 授权改版：**双视角独立选榜**，撤销 2026-10-04 的「商机与必读同 URL 互斥」。
     // 撤销理由（10-23 线上事故）：LLM 把「债基限购」「理财规模」等**既是市场信号又是落地商机**
     //   的素材同时写进两个板块，互斥规则单边删商机侧 → 6 条塌成 1 条；而口播稿不走该过滤，
@@ -638,6 +621,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     log,
     heroRewriteNeeded,
     ...(insightFunnel ? { insightFunnel } : {}),
+    ...(mustReadFunnel ? { mustReadFunnel } : {}),
     ...(unplayedInsightTopics.length ? { unplayedInsightTopics } : {}),
   };
 }

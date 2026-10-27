@@ -222,9 +222,19 @@ export function renderReportExec(report: DailyReport): string {
     const fbKey = (r.sources && r.sources[0]?.url) || r.url || `risk:${r.topic}`;
     // 站内锚点（2026-10-19）：与 slim 的 itemIdOf(risk.sources[0].url) 同源。
     const riskUrl = r.sources?.[0]?.url ?? "";
-    const riskAnchor = riskUrl && !bodyUrls.has(riskUrl) ? ` id="${itemAnchorId(riskUrl)}"` : "";
+    const riskInBody = !!riskUrl && bodyUrls.has(riskUrl);
+    const riskAnchor = riskUrl && !riskInBody ? ` id="${itemAnchorId(riskUrl)}"` : "";
+    // 🔴 「原文（站外）」标记（2026-10-27 sc）：风险卡的信息源**可能没进任何展示板块**
+    //    （今天实测：信用卡中心被罚那条在 154 条采集素材里，但被漏斗/筛选挡在板块外）。
+    //    此前风险卡只在标题栏显示来源标记，读者会去下面翻具体卡片、翻不到 →
+    //    以为系统漏了或点错了。现在明确告知「这条在站内没有卡片」，并给出原文外链。
+    //    ⚠️ 只影响可读性，不改任何筛选/展示逻辑 —— 风险内容本身仍按原口径产出。
+    const externalMark =
+      riskUrl && !riskInBody
+        ? `<a class="risk-external" href="${escapeHtml(riskUrl)}" target="_blank" rel="noopener noreferrer" title="这条信息在下方板块没有对应卡片，点击查看原文">原文（站外）</a>`
+        : "";
     return `<article class="risk-card"${riskAnchor} data-audio-section="risk">
-        <div class="risk-header">⚠️ 风险预警${sourceBadge}${renderDeltaBadge(r.delta)}${srcMarks}</div>
+        <div class="risk-header">⚠️ 风险预警${sourceBadge}${externalMark}${renderDeltaBadge(r.delta)}${srcMarks}</div>
         <h3>${escapeHtml(r.topic)}</h3>
         ${r.evidence ? `<p><b>依据：</b>${escapeHtml(r.evidence)}</p>` : ""}
         ${r.impact ? `<p><b>影响：</b>${escapeHtml(r.impact)}</p>` : ""}

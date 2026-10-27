@@ -319,6 +319,23 @@ export interface DailyReport {
    * event-memory 反推（首播 1 条），花了五六步才定位。这个字段把关键计数直接落盘。
    */
   insightFunnel?: InsightFunnel;
+  /**
+   * 必读漏斗埋点（2026-10-27 sc：必读从 5 条塌到 2 条，但查不出是「LLM 给少了」
+   * 还是「记忆判重砍多了」—— 商机侧有 insightFunnel 一眼可见，必读侧此前什么都没有）。
+   */
+  mustReadFunnel?: MustReadFunnel;
+}
+
+/** 必读漏斗计数（见 `DailyReport.mustReadFunnel`）。 */
+export interface MustReadFunnel {
+  /** LLM 给出的必读候选数 */
+  candidates: number;
+  /** 最终选入条数（= 卡片数） */
+  played: number;
+  /** 命中内容记忆判重被跳过条数 */
+  skippedByMemory: number;
+  /** 目标上限（便于一眼看出缺口：target - played = 缺口） */
+  target: number;
 }
 
 /** 商机漏斗计数（见 `DailyReport.insightFunnel`）。 */

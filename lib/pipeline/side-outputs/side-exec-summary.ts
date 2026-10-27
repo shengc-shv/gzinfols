@@ -10,7 +10,7 @@
  */
 
 import type { ArticleInput } from "../../contracts/article";
-import type { DailyReport, InsightFunnel, ReportItem } from "../../contracts/report";
+import type { DailyReport, InsightFunnel, MustReadFunnel, ReportItem } from "../../contracts/report";
 import { applyDisplayCaps } from "../../services/assemble/display-cap";
 import {
   buildExecutiveFromScores,
@@ -235,6 +235,8 @@ export async function buildExecutiveSummary(
    */
   /** 商机漏斗埋点（guard 内产生，写 report 时落盘；2026-10-23 sc）。 */
   let lastInsightFunnel: InsightFunnel | undefined;
+  /** 必读漏斗埋点（2026-10-27 sc）。 */
+  let lastMustReadFunnel: MustReadFunnel | undefined;
   const guard = async (ex: ExecutiveSummary): Promise<ExecutiveSummary> => {
     // 去重后统一对齐口播（1:1 由卡面派生，零 LLM）——记忆关闭时也不放过，保证预览一致
     if (!memoryOn || !memStore) return syncNarration(ex);
@@ -256,6 +258,7 @@ export async function buildExecutiveSummary(
       });
       memStore = g.store;
       if (g.insightFunnel) lastInsightFunnel = g.insightFunnel;
+      if (g.mustReadFunnel) lastMustReadFunnel = g.mustReadFunnel;
       for (const line of g.log) ctx.log.info("exec", line);
       let out = g.exec;
       if (g.heroRewriteNeeded) {
@@ -437,6 +440,7 @@ export async function buildExecutiveSummary(
       const next: DailyReport = { ...report };
       // 商机漏斗埋点（2026-10-23 sc）：直接落盘，下次定位「商机为什么变少」不用翻日志
       if (lastInsightFunnel) next.insightFunnel = lastInsightFunnel;
+      if (lastMustReadFunnel) next.mustReadFunnel = lastMustReadFunnel;
       if (exec.hero_line) next.hero_line = exec.hero_line;
       const mustRead = exec.must_read
         .filter((m) => !!m.url)

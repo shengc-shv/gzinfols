@@ -90,3 +90,35 @@ test("store 类型承载 lastHeroLine：guard 覆写 → 下次运行即「昨�
   const store: EventMemoryStore = { version: 1, events: {}, lastHeroLine: H1024 };
   assert.equal(store.lastHeroLine, H1024);
 });
+
+test("落盘不丢字段：pruneMemory 必须透传 lastHeroLine（10-27 实测丢字段的回归锁）", async () => {
+  const { pruneMemory } = await import("../lib/services/memory/event-brief");
+  const store: EventMemoryStore = {
+    version: 1,
+    events: {},
+    lastHeroLine: "今天主要看四个方面：汇率创新高，结售汇窗口打开…",
+    deliveries: [],
+    ipoVoicing: {},
+    today: { date: "2026-10-27", entries: [] },
+  };
+  const out = pruneMemory(store, "2026-10-27");
+  // 🔴 原实现用手写字段白名单重建 store → lastHeroLine 被静默丢弃，
+  //    导致「昨日定调」永远读不到、跨天判重形同虚设（10-27 定调又与 10-26 重复）。
+  assert.equal(out.lastHeroLine, store.lastHeroLine, "lastHeroLine 必须透传");
+  assert.equal(out.today?.date, "2026-10-27", "today 必须保留");
+  assert.deepEqual(out.deliveries, [], "deliveries 必须保留");
+  assert.deepEqual(Object.keys(out.events), [], "events 由本次计算覆盖");
+});
+
+test("beginDay 也透传 lastHeroLine（开新一天时它是「昨日定调」）", async () => {
+  const { beginDay } = await import("../lib/services/memory/event-settle");
+  const store: EventMemoryStore = {
+    version: 1,
+    events: {},
+    lastHeroLine: "昨天的定调原文",
+    today: { date: "2026-10-26", entries: [] },
+  };
+  const out = beginDay(store, "2026-10-27");
+  assert.equal(out.lastHeroLine, "昨天的定调原文", "跨天时 lastHeroLine 必须保留");
+  assert.equal(out.today?.date, "2026-10-27");
+});

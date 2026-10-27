@@ -27,12 +27,19 @@ export function pruneMemory(
   const list = Object.entries(events).sort(
     (a, b) => (a[1].lastBroadcastAt < b[1].lastBroadcastAt ? -1 : 1),
   );
+  // 🔴 2026-10-27 修正：这两个 return 原先是**手写字段白名单**（today/deliveries/ipoVoicing），
+  //    任何新加字段都会在此被静默丢弃 —— `lastHeroLine`（10-25 加的定调跨天判重依据）
+  //    就是这么丢的：guard 里确实写进了 store，但落盘前被 pruneMemory 重建掉，
+  //    结果 event-memory.json 里始终没有该字段、定调判重永远拿不到「昨日定调」，
+  //    10-27 定调第一个方面又与 10-26 重复（汇率/结售汇）。
+  //    ⇒ 改为 `...store` 展开 + 只覆盖本次真正计算的字段（events/updatedAt/version），
+  //      新字段自动透传，不再需要每加一个字段就回来补一行。
   if (list.length > maxEvents) {
     const trimmed: Record<string, EventRecord> = {};
     for (const [id, rec] of list.slice(list.length - maxEvents)) trimmed[id] = rec;
-    return { version: 1, updatedAt: today, events: trimmed, ...(store.today ? { today: store.today } : {}), ...(store.deliveries ? { deliveries: store.deliveries } : {}), ...(store.ipoVoicing ? { ipoVoicing: store.ipoVoicing } : {}) };
+    return { ...store, version: 1, updatedAt: today, events: trimmed };
   }
-  return { version: 1, updatedAt: today, events, ...(store.today ? { today: store.today } : {}), ...(store.deliveries ? { deliveries: store.deliveries } : {}), ...(store.ipoVoicing ? { ipoVoicing: store.ipoVoicing } : {}) };
+  return { ...store, version: 1, updatedAt: today, events };
 }
 
 /** 空记忆库。 */
