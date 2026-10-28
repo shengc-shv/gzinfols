@@ -54,14 +54,36 @@ const SZSE_API_PATH = "/api/ras/projectrends/query";
  * 返回 502（首页 + API 全挂），而 **HTTP** 通道数据完整可用（totalSize=1461）；
  * 深交所全球服务本身正常（HTTPS 首页经其他路径验证无误）→ 属出口侧限制。
  *
- * 每个协议各自重试 `retries + 1` 次；5xx/429/403 视为瞬时错误重试，其余
- * （4xx 等）快速放弃当前协议换下一个，保证公网/CI 环境下 HTTP 被拒时
- * 能无缝回落到 HTTPS，不会因协议顺序变化而漏数。
+ * ⚠️ 2026-10-28 复测反转：沙箱出口下 **HTTP 恒 502**（curl/node 一致，0.02s 瞬时拒绝，
+ *   典型网关层拦截），而 HTTPS **偶通**（同一分钟内 5 次 502 后第 6 次返回 200）。
+ *    故顺序调整为 **先 HTTPS 后 HTTP**：HTTPS 是当前唯一可能成功的通道，HTTP 仅作公网兜底。
+ *    每个协议各自重试 `retries + 1` 次；5xx/429/403 视为瞬时错误重试，其余
+ *    （4xx 等）快速放弃当前协议换下一个，保证公网/CI 环境下 HTTP 被拒时
+ *    能无缝回落到 HTTPS，不会因协议顺序变化而漏数。
  */
-const SZSE_BASES = ["http://www.szse.cn", "https://www.szse.cn"] as const;
+const SZSE_BASES = ["https://www.szse.cn", "http://www.szse.cn"] as const;
 const SZSE_LIST = "https://www.szse.cn/listing/projectdynamic/ipo/index.html";
 const PAGE_SIZE = 50;
 const MAX_PAGES = 5; // 兜底：最多抓 5 页（250 条），防死循环
+
+/**
+ * 东方财富备份源（2026-10-28 新增，用户拍板「2+3」方案第 2 条）。
+ *
+ * 背景：szse.cn 在云端沙箱出口下 502 率极高（2026-10-28 实测每分钟仅 ~1/6 成功），
+ * 单日 8 次重试仍可能全挂 → 深交所卡片整源消失（用户实锤「实际 8 家活跃企业、日报只露 1 家」）。
+ * 东财 `RPT_IPO_DECORGNEWEST`（在审企业全量）实测稳定 200，数据新鲜（END_DATE 到当日），
+ * 字段完备且可直接映射到 SzseRow：
+ *   DECLARE_ORG → cmpnm（全称）/ STATE → prjst / REG_ADDRESS → regloc（省级，可精确过滤广东）
+ *   PREDICT_LISTING_MARKET → boardName（创业板 / 深主板 / 沪主板 / 北交所）/ END_DATE → updtdt
+ *   RECOMMEND_ORG → sprinsts / INFO_CODE → prjid 的数值化替身（保证 URL 唯一）
+ *
+ * 定位：**仅在深交所官方源整源抓取失败时兜底**，官方源正常时完全不触发（保证权威性优先）。
+ * 时间红线不变：publishedAt 仍取 END_DATE（官方更新日），绝不回退抓取日。
+ */
+const EM_API = "https://datacenter-web.eastmoney.com/api/data/v1/get";
+const EM_REPORT = "RPT_IPO_DECORGNEWEST";
+/** 东财 boardName 中含「深」的板块才计入本源（深主板 / 创业板）。 */
+const EM_SZSE_BOARDS = /^(创业板|深主板|中小板)$/;
 
 /** 审核状态 → 卡片展示文案（prjst 中文官方值实测；与 inferStage 词表对齐）。 */
 const STATE_LABELS: Record<string, string> = {
@@ -142,6 +164,57 @@ export function isGdRow(row: SzseRow): boolean {
 }
 
 /**
+ * 解析东财 `RPT_IPO_DECORGNEWEST` 响应 → SzseRow[]（2026-10-28 兜底源）。
+ *
+ * 字段映射见 EM_REPORT 注释。只保留**深市板块**（创业板/深主板/中小板）且注册地为广东的行，
+ * 与官方源「gd-szse-audit = 深交所窗口内广东动态」语义严格对齐（不接受沪市/北交所行）。
+ *
+ * 时间红线：updtdt 取 END_DATE（东财记录的官方更新日），缺失则整行丢弃，绝不用抓取日兜底。
+ * prjid：东财无交易所主键，用 INFO_CODE 的数值化哈希生成稳定整数，保证同一企业在多次抓取中
+ *        URL 锚点稳定（去重/跨天判重依赖 URL 稳定性）。
+ */
+export function parseEastmoneyJson(text: string): SzseRow[] {
+  let data: { result?: { data?: unknown[] } };
+  try {
+    data = JSON.parse(text);
+  } catch {
+    return [];
+  }
+  const rows = data?.result?.data;
+  if (!Array.isArray(rows)) return [];
+
+  /** INFO_CODE → 稳定正整数（FNV-1a 变体，纯本地计算，无副作用）。 */
+  const hashId = (s: string): number => {
+    let h = 2166136261;
+    for (let i = 0; i < s.length; i++) {
+      h ^= s.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return Math.abs(h % 100000000);
+  };
+
+  return rows
+    .map((raw) => {
+      const r = raw as Record<string, unknown>;
+      const updtdt = String(r.END_DATE || "").match(/(\d{4}-\d{2}-\d{2})/)?.[1] || "";
+      const board = String(r.PREDICT_LISTING_MARKET || "").trim();
+      const infoCode = String(r.INFO_CODE || "");
+      return {
+        prjid: infoCode ? hashId(infoCode) : 0,
+        cmpnm: String(r.DECLARE_ORG || "").trim(),
+        cmpsnm: "", // 东财只给全称，交由 shortName 截取
+        prjst: String(r.STATE || "").trim(),
+        regloc: String(r.REG_ADDRESS || "").trim(),
+        sprinsts: String(r.RECOMMEND_ORG || "").trim(),
+        acptdt: "", // 东财该报表无受理日，留空（excerpt 自动省略）
+        updtdt,
+        boardName: board,
+      };
+    })
+    .filter((x) => x.cmpnm && x.updtdt && EM_SZSE_BOARDS.test(x.boardName) && isGdRow(x));
+}
+
+/**
  * 窗口下界 `windowFloor` / `shortName` / `GD_CITIES` / `IPO_SOURCE_WINDOW_DAYS`
  * 已于 2026-09-10（P2-3）迁出本文件：常量 → `lib/ipo-config.ts`，
  * 工具 → `./ipo-shared`（此前被 sse/bse/hk-filing 跨源 import）。
@@ -152,15 +225,21 @@ export class SzseAuditCrawler extends BaseCrawler {
   override sourceIds = ["gd-szse-audit"];
 
   constructor() {
-    super({ name: "深交所IPO审核动态", timeout: 20000, retries: 3 });
+    // retries 3→8（2026-10-28）：沙箱出口对 szse.cn 的 502 是「高频瞬时拒绝」而非持久故障，
+    // 实测同一分钟内 5 次 502 后第 6 次即 200。3 次重试命中率过低 → 整源静默为空。
+    super({ name: "深交所IPO审核动态", timeout: 20000, retries: 8 });
   }
 
   /**
    * 单页抓取（GET + JSON；protected 便于测试 mock）。
    *
-   * ⚠️ 协议顺序（2026-10-23 用户拍板）：**先 HTTP，失败再 HTTPS**（SZSE_BASES）。
-   *   部分出口网络对 szse.cn 的 HTTPS 通道返回 502 而 HTTP 可用；两个协议
-   *   各自重试 `retries + 1` 次，任一协议成功即返回，全失败才抛错。
+   * ⚠️ 协议顺序（2026-10-28 修正）：**先 HTTPS，失败再 HTTP**（SZSE_BASES）。
+   *   沙箱出口 HTTP 恒 502、HTTPS 偶通；HTTPS 优先可省掉 9 次必败请求。
+   *   两个协议各自重试 `retries + 1` 次，任一协议成功即返回，全失败才抛错。
+   *
+   * ⚠️ 空 body 视为失败（2026-10-28）：HTTPS 偶发返回 **HTTP 200 但 body 为空**
+   *   （网关截断），旧逻辑 `resp.ok` 直接 return → parse 出 0 条 → 静默丢数且不触发兜底。
+   *   这里把空白 body 归入可重试错误，耗尽重试后才抛错，确保能进东财兜底分支。
    */
   protected async fetchPage(pageIndex: number): Promise<string> {
     const params = new URLSearchParams({
@@ -183,7 +262,17 @@ export class SzseAuditCrawler extends BaseCrawler {
       for (let attempt = 1; attempt <= perProtocol; attempt++) {
         try {
           const resp = await fetch(url, { headers, signal: AbortSignal.timeout(this.timeout) });
-          if (resp.ok) return await resp.text();
+          if (resp.ok) {
+            const text = await resp.text();
+            if (text.trim()) return text; // 正常响应
+            // 200 但空 body：网关截断，按可重试处理（见方法注释）
+            lastErr = new Error("empty body (200)");
+            console.warn(
+              `[${this.name}] ${url} 返回 200 但 body 为空（${scheme} 尝试 ${attempt}/${perProtocol}），将重试`,
+            );
+            if (attempt < perProtocol) await this._backoff(attempt);
+            continue;
+          }
           const retriable = resp.status >= 500 || resp.status === 429 || resp.status === 403;
           console.warn(
             `[${this.name}] ${url} 返回 ${resp.status}（${scheme} 尝试 ${attempt}/${perProtocol}）` +
@@ -203,12 +292,57 @@ export class SzseAuditCrawler extends BaseCrawler {
     throw new Error(`fetch SZSE page ${pageIndex} failed: ${String(lastErr)}`);
   }
 
-  /** override run()：窗口内过滤 + 倒序早停多页抓取。 */
+  /**
+   * 东财兜底：深交所官方源整源失败时，用东财在审企业报表顶替。
+   *
+   * 只返回**深市板块 + 广东**的在审企业（与官方源 isGdRow + boardName 口径一致），
+   * 并把窗口过滤交给调用方（与官方源共用同一 floor），保证两条路径产出同一语义。
+   *
+   * 失败返回 null（调用方据此决定是否恢复旧条目），不抛错 —— 兜底本身不应让整源崩。
+   */
+  protected async fetchFromEastmoney(): Promise<SzseRow[] | null> {
+    const params = new URLSearchParams({
+      reportName: EM_REPORT,
+      columns: "ALL",
+      pageSize: "200",
+      sortColumns: "END_DATE",
+      sortTypes: "-1",
+      filter: '(REG_ADDRESS="广东")',
+    });
+    const url = `${EM_API}?${params.toString()}`;
+    const headers = {
+      "User-Agent": this.userAgent,
+      Referer: "https://data.eastmoney.com/",
+      Accept: "application/json",
+    };
+    try {
+      const resp = await fetch(url, { headers, signal: AbortSignal.timeout(this.timeout) });
+      if (!resp.ok) {
+        console.warn(`[${this.name}] 东财兜底返回 ${resp.status}，放弃兜底`);
+        return null;
+      }
+      const text = await resp.text();
+      if (!text.trim()) {
+        console.warn(`[${this.name}] 东财兜底返回空 body，放弃兜底`);
+        return null;
+      }
+      const rows = parseEastmoneyJson(text);
+      console.log(`[${this.name}] 东财兜底命中 ${rows.length} 条（广东 + 深市板块）`);
+      return rows;
+    } catch (err) {
+      console.warn(`[${this.name}] 东财兜底失败: ${(err as Error).message}`);
+      return null;
+    }
+  }
+
+  /** override run()：窗口内过滤 + 倒序早停多页抓取；整源失败 → 东财兜底。 */
   override async run(): Promise<CrawlerResult[]> {
     const floor = windowFloor();
     console.log(`[${this.name}] 更新窗口下界=${floor}（回退周末后）`);
     let page = 0;
     let consecutiveStale = 0;
+    let officialRows = 0; // 官方源成功产出的条数（0 → 触发兜底）
+    let firstPageFailed = false;
     const allDates: string[] = []; // 新鲜度哨兵输入（含窗口外日期）
 
     while (page < MAX_PAGES) {
@@ -217,6 +351,7 @@ export class SzseAuditCrawler extends BaseCrawler {
         text = await this.fetchPage(page);
       } catch (err) {
         console.warn(`[${this.name}] 第 ${page} 页抓取失败，停止翻页: ${(err as Error).message}`);
+        if (page === 0) firstPageFailed = true;
         break;
       }
 
@@ -234,6 +369,7 @@ export class SzseAuditCrawler extends BaseCrawler {
         if (!isGdRow(r)) continue;
         if ([...DROP_STATES].some((s) => r.prjst.includes(s))) continue; // 终止/中止类不进日报
         this.results.push(this.toResult(r));
+        officialRows++;
       }
 
       // ② 再判是否继续翻页：页内最早 updtdt < floor → 早停（当前页已收）
@@ -245,6 +381,27 @@ export class SzseAuditCrawler extends BaseCrawler {
       page++;
       // 温和节流，避免触发反爬
       await new Promise((r) => setTimeout(r, 800 + Math.random() * 800));
+    }
+
+    // ③ 兜底判定（2026-10-28）：
+    //    首屏即失败（firstPageFailed）→ 官方源完全不可用，必须兜底；
+    //    或官方源翻页走完但窗口内 0 条（officialRows===0）且已抓到有效日期 → 说明「真没新动态」，
+    //    不兜底（避免东财旧数据把真实空窗填成假新增）。
+    const needFallback = firstPageFailed || (officialRows === 0 && allDates.length === 0);
+    if (needFallback) {
+      console.warn(`[${this.name}] ⚠️ 官方源不可用（首屏失败=${firstPageFailed}），启用东财兜底`);
+      const emRows = await this.fetchFromEastmoney();
+      if (emRows && emRows.length > 0) {
+        for (const r of emRows) {
+          allDates.push(r.updtdt);
+          if (r.updtdt < floor) continue;
+          if ([...DROP_STATES].some((s) => r.prjst.includes(s))) continue;
+          this.results.push(this.toResult(r));
+        }
+        console.log(`[${this.name}] 兜底生效：东财窗口内 ${this.results.length} 条`);
+      } else {
+        console.warn(`[${this.name}] ⚠️ 官方源与东财兜底双双失败 → 本源 0 条（下游将沿用旧文件）`);
+      }
     }
 
     warnIfStale(this, allDates, STALE_LAG_DAYS_IPO);
