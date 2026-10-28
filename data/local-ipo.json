@@ -1,13 +1,12 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-28T09:18:34+08:00",
+  "fetchedAt": "2026-10-29T07:06:54+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
     "gd-bse-audit": 1,
     "gd-csrc-tutoring": 1,
-    "gd-sse-audit": 1,
-    "gd-szse-audit": 2
+    "gd-sse-audit": 1
   },
   "items": [
     {
@@ -22,21 +21,10 @@
       "ipoStage": "stage-tutoring"
     },
     {
-      "title": "保伦股份：IPO提交注册（拟主板）",
-      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2189@4",
-      "excerpt": "注册地：广东广州市｜保荐：广发证券股份有限公司｜受理：2026-05-13｜状态：IPO提交注册｜更新：2026-10-27｜行业：计算机、通信和其他电子设备制造业",
+      "title": "腾龙健康：IPO问询中（拟北交所）",
+      "url": "https://www.bse.cn/audit/project_news_select.html#874823@P02",
+      "excerpt": "注册地：广东省广州市｜保荐：国信证券股份有限公司｜代码：874823｜状态：IPO问询中｜更新：2026-10-27",
       "publishedAt": "2026-10-27",
-      "source": "上交所IPO审核动态",
-      "sourceId": "gd-sse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-registered"
-    },
-    {
-      "title": "裕富照明：IPO问询中（拟北交所）",
-      "url": "https://www.bse.cn/audit/project_news_select.html#874736@P02",
-      "excerpt": "注册地：广东省深圳市｜保荐：招商证券股份有限公司｜代码：874736｜状态：IPO问询中｜更新：2026-10-22",
-      "publishedAt": "2026-10-22",
       "source": "北交所IPO审核动态",
       "sourceId": "gd-bse-audit",
       "region": "gd",
@@ -44,23 +32,12 @@
       "ipoStage": "stage-reviewing"
     },
     {
-      "title": "微容科技：IPO问询中（拟创业板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004348",
-      "excerpt": "注册地：广东｜保荐：华泰联合｜受理：2026-04-28｜状态：已问询｜更新：2026-10-22",
-      "publishedAt": "2026-10-22",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "珠海越亚半导体：注册申请材料已受理（拟创业板）",
-      "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj44516907",
-      "excerpt": "注册地：广东｜保荐：中信证券股份有限公司｜状态：已收到注册申请材料｜更新：2026-10-22",
-      "publishedAt": "2026-10-22",
-      "source": "深交所IPO审核动态",
-      "sourceId": "gd-szse-audit",
+      "title": "保伦股份：IPO提交注册（拟主板）",
+      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2189@4",
+      "excerpt": "注册地：广东广州市｜保荐：广发证券股份有限公司｜受理：2026-05-13｜状态：IPO提交注册｜更新：2026-10-27｜行业：计算机、通信和其他电子设备制造业",
+      "publishedAt": "2026-10-27",
+      "source": "上交所IPO审核动态",
+      "sourceId": "gd-sse-audit",
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-registered"
