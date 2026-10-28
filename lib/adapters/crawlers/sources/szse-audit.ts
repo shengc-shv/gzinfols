@@ -225,21 +225,43 @@ export class SzseAuditCrawler extends BaseCrawler {
   override sourceIds = ["gd-szse-audit"];
 
   constructor() {
-    // retries 3→8（2026-10-28）：沙箱出口对 szse.cn 的 502 是「高频瞬时拒绝」而非持久故障，
-    // 实测同一分钟内 5 次 502 后第 6 次即 200。3 次重试命中率过低 → 整源静默为空。
-    super({ name: "深交所IPO审核动态", timeout: 20000, retries: 8 });
+    // retries 8→3（2026-10-28 用户拍板）：改用「**少次数 + 长等待**」策略。
+    // 沙箱出口对 szse.cn 的 502 是网关层高频瞬时拒绝（0.02s 即回），密集重试只是
+    // 在同一个故障窗口里反复试探，命中率并不会线性提升，反而把整源耗时拉到 7~8 分钟。
+    // 改为每个协议 4 次尝试 + 指数拉长间隔（见 SZSE_BACKOFF_MS），总耗时约 2 分钟，
+    // 且每次尝试都落在不同的时间窗，更容易躲过瞬时封禁；仍失败则由东财兜底保底。
+    super({ name: "深交所IPO审核动态", timeout: 20000, retries: 3 });
+  }
+
+  /**
+   * 深交所专用退避（毫秒），按 attempt 索引（第 1 次重试起）。
+   *
+   * 2026-10-28 用户要求「每次失败的等待时间可以长一点」：基础基类 `_backoff` 是
+   * `attempt² × 1000ms`（2s/5s/10s），对网关级瞬时拒绝偏密。这里放慢到 5s/15s/30s
+   * （叠加 0~2s 抖动，避免多源并发时同步撞点）。
+   * 总等待 = 5+15+30 ≈ 50s/协议 × 2 协议 ≈ 100s，加 8 次请求本身 < 2 分钟。
+   */
+  private async szseBackoff(attempt: number): Promise<void> {
+    const table = [5000, 15000, 30000];
+    const base = table[Math.min(attempt - 1, table.length - 1)];
+    const jitter = Math.random() * 2000;
+    console.warn(`[${this.name}] 退避 ${Math.round((base + jitter) / 1000)}s 后重试`);
+    await new Promise((r) => setTimeout(r, base + jitter));
   }
 
   /**
    * 单页抓取（GET + JSON；protected 便于测试 mock）。
    *
    * ⚠️ 协议顺序（2026-10-28 修正）：**先 HTTPS，失败再 HTTP**（SZSE_BASES）。
-   *   沙箱出口 HTTP 恒 502、HTTPS 偶通；HTTPS 优先可省掉 9 次必败请求。
+   *   沙箱出口 HTTP 恒 502、HTTPS 偶通；HTTPS 优先可省掉一轮必败请求。
    *   两个协议各自重试 `retries + 1` 次，任一协议成功即返回，全失败才抛错。
    *
    * ⚠️ 空 body 视为失败（2026-10-28）：HTTPS 偶发返回 **HTTP 200 但 body 为空**
    *   （网关截断），旧逻辑 `resp.ok` 直接 return → parse 出 0 条 → 静默丢数且不触发兜底。
    *   这里把空白 body 归入可重试错误，耗尽重试后才抛错，确保能进东财兜底分支。
+   *
+   * ⚠️ 退避策略（2026-10-28）：用本类的 `szseBackoff`（5s/15s/30s）替代基类默认的
+   *   `_backoff`（2s/5s/10s）—— 用户要求失败等待拉长，见该方法注释。
    */
   protected async fetchPage(pageIndex: number): Promise<string> {
     const params = new URLSearchParams({
@@ -270,7 +292,7 @@ export class SzseAuditCrawler extends BaseCrawler {
             console.warn(
               `[${this.name}] ${url} 返回 200 但 body 为空（${scheme} 尝试 ${attempt}/${perProtocol}），将重试`,
             );
-            if (attempt < perProtocol) await this._backoff(attempt);
+            if (attempt < perProtocol) await this.szseBackoff(attempt);
             continue;
           }
           const retriable = resp.status >= 500 || resp.status === 429 || resp.status === 403;
@@ -279,13 +301,13 @@ export class SzseAuditCrawler extends BaseCrawler {
               `${retriable ? "，将重试" : "，放弃该协议"}`,
           );
           if (!retriable) break; // 非瞬时错误 → 不再重试本协议，换下一个
-          if (attempt < perProtocol) await this._backoff(attempt);
+          if (attempt < perProtocol) await this.szseBackoff(attempt);
         } catch (err) {
           lastErr = err;
           console.warn(
             `[${this.name}] ${url} 抓取失败（${scheme} 尝试 ${attempt}/${perProtocol}）: ${(err as Error).message}`,
           );
-          if (attempt < perProtocol) await this._backoff(attempt);
+          if (attempt < perProtocol) await this.szseBackoff(attempt);
         }
       }
     }
