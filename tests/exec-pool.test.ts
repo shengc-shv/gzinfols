@@ -329,3 +329,91 @@ test("S6：空池 / 单条直接返回，顺序保持不变", () => {
   ];
   assert.deepEqual(prune(two).map((i) => i.url), ["g1", "a"], "不同主题时原顺序不变");
 });
+
+/* ------------------------------------------------------------------ *
+ * 2026-10-29 sc：必读必须"页面看得到" + 国家政策不得被分数门槛埋掉
+ * ------------------------------------------------------------------ */
+
+test("排序优先级：正文条目 > 非正文；同组内国家政策 > 高分普通条", () => {
+  process.env.REPORT_TZ = "Asia/Shanghai";
+  const report: DailyReport = {
+    date: TODAY,
+    hero_line: "",
+    must_read: [],
+    insights: [],
+    sections: {
+      gz_local: [],
+      biz_insight: [],
+      policy_market: [
+        mkReportItem("t-policy", "8000亿新型政策性金融工具投放完成，基建有望加速跑", "新型政策性金融工具投放完成，基建投资有望加速。"),
+        mkReportItem("t-pbc", "央行发布三季度金融机构贷款投向统计报告", "信贷结构呈现积极变化，科技领域信贷表现亮眼。"),
+      ],
+      tech: [],
+      ipo: [],
+    },
+  } as DailyReport;
+  const arts = [
+    { url: "t-policy", publishedAt: `${TODAY}T09:00:00+08:00`, category: "finance" },
+    { url: "t-pbc", publishedAt: `${TODAY}T09:05:00+08:00`, category: "finance" },
+  ];
+  const hist: Record<string, ExecPoolHistoryEntry> = {
+    // 昨日、非本期正文、分还不低（加拿大央行 10-29 实测 66 分）
+    "y-ca": {
+      publishedAt: `${YEST}T20:00:00+08:00`,
+      category: "finance",
+      ai_relevant: true,
+      summary: "加拿大央行上调基准利率25个基点至2.5%",
+      title: "加拿大央行加息25基点至2.5%",
+      url: "y-ca",
+    },
+  };
+  const res = buildTwoDayExecPool({ history: hist, articles: arts, report, today: TODAY, now: new Date() });
+  const order = res.finance.map((i) => i.url);
+
+  const iPolicy = order.indexOf("t-policy");
+  const iPbc = order.indexOf("t-pbc");
+  const iCa = order.indexOf("y-ca");
+  assert.ok(iPolicy >= 0 && iPbc >= 0 && iCa >= 0, `三条都应在池内，实际 ${JSON.stringify(order)}`);
+
+  // ① 正文全部排在非正文前面（加拿大 66 分也不得越过 43 分的正文政策条）
+  assert.ok(iPolicy < iCa, "正文政策条应排在非正文的加拿大央行之前");
+  assert.ok(iPbc < iCa, "正文的央行报告应排在非正文之前");
+
+  // ② 正文组内：国家政策优先于更高分的普通正文条（央行报告 87 > 政策条 43）
+  assert.ok(iPolicy < iPbc, "国家政策条应排在更高分的普通正文条之前");
+  assert.equal(res.finance[0].url, "t-policy", "国家政策条应排池首");
+  assert.equal(res.finance[0].inBody, true);
+});
+
+/* ------------------------------------------------------------------ *
+ * 方案 C（2026-10-29 sc 授权）：同事件「数值口径不同」不得漏并
+ * ------------------------------------------------------------------ */
+
+test("S6 方案 C：同一事件的不同数值口径可合并（主体锚相同 + 标题 Dice ≥0.55）", () => {
+  const items = [
+    { title: "8000亿元新型政策性金融工具投放完成，资金到位节奏快于预期", summary: "投放完成。", url: "a" },
+    { title: "8000亿新型政策性金融工具投放完成，基建有望加速跑", summary: "投放完成。", url: "b" },
+  ];
+  const out = pruneHomogeneousTopics(items);
+  assert.equal(out.length, 1, "同题两条应合并（Dice 0.60 ≥ 0.55）");
+
+  const items2 = [
+    { title: "8000亿新型政策性金融工具投放完成，基建有望加速跑", summary: "投放完成。", url: "b" },
+    { title: "2026年8000亿元新型政策性金融工具完成投放", summary: "投放完成。", url: "c" },
+  ];
+  assert.equal(pruneHomogeneousTopics(items2).length, 1, "数值锚不一致也要合并（Dice 0.58）");
+});
+
+test("S6 方案 C 反向守护：只共享粗体锚、讲不同事的不得被并（数字锚是区分力）", () => {
+  const etf = [
+    { title: "18只主动ETF开售在即 有望为A股带来360亿元增量资金", summary: "新基金发行。", url: "x" },
+    { title: "最后10分钟进场！多只宽基ETF放量拉升近2000亿元入市", summary: "资金流入。", url: "y" },
+  ];
+  assert.equal(pruneHomogeneousTopics(etf).length, 2, "ETF 簇不该被并（Dice 0.15）");
+
+  const insurance = [
+    { title: "金融监管总局副局长丛林：保险业要精准对接重点领域和薄弱环节", summary: "监管表态。", url: "m" },
+    { title: "中国人寿总裁利明光：推动普惠保险由风险补偿向风险减量转型", summary: "机构表态。", url: "n" },
+  ];
+  assert.equal(pruneHomogeneousTopics(insurance).length, 2, "保险簇不该被并（Dice 0.04）");
+});

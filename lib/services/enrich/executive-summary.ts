@@ -103,6 +103,8 @@ export interface ExecSummaryInput {
     subcategory?: string;
     url?: string;
     when?: string;
+    /** 是否本期正文（见 exec-pool 的 ExecPoolItem.inBody）：喂 LLM 时正文优先占位。 */
+    inBody?: boolean;
   }>;
   /** 当日广州商机条目（title + 摘要 + 源链接） */
   gz: Array<{
@@ -111,6 +113,7 @@ export interface ExecSummaryInput {
     subcategory?: string;
     url?: string;
     when?: string;
+    inBody?: boolean;
   }>;
   /** 市场行情总览（AI 点评，可选） */
   marketOverview?: string;
@@ -343,12 +346,13 @@ export type ExecLlmRunner = (systemPrompt: string, userPrompt: string) => Promis
  * 也让限流（动态 Top-K）更安全。稳定排序：同分保持原顺序。
  */
 function topByRelevance<
-  T extends { title?: string; summary?: string; subcategory?: string; url?: string },
+  T extends { title?: string; summary?: string; subcategory?: string; url?: string; inBody?: boolean },
 >(items: T[], n: number): T[] {
   if (items.length <= n) return items;
   const order = items
     .map((it, i) => ({
       i,
+      body: it.inBody ? 1 : 0,
       score: scoreBranchRelevance({
         title: it.title ?? "",
         summary: it.summary,
@@ -356,7 +360,8 @@ function topByRelevance<
         url: it.url,
       }).score,
     }))
-    .sort((a, b) => b.score - a.score);
+    // 2026-10-29 sc：**正文优先**占位（必读必须是页面上看得到的条）→ 同批内再按分数。
+    .sort((a, b) => b.body - a.body || b.score - a.score);
   return order.slice(0, n).map((o) => items[o.i]);
 }
 

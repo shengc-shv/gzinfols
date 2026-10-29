@@ -205,6 +205,51 @@ const FOREIGN_REGIONAL_BANK_RE =
 //    这二者与「降为媒体级」是同一件事的三面，属预期结果。
 const TOP_ISSUER_RE =
   /央行|人民银行|国家金融监督管理总局|金融监管总局|金监总局|国务院|财政部|发改委|国资委|住建部|证监会|外汇局/;
+// 🔴 外国央行（2026-10-29 sc）：`TOP_ISSUER_RE` 的「央行」是**裸词、不分国别** ——
+//    「加拿大央行加息25基点」实测 **87 分 must_read，与中国央行同分**，池内并列第一，
+//    LLM 按分数挑必然选进必读（10-29 必读第 2 条）。
+//    sc 口径：**美联储 > 加拿大/日本这类国家央行**，且美联储已由 10-03 单独定为媒体级(0.42)。
+//    ⇒ 本表只压「非美联储的外国央行」到媒体档以下（0.35），**不动美联储**，
+//      排序自动变成 中国央行 87 > 美联储 66 > 加/日/韩 64。
+//    ⚠️ 必须带国别前缀：裸「央行」在中国语境是人民银行，⛔ 不可裸压。
+const FOREIGN_CB_RE =
+  /(?:加拿大|韩国|日本|英国|欧洲|欧盟|澳洲|澳大利亚|新西兰|印度|俄罗斯|巴西|土耳其|瑞士|瑞典|挪威|墨西哥|印尼|泰国|越南|新加坡|马来西亚|沙特|南非)央行|英格兰银行|日本银行|欧洲中央银行/;
+/** 外国央行可行动性上限：他国利率动作不构成广州分行可执行动作（但仍是市场信号）。 */
+const FOREIGN_CB_ACTION_CAP = 0.5;
+
+// ---------------------------------------------------------------------------
+// 国家级政策动作（P1 补词，2026-10-29 sc 授权）
+// ---------------------------------------------------------------------------
+// 背景：10-29 实测「8000亿新型政策性金融工具」「消费品以旧换新」都是 **21 分 drop**，
+//   业务线为空（词表一条都不命中）→ 连 exec 候选池都进不去（当日截断线 61 分）。
+//   sc 口径：这类是"国家一级商机政策"，red line 允许，必须能被用上。
+//
+// 🔴 守卫（sc 同轮要求「不要把一些小银行的类似信息抓进来」）：
+//   政策词**必须与发文主体一同出现**才算数 —— 否则「XX商场以旧换新活动启动」
+//   「某农商行中期分红方案」这类地方/单家机构稿会白捡 22.5 分。
+//   实测 8 期真实数据：加守卫后命中 6 条，全部是目标条目，零小银行误配。
+//
+// ⚠️ 分两类（2026-10-29 实测）：
+//    ① **特异词**无需守卫 —— 「政策性金融工具」不会在任何地方小活动稿里出现，
+//       且真实标题常不写发文主体（实测「8000亿新型政策性金融工具投放完成，基建有望加速跑」
+//       全文无「商务部/央行」字样，加守卫会把目标条自己拦掉）。
+//    ② **宽泛词必须守卫** —— 「以旧换新」地方商场促销稿满地都是。
+// ⚠️ 「中期分红」**刻意不收**：8 期样本全在 10 月，银行分红季（3-4 月 / 8-9 月）
+//   无样本 → 无法证明不误配。等分红季前用真实数据验过再加（sc 2026-10-29）。
+const NATIONAL_POLICY_STRICT_RE = /政策性金融工具|特别国债|两重两新/;
+const NATIONAL_POLICY_GUARDED_RE = /以旧换新/;
+/** 发文主体守卫：宽泛政策词须与国家级/省市级发文主体同现。 */
+const POLICY_ISSUER_GUARD_RE =
+  /国务院|国常会|商务部|发改委|国家发展改革委|财政部|人民银行|央行|金融监管总局|金监总局|证监会|住建部|工业和信息化部|工信部|省级|省政府|市政府/;
+
+/**
+ * 是否「国家级政策动作」文本。
+ * 供 exec 池排序用：兜底保证这类条目不会被分数门槛挤出 LLM 视野。
+ */
+export function isNationalPolicyText(text: string): boolean {
+  if (NATIONAL_POLICY_STRICT_RE.test(text)) return true;
+  return NATIONAL_POLICY_GUARDED_RE.test(text) && POLICY_ISSUER_GUARD_RE.test(text);
+}
 // 🔴 2026-10-19 修正（sc：「市局这个要生效」）。
 //    旧式 `/省(政府|委|厅|金融监管局)|市(政府|委)/` 要求「省」字**紧跟**「厅」，
 //    而真实发文方是「广东省工业和信息化厅」「广州市商务局」——中间隔着机构名，**一律匹配不到**，
@@ -215,10 +260,17 @@ const HIGH_ISSUER_RE =
 const ORG_ISSUER_RE = /协会|总行|银行业/;
 
 function issuerScore(text: string): number {
-  if (TOP_ISSUER_RE.test(text)) return 0.95;
-  if (HIGH_ISSUER_RE.test(text)) return 0.8;
-  if (ORG_ISSUER_RE.test(text)) return 0.6;
-  return 0;
+  const base = TOP_ISSUER_RE.test(text)
+    ? 0.95
+    : HIGH_ISSUER_RE.test(text)
+      ? 0.8
+      : ORG_ISSUER_RE.test(text)
+        ? 0.6
+        : 0;
+  // 外国央行（非美联储）：**不作为「发文方」计权威** —— 它不是中国监管发文方，
+  // 权威度只由转述媒体决定（`sourceScore` 的媒体档 0.42），与中国央行 0.95 拉开差距。
+  if (FOREIGN_CB_RE.test(text)) return 0;
+  return base;
 }
 
 /** 源 id → 权威度（媒体只是转述，权威度低于发文方） */
@@ -393,6 +445,12 @@ export function scoreBranchRelevance(
   const matched = BUSINESS_LINES.filter((r) => r.kws.some((kw) => lineMatchText.includes(kw)))
     .map((r) => ({ line: r.line, weight: r.weight }))
     .sort((a, b) => b.weight - a.weight);
+  // P1（2026-10-29 sc）：国家级政策动作 → 记入「政策信号」线（0.5）。
+  // 词表无法表达「须与发文主体同现」的守卫，故放在这里判（见 NATIONAL_POLICY_RE 注释）。
+  if (isNationalPolicyText(lineMatchText) && !matched.some((m) => m.line === "政策信号")) {
+    matched.push({ line: "政策信号", weight: 0.5 });
+    matched.sort((a, b) => b.weight - a.weight);
+  }
   const lineW = matched[0]?.weight ?? 0;
   const businessLines = matched.slice(0, 3).map((m) => m.line);
   if (matched.length) signals.push(`业务线[${businessLines.join("/")}] 权重${lineW}`);
@@ -406,8 +464,12 @@ export function scoreBranchRelevance(
   // 可行动性（国家核心监管「发文/出政策」本身即强行动信号；讲话/数据不构成）
   const baseAct = actionabilityScore(text);
   const issuerTop = issuerScore(text) >= 0.95;
-  const actW =
+  const rawAct =
     issuerTop && baseAct.type === "policy_action" ? Math.max(baseAct.score, 0.8) : baseAct.score;
+  // 外国央行（非美联储）：他国利率动作只是市场信号，不构成分行可执行动作 → 封顶 0.5
+  const foreignCb = FOREIGN_CB_RE.test(text);
+  const actW = foreignCb ? Math.min(rawAct, FOREIGN_CB_ACTION_CAP) : rawAct;
+  if (foreignCb) signals.push("外国央行(非美联储) → 权威压至媒体档以下、可行动封顶 0.5");
   if (baseAct.type === "policy_action") signals.push("政策/新规动作 +0.9");
   else if (baseAct.type === "risk_action") signals.push("风险/违规动作 +0.85");
   else if (baseAct.type === "data_context") signals.push("数据解读(非动作) +0.4");

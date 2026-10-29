@@ -333,3 +333,70 @@ test("回归保护：港澳类仍按跨境线强词计（sc 2026-10-03 口径不
   const fed = scoreBranchRelevance({ title: "美联储官员集体警示通胀依旧过高", category: "finance" });
   assert.equal(fed.businessLines[0], "跨境", "国际宏观仍走跨境线（未降级）");
 });
+
+/* ------------------------------------------------------------------ *
+ * P0 / P1（2026-10-29 sc 授权）
+ * ------------------------------------------------------------------ */
+
+test("P0：外国央行（非美联储）压到媒体档以下，不得与中国央行同分", () => {
+  // 实测背景：改动前「加拿大央行加息25基点」= 87 分 must_read，与「中国人民银行加息」
+  // 完全同分，10-29 池内并列第 1 → LLM 必然选进必读。
+  const ca = scoreBranchRelevance({
+    title: "加拿大央行加息25基点至2.5%",
+    summary: "加拿大央行上调基准利率25个基点至2.5%",
+  });
+  const cn = scoreBranchRelevance({
+    title: "中国人民银行加息25基点",
+    summary: "中国人民银行上调基准利率25个基点",
+  });
+  assert.ok(ca.score < cn.score - 15, `加拿大央行必须明显低于中国央行（${ca.score} vs ${cn.score}）`);
+  assert.notEqual(ca.tier, "must_read", `外国央行不得进必读档，实际 ${ca.tier}/${ca.score}`);
+  assert.ok(ca.authority <= 0.42, `外国央行不作为发文方 → 权威只能是媒体档，实际 ${ca.authority}`);
+  assert.ok(ca.actionability <= 0.5, `可行动性应封顶 0.5，实际 ${ca.actionability}`);
+
+  const kr = scoreBranchRelevance({
+    title: "韩央行警告AI投入放缓或减出口千亿",
+    summary: "韩国央行警告：美巨头放缓AI投入，韩芯片出口或减千亿美元",
+  });
+  assert.ok(kr.authority <= 0.42, `韩国央行同样受压制，实际 ${kr.authority}`);
+});
+
+test("P0 反向守护：美联储维持媒体级、中国央行仍 0.95（sc 2026-10-03 口径不动）", () => {
+  const fed = scoreBranchRelevance({ title: "美联储宣布维持利率不变" });
+  assert.equal(fed.authority, 0.42, "美联储仍是媒体档（10-03 口径）");
+  // sc 2026-10-29：美联储影响大于加拿大/日本这类国家央行 → 排序上必须更高
+  const ca = scoreBranchRelevance({ title: "加拿大央行加息25基点至2.5%" });
+  assert.ok(fed.score >= ca.score, `美联储(${fed.score}) 不得低于加拿大央行(${ca.score})`);
+  assert.ok(fed.tier !== "drop" && ca.tier !== "must_read", "两者都不得落到 drop / 不得进必读档");
+
+  const pbc = scoreBranchRelevance({ title: "央行发布三季度金融机构贷款投向统计报告" });
+  assert.equal(pbc.authority, 0.95, "中国央行权威档不得被外国央行规则带动");
+  assert.equal(pbc.tier, "must_read");
+});
+
+test("P1：国家级政策词（特异词免守卫）脱离 drop", () => {
+  const tool = scoreBranchRelevance({
+    title: "8000亿新型政策性金融工具投放完成，基建有望加速跑",
+  });
+  assert.ok(tool.businessLines.includes("政策信号"), "应命中政策信号线");
+  assert.ok(tool.score >= 40, `应脱离 21 分 drop 档，实际 ${tool.score}`);
+
+  const vouchers = scoreBranchRelevance({
+    title: "商务部：消费品以旧换新带动销售额超2万亿元",
+  });
+  assert.ok(vouchers.businessLines.includes("政策信号"));
+  assert.ok(vouchers.score >= 40, `实际 ${vouchers.score}`);
+});
+
+test("P1 守卫：地方促销稿的「以旧换新」不得沾国家级政策的光", () => {
+  const local = scoreBranchRelevance({ title: "某商场以旧换新活动正式启动" });
+  assert.ok(!local.businessLines.includes("政策信号"), "无发文主体 → 不算国家级政策");
+  assert.ok(local.score < 25, `应留在 drop 档，实际 ${local.score}`);
+});
+
+test("P1 刻意不收「中期分红」：分红季样本缺失，先不加（sc 2026-10-29）", () => {
+  const div = scoreBranchRelevance({ title: "中期分红陆续兑现 银行股红利属性持续强化" });
+  assert.ok(!div.businessLines.includes("政策信号"), "本版不收该词");
+  const smallBank = scoreBranchRelevance({ title: "某农商行公布中期分红方案" });
+  assert.ok(!smallBank.businessLines.includes("政策信号"), "单家小银行分红不得蹭政策线");
+});

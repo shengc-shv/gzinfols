@@ -16,12 +16,13 @@
  */
 import { getReportTz, recentMmddSet, spokenRelativeDay, todayKey } from "../../utils/time";
 import type { DailyReport, ReportSectionKey } from "../../contracts/report";
-import { scoreBranchRelevance } from "../select/filters/relevance-score";
+import { scoreBranchRelevance, isNationalPolicyText } from "../select/filters/relevance-score";
 // S6 同主题终选：事件指纹 / 主体锚 / 集合相似度（与判重层同一套词表，不另起炉灶）
 import {
   eventFingerprint,
   jaccard,
   sharedSubjectAnchors,
+  titleSimilarityDice,
 } from "../select/filters/dedup-similar";
 // 广东 IPO 内容判定（与渲染/side-output 同一口径，避免三处判定漂移）
 import { isGdIpoCandidate } from "./heuristics";
@@ -81,6 +82,14 @@ export interface ExecPoolItem {
    * 绝不编造「上午/下午」（见 `utils/time.ts#spokenRelativeDay`）。
    */
   when?: string;
+  /**
+   * 是否**本期正文**（= 页面底部资讯卡，来自 `report.sections`）。
+   *
+   * 2026-10-29 sc 口径：「连正文都进不去，凭什么上必读」→ 池排序把正文条目前置，
+   * 必读候选（喂给 LLM 的前 12 条）自然优先落在这批里；正文不足时才由非正文补位。
+   * ⚠️ 只是**排序优先级**，不做硬过滤 —— 硬过滤会在正文偏少的日子把必读搞空。
+   */
+  inBody?: boolean;
 }
 
 /** 给池条目补上 `when`（无法换算 / 报告日缺省则不加该字段，调用方与 LLM 按「未标明」处理）。 */
@@ -151,6 +160,13 @@ const MIN_STRICT_ITEMS = 3;
  */
 const TOPIC_MERGE_JACCARD = 0.8;
 
+/**
+ * 同主题「措辞差异兜底」阈值（2026-10-29 sc 授权，方案 C）。
+ * 共享 ≥1 主体锚后，标题 Dice ≥ 此值即视为同一事件（弥补数字锚不一致导致的漏并）。
+ * 0.55 由 8 期 1145 条实测标定：多合并 1 对、零误并（见 `isSameTopic` 注释）。
+ */
+const TOPIC_MERGE_DICE = 0.55;
+
 /** 宽松兜底池上限，控制 LLM 提示词体积（实测两天窗口内约 132 条候选）。 */
 const MAX_RELAXED_ITEMS = 24;
 
@@ -220,6 +236,8 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
       cat: "finance" | "gz";
       subcategory?: string;
       excerpt?: string;
+      /** 是否**本期正文**（report.sections = 页面底部资讯卡）。见 ExecPoolItem.inBody。 */
+      inBody?: boolean;
     }
   >();
 
@@ -233,6 +251,7 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
         title: it.title_cn || it.title_orig || "",
         summary: it.summary,
         cat,
+        inBody: true,
         // S5：今日这一路的 summary 是 AI 摘要，另存源站原文供评分使用。
         ...(excerptByUrl.get(it.url) ? { excerpt: excerptByUrl.get(it.url) } : {}),
       });
@@ -304,6 +323,7 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     if (!p || !inWindow(p)) continue;
     const base: ExecPoolItem = { title: info.title, summary: info.summary, url };
     if (info.subcategory) base.subcategory = info.subcategory;
+    if (info.inBody) base.inBody = true;
     // S5：把源站原文带进池条目，供评分使用（不进 LLM —— enc() 是字段白名单）
     if (info.excerpt) base.excerpt = info.excerpt;
     const entry = withWhen(base, p, tk);
@@ -336,9 +356,19 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     }
     return v;
   };
-  const byScoreDesc = (a: ExecPoolItem, b: ExecPoolItem): number => scoreOf(b) - scoreOf(a);
-  finance.sort(byScoreDesc);
-  gz.sort(byScoreDesc);
+  //
+  // 2026-10-29 sc 口径追加两条排序优先级（**只影响排序，不删条**）：
+  //  ① **正文优先**：必读必须是"页面底部看得到"的条 —— 10-29 实测必读 5 条里 4 条
+  //     正文无对应卡（加拿大央行/韩央行/博通/央行信贷投向），行长听完在页面上找不到下文。
+  //  ② **国家政策优先**：政策稿分数天然低（业务线词表认不出"政策性金融工具"）
+  //     → 实测 8000 亿只有 43 分，排在 100 名开外，被 40 条截断挡在 LLM 视野外。
+  const bodyRank = (it: ExecPoolItem): number => (it.inBody ? 1 : 0);
+  const policyRank = (it: ExecPoolItem): number =>
+    isNationalPolicyText(`${it.title} ${it.excerpt ?? it.summary ?? ""}`) ? 1 : 0;
+  const byRank = (a: ExecPoolItem, b: ExecPoolItem): number =>
+    bodyRank(b) - bodyRank(a) || policyRank(b) - policyRank(a) || scoreOf(b) - scoreOf(a);
+  finance.sort(byRank);
+  gz.sort(byRank);
   if (finance.length > MAX_STRICT_ITEMS) finance.length = MAX_STRICT_ITEMS;
   if (gz.length > MAX_STRICT_ITEMS) gz.length = MAX_STRICT_ITEMS;
 
@@ -350,6 +380,9 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
     for (const r of buildRelaxedTwoDayPool(opts, tz, tk, yk, used)) {
       (r.cat === "finance" ? finance : gz).push(r.item);
     }
+    // 兜底追加会打乱上面的排序（正文优先 / 政策优先），重排一次保持一致。
+    finance.sort(byRank);
+    gz.sort(byRank);
   }
 
   // S6（2026-10-06 sc 授权）：池定稿前做一次**同主题终选** —— 每簇只留信息量最大者。
@@ -384,6 +417,7 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
 export function pruneHomogeneousTopics(items: ExecPoolItem[]): ExecPoolItem[] {
   if (items.length < 2) return items;
   const info = items.map((it) => ({
+    title: it.title,
     fp: eventFingerprint(it.title),
     score: scoreBranchRelevance({
       title: it.title,
@@ -400,7 +434,7 @@ export function pruneHomogeneousTopics(items: ExecPoolItem[]): ExecPoolItem[] {
     if (drop.has(i)) continue;
     for (let j = i + 1; j < info.length; j++) {
       if (drop.has(j)) continue;
-      if (!isSameTopic(info[i].fp, info[j].fp)) continue;
+      if (!isSameTopic(info[i].fp, info[j].fp, info[i].title, info[j].title)) continue;
       // 同主题 → 砍掉分值低的那条；同分时砍**后面**那条（保持确定性 + 靠前者优先）
       drop.add(info[i].score >= info[j].score ? j : i);
       if (drop.has(i)) break;
@@ -410,10 +444,26 @@ export function pruneHomogeneousTopics(items: ExecPoolItem[]): ExecPoolItem[] {
 }
 
 /** 同主题判定：共享 ≥1 个主体锚 + 锚集合 Jaccard ≥ 0.8（见 `pruneHomogeneousTopics` 注释）。 */
-function isSameTopic(a: Set<string>, b: Set<string>): boolean {
+function isSameTopic(a: Set<string>, b: Set<string>, ta?: string, tb?: string): boolean {
   if (a.size === 0 || b.size === 0) return false;
   if (sharedSubjectAnchors([...a], [...b]) < 1) return false;
-  return jaccard(a, b) >= TOPIC_MERGE_JACCARD;
+  if (jaccard(a, b) >= TOPIC_MERGE_JACCARD) return true;
+  // 2026-10-29 sc 授权（方案 C）：**措辞差异兜底**。
+  //
+  // 为什么需要：同一事件的不同信源常常「实体锚一致、数字锚不一致」，Jaccard 被判到 0.5 以下
+  // 而合不上。实测 10-29 三条同题稿：
+  //   「8000亿元新型政策性金融工具投放完成，资金到位节奏快于预期」= {政策性金融工具, #8000亿元}
+  //   「8000亿新型政策性金融工具投放完成，基建有望加速跑」        = {政策性金融工具}（无数字锚）
+  //   「2026年8000亿元新型政策性金融工具完成投放」               = {政策性金融工具, #2026年, #8000亿元}
+  //   → 两两 Jaccard 0.33~0.67，全部漏并，在 exec 池里连占 3 个候选位。
+  //
+  // 判据：**已共享 ≥1 个主体锚**（同一主体在谈同一主题）∧ 标题 Dice ≥ 0.55。
+  // ⚠️ 阈值 0.55 是 8 期 1145 条实测标定：多合并 1 对、**零误并**。
+  // ⛔ **不可改成「只算主体锚的 Jaccard」**（试过）：实测多合并 38 条且全是误并
+  //    —— 「主动ETF发行火速定档」⇋「多只宽基ETF放量拉升」⇋「AI软件爆发涨停」会被并成一簇，
+  //    「保险业要精准对接」⇋「中国人寿」⇋「北京市副市长」同理。数字锚是唯一区分力，不能剔。
+  if (ta && tb && titleSimilarityDice(ta, tb) >= TOPIC_MERGE_DICE) return true;
+  return false;
 }
 
 /**
