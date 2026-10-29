@@ -1,0 +1,889 @@
+{
+  "date": "2026-10-30",
+  "updatedAt": "2026-10-29T23:11:07.208Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：十五五政策定调，发布会解读；信贷结构转向，科技绿色领跑；广州产业集聚区，35个园区落地；外资行揽存与财富竞争，高端客群分流。",
+    "spoken_hero": "今天主要看四个方面：十五五政策定调，发布会解读；信贷结构转向，科技绿色领跑；广州35个产业集聚区落地；外资行揽存与财富竞争，高端客群在分流。",
+    "must_read": [
+      {
+        "title": "央行发布三季度金融机构贷款投向统计报告 信贷结构呈现积极变化 科技领域信贷表现亮眼",
+        "why": "国家核心监管新政（信贷）：建议分行评估对客与产品影响",
+        "url": "https://finance.sina.com.cn/roll/2026-10-29/doc-iniwvftk6393304.shtml"
+      },
+      {
+        "title": "四大行总市值首破10万亿",
+        "why": "银行板块情绪回暖，高股息资产受追捧，财富客户对权益与分红类产品的关注度同步抬升。",
+        "url": "https://m.21jingji.com/article/20261029/herald/aa2e2ccba1bb15f0fc286712afc16ca3.html"
+      },
+      {
+        "title": "央行上海专班92项任务",
+        "why": "科技、绿色、普惠考核趋细，各地五篇大文章的工作要求正从方向转向可量化任务。",
+        "url": "https://finance.sina.com.cn/jryx/bank/2026-10-29/doc-iniwwyas2807797.shtml"
+      },
+      {
+        "title": "三季度贷款增速4.8%",
+        "why": "增量靠对公、科技与绿色领跑，零售条线所处的信贷结构位置与对公联动空间由此可判。",
+        "url": "https://m.21jingji.com/article/20261029/herald/7ade9944807a48c54343ae8052b2293a.html"
+      },
+      {
+        "title": "前9月工业利润增15.5%",
+        "why": "电子行业贡献显著，产业链企业盈利改善，其员工收入与消费信贷承载力相应增强。",
+        "url": "https://finance.eastmoney.com/a/202610303915142188.html"
+      }
+    ],
+    "spoken_must_read": "央行发布三季度金融机构贷款投向统计报告 信贷结构呈现积极变化 科技领域信贷表现亮眼。国家核心监管新政（信贷）：建议分行评估对客与产品影响。其次，四大行总市值首破10万亿。银行板块情绪回暖，高股息资产受追捧，财富客户对权益与分红类产品的关注度同步抬升。此外，央行上海专班92项任务。科技、绿色、普惠考核趋细，各地五篇大文章的工作要求正从方向转向可量化任务。还有，三季度贷款增速4.8%。增量靠对公、科技与绿色领跑，零售条线所处的信贷结构位置与对公联动空间由此可判。另外，前9月工业利润增15.5%。电子行业贡献显著，产业链企业盈利改善，其员工收入与消费信贷承载力相应增强。",
+    "insights": [
+      {
+        "topic": "银行股大涨带动高股息配置",
+        "impact": "财富客户对分红与权益类产品的关注度上升，产品货架上的稳健高息品种面临重新排序。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "银行股大涨，四大行总市值首破10万亿元",
+            "url": "https://m.21jingji.com/article/20261029/herald/aa2e2ccba1bb15f0fc286712afc16ca3.html"
+          }
+        ]
+      },
+      {
+        "topic": "外资行转向高端财富",
+        "impact": "33家外资行分支机构退出但财富管理成新重心，高端客群的产品与投顾供给端竞争加剧。",
+        "tag": [
+          "私行",
+          "竞对动态"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "年内33家外资银行分支机构退出市场，财富管理成布局新重心",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_10_29_906227.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "中行联合博时启财富节",
+        "impact": "大行以活动形式抢占财富客户注意力，其产品组合与客群分层打法构成高端客户经营的直接参照。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "中国银行×博时基金｜2026中银财富节正式启幕",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_10_29_906298.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "政府性融资担保降费",
+        "impact": "上海担保新增超1332亿、费率降至1%以下，小微客群的增信成本下行，本地同类合作空间被打开。",
+        "tag": [
+          "信贷",
+          "政银合作"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "上海1-9月新增政府性融资担保1332亿元，平均担保费率降至1%以下",
+            "url": "https://www.cnfin.com/qy-lb/detail/20261029/4488153_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "电子产业链盈利改善",
+        "impact": "电子行业利润贡献显著，产业链企业员工收入预期改善，代发与消费信贷的客群质量随之抬升。",
+        "tag": [
+          "代发",
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "前9个月工业企业利润同比增长15.5% 电子行业贡献显著",
+            "url": "https://finance.eastmoney.com/a/202610303915142188.html"
+          }
+        ]
+      },
+      {
+        "topic": "数字人民币代发升温",
+        "impact": "数币发工资应用扩散，代发企业与个人钱包场景的对接需求上升，对公代发客户的方案选择出现分化。",
+        "tag": [
+          "代发",
+          "科技金融"
+        ],
+        "group": "代发与数币",
+        "sources": [
+          {
+            "title": "数字人民币发工资火了，都有哪些功能和应用？",
+            "url": "https://m.21jingji.com/article/20261029/herald/8195a3c8c92769235e821525dcb94d4a.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，银行股大涨带动高股息配置，财富客户对分红与权益类产品的关注度上升。第二，高端客户方面，外资行转向高端财富、中行联合博时启财富节，33家外资行分支机构退出但财富管理成新重心。第三，普惠小微方面，政府性融资担保降费、电子产业链盈利改善，上海担保新增超1332亿、费率降至1%以下。第四，代发与数币方面，数字人民币代发升温，数币发工资应用扩散。",
+    "risk": {
+      "topic": "撸贷黑产伪造流水骗贷",
+      "evidence": "起底撸贷黑产骗局：包装公司伪造一年流水，借款人背负百万债务，消费贷与信用卡欺诈风险上升。",
+      "impact": "个贷与信用卡面临贷前流水失真风险，风控需强化中介渠道排查；财富与私行端客户信息保护压力同步上升。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "起底“撸贷”黑产骗局：包装公司伪造一年流水，借款人背负百万债务",
+          "url": "https://finance.sina.com.cn/jjxw/2026-10-29/doc-iniwwifc5345605.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：撸贷黑产伪造流水骗贷，个贷与信用卡面临贷前流水失真风险，风控需强化中介渠道排查；财富与私行端客户信息保护压力同步上升。",
+    "guangdong_ipo": {
+      "spoken": "广东企业微容科技IPO过会，拟登陆创业板，保荐机构为华泰联合，注册地广东，昨天上市委会议通过，是本地电子产业链上的一家在审企业。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌1.38%，AI交易现裂痕，加密股财报分化。",
+      "sectors": [
+        "纳指跌1.38%领跌，AI交易现裂痕，AMD成少数亮点。",
+        "Coinbase三季度净利大增66%，加密投资回暖抵消交易疲弱。",
+        "Robinhood股价下挫，加密低迷拖累利润，新业务增长被抵消。",
+        "Anthropic已向SEC递交S-1，预测市场押注年内IPO近乎确定。",
+        "甲骨文等云巨头财报前，AI债务担忧有所缓解，信贷市场紧盯。"
+      ],
+      "spoken": "美股今日收跌，道指跌0.25%，纳指跌1.38%，标普500跌0.30%。AI交易出现裂痕，AMD成少数亮点。加密板块财报分化，Coinbase三季度净利大增66%，Robinhood则因加密低迷股价下挫。Anthropic已递交上市申请，市场押注年内IPO。云巨头财报前，AI债务担忧有所缓解。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-30"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52342.56",
+          "changePct": "-0.25%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "26184.72",
+          "changePct": "-1.38%"
+        },
+        {
+          "name": "标普500",
+          "value": "7720.39",
+          "changePct": "-0.30%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "沪指跌0.82%，双创重挫逾4%，银行逆市护盘。",
+      "sectors": [
+        "银行逆市走强，四大行总市值突破10万亿，工建农中齐创新高。",
+        "双创指数重挫逾4%，宽基ETF尾盘集体放量，三只沪深300ETF显著放量。",
+        "工业母机订单排到明年，景气度攀升，多只个股获资金关注。",
+        "中际旭创Q3净利同比增173%，光模块景气延续，融资客逆势加仓。",
+        "前9个月工业企业利润同比增15.5%，电子行业贡献显著。"
+      ],
+      "spoken": "A股今日三大指数集体收跌，沪指跌0.82%，深成指跌2.92%，创业板指重挫4.45%。盘面上银行板块逆市走强，四大行总市值突破10万亿，工建农中齐创新高。双创方向明显承压，宽基ETF尾盘集体放量。工业母机订单饱满，光模块龙头中际旭创三季度净利同比增173%。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-30"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3651.43",
+          "changePct": "-0.82%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11138.20",
+          "changePct": "-2.92%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2517.59",
+          "changePct": "-4.45%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报22958.65点（-0.59%）；恒生科技收报3744.14点（-2.84%）。",
+      "sectors": [
+        "恒生指数跌0.59%失守23000点",
+        "科网股低迷",
+        "光通信板块下挫"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-30"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.59%失守23000点 科指跌2.84% 科网股低迷 光通信板块下挫",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-29/doc-iniwwpnu6102336.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22958.65",
+          "changePct": "-0.59%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3744.14",
+          "changePct": "-2.84%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-29",
+    "marketStatus": {
+      "reportDate": "2026-10-30",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-10-29"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-29"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-29"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 10月29日 周四 收盘；港股为 10月29日 周四 收盘；美股为 10月29日 周四 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610293913527497.html",
+      "title_cn": "历史时刻！A股市值“一哥”“二哥”再创新高四大行总市值突破10万亿",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "A股市值排名前两位的公司股价再创新高，四大国有银行总市值合计突破10万亿元。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "银行",
+        "A股",
+        "市值"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610293913948829.html",
+      "title_cn": "A股三大指数集体收跌银行板块逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "A股三大指数集体收跌，银行板块逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "银行",
+        "大盘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610293913476340.html",
+      "title_cn": "订单排到明年！工业母机行业景气度攀升多只潜力股获资金关注(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "工业母机行业景气度攀升，部分企业订单已排至明年，多只相关个股获资金关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "工业母机",
+        "制造业",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610293914638663.html",
+      "title_cn": "10月29日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "汇总10月29日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610293913921266.html",
+      "title_cn": "三只沪深300ETF显著放量成交",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "三只沪深300ETF当日成交显著放量。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "ETF",
+        "A股",
+        "资金"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610293914036173.html",
+      "title_cn": "双创指数重挫逾4%宽基ETF尾盘再度集体放量",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "双创指数当日重挫逾4%，宽基ETF尾盘再度集体放量。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "ETF",
+        "大盘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610293914537581.html",
+      "title_cn": "突然暴跌！巴菲特“踩雷”！发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "报道称巴菲特相关持仓出现暴跌，具体标的与原因未在标题中说明。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "巴菲特"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610293913817387.html",
+      "title_cn": "三星财报“冷风”吹不到光模块？券商拆解：存储与光通信是两码事“易中天”超跌修复窗口渐近",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "券商分析认为三星财报疲软不直接影响光模块，存储与光通信属不同领域，并提及光通信板块超跌修复窗口。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "光模块",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610293914483756.html",
+      "title_cn": "中际旭创：Q3净利润同比增长173%环比增长8%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "中际旭创第三季度净利润同比增长173%，环比增长8%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "光模块",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610293912813383.html",
+      "title_cn": "光互联并购升温迈威尔科技洽购Lumentum！光模块景气延续融资客逆势加仓多股(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "迈威尔科技洽购Lumentum，光互联并购升温，光模块景气延续，融资客逆势加仓多只相关个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "光模块",
+        "并购",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303915142188.html",
+      "title_cn": "前9个月工业企业利润同比增长15.5%电子行业贡献显著",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "前9个月全国工业企业利润同比增长15.5%，电子行业贡献显著。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "工业企业利润",
+        "电子"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303915139836.html",
+      "title_cn": "A股10月99家公司披露回购增持计划券商首席详解产业资本“真金白银”阻断“负反馈”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "10月共有99家A股公司披露回购或增持计划，券商首席解读产业资本以真金白银阻断负反馈。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "回购增持",
+        "产业资本"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-29/doc-iniwwpnu6102336.shtml",
+      "title_cn": "港股收评：恒指跌0.59%失守23000点 科指跌2.84% 科网股低迷 光通信板块下挫",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "港股恒指跌0.59%失守23000点，恒生科技指数跌2.84%，科网股低迷，光通信板块下挫。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "科技股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-30/doc-iniwxzqf8383791.shtml",
+      "title_cn": "恒指牛熊街货比(44:56)︱10月30日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "10月30日恒指牛熊街货比为44:56。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒指",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/observe/2026-10-29/doc-iniwwtux5257836.shtml",
+      "title_cn": "港股IPO异常基石投资透视：解禁亏多盈少 小盘股波动剧烈 头部保荐人与涉案项目存在交叉 拷问投行看门人责任",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "报道梳理港股IPO基石投资情况：解禁项目亏多盈少，小盘股波动剧烈，头部保荐人与涉案项目存在交叉。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "基石投资"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-29/doc-iniwvftk6391752.shtml",
+      "title_cn": "港股IPO“变奏” 融资额创16年来新高 基石投资者占比超八成",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "港股IPO融资额创16年来新高，基石投资者占比超过八成。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "融资"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-29/doc-iniwwtux5256981.shtml",
+      "title_cn": "港股“新陈代谢”加速：10月份除牌加速，百家停牌企业何去何从？",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "港股10月除牌加速，报道关注百家停牌企业的去向。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "退市",
+        "监管"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-10-29/doc-iniwvwre2893320.shtml",
+      "title_cn": "天风·策略 | 静待美国中期选举——港股策略周观察",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "天风策略发布港股周观察，主题为静待美国中期选举。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "策略",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-10-29/doc-iniwvwre2865297.shtml",
+      "title_cn": "港股概念追踪 | 全球燃气轮机产能紧张！海外排产延至2031年 国产燃机迎出海良机(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "全球燃气轮机产能紧张，海外排产延至2031年，报道称国产燃机迎出海机会并列出概念股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "燃气轮机",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-29/doc-iniwvwrf8961864.shtml",
+      "title_cn": "头部券商不要租赁了？，拟91亿港元出售港股上市子公司控股权",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "某头部券商拟以91亿港元出售其港股上市子公司的控股权。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "券商",
+        "港股",
+        "并购"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/estate/integration/2026-10-29/doc-iniwvftn3170075.shtml",
+      "title_cn": "科技C杀中 东山精密“增收增利”难抵港股破发",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "东山精密实现增收增利，但其港股上市首日破发。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-29/doc-iniwxekn5955357.shtml",
+      "title_cn": "光大证券：看好中国石油(00857)“增储上产”潜力 维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "光大证券看好中国石油增储上产潜力，维持买入评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "券商观点",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-29/doc-iniwxekq2731337.shtml",
+      "title_cn": "光大证券：ASMPT(00522)订单创历史新高 上调净利润维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "光大证券称ASMPT订单创历史新高，上调其净利润预测并维持买入评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "券商观点",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-29/doc-iniwwtus6020892.shtml",
+      "title_cn": "瑞银：ASMPT(00522)第三季订单远胜预期 重申“买入” 目标价200港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "瑞银称ASMPT第三季订单远胜预期，重申买入评级，目标价200港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "券商观点",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/29/coinbase-coin-earnings-q3-2026-.html",
+      "title_cn": "Coinbase net income surges 66% in third quarter, benefiting from bitcoin investment gains",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "Coinbase第三季度净利润大增66%，受益于比特币投资收益。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "加密货币",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
+      "title_cn": "Robinhood shares fall as crypto slump weighs on profits, offsetting gains in new businesses",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/28",
+      "summary": "Robinhood股价下跌，加密货币市场低迷拖累利润，抵消了新业务的增长。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "财报",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/27/ai-debt-hyperscaler-earnings.html",
+      "title_cn": "AI debt fears ease ahead of Oracle, Alphabet and Amazon updates. Here's what to watch. ",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "在甲骨文、Alphabet和亚马逊发布财报前，市场对AI相关债务的担忧有所缓解。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "财报",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/27/ripple-strikes-deal-with-robinhood-to-expand-its-rlusd-digital-dollar.html",
+      "title_cn": "Ripple strikes deal with Robinhood to expand its RLUSD digital dollar",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "Ripple与Robinhood达成合作，以扩展其RLUSD数字美元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "合作",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/-as-ai-becomes-more-fractured-one-names-stands-out-amd.html",
+      "title_cn": " As AI becomes more fractured, one name stands out: AMD",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "报道称随着AI格局趋于分化，AMD成为受关注的公司之一。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "半导体",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/prediction-markets-think-anthropic-ipo-near-certain-in-2026.html",
+      "title_cn": "Prediction market traders say an Anthropic IPO is near-certain this year after company filed with SEC ",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/26",
+      "summary": "预测市场交易者认为，Anthropic向SEC提交文件后，今年IPO近乎确定。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "IPO",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/stonepeak-completes-acquisition-of-bmo-finance-units-93CH-4985540",
+      "title_cn": "Stonepeak completes acquisition of BMO finance units",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "Stonepeak完成对BMO金融业务的收购。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "并购",
+        "金融",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/coinbase-snaps-losing-streak-with-thirdquarter-profit-on-crypto-trading-rebound-4985073",
+      "title_cn": "Coinbase returns to profit as crypto investment gains offset trading weakness",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "Coinbase恢复盈利，加密货币投资收益抵消了交易业务疲软。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "加密货币",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-impedimed-q1-2026-sales-stumble-clouds-outlook-93CH-4985539",
+      "title_cn": "Earnings call transcript: ImpediMed Q1 2026 sales stumble clouds outlook",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "ImpediMed 2026财年第一季度销售表现不佳，令前景蒙阴。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "医药",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-onespan-tops-q3-2026-estimates-shares-jump-195-93CH-4985537",
+      "title_cn": "Earnings call transcript: OneSpan tops Q3 2026 estimates, shares jump 19.5%",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "OneSpan第三季度业绩超出预期，股价大涨19.5%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-arthur-j-gallagher-tops-eps-in-q3-2026-shares-ease-93CH-4985535",
+      "title_cn": "Earnings call transcript: Arthur J. Gallagher tops EPS in Q3 2026, shares ease",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "Arthur J. Gallagher第三季度每股收益超出预期，股价小幅走低。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "保险",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-air-canada-beats-q3-2026-eps-as-fuel-costs-bite-93CH-4985534",
+      "title_cn": "Earnings call transcript: Air Canada beats Q3 2026 EPS as fuel costs bite",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "加拿大航空第三季度每股收益超出预期，但燃油成本带来压力。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "航空",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
