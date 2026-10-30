@@ -1,0 +1,877 @@
+{
+  "date": "2026-10-31",
+  "updatedAt": "2026-10-30T23:12:31.018Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：政策利率锚切换至1.25%，存款理财定价基准生变；公开市场框架11月2日落地，资金面节奏调整；金价跌破4000美元，贵金属客群咨询升温。",
+    "spoken_hero": "今天主要看三个方面：政策利率锚从1.4%切到1.25%，存款和理财的定价基准跟着变；公开市场操作框架11月2日落地，资金面节奏要调；国际金价跌破4000美元，贵金属客户咨询会明显增多。",
+    "must_read": [
+      {
+        "title": "十月银行业被罚超九千万",
+        "why": "双罚率超63%、有人被禁业12年，个人责任追究加重，销售环节合规成本明显抬升。",
+        "url": "https://m.21jingji.com/article/20261030/herald/9d4aa2acd3714e3f567aaa8448dbed7c.html"
+      },
+      {
+        "title": "公开市场框架11月2日落地",
+        "why": "流动性投放机制调整，资金面波动节奏改变，直接影响理财与存款产品的发行排期安排。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_10_30_906459.shtml"
+      },
+      {
+        "title": "证监会强调稳市场稳预期",
+        "why": "资本市场政策基调延续，权益类产品客户沟通有据可依，市场情绪处于政策托底区间。",
+        "url": "https://finance.eastmoney.com/a/202610303916585451.html"
+      },
+      {
+        "title": "沪银单日重挫超6%",
+        "why": "商品市场贵金属集体走弱，与金价形成共振，反映避险资金正在重新选择方向。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261030/4488998_1.html"
+      },
+      {
+        "title": "六大行息差拨备双向承压",
+        "why": "中行拨备覆盖率跌破200%、邮储净息差同比降8bp，行业盈利压力向零售定价传导。",
+        "url": "https://finance.sina.com.cn/jinrong/yh/2026-10-30/doc-iniwzprk5363882.shtml"
+      }
+    ],
+    "spoken_must_read": "十月银行业被罚超九千万。双罚率超63%、有人被禁业12年，个人责任追究加重，销售环节合规成本明显抬升。其次，公开市场框架11月2日落地。流动性投放机制调整，资金面波动节奏改变，直接影响理财与存款产品的发行排期安排。此外，证监会强调稳市场稳预期。资本市场政策基调延续，权益类产品客户沟通有据可依，市场情绪处于政策托底区间。还有，沪银单日重挫超6%。商品市场贵金属集体走弱，与金价形成共振，反映避险资金正在重新选择方向。另外，六大行息差拨备双向承压。中行拨备覆盖率跌破200%、邮储净息差同比降8bp，行业盈利压力向零售定价传导。",
+    "insights": [
+      {
+        "topic": "理财赎回卷至当天到账",
+        "impact": "客户对资金流动性的预期被同业抬高，现金管理类产品到账时效成为客户比较的直接维度，收益之外多了一层时效竞争。",
+        "tag": [
+          "财富",
+          "竞对动态"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "T+0.25天即可到账，银行理财产品开“卷”赎回效率",
+            "url": "https://finance.sina.com.cn/roll/2026-10-30/doc-iniwzazt8210628.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "存款理财定价基准下移",
+        "impact": "政策利率锚切换后，存款与理财的收益中枢面临再定价，存量客户的收益预期与实际到账之间容易出现落差。",
+        "tag": [
+          "财富",
+          "监管"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "央行切换主要政策利率，从1.4%换成1.25%",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-30/doc-iniwzprn2143734.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "邮储非息收入增12.63%",
+        "impact": "大行中收贡献抬升，财富与代销赛道的同业竞争加剧，客户在代销产品上的比价行为更频繁。",
+        "tag": [
+          "财富",
+          "竞对动态"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "邮储银行前三季度净利润802亿元 非息收入同比增12.63%",
+            "url": "https://m.21jingji.com/article/20261030/herald/30c70eff3cbd69ca5988929f16a3f57c.html"
+          }
+        ]
+      },
+      {
+        "topic": "金饰需求转弱偏好迁移",
+        "impact": "大克重金饰需求转弱，贵金属客户的偏好从实物饰品向积存类、投资类迁移，产品结构面临调整。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "黄金消费有变化，大金镯不香了？",
+            "url": "https://finance.sina.com.cn/jjxw/2026-10-30/doc-iniwxqyp5025384.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "银行密集布局一人公司",
+        "impact": "个体与小微客群的开户、结算与信贷竞争前移到注册环节，客户在起步阶段就被同业锁定。",
+        "tag": [
+          "客群",
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "银行密集布局“一人公司”业务",
+            "url": "https://finance.sina.com.cn/jjxw/2026-10-30/doc-iniwxvhi8463573.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "跨境支付互联互通扩容",
+        "impact": "跨境收付通道竞争加剧，外贸客群在汇款与结售汇上的选择变多，本行产品的分流压力上升。",
+        "tag": [
+          "客群",
+          "科技金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "两大头部支付机构落地新合作 跨境支付互联互通“朋友圈”持续扩容",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-10-30/doc-iniwxzqf8397351.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，理财赎回卷至当天到账等3条线索，客户对资金流动性的预期被同业抬高。第二，高端客户方面，金饰需求转弱偏好迁移，大克重金饰需求转弱。第三，普惠小微方面，银行密集布局一人公司，个体与小微客群的开户、结算与信贷竞争前移到注册环节。第四，跨境客群方面，跨境支付互联互通扩容，跨境收付通道竞争加剧。",
+    "risk": {
+      "topic": "十月银行业双罚率超63%",
+      "evidence": "十月银行业被罚超九千万元，双罚率超63%，有从业人员被禁业12年，个人责任追究明显加重。",
+      "impact": "财富与个贷条线的销售双录、适当性留痕成为个人追责重点，私行客户经理的代销行为与风控留证要求同步抬升。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "十月银行业被罚超九千万元：双罚率超63%，有人被禁业12年",
+          "url": "https://m.21jingji.com/article/20261030/herald/9d4aa2acd3714e3f567aaa8448dbed7c.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：十月银行业双罚率超63%，财富与个贷条线的销售双录、适当性留痕成为个人追责重点，私行客户经理的代销行为与风控留证要求同步抬升。",
+    "guangdong_ipo": {
+      "spoken": "广东东莞企业邦泽创科，代码874249，由东莞证券保荐，拟登陆北交所，IPO注册已生效，昨天完成状态更新。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌2.86%，英特尔、亚马逊财报双双不及预期引发科技股跳水。",
+      "sectors": [
+        "英特尔盘前重挫超26%，财报不及预期拖累芯片股情绪。",
+        "亚马逊财报不及预期，科技巨头全线跳水。",
+        "Coinbase三季度净利大增66%，受益于加密市场回暖。",
+        "Robinhood股价下跌，加密市场低迷拖累利润表现。",
+        "AI债务担忧在甲骨文、Alphabet、亚马逊财报前有所缓解。"
+      ],
+      "spoken": "美股三大指数集体收跌，纳指跌2.86%，标普500跌1.82%，道指跌1.09%。英特尔盘前重挫超26%，亚马逊财报不及预期，科技巨头全线跳水拖累大盘。加密板块分化，Coinbase三季度净利大增66%，但Robinhood因加密市场低迷股价下跌。市场关注甲骨文等 hyperscaler 财报及AI债务风险。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-31"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51770.31",
+          "changePct": "-1.09%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25437.00",
+          "changePct": "-2.86%"
+        },
+        {
+          "name": "标普500",
+          "value": "7580.07",
+          "changePct": "-1.82%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数跌1.44%，创业板指跌4.13%，科技股大幅回调拖累大盘。",
+      "sectors": [
+        "白酒板块逆市大涨，成为弱势中的主要避风港。",
+        "红利资产再获资金青睐，17只绩优高股息个股受关注。",
+        "49股逆市涨停，其中'羊'字辈占10席，玄学炒作持续活跃。",
+        "证监会表态全力稳市场稳预期，央行重申适度宽松货币政策。"
+      ],
+      "spoken": "A股三大指数集体收跌，上证指数跌1.44%，创业板指跌4.13%。白酒板块逆市大涨，红利资产成为资金避风港，高股息个股受关注。市场仍有49只个股逆市涨停，玄学炒作持续活跃。政策面上，证监会强调稳市场稳预期，央行继续实施适度宽松货币政策。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-31"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3599.02",
+          "changePct": "-1.44%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10833.78",
+          "changePct": "-2.73%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2413.63",
+          "changePct": "-4.13%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23294.42点（+1.46%）；恒生科技收报3754.90点（+0.29%）。",
+      "sectors": [
+        "科网股活跃",
+        "石油股走强"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-30"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨1.46% 科指涨0.29% 科网股活跃 石油股走强",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-30/doc-iniwywts5514144.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23294.42",
+          "changePct": "+1.46%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3754.90",
+          "changePct": "+0.29%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-30",
+    "marketStatus": {
+      "reportDate": "2026-10-31",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-10-30"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-10-30"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-10-30"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 10月30日 周五 收盘；港股为 10月30日 周五 收盘；美股为 10月30日 周五 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610303916585451.html",
+      "title_cn": "证监会：全力稳市场稳预期持续提升资本市场韧性和信心",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "证监会表示将全力稳市场稳预期，持续提升资本市场韧性和信心。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "资本市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303915128590.html",
+      "title_cn": "人民锐评：警惕“中国AI跑偏论”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "人民锐评发文，提醒警惕“中国AI跑偏论”相关论调。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303916093777.html",
+      "title_cn": "临近午盘大幅拉升！两大积极信号突袭中国资产！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "A股临近午盘出现大幅拉升，报道提及两大积极信号涉及中国资产。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303916404672.html",
+      "title_cn": "A股三大指数集体收跌白酒板块逆市大涨",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "A股三大指数集体收跌，白酒板块逆市大涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "白酒"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303915225676.html",
+      "title_cn": "红利资产再成资金避风港17只“绩优+高股息”个股浮出水面",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "红利资产再度成为资金避风港，报道梳理出17只“绩优+高股息”个股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "红利资产",
+        "高股息"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303916884983.html",
+      "title_cn": "10月30日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "汇总10月30日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303916593512.html",
+      "title_cn": "美股科技巨头英特尔盘前重挫超26%！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "英特尔美股盘前重挫超26%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303916819945.html",
+      "title_cn": "央行：继续实施适度宽松的货币政策保持流动性充裕",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "央行表示将继续实施适度宽松的货币政策，保持流动性充裕。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "货币政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303915149254.html",
+      "title_cn": "刚刚全线跳水！英特尔、亚马逊财报双双不及预期",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "英特尔与亚马逊财报双双不及预期，相关资产全线跳水。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610303916525640.html",
+      "title_cn": "49股逆市涨停“羊”字辈占10席玄学炒作为何持续活跃？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "49只个股逆市涨停，其中“羊”字辈占10席，报道关注玄学炒作持续活跃现象。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917326922.html",
+      "title_cn": "用好有利条件推动工业经济质效向好",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "报道提出用好有利条件，推动工业经济质效向好。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "工业经济"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917328917.html",
+      "title_cn": "经济学也“嗑CP”？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "报道以“经济学也嗑CP”为题，内容为经济学相关话题讨论。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "经济"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-30/doc-iniwywts5514144.shtml",
+      "title_cn": "港股收评：恒指涨1.46% 科指涨0.29% 科网股活跃 石油股走强",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "港股收评：恒指涨1.46%，科指涨0.29%，科网股活跃，石油股走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "科网股",
+        "石油"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-30/doc-iniwxvhh2493705.shtml",
+      "title_cn": "港股新股冷热分化： 高认购与破发并存",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "港股新股呈现冷热分化，高认购与破发现象并存。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-30/doc-iniwyfvy5613061.shtml",
+      "title_cn": "东山精密破发，微亿智造延迟上市，港股IPO风向变了？",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "东山精密破发、微亿智造延迟上市，报道关注港股IPO风向变化。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-10-30/doc-iniwxzqf8419155.shtml",
+      "title_cn": "和美药业香港IPO拟募资不超过10.4亿港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "和美药业香港IPO拟募资不超过10.4亿港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-10-30/doc-iniwzazs2291694.shtml",
+      "title_cn": "美银重申吉利汽车“买入”评级 目标价下调18.1%至22.6港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "美银重申吉利汽车“买入”评级，目标价下调18.1%至22.6港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "汽车",
+        "评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-10-30/doc-iniwywtx4701441.shtml",
+      "title_cn": "渤海银行(09668)前三季度净利润为51.42亿元 同比增长3.09%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "渤海银行前三季度净利润51.42亿元，同比增长3.09%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-30/doc-iniwywtx4678153.shtml",
+      "title_cn": "高盛：维持百威亚太(01876)“买入”评级 下调目标价至6.55港元 中国市场复苏需时更长",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "高盛维持百威亚太“买入”评级，目标价下调至6.55港元，称中国市场复苏需时更长。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-30/doc-iniwywtv8227514.shtml",
+      "title_cn": "瑞银：维持中国铝业(02600)H股“买入”评级及12.8港元目标价 第三季度盈利略胜预期",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "瑞银维持中国铝业H股“买入”评级及12.8港元目标价，称第三季度盈利略胜预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "有色金属"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-30/doc-iniwywtu2288635.shtml",
+      "title_cn": "花旗：中信银行(00998)第三季业绩可观受惠成本效益改善 盈利增长趋势优于管理层指引",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "花旗称中信银行第三季业绩可观，受惠成本效益改善，盈利增长趋势优于管理层指引。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-30/doc-iniwywts5512601.shtml",
+      "title_cn": "大摩：潍柴动力(02338)第三季业绩符该行预期 维持“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "大摩称潍柴动力第三季业绩符合预期，维持“增持”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "机械"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-30/doc-iniwywtx4650790.shtml",
+      "title_cn": "海通国际：美高梅中国(02282)第三季度业绩略胜预期",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "海通国际称美高梅中国第三季度业绩略胜预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "博彩"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-30/doc-iniwywts5499511.shtml",
+      "title_cn": "里昂：维持美高梅中国(02282)“跑赢大市”评级及13.8港元目标价 第三季度物业EBITDA高于预期6%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "里昂维持美高梅中国“跑赢大市”评级及13.8港元目标价，称第三季度物业EBITDA高于预期6%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "博彩"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/29/circle-tether-freeze-funds-impacted-by-potential-binance-security-issue.html",
+      "title_cn": "$6.3 billion Binance hack is largest crypto theft on record",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "币安遭黑客攻击，涉案金额63亿美元，为有记录以来最大加密货币盗窃案。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/29/coinbase-coin-earnings-q3-2026-.html",
+      "title_cn": "Coinbase net income surges 66% in third quarter, benefiting from bitcoin investment gains",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "Coinbase第三季度净利润大增66%，受益于比特币投资收益。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "加密货币"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/27/robinhood-hood-q3-2026-earnings.html",
+      "title_cn": "Robinhood shares fall as crypto slump weighs on profits, offsetting gains in new businesses",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/28",
+      "summary": "Robinhood股价下跌，加密货币低迷拖累利润，抵消了新业务收益。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "加密货币"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/27/ai-debt-hyperscaler-earnings.html",
+      "title_cn": "AI debt fears ease ahead of Oracle, Alphabet and Amazon updates. Here's what to watch. ",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "在甲骨文、Alphabet和亚马逊发布财报前，AI债务担忧有所缓解，报道列出关注要点。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/27/ripple-strikes-deal-with-robinhood-to-expand-its-rlusd-digital-dollar.html",
+      "title_cn": "Ripple strikes deal with Robinhood to expand its RLUSD digital dollar",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/27",
+      "summary": "Ripple与Robinhood达成协议，扩大其RLUSD数字美元的应用。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/-as-ai-becomes-more-fractured-one-names-stands-out-amd.html",
+      "title_cn": " As AI becomes more fractured, one name stands out: AMD",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "报道称随着AI格局日益分化，AMD成为突出标的。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "半导体"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/paypal-pres-frank-keller-sells-40530-in-common-stock-93CH-4988892",
+      "title_cn": "PayPal pres. Frank Keller sells $40,530 in common stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "PayPal总裁Frank Keller出售价值40,530美元普通股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/happen-inc-general-counsel-sells-44800-in-common-stock-93CH-4988891",
+      "title_cn": "Happen Inc. general counsel sells $44,800 in common stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "Happen Inc.总法律顾问出售价值44,800美元普通股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/mcdonalds-must-face-lawsuit-overmcrib-us-judge-rules-4988646",
+      "title_cn": "McDonald’s must face lawsuit over McRib, US judge rules",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "美国法官裁定麦当劳须就McRib相关诉讼应诉。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "诉讼",
+        "消费"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/baseten-seeks-30bn-valuation-in-new-2-billion-funding-round--bloomberg-4988882",
+      "title_cn": "Baseten seeks $30bn valuation in new $2 billion funding round - Bloomberg",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "据彭博报道，Baseten在新一轮20亿美元融资中寻求300亿美元估值。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/arch-capital-group-subsidiary-amends-700-million-credit-facility-with-lloyds-bank-93CH-4988881",
+      "title_cn": "Arch Capital Group subsidiary amends $700 million credit facility with Lloyds Bank",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "Arch Capital Group子公司与劳埃德银行修订7亿美元信贷安排。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "信贷"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/western-digital-director-martin-cole-sells-158m-in-shares-93CH-4988878",
+      "title_cn": "Western Digital director Martin Cole sells $1.58M in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "西部数据董事Martin Cole出售价值158万美元股份。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "高管交易",
+        "半导体"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
