@@ -1,15 +1,37 @@
 {
   "version": 1,
-  "fetchedAt": "2026-10-30T07:06:08+08:00",
+  "fetchedAt": "2026-10-31T07:04:51+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-bse-audit": 1,
+    "gd-bse-audit": 3,
     "gd-csrc-tutoring": 1,
     "gd-sse-audit": 1,
     "gd-szse-audit": 1
   },
   "items": [
+    {
+      "title": "邦泽创科：IPO注册生效（拟北交所）",
+      "url": "https://www.bse.cn/audit/project_news_select.html#874249@P07",
+      "excerpt": "注册地：广东省东莞市｜保荐：东莞证券股份有限公司｜代码：874249｜状态：IPO注册生效｜更新：2026-10-30",
+      "publishedAt": "2026-10-30",
+      "source": "北交所IPO审核动态",
+      "sourceId": "gd-bse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-registered"
+    },
+    {
+      "title": "邦正精机：IPO问询中（拟北交所）",
+      "url": "https://www.bse.cn/audit/project_news_select.html#874544@P02",
+      "excerpt": "注册地：广东省深圳市｜保荐：国联民生证券承销保荐有限公司｜代码：874544｜状态：IPO问询中｜更新：2026-10-29",
+      "publishedAt": "2026-10-29",
+      "source": "北交所IPO审核动态",
+      "sourceId": "gd-bse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
+    },
     {
       "title": "微容科技：IPO过会（拟创业板）",
       "url": "https://www.szse.cn/listing/projectdynamic/ipo/index.html#prj1004348",
