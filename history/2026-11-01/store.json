@@ -1,0 +1,876 @@
+{
+  "date": "2026-11-01",
+  "updatedAt": "2026-10-31T23:10:16.708Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：政策利率换锚落地，负债定价基准生变；10月PMI回落至49.3%，小微需求端偏弱；大额存单密集回归，存款竞争升温。",
+    "spoken_hero": "今天主要看三个方面：政策利率换锚正式落地，存款和理财的定价基准要跟着变；十月制造业景气回落到四十九点三，小微客户喊的是没订单不是没钱；大额存单密集回归，存款竞争又热起来了。",
+    "must_read": [
+      {
+        "title": "10月制造业PMI回落至49.3%",
+        "why": "制造业景气重回收缩区间，对公与普惠客户的经营预期偏弱，订单与现金流的变化会先于报表反映出来。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261031/4489234_1.html"
+      },
+      {
+        "title": "华夏银行规模破5万亿",
+        "why": "同业规模与营收增速创新高，其零售与中间业务结构变化构成对分行客群分流的参照。",
+        "url": "https://m.21jingji.com/article/20261031/herald/93e20ec8705847d27284285e6edd55f8.html"
+      },
+      {
+        "title": "10月服务业指数回升",
+        "why": "假期消费呈出行旺、线上增、文旅热，服务消费的修复节奏快于制造，广州文旅与线上消费商户景气相对占优。",
+        "url": "https://finance.eastmoney.com/a/202610313917631012.html"
+      },
+      {
+        "title": "外资三季度增持创新药红利股",
+        "why": "外资调仓方向指向创新药与红利资产，主题产品的咨询热度与客户配置偏好会跟着迁移。",
+        "url": "https://finance.eastmoney.com/a/202610313917302857.html"
+      },
+      {
+        "title": "小微痛点在需求端",
+        "why": "调查显示小微最大痛点不是融资而是订单，普惠客户的经营压力从融资价格转向需求与现金流。",
+        "url": "https://finance.eastmoney.com/a/202610313917645516.html"
+      }
+    ],
+    "spoken_must_read": "10月制造业PMI回落至49.3%。制造业景气重回收缩区间，对公与普惠客户的经营预期偏弱，订单与现金流的变化会先于报表反映出来。其次，华夏银行规模破5万亿。同业规模与营收增速创新高，其零售与中间业务结构变化构成对分行客群分流的参照。此外，10月服务业指数回升。假期消费呈出行旺、线上增、文旅热，服务消费的修复节奏快于制造，广州文旅与线上消费商户景气相对占优。还有，外资三季度增持创新药红利股。外资调仓方向指向创新药与红利资产，主题产品的咨询热度与客户配置偏好会跟着迁移。另外，小微痛点在需求端。调查显示小微最大痛点不是融资而是订单，普惠客户的经营压力从融资价格转向需求与现金流。",
+    "insights": [
+      {
+        "topic": "同业规模扩张与客群分流",
+        "impact": "同业规模与营收增速走高，其在存款与财富端的策略变化可能带来客户在不同机构间的迁移。",
+        "tag": [
+          "竞对动态"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "又一家5万亿银行！华夏银行为何营收增速创新高？三季报透露关键信号",
+            "url": "https://m.21jingji.com/article/20261031/herald/93e20ec8705847d27284285e6edd55f8.html"
+          }
+        ]
+      },
+      {
+        "topic": "实物金消费回暖",
+        "impact": "金价年内大幅回落带动实物金需求回升，贵金属咨询量上升，客户风险偏好分层更明显。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "金饰克价，年内跌了近550元！大金镯子又香了→",
+            "url": "https://news.southcn.com/node_812903b83a/1e88a0eaac.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "小微痛点转向需求端",
+        "impact": "普惠客户的经营压力从融资价格转向订单与现金流，贷后关注的指标结构随之改变。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "北大调查报告：市场需求仍是小微最大痛点，应加强需求端政策",
+            "url": "https://finance.eastmoney.com/a/202610313917645516.html"
+          }
+        ]
+      },
+      {
+        "topic": "制造业景气回落传导",
+        "impact": "制造业订单走弱会先影响小微与个体工商户的经营性现金流，授信与贷后的观察窗口前移。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "国家统计局：10月份PMI为49.3% 制造业景气水平有所回落",
+            "url": "https://www.cnfin.com/yw-lb/detail/20261031/4489234_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "外资调仓与主题配置",
+        "impact": "创新药与红利方向的关注度抬升，高净值客户对主题类产品的问询结构发生变化。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "三季度外资机构大调仓增持创新药及红利股",
+            "url": "https://finance.eastmoney.com/a/202610313917302857.html"
+          }
+        ]
+      },
+      {
+        "topic": "广交会带动跨境客群",
+        "impact": "广交会与APEC合作叠加，跨境结算与外汇服务的客群关注度上升，同业在跨境品牌上的投入加大。",
+        "tag": [
+          "客群",
+          "政银合作"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "中国银行成为2026年APEC会议官方合作伙伴",
+            "url": "https://m.21jingji.com/article/20261031/herald/e75bf7582572cee3455cb26b738ae2b0.html"
+          },
+          {
+            "title": "“我与广交会”故事分享会：让中国制造与世界共赢｜同舟共济",
+            "url": "https://news.dayoo.com/guangzhou/202610/31/139995_55019013.htm"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，高端客户方面，同业规模扩张与客群分流等3条线索，同业规模与营收增速走高。第二，普惠小微方面，小微痛点转向需求端、制造业景气回落传导，普惠客户的经营压力从融资价格转向订单与现金流。第三，跨境客群方面，广交会带动跨境客群，广交会与APEC合作叠加。",
+    "risk": {
+      "topic": "存款竞争升温下的定价风险",
+      "evidence": "多家银行密集重启大额存单，存款竞争升温，负债端成本压力与产品比价同步上行。",
+      "impact": "财富端货架比价压力上升，中高端客户资金搬家频率提高；个贷与对公存款的联动定价空间收窄，风控需关注高息揽储带来的成本与合规边界。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "大额存单回来了，银行密集上线",
+          "url": "https://m.21jingji.com/article/20261031/herald/99246b707d0cc674efc74a1f244db998.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：存款竞争升温下的定价风险，财富端货架比价压力上升，中高端客户资金搬家频率提高；个贷与对公存款的联动定价空间收窄，风控需关注高息揽储带来的成本与合规边界。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌2.86%，标普跌1.82%，AI交易现裂痕叠加加密安全事件拖累。",
+      "sectors": [
+        "币安遭约63亿美元黑客攻击，创加密盗窃纪录，约30亿美元已冻结。",
+        "Coinbase三季度净利大增66%，受益比特币投资回暖和加密市场复苏。",
+        "AI交易现裂痕，AMD成少数亮点，Anthropic推进上市引发板块分化。",
+        "OPEC+预计12月维持产量不变，油价预期受关注。",
+        "花旗预计2027年欧洲天然气价格上涨，中东风险推升价格。"
+      ],
+      "spoken": "美股今日集体下跌，纳指跌2.86%，标普500跌1.82%，道指跌1.09%。AI交易出现裂痕，AMD成少数亮点。加密板块方面，币安遭约63亿美元黑客攻击，创盗窃纪录，约30亿美元已冻结；Coinbase三季度净利大增66%。能源方面，OPEC+预计12月维持产量不变。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-01"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51770.31",
+          "changePct": "-1.09%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25437.00",
+          "changePct": "-2.86%"
+        },
+        {
+          "name": "标普500",
+          "value": "7580.07",
+          "changePct": "-1.82%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数跌1.44%，创业板指跌4.13%，科技成长股集体回调。",
+      "sectors": [
+        "长鑫科技公告拟回购并至少注销一半股份，前三季净利1320亿元，护盘信号受关注。",
+        "苹果智能接入阿里千问，AI应用端合作落地，相关算力与模型概念受关注。",
+        "硬科技三季报多点开花，算力链业绩高增兑现，新赛道蓄力。",
+        "外资机构三季度调仓，增持创新药及红利股，偏好业绩确定性。",
+        "社保基金三季度现身超650股，偏爱业绩增长标的。"
+      ],
+      "spoken": "A股今日走弱，上证指数跌1.44%，创业板指跌4.13%，科技成长股回调明显。板块方面，长鑫科技公告拟回购并至少注销一半股份，护盘信号受关注。苹果智能接入阿里千问，AI应用合作落地。硬科技三季报算力链业绩高增，外资三季度增持创新药及红利股。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-31"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3599.02",
+          "changePct": "-1.44%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10833.78",
+          "changePct": "-2.73%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2413.63",
+          "changePct": "-4.13%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23294.42点（+1.46%）；恒生科技收报3754.90点（+0.29%）。",
+      "sectors": [
+        "科网股活跃",
+        "石油股走强"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-10-31"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨1.46% 科指涨0.29% 科网股活跃 石油股走强",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-30/doc-iniwywts5514144.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23294.42",
+          "changePct": "+1.46%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3754.90",
+          "changePct": "+0.29%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-10-30",
+    "marketStatus": {
+      "reportDate": "2026-11-01",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-10-30",
+          "reason": "数据为 10月30日（距今 2 天）"
+        },
+        "hk": {
+          "fresh": false,
+          "dataDate": "2026-10-30",
+          "reason": "数据为 10月30日（距今 2 天）"
+        },
+        "us": {
+          "fresh": false,
+          "dataDate": "2026-10-30",
+          "reason": "数据为 10月30日（距今 2 天）"
+        }
+      },
+      "allStale": true,
+      "note": "三地股市均无隔夜行情（休市或数据未更新），以下为最近一次收盘数据",
+      "spokenNote": "三地股市今日均无隔夜行情"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917475524.html",
+      "title_cn": "“象征性护盘？”话音未落长鑫科技公告拟回购股份至少注销一半前三季净利1320亿元",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "长鑫科技公告拟回购股份并至少注销一半，公司前三季度净利润为1320亿元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "半导体",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917337771.html",
+      "title_cn": "凌晨重磅！两大科技巨头正式官宣！Apple智能接入阿里千问",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "Apple智能正式宣布接入阿里千问，两大科技巨头官宣合作。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "科技巨头",
+        "合作"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917427098.html",
+      "title_cn": "逾百家机构调研股曝光（附名单）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "逾百家机构调研的个股名单曝光。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机构调研"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917302369.html",
+      "title_cn": "社保基金三季度现身超650股偏爱业绩增长标的",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "社保基金三季度现身超650只个股，持仓偏爱业绩增长标的。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "社保基金",
+        "持仓",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917510826.html",
+      "title_cn": "东鹏特饮下架含姆巴佩头像的“补水啦”经销商库存成难题",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "东鹏特饮下架含姆巴佩头像的“补水啦”产品，经销商面临库存难题。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "消费",
+        "食品饮料"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917302857.html",
+      "title_cn": "三季度外资机构大调仓增持创新药及红利股",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "三季度外资机构大幅调仓，增持创新药及红利股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "外资",
+        "医药",
+        "红利股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917334683.html",
+      "title_cn": "“硬科技”三季报多点开花：算力链高增兑现新赛道蓄力启航",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "“硬科技”板块三季报多点开花，算力链业绩高增兑现，新赛道蓄力。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "算力",
+        "硬科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917337892.html",
+      "title_cn": "又一家5万亿银行！华夏银行为何营收增速创新高？三季报透露关键信号",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "华夏银行三季报显示营收增速创新高，成为又一家5万亿规模银行。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917654063.html",
+      "title_cn": "DeepSeek发布全新Agent架构",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "DeepSeek发布全新Agent架构。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "大模型"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917305654.html",
+      "title_cn": "部分造船产业链上市公司前三季度业绩高增",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "部分造船产业链上市公司前三季度业绩实现高增。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "造船"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917657368.html",
+      "title_cn": "AI冲击下的码农群像：外包人员池急剧萎缩写基础代码饭碗难保",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "AI冲击下程序员就业结构变化，外包人员池急剧萎缩，基础代码岗位受挤压。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "就业"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202610313917648132.html",
+      "title_cn": "壹快评｜“有本事你来取”恶意仅退款为何越来越猖狂",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "评论文章关注“恶意仅退款”现象愈发猖獗的问题。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "电商",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-10-30/doc-iniwywts5514144.shtml",
+      "title_cn": "港股收评：恒指涨1.46% 科指涨0.29% 科网股活跃 石油股走强",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "港股收评：恒指涨1.46%，科指涨0.29%，科网股活跃，石油股走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "科网股",
+        "石油"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-31/doc-inixcsqr3735321.shtml",
+      "title_cn": "花旗：百威亚太维持“买入”评级 目标价8.7港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "花旗维持百威亚太“买入”评级，目标价8.7港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-31/doc-inixcsqr3734110.shtml",
+      "title_cn": "里昂：中国石油股份目标价升至12.4港元 维持“跑赢大市”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "里昂将中国石油股份目标价上调至12.4港元，维持“跑赢大市”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "能源"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-31/doc-inixcsqk4723499.shtml",
+      "title_cn": "花旗：潍柴动力维持“买入”评级 目标价50港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "花旗维持潍柴动力“买入”评级，目标价50港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "机械"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-31/doc-inixcsqk4723065.shtml",
+      "title_cn": "花旗：渣打集团目标价升至230.8港元 上调盈利预测看好近期动能",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "花旗将渣打集团目标价上调至230.8港元，上调盈利预测并看好近期动能。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-31/doc-inixcsqr3733740.shtml",
+      "title_cn": "大摩：中国联通维持H股“与大市同步”评级 目标价7港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "大摩维持中国联通H股“与大市同步”评级，目标价7港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "电信"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-31/doc-inixcsqr3733191.shtml",
+      "title_cn": "小摩：渣打集团重申“增持”评级 目标价310港元不变",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "小摩重申渣打集团“增持”评级，目标价310港元不变。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-31/doc-inixcsqr3732786.shtml",
+      "title_cn": "大摩：美高梅中国维持“增持”评级 目标价12港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "大摩维持美高梅中国“增持”评级，目标价12港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "博彩"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-31/doc-inixcsqr3732140.shtml",
+      "title_cn": "高盛：友邦保险维持“买入”评级 目标价95港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "高盛维持友邦保险“买入”评级，目标价95港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "保险"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-10-31/doc-inixcsqr3731884.shtml",
+      "title_cn": "美银证券：中国石油化工股份目标价升至6港元 重申“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "美银证券将中国石油化工股份目标价上调至6港元，重申“买入”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "评级",
+        "能源"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-10-30/doc-iniwxvhh2493705.shtml",
+      "title_cn": "港股新股冷热分化： 高认购与破发并存",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "港股新股市场冷热分化，高认购与破发现象并存。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-10-30/doc-iniwyfvy5613061.shtml",
+      "title_cn": "东山精密破发，微亿智造延迟上市，港股IPO风向变了？",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "东山精密上市破发，微亿智造延迟上市，港股IPO风向出现变化。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/29/circle-tether-freeze-funds-impacted-by-potential-binance-security-issue.html",
+      "title_cn": "$6.3 billion Binance hack is largest crypto theft on record",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "币安遭6.3亿美元黑客攻击，为有记录以来最大加密货币盗窃案。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "黑客攻击"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/29/coinbase-coin-earnings-q3-2026-.html",
+      "title_cn": "Coinbase net income surges 66% in third quarter, benefiting from bitcoin investment gains",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "Coinbase第三季度净利润大增66%，受益于比特币投资收益。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "加密货币"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/26/-as-ai-becomes-more-fractured-one-names-stands-out-amd.html",
+      "title_cn": " As AI becomes more fractured, one name stands out: AMD",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/29",
+      "summary": "在AI格局日益分化背景下，AMD被视为突出标的。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "半导体"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/us-judge-dismisses-trumps-lawsuit-against-wall-street-journal-with-prejudice-4989324",
+      "title_cn": "Judge ends Trump’s attempts to sue Wall Street Journal over Epstein reporting",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "法官终止特朗普就爱泼斯坦报道起诉《华尔街日报》的尝试。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "法律",
+        "媒体"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/top-takeaways-from-bernsteins-annual-global-sportswear-survey-4989345",
+      "title_cn": "Top takeaways from Bernstein’s annual Global Sportswear survey",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "Bernstein年度全球运动服饰调查的主要结论出炉。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "消费",
+        "运动服饰"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/uk-pm-burnham-says-he-is-open-to-formal-apology-for-slavery-but-rules-out-reparations-4989219",
+      "title_cn": "UK PM Burnham says he is ’open’ to formal apology for slavery, but rules out reparations",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "英国首相伯纳姆表示对就奴隶制正式道歉持开放态度，但排除赔偿。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政治",
+        "英国"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/russia-stocks-lower-at-close-of-trade-moex-russia-index-unchanged-4989336",
+      "title_cn": "Russia stocks lower at close of trade; MOEX Russia Index unchanged",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "俄罗斯股市收低，MOEX俄罗斯指数基本持平。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "俄罗斯股市",
+        "大盘"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/cryptocurrency-news/bitcoin-holds-above-77000-as-binance-hack-recovery-takes-shape-4989115",
+      "title_cn": "Bitcoin rises as Binance says it has covered 90% of $6.3 billion hack",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "币安称已覆盖6.3亿美元黑客攻击损失的90%，比特币随之上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "黑客攻击"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/opec-set-to-hold-december-oil-output-steady-4989332",
+      "title_cn": "OPEC+ set to hold December oil output steady, Reuters reports",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "据路透报道，OPEC+预计将维持12月石油产量不变。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "OPEC"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/france-braces-for-fresh-unrest-government-vows-tough-response-4989212",
+      "title_cn": "Isolated clashes in France after peaceful marches, as police brace for Halloween night violence",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "法国和平游行后出现零星冲突，警方为万圣节夜间暴力做准备。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政治",
+        "法国"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economic-indicators/thousands-return-to-lisbon-square-press-government-to-scrap-rental-bill-4989325",
+      "title_cn": "Thousands return to Lisbon square, press government to scrap rental bill",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "数千人重返里斯本广场，施压政府废除租金法案。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政治",
+        "地产",
+        "葡萄牙"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/citi-sees-european-gas-prices-rising-in-2027-as-middle-east-risks-spur-price-gains-4989323",
+      "title_cn": "Citi sees European gas prices rising in 2027 as Middle East risks spur price gains",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "10/31",
+      "summary": "花旗预计2027年欧洲天然气价格将上涨，中东风险推动价格走高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "天然气"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
