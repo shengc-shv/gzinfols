@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-10-31",
+  "updatedAt": "2026-11-01",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -12289,8 +12289,151 @@
     }
   },
   "today": {
-    "date": "2026-10-31",
-    "entries": []
+    "date": "2026-11-01",
+    "entries": [
+      {
+        "date": "2026-11-01",
+        "section": "must_read",
+        "title": "10月制造业PMI回落至49.3%",
+        "text": "10月制造业PMI回落至49.3% 制造业景气重回收缩区间，对公与普惠客户的经营预期偏弱，订单与现金流的变化会先于报表反映出来。",
+        "facts": [
+          "#10月",
+          "#49.3%"
+        ],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261031/4489234_1.html",
+        "score": 19,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-01",
+        "section": "must_read",
+        "title": "华夏银行规模破5万亿",
+        "text": "华夏银行规模破5万亿 同业规模与营收增速创新高，其零售与中间业务结构变化构成对分行客群分流的参照。",
+        "facts": [
+          "#5万亿"
+        ],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://m.21jingji.com/article/20261031/herald/93e20ec8705847d27284285e6edd55f8.html",
+        "score": 52,
+        "novelty": 0.7681818181818182,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-11-01",
+        "section": "must_read",
+        "title": "10月服务业指数回升",
+        "text": "10月服务业指数回升 假期消费呈出行旺、线上增、文旅热，服务消费的修复节奏快于制造，广州文旅与线上消费商户景气相对占优。",
+        "facts": [
+          "#10月"
+        ],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://finance.eastmoney.com/a/202610313917631012.html",
+        "score": 21,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-01",
+        "section": "must_read",
+        "title": "外资三季度增持创新药红利股",
+        "text": "外资三季度增持创新药红利股 外资调仓方向指向创新药与红利资产，主题产品的咨询热度与客户配置偏好会跟着迁移。",
+        "facts": [],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://finance.eastmoney.com/a/202610313917302857.html",
+        "score": 21,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-01",
+        "section": "must_read",
+        "title": "小微痛点在需求端",
+        "text": "小微痛点在需求端 调查显示小微最大痛点不是融资而是订单，普惠客户的经营压力从融资价格转向需求与现金流。",
+        "facts": [],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://finance.eastmoney.com/a/202610313917645516.html",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-01",
+        "section": "insights",
+        "title": "同业规模扩张与客群分流",
+        "text": "同业规模扩张与客群分流 同业规模与营收增速走高，其在存款与财富端的策略变化可能带来客户在不同机构间的迁移。",
+        "facts": [],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://m.21jingji.com/article/20261031/herald/93e20ec8705847d27284285e6edd55f8.html",
+        "novelty": 0.2510869565217391,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-01",
+        "section": "insights",
+        "title": "实物金消费回暖",
+        "text": "实物金消费回暖 金价年内大幅回落带动实物金需求回升，贵金属咨询量上升，客户风险偏好分层更明显。",
+        "facts": [],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://news.southcn.com/node_812903b83a/1e88a0eaac.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-01",
+        "section": "insights",
+        "title": "小微痛点转向需求端",
+        "text": "小微痛点转向需求端 普惠客户的经营压力从融资价格转向订单与现金流，贷后关注的指标结构随之改变。",
+        "facts": [],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://finance.eastmoney.com/a/202610313917645516.html",
+        "novelty": 0.13104166666666667,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-01",
+        "section": "insights",
+        "title": "制造业景气回落传导",
+        "text": "制造业景气回落传导 制造业订单走弱会先影响小微与个体工商户的经营性现金流，授信与贷后的观察窗口前移。",
+        "facts": [],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261031/4489234_1.html",
+        "novelty": 0.2545454545454545,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-01",
+        "section": "insights",
+        "title": "外资调仓与主题配置",
+        "text": "外资调仓与主题配置 创新药与红利方向的关注度抬升，高净值客户对主题类产品的问询结构发生变化。",
+        "facts": [
+          "!问询"
+        ],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://finance.eastmoney.com/a/202610313917302857.html",
+        "novelty": 0.6554878048780488,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-01",
+        "section": "insights",
+        "title": "广交会带动跨境客群",
+        "text": "广交会带动跨境客群 广交会与APEC合作叠加，跨境结算与外汇服务的客群关注度上升，同业在跨境品牌上的投入加大。",
+        "facts": [],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "url": "https://m.21jingji.com/article/20261031/herald/e75bf7582572cee3455cb26b738ae2b0.html",
+        "novelty": 0.33444444444444443,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-01",
+        "section": "risk",
+        "title": "存款竞争升温下的定价风险",
+        "text": "存款竞争升温下的定价风险 多家银行密集重启大额存单，存款竞争升温，负债端成本压力与产品比价同步上行。 财富端货架比价压力上升，中高端客户资金搬家频率提高；个贷与对公存款的联动定价空间收窄，风控需关注高息揽储带来的成本与合规边界。",
+        "facts": [],
+        "broadcastAt": "2026-11-01T07:07:02+08:00",
+        "score": 66,
+        "novelty": 0.3313829787234042,
+        "angle": "市场反应"
+      }
+    ],
+    "runId": "41251095826"
   },
   "deliveries": [
     {
@@ -12614,6 +12757,7 @@
       "reportSha": "23e13dcb0c50019931faf7fc5f4e4e3f8bc00e35"
     }
   ],
+  "lastHeroLine": "今天主要看三个方面：政策利率换锚落地，负债定价基准生变；10月PMI回落至49.3%，小微需求端偏弱；大额存单密集回归，存款竞争升温。",
   "ipoVoicing": {
     "保伦股份": [
       "2026-09-24",
