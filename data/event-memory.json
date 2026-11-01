@@ -11414,14 +11414,15 @@
       ],
       "kind": "market",
       "firstBroadcastAt": "2026-10-25",
-      "lastBroadcastAt": "2026-10-25",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 2,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -11445,14 +11446,31 @@
           "url": "https://video.sina.com.cn/p/finance/2026-10-24/detail-iniwiutn1781331.d.html",
           "novelty": 0.30288461538461536,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-11-02",
+          "section": "must_read",
+          "title": "政策利率换锚落地",
+          "text": "政策利率换锚落地 利率传导机制重构，存贷款定价基准与客户预期同步生变，影响全条线定价与产品报价逻辑。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://m.21jingji.com/article/20261101/herald/dfac91001e16109b82a02c271bddebfe.html",
+          "score": 74,
+          "novelty": 0.7261627906976744,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "黄金大跌后如何判断转强 黄金大跌后如何判断转强 利率、资金、价格三笔账的分析框架受关注，反映客户在贵金属回调中的判断分歧加大。",
-        "黄金定价逻辑生变 黄金定价逻辑生变 金价在4300美元附近反复争夺，客户对贵金属的持有理由从避险转向利率与资金面，配置诉求分化明显。"
+        "黄金定价逻辑生变 黄金定价逻辑生变 金价在4300美元附近反复争夺，客户对贵金属的持有理由从避险转向利率与资金面，配置诉求分化明显。",
+        "政策利率换锚落地 政策利率换锚落地 利率传导机制重构，存贷款定价基准与客户预期同步生变，影响全条线定价与产品报价逻辑。"
       ],
-      "broadcastedFacts": [],
-      "peakScore": 64
+      "broadcastedFacts": [
+        "!落地"
+      ],
+      "peakScore": 74
     },
     "代发": {
       "id": "代发",
@@ -12591,137 +12609,330 @@
       ],
       "broadcastedFacts": [],
       "peakScore": 66
+    },
+    "央行|证监会": {
+      "id": "央行|证监会",
+      "topicTags": [],
+      "anchors": [
+        "央行",
+        "证监会"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-11-02",
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-02",
+          "section": "must_read",
+          "title": "央行证监会周一座谈",
+          "text": "央行证监会周一座谈 回购增持再贷款等工具落地节奏或加快，资本市场支持工具从表态进入实操阶段。",
+          "facts": [
+            "@央行",
+            "@证监会",
+            "!落地"
+          ],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://finance.eastmoney.com/a/202611013917704312.html",
+          "score": 34,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "央行证监会周一座谈 央行证监会周一座谈 回购增持再贷款等工具落地节奏或加快，资本市场支持工具从表态进入实操阶段。"
+      ],
+      "broadcastedFacts": [
+        "@央行",
+        "@证监会",
+        "!落地"
+      ],
+      "peakScore": 34
+    },
+    "ev-oryrc5": {
+      "id": "ev-oryrc5",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-11-02",
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-02",
+          "section": "must_read",
+          "title": "十五五扩内需着力点明确",
+          "text": "十五五扩内需着力点明确 统筹消费投资、畅通经济循环的规划方向落地，消费与投资的政策抓手更清晰。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20261101/4489425_1.html",
+          "score": 21,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "十五五扩内需着力点明确 十五五扩内需着力点明确 统筹消费投资、畅通经济循环的规划方向落地，消费与投资的政策抓手更清晰。"
+      ],
+      "broadcastedFacts": [
+        "!落地"
+      ],
+      "peakScore": 21
+    },
+    "ev-87yjsn": {
+      "id": "ev-87yjsn",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-02",
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-02",
+          "section": "must_read",
+          "title": "大行千亿级增持贷额度",
+          "text": "大行千亿级增持贷额度 国有大行对两家央企各新增千亿级专项额度，回购增持贷款这一工具进入额度争夺阶段。",
+          "facts": [],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://m.21jingji.com/article/20261101/herald/5acdb899ee29497bffbbec30f5c247c6.html",
+          "score": 66,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "大行千亿级增持贷额度 大行千亿级增持贷额度 国有大行对两家央企各新增千亿级专项额度，回购增持贷款这一工具进入额度争夺阶段。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 66
+    },
+    "ev-dkrd44": {
+      "id": "ev-dkrd44",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-11-02",
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-02",
+          "section": "must_read",
+          "title": "机构称接近周期底部",
+          "text": "机构称接近周期底部 中外资机构判断股市逐步接近周期性底部，客户情绪面出现修复迹象。",
+          "facts": [],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://finance.eastmoney.com/a/202611013917758716.html",
+          "score": 61,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "机构称接近周期底部 机构称接近周期底部 中外资机构判断股市逐步接近周期性底部，客户情绪面出现修复迹象。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 61
+    },
+    "ev-b2kwnj": {
+      "id": "ev-b2kwnj",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-02",
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-02",
+          "section": "insights",
+          "title": "贵金属替代品类爆单",
+          "text": "贵金属替代品类爆单 高金价下客户转向替代性贵金属品类，收藏与配置类咨询结构发生变化。",
+          "facts": [],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://news.southcn.com/node_812903b83a/005859cc34.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "贵金属替代品类爆单 贵金属替代品类爆单 高金价下客户转向替代性贵金属品类，收藏与配置类咨询结构发生变化。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-ni4nza": {
+      "id": "ev-ni4nza",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-02",
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-02",
+          "section": "insights",
+          "title": "红利资产咨询升温",
+          "text": "红利资产咨询升温 稳健型客户对分红类产品的关注度上升，财富货架上的产品对照与说明材料面临更新需求。",
+          "facts": [],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://finance.sina.com.cn/stock/zqgd/2026-11-01/doc-inixetzy1032168.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "红利资产咨询升温 红利资产咨询升温 稳健型客户对分红类产品的关注度上升，财富货架上的产品对照与说明材料面临更新需求。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-qxyjz3": {
+      "id": "ev-qxyjz3",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-02",
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-02",
+          "section": "insights",
+          "title": "纪念币评选揭晓",
+          "text": "纪念币评选揭晓 实物贵金属话题度延续，收藏类客户到店咨询与话题互动增多。",
+          "facts": [],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://finance.sina.com.cn/money/nmetal/hjzx/2026-11-01/doc-inixfvpu7753364.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "纪念币评选揭晓 纪念币评选揭晓 实物贵金属话题度延续，收藏类客户到店咨询与话题互动增多。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-2jc43r": {
+      "id": "ev-2jc43r",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-02",
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-02",
+          "section": "insights",
+          "title": "机构建议均衡配置",
+          "text": "机构建议均衡配置 客户对弹性资产与防御底仓的搭配诉求上升，资产配置沟通从单一产品转向组合框架。",
+          "facts": [],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://finance.eastmoney.com/a/202611023917815340.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "机构建议均衡配置 机构建议均衡配置 客户对弹性资产与防御底仓的搭配诉求上升，资产配置沟通从单一产品转向组合框架。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-szji7h": {
+      "id": "ev-szji7h",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-02",
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-02",
+          "section": "insights",
+          "title": "中金称估值有吸引力",
+          "text": "中金称估值有吸引力 机构对估值吸引力的表态增多，客户对中期配置话题的讨论意愿回升。",
+          "facts": [],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://finance.sina.com.cn/roll/2026-11-01/doc-inixfkxv3029796.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "中金称估值有吸引力 中金称估值有吸引力 机构对估值吸引力的表态增多，客户对中期配置话题的讨论意愿回升。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-zaz4jt": {
+      "id": "ev-zaz4jt",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-02",
+      "lastBroadcastAt": "2026-11-02",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-02",
+          "section": "insights",
+          "title": "六大机构后市研判分歧",
+          "text": "六大机构后市研判分歧 机构观点分歧仍存，客户沟通素材增多但口径一致性要求上升。",
+          "facts": [],
+          "broadcastAt": "2026-11-02T07:05:18+08:00",
+          "url": "https://finance.sina.com.cn/jjxw/2026-11-01/doc-inixfvpu7784101.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "六大机构后市研判分歧 六大机构后市研判分歧 机构观点分歧仍存，客户沟通素材增多但口径一致性要求上升。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
     }
   },
   "today": {
     "date": "2026-11-02",
-    "entries": [
-      {
-        "date": "2026-11-02",
-        "section": "must_read",
-        "title": "央行证监会周一座谈",
-        "text": "央行证监会周一座谈 回购增持再贷款等工具落地节奏或加快，资本市场支持工具从表态进入实操阶段。",
-        "facts": [
-          "@央行",
-          "@证监会",
-          "!落地"
-        ],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://finance.eastmoney.com/a/202611013917704312.html",
-        "score": 34,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-02",
-        "section": "must_read",
-        "title": "政策利率换锚落地",
-        "text": "政策利率换锚落地 利率传导机制重构，存贷款定价基准与客户预期同步生变，影响全条线定价与产品报价逻辑。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://m.21jingji.com/article/20261101/herald/dfac91001e16109b82a02c271bddebfe.html",
-        "score": 74,
-        "novelty": 0.7261627906976744,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-11-02",
-        "section": "must_read",
-        "title": "十五五扩内需着力点明确",
-        "text": "十五五扩内需着力点明确 统筹消费投资、畅通经济循环的规划方向落地，消费与投资的政策抓手更清晰。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20261101/4489425_1.html",
-        "score": 21,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-02",
-        "section": "must_read",
-        "title": "大行千亿级增持贷额度",
-        "text": "大行千亿级增持贷额度 国有大行对两家央企各新增千亿级专项额度，回购增持贷款这一工具进入额度争夺阶段。",
-        "facts": [],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://m.21jingji.com/article/20261101/herald/5acdb899ee29497bffbbec30f5c247c6.html",
-        "score": 66,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-02",
-        "section": "must_read",
-        "title": "机构称接近周期底部",
-        "text": "机构称接近周期底部 中外资机构判断股市逐步接近周期性底部，客户情绪面出现修复迹象。",
-        "facts": [],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://finance.eastmoney.com/a/202611013917758716.html",
-        "score": 61,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-02",
-        "section": "insights",
-        "title": "贵金属替代品类爆单",
-        "text": "贵金属替代品类爆单 高金价下客户转向替代性贵金属品类，收藏与配置类咨询结构发生变化。",
-        "facts": [],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://news.southcn.com/node_812903b83a/005859cc34.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-02",
-        "section": "insights",
-        "title": "红利资产咨询升温",
-        "text": "红利资产咨询升温 稳健型客户对分红类产品的关注度上升，财富货架上的产品对照与说明材料面临更新需求。",
-        "facts": [],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://finance.sina.com.cn/stock/zqgd/2026-11-01/doc-inixetzy1032168.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-02",
-        "section": "insights",
-        "title": "纪念币评选揭晓",
-        "text": "纪念币评选揭晓 实物贵金属话题度延续，收藏类客户到店咨询与话题互动增多。",
-        "facts": [],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://finance.sina.com.cn/money/nmetal/hjzx/2026-11-01/doc-inixfvpu7753364.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-02",
-        "section": "insights",
-        "title": "机构建议均衡配置",
-        "text": "机构建议均衡配置 客户对弹性资产与防御底仓的搭配诉求上升，资产配置沟通从单一产品转向组合框架。",
-        "facts": [],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://finance.eastmoney.com/a/202611023917815340.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-02",
-        "section": "insights",
-        "title": "中金称估值有吸引力",
-        "text": "中金称估值有吸引力 机构对估值吸引力的表态增多，客户对中期配置话题的讨论意愿回升。",
-        "facts": [],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://finance.sina.com.cn/roll/2026-11-01/doc-inixfkxv3029796.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-02",
-        "section": "insights",
-        "title": "六大机构后市研判分歧",
-        "text": "六大机构后市研判分歧 机构观点分歧仍存，客户沟通素材增多但口径一致性要求上升。",
-        "facts": [],
-        "broadcastAt": "2026-11-02T07:05:18+08:00",
-        "url": "https://finance.sina.com.cn/jjxw/2026-11-01/doc-inixfvpu7784101.shtml",
-        "novelty": 1
-      }
-    ],
-    "runId": "41360285278"
+    "entries": []
   },
   "deliveries": [
     {
@@ -13050,9 +13261,15 @@
       "runId": "41253970530",
       "reportRunId": "41251095826",
       "reportSha": "98ad2d0838ac599b8936cba75fe06464a2266cc0"
+    },
+    {
+      "date": "2026-11-02",
+      "pushedAt": "2026-11-02T07:47:27+08:00",
+      "runId": "41363789741",
+      "reportRunId": "41360285278",
+      "reportSha": "8609cc74961a3bd6a767d89b6ff903b374d03f5f"
     }
   ],
-  "lastHeroLine": "今天主要看三个方面：政策利率换锚，存贷款定价传导在变；资本市场工具加码，回购增持额度争夺升温；双11大件消费走强，分期场景有量。",
   "ipoVoicing": {
     "保伦股份": [
       "2026-09-24",
