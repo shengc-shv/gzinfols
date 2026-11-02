@@ -6,7 +6,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
-import { resolveInsightSources } from "../lib/services/enrich/executive-summary";
+import { resolveInsightSources, isMarketViewInsight } from "../lib/services/enrich/executive-summary";
 
 const inputs = [
   { title: "8月LPR保持不变，今年房贷还能否下调？", summary: "LPR 不变但下调预期升温。", url: "https://a/lpr" },
@@ -54,3 +54,35 @@ test("改写表述的单源洞察也能回链（共享 bigram 门槛接住）", 
   assert.equal(wrong.length, 0, "无任何共享字符片段→不臆造错源");
 });
 
+
+/* ------------------------------------------------------------------ *
+ * 2026-11-02 sc：商机不许拿「市场观点」凑数
+ * ------------------------------------------------------------------ */
+
+test("商机口径：券商研判 / 估值观点 / 配置建议 一律判为市场观点（应剔除）", () => {
+  // 11-02 实测 6 条商机里有 4 条是这类，全部落不到客群/产品上
+  const bad: Array<[string, string, Array<{ title: string }>?]> = [
+    ["机构建议均衡配置", "客户对弹性资产与防御底仓的搭配诉求上升。"],
+    ["中金称估值有吸引力", "机构对估值吸引力的表态增多。"],
+    ["六大机构后市研判分歧", "机构观点分歧仍存，客户沟通素材增多。"],
+    ["红利资产咨询升温", "稳健型客户对分红类产品的关注度上升。", [{ title: "红利资产成香饽饽！机构最新解读" }]],
+    ["券商晨会要点", "关注度提升。"],
+  ];
+  for (const [topic, impact, src] of bad) {
+    assert.ok(isMarketViewInsight(topic, impact, src), `应剔除：${topic}`);
+  }
+});
+
+test("商机口径反向守护：落到客群/产品的真线索不得被误杀", () => {
+  const good: Array<[string, string, Array<{ title: string }>?]> = [
+    ["大额存单上新与定存降息分化", "中长期存单集中供给，客户在期限与收益间的选择出现空档。"],
+    ["双十一消费贷贴息叠加分期战", "贴息与购物节叠加，大额分期定价与额度竞争升温。"],
+    ["同业压缩互联网助贷新增合作", "消费贷获客渠道结构面临调整，合作方名单发生变化。"],
+    ["外资调仓与主题配置", "外资增持创新药与红利股。", [{ title: "三季度外资机构大调仓增持创新药及红利股" }]],
+    // 只要有一条来源落到实事上就保留（宁可错留，不可错杀）
+    ["红利资产咨询升温", "客户关注度上升。", [{ title: "红利资产成香饽饽！机构最新解读" }, { title: "某行发布红利主题理财产品" }]],
+  ];
+  for (const [topic, impact, src] of good) {
+    assert.ok(!isMarketViewInsight(topic, impact, src), `不得误杀：${topic}`);
+  }
+});

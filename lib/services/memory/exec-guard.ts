@@ -44,6 +44,8 @@ import {
   nextAngle,
   MUST_READ_PLAY_TARGET,
   INSIGHT_PLAY_TARGET,
+  mustReadTargetFor,
+  insightTargetFor,
   type EventMemoryStore,
   type EventRecord,
   type MemoryCandidate,
@@ -344,22 +346,24 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     // ③ 顺序判重：依次取，未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延下一条候补，
     //    直到选满 MUST_READ_PLAY_TARGET（规则 3）。候补用尽仍不足 → 按实际剩余（规则 4），
     //    不强拉池内条目凑数 —— 宁缺勿滥。
+    // 周末版降档（2026-11-02 sc）：周六/周日/周一素材只有工作日一半，满额会逼 LLM 拿股市评论凑数。
+    const mrTarget = mustReadTargetFor(today);
     const r = pickUntilTarget({
       items: cands,
       toCandidate: (c) => c.cand,
       section: "must_read",
       today,
       broadcastAt,
-      target: MUST_READ_PLAY_TARGET,
+      target: mrTarget,
       store,
     });
     store = r.store;
     decisions.push(...r.chosen.map((c) => c.decision), ...r.skipped);
     if (r.chosen.length > 0) next.must_read = r.chosen.map((c) => c.item.m);
 
-    if (r.skipped.length > 0 || r.chosen.length < MUST_READ_PLAY_TARGET) {
+    if (r.skipped.length > 0 || r.chosen.length < mrTarget) {
       log.push(
-        `🧠 必读：候选 ${cands.length} 条（按宏观视角分降序）→ 播出 ${r.chosen.length}/${MUST_READ_PLAY_TARGET} 条` +
+        `🧠 必读：候选 ${cands.length} 条（按宏观视角分降序）→ 播出 ${r.chosen.length}/${mrTarget} 条` +
           `（命中重复跳过 ${r.skipped.length} 条：${r.skipped.map((d) => d.verdict).join(",") || "无"}）`,
       );
     }
@@ -367,7 +371,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
       candidates: cands.length,
       played: r.chosen.length,
       skippedByMemory: r.skipped.length,
-      target: MUST_READ_PLAY_TARGET,
+      target: mrTarget,
     };
   }
 
@@ -407,13 +411,14 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
 
     // 依次取：未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延下一条候补，直到选满
     // INSIGHT_PLAY_TARGET。候补用尽仍不足 → 按实际剩余，不强拉池内条目凑数（宁缺勿滥）。
+    const inTarget = insightTargetFor(today);
     const r = pickUntilTarget({
       items: cands,
       toCandidate: (c) => c.cand,
       section: "insights",
       today,
       broadcastAt,
-      target: INSIGHT_PLAY_TARGET,
+      target: inTarget,
       store,
     });
     store = r.store;
@@ -426,9 +431,9 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
       .filter((c) => !chosenSet.has(c.it))
       .map((c) => c.it.topic ?? "");
 
-    if (r.skipped.length > 0 || r.chosen.length < INSIGHT_PLAY_TARGET) {
+    if (r.skipped.length > 0 || r.chosen.length < inTarget) {
       log.push(
-        `🧠 商机：候选 ${cands.length} 条（按商机视角分降序）→ 播出 ${r.chosen.length}/${INSIGHT_PLAY_TARGET} 条` +
+        `🧠 商机：候选 ${cands.length} 条（按商机视角分降序）→ 播出 ${r.chosen.length}/${inTarget} 条` +
           `（命中重复跳过 ${r.skipped.length} 条：${r.skipped.map((d) => d.verdict).join(",") || "无"}）`,
       );
     }
@@ -452,7 +457,7 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
           (s) => s?.url && (next.must_read ?? []).some((m) => m.url === s.url),
         ),
       ).length,
-      target: INSIGHT_PLAY_TARGET,
+      target: inTarget,
     };
   }
 

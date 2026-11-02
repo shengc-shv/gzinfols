@@ -191,6 +191,13 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
 
   **客户客群聚焦（极重要）**：分行当前最关注的三类客群商机须优先覆盖——① 零售AUM（财富管理/理财/基金/存款/资产配置等零售管理资产）；② 中高端客群(过亿资产)（私行/家族信托/企业主/超高净值）；③ 普惠小微贷款客户（普惠金融/小微企业/个体工商户/经营贷）。生成 insights 时，若输入中存在这三类客群的高信号，应优先选取并分别打上对应 segments 标签，确保三条客群线索在「商机洞察」中都有呈现；不要只堆房贷/宏观而漏掉普惠小微与私行客群。
 2. insights（商机提示，10-12 条）— **偏落地的事实线索**：哪类客群/客户/产品出现了值得关注的变化（新政策、新资金、新场景、新动向）。**只陈述事实与影响，不给任何行动建议**（见文末「不许给建议」）。**不放监管威胁**（威胁归 risk）。**多给候选**：下游会按记忆判重剔除近期已播过的，命中重复时顺延取用靠后候选，故请尽量凑满 10-12 条（宁多勿少）。每条：
+   - ⛔ **不许拿"市场观点"凑数（2026-11-02 sc 定，硬约束）**：商机是**可跟进的具体线索**，不是行情评论。下列一律不进 insights：
+     ① 券商/机构研判、策略、晨会、周报（「十大券商策略」「六大机构后市研判」「XX 策略周报」）；
+     ② 估值与目标价观点（「估值已具备吸引力」「中期向好趋势未变」「底部蓄势」「等待右侧信号」）；
+     ③ 配置建议（「机构建议均衡配置」「保持耐心」）；
+     ④ 投资标的点评、个股异动复盘。
+     判据：**这条能不能落到某个客群/产品上？** 落不到（只说明"市场怎么看"）就不要写。
+     宁可只给 2-3 条真线索，也不要凑满 6 条行情评论 —— 少而准 > 多而空。
    - 📌 **双视角口径（2026-10-23 sc 定）**：同一件素材若**既有宏观面又有商机面**（例：「银行理财规模重回35万亿」→ 宏观面是行业总量回升，商机面是客户资金回流、货架配置诉求变化），**两个板块都可以写**，不再要求互斥。但商机侧必须写成「**客群/产品侧发生了什么变化**」，不得复述宏观事实本身（不要重复数字与政策表述）。避免：商机里再写一遍「理财规模超35万亿」——那是必读的活。
    - topic：主题（15 字内）
    - impact：对广州分行零售/对公业务的潜在影响（40-60 字）—— **写「这件事会让什么发生变化」，不写「我们该怎么做」**
@@ -338,6 +345,37 @@ export function dedupeExecutiveCrossSection(exec: ExecutiveSummary): ExecutiveSu
 
 /** LLM runner 类型（组合根把 LlmPort 适配成此签名；gzinfo 为 runLlm 直连）。 */
 export type ExecLlmRunner = (systemPrompt: string, userPrompt: string) => Promise<string>;
+
+/**
+ * 「市场观点/券商研判」话术（2026-11-02 sc：商机不许拿行情评论凑数）。
+ *
+ * 背景（11-02 实测）：商机 6 条**全部**是市场评论 ——
+ *   「红利资产成香饽饽！机构最新解读」「机构建议均衡配置」
+ *   「中金：估值已具备较好投资吸引力，中期向好趋势未变」「六大机构后市研判分歧」
+ * 一条都落不到具体客群/产品上，其中「机构建议均衡配置」还踩了「全篇不给操作建议」。
+ *
+ * ⚠️ 必须**配对**（机构+解读/建议/研判）才命中：单用「机构」会误伤
+ * 「机构数据显示…」这类正常统计稿。
+ */
+const MARKET_VIEW_RE =
+  /机构(?:最新)?(?:解读|建议|研判|观点|策略|预测|看市)|(?:后市|市场|券商)(?:最新)?研判|十大券商|六大机构|券商(?:策略|观点|研报|晨会)|估值(?:已)?(?:具备|有|处于|处).{0,8}(?:吸引力|优势)|投资吸引力|中期向好|保持耐心|等待右侧|底部蓄势|建议.{0,6}(?:配置|观望|入场)|晨会纪要|策略周报|研究周报/;
+
+/**
+ * 该条商机是否只是「市场观点」（应当剔除）。
+ *
+ * 判据：topic+impact 命中话术，或**全部**来源标题都命中（只要有一条落到实事上就保留）。
+ * 宁可错留不可错杀：来源里有一条是实事（政策/产品/客群）就放行。
+ */
+export function isMarketViewInsight(
+  topic: string,
+  impact: string,
+  sources?: Array<{ title?: string }>,
+): boolean {
+  if (MARKET_VIEW_RE.test(`${topic ?? ""} ${impact ?? ""}`)) return true;
+  const titles = (sources ?? []).map((s) => (s?.title ?? "").trim()).filter(Boolean);
+  if (titles.length === 0) return false;
+  return titles.every((t) => MARKET_VIEW_RE.test(t));
+}
 
 /**
  * 按分行相关性取前 N（2026-09-15 Token 优化）。
@@ -572,7 +610,14 @@ export async function generateExecutiveSummary(
           ...(typeof it.group === "string" && it.group.trim() ? { group: it.group.trim() } : {}),
           ...(sources.length > 0 ? { sources } : {}),
         };
-      }),
+      })
+        // 2026-11-02 sc：剔除「纯市场观点」商机（券商研判/估值观点/配置建议）。
+        // prompt 已加了硬约束，这里是**代码兜底** —— LLM 偶尔仍会拿行情评论凑数。
+        .filter((it) => {
+          if (!isMarketViewInsight(it.topic, it.impact, it.sources)) return true;
+          console.warn(`[exec-llm] 商机剔除（市场观点，非可跟进线索）：${it.topic}`);
+          return false;
+        }),
       spoken_insights: typeof parsed.spoken_insights === "string" && parsed.spoken_insights.trim() ? parsed.spoken_insights.trim() : undefined,
       risk,
       spoken_risk:

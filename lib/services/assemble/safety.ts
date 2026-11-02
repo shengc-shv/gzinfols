@@ -35,11 +35,29 @@ function blobOf(it: unknown): string {
 export function hitsCrypto(it: unknown): boolean {
   const blob = blobOf(it);
   if (!blob) return false;
-  return CRYPTO_WORDS.some((w) => blob.includes(w));
+  return textHitsCrypto(blob);
 }
+
+/**
+ * 裸「加密」前缀兜底（2026-11-02，红线事故后补）。
+ *
+ * 背景：`CRYPTO_WORDS` 是精确子串表，只有「加密货币/加密资产/加密市场/加密行情」四个搭配，
+ * 实测 10-30~11-02 连续漏掉「加密安全事件」「加密盗窃」「加密股」「加密投资」「加密低迷」
+ * —— 这五类都**不在**表里，`textHitsCrypto` 全部返回 false，内容已渲染上线。
+ *
+ * 为什么不直接把裸词「加密」塞进 `CRYPTO_WORDS`：那张表是 `BANNED_WORDS` 的来源，
+ * 会被 enrich 前筛用于**整条毙掉**文章 —— 「数据加密传输」「加密算法」这类银行科技稿
+ * 会被误杀。故用**否定断言**只在渲染/口播兜底这一层拦：
+ *   命中「加密」且**后面不是**技术词 → 判为加密资产内容。
+ * ⚠️ 技术词清单宁全勿缺：漏一个就是把正常稿毙掉。
+ */
+export const CRYPTO_PREFIX_RE =
+  /加密(?!算法|技术|传输|存储|协议|芯片|模块|方式|手段|系统|方案|密钥|网关|终端|平台建设)/;
 
 /** 纯文本是否命中加密词。 */
 function textHitsCrypto(text: string): boolean {
+  if (!text) return false;
+  if (CRYPTO_PREFIX_RE.test(text)) return true;
   return CRYPTO_WORDS.some((w) => text.includes(w));
 }
 

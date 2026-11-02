@@ -160,3 +160,48 @@ test("红线（端到端）：渲染产物里不得出现加密词（stock_news 
   assert.ok(!html.includes("u-c"), "加密动态条目整体不得被渲染");
   assert.ok(html.includes("欧洲冬季能源紧张"), "同一张卡的正常板块句仍应渲染");
 });
+
+/* ------------------------------------------------------------------ *
+ * 2026-11-02 事故回归：10-30 / 11-01 / 11-02 三天加密内容已渲染上线
+ * ------------------------------------------------------------------ */
+
+test("红线（2026-11-02 事故）：加密安全事件 / 币安 / 加密盗窃 / 加密股 必须命中", () => {
+  // 实测漏网原句（已出现在线上页面 stock_recap.us）
+  const leaked = [
+    "纳指跌2.86%，标普跌1.82%，AI交易现裂痕叠加加密安全事件拖累。",
+    "币安遭约63亿美元黑客攻击，创加密盗窃纪录，约30亿美元已冻结。",
+    "加密股财报分化，加密投资回暖抵消交易疲弱。",
+    "Robinhood股价下挫，加密低迷拖累利润，新业务增长被抵消。",
+    "Coinbase三季度净利大增66%",
+  ];
+  for (const s of leaked) {
+    assert.ok(hitsCrypto({ title: s }), `应拦截：${s}`);
+  }
+
+  const dirty = sanitizeCrypto({
+    ...report([]),
+    stock_recap: {
+      us: {
+        overview: "纳指跌2.86%，AI交易现裂痕叠加加密安全事件拖累。",
+        sectors: ["币安遭约63亿美元黑客攻击，创加密盗窃纪录。", "AI交易出现裂痕，AMD成少数亮点。"],
+        indices: [],
+        meta: { source: "CNBC Investing", quoteSource: "新浪行情", date: "2026-11-01" },
+      },
+    } as unknown as StockRecap,
+  } as DailyReport);
+  assert.ok(dirty.stats.sectors + dirty.stats.sentences > 0, "事故报告应被清洗");
+  assert.ok(!JSON.stringify(dirty.report).includes("加密"), "清洗后不得残留加密字样");
+  assert.ok(JSON.stringify(dirty.report).includes("AMD"), "同一张卡的正常板块句仍保留");
+});
+
+test("红线反向守护：银行科技稿的「数据加密/加密算法/加密传输」不得被误杀", () => {
+  const safe = [
+    "该行完成数据加密传输改造，全部通道启用国密算法",
+    "量子加密技术试点落地，加密芯片进入测试阶段",
+    "加密存储方案通过验收，加密网关完成部署",
+    "手机银行采用加密协议保障交易安全",
+  ];
+  for (const s of safe) {
+    assert.ok(!hitsCrypto({ title: s }), `不得误杀：${s}`);
+  }
+});

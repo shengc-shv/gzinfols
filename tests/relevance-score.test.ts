@@ -400,3 +400,22 @@ test("P1 刻意不收「中期分红」：分红季样本缺失，先不加（sc
   const smallBank = scoreBranchRelevance({ title: "某农商行公布中期分红方案" });
   assert.ok(!smallBank.businessLines.includes("政策信号"), "单家小银行分红不得蹭政策线");
 });
+
+test("软资讯补「评选」：评奖通稿下沉，但「…揭晓」类正经新闻不得被误降", () => {
+  // 11-02 实测：纪念币评奖通稿 61 分 insight 进了商机（落不到任何客群/产品）
+  const award = scoreBranchRelevance({
+    title: "“最受群众喜爱的2025年贵金属纪念币”评选四大奖项揭晓",
+  });
+  assert.equal(award.actionability, 0.2, "评选类应落到软资讯档");
+  assert.ok(award.score <= 55, `应下沉到候选线以下，实际 ${award.score}`);
+  assert.notEqual(award.tier, "insight");
+
+  // 反向守护：只加「评选」，⛔ 不能加裸「揭晓」（实测会误伤这三类正经新闻）
+  for (const t of [
+    "环球下周看点：AI巨头财报密集揭晓 美联储议息或为利率定调",
+    "今夜无眠！美联储决议凌晨揭晓：暂停加息渐成共识",
+  ]) {
+    const r = scoreBranchRelevance({ title: t });
+    assert.notEqual(r.actionability, 0.2, `不得被当软资讯：${t}`);
+  }
+});

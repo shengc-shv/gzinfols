@@ -378,6 +378,45 @@ export const MUST_READ_PLAY_TARGET = 5;
 export const INSIGHT_CANDIDATE_POOL = 12;
 export const INSIGHT_PLAY_TARGET = 6;
 
+// ---------------------------------------------------------------------------
+// 周末版降档（2026-11-02 sc 授权）
+// ---------------------------------------------------------------------------
+// 背景（11-02 实测）：周末+周一早报的可用内容只有工作日的一半 ——
+//   sina-bank 抓到 47 条但**收录 0**（周末频道不更新，滚动列表还是周五那批，被时间窗整批挡掉）、
+//   guancha 53→0、southcn 33→2；能给内容的只剩 24 小时滚动的股市源（占比 31%→43%）。
+// 后果：满额 5+6 会逼着 LLM 拿「券商策略 / 估值观点 / 机构研判」凑数（11-02 商机 6 条全是市场评论）。
+// 处置：周末版**减少目标条数**（宁缺毋滥），而不是降低选条标准。
+//
+// ⚠️ 判据用**报告日期**（不是抓取时刻）：周一早报抓的是周日内容，同样算周末版。
+
+/** 星期几（0=周日 … 6=周六）。Sakamoto 算法，纯整数运算 —— 服务层禁止裸 new Date()。 */
+function weekdayOf(dateKey: string): number {
+  const [y, m, d] = dateKey.split("-").map(Number);
+  if (!y || !m || !d) return 1; // 非法日期 → 按周一（最保守：降档）
+  const t = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4];
+  const yy = m < 3 ? y - 1 : y;
+  return (yy + Math.floor(yy / 4) - Math.floor(yy / 100) + Math.floor(yy / 400) + t[m - 1] + d) % 7;
+}
+
+/**
+ * 是否「周末版」：周六 / 周日 / **周一**（周一早报的素材是周日的）。
+ * 周二至周五为正常版。
+ */
+export function isWeekendEdition(dateKey: string): boolean {
+  const wd = weekdayOf(dateKey);
+  return wd === 0 || wd === 6 || wd === 1;
+}
+
+/** 当日必读播出目标：工作日 5、周末版 4。 */
+export function mustReadTargetFor(dateKey: string): number {
+  return isWeekendEdition(dateKey) ? MUST_READ_PLAY_TARGET - 1 : MUST_READ_PLAY_TARGET;
+}
+
+/** 当日商机播出目标：工作日 6、周末版 5。 */
+export function insightTargetFor(dateKey: string): number {
+  return isWeekendEdition(dateKey) ? INSIGHT_PLAY_TARGET - 1 : INSIGHT_PLAY_TARGET;
+}
+
 /**
  * 「同题」判定阈值（标题 bigram Dice ≥ 该值即视为同一事件）。
  *
