@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-03T07:08:12+08:00",
+  "fetchedAt": "2026-11-04T07:06:02+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
     "gd-bse-audit": 3,
-    "gd-csrc-tutoring": 2,
+    "gd-csrc-tutoring": 1,
     "gd-sse-audit": 1,
     "gd-szse-audit": 1
   },
@@ -75,17 +75,6 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "珠海菲高科技股份有限公司 (辅导备案) [广东证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/10/28/PREIPO_F0101_V01_20261028_37512_Q/6DC2A7C89943449394E79148DB2F4D2E/关于珠海菲高科技股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导备案报告.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 东方证券股份有限公司 | 备案时间: 2026-10-27 | 状态: 辅导备案 | 报告: 辅导备案报告 | 披露: 2026-10-28",
-      "publishedAt": "2026-10-28",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
     }
   ]
 }
