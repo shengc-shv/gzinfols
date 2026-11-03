@@ -2746,8 +2746,8 @@
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-09-19",
-      "lastBroadcastAt": "2026-10-22",
-      "broadcastCount": 4,
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 5,
       "sections": [
         "must_read",
         "insights"
@@ -2756,7 +2756,8 @@
         "政策变化",
         "市场反应",
         "受影响人群",
-        "数据验证"
+        "数据验证",
+        "同业动作"
       ],
       "samples": [
         {
@@ -2825,6 +2826,21 @@
           "score": 56,
           "novelty": 0.505,
           "angle": "数据验证"
+        },
+        {
+          "date": "2026-11-04",
+          "section": "must_read",
+          "title": "【财经分析】上调外汇存款准备金率，央行缘何出手稳汇率",
+          "text": "【财经分析】上调外汇存款准备金率，央行缘何出手稳汇率 国家核心监管新政（跨境/财富）：建议分行评估对客与产品影响",
+          "facts": [
+            "!上调",
+            "@央行"
+          ],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20261103/4490460_1.html",
+          "score": 87,
+          "novelty": 0.7377659574468085,
+          "angle": "同业动作"
         }
       ],
       "broadcastedTexts": [
@@ -2832,13 +2848,15 @@
         "央行三季度例会首现新提法 央行三季度例会首现新提法 货币政策最新部署释放结构性信号，信贷投向与负债成本走向将直接影响分行零售资产端与存款定价安排。",
         "央行最新部署货币政策 央行最新部署货币政策 政策基调延续，后续操作节奏影响零售信贷投放与存款成本，需纳入四季度经营规划考量。",
         "老存单到期自动降档 老存单到期自动降档 中小行长期限存款供给收缩，客户到期资金再配置需求上升，零售AUM的承接窗口打开。",
-        "隔夜逆回购首日800亿 隔夜逆回购首日800亿 央行启动连续隔夜逆回购、首日投放800亿元，短端流动性调节方式生变，资金价格预期与存款定价窗口同步受影响。"
+        "隔夜逆回购首日800亿 隔夜逆回购首日800亿 央行启动连续隔夜逆回购、首日投放800亿元，短端流动性调节方式生变，资金价格预期与存款定价窗口同步受影响。",
+        "【财经分析】上调外汇存款准备金率，央行缘何出手稳汇率 【财经分析】上调外汇存款准备金率，央行缘何出手稳汇率 国家核心监管新政（跨境/财富）：建议分行评估对客与产品影响"
       ],
       "broadcastedFacts": [
         "@央行",
-        "#800亿元"
+        "#800亿元",
+        "!上调"
       ],
-      "peakScore": 79
+      "peakScore": 87
     },
     "个贷|利率": {
       "id": "个贷|利率",
@@ -7098,8 +7116,8 @@
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-10-01",
-      "lastBroadcastAt": "2026-10-30",
-      "broadcastCount": 4,
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 5,
       "sections": [
         "must_read",
         "insights"
@@ -7160,13 +7178,28 @@
           "score": 34,
           "novelty": 0.3333333333333333,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-11-04",
+          "section": "must_read",
+          "title": "离岸人民币急跌200点",
+          "text": "离岸人民币急跌200点 央行出手后汇率快速回调，外贸企业结汇节奏与汇率风险敞口管理成为近期市场焦点。",
+          "facts": [
+            "@央行"
+          ],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://m.21jingji.com/article/20261103/herald/0961aaf472f38b6a8a18a9c20fbc56a3.html",
+          "score": 77,
+          "novelty": 0.3188888888888889,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
         "财政央行协同延伸至住房消费 财政央行协同延伸至住房消费 促内需工具延伸至住房消费，住房金融政策组合仍在加码，可跟踪后续细则并提前储备按揭项目。",
         "央行阐明汇率政策立场 央行阐明汇率政策立场 强调市场决定作用、无意靠贬值获贸易优势，有换汇与跨境结算需求的客户对汇率预期的判断将随之调整。",
         "从化城中村安置房供地 从化城中村安置房供地 从化两宗城中村改造复建安置房完成供地，改造片区居民的回迁时点明确，按揭与装修类资金需求在片区集中形成。",
-        "央行上海专班92项任务 央行上海专班92项任务 科技、绿色、普惠考核趋细，各地五篇大文章的工作要求正从方向转向可量化任务。"
+        "央行上海专班92项任务 央行上海专班92项任务 科技、绿色、普惠考核趋细，各地五篇大文章的工作要求正从方向转向可量化任务。",
+        "离岸人民币急跌200点 离岸人民币急跌200点 央行出手后汇率快速回调，外贸企业结汇节奏与汇率风险敞口管理成为近期市场焦点。"
       ],
       "broadcastedFacts": [
         "@央行"
@@ -11720,16 +11753,20 @@
       "anchors": [
         "国务院",
         "客群",
-        "养老"
+        "养老",
+        "缴存"
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-10-26",
-      "lastBroadcastAt": "2026-10-26",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 2,
       "sections": [
-        "must_read"
+        "must_read",
+        "insights"
       ],
-      "anglesUsed": [],
+      "anglesUsed": [
+        "政策变化"
+      ],
       "samples": [
         {
           "date": "2026-10-26",
@@ -11743,10 +11780,22 @@
           "url": "https://finance.eastmoney.com/a/202610253907169967.html",
           "score": 61,
           "novelty": 1
+        },
+        {
+          "date": "2026-11-04",
+          "section": "insights",
+          "title": "个人养老金近八成账户零缴存",
+          "text": "个人养老金近八成账户零缴存 账户开而不缴普遍，养老客群的实际缴存转化与产品适配存在明显缺口。",
+          "facts": [],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://finance.sina.com.cn/money/insurance/bxdt/2026-11-03/doc-inixmsvy6745039.shtml",
+          "novelty": 0.33205128205128204,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "国常会研究人口与经济发展 国常会研究人口与经济发展 人口与家庭结构议题进入国务院议程，养老、生育与家庭保障类政策预期升温，长期客群结构面临重估。"
+        "国常会研究人口与经济发展 国常会研究人口与经济发展 人口与家庭结构议题进入国务院议程，养老、生育与家庭保障类政策预期升温，长期客群结构面临重估。",
+        "个人养老金近八成账户零缴存 个人养老金近八成账户零缴存 账户开而不缴普遍，养老客群的实际缴存转化与产品适配存在明显缺口。"
       ],
       "broadcastedFacts": [
         "@国务院"
@@ -12280,12 +12329,14 @@
       ],
       "kind": "market",
       "firstBroadcastAt": "2026-10-31",
-      "lastBroadcastAt": "2026-10-31",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 2,
       "sections": [
         "must_read"
       ],
-      "anglesUsed": [],
+      "anglesUsed": [
+        "政策变化"
+      ],
       "samples": [
         {
           "date": "2026-10-31",
@@ -12299,15 +12350,32 @@
           "url": "https://www.cnfin.com/yw-lb/detail/20261030/4488998_1.html",
           "score": 61,
           "novelty": 1
+        },
+        {
+          "date": "2026-11-04",
+          "section": "must_read",
+          "title": "外汇存准率上调至6%",
+          "text": "外汇存准率上调至6% 打破汇率单边升值预期，人民币双向波动信号明确，跨境结算与套保需求结构随之变化。",
+          "facts": [
+            "#6%",
+            "!上调"
+          ],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20261103/4490530_1.html",
+          "score": 74,
+          "novelty": 0.7749999999999999,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "沪银单日重挫超6% 沪银单日重挫超6% 商品市场贵金属集体走弱，与金价形成共振，反映避险资金正在重新选择方向。"
+        "沪银单日重挫超6% 沪银单日重挫超6% 商品市场贵金属集体走弱，与金价形成共振，反映避险资金正在重新选择方向。",
+        "外汇存准率上调至6% 外汇存准率上调至6% 打破汇率单边升值预期，人民币双向波动信号明确，跨境结算与套保需求结构随之变化。"
       ],
       "broadcastedFacts": [
-        "#6%"
+        "#6%",
+        "!上调"
       ],
-      "peakScore": 61
+      "peakScore": 74
     },
     "#200%|#8bp": {
       "id": "#200%|#8bp",
@@ -12651,13 +12719,15 @@
       ],
       "kind": "market",
       "firstBroadcastAt": "2026-11-01",
-      "lastBroadcastAt": "2026-11-01",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 2,
       "sections": [
-        "risk"
+        "risk",
+        "insights"
       ],
       "anglesUsed": [
-        "市场反应"
+        "市场反应",
+        "受影响人群"
       ],
       "samples": [
         {
@@ -12670,10 +12740,34 @@
           "score": 66,
           "novelty": 0.3313829787234042,
           "angle": "市场反应"
+        },
+        {
+          "date": "2026-11-04",
+          "section": "insights",
+          "title": "六大行大额存单集体归队",
+          "text": "六大行大额存单集体归队 存款竞争回到大行主场，客户对高息长期存款的比价诉求上升，中小行存款留存与定价空间被压缩。",
+          "facts": [],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://finance.cctv.com/2026/11/03/ARTIFhSTMBvINwAVDmfyVsVS261103.shtml",
+          "novelty": 0.3427083333333333,
+          "angle": "市场反应"
+        },
+        {
+          "date": "2026-11-04",
+          "section": "insights",
+          "title": "四家大行净息差回升",
+          "text": "四家大行净息差回升 负债成本改善在大行报表中显现，存款结构与定价的同业参照系发生变化。",
+          "facts": [],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://finance.sina.com.cn/jjxw/2026-11-03/doc-inixkzyk2429251.shtml",
+          "novelty": 0.3131578947368421,
+          "angle": "受影响人群"
         }
       ],
       "broadcastedTexts": [
-        "存款竞争升温下的定价风险 存款竞争升温下的定价风险 多家银行密集重启大额存单，存款竞争升温，负债端成本压力与产品比价同步上行。 财富端货架比价压力上升，中高端客户资金搬家频率提高；个贷与对公存款的联动定价空间收窄，风控需关注高息揽储带来的成本与合规边界。"
+        "存款竞争升温下的定价风险 存款竞争升温下的定价风险 多家银行密集重启大额存单，存款竞争升温，负债端成本压力与产品比价同步上行。 财富端货架比价压力上升，中高端客户资金搬家频率提高；个贷与对公存款的联动定价空间收窄，风控需关注高息揽储带来的成本与合规边界。",
+        "六大行大额存单集体归队 六大行大额存单集体归队 存款竞争回到大行主场，客户对高息长期存款的比价诉求上升，中小行存款留存与定价空间被压缩。",
+        "四家大行净息差回升 四家大行净息差回升 负债成本改善在大行报表中显现，存款结构与定价的同业参照系发生变化。"
       ],
       "broadcastedFacts": [],
       "peakScore": 66
@@ -13008,12 +13102,14 @@
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-11-03",
-      "lastBroadcastAt": "2026-11-03",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 2,
       "sections": [
         "must_read"
       ],
-      "anglesUsed": [],
+      "anglesUsed": [
+        "政策变化"
+      ],
       "samples": [
         {
           "date": "2026-11-03",
@@ -13027,13 +13123,30 @@
           "url": "https://finance.eastmoney.com/a/202611033919181779.html",
           "score": 84,
           "novelty": 1
+        },
+        {
+          "date": "2026-11-04",
+          "section": "must_read",
+          "title": "证监会稳市组合拳落地",
+          "text": "证监会稳市组合拳落地 护盘式回购优化、主动ETF加快建仓、两融逆周期调节同步推进，资本市场政策环境边际转暖，权益类业务预期修复。",
+          "facts": [
+            "!落地",
+            "@证监会"
+          ],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://finance.eastmoney.com/a/202611033919181779.html",
+          "score": 84,
+          "novelty": 0.5355263157894736,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "证监会多措稳市场：回购与两融齐动 证监会多措稳市场：回购与两融齐动 护盘式回购优化、主动ETF加快建仓、两融逆周期调节同步推进，资本市场业务环境边际转暖。"
+        "证监会多措稳市场：回购与两融齐动 证监会多措稳市场：回购与两融齐动 护盘式回购优化、主动ETF加快建仓、两融逆周期调节同步推进，资本市场业务环境边际转暖。",
+        "证监会稳市组合拳落地 证监会稳市组合拳落地 护盘式回购优化、主动ETF加快建仓、两融逆周期调节同步推进，资本市场政策环境边际转暖，权益类业务预期修复。"
       ],
       "broadcastedFacts": [
-        "@证监会"
+        "@证监会",
+        "!落地"
       ],
       "peakScore": 84
     },
@@ -13150,13 +13263,14 @@
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-11-03",
-      "lastBroadcastAt": "2026-11-03",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 2,
       "sections": [
         "insights"
       ],
       "anglesUsed": [
-        "受影响人群"
+        "受影响人群",
+        "市场反应"
       ],
       "samples": [
         {
@@ -13169,168 +13283,168 @@
           "url": "https://www.guancha.cn/GuanJinRong/2026_11_02_906744.shtml",
           "novelty": 0.3230769230769231,
           "angle": "受影响人群"
+        },
+        {
+          "date": "2026-11-04",
+          "section": "insights",
+          "title": "腾讯联手Visa布局跨境支付",
+          "text": "腾讯联手Visa布局跨境支付 跨境与智能体支付赛道竞争加剧，跨境客群收单与结算方案的比价维度增多。",
+          "facts": [],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_11_03_906860.shtml",
+          "novelty": 0.3416666666666666,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
-        "母基金新规分散投资底线 母基金新规分散投资底线 母基金新规明确分散投资底线、长期资金可豁免一层，私募与机构客群的合作结构面临调整。"
+        "母基金新规分散投资底线 母基金新规分散投资底线 母基金新规明确分散投资底线、长期资金可豁免一层，私募与机构客群的合作结构面临调整。",
+        "腾讯联手Visa布局跨境支付 腾讯联手Visa布局跨境支付 跨境与智能体支付赛道竞争加剧，跨境客群收单与结算方案的比价维度增多。"
       ],
       "broadcastedFacts": [],
       "peakScore": 0
+    },
+    "国务院": {
+      "id": "国务院",
+      "topicTags": [],
+      "anchors": [
+        "国务院"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-11-04",
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-04",
+          "section": "must_read",
+          "title": "国务院金融工作报告定调",
+          "text": "国务院金融工作报告定调 下一步五方面考虑明确金融工作取向，零售业务中长期布局的政策坐标更清晰。",
+          "facts": [
+            "@国务院"
+          ],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://m.21jingji.com/article/20261103/herald/ddace5575cc34c41160f14483a626f7f.html",
+          "score": 34,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "国务院金融工作报告定调 国务院金融工作报告定调 下一步五方面考虑明确金融工作取向，零售业务中长期布局的政策坐标更清晰。"
+      ],
+      "broadcastedFacts": [
+        "@国务院"
+      ],
+      "peakScore": 34
+    },
+    "ev-iqvur2": {
+      "id": "ev-iqvur2",
+      "topicTags": [
+        "消费信贷"
+      ],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-04",
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-04",
+          "section": "insights",
+          "title": "大行加码先进制造业融资",
+          "text": "大行加码先进制造业融资 建行十五五力争六万亿制造业融资，本地制造业与供应链小微客户的同业争夺升温。",
+          "facts": [],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://m.21jingji.com/article/20261103/herald/0c2b7b5c277c8d74e35e5d316f1a3d90.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "大行加码先进制造业融资 大行加码先进制造业融资 建行十五五力争六万亿制造业融资，本地制造业与供应链小微客户的同业争夺升温。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-wv6wmt": {
+      "id": "ev-wv6wmt",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-04",
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-04",
+          "section": "insights",
+          "title": "投顾四季度转向均衡配置",
+          "text": "投顾四季度转向均衡配置 客户对均衡型组合的接受度上升，单一赛道集中持仓的沟通难度加大，资产配置类产品需求结构变化。",
+          "facts": [],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "url": "https://finance.eastmoney.com/a/202611033919179226.html",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "投顾四季度转向均衡配置 投顾四季度转向均衡配置 客户对均衡型组合的接受度上升，单一赛道集中持仓的沟通难度加大，资产配置类产品需求结构变化。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "个贷|通报": {
+      "id": "个贷|通报",
+      "topicTags": [
+        "监管合规"
+      ],
+      "anchors": [
+        "通报",
+        "个贷"
+      ],
+      "kind": "enforcement",
+      "firstBroadcastAt": "2026-11-04",
+      "lastBroadcastAt": "2026-11-04",
+      "broadcastCount": 1,
+      "sections": [
+        "risk"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-04",
+          "section": "risk",
+          "title": "8款金融APP被点名通报",
+          "text": "8款金融APP被点名通报 众安贷、58好借等8款金融类APP被监管点名通报，涉及线上营销与助贷合作环节。 财富端线上营销素材与推送话术面临合规复核，个贷助贷合作方准入与导流链路需重检，风控对第三方数据接口的合规审查压力上升。",
+          "facts": [
+            "!通报"
+          ],
+          "broadcastAt": "2026-11-04T07:07:54+08:00",
+          "score": 74,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "8款金融APP被点名通报 8款金融APP被点名通报 众安贷、58好借等8款金融类APP被监管点名通报，涉及线上营销与助贷合作环节。 财富端线上营销素材与推送话术面临合规复核，个贷助贷合作方准入与导流链路需重检，风控对第三方数据接口的合规审查压力上升。"
+      ],
+      "broadcastedFacts": [
+        "!通报"
+      ],
+      "peakScore": 74
     }
   },
   "today": {
     "date": "2026-11-04",
-    "entries": [
-      {
-        "date": "2026-11-04",
-        "section": "must_read",
-        "title": "【财经分析】上调外汇存款准备金率，央行缘何出手稳汇率",
-        "text": "【财经分析】上调外汇存款准备金率，央行缘何出手稳汇率 国家核心监管新政（跨境/财富）：建议分行评估对客与产品影响",
-        "facts": [
-          "!上调",
-          "@央行"
-        ],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20261103/4490460_1.html",
-        "score": 87,
-        "novelty": 0.7377659574468085,
-        "angle": "同业动作"
-      },
-      {
-        "date": "2026-11-04",
-        "section": "must_read",
-        "title": "离岸人民币急跌200点",
-        "text": "离岸人民币急跌200点 央行出手后汇率快速回调，外贸企业结汇节奏与汇率风险敞口管理成为近期市场焦点。",
-        "facts": [
-          "@央行"
-        ],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://m.21jingji.com/article/20261103/herald/0961aaf472f38b6a8a18a9c20fbc56a3.html",
-        "score": 77,
-        "novelty": 0.3188888888888889,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-11-04",
-        "section": "must_read",
-        "title": "证监会稳市组合拳落地",
-        "text": "证监会稳市组合拳落地 护盘式回购优化、主动ETF加快建仓、两融逆周期调节同步推进，资本市场政策环境边际转暖，权益类业务预期修复。",
-        "facts": [
-          "!落地",
-          "@证监会"
-        ],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://finance.eastmoney.com/a/202611033919181779.html",
-        "score": 84,
-        "novelty": 0.5355263157894736,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-11-04",
-        "section": "must_read",
-        "title": "外汇存准率上调至6%",
-        "text": "外汇存准率上调至6% 打破汇率单边升值预期，人民币双向波动信号明确，跨境结算与套保需求结构随之变化。",
-        "facts": [
-          "#6%",
-          "!上调"
-        ],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20261103/4490530_1.html",
-        "score": 74,
-        "novelty": 0.7749999999999999,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-11-04",
-        "section": "must_read",
-        "title": "国务院金融工作报告定调",
-        "text": "国务院金融工作报告定调 下一步五方面考虑明确金融工作取向，零售业务中长期布局的政策坐标更清晰。",
-        "facts": [
-          "@国务院"
-        ],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://m.21jingji.com/article/20261103/herald/ddace5575cc34c41160f14483a626f7f.html",
-        "score": 34,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-04",
-        "section": "insights",
-        "title": "六大行大额存单集体归队",
-        "text": "六大行大额存单集体归队 存款竞争回到大行主场，客户对高息长期存款的比价诉求上升，中小行存款留存与定价空间被压缩。",
-        "facts": [],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://finance.cctv.com/2026/11/03/ARTIFhSTMBvINwAVDmfyVsVS261103.shtml",
-        "novelty": 0.3427083333333333,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-11-04",
-        "section": "insights",
-        "title": "大行加码先进制造业融资",
-        "text": "大行加码先进制造业融资 建行十五五力争六万亿制造业融资，本地制造业与供应链小微客户的同业争夺升温。",
-        "facts": [],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://m.21jingji.com/article/20261103/herald/0c2b7b5c277c8d74e35e5d316f1a3d90.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-04",
-        "section": "insights",
-        "title": "个人养老金近八成账户零缴存",
-        "text": "个人养老金近八成账户零缴存 账户开而不缴普遍，养老客群的实际缴存转化与产品适配存在明显缺口。",
-        "facts": [],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://finance.sina.com.cn/money/insurance/bxdt/2026-11-03/doc-inixmsvy6745039.shtml",
-        "novelty": 0.33205128205128204,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-11-04",
-        "section": "insights",
-        "title": "四家大行净息差回升",
-        "text": "四家大行净息差回升 负债成本改善在大行报表中显现，存款结构与定价的同业参照系发生变化。",
-        "facts": [],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://finance.sina.com.cn/jjxw/2026-11-03/doc-inixkzyk2429251.shtml",
-        "novelty": 0.3131578947368421,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-11-04",
-        "section": "insights",
-        "title": "投顾四季度转向均衡配置",
-        "text": "投顾四季度转向均衡配置 客户对均衡型组合的接受度上升，单一赛道集中持仓的沟通难度加大，资产配置类产品需求结构变化。",
-        "facts": [],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://finance.eastmoney.com/a/202611033919179226.html",
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-04",
-        "section": "insights",
-        "title": "腾讯联手Visa布局跨境支付",
-        "text": "腾讯联手Visa布局跨境支付 跨境与智能体支付赛道竞争加剧，跨境客群收单与结算方案的比价维度增多。",
-        "facts": [],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "url": "https://www.guancha.cn/GuanJinRong/2026_11_03_906860.shtml",
-        "novelty": 0.3416666666666666,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-11-04",
-        "section": "risk",
-        "title": "8款金融APP被点名通报",
-        "text": "8款金融APP被点名通报 众安贷、58好借等8款金融类APP被监管点名通报，涉及线上营销与助贷合作环节。 财富端线上营销素材与推送话术面临合规复核，个贷助贷合作方准入与导流链路需重检，风控对第三方数据接口的合规审查压力上升。",
-        "facts": [
-          "!通报"
-        ],
-        "broadcastAt": "2026-11-04T07:07:54+08:00",
-        "score": 74,
-        "novelty": 1
-      }
-    ],
-    "runId": "41736576835"
+    "entries": []
   },
   "deliveries": [
     {
@@ -13673,6 +13787,13 @@
       "runId": "41548071101",
       "reportRunId": "41543809220",
       "reportSha": "f23f46d043e8c711f3810a795d73c8c839ee3647"
+    },
+    {
+      "date": "2026-11-04",
+      "pushedAt": "2026-11-04T07:47:37+08:00",
+      "runId": "41741883259",
+      "reportRunId": "41736576835",
+      "reportSha": "0eeb01248b4e81a2f2a1d0f39ff5d8f991725a52"
     }
   ],
   "ipoVoicing": {
