@@ -1,0 +1,875 @@
+{
+  "date": "2026-11-04",
+  "updatedAt": "2026-11-03T23:11:31.423Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：资本市场稳市组合拳，护盘回购与两融逆周期齐动；汇率预期管理，外汇存准率上调至6%；广东37条消费新政，公积金与消费场景扩容。",
+    "spoken_hero": "今天主要看三个方面：资本市场稳市组合拳，护盘回购和两融逆周期一起动；汇率预期管理，外汇存准率上调到百分之六；广东三十七条消费新政，公积金和消费场景一起扩容。",
+    "must_read": [
+      {
+        "title": "【财经分析】上调外汇存款准备金率，央行缘何出手稳汇率",
+        "why": "国家核心监管新政（跨境/财富）：建议分行评估对客与产品影响",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261103/4490460_1.html"
+      },
+      {
+        "title": "离岸人民币急跌200点",
+        "why": "央行出手后汇率快速回调，外贸企业结汇节奏与汇率风险敞口管理成为近期市场焦点。",
+        "url": "https://m.21jingji.com/article/20261103/herald/0961aaf472f38b6a8a18a9c20fbc56a3.html"
+      },
+      {
+        "title": "证监会稳市组合拳落地",
+        "why": "护盘式回购优化、主动ETF加快建仓、两融逆周期调节同步推进，资本市场政策环境边际转暖，权益类业务预期修复。",
+        "url": "https://finance.eastmoney.com/a/202611033919181779.html"
+      },
+      {
+        "title": "外汇存准率上调至6%",
+        "why": "打破汇率单边升值预期，人民币双向波动信号明确，跨境结算与套保需求结构随之变化。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261103/4490530_1.html"
+      },
+      {
+        "title": "国务院金融工作报告定调",
+        "why": "下一步五方面考虑明确金融工作取向，零售业务中长期布局的政策坐标更清晰。",
+        "url": "https://m.21jingji.com/article/20261103/herald/ddace5575cc34c41160f14483a626f7f.html"
+      }
+    ],
+    "spoken_must_read": "【财经分析】上调外汇存款准备金率，央行缘何出手稳汇率。国家核心监管新政（跨境/财富）：建议分行评估对客与产品影响。其次，离岸人民币急跌200点。央行出手后汇率快速回调，外贸企业结汇节奏与汇率风险敞口管理成为近期市场焦点。此外，证监会稳市组合拳落地。护盘式回购优化、主动ETF加快建仓、两融逆周期调节同步推进，资本市场政策环境边际转暖，权益类业务预期修复。还有，外汇存准率上调至6%。打破汇率单边升值预期，人民币双向波动信号明确，跨境结算与套保需求结构随之变化。另外，国务院金融工作报告定调。下一步五方面考虑明确金融工作取向，零售业务中长期布局的政策坐标更清晰。",
+    "insights": [
+      {
+        "topic": "六大行大额存单集体归队",
+        "impact": "存款竞争回到大行主场，客户对高息长期存款的比价诉求上升，中小行存款留存与定价空间被压缩。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "中行、农行、建行、工行、交行、邮储银行，大额存单“集体归队”",
+            "url": "https://finance.cctv.com/2026/11/03/ARTIFhSTMBvINwAVDmfyVsVS261103.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "大行加码先进制造业融资",
+        "impact": "建行十五五力争六万亿制造业融资，本地制造业与供应链小微客户的同业争夺升温。",
+        "tag": [
+          "信贷",
+          "科技金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "建行“十五五”力争为先进制造业提供融资6万亿元",
+            "url": "https://m.21jingji.com/article/20261103/herald/0c2b7b5c277c8d74e35e5d316f1a3d90.html"
+          }
+        ]
+      },
+      {
+        "topic": "个人养老金近八成账户零缴存",
+        "impact": "账户开而不缴普遍，养老客群的实际缴存转化与产品适配存在明显缺口。",
+        "tag": [
+          "客群",
+          "财富"
+        ],
+        "group": "养老金融",
+        "sources": [
+          {
+            "title": "79%个人养老金账户零缴存，专家呼吁打通储蓄转化通道",
+            "url": "https://finance.sina.com.cn/money/insurance/bxdt/2026-11-03/doc-inixmsvy6745039.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "四家大行净息差回升",
+        "impact": "负债成本改善在大行报表中显现，存款结构与定价的同业参照系发生变化。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "4家国有大行前三季度净息差较去年末回升",
+            "url": "https://finance.sina.com.cn/jjxw/2026-11-03/doc-inixkzyk2429251.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "投顾四季度转向均衡配置",
+        "impact": "客户对均衡型组合的接受度上升，单一赛道集中持仓的沟通难度加大，资产配置类产品需求结构变化。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "投顾对四季度持良好预期配置风格转向均衡",
+            "url": "https://finance.eastmoney.com/a/202611033919179226.html"
+          }
+        ]
+      },
+      {
+        "topic": "腾讯联手Visa布局跨境支付",
+        "impact": "跨境与智能体支付赛道竞争加剧，跨境客群收单与结算方案的比价维度增多。",
+        "tag": [
+          "竞对动态",
+          "科技金融"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "腾讯牵手Visa 押注跨境与智能体支付",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_11_03_906860.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，六大行大额存单集体归队、四家大行净息差回升，存款竞争回到大行主场。第二，普惠小微方面，大行加码先进制造业融资，建行十五五力争六万亿制造业融资。第三，养老金融方面，个人养老金近八成账户零缴存，账户开而不缴普遍。第四，高端客户方面，投顾四季度转向均衡配置，客户对均衡型组合的接受度上升。第五，跨境客群方面，腾讯联手Visa布局跨境支付，跨境与智能体支付赛道竞争加剧。",
+    "risk": {
+      "topic": "8款金融APP被点名通报",
+      "evidence": "众安贷、58好借等8款金融类APP被监管点名通报，涉及线上营销与助贷合作环节。",
+      "impact": "财富端线上营销素材与推送话术面临合规复核，个贷助贷合作方准入与导流链路需重检，风控对第三方数据接口的合规审查压力上升。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "众安贷、58好借等8款金融类APP被点名通报！",
+          "url": "https://finance.cctv.com/2026/11/03/ARTIPHdmAwPv5zAvI5AaSln2261103.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：8款金融APP被点名通报，财富端线上营销素材与推送话术面临合规复核，个贷助贷合作方准入与导流链路需重检，风控对第三方数据接口的合规审查压力上升。",
+    "guangdong_ipo": {
+      "spoken": "广东河源企业富马硬质合金进入IPO辅导备案，主营硬质合金材料，辅导机构为国泰海通证券，本月二日完成备案，拟登陆境内交易所。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨0.83%领涨，AI主线撑起科技股反弹，道指跌0.38%。",
+      "sectors": [
+        "两房大涨，Ackman施压政府推动结束托管，中期选举被视为关键节点。",
+        "加密基础设施受关注，币安63亿美元被盗事件令托管环节成交易焦点。",
+        "Santoli称AI牛市几乎必须靠科技股回升才能延续，非必需消费与医药难担纲。",
+        "中期选举或重塑市政债市场，州级税收措施与债券供给预期生变。",
+        "个股分化：Corcept三季度超预期但盘后走低，Freshworks、SM Energy下挫。"
+      ],
+      "spoken": "美股收盘涨跌不一，纳指涨0.83%，标普500涨0.36%，道指跌0.38%。板块上，两房因Ackman施压结束政府托管而大涨，加密基础设施受币安被盗事件带动获关注，AI主线仍要靠科技股回升，市政债则受中期选举预期影响。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-04"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51786.72",
+          "changePct": "-0.38%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25372.01",
+          "changePct": "+0.83%"
+        },
+        {
+          "name": "标普500",
+          "value": "7568.92",
+          "changePct": "+0.36%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3608.10点（-0.82%）；深证成指收报10876.99点（-1.21%）；创业板指收报2391.65点（-2.73%）。",
+      "sectors": [
+        "创业板指跌破2400点",
+        "算力硬件概念集体大跌"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-04"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3608.10",
+          "changePct": "-0.82%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10876.99",
+          "changePct": "-1.21%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2391.65",
+          "changePct": "-2.73%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23525.97点（+0.57%）；恒生科技收报3867.73点（+0.74%）。",
+      "sectors": [
+        "科网股、保险股活跃",
+        "光通信板块下挫"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-03"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.57% 科指涨0.74% 科网股、保险股活跃 光通信板块下挫",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-03/doc-inixmxcw6726496.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23525.97",
+          "changePct": "+0.57%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3867.73",
+          "changePct": "+0.74%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-03",
+    "marketStatus": {
+      "reportDate": "2026-11-04",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-03"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-03"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-03"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月3日 周二 收盘；港股为 11月3日 周二 收盘；美股为 11月3日 周二 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611033919446783.html",
+      "title_cn": "央行：11月15日起上调金融机构外汇存款准备金率2个百分点",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "央行宣布自11月15日起上调金融机构外汇存款准备金率2个百分点。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "外汇",
+        "央行"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033920242351.html",
+      "title_cn": "证监会最新发声：全力维护资本市场平稳运行",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "证监会公开表态，将全力维护资本市场平稳运行。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "监管",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033919515775.html",
+      "title_cn": "不抢口红抢Token！李佳琦半小时卖出2万亿算力商品化大幕开启(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "报道称李佳琦直播间半小时卖出2万亿元算力相关商品，被视为算力商品化的开端。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "算力",
+        "直播电商"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033920191875.html",
+      "title_cn": "A股三大指数集体收跌保险与稀土板块逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "A股三大指数集体收跌，保险与稀土板块逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "保险",
+        "稀土"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033919969373.html",
+      "title_cn": "中一签最多赚6.6万元A股再现“肉签”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "A股新股上市再现高收益“肉签”，中一签最高盈利6.6万元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "新股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033920148153.html",
+      "title_cn": "924行情后首次！同日4只宽基ETF成交破百亿",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "同日4只宽基ETF成交额突破百亿元，为924行情以来首次。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "ETF",
+        "资金面"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033920369514.html",
+      "title_cn": "外交部回应“英伟达要求其合作伙伴必须将至少51％的服务提供给非中国企业”有关报道",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "外交部就媒体报道英伟达要求合作伙伴将至少51%服务提供给非中国企业一事作出回应。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "中美关系",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033920410390.html",
+      "title_cn": "11月3日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "汇总11月3日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033920336892.html",
+      "title_cn": "转机将现！关键时刻中信证券重磅发声：这是中国资产最硬的底气",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "中信证券发布观点称转机将现，并称中国资产具备“最硬的底气”。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "券商观点",
+        "A股",
+        "中国资产"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033920330271.html",
+      "title_cn": "国务院关于金融工作情况的报告提出我国金融工作下一步5方面考虑",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "国务院金融工作情况报告提出我国金融工作下一步五方面考虑。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "金融",
+        "国务院"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611043920706243.html",
+      "title_cn": "第九年的进博会，何以常新？|锋面评论",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/04",
+      "summary": "评论文章关注第九届进博会如何保持常新。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "进博会",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611043920704145.html",
+      "title_cn": "中信证券策略会展望2027年投资机遇：从AI热度看行情宽度聚焦成长和红利",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/04",
+      "summary": "中信证券策略会展望2027年投资机遇，提出从AI热度看行情宽度，聚焦成长和红利。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "券商观点",
+        "AI",
+        "策略会"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-03/doc-inixmxcw6726496.shtml",
+      "title_cn": "港股收评：恒指涨0.57% 科指涨0.74% 科网股、保险股活跃 光通信板块下挫",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "港股收评：恒指涨0.57%，科指涨0.74%，科网股与保险股活跃，光通信板块下挫。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "科网股",
+        "保险"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-03/doc-inixkrkn6974779.shtml",
+      "title_cn": "港股硬科技叙事进入价值兑现期",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "报道称港股硬科技叙事进入价值兑现期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "硬科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-11-03/doc-inixkzym8895199.shtml",
+      "title_cn": "国泰海通：资金逆风未解 港股红利防御先行",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "国泰海通研报称资金逆风未解，港股红利资产防御性先行。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "红利"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-03/doc-inixkzym8880157.shtml",
+      "title_cn": "港股新消费企业经营模式转向",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "报道称港股新消费企业的经营模式正在转向。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "新消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-03/doc-inixnits6672086.shtml",
+      "title_cn": "香港金融科技周新浪财经分论坛“跨境无境” 聚焦AI赋能与合规并行之下的跨境支付升级路径",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "香港金融科技周新浪财经分论坛以“跨境无境”为主题，聚焦AI赋能与合规并行下的跨境支付升级路径。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "金融科技",
+        "跨境支付",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-11-03/doc-inixmxcz8743134.shtml",
+      "title_cn": "香港金融科技周|CIC灼识创始合伙人侯绪超：跨境支付属强监管、零容错 人工把关仍不可或缺",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "CIC灼识创始合伙人侯绪超表示跨境支付属强监管、零容错领域，人工把关仍不可或缺。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "金融科技",
+        "跨境支付",
+        "监管"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-03/doc-inixncmu6642867.shtml",
+      "title_cn": "小摩：上调中国海洋石油(00883)目标价至31.5港元 料第四季产量随陵水17-2复产回升",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "摩根大通上调中国海洋石油(00883)目标价至31.5港元，预计第四季产量随陵水17-2复产回升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "能源",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-03/doc-inixmxcw6750998.shtml",
+      "title_cn": "晨星：腾讯控股(00700)及阿里巴巴-W(09988)为长期AI投资首选 中国AI芯片股估值或偏高",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "晨星称腾讯控股及阿里巴巴为长期AI投资首选，并认为中国AI芯片股估值或偏高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "AI",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-03/doc-inixmxcw6745618.shtml",
+      "title_cn": "小摩：上调周大福(01929)目标价至19港元 列为中国珠宝行业首选股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "摩根大通上调周大福(01929)目标价至19港元，并将其列为中国珠宝行业首选股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "珠宝",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-03/doc-inixmxcz8738145.shtml",
+      "title_cn": "大摩：友邦保险(01299)第三季新业务价值跌5%大致符预期 维持“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "摩根士丹利称友邦保险(01299)第三季新业务价值下跌5%，大致符合预期，维持“增持”评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "保险",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-03/doc-inixmxcz8738138.shtml",
+      "title_cn": "瑞银：中信银行(00998)第三季盈利增长优于同业 受投资收益强劲及成本管控带动",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "瑞银称中信银行(00998)第三季盈利增长优于同业，受投资收益强劲及成本管控带动。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "银行",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-03/doc-inixmxcz8701336.shtml",
+      "title_cn": "中银国际：下调中兴通讯(00763)目标价至29.65港元 重申“买入”评级 服务器带动收入加速增长",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "中银国际下调中兴通讯(00763)目标价至29.65港元，重申“买入”评级，称服务器带动收入加速增长。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "通信",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/03/binance-breach-puts-custody-at-center-of-crypto-infrastructure-trade.html",
+      "title_cn": "Binance breach puts custody at center of crypto infrastructure trade",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "报道称币安发生安全事件，托管问题成为加密基础设施交易关注焦点。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "美股",
+        "安全事件"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/03/ackman-fannie-mae-freddie-mac-conservatorship.html",
+      "title_cn": "Fannie Mae, Freddie Mac rally as Ackman presses for conservatorship exit",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "房利美与房地美股价上涨，此前阿克曼施压要求结束政府托管状态。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "地产",
+        "政府托管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/03/santoli-ai-bull-market-needs-tech-stocks.html",
+      "title_cn": "Santoli: AI bull market almost surely needs tech stocks to recover to keep advancing",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "Santoli评论称AI牛市几乎必然需要科技股反弹才能延续。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "科技股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/01/top-analysts-are-bullish-on-these-3-stocks-for-the-long-haul.html",
+      "title_cn": "Top Wall Street analysts are bullish on these 3 stocks for the long haul",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/01",
+      "summary": "报道汇总华尔街顶级分析师长期看好的三只股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/01/election-municipal-bonds.html",
+      "title_cn": "The midterm election could reshape the muni bond market. Here’s what investors need to know",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/01",
+      "summary": "报道称中期选举可能重塑美国市政债市场，并梳理投资者需关注要点。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "市政债",
+        "选举"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-corcept-beats-q3-2026-estimates-shares-slip-after-hours-93CH-4996846",
+      "title_cn": "Earnings call transcript: Corcept beats Q3 2026 estimates, shares slip after hours",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "Corcept财报电话会显示其第三季度业绩超预期，但股价盘后下跌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/why-is-freshworks-stock-sliding-today-93CH-4996845",
+      "title_cn": "Why is Freshworks stock sliding today?",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "报道分析Freshworks股票当日下跌原因。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "个股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/oreilly-automotive-at-50th-annual-automotive-symposium-growth-plan-in-focus-93CH-4996844",
+      "title_cn": "O’Reilly Automotive at 50th annual automotive symposium: growth plan in focus",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "O'Reilly Automotive在第50届汽车研讨会上聚焦增长计划。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "汽车",
+        "公司动态"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/why-is-sm-energy-stock-sliding-today-93CH-4996843",
+      "title_cn": "Why is SM Energy stock sliding today?",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "报道分析SM Energy股票当日下跌原因。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "能源",
+        "个股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-oportun-tops-revenue-forecast-in-q3-2026-shares-jump-93CH-4996842",
+      "title_cn": "Earnings call transcript: Oportun tops revenue forecast in Q3 2026, shares jump",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "Oportun财报电话会显示其第三季度营收超预期，股价上涨。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/z-squared-adds-cto-jeffery-harris-to-board-of-directors-93CH-4996840",
+      "title_cn": "Z Squared adds CTO Jeffery Harris to board of directors",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "Z Squared宣布任命Jeffery Harris为首席技术官并加入董事会。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司人事"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/why-is-pacs-stock-surging-today-93CH-4996839",
+      "title_cn": "Why is PACS stock surging today?",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "报道分析PACS股票当日大涨原因。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "个股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
