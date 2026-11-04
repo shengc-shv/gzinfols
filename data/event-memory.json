@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-04",
+  "updatedAt": "2026-11-05",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -3575,41 +3575,6 @@
         "!问询"
       ],
       "peakScore": 84
-    },
-    "ev-8fck23": {
-      "id": "ev-8fck23",
-      "topicTags": [],
-      "anchors": [],
-      "kind": "policy",
-      "firstBroadcastAt": "2026-09-20",
-      "lastBroadcastAt": "2026-09-20",
-      "broadcastCount": 1,
-      "sections": [
-        "must_read"
-      ],
-      "anglesUsed": [],
-      "samples": [
-        {
-          "date": "2026-09-20",
-          "section": "must_read",
-          "title": "期货公司监管新规落地",
-          "text": "期货公司监管新规落地 行业逻辑加速重构，涉及期货类代销与客户适当性，财富条线需关注合作机构资质变化与产品准入。",
-          "facts": [
-            "!落地"
-          ],
-          "broadcastAt": "2026-09-20T08:13:51+08:00",
-          "url": "https://www.cnfin.com/yw-lb/detail/20260920/4472237_1.html",
-          "score": 29,
-          "novelty": 1
-        }
-      ],
-      "broadcastedTexts": [
-        "期货公司监管新规落地 期货公司监管新规落地 行业逻辑加速重构，涉及期货类代销与客户适当性，财富条线需关注合作机构资质变化与产品准入。"
-      ],
-      "broadcastedFacts": [
-        "!落地"
-      ],
-      "peakScore": 29
     },
     "代发|信用卡|开户": {
       "id": "代发|信用卡|开户",
@@ -13443,8 +13408,158 @@
     }
   },
   "today": {
-    "date": "2026-11-04",
-    "entries": []
+    "date": "2026-11-05",
+    "entries": [
+      {
+        "date": "2026-11-05",
+        "section": "must_read",
+        "title": "人身险预定利率研究值回落至1.9%",
+        "text": "人身险预定利率研究值回落至1.9% 普通型人身险定价基准结束两季连涨，保险代销的收益演示与客户预期面临重估。",
+        "facts": [
+          "#1.9%"
+        ],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://m.21jingji.com/article/20261104/herald/91e7c36531e41f6d4e77bb3221a791ec.html",
+        "score": 64,
+        "novelty": 0.4989130434782608,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "must_read",
+        "title": "广州35个集聚区瞄准8000亿",
+        "text": "广州35个集聚区瞄准8000亿 重点产业集聚区成建制推介，园区入驻企业构成批量获客与结算归集的集中入口。",
+        "facts": [
+          "@广州"
+        ],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202611/04/139995_55020141.htm",
+        "score": 25,
+        "novelty": 0.2644444444444444,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "must_read",
+        "title": "美国中期选举牵动美元美债",
+        "text": "美国中期选举牵动美元美债 美元走弱预期与美联储路径重估交织，QDII与外币资产客群的配置判断窗口打开。",
+        "facts": [
+          "@美联储"
+        ],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261104/4491137_1.html",
+        "score": 66,
+        "novelty": 0.266304347826087,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "must_read",
+        "title": "外汇存准率近五年首升",
+        "text": "外汇存准率近五年首升 外币流动性收紧，外贸与跨境客群的结售汇成本与外币存款收益同步变化，汇率敏感度上升。",
+        "facts": [],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-04/doc-inixpmfe6286780.shtml",
+        "score": 74,
+        "novelty": 0.31956521739130433,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "must_read",
+        "title": "广州年增5000家科技型企业",
+        "text": "广州年增5000家科技型企业 科创客群增量口径明确，科技型企业从设立到首贷的窗口期缩短，客群结构在变。",
+        "facts": [
+          "#5000家",
+          "@广州"
+        ],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202611/04/139995_55020257.htm",
+        "score": 34,
+        "novelty": 0.54875,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "insights",
+        "title": "长期限存款需求外溢",
+        "text": "长期限存款需求外溢 大行三年期大额存单售罄后，追求锁定收益的客户在货架上找不到承接，资金在行际间重新比价。",
+        "facts": [],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_04_906909.shtml",
+        "novelty": 0.33541666666666664,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "insights",
+        "title": "绿电成广货出海要素",
+        "text": "绿电成广货出海要素 出口制造企业把绿电采购与碳足迹纳入成本，绿色信贷与跨境结算需求在同一客群叠加。",
+        "facts": [],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://www.cnfin.com/qy-lb/detail/20261104/4490751_1.html",
+        "novelty": 0.34204545454545454,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "insights",
+        "title": "中收承压品类补位",
+        "text": "中收承压品类补位 代销中收增速放缓，客户对保险与黄金类产品的接受度上升，货架品类权重正在被动调整。",
+        "facts": [],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://m.21jingji.com/article/20261104/herald/00886cb05db93c26d4065c2d0880d0c6.html",
+        "novelty": 0.31666666666666665,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "insights",
+        "title": "科技型企业年增五千家",
+        "text": "科技型企业年增五千家 广州每年新增科技型企业口径明确，小微客群中科创属性占比上升，首贷与结算需求前置。",
+        "facts": [],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202611/04/139995_55020257.htm",
+        "novelty": 0.25,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "insights",
+        "title": "对公挑大梁零售找增量",
+        "text": "对公挑大梁零售找增量 季报显示对公贷款挑大梁，零售信贷增量场景承压，消费贷与经营贷的联动空间被放大。",
+        "facts": [],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-04/doc-inixpmfi8186678.shtml",
+        "novelty": 0.27820512820512816,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "insights",
+        "title": "外资行密集对接外贸需求",
+        "text": "外资行密集对接外贸需求 十三家外资银行集中对接义乌外贸企业，跨境结算与汇率避险的同业竞争在客群端加剧。",
+        "facts": [],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "url": "https://m.21jingji.com/article/20261104/herald/f7a8f8fe99eb6a2a2a669861a5f8a240.html",
+        "novelty": 0.34204545454545454,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-05",
+        "section": "risk",
+        "title": "高息理财非法吸存骗局",
+        "text": "高息理财非法吸存骗局 公安部公布承诺年化12%的“领养羊”理财非法吸存数亿元案件。 财富与私行条线客户易被高息话术吸引，涉农与中老年客群风险敞口集中；网点宣教与适当性管理压力上升，风控需前置排查同类产品推介。",
+        "facts": [
+          "#12%"
+        ],
+        "broadcastAt": "2026-11-05T07:07:08+08:00",
+        "score": 68,
+        "novelty": 0.38770114942528733,
+        "angle": "数据验证"
+      }
+    ],
+    "runId": "41931019750"
   },
   "deliveries": [
     {
@@ -13796,6 +13911,7 @@
       "reportSha": "0eeb01248b4e81a2f2a1d0f39ff5d8f991725a52"
     }
   ],
+  "lastHeroLine": "今天主要看三个方面：外汇存准率近五年首升，结售汇窗口打开；广州35个集聚区瞄准8000亿，科创客群年增五千家；存款付息率普降，大额存单三年期售罄。",
   "ipoVoicing": {
     "保伦股份": [
       "2026-09-24",
