@@ -1,15 +1,26 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-05T07:05:41+08:00",
+  "fetchedAt": "2026-11-06T07:06:24+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-bse-audit": 2,
+    "gd-bse-audit": 1,
     "gd-csrc-tutoring": 1,
-    "gd-sse-audit": 1,
+    "gd-sse-audit": 2,
     "gd-szse-audit": 1
   },
   "items": [
+    {
+      "title": "核心医疗：IPO问询中（拟科创板）",
+      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2126@2",
+      "excerpt": "注册地：广东深圳市｜保荐：华泰联合证券有限责任公司｜受理：2025-11-06｜状态：IPO问询中｜更新：2026-11-05｜行业：专用设备制造业",
+      "publishedAt": "2026-11-05",
+      "source": "上交所IPO审核动态",
+      "sourceId": "gd-sse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-reviewing"
+    },
     {
       "title": "河源富马硬质合金股份有限公司 (辅导备案) [广东证监局]",
       "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/3/PREIPO_F0101_V01_20261103_37529_Q/89C9FDC5EAD74A548562C8B4286DCEB5/关于河源富马硬质合金股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导备案报告.pdf",
@@ -50,17 +61,6 @@
       "publishedAt": "2026-11-02",
       "source": "深交所IPO审核动态",
       "sourceId": "gd-szse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-registered"
-    },
-    {
-      "title": "邦泽创科：IPO注册生效（拟北交所）",
-      "url": "https://www.bse.cn/audit/project_news_select.html#874249@P07",
-      "excerpt": "注册地：广东省东莞市｜保荐：东莞证券股份有限公司｜代码：874249｜状态：IPO注册生效｜更新：2026-10-30",
-      "publishedAt": "2026-10-30",
-      "source": "北交所IPO审核动态",
-      "sourceId": "gd-bse-audit",
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-registered"
