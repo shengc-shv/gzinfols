@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06",
+  "updatedAt": "2026-11-07",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -5251,40 +5251,6 @@
         "#2.52万亿"
       ],
       "peakScore": 69
-    },
-    "ev-nxiet8": {
-      "id": "ev-nxiet8",
-      "topicTags": [],
-      "anchors": [],
-      "kind": "generic",
-      "firstBroadcastAt": "2026-09-22",
-      "lastBroadcastAt": "2026-09-22",
-      "broadcastCount": 1,
-      "sections": [
-        "insights"
-      ],
-      "anglesUsed": [],
-      "samples": [
-        {
-          "date": "2026-09-22",
-          "section": "insights",
-          "title": "贵金属货架替代方案",
-          "text": "贵金属货架替代方案 超10家银行清退代理炒金通道，原有贵金属客户面临产品断档，若不及时承接易流失至同业。 提示财富条线本周梳理受影响客户名单，准备积存金、实物金等替代方案与统一沟通口径。",
-          "facts": [
-            "#10家"
-          ],
-          "broadcastAt": "2026-09-22T07:25:57+08:00",
-          "url": "https://m.21jingji.com/article/20260921/herald/a6a61e5be4522c6ded4dcf36e5bf1848.html",
-          "novelty": 1
-        }
-      ],
-      "broadcastedTexts": [
-        "贵金属货架替代方案 贵金属货架替代方案 超10家银行清退代理炒金通道，原有贵金属客户面临产品断档，若不及时承接易流失至同业。 提示财富条线本周梳理受影响客户名单，准备积存金、实物金等替代方案与统一沟通口径。"
-      ],
-      "broadcastedFacts": [
-        "#10家"
-      ],
-      "peakScore": 0
     },
     "个贷|利率|处罚": {
       "id": "个贷|利率|处罚",
@@ -13718,8 +13684,136 @@
     }
   },
   "today": {
-    "date": "2026-11-06",
-    "entries": []
+    "date": "2026-11-07",
+    "entries": [
+      {
+        "date": "2026-11-07",
+        "section": "must_read",
+        "title": "创业板指数权重上限调至15%",
+        "text": "创业板指数权重上限调至15% 指数结构更均衡，跟踪类产品的申赎与客户认知将随之变化。",
+        "facts": [
+          "#15%",
+          "@创业板"
+        ],
+        "broadcastAt": "2026-11-07T07:11:20+08:00",
+        "url": "https://finance.eastmoney.com/a/202611063924964937.html",
+        "score": 69,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-07",
+        "section": "must_read",
+        "title": "十五五专项规划明确金融方向",
+        "text": "十五五专项规划明确金融方向 重点领域融资方向渐明，对公与零售联动行业清单可对照梳理。",
+        "facts": [],
+        "broadcastAt": "2026-11-07T07:11:20+08:00",
+        "url": "https://m.21jingji.com/article/20261107/herald/f27a6469d87ca9f50ca489676e7fe88e.html",
+        "score": 21,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-07",
+        "section": "must_read",
+        "title": "创业板指单日大跌近4%",
+        "text": "创业板指单日大跌近4% 下跌个股超4700只，权益持仓客户浮亏面扩大，市场情绪处于敏感区间。",
+        "facts": [
+          "#4%",
+          "@创业板"
+        ],
+        "broadcastAt": "2026-11-07T07:11:20+08:00",
+        "url": "https://finance.sina.com.cn/tob/2026-11-06/doc-inixuqhy8848088.shtml",
+        "score": 59,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-07",
+        "section": "must_read",
+        "title": "金融工作报告重申稳市机制",
+        "text": "金融工作报告重申稳市机制 与国常会表述一致，政策连续性强化，长期资金入市方向不变。",
+        "facts": [],
+        "broadcastAt": "2026-11-07T07:11:20+08:00",
+        "url": "https://finance.cctv.com/2026/11/06/ARTI9RZeAzgXmeRRMTtUJ2gZ261106.shtml",
+        "score": 34,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-07",
+        "section": "insights",
+        "title": "多只理财产品提前终止",
+        "text": "多只理财产品提前终止 11月多只产品因止盈、规模不足、底层退出提前终止，客户到期资金再配置需求集中释放，货架承接与话术准备压力上升。",
+        "facts": [
+          "#11月"
+        ],
+        "broadcastAt": "2026-11-07T07:11:20+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-11-06/doc-inixvfey5578893.shtml",
+        "novelty": 0.6546296296296297,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-11-07",
+        "section": "insights",
+        "title": "存款搬家叠加保险开门红",
+        "text": "存款搬家叠加保险开门红 全球配置卖点与保险2027年开门红预热叠加，财富客群资产再配置分流压力上升，存款留存与代销组合面临再平衡。",
+        "facts": [
+          "#2027年"
+        ],
+        "broadcastAt": "2026-11-07T07:11:20+08:00",
+        "url": "https://finance.cctv.com/2026/11/06/ARTIWHXzmLdKLPnegtlTn2gD261106.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-07",
+        "section": "insights",
+        "title": "银行股新高引红利配置问询",
+        "text": "银行股新高引红利配置问询 高股息资产关注度提升，财富客群对红利类产品问询增加，产品货架说明与适当性匹配要求同步提高。",
+        "facts": [
+          "!问询"
+        ],
+        "broadcastAt": "2026-11-07T07:11:20+08:00",
+        "url": "https://m.21jingji.com/article/20261106/herald/b52115842572f7460cb3cfac4a620911.html",
+        "novelty": 0.7609999999999999,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-11-07",
+        "section": "insights",
+        "title": "民企座谈会释放政策预期",
+        "text": "民企座谈会释放政策预期 明年政策举措研究中，小微与民营客群融资预期改善，普惠投放节奏与客户储备结构可能随之调整。",
+        "facts": [],
+        "broadcastAt": "2026-11-07T07:11:20+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261106/4492389_1.html",
+        "novelty": 0.3428571428571428,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-07",
+        "section": "insights",
+        "title": "穗岁康2027年度参保启动",
+        "text": "穗岁康2027年度参保启动 普惠健康险参保启动且特定人群保障升级，养老与健康客群交叉覆盖窗口打开，网点与代发场景触点增多。",
+        "facts": [
+          "#2027年"
+        ],
+        "broadcastAt": "2026-11-07T07:11:20+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202611/06/139995_55020887.htm",
+        "novelty": 0.30288461538461536,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-07",
+        "section": "risk",
+        "title": "财政资金项目造假被通报",
+        "text": "财政资金项目造假被通报 包头虚假项目骗取3908万元国债资金被中央通报，项目申报与资金流向审核趋严。 对公涉政项目贷前审查与资金流向监控要求提升，风控条线合规成本上升；个贷与普惠客户涉政补贴类资金核查同步收紧。",
+        "facts": [
+          "!通报",
+          "#3908万元"
+        ],
+        "broadcastAt": "2026-11-07T07:11:20+08:00",
+        "score": 74,
+        "novelty": 0.5502941176470588,
+        "angle": "政策变化"
+      }
+    ],
+    "runId": "42310078466"
   },
   "deliveries": [
     {
@@ -14104,6 +14198,9 @@
     ],
     "核心医疗": [
       "2026-11-06"
+    ],
+    "展辰新材": [
+      "2026-11-07"
     ],
     "保伦股份": [
       "2026-09-24",
