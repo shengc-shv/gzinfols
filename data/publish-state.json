@@ -1,27 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-02",
+  "updatedAt": "2026-11-06",
   "reports": {
-    "2026-10-27": {
-      "source": "manual-final",
-      "runId": "40417519863",
-      "publishedAt": "2026-10-27T07:12:12+08:00"
-    },
-    "2026-10-28": {
-      "source": "manual-final",
-      "runId": "40600922532",
-      "publishedAt": "2026-10-28T07:20:46+08:00"
-    },
-    "2026-10-29": {
-      "source": "manual-final",
-      "runId": "40785114153",
-      "publishedAt": "2026-10-29T07:12:58+08:00"
-    },
-    "2026-10-30": {
-      "source": "manual-final",
-      "runId": "40970879307",
-      "publishedAt": "2026-10-30T07:12:03+08:00"
-    },
     "2026-10-31": {
       "source": "manual-final",
       "runId": "41142580198",
@@ -36,6 +16,26 @@
       "source": "manual-final",
       "runId": "41360285278",
       "publishedAt": "2026-11-02T07:09:23+08:00"
+    },
+    "2026-11-03": {
+      "source": "manual-final",
+      "runId": "41543809220",
+      "publishedAt": "2026-11-03T07:18:51+08:00"
+    },
+    "2026-11-04": {
+      "source": "manual-final",
+      "runId": "41736576835",
+      "publishedAt": "2026-11-04T07:12:28+08:00"
+    },
+    "2026-11-05": {
+      "source": "manual-final",
+      "runId": "41931019750",
+      "publishedAt": "2026-11-05T07:11:24+08:00"
+    },
+    "2026-11-06": {
+      "source": "manual-final",
+      "runId": "42127118704",
+      "publishedAt": "2026-11-06T07:11:54+08:00"
     }
   }
 }

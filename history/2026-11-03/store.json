@@ -1,0 +1,875 @@
+{
+  "date": "2026-11-03",
+  "updatedAt": "2026-11-02T23:17:51.853Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：资本市场政策组合拳，回购增持再贷款利率降至1%；广州本地客群线索，配售房选房与专精特新培育中心落地；存款与财富货架，六大行重启大额存单；广东IPO，四家粤企同日推进。",
+    "spoken_hero": "今天主要看四个方面：资本市场政策组合拳，回购增持再贷款利率降到百分之一；广州本地客群线索，配售房选房和专精特新培育中心落地；存款与财富货架，六大行全部重启大额存单；广东IPO，四家粤企同日推进。",
+    "must_read": [
+      {
+        "title": "回购增持再贷款利率降至1%",
+        "why": "三部门将其转为长期制度性安排、利率由1.25%降至1%，上市公司客群相关业务的政策窗口拉长。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261102/4489912_1.html"
+      },
+      {
+        "title": "证监会多措稳市场：回购与两融齐动",
+        "why": "护盘式回购优化、主动ETF加快建仓、两融逆周期调节同步推进，资本市场业务环境边际转暖。",
+        "url": "https://finance.eastmoney.com/a/202611033919181779.html"
+      },
+      {
+        "title": "17万亿市场告别类信贷",
+        "why": "信托通道业务受冲击，代销与同业合作的产品底层逻辑变化，非标供给进一步收缩。",
+        "url": "https://m.21jingji.com/article/20261102/herald/e43f340c88d00cc700b715eaa2380cbf.html"
+      },
+      {
+        "title": "沪深上市公司前三季业绩创新高",
+        "why": "业绩规模与增速均创2022年以来新高，上市公司客群经营基本面支撑增强，分红能力同步抬升。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261102/4489963_1.html"
+      },
+      {
+        "title": "逾200家公司三季度拟派现",
+        "why": "现金分红热度不减，分红资金集中到账，股东客群的资金沉淀与再配置需求随之放大。",
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-02/doc-inixhhcq7595255.shtml"
+      }
+    ],
+    "spoken_must_read": "回购增持再贷款利率降至1%。三部门将其转为长期制度性安排、利率由1.25%降至1%，上市公司客群相关业务的政策窗口拉长。其次，证监会多措稳市场：回购与两融齐动。护盘式回购优化、主动ETF加快建仓、两融逆周期调节同步推进，资本市场业务环境边际转暖。此外，17万亿市场告别类信贷。信托通道业务受冲击，代销与同业合作的产品底层逻辑变化，非标供给进一步收缩。还有，沪深上市公司前三季业绩创新高。业绩规模与增速均创2022年以来新高，上市公司客群经营基本面支撑增强，分红能力同步抬升。另外，逾200家公司三季度拟派现。现金分红热度不减，分红资金集中到账，股东客群的资金沉淀与再配置需求随之放大。",
+    "insights": [
+      {
+        "topic": "信托通道收缩货架变窄",
+        "impact": "类信贷通道业务受冲击，代销货架上的非标与固收替代品供给减少，客户配置诉求向标准化产品转移。",
+        "tag": [
+          "财富",
+          "监管"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "新规落地：17万亿市场告别“类信贷”时代，信托通道业务受冲击",
+            "url": "https://m.21jingji.com/article/20261102/herald/e43f340c88d00cc700b715eaa2380cbf.html"
+          }
+        ]
+      },
+      {
+        "topic": "广州民营经济服务周启幕",
+        "impact": "70余场惠企活动直达市场主体，小微与民营客群集中曝光，融资与结算需求在同一窗口释放。",
+        "tag": [
+          "客群",
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "70余场惠企活动直达市场主体，2026年广州市民营经济服务周启幕",
+            "url": "https://news.dayoo.com/guangzhou/202611/02/139995_55019577.htm"
+          }
+        ]
+      },
+      {
+        "topic": "上海二手房银十超金九",
+        "impact": "上海二手房成交再放量、银十超金九，按揭需求边际回暖，一线楼市联动节奏出现新变化。",
+        "tag": [
+          "住房金融"
+        ],
+        "group": "住房金融",
+        "sources": [
+          {
+            "title": "“银十”超“金九” 上海二手房成交再放量",
+            "url": "https://www.cnfin.com/qy-lb/detail/20261102/4489891_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "四大行日均放贷255亿",
+        "impact": "四大行日均放贷255亿、合计市值首破10万亿，大行信贷投放强度对优质资产形成争夺压力。",
+        "tag": [
+          "信贷",
+          "竞对动态"
+        ],
+        "group": "同业竞争",
+        "sources": [
+          {
+            "title": "国有四大行日均放贷255亿，年内分红1902亿、合计市值首破10万亿",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-02/doc-inixhwzc2418255.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "母基金新规分散投资底线",
+        "impact": "母基金新规明确分散投资底线、长期资金可豁免一层，私募与机构客群的合作结构面临调整。",
+        "tag": [
+          "财富",
+          "监管"
+        ],
+        "group": "同业竞争",
+        "sources": [
+          {
+            "title": "母基金迎新规：分散投资有底线，长期资金可豁免一层",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_11_02_906744.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "信托重仓金融股超四成",
+        "impact": "21家信托三季度重仓28只个股、金融股占比超四成，高净值客户对权益类配置的关注度回升。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "21家信托公司三季度重仓28只个股，金融股占比超四成",
+            "url": "https://finance.sina.com.cn/trust/2026-11-02/doc-inixkmap0278176.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，信托通道收缩货架变窄，类信贷通道业务受冲击。第二，普惠小微方面，广州民营经济服务周启幕，70余场惠企活动直达市场主体。第三，住房金融方面，上海二手房银十超金九，上海二手房成交再放量、银十超金九。第四，同业竞争方面，四大行日均放贷255亿、母基金新规分散投资底线，四大行日均放贷255亿、合计市值首破10万亿。第五，高端客户方面，信托重仓金融股超四成，21家信托三季度重仓28只个股、金融股占比超四成。",
+    "risk": {
+      "topic": "私募产品线上宣传拟被禁止",
+      "evidence": "金融法草案二审拟禁止非公开发行金融产品进行互联网宣传。",
+      "impact": "财富与私行条线的私募类产品线上获客与宣传物料面临合规重审，风控需排查现有线上营销路径，客群触达方式受限。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "金融法草案迎二审：禁止非公开发行金融产品进行互联网宣传",
+          "url": "https://m.21jingji.com/article/20261102/herald/f921d0a53568bee1e6ce3b431f474cc3.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：私募产品线上宣传拟被禁止，财富与私行条线的私募类产品线上获客与宣传物料面临合规重审，风控需排查现有线上营销路径，客群触达方式受限。",
+    "guangdong_ipo": {
+      "spoken": "广东有四家企业在推进IPO：河源富马硬质合金今天在广东证监局完成辅导备案，保荐机构是国泰海通；深圳海明润拟上北交所，正在问询中；东莞龙行天下拟上主板，也在问询中；另外还有一家广东企业微容科技，拟上创业板，已经提交注册。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌1.07%、标普跌0.51%，道指涨0.41%，科技股拖累指数分化。",
+      "sectors": [
+        "币安遭约63亿美元黑客攻击，为史上最大加密盗窃，约30亿美元已冻结。",
+        "伊朗最高领袖暗示愿与美国对话，油价应声回落，能源板块承压。",
+        "Fabrinet第一财季业绩超预期，盘后股价跳涨，光通信链受关注。",
+        "Clorox、Inspire Medical财报超预期，股价走高，防御与医疗个股偏强。"
+      ],
+      "spoken": "美股三大指数分化，道指涨0.41%，纳指跌1.07%，标普跌0.51%，科技股走弱拖累大盘。消息面上，币安遭约63亿美元黑客攻击，成为史上最大加密盗窃案，约30亿美元已冻结。伊朗最高领袖暗示愿与美国对话，油价回落。个股方面，Fabrinet、Clorox财报超预期，股价走强。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-03"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51983.98",
+          "changePct": "+0.41%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25164.32",
+          "changePct": "-1.07%"
+        },
+        {
+          "name": "标普500",
+          "value": "7541.40",
+          "changePct": "-0.51%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证涨1.08%、创业板涨1.87%，三部门稳市场政策与抄底资金共振。",
+      "sectors": [
+        "股票回购增持再贷款转为长期制度、利率降至1%，政策面直接利好宽基与蓝筹。",
+        "央行将开展第三次互换便利操作，超30家机构表达意向，流动性预期改善。",
+        "宽基ETF显著放量，中证1000ETF南方成交额超上一日全天，抄底资金加速进场。",
+        "短剧概念股集体爆发，产能扩张带动2026年业绩预测翻倍个股受关注。"
+      ],
+      "spoken": "A股三大指数集体反弹，上证涨1.08%，创业板指涨近2%，近4700只个股上涨。政策面三部门把回购增持再贷款转为长期制度、利率降到1%，央行还将开展第三次互换便利操作，抄底资金加速进场，宽基ETF明显放量。板块上短剧概念集体爆发，中小盘宽基获资金青睐。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-03"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3638.03",
+          "changePct": "+1.08%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11010.68",
+          "changePct": "+1.63%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2458.70",
+          "changePct": "+1.87%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23393.32点（+0.42%）；恒生科技收报3839.41点（+2.25%）。",
+      "sectors": [
+        "科网股普涨",
+        "锂电池股强势"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-03"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.42% 科指涨2.25% 科网股普涨 锂电池股强势",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-02/doc-inixiuev0391069.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23393.32",
+          "changePct": "+0.42%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3839.41",
+          "changePct": "+2.25%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-02",
+    "marketStatus": {
+      "reportDate": "2026-11-03",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-02"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-02"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-02"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月2日 周一 收盘；港股为 11月2日 周一 收盘；美股为 11月2日 周一 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611023917844483.html",
+      "title_cn": "央行、金融监管总局、证监会今日将召开会议",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "央行、金融监管总局、证监会于11月2日召开会议，消息由东方财富报道。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "金融监管"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611023918528994.html",
+      "title_cn": "刚刚全线拉升！抄底资金加速进场！外围突传利好",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "A股盘中全线拉升，抄底资金加速进场，同时外围传出利好消息。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "资金面"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611023918690284.html",
+      "title_cn": "央行将开展第三次证券、基金、保险公司互换便利操作超30家机构表达初步意向",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "央行将开展第三次证券、基金、保险公司互换便利操作，已有超30家机构表达初步意向。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "流动性",
+        "央行"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611023918925478.html",
+      "title_cn": "三部门：股票回购增持再贷款政策由阶段性安排转为长期制度性安排再贷款利率由1.25%降至1%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "三部门将股票回购增持再贷款政策由阶段性安排转为长期制度性安排，再贷款利率由1.25%降至1%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "回购增持",
+        "央行"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611023918963448.html",
+      "title_cn": "证监会有关部门负责人就近期稳市场稳预期相关工作答记者问",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "证监会有关部门负责人就近期稳市场、稳预期相关工作答记者问。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "证监会"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611023918486593.html",
+      "title_cn": "短剧产能狂飙！概念股集体爆发2026业绩预测翻倍股来了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "短剧产能快速扩张，相关概念股集体大涨，报道提及2026年业绩预测翻倍的个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "传媒",
+        "短剧",
+        "概念股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611023918914825.html",
+      "title_cn": "11月2日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "汇总11月2日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "公告",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611023918668373.html",
+      "title_cn": "A股三大指数反弹创业板指涨近2%近4700只股上涨",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "A股三大指数反弹，创业板指涨近2%，近4700只个股上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611023918144033.html",
+      "title_cn": "部分宽基ETF显著放量中证1000ETF南方成交额超上一日全天",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "部分宽基ETF显著放量，中证1000ETF南方成交额超过前一交易日全天水平。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "ETF",
+        "资金面"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611023917848083.html",
+      "title_cn": "【三季报持仓透视】牛散调仓曝光章建平、葛卫东、刘鑫重仓股出炉",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "三季报持仓透视显示，章建平、葛卫东、刘鑫等知名个人投资者的重仓股情况曝光。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "三季报",
+        "持仓",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033919221723.html",
+      "title_cn": "从广交会到APEC：从市场相通走向规则相融|潮涌亚太",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "报道梳理从广交会到APEC的亚太经贸议题，聚焦市场相通与规则相融。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "经贸",
+        "APEC"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611033919206171.html",
+      "title_cn": "法国经济走出困境，需要改革与开放（经济透视）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "评论文章讨论法国经济困境，认为其需要改革与开放。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "海外经济"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-02/doc-inixiuev0391069.shtml",
+      "title_cn": "港股收评：恒指涨0.42% 科指涨2.25% 科网股普涨 锂电池股强势",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "港股收评：恒指涨0.42%，恒生科技指数涨2.25%，科网股普涨，锂电池股表现强势。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "市场行情",
+        "科技",
+        "锂电"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-03/doc-inixkzyh6807740.shtml",
+      "title_cn": "恒指牛熊街货比(45:55)︱11月3日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/03",
+      "summary": "11月3日恒指牛熊街货比为45:55。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-02/doc-inixipwy7186531.shtml",
+      "title_cn": "港股午后涨幅扩大，恒生科技指数涨幅扩大至3%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "港股午后涨幅扩大，恒生科技指数涨幅扩大至3%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "市场行情",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-02/doc-inixichz2337817.shtml",
+      "title_cn": "港股大金融股全线拉升 央行、金融监管总局、证监会今日将召开会议",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "港股大金融股全线拉升，背景为央行、金融监管总局、证监会当日将召开会议。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "金融",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkzmt/2026-11-02/doc-inixhwzf0543720.shtml",
+      "title_cn": "终止港股IPO叠加动力板块出表，小米17亿入局，欣旺达的“减法与加法”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "欣旺达终止港股IPO并剥离动力板块，小米以17亿元入局，报道梳理其业务调整。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "公司",
+        "小米",
+        "锂电"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-02/doc-inixhwzc2378798.shtml",
+      "title_cn": "港股本周要闻前瞻｜百胜中国等公司披露业绩 海外科技股财报密集登场",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "港股本周前瞻：百胜中国等公司将披露业绩，海外科技股财报密集发布。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "前瞻"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-02/doc-inixiuez9307014.shtml",
+      "title_cn": "花旗：中国人寿维持“买入”评级 目标价37.7港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "花旗维持中国人寿“买入”评级，目标价37.7港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "保险",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-02/doc-inixiuey2908547.shtml",
+      "title_cn": "美银证券：维持中银香港(02388)“中性”评级及51.36港元目标价 前九个月业绩符合预期",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "美银证券维持中银香港“中性”评级及51.36港元目标价，称其前九个月业绩符合预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "银行",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-02/doc-inixiuey2908484.shtml",
+      "title_cn": "中银国际：比亚迪电子(00285)消费电子低谷与AI基建放量标志良好入场点 重申“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "中银国际重申比亚迪电子“买入”评级，认为消费电子低谷与AI基建放量构成良好入场点。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "消费电子",
+        "AI",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-02/doc-inixiuey2898682.shtml",
+      "title_cn": "美银证券：下调潍柴动力(02338)目标价至42港元 第三季AIDC引擎按计划交付 重卡受出口带动",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "美银证券下调潍柴动力目标价至42港元，称第三季AIDC引擎按计划交付，重卡受出口带动。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机械",
+        "AIDC",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-02/doc-inixiuez9344517.shtml",
+      "title_cn": "瑞银：维持农业银行(01288)“中性”评级及7.3港元目标价 第三季度收入及纯利增长领先国有同业",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "瑞银维持农业银行“中性”评级及7.3港元目标价，称其第三季度收入及纯利增长领先国有同业。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "银行",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-02/doc-inixiuez9337362.shtml",
+      "title_cn": "小摩：维持中国人寿(02628)“增持”评级 料市场对上季录亏损不意外",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "摩根大通维持中国人寿“增持”评级，预计市场对其上季亏损不会感到意外。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "保险",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/01/top-analysts-are-bullish-on-these-3-stocks-for-the-long-haul.html",
+      "title_cn": "Top Wall Street analysts are bullish on these 3 stocks for the long haul",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/01",
+      "summary": "CNBC报道称，华尔街分析师长期看好三只股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "机构观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/01/election-municipal-bonds.html",
+      "title_cn": "The midterm election could reshape the muni bond market. Here’s what investors need to know",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/01",
+      "summary": "CNBC报道分析中期选举可能如何重塑美国市政债市场。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "市政债",
+        "选举"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/10/29/circle-tether-freeze-funds-impacted-by-potential-binance-security-issue.html",
+      "title_cn": "$6.3 billion Binance hack is largest crypto theft on record",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "10/30",
+      "summary": "币安遭黑客攻击，涉案金额63亿美元，为有记录以来最大加密货币盗窃案。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "安全事件"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/oil-falls-as-trump-favours-iran-diplomacy-before-midterm-elections-4989799",
+      "title_cn": "Oil slides after Iran’s Supreme Leader hints at pursuing ’dialogue’ with the U.S.",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "伊朗最高领袖暗示愿与美国对话后，油价下跌。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "原油",
+        "地缘"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/backblaze-q3-2026-slides-ai-strategy-drives-47-b2-growth-93CH-4993161",
+      "title_cn": "Backblaze Q3 2026 slides: AI strategy drives 47% B2 growth",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "Backblaze第三季度业绩显示，AI战略推动其B2业务增长47%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-match-group-q3-2026-revenue-nearly-meets-forecast-93CH-4993160",
+      "title_cn": "Earnings call transcript: Match Group Q3 2026 revenue nearly meets forecast",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "Match Group第三季度营收基本符合预期，业绩电话会议纪要披露。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/saba-fund-renews-share-buyback-plan-for-up-to-10-of-shares-93CH-4993159",
+      "title_cn": "Saba fund renews share buyback plan for up to 10% of shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "Saba基金续签股份回购计划，规模最高达10%股份。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "回购",
+        "基金"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/saba-fund-renews-share-buyback-program-for-up-to-10-stake-93CH-4993158",
+      "title_cn": "Saba fund renews share buyback program for up to 10% stake",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "Saba基金续签股份回购计划，规模最高达10%股份（与上条为同一事件的不同表述）。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "回购",
+        "基金"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/reconnaissance-energy-grants-stock-options-to-new-director-93CH-4993157",
+      "title_cn": "Reconnaissance Energy grants stock options to new director",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "Reconnaissance Energy向新任董事授予股票期权。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司公告",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-inspire-medical-beats-q3-2026-estimates-shares-rise-after-hours-93CH-4993156",
+      "title_cn": "Earnings call transcript: Inspire Medical beats Q3 2026 estimates, shares rise after hours",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "Inspire Medical第三季度业绩超预期，股价盘后上涨。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-fabrinet-posts-q1-2027-beat-as-stock-jumps-after-hours-93CH-4993155",
+      "title_cn": "Earnings call transcript: Fabrinet posts Q1 2027 beat as stock jumps after hours",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "Fabrinet 2027财年第一季度业绩超预期，股价盘后大涨。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "光通信"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-clorox-beats-q1-2026-estimates-shares-rise-93CH-4993154",
+      "title_cn": "Earnings call transcript: Clorox beats Q1 2026 estimates, shares rise",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/02",
+      "summary": "Clorox 2026财年第一季度业绩超预期，股价上涨。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "消费"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
