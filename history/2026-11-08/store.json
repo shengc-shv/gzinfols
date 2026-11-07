@@ -1,0 +1,855 @@
+{
+  "date": "2026-11-08",
+  "updatedAt": "2026-11-07T23:09:58.508Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：跨境资金与汇率，外储3.4万亿、非农超预期；贵金属配置，金价回撤超三成、ETF逆势买入；湾区合作与普惠竞争，大行市占46%。",
+    "spoken_hero": "今天主要看三个方面：跨境资金和汇率，外储站稳三万四千亿美元，美国非农大超预期；贵金属配置，金价回撤超三成，黄金ETF却逆势买入一百多吨；还有湾区合作和普惠竞争，大行普惠市占已经到四成六。",
+    "must_read": [
+      {
+        "title": "央行连续24个月买黄金",
+        "why": "官方储备配置延续，为贵金属长期配置提供权威背书，与短期机构下调形成对照，影响客户预期。",
+        "url": "https://finance.sina.com.cn/money/nmetal/hjzx/2026-11-07/doc-inixxcwa4937781.shtml"
+      },
+      {
+        "title": "美国10月非农16.5万大超预期",
+        "why": "海外利率预期重新定价，美元与人民币汇率波动来源变化，影响跨境客户结售汇与外币资产配置节奏。",
+        "url": "https://finance.eastmoney.com/a/202611073925450646.html"
+      },
+      {
+        "title": "10月末外储3.4万亿美元",
+        "why": "外储连续7个月站稳3.4万亿，跨境资金面平稳，汇率预期与结售汇环境对跨境客群判断有直接参考。",
+        "url": "https://www.cnfin.com/hg-lb/detail/20261107/4492473_1.html"
+      },
+      {
+        "title": "大行普惠小微信贷市占46%",
+        "why": "普惠小微竞争格局固化，中小行增量空间收窄，广州本地小微客群的争夺将更依赖场景与定价差异。",
+        "url": "https://m.21jingji.com/article/20261107/herald/0db98164a0bb886adbb345da71abed2f.html"
+      }
+    ],
+    "spoken_must_read": "央行连续24个月买黄金。官方储备配置延续，为贵金属长期配置提供权威背书，与短期机构下调形成对照，影响客户预期。其次，美国10月非农16.5万大超预期。海外利率预期重新定价，美元与人民币汇率波动来源变化，影响跨境客户结售汇与外币资产配置节奏。此外，10月末外储3.4万亿美元。外储连续7个月站稳3.4万亿，跨境资金面平稳，汇率预期与结售汇环境对跨境客群判断有直接参考。还有，大行普惠小微信贷市占46%。普惠小微竞争格局固化，中小行增量空间收窄，广州本地小微客群的争夺将更依赖场景与定价差异。",
+    "insights": [
+      {
+        "topic": "跨境客户结售汇问询增加",
+        "impact": "外储平稳叠加海外利率预期扰动，有跨境收支安排的企业主对结售汇时点与外币存款收益的关注度上升。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "美国10月非农大超预期 美联储下月加息稳了？",
+            "url": "https://finance.eastmoney.com/a/202611073925450646.html"
+          },
+          {
+            "title": "10月末我国外汇储备规模为34052亿美元",
+            "url": "https://www.cnfin.com/hg-lb/detail/20261107/4492473_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "企业主外币资产配置诉求分化",
+        "impact": "美元利率预期反复，超高净值企业主在境内人民币资产与外币资产之间的摆布意愿出现分化，家族信托与跨境传承话题同步升温。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "美国10月非农大超预期 美联储下月加息稳了？",
+            "url": "https://finance.eastmoney.com/a/202611073925450646.html"
+          }
+        ]
+      },
+      {
+        "topic": "普惠小微增量空间收窄",
+        "impact": "大行普惠市占达46%，中小行在标准小微客群上的价格与额度优势减弱，个体工商户与细分场景客群的争夺更依赖产品适配。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "大行市占率达46%！中小银行普惠小微信贷增量何在",
+            "url": "https://m.21jingji.com/article/20261107/herald/0db98164a0bb886adbb345da71abed2f.html"
+          }
+        ]
+      },
+      {
+        "topic": "提前还款流程时效引发客诉",
+        "impact": "大额提前还贷因内部审批拖延近两月并多收利息，高净值房贷客户对流程时效与费用计算的敏感度上升。",
+        "tag": [
+          "住房金融"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "客户凑齐1800万元提前还贷，银行以内部审批为由拖延近两月多收10万余元利息",
+            "url": "https://m.21jingji.com/article/20261107/herald/810c80c05a6b65db72d3c9801eb541f6.html"
+          }
+        ]
+      },
+      {
+        "topic": "湾区合作倡议落地带动跨境客群",
+        "impact": "全球湾区代表在广州发出合作倡议，跨境贸易与投资往来主体增加，跨境结算与外币账户类需求随之活跃。",
+        "tag": [
+          "政银合作",
+          "客群"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "重磅！全球湾区代表在广州共同发出湾区经济合作倡议",
+            "url": "https://economy.southcn.com/node_52de6dd46e/5102ece1c4.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，高端客户方面，跨境客户结售汇问询增加等4条线索，外储平稳叠加海外利率预期扰动。第二，普惠小微方面，普惠小微增量空间收窄，大行普惠市占达46%。",
+    "risk": {
+      "topic": "信托代销员工行为违规被罚",
+      "evidence": "中信信托因员工违规汇集资金购买信托产品等被罚175万元。",
+      "impact": "财富与私行条线代销环节的员工行为管理面临直接对照，涉及客户资金归集、代客操作等红线；风控需复核代销流程留痕与双录执行。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "中信信托因员工违规汇集资金购买信托产品等被罚175万元",
+          "url": "https://finance.sina.com.cn/roll/2026-11-07/doc-inixxqms4492981.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：信托代销员工行为违规被罚，财富与私行条线代销环节的员工行为管理面临直接对照，涉及客户资金归集、代客操作等红线；风控需复核代销流程留痕与双录执行。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨1.09%，标普500涨0.31%，道指跌0.46%，科技股走强。",
+      "sectors": [
+        "CoreWeave债券收益率突破16%，AI债务市场承压，投资者担忧数据中心放缓。",
+        "民主党在国会选举中获胜，加密行业面临更严监管，华盛顿对加密转趋防守。",
+        "美股股票仓位单周降幅创纪录，德意志银行数据显示资金明显撤离。",
+        "美国10月非农新增16.5万大超预期，市场对美联储下月加息预期升温。"
+      ],
+      "spoken": "美股今日分化，纳指涨1.09%，标普500涨0.31%，道指跌0.46%，科技股支撑大盘。板块方面，CoreWeave债券收益率突破16%，AI债务市场承压；民主党选举获胜令加密行业面临更严监管；德意志银行数据显示美股仓位单周降幅创纪录。另外，美国10月非农新增16.5万大超预期，市场对美联储下月加息预期升温。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-08"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51285.73",
+          "changePct": "-0.46%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "24579.42",
+          "changePct": "+1.09%"
+        },
+        {
+          "name": "标普500",
+          "value": "7376.86",
+          "changePct": "+0.31%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数跌1.10%，创业板指跌3.96%，科技成长股大幅回调。",
+      "sectors": [
+        "国常会提出完善资本市场稳市机制，增强股市内在稳定性，政策面释放稳市信号。",
+        "大量资金涌入科技成长宽基ETF，但创业板指仍跌3.96%，资金与指数走势背离。",
+        "6家头部券商完成互换便利操作，首批股票投资落地，增量资金已入市。",
+        "5连板浙文影业称无AI短剧相关业务，同日收到上交所监管工作函，题材炒作降温。"
+      ],
+      "spoken": "A股今日走弱，上证指数跌1.10%，深证成指跌2.57%，创业板指跌3.96%，科技成长板块回调明显。政策面上，国常会提出完善资本市场稳市机制，6家头部券商互换便利操作落地，增量资金已入市。但盘面上科技成长宽基ETF虽获资金涌入，指数仍承压，浙文影业因AI短剧题材收到监管工作函。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-07"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3649.18",
+          "changePct": "-1.10%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11175.78",
+          "changePct": "-2.57%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2465.23",
+          "changePct": "-3.96%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24481.86点（-1.27%）；恒生科技收报4078.23点（-1.83%）。",
+      "sectors": [
+        "科网股低迷",
+        "AI概念股下挫",
+        "智谱跌超10%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-07"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.27% 科指跌1.83% 科网股低迷 AI概念股下挫 智谱跌超10%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-06/doc-inixuuqw8766859.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24481.86",
+          "changePct": "-1.27%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4078.23",
+          "changePct": "-1.83%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-06",
+    "marketStatus": {
+      "reportDate": "2026-11-08",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-11-06",
+          "reason": "数据为 11月6日（距今 2 天）"
+        },
+        "hk": {
+          "fresh": false,
+          "dataDate": "2026-11-06",
+          "reason": "数据为 11月6日（距今 2 天）"
+        },
+        "us": {
+          "fresh": false,
+          "dataDate": "2026-11-06",
+          "reason": "数据为 11月6日（距今 2 天）"
+        }
+      },
+      "allStale": true,
+      "note": "三地股市均无隔夜行情（休市或数据未更新），以下为最近一次收盘数据",
+      "spokenNote": "三地股市今日均无隔夜行情"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925300073.html",
+      "title_cn": "国常会：完善资本市场稳市机制增强股市内在稳定性",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "国务院常务会议提出完善资本市场稳市机制，增强股市内在稳定性。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "资本市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611063925190067.html",
+      "title_cn": "稳市组合拳持续加码公募机构集体发声",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "稳市政策组合拳持续加码，多家公募机构集体发声。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "公募基金"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925249393.html",
+      "title_cn": "大量资金涌入科技成长宽基ETF",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "大量资金涌入科技成长类宽基ETF。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "ETF",
+        "资金流向",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925502079.html",
+      "title_cn": "大幅下调估值！史上最大IPO突变！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "某史上最大IPO大幅下调估值，发行出现突变。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "IPO",
+        "估值"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925450646.html",
+      "title_cn": "新增16.5万！美国10月非农大超预期美联储下月加息稳了？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "美国10月非农新增就业16.5万人，大超预期，市场关注美联储下月加息动向。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "美联储",
+        "就业数据"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925490574.html",
+      "title_cn": "震惊华尔街！马斯克豪言：SpaceX明年底年化营收或超5000亿美元",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "马斯克称SpaceX明年底年化营收或超5000亿美元，引发华尔街关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "SpaceX",
+        "马斯克",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925452829.html",
+      "title_cn": "“易中天”都说经营正常光还值得拥有吗",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "相关公司回应称经营正常，市场关注其后续表现。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "公司动态"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925312813.html",
+      "title_cn": "增量资金已入市！6家头部券商完成互换便利操作落地首批股票投资",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "6家头部券商完成互换便利操作，首批股票投资已落地，增量资金入市。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "券商",
+        "政策",
+        "资金流向"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925453288.html",
+      "title_cn": "下修超10%！高盛时隔两个月再度大砍黄金目标",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "高盛时隔两个月再度下调黄金目标价，下调幅度超10%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "黄金",
+        "大宗商品",
+        "机构观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925288178.html",
+      "title_cn": "5连板浙文影业称无AI短剧相关业务同日上交所下发监管工作函",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "浙文影业5连板后称无AI短剧相关业务，同日上交所下发监管工作函。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "监管",
+        "AI",
+        "个股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925540081.html",
+      "title_cn": "国金证券牟一凌：蓝筹估值跌入历史低位，三条主线布局市场",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "国金证券牟一凌表示蓝筹估值跌入历史低位，并提出三条主线布局市场。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "蓝筹"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611073925537410.html",
+      "title_cn": "化债之外，更要管住预算外融资",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "评论文章指出化债之外还需管住预算外融资。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "地方债"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-06/doc-inixuuqw8766859.shtml",
+      "title_cn": "港股收评：恒指跌1.27% 科指跌1.83% 科网股低迷 AI概念股下挫 智谱跌超10%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "港股收评：恒指跌1.27%，科指跌1.83%，科网股低迷，AI概念股下挫，智谱跌超10%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "AI",
+        "科网股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-07/doc-inixwhsn5175964.shtml",
+      "title_cn": "恒指牛熊街货比(48:52)︱11月7日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "11月7日恒指牛熊街货比为48:52。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-06/doc-inixuqia5496345.shtml",
+      "title_cn": "港交所三季报：新股募资额全球第二",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "港交所三季报显示新股募资额位居全球第二。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港交所",
+        "财报",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/bxjj/2026-11-06/doc-inixuqhy8807484.shtml",
+      "title_cn": "多项指标创新高！港交所，最新披露",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "港交所披露最新数据，多项指标创新高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港交所",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-06/doc-inixucsy5075959.shtml",
+      "title_cn": "美股AI抛售潮蔓延！港股存储概念股直线下挫，南方最多两倍做多海力士跌超21%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "美股AI抛售潮蔓延至港股，存储概念股直线下挫，南方两倍做多海力士跌超21%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "AI",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/7x24/2026-11-06/doc-inixucth5541098.shtml",
+      "title_cn": "港交所：10月底证券市场市价总值42.4万亿港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "港交所披露10月底证券市场市价总值为42.4万亿港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港交所",
+        "市场数据"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/wm/2026-11-06/doc-inixtxky8352573.shtml",
+      "title_cn": "中信证券：利率拐点叠加资金回流，看好港股互联网修复行情",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "中信证券认为利率拐点叠加资金回流，看好港股互联网修复行情。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "港股",
+        "互联网"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-06/doc-inixtxmh8967438.shtml",
+      "title_cn": "港股延迟上市再“+1”！企业等待更合适上市窗口",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "港股延迟上市案例再增一例，企业等待更合适的上市窗口。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-06/doc-inixuqia5500128.shtml",
+      "title_cn": "广发证券：维持百胜中国“买入”评级 H股合理价值504.87港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "广发证券维持百胜中国“买入”评级，H股合理价值504.87港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "港股",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-06/doc-inixuure5633623.shtml",
+      "title_cn": "高盛：维持工商银行(01398)“中性”评级 目标价8.02港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "高盛维持工商银行“中性”评级，目标价8.02港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "港股",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-06/doc-inixuura8852550.shtml",
+      "title_cn": "小摩：中国CDMO进入新发展阶段 首予康龙化成(03759)及凯莱英(06821)H股“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "摩根大通认为中国CDMO进入新发展阶段，首予康龙化成及凯莱英H股“增持”评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "医药",
+        "CDMO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-06/doc-inixuura8836062.shtml",
+      "title_cn": "花旗：维持香港交易所(00388)“买入”评级及460港元目标价 第三季度收入略低于预期",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "花旗维持香港交易所“买入”评级及460港元目标价，指出第三季度收入略低于预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机构观点",
+        "港交所",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/06/coreweave-bond-yield-tops-16percent-as-ai-credit-stress-rises.html",
+      "title_cn": "The AI ‘credit card’ is getting costlier as CoreWeave bond yield tops 16%",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "CoreWeave债券收益率突破16%，AI相关融资成本上升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "债券",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/05/cnbcs-experts-on-whether-the-ai-trade-is-ending-and-what-investors-should-do-next.html",
+      "title_cn": "CNBC's experts on whether the AI trade is ending and what investors should do next",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/05",
+      "summary": "CNBC专家讨论AI交易是否终结及投资者后续应对。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股",
+        "机构观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/05/crypto-midterms-democrats-clarity-act.html",
+      "title_cn": "Democratic sweep puts crypto on defensive in Washington",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/05",
+      "summary": "民主党在选举中获胜，使加密货币在华盛顿处于防守态势。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "政策",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/binance-cfo-kaiser-ng-steps-down-justin-yek-named-new-finance-chief-5009978",
+      "title_cn": "Binance CFO Kaiser Ng steps down, Justin Yek named new finance chief",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "币安CFO Kaiser Ng卸任，Justin Yek被任命为新任财务负责人。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "人事变动"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/world-acceptance-director-benjamin-robinson-sells-14878-in-shares-93CH-5010063",
+      "title_cn": "World Acceptance director Benjamin Robinson sells $14,878 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "World Acceptance董事Benjamin Robinson出售价值14,878美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/dropbox-chief-accounting-officer-sells-74884-in-stock-93CH-5010062",
+      "title_cn": "Dropbox chief accounting officer sells $74,884 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "Dropbox首席会计官出售价值74,884美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/emerging-market-central-banks-turn-hawkish-as-inflation-pressures-mount-citi-says-5010059",
+      "title_cn": "Emerging market central banks turn hawkish as inflation pressures mount, Citi says",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "花旗称随着通胀压力上升，新兴市场央行转向鹰派。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "新兴市场",
+        "央行"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/us-military-says-it-disabled-cargo-vessel-in-gulf-of-oman-5010055",
+      "title_cn": "US military says it disabled cargo vessel in Gulf of Oman",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "美国军方称在阿曼湾使一艘货船失去动力。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/russia-stocks-lower-at-close-of-trade-moex-russia-index-unchanged-5010054",
+      "title_cn": "Russia stocks lower at close of trade; MOEX Russia Index unchanged",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "俄罗斯股市收盘走低，MOEX俄罗斯指数基本持平。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "俄罗斯",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/equity-positioning-suffered-one-of-its-sharpest-weekly-drops-on-record-db-5010048",
+      "title_cn": "Equity positioning suffered one of its sharpest weekly drops on record: DB",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "德意志银行称股票仓位出现有记录以来最大单周降幅之一。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "资金流向",
+        "机构观点"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/coreweave-seeks-truce-with-texas-governorelect-hinojosa-5010044",
+      "title_cn": "CoreWeave seeks truce with Texas Governor-elect Hinojosa",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "CoreWeave寻求与得州当选州长Hinojosa缓和关系。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股",
+        "公司动态"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/trump-signals-iran-peace-progress-as-hormuz-attacks-threaten-talks-5009635",
+      "title_cn": "Trump cites progress in Iran talks as fresh explosions hit Qeshm Island",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/07",
+      "summary": "特朗普称伊朗谈判取得进展，同时格什姆岛发生新的爆炸。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
