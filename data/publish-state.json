@@ -1,17 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-06",
+  "updatedAt": "2026-11-08",
   "reports": {
-    "2026-10-31": {
-      "source": "manual-final",
-      "runId": "41142580198",
-      "publishedAt": "2026-10-31T07:13:34+08:00"
-    },
-    "2026-11-01": {
-      "source": "manual-final",
-      "runId": "41251095826",
-      "publishedAt": "2026-11-01T07:11:06+08:00"
-    },
     "2026-11-02": {
       "source": "manual-final",
       "runId": "41360285278",
@@ -36,6 +26,16 @@
       "source": "manual-final",
       "runId": "42127118704",
       "publishedAt": "2026-11-06T07:11:54+08:00"
+    },
+    "2026-11-07": {
+      "source": "manual-final",
+      "runId": "42310078466",
+      "publishedAt": "2026-11-07T07:15:33+08:00"
+    },
+    "2026-11-08": {
+      "source": "manual-final",
+      "runId": "42423669360",
+      "publishedAt": "2026-11-08T07:10:43+08:00"
     }
   }
 }
