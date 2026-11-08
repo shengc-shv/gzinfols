@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-08",
+  "updatedAt": "2026-11-09",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -6016,71 +6016,6 @@
         "#1.92%"
       ],
       "peakScore": 87
-    },
-    "ev-woq4z8": {
-      "id": "ev-woq4z8",
-      "topicTags": [],
-      "anchors": [],
-      "kind": "generic",
-      "firstBroadcastAt": "2026-09-24",
-      "lastBroadcastAt": "2026-09-24",
-      "broadcastCount": 1,
-      "sections": [
-        "must_read"
-      ],
-      "anglesUsed": [],
-      "samples": [
-        {
-          "date": "2026-09-24",
-          "section": "must_read",
-          "title": "南向通五周年双向提速",
-          "text": "南向通五周年双向提速 离岸人民币债券配置渠道拓宽，跨境客户债券投资需求或成财富管理新增长点。",
-          "facts": [],
-          "broadcastAt": "2026-09-24T07:32:16+08:00",
-          "url": "https://www.cnfin.com/yw-lb/detail/20260924/4474398_1.html",
-          "score": 43,
-          "novelty": 1
-        }
-      ],
-      "broadcastedTexts": [
-        "南向通五周年双向提速 南向通五周年双向提速 离岸人民币债券配置渠道拓宽，跨境客户债券投资需求或成财富管理新增长点。"
-      ],
-      "broadcastedFacts": [],
-      "peakScore": 43
-    },
-    "ev-9ft4yz": {
-      "id": "ev-9ft4yz",
-      "topicTags": [],
-      "anchors": [],
-      "kind": "generic",
-      "firstBroadcastAt": "2026-09-24",
-      "lastBroadcastAt": "2026-09-24",
-      "broadcastCount": 1,
-      "sections": [
-        "insights"
-      ],
-      "anglesUsed": [],
-      "samples": [
-        {
-          "date": "2026-09-24",
-          "section": "insights",
-          "title": "积存金承接炒金客",
-          "text": "积存金承接炒金客 超10家银行清退代理上金所个人贵金属通道，光大亦停办，存量炒金客户面临迁移与再选择。 加快积存金类产品上架与话术更新，本周对存量贵金属客户做一轮承接式触达。",
-          "facts": [
-            "#10家"
-          ],
-          "broadcastAt": "2026-09-24T07:32:16+08:00",
-          "url": "https://finance.cctv.com/2026/09/23/ARTIvqQwc2j0BsHpXM2ThOTr260923.shtml",
-          "novelty": 1
-        }
-      ],
-      "broadcastedTexts": [
-        "积存金承接炒金客 积存金承接炒金客 超10家银行清退代理上金所个人贵金属通道，光大亦停办，存量炒金客户面临迁移与再选择。 加快积存金类产品上架与话术更新，本周对存量贵金属客户做一轮承接式触达。"
-      ],
-      "broadcastedFacts": [
-        "#10家"
-      ],
-      "peakScore": 0
     },
     "#3个月|开户|罚": {
       "id": "#3个月|开户|罚",
@@ -14090,8 +14025,132 @@
     }
   },
   "today": {
-    "date": "2026-11-08",
-    "entries": []
+    "date": "2026-11-09",
+    "entries": [
+      {
+        "date": "2026-11-09",
+        "section": "must_read",
+        "title": "十年期美债收益率破5%临界点",
+        "text": "十年期美债收益率破5%临界点 全球无风险利率中枢上移，跨境资产比价与汇率波动同步放大，高净值客户持仓的敏感度显著抬升。",
+        "facts": [
+          "#5%"
+        ],
+        "broadcastAt": "2026-11-09T07:07:26+08:00",
+        "url": "https://finance.sina.com.cn/money/nmetal/hjfx/2026-11-08/doc-iniyacys3718862.shtml",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-09",
+        "section": "must_read",
+        "title": "前10月国开行制造业贷款超4800亿",
+        "text": "前10月国开行制造业贷款超4800亿 政策性资金对制造业的投放强度明确，广州制造业与科创客群的融资价格与额度参照系被抬高。",
+        "facts": [
+          "#10月"
+        ],
+        "broadcastAt": "2026-11-09T07:07:26+08:00",
+        "url": "https://m.21jingji.com/article/20261108/herald/463afe825e60081c8d7368c402eaf1a4.html",
+        "score": 66,
+        "novelty": 0.7419811320754717,
+        "angle": "同业动作"
+      },
+      {
+        "date": "2026-11-09",
+        "section": "must_read",
+        "title": "前三季度科技普惠涉农信贷持续发力",
+        "text": "前三季度科技普惠涉农信贷持续发力 政策导向下科技型与小微客群的信贷供给保持强度，普惠资产投放的同业竞争位次继续变化。",
+        "facts": [],
+        "broadcastAt": "2026-11-09T07:07:26+08:00",
+        "url": "https://m.21jingji.com/article/20261108/herald/b5d0cc10d5517ed5e23185eb3609ac80.html",
+        "score": 66,
+        "novelty": 0.3156862745098039,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-09",
+        "section": "must_read",
+        "title": "多家银行公告赎回1855亿元",
+        "text": "多家银行公告赎回1855亿元 同业负债与理财资金集中腾挪，客户对理财产品的比价与再配置选择出现新的参照，货架结构承压。",
+        "facts": [
+          "#1855亿元"
+        ],
+        "broadcastAt": "2026-11-09T07:07:26+08:00",
+        "url": "https://m.21jingji.com/article/20261108/herald/ae7f6ba850eab25ac5704bca1f7a2132.html",
+        "score": 29,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-09",
+        "section": "insights",
+        "title": "银行集中赎回1855亿资金腾挪",
+        "text": "银行集中赎回1855亿资金腾挪 同业与理财资金集中回笼，客户对产品收益的比价更频繁，货架上的存续产品面临再配置诉求。",
+        "facts": [],
+        "broadcastAt": "2026-11-09T07:07:26+08:00",
+        "url": "https://m.21jingji.com/article/20261108/herald/ae7f6ba850eab25ac5704bca1f7a2132.html",
+        "novelty": 0.189,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-09",
+        "section": "insights",
+        "title": "理财资金回流下的货架比价",
+        "text": "理财资金回流下的货架比价 赎回潮后客户对短期限与净值型产品的选择更挑剔，收益展示与到期衔接成为投诉高发环节。",
+        "facts": [],
+        "broadcastAt": "2026-11-09T07:07:26+08:00",
+        "url": "https://m.21jingji.com/article/20261108/herald/ae7f6ba850eab25ac5704bca1f7a2132.html",
+        "novelty": 0.26599999999999996,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-09",
+        "section": "insights",
+        "title": "美债破5%抬升跨境持仓敏感度",
+        "text": "美债破5%抬升跨境持仓敏感度 持有境外资产与外币存款的高净值客户，对汇率折算与净值回撤的关注度明显上升。",
+        "facts": [
+          "#5%"
+        ],
+        "broadcastAt": "2026-11-09T07:07:26+08:00",
+        "url": "https://finance.sina.com.cn/money/nmetal/hjfx/2026-11-08/doc-iniyacys3718862.shtml",
+        "novelty": 0.2510869565217391,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-09",
+        "section": "insights",
+        "title": "稳市机制强化下的权益配置意愿",
+        "text": "稳市机制强化下的权益配置意愿 超高净值客户对权益类与红利策略的问询增多，家族信托与全权委托的配置讨论随之升温。",
+        "facts": [
+          "!问询"
+        ],
+        "broadcastAt": "2026-11-09T07:07:26+08:00",
+        "url": "https://finance.eastmoney.com/a/202611083925610461.html",
+        "novelty": 0.5767857142857142,
+        "angle": "同业动作"
+      },
+      {
+        "date": "2026-11-09",
+        "section": "insights",
+        "title": "科技与普惠信贷供给保持强度",
+        "text": "科技与普惠信贷供给保持强度 科技型小微与涉农经营主体的可获信贷额度充裕，同业在利率与担保方式上的竞争更直接。",
+        "facts": [],
+        "broadcastAt": "2026-11-09T07:07:26+08:00",
+        "url": "https://m.21jingji.com/article/20261108/herald/b5d0cc10d5517ed5e23185eb3609ac80.html",
+        "novelty": 0.24062499999999998,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-09",
+        "section": "risk",
+        "title": "上市公司金融借款纠纷提示贷后风险",
+        "text": "上市公司金融借款纠纷提示贷后风险 登云股份涉3000多万元金融借款合同纠纷案将开庭。 公司条线需关注上市公司客群信贷敞口，风控侧贷后排查压力上升，个贷与财富端对该类主体关联产品的适当性审查同步收紧。",
+        "facts": [],
+        "broadcastAt": "2026-11-09T07:07:26+08:00",
+        "score": 74,
+        "novelty": 0.3414634146341463,
+        "angle": "市场反应"
+      }
+    ],
+    "runId": "42533569689"
   },
   "deliveries": [
     {
@@ -14471,6 +14530,7 @@
       "reportSha": "86f8ba82117cf6fbd2eaf2b63031ccc4479e3adf"
     }
   ],
+  "lastHeroLine": "今天主要看三个方面：负债定价，自律机制首纳城商行；资本市场稳市，国常会新提法叠加互换便利；广州本地场景，南沙外贸与地铁新线。",
   "ipoVoicing": {
     "微容科技": [
       "2026-10-30",
