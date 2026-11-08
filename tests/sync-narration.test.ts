@@ -15,7 +15,6 @@ import assert from "node:assert/strict";
 import { syncNarration } from "../lib/pipeline/side-outputs/side-exec-summary";
 import {
   INSIGHT_GROUP_IMPACT_CHARS,
-  INSIGHT_GROUP_TOPIC_MAX,
   groupedInsightsSpeech,
 } from "../lib/services/voice/speech-lines";
 import type { ExecutiveSummary } from "../lib/services/enrich/executive-summary";
@@ -49,13 +48,13 @@ test("商机口播：按客群归并 —— 条数不随卡面线性增长（5 �
   assert.ok(!/节前接住到期资金|更新配置话术|走访文旅商户/.test(text), "2026-10-01：action 不再进口播");
 });
 
-test("商机口播：组内超 2 条 → 以「首条等N条线索」概括，不罗列", () => {
+test("商机口播：组内超 2 条 → 全列主题名（2026-11-08 sc 口径）", () => {
   const exec = base({
     insights: [1, 2, 3, 4].map((i) => ({ topic: `主题${i}`, impact: `影响${i}`, action: `动作${i}。` })),
   });
   const out = syncNarration(exec);
-  assert.equal(out.spoken_insights, "第一，其他机会方面，主题1等4条线索，影响1。");
-  assert.equal(INSIGHT_GROUP_TOPIC_MAX, 2, "上限常量须与实现一致");
+  assert.equal(out.spoken_insights, "第一，其他机会方面，主题1、主题2、主题3、主题4，影响1。");
+  assert.ok(!/等\d+条线索/.test(out.spoken_insights ?? ""), "卡片有的商机都要点名，不再用「等N条线索」概括");
 });
 
 test("商机口播：多标签卡取第一段客群（口播只按主客群归并）", () => {
@@ -105,11 +104,20 @@ test("商机口播：impact 首段过短 → 向后补一段（不产出无信�
 });
 
 test("商机口播：LLM 产出优先（归并稿不被卡面兜底覆盖）", () => {
+  // 这是 LLM 原稿，其中「等3条线索」是历史写法，原样保留属刻意：
+  // 2026-11-08 只改确定性派生路径，LLM 稿由 insightSpeechAligned 管，本期不扩它的判据口径。
+  // 2026-11-08 顺带修过时 fixture：原用例只有 1 条卡片却配 78 字长稿，10-23 起
+  // insightSpeechAligned 的长度上界必然判不对齐（正确行为）→ 该用例长期红灯、失去守护作用。
+  // 补到 3 条卡片（与归并稿规模匹配），守护的仍是「LLM 稿原样保留」这件事。
   const llm =
     "第一，零售 A U M方面，基金代销等3条线索，节前接住到期资金与存款迁移。第二，本地场景方面，消费补贴与文旅商圈同时放量，信用卡和消费贷提前进商圈布点。";
   const exec = base({
     spoken_insights: llm,
-    insights: [{ topic: "基金代销", impact: "i", action: "a", sources: [{ title: "t", url: "https://example.com/a" }] }],
+    insights: [
+      { topic: "基金代销", impact: "i", action: "a", sources: [{ title: "t", url: "https://example.com/a" }] },
+      { topic: "消费补贴", impact: "i2", action: "a2" },
+      { topic: "文旅商圈", impact: "i3", action: "a3" },
+    ],
   });
   assert.equal(syncNarration(exec).spoken_insights, llm, "LLM 归并稿比卡面兜底更聚焦，应原样保留");
 });

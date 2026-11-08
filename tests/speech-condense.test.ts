@@ -212,6 +212,7 @@ test("⑨ 商机口播归并后不再触发 280 字截断（原逐条 520 上限
   });
   const b = await assembleBriefingScript(report(), { exec: synced });
   assert.ok(b);
-  assert.ok(b.parts.insights!.includes("主题1号内容"), "首条主题在（8 条同属一组 → 概括为「主题1号内容等8条线索」）");
-  assert.ok(b.parts.insights!.length < 200, `归并后远低于 280 上限（实际 ${b.parts.insights!.length} 字）`);
+  assert.ok(b.parts.insights!.includes("主题1号内容"), "首条主题在（8 条同属一组 → 2026-11-08 起全列 8 个主题名）");
+  assert.ok(!/等\d+条线索/.test(b.parts.insights!), "组内不再概括为「等N条线索」");
+  assert.ok(b.parts.insights!.length < 200, `按客群归并后仍远低于 280 上限（实际 ${b.parts.insights!.length} 字）`);
 });

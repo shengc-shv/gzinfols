@@ -87,8 +87,6 @@ export function insightSpeechLine(
  * LLM 正常产出时应在 prompt 约束下给出**实质方向名**（如「本地消费场景」「跨境客群」）。
  */
 export const INSIGHT_OTHER_GROUP = "其他机会";
-/** 组内主题最多列几个（超出以「X 等 N 条线索」概括，避免罗列）。 */
-export const INSIGHT_GROUP_TOPIC_MAX = 2;
 /** 组内「一句影响」的截断长度（字）。 */
 export const INSIGHT_GROUP_IMPACT_CHARS = 40;
 /** 首段短于此长度时，向后补一段（避免「本周对接」这种无信息片段）。 */
@@ -100,7 +98,7 @@ export interface InsightSpeechGroup {
    * 逐字同源**；无 group 时回落客群短名（零售 A U M / 高端客户 / 普惠小微）/ 兜底名（其他机会）。
    */
   label: string;
-  /** 该组要念的主题（已按上限概括）。 */
+  /** 该组要念的主题（全列，与最终卡片一一对应）。 */
   topics: string[];
   /** 组内条数（调试用）。 */
   topicCount: number;
@@ -140,6 +138,7 @@ function firstClause(raw: string | undefined, max: number): string {
  * 分组键（2026-09-30 sc 口径「标签同源」）：**优先 `insights[].group`（LLM 自拟方向名，
  * 卡面 chip 与口播逐字共用同一串字）**；无 group 才退回 `segments[0]`。
  * 键全空（既无 group 也无 segments）归入 `INSIGHT_OTHER_GROUP` 组。
+ * 2026-11-08 sc 口径：组内 topic **全列**，不再按条数概括（详见下方实现注释）。
  */
 /**
  * 商机口播的**事实锚**提取（数字 + 单位）——用于「必读已念过的事实，商机段不再复述」。
@@ -199,13 +198,13 @@ export function groupInsightsForSpeech(
   }
   const groups = order.map((key) => {
     const g = acc.get(key)!;
-    const topics =
-      g.topics.length > INSIGHT_GROUP_TOPIC_MAX
-        ? [`${g.topics[0]}等${g.topics.length}条线索`]
-        : g.topics;
     return {
       label: g.label,
-      topics,
+      // 2026-11-08 sc 口径：凡通过 exec-guard 成为最终卡片的商机，口播都要点到它的主题名。
+      // 旧口径「组内 >2 条压成首条 + 等N条线索」在 11-01 / 11-02 / 11-08 分别漏念 2 / 3 / 2 条，
+      // 且「等4条线索」把 1 条说成 4 条。改全列 topic；impact 仍每组只取一条，守住 280 字预算。
+      // 🔴 只改派生（回退）路径；LLM 稿由 insightSpeechAligned 管，本次不扩它的判据口径。
+      topics: g.topics,
       topicCount: g.topics.length,
       impact: g.impact,
     };
