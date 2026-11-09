@@ -6112,15 +6112,16 @@
     "开户": {
       "id": "开户",
       "topicTags": [
-        "私行客群"
+        "私行客群",
+        "广州本地"
       ],
       "anchors": [
         "开户"
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-09-26",
-      "lastBroadcastAt": "2026-10-10",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-11-10",
+      "broadcastCount": 4,
       "sections": [
         "insights",
         "must_read"
@@ -6128,7 +6129,8 @@
       "anglesUsed": [
         "政策变化",
         "市场反应",
-        "受影响人群"
+        "受影响人群",
+        "数据验证"
       ],
       "samples": [
         {
@@ -6183,13 +6185,27 @@
           "url": "https://news.dayoo.com/guangzhou/202610/09/139995_55011077.htm",
           "novelty": 0.33055555555555555,
           "angle": "受影响人群"
+        },
+        {
+          "date": "2026-11-10",
+          "section": "insights",
+          "title": "湾区招商大会项目落地",
+          "text": "湾区招商大会项目落地 粤港澳大湾区全球招商大会举办，参会企业名单中的开户、结算与项目融资需求集中释放。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-11-10T07:05:33+08:00",
+          "url": "https://www.cnr.cn/gd/zongtaiguanzhu/20261109/t20261109_527867010.shtml",
+          "novelty": 0.29024390243902437,
+          "angle": "数据验证"
         }
       ],
       "broadcastedTexts": [
         "银行AI对客流程自动化 银行AI对客流程自动化 银行AI竞争从对话转向任务执行，对客流程自动化与运营提效成为比拼焦点，信息技术部可评估落地场景。 信息技术部可考虑本周梳理对客高频流程，选取开户、资料审核等场景试点AI任务执行，提升效率。",
         "10月起多项新规施行 10月起多项新规施行 新规涉及开户、销售等零售环节的合规要点，业务流程与客户体验可能受到影响，需关注实际执行口径。",
         "在港机构加码清理非法交易 在港机构加码清理非法交易 跨境资金合规审查趋严，涉及跨境开户与资金划转的客户面临更严格审查，跨境业务合规成本上升。",
-        "广交会通关便利化升级 广交会通关便利化升级 第140届广交会12项通关便利措施落地，境外采购商与参展商的跨境结算、开户需求将集中释放，展馆周边网点承压。"
+        "广交会通关便利化升级 广交会通关便利化升级 第140届广交会12项通关便利措施落地，境外采购商与参展商的跨境结算、开户需求将集中释放，展馆周边网点承压。",
+        "湾区招商大会项目落地 湾区招商大会项目落地 粤港澳大湾区全球招商大会举办，参会企业名单中的开户、结算与项目融资需求集中释放。"
       ],
       "broadcastedFacts": [
         "!落地",
@@ -7009,15 +7025,16 @@
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-09-30",
-      "lastBroadcastAt": "2026-10-28",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-11-10",
+      "broadcastCount": 4,
       "sections": [
         "risk",
         "insights"
       ],
       "anglesUsed": [
         "政策变化",
-        "市场反应"
+        "市场反应",
+        "受影响人群"
       ],
       "samples": [
         {
@@ -7051,12 +7068,24 @@
           "url": "https://finance.sina.com.cn/money/bank/gsdt/2026-10-27/doc-iniwrqsu2114944.shtml",
           "novelty": 0.29042553191489356,
           "angle": "市场反应"
+        },
+        {
+          "date": "2026-11-10",
+          "section": "insights",
+          "title": "信用卡注销流程存在隐形关卡",
+          "text": "信用卡注销流程存在隐形关卡 注销需回电、短信验证与四十五天等待，客户体验痛点集中，销户环节的摩擦直接影响留存口碑。",
+          "facts": [],
+          "broadcastAt": "2026-11-10T07:05:33+08:00",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-09/doc-iniyazee6594057.shtml",
+          "novelty": 0.3,
+          "angle": "受影响人群"
         }
       ],
       "broadcastedTexts": [
         "万事达盗刷事件风控排查 万事达盗刷事件风控排查 万事达信用卡盗刷事件进展：有银行内部启动自查，相关交易渠道采取管控措施。 信用卡条线需排查外卡交易风控与客户告知流程，个贷与财富条线需关注客户账户安全投诉，风控部需评估交易渠道管控对客户体验的影响。 信用卡部应本周完成外卡交易风控自查，风控部应评估交易渠道管控措施，客服部应准备客户告知与投诉应对话术。",
         "北京商超银行福利叠满 北京商超银行福利叠满 北京商超国庆档银行福利密集叠加，信用卡场景营销竞争加剧，同业权益投放力度与本地商圈合作节奏面临对标。",
-        "Visa准入影响外卡收单 Visa准入影响外卡收单 Visa相关准入取得进展，外卡收单与跨境支付格局可能调整，信用卡与收单条线的合作空间出现变化。"
+        "Visa准入影响外卡收单 Visa准入影响外卡收单 Visa相关准入取得进展，外卡收单与跨境支付格局可能调整，信用卡与收单条线的合作空间出现变化。",
+        "信用卡注销流程存在隐形关卡 信用卡注销流程存在隐形关卡 注销需回电、短信验证与四十五天等待，客户体验痛点集中，销户环节的摩擦直接影响留存口碑。"
       ],
       "broadcastedFacts": [],
       "peakScore": 66
@@ -9956,7 +9985,8 @@
     "#27.46万亿|信贷": {
       "id": "#27.46万亿|信贷",
       "topicTags": [
-        "广州本地"
+        "广州本地",
+        "消费信贷"
       ],
       "anchors": [
         "#27.46万亿",
@@ -9964,14 +9994,15 @@
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-10-15",
-      "lastBroadcastAt": "2026-11-06",
-      "broadcastCount": 2,
+      "lastBroadcastAt": "2026-11-10",
+      "broadcastCount": 3,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -9997,11 +10028,23 @@
           "url": "https://www.cnr.cn/gd/xgyxgd/20261105/t20261105_527863626.shtml",
           "novelty": 0.33249999999999996,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-11-10",
+          "section": "insights",
+          "title": "低价无序竞争治理改善价格秩序",
+          "text": "低价无序竞争治理改善价格秩序 部分行业价格秩序边际改善，相关小微与制造业客户的经营现金流与信贷质量出现分化。",
+          "facts": [],
+          "broadcastAt": "2026-11-10T07:05:33+08:00",
+          "url": "https://finance.eastmoney.com/a/202611093925727516.html",
+          "novelty": 0.3347826086956522,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "社融增量27.46万亿 社融增量27.46万亿 前三季度信贷总量保持扩张，四季度投放节奏与结构安排的空间随之打开，零售条线的资产配置与信贷摆布有了总量参照。",
-        "时尚产业首发经济 时尚产业首发经济 金融资源向广州时尚产业首发经济倾斜，时尚类商户与消费场景的合作点增多，消费信贷场景随之扩容。"
+        "时尚产业首发经济 时尚产业首发经济 金融资源向广州时尚产业首发经济倾斜，时尚类商户与消费场景的合作点增多，消费信贷场景随之扩容。",
+        "低价无序竞争治理改善价格秩序 低价无序竞争治理改善价格秩序 部分行业价格秩序边际改善，相关小微与制造业客户的经营现金流与信贷质量出现分化。"
       ],
       "broadcastedFacts": [
         "#27.46万亿"
@@ -11945,14 +11988,15 @@
       ],
       "kind": "local",
       "firstBroadcastAt": "2026-10-27",
-      "lastBroadcastAt": "2026-10-27",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-11-10",
+      "broadcastCount": 2,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -11981,17 +12025,44 @@
           "url": "https://news.dayoo.com/guangzhou/202610/26/139995_55016923.htm",
           "novelty": 0.2048780487804878,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-11-10",
+          "section": "must_read",
+          "title": "广州跨境电商清单超6亿票",
+          "text": "广州跨境电商清单超6亿票 前十月广州海关监管跨境电商零售清单破六亿票，跨境商户结算与融资需求体量已成规模。",
+          "facts": [
+            "@广州"
+          ],
+          "broadcastAt": "2026-11-10T07:05:33+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202611/09/139995_55022055.htm",
+          "score": 84,
+          "novelty": 0.31666666666666665,
+          "angle": "市场反应"
+        },
+        {
+          "date": "2026-11-10",
+          "section": "insights",
+          "title": "跨境电商清单破六亿票",
+          "text": "跨境电商清单破六亿票 广州跨境电商零售进出口清单前十月超六亿票，跨境商户的结算、结售汇与备货融资需求同步放大。",
+          "facts": [],
+          "broadcastAt": "2026-11-10T07:05:33+08:00",
+          "url": "https://news.dayoo.com/guangzhou/202611/09/139995_55022055.htm",
+          "novelty": 0.17093023255813952,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
         "广州社零增2.5%领跑一线 广州社零增2.5%领跑一线 消费复苏在一线城市中领先，本地商圈客流与商户经营回暖，消费场景的金融需求随之抬升。",
-        "社零领跑带动商户经营 社零领跑带动商户经营 社零增2.5%领跑一线城市，餐饮零售类商户流水回暖，收单与经营周转类需求随之活跃。"
+        "社零领跑带动商户经营 社零领跑带动商户经营 社零增2.5%领跑一线城市，餐饮零售类商户流水回暖，收单与经营周转类需求随之活跃。",
+        "广州跨境电商清单超6亿票 广州跨境电商清单超6亿票 前十月广州海关监管跨境电商零售清单破六亿票，跨境商户结算与融资需求体量已成规模。",
+        "跨境电商清单破六亿票 跨境电商清单破六亿票 广州跨境电商零售进出口清单前十月超六亿票，跨境商户的结算、结售汇与备货融资需求同步放大。"
       ],
       "broadcastedFacts": [
         "#2.5%",
         "@广州"
       ],
-      "peakScore": 69
+      "peakScore": 84
     },
     "ev-1g215m": {
       "id": "ev-1g215m",
@@ -14204,135 +14275,190 @@
         "#1855亿元"
       ],
       "peakScore": 29
+    },
+    "ev-bt41mk": {
+      "id": "ev-bt41mk",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-11-10",
+      "lastBroadcastAt": "2026-11-10",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-10",
+          "section": "must_read",
+          "title": "国常会首提完善稳市机制",
+          "text": "国常会首提完善稳市机制 资本市场稳市机制首次进入国常会部署，权益类财富配置的政策预期与客户风险偏好同步变化。",
+          "facts": [],
+          "broadcastAt": "2026-11-10T07:05:33+08:00",
+          "url": "https://finance.cctv.com/2026/11/09/ARTI3269MVsloSYQnSa5FPSY261109.shtml",
+          "score": 43,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "国常会首提完善稳市机制 国常会首提完善稳市机制 资本市场稳市机制首次进入国常会部署，权益类财富配置的政策预期与客户风险偏好同步变化。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 43
+    },
+    "#0.7%|#5.7%|信贷": {
+      "id": "#0.7%|#5.7%|信贷",
+      "topicTags": [],
+      "anchors": [
+        "#0.7%",
+        "#5.7%",
+        "信贷"
+      ],
+      "kind": "market",
+      "firstBroadcastAt": "2026-11-10",
+      "lastBroadcastAt": "2026-11-10",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-10",
+          "section": "must_read",
+          "title": "10月CPI涨0.7%、PPI涨5.7%",
+          "text": "10月CPI涨0.7%、PPI涨5.7% 物价总水平平稳而工业品价格高位，对公客户成本与信贷定价环境出现结构性分化。",
+          "facts": [
+            "#10月",
+            "#0.7%",
+            "#5.7%"
+          ],
+          "broadcastAt": "2026-11-10T07:05:33+08:00",
+          "url": "https://finance.eastmoney.com/a/202611103926645451.html",
+          "score": 41,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "10月CPI涨0.7%、PPI涨5.7% 10月CPI涨0.7%、PPI涨5.7% 物价总水平平稳而工业品价格高位，对公客户成本与信贷定价环境出现结构性分化。"
+      ],
+      "broadcastedFacts": [
+        "#10月",
+        "#0.7%",
+        "#5.7%"
+      ],
+      "peakScore": 41
+    },
+    "#2.7万亿|粤": {
+      "id": "#2.7万亿|粤",
+      "topicTags": [
+        "广州本地"
+      ],
+      "anchors": [
+        "粤",
+        "#2.7万亿"
+      ],
+      "kind": "local",
+      "firstBroadcastAt": "2026-11-10",
+      "lastBroadcastAt": "2026-11-10",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-10",
+          "section": "must_read",
+          "title": "险资入粤投资达2.7万亿",
+          "text": "险资入粤投资达2.7万亿 广东大型项目与机构资金对接活跃，托管、项目融资与机构合作的资金体量在持续放大。",
+          "facts": [
+            "#2.7万亿"
+          ],
+          "broadcastAt": "2026-11-10T07:05:33+08:00",
+          "url": "https://m.21jingji.com/article/20261109/herald/47ea3d5bdf2efe837a86dffc7275f81e.html",
+          "score": 21,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "险资入粤投资达2.7万亿 险资入粤投资达2.7万亿 广东大型项目与机构资金对接活跃，托管、项目融资与机构合作的资金体量在持续放大。"
+      ],
+      "broadcastedFacts": [
+        "#2.7万亿"
+      ],
+      "peakScore": 21
+    },
+    "ev-w9zyg9": {
+      "id": "ev-w9zyg9",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-11-10",
+      "lastBroadcastAt": "2026-11-10",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-10",
+          "section": "must_read",
+          "title": "第三批互换便利落地",
+          "text": "第三批互换便利落地 券商资金加速入场，市场流动性预期改善，权益类产品咨询热度与客户申赎行为可能同步抬升。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-11-10T07:05:33+08:00",
+          "url": "https://finance.eastmoney.com/a/202611093925714745.html",
+          "score": 29,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "第三批互换便利落地 第三批互换便利落地 券商资金加速入场，市场流动性预期改善，权益类产品咨询热度与客户申赎行为可能同步抬升。"
+      ],
+      "broadcastedFacts": [
+        "!落地"
+      ],
+      "peakScore": 29
+    },
+    "ev-bflnly": {
+      "id": "ev-bflnly",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-10",
+      "lastBroadcastAt": "2026-11-10",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-10",
+          "section": "insights",
+          "title": "固收加净值受挫引发赎回咨询",
+          "text": "固收加净值受挫引发赎回咨询 重仓高波权益的固收加产品净值回撤，持有此类产品的客户赎回咨询与持有期诉求同步上升，稳健型货架关注度抬升。",
+          "facts": [],
+          "broadcastAt": "2026-11-10T07:05:33+08:00",
+          "url": "https://finance.sina.com.cn/jjxw/2026-11-09/doc-iniyacyk6761128.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "固收加净值受挫引发赎回咨询 固收加净值受挫引发赎回咨询 重仓高波权益的固收加产品净值回撤，持有此类产品的客户赎回咨询与持有期诉求同步上升，稳健型货架关注度抬升。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
     }
   },
   "today": {
     "date": "2026-11-10",
-    "entries": [
-      {
-        "date": "2026-11-10",
-        "section": "must_read",
-        "title": "国常会首提完善稳市机制",
-        "text": "国常会首提完善稳市机制 资本市场稳市机制首次进入国常会部署，权益类财富配置的政策预期与客户风险偏好同步变化。",
-        "facts": [],
-        "broadcastAt": "2026-11-10T07:05:33+08:00",
-        "url": "https://finance.cctv.com/2026/11/09/ARTI3269MVsloSYQnSa5FPSY261109.shtml",
-        "score": 43,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-10",
-        "section": "must_read",
-        "title": "广州跨境电商清单超6亿票",
-        "text": "广州跨境电商清单超6亿票 前十月广州海关监管跨境电商零售清单破六亿票，跨境商户结算与融资需求体量已成规模。",
-        "facts": [
-          "@广州"
-        ],
-        "broadcastAt": "2026-11-10T07:05:33+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202611/09/139995_55022055.htm",
-        "score": 84,
-        "novelty": 0.31666666666666665,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-11-10",
-        "section": "must_read",
-        "title": "10月CPI涨0.7%、PPI涨5.7%",
-        "text": "10月CPI涨0.7%、PPI涨5.7% 物价总水平平稳而工业品价格高位，对公客户成本与信贷定价环境出现结构性分化。",
-        "facts": [
-          "#10月",
-          "#0.7%",
-          "#5.7%"
-        ],
-        "broadcastAt": "2026-11-10T07:05:33+08:00",
-        "url": "https://finance.eastmoney.com/a/202611103926645451.html",
-        "score": 41,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-10",
-        "section": "must_read",
-        "title": "险资入粤投资达2.7万亿",
-        "text": "险资入粤投资达2.7万亿 广东大型项目与机构资金对接活跃，托管、项目融资与机构合作的资金体量在持续放大。",
-        "facts": [
-          "#2.7万亿"
-        ],
-        "broadcastAt": "2026-11-10T07:05:33+08:00",
-        "url": "https://m.21jingji.com/article/20261109/herald/47ea3d5bdf2efe837a86dffc7275f81e.html",
-        "score": 21,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-10",
-        "section": "must_read",
-        "title": "第三批互换便利落地",
-        "text": "第三批互换便利落地 券商资金加速入场，市场流动性预期改善，权益类产品咨询热度与客户申赎行为可能同步抬升。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-11-10T07:05:33+08:00",
-        "url": "https://finance.eastmoney.com/a/202611093925714745.html",
-        "score": 29,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-10",
-        "section": "insights",
-        "title": "固收加净值受挫引发赎回咨询",
-        "text": "固收加净值受挫引发赎回咨询 重仓高波权益的固收加产品净值回撤，持有此类产品的客户赎回咨询与持有期诉求同步上升，稳健型货架关注度抬升。",
-        "facts": [],
-        "broadcastAt": "2026-11-10T07:05:33+08:00",
-        "url": "https://finance.sina.com.cn/jjxw/2026-11-09/doc-iniyacyk6761128.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-10",
-        "section": "insights",
-        "title": "低价无序竞争治理改善价格秩序",
-        "text": "低价无序竞争治理改善价格秩序 部分行业价格秩序边际改善，相关小微与制造业客户的经营现金流与信贷质量出现分化。",
-        "facts": [],
-        "broadcastAt": "2026-11-10T07:05:33+08:00",
-        "url": "https://finance.eastmoney.com/a/202611093925727516.html",
-        "novelty": 0.3347826086956522,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-11-10",
-        "section": "insights",
-        "title": "信用卡注销流程存在隐形关卡",
-        "text": "信用卡注销流程存在隐形关卡 注销需回电、短信验证与四十五天等待，客户体验痛点集中，销户环节的摩擦直接影响留存口碑。",
-        "facts": [],
-        "broadcastAt": "2026-11-10T07:05:33+08:00",
-        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-09/doc-iniyazee6594057.shtml",
-        "novelty": 0.3,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-11-10",
-        "section": "insights",
-        "title": "跨境电商清单破六亿票",
-        "text": "跨境电商清单破六亿票 广州跨境电商零售进出口清单前十月超六亿票，跨境商户的结算、结售汇与备货融资需求同步放大。",
-        "facts": [],
-        "broadcastAt": "2026-11-10T07:05:33+08:00",
-        "url": "https://news.dayoo.com/guangzhou/202611/09/139995_55022055.htm",
-        "novelty": 0.17093023255813952,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-11-10",
-        "section": "insights",
-        "title": "湾区招商大会项目落地",
-        "text": "湾区招商大会项目落地 粤港澳大湾区全球招商大会举办，参会企业名单中的开户、结算与项目融资需求集中释放。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-11-10T07:05:33+08:00",
-        "url": "https://www.cnr.cn/gd/zongtaiguanzhu/20261109/t20261109_527867010.shtml",
-        "novelty": 0.29024390243902437,
-        "angle": "数据验证"
-      }
-    ],
-    "runId": "42717468844"
+    "entries": []
   },
   "deliveries": [
     {
@@ -14717,6 +14843,13 @@
       "runId": "42536841031",
       "reportRunId": "42533569689",
       "reportSha": "9b35c663b96fd491249a65aac41bd709aa7fd5ec"
+    },
+    {
+      "date": "2026-11-10",
+      "pushedAt": "2026-11-10T07:47:25+08:00",
+      "runId": "42723236577",
+      "reportRunId": "42717468844",
+      "reportSha": "a240b63c3e555257edac6653e7954c28ec069016"
     }
   ],
   "ipoVoicing": {
