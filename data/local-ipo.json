@@ -1,14 +1,58 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-09T07:05:51+08:00",
+  "fetchedAt": "2026-11-10T07:04:20+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
     "gd-bse-audit": 1,
-    "gd-csrc-tutoring": 1,
-    "gd-sse-audit": 1
+    "gd-csrc-tutoring": 3,
+    "gd-sse-audit": 2
   },
   "items": [
+    {
+      "title": "深圳蜂巢互联科技股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/10/PREIPO_F0101_V01_20261110_37559_Q/AF7667A1D03D4E44A40A780D314CADFB/关于深圳蜂巢互联科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中信证券股份有限公司 | 备案时间: 2026-11-09 | 状态: 辅导备案 | 报告: 辅导备案报告 | 披露: 2026-11-10",
+      "publishedAt": "2026-11-10",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
+    {
+      "title": "深圳盛凌电子股份有限公司 (辅导验收) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/10/PREIPO_F0101_V01_20261110_37560_Q/2B66232B8B354E91B33F5F573A1D6F5E/关于深圳盛凌电子股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作完成报告.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 兴业证券股份有限公司 | 备案时间: 2025-10-28 | 状态: 辅导验收 | 报告: 辅导工作完成报告 | 披露: 2026-11-10",
+      "publishedAt": "2026-11-10",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-coach-done"
+    },
+    {
+      "title": "深圳天华机器设备股份有限公司 (辅导验收) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/10/PREIPO_F0101_V01_20261110_37561_Q/70CBB856E3A848658F68D30F1B34A563/关于深圳天华机器设备股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作完成报告.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 招商证券股份有限公司 | 备案时间: 2025-12-30 | 状态: 辅导验收 | 报告: 辅导工作完成报告 | 披露: 2026-11-10",
+      "publishedAt": "2026-11-10",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-coach-done"
+    },
+    {
+      "title": "保伦股份：IPO注册生效（拟主板）",
+      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2189@5",
+      "excerpt": "注册地：广东广州市｜保荐：广发证券股份有限公司｜受理：2026-05-13｜状态：IPO注册生效｜更新：2026-11-09｜行业：计算机、通信和其他电子设备制造业",
+      "publishedAt": "2026-11-09",
+      "source": "上交所IPO审核动态",
+      "sourceId": "gd-sse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-registered"
+    },
     {
       "title": "展辰新材：IPO问询中（拟北交所）",
       "url": "https://www.bse.cn/audit/project_news_select.html#874453@P02",
@@ -30,17 +74,6 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "河源富马硬质合金股份有限公司 (辅导备案) [广东证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/3/PREIPO_F0101_V01_20261103_37529_Q/89C9FDC5EAD74A548562C8B4286DCEB5/关于河源富马硬质合金股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导备案报告.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 国泰海通证券股份有限公司 | 备案时间: 2026-11-02 | 状态: 辅导备案 | 报告: 辅导备案报告 | 披露: 2026-11-03",
-      "publishedAt": "2026-11-03",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
     }
   ]
 }
