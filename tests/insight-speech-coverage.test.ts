@@ -118,3 +118,50 @@ test("样本完整性：8 期 / 46 条真实卡片", () => {
   assert.equal(Object.keys(SAMPLES).length, 8);
   assert.equal(Object.values(SAMPLES).reduce((n, rows) => n + rows.length, 0), 46);
 });
+
+/**
+ * 11-09 线上真实事故样本（远端 main `history/2026-11-09/store.json`）：
+ * 5 条商机卡片中 4 条标「同今日必读」，旧实现按**组**查数字锚 → 任一条命中删整组，
+ * 只念出 1 条；其中 INS2 / INS4 本身无任何数字锚，纯属连坐误伤。
+ * 方案 A：逐条判定，只删 2 条复述必读数字（1855亿 / 5%），3 条客群增量保留。
+ */
+const SAMPLE_1109 = {
+  mustReadSpeech:
+    "十年期美债收益率破5%临界点。全球无风险利率中枢上移，跨境资产比价与汇率波动同步放大，高净值客户持仓的敏感度显著抬升。" +
+    "其次，前10月国开行制造业贷款超4800亿。政策性资金对制造业的投放强度明确，广州制造业与科创客群的融资价格与额度参照系被抬高。" +
+    "此外，前三季度科技普惠涉农信贷持续发力。政策导向下科技型与小微客群的信贷供给保持强度，普惠资产投放的同业竞争位次继续变化。" +
+    "还有，多家银行公告赎回1855亿元。同业负债与理财资金集中腾挪，客户对理财产品的比价与再配置选择出现新的参照，货架结构承压。",
+  insights: [
+    { group: "零售AUM", topic: "银行集中赎回1855亿资金腾挪", impact: "同业与理财资金集中回笼，客户对产品收益的比价更频繁，货架上的存续产品面临再配置诉求。" },
+    { group: "零售AUM", topic: "理财资金回流下的货架比价", impact: "赎回潮后客户对短期限与净值型产品的选择更挑剔，收益展示与到期衔接成为投诉高发环节。" },
+    { group: "高端客户", topic: "美债破5%抬升跨境持仓敏感度", impact: "持有境外资产与外币存款的高净值客户，对汇率折算与净值回撤的关注度明显上升。" },
+    { group: "高端客户", topic: "稳市机制强化下的权益配置意愿", impact: "超高净值客户对权益类与红利策略的问询增多，家族信托与全权委托的配置讨论随之升温。" },
+    { group: "普惠小微", topic: "科技与普惠信贷供给保持强度", impact: "科技型小微与涉农经营主体的可获信贷额度充裕，同业在利率与担保方式上的竞争更直接。" },
+  ],
+};
+
+test("11-09 事故样本：事实锚只删 2 条复述，3 条客群增量全部保留（不超预算）", () => {
+  const spoken = groupedInsightsSpeech(SAMPLE_1109.insights, {
+    mustReadSpeech: SAMPLE_1109.mustReadSpeech,
+  });
+  for (const t of ["银行集中赎回1855亿资金腾挪", "美债破5%抬升跨境持仓敏感度"]) {
+    assert.ok(!spoken.includes(t), `复述必读数字的「${t}」不该再念`);
+  }
+  for (const t of [
+    "理财资金回流下的货架比价",
+    "稳市机制强化下的权益配置意愿",
+    "科技与普惠信贷供给保持强度",
+  ]) {
+    assert.ok(spoken.includes(t), `同组的客群增量「${t}」应进口播：${spoken}`);
+  }
+  assert.ok(spoken.includes("零售AUM方面") && spoken.includes("高端客户方面"), "两组客群名都要出现");
+  assert.ok(spoken.includes("赎回潮后客户对短期限与净值型产品的选择更挑剔"), "影响取剩余首条");
+  assert.ok(!spoken.includes("同业与理财资金集中回笼"), "被删条目的影响不得残留");
+  assert.ok(
+    spoken.length <= AUDIO_SPEAK_LIMITS.insights,
+    `派生稿 ${spoken.length} 字超出商机段 ${AUDIO_SPEAK_LIMITS.insights} 字预算`,
+  );
+  assert.equal(spoken.length, 139, "与方案 A 逐字模拟一致（3 组 / 139 字）");
+  // `insightSpeechAligned` 的长度基准是无过滤稿；本次改动不得动它
+  assert.equal(groupedInsightsSpeech(SAMPLE_1109.insights).length, 156);
+});

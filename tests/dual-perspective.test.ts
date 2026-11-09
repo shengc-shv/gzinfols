@@ -68,7 +68,7 @@ test("否定断言：「客户端」不算零售客群", () => {
   assert.equal(b.bizSignals.includes("客群"), true, "「客户」应命中客群类");
 });
 
-test("商机口播：与必读已念的数字事实重复时，该组不进口播", () => {
+test("商机口播：只删复述必读数字的那条 topic，同组其余视角照常念（11-09 方案 A）", () => {
   const insights = [
     { topic: "固收货架收窄", impact: "客户配置选择变少，理财经理沟通素材需要更新。", segments: ["零售AUM"] },
     { topic: "跨境配置需求", impact: "外币货架询单增加。", segments: ["中高端客群(过亿资产)"] },
@@ -81,14 +81,31 @@ test("商机口播：与必读已念的数字事实重复时，该组不进口�
   // 「固收货架收窄」本身不含 150 这个数字 → 不该被误杀
   assert.equal(withFilter.length, without.length, "不含数字锚的组不应被剔除");
 
-  // 若商机组复述了同一个数字 → 该组被剔除
-  const dupInsights = [
+  // 同组 3 条、只有第 2 条复述必读数字：旧实现按组连坐会整组删光，
+  // 新实现只删那一条（11-09 实测「理财资金回流下的货架比价」就是这样被吞的）。
+  const mixed = [
+    { topic: "固收货架收窄", impact: "客户配置选择变少。", group: "零售AUM" },
+    { topic: "150只债基收紧申购", impact: "同业限购潮蔓延。", group: "零售AUM" },
+    { topic: "到期衔接与收益展示", impact: "投诉高发环节前移。", group: "零售AUM" },
+  ];
+  const filtered = groupInsightsForSpeech(mixed, { mustReadSpeech });
+  assert.equal(filtered.length, 1, "整组不该被连坐删掉");
+  assert.deepEqual(filtered[0]!.topics, ["固收货架收窄", "到期衔接与收益展示"], "只删复述数字的那条");
+  assert.equal(filtered[0]!.topicCount, 2);
+  assert.equal(filtered[0]!.impact, "客户配置选择变少", "组内影响取剩余首条，不复述被删条目的事实");
+
+  // 整组只剩复述数字的一条 → 该组不进口播（10-23 防线保留，且不得留下空组残句）
+  const allDup = [
     { topic: "150只债基收紧申购", impact: "客户可选面变窄，配置诉求转移。", segments: ["零售AUM"] },
     { topic: "跨境配置需求", impact: "外币货架询单增加。", segments: ["中高端客群(过亿资产)"] },
   ];
-  const filtered = groupInsightsForSpeech(dupInsights, { mustReadSpeech });
-  assert.equal(filtered.length, 1, "复述必读数字的组应被剔除，只剩另一组");
-  assert.ok(!filtered.some((g) => g.topics.includes("150只债基收紧申购")));
+  const onlyOne = groupInsightsForSpeech(allDup, { mustReadSpeech });
+  assert.equal(onlyOne.length, 1, "整组都复述时该组被剔除，只剩另一组");
+  assert.ok(!onlyOne.some((g) => g.topics.includes("150只债基收紧申购")));
+  assert.ok(
+    !groupedInsightsSpeech(allDup, { mustReadSpeech }).includes("零售AUM方面，。"),
+    "不得产出「X方面，。」这类空组残句",
+  );
 });
 
 test("LLM 口播稿对齐校验：讲多了（复述必读）→ 判不对齐 → 回退确定性派生", () => {

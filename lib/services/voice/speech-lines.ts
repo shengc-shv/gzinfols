@@ -104,6 +104,7 @@ export interface InsightSpeechGroup {
   topicCount: number;
   /**
    * 该组的「一句影响」（组内首条 `impact` 的首要片段）。
+   * 2026-11-09 起取**过滤后剩余首条**，避免继续复述被删条目的事实。
    *
    * 2026-10-01 由 `action` 改为 `impact`：sc 口径 —— 全篇**不输出操作建议/行动指引**，
    * 口播只客观呈现「事实 + 影响」。领导各有自己的工作思路，替他安排动作既越位又啰嗦。
@@ -145,7 +146,11 @@ function firstClause(raw: string | undefined, max: number): string {
  *
  * 2026-10-23 sc 口径（B 修订版）：同一事件双视角**都念**，但两段各有职责边界——
  *   必读段讲「市场/政策发生了什么」，商机段讲「客群/产品侧怎么变」。
- * 若商机段把事实本身（数字锚）又念一遍，就是车轱辘话 → 该组只留卡片、不进口播。
+ * 若商机段把事实本身（数字锚）又念一遍，就是车轱辘话 → 该条不进口播（卡片仍在）。
+ *
+ * 2026-11-09 sc 口径（方案 A）：过滤粒度是**条目**，不是组。旧实现把整组 topics 拼成
+ * 一个字符串查数字锚，任一条命中就删整组，与 `contracts/report.ts` 的「同一事件的另一面，
+ * 予以双呈现」冲突。11-09 实测：5 条卡片只念 1 条，其中 2 条本身无任何数字锚、纯属连坐。
  *
  * ⚠️ 只认**数字锚**（150 只 / 35 万亿 / 14.1 万亿 / 4.5% 这类），不认主体词：
  *    主体词在商机侧常以不同说法出现（「固收货架」vs「债基」），判了就会误杀
@@ -172,13 +177,14 @@ export function groupInsightsForSpeech(
   opts?: {
     /**
      * 必读段口播全文（`spoken_must_read`）。给了就做「事实锚重叠」兜底：
-     * 商机组若复述必读已念的数字事实 → 该组不进口播（卡片仍展示，信息不丢）。
+     * 商机**条目**若复述必读已念的数字事实 → 该条不进口播（卡片仍展示，信息不丢）；
+     * 同组其余条目照常念（2026-11-09 sc 方案 A：不再组级连坐）。
      */
     mustReadSpeech?: string;
   },
 ): InsightSpeechGroup[] {
   const order: string[] = [];
-  const acc = new Map<string, { label: string; topics: string[]; impact: string }>();
+  const acc = new Map<string, { label: string; items: Array<{ topic: string; impact: string }> }>();
   for (const it of insights) {
     const topic = (it.topic ?? "").trim();
     if (!topic) continue;
@@ -188,33 +194,43 @@ export function groupInsightsForSpeech(
     if (!acc.has(key)) {
       // group：逐字使用（与卡面 chip 同源）；无 group：沿用既有客群短名映射，不凭空造词。
       const label = group || (segKey ? segSpeak(segKey) : INSIGHT_OTHER_GROUP);
-      acc.set(key, { label, topics: [], impact: "" });
+      acc.set(key, { label, items: [] });
       order.push(key);
     }
     const g = acc.get(key)!;
-    g.topics.push(topic);
     // 2026-10-01：取 impact（不再取 action）—— 口播只讲事实与影响，不给行动指引。
-    if (!g.impact && it.impact) g.impact = firstClause(it.impact, INSIGHT_GROUP_IMPACT_CHARS);
+    // 2026-11-09：逐条保留 impact，条目级过滤后要能重取「剩余首条」的影响。
+    g.items.push({
+      topic,
+      impact: it.impact ? firstClause(it.impact, INSIGHT_GROUP_IMPACT_CHARS) : "",
+    });
   }
-  const groups = order.map((key) => {
+
+  const mustReadSpeech = opts?.mustReadSpeech ?? "";
+  const groups: InsightSpeechGroup[] = [];
+  for (const key of order) {
     const g = acc.get(key)!;
-    return {
+    // 事实锚兜底（2026-10-23 sc B 修订 / 2026-11-09 sc 方案 A）：**逐条**判定，
+    // 只删复述必读已念数字的那条 topic，同组其余「客群/产品视角」照常念。
+    // 🔴 只查 **topic**（真正被念出来的主题词），**不查 impact**：
+    //    impact 是「影响描述」，与必读事实重叠的概率低；若连 impact 一起查，
+    //    会把「美元货架与结汇窗口」这类主题全新的组误杀（实测 10-23 回归 lock 抓出）。
+    const items = mustReadSpeech
+      ? g.items.filter((it) => !sharesFactAnchor(it.topic, mustReadSpeech))
+      : g.items;
+    // 整组都复述必读事实 → 该组只留卡片、不进口播（不能产出「第一，X方面，。」残句）。
+    if (!items.length) continue;
+    groups.push({
       label: g.label,
       // 2026-11-08 sc 口径：凡通过 exec-guard 成为最终卡片的商机，口播都要点到它的主题名。
       // 旧口径「组内 >2 条压成首条 + 等N条线索」在 11-01 / 11-02 / 11-08 分别漏念 2 / 3 / 2 条，
       // 且「等4条线索」把 1 条说成 4 条。改全列 topic；impact 仍每组只取一条，守住 280 字预算。
       // 🔴 只改派生（回退）路径；LLM 稿由 insightSpeechAligned 管，本次不扩它的判据口径。
-      topics: g.topics,
-      topicCount: g.topics.length,
-      impact: g.impact,
-    };
-  });
-  // 事实锚兜底（2026-10-23 sc B 修订）：复述必读已念数字的组 → 只留卡片不念。
-  // 🔴 只查 **topic**（真正被念出来的主题词），**不查 impact**：
-  //    impact 是「影响描述」，与必读事实重叠的概率低；若连 impact 一起查，
-  //    会把「美元货架与结汇窗口」这类主题全新的组误杀（实测 10-23 回归 lock 抓出）。
-  if (opts?.mustReadSpeech) {
-    return groups.filter((g) => !sharesFactAnchor(g.topics.join(""), opts.mustReadSpeech!));
+      topics: items.map((it) => it.topic),
+      topicCount: items.length,
+      // 取剩余首条的影响，避免继续复述被删条目的事实（11-09 方案 A）。
+      impact: items.find((it) => it.impact)?.impact ?? "",
+    });
   }
   return groups;
 }
