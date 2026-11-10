@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-10T07:04:20+08:00",
+  "fetchedAt": "2026-11-11T07:04:35+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
     "gd-bse-audit": 1,
     "gd-csrc-tutoring": 3,
-    "gd-sse-audit": 2
+    "gd-sse-audit": 3
   },
   "items": [
     {
@@ -41,6 +41,17 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-coach-done"
+    },
+    {
+      "title": "龙行天下：IPO提交注册（拟主板）",
+      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2193@4",
+      "excerpt": "注册地：广东东莞市｜保荐：招商证券股份有限公司｜受理：2026-05-29｜状态：IPO提交注册｜更新：2026-11-10｜行业：皮革、毛皮、羽毛及其制品和制鞋业",
+      "publishedAt": "2026-11-10",
+      "source": "上交所IPO审核动态",
+      "sourceId": "gd-sse-audit",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-registered"
     },
     {
       "title": "保伦股份：IPO注册生效（拟主板）",
