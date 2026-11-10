@@ -28,12 +28,13 @@ export interface WecomNotifyResult {
 const WEEKDAY_CN = ["周日", "周一", "周二", "周三", "周四", "周五", "周六"];
 
 /**
- * 广东IPO 摘要行（可选）：把当日「广东IPO」口播稿（store.json 的
- * executive.guangdong_ipo.spoken）压缩成一行随推送发出——否则领导必须点开简报
+ * 广东IPO 摘要行（可选）：把当日「广东IPO」精简行（store.json 的
+ * executive.guangdong_ipo.push_line）压缩成一行随推送发出——否则领导必须点开简报
  * 才知道当天有没有可跟进的 IPO 商机。
  *
- * 2026-11-10 sc：该字段已由组合根在 voice 拼装后写回为**口播实际使用的段**，
- * 与音频、横滑卡同源（此前是 exec LLM 稿，会另挑一拨企业）。空串 → 整行消失。
+ * 2026-11-10 sc：该字段由组合根在 voice 拼装后写回，企业集与音频/横滑卡同源，
+ * 但已去掉「今天的」/工商全称/「XX行业」等口播体裁（sc：要精简）。
+ * 此前读 exec LLM 稿，会另挑一拨企业。空串 → 整行消失。
  */
 function ipoLineOf(ipoLine?: string): string {
   const t = (ipoLine || "").replace(/\s+/g, " ").trim();

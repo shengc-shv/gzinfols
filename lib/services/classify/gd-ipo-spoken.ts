@@ -8,7 +8,14 @@
 
 import type { ArticleInput } from "../../contracts/article";
 import type { ReportItem } from "../../contracts/report";
-import { inferStage, isGdStage, tutoringProgressOf, IPO_ROUTINE_STAGE, type GdStage } from "./gd-ipo";
+import {
+  inferStage,
+  isGdStage,
+  tutoringProgressOf,
+  IPO_ROUTINE_STAGE,
+  GD_IPO_STAGE_LABEL,
+  type GdStage,
+} from "./gd-ipo";
 import { hkexAppIdOf } from "./redchip";
 import { isGdIpoCandidate } from "../enrich/heuristics";
 import { recentMmddSet, spokenRelativeDay, todayKey } from "../../utils/time";
@@ -265,6 +272,72 @@ export function buildGdIpoSpoken(
   // 候选多于席位时收尾「等N家」，避免口播听起来像只有这几家
   if (totalCandidates > clauses.length) s += `；等${totalCandidates}家`;
   return s;
+}
+
+/**
+ * 推送行专用「企业简称」（2026-11-10 sc：「要精简，不要把今天的、全称这种带进来」）。
+ *
+ * 口播稿天然带「今天的 / 注册地 / XX行业 / 目前…」等听觉冗余与工商全称，直接把口播稿
+ * 贴进企微推送会又长又难扫。此函数只做**确定性的字符串收敛**：剥离地区前缀、进展尾缀、
+ * 工商后缀，得到「蜂巢互联科技」「盛凌电子」这类短名；任何一步剥空都回退原名（宁可长，
+ * 不许把企业名改没）。⛔ 不参与判重 / 事件记忆 / 排序 —— 那些仍以 `companyNameOf` 全名为准。
+ */
+const REGION_PREFIX_RE =
+  /^(?:北京|上海|天津|重庆|广东|广州|深圳|珠海|佛山|东莞|中山|惠州|江门|肇庆|汕头|湛江|茂名|清远|韶关|梅州|河源|阳江|潮州|揭阳|云浮|汕尾)(?:省|市)?/;
+const PROGRESS_TAIL_RE =
+  /(?:北交所|上交所|深交所|科创板|创业板|主板)?(?:IPO)?(?:上市)?(?:辅导备案|辅导验收|辅导工作完成报告|辅导完成|注册生效|同意注册|注册发行|问询中|已问询|受理|过会|挂牌|上市|IPO)$/;
+const CORP_SUFFIX_RE =
+  /(?:股份有限公司|股份有限责任公司|有限责任公司|有限公司|集团公司|控股公司|公司|集团)$/;
+
+export function ipoCompanyShortOf(it: ReportItem): string {
+  const full = companyNameOf(it.title_cn || "");
+  let s = full.replace(PROGRESS_TAIL_RE, "").trim();
+  s = s.replace(REGION_PREFIX_RE, "").trim();
+  s = s.replace(CORP_SUFFIX_RE, "").trim();
+  return s || full;
+}
+
+/** 推送行阶段标签：徽章真源 `GD_IPO_STAGE_LABEL`（与页面逐字同源）；红筹单列。 */
+function ipoStageBriefOf(it: ReportItem): string {
+  if (it.redchip?.verdict === "redchip") return "红筹线索";
+  const st = gdIpoStageOf(it);
+  return st ? GD_IPO_STAGE_LABEL[st] || "" : "";
+}
+
+/**
+ * 企微推送「🏦 广东IPO」专用精简行（2026-11-10 sc）。
+ *
+ * 与口播/横滑卡**同源但不同体裁**：企业集、顺序、候选总数全部来自同一次
+ * `pickSpokenItems` 的 `selected`，只把「今天的XX股份有限公司…行业，目前…」压成
+ * 「简称+阶段标签」。形如 `蜂巢互联科技辅导备案、盛凌电子辅导完成（共5家）`。
+ *
+ * @param opts.spokenText 口播 IPO 段全文。给了就只列**真正被念到**的企业 —— 口播段可能被
+ *   `AUDIO_SPEAK_LIMITS.ipo` 截断，若仍列满 3 席，推送又会多讲口播没念的公司（P1 事故复发）。
+ *   LLM 兜底稿里可能不含工商全称，此时过滤结果为空 → 回退全部 selected，保证推送行不消失。
+ */
+export function buildGdIpoPushLine(
+  selected: ReportItem[],
+  opts?: { totalCandidates?: number; spokenText?: string },
+): string {
+  if (!selected.length) return "";
+  const mentioned = opts?.spokenText
+    ? selected.filter((it) => {
+        const full = companyNameOf(it.title_cn || "");
+        return !full || opts.spokenText!.includes(full);
+      })
+    : selected;
+  const rows = (mentioned.length ? mentioned : selected).map((it) => {
+    const name = ipoCompanyShortOf(it);
+    const stage = ipoStageBriefOf(it);
+    return stage ? `${name}${stage}` : name;
+  });
+  const unique = [...new Set(rows.filter(Boolean))];
+  if (!unique.length) return "";
+  let line = unique.join("、");
+  const total = opts?.totalCandidates ?? unique.length;
+  // 「共N家」是候选总数（口播写「等N家」，同口径换字面避免被读成「另有 N 家」）
+  if (total > unique.length) line += `（共${total}家）`;
+  return line;
 }
 
 /**

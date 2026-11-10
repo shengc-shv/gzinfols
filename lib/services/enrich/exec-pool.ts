@@ -652,7 +652,8 @@ function buildIpoPool(opts: BuildTwoDayExecPoolOpts): ExecPoolItem[] {
     // 必须与 `buildGdIpoSpoken` 同一排除口径，否则 LLM 稿仍在说
     // 「多家企业披露辅导进展」= 两条外发通道口径打架。
     // 2026-11-10 补充：**选择口径**（念哪几家）不在这里收敛——本阶段 buildGdIpo 尚未
-    // 执行、拿不到完整 IPO 列表；最终由组合根在 voice 拼装后把口播段写回 store 覆盖 LLM 稿。
+    // 执行、拿不到完整 IPO 列表；最终由组合根在 voice 拼装后把精简行写回 store 的
+    // push_line（spoken 原稿保留，供口播兜底与回溯），notify 优先读 push_line。
     // 此处只保留「排除例行」这一道 LLM 素材闸门，避免把明显无价值的内容送进提示词。
     if (isRoutineIpoItem(it)) continue;
     out.set(it.url, withWhen({ title, summary, url: it.url }, it.date, today));
