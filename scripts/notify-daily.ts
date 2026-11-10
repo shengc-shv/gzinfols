@@ -20,6 +20,9 @@
  *
  * 数据源：history/<date>/store.json → executive.hero_line（+ guangdong_ipo.spoken 一行）
  *
+ * ⚠️ guangdong_ipo.spoken 于 2026-11-10 起由组合根在口播拼装后写回（与口播段逐字同源），
+ *    不再是 exec 的 LLM 稿。改这里的取值口径会重新造成「推送与口播讲两拨公司」。
+ *
  * 退出码：群机器人送达 → 0（触发结算记忆）；未配置或推送失败 → 1。
  */
 import "./_env";
@@ -41,8 +44,9 @@ function log(msg: string) {
 /**
  * 读 store.json 的推送素材（宽松解析，缺字段返回空，绝不抛错）。
  * - heroLine：今日定调（推送正文主体）；
- * - ipoLine：当日「广东IPO」口播稿（推送正文补一行广东IPO，
- *   否则领导必须点开简报才知道当天有没有可跟进的 IPO 商机）；
+ * - ipoLine：当日「广东IPO」**口播实际使用的段**（推送正文补一行广东IPO，
+ *   否则领导必须点开简报才知道当天有没有可跟进的 IPO 商机）。
+ *   2026-11-10 起由组合根在 voice 拼装后写回，与音频/横滑卡同源；空串则整行不出现；
  * - riskTopic：风险**一句话**（2026-10-20 sc：要「谁 + 什么事情 + 影响什么」，
  *   由 `riskBriefOf` 从 evidence + impact 落点提炼；此前只取 topic 15 字，读不出主体与影响）；
  * - stockRecap：股市复盘（2026-10-07 sc 口径，**可选**：A股/港股/美股各一行涨跌总结，

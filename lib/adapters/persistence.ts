@@ -319,5 +319,43 @@ function modifyStoreField(
   }
 }
 
+/**
+ * 把「口播实际使用的广东IPO段」写回 `store.json` 的
+ * `executive.guangdong_ipo.spoken`（2026-11-10 sc：企微推送与口播同源）。
+ *
+ * 背景：`notify-daily.ts` 读该字段作为推送「🏦 广东IPO」行，而口播段由
+ * `pickSpokenItems` / `buildGdIpoSpoken` 确定性选出 3 席。此前该字段是 exec 的 LLM 稿
+ * （从 2 天窗全量池自行挑企业），11-10 实测出现「推送讲注册生效/今天上市、
+ * 口播讲辅导备案」的两拨公司。组合根在 voice 拼装完成后调用本函数写回，逐字同源。
+ *
+ * ⚠️ 字段级 read-modify-write：store 里还有 stock_recap / stock_news / deliveries / events，
+ *    整份覆盖（writeExecStore）会静默清空它们，与 writeStockRecapStore 同款约束。
+ * ⚠️ 三态：文件缺失 / JSON 损坏 / 无合法 executive → **拒写**，绝不新建半个 store
+ *    （台账 corrupt 拒写口径；静默造库比不写更危险）。
+ * ⚠️ 口播没念 IPO 时由调用方传空串 → 推送整行消失，杜绝「口播不念、推送照念」。
+ */
+export function writeIpoSpokenStore(
+  date: string,
+  spoken: string,
+  opts: { baseDir?: string } = {},
+): void {
+  try {
+    const obj = readStoreObject(date, opts);
+    if (!obj) return; // missing / corrupt → 拒写
+    const exec = obj.executive;
+    if (!exec || typeof exec !== "object" || Array.isArray(exec)) return;
+    const prev = (exec as Record<string, unknown>).guangdong_ipo;
+    const prevObj =
+      prev && typeof prev === "object" && !Array.isArray(prev)
+        ? (prev as Record<string, unknown>)
+        : {};
+    (exec as Record<string, unknown>).guangdong_ipo = { ...prevObj, spoken };
+    obj.updatedAt = new Date().toISOString();
+    writeJsonSync(storeJsonPath(date, opts), obj);
+  } catch {
+    // 归档失败不打断主流程
+  }
+}
+
 /** 测试/工具用：确保空库形状可得（与 gzinfo emptyMemory 对齐的导出转发）。 */
 export { emptyMemory };
