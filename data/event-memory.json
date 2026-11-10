@@ -4016,8 +4016,8 @@
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-09-21",
-      "lastBroadcastAt": "2026-10-16",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-11-11",
+      "broadcastCount": 4,
       "sections": [
         "must_read",
         "insights"
@@ -4081,13 +4081,27 @@
           "score": 74,
           "novelty": 0.7037037037037037,
           "angle": "受影响人群"
+        },
+        {
+          "date": "2026-11-11",
+          "section": "insights",
+          "title": "二手房成交回暖带动按揭",
+          "text": "二手房成交回暖带动按揭 成交放量后按揭受理与提前还款咨询同步增加，住房金融客群的资金安排节奏被打乱。",
+          "facts": [
+            "!受理"
+          ],
+          "broadcastAt": "2026-11-11T07:08:17+08:00",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_11_10_907767.shtml",
+          "novelty": 0.7670454545454546,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "多家银行落地40年房贷 多家银行落地40年房贷 按揭期限竞争加剧并设45岁年龄门槛，本行期限与年龄政策覆盖差异需评估。",
         "40年房贷期限竞争 40年房贷期限竞争 多家银行推出40年房贷并设45岁年龄门槛，按揭期限竞争加剧，中年置业客群覆盖差异显现。 值得关注本行期限与年龄政策与同业的差距，评估对45岁以上客群的覆盖空间。",
         "北上广深楼市带看成交回温 北上广深楼市带看成交回温 金九银十活跃度提升，按揭投放节奏与改善型客群接单准备需提前安排，关系四季度房贷储备。",
-        "四大一线楼市新政全落地 四大一线楼市新政全落地 一线城市政策口径统一后，按揭受理量与提前还款节奏可能同步变化，直接影响四季度房贷投放与额度排布。"
+        "四大一线楼市新政全落地 四大一线楼市新政全落地 一线城市政策口径统一后，按揭受理量与提前还款节奏可能同步变化，直接影响四季度房贷投放与额度排布。",
+        "二手房成交回暖带动按揭 二手房成交回暖带动按揭 成交放量后按揭受理与提前还款咨询同步增加，住房金融客群的资金安排节奏被打乱。"
       ],
       "broadcastedFacts": [
         "#40年",
@@ -5927,8 +5941,8 @@
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-09-24",
-      "lastBroadcastAt": "2026-11-06",
-      "broadcastCount": 7,
+      "lastBroadcastAt": "2026-11-11",
+      "broadcastCount": 8,
       "sections": [
         "must_read",
         "insights"
@@ -5937,22 +5951,10 @@
         "政策变化",
         "市场反应",
         "受影响人群",
-        "数据验证"
+        "数据验证",
+        "同业动作"
       ],
       "samples": [
-        {
-          "date": "2026-10-13",
-          "section": "insights",
-          "title": "香港高息存款年化达22%",
-          "text": "香港高息存款年化达22% 香港多家银行推高息存款、部分年化达22%，跨境客群咨询量上升，但换汇赴港存在汇率与期限错配，客户实际到手收益可能被侵蚀。",
-          "facts": [
-            "#22%"
-          ],
-          "broadcastAt": "2026-10-13T06:28:35+08:00",
-          "url": "https://m.21jingji.com/article/20261012/herald/cf0dc63a42e014a7ba450727aafbe6e5.html",
-          "novelty": 0.55,
-          "angle": "市场反应"
-        },
         {
           "date": "2026-10-28",
           "section": "insights",
@@ -6014,23 +6016,40 @@
           "url": "https://news.southcn.com/node_812903b83a/7a312e0da0.shtml",
           "novelty": 0.7239130434782608,
           "angle": "数据验证"
+        },
+        {
+          "date": "2026-11-11",
+          "section": "must_read",
+          "title": "利率自律成员扩至18家",
+          "text": "利率自律成员扩至18家 首次3家城商行集体入列，存款定价约束范围扩大，广州存款价格竞争格局与付息成本面临重估。",
+          "facts": [
+            "#18家",
+            "#3家"
+          ],
+          "broadcastAt": "2026-11-11T07:08:17+08:00",
+          "url": "https://finance.sina.com.cn/roll/2026-11-10/doc-iniyfkmf2791086.shtml",
+          "score": 66,
+          "novelty": 0.5178571428571429,
+          "angle": "同业动作"
         }
       ],
       "broadcastedTexts": [
-        "人民币升破6.7 人民币升破6.7 前期配置美元存款客户出现汇兑浮亏，客户沟通与结汇时点提醒成为近期财富条线重点。",
         "2字头大额存单重现 2字头大额存单重现 揽储逻辑转向精细化，存款到期客户的承接方式发生变化，期限匹配与收益比较成为客户决策焦点。",
         "香港高息存款年化达22% 香港高息存款年化达22% 香港多家银行推高息存款、部分年化达22%，跨境客群咨询量上升，但换汇赴港存在汇率与期限错配，客户实际到手收益可能被侵蚀。",
         "村镇银行调整客群重分 村镇银行调整客群重分 东营银行拟接盘异地发起行村镇银行、贷款回广东存款留本地，跨区域机构调整带来本地客群与资产在机构间的重新分布。",
         "同业规模扩张与客群分流 同业规模扩张与客群分流 同业规模与营收增速走高，其在存款与财富端的策略变化可能带来客户在不同机构间的迁移。",
         "外汇存准率近五年首升 外汇存准率近五年首升 外币流动性收紧，外贸与跨境客群的结售汇成本与外币存款收益同步变化，汇率敏感度上升。",
         "外汇存准率五年首升 外汇存准率五年首升 央行上调外汇存款准备金率给人民币升值降温，汇率预期或转向双向波动，外贸客群结售汇节奏面临重估。",
-        "大额存单重启售罄 大额存单重启售罄 多家银行大额存单重启即售罄、个别利率达1.92%，存款竞争升温，本行到期资金的留存与定价面临直接比较。"
+        "大额存单重启售罄 大额存单重启售罄 多家银行大额存单重启即售罄、个别利率达1.92%，存款竞争升温，本行到期资金的留存与定价面临直接比较。",
+        "利率自律成员扩至18家 利率自律成员扩至18家 首次3家城商行集体入列，存款定价约束范围扩大，广州存款价格竞争格局与付息成本面临重估。"
       ],
       "broadcastedFacts": [
         "#22%",
         "!上调",
         "@央行",
-        "#1.92%"
+        "#1.92%",
+        "#18家",
+        "#3家"
       ],
       "peakScore": 87
     },
@@ -7890,24 +7909,27 @@
       "topicTags": [
         "私行客群",
         "资本市场",
-        "消费信贷"
+        "消费信贷",
+        "监管合规"
       ],
       "anchors": [
         "客群",
         "开户",
         "#55%",
         "信贷",
-        "注册"
+        "注册",
+        "不良"
       ],
       "kind": "market",
       "firstBroadcastAt": "2026-10-03",
-      "lastBroadcastAt": "2026-10-31",
-      "broadcastCount": 2,
+      "lastBroadcastAt": "2026-11-11",
+      "broadcastCount": 3,
       "sections": [
         "insights"
       ],
       "anglesUsed": [
-        "政策变化"
+        "政策变化",
+        "市场反应"
       ],
       "samples": [
         {
@@ -7932,11 +7954,23 @@
           "url": "https://finance.sina.com.cn/jjxw/2026-10-30/doc-iniwxvhi8463573.shtml",
           "novelty": 0.3119565217391304,
           "angle": "政策变化"
+        },
+        {
+          "date": "2026-11-11",
+          "section": "insights",
+          "title": "六大行不良率四降两升",
+          "text": "六大行不良率四降两升 资产质量分化延续，零售信贷投放与贷后管理的客群结构差异进一步显性化。",
+          "facts": [],
+          "broadcastAt": "2026-11-11T07:08:17+08:00",
+          "url": "https://m.21jingji.com/article/20261110/herald/8c2950095482f0bb4b6dfe551c6b06d0.html",
+          "novelty": 0.33292682926829265,
+          "angle": "市场反应"
         }
       ],
       "broadcastedTexts": [
         "外商股权投资增55% 外商股权投资增55% 上半年外商股权性质直接投资同比增长55%，外资来华投资回暖，跨境客群的开户、结汇与资金归集需求出现增量。",
-        "银行密集布局一人公司 银行密集布局一人公司 个体与小微客群的开户、结算与信贷竞争前移到注册环节，客户在起步阶段就被同业锁定。"
+        "银行密集布局一人公司 银行密集布局一人公司 个体与小微客群的开户、结算与信贷竞争前移到注册环节，客户在起步阶段就被同业锁定。",
+        "六大行不良率四降两升 六大行不良率四降两升 资产质量分化延续，零售信贷投放与贷后管理的客群结构差异进一步显性化。"
       ],
       "broadcastedFacts": [
         "#55%"
@@ -8929,27 +8963,19 @@
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-10-07",
-      "lastBroadcastAt": "2026-11-03",
-      "broadcastCount": 6,
+      "lastBroadcastAt": "2026-11-11",
+      "broadcastCount": 7,
       "sections": [
-        "insights"
+        "insights",
+        "must_read"
       ],
       "anglesUsed": [
         "政策变化",
         "市场反应",
-        "受影响人群"
+        "受影响人群",
+        "数据验证"
       ],
       "samples": [
-        {
-          "date": "2026-10-07",
-          "section": "insights",
-          "title": "信托原董事长掌千亿平台",
-          "text": "信托原董事长掌千亿平台 某信托原董事长出任千亿级平台总经理，财富管理行业高管流动，头部机构战略与产品线可能随之调整。",
-          "facts": [],
-          "broadcastAt": "2026-10-07T06:35:02+08:00",
-          "url": "https://finance.sina.com.cn/trust/roll/2026-10-06/doc-iniuhyra6769616.shtml",
-          "novelty": 1
-        },
         {
           "date": "2026-10-09",
           "section": "insights",
@@ -9008,6 +9034,21 @@
           "url": "https://finance.sina.com.cn/trust/2026-11-02/doc-inixkmap0278176.shtml",
           "novelty": 0.7348837209302326,
           "angle": "受影响人群"
+        },
+        {
+          "date": "2026-11-11",
+          "section": "must_read",
+          "title": "上交所协议回购出资人扩至28家",
+          "text": "上交所协议回购出资人扩至28家 信托机构增至10家，固收类产品的底层工具与流动性来源变宽，货架结构随之调整。",
+          "facts": [
+            "#28家",
+            "#10家"
+          ],
+          "broadcastAt": "2026-11-11T07:08:17+08:00",
+          "url": "https://finance.sina.com.cn/trust/2026-11-10/doc-iniyhmwt2447269.shtml",
+          "score": 74,
+          "novelty": 0.7071428571428571,
+          "angle": "数据验证"
         }
       ],
       "broadcastedTexts": [
@@ -9016,13 +9057,16 @@
         "信托货架更新 信托货架更新 高净值客户非存款类配置的比价参考更丰富，期限与底层资产披露差异成为选择关键。",
         "信托货架期限定价变动 信托货架期限定价变动 当日信托产品概览显示同类产品期限与定价出现变化，高净值客户资金在货架间的比价与留存随之波动。",
         "林票信托拓宽资产供给 林票信托拓宽资产供给 林票2.0信托试水让山林变成可交易资产，另类与绿色主题产品的可投品类增加，高净值客户的配置选项更宽。",
-        "信托重仓金融股超四成 信托重仓金融股超四成 21家信托三季度重仓28只个股、金融股占比超四成，高净值客户对权益类配置的关注度回升。"
+        "信托重仓金融股超四成 信托重仓金融股超四成 21家信托三季度重仓28只个股、金融股占比超四成，高净值客户对权益类配置的关注度回升。",
+        "上交所协议回购出资人扩至28家 上交所协议回购出资人扩至28家 信托机构增至10家，固收类产品的底层工具与流动性来源变宽，货架结构随之调整。"
       ],
       "broadcastedFacts": [
         "#9月",
-        "#21家"
+        "#21家",
+        "#28家",
+        "#10家"
       ],
-      "peakScore": 0
+      "peakScore": 74
     },
     "ev-mq42ni": {
       "id": "ev-mq42ni",
@@ -13517,8 +13561,8 @@
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-11-03",
-      "lastBroadcastAt": "2026-11-09",
-      "broadcastCount": 6,
+      "lastBroadcastAt": "2026-11-11",
+      "broadcastCount": 7,
       "sections": [
         "insights",
         "must_read"
@@ -13531,17 +13575,6 @@
         "同业动作"
       ],
       "samples": [
-        {
-          "date": "2026-11-03",
-          "section": "insights",
-          "title": "母基金新规分散投资底线",
-          "text": "母基金新规分散投资底线 母基金新规明确分散投资底线、长期资金可豁免一层，私募与机构客群的合作结构面临调整。",
-          "facts": [],
-          "broadcastAt": "2026-11-03T07:14:41+08:00",
-          "url": "https://www.guancha.cn/GuanJinRong/2026_11_02_906744.shtml",
-          "novelty": 0.3230769230769231,
-          "angle": "受影响人群"
-        },
         {
           "date": "2026-11-04",
           "section": "insights",
@@ -13603,6 +13636,17 @@
           "score": 66,
           "novelty": 0.7419811320754717,
           "angle": "同业动作"
+        },
+        {
+          "date": "2026-11-11",
+          "section": "insights",
+          "title": "多家银行获股东管理层增持",
+          "text": "多家银行获股东管理层增持 银行板块信心信号增强，财富客群沟通中关于板块配置的提问明显增多。",
+          "facts": [],
+          "broadcastAt": "2026-11-11T07:08:17+08:00",
+          "url": "https://finance.sina.com.cn/jjxw/2026-11-10/doc-iniyepfr3028804.shtml",
+          "novelty": 0.33205128205128204,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
@@ -13611,7 +13655,8 @@
         "外资行密集对接外贸需求 外资行密集对接外贸需求 十三家外资银行集中对接义乌外贸企业，跨境结算与汇率避险的同业竞争在客群端加剧。",
         "银行股新高引红利配置问询 银行股新高引红利配置问询 高股息资产关注度提升，财富客群对红利类产品问询增加，产品货架说明与适当性匹配要求同步提高。",
         "湾区合作倡议落地带动跨境客群 湾区合作倡议落地带动跨境客群 全球湾区代表在广州发出合作倡议，跨境贸易与投资往来主体增加，跨境结算与外币账户类需求随之活跃。",
-        "前10月国开行制造业贷款超4800亿 前10月国开行制造业贷款超4800亿 政策性资金对制造业的投放强度明确，广州制造业与科创客群的融资价格与额度参照系被抬高。"
+        "前10月国开行制造业贷款超4800亿 前10月国开行制造业贷款超4800亿 政策性资金对制造业的投放强度明确，广州制造业与科创客群的融资价格与额度参照系被抬高。",
+        "多家银行获股东管理层增持 多家银行获股东管理层增持 银行板块信心信号增强，财富客群沟通中关于板块配置的提问明显增多。"
       ],
       "broadcastedFacts": [
         "!问询",
@@ -14188,15 +14233,16 @@
       ],
       "kind": "market",
       "firstBroadcastAt": "2026-11-09",
-      "lastBroadcastAt": "2026-11-09",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-11-11",
+      "broadcastCount": 2,
       "sections": [
         "must_read",
         "insights"
       ],
       "anglesUsed": [
         "政策变化",
-        "市场反应"
+        "市场反应",
+        "受影响人群"
       ],
       "samples": [
         {
@@ -14233,12 +14279,24 @@
           "url": "https://m.21jingji.com/article/20261108/herald/ae7f6ba850eab25ac5704bca1f7a2132.html",
           "novelty": 0.26599999999999996,
           "angle": "市场反应"
+        },
+        {
+          "date": "2026-11-11",
+          "section": "insights",
+          "title": "理财产品中途谢幕增多",
+          "text": "理财产品中途谢幕增多 产品提前终止让客户实际持有期短于预期，收益空档与再配置衔接成为投诉高发点。",
+          "facts": [],
+          "broadcastAt": "2026-11-11T07:08:17+08:00",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-10/doc-iniyfeck9400683.shtml",
+          "novelty": 0.22790697674418606,
+          "angle": "受影响人群"
         }
       ],
       "broadcastedTexts": [
         "多家银行公告赎回1855亿元 多家银行公告赎回1855亿元 同业负债与理财资金集中腾挪，客户对理财产品的比价与再配置选择出现新的参照，货架结构承压。",
         "银行集中赎回1855亿资金腾挪 银行集中赎回1855亿资金腾挪 同业与理财资金集中回笼，客户对产品收益的比价更频繁，货架上的存续产品面临再配置诉求。",
-        "理财资金回流下的货架比价 理财资金回流下的货架比价 赎回潮后客户对短期限与净值型产品的选择更挑剔，收益展示与到期衔接成为投诉高发环节。"
+        "理财资金回流下的货架比价 理财资金回流下的货架比价 赎回潮后客户对短期限与净值型产品的选择更挑剔，收益展示与到期衔接成为投诉高发环节。",
+        "理财产品中途谢幕增多 理财产品中途谢幕增多 产品提前终止让客户实际持有期短于预期，收益空档与再配置衔接成为投诉高发点。"
       ],
       "broadcastedFacts": [
         "#1855亿元"
@@ -14423,133 +14481,140 @@
       ],
       "broadcastedFacts": [],
       "peakScore": 0
+    },
+    "养老|发改委": {
+      "id": "养老|发改委",
+      "topicTags": [],
+      "anchors": [
+        "发改委",
+        "养老"
+      ],
+      "kind": "policy",
+      "firstBroadcastAt": "2026-11-11",
+      "lastBroadcastAt": "2026-11-11",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-11",
+          "section": "must_read",
+          "title": "发改委规范养老护理费加码",
+          "text": "发改委规范养老护理费加码 养老服务收费规则收紧，养老金融合作方的合规成本与产品定价逻辑随之变化。",
+          "facts": [
+            "@发改委"
+          ],
+          "broadcastAt": "2026-11-11T07:08:17+08:00",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_11_10_907756.shtml",
+          "score": 48,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "发改委规范养老护理费加码 发改委规范养老护理费加码 养老服务收费规则收紧，养老金融合作方的合规成本与产品定价逻辑随之变化。"
+      ],
+      "broadcastedFacts": [
+        "@发改委"
+      ],
+      "peakScore": 48
+    },
+    "ev-qxi8xp": {
+      "id": "ev-qxi8xp",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-11",
+      "lastBroadcastAt": "2026-11-11",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-11",
+          "section": "must_read",
+          "title": "五家中资行续留全球系统重要性名单",
+          "text": "五家中资行续留全球系统重要性名单 附加监管要求延续，同业资本约束与业务节奏保持稳定，对竞争格局影响有限。",
+          "facts": [],
+          "broadcastAt": "2026-11-11T07:08:17+08:00",
+          "url": "https://finance.sina.com.cn/jjxw/2026-11-10/doc-iniyepfs9692452.shtml",
+          "score": 21,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "五家中资行续留全球系统重要性名单 五家中资行续留全球系统重要性名单 附加监管要求延续，同业资本约束与业务节奏保持稳定，对竞争格局影响有限。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 21
+    },
+    "ev-qrwk9k": {
+      "id": "ev-qrwk9k",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-11",
+      "lastBroadcastAt": "2026-11-11",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-11",
+          "section": "insights",
+          "title": "近500只固收加由盈转亏",
+          "text": "近500只固收加由盈转亏 持有固收加产品的客户账面收益转负，四季度赎回咨询与持仓检视需求同步抬升。",
+          "facts": [],
+          "broadcastAt": "2026-11-11T07:08:17+08:00",
+          "url": "https://finance.sina.com.cn/roll/2026-11-10/doc-iniyhfqv2549454.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "近500只固收加由盈转亏 近500只固收加由盈转亏 持有固收加产品的客户账面收益转负，四季度赎回咨询与持仓检视需求同步抬升。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
+    },
+    "ev-mrdvlq": {
+      "id": "ev-mrdvlq",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-11-11",
+      "lastBroadcastAt": "2026-11-11",
+      "broadcastCount": 1,
+      "sections": [
+        "insights"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-11",
+          "section": "insights",
+          "title": "贵金属追涨杀跌风险提示",
+          "text": "贵金属追涨杀跌风险提示 金价高位回调叠加官方风险提示，持仓客户的适当性沟通与波动预期管理需求上升。",
+          "facts": [],
+          "broadcastAt": "2026-11-11T07:08:17+08:00",
+          "url": "https://finance.sina.com.cn/money/lczx/2026-11-10/doc-iniyfkme2776165.shtml",
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "贵金属追涨杀跌风险提示 贵金属追涨杀跌风险提示 金价高位回调叠加官方风险提示，持仓客户的适当性沟通与波动预期管理需求上升。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 0
     }
   },
   "today": {
     "date": "2026-11-11",
-    "entries": [
-      {
-        "date": "2026-11-11",
-        "section": "must_read",
-        "title": "上交所协议回购出资人扩至28家",
-        "text": "上交所协议回购出资人扩至28家 信托机构增至10家，固收类产品的底层工具与流动性来源变宽，货架结构随之调整。",
-        "facts": [
-          "#28家",
-          "#10家"
-        ],
-        "broadcastAt": "2026-11-11T07:08:17+08:00",
-        "url": "https://finance.sina.com.cn/trust/2026-11-10/doc-iniyhmwt2447269.shtml",
-        "score": 74,
-        "novelty": 0.7071428571428571,
-        "angle": "数据验证"
-      },
-      {
-        "date": "2026-11-11",
-        "section": "must_read",
-        "title": "发改委规范养老护理费加码",
-        "text": "发改委规范养老护理费加码 养老服务收费规则收紧，养老金融合作方的合规成本与产品定价逻辑随之变化。",
-        "facts": [
-          "@发改委"
-        ],
-        "broadcastAt": "2026-11-11T07:08:17+08:00",
-        "url": "https://www.guancha.cn/GuanJinRong/2026_11_10_907756.shtml",
-        "score": 48,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-11",
-        "section": "must_read",
-        "title": "利率自律成员扩至18家",
-        "text": "利率自律成员扩至18家 首次3家城商行集体入列，存款定价约束范围扩大，广州存款价格竞争格局与付息成本面临重估。",
-        "facts": [
-          "#18家",
-          "#3家"
-        ],
-        "broadcastAt": "2026-11-11T07:08:17+08:00",
-        "url": "https://finance.sina.com.cn/roll/2026-11-10/doc-iniyfkmf2791086.shtml",
-        "score": 66,
-        "novelty": 0.5178571428571429,
-        "angle": "同业动作"
-      },
-      {
-        "date": "2026-11-11",
-        "section": "must_read",
-        "title": "五家中资行续留全球系统重要性名单",
-        "text": "五家中资行续留全球系统重要性名单 附加监管要求延续，同业资本约束与业务节奏保持稳定，对竞争格局影响有限。",
-        "facts": [],
-        "broadcastAt": "2026-11-11T07:08:17+08:00",
-        "url": "https://finance.sina.com.cn/jjxw/2026-11-10/doc-iniyepfs9692452.shtml",
-        "score": 21,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-11",
-        "section": "insights",
-        "title": "近500只固收加由盈转亏",
-        "text": "近500只固收加由盈转亏 持有固收加产品的客户账面收益转负，四季度赎回咨询与持仓检视需求同步抬升。",
-        "facts": [],
-        "broadcastAt": "2026-11-11T07:08:17+08:00",
-        "url": "https://finance.sina.com.cn/roll/2026-11-10/doc-iniyhfqv2549454.shtml",
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-11",
-        "section": "insights",
-        "title": "理财产品中途谢幕增多",
-        "text": "理财产品中途谢幕增多 产品提前终止让客户实际持有期短于预期，收益空档与再配置衔接成为投诉高发点。",
-        "facts": [],
-        "broadcastAt": "2026-11-11T07:08:17+08:00",
-        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-10/doc-iniyfeck9400683.shtml",
-        "novelty": 0.22790697674418606,
-        "angle": "受影响人群"
-      },
-      {
-        "date": "2026-11-11",
-        "section": "insights",
-        "title": "六大行不良率四降两升",
-        "text": "六大行不良率四降两升 资产质量分化延续，零售信贷投放与贷后管理的客群结构差异进一步显性化。",
-        "facts": [],
-        "broadcastAt": "2026-11-11T07:08:17+08:00",
-        "url": "https://m.21jingji.com/article/20261110/herald/8c2950095482f0bb4b6dfe551c6b06d0.html",
-        "novelty": 0.33292682926829265,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-11-11",
-        "section": "insights",
-        "title": "多家银行获股东管理层增持",
-        "text": "多家银行获股东管理层增持 银行板块信心信号增强，财富客群沟通中关于板块配置的提问明显增多。",
-        "facts": [],
-        "broadcastAt": "2026-11-11T07:08:17+08:00",
-        "url": "https://finance.sina.com.cn/jjxw/2026-11-10/doc-iniyepfr3028804.shtml",
-        "novelty": 0.33205128205128204,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-11-11",
-        "section": "insights",
-        "title": "二手房成交回暖带动按揭",
-        "text": "二手房成交回暖带动按揭 成交放量后按揭受理与提前还款咨询同步增加，住房金融客群的资金安排节奏被打乱。",
-        "facts": [
-          "!受理"
-        ],
-        "broadcastAt": "2026-11-11T07:08:17+08:00",
-        "url": "https://www.guancha.cn/GuanJinRong/2026_11_10_907767.shtml",
-        "novelty": 0.7670454545454546,
-        "angle": "市场反应"
-      },
-      {
-        "date": "2026-11-11",
-        "section": "insights",
-        "title": "贵金属追涨杀跌风险提示",
-        "text": "贵金属追涨杀跌风险提示 金价高位回调叠加官方风险提示，持仓客户的适当性沟通与波动预期管理需求上升。",
-        "facts": [],
-        "broadcastAt": "2026-11-11T07:08:17+08:00",
-        "url": "https://finance.sina.com.cn/money/lczx/2026-11-10/doc-iniyfkme2776165.shtml",
-        "novelty": 1
-      }
-    ],
-    "runId": "42920697157"
+    "entries": []
   },
   "deliveries": [
     {
@@ -14941,6 +15006,13 @@
       "runId": "42723236577",
       "reportRunId": "42717468844",
       "reportSha": "a240b63c3e555257edac6653e7954c28ec069016"
+    },
+    {
+      "date": "2026-11-11",
+      "pushedAt": "2026-11-11T07:47:28+08:00",
+      "runId": "42926186113",
+      "reportRunId": "42920697157",
+      "reportSha": "d40df91c7b15b0d2412028885c8c1766f01a81e9"
     }
   ],
   "ipoVoicing": {
