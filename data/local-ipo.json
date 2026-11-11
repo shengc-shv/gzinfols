@@ -1,12 +1,12 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-11T07:04:35+08:00",
+  "fetchedAt": "2026-11-12T07:07:06+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
     "gd-bse-audit": 1,
     "gd-csrc-tutoring": 3,
-    "gd-sse-audit": 3
+    "gd-sse-audit": 2
   },
   "items": [
     {
@@ -71,17 +71,6 @@
       "publishedAt": "2026-11-06",
       "source": "北交所IPO审核动态",
       "sourceId": "gd-bse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
-    },
-    {
-      "title": "核心医疗：IPO问询中（拟科创板）",
-      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2126@2",
-      "excerpt": "注册地：广东深圳市｜保荐：华泰联合证券有限责任公司｜受理：2025-11-06｜状态：IPO问询中｜更新：2026-11-05｜行业：专用设备制造业",
-      "publishedAt": "2026-11-05",
-      "source": "上交所IPO审核动态",
-      "sourceId": "gd-sse-audit",
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-reviewing"
