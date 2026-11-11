@@ -1,0 +1,847 @@
+{
+  "date": "2026-11-12",
+  "updatedAt": "2026-11-11T23:15:41.582Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：贷款定价基准转向多元，存量合同面临衔接；货政报告加力资本市场工具，固收流动性压力缓释；科创再贷款增两千亿，科技客群融资成本下行；广州金融城与跨境电商出口破千亿，本地场景扩容。",
+    "spoken_hero": "今天主要看四个方面：贷款定价基准要从单一LPR转向多元，存量合同面临衔接；央行货政报告加力资本市场工具，固收产品的流动性压力有缓释；科创再贷款多了两千亿，科技企业融资成本往下走；广州金融城用地落地、跨境电商出口破千亿，本地客群场景在扩容。",
+    "must_read": [
+      {
+        "title": "财会监督三年行动启动",
+        "why": "财政部启动财会监督质效提升三年行动、全链条惩治违规，代销与理财销售的合规检查预计趋严。",
+        "url": "https://news.southcn.com/node_812903b83a/420fe9b50b.shtml"
+      },
+      {
+        "title": "债市设非银赎回互换便利",
+        "why": "非银大额赎回互换便利设立，理财与债基的流动性压力有望缓释，固收持有体验的底层条件在变。",
+        "url": "https://m.21jingji.com/article/20261111/herald/53b2e517d920bb147255bda573f4c92a.html"
+      },
+      {
+        "title": "货政报告加力资本市场工具",
+        "why": "三季度货政报告提出加力实施支持资本市场两项工具，权益类产品供给与客户配置环境边际改善。",
+        "url": "https://finance.eastmoney.com/a/202611123928811684.html"
+      },
+      {
+        "title": "银行利息净收入增超10%",
+        "why": "多家银行前三季度利息净收入增长超一成，负债成本改善是主因，存款定价与结构管理的价值凸显。",
+        "url": "https://finance.cctv.com/2026/11/11/ARTIk8Ii2y9iTvqlTzunPjfY261111.shtml"
+      },
+      {
+        "title": "上市公司理财缩水2800亿",
+        "why": "上市公司闲置资金买理财9283亿元、同比缩水两千八百亿，对公联动零售的资金配置偏好正在重估。",
+        "url": "https://finance.sina.com.cn/roll/2026-11-11/doc-iniyixxz1868554.shtml"
+      }
+    ],
+    "spoken_must_read": "财会监督三年行动启动。财政部启动财会监督质效提升三年行动、全链条惩治违规，代销与理财销售的合规检查预计趋严。其次，债市设非银赎回互换便利。非银大额赎回互换便利设立，理财与债基的流动性压力有望缓释，固收持有体验的底层条件在变。此外，货政报告加力资本市场工具。三季度货政报告提出加力实施支持资本市场两项工具，权益类产品供给与客户配置环境边际改善。还有，银行利息净收入增超10%。多家银行前三季度利息净收入增长超一成，负债成本改善是主因，存款定价与结构管理的价值凸显。另外，上市公司理财缩水2800亿。上市公司闲置资金买理财9283亿元、同比缩水两千八百亿，对公联动零售的资金配置偏好正在重估。",
+    "insights": [
+      {
+        "topic": "理财提前退场增至53只",
+        "impact": "11月已有53只银行理财提前终止，到期资金集中回流，客户对收益空档与再配置的敏感度上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "加速优化！11月53只银行理财提前退场，三类情形是主因",
+            "url": "https://finance.sina.com.cn/roll/2026-11-11/doc-iniykefy8455396.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "上市公司理财结构生变",
+        "impact": "上市公司理财规模同比缩水两千八百亿，闲置资金去向分化，代发与财富条线的客户配置偏好出现迁移。",
+        "tag": [
+          "财富",
+          "代发"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "超9283亿元“闲钱”买了理财，同比缩水2800亿元，上市公司理财结构生变",
+            "url": "https://finance.sina.com.cn/roll/2026-11-11/doc-iniyixxz1868554.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "金融城东区用地落地",
+        "impact": "金融城东区项目用地手续办结，片区开发与入驻企业配套需求释放，园区代发与结算客群扩容。",
+        "tag": [
+          "代发",
+          "政银合作"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "广州金融城东区项目顺利办理用地手续",
+            "url": "https://m.21jingji.com/article/20261111/herald/10fbd67d12d6de658b86054a78f55d92.html"
+          }
+        ]
+      },
+      {
+        "topic": "同业抢粤企中亚出海",
+        "impact": "同业以融资加融智切入粤企中亚出海，跨境结算与外汇客群争夺加剧，跨境方案差异化成关键。",
+        "tag": [
+          "竞对动态",
+          "政银合作"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "广东中行以“融资+融智”双轮驱动粤企开拓中亚蓝海",
+            "url": "https://www.cnr.cn/gd/xgyxgd/20261111/t20261111_527868939.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "医疗险条款药品一体规范",
+        "impact": "商业医疗险条款药品成本数据一体推进，代销产品的筛选标准与客户告知口径需要同步更新。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "商业医疗险迎来“标准时刻”：三大会管单位同日发文，条款、药品、成本、数据一体推进",
+            "url": "https://finance.sina.com.cn/jinrong/bx/2026-11-11/doc-iniykkqa9048004.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，理财提前退场增至53只、上市公司理财结构生变、医疗险条款药品一体规范，11月已有53只银行理财提前终止。第二，本地消费场景方面，金融城东区用地落地，金融城东区项目用地手续办结。第三，跨境客群方面，同业抢粤企中亚出海，同业以融资加融智切入粤企中亚出海。",
+    "risk": {
+      "topic": "香雪制药破产重整涉贷",
+      "evidence": "广州农商行提请香雪制药破产重整，5.5亿元借款续期两次后仍走向重整，多家银行涉借贷诉讼。",
+      "impact": "公司条线需排查本地医药类对公敞口；个贷关注关联企业主经营贷与抵押物；风控侧评估担保链传染；财富端留意相关客户产品持有情况。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "广州农商行提请香雪制药破产重整 多家银行涉借贷诉讼",
+          "url": "https://finance.sina.com.cn/jinrong/yh/2026-11-11/doc-iniykkpz2273250.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：香雪制药破产重整涉贷，公司条线需排查本地医药类对公敞口；个贷关注关联企业主经营贷与抵押物；风控侧评估担保链传染；财富端留意相关客户产品持有情况。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨1.60%，标普涨1.31%，道指涨0.49%，科技股领涨。",
+      "sectors": [
+        "英伟达据报准备撤换CEO黄仁勋，消息面扰动芯片股。",
+        "Strategy因MSCI确认将其剔除出美国大盘基准，股价下跌。",
+        "Securitize盘后涨10%，Q3业绩向好并收购River One进军资产支持融资。",
+        "伊朗和平努力信号混乱叠加霍尔木兹船只遇袭，油价上涨。",
+        "Digi International第四季度业绩超预期，股价盘后仍走低。"
+      ],
+      "spoken": "美股三大指数集体收涨，纳指涨1.60%，标普500涨1.31%，道指涨0.49%，科技股领涨。个股方面，英伟达据报准备撤换CEO黄仁勋，消息扰动芯片股。Strategy因被剔除出MSCI美国大盘基准而下跌。Securitize盘后涨10%，Q3业绩向好并进军资产支持融资。油价受伊朗局势信号混乱和霍尔木兹船只遇袭提振上涨。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-12"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52486.49",
+          "changePct": "+0.49%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25466.19",
+          "changePct": "+1.60%"
+        },
+        {
+          "name": "标普500",
+          "value": "7619.38",
+          "changePct": "+1.31%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "沪指涨0.46%，创业板指涨3.11%，光模块概念爆发领涨。",
+      "sectors": [
+        "光模块板块走势转强，光收发器禁令落地阻力重重，多股获融资客抢筹。",
+        "存储厂商酝酿新一轮涨价，先涨企业级产品，涨价预期升温。",
+        "光纤概念逆势走高，新一代通信网技术取得重要突破。",
+        "央行表态用好债市非银大额赎回互换便利，维护金融市场平稳运行。",
+        "30分钟60亿主力资金涌入，有个股直线涨停。"
+      ],
+      "spoken": "A股三大指数集体收涨，沪指涨0.46%，创业板指涨3.11%。板块上，光模块概念爆发领涨，光收发器禁令落地阻力重重，多股获融资客抢筹。存储厂商酝酿新一轮涨价，先涨企业级产品。光纤概念受通信网技术突破带动逆势走高。央行表态用好互换便利，维护金融市场平稳运行。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-12"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3680.64",
+          "changePct": "+0.46%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11389.74",
+          "changePct": "+1.32%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2572.07",
+          "changePct": "+3.11%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24315.92点（-0.98%）；恒生科技收报4027.06点（-1.41%）。",
+      "sectors": [
+        "科网股、汽车股低迷",
+        "光通信板块逆势大涨",
+        "中际旭创涨超13%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-12"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.98% 科指跌1.41% 科网股、汽车股低迷 光通信板块逆势大涨 中际旭创涨超13%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-11/doc-iniykefx1794763.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24315.92",
+          "changePct": "-0.98%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4027.06",
+          "changePct": "-1.41%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-11",
+    "marketStatus": {
+      "reportDate": "2026-11-12",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-11"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-11"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-11"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月11日 周三 收盘；港股为 11月11日 周三 收盘；美股为 11月11日 周三 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611113928181771.html",
+      "title_cn": "突生变数！英伟达、美光被“移除”！软银大跌10%发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "报道称英伟达、美光被「移除」，软银股价大跌10%，市场出现变数。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "美股",
+        "市场波动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113928506743.html",
+      "title_cn": "央行：用好债市非银大额赎回互换便利维护股票、债券、外汇等金融市场平稳运行",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "央行表示将用好债市非银大额赎回互换便利，维护股票、债券、外汇等金融市场平稳运行。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "央行",
+        "债市"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113928245383.html",
+      "title_cn": "新一代通信网技术取得重要突破！光纤概念逆势走高多股业绩倍增可期(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "新一代通信网技术取得重要突破，光纤概念逆势走高，多只个股业绩倍增预期受关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "通信",
+        "光纤",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113928298848.html",
+      "title_cn": "存储厂商酝酿新一轮涨价先涨的是企业级",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "存储厂商酝酿新一轮涨价，本轮率先涨价的是企业级产品。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "存储",
+        "半导体",
+        "涨价"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113928354661.html",
+      "title_cn": "A股三大指数收涨创业板指涨超3%光模块概念爆发",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "A股三大指数收涨，创业板指涨超3%，光模块概念爆发。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "光模块",
+        "指数"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113928252082.html",
+      "title_cn": "突然直线涨停！30分钟60亿主力资金涌入！啥情况？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "某标的突然直线涨停，30分钟内涌入60亿元主力资金。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "资金流向",
+        "异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113928571382.html",
+      "title_cn": "11月11日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "汇总11月11日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113928239257.html",
+      "title_cn": "光收发器禁令落地阻力重重！光模块板块走势转强多股获融资客抢筹(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "光收发器禁令落地面临重重阻力，光模块板块走势转强，多股获融资客抢筹。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "光模块",
+        "政策",
+        "融资"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113928361556.html",
+      "title_cn": "美议员再次呼吁收紧美国输华芯片外交部回应",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "美国议员再次呼吁收紧对华芯片出口，外交部作出回应。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "政策",
+        "中美"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113928213161.html",
+      "title_cn": "华尔街热议10月CPI：美联储12月加息板上钉钉幅度或达50个基点！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "华尔街热议10月CPI数据，市场认为美联储12月加息板上钉钉，幅度或达50个基点。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "CPI",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123928843119.html",
+      "title_cn": "21评论丨美股市场喧嚣背后的核心资产重估",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "评论文章讨论美股市场喧嚣背后的核心资产重估。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "资产重估",
+        "评论"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123928839233.html",
+      "title_cn": "券商：2027年港股基本面与估值或迎共振修复红利为盾静待成长板块布局时机",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "券商观点认为2027年港股基本面与估值或迎共振修复，红利为盾，等待成长板块布局时机。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "策略",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-11/doc-iniykefx1794763.shtml",
+      "title_cn": "港股收评：恒指跌0.98% 科指跌1.41% 科网股、汽车股低迷 光通信板块逆势大涨 中际旭创涨超13%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "港股收评：恒指跌0.98%，科指跌1.41%，科网股与汽车股低迷，光通信板块逆势大涨，中际旭创涨超13%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "光通信",
+        "指数"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-12/doc-iniymmzp1882205.shtml",
+      "title_cn": "恒指牛熊街货比(52:48)︱11月12日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "11月12日恒指牛熊街货比为52:48。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-11/doc-iniyiaun8793443.shtml",
+      "title_cn": "产业资本频现 港股IPO基石投资者阵容扩容",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "产业资本频繁现身，港股IPO基石投资者阵容扩容。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "产业资本"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-11/doc-iniyiaun8793447.shtml",
+      "title_cn": "港股通ETF标的扩容 港股市场配置工具持续完善",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "港股通ETF标的扩容，港股市场配置工具持续完善。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "ETF",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/cj/2026-11-11/doc-iniyiiah2159312.shtml",
+      "title_cn": "【看新股】10月港股IPO透视：东山精密、传音控股、奕斯伟计算成功上市 港股IPO排队企业总数达366家",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "10月港股IPO透视：东山精密、传音控股、奕斯伟计算成功上市，港股IPO排队企业总数达366家。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-11/doc-iniyiiah2139577.shtml",
+      "title_cn": "年内48家港股公司行使绿鞋机制 超额配售募资净额超284亿港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "年内48家港股公司行使绿鞋机制，超额配售募资净额超284亿港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "绿鞋机制"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-11-11/doc-iniyiiah2142137.shtml",
+      "title_cn": "【策略*陈梦】港股大涨后，怎么看？——港股周观点",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "券商发布港股周观点，讨论港股大涨后的市场看法。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "策略",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/observe/2026-11-11/doc-iniykkqa9058219.shtml",
+      "title_cn": "宏芯宇港股IPO：依托上行周期 2026年前四个月录得净利润38.4亿元 高企存货与现金流背离 存储红利能否持续",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "宏芯宇港股IPO：依托上行周期，2026年前四个月录得净利润38.4亿元，但存货高企与现金流背离，存储红利持续性受关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "存储"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-11-11/doc-iniyixxy2022763.shtml",
+      "title_cn": "香港金融科技周｜专访德勤亚太金融服务业主管Stuart Johnston：亚太有能力超越美国成为全球金融重心 “中产”成为金融增长新引擎",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "德勤亚太金融服务业主管在专访中表示，亚太有能力超越美国成为全球金融重心，「中产」成为金融增长新引擎。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "金融科技",
+        "亚太",
+        "专访"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-11/doc-iniykefy8493012.shtml",
+      "title_cn": "花旗：重申中广核电力(01816)“买入”评级 目标价3.8港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "花旗重申中广核电力「买入」评级，目标价3.8港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "核电",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-11/doc-iniykehc2341566.shtml",
+      "title_cn": "富瑞：阿里巴巴-W(09988)拟分拆平头哥可释放其价值 目标价186港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "富瑞认为阿里巴巴拟分拆平头哥可释放价值，目标价186港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "阿里巴巴",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-11/doc-iniykefx1820502.shtml",
+      "title_cn": "美银证券：港铁公司(00066)资本开支增加股息上行有限 维持“逊于大市”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "美银证券称港铁公司资本开支增加、股息上行有限，维持「逊于大市」评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "港铁",
+        "券商评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/09/tokenization-platform-securitize-reports-gains-expands-into-asset-backed-finance.html",
+      "title_cn": "Tokenization platform Securitize gains 10% postmarket on Q3 results, move into asset-backed finance",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "代币化平台Securitize公布三季度业绩并进军资产支持融资，盘后股价上涨10%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "代币化"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/warner-bros-discovery-stock-sold-by-david-kustoff-93CH-5020041",
+      "title_cn": "Warner Bros. Discovery stock sold by David Kustoff",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "披露David Kustoff卖出华纳兄弟探索公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "传媒"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/strategy-shares-fall-after-msci-confirms-deletion-from-us-largecap-benchmark-5020038",
+      "title_cn": "Strategy shares fall after MSCI confirms deletion from US large-cap benchmark",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "MSCI确认将Strategy从美国大盘基准指数中剔除，其股价下跌。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "指数调整",
+        "MSCI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/oil-prices-rise-from-2mth-low-with-focus-on-usiran-peace-inventories-5017522",
+      "title_cn": "Oil prices rise amid mixed messaging on Iran peace efforts, Hormuz ship attacks",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "伊朗和平努力信号不一及霍尔木兹海峡船只遇袭，油价上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "原油",
+        "地缘"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/mach-natural-resources-director-buys-388902-in-common-units-93CH-5020037",
+      "title_cn": "Mach Natural Resources director buys $388,902 in common units",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "Mach Natural Resources董事买入388,902美元普通单位。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "增持",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/guardant-health-director-steve-krognes-sells-117m-in-shares-93CH-5020036",
+      "title_cn": "Guardant Health director Steve Krognes sells $1.17M in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "Guardant Health董事Steve Krognes卖出117万美元股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/guardant-health-cto-darya-chudova-sells-shares-worth-138-million-93CH-5020035",
+      "title_cn": "Guardant Health CTO Darya Chudova sells shares worth $1.38 million",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "Guardant Health首席技术官Darya Chudova卖出价值138万美元股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/guardant-health-director-alex-azar-ii-sells-144550-in-stock-93CH-5020034",
+      "title_cn": "Guardant Health director Alex Azar II sells $144,550 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "Guardant Health董事Alex Azar II卖出144,550美元股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "减持",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/nvidia-is-preparing-to-oust-ceo-jensen-huang-wsj-reports-5019991",
+      "title_cn": "Nvidia is preparing to oust CEO Jensen Huang, WSJ reports",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "据《华尔街日报》报道，英伟达正准备撤换CEO黄仁勋。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "英伟达",
+        "人事"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-digi-international-posts-q4-2026-beat-shares-fall-after-hours-93CH-5020029",
+      "title_cn": "Earnings call transcript: Digi International posts q4 2026 beat, shares fall after hours",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "Digi International第四季度业绩超预期，但盘后股价下跌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/resideo-at-baird-2026-global-industrial-conference-core-growth-holds-93CH-5020028",
+      "title_cn": "Resideo at Baird 2026 Global Industrial Conference: core growth holds",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "Resideo在Baird 2026全球工业会议上表示核心增长保持稳健。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "会议",
+        "工业"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}

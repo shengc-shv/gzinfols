@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-11",
+  "updatedAt": "2026-11-12",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -6237,41 +6237,6 @@
         "!落地"
       ],
       "peakScore": 74
-    },
-    "资管": {
-      "id": "资管",
-      "topicTags": [
-        "财富管理"
-      ],
-      "anchors": [
-        "资管"
-      ],
-      "kind": "generic",
-      "firstBroadcastAt": "2026-09-27",
-      "lastBroadcastAt": "2026-09-27",
-      "broadcastCount": 1,
-      "sections": [
-        "must_read"
-      ],
-      "anglesUsed": [],
-      "samples": [
-        {
-          "date": "2026-09-27",
-          "section": "must_read",
-          "title": "券商财富资管双向赋能",
-          "text": "券商财富资管双向赋能 券商提出财富与资管双向赋能路径，其客户分层与投顾联动打法对零售条线产品配置有参考价值。",
-          "facts": [],
-          "broadcastAt": "2026-09-27T07:29:02+08:00",
-          "url": "https://www.stcn.com/article/detail/4199612.html",
-          "score": 59,
-          "novelty": 1
-        }
-      ],
-      "broadcastedTexts": [
-        "券商财富资管双向赋能 券商财富资管双向赋能 券商提出财富与资管双向赋能路径，其客户分层与投顾联动打法对零售条线产品配置有参考价值。"
-      ],
-      "broadcastedFacts": [],
-      "peakScore": 59
     },
     "美联储": {
       "id": "美联储",
@@ -14613,8 +14578,145 @@
     }
   },
   "today": {
-    "date": "2026-11-11",
-    "entries": []
+    "date": "2026-11-12",
+    "entries": [
+      {
+        "date": "2026-11-12",
+        "section": "must_read",
+        "title": "财会监督三年行动启动",
+        "text": "财会监督三年行动启动 财政部启动财会监督质效提升三年行动、全链条惩治违规，代销与理财销售的合规检查预计趋严。",
+        "facts": [
+          "@财政部"
+        ],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "url": "https://news.southcn.com/node_812903b83a/420fe9b50b.shtml",
+        "score": 79,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-12",
+        "section": "must_read",
+        "title": "债市设非银赎回互换便利",
+        "text": "债市设非银赎回互换便利 非银大额赎回互换便利设立，理财与债基的流动性压力有望缓释，固收持有体验的底层条件在变。",
+        "facts": [],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "url": "https://m.21jingji.com/article/20261111/herald/53b2e517d920bb147255bda573f4c92a.html",
+        "score": 43,
+        "novelty": 0.3261363636363636,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-12",
+        "section": "must_read",
+        "title": "货政报告加力资本市场工具",
+        "text": "货政报告加力资本市场工具 三季度货政报告提出加力实施支持资本市场两项工具，权益类产品供给与客户配置环境边际改善。",
+        "facts": [
+          "!实施"
+        ],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "url": "https://finance.eastmoney.com/a/202611123928811684.html",
+        "score": 64,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-12",
+        "section": "must_read",
+        "title": "银行利息净收入增超10%",
+        "text": "银行利息净收入增超10% 多家银行前三季度利息净收入增长超一成，负债成本改善是主因，存款定价与结构管理的价值凸显。",
+        "facts": [
+          "#10%"
+        ],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "url": "https://finance.cctv.com/2026/11/11/ARTIk8Ii2y9iTvqlTzunPjfY261111.shtml",
+        "score": 19,
+        "novelty": 0.48944444444444446,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-12",
+        "section": "must_read",
+        "title": "上市公司理财缩水2800亿",
+        "text": "上市公司理财缩水2800亿 上市公司闲置资金买理财9283亿元、同比缩水两千八百亿，对公联动零售的资金配置偏好正在重估。",
+        "facts": [
+          "#9283亿元"
+        ],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-11-11/doc-iniyixxz1868554.shtml",
+        "score": 59,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-12",
+        "section": "insights",
+        "title": "理财提前退场增至53只",
+        "text": "理财提前退场增至53只 11月已有53只银行理财提前终止，到期资金集中回流，客户对收益空档与再配置的敏感度上升。",
+        "facts": [
+          "#11月"
+        ],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-11-11/doc-iniykefy8455396.shtml",
+        "novelty": 0.767391304347826,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-12",
+        "section": "insights",
+        "title": "上市公司理财结构生变",
+        "text": "上市公司理财结构生变 上市公司理财规模同比缩水两千八百亿，闲置资金去向分化，代发与财富条线的客户配置偏好出现迁移。",
+        "facts": [],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-11-11/doc-iniyixxz1868554.shtml",
+        "novelty": 0.2085106382978723,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-12",
+        "section": "insights",
+        "title": "金融城东区用地落地",
+        "text": "金融城东区用地落地 金融城东区项目用地手续办结，片区开发与入驻企业配套需求释放，园区代发与结算客群扩容。",
+        "facts": [
+          "!落地"
+        ],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "url": "https://m.21jingji.com/article/20261111/herald/10fbd67d12d6de658b86054a78f55d92.html",
+        "novelty": 0.2817073170731707,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-11-12",
+        "section": "insights",
+        "title": "同业抢粤企中亚出海",
+        "text": "同业抢粤企中亚出海 同业以融资加融智切入粤企中亚出海，跨境结算与外汇客群争夺加剧，跨境方案差异化成关键。",
+        "facts": [],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "url": "https://www.cnr.cn/gd/xgyxgd/20261111/t20261111_527868939.shtml",
+        "novelty": 0.33249999999999996,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-12",
+        "section": "insights",
+        "title": "医疗险条款药品一体规范",
+        "text": "医疗险条款药品一体规范 商业医疗险条款药品成本数据一体推进，代销产品的筛选标准与客户告知口径需要同步更新。",
+        "facts": [],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "url": "https://finance.sina.com.cn/jinrong/bx/2026-11-11/doc-iniykkqa9048004.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-12",
+        "section": "risk",
+        "title": "香雪制药破产重整涉贷",
+        "text": "香雪制药破产重整涉贷 广州农商行提请香雪制药破产重整，5.5亿元借款续期两次后仍走向重整，多家银行涉借贷诉讼。 公司条线需排查本地医药类对公敞口；个贷关注关联企业主经营贷与抵押物；风控侧评估担保链传染；财富端留意相关客户产品持有情况。",
+        "facts": [
+          "#5.5亿元"
+        ],
+        "broadcastAt": "2026-11-12T07:12:41+08:00",
+        "score": 66,
+        "novelty": 1
+      }
+    ],
+    "runId": "43117948663"
   },
   "deliveries": [
     {
@@ -15015,6 +15117,7 @@
       "reportSha": "d40df91c7b15b0d2412028885c8c1766f01a81e9"
     }
   ],
+  "lastHeroLine": "今天主要看四个方面：贷款定价基准转向多元，存量合同面临衔接；货政报告加力资本市场工具，固收流动性压力缓释；科创再贷款增两千亿，科技客群融资成本下行；广州金融城与跨境电商出口破千亿，本地场景扩容。",
   "ipoVoicing": {
     "河源富马硬质合金股份有限公司": [
       "2026-11-03",
