@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-12",
+  "updatedAt": "2026-11-13",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -14860,8 +14860,160 @@
     }
   },
   "today": {
-    "date": "2026-11-12",
-    "entries": []
+    "date": "2026-11-13",
+    "entries": [
+      {
+        "date": "2026-11-13",
+        "section": "must_read",
+        "title": "央行货政报告拆解存款结构",
+        "text": "央行货政报告拆解存款结构 资金定期化与理财分流并存，存款到期承接的客群分层逻辑正在改变，负债成本与AUM结构同步受影响。",
+        "facts": [
+          "@央行"
+        ],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://finance.cctv.com/2026/11/12/ARTIOE74r8I3zYbkcb3SYfJx261112.shtml",
+        "score": 74,
+        "novelty": 0.2839622641509434,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-11-13",
+        "section": "must_read",
+        "title": "证监会拟细化先行赔付政策",
+        "text": "证监会拟细化先行赔付政策 投资者保护机制进一步落地，代销与投顾环节的适当性要求趋严，客户维权路径与纠纷处置方式生变。",
+        "facts": [
+          "@证监会",
+          "!落地"
+        ],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://finance.cctv.com/2026/11/12/ARTI5CzNeOs7nzeUg8DW0OUK261112.shtml",
+        "score": 34,
+        "novelty": 0.330188679245283,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-13",
+        "section": "must_read",
+        "title": "证监会强调维护市场平稳运行",
+        "text": "证监会强调维护市场平稳运行 稳预期信号延续，权益类产品营销节奏与客户沟通口径面临调整，市场情绪修复的持续性待观察。",
+        "facts": [
+          "@证监会"
+        ],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://news.southcn.com/node_812903b83a/b81fdac0e8.shtml",
+        "score": 34,
+        "novelty": 0.32941176470588235,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-13",
+        "section": "must_read",
+        "title": "美联储2027年全年仅7次议息",
+        "text": "美联储2027年全年仅7次议息 美元利率决策节奏改变，美元资产定价与汇率预期的时间锚随之调整，影响外币配置客户的决策周期。",
+        "facts": [
+          "#2027年",
+          "@美联储"
+        ],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://finance.sina.com.cn/stock/usstock/c/2026-11-13/doc-iniypksr1480770.shtml",
+        "score": 74,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-13",
+        "section": "must_read",
+        "title": "票据贴现利率0.5%低位徘徊",
+        "text": "票据贴现利率0.5%低位徘徊 信贷统计口径调整预期升温，月末规模腾挪空间与指标口径变化并存，对信贷投放节奏判断形成扰动。",
+        "facts": [
+          "#0.5%"
+        ],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://m.21jingji.com/article/20261112/herald/f7251ebbec13b1c9941eeebe5d58a16b.html",
+        "score": 74,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-13",
+        "section": "insights",
+        "title": "存款到期客户回流定期",
+        "text": "存款到期客户回流定期 存款到期客户风险偏好明显收缩，资金沉淀为定期而非理财，稳健型产品的承接缺口扩大，客户收益预期与货架供给之间出现错位。",
+        "facts": [],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-12/doc-iniynyax3691612.shtml",
+        "novelty": 0.30624999999999997,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-13",
+        "section": "insights",
+        "title": "美元定存理财基准超4%",
+        "text": "美元定存理财基准超4% 有美元资产配置需求的客户报价选择增多，外币货架与话术需要同步更新，客户比价行为明显增强。",
+        "facts": [
+          "#4%"
+        ],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-11-12/doc-iniyntut1124638.shtml",
+        "novelty": 0.5239583333333333,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-11-13",
+        "section": "insights",
+        "title": "票据贴现利率低位徘徊",
+        "text": "票据贴现利率低位徘徊 小微与经营贷客户的短期融资成本参照下移，信贷统计口径调整预期下，规模与定价的匹配关系生变。",
+        "facts": [],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://m.21jingji.com/article/20261112/herald/f7251ebbec13b1c9941eeebe5d58a16b.html",
+        "novelty": 0.17551470588235293,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-13",
+        "section": "insights",
+        "title": "储蓄国债秒光额度紧张",
+        "text": "储蓄国债秒光额度紧张 年内最后一批储蓄国债被抢购，客户对保本类额度高度敏感，后续批次预约需求积压，替代产品的衔接诉求上升。",
+        "facts": [],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://finance.cctv.com/2026/11/12/ARTI4FH6yc7A0jXOSi14HiUC261112.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-13",
+        "section": "insights",
+        "title": "拉卡拉注销小贷牌照",
+        "text": "拉卡拉注销小贷牌照 助贷与联合贷合作方持续出清，消费贷存量合作机构名单与资产质量面临重新审视，合作方稳定性下降。",
+        "facts": [],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://m.21jingji.com/article/20261112/herald/5f4b045890998e6b4b152e278e9e8207.html",
+        "novelty": 0.26249999999999996,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-11-13",
+        "section": "insights",
+        "title": "头部信托增资至120亿",
+        "text": "头部信托增资至120亿 代销合作方实力格局生变，年内另有5家信托获批增资，高净值客户对代销机构资质的关注度上升。",
+        "facts": [
+          "#5家"
+        ],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "url": "https://finance.sina.com.cn/trust/roll/2026-11-12/doc-iniynyav1593575.shtml",
+        "novelty": 0.35312499999999997,
+        "angle": "同业动作"
+      },
+      {
+        "date": "2026-11-13",
+        "section": "risk",
+        "title": "上市公司财务造假严打五年",
+        "text": "上市公司财务造假严打五年 中国计划未来五年严厉打击财务造假，上市公司信息披露约束趋严，天晟新材因漏披关联交易拟罚940万。 对公授信与投行联动审查标准趋严，涉上市公司客群的授信复核压力上升；财富条线代销标的的披露瑕疵排查要求提高，风控需同步收紧准入。",
+        "facts": [],
+        "broadcastAt": "2026-11-13T07:13:54+08:00",
+        "score": 74,
+        "novelty": 0.30196078431372547,
+        "angle": "数据验证"
+      }
+    ],
+    "runId": "43326992346"
   },
   "deliveries": [
     {
@@ -15269,6 +15421,7 @@
       "reportSha": "5ea2cfb07ea35aff1485f334ba8f5ed0930481d5"
     }
   ],
+  "lastHeroLine": "今天主要看四个方面：存款结构变化，资金定期化与理财分流并存；美元资产升温，定存理财基准超4%；本地绿色金融目录落地，全国首个；跨境结算放量，双11清单超4260万票。",
   "ipoVoicing": {
     "河源富马硬质合金股份有限公司": [
       "2026-11-03",
