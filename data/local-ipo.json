@@ -1,10 +1,9 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-12T07:07:06+08:00",
+  "fetchedAt": "2026-11-13T07:08:50+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-bse-audit": 1,
     "gd-csrc-tutoring": 3,
     "gd-sse-audit": 2
   },
@@ -63,17 +62,6 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-registered"
-    },
-    {
-      "title": "展辰新材：IPO问询中（拟北交所）",
-      "url": "https://www.bse.cn/audit/project_news_select.html#874453@P02",
-      "excerpt": "注册地：广东省珠海市｜保荐：招商证券股份有限公司｜代码：874453｜状态：IPO问询中｜更新：2026-11-06",
-      "publishedAt": "2026-11-06",
-      "source": "北交所IPO审核动态",
-      "sourceId": "gd-bse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-reviewing"
     }
   ]
 }
