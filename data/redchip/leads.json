@@ -17,7 +17,7 @@
     "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/109026/documents/sehk26111201125.pdf",
     "market": "hk",
     "leadId": "109026",
-    "lastChangedAt": "2026-11-13T07:09:13+08:00"
+    "lastChangedAt": "2026-11-14T07:08:35+08:00"
   },
   {
     "appId": "108750",
@@ -58,6 +58,25 @@
     "market": "hk",
     "leadId": "108966",
     "lastChangedAt": "2026-11-10T07:04:42+08:00"
+  },
+  {
+    "appId": "108536",
+    "nameCn": "Adaspace Technology Co., Ltd.",
+    "nameEn": "",
+    "board": "主板",
+    "status": "LT",
+    "stockCode": "06935",
+    "submitDate": "2026-10-29",
+    "isOffshore": false,
+    "gdCityHits": 0,
+    "gdCityMentions": 0,
+    "isGdConnected": false,
+    "vie": "unverified",
+    "verdict": "unverified",
+    "discoveredAt": "2026-11-14T07:08:35+08:00",
+    "market": "hk",
+    "leadId": "108536",
+    "lastChangedAt": "2026-11-14T07:08:35+08:00"
   },
   {
     "appId": "us-2087307",
