@@ -1,13 +1,24 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-13T07:08:50+08:00",
+  "fetchedAt": "2026-11-14T07:04:55+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-csrc-tutoring": 3,
+    "gd-csrc-tutoring": 4,
     "gd-sse-audit": 2
   },
   "items": [
+    {
+      "title": "大寰机器人科技股份有限公司 (辅导备案) [深圳证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/14/PREIPO_F0101_V01_20261114_37576_Q/5D561823919746DBBCC7C955D587EBB8/关于大寰机器人科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 国泰海通证券股份有限公司 | 备案时间: 2026-11-13 | 状态: 辅导备案 | 报告: 辅导备案报告 | 披露: 2026-11-14",
+      "publishedAt": "2026-11-14",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-tutoring"
+    },
     {
       "title": "深圳蜂巢互联科技股份有限公司 (辅导备案) [深圳证监局]",
       "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/10/PREIPO_F0101_V01_20261110_37559_Q/AF7667A1D03D4E44A40A780D314CADFB/关于深圳蜂巢互联科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf",
