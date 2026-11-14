@@ -1,0 +1,864 @@
+{
+  "date": "2026-11-15",
+  "updatedAt": "2026-11-14T23:11:10.359Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：监管稳预期与长期资本，看点在于预期引导机制；理财货架与贵金属波动，看点在于产品提前退场、金价回落超五百元；本地消费与科创客群，看点在于南沙邮轮试航、深圳机器人企业辅导备案。",
+    "spoken_hero": "今天主要看三个方面：监管稳预期和长期资本，看点在于预期引导机制；理财货架和贵金属，看点在于产品提前退场、金价较高点回落超五百元；本地消费和科创客群，看点在于南沙邮轮试航、深圳有机器人企业进入辅导备案。",
+    "must_read": [
+      {
+        "title": "银行板块逆势大涨创新高",
+        "why": "同业估值与经营预期同步抬升，银行股成为财富客户资产讨论中的高频话题。",
+        "url": "https://finance.eastmoney.com/a/202611143931111515.html"
+      },
+      {
+        "title": "机构预计金价震荡上行",
+        "why": "机构判断与实际价格走势出现分歧，贵金属客户沟通中的观点差异需要消化。",
+        "url": "https://finance.eastmoney.com/a/202611143931376928.html"
+      },
+      {
+        "title": "美股三大股指涨跌不一",
+        "why": "海外投资者担忧持续，境外市场情绪分化，影响跨境配置类客户的判断。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261114/4495720_1.html"
+      },
+      {
+        "title": "金饰克价较高点跌超500元",
+        "why": "贵金属价格大幅回撤，年轻客群黄金投资热度降温，销售适当性压力上升。",
+        "url": "https://finance.sina.com.cn/roll/2026-11-14/doc-iniyszsx0423455.shtml"
+      }
+    ],
+    "spoken_must_read": "银行板块逆势大涨创新高。同业估值与经营预期同步抬升，银行股成为财富客户资产讨论中的高频话题。其次，机构预计金价震荡上行。机构判断与实际价格走势出现分歧，贵金属客户沟通中的观点差异需要消化。此外，美股三大股指涨跌不一。海外投资者担忧持续，境外市场情绪分化，影响跨境配置类客户的判断。还有，金饰克价较高点跌超500元。贵金属价格大幅回撤，年轻客群黄金投资热度降温，销售适当性压力上升。",
+    "insights": [
+      {
+        "topic": "理财产品提前终止增多",
+        "impact": "在售产品触发提前终止条款的情形增加，客户对存续期与收益兑现的问询集中出现，货架稳定性直接影响客户留存。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "“见好就收”等多重因素触发 部分银行理财产品“提前退场”",
+            "url": "https://finance.cctv.com/2026/11/14/ARTIInu3hvv58xO0oSc9Qv1O261114.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "银行股成财富客户话题",
+        "impact": "银行板块逆势创新高，含权类资产讨论升温，客户对银行股及权益配置的咨询意愿增强。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "再创新高！银行板块逆势大涨2027年如何布局？",
+            "url": "https://finance.eastmoney.com/a/202611143931111515.html"
+          }
+        ]
+      },
+      {
+        "topic": "金价回落投资热度降温",
+        "impact": "金饰克价较高点跌超五百元，年轻客群黄金投资热情回落，贵金属销售的风险揭示与适当性沟通压力上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "金饰克价较年内高点跌超500元，向太劝年轻人不要炒黄金",
+            "url": "https://finance.sina.com.cn/roll/2026-11-14/doc-iniyszsx0423455.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "粤农产品品牌五年行动",
+        "impact": "广东农产品品牌建设方案落地，涉农小微与个体工商户的品牌化、渠道化投入增加，经营资金需求随之变化。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "广东省农产品品牌建设五年行动方案发布",
+            "url": "https://www.cnr.cn/gd/guangdongyaowen/20261114/t20261114_527872328.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "长期资本政策窗口打开",
+        "impact": "长期配置类产品的政策导向更明确，客户对养老、长期持有型产品的接受度与讨论度在上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "中国证监会：加快发展壮大长期资本 保护投资者合法权益",
+            "url": "https://news.southcn.com/node_812903b83a/d24f70f04a.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，理财产品提前终止增多、金价回落投资热度降温、长期资本政策窗口打开，在售产品触发提前终止条款的情形增加。第二，高端客户方面，银行股成财富客户话题，银行板块逆势创新高。第三，普惠小微方面，粤农产品品牌五年行动，广东农产品品牌建设方案落地。",
+    "risk": {
+      "topic": "理财提前终止的适当性风险",
+      "evidence": "部分银行理财产品因“见好就收”等多重因素触发提前终止，产品提前退场。",
+      "impact": "财富条线面临客户对存续期与收益兑现的集中问询，个贷与私行客户交叉持有产品时投诉风险上升，风控需关注销售适当性留痕。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "“见好就收”等多重因素触发 部分银行理财产品“提前退场”",
+          "url": "https://finance.cctv.com/2026/11/14/ARTIInu3hvv58xO0oSc9Qv1O261114.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：理财提前终止的适当性风险，财富条线面临客户对存续期与收益兑现的集中问询，个贷与私行客户交叉持有产品时投诉风险上升，风控需关注销售适当性留痕。",
+    "guangdong_ipo": {
+      "spoken": "深圳大寰机器人科技股份有限公司进入IPO辅导备案，注册地深圳，属机器人科技行业，辅导机构为国泰海通证券，备案时间十一月十三日，拟登陆境内资本市场。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌0.91%，标普跌0.40%，黄仁勋离职引发AI融资担忧。",
+      "sectors": [
+        "英伟达CEO黄仁勋离职，AI融资策略与信用市场成焦点。",
+        "伯克希尔四连创收盘新高，四季度累计涨19%。",
+        "比特币跌破64000美元，ETF资金连续七日净流出。",
+        "FAA调查L3Harris故障，全美航班中断延续至周日。",
+        "纳指100是否见底受关注，机构提示关键图表信号。"
+      ],
+      "spoken": "美股今日涨跌互现，道指微涨0.10%，纳指跌0.91%，标普500跌0.40%。市场焦点在英伟达，黄仁勋离职令AI融资策略和信用市场受关注，相关交易策略转向防御。伯克希尔四连创收盘新高，四季度累涨19%。比特币跌破64000美元，ETF连续七日净流出；全美航班中断延续至周日。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-15"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52347.55",
+          "changePct": "+0.10%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25136.27",
+          "changePct": "-0.91%"
+        },
+        {
+          "name": "标普500",
+          "value": "7561.67",
+          "changePct": "-0.40%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证跌0.59%，创业板重挫3.32%，吴清表态深化稳市机制。",
+      "sectors": [
+        "银行板块逆势大涨再创新高，资金避险抱团高股息方向。",
+        "主力调仓，69亿资金撤离'易中天'，超8亿转向600410。",
+        "AI短剧概念持续上扬，机构提示聚焦四条主线。",
+        "电子布龙头拟回购全部注销，公司密集公告回购。",
+        "中国彩电双雄前三季业绩逆势增长，龙头基本面获支撑。"
+      ],
+      "spoken": "A股今日分化明显，上证指数跌0.59%，深证成指跌2.05%，创业板指重挫3.32%。盘面上银行板块逆势大涨再创新高，高股息方向获资金抱团；AI短剧概念持续上扬；主力资金调仓，69亿撤离热门标的，另有超8亿资金转向600410。电子布龙头拟回购全部注销。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-15"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3634.35",
+          "changePct": "-0.59%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10968.79",
+          "changePct": "-2.05%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2426.08",
+          "changePct": "-3.32%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23637.60点（-1.55%）；恒生科技收报3813.19点（-3.02%）。",
+      "sectors": [
+        "AI相关概念股大跌",
+        "智谱跌超10%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-14"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.55% 科指跌3.02% AI相关概念股大跌 智谱跌超10%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-13/doc-iniyqsmv0938230.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23637.60",
+          "changePct": "-1.55%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3813.19",
+          "changePct": "-3.02%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-13",
+    "marketStatus": {
+      "reportDate": "2026-11-15",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-11-13",
+          "reason": "数据为 11月13日（距今 2 天）"
+        },
+        "hk": {
+          "fresh": false,
+          "dataDate": "2026-11-13",
+          "reason": "数据为 11月13日（距今 2 天）"
+        },
+        "us": {
+          "fresh": false,
+          "dataDate": "2026-11-13",
+          "reason": "数据为 11月13日（距今 2 天）"
+        }
+      },
+      "allStale": true,
+      "note": "三地股市均无隔夜行情（休市或数据未更新），以下为最近一次收盘数据",
+      "spokenNote": "三地股市今日均无隔夜行情"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931312639.html",
+      "title_cn": "吴清：进一步深化市场稳定长效机制研究防范市场异常波动",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "证监会主席吴清表示，将进一步深化市场稳定长效机制研究，防范市场异常波动。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "监管",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931321811.html",
+      "title_cn": "马斯克签名请愿支持黄仁勋复职已有4.2万人签署请愿书",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "一份由马斯克签名、支持黄仁勋复职的请愿书已有4.2万人签署。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "科技",
+        "公司治理"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931111515.html",
+      "title_cn": "再创新高！银行板块逆势大涨2027年如何布局？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "银行板块逆势大涨并再创新高，报道讨论2027年布局方向。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "银行",
+        "A股",
+        "板块行情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931300279.html",
+      "title_cn": "利好！电子布龙头拟回购全部注销！A股公司密集公告",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "电子布龙头公告拟回购股份并全部注销，A股多家公司密集发布回购公告。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "A股",
+        "公司公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931289864.html",
+      "title_cn": "主力调仓进行时！69亿撤离“易中天”，超8亿资金悄悄盯上600410",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "主力资金调仓，69亿元撤离“易中天”相关标的，超8亿元资金流入600410。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "资金流向",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931286786.html",
+      "title_cn": "梁建章又来“催生”了：给上海博士生发5万元育儿补贴",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "梁建章建议向上海博士生发放5万元育儿补贴以鼓励生育。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "人口",
+        "政策",
+        "社会"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931073412.html",
+      "title_cn": "AI短剧概念持续上扬机构建议聚焦四条主线",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "AI短剧概念持续上涨，机构提出聚焦四条主线。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "传媒",
+        "A股",
+        "概念板块"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931337858.html",
+      "title_cn": "英伟达回应黄仁勋继任者传闻：尚未正式接触任何潜在候选人",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "英伟达回应黄仁勋继任者传闻，称尚未正式接触任何潜在候选人。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "AI",
+        "公司治理"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931281813.html",
+      "title_cn": "DeepSeek开放全家桶应用API：开发者可1:1复刻出完整的DeepSeekApp",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "DeepSeek开放全家桶应用API，开发者可1:1复刻完整的DeepSeek App。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "科技",
+        "API"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931289725.html",
+      "title_cn": "中国彩电“双雄”前三季业绩逆势增长",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "中国彩电“双雄”前三季度业绩逆势增长。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "家电"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931376928.html",
+      "title_cn": "中信建投：预计2027年实际利率进一步上行空间有限金价有望震荡上行",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "中信建投预计2027年实际利率进一步上行空间有限，金价有望震荡上行。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "黄金",
+        "券商观点",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931368239.html",
+      "title_cn": "周小川：AI深刻改变资本市场人机分工格局锚定三大目标引导其服务实体经济",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "周小川表示AI深刻改变资本市场人机分工格局，应锚定三大目标引导其服务实体经济。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "监管",
+        "资本市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-13/doc-iniyqsmv0938230.shtml",
+      "title_cn": "港股收评：恒指跌1.55% 科指跌3.02% AI相关概念股大跌 智谱跌超10%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "港股收评：恒指跌1.55%，科指跌3.02%，AI相关概念股大跌，智谱跌超10%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "AI",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-14/doc-iniyryff0551970.shtml",
+      "title_cn": "恒指牛熊街货比(58:42)︱11月14日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "11月14日恒指牛熊街货比为58:42。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/bxjj/2026-11-13/doc-iniypekv3780372.shtml",
+      "title_cn": "港股互联网板块逆势走强又“深蹲” 价值重估还未到无条件“击球区”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "港股互联网板块逆势走强后又回落，报道称价值重估尚未到无条件“击球区”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "互联网",
+        "板块行情"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-13/doc-iniypksm1022650.shtml",
+      "title_cn": "MSCI中国指数11月底调整 纳入中际旭创H股等3只个股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "MSCI中国指数11月底调整，纳入中际旭创H股等3只个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "指数调整",
+        "MSCI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-13/doc-iniypvhn8064511.shtml",
+      "title_cn": "国星宇航今日登陆港股市场",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "国星宇航登陆港股市场。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "航天"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-13/doc-iniypekv3780378.shtml",
+      "title_cn": "港股公司年内回购超1300亿港元 科技企业扛大旗 “A+H”同步操作成亮点",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "港股公司年内回购超1300亿港元，科技企业为主力，“A+H”同步操作成为亮点。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-13/doc-iniypvhn8130384.shtml",
+      "title_cn": "腾讯，年内回购已耗资超320亿港元！港股龙头公司，回购潮！",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "腾讯年内回购已耗资超320亿港元，港股龙头公司掀起回购潮。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购",
+        "腾讯"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-13/doc-iniyqsmv0958635.shtml",
+      "title_cn": "国信证券：五一视界(06651)受益智驾与具身需求高景气 51Sim打开增长空间",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "国信证券称五一视界(06651)受益智驾与具身需求高景气，51Sim打开增长空间。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "智驾"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-13/doc-iniyqncx1030750.shtml",
+      "title_cn": "花旗：翰森制药维持“买入”评级 目标价52港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "花旗维持翰森制药“买入”评级，目标价52港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-13/doc-iniyqnec1288483.shtml",
+      "title_cn": "中金：新秀丽目标价上调5%至21港元 维持“跑赢行业”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "中金将新秀丽目标价上调5%至21港元，维持“跑赢行业”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-13/doc-iniyqncx1015350.shtml",
+      "title_cn": "花旗：潍柴动力维持“买入”评级 目标价48港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "花旗维持潍柴动力“买入”评级，目标价48港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "机械"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-13/doc-iniyqnef3675260.shtml",
+      "title_cn": "中信里昂：信达生物目标价上调至152港元 维持“优于大市”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "中信里昂将信达生物目标价上调至152港元，维持“优于大市”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/14/hsa-investing-tax-benefits.html",
+      "title_cn": "Juice your growth and save on taxes in this workplace investment account",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "CNBC介绍在工作场所投资账户中实现增长并节省税收的方式。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "投资账户",
+        "税务"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/14/berkshire-breaks-out-to-record-high-with-fourth-quarter-rally-reaching-19percent.html",
+      "title_cn": "Berkshire breaks out to record high with fourth-quarter rally reaching 19%",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "伯克希尔股价创历史新高，第四季度涨幅达19%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "伯克希尔",
+        "市场行情"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/a-trading-strategy-to-ride-out-the-nvidia-uncertainty-and-generate-income-in-the-process.html",
+      "title_cn": "A trading strategy to ride out the Nvidia uncertainty and generate income in the process",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC介绍一种应对英伟达不确定性的交易策略，并在此过程中获取收益。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "英伟达",
+        "交易策略"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/is-a-bottom-in-for-the-nasdaq-100-charts-to-watch.html",
+      "title_cn": "Is a bottom in for the Nasdaq-100? Charts to watch",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC讨论纳斯达克100指数是否已见底，并列出需关注的图表。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "纳斯达克",
+        "技术分析"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/nvidia-jensen-huang-resignation-ai-financing.html",
+      "title_cn": "What's ahead for AI financing after Nvidia CEO Jensen Huang departs",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC讨论英伟达CEO黄仁勋离任后AI融资的前景。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "英伟达"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/draftkings-director-gregory-wendt-buys-98800-in-shares-93CH-5027554",
+      "title_cn": "DraftKings director Gregory Wendt buys $98,800 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "DraftKings董事Gregory Wendt买入98,800美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/cryptocurrency-news/bitcoin-slides-below-68000-as-anthropic-ipo-frenzy-drains-market-liquidity-5027106",
+      "title_cn": "Bitcoin falls below $64,000 as ETF outflows extend to seventh straight day",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "比特币跌破64,000美元，ETF资金流出已连续第七日。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "加密货币",
+        "ETF"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/faa-orders-nationwide-ground-stop-citing-extraordinary-safety-concerns-5026489",
+      "title_cn": "U.S. flight disruptions persist as FAA probes L3Harris role in nationwide outage",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "美国航班中断持续，FAA调查L3Harris在全国性故障中的角色。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "航空",
+        "监管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/riley-exploration-permian-cio-sells-143428-in-stock-93CH-5027535",
+      "title_cn": "Riley Exploration Permian CIO sells $143,428 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "Riley Exploration Permian首席投资官卖出143,428美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/beta-technologies-ceo-kyle-clark-sells-563525-in-stock-93CH-5027528",
+      "title_cn": "Beta Technologies CEO Kyle Clark sells $563,525 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "Beta Technologies CEO Kyle Clark卖出563,525美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/investors-title-co-director-elton-parker-jr-buys-133000-in-shares-93CH-5027527",
+      "title_cn": "Investors Title Co director Elton Parker Jr. buys $133,000 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "Investors Title Co董事Elton Parker Jr.买入133,000美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/thousands-of-us-flights-canceled-delayed-as-air-travel-system-recovers-from-shutdown-5027394",
+      "title_cn": "Air travel issues to persist well into Sunday, officials say, with thousands of flights affected",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "官员称航空出行问题将持续至周日，数千架次航班受影响。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "航空",
+        "交通"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
