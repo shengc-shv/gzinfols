@@ -290,12 +290,15 @@
       ],
       "kind": "policy",
       "firstBroadcastAt": "2026-09-16",
-      "lastBroadcastAt": "2026-09-16",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-11-15",
+      "broadcastCount": 2,
       "sections": [
-        "must_read"
+        "must_read",
+        "insights"
       ],
-      "anglesUsed": [],
+      "anglesUsed": [
+        "政策变化"
+      ],
       "samples": [
         {
           "date": "2026-09-16",
@@ -307,10 +310,22 @@
           "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-09-15/doc-inirwfqk3988152.shtml",
           "score": 66,
           "novelty": 1
+        },
+        {
+          "date": "2026-11-15",
+          "section": "insights",
+          "title": "长期资本政策窗口打开",
+          "text": "长期资本政策窗口打开 长期配置类产品的政策导向更明确，客户对养老、长期持有型产品的接受度与讨论度在上升。",
+          "facts": [],
+          "broadcastAt": "2026-11-15T07:08:21+08:00",
+          "url": "https://news.southcn.com/node_812903b83a/d24f70f04a.shtml",
+          "novelty": 0.325,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "五篇大文章增量超七成 五篇大文章增量超七成 科技、绿色、普惠、养老投放权重上升，零售条线可对照自身结构找差距，争取政策资源倾斜。"
+        "五篇大文章增量超七成 五篇大文章增量超七成 科技、绿色、普惠、养老投放权重上升，零售条线可对照自身结构找差距，争取政策资源倾斜。",
+        "长期资本政策窗口打开 长期资本政策窗口打开 长期配置类产品的政策导向更明确，客户对养老、长期持有型产品的接受度与讨论度在上升。"
       ],
       "broadcastedFacts": [],
       "peakScore": 66
@@ -3191,47 +3206,26 @@
       "anchors": [
         "理财",
         "新客",
-        "申购"
+        "申购",
+        "个贷",
+        "私行"
       ],
       "kind": "ipo",
       "firstBroadcastAt": "2026-09-19",
-      "lastBroadcastAt": "2026-11-07",
-      "broadcastCount": 6,
+      "lastBroadcastAt": "2026-11-15",
+      "broadcastCount": 7,
       "sections": [
-        "insights"
+        "insights",
+        "risk"
       ],
       "anglesUsed": [
         "政策变化",
         "市场反应",
         "受影响人群",
-        "数据验证"
+        "数据验证",
+        "同业动作"
       ],
       "samples": [
-        {
-          "date": "2026-09-19",
-          "section": "insights",
-          "title": "打新客户资金安排",
-          "text": "打新客户资金安排 力勤资源今日申购，有打新需求的客户存在资金调度与短期理财衔接需求。 可提示打新客户关注申购时间与资金安排，配套短期理财与资金归集服务。",
-          "facts": [
-            "!申购"
-          ],
-          "broadcastAt": "2026-09-19T07:42:37+08:00",
-          "url": "https://www.stcn.com/article/detail/4189832.html",
-          "novelty": 1
-        },
-        {
-          "date": "2026-09-24",
-          "section": "insights",
-          "title": "理财费率竞争应对",
-          "text": "理财费率竞争应对 理财机构密集下调管理费率、0费率可持续性存疑，客户比价敏感度上升，单纯价格战难留客。 可考虑以资产配置服务与投顾陪伴作为差异点，本周更新客户沟通口径，弱化费率单一卖点。",
-          "facts": [
-            "!下调"
-          ],
-          "broadcastAt": "2026-09-24T07:32:16+08:00",
-          "url": "https://www.cnfin.com/hg-lb/detail/20260924/4474402_1.html",
-          "novelty": 0.9820512820512821,
-          "angle": "政策变化"
-        },
         {
           "date": "2026-10-18",
           "section": "insights",
@@ -3281,6 +3275,32 @@
           "url": "https://finance.sina.com.cn/roll/2026-11-06/doc-inixvfey5578893.shtml",
           "novelty": 0.6546296296296297,
           "angle": "数据验证"
+        },
+        {
+          "date": "2026-11-15",
+          "section": "insights",
+          "title": "理财产品提前终止增多",
+          "text": "理财产品提前终止增多 在售产品触发提前终止条款的情形增加，客户对存续期与收益兑现的问询集中出现，货架稳定性直接影响客户留存。",
+          "facts": [
+            "!问询"
+          ],
+          "broadcastAt": "2026-11-15T07:08:21+08:00",
+          "url": "https://finance.cctv.com/2026/11/14/ARTIInu3hvv58xO0oSc9Qv1O261114.shtml",
+          "novelty": 0.4599999999999999,
+          "angle": "同业动作"
+        },
+        {
+          "date": "2026-11-15",
+          "section": "risk",
+          "title": "理财提前终止的适当性风险",
+          "text": "理财提前终止的适当性风险 部分银行理财产品因“见好就收”等多重因素触发提前终止，产品提前退场。 财富条线面临客户对存续期与收益兑现的集中问询，个贷与私行客户交叉持有产品时投诉风险上升，风控需关注销售适当性留痕。",
+          "facts": [
+            "!问询"
+          ],
+          "broadcastAt": "2026-11-15T07:08:21+08:00",
+          "score": 66,
+          "novelty": 0.25833333333333336,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
@@ -3289,15 +3309,18 @@
         "解禁潮与新股申购并行 解禁潮与新股申购并行 超千亿解禁叠加新股申购，客户持仓结构调整与打新资金调度需求上升，证券保证金流动加快。",
         "理财控回撤新招落地 理财控回撤新招落地 理财引入量化定档与限时修复管理净值波动，稳健型客户对回撤修复节奏的敏感度上升，产品间差异更需讲清。",
         "理财赎回卷至当天到账 理财赎回卷至当天到账 客户对资金流动性的预期被同业抬高，现金管理类产品到账时效成为客户比较的直接维度，收益之外多了一层时效竞争。",
-        "多只理财产品提前终止 多只理财产品提前终止 11月多只产品因止盈、规模不足、底层退出提前终止，客户到期资金再配置需求集中释放，货架承接与话术准备压力上升。"
+        "多只理财产品提前终止 多只理财产品提前终止 11月多只产品因止盈、规模不足、底层退出提前终止，客户到期资金再配置需求集中释放，货架承接与话术准备压力上升。",
+        "理财产品提前终止增多 理财产品提前终止增多 在售产品触发提前终止条款的情形增加，客户对存续期与收益兑现的问询集中出现，货架稳定性直接影响客户留存。",
+        "理财提前终止的适当性风险 理财提前终止的适当性风险 部分银行理财产品因“见好就收”等多重因素触发提前终止，产品提前退场。 财富条线面临客户对存续期与收益兑现的集中问询，个贷与私行客户交叉持有产品时投诉风险上升，风控需关注销售适当性留痕。"
       ],
       "broadcastedFacts": [
         "!申购",
         "!下调",
         "!落地",
-        "#11月"
+        "#11月",
+        "!问询"
       ],
-      "peakScore": 0
+      "peakScore": 66
     },
     "#2万亿|按揭": {
       "id": "#2万亿|按揭",
@@ -8341,12 +8364,13 @@
         "黄金",
         "客群",
         "#3.5万亿",
-        "#5万亿"
+        "#5万亿",
+        "#500元"
       ],
       "kind": "generic",
       "firstBroadcastAt": "2026-10-05",
-      "lastBroadcastAt": "2026-11-01",
-      "broadcastCount": 3,
+      "lastBroadcastAt": "2026-11-15",
+      "broadcastCount": 4,
       "sections": [
         "insights",
         "must_read"
@@ -8355,7 +8379,8 @@
         "政策变化",
         "市场反应",
         "受影响人群",
-        "数据验证"
+        "数据验证",
+        "同业动作"
       ],
       "samples": [
         {
@@ -8407,17 +8432,45 @@
           "score": 52,
           "novelty": 0.7681818181818182,
           "angle": "数据验证"
+        },
+        {
+          "date": "2026-11-15",
+          "section": "must_read",
+          "title": "金饰克价较高点跌超500元",
+          "text": "金饰克价较高点跌超500元 贵金属价格大幅回撤，年轻客群黄金投资热度降温，销售适当性压力上升。",
+          "facts": [
+            "#500元"
+          ],
+          "broadcastAt": "2026-11-15T07:08:21+08:00",
+          "url": "https://finance.sina.com.cn/roll/2026-11-14/doc-iniyszsx0423455.shtml",
+          "score": 61,
+          "novelty": 0.5,
+          "angle": "同业动作"
+        },
+        {
+          "date": "2026-11-15",
+          "section": "insights",
+          "title": "金价回落投资热度降温",
+          "text": "金价回落投资热度降温 金饰克价较高点跌超五百元，年轻客群黄金投资热情回落，贵金属销售的风险揭示与适当性沟通压力上升。",
+          "facts": [],
+          "broadcastAt": "2026-11-15T07:08:21+08:00",
+          "url": "https://finance.sina.com.cn/roll/2026-11-14/doc-iniyszsx0423455.shtml",
+          "novelty": 0.161,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
         "人民币计价黄金期货将推出 人民币计价黄金期货将推出 港交所拟推人民币计价黄金期货，跨境人民币避险工具扩容，有跨境结算与套保需求的客群对汇率与贵金属组合的关注度上升。",
         "黄金走势异动 黄金走势异动 贵金属价格波动加大，持有黄金类产品的客户情绪易波动，财富条线在产品说明与风险匹配上的沟通压力上升。",
         "低空经济规模突破3.5万亿 低空经济规模突破3.5万亿 政策与出海双重共振下低空经济站上3.5万亿量级，相关产业链企业主客群与股权融资需求值得关注。",
-        "华夏银行规模破5万亿 华夏银行规模破5万亿 同业规模与营收增速创新高，其零售与中间业务结构变化构成对分行客群分流的参照。"
+        "华夏银行规模破5万亿 华夏银行规模破5万亿 同业规模与营收增速创新高，其零售与中间业务结构变化构成对分行客群分流的参照。",
+        "金饰克价较高点跌超500元 金饰克价较高点跌超500元 贵金属价格大幅回撤，年轻客群黄金投资热度降温，销售适当性压力上升。",
+        "金价回落投资热度降温 金价回落投资热度降温 金饰克价较高点跌超五百元，年轻客群黄金投资热情回落，贵金属销售的风险揭示与适当性沟通压力上升。"
       ],
       "broadcastedFacts": [
         "#3.5万亿",
-        "#5万亿"
+        "#5万亿",
+        "#500元"
       ],
       "peakScore": 66
     },
@@ -14490,7 +14543,8 @@
     "#2.7万亿|粤": {
       "id": "#2.7万亿|粤",
       "topicTags": [
-        "广州本地"
+        "广州本地",
+        "消费信贷"
       ],
       "anchors": [
         "粤",
@@ -14498,12 +14552,15 @@
       ],
       "kind": "local",
       "firstBroadcastAt": "2026-11-10",
-      "lastBroadcastAt": "2026-11-10",
-      "broadcastCount": 1,
+      "lastBroadcastAt": "2026-11-15",
+      "broadcastCount": 2,
       "sections": [
-        "must_read"
+        "must_read",
+        "insights"
       ],
-      "anglesUsed": [],
+      "anglesUsed": [
+        "政策变化"
+      ],
       "samples": [
         {
           "date": "2026-11-10",
@@ -14517,13 +14574,28 @@
           "url": "https://m.21jingji.com/article/20261109/herald/47ea3d5bdf2efe837a86dffc7275f81e.html",
           "score": 21,
           "novelty": 1
+        },
+        {
+          "date": "2026-11-15",
+          "section": "insights",
+          "title": "粤农产品品牌五年行动",
+          "text": "粤农产品品牌五年行动 广东农产品品牌建设方案落地，涉农小微与个体工商户的品牌化、渠道化投入增加，经营资金需求随之变化。",
+          "facts": [
+            "!落地"
+          ],
+          "broadcastAt": "2026-11-15T07:08:21+08:00",
+          "url": "https://www.cnr.cn/gd/guangdongyaowen/20261114/t20261114_527872328.shtml",
+          "novelty": 0.9854166666666666,
+          "angle": "政策变化"
         }
       ],
       "broadcastedTexts": [
-        "险资入粤投资达2.7万亿 险资入粤投资达2.7万亿 广东大型项目与机构资金对接活跃，托管、项目融资与机构合作的资金体量在持续放大。"
+        "险资入粤投资达2.7万亿 险资入粤投资达2.7万亿 广东大型项目与机构资金对接活跃，托管、项目融资与机构合作的资金体量在持续放大。",
+        "粤农产品品牌五年行动 粤农产品品牌五年行动 广东农产品品牌建设方案落地，涉农小微与个体工商户的品牌化、渠道化投入增加，经营资金需求随之变化。"
       ],
       "broadcastedFacts": [
-        "#2.7万亿"
+        "#2.7万亿",
+        "!落地"
       ],
       "peakScore": 21
     },
@@ -15116,132 +15188,119 @@
         "#7.1%"
       ],
       "peakScore": 51
+    },
+    "ev-e6wyud": {
+      "id": "ev-e6wyud",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-11-15",
+      "lastBroadcastAt": "2026-11-15",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read",
+        "insights"
+      ],
+      "anglesUsed": [
+        "政策变化"
+      ],
+      "samples": [
+        {
+          "date": "2026-11-15",
+          "section": "must_read",
+          "title": "银行板块逆势大涨创新高",
+          "text": "银行板块逆势大涨创新高 同业估值与经营预期同步抬升，银行股成为财富客户资产讨论中的高频话题。",
+          "facts": [],
+          "broadcastAt": "2026-11-15T07:08:21+08:00",
+          "url": "https://finance.eastmoney.com/a/202611143931111515.html",
+          "score": 19,
+          "novelty": 1
+        },
+        {
+          "date": "2026-11-15",
+          "section": "insights",
+          "title": "银行股成财富客户话题",
+          "text": "银行股成财富客户话题 银行板块逆势创新高，含权类资产讨论升温，客户对银行股及权益配置的咨询意愿增强。",
+          "facts": [],
+          "broadcastAt": "2026-11-15T07:08:21+08:00",
+          "url": "https://finance.eastmoney.com/a/202611143931111515.html",
+          "novelty": 0.21341463414634146,
+          "angle": "政策变化"
+        }
+      ],
+      "broadcastedTexts": [
+        "银行板块逆势大涨创新高 银行板块逆势大涨创新高 同业估值与经营预期同步抬升，银行股成为财富客户资产讨论中的高频话题。",
+        "银行股成财富客户话题 银行股成财富客户话题 银行板块逆势创新高，含权类资产讨论升温，客户对银行股及权益配置的咨询意愿增强。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 19
+    },
+    "ev-9kal93": {
+      "id": "ev-9kal93",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "generic",
+      "firstBroadcastAt": "2026-11-15",
+      "lastBroadcastAt": "2026-11-15",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-15",
+          "section": "must_read",
+          "title": "机构预计金价震荡上行",
+          "text": "机构预计金价震荡上行 机构判断与实际价格走势出现分歧，贵金属客户沟通中的观点差异需要消化。",
+          "facts": [],
+          "broadcastAt": "2026-11-15T07:08:21+08:00",
+          "url": "https://finance.eastmoney.com/a/202611143931376928.html",
+          "score": 64,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "机构预计金价震荡上行 机构预计金价震荡上行 机构判断与实际价格走势出现分歧，贵金属客户沟通中的观点差异需要消化。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 64
+    },
+    "ev-6cb38y": {
+      "id": "ev-6cb38y",
+      "topicTags": [],
+      "anchors": [],
+      "kind": "market",
+      "firstBroadcastAt": "2026-11-15",
+      "lastBroadcastAt": "2026-11-15",
+      "broadcastCount": 1,
+      "sections": [
+        "must_read"
+      ],
+      "anglesUsed": [],
+      "samples": [
+        {
+          "date": "2026-11-15",
+          "section": "must_read",
+          "title": "美股三大股指涨跌不一",
+          "text": "美股三大股指涨跌不一 海外投资者担忧持续，境外市场情绪分化，影响跨境配置类客户的判断。",
+          "facts": [],
+          "broadcastAt": "2026-11-15T07:08:21+08:00",
+          "url": "https://www.cnfin.com/yw-lb/detail/20261114/4495720_1.html",
+          "score": 61,
+          "novelty": 1
+        }
+      ],
+      "broadcastedTexts": [
+        "美股三大股指涨跌不一 美股三大股指涨跌不一 海外投资者担忧持续，境外市场情绪分化，影响跨境配置类客户的判断。"
+      ],
+      "broadcastedFacts": [],
+      "peakScore": 61
     }
   },
   "today": {
     "date": "2026-11-15",
-    "entries": [
-      {
-        "date": "2026-11-15",
-        "section": "must_read",
-        "title": "银行板块逆势大涨创新高",
-        "text": "银行板块逆势大涨创新高 同业估值与经营预期同步抬升，银行股成为财富客户资产讨论中的高频话题。",
-        "facts": [],
-        "broadcastAt": "2026-11-15T07:08:21+08:00",
-        "url": "https://finance.eastmoney.com/a/202611143931111515.html",
-        "score": 19,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-15",
-        "section": "must_read",
-        "title": "机构预计金价震荡上行",
-        "text": "机构预计金价震荡上行 机构判断与实际价格走势出现分歧，贵金属客户沟通中的观点差异需要消化。",
-        "facts": [],
-        "broadcastAt": "2026-11-15T07:08:21+08:00",
-        "url": "https://finance.eastmoney.com/a/202611143931376928.html",
-        "score": 64,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-15",
-        "section": "must_read",
-        "title": "美股三大股指涨跌不一",
-        "text": "美股三大股指涨跌不一 海外投资者担忧持续，境外市场情绪分化，影响跨境配置类客户的判断。",
-        "facts": [],
-        "broadcastAt": "2026-11-15T07:08:21+08:00",
-        "url": "https://www.cnfin.com/yw-lb/detail/20261114/4495720_1.html",
-        "score": 61,
-        "novelty": 1
-      },
-      {
-        "date": "2026-11-15",
-        "section": "must_read",
-        "title": "金饰克价较高点跌超500元",
-        "text": "金饰克价较高点跌超500元 贵金属价格大幅回撤，年轻客群黄金投资热度降温，销售适当性压力上升。",
-        "facts": [
-          "#500元"
-        ],
-        "broadcastAt": "2026-11-15T07:08:21+08:00",
-        "url": "https://finance.sina.com.cn/roll/2026-11-14/doc-iniyszsx0423455.shtml",
-        "score": 61,
-        "novelty": 0.5,
-        "angle": "同业动作"
-      },
-      {
-        "date": "2026-11-15",
-        "section": "insights",
-        "title": "理财产品提前终止增多",
-        "text": "理财产品提前终止增多 在售产品触发提前终止条款的情形增加，客户对存续期与收益兑现的问询集中出现，货架稳定性直接影响客户留存。",
-        "facts": [
-          "!问询"
-        ],
-        "broadcastAt": "2026-11-15T07:08:21+08:00",
-        "url": "https://finance.cctv.com/2026/11/14/ARTIInu3hvv58xO0oSc9Qv1O261114.shtml",
-        "novelty": 0.4599999999999999,
-        "angle": "同业动作"
-      },
-      {
-        "date": "2026-11-15",
-        "section": "insights",
-        "title": "银行股成财富客户话题",
-        "text": "银行股成财富客户话题 银行板块逆势创新高，含权类资产讨论升温，客户对银行股及权益配置的咨询意愿增强。",
-        "facts": [],
-        "broadcastAt": "2026-11-15T07:08:21+08:00",
-        "url": "https://finance.eastmoney.com/a/202611143931111515.html",
-        "novelty": 0.21341463414634146,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-11-15",
-        "section": "insights",
-        "title": "金价回落投资热度降温",
-        "text": "金价回落投资热度降温 金饰克价较高点跌超五百元，年轻客群黄金投资热情回落，贵金属销售的风险揭示与适当性沟通压力上升。",
-        "facts": [],
-        "broadcastAt": "2026-11-15T07:08:21+08:00",
-        "url": "https://finance.sina.com.cn/roll/2026-11-14/doc-iniyszsx0423455.shtml",
-        "novelty": 0.161,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-11-15",
-        "section": "insights",
-        "title": "粤农产品品牌五年行动",
-        "text": "粤农产品品牌五年行动 广东农产品品牌建设方案落地，涉农小微与个体工商户的品牌化、渠道化投入增加，经营资金需求随之变化。",
-        "facts": [
-          "!落地"
-        ],
-        "broadcastAt": "2026-11-15T07:08:21+08:00",
-        "url": "https://www.cnr.cn/gd/guangdongyaowen/20261114/t20261114_527872328.shtml",
-        "novelty": 0.9854166666666666,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-11-15",
-        "section": "insights",
-        "title": "长期资本政策窗口打开",
-        "text": "长期资本政策窗口打开 长期配置类产品的政策导向更明确，客户对养老、长期持有型产品的接受度与讨论度在上升。",
-        "facts": [],
-        "broadcastAt": "2026-11-15T07:08:21+08:00",
-        "url": "https://news.southcn.com/node_812903b83a/d24f70f04a.shtml",
-        "novelty": 0.325,
-        "angle": "政策变化"
-      },
-      {
-        "date": "2026-11-15",
-        "section": "risk",
-        "title": "理财提前终止的适当性风险",
-        "text": "理财提前终止的适当性风险 部分银行理财产品因“见好就收”等多重因素触发提前终止，产品提前退场。 财富条线面临客户对存续期与收益兑现的集中问询，个贷与私行客户交叉持有产品时投诉风险上升，风控需关注销售适当性留痕。",
-        "facts": [
-          "!问询"
-        ],
-        "broadcastAt": "2026-11-15T07:08:21+08:00",
-        "score": 66,
-        "novelty": 0.25833333333333336,
-        "angle": "政策变化"
-      }
-    ],
-    "runId": "43651658424"
+    "entries": []
   },
   "deliveries": [
     {
@@ -15661,9 +15720,15 @@
       "runId": "43529687070",
       "reportRunId": "43525186175",
       "reportSha": "08e731664e8f4ed5949b39b49d741827ffee3e6f"
+    },
+    {
+      "date": "2026-11-15",
+      "pushedAt": "2026-11-15T07:47:26+08:00",
+      "runId": "43654961028",
+      "reportRunId": "43651658424",
+      "reportSha": "fca2cecb90c0a1076f159998da7b3ce323c63943"
     }
   ],
-  "lastHeroLine": "今天主要看三个方面：监管稳预期与长期资本，看点在于预期引导机制；理财货架与贵金属波动，看点在于产品提前退场、金价回落超五百元；本地消费与科创客群，看点在于南沙邮轮试航、深圳机器人企业辅导备案。",
   "ipoVoicing": {
     "展辰新材": [
       "2026-11-07"
