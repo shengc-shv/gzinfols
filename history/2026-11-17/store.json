@@ -1,0 +1,876 @@
+{
+  "date": "2026-11-17",
+  "updatedAt": "2026-11-16T23:17:37.904Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：宏观数据与楼市分化，社融近29万亿、房价降幅收窄；跨境与离岸人民币，结汇购汇双升、305只债券入指数；零售资产质量与理财货架，不良出清提速、收益风险再平衡。",
+    "spoken_hero": "今天主要看三个方面：宏观数据和楼市分化，前十月社融二十八万六千亿，房价同比降幅继续收窄；跨境和离岸人民币，企业结汇购汇意愿双双上升，港交所推出离岸人民币债券指数；零售资产质量和理财货架，中小银行加速出清零售不良，理财从拼规模转向收益风险平衡。",
+    "must_read": [
+      {
+        "title": "发改委释放四大重磅信号",
+        "why": "政策取向直接指向下一阶段信贷投向重点，影响对公与零售的行业选择与资源配置。",
+        "url": "https://finance.cctv.com/2026/11/16/ARTI8HuyWHHCxLuRbK7JdC5Y261116.shtml"
+      },
+      {
+        "title": "结汇购汇意愿双双上升",
+        "why": "涉外交易持续活跃，跨境收付与结售汇需求同步放大，跨境客群资金流动节奏加快。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261116/4496282_1.html"
+      },
+      {
+        "title": "美股收跌、半导体跌超5%",
+        "why": "海外风险资产集体回调，持有海外资产客户的持仓体验与情绪管理压力上升。",
+        "url": "https://finance.eastmoney.com/a/202611173932222649.html"
+      },
+      {
+        "title": "港交所首推离岸人民币债券指数",
+        "why": "305只债券纳入样本，离岸人民币资产有了定价基准，跨境财富配置的标的池扩容。",
+        "url": "https://m.21jingji.com/article/20261116/herald/a14c8a0007156000f4ebaa8cc99183a9.html"
+      },
+      {
+        "title": "10月房价同比降幅继续收窄",
+        "why": "各线城市售价降幅同步收窄，按揭客群价格预期边际改善，楼市区域分化格局延续。",
+        "url": "https://news.southcn.com/node_812903b83a/bbf522d260.shtml"
+      }
+    ],
+    "spoken_must_read": "发改委释放四大重磅信号。政策取向直接指向下一阶段信贷投向重点，影响对公与零售的行业选择与资源配置。其次，结汇购汇意愿双双上升。涉外交易持续活跃，跨境收付与结售汇需求同步放大，跨境客群资金流动节奏加快。此外，美股收跌、半导体跌超5%。海外风险资产集体回调，持有海外资产客户的持仓体验与情绪管理压力上升。还有，港交所首推离岸人民币债券指数。305只债券纳入样本，离岸人民币资产有了定价基准，跨境财富配置的标的池扩容。另外，10月房价同比降幅继续收窄。各线城市售价降幅同步收窄，按揭客群价格预期边际改善，楼市区域分化格局延续。",
+    "insights": [
+      {
+        "topic": "理财转向收益风险平衡",
+        "impact": "低利率下理财从拼规模转向收益与风险平衡，客户对净值回撤的容忍度下降，货架结构与预期管理压力同步上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "理财的分量不止在规模 低利率环境下银行理财答好收益与风险平衡之问",
+            "url": "https://finance.eastmoney.com/a/202611173932248750.html"
+          }
+        ]
+      },
+      {
+        "topic": "离岸人民币资产定价基准",
+        "impact": "港交所离岸人民币债券指数落地，跨境资产配置多了一个可比的定价参照，高端客户的配置选项随之拓宽。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "港交所首个离岸人民币债券指数推出，305只债券纳入样本",
+            "url": "https://m.21jingji.com/article/20261116/herald/a14c8a0007156000f4ebaa8cc99183a9.html"
+          }
+        ]
+      },
+      {
+        "topic": "中小银行出清零售不良",
+        "impact": "地方中小银行加速出清零售不良，消费贷资产质量压力显性化，同类客群的风险迁徙路径值得持续观察。",
+        "tag": [
+          "信贷",
+          "监管"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "地方中小银行加速出清零售不良",
+            "url": "https://finance.sina.com.cn/jjxw/2026-11-16/doc-iniyvvpv2925234.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "养老金融定位跨周期",
+        "impact": "养老金融被定位为跨越周期的长期事业，养老账户与产品组合的衔接成为长线客群经营的主要抓手。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "养老客群",
+        "sources": [
+          {
+            "title": "平安养老险董事长甘为民：养老金融是一项跨越经济周期、关乎代际民生的长期事业",
+            "url": "https://m.21jingji.com/article/20261116/herald/f5edb79a85b3596c93ee4decae974fa9.html"
+          }
+        ]
+      },
+      {
+        "topic": "港股打新通道短期集中",
+        "impact": "先通医药招股期集中在四天内，港股打新与跨境认购需求短期集中，通道容量与额度安排面临考验。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "先通医药-B于11月16日至11月19日招股 拟全球发售656.1万股H股",
+            "url": "https://finance.sina.com.cn/stock/hkstock/ggipo/2026-11-16/doc-iniywsth5737283.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "中企出海东盟进入3.0",
+        "impact": "中企出海东盟从结算走向综合服务，企业主与超高净值客群的跨境金融诉求向多币种、多市场延伸。",
+        "tag": [
+          "私行",
+          "客群"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "汇丰曾愔：中企出海东盟进入3.0时代，银行角色重塑",
+            "url": "https://m.21jingji.com/article/20261116/herald/be8a4b0fa50002417badb94b6806c31c.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，低利率下理财从拼规模转向收益与风险平衡，客户对净值波动的敏感度上升；QDII基金下半年业绩大洗牌，持有客户的体验明显分化。高端客户方面，港交所离岸人民币债券指数落地，跨境资产配置的定价基准变多；中企出海东盟进入新阶段，超高净值企业主的跨境服务诉求在升级。普惠小微方面，消费形势和居民消费意愿出现结构性变化，消费贷与信用卡客群分层更明显；中小银行加速出清零售不良，同类客群的风险迁徙值得盯住。养老与跨境方面，养老金融被定位为跨周期长期事业，养老账户与产品衔接成为长线客群抓手；支付通道合规收紧，合作机构资质稳定性需要关注。",
+    "risk": {
+      "topic": "支付机构会员资格被注销",
+      "evidence": "三家支付公司被注销会员资格，支付通道合规门槛收紧。",
+      "impact": "对零售端，绑卡支付与代扣通道的稳定性受影响；对公端，合作商户结算链路存在中断可能；风控需重检合作机构资质。",
+      "source": "T1.5",
+      "sources": [
+        {
+          "title": "三家支付公司被注销会员资格",
+          "url": "https://finance.sina.com.cn/money/bank/gsdt/2026-11-16/doc-iniyxiqw8861380.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：支付机构会员资格被注销，对零售端，绑卡支付与代扣通道的稳定性受影响；对公端，合作商户结算链路存在中断可能；风控需重检合作机构资质。",
+    "guangdong_ipo": {
+      "push_line": ""
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌2.49%，黄仁勋离任引发AI融资担忧，三大指数集体收跌。",
+      "sectors": [
+        "英伟达CEO黄仁勋离任，AI融资策略受关注，投资者紧盯信贷市场与neocloud敞口。",
+        "伯克希尔连创四个收盘新高，四季度累计涨19%，防御属性获资金追捧。",
+        "伯克希尔减持美银与第一资本，增持达美航空，持仓结构调整引关注。",
+        "纳指100是否见底成焦点，技术面图表显示多空关键位待确认。",
+        "Anthropic IPO衍生品现看涨信号，相关代理标的获交易员关注。"
+      ],
+      "spoken": "美股三大指数集体收跌，道指跌1.41%，纳指跌2.49%，标普500跌1.92%。英伟达CEO黄仁勋离任，市场担忧AI融资前景，科技股承压。伯克希尔逆势连创新高，四季度涨19%，并减持美银、增持达美航空。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-17"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "51608.17",
+          "changePct": "-1.41%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "24509.76",
+          "changePct": "-2.49%"
+        },
+        {
+          "name": "标普500",
+          "value": "7416.59",
+          "changePct": "-1.92%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "沪指跌0.87%，创指重挫4.37%，AI板块回调叠加成交不足1.5万亿。",
+      "sectors": [
+        "银行与保险逆市走强，资金避险情绪升温，成两市少数红盘方向。",
+        "AI概念集体重挫，'易中天'再度大跌，AI债务担忧压制算力链情绪。",
+        "51个1类新药进医保，创新药政策红利落地，8股业绩有望翻倍。",
+        "家电龙头内外利好共振创历史新高，主力资金持续吸筹多股。",
+        "三只宽基ETF尾盘放量，机构借道布局，看好权益资产长期表现。"
+      ],
+      "spoken": "A股今日三大指数集体收跌，沪指跌0.87%，深成指跌2.53%，创业板指重挫4.37%，成交额不足1.5万亿。盘面上，银行与保险板块逆市走强，AI概念集体重挫，'易中天'再度大跌。创新药受医保新政提振，家电龙头创出新高。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-17"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3602.57",
+          "changePct": "-0.87%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10690.78",
+          "changePct": "-2.53%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2320.02",
+          "changePct": "-4.37%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23753.84点（+0.49%）；恒生科技收报3801.64点（-0.30%）。",
+      "sectors": [
+        "内银股活跃",
+        "AI相关概念股下挫",
+        "智谱跌超13%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-17"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.49% 科指跌0.3% 内银股活跃 AI相关概念股下挫 智谱跌超13%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-16/doc-iniyxirf6030713.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23753.84",
+          "changePct": "+0.49%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3801.64",
+          "changePct": "-0.30%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-16",
+    "marketStatus": {
+      "reportDate": "2026-11-17",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-16"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-16"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-16"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月16日 周一 收盘；港股为 11月16日 周一 收盘；美股为 11月16日 周一 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931576619.html",
+      "title_cn": "习近平将同俄罗斯总统普京、美国总统特朗普举行中俄美元首会晤",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "东方财富报道，习近平将同俄罗斯总统普京、美国总统特朗普举行中俄美元首会晤。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "地缘政治"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931766275.html",
+      "title_cn": "调用量冲上全球第一DeepSeek开始对免费用户“限额”了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "东方财富报道，DeepSeek调用量冲上全球第一，并开始对免费用户实施限额。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931651721.html",
+      "title_cn": "港股逆市飙升！股市“吹哨人”最新发声！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "东方财富报道，港股逆市飙升，有股市「吹哨人」最新发声。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931755498.html",
+      "title_cn": "A股三大指数收跌成交额不足1.5万亿银行与保险板块逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "A股三大指数收跌，成交额不足1.5万亿元，银行与保险板块逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "银行",
+        "保险"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931555565.html",
+      "title_cn": "51个1类新药进医保！创新药再迎政策红利8股业绩有望翻倍(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "东方财富报道，51个1类新药进入医保，创新药再迎政策红利，报道提及8股业绩有望翻倍。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "政策",
+        "医保"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931873359.html",
+      "title_cn": "盘前集体跳水！黄仁勋突传重磅！“AI教父”最新发声",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "东方财富报道，盘前集体跳水，黄仁勋突传重磅消息，「AI教父」最新发声。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931753451.html",
+      "title_cn": "三只宽基ETF尾盘放量！机构看好权益资产长期表现",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "东方财富报道，三只宽基ETF尾盘放量，机构看好权益资产长期表现。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "ETF",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931663429.html",
+      "title_cn": "内外利好共振！7000亿家电巨头新高主力吸筹多股",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "东方财富报道，内外利好共振，7000亿家电巨头股价创新高，主力吸筹多股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "家电",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931663553.html",
+      "title_cn": "“易中天”再度重挫AI债务警报拉响？支撑因素并未缺席",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "东方财富报道，「易中天」再度重挫，市场关注AI债务警报，报道称支撑因素并未缺席。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931967961.html",
+      "title_cn": "11月16日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "东方财富汇总11月16日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611173932248750.html",
+      "title_cn": "理财的分量不止在规模低利率环境下银行理财答好收益与风险平衡之问",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/17",
+      "summary": "东方财富报道，低利率环境下银行理财需平衡收益与风险，理财分量不止在规模。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "银行理财",
+        "利率"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611173932247276.html",
+      "title_cn": "21社论丨构建更加独立自主的中国市场投资逻辑",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/17",
+      "summary": "21世纪经济报道社论，提出构建更加独立自主的中国市场投资逻辑。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-16/doc-iniyxirf6030713.shtml",
+      "title_cn": "港股收评：恒指涨0.49% 科指跌0.3% 内银股活跃 AI相关概念股下挫 智谱跌超13%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "港股收评：恒指涨0.49%，科指跌0.3%，内银股活跃，AI相关概念股下挫，智谱跌超13%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "银行",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-17/doc-iniyyvsp5538932.shtml",
+      "title_cn": "恒指牛熊街货比(52:48)︱11月17日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/17",
+      "summary": "新浪财经港股数据显示，11月17日恒指牛熊街货比为52:48。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-16/doc-iniyxchy8960355.shtml",
+      "title_cn": "恒生科技指数转跌，此前涨超1%，MINIMAX领跌成分股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "恒生科技指数转跌，此前涨超1%，MINIMAX领跌成分股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-16/doc-iniyvzvq6056991.shtml",
+      "title_cn": "港交所今日推出离岸人民币债券指数",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "港交所今日推出离岸人民币债券指数。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "债券",
+        "人民币"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-16/doc-iniywsth5743977.shtml",
+      "title_cn": "华泰|港股策略：重点关注财报后盈利企稳个股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "华泰港股策略报告建议重点关注财报后盈利企稳个股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-16/doc-iniyvzvn9277178.shtml",
+      "title_cn": "坚持看好港股优质资产 公募加码结构性布局",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "新浪财经报道，公募基金坚持看好港股优质资产，加码结构性布局。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "公募基金"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-16/doc-iniyvzvr1596194.shtml",
+      "title_cn": "下半年以来QDII基金业绩“大洗牌” 原油类、港股创新药类净值增长率领跑",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "下半年以来QDII基金业绩大洗牌，原油类和港股创新药类净值增长率领跑。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "QDII",
+        "基金",
+        "能源",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-16/doc-iniyxpwx1118177.shtml",
+      "title_cn": "花旗：上调泉峰控股(02285)目标价至45港元 重申“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "花旗上调泉峰控股(02285)目标价至45港元，重申「买入」评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-16/doc-iniyxpwx1110092.shtml",
+      "title_cn": "花旗：蒙牛乳业(02319)维持全年指引 料明年经营利润率恢复扩张",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "花旗称蒙牛乳业(02319)维持全年指引，预计明年经营利润率恢复扩张。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "食品饮料",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-16/doc-iniyxirc2457413.shtml",
+      "title_cn": "花旗：予五矿资源(01208)目标价12港元 评级“买入”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "花旗予五矿资源(01208)目标价12港元，评级「买入」。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "矿业",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-16/doc-iniyxirc2457425.shtml",
+      "title_cn": "花旗：中国移动(00941)计划今年交付1.5GW新AIDC产能 评级“买入”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "花旗称中国移动(00941)计划今年交付1.5GW新AIDC产能，评级「买入」。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "电信",
+        "AI",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-16/doc-iniyxiri2826722.shtml",
+      "title_cn": "花旗：予H H国际控股(01112)目标价31.4港元 评级“买入”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "花旗予H&H国际控股(01112)目标价31.4港元，评级「买入」。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/16/anthropic-proxy-destiny-tech100-fund.html",
+      "title_cn": "This Anthropic proxy play is getting traders' attention – here's where they see it going",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "CNBC报道，一只与Anthropic相关的代理概念股受到交易员关注，报道讨论其后续走势。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/14/berkshire-breaks-out-to-record-high-with-fourth-quarter-rally-reaching-19percent.html",
+      "title_cn": "Berkshire breaks out to record high with fourth-quarter rally reaching 19%",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "CNBC报道，伯克希尔股价突破至历史新高，第四季度累计涨幅达19%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "伯克希尔"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/a-trading-strategy-to-ride-out-the-nvidia-uncertainty-and-generate-income-in-the-process.html",
+      "title_cn": "A trading strategy to ride out the Nvidia uncertainty and generate income in the process",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC介绍一种应对英伟达不确定性的交易策略，并在此过程中获取收益。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "交易策略"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/is-a-bottom-in-for-the-nasdaq-100-charts-to-watch.html",
+      "title_cn": "Is a bottom in for the Nasdaq-100? Charts to watch",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC讨论纳斯达克100指数是否已见底，并列出需关注的图表。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "纳斯达克"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/nvidia-jensen-huang-resignation-ai-financing.html",
+      "title_cn": "What's ahead for AI financing after Nvidia CEO Jensen Huang departs",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC报道，英伟达CEO黄仁勋离场后，AI融资前景受到关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "半导体"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/northern-discovery-raises-c500000-in-first-financing-tranche-93CH-5031223",
+      "title_cn": "Northern Discovery raises C$500,000 in first financing tranche",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "Northern Discovery完成首轮融资第一笔，募资50万加元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/pagbank-q3-2026-slides-credit-growth-drives-13-eps-gain-93CH-5031217",
+      "title_cn": "PagBank Q3 2026 slides: credit growth drives 13% EPS gain",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "PagBank发布2026年第三季度业绩材料，信贷增长推动每股收益增长13%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "金融科技"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/ajb-investment-fund-ii-buys-8301-in-jewett-cameron-trading-shares-93CH-5031216",
+      "title_cn": "AJB Investment Fund II buys $8,301 in Jewett Cameron Trading shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "AJB Investment Fund II买入Jewett Cameron Trading价值8,301美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "持股变动"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/kingsway-cfo--evp-kent-hansen-buys-1561-in-company-stock-93CH-5031215",
+      "title_cn": "Kingsway CFO & EVP Kent Hansen buys $1,561 in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "Kingsway首席财务官兼执行副总裁Kent Hansen买入公司价值1,561美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "持股变动"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/kingsway-corp-ceo-fitzgerald-acquires-2506-of-stock-93CH-5031214",
+      "title_cn": "Kingsway Corp CEO Fitzgerald acquires $2,506 of stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "Kingsway Corp CEO Fitzgerald买入公司价值2,506美元的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "持股变动"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/berkshire-trims-bank-of-america-capital-one-stakes-adds-to-delta-investment-5031211",
+      "title_cn": "Berkshire trims Bank of America, Capital One stakes, adds to Delta investment",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "伯克希尔减持美国银行和Capital One股份，增持达美航空投资。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "伯克希尔",
+        "银行",
+        "航空"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-kyntra-bio-posts-q3-2026-profit-as-shares-slip-93CH-5031206",
+      "title_cn": "Earnings call transcript: Kyntra Bio posts q3 2026 profit as shares slip",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "Kyntra Bio在2026年第三季度业绩电话会议中录得盈利，但股价下滑。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}

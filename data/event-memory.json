@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-16",
+  "updatedAt": "2026-11-17",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -7155,70 +7155,6 @@
       ],
       "peakScore": 79
     },
-    "#50.1%|客群|普惠": {
-      "id": "#50.1%|客群|普惠",
-      "topicTags": [
-        "私行客群",
-        "消费信贷"
-      ],
-      "anchors": [
-        "普惠",
-        "客群",
-        "#50.1%",
-        "代发",
-        "#8.8万亿"
-      ],
-      "kind": "generic",
-      "firstBroadcastAt": "2026-10-01",
-      "lastBroadcastAt": "2026-10-02",
-      "broadcastCount": 2,
-      "sections": [
-        "must_read",
-        "insights"
-      ],
-      "anglesUsed": [
-        "政策变化"
-      ],
-      "samples": [
-        {
-          "date": "2026-10-01",
-          "section": "must_read",
-          "title": "9月制造业PMI重回扩张区间",
-          "text": "9月制造业PMI重回扩张区间 制造业景气边际改善至50.1%，对公授信与供应链金融需求或随之回暖，普惠小微客群经营预期改善。",
-          "facts": [
-            "#9月",
-            "#50.1%"
-          ],
-          "broadcastAt": "2026-10-01T06:35:25+08:00",
-          "url": "https://news.southcn.com/node_812903b83a/03cec3e9a5.shtml",
-          "score": 21,
-          "novelty": 1
-        },
-        {
-          "date": "2026-10-02",
-          "section": "insights",
-          "title": "前三季地方债发行近8.8万亿",
-          "text": "前三季地方债发行近8.8万亿 财政靠前发力，政银合作与项目配套资金需求延续，相关代发、结算与普惠小微客群的经营机会增多。",
-          "facts": [
-            "#8.8万亿"
-          ],
-          "broadcastAt": "2026-10-02T06:39:32+08:00",
-          "url": "https://www.cnfin.com/yw-lb/detail/20261001/4477083_1.html",
-          "novelty": 0.5287735849056604,
-          "angle": "政策变化"
-        }
-      ],
-      "broadcastedTexts": [
-        "9月制造业PMI重回扩张区间 9月制造业PMI重回扩张区间 制造业景气边际改善至50.1%，对公授信与供应链金融需求或随之回暖，普惠小微客群经营预期改善。",
-        "前三季地方债发行近8.8万亿 前三季地方债发行近8.8万亿 财政靠前发力，政银合作与项目配套资金需求延续，相关代发、结算与普惠小微客群的经营机会增多。"
-      ],
-      "broadcastedFacts": [
-        "#9月",
-        "#50.1%",
-        "#8.8万亿"
-      ],
-      "peakScore": 21
-    },
     "信贷": {
       "id": "信贷",
       "topicTags": [
@@ -7395,36 +7331,6 @@
       ],
       "peakScore": 73
     },
-    "ev-rsvz2f": {
-      "id": "ev-rsvz2f",
-      "topicTags": [],
-      "anchors": [],
-      "kind": "generic",
-      "firstBroadcastAt": "2026-10-02",
-      "lastBroadcastAt": "2026-10-02",
-      "broadcastCount": 1,
-      "sections": [
-        "insights"
-      ],
-      "anglesUsed": [],
-      "samples": [
-        {
-          "date": "2026-10-02",
-          "section": "insights",
-          "title": "公募年内分红超1200亿",
-          "text": "公募年内分红超1200亿 客户现金回流与再配置需求上升，分红到账节点前后持仓检视与产品衔接需求集中释放，财富条线客户触达窗口打开。",
-          "facts": [],
-          "broadcastAt": "2026-10-02T06:39:32+08:00",
-          "url": "https://finance.sina.com.cn/jjxw/2026-10-01/doc-initsiep1539353.shtml",
-          "novelty": 1
-        }
-      ],
-      "broadcastedTexts": [
-        "公募年内分红超1200亿 公募年内分红超1200亿 客户现金回流与再配置需求上升，分红到账节点前后持仓检视与产品衔接需求集中释放，财富条线客户触达窗口打开。"
-      ],
-      "broadcastedFacts": [],
-      "peakScore": 0
-    },
     "基金|申购": {
       "id": "基金|申购",
       "topicTags": [
@@ -7527,36 +7433,6 @@
         "#2%"
       ],
       "peakScore": 66
-    },
-    "ev-u8w67j": {
-      "id": "ev-u8w67j",
-      "topicTags": [],
-      "anchors": [],
-      "kind": "generic",
-      "firstBroadcastAt": "2026-10-02",
-      "lastBroadcastAt": "2026-10-02",
-      "broadcastCount": 1,
-      "sections": [
-        "insights"
-      ],
-      "anglesUsed": [],
-      "samples": [
-        {
-          "date": "2026-10-02",
-          "section": "insights",
-          "title": "六家国有大行同日公告",
-          "text": "六家国有大行同日公告 大行动作往往带动同业跟进，其业务方向可能影响分行零售条线的竞争格局与客户争夺节奏。",
-          "facts": [],
-          "broadcastAt": "2026-10-02T06:39:32+08:00",
-          "url": "https://m.21jingji.com/article/20261001/herald/bf5592ed92a6a3f8d7154d83ca08535c.html",
-          "novelty": 1
-        }
-      ],
-      "broadcastedTexts": [
-        "六家国有大行同日公告 六家国有大行同日公告 大行动作往往带动同业跟进，其业务方向可能影响分行零售条线的竞争格局与客户争夺节奏。"
-      ],
-      "broadcastedFacts": [],
-      "peakScore": 0
     },
     "广东|房贷|获客": {
       "id": "广东|房贷|获客",
@@ -15329,8 +15205,154 @@
     }
   },
   "today": {
-    "date": "2026-11-16",
-    "entries": []
+    "date": "2026-11-17",
+    "entries": [
+      {
+        "date": "2026-11-17",
+        "section": "must_read",
+        "title": "发改委释放四大重磅信号",
+        "text": "发改委释放四大重磅信号 政策取向直接指向下一阶段信贷投向重点，影响对公与零售的行业选择与资源配置。",
+        "facts": [
+          "@发改委"
+        ],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://finance.cctv.com/2026/11/16/ARTI8HuyWHHCxLuRbK7JdC5Y261116.shtml",
+        "score": 34,
+        "novelty": 0.3188888888888889,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-17",
+        "section": "must_read",
+        "title": "结汇购汇意愿双双上升",
+        "text": "结汇购汇意愿双双上升 涉外交易持续活跃，跨境收付与结售汇需求同步放大，跨境客群资金流动节奏加快。",
+        "facts": [],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261116/4496282_1.html",
+        "score": 87,
+        "novelty": 0.27499999999999997,
+        "angle": "客户行动"
+      },
+      {
+        "date": "2026-11-17",
+        "section": "must_read",
+        "title": "美股收跌、半导体跌超5%",
+        "text": "美股收跌、半导体跌超5% 海外风险资产集体回调，持有海外资产客户的持仓体验与情绪管理压力上升。",
+        "facts": [
+          "#5%"
+        ],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://finance.eastmoney.com/a/202611173932222649.html",
+        "score": 21,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-17",
+        "section": "must_read",
+        "title": "港交所首推离岸人民币债券指数",
+        "text": "港交所首推离岸人民币债券指数 305只债券纳入样本，离岸人民币资产有了定价基准，跨境财富配置的标的池扩容。",
+        "facts": [],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://m.21jingji.com/article/20261116/herald/a14c8a0007156000f4ebaa8cc99183a9.html",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-17",
+        "section": "must_read",
+        "title": "10月房价同比降幅继续收窄",
+        "text": "10月房价同比降幅继续收窄 各线城市售价降幅同步收窄，按揭客群价格预期边际改善，楼市区域分化格局延续。",
+        "facts": [
+          "#10月"
+        ],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://news.southcn.com/node_812903b83a/bbf522d260.shtml",
+        "score": 19,
+        "novelty": 0.759090909090909,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-17",
+        "section": "insights",
+        "title": "理财转向收益风险平衡",
+        "text": "理财转向收益风险平衡 低利率下理财从拼规模转向收益与风险平衡，客户对净值回撤的容忍度下降，货架结构与预期管理压力同步上升。",
+        "facts": [],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://finance.eastmoney.com/a/202611173932248750.html",
+        "novelty": 0.2857142857142857,
+        "angle": "同业动作"
+      },
+      {
+        "date": "2026-11-17",
+        "section": "insights",
+        "title": "离岸人民币资产定价基准",
+        "text": "离岸人民币资产定价基准 港交所离岸人民币债券指数落地，跨境资产配置多了一个可比的定价参照，高端客户的配置选项随之拓宽。",
+        "facts": [
+          "!落地"
+        ],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://m.21jingji.com/article/20261116/herald/a14c8a0007156000f4ebaa8cc99183a9.html",
+        "novelty": 0.6484042553191489,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-17",
+        "section": "insights",
+        "title": "中小银行出清零售不良",
+        "text": "中小银行出清零售不良 地方中小银行加速出清零售不良，消费贷资产质量压力显性化，同类客群的风险迁徙路径值得持续观察。",
+        "facts": [],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-16/doc-iniyvvpv2925234.shtml",
+        "novelty": 0.3340909090909091,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-17",
+        "section": "insights",
+        "title": "养老金融定位跨周期",
+        "text": "养老金融定位跨周期 养老金融被定位为跨越周期的长期事业，养老账户与产品组合的衔接成为长线客群经营的主要抓手。",
+        "facts": [],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://m.21jingji.com/article/20261116/herald/f5edb79a85b3596c93ee4decae974fa9.html",
+        "novelty": 0.34204545454545454,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-17",
+        "section": "insights",
+        "title": "港股打新通道短期集中",
+        "text": "港股打新通道短期集中 先通医药招股期集中在四天内，港股打新与跨境认购需求短期集中，通道容量与额度安排面临考验。",
+        "facts": [
+          "!招股"
+        ],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://finance.sina.com.cn/stock/hkstock/ggipo/2026-11-16/doc-iniywsth5737283.shtml",
+        "novelty": 0.27317073170731704,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-17",
+        "section": "insights",
+        "title": "中企出海东盟进入3.0",
+        "text": "中企出海东盟进入3.0 中企出海东盟从结算走向综合服务，企业主与超高净值客群的跨境金融诉求向多币种、多市场延伸。",
+        "facts": [],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "url": "https://m.21jingji.com/article/20261116/herald/be8a4b0fa50002417badb94b6806c31c.html",
+        "novelty": 0.32666666666666666,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-17",
+        "section": "risk",
+        "title": "支付机构会员资格被注销",
+        "text": "支付机构会员资格被注销 三家支付公司被注销会员资格，支付通道合规门槛收紧。 对零售端，绑卡支付与代扣通道的稳定性受影响；对公端，合作商户结算链路存在中断可能；风控需重检合作机构资质。",
+        "facts": [],
+        "broadcastAt": "2026-11-17T07:14:12+08:00",
+        "score": 69,
+        "novelty": 1
+      }
+    ],
+    "runId": "43977387536"
   },
   "deliveries": [
     {
@@ -15766,6 +15788,7 @@
       "reportSha": "8c236ba2d08c3c71c6fe6f163dd54fe40bee2889"
     }
   ],
+  "lastHeroLine": "今天主要看三个方面：宏观数据与楼市分化，社融近29万亿、房价降幅收窄；跨境与离岸人民币，结汇购汇双升、305只债券入指数；零售资产质量与理财货架，不良出清提速、收益风险再平衡。",
   "ipoVoicing": {
     "展辰新材": [
       "2026-11-07"
