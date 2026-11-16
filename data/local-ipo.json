@@ -1,11 +1,10 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-16T07:07:24+08:00",
+  "fetchedAt": "2026-11-17T07:05:53+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-csrc-tutoring": 4,
-    "gd-sse-audit": 1
+    "gd-csrc-tutoring": 1
   },
   "items": [
     {
@@ -18,50 +17,6 @@
       "region": "gd",
       "registeredProvince": "广东",
       "ipoStage": "stage-tutoring"
-    },
-    {
-      "title": "深圳蜂巢互联科技股份有限公司 (辅导备案) [深圳证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/10/PREIPO_F0101_V01_20261110_37559_Q/AF7667A1D03D4E44A40A780D314CADFB/关于深圳蜂巢互联科技股份有限公司首次公开发行股票并上市辅导备案报告.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 中信证券股份有限公司 | 备案时间: 2026-11-09 | 状态: 辅导备案 | 报告: 辅导备案报告 | 披露: 2026-11-10",
-      "publishedAt": "2026-11-10",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-tutoring"
-    },
-    {
-      "title": "深圳盛凌电子股份有限公司 (辅导验收) [深圳证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/10/PREIPO_F0101_V01_20261110_37560_Q/2B66232B8B354E91B33F5F573A1D6F5E/关于深圳盛凌电子股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作完成报告.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 兴业证券股份有限公司 | 备案时间: 2025-10-28 | 状态: 辅导验收 | 报告: 辅导工作完成报告 | 披露: 2026-11-10",
-      "publishedAt": "2026-11-10",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-coach-done"
-    },
-    {
-      "title": "深圳天华机器设备股份有限公司 (辅导验收) [深圳证监局]",
-      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/10/PREIPO_F0101_V01_20261110_37561_Q/70CBB856E3A848658F68D30F1B34A563/关于深圳天华机器设备股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作完成报告.pdf",
-      "excerpt": "IPO辅导备案 | 辅导机构: 招商证券股份有限公司 | 备案时间: 2025-12-30 | 状态: 辅导验收 | 报告: 辅导工作完成报告 | 披露: 2026-11-10",
-      "publishedAt": "2026-11-10",
-      "source": "证监会辅导企业(csrcfd)",
-      "sourceId": "gd-csrc-tutoring",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-coach-done"
-    },
-    {
-      "title": "龙行天下：IPO提交注册（拟主板）",
-      "url": "https://www.sse.com.cn/listing/renewal/ipo/#2193@4",
-      "excerpt": "注册地：广东东莞市｜保荐：招商证券股份有限公司｜受理：2026-05-29｜状态：IPO提交注册｜更新：2026-11-10｜行业：皮革、毛皮、羽毛及其制品和制鞋业",
-      "publishedAt": "2026-11-10",
-      "source": "上交所IPO审核动态",
-      "sourceId": "gd-sse-audit",
-      "region": "gd",
-      "registeredProvince": "广东",
-      "ipoStage": "stage-registered"
     }
   ]
 }
