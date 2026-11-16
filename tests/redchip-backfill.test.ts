@@ -18,6 +18,7 @@ import {
   vieOfFlag,
   type UpstreamListingRow,
 } from "../lib/services/redchip/backfill";
+import { withApplicationProof } from "../lib/services/redchip/leads";
 import type { RedchipProject } from "../lib/contracts/redchip";
 
 function row(over: Partial<UpstreamListingRow> = {}): UpstreamListingRow {
@@ -168,4 +169,25 @@ test("⑧ 🔴 红线：模型与产物都不得含招股书原文（往来银�
   // 台账级同样扫一遍
   const ledger = JSON.stringify(mergeProjects([], [p]));
   assert.ok(!ledger.includes("银行"), "台账序列化后不得含银行字样");
+});
+
+test("⑨ 无申请版本不进台账：sourceUrl 缺失的条目一律剔除（2026-11-17 用户口径）", () => {
+  const withProof = projectFromUpstreamRow(row(), "2026-09-17T12:00:00+08:00");
+  // 实测 108536 Adaspace：披露易 listed 清单 ls=[] → 抽不到文本 → unverified、无直链。
+  const noProof: RedchipProject = {
+    ...withProof,
+    appId: "108536",
+    nameCn: "Adaspace Technology Co., Ltd.",
+    domicile: undefined,
+    isOffshore: false,
+    gdCityHits: 0,
+    gdCityMentions: 0,
+    isGdConnected: false,
+    verdict: "unverified",
+    sourceUrl: undefined,
+  };
+  const kept = withApplicationProof([withProof, noProof]);
+  assert.equal(kept.length, 1, "无申请版本的条目不得留在台账");
+  assert.equal(kept[0]!.appId, withProof.appId, "有直链的条目须保留");
+  assert.equal(withApplicationProof([]).length, 0);
 });

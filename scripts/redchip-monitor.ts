@@ -36,7 +36,7 @@ import {
 } from "../lib/adapters/redchip/snapshot-store";
 import { classifyProject } from "../lib/services/redchip/classify";
 import { diffSnapshots } from "../lib/services/redchip/diff";
-import { toLeads } from "../lib/services/redchip/leads";
+import { toLeads, withApplicationProof } from "../lib/services/redchip/leads";
 import { mergeProjects } from "../lib/services/redchip/backfill";
 import type { RedchipProject, RedchipSnapshot } from "../lib/contracts/redchip";
 import { REPORT_TZ, dayGap, prevDateKey, todayKey } from "../lib/utils/time";
@@ -115,17 +115,27 @@ async function main(): Promise<void> {
     }
     console.log(
       "[redchip] 实网：清单总量 " + all.length + " 条（**源清单总量，不是抓取量**）→ 采信窗口 " +
-        windowDates.join(" ~ ") + " 命中 " + hit.length + " 条，实际下载申请版本 PDF " +
-        Math.min(hit.length, limit) + " 个（--limit " + limit + "）",
+        windowDates.join(" ~ ") + " 命中 " + hit.length + " 条（--limit " + limit + "）",
+    );
+    // 文档选取：ls[] 的「申请版本」（**不再用 w** —— 那是 1 页「警告聲明」，判不出注册地）。
+    // 2026-11-17 用户拍板：无申请版本直接跳过，不抽文本、不判 unverified、不进台账。
+    let noProofCount = 0;
+    const proofHits = hit.filter((r) => {
+      if (docUrlOf(r)) return true;
+      noProofCount++;
+      console.log("[redchip] ⚠️ " + String(r.id) + " ls 里无 Application Proof 条目 → 跳过，不入库（无申请版本不进线索库）");
+      return false;
+    });
+    if (noProofCount > 0) {
+      console.log("[redchip] 无申请版本跳过 " + noProofCount + " 条");
+    }
+    console.log(
+      "[redchip] 实际下载申请版本 PDF " + Math.min(proofHits.length, limit) + " 个（--limit " + limit + "）",
     );
     const enriched: ListingRecord[] = [];
-    for (const r of hit.slice(0, limit)) {
-      // 文档选取：ls[] 的「申请版本」（**不再用 w** —— 那是 1 页「警告聲明」，判不出注册地）
-      const docUrl = docUrlOf(r);
-      if (!docUrl) {
-        console.log("[redchip] ⚠️ " + String(r.id) + " ls 里无 Application Proof 条目 → 不抽文本（宁缺毋滥）");
-      }
-      enriched.push({ ...r, docUrl, docText: docUrl ? await extractPdfText(docUrl) : "" });
+    for (const r of proofHits.slice(0, limit)) {
+      const docUrl = docUrlOf(r)!;
+      enriched.push({ ...r, docUrl, docText: await extractPdfText(docUrl) });
     }
     console.log("[redchip] 实网：已抽取申请版本文本 " + enriched.length + " 条（--limit " + limit + "）");
     records = enriched;
@@ -214,16 +224,20 @@ async function main(): Promise<void> {
   // 这正是线上面板长期「共 1 家（红筹 0）」的直接根因。台账语义 = 在册状态的累积，
   // 不是每日快照；同日重复抓取时同 appId 覆盖、discoveredAt 保留最早值。
   const prevLeads = readLeads();
-  const merged = mergeProjects(prevLeads, projects);
-  writeLeads(toLeads(merged, readChanges()));
+  // 清掉历史上因无申请版本而误入的条目（如 108536 Adaspace：ls 为空 → unverified）。
+  const prevWithProof = withApplicationProof(prevLeads);
+  const merged = mergeProjects(prevWithProof, projects);
+  const dropped = prevLeads.length - prevWithProof.length;
+  const finalLeads = withApplicationProof(merged);
+  writeLeads(toLeads(finalLeads, readChanges()));
   console.log(
-    "[redchip] 线索库累积：" + prevLeads.length + " → 合并后 " + merged.length +
-      " 条（本次窗口 " + projects.length + " 条）",
+    "[redchip] 线索库累积：" + prevWithProof.length + " → 合并后 " + merged.length +
+      " 条（本次窗口 " + projects.length + " 条；无申请版本剔除 " + dropped + " 条）",
   );
   console.log(
     "[redchip] 摘要 源 hk：清单扫描 " + scanned + " → 窗口命中 " + records.length +
       " → 入账红筹 " + projects.filter((p) => p.verdict === "redchip").length +
-      " ｜ 台账 " + merged.length + " 条 · 数据截至 " + nowIso + "（ok=" + ok + "）",
+      " ｜ 台账 " + finalLeads.length + " 条 · 数据截至 " + nowIso + "（ok=" + ok + "）",
   );
   console.log("[redchip] 已写入 data/redchip/{leads.json, latest.json, meta.json, snapshots/" + dataDate + ".json, changelog.jsonl}");
 }

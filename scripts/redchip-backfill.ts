@@ -33,6 +33,7 @@ import {
   type UpstreamListingRow,
 } from "../lib/services/redchip/backfill";
 import { mergeProjects } from "../lib/services/redchip/backfill";
+import { withApplicationProof } from "../lib/services/redchip/leads";
 import { readLeads, writeLeads, writeLatest, writeDatedSnapshot } from "../lib/adapters/redchip/snapshot-store";
 import { toLeads } from "../lib/services/redchip/leads";
 import { REPORT_TZ, todayKey } from "../lib/utils/time";
@@ -137,8 +138,10 @@ function main(): number {
   const picked = pickRedchipRows(allRows);
   const nowIso = beijingNowIso();
 
-  const incoming: RedchipProject[] = picked.map((r) => projectFromUpstreamRow(r, nowIso));
-  const prev = readLeads();
+  const incoming: RedchipProject[] = withApplicationProof(
+    picked.map((r) => projectFromUpstreamRow(r, nowIso)),
+  );
+  const prev = withApplicationProof(readLeads());
   const merged = mergeProjects(prev, incoming);
   const added = merged.length - prev.length;
 

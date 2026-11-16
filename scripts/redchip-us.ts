@@ -25,7 +25,7 @@ import { classifyProject } from "../lib/services/redchip/classify";
 import { mergeProjects } from "../lib/services/redchip/backfill";
 import { searchF1Filings, resolvePrimaryDocUrl, extractEdgarDoc } from "../lib/adapters/redchip/edgar-client";
 import { readLeads, writeLeads, writeMetaSource } from "../lib/adapters/redchip/snapshot-store";
-import { toLeads } from "../lib/services/redchip/leads";
+import { toLeads, withApplicationProof } from "../lib/services/redchip/leads";
 import type { RedchipProject, RedchipSnapshot } from "../lib/contracts/redchip";
 import { REPORT_TZ, prevDateKey, todayKey } from "../lib/utils/time";
 
@@ -135,11 +135,13 @@ async function main(): Promise<void> {
 
   // 共享台账合并（leads.json，market:"us" 区分）
   const prevLeads = readLeads();
-  const merged = mergeProjects(prevLeads, redchip);
+  // 与港股源同口径：无申请版本 / 主文档直链的条目不留在台账。
+  const prevWithProof = withApplicationProof(prevLeads);
+  const merged = withApplicationProof(mergeProjects(prevWithProof, redchip));
   writeLeads(toLeads(merged));
 
   console.log(
-    `[redchip-us] 线索库累积：${prevLeads.length} → ${merged.length} 条（本次新增红筹 ${redchip.length}）`,
+    `[redchip-us] 线索库累积：${prevWithProof.length} → ${merged.length} 条（本次新增红筹 ${redchip.length}；无申请版本剔除 ${prevLeads.length - prevWithProof.length} 条）`,
   );
 
   // 元信息（**入库**）：与港股源**按源合并**写同一份 meta.json（港股那一格不被覆盖）。

@@ -67,6 +67,18 @@ export function toLeads(
   });
 }
 
+/**
+ * 申请版本门禁（2026-11-17 用户拍板）：**无申请版本直链的条目不进台账**。
+ *
+ * `sourceUrl` 是申请版本 / EDGAR 主文档直链。没有它就没有可回原文的证据，
+ * 连「待核」也不该占坑——实测披露易 listed 清单里 `ls: []` 的条目会走
+ * `classifyProject` 的 `!text → unverified` 分支，变成「0 命中却挂红筹线索·待核」。
+ * 本规则按 `sourceUrl` 统一收口，三个写入者（港股 / 美股 / 回填）都必须过。
+ */
+export function withApplicationProof<T extends { sourceUrl?: string }>(leads: T[]): T[] {
+  return (leads ?? []).filter((l) => Boolean(l && l.sourceUrl));
+}
+
 /** 条目「新旧」判据：最近变更时刻优先，其次发现时刻（都缺则该条视为最旧）。 */
 function recencyOf(l: RedchipLead): string {
   return l.lastChangedAt ?? l.discoveredAt ?? "";
