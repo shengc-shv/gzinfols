@@ -18,7 +18,11 @@
  *     REPORT_BASE_URL        可选 报告根 URL，默认 https://shengc-shv.github.io/gzinfols
  *     REPORT_TZ              可选 报告时区，默认 Asia/Shanghai
  *
- * 数据源：history/<date>/store.json → executive.hero_line（+ guangdong_ipo.spoken 一行）
+ * 数据源：history/<date>/store.json → executive.hero_line（+ guangdong_ipo.push_line 一行）
+ *
+ * ⚠️ guangdong_ipo.push_line 于 2026-11-10 起由组合根在口播拼装后写回：与口播同一批企业，
+ *    但已压成「简称+阶段标签」的精简行（不带「今天的」/工商全称）。老 store 无该字段时
+ *    回退读 spoken（exec 的 LLM 稿）。改这里的取值口径会重新造成「推送与口播讲两拨公司」。
  *
  * 退出码：群机器人送达 → 0（触发结算记忆）；未配置或推送失败 → 1。
  */
@@ -41,8 +45,10 @@ function log(msg: string) {
 /**
  * 读 store.json 的推送素材（宽松解析，缺字段返回空，绝不抛错）。
  * - heroLine：今日定调（推送正文主体）；
- * - ipoLine：当日「广东IPO」口播稿（推送正文补一行广东IPO，
- *   否则领导必须点开简报才知道当天有没有可跟进的 IPO 商机）；
+ * - ipoLine：当日「广东IPO」**推送精简行**（推送正文补一行广东IPO，
+ *   否则领导必须点开简报才知道当天有没有可跟进的 IPO 商机）。
+ *   2026-11-10 起由组合根在 voice 拼装后写回，企业集与音频/横滑卡同源、体裁更短；
+ *   空串则整行不出现；
  * - riskTopic：风险**一句话**（2026-10-20 sc：要「谁 + 什么事情 + 影响什么」，
  *   由 `riskBriefOf` 从 evidence + impact 落点提炼；此前只取 topic 15 字，读不出主体与影响）；
  * - stockRecap：股市复盘（2026-10-07 sc 口径，**可选**：A股/港股/美股各一行涨跌总结，
@@ -63,14 +69,15 @@ function loadStoreDigest(storePath: string): {
     const store = JSON.parse(fs.readFileSync(storePath, "utf8")) as {
       executive?: {
         hero_line?: string;
-        guangdong_ipo?: { spoken?: string };
+        guangdong_ipo?: { spoken?: string; push_line?: string };
         risk?: { topic?: string; evidence?: string; impact?: string };
       };
       stock_recap?: unknown;
     };
     return {
       heroLine: store.executive?.hero_line ?? "",
-      ipoLine: store.executive?.guangdong_ipo?.spoken ?? "",
+      // push_line 存在即优先（含空串 = 口播没念 IPO → 整行消失）；老 store 才回退 LLM 稿
+      ipoLine: store.executive?.guangdong_ipo?.push_line ?? store.executive?.guangdong_ipo?.spoken ?? "",
       riskTopic: riskBriefOf(store.executive?.risk),
       stockRecap: store.stock_recap ?? null,
     };

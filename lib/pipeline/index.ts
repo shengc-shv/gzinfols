@@ -24,7 +24,7 @@ import { renderHtml, renderMarkdown } from "../services/render";
 import { assembleBriefingScript, type AudioMeta } from "../services/voice";
 import { publishReport } from "../services/publish";
 import { companyNameOf } from "../services/classify/gd-ipo-spoken";
-import { loadHistoryStore, loadExecStore, loadEventMemory, saveEventMemory } from "../adapters/persistence";
+import { loadHistoryStore, loadExecStore, loadEventMemory, saveEventMemory, writeIpoPushLineStore } from "../adapters/persistence";
 import { llmCallStats } from "../adapters/llm-log";
 import { dayGap } from "../utils/time";
 import { recordIpoVoicing, ipoShouldSkip } from "../services/memory/event-memory";
@@ -189,6 +189,16 @@ export async function runPipeline(
       parts: briefing.parts,
       segments: briefing.segments,
     });
+    // —— 企微推送「广东IPO」行与口播同源（2026-11-10 sc）——
+    // 推送原本读 executive.guangdong_ipo.spoken（exec 的 LLM 稿，从 2 天窗全量池自行挑企业），
+    // 而口播段由 pickSpokenItems 确定性选 3 席 → 11-10 实测推送讲「注册生效 / 今天上市」、
+    // 口播讲「辅导备案」，两拨公司。此处写回 voice 用**同一批 selected** 生成的精简行
+    // （sc 口径：不要「今天的」/工商全称/「XX行业」等口播体裁），notify 优先读 push_line。
+    // ⚠️ 只有 briefing 存在才写：exec 缺失（store 不存在）时本就没有可写回的 store。
+    // ⚠️ 口播没念 IPO → 写空串，推送整行消失，杜绝「口播不念、推送照念」。
+    const ipoPushLine = briefing.ipoPushLine ?? "";
+    writeIpoPushLineStore(ctx.date, ipoPushLine);
+    ctx.log.info("voice", `🔗 广东IPO 推送行已与口播同源（精简 ${ipoPushLine.length} 字）`);
   }
 
   // 渲染注入（P0-4）：分享基址 / Web 模式取自 ctx.config，渲染时刻取 ctx.startTime

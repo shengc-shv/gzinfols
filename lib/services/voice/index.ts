@@ -22,7 +22,13 @@ import { buildStockSpoken } from "./stock-spoken";
 import { condenseSpeech, formatOverlapLog, type SpeechOverlapStats } from "./condense";
 import { formatCnDate, formatCnDateShort } from "../market/market-status";
 import { ipoShouldSkip } from "../memory/event-memory";
-import { buildGdIpoSpoken, pickGdIpoCompanies, companyNameOf, pickSpokenItems } from "../classify/gd-ipo-spoken";
+import {
+  buildGdIpoSpoken,
+  buildGdIpoPushLine,
+  pickGdIpoCompanies,
+  companyNameOf,
+  pickSpokenItems,
+} from "../classify/gd-ipo-spoken";
 // 广东企业注册表（纯数据模块，与卡面判定同源；类型由 lib/guangdong.d.mts 提供）
 import { isGuangdongEnterprise } from "../../guangdong.mjs";
 
@@ -64,6 +70,12 @@ export interface AudioBuildResult {
    * 供调用方打日志与测试断言（让「口播重复」可观测，不再只靠人耳发现）。
    */
   speechOverlap?: SpeechOverlapStats;
+  /**
+   * 企微推送「广东IPO」行（2026-11-10 sc）：与口播段**同源不同体裁**的精简行，
+   * 由同一批 `pickSpokenItems.selected` 拼出「简称+阶段标签」，不带「今天的」/工商全称。
+   * ⛔ 刻意不进 `parts`：parts 会写进 audio_parts.json 供音频段对齐，不是推送素材。
+   */
+  ipoPushLine?: string;
 }
 
 /**
@@ -319,6 +331,7 @@ export async function assembleBriefingScript(
   const ipoItems = report.sections.ipo ?? [];
   const llmIpo = exec?.guangdong_ipo?.spoken ? sanitize(exec.guangdong_ipo.spoken) : "";
   let ipo = "";
+  let ipoPushLine = "";
   let ipoRefs: string[] = [];
   const skipCompanies = opts.ipoMemory?.skip ?? new Set<string>();
   const voicedCompanies: string[] = [];
@@ -394,6 +407,12 @@ export async function assembleBriefingScript(
     const segText = `${IPO_TRANSITION}${ipo}`;
     parts.push(segText);
     partMap.guangdong_ipo = ipo;
+    // 企微推送行（sc 2026-11-10）：与口播同一批 selected，只换体裁 —— 不带「今天的」、
+    // 工商全称、「XX行业、目前…」等听觉冗余。spokenText 传**截断后**的稿，保证只列真正念到的企业。
+    ipoPushLine = buildGdIpoPushLine(ipoPick.selected, {
+      totalCandidates: ipoPick.totalCandidates,
+      spokenText: ipo,
+    });
     const dur = estimateDurationSec(segText.length);
     segments.push({ id: "ipo", startSec: cursor, durationSec: dur, refs: ipoRefs, text: segText });
     cursor += dur;
@@ -534,5 +553,6 @@ export async function assembleBriefingScript(
     durationSec,
     segments,
     ...(overlapStats ? { speechOverlap: overlapStats } : {}),
+    ...(ipoPushLine ? { ipoPushLine } : {}),
   };
 }

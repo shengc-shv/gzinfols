@@ -648,9 +648,13 @@ function buildIpoPool(opts: BuildTwoDayExecPoolOpts): ExecPoolItem[] {
     // ⚠️ 2026-09-10 回检 P1-1：此前把 sections.ipo **不预过滤**整块喂 LLM，而
     // sections.ipo 里含港交所「全国递表」条目（外省企业）→ 可能被写进「广东IPO」口播。
     if (!isGd(title, summary, it.tags)) continue;
-    // 🔴 2026-10-19 sc：「例行的，都不配进入口播。」本池喂给 exec 的 guangdong_ipo 槽位，
-    // 其产出直接变成推送里的「广东IPO」段 → 必须与 `buildGdIpoSpoken` 同一排除口径，
-    // 否则口播稿不念、推送却仍在说「多家企业披露辅导进展」= 两条外发通道口径打架。
+    // 🔴 2026-10-19 sc：「例行的，都不配进入口播。」本池喂给 exec 的 guangdong_ipo 槽位 →
+    // 必须与 `buildGdIpoSpoken` 同一排除口径，否则 LLM 稿仍在说
+    // 「多家企业披露辅导进展」= 两条外发通道口径打架。
+    // 2026-11-10 补充：**选择口径**（念哪几家）不在这里收敛——本阶段 buildGdIpo 尚未
+    // 执行、拿不到完整 IPO 列表；最终由组合根在 voice 拼装后把精简行写回 store 的
+    // push_line（spoken 原稿保留，供口播兜底与回溯），notify 优先读 push_line。
+    // 此处只保留「排除例行」这一道 LLM 素材闸门，避免把明显无价值的内容送进提示词。
     if (isRoutineIpoItem(it)) continue;
     out.set(it.url, withWhen({ title, summary, url: it.url }, it.date, today));
   }

@@ -1,0 +1,689 @@
+{
+  "date": "2026-11-16",
+  "updatedAt": "2026-11-15T23:37:23.972Z",
+  "executive": {
+    "hero_line": "今天主要看3个方面：外汇存款准备金率今起升至6%，外贸客群结售汇价格面临重估；10月金融数据贷款降速提质，小微经营贷定价空间生变；北交所五周年市值约8000亿，打新与托管需求上升。",
+    "spoken_hero": "今天主要看3个方面：外汇存款准备金率今起升至6%，外贸客群结售汇价格面临重估；10月金融数据贷款降速提质，小微经营贷定价空间生变；北交所五周年市值约8000亿，打新与托管需求上升。",
+    "must_read": [
+      {
+        "title": "北交所五周年市值约8000亿",
+        "why": "开市五年总市值达八千亿量级，中小市值标的流动性改善，涉及打新、托管与权益配置的客户服务链条随之扩容。",
+        "url": "https://news.southcn.com/node_812903b83a/553d41e522.shtml"
+      },
+      {
+        "title": "10月金融数据：贷款降速提质",
+        "why": "贷款“降速提质”被确认为新常态，零售信贷投放节奏与结构考核的基准随之变化，优质客群定价空间成为分行全年收官的参照。",
+        "url": "https://finance.eastmoney.com/a/202611153931504344.html"
+      },
+      {
+        "title": "外汇存款准备金率今起升至6%",
+        "why": "外汇存款准备金率上调直接抬升跨境资金成本，结售汇报价与外币存款定价面临重估，外贸客群资金安排节奏受影响。",
+        "url": "https://news.southcn.com/node_812903b83a/db1f966d64.shtml"
+      },
+      {
+        "title": "广州五大黄金赛道向海图强",
+        "why": "本地产业方向明确为五条赛道，产业链上下游的企业与个人客户分布更清晰，对公联动零售的获客地图随之更新。",
+        "url": "https://news.dayoo.com/guangzhou/202611/15/139995_55023836.htm"
+      }
+    ],
+    "spoken_must_read": "北交所五周年市值约8000亿。开市五年总市值达八千亿量级，中小市值标的流动性改善，涉及打新、托管与权益配置的客户服务链条随之扩容。其次，10月金融数据：贷款降速提质。贷款“降速提质”被确认为新常态，零售信贷投放节奏与结构考核的基准随之变化，优质客群定价空间成为分行全年收官的参照。此外，外汇存款准备金率今起升至6%。外汇存款准备金率上调直接抬升跨境资金成本，结售汇报价与外币存款定价面临重估，外贸客群资金安排节奏受影响。还有，广州五大黄金赛道向海图强。本地产业方向明确为五条赛道，产业链上下游的企业与个人客户分布更清晰，对公联动零售的获客地图随之更新。",
+    "insights": [
+      {
+        "topic": "年末债市波动传导持有体验",
+        "impact": "资金面与机构行为主导年末债市，债基与理财净值波动加大，持有客户的体验分化，稳健型配置诉求上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "申万固收：年末债市行情关注点",
+            "url": "https://finance.sina.com.cn/money/bond/research/2026-11-15/doc-iniyvrfv1753802.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "贷款降速提质影响小微定价",
+        "impact": "贷款投放转向提质，小微与经营贷客群的额度与定价安排随之调整，优质小微客户的议价空间发生变化。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "央行发布10月金融统计数据 专家：贷款“降速提质”仍是新常态",
+            "url": "https://finance.eastmoney.com/a/202611153931504344.html"
+          }
+        ]
+      },
+      {
+        "topic": "外贸客群结售汇价格变化",
+        "impact": "外汇存款准备金率上调抬升跨境资金成本，外贸企业的结售汇时点选择与外币存款定价敏感度同步上升。",
+        "tag": [
+          "客群"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "金融机构外汇存款准备金率今起提高至6%",
+            "url": "https://news.southcn.com/node_812903b83a/db1f966d64.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "北交所打新与托管需求",
+        "impact": "中小市值标的流动性改善，参与北交所打新与托管的客户数量与频次上升，相关服务流程的体验差异被放大。",
+        "tag": [
+          "财富",
+          "科技金融"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "北交所开市五周年 总市值约8000亿元",
+            "url": "https://news.southcn.com/node_812903b83a/553d41e522.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "慈善信托本地落地",
+        "impact": "慈善信托在社区场景落地，高净值客户对家族财富与社会责任结合的诉求显性化，家族信托类咨询场景增多。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "以党建引领、慈善信托为体，华润信托谱写社区知识反哺社区关爱新篇章",
+            "url": "https://finance.sina.com.cn/trust/roll/2026-11-15/doc-iniyupuh6563783.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，年末债市波动传导持有体验，资金面与机构行为主导年末债市。第二，普惠小微方面，贷款降速提质影响小微定价，贷款投放转向提质。第三，跨境客群方面，外贸客群结售汇价格变化，外汇存款准备金率上调抬升跨境资金成本。第四，高端客户方面，北交所打新与托管需求、慈善信托本地落地，中小市值标的流动性改善。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌0.91%，标普跌0.40%，英伟达CEO离任引发AI融资担忧。",
+      "sectors": [
+        "英伟达CEO黄仁勋离任，市场关注AI融资与信用市场敞口。",
+        "英特尔遭股东起诉，此前股价单日暴跌29%。",
+        "伯克希尔四连创收盘新高，四季度累计涨幅达19%。",
+        "美国航班连续第三天大面积取消延误，航空出行受扰。",
+        "伊朗称不会等美国先动手，地缘风险升温；美油机构看至110美元。"
+      ],
+      "spoken": "美股收盘涨跌互现，道指涨0.10%，纳指跌0.91%，标普500跌0.40%。英伟达CEO黄仁勋离任，AI融资前景引发关注；英特尔遭股东起诉，此前股价暴跌29%。伯克希尔逆势四连创新高，四季度涨19%。地缘方面伊朗表态强硬，油价获机构看高。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-16"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52347.55",
+          "changePct": "+0.10%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25136.27",
+          "changePct": "-0.91%"
+        },
+        {
+          "name": "标普500",
+          "value": "7561.67",
+          "changePct": "-0.40%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "沪指跌0.59%，创业板重挫3.32%，高位成长股集体回调。",
+      "sectors": [
+        "创业板指领跌3.32%，深成指跌2.05%，成长板块资金明显流出。",
+        "证监会提出六个'进一步深化'，并强调稳定长效机制、防范异常波动。",
+        "外汇存款准备金率今起上调至6%，跨境资金面边际收紧。",
+        "机构调研聚焦机器人、PCB概念，领益智造多条机器人产线投产。",
+        "十大机构称反弹窗口仍在延续，建议把握国产替代配置方向。"
+      ],
+      "spoken": "A股收盘走弱，沪指跌0.59%，深成指跌2.05%，创业板指跌3.32%，成长股回调明显。板块上，机器人、PCB概念获机构密集调研，领益智造多条机器人产线投产；政策面证监会提出六个进一步深化，强调稳定长效机制。外汇存款准备金率今起上调至6%。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-16"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3634.35",
+          "changePct": "-0.59%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10968.79",
+          "changePct": "-2.05%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2426.08",
+          "changePct": "-3.32%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23637.60点（-1.55%）；恒生科技收报3813.19点（-3.02%）。",
+      "sectors": [
+        "AI相关概念股大跌",
+        "智谱跌超10%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-16"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.55% 科指跌3.02% AI相关概念股大跌 智谱跌超10%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-13/doc-iniyqsmv0938230.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23637.60",
+          "changePct": "-1.55%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3813.19",
+          "changePct": "-3.02%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-13",
+    "marketStatus": {
+      "reportDate": "2026-11-16",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-11-13",
+          "reason": "数据为 11月13日（距今 3 天）"
+        },
+        "hk": {
+          "fresh": false,
+          "dataDate": "2026-11-13",
+          "reason": "数据为 11月13日（距今 3 天）"
+        },
+        "us": {
+          "fresh": false,
+          "dataDate": "2026-11-13",
+          "reason": "数据为 11月13日（距今 3 天）"
+        }
+      },
+      "allStale": true,
+      "note": "三地股市均无隔夜行情（休市或数据未更新），以下为最近一次收盘数据",
+      "spokenNote": "三地股市今日均无隔夜行情"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931422385.html",
+      "title_cn": "周末要闻汇总：吴清提出资本市场六个“进一步深化”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "证监会主席吴清提出资本市场六个“进一步深化”相关表述，为周末要闻汇总的核心内容。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "资本市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931476331.html",
+      "title_cn": "11月15日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "东方财富汇总11月15日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "公告",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931406330.html",
+      "title_cn": "3万股民蒙在鼓里！72岁女董事长折价64％贱卖股份“隐瞒不发”拟被罚300万元",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "一名72岁女董事长折价64%转让股份且隐瞒未披露，涉及约3万股民，拟被罚款300万元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "监管",
+        "公司治理",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931394931.html",
+      "title_cn": "金融机构外汇存款准备金率今起提高至6%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "金融机构外汇存款准备金率自11月15日起由原水平上调至6%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "外汇",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931400532.html",
+      "title_cn": "英伟达两大股东向董事会发公开信：要求考虑让黄仁勋回归",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "英伟达两大股东向董事会发公开信，要求考虑让黄仁勋回归。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "公司治理",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931389222.html",
+      "title_cn": "领益智造多个机器人产线投产！机构扎堆调研股曝光",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "领益智造多个机器人产线投产，相关机构扎堆调研个股名单曝光。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机器人",
+        "A股",
+        "机构调研"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931463818.html",
+      "title_cn": "十大机构论市：反弹窗口仍在延续如何把握行业配置方向？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "十大机构发布论市观点，认为反弹窗口仍在延续并讨论行业配置方向。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "策略",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931393188.html",
+      "title_cn": "AI应用升温！国产大模型抢滩“高价值”场景",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "AI应用热度升温，国产大模型加速布局高价值场景。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "大模型",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931391517.html",
+      "title_cn": "昊志机电、沃尔德火了！机构“盯”上PCB概念股",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "昊志机电、沃尔德受到机构关注，PCB概念股获机构集中调研。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "PCB",
+        "机构调研",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931399540.html",
+      "title_cn": "全线大跳水！31.87万人爆仓！资金大规模出逃比特币发生了啥？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "比特币价格全线大跳水，31.87万人爆仓，资金大规模出逃。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "加密货币",
+        "市场波动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611163931529392.html",
+      "title_cn": "证监会：进一步深化市场稳定长效机制研究有效防范市场异常波动",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "证监会表示将进一步深化市场稳定长效机制研究，有效防范市场异常波动。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "监管",
+        "资本市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611153931504966.html",
+      "title_cn": "十大券商策略：市场仍处反弹格局中把握国产替代窗口",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "十大券商发布策略观点，认为市场仍处反弹格局中，建议把握国产替代窗口。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "策略",
+        "国产替代",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-16/doc-iniywsti1288022.shtml",
+      "title_cn": "旅橙文化与香港牛游果签署业务合作协议",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "旅橙文化与香港牛游果签署业务合作协议。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "公司合作"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggipo/2026-11-16/doc-iniywsth5737283.shtml",
+      "title_cn": "先通医药-B于11月16日至11月19日招股 拟全球发售656.1万股H股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "先通医药-B于11月16日至19日招股，拟全球发售656.1万股H股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-14/doc-iniyryff0551970.shtml",
+      "title_cn": "恒指牛熊街货比(58:42)︱11月14日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "11月14日恒指牛熊街货比为58:42。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/14/berkshire-breaks-out-to-record-high-with-fourth-quarter-rally-reaching-19percent.html",
+      "title_cn": "Berkshire breaks out to record high with fourth-quarter rally reaching 19%",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "伯克希尔股价突破至历史新高，第四季度累计涨幅达19%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "伯克希尔"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/a-trading-strategy-to-ride-out-the-nvidia-uncertainty-and-generate-income-in-the-process.html",
+      "title_cn": "A trading strategy to ride out the Nvidia uncertainty and generate income in the process",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC介绍一种应对英伟达不确定性的交易策略，并可在过程中获取收益。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "交易策略"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/is-a-bottom-in-for-the-nasdaq-100-charts-to-watch.html",
+      "title_cn": "Is a bottom in for the Nasdaq-100? Charts to watch",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC讨论纳斯达克100指数是否已见底，并列出需关注的图表。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "纳斯达克",
+        "技术分析"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/nvidia-jensen-huang-resignation-ai-financing.html",
+      "title_cn": "What's ahead for AI financing after Nvidia CEO Jensen Huang departs",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC分析英伟达CEO黄仁勋离任后AI融资的前景。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "英伟达",
+        "融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/us-air-travel-disruptions-continue-into-third-day-5028023",
+      "title_cn": "Thousands of US flights canceled, delayed for third day in a row",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "美国航班连续第三天出现数千架次取消或延误。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "航空",
+        "美国"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/intel-sued-by-shareholders-following-29-stock-plunge-5028171",
+      "title_cn": "Intel sued by shareholders following 29% stock plunge",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "英特尔股价暴跌29%后遭股东起诉。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "诉讼"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-serko-lifts-h1-2027-revenue-guidance-on-strong-growth-93CH-5028170",
+      "title_cn": "Earnings call transcript: Serko lifts H1 2027 revenue guidance on strong growth",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "Serko财报电话会议显示，公司因增长强劲上调2027财年上半年营收指引。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/iran-claims-fresh-strike-on-us-base-as-hormuz-shipping-crisis-deepens-5027672",
+      "title_cn": "Iran says it will not wait for U.S. to attack first",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "伊朗表示不会等待美国先发动攻击。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/ubs-says-emerging-markets-are-more-agile-than-fragile-forecasts-2027-gains-5028161",
+      "title_cn": "UBS says emerging markets are ‘more agile than fragile,’ forecasts 2027 gains",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "瑞银称新兴市场“更灵活而非脆弱”，并预测2027年将上涨。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "新兴市场",
+        "策略",
+        "瑞银"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/diamondback-energy-nears-5-bln-double-eagle-deal--report-5028152",
+      "title_cn": "Diamondback Energy nears $5 bln Double Eagle deal - report",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "据报道，Diamondback Energy接近以50亿美元收购Double Eagle。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "并购",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/designer-brands-svp-mark-haley-sells-123520-in-shares-93CH-5028150",
+      "title_cn": "Designer Brands svp Mark Haley sells $123,520 in shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "Designer Brands高级副总裁Mark Haley出售价值123,520美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/ubs-sees-brent-hitting-110-as-tight-supply-buffers-leave-oil-vulnerable-5028142",
+      "title_cn": "UBS sees Brent hitting $110 as tight supply buffers leave oil vulnerable",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/15",
+      "summary": "瑞银预计布伦特原油将触及110美元，称供应紧张使油价易受冲击。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "原油",
+        "瑞银"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
