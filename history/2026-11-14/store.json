@@ -1,0 +1,855 @@
+{
+  "date": "2026-11-14",
+  "updatedAt": "2026-11-13T23:14:57.416Z",
+  "executive": {
+    "hero_line": "今天主要看3个方面：信贷定价，企业贷款利率首破3%；汇率配置，美元指数破103创一年半新高；财富转型，基金投顾T类份额转向买方收费。",
+    "spoken_hero": "今天主要看3个方面：信贷定价，企业贷款利率首破3%；汇率配置，美元指数破103创一年半新高；财富转型，基金投顾T类份额转向买方收费。",
+    "must_read": [
+      {
+        "title": "央行开展3640亿隔夜逆回购",
+        "why": "单日三千六百亿隔夜投放，叠加科创债ETF规模破两千亿，短端流动性与科创主题资金面同时偏松。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_13_908172.shtml"
+      },
+      {
+        "title": "前10月社融增量28.61万亿",
+        "why": "社融二十八万亿、M2同比增7.1%，流动性总量充裕，实体与零售的融资需求节奏有了可校准的参照。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261113/4495482_1.html"
+      },
+      {
+        "title": "中小银行不良率20家压降",
+        "why": "二十家中小行不良率压降但拨备整体回落，资产质量改善与风险抵补之间的平衡值得对照检视。",
+        "url": "https://m.21jingji.com/article/20261113/herald/e0cfdbaaad3d3a125b2dd8e570215f36.html"
+      },
+      {
+        "title": "美元指数破103创一年半新高",
+        "why": "加息押注升温推动美元走强，跨境结算、外币存款与外币理财的客户预期随之变化，汇率敏感度上升。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_13_908118.shtml"
+      }
+    ],
+    "spoken_must_read": "央行开展3640亿隔夜逆回购。单日三千六百亿隔夜投放，叠加科创债ETF规模破两千亿，短端流动性与科创主题资金面同时偏松。其次，前10月社融增量28.61万亿。社融二十八万亿、M2同比增7.1%，流动性总量充裕，实体与零售的融资需求节奏有了可校准的参照。此外，中小银行不良率20家压降。二十家中小行不良率压降但拨备整体回落，资产质量改善与风险抵补之间的平衡值得对照检视。还有，美元指数破103创一年半新高。加息押注升温推动美元走强，跨境结算、外币存款与外币理财的客户预期随之变化，汇率敏感度上升。",
+    "insights": [
+      {
+        "topic": "基金投顾转向买方收费",
+        "impact": "T类份额把投顾费从申购端挪到持有端，客户对费率与持有期限的敏感度上升，货架上的产品期限结构随之调整。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "基金投顾里程碑：T类份额加速行业向买方投顾转型",
+            "url": "https://www.cnfin.com/yw-lb/detail/20261113/4495503_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "美元走强抬升外币配置",
+        "impact": "美元指数破一百零三，持有外币资产与有跨境收支的客户对结售汇时点更敏感，外币存款与理财询价升温。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "加息押注升温，美元指数破103创2025年5月以来新高",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_11_13_908118.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "企业贷款利率首破3%",
+        "impact": "对公报价基准下移，小微与个体工商户的经营贷比价压力传导，客户对续贷条件与综合成本的关注度上升。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "企业贷款利率首破3%，再创新低",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-13/doc-iniypzqm3679428.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "积存金挂单功能成竞争点",
+        "impact": "多家银行上线积存金挂单，贵金属交易的择时体验成为客户留存变量，小额高频的黄金配置需求在上升。",
+        "tag": [
+          "财富"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "不再“盯盘下单” 多家银行上线积存金挂单功能",
+            "url": "https://finance.sina.com.cn/jjxw/2026-11-13/doc-iniypvhf1029819.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "个人养老金缴存转化分化",
+        "impact": "开户数已铺开但缴存率机构间差距拉大，客户在养老产品上的选择更集中于少数几类期限与风险档位。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "个人养老金四周年：规模分化 机构竞争跑出新变量",
+            "url": "https://finance.sina.com.cn/jjxw/2026-11-13/doc-iniypvhf1029782.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，基金投顾转向买方收费、个人养老金缴存转化分化，T类份额把投顾费从申购端挪到持有端。第二，高端客户方面，美元走强抬升外币配置，美元指数破一百零三。第三，普惠小微方面，企业贷款利率首破3%，对公报价基准下移。第四，本地消费场景方面，积存金挂单功能成竞争点，多家银行上线积存金挂单。",
+    "risk": {
+      "topic": "监管关注信贷投放压降节奏",
+      "evidence": "风险跟踪识别到与信贷压降相关的窗口指导类信号，指向部分领域投放节奏的合规要求。",
+      "impact": "个贷与普惠条线的投放节奏、对公授信的结构调整均可能受影响，风控需同步检视资金流向与用途真实性核查口径。",
+      "source": "T2"
+    },
+    "spoken_risk": "今天有 1 个需要警惕：监管关注信贷投放压降节奏，个贷与普惠条线的投放节奏、对公授信的结构调整均可能受影响，风控需同步检视资金流向与用途真实性核查口径。",
+    "guangdong_ipo": {
+      "spoken": "深圳证监局披露，大寰机器人科技股份有限公司完成IPO辅导备案，辅导机构为国泰海通证券，备案时间为十一月十三日，属深圳企业、机器人行业，拟登陆境内市场。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌0.91%，英伟达CEO黄仁勋辞职引发AI板块与信用市场担忧。",
+      "sectors": [
+        "英伟达股价巨震，黄仁勋辞职令AI融资策略与neocloud敞口受关注。",
+        "纳斯达克100探底讨论升温，市场关注是否已现底部。",
+        "油价本周跌超2%，美伊冲突担忧缓解压制能源价格。",
+        "Anthropic IPO获投资者追捧，但市场质疑其AI领先地位可持续性。"
+      ],
+      "spoken": "美股收盘涨跌互现，道指涨0.10%，纳指跌0.91%，标普500跌0.40%。英伟达CEO黄仁勋辞职引发股价巨震，AI融资与信用市场担忧升温；油价本周跌超2%，Anthropic IPO获追捧但领先地位受质疑。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-14"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52347.55",
+          "changePct": "+0.10%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25136.27",
+          "changePct": "-0.91%"
+        },
+        {
+          "name": "标普500",
+          "value": "7561.67",
+          "changePct": "-0.40%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "三大指数集体收跌，创业板指跌3.32%，算力与AI板块承压。",
+      "sectors": [
+        "影视板块逆市大涨，资金追捧内容消费方向。",
+        "银行板块走强，高股息逻辑获重新定价，资金回流防御。",
+        "算力方向承压，美方推动法案限制中国公司远程使用境外算力。",
+        "AI制药概念活跃，阿莫代伊称十年内攻克癌症提振情绪。"
+      ],
+      "spoken": "A股三大指数集体收跌，上证指数跌0.59%，深证成指跌2.05%，创业板指跌3.32%。盘面上，影视板块逆市大涨，银行板块走强，高股息逻辑重新定价；算力方向承压，AI制药概念相对活跃。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-14"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3634.35",
+          "changePct": "-0.59%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10968.79",
+          "changePct": "-2.05%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2426.08",
+          "changePct": "-3.32%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报23637.60点（-1.55%）；恒生科技收报3813.19点（-3.02%）。",
+      "sectors": [
+        "AI相关概念股大跌",
+        "智谱跌超10%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-13"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.55% 科指跌3.02% AI相关概念股大跌 智谱跌超10%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-13/doc-iniyqsmv0938230.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "23637.60",
+          "changePct": "-1.55%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3813.19",
+          "changePct": "-3.02%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-13",
+    "marketStatus": {
+      "reportDate": "2026-11-14",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-13"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-13"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-13"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月13日 周五 收盘；港股为 11月13日 周五 收盘；美股为 11月13日 周五 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930099993.html",
+      "title_cn": "凌晨V形大反弹！美联储传出大消息",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "美股凌晨出现V形反弹，市场关注美联储传出的最新消息。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "美股",
+        "市场波动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930583230.html",
+      "title_cn": "批量新高！英伟达出事、“银伟大”回归！高股息逻辑迎重新定价",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "高股息板块批量创新高，市场讨论英伟达相关事件及高股息逻辑的重新定价。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "高股息",
+        "英伟达",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930203585.html",
+      "title_cn": "十年内攻克癌症？阿莫代伊再发“豪言”AI制药站上风口(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "阿莫代伊再发AI制药豪言，称十年内攻克癌症，AI制药概念受到市场关注。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "医药",
+        "概念股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930659580.html",
+      "title_cn": "A股三大指数收跌影视板块逆市大涨银行板块走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "A股三大指数收跌，影视板块逆市大涨，银行板块走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "影视",
+        "银行"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930674147.html",
+      "title_cn": "美方正推动新法案阻止中国公司远程使用美国境外算力外交部回应",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "美方正推动新法案阻止中国公司远程使用美国境外算力，外交部作出回应。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "算力",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930185489.html",
+      "title_cn": "算力“独角兽”IPO重大进展影子股曝光",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "一家算力独角兽IPO取得重大进展，相关影子股被曝光。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "算力",
+        "IPO",
+        "影子股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930648961.html",
+      "title_cn": "韩股午后跳水！外资大逆转发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "韩股午后跳水，外资出现大逆转，市场关注背后原因。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "韩股",
+        "外资",
+        "市场波动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930527650.html",
+      "title_cn": "巨头持续涌入！谷歌新一代AI眼镜来了端侧AI打开想象空间(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "谷歌推出新一代AI眼镜，巨头持续涌入端侧AI领域，相关概念股受关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "谷歌",
+        "端侧AI"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930828214.html",
+      "title_cn": "11月13日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "汇总11月13日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公司公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930099479.html",
+      "title_cn": "黄仁勋辞职后英伟达股价巨震！但斌、段永平最新发声华尔街集体重新评估",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "黄仁勋辞职后英伟达股价剧烈震荡，但斌、段永平发声，华尔街集体重新评估。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "英伟达",
+        "美股",
+        "人事变动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931107045.html",
+      "title_cn": "21社论丨持续提振中国资产长期吸引力",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "社论提出持续提振中国资产长期吸引力。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "中国资产",
+        "政策",
+        "社论"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611143931094230.html",
+      "title_cn": "铺好六张网重在“流起来”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/14",
+      "summary": "评论文章讨论铺好六张网重在让要素'流起来'。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "评论"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-13/doc-iniyqsmv0938230.shtml",
+      "title_cn": "港股收评：恒指跌1.55% 科指跌3.02% AI相关概念股大跌 智谱跌超10%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "港股收评：恒指跌1.55%，科指跌3.02%，AI相关概念股大跌，智谱跌超10%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "AI",
+        "恒生科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/bxjj/2026-11-13/doc-iniypekv3780372.shtml",
+      "title_cn": "港股互联网板块逆势走强又“深蹲” 价值重估还未到无条件“击球区”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "港股互联网板块逆势走强后又出现回调，市场讨论其价值重估是否到位。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "互联网",
+        "估值"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-13/doc-iniypksm1022650.shtml",
+      "title_cn": "MSCI中国指数11月底调整 纳入中际旭创H股等3只个股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "MSCI中国指数将于11月底调整，纳入中际旭创H股等3只个股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "MSCI",
+        "指数调整"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-13/doc-iniypvhn8064511.shtml",
+      "title_cn": "国星宇航今日登陆港股市场",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "国星宇航当日登陆港股市场。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "航天"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-13/doc-iniypekv3780378.shtml",
+      "title_cn": "港股公司年内回购超1300亿港元 科技企业扛大旗 “A+H”同步操作成亮点",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "港股公司年内回购金额超1300亿港元，科技企业为主力，'A+H'同步操作成为亮点。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-13/doc-iniypvhn8130384.shtml",
+      "title_cn": "腾讯，年内回购已耗资超320亿港元！港股龙头公司，回购潮！",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "腾讯年内回购已耗资超320亿港元，港股龙头公司掀起回购潮。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购",
+        "腾讯"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-13/doc-iniyqnef3654034.shtml",
+      "title_cn": "恒生科技指数跌3% 智谱领跌成分股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "恒生科技指数跌3%，智谱领跌成分股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生科技",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-13/doc-iniyqfvz1031000.shtml",
+      "title_cn": "港股午评：恒指跌0.92% 科指跌1.75% 科网股普跌 PCB概念股下挫",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "港股午评：恒指跌0.92%，科指跌1.75%，科网股普跌，PCB概念股下挫。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "科网股",
+        "PCB"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-13/doc-iniyqsmv0958635.shtml",
+      "title_cn": "国信证券：五一视界(06651)受益智驾与具身需求高景气 51Sim打开增长空间",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "国信证券研报称五一视界受益智驾与具身需求高景气，51Sim打开增长空间。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "智驾"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-13/doc-iniyqncx1030750.shtml",
+      "title_cn": "花旗：翰森制药维持“买入”评级 目标价52港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "花旗维持翰森制药'买入'评级，目标价52港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-13/doc-iniyqnec1288483.shtml",
+      "title_cn": "中金：新秀丽目标价上调5%至21港元 维持“跑赢行业”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "中金将新秀丽目标价上调5%至21港元，维持'跑赢行业'评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-13/doc-iniyqncx1015350.shtml",
+      "title_cn": "花旗：潍柴动力维持“买入”评级 目标价48港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "花旗维持潍柴动力'买入'评级，目标价48港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "机械"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/a-trading-strategy-to-ride-out-the-nvidia-uncertainty-and-generate-income-in-the-process.html",
+      "title_cn": "A trading strategy to ride out the Nvidia uncertainty and generate income in the process",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC讨论在英伟达不确定性下获取收益的交易策略。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "英伟达",
+        "策略"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/is-a-bottom-in-for-the-nasdaq-100-charts-to-watch.html",
+      "title_cn": "Is a bottom in for the Nasdaq-100? Charts to watch",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC分析纳斯达克100指数是否已见底，并列出需关注的图表。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "纳斯达克",
+        "技术分析"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/13/nvidia-jensen-huang-resignation-ai-financing.html",
+      "title_cn": "What's ahead for AI financing after Nvidia CEO Jensen Huang departs",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CNBC讨论英伟达CEO黄仁勋离职后AI融资的前景。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "英伟达"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/mistras-group-issues-supplemental-merger-disclosures-amid-shareholder-lawsuits-93CH-5026718",
+      "title_cn": "Mistras Group issues supplemental merger disclosures amid shareholder lawsuits",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "Mistras Group在股东诉讼背景下发布补充合并披露文件。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "并购",
+        "诉讼"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/exclusivebrookfield-cppib-advance-to-next-round-in-uniper-sales-process-sources-say-5026330",
+      "title_cn": "Exclusive-Brookfield, CPPIB consortium enters next round in Uniper sales process, sources say",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "消息称Brookfield与CPPIB组成的财团进入Uniper出售流程的下一轮。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "并购",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/onespan-director-michael-mcconnell-sells-466210-in-company-stock-93CH-5026716",
+      "title_cn": "OneSpan director Michael McConnell sells $466,210 in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "OneSpan董事Michael McConnell出售价值466,210美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/mangoceuticals-amends-preferred-stock-terms-and-establishes-new-series-d-shares-93CH-5026709",
+      "title_cn": "Mangoceuticals amends preferred stock terms and establishes new Series D shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "Mangoceuticals修订优先股条款并设立新的D系列股份。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司公告",
+        "股权"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/oil-prices-hold-gains-as-trump-sidelines-vance-from-iran-diplomacy-5023781",
+      "title_cn": "Oil prices fall over 2% for the week amid easing fears of fresh U.S.-Iran fighting",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "因美伊冲突担忧缓解，油价本周下跌逾2%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "原油",
+        "地缘政治"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/caretrust-reit-enters-forward-sale-agreements-for-1955-million-shares-93CH-5026708",
+      "title_cn": "CareTrust REIT enters forward sale agreements for 19.55 million shares",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "CareTrust REIT就1955万股股份签订远期出售协议。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "REIT",
+        "股权融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/faa-orders-nationwide-ground-stop-citing-extraordinary-safety-concerns-5026489",
+      "title_cn": "FAA grounds flights nationwide after air traffic control communications outage",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "美国空管通信中断后，FAA下令全国范围内航班停飞。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "航空",
+        "监管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/microsoft-365-outage-expected-to-have-minimal-insurance-impact-93CH-5026706",
+      "title_cn": "Microsoft 365 outage expected to have minimal insurance impact",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "微软365服务中断预计对保险影响有限。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "微软",
+        "科技"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/exclusiveinvestors-flock-to-anthropic-ipo-but-question-durability-of-ai-lead-5026644",
+      "title_cn": "Exclusive-Investors flock to Anthropic IPO but question durability of AI lead",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "消息称投资者踊跃参与Anthropic IPO，但质疑其AI领先地位的持久性。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "IPO"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}

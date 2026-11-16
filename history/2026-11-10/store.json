@@ -1,0 +1,848 @@
+{
+  "date": "2026-11-10",
+  "updatedAt": "2026-11-09T23:08:54.191Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：关税与利率机制调整，涉外客群成本与负债定价生变；资本市场稳市机制首提，权益配置预期升温；广州跨境电商超六亿票、小微小额融资缺口大，本地商机在扩。",
+    "spoken_hero": "今天主要看三个方面：关税与利率自律机制同时调整，涉外客群成本和存款定价都在变；国常会首提完善资本市场稳市机制，权益配置预期升温；广州跨境电商前十月超六亿票，小微十万元以下融资满足率不到三成，本地商机两头都在扩。",
+    "must_read": [
+      {
+        "title": "国常会首提完善稳市机制",
+        "why": "资本市场稳市机制首次进入国常会部署，权益类财富配置的政策预期与客户风险偏好同步变化。",
+        "url": "https://finance.cctv.com/2026/11/09/ARTI3269MVsloSYQnSa5FPSY261109.shtml"
+      },
+      {
+        "title": "广州跨境电商清单超6亿票",
+        "why": "前十月广州海关监管跨境电商零售清单破六亿票，跨境商户结算与融资需求体量已成规模。",
+        "url": "https://news.dayoo.com/guangzhou/202611/09/139995_55022055.htm"
+      },
+      {
+        "title": "10月CPI涨0.7%、PPI涨5.7%",
+        "why": "物价总水平平稳而工业品价格高位，对公客户成本与信贷定价环境出现结构性分化。",
+        "url": "https://finance.eastmoney.com/a/202611103926645451.html"
+      },
+      {
+        "title": "险资入粤投资达2.7万亿",
+        "why": "广东大型项目与机构资金对接活跃，托管、项目融资与机构合作的资金体量在持续放大。",
+        "url": "https://m.21jingji.com/article/20261109/herald/47ea3d5bdf2efe837a86dffc7275f81e.html"
+      },
+      {
+        "title": "第三批互换便利落地",
+        "why": "券商资金加速入场，市场流动性预期改善，权益类产品咨询热度与客户申赎行为可能同步抬升。",
+        "url": "https://finance.eastmoney.com/a/202611093925714745.html"
+      }
+    ],
+    "spoken_must_read": "国常会首提完善稳市机制。资本市场稳市机制首次进入国常会部署，权益类财富配置的政策预期与客户风险偏好同步变化。其次，广州跨境电商清单超6亿票。前十月广州海关监管跨境电商零售清单破六亿票，跨境商户结算与融资需求体量已成规模。此外，10月CPI涨0.7%、PPI涨5.7%。物价总水平平稳而工业品价格高位，对公客户成本与信贷定价环境出现结构性分化。还有，险资入粤投资达2.7万亿。广东大型项目与机构资金对接活跃，托管、项目融资与机构合作的资金体量在持续放大。另外，第三批互换便利落地。券商资金加速入场，市场流动性预期改善，权益类产品咨询热度与客户申赎行为可能同步抬升。",
+    "insights": [
+      {
+        "topic": "固收加净值受挫引发赎回咨询",
+        "impact": "重仓高波权益的固收加产品净值回撤，持有此类产品的客户赎回咨询与持有期诉求同步上升，稳健型货架关注度抬升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "重仓高波权益遭反噬 一批“固收+”基金净值受挫",
+            "url": "https://finance.sina.com.cn/jjxw/2026-11-09/doc-iniyacyk6761128.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "低价无序竞争治理改善价格秩序",
+        "impact": "部分行业价格秩序边际改善，相关小微与制造业客户的经营现金流与信贷质量出现分化。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "依法依规治理低价无序竞争",
+            "url": "https://finance.eastmoney.com/a/202611093925727516.html"
+          }
+        ]
+      },
+      {
+        "topic": "信用卡注销流程存在隐形关卡",
+        "impact": "注销需回电、短信验证与四十五天等待，客户体验痛点集中，销户环节的摩擦直接影响留存口碑。",
+        "tag": [
+          "客群"
+        ],
+        "group": "信用卡客群",
+        "sources": [
+          {
+            "title": "回电、短信验证与45天：信用卡注销的隐形关卡",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-09/doc-iniyazee6594057.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "跨境电商清单破六亿票",
+        "impact": "广州跨境电商零售进出口清单前十月超六亿票，跨境商户的结算、结售汇与备货融资需求同步放大。",
+        "tag": [
+          "客群",
+          "信贷"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "前10月广州海关监管跨境电商零售进出口清单超6亿票",
+            "url": "https://news.dayoo.com/guangzhou/202611/09/139995_55022055.htm"
+          }
+        ]
+      },
+      {
+        "topic": "湾区招商大会项目落地",
+        "impact": "粤港澳大湾区全球招商大会举办，参会企业名单中的开户、结算与项目融资需求集中释放。",
+        "tag": [
+          "政银合作",
+          "客群"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "2026年粤港澳大湾区全球招商大会举办",
+            "url": "https://www.cnr.cn/gd/zongtaiguanzhu/20261109/t20261109_527867010.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，固收加净值受挫引发赎回咨询，重仓高波权益的固收加产品净值回撤。第二，普惠小微方面，低价无序竞争治理改善价格秩序，部分行业价格秩序边际改善。第三，信用卡客群方面，信用卡注销流程存在隐形关卡，注销需回电、短信验证与四十五天等待。第四，跨境客群方面，跨境电商清单破六亿票，广州跨境电商零售进出口清单前十月超六亿票。第五，高端客户方面，湾区招商大会项目落地，粤港澳大湾区全球招商大会举办。",
+    "guangdong_ipo": {
+      "spoken": "广州保伦股份IPO注册生效，拟登陆主板，本地电子制造企业上市进程推进；广东钶锐锶数控技术今天上市，注册地广东的装备制造企业登陆资本市场；深圳盛凌电子北交所辅导验收、蜂巢互联完成辅导备案，深圳科技企业进入上市准备期。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "三大指数集体大涨，纳指涨2.74%领涨，AI交易情绪回暖。",
+      "sectors": [
+        "英伟达期权大单押注新高，周一抛售后资金回流AI龙头。",
+        "CoreWeave债券收益率突破16%，AI数据中心债务压力引发关注。",
+        "Securitize盘后涨10%，Q3业绩增长并收购River One进军资产支持融资。",
+        "中期选举夜预测市场交易量激增，资金押注民主党掌控国会。"
+      ],
+      "spoken": "美股三大指数集体大涨，纳指涨2.74%领涨，标普涨2.35%，道指涨2.15%。板块方面，英伟达获大额期权押注新高，AI龙头资金回流；但CoreWeave债券收益率突破16%，AI数据中心债务压力受关注。个股方面，Securitize盘后涨10%，Q3业绩增长并进军资产支持融资。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-10"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52389.75",
+          "changePct": "+2.15%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25253.14",
+          "changePct": "+2.74%"
+        },
+        {
+          "name": "标普500",
+          "value": "7549.94",
+          "changePct": "+2.35%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3660.79点（+0.32%）；深证成指收报11145.49点（-0.27%）；创业板指收报2458.56点（-0.27%）。",
+      "sectors": [
+        "煤炭板块强势"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-10"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3660.79",
+          "changePct": "+0.32%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11145.49",
+          "changePct": "-0.27%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2458.56",
+          "changePct": "-0.27%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24448.95点（-0.13%）；恒生科技收报4040.73点（-0.92%）。",
+      "sectors": [
+        "科网股低迷",
+        "煤炭板块逆势走强"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-10"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.13% 科指跌0.92% 科网股低迷 煤炭板块逆势走强",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-09/doc-iniycmtw2980037.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24448.95",
+          "changePct": "-0.13%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4040.73",
+          "changePct": "-0.92%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-09",
+    "marketStatus": {
+      "reportDate": "2026-11-10",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-09"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-09"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-09"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月9日 周一 收盘；港股为 11月9日 周一 收盘；美股为 11月9日 周一 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611093926166163.html",
+      "title_cn": "中美经贸罕见同步释放善意最新解读",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "中美经贸领域罕见同步释放善意信号，市场关注后续进展。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美关系",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611093926106885.html",
+      "title_cn": "突然爆发！19分钟20%涨停！A股迎来双重利好",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "A股盘中出现个股19分钟内20%涨停的快速拉升，报道提及市场迎来双重利好。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611093926182342.html",
+      "title_cn": "AI退潮反噬大宗！“焊料之王”锡遭血洗背后究竟冤不冤？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "报道称AI需求退潮波及大宗商品，锡价大幅下跌，市场讨论其合理性。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "大宗商品",
+        "有色金属"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611093926229455.html",
+      "title_cn": "中方尚未批准约60万枚先进AI芯片的大规模进口？外交部回应",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "外交部就中方尚未批准约60万枚先进AI芯片大规模进口的报道作出回应。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "AI",
+        "政策",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611093925775778.html",
+      "title_cn": "A股靠什么托举？这些重要变量正在集聚",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "报道梳理A股当前支撑因素，称多项重要变量正在集聚。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611093925747015.html",
+      "title_cn": "黄仁勋道歉信全文：我对妻子不忠伤害了家人没有任何借口",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "报道刊出黄仁勋道歉信全文，其就对妻子不忠一事致歉。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "公司",
+        "人物"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611093925795942.html",
+      "title_cn": "国家统计局：10月CPI同比上涨0.7%PPI同比上涨5.7%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "国家统计局公布10月CPI同比上涨0.7%，PPI同比上涨5.7%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "通胀",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611093926213181.html",
+      "title_cn": "沪指小幅收涨深成指与创业板指冲高回落煤炭与机器人板块走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "沪指小幅收涨，深成指与创业板指冲高回落，煤炭与机器人板块走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "市场",
+        "煤炭",
+        "机器人"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611093926423711.html",
+      "title_cn": "11月9日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "汇总11月9日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公司公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611093926173635.html",
+      "title_cn": "20多万元/只实验猴身价不到1年翻倍！养殖企业：不预订有需要明年初再来谈",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "实验猴价格涨至20多万元/只，不到一年翻倍，养殖企业称需提前预订。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "生物医药",
+        "价格"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103926667452.html",
+      "title_cn": "国常会定调稳市机制A股稳定性何处来",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "国常会定调稳市机制，报道讨论A股稳定性的来源。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "A股",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103926651193.html",
+      "title_cn": "烟火气也是竞争力（人民锐评）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "人民锐评发文称烟火气也是竞争力。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "消费",
+        "评论"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-09/doc-iniycmtw2980037.shtml",
+      "title_cn": "港股收评：恒指跌0.13% 科指跌0.92% 科网股低迷 煤炭板块逆势走强",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "港股收评：恒指跌0.13%，科指跌0.92%，科网股低迷，煤炭板块逆势走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "市场",
+        "煤炭",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-10/doc-iniyexvh6041022.shtml",
+      "title_cn": "恒指牛熊街货比(53:47)︱11月10日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "11月10日恒指牛熊街货比为53:47。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/wm/2026-11-09/doc-iniyauwk3432755.shtml",
+      "title_cn": "港股通重要调整，今起生效",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "港股通相关重要调整于当日生效。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "港股通",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-11-09/doc-iniyauwa6433767.shtml",
+      "title_cn": "华泰 | 港股策略：港股从β反弹到更关注α",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "华泰发布港股策略报告，称港股从β反弹转向更关注α。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "策略",
+        "券商研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-11-09/doc-iniyauwa6429893.shtml",
+      "title_cn": "港股概念追踪 | 欧洲资本组团来华扫货 中国创新药迈向海外商业化4.0时代(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "报道称欧洲资本组团来华投资，中国创新药迈向海外商业化4.0时代，并列出相关概念股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "创新药",
+        "港股",
+        "出海"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-09/doc-iniyacyq6968443.shtml",
+      "title_cn": "美科技股重挫拉低净值 主动QDII料回流港股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "美科技股重挫拉低净值，报道称主动QDII资金预计回流港股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "QDII",
+        "科技",
+        "资金流向"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-09/doc-iniyaqqn3522743.shtml",
+      "title_cn": "港股绿鞋机制充当隐形稳定器 年内48家企业启动超额配售",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "港股绿鞋机制发挥稳定作用，年内48家企业启动超额配售。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "新股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/observe/2026-11-09/doc-iniycrzu2918795.shtml",
+      "title_cn": "芯德半导体港股IPO：收入三年翻倍却从未赚过毛利 重资产封测厂的爬坡与债务压力",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "芯德半导体递表港股IPO，收入三年翻倍但尚未实现毛利，报道关注其重资产封测与债务压力。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-09/doc-iniycmty6531052.shtml",
+      "title_cn": "美银证券：光大环境维持“买入”评级 目标价6.8港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "美银证券维持光大环境“买入”评级，目标价6.8港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "环保"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-09/doc-iniycmtu6285397.shtml",
+      "title_cn": "富瑞：药明康德目标价215港元 维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "富瑞维持药明康德“买入”评级，目标价215港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-09/doc-iniycrzw6487994.shtml",
+      "title_cn": "高盛：中国重汽(03808)出口及新能源车仍为主要增长引擎 海外订单能见度延至明年首季",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "高盛称中国重汽出口及新能源车仍为主要增长引擎，海外订单能见度延至明年首季。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "汽车",
+        "出口"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-09/doc-iniycrzw6483878.shtml",
+      "title_cn": "小摩：首予康诺亚-B(02162)“增持”评级 目标价95港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "摩根大通首次覆盖康诺亚-B，给予“增持”评级，目标价95港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/09/tokenization-platform-securitize-reports-gains-expands-into-asset-backed-finance.html",
+      "title_cn": "Tokenization platform Securitize gains 10% postmarket on Q3 results, move into asset-backed finance",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "代币化平台Securitize公布三季度业绩并宣布进军资产支持融资，盘后股价上涨10%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "代币化"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/09/a-massive-trade-in-nvidia-just-went-off-here-are-the-details.html",
+      "title_cn": "A massive trade in Nvidia just went off – here are the details",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "报道披露英伟达一笔大额交易的细节。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/09/millions-of-dollars-poured-into-prediction-markets-on-election-night.html",
+      "title_cn": "Millions of dollars poured into prediction markets on election night, trading on Democratic control of Congress and Texas governor's race",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "选举夜数百万美元资金涌入预测市场，交易标的涉及民主党对国会的控制及得州州长选情。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "预测市场",
+        "选举"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/08/top-analysts-like-these-3-dividend-stocks-for-consistent-income.html",
+      "title_cn": "Top Wall Street analysts like these 3 dividend stocks for consistent income",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/08",
+      "summary": "报道称华尔街顶级分析师看好三只股息股，认为可提供稳定收益。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商研报",
+        "股息"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/06/coreweave-bond-yield-tops-16percent-as-ai-credit-stress-rises.html",
+      "title_cn": "The AI ‘credit card’ is getting costlier as CoreWeave bond yield tops 16%",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/06",
+      "summary": "报道称CoreWeave债券收益率升破16%，AI相关融资成本上升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "债券",
+        "融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-american-public-education-tops-q3-2026-estimates-93CH-5013639",
+      "title_cn": "Earnings call transcript: American Public Education tops Q3 2026 estimates",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "American Public Education财报电话会显示其第三季度业绩超出预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "教育"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-exodus-posts-q3-2026-revenue-beat-as-shares-swing-lower-93CH-5013637",
+      "title_cn": "Earnings call transcript: Exodus posts q3 2026 revenue beat as shares swing lower",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "Exodus第三季度营收超预期，但股价走低。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/helus-pharma-at-guggenheim-phase-iii-data-cash-runway-in-focus-93CH-5013636",
+      "title_cn": "Helus Pharma at Guggenheim: phase iii data, cash runway in focus",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "Helus Pharma在Guggenheim会议上聚焦三期临床数据与现金储备情况。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "医药",
+        "临床"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/earnings/surgery-partners-inc-earnings-beat-by-004-revenue-fell-short-of-estimates-5013635",
+      "title_cn": "Surgery Partners Inc earnings beat by $0.04, revenue fell short of estimates",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "Surgery Partners每股收益超预期0.04美元，营收不及预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "医疗"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/earnings/rani-therapeutics-holdings-earnings-beat-by-001-revenue-topped-estimates-5013634",
+      "title_cn": "Rani Therapeutics Holdings earnings beat by $0.01, revenue topped estimates",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "Rani Therapeutics每股收益超预期0.01美元，营收超预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-zeta-global-tops-q3-2026-forecasts-shares-slip-after-hours-93CH-5013633",
+      "title_cn": "Earnings call transcript: Zeta Global tops Q3 2026 forecasts, shares slip after hours",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "Zeta Global第三季度业绩超预期，但盘后股价下跌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/graphano-energy-closes-first-tranche-of-private-placement-93CH-5013632",
+      "title_cn": "Graphano Energy closes first tranche of private placement",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "Graphano Energy完成私募配售首期交割。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "融资",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}

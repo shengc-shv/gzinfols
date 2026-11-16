@@ -1,0 +1,859 @@
+{
+  "date": "2026-11-11",
+  "updatedAt": "2026-11-10T23:11:17.143Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：货币政策取向，潘功胜定调下一阶段重点；楼市回温，二手房成交同比增17.5%；稳健资金抢配，储蓄国债两分钟售罄。",
+    "spoken_hero": "今天主要看三个方面：货币政策取向，潘功胜定调下一阶段重点；楼市回温，二手房成交同比增17.5%；稳健资金抢配，储蓄国债两分钟售罄。",
+    "must_read": [
+      {
+        "title": "上交所协议回购出资人扩至28家",
+        "why": "信托机构增至10家，固收类产品的底层工具与流动性来源变宽，货架结构随之调整。",
+        "url": "https://finance.sina.com.cn/trust/2026-11-10/doc-iniyhmwt2447269.shtml"
+      },
+      {
+        "title": "发改委规范养老护理费加码",
+        "why": "养老服务收费规则收紧，养老金融合作方的合规成本与产品定价逻辑随之变化。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_10_907756.shtml"
+      },
+      {
+        "title": "利率自律成员扩至18家",
+        "why": "首次3家城商行集体入列，存款定价约束范围扩大，广州存款价格竞争格局与付息成本面临重估。",
+        "url": "https://finance.sina.com.cn/roll/2026-11-10/doc-iniyfkmf2791086.shtml"
+      },
+      {
+        "title": "五家中资行续留全球系统重要性名单",
+        "why": "附加监管要求延续，同业资本约束与业务节奏保持稳定，对竞争格局影响有限。",
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-10/doc-iniyepfs9692452.shtml"
+      }
+    ],
+    "spoken_must_read": "上交所协议回购出资人扩至28家。信托机构增至10家，固收类产品的底层工具与流动性来源变宽，货架结构随之调整。其次，发改委规范养老护理费加码。养老服务收费规则收紧，养老金融合作方的合规成本与产品定价逻辑随之变化。此外，利率自律成员扩至18家。首次3家城商行集体入列，存款定价约束范围扩大，广州存款价格竞争格局与付息成本面临重估。还有，五家中资行续留全球系统重要性名单。附加监管要求延续，同业资本约束与业务节奏保持稳定，对竞争格局影响有限。",
+    "insights": [
+      {
+        "topic": "近500只固收加由盈转亏",
+        "impact": "持有固收加产品的客户账面收益转负，四季度赎回咨询与持仓检视需求同步抬升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "近500只“固收+”由盈转亏，四季度赎回压力待考",
+            "url": "https://finance.sina.com.cn/roll/2026-11-10/doc-iniyhfqv2549454.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "理财产品中途谢幕增多",
+        "impact": "产品提前终止让客户实际持有期短于预期，收益空档与再配置衔接成为投诉高发点。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "理财产品“中途谢幕” 规模竞赛让位需求导向",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-10/doc-iniyfeck9400683.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "六大行不良率四降两升",
+        "impact": "资产质量分化延续，零售信贷投放与贷后管理的客群结构差异进一步显性化。",
+        "tag": [
+          "信贷",
+          "监管"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "六大行不良贷款率“四降两升”",
+            "url": "https://m.21jingji.com/article/20261110/herald/8c2950095482f0bb4b6dfe551c6b06d0.html"
+          }
+        ]
+      },
+      {
+        "topic": "多家银行获股东管理层增持",
+        "impact": "银行板块信心信号增强，财富客群沟通中关于板块配置的提问明显增多。",
+        "tag": [
+          "财富",
+          "竞对动态"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "大股东加仓管理层自购 年内多家银行获真金白银增持",
+            "url": "https://finance.sina.com.cn/jjxw/2026-11-10/doc-iniyepfr3028804.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "二手房成交回暖带动按揭",
+        "impact": "成交放量后按揭受理与提前还款咨询同步增加，住房金融客群的资金安排节奏被打乱。",
+        "tag": [
+          "住房金融"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "政策发力 楼市回温 二手房成交同比增17.5%",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_11_10_907767.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "贵金属追涨杀跌风险提示",
+        "impact": "金价高位回调叠加官方风险提示，持仓客户的适当性沟通与波动预期管理需求上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "中国金币发布贵金属价格波动风险提示：避免盲目追涨杀跌",
+            "url": "https://finance.sina.com.cn/money/lczx/2026-11-10/doc-iniyfkme2776165.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，近500只固收加由盈转亏、理财产品中途谢幕增多、二手房成交回暖带动按揭、贵金属追涨杀跌风险提示，持有固收加产品的客户账面收益转负。第二，普惠小微方面，六大行不良率四降两升，资产质量分化延续。第三，高端客户方面，多家银行获股东管理层增持，银行板块信心信号增强。",
+    "guangdong_ipo": {
+      "spoken": "广东东莞的龙行天下，做皮革毛皮制鞋，拟上主板，IPO已提交注册，保荐是招商证券；另外广东钶锐锶数控技术11月10日已在科创板上市，注册地广东。"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌0.74%领跌，AI资本开支与债务担忧压制科技股。",
+      "sectors": [
+        "CoreWeave财报盘后公布，市场聚焦其债务驱动的AI扩张风险",
+        "英伟达大额期权交易押注新高，此前一日曾遭抛售",
+        "Securitize盘后涨10%，Q3业绩向好并收购River One进军资产支持融资",
+        "中期选举夜预测市场资金激增，交易员押注民主党掌控国会"
+      ],
+      "spoken": "美股三大指数集体收跌，纳指跌0.74%领跌，标普跌0.38%，道指跌0.30%。AI资本开支与债务问题压制科技股情绪。个股方面，CoreWeave财报盘后公布，市场关注其债务驱动的扩张风险；英伟达出现大额期权交易押注新高。代币化平台Securitize盘后涨10%。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-11"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52231.89",
+          "changePct": "-0.30%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25065.87",
+          "changePct": "-0.74%"
+        },
+        {
+          "name": "标普500",
+          "value": "7520.93",
+          "changePct": "-0.38%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3663.72点（+0.08%）；深证成指收报11241.54点（+0.86%）；创业板指收报2494.40点（+1.46%）。",
+      "sectors": [
+        "上涨个股超4200只"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-11"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3663.72",
+          "changePct": "+0.08%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11241.54",
+          "changePct": "+0.86%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2494.40",
+          "changePct": "+1.46%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24557.04点（+0.44%）；恒生科技收报4084.45点（+1.08%）。",
+      "sectors": [
+        "科网股活跃",
+        "应用软件板块大涨",
+        "智谱涨超11%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-11"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨0.44% 科指涨1.08% 科网股活跃 应用软件板块大涨 智谱涨超11%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-10/doc-iniyfuyz2665058.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24557.04",
+          "changePct": "+0.44%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "4084.45",
+          "changePct": "+1.08%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-10",
+    "marketStatus": {
+      "reportDate": "2026-11-11",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-10"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-10"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-10"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月10日 周二 收盘；港股为 11月10日 周二 收盘；美股为 11月10日 周二 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611103927193330.html",
+      "title_cn": "Anthropic、英伟达重磅！物理AI再度引爆机器人(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "东方财富报道称，Anthropic与英伟达相关动向再度引发市场对物理AI及机器人概念的关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "机器人",
+        "半导体"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103927469391.html",
+      "title_cn": "11月10日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "东方财富汇总11月10日晚间沪深上市公司披露的重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103927273312.html",
+      "title_cn": "A股三大指数收涨创业板指涨1.46%近4300只股上涨",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "11月10日A股三大指数收涨，创业板指涨1.46%，全市场近4300只个股上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103927327465.html",
+      "title_cn": "新一轮俄美乌三方会谈在阿布扎比开始举行",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "新一轮俄罗斯、美国、乌克兰三方会谈在阿布扎比开始举行。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "俄乌"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103927447692.html",
+      "title_cn": "物理AI引爆宇树！数据缺口近20倍",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "东方财富报道称物理AI带动宇树相关关注度升温，并提及数据缺口接近20倍。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "机器人"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103927393954.html",
+      "title_cn": "加息大消息！美联储理事沃勒：将支持下月加息25个基点必要时50个基点",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "美联储理事沃勒表示将支持下月加息25个基点，必要时支持加息50个基点。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "货币政策",
+        "海外宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103926714256.html",
+      "title_cn": "内外共振！太空算力产业化按下快进键行业景气度有望上行(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "东方财富报道称太空算力产业化提速，行业景气度有望上行。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "算力",
+        "卫星",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103927427568.html",
+      "title_cn": "显卡终于降价了！有型号直降4000元",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "报道称显卡价格出现下调，部分型号降价幅度达4000元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "硬件",
+        "价格"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103927190534.html",
+      "title_cn": "20%涨停！“敢死队”26.7亿抢筹！全球流动性三大变数显现",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "报道称有资金以26.7亿元抢筹并出现20%涨停，同时提及全球流动性三大变数。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "资金面",
+        "流动性"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611103927189667.html",
+      "title_cn": "“易中天”携手大涨算力硬件全线回暖调整结束了吗？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "报道称“易中天”相关个股携手大涨，算力硬件板块全线回暖。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "算力",
+        "硬件",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113927747233.html",
+      "title_cn": "释放交通基建乘数效应",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "东方财富刊文讨论释放交通基建乘数效应的相关议题。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "基建",
+        "政策",
+        "交通运输"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611113927718693.html",
+      "title_cn": "券商股权投资如何看长做长",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "东方财富刊文讨论券商股权投资如何看长做长。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "券商",
+        "股权投资"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-10/doc-iniyfuyz2665058.shtml",
+      "title_cn": "港股收评：恒指涨0.44% 科指涨1.08% 科网股活跃 应用软件板块大涨 智谱涨超11%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "11月10日港股收评：恒指涨0.44%，恒生科技指数涨1.08%，科网股活跃、应用软件板块大涨，智谱涨超11%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "科技",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-11/doc-iniyiaun8787573.shtml",
+      "title_cn": "恒指牛熊街货比(52:48)︱11月11日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/11",
+      "summary": "11月11日恒指牛熊街货比为52:48。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-10/doc-iniyfeci2792772.shtml",
+      "title_cn": "港股创新药概念股高开 药明康德涨超6% 美国将其从1260H名单中移除",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "港股创新药概念股高开，药明康德涨超6%，此前美国将其从1260H名单中移除。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-10/doc-iniyfeck9410691.shtml",
+      "title_cn": "代谢赛道下一个风口，来凯医药(02105)全线卡位",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "新浪财经港股报道来凯医药在代谢赛道全线布局。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "代谢"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-10/doc-iniyfqte9350984.shtml",
+      "title_cn": "瑞银：江西铜业目标价下调41.5%至38港元 维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "瑞银将江西铜业目标价下调41.5%至38港元，维持“买入”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "有色金属",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-10/doc-iniyfqte9350965.shtml",
+      "title_cn": "高盛：中国财险维持“买入”评级 12个月目标价19.7港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "高盛维持中国财险“买入”评级，12个月目标价19.7港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "保险",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-10/doc-iniyhfqw9197006.shtml",
+      "title_cn": "国泰海通：创新管线打开增长空间 予复宏汉霖(02696)目标价101.75港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "国泰海通给予复宏汉霖目标价101.75港元，称其创新管线打开增长空间。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-10/doc-iniyfuza9353089.shtml",
+      "title_cn": "花旗：银河娱乐(00027)10月市场份额下跌因赢率不利 毋须过度解读 续列行业首选",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "花旗称银河娱乐10月市场份额下跌源于赢率不利，认为毋须过度解读，并继续列为行业首选。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "博彩",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-10/doc-iniyfuza9311503.shtml",
+      "title_cn": "瑞银：内地土地使用权续期新政策下 嘉里建设(00683)、恒隆地产(00101)及恒基地产(00012)面临较迫切压力",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "瑞银称在内地土地使用权续期新政策下，嘉里建设、恒隆地产及恒基地产面临较迫切压力。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "地产",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-10/doc-iniyfuza9292962.shtml",
+      "title_cn": "高盛：维持药明康德(02359)“买入”评级 目标价251港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "高盛维持药明康德“买入”评级，目标价251港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-10/doc-iniyfuyy2671913.shtml",
+      "title_cn": "高盛：上调阿里巴巴-W(09988)AI云端与运算服务收入增长预测 目标价172港元 维持“买入”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "高盛上调阿里巴巴AI云端与运算服务收入增长预测，目标价172港元，维持“买入”评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "AI",
+        "云计算",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-10/doc-iniyfeck9427157.shtml",
+      "title_cn": "思摩尔国际于11月9日耗资约2402.23万港元回购290万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "思摩尔国际于11月9日耗资约2402.23万港元回购290万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/10/coreweave-earnings-preview-debt-capex.html",
+      "title_cn": "CoreWeave earnings put debt-fueled AI build-out under scrutiny",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "CNBC报道称，CoreWeave的财报使市场关注以债务融资推动的AI基建扩张。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "财报",
+        "债务"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/09/tokenization-platform-securitize-reports-gains-expands-into-asset-backed-finance.html",
+      "title_cn": "Tokenization platform Securitize gains 10% postmarket on Q3 results, move into asset-backed finance",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "代币化平台Securitize公布三季度业绩并宣布进军资产支持融资，盘后股价上涨10%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "代币化"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/09/a-massive-trade-in-nvidia-just-went-off-here-are-the-details.html",
+      "title_cn": "A massive trade in Nvidia just went off – here are the details",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "CNBC报道称英伟达出现一笔大规模交易，并披露相关细节。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/09/millions-of-dollars-poured-into-prediction-markets-on-election-night.html",
+      "title_cn": "Millions of dollars poured into prediction markets on election night, trading on Democratic control of Congress and Texas governor's race",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "报道称选举夜数百万美元资金涌入预测市场，围绕民主党对国会的控制及得州州长选情进行交易。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "预测市场",
+        "美国政治"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/08/top-analysts-like-these-3-dividend-stocks-for-consistent-income.html",
+      "title_cn": "Top Wall Street analysts like these 3 dividend stocks for consistent income",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/08",
+      "summary": "CNBC报道称多位华尔街顶级分析师看好三只股息股，认为其可提供稳定收益。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商观点",
+        "股息"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/medipharm-labs-launches-cbd-oil-in-brazil-through-pharmacy-network-93CH-5017280",
+      "title_cn": "MediPharm Labs launches CBD oil in Brazil through pharmacy network",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "MediPharm Labs通过药房网络在巴西推出CBD油产品。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "医药",
+        "大麻"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/trustbix-completes-wildcard-msp-acquisition-ends-ops-deal-93CH-5017279",
+      "title_cn": "TrustBIX completes WILDCARD MSP acquisition, ends OPS deal",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "TrustBIX完成对WILDCARD MSP的收购，并终止OPS协议。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "并购"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/posabit-promotes-emily-eagon-to-chief-financial-officer-93CH-5017278",
+      "title_cn": "POSaBIT promotes Emily Eagon to chief financial officer",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "POSaBIT晋升Emily Eagon为首席财务官。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "人事"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-beachbody-beats-q3-2026-eps-shares-rise-after-hours-93CH-5017276",
+      "title_cn": "Earnings call transcript: Beachbody beats Q3 2026 EPS, shares rise after hours",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "Beachbody三季度每股收益超出预期，股价盘后上涨。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-fold-holdings-posts-q3-revenue-drop-as-shares-slip-in-2026-93CH-5017275",
+      "title_cn": "Earnings call transcript: Fold Holdings posts Q3 revenue drop as shares slip in 2026",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "Fold Holdings三季度营收下滑，股价走低。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-swarmer-q3-2026-loss-widens-as-stock-falls-after-hours-93CH-5017274",
+      "title_cn": "Earnings call transcript: Swarmer Q3 2026 loss widens as stock falls after hours",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "Swarmer三季度亏损扩大，股价盘后下跌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/sibone-at-ubs-global-healthcare-conference-platform-growth-builds-93CH-5017272",
+      "title_cn": "SI-BONE at UBS Global Healthcare Conference: platform growth builds",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/10",
+      "summary": "SI-BONE在瑞银全球医疗健康会议上介绍其平台增长情况。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "医药",
+        "会议"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}

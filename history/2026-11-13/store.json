@@ -1,0 +1,872 @@
+{
+  "date": "2026-11-13",
+  "updatedAt": "2026-11-12T23:17:04.471Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：存款结构变化，资金定期化与理财分流并存；美元资产升温，定存理财基准超4%；本地绿色金融目录落地，全国首个；跨境结算放量，双11清单超4260万票。",
+    "spoken_hero": "今天主要看四个方面：存款结构在变，资金往定期和理财两头走；美元资产升温，定存和理财基准都超四个点；广州出了全国首个美丽城市金融支持目录；双11跨境电商清单超四千两百六十万票，结算需求集中释放。",
+    "must_read": [
+      {
+        "title": "央行货政报告拆解存款结构",
+        "why": "资金定期化与理财分流并存，存款到期承接的客群分层逻辑正在改变，负债成本与AUM结构同步受影响。",
+        "url": "https://finance.cctv.com/2026/11/12/ARTIOE74r8I3zYbkcb3SYfJx261112.shtml"
+      },
+      {
+        "title": "证监会拟细化先行赔付政策",
+        "why": "投资者保护机制进一步落地，代销与投顾环节的适当性要求趋严，客户维权路径与纠纷处置方式生变。",
+        "url": "https://finance.cctv.com/2026/11/12/ARTI5CzNeOs7nzeUg8DW0OUK261112.shtml"
+      },
+      {
+        "title": "证监会强调维护市场平稳运行",
+        "why": "稳预期信号延续，权益类产品营销节奏与客户沟通口径面临调整，市场情绪修复的持续性待观察。",
+        "url": "https://news.southcn.com/node_812903b83a/b81fdac0e8.shtml"
+      },
+      {
+        "title": "美联储2027年全年仅7次议息",
+        "why": "美元利率决策节奏改变，美元资产定价与汇率预期的时间锚随之调整，影响外币配置客户的决策周期。",
+        "url": "https://finance.sina.com.cn/stock/usstock/c/2026-11-13/doc-iniypksr1480770.shtml"
+      },
+      {
+        "title": "票据贴现利率0.5%低位徘徊",
+        "why": "信贷统计口径调整预期升温，月末规模腾挪空间与指标口径变化并存，对信贷投放节奏判断形成扰动。",
+        "url": "https://m.21jingji.com/article/20261112/herald/f7251ebbec13b1c9941eeebe5d58a16b.html"
+      }
+    ],
+    "spoken_must_read": "央行货政报告拆解存款结构。资金定期化与理财分流并存，存款到期承接的客群分层逻辑正在改变，负债成本与AUM结构同步受影响。其次，证监会拟细化先行赔付政策。投资者保护机制进一步落地，代销与投顾环节的适当性要求趋严，客户维权路径与纠纷处置方式生变。此外，证监会强调维护市场平稳运行。稳预期信号延续，权益类产品营销节奏与客户沟通口径面临调整，市场情绪修复的持续性待观察。还有，美联储2027年全年仅7次议息。美元利率决策节奏改变，美元资产定价与汇率预期的时间锚随之调整，影响外币配置客户的决策周期。另外，票据贴现利率0.5%低位徘徊。信贷统计口径调整预期升温，月末规模腾挪空间与指标口径变化并存，对信贷投放节奏判断形成扰动。",
+    "insights": [
+      {
+        "topic": "存款到期客户回流定期",
+        "impact": "存款到期客户风险偏好明显收缩，资金沉淀为定期而非理财，稳健型产品的承接缺口扩大，客户收益预期与货架供给之间出现错位。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "“亏钱不如不投”！存款到期后，他们又选了定期",
+            "url": "https://finance.sina.com.cn/jjxw/2026-11-12/doc-iniynyax3691612.shtml"
+          },
+          {
+            "title": "“钱去哪了”？央行最新货政报告揭秘存款结构变化",
+            "url": "https://finance.cctv.com/2026/11/12/ARTIOE74r8I3zYbkcb3SYfJx261112.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "美元定存理财基准超4%",
+        "impact": "有美元资产配置需求的客户报价选择增多，外币货架与话术需要同步更新，客户比价行为明显增强。",
+        "tag": [
+          "财富",
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "多家银行上调！美元定存利率、理财业绩基准均值超4%",
+            "url": "https://finance.sina.com.cn/roll/2026-11-12/doc-iniyntut1124638.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "票据贴现利率低位徘徊",
+        "impact": "小微与经营贷客户的短期融资成本参照下移，信贷统计口径调整预期下，规模与定价的匹配关系生变。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "票据贴现利率在0.5%低位徘徊 信贷统计口径调整预期升温",
+            "url": "https://m.21jingji.com/article/20261112/herald/f7251ebbec13b1c9941eeebe5d58a16b.html"
+          }
+        ]
+      },
+      {
+        "topic": "储蓄国债秒光额度紧张",
+        "impact": "年内最后一批储蓄国债被抢购，客户对保本类额度高度敏感，后续批次预约需求积压，替代产品的衔接诉求上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "年内最后一批储蓄国债“秒光”，低利差下为何仍遭抢购？",
+            "url": "https://finance.cctv.com/2026/11/12/ARTI4FH6yc7A0jXOSi14HiUC261112.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "拉卡拉注销小贷牌照",
+        "impact": "助贷与联合贷合作方持续出清，消费贷存量合作机构名单与资产质量面临重新审视，合作方稳定性下降。",
+        "tag": [
+          "信贷",
+          "监管"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "拉卡拉注销小贷牌照 信贷资产出清再落一子",
+            "url": "https://m.21jingji.com/article/20261112/herald/5f4b045890998e6b4b152e278e9e8207.html"
+          }
+        ]
+      },
+      {
+        "topic": "头部信托增资至120亿",
+        "impact": "代销合作方实力格局生变，年内另有5家信托获批增资，高净值客户对代销机构资质的关注度上升。",
+        "tag": [
+          "私行",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "增资至120亿元！头部信托大动作，年内另有5家信托增资获批",
+            "url": "https://finance.sina.com.cn/trust/roll/2026-11-12/doc-iniynyav1593575.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，存款到期客户回流定期、储蓄国债秒光额度紧张，存款到期客户风险偏好明显收缩。第二，高端客户方面，美元定存理财基准超4%、头部信托增资至120亿，有美元资产配置需求的客户报价选择增多。第三，普惠小微方面，票据贴现利率低位徘徊、拉卡拉注销小贷牌照，小微与经营贷客户的短期融资成本参照下移。",
+    "risk": {
+      "topic": "上市公司财务造假严打五年",
+      "evidence": "中国计划未来五年严厉打击财务造假，上市公司信息披露约束趋严，天晟新材因漏披关联交易拟罚940万。",
+      "impact": "对公授信与投行联动审查标准趋严，涉上市公司客群的授信复核压力上升；财富条线代销标的的披露瑕疵排查要求提高，风控需同步收紧准入。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "中国计划未来五年严厉打击财务造假，怎么做？",
+          "url": "https://finance.cctv.com/2026/11/12/ARTIUQqXh1hra6YoWDlWGWs6261112.shtml"
+        },
+        {
+          "title": "天晟新材漏披关联交易，拟罚940万",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_11_12_908100.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：上市公司财务造假严打五年，对公授信与投行联动审查标准趋严，涉上市公司客群的授信复核压力上升；财富条线代销标的的披露瑕疵排查要求提高，风控需同步收紧准入。",
+    "guangdong_ipo": null
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "三大指数集体小幅收跌，道指跌0.36%，财报与个股消息主导盘面。",
+      "sectors": [
+        "Securitize盘后涨10%，Q3业绩增长并收购River One进军资产支持融资。",
+        "Nu Holdings涨3%，Q3净利润创纪录。",
+        "StoneCo下调2026年展望，称宏观压力拖累。",
+        "U.S. Antimony Q3业绩不及预期，股价下跌。",
+        "Curis盘后走低，尽管Q3亏损收窄。"
+      ],
+      "spoken": "美股三大指数集体小幅收跌，道指跌0.36%，纳指跌0.39%，标普500跌0.35%，盘面主要受财报和个股消息驱动。个股方面，Securitize盘后涨10%，三季度业绩增长并宣布收购River One进军资产支持融资。Nu Holdings涨3%，三季度净利润创纪录。StoneCo下调2026年展望，称宏观承压。U.S. Antimony业绩不及预期，股价下跌。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-13"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "52297.09",
+          "changePct": "-0.36%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "25366.09",
+          "changePct": "-0.39%"
+        },
+        {
+          "name": "标普500",
+          "value": "7592.40",
+          "changePct": "-0.35%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3655.83点（-0.67%）；深证成指收报11197.98点（-1.68%）；创业板指收报2509.43点（-2.44%）。",
+      "sectors": [
+        "下跌个股超4600只"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-13"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3655.83",
+          "changePct": "-0.67%"
+        },
+        {
+          "name": "深证成指",
+          "value": "11197.98",
+          "changePct": "-1.68%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2509.43",
+          "changePct": "-2.44%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报24008.55点（-1.26%）；恒生科技收报3931.93点（-2.36%）。",
+      "sectors": [
+        "恒生指数跌1.26%险守24000点",
+        "科网股、黄金股普跌",
+        "阿里巴巴跌超6%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-13"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.26%险守24000点 科指跌2.36% 科网股、黄金股普跌 阿里巴巴跌超6%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-12/doc-iniyniff3881778.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "24008.55",
+          "changePct": "-1.26%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3931.93",
+          "changePct": "-2.36%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-12",
+    "marketStatus": {
+      "reportDate": "2026-11-13",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-12"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-12"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-12"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月12日 周四 收盘；港股为 11月12日 周四 收盘；美股为 11月12日 周四 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611123929926773.html",
+      "title_cn": "英伟达宣布CEO黄仁勋辞职CFO科莱特&#183;克雷斯出任临时CEO",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "东方财富报道称，英伟达宣布CEO黄仁勋辞职，由CFO科莱特·克雷斯出任临时CEO。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "公司人事",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123929437342.html",
+      "title_cn": "A股三大指数收跌成交额超1.9万亿地面兵装板块逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "A股三大指数收跌，全市场成交额超过1.9万亿元，地面兵装板块逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "军工"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123929328492.html",
+      "title_cn": "寒王重返千元、四小龙集体暴涨算力芯片赛道爆了！发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "算力芯片板块大涨，寒武纪股价重返千元，被称为“四小龙”的相关个股集体暴涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "AI",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123929422331.html",
+      "title_cn": "午后！亚太市场大跳水！发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "亚太市场午后出现大幅跳水。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "亚太市场",
+        "大盘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123928930016.html",
+      "title_cn": "重大突破国产1.6T光传输创新纪录！热门赛道再迎催化有望持续高增长的光通信股出炉",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "国产1.6T光传输技术创下新纪录，光通信赛道再获催化，相关概念股被列出。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "光通信",
+        "科技",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123929442489.html",
+      "title_cn": "商务部：中美正就降税、贸易、投资等问题保持密切沟通",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "商务部表示，中美正就降税、贸易、投资等问题保持密切沟通。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "中美贸易",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123929779813.html",
+      "title_cn": "11月12日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "东方财富汇总11月12日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公司公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123929028358.html",
+      "title_cn": "被曝新婚外情？黄仁勋据悉将遭罢免英伟达股价盘后暴跌逾8%",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "有消息称黄仁勋被曝婚外情并据悉将遭罢免，英伟达股价盘后暴跌逾8%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "公司人事",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123929281169.html",
+      "title_cn": "年内创业板“募资王”来了！超聚变今日迎考多只概念股业绩有望高增",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "超聚变于当日迎考，被称为年内创业板“募资王”，多只相关概念股业绩有望高增。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "IPO",
+        "A股",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611123929373974.html",
+      "title_cn": "热度拉满！Anthropic上市首日散户净买入或达2.5亿美元为SpaceX纪录两倍",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "Anthropic上市首日散户净买入或达2.5亿美元，为SpaceX纪录的两倍。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "IPO",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930092244.html",
+      "title_cn": "21评论丨美国通胀惯性增强，加息概率上升",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "21评论文章指出，美国通胀惯性增强，加息概率上升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "宏观",
+        "通胀",
+        "美联储"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611133930081617.html",
+      "title_cn": "黄仁勋被“逼宫”辞职后，英伟达还是一家伟大的公司吗？|财经时评",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "财经时评讨论黄仁勋被“逼宫”辞职后，英伟达是否仍是一家伟大公司。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "公司人事",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-12/doc-iniyniff3881778.shtml",
+      "title_cn": "港股收评：恒指跌1.26%险守24000点 科指跌2.36% 科网股、黄金股普跌 阿里巴巴跌超6%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "港股收评：恒指跌1.26%险守24000点，恒生科技指数跌2.36%，科网股与黄金股普跌，阿里巴巴跌超6%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "中概股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-13/doc-iniypqyq8185108.shtml",
+      "title_cn": "恒指牛熊街货比(53:47)︱11月13日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/13",
+      "summary": "11月13日恒指牛熊街货比为53:47。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-12/doc-iniynaxf1781035.shtml",
+      "title_cn": "恒生科技指数跌超2% 智谱领跌成分股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "恒生科技指数跌超2%，智谱领跌成分股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "科技",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-12/doc-iniymmzi1323052.shtml",
+      "title_cn": "券商：2027年港股基本面与估值或迎共振修复",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "券商观点认为，2027年港股基本面与估值或迎来共振修复。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-12/doc-iniymsim1806673.shtml",
+      "title_cn": "中信建投：关注2027年弱美元撬动的港股机会",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "中信建投研报关注2027年弱美元环境下撬动的港股机会。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-11-12/doc-iniymmzr4002725.shtml",
+      "title_cn": "港股概念追踪 | 光伏能耗国标落地在即 行业基本面边际改善(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "港股概念追踪显示，光伏能耗国家标准即将落地，行业基本面边际改善，并附相关概念股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "光伏",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-12/doc-iniynpnv1178288.shtml",
+      "title_cn": "天伦燃气(01600)11月12日斥资约90.25万港元回购59.05万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "天伦燃气11月12日斥资约90.25万港元回购59.05万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购",
+        "公用事业"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-12/doc-iniynppc3795976.shtml",
+      "title_cn": "西南证券：首予中国心连心化肥(01866)“买入”评级 量质齐升迎成长",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "西南证券首次给予中国心连心化肥“买入”评级，称其量质齐升迎成长。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "化工"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-12/doc-iniyniff3915948.shtml",
+      "title_cn": "财通证券：企业AI商业化提速 智算中心打开成长空间 调整浪潮数字企业(00596)为“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "财通证券称企业AI商业化提速、智算中心打开成长空间，将浪潮数字企业评级调整为“增持”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "AI",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-12/doc-iniynife8572311.shtml",
+      "title_cn": "第一上海：量价齐升持续兑现 维持华虹宏力(01347)“买入”评级 目标价降至125港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "第一上海维持华虹宏力“买入”评级，称量价齐升持续兑现，目标价降至125港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "半导体",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-12/doc-iniyniex1184192.shtml",
+      "title_cn": "瑞银：维持中国财险(02328)目标价20港元 评级“买入”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "瑞银维持中国财险目标价20港元及“买入”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "保险",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-12/doc-iniyniff3824428.shtml",
+      "title_cn": "广发证券：维持中国海外发展(00688)“买入”评级 合理价值16.15港元/股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "广发证券维持中国海外发展“买入”评级，合理价值16.15港元/股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "地产",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/09/tokenization-platform-securitize-reports-gains-expands-into-asset-backed-finance.html",
+      "title_cn": "Tokenization platform Securitize gains 10% postmarket on Q3 results, move into asset-backed finance",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/09",
+      "summary": "代币化平台Securitize公布第三季度业绩并宣布进军资产支持融资，盘后股价上涨10%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "加密资产"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-lineage-cell-rises-on-q3-2026-pipeline-update-93CH-5023602",
+      "title_cn": "Earnings call transcript: Lineage Cell rises on Q3 2026 pipeline update",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "Lineage Cell在第三季度电话会上更新2026年管线进展，股价上涨。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-us-antimony-misses-q3-2026-estimates-as-shares-fall-93CH-5023601",
+      "title_cn": "Earnings call transcript: U.S. Antimony misses Q3 2026 estimates as shares fall",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "U.S. Antimony第三季度业绩不及预期，股价下跌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "矿业"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-heartbeam-narrows-q3-2026-loss-as-cash-burn-eases-93CH-5023600",
+      "title_cn": "Earnings call transcript: HeartBeam narrows Q3 2026 loss as cash burn eases",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "HeartBeam第三季度亏损收窄，现金消耗放缓。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/microvision-to-terminate-redmond-leases-reduces-convertible-notes-balance-93CH-5023599",
+      "title_cn": "MicroVision to terminate Redmond leases, reduces convertible notes balance",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "MicroVision将终止雷德蒙德租约，并降低可转换票据余额。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司公告"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-curis-posts-smaller-q3-2026-loss-shares-fall-after-hours-93CH-5023598",
+      "title_cn": "Earnings call transcript: Curis posts smaller q3 2026 loss, shares fall after hours",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "Curis第三季度亏损收窄，但股价盘后下跌。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-stoneco-cuts-2026-outlook-in-q3-2026-amid-macro-strain-93CH-5023597",
+      "title_cn": "Earnings call transcript: StoneCo cuts 2026 outlook in Q3 2026 amid macro strain",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "StoneCo在宏观压力下于第三季度下调2026年业绩展望。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "支付"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-grown-rogue-lifts-2027-outlook-on-expansion-push-in-q3-2026-93CH-5023595",
+      "title_cn": "Earnings call transcript: Grown Rogue lifts 2027 outlook on expansion push in Q3 2026",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "Grown Rogue在第三季度电话会上因扩张推进上调2027年展望。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/earnings/nu-holdings-stock-up-3-on-hitting-record-q3-net-income-93CH-5023594",
+      "title_cn": "Nu Holdings stock up 3% on hitting record Q3 net income",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "Nu Holdings第三季度净利润创纪录，股价上涨3%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "金融科技"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/earnings/pedevco-earnings-missed-by-086-revenue-topped-estimates-5023593",
+      "title_cn": "PEDEVCO earnings missed by $0.86, revenue topped estimates",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "PEDEVCO业绩每股收益低于预期0.86美元，但营收超出预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-dragonfly-energy-misses-q3-2026-estimates-but-shares-rise-93CH-5023592",
+      "title_cn": "Earnings call transcript: Dragonfly Energy misses Q3 2026 estimates but shares rise",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/12",
+      "summary": "Dragonfly Energy第三季度业绩不及预期，但股价上涨。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "能源"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
