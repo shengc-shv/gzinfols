@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-17",
+  "updatedAt": "2026-11-18",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -7679,36 +7679,6 @@
       ],
       "peakScore": 87
     },
-    "ev-ft3zgv": {
-      "id": "ev-ft3zgv",
-      "topicTags": [],
-      "anchors": [],
-      "kind": "market",
-      "firstBroadcastAt": "2026-10-03",
-      "lastBroadcastAt": "2026-10-03",
-      "broadcastCount": 1,
-      "sections": [
-        "insights"
-      ],
-      "anglesUsed": [],
-      "samples": [
-        {
-          "date": "2026-10-03",
-          "section": "insights",
-          "title": "港股重挫扰动持仓客户",
-          "text": "港股重挫扰动持仓客户 港股复市首日三大指数集体重挫、金融股领跌，持有港股类产品的中高端客户账面波动放大，情绪与赎回压力上升。",
-          "facts": [],
-          "broadcastAt": "2026-10-03T06:35:34+08:00",
-          "url": "https://m.21jingji.com/article/20261002/herald/ff008442f9d42629a9a38d786c361148.html",
-          "novelty": 1
-        }
-      ],
-      "broadcastedTexts": [
-        "港股重挫扰动持仓客户 港股重挫扰动持仓客户 港股复市首日三大指数集体重挫、金融股领跌，持有港股类产品的中高端客户账面波动放大，情绪与赎回压力上升。"
-      ],
-      "broadcastedFacts": [],
-      "peakScore": 0
-    },
     "#55%|客群|开户": {
       "id": "#55%|客群|开户",
       "topicTags": [
@@ -15385,8 +15355,149 @@
     }
   },
   "today": {
-    "date": "2026-11-17",
-    "entries": []
+    "date": "2026-11-18",
+    "entries": [
+      {
+        "date": "2026-11-18",
+        "section": "must_read",
+        "title": "银行业集体加码财富管理",
+        "text": "银行业集体加码财富管理 中收争夺进一步前移，同业在产品与费率上的动作节奏加快，财富条线竞争位次面临重排。",
+        "facts": [],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://finance.cctv.com/2026/11/17/ARTIGA9ewKKsCJ1CMeVlg8Lj261117.shtml",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-18",
+        "section": "must_read",
+        "title": "地产投资降21.6%、二手房增11.4%",
+        "text": "地产投资降21.6%、二手房增11.4% 一二手分化进一步拉大，新房投资端收缩而二手交易活跃，按揭投放的场景结构正在位移。",
+        "facts": [
+          "#21.6%",
+          "#11.4%"
+        ],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_17_908568.shtml",
+        "score": 66,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-18",
+        "section": "must_read",
+        "title": "固收+理财收益降至1.78%",
+        "text": "固收+理财收益降至1.78% 八点二八万亿固收加产品收益下行，同业集体转向控回撤，客户收益预期与货架结构面临重估。",
+        "facts": [
+          "#1.78%"
+        ],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://finance.sina.com.cn/money/lczx/2026-11-17/doc-iniyzxec2162272.shtml",
+        "score": 61,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-18",
+        "section": "must_read",
+        "title": "金价自高点回撤31.6%",
+        "text": "金价自高点回撤31.6% 贵金属进入年内低位窗口，实物金与积存金需求集中释放，避险与婚嫁两类客群同时被激活。",
+        "facts": [
+          "#31.6%"
+        ],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-11-17/doc-iniyzxcx1717526.shtml",
+        "score": 61,
+        "novelty": 0.47021276595744677,
+        "angle": "受影响人群"
+      },
+      {
+        "date": "2026-11-18",
+        "section": "must_read",
+        "title": "银行间债市超6000亿支持民企",
+        "text": "银行间债市超6000亿支持民企 民企债券融资渠道拓宽，本地民营企业的直接融资可得性上升，融资结构出现替代效应。",
+        "facts": [],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261117/4496783_1.html",
+        "score": 19,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-18",
+        "section": "insights",
+        "title": "固收加收益走低、同业转控回撤",
+        "text": "固收加收益走低、同业转控回撤 八点二八万亿固收加产品十月收益降至一点七八，客户对净值回撤的敏感度上升，持有体验与投诉风险同步抬升。",
+        "facts": [],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://finance.sina.com.cn/money/lczx/2026-11-17/doc-iniyzxec2162272.shtml",
+        "novelty": 0.2418181818181818,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-18",
+        "section": "insights",
+        "title": "点心债建立香港本地基准",
+        "text": "点心债建立香港本地基准 离岸人民币定价基础设施完善，跨境客户的债券配置选择增多，对报价与期限的要求更细。",
+        "facts": [],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_17_908655.shtml",
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-18",
+        "section": "insights",
+        "title": "民企债市融资超6000亿",
+        "text": "民企债市融资超6000亿 银行间债市以超六千亿规模支持民企融资，本地民营企业的融资渠道拓宽，信贷与直融之间出现替代。",
+        "facts": [],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261117/4496783_1.html",
+        "novelty": 0.16041666666666665,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-18",
+        "section": "insights",
+        "title": "四家银行推迟发债、银团再违约",
+        "text": "四家银行推迟发债、银团再违约 信用风险事件延续，相关行业授信与代销资产的排查压力上升，小微客群的风险画像需要重估。",
+        "facts": [],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_17_908629.shtml",
+        "novelty": 0.34299999999999997,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-18",
+        "section": "insights",
+        "title": "金价回撤、婚嫁买家进场",
+        "text": "金价回撤、婚嫁买家进场 金价自高点回撤三成，婚嫁等实物金需求集中进场，贵金属代销与积存金的客群结构发生变化。",
+        "facts": [],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-11-17/doc-iniyzxcx1717526.shtml",
+        "novelty": 0.19886363636363638,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-18",
+        "section": "insights",
+        "title": "医保钱包2.0盘活个人账户",
+        "text": "医保钱包2.0盘活个人账户 个人账户资金盘活并支持家庭互助，社保客群的账户活跃度与代发资金流转频次上升。",
+        "facts": [],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_17_908700.shtml",
+        "novelty": 0.3414634146341463,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-18",
+        "section": "risk",
+        "title": "金融黑灰产侵蚀获客入口",
+        "text": "金融黑灰产侵蚀获客入口 监管堵入口、疏渠道遏制金融黑灰产牟利，异常中介在信用卡与消费贷获客环节的活动被重点整治。 信用卡与消费贷获客环节的异常中介风险上升，贷前核查与渠道准入承压；风控需加强身份与用途核验，个贷与信用卡条路面客诉与合规成本抬升。",
+        "facts": [],
+        "broadcastAt": "2026-11-18T07:13:18+08:00",
+        "score": 74,
+        "novelty": 0.2674157303370786,
+        "angle": "市场反应"
+      }
+    ],
+    "runId": "44197351903"
   },
   "deliveries": [
     {
@@ -15829,6 +15940,7 @@
       "reportSha": "510f44ec2b3064eaa321cd1b630e6b0b58e6ab37"
     }
   ],
+  "lastHeroLine": "今天主要看五个方面：点心债建立香港本地基准、四家银行推迟发债、银团再违约、银行业集体加码财富管理、地产投资降21.6%、二手房增11.4%、民企债市融资超6000亿。",
   "ipoVoicing": {
     "展辰新材": [
       "2026-11-07"
