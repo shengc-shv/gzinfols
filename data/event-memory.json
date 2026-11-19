@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-19",
+  "updatedAt": "2026-11-20",
   "events": {
     "信贷|利率|客群": {
       "id": "信贷|利率|客群",
@@ -8141,43 +8141,6 @@
       "broadcastedFacts": [],
       "peakScore": 61
     },
-    "ev-m72mth": {
-      "id": "ev-m72mth",
-      "topicTags": [
-        "消费信贷",
-        "广州本地"
-      ],
-      "anchors": [],
-      "kind": "local",
-      "firstBroadcastAt": "2026-10-05",
-      "lastBroadcastAt": "2026-10-05",
-      "broadcastCount": 1,
-      "sections": [
-        "insights"
-      ],
-      "anglesUsed": [],
-      "samples": [
-        {
-          "date": "2026-10-05",
-          "section": "insights",
-          "title": "中欧班列货运量2.73万标箱",
-          "text": "中欧班列货运量2.73万标箱 广州国际港中欧班列前9月监管2.73万标箱，班列相关小微企业的结算与贸易融资需求持续累积，跨境结算场景的客户黏性增强。",
-          "facts": [
-            "#9月"
-          ],
-          "broadcastAt": "2026-10-05T06:33:34+08:00",
-          "url": "https://www.stcn.com/article/detail/4206202.html",
-          "novelty": 1
-        }
-      ],
-      "broadcastedTexts": [
-        "中欧班列货运量2.73万标箱 中欧班列货运量2.73万标箱 广州国际港中欧班列前9月监管2.73万标箱，班列相关小微企业的结算与贸易融资需求持续累积，跨境结算场景的客户黏性增强。"
-      ],
-      "broadcastedFacts": [
-        "#9月"
-      ],
-      "peakScore": 0
-    },
     "客群|黄金": {
       "id": "客群|黄金",
       "topicTags": [
@@ -15822,8 +15785,165 @@
     }
   },
   "today": {
-    "date": "2026-11-19",
-    "entries": []
+    "date": "2026-11-20",
+    "entries": [
+      {
+        "date": "2026-11-20",
+        "section": "must_read",
+        "title": "信用卡一年减少3400万张",
+        "text": "信用卡一年减少3400万张 支付结构向借记卡迁移，一年净增近2亿张借记卡，零售支付入口与结算账户的争夺重心正在转移。",
+        "facts": [],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://finance.sina.com.cn/jinrong/yh/2026-11-19/doc-inizhmiz6195378.shtml",
+        "score": 63,
+        "novelty": 0.3214285714285714,
+        "angle": "数据验证"
+      },
+      {
+        "date": "2026-11-20",
+        "section": "must_read",
+        "title": "3000亿注资特别国债落地",
+        "text": "3000亿注资特别国债落地 8家金融央企获核心一级资本补充，国有大行资本实力抬升，同业竞争格局与下沉力度将受影响。",
+        "facts": [
+          "!落地",
+          "#8家"
+        ],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://m.21jingji.com/article/20261119/herald/ea03fd8238d283c8588c551713148a2c.html",
+        "score": 51,
+        "novelty": 1
+      },
+      {
+        "date": "2026-11-20",
+        "section": "must_read",
+        "title": "二永债发行突破2万亿",
+        "text": "二永债发行突破2万亿 商业银行年内补充资本节奏加快，同业资本约束缓解，后续信贷与投放能力的空间随之打开。",
+        "facts": [
+          "#2万亿"
+        ],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_19_909012.shtml",
+        "score": 66,
+        "novelty": 0.5369565217391304,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-20",
+        "section": "must_read",
+        "title": "普惠贷款38.5万亿、大行份额近半",
+        "text": "普惠贷款38.5万亿、大行份额近半 大行下沉抢占近半份额，普惠小微市场的价格与客户结构被重塑，存量客户被分流压力上升。",
+        "facts": [
+          "#38.5万亿"
+        ],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-19/doc-inizfqem6388931.shtml",
+        "score": 66,
+        "novelty": 0.5526595744680851,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-20",
+        "section": "must_read",
+        "title": "信托日开型产品加速退出",
+        "text": "信托日开型产品加速退出 信托新规实施在即，短期限高流动性产品供给收缩，财富货架的期限结构正在整体拉长。",
+        "facts": [
+          "!实施"
+        ],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-11-19/doc-inizhmki0951588.shtml",
+        "score": 74,
+        "novelty": 0.5667441860465117,
+        "angle": "客户行动"
+      },
+      {
+        "date": "2026-11-20",
+        "section": "insights",
+        "title": "理财回撤后保险承接",
+        "text": "理财回撤后保险承接 理财净值回撤期，风险偏好偏稳的客户对保本型替代品关注度上升，储蓄型保险与定期存款的承接诉求同步走高。",
+        "facts": [],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://finance.sina.com.cn/roll/2026-11-19/doc-inizhmki0979651.shtml",
+        "novelty": 0.28823529411764703,
+        "angle": "客户行动"
+      },
+      {
+        "date": "2026-11-20",
+        "section": "insights",
+        "title": "大行下沉抢普惠份额",
+        "text": "大行下沉抢普惠份额 普惠贷款余额38.5万亿、大行下沉份额近半，小微客户被同业低价争抢，存量客户的续作与留存压力上升。",
+        "facts": [
+          "#38.5万亿"
+        ],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-19/doc-inizfqem6388931.shtml",
+        "novelty": 0.1673913043478261,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-20",
+        "section": "insights",
+        "title": "信用卡与借记卡此消彼长",
+        "text": "信用卡与借记卡此消彼长 信用卡一年减少3400万张、借记卡增近2亿张，客户支付账户选择迁移，信用卡存量活跃度与绑卡结构发生变化。",
+        "facts": [],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://finance.sina.com.cn/jinrong/yh/2026-11-19/doc-inizhmiz6195378.shtml",
+        "novelty": 0.1951923076923077,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-20",
+        "section": "insights",
+        "title": "信托产品货架更新",
+        "text": "信托产品货架更新 信托产品供给端持续调整，高净值客户对产品底层与期限结构的问询增多，配置沟通频次上升。",
+        "facts": [
+          "!问询"
+        ],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://finance.sina.com.cn/trust/2026-11-19/doc-inizhrsf0939780.shtml",
+        "novelty": 0.9333333333333333,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-20",
+        "section": "insights",
+        "title": "人民币购售便利化落地",
+        "text": "人民币购售便利化落地 首批人民币购售便利化交易落地，跨境客群的外汇交易流程与报价体验出现差异，同业服务竞争升温。",
+        "facts": [
+          "!落地"
+        ],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://m.21jingji.com/article/20261119/herald/96381cc139d41f312f116841bd961a1f.html",
+        "novelty": 0.7583333333333333,
+        "angle": "市场反应"
+      },
+      {
+        "date": "2026-11-20",
+        "section": "insights",
+        "title": "外贸工厂数字化经营",
+        "text": "外贸工厂数字化经营 外贸工厂用AI管理十万级客户，跨境结算频次与融资节奏随之变化，外贸客群的数字化服务诉求上升。",
+        "facts": [],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "url": "https://news.dayoo.com/guangzhou/202611/19/139995_55025174.htm",
+        "novelty": 0.3188888888888889,
+        "angle": "政策变化"
+      },
+      {
+        "date": "2026-11-20",
+        "section": "risk",
+        "title": "资本补充提速下的同业竞争",
+        "text": "资本补充提速下的同业竞争 3000亿元注资特别国债落地，8家金融央企补充核心一级资本，同期商业银行二永债发行突破2万亿。 大行资本约束缓解后下沉与定价空间扩大，个贷与普惠条线面临客户被低价分流；财富条线则需应对大行以保险、存款稳客带来的资金搬家压力。",
+        "facts": [
+          "#3000亿元",
+          "#8家",
+          "#2万亿",
+          "!落地"
+        ],
+        "broadcastAt": "2026-11-20T07:19:29+08:00",
+        "score": 74,
+        "novelty": 1
+      }
+    ],
+    "runId": "44636582973"
   },
   "deliveries": [
     {
@@ -16280,6 +16400,7 @@
       "reportSha": "2a50253e17eceee8999dd73bd5d6c409d4c720cd"
     }
   ],
+  "lastHeroLine": "今天主要看三个方面：支付结构迁移，信用卡一年少3400万张；贵金属与美元存款双向波动，金价失守800元每克；财富货架调整，信托日开型产品加速退出。",
   "ipoVoicing": {
     "大寰机器人科技股份有限公司": [
       "2026-11-14"

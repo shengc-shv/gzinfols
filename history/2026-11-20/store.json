@@ -1,0 +1,870 @@
+{
+  "date": "2026-11-20",
+  "updatedAt": "2026-11-19T23:22:47.931Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：支付结构迁移，信用卡一年少3400万张；贵金属与美元存款双向波动，金价失守800元每克；财富货架调整，信托日开型产品加速退出。",
+    "spoken_hero": "今天主要看三个方面：支付结构在迁移，信用卡一年少了三千四百万张；贵金属和美元存款双向波动，国内金价失守八百元每克；财富货架在调整，信托日开型产品加速退出。",
+    "must_read": [
+      {
+        "title": "信用卡一年减少3400万张",
+        "why": "支付结构向借记卡迁移，一年净增近2亿张借记卡，零售支付入口与结算账户的争夺重心正在转移。",
+        "url": "https://finance.sina.com.cn/jinrong/yh/2026-11-19/doc-inizhmiz6195378.shtml"
+      },
+      {
+        "title": "3000亿注资特别国债落地",
+        "why": "8家金融央企获核心一级资本补充，国有大行资本实力抬升，同业竞争格局与下沉力度将受影响。",
+        "url": "https://m.21jingji.com/article/20261119/herald/ea03fd8238d283c8588c551713148a2c.html"
+      },
+      {
+        "title": "二永债发行突破2万亿",
+        "why": "商业银行年内补充资本节奏加快，同业资本约束缓解，后续信贷与投放能力的空间随之打开。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_19_909012.shtml"
+      },
+      {
+        "title": "普惠贷款38.5万亿、大行份额近半",
+        "why": "大行下沉抢占近半份额，普惠小微市场的价格与客户结构被重塑，存量客户被分流压力上升。",
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-19/doc-inizfqem6388931.shtml"
+      },
+      {
+        "title": "信托日开型产品加速退出",
+        "why": "信托新规实施在即，短期限高流动性产品供给收缩，财富货架的期限结构正在整体拉长。",
+        "url": "https://finance.sina.com.cn/roll/2026-11-19/doc-inizhmki0951588.shtml"
+      }
+    ],
+    "spoken_must_read": "信用卡一年减少3400万张。支付结构向借记卡迁移，一年净增近2亿张借记卡，零售支付入口与结算账户的争夺重心正在转移。其次，3000亿注资特别国债落地。8家金融央企获核心一级资本补充，国有大行资本实力抬升，同业竞争格局与下沉力度将受影响。此外，二永债发行突破2万亿。商业银行年内补充资本节奏加快，同业资本约束缓解，后续信贷与投放能力的空间随之打开。还有，普惠贷款38.5万亿、大行份额近半。大行下沉抢占近半份额，普惠小微市场的价格与客户结构被重塑，存量客户被分流压力上升。另外，信托日开型产品加速退出。信托新规实施在即，短期限高流动性产品供给收缩，财富货架的期限结构正在整体拉长。",
+    "insights": [
+      {
+        "topic": "理财回撤后保险承接",
+        "impact": "理财净值回撤期，风险偏好偏稳的客户对保本型替代品关注度上升，储蓄型保险与定期存款的承接诉求同步走高。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "银行理财收益年末大幅回撤！国有大行力推储蓄型保险稳客留客，中小银行仍渴求存款",
+            "url": "https://finance.sina.com.cn/roll/2026-11-19/doc-inizhmki0979651.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "大行下沉抢普惠份额",
+        "impact": "普惠贷款余额38.5万亿、大行下沉份额近半，小微客户被同业低价争抢，存量客户的续作与留存压力上升。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "普惠贷款已达38.5万亿，大行下沉“抢客”份额近半",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-19/doc-inizfqem6388931.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "信用卡与借记卡此消彼长",
+        "impact": "信用卡一年减少3400万张、借记卡增近2亿张，客户支付账户选择迁移，信用卡存量活跃度与绑卡结构发生变化。",
+        "tag": [
+          "客群"
+        ],
+        "group": "支付结构迁移",
+        "sources": [
+          {
+            "title": "央行最新数据！信用卡一年减少3400万张，借记卡一年增近2亿张",
+            "url": "https://finance.sina.com.cn/jinrong/yh/2026-11-19/doc-inizhmiz6195378.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "信托产品货架更新",
+        "impact": "信托产品供给端持续调整，高净值客户对产品底层与期限结构的问询增多，配置沟通频次上升。",
+        "tag": [
+          "私行",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "信托产品概览（2026年11月19日）",
+            "url": "https://finance.sina.com.cn/trust/2026-11-19/doc-inizhrsf0939780.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "人民币购售便利化落地",
+        "impact": "首批人民币购售便利化交易落地，跨境客群的外汇交易流程与报价体验出现差异，同业服务竞争升温。",
+        "tag": [
+          "政银合作"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "中国工商银行成功落地首批人民币购售便利化交易",
+            "url": "https://m.21jingji.com/article/20261119/herald/96381cc139d41f312f116841bd961a1f.html"
+          }
+        ]
+      },
+      {
+        "topic": "外贸工厂数字化经营",
+        "impact": "外贸工厂用AI管理十万级客户，跨境结算频次与融资节奏随之变化，外贸客群的数字化服务诉求上升。",
+        "tag": [
+          "科技金融"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "厂里的AI“管着”十万客户｜“厂”开大门·外贸工厂蹲点融媒报道④",
+            "url": "https://news.dayoo.com/guangzhou/202611/19/139995_55025174.htm"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，理财回撤后保险承接，理财净值回撤期，风险偏好偏稳的客户对保本型替代品关注度上升。第二，普惠小微方面，大行下沉抢普惠份额，普惠贷款余额38.5万亿、大行下沉份额近半。第三，支付结构迁移方面，信用卡与借记卡此消彼长，信用卡一年减少3400万张、借记卡增近2亿张。第四，高端客户方面，信托产品货架更新，信托产品供给端持续调整。第五，跨境客群方面，人民币购售便利化落地、外贸工厂数字化经营，首批人民币购售便利化交易落地。",
+    "risk": {
+      "topic": "资本补充提速下的同业竞争",
+      "evidence": "3000亿元注资特别国债落地，8家金融央企补充核心一级资本，同期商业银行二永债发行突破2万亿。",
+      "impact": "大行资本约束缓解后下沉与定价空间扩大，个贷与普惠条线面临客户被低价分流；财富条线则需应对大行以保险、存款稳客带来的资金搬家压力。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "3000亿元注资特别国债落地 8家金融央企补充核心一级资本",
+          "url": "https://m.21jingji.com/article/20261119/herald/ea03fd8238d283c8588c551713148a2c.html"
+        },
+        {
+          "title": "年内商业银行二永债发行突破2万亿；金价七连跌失守3800美元",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_11_19_909012.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：资本补充提速下的同业竞争，大行资本约束缓解后下沉与定价空间扩大，个贷与普惠条线面临客户被低价分流；财富条线则需应对大行以保险、存款稳客带来的资金搬家压力。",
+    "guangdong_ipo": {
+      "push_line": ""
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "三大指数集体重挫，纳指跌2.25%，AI交易退潮叠加AMD遭做空。",
+      "sectors": [
+        "科技股全线走弱，Anthropic重磅IPO未能提振AI人气，AI板块承压。",
+        "AMD收跌超7%，做空机构指其固件现身黑名单中企，公司称合规。",
+        "英伟达市值累计蒸发2万亿美元，期权市场为其财报定价更大波动。",
+        "加州总检察长就对华泄露风险与投资者披露向英伟达发出传票。",
+        "Bausch+Lomb眼痛药物未达终点，股价走低。"
+      ],
+      "spoken": "美股三大指数集体大跌，纳指跌2.25%，道指跌2.19%，标普跌2.02%。AI交易明显退潮，备受期待的Anthropic上市也没能提振人气。个股方面，AMD因做空报告指其涉黑名单中企收跌超7%，英伟达市值累计蒸发2万亿美元，还遭加州总检察长传票，科技股整体承压。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-20"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "49097.06",
+          "changePct": "-2.19%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "23879.20",
+          "changePct": "-2.25%"
+        },
+        {
+          "name": "标普500",
+          "value": "7175.83",
+          "changePct": "-2.02%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3577.62点（-0.28%）；深证成指收报10583.20点（-0.71%）；创业板指收报2293.34点（-0.79%）。",
+      "sectors": [
+        "沪深沪深两市成交额仅1.31万亿"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-20"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3577.62",
+          "changePct": "-0.28%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10583.20",
+          "changePct": "-0.71%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2293.34",
+          "changePct": "-0.79%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报22841.62点（-1.95%）；恒生科技收报3649.14点（-2.33%）。",
+      "sectors": [
+        "科网股普跌",
+        "光通信板块逆势活跃",
+        "腾讯跌超6%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-20"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.95% 科指跌2.33% 科网股普跌 光通信板块逆势活跃 腾讯跌超6%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-19/doc-inizhfac6233718.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22841.62",
+          "changePct": "-1.95%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3649.14",
+          "changePct": "-2.33%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-19",
+    "marketStatus": {
+      "reportDate": "2026-11-20",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-19"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-19"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-19"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月19日 周四 收盘；港股为 11月19日 周四 收盘；美股为 11月19日 周四 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611193934914944.html",
+      "title_cn": "GPU赛道全线崩跌发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "A股GPU板块出现全线大幅下跌，市场关注下跌原因。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "GPU",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611193934499755.html",
+      "title_cn": "四大证券报齐发文：勿让“小作文”扰乱资本市场官方及时发声稳预期",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "四大证券报同日发文，呼吁勿让“小作文”扰乱资本市场，并提及官方及时发声以稳定预期。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "监管",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611193934935630.html",
+      "title_cn": "国产算力板块暴跌业界称“三星开始穿透严查代工”的市场传闻不准确",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "国产算力板块大幅下跌，业界回应称“三星开始穿透严查代工”的市场传闻不准确。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "算力",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611193934716375.html",
+      "title_cn": "利好突袭！刚刚全线拉升！史上最大IPO定了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "市场出现利好消息并全线拉升，报道提及“史上最大IPO”已确定。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "IPO",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611193934998824.html",
+      "title_cn": "科创50指数收盘涨近2%三市成交额1.31万亿",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "科创50指数收盘涨近2%，沪深两市成交额达1.31万亿元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "指数",
+        "成交额"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611193935149363.html",
+      "title_cn": "中俄美元首和平宣言",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "报道提及中俄美元首发表和平宣言。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "地缘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203935424713.html",
+      "title_cn": "Anthropic上市首日收涨17%市值一度达到1.5万亿美元",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "Anthropic上市首日收涨17%，市值一度达到1.5万亿美元。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "IPO",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611193934917162.html",
+      "title_cn": "7分钟3股直线涨停！外围变数引爆光刻胶赛道",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "光刻胶板块受外围变数影响异动，7分钟内有3只个股直线涨停。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "光刻胶",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611193934994893.html",
+      "title_cn": "临近尾盘宽基ETF持续放量2只ETF成交超100亿",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "临近尾盘宽基ETF持续放量，2只ETF成交额超过100亿元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "ETF",
+        "A股",
+        "资金"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611193935053683.html",
+      "title_cn": "习近平主持中俄美元首会晤",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "习近平主持中俄美元首会晤。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "地缘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203935478618.html",
+      "title_cn": "推动资金“愿意来留得住”FOF需夯实长期竞争力建设",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "报道讨论推动资金“愿意来、留得住”，并提出FOF需夯实长期竞争力建设。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "基金",
+        "FOF",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203935466641.html",
+      "title_cn": "轻工业需要强标准（经济时评）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "经济时评文章指出轻工业需要强化标准建设。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "轻工业"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-19/doc-inizhfac6233718.shtml",
+      "title_cn": "港股收评：恒指跌1.95% 科指跌2.33% 科网股普跌 光通信板块逆势活跃 腾讯跌超6%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "港股收评：恒指跌1.95%，恒生科技指数跌2.33%，科网股普跌，光通信板块逆势活跃，腾讯跌超6%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "指数",
+        "科网股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-20/doc-inizinvp5805150.shtml",
+      "title_cn": "恒指牛熊街货比(53:47)︱11月20日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "11月20日恒指牛熊街货比为53:47。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-19/doc-inizfuni1036103.shtml",
+      "title_cn": "腾讯股价跌破350港元创2024年8月以来新低，AI“账单”压顶",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "腾讯股价跌破350港元，创2024年8月以来新低，报道提及AI相关支出压力。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "腾讯",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-19/doc-inizfiwp1115557.shtml",
+      "title_cn": "港交所推出离岸人民币债券指数意义重大",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "港交所推出离岸人民币债券指数，报道称其意义重大。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "港交所",
+        "债券"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-11-19/doc-inizfiwp1149629.shtml",
+      "title_cn": "港股概念追踪|能源局发文加快流域水风光一体化发展 优质风光资产迎重估(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "能源局发文加快流域水风光一体化发展，报道提及优质风光资产或迎重估并附概念股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "政策",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-11-19/doc-inizhrsa4418353.shtml",
+      "title_cn": "汇丰削巨子生物目标价26%至20.7港元 可复美双十一GMV仅增5%逊预期",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "汇丰将巨子生物目标价下调26%至20.7港元，称可复美双十一GMV仅增5%逊于预期。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "医药",
+        "评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-19/doc-inizhfac6270626.shtml",
+      "title_cn": "小摩：维持中金公司(03908)目标价30港元及“增持”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "摩根大通维持中金公司目标价30港元及“增持”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商",
+        "评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-19/doc-inizhfah4575046.shtml",
+      "title_cn": "花旗：维持联想集团(00992)目标价40港元及“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "花旗维持联想集团目标价40港元及“买入”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "科技硬件",
+        "评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-19/doc-inizhfam1043080.shtml",
+      "title_cn": "大摩：削岚图汽车(07489)目标价至1.7港元 重申“增持”评级 增长重置惟具海外潜力",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "摩根士丹利将岚图汽车目标价下调至1.7港元，重申“增持”评级，提及增长重置但具海外潜力。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "汽车",
+        "评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-19/doc-inizhfam1034577.shtml",
+      "title_cn": "中银国际：下调腾讯控股(00700)目标价至520港元 维持“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "中银国际将腾讯控股目标价下调至520港元，维持“买入”评级。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "腾讯",
+        "评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-19/doc-inizhfae7781306.shtml",
+      "title_cn": "高盛：予联想集团(00992)目标价51港元 评级“买入”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "高盛给予联想集团目标价51港元，评级“买入”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "科技硬件",
+        "评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-19/doc-inizhfae7773079.shtml",
+      "title_cn": "小摩：德昌电机控股(00179)中期盈利符盈警预告 利润率压力延续 目标价降至15港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "摩根大通称德昌电机控股中期盈利符合盈警预告，利润率压力延续，目标价降至15港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/19/anthropic-ipo-ai-stocks-selloff.html",
+      "title_cn": "Anthropic was supposed to save the AI trade. What went wrong?",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "CNBC报道讨论Anthropic本应提振AI交易，但市场表现引发对其走势的质疑。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/19/amd-falls-on-short-seller-report-of-alleged-china-exposure.html",
+      "title_cn": "AMD dives on short-seller report of alleged China exposure",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "AMD因做空机构报告称其涉嫌中国相关敞口而股价大跌。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "美股",
+        "做空"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/17/nvidia-has-lost-2-trillion-in-value-heres-what-options-traders-expect-from-earnings.html",
+      "title_cn": "Nvidia has lost $2 trillion in value. Here's what options traders expect from earnings",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/17",
+      "summary": "英伟达市值已蒸发2万亿美元，报道分析期权交易者对财报的预期。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/16/anthropic-proxy-destiny-tech100-fund.html",
+      "title_cn": "This Anthropic proxy play is getting traders' attention – here's where they see it going",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/16",
+      "summary": "报道称某被视为Anthropic替代标的的个股受到交易者关注，并分析其后续走势。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-clearsign-beats-q3-2026-eps-forecast-as-margin-jumps-93CH-5040291",
+      "title_cn": "Earnings call transcript: ClearSign beats Q3 2026 EPS forecast as margin jumps",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "ClearSign财报电话会显示其第三季度EPS超出预期，利润率上升。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/irhythm-holdings-director-abhijit-talwalkar-buys-763k-in-stock-93CH-5040290",
+      "title_cn": "iRhythm Holdings director Abhijit Talwalkar buys $763K in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "iRhythm Holdings董事Abhijit Talwalkar买入价值76.3万美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "医药",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/musks-spacexsi-denies-liability-in-uk-lawmakers-lawsuit-over-grok-images-5039639",
+      "title_cn": "Musk’s SpaceXSI denies liability in UK lawmaker’s lawsuit over Grok images",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "马斯克旗下SpaceXSI就英国议员针对Grok图像的诉讼否认责任。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "诉讼"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/kbr-subsidiary-prices-500m-notes-for-trinzic-spinoff-93CH-5040289",
+      "title_cn": "KBR subsidiary prices $500m notes for Trinzic spinoff",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "KBR子公司为Trinzic分拆定价发行5亿美元票据。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "分拆"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/bausch--lomb-stock-slips-as-eye-pain-drug-misses-endpoint-5040281",
+      "title_cn": "Bausch + Lomb stock slips as eye pain drug misses endpoint",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "Bausch + Lomb股价下跌，因其眼痛药物未达到试验终点。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/corpay-to-invest-11b-in-bill-as-part-of-takeprivate-deal-93CH-5040279",
+      "title_cn": "Corpay to invest $1.1B in BILL as part of take-private deal",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "Corpay将向BILL投资11亿美元，作为私有化交易的一部分。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "并购"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-gorilla-technology-beats-q3-2026-estimates-on-revenue-93CH-5040278",
+      "title_cn": "Earnings call transcript: Gorilla Technology beats Q3 2026 estimates on revenue",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "Gorilla Technology财报电话会显示其第三季度营收超出预期。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/california-ag-subpoenas-nvidia-over-china-leak-risks-and-investor-disclosures-5040277",
+      "title_cn": "California AG subpoenas Nvidia over China leak risks and investor disclosures",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/19",
+      "summary": "加州总检察长就中国泄露风险及投资者披露问题向英伟达发出传票。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "美股",
+        "监管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
