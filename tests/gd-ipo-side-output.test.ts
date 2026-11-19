@@ -202,6 +202,26 @@ test("IPO_PROGRESS_RE：覆盖 IPO受理 / IPO问询 两种在审高频状态", 
   );
 });
 
+test("IPO_PROGRESS_RE：裸「路演」不再误收创业赛/项目路演泛活动（2026-11-19）", () => {
+  // 实锤：2026-11-19「“赢在广州”复赛路演走进华农，超千岗位送进校园」
+  // (isIpo=false / gz-media) 因标题含裸「路演」+「广州」被误判进「广东IPO动态」
+  // 及 IPO 口播。裸「路演」须带 IPO 限定词才算 IPO 事件。
+  assert.equal(
+    isGdIpoCandidate("“赢在广州”复赛路演走进华农，超千岗位送进校园", "超千岗位进华农校园"),
+    false,
+    "创业赛复赛路演 + 广州 → 不得进 IPO",
+  );
+  assert.equal(
+    isGdIpoCandidate("双创项目路演在广州举行", "投资机构现场对接"),
+    false,
+    "双创项目路演 → 不得进 IPO",
+  );
+  // IPO 语境的路演搭配仍须命中
+  assert.ok(isGdIpoCandidate("粤芯半导体 IPO路演推介会举行", "注册地：广东"), "IPO路演仍命中");
+  assert.ok(isGdIpoCandidate("某公司新股路演如期举行", "注册地：广东"), "新股路演仍命中");
+  assert.ok(isGdIpoCandidate("某公司发行路演启动", "注册地：广东"), "发行路演仍命中");
+});
+
 test("buildGdIpoSpoken：带出属性 + 超过 3 家收尾「等N家」", () => {
   const items = ["A", "B", "C", "D"].map((n, i) => ({
     url: `u${i}`,
