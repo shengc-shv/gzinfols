@@ -51,9 +51,10 @@ function exchangeOfCode(code: string): "szse" | "sse" | "bse" | null {
 }
 
 // 类型关键词
-// 2026-11-19：裸「路演」会误收创业赛/项目路演等泛活动，收紧为带 IPO 限定词。
+// 2026-11-19：「路演」改为配对词（与 enrich/heuristics.ts IPO_PROGRESS_RE 同口径），
+// 裸「路演」会把「创业赛复赛路演」「招聘路演进校园」误判成 IPO 辅导线索。
 const TUTORING_RE =
-  /(辅导|备案|招股|过会|上市委|注册生效|询价|申购|IPO路演|新股路演|发行路演|上市路演|招股路演|路演询价|拟登陆|pre-?ipo|ipo)/i;
+  /(辅导|备案|招股|过会|上市委|注册生效|询价|申购|(?:IPO|ipo|新股|首发|网上|网下|发行)路演|路演(?:推介|询价)|拟登陆|pre-?ipo|ipo)/i;
 const EXCHANGE_EVENT_RE =
   /(限售|解禁|定增|增发|可转债|新股上市|上市公告|募资|配股|转板)/i;
 const FINANCE_ONLY_RE =

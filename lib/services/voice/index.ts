@@ -131,11 +131,10 @@ export const SCRIPT_MAX_CHARS = Math.round(AUDIO_DURATION_MAX_SEC * CHARS_PER_SE
 /**
  * IPO 进展词表（gzinfo lib/output/render/cards.ts IPO_PROGRESS_RE 逐字移植）。
  * 口径纪律：与卡面判定共用同一份词表，避免「播报与卡片两套正则漂移」。
- * 2026-11-19：「路演」收紧为必须带 IPO 限定词（IPO/新股/发行/上市/招股 前缀或路演询价），
- * 避免「创业赛复赛路演」等泛活动被口播成 IPO 动态（与 enrich/heuristics.ts 同步）。
  */
+// 2026-11-19：「路演」改为配对词（与 enrich/heuristics.ts 同口径），裸词会误判赛事/招聘路演。
 export const IPO_PROGRESS_RE =
-  /注册生效|同意注册|IPO注册|首次公开发行|过会|上会|上市委|提交注册|注册申请|辅导备案|IPO辅导|辅导验收|招股|申购|IPO路演|新股路演|发行路演|上市路演|招股路演|路演询价|敲钟|新股上市|递表|拟上市|发行审核|发行注册|注册制上市|IPO已?受理|IPO已?问询/;
+  /注册生效|同意注册|IPO注册|首次公开发行|过会|上会|上市委|提交注册|注册申请|辅导备案|IPO辅导|辅导验收|招股|申购|(?:IPO|ipo|新股|首发|网上|网下|发行)路演|路演(?:推介|询价)|敲钟|新股上市|递表|拟上市|发行审核|发行注册|注册制上市|IPO已?受理|IPO已?问询/;
 
 /** 去除 URL / Markdown / 链接 / 易碎符号，保留可朗读纯文本。 */
 export function sanitize(t: string): string {
