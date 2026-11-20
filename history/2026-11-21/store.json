@@ -1,0 +1,832 @@
+{
+  "date": "2026-11-21",
+  "updatedAt": "2026-11-20T23:22:45.913Z",
+  "executive": {
+    "hero_line": "今天主要看3个方面：贵金属风险，金价创14个月新低且四家银行集中示警；个人养老金，年底缴存最多省税5400元；信用卡，连续16个季度下滑近一年减少3400万张。",
+    "spoken_hero": "今天主要看3个方面：贵金属风险，金价创14个月新低且四家银行集中示警；个人养老金，年底缴存最多省税5400元；信用卡，连续16个季度下滑近一年减少3400万张。",
+    "must_read": [
+      {
+        "title": "财政部在港发20亿美元主权债",
+        "why": "认购达发行额36倍，离岸人民币资产受追捧，跨境财富配置需求信号偏强。",
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_20_909252.shtml"
+      },
+      {
+        "title": "1-10月财政收入增4.9%",
+        "why": "财政端平稳运行，政务与代发场景客群经营的基本面支撑中性偏稳。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261120/4498250_1.html"
+      },
+      {
+        "title": "银行业资产总额503.1万亿",
+        "why": "行业规模稳增，同业扩表节奏可作为零售条线考核与资源配置的对标参照。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261120/4498315_1.html"
+      },
+      {
+        "title": "LPR连续18个月持稳",
+        "why": "按揭与消费贷定价短期维持现状，客户降息预期与提前还款判断需重新校准，影响个贷投放节奏。",
+        "url": "https://finance.cctv.com/2026/11/20/ARTIpz03iBmSmLMiyWNlZ8Bb261120.shtml"
+      }
+    ],
+    "spoken_must_read": "财政部在港发20亿美元主权债。认购达发行额36倍，离岸人民币资产受追捧，跨境财富配置需求信号偏强。其次，1-10月财政收入增4.9%。财政端平稳运行，政务与代发场景客群经营的基本面支撑中性偏稳。此外，银行业资产总额503.1万亿。行业规模稳增，同业扩表节奏可作为零售条线考核与资源配置的对标参照。还有，LPR连续18个月持稳。按揭与消费贷定价短期维持现状，客户降息预期与提前还款判断需重新校准，影响个贷投放节奏。",
+    "insights": [
+      {
+        "topic": "个人养老金年底缴存窗口",
+        "impact": "年底缴存最多省税5400元，纳税客群对额度使用有明确时点诉求，是财富客群年末低成本触达点。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "年底了这件事抓紧做！每年最多省税5400元",
+            "url": "https://news.southcn.com/node_812903b83a/e8aae96f6a.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "黄金类理财降温",
+        "impact": "金价回调下黄金类产品货架吸引力下降，客户资产再配置方向出现分化，产品结构面临调整。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "金价回调 “黄金类”银行理财降温",
+            "url": "https://finance.sina.com.cn/money/nmetal/gjshz/2026-11-20/doc-iniziafu7556607.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "四家银行集中提示贵金属风险",
+        "impact": "同业同步加大贵金属风险提示，持有黄金类产品的客户预期管理压力在行业内普遍上升。",
+        "tag": [
+          "财富",
+          "监管"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "一日四家集中示警！金价创14个月新低，四季度多家银行持续加大贵金属业务风险提示",
+            "url": "https://finance.sina.com.cn/roll/2026-11-20/doc-inizkuqx5498996.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "荔湾AI+电商社区落地",
+        "impact": "传统商贸数智升级带动电商类小微结算与经营贷需求，荔湾片区小微客群结构出现新变化。",
+        "tag": [
+          "客群",
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "荔湾首个“AI+电商”OPC社区落地唯品会电商产业中心，赋能传统商贸数智升级",
+            "url": "https://news.dayoo.com/guangzhou/202611/20/139995_55025672.htm"
+          }
+        ]
+      },
+      {
+        "topic": "信用卡一年减少3400万张",
+        "impact": "存量卡客群活跃度持续下滑，分期场景与存量激活的经营重心进一步向场景端集中。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "连续16个季度下滑，信用卡近一年减少3400万张",
+            "url": "https://finance.cctv.com/2026/11/20/ARTIKbXxMse2s3ZhcJcOA98p261120.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，个人养老金年底缴存窗口、黄金类理财降温、四家银行集中提示贵金属风险，年底缴存最多省税5400元。第二，普惠小微方面，荔湾AI+电商社区落地，传统商贸数智升级带动电商类小微结算与经营贷需求。第三，本地消费场景方面，信用卡一年减少3400万张，存量卡客群活跃度持续下滑。",
+    "guangdong_ipo": {
+      "spoken": "广东惠州的金力传动，主营传动部件，北交所IPO目前处于问询阶段，保荐机构是中信建投，惠州本地科创客群的上市前综合服务存在衔接空间。",
+      "push_line": "金力传动在审"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "AI抛售重创科技股，纳指跌5.28%，标普跌3.70%，道指跌1.93%。",
+      "sectors": [
+        "AI板块遭集中抛售，Anthropic上市未能提振人气，科技股全线走弱。",
+        "AMD收跌超7%，做空报告指其固件现身黑名单中企，公司称合规。",
+        "方舟投资逆势买入Anthropic约9080万美元，称对其前景乐观。",
+        "原油价格收低，供应改善推动油价录得三周连跌。"
+      ],
+      "spoken": "美股三大指数集体重挫，纳指跌5.28%，标普跌3.70%，道指跌1.93%，AI板块抛售是主要拖累。个股方面，AMD因做空报告指其涉黑名单中企收跌超7%，Anthropic上市未能提振AI人气，方舟投资逆势买入约9080万美元。原油收低，录得三周连跌。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-21"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "48147.33",
+          "changePct": "-1.93%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "22617.73",
+          "changePct": "-5.28%"
+        },
+        {
+          "name": "标普500",
+          "value": "6910.39",
+          "changePct": "-3.70%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "深证成指、创业板指均跌超3%。",
+      "sectors": [
+        "下跌个股超5200只"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-21"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3533.79",
+          "changePct": "-1.22%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10256.39",
+          "changePct": "-3.09%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2212.13",
+          "changePct": "-3.54%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报22410.80点（-1.89%）；恒生科技收报3511.14点（-3.78%）。",
+      "sectors": [
+        "科网股、芯片股普跌",
+        "网易跌超17%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-20"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.89% 科指跌3.78% 科网股、芯片股普跌 网易跌超17%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-20/doc-inizkqie3898717.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22410.80",
+          "changePct": "-1.89%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3511.14",
+          "changePct": "-3.78%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-20",
+    "marketStatus": {
+      "reportDate": "2026-11-21",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-20"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-20"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-20"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月20日 周五 收盘；港股为 11月20日 周五 收盘；美股为 11月20日 周五 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611203936062686.html",
+      "title_cn": "沪指跌逾1%上证50指数尾盘拉升四大行创年内新高",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "沪指当日跌逾1%，上证50指数尾盘拉升，四大行股价创年内新高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "银行",
+        "大盘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203936087580.html",
+      "title_cn": "黄仁勋据称将创办新的半导体公司或将筹资500亿美元用于创业",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "据称黄仁勋将创办新的半导体公司，或筹资500亿美元用于创业。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "公司动态"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203935804411.html",
+      "title_cn": "大宗商品全军覆没、全球股市步履蹒跚！一文读懂：市场在交易什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "大宗商品普遍下跌、全球股市走弱，报道梳理市场当前交易主线。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "大宗商品",
+        "全球市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203935545555.html",
+      "title_cn": "预售超百亿！GTA6发售引爆全球游戏板块迎新催化(附股)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "GTA6预售额超百亿元，报道称其发售带动全球游戏板块关注度提升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "游戏",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203936137553.html",
+      "title_cn": "两部门联合公布4起编造传播资本市场虚假信息典型案例",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "两部门联合公布4起编造传播资本市场虚假信息典型案例。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "监管",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203935483639.html",
+      "title_cn": "清晨全线跳水！美股突变发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "美股清晨交易时段出现全线跳水，报道关注市场突变原因。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "大盘"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203936052934.html",
+      "title_cn": "多只宽基ETF持续放量上证50ETF华夏成交额较上一日实现翻倍",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "多只宽基ETF持续放量，上证50ETF华夏成交额较上一交易日翻倍。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "ETF",
+        "资金面"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203935536921.html",
+      "title_cn": "稀少！长牛股曝光高股息、低波动！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "报道梳理高股息、低波动的长牛股特征，称此类标的较为稀少。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "高股息",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203935706731.html",
+      "title_cn": "特朗普9月调仓披露：买入英伟达、Palantir、SpaceX恰逢大额联邦合同落地前后",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "特朗普9月调仓披露显示其买入英伟达、Palantir、SpaceX，时点接近大额联邦合同落地前后。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司动态"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611203936274847.html",
+      "title_cn": "11月20日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "汇总11月20日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公司公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611213936597078.html",
+      "title_cn": "昆仑期货董事长王增业：深耕能源产业打造特色衍生品服务商",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/21",
+      "summary": "昆仑期货董事长王增业表示公司深耕能源产业，打造特色衍生品服务商。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "期货",
+        "能源"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611213936600883.html",
+      "title_cn": "21评论丨1.5&#176;C被突破之后，怎样才算成功的气候治理？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/21",
+      "summary": "评论文章讨论1.5°C温控目标被突破后，如何界定成功的气候治理。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "气候",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-20/doc-inizkqie3898717.shtml",
+      "title_cn": "港股收评：恒指跌1.89% 科指跌3.78% 科网股、芯片股普跌 网易跌超17%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "港股收评：恒指跌1.89%，恒生科技指数跌3.78%，科网股与芯片股普跌，网易跌超17%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-20/doc-iniziaft5995686.shtml",
+      "title_cn": "优质公司在港股不缺上市窗口",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "报道称优质公司在港股并不缺乏上市窗口。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-20/doc-inizixmn3996461.shtml",
+      "title_cn": "游戏收入下滑拖累业绩 网易港股开盘跌逾13%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "游戏收入下滑拖累业绩，网易港股开盘跌逾13%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "游戏"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/bxjj/2026-11-20/doc-inizitcn7308001.shtml",
+      "title_cn": "突发｜四个月，港股IPO说停就停：西子洁能撤单，前三季净利暴降75.61%,6连跌市值蒸发83亿",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "西子洁能撤回港股IPO，前三季净利同比降75.61%，股价6连跌、市值蒸发83亿元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "财报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/observe/2026-11-20/doc-inizkqie3961684.shtml",
+      "title_cn": "先通医药港股IPO：3801倍孖展与折价发行同现 一场强势情绪与弱势定价的对撞",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "先通医药港股IPO出现3801倍孖展认购与折价发行并存的情况。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-20/doc-inizkqhz5539092.shtml",
+      "title_cn": "瑞银：香港奢侈品零售复苏上轨道 品牌仍愿投资",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "瑞银称香港奢侈品零售复苏步入轨道，品牌仍愿投资。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "消费",
+        "零售"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-20/doc-inizkqhz5494735.shtml",
+      "title_cn": "大摩：维持腾讯控股(00700)“增持”评级 目标价480港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "大摩维持腾讯控股“增持”评级，目标价480港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-20/doc-inizkizm0398210.shtml",
+      "title_cn": "小摩：维持腾讯控股(00700)“增持”评级 目标价560港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "小摩维持腾讯控股“增持”评级，目标价560港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-20/doc-inizkizm0393535.shtml",
+      "title_cn": "瑞银：维持和黄医药(00013)“买入”评级 目标价29.5港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "瑞银维持和黄医药“买入”评级，目标价29.5港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-20/doc-inizkizh4013277.shtml",
+      "title_cn": "大和：维持华润啤酒(00291)“买入”评级 目标价27港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "大和维持华润啤酒“买入”评级，目标价27港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-20/doc-inizkizc5599419.shtml",
+      "title_cn": "花旗：维持莎莎国际(00178)“买入”评级 目标价1.2港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "花旗维持莎莎国际“买入”评级，目标价1.2港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级",
+        "零售"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-20/doc-inizkizc5590724.shtml",
+      "title_cn": "小摩：维持创科实业(00669)“增持”评级 目标价179港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "小摩维持创科实业“增持”评级，目标价179港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "机构评级"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/20/sp-500-8000-kalshi-odds-ai-selloff.html",
+      "title_cn": "Prediction markets outlook for stocks in 2026 dims amid AI sell-off",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "受AI板块抛售影响，预测市场对2026年美股前景的预期转弱。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "市场预期"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/20/as-anthropic-shares-tank-investors-scramble-to-hedge-it-could-be-very-expensive.html",
+      "title_cn": "As Anthropic shares tank, investors scramble to hedge. It could be very expensive",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "Anthropic股价大跌，投资者争相对冲，报道称对冲成本可能很高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "对冲"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/20/cathie-woods-ark-invest-was-a-big-buyer-of-anthropic-during-debut.html",
+      "title_cn": "Cathie Wood’s Ark Invest was a big buyer of Anthropic as she tells CNBC she’s ‘quite optimistic’",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "Cathie Wood旗下Ark Invest大举买入Anthropic，其称对该公司“相当乐观”。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "机构动向"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/19/anthropic-ipo-ai-stocks-selloff.html",
+      "title_cn": "Anthropic was supposed to save the AI trade. What went wrong?",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "报道讨论曾被寄望支撑AI交易的Anthropic为何出现股价大跌。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/19/amd-falls-on-short-seller-report-of-alleged-china-exposure.html",
+      "title_cn": "AMD dives on short seller report of alleged China exposure",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "AMD因做空机构报告称其涉嫌中国业务敞口而股价下挫。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "做空"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/enova-international-issues-600-million-in-senior-notes-due-2031-at-875-93CH-5042852",
+      "title_cn": "Enova International issues $600 million in senior notes due 2031 at 8.75%",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "Enova International发行6亿美元2031年到期高级票据，票面利率8.75%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券融资"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/exclusivelutnick-asked-battery-startup-pure-lithium-to-accept-us-takeover-documents-and-source-say-5042851",
+      "title_cn": "Exclusive-Lutnick asked battery startup Pure Lithium to accept US takeover, documents and source say",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "据文件与消息人士，Lutnick要求电池初创公司Pure Lithium接受美国收购。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "电池",
+        "并购"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/60-degrees-pharmaceuticals-receives-nasdaq-delisting-notice-plans-reverse-split-93CH-5042850",
+      "title_cn": "60 Degrees Pharmaceuticals receives Nasdaq delisting notice, plans reverse split",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "60 Degrees Pharmaceuticals收到纳斯达克退市通知，计划实施反向拆股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "退市",
+        "医药"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/oil-prices-rise-as-meast-tensions-persist-set-for-third-week-in-red-5040503",
+      "title_cn": "Oil prices settle lower, post 3-week losing streak amid improving crude supplies",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "油价收低，因原油供应改善，录得连续三周下跌。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "原油",
+        "大宗商品"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/sizzle-acquisition-corp-ii-schedules-annual-general-meeting-for-december-29-93CH-5042849",
+      "title_cn": "Sizzle Acquisition Corp. II schedules annual general meeting for December 29",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "Sizzle Acquisition Corp. II定于12月29日召开年度股东大会。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司公告"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/pioneer-power-solutions-extends-ceo-nathan-mazureks-contract-through-2027-93CH-5042839",
+      "title_cn": "Pioneer Power Solutions extends CEO Nathan Mazurek’s contract through 2027",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "Pioneer Power Solutions将CEO Nathan Mazurek的合同延长至2027年。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司公告"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/pearl-diver-credit-reports-unaudited-net-asset-value-per-share-of-958-93CH-5042838",
+      "title_cn": "Pearl Diver Credit reports unaudited net asset value per share of $9.58",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "Pearl Diver Credit公布未经审计的每股净资产值为9.58美元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
