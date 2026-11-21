@@ -1,12 +1,7 @@
 {
   "version": 1,
-  "updatedAt": "2026-11-21",
+  "updatedAt": "2026-11-22",
   "reports": {
-    "2026-11-15": {
-      "source": "manual-final",
-      "runId": "43651658424",
-      "publishedAt": "2026-11-15T07:12:07+08:00"
-    },
     "2026-11-16": {
       "source": "manual-final",
       "runId": "43775496042",
@@ -36,6 +31,11 @@
       "source": "manual-final",
       "runId": "44835830450",
       "publishedAt": "2026-11-21T07:23:15+08:00"
+    },
+    "2026-11-22": {
+      "source": "manual-final",
+      "runId": "44960693593",
+      "publishedAt": "2026-11-22T07:17:16+08:00"
     }
   }
 }
