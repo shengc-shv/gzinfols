@@ -1,0 +1,751 @@
+{
+  "date": "2026-11-23",
+  "updatedAt": "2026-11-22T23:14:42.094Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：资本市场新政，融资保证金降至八成、增量资金近四千亿；普惠与科技双向赋能，两类客群交叉名单成形；财富与信用卡客群迁移，存量经营价值上升。",
+    "spoken_hero": "今天主要看三个方面：资本市场新政，融资保证金降到八成，理论增量资金近四千亿；普惠金融与科技创新双向赋能，两类客群开始交叉；财富和信用卡客群在迁移，存量经营的价值在上升。",
+    "must_read": [
+      {
+        "title": "普惠与科技双向赋能定调",
+        "why": "监管层明确两类客群相互赋能，普惠与科技金融的产品边界和客群口径面临重新划分。",
+        "url": "https://m.21jingji.com/article/20261122/herald/8bc91f26e77631d91896c2ab7fbc330d.html"
+      },
+      {
+        "title": "融资保证金下限降至80%",
+        "why": "杠杆比例升至1.25倍、理论增量资金近4000亿元，两融客群的风险偏好与适当性边界同步变化。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261122/4498701_1.html"
+      },
+      {
+        "title": "创业板做市细则征求意见",
+        "why": "做市商引入有望带来增量资金并平抑波动，创业板相关产品与托管业务的连带影响值得预判。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261122/4498704_1.html"
+      },
+      {
+        "title": "人民币汇率2027年三情景",
+        "why": "机构给出三年期汇率情景推演，跨境收付客户的结售汇预期管理需求上升。",
+        "url": "https://m.21jingji.com/article/20261122/herald/5a3b4ea624ae9341070ce6b12a321517.html"
+      }
+    ],
+    "spoken_must_read": "普惠与科技双向赋能定调。监管层明确两类客群相互赋能，普惠与科技金融的产品边界和客群口径面临重新划分。其次，融资保证金下限降至80%。杠杆比例升至1.25倍、理论增量资金近4000亿元，两融客群的风险偏好与适当性边界同步变化。此外，创业板做市细则征求意见。做市商引入有望带来增量资金并平抑波动，创业板相关产品与托管业务的连带影响值得预判。还有，人民币汇率2027年三情景。机构给出三年期汇率情景推演，跨境收付客户的结售汇预期管理需求上升。",
+    "insights": [
+      {
+        "topic": "汇率三情景下的跨境客群",
+        "impact": "有跨境收付需求的私行与企业主客户对结售汇时点更敏感，汇率预期成为资产配置沟通中的高频议题。",
+        "tag": [
+          "私行"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "2027年人民币汇率的三种情景",
+            "url": "https://m.21jingji.com/article/20261122/herald/5a3b4ea624ae9341070ce6b12a321517.html"
+          }
+        ]
+      },
+      {
+        "topic": "普惠与科技客群交叉",
+        "impact": "监管定调两类客群双向赋能，小微与科技企业的名单出现重叠，交叉客群的授信与结算需求同步显现。",
+        "tag": [
+          "信贷",
+          "科技金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "金融监管总局王清容：普惠金融与科技创新正在“双向赋能”",
+            "url": "https://m.21jingji.com/article/20261122/herald/8bc91f26e77631d91896c2ab7fbc330d.html"
+          }
+        ]
+      },
+      {
+        "topic": "信用卡转向存量经营",
+        "impact": "权益瘦身与卡量收缩并行，存量客群的分期与场景消费价值上升，获客与权益投入的性价比被重新衡量。",
+        "tag": [
+          "信贷",
+          "客群"
+        ],
+        "sources": [
+          {
+            "title": "权益“瘦身”、存量缩水1.34亿张！信用卡如何“精打细算”",
+            "url": "https://m.21jingji.com/article/20261122/herald/035cb5518148f969f06d855aa1ab4333.html"
+          }
+        ]
+      },
+      {
+        "topic": "广州科学仪器新品发布",
+        "impact": "国产高端科学仪器在广州发布，本地科技型小微企业的设备采购与配套融资需求出现新触点。",
+        "tag": [
+          "科技金融",
+          "信贷"
+        ],
+        "sources": [
+          {
+            "title": "国产高端科学仪器新突破！TH-F120C在广州发布",
+            "url": "https://news.dayoo.com/guangzhou/202611/22/139995_55026313.htm"
+          }
+        ]
+      },
+      {
+        "topic": "两融客群杠杆空间打开",
+        "impact": "保证金下限下调后两融客户的可用杠杆提高，风险偏好分层与适当性管理的颗粒度要求随之变化。",
+        "tag": [
+          "信贷"
+        ],
+        "sources": [
+          {
+            "title": "沪深北交易所将融资保证金比例下限从100%降至80%",
+            "url": "https://www.cnfin.com/yw-lb/detail/20261122/4498701_1.html"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，高端客户方面，汇率三情景下的跨境客群，有跨境收付需求的私行与企业主客户对结售汇时点更敏感。第二，普惠小微方面，普惠与科技客群交叉，监管定调两类客群双向赋能。第三，其他机会方面，信用卡转向存量经营、广州科学仪器新品发布、两融客群杠杆空间打开，权益瘦身与卡量收缩并行。",
+    "risk": {
+      "topic": "涉资本市场信息传播红线",
+      "evidence": "两部门出手打击编造传播涉资本市场谣言行为，明确对不实信息的追责口径。",
+      "impact": "财富与私行条线客户沟通中的转发内容面临合规审查，营销素材与投顾观点需可溯源；风控需加强一线信息发布留痕。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "两部门出手打击编造传播涉资本市场谣言行为",
+          "url": "https://finance.eastmoney.com/a/202611223936891254.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：涉资本市场信息传播红线，财富与私行条线客户沟通中的转发内容面临合规审查，营销素材与投顾观点需可溯源；风控需加强一线信息发布留痕。",
+    "guangdong_ipo": {
+      "push_line": ""
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌5.28%、标普跌3.70%，AI交易退潮引发科技股集体重挫。",
+      "sectors": [
+        "纳指重挫5.28%，AI抛售潮蔓延，标普500跌3.70%、道指跌1.93%。",
+        "AMD收跌超7%，做空报告指其固件出现在被列黑名单的中国公司，公司称合规。",
+        "Anthropic上市后股价大跌，期权周一挂牌，投资者抢购对冲成本高企。",
+        "木头姐Ark Invest逆势买入9080万美元Anthropic，称对其相当乐观。",
+        "预测市场对2026年美股预期转淡，标普破8000点概率从七成以上大幅回落。"
+      ],
+      "spoken": "美股今日大跌，纳指跌5.28%，标普500跌3.70%，道指跌1.93%，AI交易退潮引发科技股集体重挫。个股方面，AMD因做空报告指其涉中国黑名单公司收跌超7%，Anthropic上市后股价大跌、投资者抢购对冲。木头姐Ark逆势买入约9080万美元Anthropic。预测市场对明年美股预期明显转淡。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-23"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "48147.33",
+          "changePct": "-1.93%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "22617.73",
+          "changePct": "-5.28%"
+        },
+        {
+          "name": "标普500",
+          "value": "6910.39",
+          "changePct": "-3.70%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证跌1.22%、创业板跌3.54%，全球股市普跌拖累A股走弱。",
+      "sectors": [
+        "创业板指领跌3.54%，深证成指跌3.09%，成长板块调整幅度居前。",
+        "十大券商策略称不必过度悲观，认为市场或逐渐企稳、建议均衡配置。",
+        "两部门出手打击编造传播涉资本市场谣言，监管层释放规范市场信号。",
+        "美伊局势传利好、特朗普称寻求与伊朗达成永久性协议，地缘扰动边际缓和。",
+        "A股迎三大新政，政策面变化成市场关注焦点。"
+      ],
+      "spoken": "A股今日走弱，上证指数跌1.22%，创业板指跌3.54%，深证成指跌3.09%，全球股市普跌拖累明显。板块上成长股调整居前，十大券商策略认为不必过度悲观、市场或逐渐企稳。消息面上，两部门出手打击涉资本市场谣言，A股迎来三大新政，美伊局势传出利好。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-23"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3533.79",
+          "changePct": "-1.22%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10256.39",
+          "changePct": "-3.09%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2212.13",
+          "changePct": "-3.54%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报22410.80点（-1.89%）；恒生科技收报3511.14点（-3.78%）。",
+      "sectors": [
+        "科网股、芯片股普跌",
+        "网易跌超17%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-22"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.89% 科指跌3.78% 科网股、芯片股普跌 网易跌超17%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-20/doc-inizkqie3898717.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22410.80",
+          "changePct": "-1.89%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3511.14",
+          "changePct": "-3.78%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-20",
+    "marketStatus": {
+      "reportDate": "2026-11-23",
+      "markets": {
+        "aShare": {
+          "fresh": false,
+          "dataDate": "2026-11-20",
+          "reason": "数据为 11月20日（距今 3 天）"
+        },
+        "hk": {
+          "fresh": false,
+          "dataDate": "2026-11-20",
+          "reason": "数据为 11月20日（距今 3 天）"
+        },
+        "us": {
+          "fresh": false,
+          "dataDate": "2026-11-20",
+          "reason": "数据为 11月20日（距今 3 天）"
+        }
+      },
+      "allStale": true,
+      "note": "三地股市均无隔夜行情（休市或数据未更新），以下为最近一次收盘数据",
+      "spokenNote": "三地股市今日均无隔夜行情"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936874637.html",
+      "title_cn": "突然全线拉升！美伊局势传来利好消息",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "东方财富报道称，受美伊局势传来利好消息影响，市场出现全线拉升。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936866816.html",
+      "title_cn": "周一上市！18只“每日明牌”基金来了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "东方财富报道，18只“每日明牌”基金将于周一上市。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "基金",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936931124.html",
+      "title_cn": "11月22日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "东方财富汇总11月22日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "公告",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936867127.html",
+      "title_cn": "业绩暴增+低估值3只股被机构盯上",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "东方财富报道称，3只业绩大幅增长且估值较低的个股获机构关注。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "机构"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936891254.html",
+      "title_cn": "周末要闻汇总：两部门出手打击编造传播涉资本市场谣言行为",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "东方财富汇总周末要闻，其中两部门出手打击编造传播涉资本市场谣言行为。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "监管"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936872296.html",
+      "title_cn": "美方拟禁止中国电信运营商直接获取美国互联网电话号码资源商务部回应",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "美方拟禁止中国电信运营商直接获取美国互联网电话号码资源，商务部就此作出回应。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "电信",
+        "中美"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936866413.html",
+      "title_cn": "中东突传大消息！特朗普称寻求与伊朗达成一项永久性协议",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "特朗普称寻求与伊朗达成一项永久性协议，中东传出相关消息。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地缘政治",
+        "能源"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936917289.html",
+      "title_cn": "韩国救市！已准备好立即部署市场稳定基金",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "韩国表示已准备好立即部署市场稳定基金以救市。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936948742.html",
+      "title_cn": "重磅时刻！A股迎三大“新政”！影响几何？最新解读来了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "东方财富报道A股迎来三大“新政”，并发布相关影响解读。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936874946.html",
+      "title_cn": "全球股市都在跌下周A股会不一样吗？回测结果来了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "东方财富报道全球股市普遍下跌，并回测下周A股表现。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "市场",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611223936966212.html",
+      "title_cn": "十大券商策略：不必过度悲观！市场或逐渐企稳关注均衡配置",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "十大券商发布策略观点，认为不必过度悲观，市场或逐渐企稳并关注均衡配置。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "券商",
+        "策略"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937006655.html",
+      "title_cn": "鹏扬基金曹敏：消费板块底部渐明个股挖掘仍是重点",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "鹏扬基金曹敏表示消费板块底部渐明，个股挖掘仍是重点。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "基金",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-22/doc-inizqmrh6165707.shtml",
+      "title_cn": "顺丰同城于11月20日斥资337.8万港元回购45.74万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "顺丰同城于11月20日斥资337.8万港元回购45.74万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-22/doc-inizqmrn9120683.shtml",
+      "title_cn": "圣贝拉集团于11月20日斥资18.31万港元回购6.95万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "圣贝拉集团于11月20日斥资18.31万港元回购6.95万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-22/doc-inizqmrn9120404.shtml",
+      "title_cn": "奇瑞汽车于11月20日耗资4266.44万港元回购200万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "奇瑞汽车于11月20日耗资4266.44万港元回购200万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "汽车",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-22/doc-inizqmrn9119600.shtml",
+      "title_cn": "耐世特于11月20日斥资约613.86万港元回购145.7万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "耐世特于11月20日斥资约613.86万港元回购145.7万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-22/doc-inizqmrq1447974.shtml",
+      "title_cn": "易点云于11月20日耗资约255.38万港元回购88.4万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "易点云于11月20日耗资约255.38万港元回购88.4万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-22/doc-inizqmrq1446717.shtml",
+      "title_cn": "永达汽车于11月20日斥资31.7万港元回购50万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "永达汽车于11月20日斥资31.7万港元回购50万股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "回购",
+        "汽车",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-21/doc-inizmwaq3668189.shtml",
+      "title_cn": "恒指牛熊街货比(48:52)︱11月21日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/21",
+      "summary": "11月21日恒指牛熊街货比为48:52。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/22/top-wall-street-analysts-favor-these-stocks-for-strong-returns.html",
+      "title_cn": "Top Wall Street analysts favor these 3 dividend stocks for strong returns",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "CNBC报道，华尔街顶级分析师看好3只股息股以实现强劲回报。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "机构"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/22/the-nasdaq-is-in-freefall-heres-one-stock-to-look-at.html",
+      "title_cn": "The Nasdaq is in freefall. Here's one stock to look at",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "CNBC报道纳斯达克指数大幅下跌，并提及一只值得关注的股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "市场"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/20/sp-500-8000-kalshi-odds-ai-selloff.html",
+      "title_cn": "Prediction markets outlook for stocks in 2026 dims amid AI sell-off",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "CNBC报道，受AI板块抛售影响，预测市场对2026年美股前景的看法转淡。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/20/as-anthropic-shares-tank-investors-scramble-to-hedge-it-could-be-very-expensive.html",
+      "title_cn": "As Anthropic shares tank, investors scramble to hedge. It could be very expensive",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "CNBC报道，Anthropic股价大跌，投资者争相对冲，成本可能很高。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/20/cathie-woods-ark-invest-was-a-big-buyer-of-anthropic-during-debut.html",
+      "title_cn": "Cathie Wood’s Ark Invest was a big buyer of Anthropic as she tells CNBC she’s ‘quite optimistic’",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "CNBC报道，Cathie Wood旗下Ark Invest大举买入Anthropic，她表示“相当乐观”。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "机构"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/19/anthropic-ipo-ai-stocks-selloff.html",
+      "title_cn": "Anthropic was supposed to save the AI trade. What went wrong?",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "CNBC报道，Anthropic本应拯救AI交易，但情况出现逆转。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/19/amd-falls-on-short-seller-report-of-alleged-china-exposure.html",
+      "title_cn": "AMD dives on short seller report of alleged China exposure",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "CNBC报道，AMD因做空机构报告称其涉嫌中国敞口而股价大跌。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "做空"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/delta-flights-faced-brief-delays-atatlanta-airport-over-automated-system-issue-5044102",
+      "title_cn": "Delta flights faced brief delays at Atlanta airport over automated system issue",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "Investing.com报道，达美航空航班因自动化系统问题在亚特兰大机场短暂延误。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "航空"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/gentrack-fy26-slides-recurring-revenue-climbs-15-as-ai-boosts-efficiency-93CH-5044168",
+      "title_cn": "Gentrack FY26 slides: recurring revenue climbs 15% as AI boosts efficiency",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "Investing.com报道，Gentrack FY26业绩下滑，但经常性收入增长15%，AI提升效率。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-gentrack-h2-2026-results-meet-guidance-as-recurring-revenue-climbs-93CH-5044160",
+      "title_cn": "Earnings call transcript: Gentrack H2 2026 results meet guidance as recurring revenue climbs",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "Investing.com报道，Gentrack 2026下半年业绩符合指引，经常性收入上升。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "财报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/diodes-ceo-gary-yu-sells-525780-of-company-stock-93CH-5044156",
+      "title_cn": "Diodes CEO Gary Yu sells $525,780 of company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "Investing.com报道，Diodes CEO Gary Yu出售价值525,780美元的公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/natural-gas-services-group-ceo-justin-jacobs-buys-85806-in-stock-93CH-5044155",
+      "title_cn": "Natural gas services group CEO Justin Jacobs buys $85,806 in stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "Investing.com报道，Natural Gas Services Group CEO Justin Jacobs买入85,806美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "能源",
+        "内部交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
