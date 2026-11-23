@@ -1,0 +1,878 @@
+{
+  "date": "2026-11-24",
+  "updatedAt": "2026-11-23T23:18:29.817Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：月末资金面，缴款叠加央行投放；贵金属波动，积存金跌进七字头；理财缩水，单周减少五千亿；广州科创场景发布，本地对接窗口打开。",
+    "spoken_hero": "今天主要看四个方面：月末资金面，缴款叠加央行投放；贵金属波动，积存金跌进七字头；理财单周缩水五千亿；广州科创场景发布，本地对接窗口打开。",
+    "must_read": [
+      {
+        "title": "首批18只主动ETF挂牌",
+        "why": "主动与被动边界进一步融合，客户权益配置工具箱扩容，产品货架与投顾话术面临新一轮比价。",
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-24/doc-inizutpk1896148.shtml"
+      },
+      {
+        "title": "黄金上周暴跌8%",
+        "why": "机构对暴跌成因判断分歧，期货抛售与ETF持仓走向不一致，客户沟通素材需要区分资金面与持仓面。",
+        "url": "https://finance.sina.com.cn/stock/usstock/c/2026-11-23/doc-iniztrzu5471750.shtml"
+      },
+      {
+        "title": "广州科创产业场景发布",
+        "why": "本地科技金融对接窗口打开，科创企业客群的场景融资与结算需求集中释放。",
+        "url": "https://www.cnr.cn/gd/fxgz/20261123/t20261123_527880946.shtml"
+      },
+      {
+        "title": "两融风控细则明确",
+        "why": "信用业务合规要求细化，高净值客户融资融券服务的流程与违约处置口径随之调整。",
+        "url": "https://finance.eastmoney.com/a/202611233937278151.html"
+      },
+      {
+        "title": "积存金跌至7字头",
+        "why": "多家银行同步提示贵金属波动风险，持仓客户浮亏面扩大，贵金属业务的适当性与投诉压力上升。",
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-23/doc-inizsqqn8372686.shtml"
+      }
+    ],
+    "spoken_must_read": "首批18只主动ETF挂牌。主动与被动边界进一步融合，客户权益配置工具箱扩容，产品货架与投顾话术面临新一轮比价。其次，黄金上周暴跌8%。机构对暴跌成因判断分歧，期货抛售与ETF持仓走向不一致，客户沟通素材需要区分资金面与持仓面。此外，广州科创产业场景发布。本地科技金融对接窗口打开，科创企业客群的场景融资与结算需求集中释放。还有，两融风控细则明确。信用业务合规要求细化，高净值客户融资融券服务的流程与违约处置口径随之调整。另外，积存金跌至7字头。多家银行同步提示贵金属波动风险，持仓客户浮亏面扩大，贵金属业务的适当性与投诉压力上升。",
+    "insights": [
+      {
+        "topic": "贵金属持仓客户回撤",
+        "impact": "积存金价格跌进七字头，持仓客户浮亏感受明显，定投客户的扣款意愿与追问频次同步变化。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "积存金价格跌至“7字头” 银行纷纷提示贵金属市场波动风险",
+            "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-23/doc-inizsqqn8372686.shtml"
+          },
+          {
+            "title": "农业银行发布贵金属市场风险防范提示",
+            "url": "https://finance.sina.com.cn/jryx/bank/2026-11-23/doc-iniztmua8255036.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "轻资产养老客群授信",
+        "impact": "非抵押方式破解养老机构融资的路径出现，本地轻资产服务型小微客群的准入与风控参照发生变化。",
+        "tag": [
+          "信贷"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "没土地、没厂房，养老机构凭什么拿到贷款？安徽有答案",
+            "url": "https://m.21jingji.com/article/20261123/herald/65237c8cbd7cdf1b0c4a167f045ee209.html"
+          }
+        ]
+      },
+      {
+        "topic": "中小机构退场客户迁移",
+        "impact": "区域中小金融机构持续出清，同业客户的存款与结算关系面临重新选择，承接窗口打开。",
+        "tag": [
+          "客群"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "贵州年内逾50家中小金融机构获准解散退场",
+            "url": "https://finance.sina.com.cn/money/bank/gsdt/2026-11-23/doc-inizsqqn8391894.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "信用卡存量客群经营",
+        "impact": "发卡量连续十六个季度下降，存量客户的激活与分期经营成为信用卡收入的主要来源。",
+        "tag": [
+          "信贷"
+        ],
+        "group": "信用卡存量",
+        "sources": [
+          {
+            "title": "连降16个季度、一年缩水3400万张：信用卡告别“发卡竞赛”",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_11_23_909311.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "跨境客群结算与避险",
+        "impact": "央行与欧方机构跨境金融议题延续，跨境客群的汇率避险与结算服务需求出现结构性变化。",
+        "tag": [
+          "客群"
+        ],
+        "group": "跨境客群",
+        "sources": [
+          {
+            "title": "中国人民银行行长潘功胜会见欧洲央行、欧盟委员会和欧元集团相关负责人",
+            "url": "https://www.cnfin.com/hg-lb/detail/20261123/4499234_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "广州科创场景融资",
+        "impact": "本地科创产业场景集中发布，科技类企业的场景融资、结算与代发需求在同一窗口集中显形。",
+        "tag": [
+          "科技金融",
+          "政银合作"
+        ],
+        "group": "本地科创",
+        "sources": [
+          {
+            "title": "广州举办科创产业场景发布活动",
+            "url": "https://www.cnr.cn/gd/fxgz/20261123/t20261123_527880946.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，理财单周缩水五千亿、提前终止产品增多，货架稳定性和客户赎回沟通压力同时上升。高端客户方面，黄金上周暴跌后机构判断分歧明显，持仓客户的回撤感受和追问都在增加。普惠小微方面，安徽用非抵押方式做养老机构融资，轻资产客群的授信路径有了参照。本地科创方面，广州科创产业场景集中发布，科技类企业的场景融资与代发需求在同步显形。",
+    "risk": {
+      "topic": "贵金属销售适当性压力",
+      "evidence": "积存金价格跌至7字头，多家银行集中发布贵金属市场波动风险提示，农行已先行发布风险防范提示。",
+      "impact": "财富与私行条线面临持仓客户投诉与适当性回溯压力，风控需核查风险告知留痕，网点销售话术口径需统一。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "积存金价格跌至“7字头” 银行纷纷提示贵金属市场波动风险",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-23/doc-inizsqqn8372686.shtml"
+        },
+        {
+          "title": "农业银行发布贵金属市场风险防范提示",
+          "url": "https://finance.sina.com.cn/jryx/bank/2026-11-23/doc-iniztmua8255036.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：贵金属销售适当性压力，财富与私行条线面临持仓客户投诉与适当性回溯压力，风控需核查风险告知留痕，网点销售话术口径需统一。",
+    "guangdong_ipo": {
+      "spoken": "广东企业IPO有新进展：中星微技术股份有限公司完成辅导验收，注册地广东，属半导体芯片设计行业，拟登陆境内交易所，辅导机构为中国银河证券，辅导工作完成报告已披露。",
+      "push_line": ""
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨6.51%，英伟达董事会恢复黄仁勋CEO职务点燃AI交易。",
+      "sectors": [
+        "英伟达直线拉升，董事会一致同意恢复黄仁勋CEO职务，AI链情绪显著修复。",
+        "纳斯达克大涨6.51%，AI抛售降温，黄金自上周重挫后强势反弹。",
+        "方舟投资买入约9080万美元Anthropic，称对AI前景相当乐观。",
+        "AMD登记至多3.37亿股供转售，涉及OpenAI与Meta认股权证。",
+        "炼厂类能源股繁荣交易趋于结束，资金转向其他方向。"
+      ],
+      "spoken": "美股今日AI交易全面回暖，道指涨3.01%，标普500涨4.73%，纳指大涨6.51%。核心驱动是英伟达董事会一致同意恢复黄仁勋CEO职务，股价直线拉升，带动AI链情绪修复。方舟投资买入约9080万美元Anthropic；AMD登记至多3.37亿股供转售；黄金自上周重挫后强势反弹。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-24"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "49595.31",
+          "changePct": "+3.01%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "24089.56",
+          "changePct": "+6.51%"
+        },
+        {
+          "name": "标普500",
+          "value": "7237.17",
+          "changePct": "+4.73%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "创业板指涨3.08%，人形机器人涨停潮与两融风控细则落地共振。",
+      "sectors": [
+        "创业板指大涨超3%，超4600只个股飘红、逾150只涨停，成长风格全面占优。",
+        "人形机器人掀涨停潮，宇树跻身A股第三贵，产业催化带动资金集中涌入。",
+        "PCB缺货警报拉响，多只绩优股获逆势押注，供需紧张推升板块关注度。",
+        "监管明确两融风控细则、稳妥处置违约，券商及两融相关情绪获政策托底。"
+      ],
+      "spoken": "A股今日成长风格明显占优，上证指数微涨0.15%，深证成指涨1.93%，创业板指大涨3.08%，超4600只个股飘红、逾150只涨停。板块上，人形机器人掀涨停潮，宇树跻身A股第三贵；PCB缺货警报拉响，绩优股获逆势押注；监管明确两融风控细则，稳妥处置违约。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-24"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3538.95",
+          "changePct": "+0.15%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10454.37",
+          "changePct": "+1.93%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2280.20",
+          "changePct": "+3.08%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报22383.74点（-0.12%）；恒生科技收报3508.00点（-0.09%）。",
+      "sectors": [
+        "汽车股走弱",
+        "黄金股强势",
+        "零跑汽车跌近13%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-24"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.12% 科指跌0.09% 汽车股走弱 黄金股强势 零跑汽车跌近13%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-23/doc-iniztfna2303283.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22383.74",
+          "changePct": "-0.12%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3508.00",
+          "changePct": "-0.09%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-23",
+    "marketStatus": {
+      "reportDate": "2026-11-24",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-23"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-23"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-23"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月23日 周一 收盘；港股为 11月23日 周一 收盘；美股为 11月23日 周一 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937141665.html",
+      "title_cn": "英伟达直线拉升！特朗普重磅表态：希望英伟达董事会重新聘用黄仁勋",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "英伟达股价直线拉升，特朗普公开表态希望英伟达董事会重新聘用黄仁勋。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "半导体",
+        "公司治理"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937582398.html",
+      "title_cn": "英伟达董事会一致同意恢复黄仁勋CEO职务",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "英伟达董事会一致同意恢复黄仁勋的CEO职务。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "AI",
+        "公司治理"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937278151.html",
+      "title_cn": "A股重磅！监管明确两融风控细则稳妥处置违约",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "监管层明确两融业务风控细则，提出稳妥处置违约相关要求。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "券商",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937244051.html",
+      "title_cn": "特朗普称只想向中国出售相对落后的芯片外交部回应",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "特朗普称只想向中国出售相对落后的芯片，外交部就此作出回应。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "政策",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937059780.html",
+      "title_cn": "特朗普希望黄仁勋道歉后回归贝森特：英伟达应从外部寻才黄仁勋已经是外部人士了",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "特朗普希望黄仁勋道歉后回归，贝森特称英伟达应从外部寻才、黄仁勋已是外部人士。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "公司治理",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937232623.html",
+      "title_cn": "创业板指大涨超3%超4600只股飘红逾150只股涨停",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "创业板指大涨超3%，全市场超4600只个股上涨，逾150只个股涨停。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937126772.html",
+      "title_cn": "宇树跻身A股第三贵！人形机器人掀涨停潮发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "宇树跻身A股第三高价股，人形机器人板块掀起涨停潮。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "机器人",
+        "A股",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937471055.html",
+      "title_cn": "11月23日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "汇总11月23日晚间沪深上市公司重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公司公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937035065.html",
+      "title_cn": "PCB缺货拉响警报！多只绩优股获逆势押注(名单)",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "PCB出现缺货警报，多只绩优股获资金逆势押注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "PCB",
+        "电子",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611233937047433.html",
+      "title_cn": "下月加息概率不再100%！一文读懂：美股大跌会如何影响美联储？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "下月加息概率不再为100%，分析讨论美股大跌对美联储的影响。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美联储",
+        "美股",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243937787651.html",
+      "title_cn": "资本市场稳市机制建设向深而行",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "报道资本市场稳市机制建设持续推进。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243937786133.html",
+      "title_cn": "美国通胀数据将公布黄金股或先于金价企稳",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "美国通胀数据即将公布，黄金股或先于金价企稳。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "黄金",
+        "宏观",
+        "美股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-23/doc-iniztfna2303283.shtml",
+      "title_cn": "港股收评：恒指跌0.12% 科指跌0.09% 汽车股走弱 黄金股强势 零跑汽车跌近13%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "港股收评：恒指跌0.12%，科指跌0.09%，汽车股走弱、黄金股强势，零跑汽车跌近13%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "市场行情",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-24/doc-inizutph5125520.shtml",
+      "title_cn": "港股概念追踪 | 算力用电需求强劲 电力设备企业打开成长新空间(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "算力用电需求强劲，电力设备企业被指打开成长新空间，相关概念股受关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "电力设备",
+        "算力",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-24/doc-inizupfq7949700.shtml",
+      "title_cn": "恒指牛熊街货比(50:50)︱11月24日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "11月24日恒指牛熊街货比为50:50。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-23/doc-iniztfne8286828.shtml",
+      "title_cn": "近50家公司千亿规模限售股解禁将至 港股韧性从何而来",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "近50家公司千亿规模限售股解禁将至，报道讨论港股韧性来源。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "解禁"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-23/doc-inizsqqk2276162.shtml",
+      "title_cn": "海致科技集团获纳入恒生科技指数成份股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "海致科技集团获纳入恒生科技指数成份股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "指数调整"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/stockzmt/2026-11-23/doc-inizsqqq0695797.shtml",
+      "title_cn": "中金：恒科与港股通有哪些新变化？ （2026-11）",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "中金发布2026年11月报告，梳理恒生科技指数与港股通的新变化。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "指数",
+        "券商研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-23/doc-inizskhk5600263.shtml",
+      "title_cn": "港股本周要闻前瞻｜小米、美团等公司将公布业绩 美国PCE物价指数出炉",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "港股本周前瞻：小米、美团等公司将公布业绩，美国PCE物价指数出炉。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "财报",
+        "宏观"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-23/doc-inizskhn2375087.shtml",
+      "title_cn": "港股概念追踪 | 2026年医保商保“双目录”发布 创新药商业化链条加速打通(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "2026年医保商保“双目录”发布，创新药商业化链条加速打通，相关概念股受关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "医药",
+        "政策",
+        "港股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-23/doc-inizskhk5616688.shtml",
+      "title_cn": "华泰证券港股策略：短期密集压力或已接近峰值",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "华泰证券港股策略认为短期密集压力或已接近峰值。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/tech/roll/2026-11-23/doc-inizrtks5829724.shtml",
+      "title_cn": "港股IPO明显降温 监管整肃骤然升温",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "港股IPO明显降温，同时监管整肃力度骤然升温。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "监管"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-11-23/doc-iniztmtw5535096.shtml",
+      "title_cn": "租金连升11个月破顶、小户型月租逼近历史极限：高昂租金正重塑香港住宅市场格局",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "香港住宅租金连升11个月破顶，小户型月租逼近历史极限，高租金正重塑香港住宅市场格局。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "地产",
+        "香港",
+        "租金"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-23/doc-iniztmty2247186.shtml",
+      "title_cn": "大摩：维持小鹏集团-W(09868)目标价70港元 评级“增持”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "大摩维持小鹏集团-W目标价70港元，评级为“增持”。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "汽车",
+        "港股",
+        "券商研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/23/nvidia-stock-jensen-huang-ai-trade.html",
+      "title_cn": "Nvidia surge: What investors should do with the stock and the AI trade now",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "CNBC讨论英伟达股价大涨后投资者对该股及AI交易的应对。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "半导体",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/23/refinery-stocks-crack-spreads.html",
+      "title_cn": "The biggest money-making energy trade looks over. What to buy instead",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "CNBC称此前最赚钱的能源交易似已结束，并讨论替代配置方向。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "能源",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/22/top-wall-street-analysts-favor-these-stocks-for-strong-returns.html",
+      "title_cn": "Top Wall Street analysts favor these 3 dividend stocks for strong returns",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "CNBC称华尔街顶级分析师看好3只股息股，认为其回报强劲。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "券商研报"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/22/the-nasdaq-is-in-freefall-heres-one-stock-to-look-at.html",
+      "title_cn": "The Nasdaq is in freefall. Here's one stock to look at",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "CNBC称纳斯达克指数大幅下挫，并点名一只值得关注的股票。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "市场行情"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/20/sp-500-8000-kalshi-odds-ai-selloff.html",
+      "title_cn": "Prediction markets outlook for stocks in 2026 dims amid AI sell-off",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "受AI板块抛售影响，预测市场对2026年美股走势的预期转弱。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "市场预期"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/20/cathie-woods-ark-invest-was-a-big-buyer-of-anthropic-during-debut.html",
+      "title_cn": "Cathie Wood’s Ark Invest was a big buyer of Anthropic as she tells CNBC she’s ‘quite optimistic’",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/20",
+      "summary": "Cathie Wood旗下Ark Invest大举买入Anthropic，其称对前景“相当乐观”。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "美股",
+        "机构持仓"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/pinterest-amends-executive-severance-and-change-in-control-agreements-93CH-5046637",
+      "title_cn": "Pinterest amends executive severance and change in control agreements",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "Pinterest修订高管遣散及控制权变更相关协议。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司治理"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/amd-registers-up-to-337-million-shares-for-resale-tied-to-openai-meta-warrants-5046636",
+      "title_cn": "AMD registers up to 337 million shares for resale tied to OpenAI, Meta warrants",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "AMD登记至多3.37亿股用于转售，涉及与OpenAI、Meta认股权证相关安排。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "美股",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-semtech-tops-q3-2027-estimates-shares-swing-93CH-5046624",
+      "title_cn": "Earnings call transcript: Semtech tops Q3 2027 estimates, shares swing",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "Semtech第三季度业绩超出2027财年预期，股价出现波动。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "财报",
+        "半导体",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/economy-news/exclusivesome-us-banks-tighten-aiagent-controls-on-concern-about-models-escaping-safeguards-5044788",
+      "title_cn": "Exclusive-Some US banks tighten AI-agent controls on concern about models escaping safeguards",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "据报道，部分美国银行因担忧AI模型脱离安全防护而收紧AI代理管控。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "AI",
+        "银行",
+        "监管"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/gold-rebounds-from-14mth-low-as-tech-selloff-lifts-safehaven-demand-5044271",
+      "title_cn": "Gold prices rebound strongly from last week’s rout as AI trade revs back to life",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "金价在上周大跌后强势反弹，AI交易回暖。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "黄金",
+        "AI",
+        "美股"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/prescott-group-capital-a-10-owner-buys-169m-in-natures-sunshine-93CH-5046623",
+      "title_cn": "Prescott Group Capital, a 10% owner, buys $1.69M in Nature’s Sunshine",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "10%股东Prescott Group Capital买入Nature’s Sunshine价值169万美元的股份。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "机构持仓"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
