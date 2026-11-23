@@ -1,12 +1,24 @@
 {
   "version": 1,
-  "fetchedAt": "2026-11-23T07:10:21+08:00",
+  "fetchedAt": "2026-11-24T07:06:07+08:00",
   "generator": "local-ipo-sync",
   "windowDays": 7,
   "sourceCounts": {
-    "gd-bse-audit": 1
+    "gd-bse-audit": 1,
+    "gd-csrc-tutoring": 1
   },
   "items": [
+    {
+      "title": "中星微技术股份有限公司 (辅导验收) [广东证监局]",
+      "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/24/PREIPO_F0101_V01_20261124_37591_Q/79B2DE3956D94970BACB4CF941DBA196/关于中星微技术股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf",
+      "excerpt": "IPO辅导备案 | 辅导机构: 中国银河证券股份有限公司 | 备案时间: 2025-08-08 | 状态: 辅导验收 | 报告: 辅导工作完成报告 | 披露: 2026-11-24",
+      "publishedAt": "2026-11-24",
+      "source": "证监会辅导企业(csrcfd)",
+      "sourceId": "gd-csrc-tutoring",
+      "region": "gd",
+      "registeredProvince": "广东",
+      "ipoStage": "stage-coach-done"
+    },
     {
       "title": "金力传动：IPO问询中（拟北交所）",
       "url": "https://www.bse.cn/audit/project_news_select.html#874716@P02",
