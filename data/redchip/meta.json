@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-11-24T07:07:11+08:00",
+  "updatedAt": "2026-11-25T07:07:46+08:00",
   "sources": {
     "hk": {
-      "capturedAt": "2026-11-24T07:07:07+08:00",
+      "capturedAt": "2026-11-25T07:07:44+08:00",
       "ok": true,
       "scanned": 1946,
       "redchip": 0
     },
     "us": {
-      "capturedAt": "2026-11-24T07:07:11+08:00",
+      "capturedAt": "2026-11-25T07:07:46+08:00",
       "ok": true,
-      "scanned": 0,
+      "scanned": 4,
       "redchip": 0
     }
   }
