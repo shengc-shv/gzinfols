@@ -1,0 +1,747 @@
+{
+  "date": "2026-11-25",
+  "updatedAt": "2026-11-24T23:12:41.906Z",
+  "executive": {
+    "hero_line": "今天主要看五个方面：央行今日投放1.3万亿流动性、广州第二批好房子10个项目入选、广东超200家上市公司用贷款回购增持、好房子试点10个项目入选、贵金属产品波动加剧。",
+    "spoken_hero": "今天主要看五个方面：央行今日投放1.3万亿流动性、广州第二批好房子10个项目入选、广东超200家上市公司用贷款回购增持、好房子试点10个项目入选、贵金属产品波动加剧。",
+    "must_read": [
+      {
+        "title": "央行今日投放1.3万亿流动性",
+        "why": "八千亿MLF叠加五千亿逆回购同日落地，资金面偏松延续，负债端定价与理财收益预期同步受影响。",
+        "url": "https://finance.eastmoney.com/a/202611253938840379.html"
+      },
+      {
+        "title": "纳指跌1.48%，费城半导体重挫7.88%",
+        "why": "海外科技股单日大幅回撤，QDII与跨境配置类产品的净值波动直接传导至客户沟通端。",
+        "url": "https://finance.eastmoney.com/a/202611253938872324.html"
+      },
+      {
+        "title": "广州第二批好房子10个项目入选",
+        "why": "试点项目清单落地，对应楼盘的按揭合作与开发商资金监管格局出现新的分布。",
+        "url": "https://news.dayoo.com/guangzhou/202611/24/139995_55027143.htm"
+      },
+      {
+        "title": "广东超200家上市公司用贷款回购增持",
+        "why": "回购增持贷在粤形成规模效应，上市公司及其股东成为对公零售交叉的集中客群。",
+        "url": "https://m.21jingji.com/article/20261124/herald/e6fc63236457cf9562f71632bf16f8cc.html"
+      },
+      {
+        "title": "AI债务市场震荡，英伟达跌近6%",
+        "why": "海外AI相关企业融资情绪转弱，科技类客户的跨境融资环境与估值预期同步生变。",
+        "url": "https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-ai-credit-markets.html"
+      }
+    ],
+    "spoken_must_read": "央行今日投放1.3万亿流动性。八千亿MLF叠加五千亿逆回购同日落地，资金面偏松延续，负债端定价与理财收益预期同步受影响。其次，纳指跌1.48%，费城半导体重挫7.88%。海外科技股单日大幅回撤，QDII与跨境配置类产品的净值波动直接传导至客户沟通端。此外，广州第二批好房子10个项目入选。试点项目清单落地，对应楼盘的按揭合作与开发商资金监管格局出现新的分布。还有，广东超200家上市公司用贷款回购增持。回购增持贷在粤形成规模效应，上市公司及其股东成为对公零售交叉的集中客群。另外，AI债务市场震荡，英伟达跌近6%。海外AI相关企业融资情绪转弱，科技类客户的跨境融资环境与估值预期同步生变。",
+    "insights": [
+      {
+        "topic": "资金面偏松下的货架衔接",
+        "impact": "MLF与逆回购同日投放后短端资金充裕，客户对稳健型理财与存款的比价诉求上升，货架收益梯度面临重排。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "8000亿元MLF+5000亿元逆回购央行长短“组合拳”今日落地",
+            "url": "https://finance.eastmoney.com/a/202611253938840379.html"
+          },
+          {
+            "title": "5000亿元7天OMO+8000亿元MLF 央行流动性调控精细化“补位”",
+            "url": "https://www.cnfin.com/yw-lb/detail/20261124/4499714_1.html"
+          }
+        ]
+      },
+      {
+        "topic": "贵金属产品波动加剧",
+        "impact": "多家银行同步发布贵金属风险提示，黄金类持仓客户的浮盈回吐与追加咨询同步增加，适当性环节承压。",
+        "tag": [
+          "财富",
+          "监管"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "银行黄金类产品波动加剧 多家银行发布贵金属投资风险提示",
+            "url": "https://finance.sina.com.cn/jjxw/2026-11-24/doc-inizupfq7942770.shtml"
+          },
+          {
+            "title": "多家银行发布贵金属投资风险提示 银行黄金类产品波动加剧",
+            "url": "https://finance.cctv.com/2026/11/24/ARTI2y4LRZZjzfe5KKTE3WTn261124.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "上市公司回购增持贷需求集中",
+        "impact": "广东超两百家企业使用贷款回购增持，企业主与高管股东的资金安排、股权质押与财富传承诉求同步上升。",
+        "tag": [
+          "私行",
+          "信贷"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "政策红利凸显！广东超200家上市公司使用贷款回购增持股票",
+            "url": "https://m.21jingji.com/article/20261124/herald/e6fc63236457cf9562f71632bf16f8cc.html"
+          }
+        ]
+      },
+      {
+        "topic": "卖旧买新收购范围扩至6区",
+        "impact": "置换客群从环城高速以内扩至六个区，二手收购与新房按揭之间的资金衔接环节明显增多。",
+        "tag": [
+          "住房金融"
+        ],
+        "group": "住房金融",
+        "sources": [
+          {
+            "title": "广州商品房“卖旧买新”试点扩围：收购范围从环城高速以内扩大至6个区",
+            "url": "https://news.dayoo.com/guangzhou/202611/24/139995_55026923.htm"
+          }
+        ]
+      },
+      {
+        "topic": "好房子试点10个项目入选",
+        "impact": "第二批试点项目清单确定，对应楼盘的按揭投放与开发商资金监管分布出现新的集中点。",
+        "tag": [
+          "住房金融"
+        ],
+        "group": "住房金融",
+        "sources": [
+          {
+            "title": "广州第二批“好房子”试点公布，这10个项目入选",
+            "url": "https://news.dayoo.com/guangzhou/202611/24/139995_55027143.htm"
+          }
+        ]
+      },
+      {
+        "topic": "个人养老金四周年供给扩容",
+        "impact": "保险供给持续扩容，开户满四年的客户进入实际缴存与产品选择阶段，养老货架丰富度成为转化变量。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "group": "养老客群",
+        "sources": [
+          {
+            "title": "个人养老金四周年，保险供给持续扩容，多元产品体系支撑老有所养",
+            "url": "https://finance.cctv.com/2026/11/24/ARTILXBG4VXjiHi8s2dMGuYD261124.shtml"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "零售AUM方面，资金面偏松叠加海外科技股重挫，客户对固收与海外配置的诉求同时在变，货架上的稳健类与跨境类产品关注度上升。高端客户方面，广东两百多家上市公司用贷款回购增持，企业主与股东的综合金融需求集中释放，跨境承销与机构联动也在同步升温。普惠小微方面，粤西四十五亿授信流向三千户海洋牧场经营主体，涉农涉海批量获客有了可参照的场景样本。本地消费场景方面，直播电商节线上促销持续一个月，商户结算与收单需求集中释放。",
+    "risk": {
+      "topic": "数字人带货虚假宣传被罚",
+      "evidence": "AI数字人“方桃子”因体验式宣传涉嫌虚假广告被处罚，数字人带货违规套路被集中曝光。",
+      "impact": "零售条线线上营销与直播获客若使用数字人素材，广告合规与消费者权益环节面临直接审查压力，风控与消保口径需同步收紧。",
+      "source": "T2",
+      "sources": [
+        {
+          "title": "AI“演员”方桃子被罚的背后：数字人带货违规套路多，体验式宣传涉嫌虚假广告",
+          "url": "https://finance.cctv.com/2026/11/24/ARTIjvZfwTWotPcx4FizxhYV261124.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：数字人带货虚假宣传被罚，零售条线线上营销与直播获客若使用数字人素材，广告合规与消费者权益环节面临直接审查压力，风控与消保口径需同步收紧。",
+    "guangdong_ipo": {
+      "spoken": "中星微技术IPO辅导验收完成，辅导机构为中国银河证券，注册地在北京、属半导体行业，拟登陆境内交易所，目前处于辅导验收完成、待申报受理阶段。",
+      "push_line": "中星微技术辅导完成"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌1.48%，标普跌0.50%，道指涨0.85%，英伟达回归难掩AI债务担忧。",
+      "sectors": [
+        "纳指大幅下挫，科技股承压，AI相关债务担忧升温拖累成长股。",
+        "英伟达前CEO黄仁勋回归引爆股价，市值一夜暴增近万亿美元。",
+        "AI债务市场震荡加剧，投资者对相关企业杠杆与融资风险保持警惕。",
+        "炼厂相关能源股涨势见顶回落，资金转向其他能源交易方向。",
+        "戴尔三季度营收翻倍，AI订单积压达1320亿美元，个股表现分化。"
+      ],
+      "spoken": "美股分化明显，道指涨0.85%，纳指跌1.48%，标普跌0.50%。黄仁勋回归带动英伟达股价暴涨，市值一夜增加近万亿美元，但AI债务市场担忧升温，科技成长股整体承压。能源方面炼厂股涨势见顶回落，戴尔AI订单积压数据亮眼，个股走势分化。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-25"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "50018.70",
+          "changePct": "+0.85%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "23733.54",
+          "changePct": "-1.48%"
+        },
+        {
+          "name": "标普500",
+          "value": "7201.09",
+          "changePct": "-0.50%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "沪指涨0.27%，深成指跌0.29%，高开低走，英伟达暴涨未能带动A股延续强势。",
+      "sectors": [
+        "能源金属板块涨幅居前，领涨两市，资源品供需预期升温。",
+        "英伟达一夜涨31%，A股相关概念高开低走，资金兑现意愿强。",
+        "商务部暂停实施对美两用物项出口管制公告第二款，相关出口链情绪修复。",
+        "三大指数高开低走，深成指、创业板指翻绿，题材股冲高回落。"
+      ],
+      "spoken": "A股今天高开低走，沪指涨0.27%，深成指跌0.29%，创业板指微跌0.05%。隔夜英伟达暴涨三成，相关概念早盘冲高后回落，资金兑现明显。盘面上能源金属板块涨幅居前，出口管制相关消息带动部分品种情绪修复，但整体题材接力不足，指数分化收场。",
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-25"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3548.37",
+          "changePct": "+0.27%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10423.60",
+          "changePct": "-0.29%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2278.99",
+          "changePct": "-0.05%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数跌0.73%，恒生科技指数跌1.17%。",
+      "sectors": [
+        "科网股走弱",
+        "存储概念股活跃"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-25"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌0.73% 科指跌1.17% 科网股走弱 存储概念股活跃",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-24/doc-inizvqte0022026.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22205.65",
+          "changePct": "-0.80%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3464.52",
+          "changePct": "-1.24%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-24",
+    "marketStatus": {
+      "reportDate": "2026-11-25",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-24"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-24"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-24"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月24日 周二 收盘；港股为 11月24日 周二 收盘；美股为 11月24日 周二 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611243938371697.html",
+      "title_cn": "美国民主党：将“动用全部权力”彻查特朗普政府、黄仁勋",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "美国民主党：将“动用全部权力”彻查特朗普政府、黄仁勋",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243938014717.html",
+      "title_cn": "英伟达市值暴增近万亿美元！黄仁勋如何上演王者归来他会成为更好的CEO吗？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "英伟达市值暴增近万亿美元！黄仁勋如何上演王者归来他会成为更好的CEO吗？",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243938398040.html",
+      "title_cn": "A股三大指数高开低走能源金属板块涨幅居前",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "A股三大指数高开低走能源金属板块涨幅居前",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243938328275.html",
+      "title_cn": "账面收益高达1500万美元！英伟达暴涨特朗普大赚",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "账面收益高达1500万美元！英伟达暴涨特朗普大赚",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243938376453.html",
+      "title_cn": "知情人士：黄仁勋在复职前向董事会坦然披露了更多婚外情情况",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "知情人士：黄仁勋在复职前向董事会坦然披露了更多婚外情情况",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243938615452.html",
+      "title_cn": "11月24日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "11月24日晚间沪深上市公司重大事项公告最新快递",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243938694295.html",
+      "title_cn": "知情人士：美国准备对数十个国家和地区上调关税",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "知情人士：美国准备对数十个国家和地区上调关税",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243938025410.html",
+      "title_cn": "一夜回血近万亿！老黄回归引爆英伟达股价超跌绩优概念股都有谁？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "一夜回血近万亿！老黄回归引爆英伟达股价超跌绩优概念股都有谁？",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243938473260.html",
+      "title_cn": "商务部：《关于加强相关两用物项对美国出口管制的公告》第二款暂停实施",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "商务部：《关于加强相关两用物项对美国出口管制的公告》第二款暂停实施",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611243938432363.html",
+      "title_cn": "“祖训”又发力了！英伟达一夜涨31%为何今天A股还是高开低走？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "“祖训”又发力了！英伟达一夜涨31%为何今天A股还是高开低走？",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611253938897684.html",
+      "title_cn": "21社论丨以制度建设增强资本市场的确定性",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/25",
+      "summary": "21社论丨以制度建设增强资本市场的确定性",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611253938888936.html",
+      "title_cn": "鸿蒙“过亿”，科技自信赢得市场底气（经济时评）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/25",
+      "summary": "鸿蒙“过亿”，科技自信赢得市场底气（经济时评）",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-24/doc-inizvqte0022026.shtml",
+      "title_cn": "港股收评：恒指跌0.73% 科指跌1.17% 科网股走弱 存储概念股活跃",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "港股收评：恒指跌0.73% 科指跌1.17% 科网股走弱 存储概念股活跃",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-25/doc-inizwwnr1888343.shtml",
+      "title_cn": "恒指牛熊街货比(47:53)︱11月25日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/25",
+      "summary": "恒指牛熊街货比(47:53)︱11月25日",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/2026-11-24/doc-inizuxvn0137776.shtml",
+      "title_cn": "5228倍超额认购仍遇冷！“核药第一股”先通医药开盘破发，一手账面亏150港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "5228倍超额认购仍遇冷！“核药第一股”先通医药开盘破发，一手账面亏150港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-24/doc-inizutpq0165784.shtml",
+      "title_cn": "回购升温、外资回补、“北水”提速，三路增量资金近期稳步入场港股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "回购升温、外资回补、“北水”提速，三路增量资金近期稳步入场港股",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-24/doc-inizuarw0438497.shtml",
+      "title_cn": "港股回购“多点开花” 结构性变化释放积极信号",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "港股回购“多点开花” 结构性变化释放积极信号",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-24/doc-inizuarq5371856.shtml",
+      "title_cn": "恒生科技指数将增20只成份股 或引发被动基金产品持仓变动",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "恒生科技指数将增20只成份股 或引发被动基金产品持仓变动",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-24/doc-inizutpn7833900.shtml",
+      "title_cn": "港股IPO料稳中有进 商业化落地能力被看重",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "港股IPO料稳中有进 商业化落地能力被看重",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-11-24/doc-inizutpq0206675.shtml",
+      "title_cn": "中信建投2027年港股展望：关注弱美元及内需潜在转暖机会",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "中信建投2027年港股展望：关注弱美元及内需潜在转暖机会",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-24/doc-inizvqte0037840.shtml",
+      "title_cn": "高盛：维持智谱(02513)“买入”评级 目标价1,560港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "高盛：维持智谱(02513)“买入”评级 目标价1,560港元",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-24/doc-inizvqte0041600.shtml",
+      "title_cn": "里昂：太古股份公司A(00019)减持国泰航空(00293) 后者短期股价或受压",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "里昂：太古股份公司A(00019)减持国泰航空(00293) 后者短期股价或受压",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-24/doc-inizvqta7693420.shtml",
+      "title_cn": "富瑞：澳门11月赌收料同比跌6%至8%逊预期 看好银河娱乐(00027)及永利澳门",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "富瑞：澳门11月赌收料同比跌6%至8%逊预期 看好银河娱乐(00027)及永利澳门",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-24/doc-inizvkmi2282619.shtml",
+      "title_cn": "花旗：维持鸣鸣很忙(01768)目标价555.9港元 评级“买入”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "花旗：维持鸣鸣很忙(01768)目标价555.9港元 评级“买入”",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-ai-credit-markets.html",
+      "title_cn": "AI debt markets shudder as Nvidia's top 'banker' returns",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "Fears about some companies' AI debt ramped higher Tuesday, a day after Jensen Huang's retu",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/24/kalshi-perps-volume-prediction-markets.html",
+      "title_cn": "Kalshi daily volume of ‘perps’ trading begins to top its prediction markets",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "The product, the first one beyond event contracts, was introduced in May.",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/23/nvidia-stock-jensen-huang-ai-trade.html",
+      "title_cn": "Nvidia surge: What investors should do with the stock and the AI trade now",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "The market is loving the return of Jensen Huang, but investors and lawmakers have their gu",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/23/refinery-stocks-crack-spreads.html",
+      "title_cn": "The biggest money-making energy trade looks over. What to buy instead",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "The epic boom in refinery-related stocks is unwinding.",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/22/top-wall-street-analysts-favor-these-stocks-for-strong-returns.html",
+      "title_cn": "Top Wall Street analysts favor these 3 dividend stocks for strong returns",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "Wall Street analysts can help shortlist attractive dividend-paying stocks, as their recomm",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/22/the-nasdaq-is-in-freefall-heres-one-stock-to-look-at.html",
+      "title_cn": "The Nasdaq is in freefall. Here's one stock to look at",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/22",
+      "summary": "Elevated options premiums are creating an opportunity in Amazon",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/sharonai-holdings-amends-indenture-for-475-convertible-notes-due-2032-93CH-5049326",
+      "title_cn": "SharonAI Holdings amends indenture for 4.75% convertible notes due 2032",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "SharonAI Holdings amends indenture for 4.75% convertible notes due 2032",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/commodities-news/us-army-sets-out-measures-to-limit-lead-dust-from-iowa-explosives-blast-5048874",
+      "title_cn": "US Army sets out measures to limit lead dust from Iowa explosives blast",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "US Army sets out measures to limit lead dust from Iowa explosives blast",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/plenti-1h27-slides-cash-profit-surges-43-inaugural-dividend-declared-93CH-5049315",
+      "title_cn": "Plenti 1H27 slides: cash profit surges 43%, inaugural dividend declared",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "Plenti 1H27 slides: cash profit surges 43%, inaugural dividend declared",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/dell-q3-fy27-slides-revenue-doubles-ai-backlog-hits-132b-93CH-5049313",
+      "title_cn": "Dell Q3 FY27 slides: revenue doubles, AI backlog hits $132B",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "Dell Q3 FY27 slides: revenue doubles, AI backlog hits $132B",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/why-is-workday-stock-tumbling-today-93CH-5049312",
+      "title_cn": "Why is Workday stock tumbling today?",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "Why is Workday stock tumbling today?",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/renx-enterprises-announces-resignation-of-board-member-anthony-m-cialone-93CH-5049311",
+      "title_cn": "RenX Enterprises announces resignation of board member Anthony M. Cialone",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "RenX Enterprises announces resignation of board member Anthony M. Cialone",
+      "importance": 2,
+      "rank": 0,
+      "tags": [],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
