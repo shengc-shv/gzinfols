@@ -1,0 +1,1057 @@
+{
+  "date": "2026-11-26",
+  "hero_line": "今天主要看3个方面：流动性，八千亿MLF加五千亿逆回购今日落地；科技金融，广东首单科创再贷款贴息兑现；区域基本面，广州前10月规上工业增加值增5.1%。",
+  "must_read": [
+    {
+      "title": "央行八千亿MLF加五千亿逆回购落地",
+      "why": "跨月流动性获长短组合呵护，资金面偏松延续，直接影响负债端成本与理财存款定价节奏。",
+      "url": "https://finance.eastmoney.com/a/202611253938840379.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "广东首单科创再贷款贴息落地",
+      "why": "科技金融政策从表态进入兑现期，广东辖内科创企业融资成本出现实质性下降。",
+      "url": "https://www.cnr.cn/gd/guangdongyaowen/20261125/t20261125_527883168.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "广州前10月规上工业增加值增5.1%",
+      "why": "区域工业景气延续，制造业与科创客群的信贷需求有基本面支撑。",
+      "url": "https://news.dayoo.com/guangzhou/202611/25/139995_55027262.htm",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "前三季度商业银行净利润1.9万亿",
+      "why": "行业盈利大盘出炉，净息差压力下零售条线贡献变化成为对标参照。",
+      "url": "https://m.21jingji.com/article/20261125/herald/9d2b9983fecc98f2a2206bd9734a0a5c.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "城市更新进入15万亿时代",
+      "why": "房企从拼拿地转向拼运营，涉房客群的融资逻辑与还款来源正在重构。",
+      "url": "https://finance.cctv.com/2026/11/25/ARTIbLzeJ9GCNOH0xRXMLSy3261125.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    }
+  ],
+  "insights": [
+    {
+      "topic": "固收+业绩分化85只回撤超10%",
+      "tags": [
+        "财富"
+      ],
+      "impact": "固收加产品年内收益差距拉大，部分客户持有体验转差，代销货架上的产品筛选与回撤解释需求同步增加。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "“固收+”基金年内业绩分化：华商稳健双利债券居前 85只净值回撤超10%",
+          "url": "https://finance.sina.com.cn/jjxw/2026-11-25/doc-inizwwnp9661115.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "广东首单科创再贷款贴息兑现",
+      "tags": [
+        "信贷",
+        "科技金融"
+      ],
+      "impact": "贴息工具进入实际兑付阶段，辖内符合条件的科创小微企业融资成本出现可测算的下降。",
+      "segments": [
+        "普惠小微贷款客户"
+      ],
+      "sources": [
+        {
+          "title": "广东首单科创再贷款贴息落地",
+          "url": "https://www.cnr.cn/gd/guangdongyaowen/20261125/t20261125_527883168.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "金价连跌引发购金潮",
+      "tags": [
+        "财富"
+      ],
+      "impact": "金价连续下行带动实物金与积存类业务咨询升温，贵金属客群的交易与配置诉求同步放大。",
+      "sources": [
+        {
+          "title": "金价连跌引购金潮，水贝一天卖出数公斤黄金",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_11_25_909839.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "R2理财亏损打破低波预期",
+      "tags": [
+        "财富"
+      ],
+      "impact": "风险等级R2产品出现亏损，持有客户对稳健标签的信任松动，理财经理面对的持有期沟通与风险揭示压力上升。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "R2也会亏：银行理财“低波”叙事受考",
+          "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-25/doc-inizyefz1759762.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "广州规上工业增加值增5.1%",
+      "tags": [
+        "信贷",
+        "客群"
+      ],
+      "impact": "前十月工业景气延续，制造业与配套小微企业的生产经营性融资需求获得基本面支撑。",
+      "segments": [
+        "普惠小微贷款客户"
+      ],
+      "sources": [
+        {
+          "title": "前10月广州规上工业增加值同比增长5.1%",
+          "url": "https://news.dayoo.com/guangzhou/202611/25/139995_55027262.htm"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "数字黄金完成首批实盘交易",
+      "tags": [
+        "财富",
+        "科技金融"
+      ],
+      "impact": "大行落地批发数字黄金实盘，贵金属业务的数字化形态出现新载体，客户对线上化交易的接受度提升。",
+      "sources": [
+        {
+          "title": "黄金数字化里程碑落地：大行完成首批批发数字黄金实盘交易",
+          "url": "https://finance.sina.com.cn/money/forex/hbfx/2026-11-25/doc-inizxpkk8623884.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    }
+  ],
+  "sections": {
+    "gz_local": [
+      {
+        "url": "https://news.dayoo.com/guangzhou/202611/25/139995_55027563.htm",
+        "title_cn": "今年1至10月，广州二手车出口超3.7万辆，占比超六成领跑全省",
+        "title_orig": "今年1至10月，广州二手车出口超3.7万辆，占比超六成领跑全省",
+        "source": "广州日报·大洋网(广州频道)",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "广州前10月二手车出口超3.7万辆、占比超六成领跑全省，跨境结算与出口贸易融资需求值得关注，可排摸相关车商客群。",
+        "importance": 2,
+        "rank": 1,
+        "tags": [
+          "市场",
+          "跨境",
+          "客群",
+          "财富"
+        ],
+        "locale": "gz",
+        "locale_evidence": "今年1至10月，广州二手车出口超3.7万辆，占比超六成领跑全省"
+      },
+      {
+        "url": "https://news.dayoo.com/guangzhou/202611/25/139995_55027262.htm",
+        "title_cn": "前10月广州规上工业增加值同比增长5.1%",
+        "title_orig": "前10月广州规上工业增加值同比增长5.1%",
+        "source": "广州日报·大洋网(广州频道)",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "广州前10月规上工业增加值同比增长5.1%，工业客群信贷需求有支撑，可结合科创贴息政策梳理制造业客户名单。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "gz",
+        "locale_evidence": "前10月广州规上工业增加值同比增长5.1%"
+      },
+      {
+        "url": "https://news.dayoo.com/guangzhou/202611/25/139995_55027425.htm",
+        "title_cn": "组图看广州今年前10个月经济“成绩单”",
+        "title_orig": "组图看广州今年前10个月经济“成绩单”",
+        "source": "广州日报·大洋网(广州频道)",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "广州前10个月经济成绩单出炉，可作为区域客群营销与信贷投向的参照底稿，下一步观察重点行业景气延续性。",
+        "importance": 1,
+        "rank": 3,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "gz",
+        "locale_evidence": "组图看广州今年前10个月经济“成绩单”"
+      }
+    ],
+    "biz_insight": [
+      {
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-25/doc-inizxiar4324628.shtml",
+        "title_cn": "授信超270亿！银行抢单提速，11月回购增持专项贷款集中落地",
+        "title_orig": "授信超270亿！银行抢单提速，11月回购增持专项贷款集中落地",
+        "source": "新浪财经·银行频道",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "回购增持专项贷款授信超270亿、11月集中落地，同业抢单提速，可关注辖内上市公司及股东客群的对接节奏。",
+        "importance": 3,
+        "rank": 1,
+        "tags": [
+          "信贷",
+          "竞对动态"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-25/doc-inizyefz1759762.shtml",
+        "title_cn": "R2也会亏：银行理财“低波”叙事受考",
+        "title_orig": "R2也会亏：银行理财“低波”叙事受考",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "R2理财出现亏损，“低波”叙事受考，理财经理话术与客户预期管理需前置，提示做好持有期沟通与风险揭示。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "财富",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/money/insurance/2026-11-25/doc-inizxiam1804069.shtml",
+        "title_cn": "个人养老金四周年：1.5亿开户、户均不足千元 险企如何破局“开户热缴存冷”困境？",
+        "title_orig": "个人养老金四周年：1.5亿开户、户均不足千元 险企如何破局“开户热缴存冷”困境？",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "个人养老金开户1.5亿、户均不足千元，“开户热缴存冷”突出，可考虑以缴存提升为切口做存量客户二次经营。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "养老",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/roll/2026-11-25/doc-inizxtsf1773600.shtml",
+        "title_cn": "多地密集清退“空壳”融担公司，银行收紧合作名单，融担助贷模式日趋合规",
+        "title_orig": "多地密集清退“空壳”融担公司，银行收紧合作名单，融担助贷模式日趋合规",
+        "source": "新浪财经·银行频道",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "多地清退“空壳”融担、银行收紧合作名单，助贷合作方准入需重检，提示排查存量融担合作名单合规性。",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "信贷",
+          "监管合规",
+          "竞对动态"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-25/doc-inizwwnp9661115.shtml",
+        "title_cn": "“固收+”基金年内业绩分化：华商稳健双利债券居前 85只净值回撤超10%",
+        "title_orig": "“固收+”基金年内业绩分化：华商稳健双利债券居前 85只净值回撤超10%",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "“固收+”基金年内业绩分化、85只净值回撤超10%，代销产品筛选与客户回撤沟通需加强，关注持有体验。",
+        "importance": 1,
+        "rank": 5,
+        "tags": [
+          "财富",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnr.cn/gd/fxgz/20261125/t20261125_527883125.shtml",
+        "title_cn": "“科技反诈沉浸之旅”走进广东移动 揭秘新型诈骗套路",
+        "title_orig": "“科技反诈沉浸之旅”走进广东移动 揭秘新型诈骗套路",
+        "source": "央广网·广东频道",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "科技反诈活动走进广东移动、揭秘新型诈骗套路，提示零售客群反诈宣教可借力同类场景，关注涉案账户风险。",
+        "importance": 1,
+        "rank": 6,
+        "tags": [
+          "客群",
+          "监管合规"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/roll/2026-11-25/doc-inizyefz1737503.shtml",
+        "title_cn": "个人养老金四周年：理财平均年化回报2.81%，基金2.35%",
+        "title_orig": "个人养老金四周年：理财平均年化回报2.81%，基金2.35%",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "个人养老金四周年理财平均年化2.81%、基金2.35%，收益数据可作为客户配置沟通的参考，关注缴存转化。",
+        "importance": 1,
+        "rank": 7,
+        "tags": [
+          "养老",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20261125/herald/2b7ebe566b0c209712fc0b12d8188923.html",
+        "title_cn": "五矿信托刘雁：低利率时代信托财富管理要完成“四个转向”",
+        "title_orig": "五矿信托刘雁：低利率时代信托财富管理要完成“四个转向”",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "低利率时代信托财富管理提“四个转向”，对财富条线产品配置思路有参照，可关注客户资产再配置动向。",
+        "importance": 1,
+        "rank": 8,
+        "tags": [
+          "财富",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      }
+    ],
+    "policy_market": [
+      {
+        "url": "https://finance.cctv.com/2026/11/25/ARTIbLzeJ9GCNOH0xRXMLSy3261125.shtml",
+        "title_cn": "城市更新进入15万亿时代：房企不拼拿地，拼运营",
+        "title_orig": "城市更新进入15万亿时代：房企不拼拿地，拼运营",
+        "source": "央视财经",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "城市更新进入15万亿时代、房企转向拼运营，涉房客群融资逻辑变化，",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "住房金融",
+          "市场",
+          "信贷",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20261125/herald/36d4d90e64b913b9fd98bbc88229fe68.html",
+        "title_cn": "央行信贷市场司蹇娜：以科技金融支持新质生产力发展",
+        "title_orig": "央行信贷市场司蹇娜：以科技金融支持新质生产力发展",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "央行信贷市场司表态以科技金融支持新质生产力，政策导向与广东科创贴息落地呼应，科技客群营销可顺势推进。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "科技金融",
+          "监管合规"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/money/bank/bank_yhfg/2026-11-25/doc-inizxauq8601592.shtml",
+        "title_cn": "央行组合操作呵护跨月流动性",
+        "title_orig": "央行组合操作呵护跨月流动性",
+        "source": "新浪财经·银行频道",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "央行组合操作呵护跨月流动性，资金面平稳有助负债端安排，可关注跨月时点客户资金留存与产品到期衔接。",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "市场",
+          "监管合规",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.cctv.com/2026/11/25/ARTITi1HwQp1KKJa4QJDXdbr261125.shtml",
+        "title_cn": "监管明确可动态调整维保比例与追保平仓安排",
+        "title_orig": "监管明确可动态调整维保比例与追保平仓安排",
+        "source": "央视财经",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "监管明确可动态调整维保比例与追保平仓安排，两融及质押类业务风控参数可评估优化，关注客户追保沟通。",
+        "importance": 2,
+        "rank": 5,
+        "tags": [
+          "监管合规",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/roll/2026-11-25/doc-inizxaut4369871.shtml",
+        "title_cn": "2721亿元分红陆续派发，银行股高股息还香吗？",
+        "title_orig": "2721亿元分红陆续派发，银行股高股息还香吗？",
+        "source": "新浪财经·银行频道",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "2721亿元银行分红陆续派发，高股息讨论升温，可作为财富客户权益类配置沟通素材，关注客户风险偏好匹配。",
+        "importance": 1,
+        "rank": 6,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20261125/herald/6a80a2f63c0ea74afaaff310665e97af.html",
+        "title_cn": "利率换岗：银行赎回千亿优先股，7906亿永续债接力补充资本",
+        "title_orig": "利率换岗：银行赎回千亿优先股，7906亿永续债接力补充资本",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "银行赎回千亿优先股、7906亿永续债接力补资本，同业资本工具结构调整，可关注对负债成本与同业业务的传导。",
+        "importance": 1,
+        "rank": 7,
+        "tags": [
+          "市场",
+          "监管合规",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20261125/herald/9d2b9983fecc98f2a2206bd9734a0a5c.html",
+        "title_cn": "前三季度商业银行净利润1.9万亿元",
+        "title_orig": "前三季度商业银行净利润1.9万亿元",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "11/25",
+        "summary": "前三季度商业银行净利润1.9万亿元，行业盈利大盘可作对标参照，关注净息差与零售条线贡献变化。",
+        "importance": 1,
+        "rank": 8,
+        "tags": [
+          "市场",
+          "竞对动态",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202611253938840379.html",
+        "title_cn": "8000亿元MLF+5000亿元逆回购央行长短“组合拳”今日落地",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "media",
+        "tier": "T2",
+        "date": "11/25",
+        "summary": "8000亿MLF叠加5000亿逆回购今日落地，资金面偏松格局延续，可提示理财与存款定价节奏。",
+        "importance": 2,
+        "rank": 9,
+        "tags": [],
+        "locale": "national"
+      }
+    ],
+    "tech": [],
+    "ipo": [
+      {
+        "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/24/PREIPO_F0101_V01_20261124_37591_Q/79B2DE3956D94970BACB4CF941DBA196/关于中星微技术股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf",
+        "title_cn": "中星微技术股份有限公司 (辅导验收) [广东证监局]",
+        "source": "证监会辅导备案(官方csrcfd)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "11/24",
+        "summary": "IPO辅导备案 | 辅导机构: 中国银河证券股份有限公司 | 备案时间: 2025-08-08 | 状态: 辅导验收 | 报告: 辅导工作完成报告 | 披露: 2026-11-24",
+        "ipoStage": "stage-coach-done",
+        "ipoMeta": "",
+        "ipoCity": "广东",
+        "importance": 2,
+        "rank": 1,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.bse.cn/audit/project_news_select.html#874716@P02",
+        "title_cn": "金力传动：IPO问询中（拟北交所）",
+        "source": "北交所审核项目动态(官方)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "11/20",
+        "summary": "注册地：广东省惠州市｜保荐：中信建投证券股份有限公司｜代码：874716｜状态：IPO问询中｜更新：2026-11-20",
+        "ipoStage": "stage-reviewing",
+        "ipoMeta": "保荐 中信建投证券股份有限公司 ｜ 拟上市北交所",
+        "ipoCity": "惠州市",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      }
+    ]
+  },
+  "risk": {
+    "topic": "两融维保比例可动态调整",
+    "evidence": "监管明确可动态调整维保比例与追保平仓安排，两融及质押类业务的风控参数面临重设。",
+    "impact": "对个贷与质押类业务，追保平仓的执行口径变化直接影响客户沟通与投诉处置；财富条线需同步评估融资类客户的持仓风险；风控部门面临参数调整与合规留痕的双重压力。",
+    "source": "T1",
+    "sources": [
+      {
+        "title": "监管明确可动态调整维保比例与追保平仓安排",
+        "url": "https://finance.cctv.com/2026/11/25/ARTITi1HwQp1KKJa4QJDXdbr261125.shtml"
+      }
+    ],
+    "delta": {
+      "state": "followup"
+    }
+  },
+  "insightFunnel": {
+    "candidates": 12,
+    "played": 6,
+    "skippedByMemory": 3,
+    "dualCandidates": 5,
+    "sameAsMustRead": 2,
+    "target": 6
+  },
+  "mustReadFunnel": {
+    "candidates": 10,
+    "played": 5,
+    "skippedByMemory": 1,
+    "target": 5
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "道指涨0.33%，纳指跌0.62%，英伟达CEO回归引发AI交易分化。",
+      "sectors": [
+        "英伟达董事会遭调查、董事成股东诉讼被告，治理风险压制AI龙头情绪。",
+        "AI债务市场承压，黄仁勋回归CEO次日相关公司AI债务担忧升温。",
+        "炼油股多年大行情现松动，资金撤离炼油板块，转向其他能源标的。"
+      ],
+      "spoken": "美股收盘涨跌不一，道指涨0.33%，纳指跌0.62%，标普500跌0.25%。黄仁勋回归英伟达CEO带动股价冲高，但AI债务市场承压、董事会遭调查，AI交易出现分化。炼油股行情松动，资金撤离。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-26"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "50182.95",
+          "changePct": "+0.33%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "23585.80",
+          "changePct": "-0.62%"
+        },
+        {
+          "name": "标普500",
+          "value": "7182.78",
+          "changePct": "-0.25%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "创业板指低开低走跌超4%。",
+      "sectors": [
+        "上证指数失守3500点",
+        "下跌个股超4900只"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-26"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3476.47",
+          "changePct": "-2.03%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10086.35",
+          "changePct": "-3.24%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2183.58",
+          "changePct": "-4.19%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报21966.01点（-1.14%）；恒生科技收报3378.26点（-2.56%）。",
+      "sectors": [
+        "恒生指数跌1.14%失守22000点",
+        "芯片股低迷",
+        "锂电池股下挫",
+        "宁德时代跌超12%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-26"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指跌1.14%失守22000点 科指跌2.56% 芯片股低迷 锂电池股下挫 宁德时代跌超12%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-25/doc-inizxtsm4307898.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "21966.01",
+          "changePct": "-1.14%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3378.26",
+          "changePct": "-2.56%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-25",
+    "marketStatus": {
+      "reportDate": "2026-11-26",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-25"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-25"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-25"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月25日 周三 收盘；港股为 11月25日 周三 收盘；美股为 11月25日 周三 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611253939497239.html",
+      "title_cn": "美国将宣布对中国商品加征关税外交部：反对借口“产能过剩”进行政治操弄",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/25",
+      "summary": "美国计划宣布对中国商品加征关税，中国外交部回应称反对以“产能过剩”为借口进行政治操弄。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "关税",
+        "中美关系"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611253939487357.html",
+      "title_cn": "A股三大指数收跌成交额不足1.4万亿退税商店概念逆市走强",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/25",
+      "summary": "A股三大指数收跌，两市成交额不足1.4万亿元，退税商店概念逆市走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611253939501160.html",
+      "title_cn": "A+H双杀、市值跌破万亿“宁王”怎么了？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/25",
+      "summary": "宁德时代A股与港股同步下跌，市值跌破万亿元，市场关注其近期表现。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "港股",
+        "锂电池",
+        "宁德时代"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-25/doc-inizxtsm4307898.shtml",
+      "title_cn": "港股收评：恒指跌1.14%失守22000点 科指跌2.56% 芯片股低迷 锂电池股下挫 宁德时代跌超12%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/25",
+      "summary": "港股收跌，恒指跌1.14%失守22000点，恒生科技指数跌2.56%；芯片股低迷、锂电池股下挫，宁德时代跌超12%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "半导体",
+        "锂电池"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-26/doc-inizyzmv3939458.shtml",
+      "title_cn": "恒指牛熊街货比(36:64)︱11月26日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "11月26日恒指牛熊街货比为36:64。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-25/doc-inizwwns8674124.shtml",
+      "title_cn": "恒生科技指数大扩容 港股科技资产结构迎新变化",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/25",
+      "summary": "恒生科技指数大幅扩容，港股科技资产结构迎来新变化。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "指数",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/23/nvidia-stock-jensen-huang-ai-trade.html",
+      "title_cn": "Nvidia surge: What investors should do with the stock and the AI trade now",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "英伟达股价大涨，市场讨论投资者应如何对待该股及当前AI交易。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "半导体",
+        "英伟达"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ],
+  "redchipPanel": {
+    "entries": [],
+    "capturedAt": "2026-11-26T07:05:31+08:00",
+    "capturedSource": "snapshot",
+    "ledgerCount": 39,
+    "lastChangedAt": "2026-11-26T07:05:28+08:00",
+    "ledgerByMarket": {
+      "us": 1,
+      "hk": 38
+    }
+  },
+  "researchPanel": {
+    "items": [
+      {
+        "title": "2027年国内宏观经济年度展望：新叶催陈 持中守正",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848977984792/index.phtml",
+        "publishedAt": "2026-11-25",
+        "org": "国泰君安期货有限公司",
+        "researchers": "毛磊",
+        "industry": "宏观"
+      },
+      {
+        "title": "2026年10月宏观数据点评：生产需求均有回落",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848941685489/index.phtml",
+        "publishedAt": "2026-11-25",
+        "org": "上海证券有限责任公司",
+        "researchers": "陈彦利/王伟力",
+        "industry": "宏观"
+      },
+      {
+        "title": "宏观量化系列深度报告(五)：沪金机器学习择时研究",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848939743917/index.phtml",
+        "publishedAt": "2026-11-25",
+        "org": "东海期货有限责任公司",
+        "researchers": "明道雨",
+        "industry": "宏观"
+      },
+      {
+        "title": "10月财政数据分析：政府性基金收支改善",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848934120448/index.phtml",
+        "publishedAt": "2026-11-25",
+        "org": "甬兴证券有限公司",
+        "researchers": "高明",
+        "industry": "宏观"
+      },
+      {
+        "title": "2026年西南研究周刊十一月第四期：川渝就业协同深化 渝前10月外贸超去年全年",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848932260076/index.phtml",
+        "publishedAt": "2026-11-25",
+        "org": "西南证券股份有限公司",
+        "researchers": "叶凡/罗文萱/李卓灿/王颖婷",
+        "industry": "宏观"
+      },
+      {
+        "title": "10月外汇市场分析报告：人民币延续升势 市场预期总体保持稳定",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848851982123/index.phtml",
+        "publishedAt": "2026-11-24",
+        "org": "华福证券股份有限公司",
+        "researchers": "管涛",
+        "industry": "宏观"
+      },
+      {
+        "title": "11.22资本市场三项新政点评：稳市“组合拳”精准发力",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848836860173/index.phtml",
+        "publishedAt": "2026-11-24",
+        "org": "国泰海通证券股份有限公司",
+        "researchers": "李明亮/何韫露",
+        "industry": "宏观"
+      },
+      {
+        "title": "宏观2027年度策略报告：藏锋破浪",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848836018074/index.phtml",
+        "publishedAt": "2026-11-24",
+        "org": "华创证券有限责任公司",
+        "researchers": "张瑜/陆银波/文若愚/殷雯卿/高拓/付春生/夏雪/李星宇/袁玲玲/韩港",
+        "industry": "宏观"
+      },
+      {
+        "title": "10月金融数据点评：社融增速回升",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848827334728/index.phtml",
+        "publishedAt": "2026-11-24",
+        "org": "中证鹏元资信评估股份有限公司",
+        "researchers": "赵云蛟/吴进辉",
+        "industry": "宏观"
+      },
+      {
+        "title": "2027年全球大类资产展望：不系之舟",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848826613818/index.phtml",
+        "publishedAt": "2026-11-24",
+        "org": "工银国际证券研究有限公司",
+        "researchers": "程实/周烨",
+        "industry": "宏观"
+      },
+      {
+        "title": "宏观经济信用观察(二零二六年三季报)：经济增长边际回暖 结构分化格局延续",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848825616120/index.phtml",
+        "publishedAt": "2026-11-24",
+        "org": "联合资信评估股份有限公司",
+        "researchers": "张振/王妍",
+        "industry": "宏观"
+      },
+      {
+        "title": "宏观专题：本轮人民币升值：特征、逻辑与展望",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848825600630/index.phtml",
+        "publishedAt": "2026-11-24",
+        "org": "国盛证券股份有限公司",
+        "researchers": "熊园/穆仁文",
+        "industry": "宏观"
+      }
+    ],
+    "scanned": 16,
+    "windowDays": 3,
+    "capturedAt": "2026-11-25T23:15:51.773Z"
+  },
+  "sourceStats": [
+    {
+      "sourceId": "cnr-gd",
+      "inflow": 58,
+      "kept": 8,
+      "avgScore": 41
+    },
+    {
+      "sourceId": "guancha",
+      "inflow": 52,
+      "kept": 7,
+      "avgScore": 52
+    },
+    {
+      "sourceId": "cnfin",
+      "inflow": 46,
+      "kept": 20,
+      "avgScore": 26
+    },
+    {
+      "sourceId": "sina-bank",
+      "inflow": 45,
+      "kept": 11,
+      "avgScore": 36
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "inflow": 35,
+      "kept": 20,
+      "avgScore": 35
+    },
+    {
+      "sourceId": "cnbc-top",
+      "inflow": 30,
+      "kept": 1,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "sina-a-stock",
+      "inflow": 29,
+      "kept": 13,
+      "avgScore": 46
+    },
+    {
+      "sourceId": "sina-hk-stock",
+      "inflow": 28,
+      "kept": 14,
+      "avgScore": 59
+    },
+    {
+      "sourceId": "southcn",
+      "inflow": 26,
+      "kept": 1,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "cctv-finance",
+      "inflow": 25,
+      "kept": 3,
+      "avgScore": 28
+    },
+    {
+      "sourceId": "sina-money",
+      "inflow": 20,
+      "kept": 8,
+      "avgScore": 68
+    },
+    {
+      "sourceId": "fed-press",
+      "inflow": 20,
+      "kept": 2,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "inflow": 20,
+      "kept": 16,
+      "avgScore": 37
+    },
+    {
+      "sourceId": "21jingji-finance",
+      "inflow": 12,
+      "kept": 7,
+      "avgScore": 45
+    },
+    {
+      "sourceId": "investing-news",
+      "inflow": 10,
+      "kept": 9,
+      "avgScore": 25
+    },
+    {
+      "sourceId": "crunchbase-news",
+      "inflow": 10,
+      "kept": 2,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "govcn-policy",
+      "inflow": 7,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "gd-csrc-tutoring",
+      "inflow": 1,
+      "kept": 1,
+      "avgScore": 30
+    },
+    {
+      "sourceId": "gd-bse-audit",
+      "inflow": 1,
+      "kept": 1,
+      "avgScore": 61
+    }
+  ],
+  "heroDelta": {
+    "state": "followup"
+  },
+  "productCoverage": [
+    {
+      "line": "按揭",
+      "count": 0,
+      "examples": []
+    },
+    {
+      "line": "信用卡",
+      "count": 0,
+      "examples": []
+    },
+    {
+      "line": "代发",
+      "count": 0,
+      "examples": []
+    }
+  ]
+}
