@@ -1,0 +1,1061 @@
+{
+  "date": "2026-11-27",
+  "hero_line": "今天主要看三个方面：服务贸易十五五规划落地，AI服务贸易成新业态；跨境人民币与关税双向扰动，外贸客群结算承压；理财评级与黄金深跌，财富货架面临重排。",
+  "must_read": [
+    {
+      "title": "服务贸易十五五规划印发，AI服务贸易成新业态",
+      "why": "国家层面为服务贸易定调五年，人工智能服务贸易首次列为新业态，跨境服务与AI企业的结算、融资需求将随之扩容。",
+      "url": "https://www.cnfin.com/yw-lb/detail/20261126/4500805_1.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "COMEX黄金年内回撤超40%，创1980年以来最惨单年",
+      "why": "黄金单年跌幅创四十余年之最，前期高位买入的客户浮亏显著，贵金属类产品的客户沟通压力集中显现。",
+      "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inizzwrc8969635.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "A股缩量震荡，周期资源与银行板块走强",
+      "why": "权益市场风格向低估值与资源类倾斜，客户持仓结构分化加剧，基金投顾与仓位沟通的诉求同步上升。",
+      "url": "https://finance.sina.com.cn/money/gzqh/futuresyspzx/2026-11-27/doc-inkaayay5840316.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "29家全球系统重要性银行名单出炉，五家中资行档位不变",
+      "why": "中资行全球系统重要性档位维持不变，同业资本与监管要求格局稳定，跨境业务的监管预期没有额外扰动。",
+      "url": "https://m.21jingji.com/article/20261126/herald/c166c31f7b85179cb18d606ff5e4bf32.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "理财公司首次监管评级结果下发",
+      "why": "理财子评级首次落地，代销准入与产品白名单的调整依据由此确立，财富货架的底层规则发生变化。",
+      "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inkaaiff3705944.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    }
+  ],
+  "insights": [
+    {
+      "topic": "基金代销增量不增收",
+      "tags": [
+        "财富"
+      ],
+      "impact": "费率下行挤压中收，销量导向的收益空间收窄，客户保有规模与投顾服务能力成为代销收入的稳定来源。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "增量不增收，银行代销基金的打法要换了",
+          "url": "https://m.21jingji.com/article/20261126/herald/9411c28fea4a04079d1771362f2111c5.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "国债境外抵押扩围",
+      "tags": [
+        "私行",
+        "财富"
+      ],
+      "impact": "人民币国债可在新加坡作抵押，超高净值客户的离岸资产配置与流动性管理场景增加，跨境财富需求向境外延伸。",
+      "segments": [
+        "中高端客群(过亿资产)"
+      ],
+      "sources": [
+        {
+          "title": "人民币离岸再扩圈，中国国债有望在新加坡作抵押",
+          "url": "https://www.guancha.cn/GuanJinRong/2026_11_26_910032.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "理财代销准入随评级重排",
+      "tags": [
+        "财富",
+        "监管"
+      ],
+      "impact": "理财公司评级档位成为代销准入与白名单的新依据，合作机构的产品供给结构会分化，客户可选的货架组合随之变化。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "理财公司首次监管评级结果下发",
+          "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inkaaiff3705944.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "黄金深跌客户浮亏集中",
+      "tags": [
+        "财富",
+        "客群"
+      ],
+      "impact": "年内回撤超四成的行情下，高位买入的贵金属客户账面亏损明显，对持仓解释与后续安排的问询需求集中出现。",
+      "segments": [
+        "中高端客群(过亿资产)"
+      ],
+      "sources": [
+        {
+          "title": "年内最大回撤超40%！COMEX黄金创1980年以来最惨单年行情 这轮“黄金坑”和此前有何不同？",
+          "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inizzwrc8969635.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "硬科技白户首贷破局",
+      "tags": [
+        "信贷",
+        "科技金融"
+      ],
+      "impact": "技术流评价替代传统征信后，无信贷记录的科技型小微获得首贷通道，普惠客群的准入边界向外扩展。",
+      "segments": [
+        "普惠小微贷款客户"
+      ],
+      "sources": [
+        {
+          "title": "从征信“白户”到“小巨人”：一笔首贷，让硬科技被金融“看见”",
+          "url": "https://m.21jingji.com/article/20261126/herald/ef15bc74934e0c1567e002df5266455d.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "广州科研城市升至全球第五",
+      "tags": [
+        "客群",
+        "科技金融"
+      ],
+      "impact": "自然指数排名跃升反映本地科研机构与硬科技企业集聚度提高，高知高收入客群的规模与结构随之变化。",
+      "segments": [
+        "中高端客群(过亿资产)"
+      ],
+      "sources": [
+        {
+          "title": "《自然指数—科研城市2026》报告发布，广州升至全球第五！",
+          "url": "https://news.dayoo.com/guangzhou/202611/26/139995_55027816.htm"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    }
+  ],
+  "sections": {
+    "gz_local": [],
+    "biz_insight": [
+      {
+        "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inkaaiff3705944.shtml",
+        "title_cn": "理财公司首次监管评级结果下发",
+        "title_orig": "",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "首轮理财公司监管评级落地，代销准入与产品白名单可能随之调整，值得关注合作理财子评级档位对货架结构的影响。",
+        "importance": 3,
+        "rank": 1,
+        "tags": [
+          "财富",
+          "监管合规"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/money/bank/bank_hydt/2026-11-26/doc-inizzsii1479729.shtml",
+        "title_cn": "低风险也在亏？超4.3万只银行理财产品回撤",
+        "title_orig": "",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "超4.3万只产品回撤、低风险也在亏，客户投诉与赎回压力上升，理财经理需备好波动解释口径与替代配置方案。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-26/doc-inizyzmp9144620.shtml",
+        "title_cn": "国有大行力推股票回购增持贷款投放",
+        "title_orig": "",
+        "source": "新浪财经·银行频道",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "大行力推回购增持贷款，上市公司客群争夺加剧，可考虑梳理辖内意向名单，评估该产品的切入空间与定价条件。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "信贷",
+          "竞对动态"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inizzftm9080311.shtml",
+        "title_cn": "年末“冲量”提前启动 个人养老金将迎增量资金",
+        "title_orig": "",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "年末冲量提前启动、个人养老金增量资金将至，可考虑提前排布开户与缴存营销节奏，抢在缴存窗口前触达客户。",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "养老",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inkaapny8149231.shtml",
+        "title_cn": "理财公司密集发声稳预期 引导资金配置转向“活钱”理财",
+        "title_orig": "",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "理财子集体引导资金转向活钱类产品，可考虑加快现金管理类货架补位，承接回撤客群的短期避险资金。",
+        "importance": 2,
+        "rank": 5,
+        "tags": [
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20261126/herald/44436041dbcc231ce2a81274f5881184.html",
+        "title_cn": "“脱核不离核、确真不确权”，数字技术改写供应链金融范式",
+        "title_orig": "",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "供应链金融转向脱核不离核、确真不确权，可考虑以交易数据替代核心企业确权，拓展上下游中小客群。",
+        "importance": 1,
+        "rank": 6,
+        "tags": [
+          "信贷",
+          "科技金融"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20261126/herald/ef15bc74934e0c1567e002df5266455d.html",
+        "title_cn": "从征信“白户”到“小巨人”：一笔首贷，让硬科技被金融“看见”",
+        "title_orig": "",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "硬科技白户靠首贷破局，提示科技型小微客群可用技术流评价替代传统征信，值得关注首贷户拓展机会。",
+        "importance": 1,
+        "rank": 7,
+        "tags": [
+          "信贷",
+          "客群",
+          "科技金融"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20261126/herald/9411c28fea4a04079d1771362f2111c5.html",
+        "title_cn": "增量不增收，银行代销基金的打法要换了",
+        "title_orig": "",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "基金代销增量不增收，费率下行挤压中收，可考虑从销量导向转向保有与投顾服务，稳住代销收入基本盘。",
+        "importance": 1,
+        "rank": 8,
+        "tags": [
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      }
+    ],
+    "policy_market": [
+      {
+        "url": "https://finance.eastmoney.com/a/202611263940620313.html",
+        "title_cn": "广东：鼓励算力中心优先使用国产算力芯片提升国产化替代水平和应用规模",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "official",
+        "date": "11/26",
+        "summary": "广东鼓励算力中心优先用国产芯片，本地算力与芯片企业融资需求有望增加，可考虑梳理相关客群的项目储备。",
+        "importance": 3,
+        "rank": 1,
+        "tags": [
+          "科技金融",
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnfin.com/yw-lb/detail/20261126/4500805_1.html",
+        "title_cn": "《服务贸易发展“十五五”规划》印发 明确发展人工智能服务贸易新业态",
+        "title_orig": "",
+        "source": "新华财经",
+        "source_type": "official",
+        "date": "11/26",
+        "summary": "服务贸易十五五规划明确AI服务贸易新业态，跨境服务与AI企业结算、融资需求值得关注，可提前摸排客群。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "市场",
+          "跨境",
+          "客群",
+          "财富"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_26_910032.shtml",
+        "title_cn": "人民币离岸再扩圈，中国国债有望在新加坡作抵押",
+        "title_orig": "",
+        "source": "观察者网·金融",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "中国国债有望在新加坡作抵押，离岸人民币应用场景扩围，跨境客群的人民币资产配置与结算需求值得关注。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "跨境",
+          "市场",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnfin.com/yw-lb/detail/20261126/4500620_1.html",
+        "title_cn": "商务部：坚决反对美对中国等经济体加征301关税",
+        "title_orig": "",
+        "source": "新华财经",
+        "source_type": "official",
+        "date": "11/26",
+        "summary": "美拟对含中国在内14个经济体加征301关税，外贸客群汇率与订单风险上升，结售汇窗口值得提示客户关注。",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "市场",
+          "跨境",
+          "客群",
+          "财富"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_26_909995.shtml",
+        "title_cn": "黄金失守3500美元，白银跌破40美元",
+        "title_orig": "",
+        "source": "观察者网·金融",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "黄金失守3500美元、白银跌破40美元，贵金属波动加大，持仓客户的补仓与止损咨询可能增多，需备好应答口径。",
+        "importance": 2,
+        "rank": 5,
+        "tags": [
+          "市场",
+          "财富",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20261126/herald/c166c31f7b85179cb18d606ff5e4bf32.html",
+        "title_cn": "29家全球系统重要性银行名单出炉 五家中资银行档位不变",
+        "title_orig": "",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "29家全球系统重要性银行名单出炉、五家中资行档位不变，同业资本与监管要求格局稳定，对分行无直接调整影响。",
+        "importance": 1,
+        "rank": 6,
+        "tags": [
+          "监管合规",
+          "竞对动态"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/money/gzqh/futuresyspzx/2026-11-27/doc-inkaayay5840316.shtml",
+        "title_cn": "A股缩量震荡 周期资源与银行板块走强",
+        "title_orig": "",
+        "source": "新浪财经·A股频道",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "A股缩量震荡、周期资源与银行板块走强，权益类客户风险偏好分化，基金投顾与仓位沟通需求可能上升。",
+        "importance": 1,
+        "rank": 7,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnfin.com/qy-lb/detail/20261126/4500873_1.html",
+        "title_cn": "上海二手房网签成交已超去年 市场呈现“量企稳、价分层”格局",
+        "title_orig": "",
+        "source": "新华财经",
+        "source_type": "media",
+        "date": "11/26",
+        "summary": "上海二手房成交超去年、量企稳价分层，按揭需求边际改善，可关注本地楼市成交节奏对房贷投放的传导。",
+        "importance": 1,
+        "rank": 8,
+        "tags": [
+          "住房金融",
+          "市场",
+          "信贷",
+          "客群"
+        ],
+        "locale": "national"
+      }
+    ],
+    "tech": [],
+    "ipo": [
+      {
+        "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/24/PREIPO_F0101_V01_20261124_37591_Q/79B2DE3956D94970BACB4CF941DBA196/关于中星微技术股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf",
+        "title_cn": "中星微技术股份有限公司辅导验收完成",
+        "title_orig": "",
+        "source": "证监会辅导备案(官方csrcfd)",
+        "source_type": "official",
+        "date": "11/24",
+        "summary": "中星微技术辅导验收完成，辅导机构为中国银河证券，IPO推进至关键节点，可关注其后续募资与结算合作空间。",
+        "importance": 1,
+        "rank": 1,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.bse.cn/audit/project_news_select.html#874659@P02",
+        "title_cn": "深鹏科技：IPO问询中（拟北交所）",
+        "title_orig": "",
+        "source": "北交所审核项目动态(官方)",
+        "source_type": "official",
+        "date": "11/26",
+        "summary": "东莞企业深鹏科技北交所IPO问询中，保荐为东莞证券，可关注其上市前的资金归集与后续募资托管机会。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national",
+        "locale_evidence": "注册地：广东省东莞市"
+      },
+      {
+        "url": "https://www.bse.cn/audit/project_news_select.html#874729@P02",
+        "title_cn": "深达威：IPO问询中（拟北交所）",
+        "source": "北交所审核项目动态(官方)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "11/25",
+        "summary": "注册地：广东省东莞市｜保荐：广发证券股份有限公司｜代码：874729｜状态：IPO问询中｜更新：2026-11-25",
+        "ipoStage": "stage-reviewing",
+        "ipoMeta": "保荐 广发证券股份有限公司 ｜ 拟上市北交所",
+        "ipoCity": "东莞市",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      }
+    ]
+  },
+  "risk": {
+    "topic": "理财募集失败与评级准入收紧",
+    "evidence": "147只银行理财年内募集失败、超去年近三成，个别产品仅募集2万元；同期理财公司首次监管评级结果下发。",
+    "impact": "财富条线代销准入与白名单面临调整，低评级机构产品上架受限；个贷与私行客户若持有相关产品，净值与流动性问询上升；风控需同步复核代销适当性留痕。",
+    "source": "T1",
+    "sources": [
+      {
+        "title": "147只银行理财“折戟”超去年近三成 有产品仅募集2万元",
+        "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inizzsik8225705.shtml"
+      },
+      {
+        "title": "理财公司首次监管评级结果下发",
+        "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inkaaiff3705944.shtml"
+      }
+    ],
+    "delta": {
+      "state": "followup"
+    }
+  },
+  "insightFunnel": {
+    "candidates": 12,
+    "played": 6,
+    "skippedByMemory": 3,
+    "dualCandidates": 3,
+    "sameAsMustRead": 2,
+    "target": 6
+  },
+  "mustReadFunnel": {
+    "candidates": 10,
+    "played": 5,
+    "skippedByMemory": 2,
+    "target": 5
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌0.62%，AI债务担忧与英伟达相关不确定性压制科技股。",
+      "sectors": [
+        "英伟达董事会遭调查、高管涉股东诉讼，重磅个股治理风险升温。",
+        "AI债务市场承压，黄仁勋回归CEO次日相关担忧加剧。",
+        "半导体出口首超油气，AI需求支撑芯片板块长期逻辑。"
+      ],
+      "spoken": "美股收盘涨跌互现，纳指跌0.62%，道指涨0.33%。AI债务担忧升温，英伟达董事会调查与股东诉讼压制科技股情绪。半导体出口首超油气，芯片长期需求仍受关注。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-27"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "50182.95",
+          "changePct": "+0.33%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "23585.80",
+          "changePct": "-0.62%"
+        },
+        {
+          "name": "标普500",
+          "value": "7182.78",
+          "changePct": "-0.25%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3476.88点（+0.01%）；深证成指收报10084.04点（-0.02%）；创业板指收报2189.82点（+0.29%）。",
+      "sectors": [
+        "银行、黄金股走强"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-27"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3476.88",
+          "changePct": "+0.01%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10084.04",
+          "changePct": "-0.02%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2189.82",
+          "changePct": "+0.29%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报22226.88点（+1.19%）；恒生科技收报3417.38点（+1.16%）。",
+      "sectors": [
+        "科网股普涨",
+        "光通信板块走强"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-27"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨1.19% 科指涨1.16% 科网股普涨 光通信板块走强",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-26/doc-inkaaaxe8162106.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22226.88",
+          "changePct": "+1.19%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3417.38",
+          "changePct": "+1.16%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-26",
+    "marketStatus": {
+      "reportDate": "2026-11-27",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-26"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-26"
+        },
+        "us": {
+          "fresh": false,
+          "dataDate": "2026-11-25",
+          "reason": "数据为 11月25日（距今 2 天）"
+        }
+      },
+      "allStale": false,
+      "note": "美股今日无隔夜行情，其余市场为最新收盘",
+      "spokenNote": "美股今日无隔夜行情；A股为 11月26日 周四 收盘；港股为 11月26日 周四 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940576143.html",
+      "title_cn": "商务部：坚决反对美对中国等经济体加征301关税",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "商务部表示坚决反对美国对中国等经济体加征301关税。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "贸易",
+        "关税"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940572011.html",
+      "title_cn": "A股三大指数涨跌不一贵金属、元件、煤炭板块领涨",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "A股三大指数收盘涨跌不一，贵金属、元件、煤炭板块领涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "板块"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940448190.html",
+      "title_cn": "华为、长鑫靠近先进存储核心地带向三星、SK海力士发起挑战",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "华为、长鑫存储向先进存储核心领域推进，对三星、SK海力士形成挑战。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "存储",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-26/doc-inkaaaxe8162106.shtml",
+      "title_cn": "港股收评：恒指涨1.19% 科指涨1.16% 科网股普涨 光通信板块走强",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "港股收评：恒指涨1.19%，科指涨1.16%，科网股普涨，光通信板块走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "科网股",
+        "光通信"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-27/doc-inkacksp1119390.shtml",
+      "title_cn": "恒指牛熊街货比(39:61)︱11月27日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "11月27日恒指牛熊街货比为39:61。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-11-26/doc-inizzwrh8238907.shtml",
+      "title_cn": "交银国际维持腾讯(700.HK)“买入”评级 降目标价至488港元 削今起三年经调整盈利预测10%至18%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "交银国际维持腾讯“买入”评级，目标价下调至488港元，并下调今起三年经调整盈利预测10%至18%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "腾讯"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-ai-credit-markets.html",
+      "title_cn": "AI debt markets shudder as Nvidia's top 'banker' returns",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "CNBC报道称，随着英伟达头号“银行家”回归，AI债务市场出现波动。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "债券市场"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/23/nvidia-stock-jensen-huang-ai-trade.html",
+      "title_cn": "Nvidia surge: What investors should do with the stock and the AI trade now",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "CNBC讨论英伟达股价大涨后投资者对英伟达股票及AI交易的应对。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "英伟达",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/brazils-embraer-ceo-says-us-aircraft-tariff-will-hurt-airlines-5052544",
+      "title_cn": "Brazil’s Embraer criticizes new US tariffs, warns of air travel inflation",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "巴西航空工业公司批评美国新关税，并警告航空出行价格可能上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "关税",
+        "航空"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ],
+  "redchipPanel": {
+    "entries": [],
+    "capturedAt": "2026-11-27T07:07:54+08:00",
+    "capturedSource": "snapshot",
+    "ledgerCount": 39,
+    "lastChangedAt": "2026-11-26T07:05:28+08:00",
+    "ledgerByMarket": {
+      "us": 1,
+      "hk": 38
+    }
+  },
+  "researchPanel": {
+    "items": [
+      {
+        "title": "宏观经济深度报告：雄关漫道真如铁-2027年国内宏观主线",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849008122401/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "国信证券股份有限公司",
+        "researchers": "王奕群/邵兴宇/田地/董德志",
+        "industry": "宏观"
+      },
+      {
+        "title": "进出口观察系列：内需能接续多少？-2027年外需波动下的空间测算",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849006462558/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "国联民生证券股份有限公司",
+        "researchers": "陶川/钟渝梅/刘宏彦",
+        "industry": "宏观"
+      },
+      {
+        "title": "2027年宏观政策展望报告之一：重塑内需：从需求管理到资产负债表修复",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849002897048/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "国泰海通证券股份有限公司",
+        "researchers": "李明亮/纪尧/何韫露/孙欣欣/董琦",
+        "industry": "宏观"
+      },
+      {
+        "title": "2027年宏观经济展望：稳字当头 向内求解",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849002540214/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "中国银河证券股份有限公司",
+        "researchers": "章俊/张迪/许冬石/詹璐/吕雷/赵红蕾/路自愿",
+        "industry": "宏观"
+      },
+      {
+        "title": "2026年10月进出口数据点评：政策预期趋稳 外贸韧性有望延续",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848996335720/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "中航证券有限公司",
+        "researchers": "刘庆东/齐仝",
+        "industry": "宏观"
+      },
+      {
+        "title": "2026年10月金融数据点评：政府债支撑社融 实体融资需求与货币扩张动能仍待修复",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848996232492/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "中航证券有限公司",
+        "researchers": "刘庆东/齐仝",
+        "industry": "宏观"
+      },
+      {
+        "title": "宏观专题报告：汽车出海应对当地瓶颈的国际经验",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848994636547/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "中泰证券股份有限公司",
+        "researchers": "杨畅/夏知非",
+        "industry": "宏观"
+      },
+      {
+        "title": "宏观深度报告：A股2027年盈利预测：宽基指数、申万一级行业与季度节奏",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848981142916/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "东吴证券股份有限公司",
+        "researchers": "芦哲/唐遥衎",
+        "industry": "宏观"
+      },
+      {
+        "title": "2027年国内宏观经济年度展望：新叶催陈 持中守正",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848977984792/index.phtml",
+        "publishedAt": "2026-11-25",
+        "org": "国泰君安期货有限公司",
+        "researchers": "毛磊",
+        "industry": "宏观"
+      },
+      {
+        "title": "2026年10月宏观数据点评：生产需求均有回落",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848941685489/index.phtml",
+        "publishedAt": "2026-11-25",
+        "org": "上海证券有限责任公司",
+        "researchers": "陈彦利/王伟力",
+        "industry": "宏观"
+      },
+      {
+        "title": "宏观量化系列深度报告(五)：沪金机器学习择时研究",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848939743917/index.phtml",
+        "publishedAt": "2026-11-25",
+        "org": "东海期货有限责任公司",
+        "researchers": "明道雨",
+        "industry": "宏观"
+      },
+      {
+        "title": "10月财政数据分析：政府性基金收支改善",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/848934120448/index.phtml",
+        "publishedAt": "2026-11-25",
+        "org": "甬兴证券有限公司",
+        "researchers": "高明",
+        "industry": "宏观"
+      }
+    ],
+    "scanned": 21,
+    "windowDays": 3,
+    "capturedAt": "2026-11-26T23:14:03.934Z"
+  },
+  "sourceStats": [
+    {
+      "sourceId": "cnr-gd",
+      "inflow": 58,
+      "kept": 8,
+      "avgScore": 30
+    },
+    {
+      "sourceId": "guancha",
+      "inflow": 52,
+      "kept": 7,
+      "avgScore": 49
+    },
+    {
+      "sourceId": "cnfin",
+      "inflow": 46,
+      "kept": 20,
+      "avgScore": 30
+    },
+    {
+      "sourceId": "sina-bank",
+      "inflow": 43,
+      "kept": 7,
+      "avgScore": 38
+    },
+    {
+      "sourceId": "sina-hk-stock",
+      "inflow": 34,
+      "kept": 15,
+      "avgScore": 60
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "inflow": 32,
+      "kept": 20,
+      "avgScore": 33
+    },
+    {
+      "sourceId": "cnbc-top",
+      "inflow": 30,
+      "kept": 1,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "sina-a-stock",
+      "inflow": 28,
+      "kept": 14,
+      "avgScore": 56
+    },
+    {
+      "sourceId": "cctv-finance",
+      "inflow": 25,
+      "kept": 2,
+      "avgScore": 25
+    },
+    {
+      "sourceId": "southcn",
+      "inflow": 22,
+      "kept": 1,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "fed-press",
+      "inflow": 20,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "inflow": 20,
+      "kept": 17,
+      "avgScore": 29
+    },
+    {
+      "sourceId": "sina-money",
+      "inflow": 19,
+      "kept": 11,
+      "avgScore": 66
+    },
+    {
+      "sourceId": "investing-news",
+      "inflow": 10,
+      "kept": 8,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "21jingji-finance",
+      "inflow": 10,
+      "kept": 6,
+      "avgScore": 36
+    },
+    {
+      "sourceId": "crunchbase-news",
+      "inflow": 10,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "govcn-policy",
+      "inflow": 7,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "gd-bse-audit",
+      "inflow": 2,
+      "kept": 2,
+      "avgScore": 61
+    },
+    {
+      "sourceId": "gd-csrc-tutoring",
+      "inflow": 1,
+      "kept": 1,
+      "avgScore": 30
+    }
+  ],
+  "heroDelta": {
+    "state": "followup"
+  },
+  "productCoverage": [
+    {
+      "line": "按揭",
+      "count": 0,
+      "examples": []
+    },
+    {
+      "line": "信用卡",
+      "count": 0,
+      "examples": []
+    },
+    {
+      "line": "代发",
+      "count": 0,
+      "examples": []
+    }
+  ]
+}

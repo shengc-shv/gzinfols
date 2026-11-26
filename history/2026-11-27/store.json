@@ -1,0 +1,894 @@
+{
+  "date": "2026-11-27",
+  "updatedAt": "2026-11-26T23:14:26.258Z",
+  "executive": {
+    "hero_line": "今天主要看三个方面：服务贸易十五五规划落地，AI服务贸易成新业态；跨境人民币与关税双向扰动，外贸客群结算承压；理财评级与黄金深跌，财富货架面临重排。",
+    "spoken_hero": "今天主要看三个方面：服务贸易十五五规划落地，人工智能服务贸易成了新业态；跨境人民币和关税两头扰动，外贸客群结算压力上升；理财公司首次评级下发、黄金年内回撤超四成，财富货架要重排。",
+    "must_read": [
+      {
+        "title": "服务贸易十五五规划印发，AI服务贸易成新业态",
+        "why": "国家层面为服务贸易定调五年，人工智能服务贸易首次列为新业态，跨境服务与AI企业的结算、融资需求将随之扩容。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261126/4500805_1.html"
+      },
+      {
+        "title": "COMEX黄金年内回撤超40%，创1980年以来最惨单年",
+        "why": "黄金单年跌幅创四十余年之最，前期高位买入的客户浮亏显著，贵金属类产品的客户沟通压力集中显现。",
+        "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inizzwrc8969635.shtml"
+      },
+      {
+        "title": "A股缩量震荡，周期资源与银行板块走强",
+        "why": "权益市场风格向低估值与资源类倾斜，客户持仓结构分化加剧，基金投顾与仓位沟通的诉求同步上升。",
+        "url": "https://finance.sina.com.cn/money/gzqh/futuresyspzx/2026-11-27/doc-inkaayay5840316.shtml"
+      },
+      {
+        "title": "29家全球系统重要性银行名单出炉，五家中资行档位不变",
+        "why": "中资行全球系统重要性档位维持不变，同业资本与监管要求格局稳定，跨境业务的监管预期没有额外扰动。",
+        "url": "https://m.21jingji.com/article/20261126/herald/c166c31f7b85179cb18d606ff5e4bf32.html"
+      },
+      {
+        "title": "理财公司首次监管评级结果下发",
+        "why": "理财子评级首次落地，代销准入与产品白名单的调整依据由此确立，财富货架的底层规则发生变化。",
+        "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inkaaiff3705944.shtml"
+      }
+    ],
+    "spoken_must_read": "服务贸易十五五规划印发，AI服务贸易成新业态。国家层面为服务贸易定调五年，人工智能服务贸易首次列为新业态，跨境服务与AI企业的结算、融资需求将随之扩容。其次，COMEX黄金年内回撤超40%，创1980年以来最惨单年。黄金单年跌幅创四十余年之最，前期高位买入的客户浮亏显著，贵金属类产品的客户沟通压力集中显现。此外，A股缩量震荡，周期资源与银行板块走强。权益市场风格向低估值与资源类倾斜，客户持仓结构分化加剧，基金投顾与仓位沟通的诉求同步上升。还有，29家全球系统重要性银行名单出炉，五家中资行档位不变。中资行全球系统重要性档位维持不变，同业资本与监管要求格局稳定，跨境业务的监管预期没有额外扰动。另外，理财公司首次监管评级结果下发。理财子评级首次落地，代销准入与产品白名单的调整依据由此确立，财富货架的底层规则发生变化。",
+    "insights": [
+      {
+        "topic": "基金代销增量不增收",
+        "impact": "费率下行挤压中收，销量导向的收益空间收窄，客户保有规模与投顾服务能力成为代销收入的稳定来源。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "增量不增收，银行代销基金的打法要换了",
+            "url": "https://m.21jingji.com/article/20261126/herald/9411c28fea4a04079d1771362f2111c5.html"
+          }
+        ]
+      },
+      {
+        "topic": "国债境外抵押扩围",
+        "impact": "人民币国债可在新加坡作抵押，超高净值客户的离岸资产配置与流动性管理场景增加，跨境财富需求向境外延伸。",
+        "tag": [
+          "私行",
+          "财富"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "人民币离岸再扩圈，中国国债有望在新加坡作抵押",
+            "url": "https://www.guancha.cn/GuanJinRong/2026_11_26_910032.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "理财代销准入随评级重排",
+        "impact": "理财公司评级档位成为代销准入与白名单的新依据，合作机构的产品供给结构会分化，客户可选的货架组合随之变化。",
+        "tag": [
+          "财富",
+          "监管"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "理财公司首次监管评级结果下发",
+            "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inkaaiff3705944.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "黄金深跌客户浮亏集中",
+        "impact": "年内回撤超四成的行情下，高位买入的贵金属客户账面亏损明显，对持仓解释与后续安排的问询需求集中出现。",
+        "tag": [
+          "财富",
+          "客群"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "年内最大回撤超40%！COMEX黄金创1980年以来最惨单年行情 这轮“黄金坑”和此前有何不同？",
+            "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inizzwrc8969635.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "硬科技白户首贷破局",
+        "impact": "技术流评价替代传统征信后，无信贷记录的科技型小微获得首贷通道，普惠客群的准入边界向外扩展。",
+        "tag": [
+          "信贷",
+          "科技金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "从征信“白户”到“小巨人”：一笔首贷，让硬科技被金融“看见”",
+            "url": "https://m.21jingji.com/article/20261126/herald/ef15bc74934e0c1567e002df5266455d.html"
+          }
+        ]
+      },
+      {
+        "topic": "广州科研城市升至全球第五",
+        "impact": "自然指数排名跃升反映本地科研机构与硬科技企业集聚度提高，高知高收入客群的规模与结构随之变化。",
+        "tag": [
+          "客群",
+          "科技金融"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "《自然指数—科研城市2026》报告发布，广州升至全球第五！",
+            "url": "https://news.dayoo.com/guangzhou/202611/26/139995_55027816.htm"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，基金代销增量不增收、理财代销准入随评级重排，费率下行挤压中收。第二，高端客户方面，国债境外抵押扩围、黄金深跌客户浮亏集中、广州科研城市升至全球第五，人民币国债可在新加坡作抵押。第三，普惠小微方面，硬科技白户首贷破局，技术流评价替代传统征信后。",
+    "risk": {
+      "topic": "理财募集失败与评级准入收紧",
+      "evidence": "147只银行理财年内募集失败、超去年近三成，个别产品仅募集2万元；同期理财公司首次监管评级结果下发。",
+      "impact": "财富条线代销准入与白名单面临调整，低评级机构产品上架受限；个贷与私行客户若持有相关产品，净值与流动性问询上升；风控需同步复核代销适当性留痕。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "147只银行理财“折戟”超去年近三成 有产品仅募集2万元",
+          "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inizzsik8225705.shtml"
+        },
+        {
+          "title": "理财公司首次监管评级结果下发",
+          "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inkaaiff3705944.shtml"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：理财募集失败与评级准入收紧，财富条线代销准入与白名单面临调整，低评级机构产品上架受限；个贷与私行客户若持有相关产品，净值与流动性问询上升；风控需同步复核代销适当性留痕。",
+    "guangdong_ipo": {
+      "spoken": "东莞企业深鹏科技北交所IPO进入问询阶段，保荐机构为东莞证券，属电子制造行业，上市前资金归集与后续募资托管存在业务空间。",
+      "push_line": "深鹏科技在审"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指跌0.62%，AI债务担忧与英伟达相关不确定性压制科技股。",
+      "sectors": [
+        "英伟达董事会遭调查、高管涉股东诉讼，重磅个股治理风险升温。",
+        "AI债务市场承压，黄仁勋回归CEO次日相关担忧加剧。",
+        "半导体出口首超油气，AI需求支撑芯片板块长期逻辑。",
+        "比特币站稳6.05万美元上方，利率与监管担忧未消。"
+      ],
+      "spoken": "美股收盘涨跌互现，纳指跌0.62%，道指涨0.33%。AI债务担忧升温，英伟达董事会调查与股东诉讼压制科技股情绪。半导体出口首超油气，芯片长期需求仍受关注。比特币站稳6.05万美元上方。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-27"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "50182.95",
+          "changePct": "+0.33%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "23585.80",
+          "changePct": "-0.62%"
+        },
+        {
+          "name": "标普500",
+          "value": "7182.78",
+          "changePct": "-0.25%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "上证指数收报3476.88点（+0.01%）；深证成指收报10084.04点（-0.02%）；创业板指收报2189.82点（+0.29%）。",
+      "sectors": [
+        "银行、黄金股走强"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-27"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3476.88",
+          "changePct": "+0.01%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10084.04",
+          "changePct": "-0.02%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2189.82",
+          "changePct": "+0.29%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数收报22226.88点（+1.19%）；恒生科技收报3417.38点（+1.16%）。",
+      "sectors": [
+        "科网股普涨",
+        "光通信板块走强"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-27"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨1.19% 科指涨1.16% 科网股普涨 光通信板块走强",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-26/doc-inkaaaxe8162106.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22226.88",
+          "changePct": "+1.19%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3417.38",
+          "changePct": "+1.16%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-26",
+    "marketStatus": {
+      "reportDate": "2026-11-27",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-26"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-26"
+        },
+        "us": {
+          "fresh": false,
+          "dataDate": "2026-11-25",
+          "reason": "数据为 11月25日（距今 2 天）"
+        }
+      },
+      "allStale": false,
+      "note": "美股今日无隔夜行情，其余市场为最新收盘",
+      "spokenNote": "美股今日无隔夜行情；A股为 11月26日 周四 收盘；港股为 11月26日 周四 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940576143.html",
+      "title_cn": "商务部：坚决反对美对中国等经济体加征301关税",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "商务部表示坚决反对美国对中国等经济体加征301关税。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "贸易",
+        "关税"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940572011.html",
+      "title_cn": "A股三大指数涨跌不一贵金属、元件、煤炭板块领涨",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "A股三大指数收盘涨跌不一，贵金属、元件、煤炭板块领涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "大盘",
+        "板块"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940448190.html",
+      "title_cn": "华为、长鑫靠近先进存储核心地带向三星、SK海力士发起挑战",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "华为、长鑫存储向先进存储核心领域推进，对三星、SK海力士形成挑战。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "存储",
+        "科技"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940488133.html",
+      "title_cn": "封单超240万手！大牛股突然一字跌停！发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "一只前期大涨个股突现一字跌停，封单超240万手。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "个股",
+        "异动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940435696.html",
+      "title_cn": "SpaceX百万颗卫星获批！太空光伏站上风口（名单）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "SpaceX百万颗卫星获批，太空光伏概念受到市场关注。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "航天",
+        "光伏",
+        "概念股"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940755962.html",
+      "title_cn": "11月26日晚间沪深上市公司重大事项公告最新快递",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "沪深两市多家上市公司于11月26日晚间发布重大事项公告。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "公告"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940500818.html",
+      "title_cn": "英伟达暂停东南亚芯片出货此前多家服务器厂商已叫停当地交付",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "英伟达暂停东南亚芯片出货，此前多家服务器厂商已叫停当地交付。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "半导体",
+        "英伟达",
+        "供应链"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940620313.html",
+      "title_cn": "广东：鼓励算力中心优先使用国产算力芯片提升国产化替代水平和应用规模",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "广东发文鼓励算力中心优先使用国产算力芯片，提升国产化替代水平和应用规模。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "算力",
+        "半导体",
+        "国产替代"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940727760.html",
+      "title_cn": "什么情况？这只港股新股上市首日大跌逾48%！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "一只港股新股上市首日大跌逾48%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "新股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611263940639992.html",
+      "title_cn": "机构调研丨PCB+智能驾驶这家公司持续推进高速光模块相关业务泰国工厂预计明年开始陆续投产",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "机构调研显示，一家PCB与智能驾驶相关公司推进高速光模块业务，泰国工厂预计明年起陆续投产。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "机构调研",
+        "PCB",
+        "光模块"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941040839.html",
+      "title_cn": "详解服务贸易“十五五”路线图",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "相关部门详解服务贸易“十五五”路线图。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "服务贸易"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941026148.html",
+      "title_cn": "把体育“一阵火”变消费“长久热”（人民时评）",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "人民时评发文提出把体育赛事热度转化为消费的长期动力。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "消费",
+        "体育",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-26/doc-inkaaaxe8162106.shtml",
+      "title_cn": "港股收评：恒指涨1.19% 科指涨1.16% 科网股普涨 光通信板块走强",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "港股收评：恒指涨1.19%，科指涨1.16%，科网股普涨，光通信板块走强。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "大盘",
+        "科网股",
+        "光通信"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-27/doc-inkacksp1139521.shtml",
+      "title_cn": "港股概念追踪 | 新一代通信网建设方案发布 6G产业化进程进入关键落地期(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "新一代通信网建设方案发布，6G产业化进入关键落地期，相关概念股受关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "通信",
+        "6G",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-27/doc-inkacksp1119390.shtml",
+      "title_cn": "恒指牛熊街货比(39:61)︱11月27日",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "11月27日恒指牛熊街货比为39:61。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "衍生品"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-11-26/doc-inizzwrh8238907.shtml",
+      "title_cn": "交银国际维持腾讯(700.HK)“买入”评级 降目标价至488港元 削今起三年经调整盈利预测10%至18%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "交银国际维持腾讯“买入”评级，目标价下调至488港元，并下调今起三年经调整盈利预测10%至18%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "腾讯"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-11-26/doc-inizzmzr3815080.shtml",
+      "title_cn": "不发新股、不募基石：中旅港澳（1821.HK）34.6亿市值今登港股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "中旅港澳（1821.HK）以34.6亿市值登陆港股，未发行新股、未引入基石投资者。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO",
+        "新股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-26/doc-inizzftp1429906.shtml",
+      "title_cn": "2026年港股IPO数量延续上升趋势",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "报告预计2026年港股IPO数量将延续上升趋势。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "IPO"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-26/doc-inizzftm9079492.shtml",
+      "title_cn": "上调港股至超配 预计沪深300明年上涨10%！高盛最新研判来了",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "高盛上调港股至超配，预计沪深300明年上涨10%。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-11-26/doc-inizzftq8212655.shtml",
+      "title_cn": "港股概念追踪 | 刚果金再度暂停钴出口 全球钴供需平衡和价格走势的核心变量生变(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "刚果金再度暂停钴出口，全球钴供需平衡与价格走势的核心变量生变，相关概念股受关注。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "有色金属",
+        "钴",
+        "供应链"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-11-26/doc-inkaaifa8148102.shtml",
+      "title_cn": "大摩降同程旅行(780.HK)目标价11.76%至15港元 现价估值具吸引力 维持“增持”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "大摩将同程旅行目标价下调11.76%至15港元，维持“增持”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "旅游"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkyx/2026-11-26/doc-inkaaaxc1395008.shtml",
+      "title_cn": "里昂重申宁德时代（3750.HK）“高度确信跑赢大市”评级 H股目标价585港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "里昂重申宁德时代“高度确信跑赢大市”评级，H股目标价585港元。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商评级",
+        "新能源"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-26/doc-inkaaaxi3670013.shtml",
+      "title_cn": "高盛：预计沪深300明年上涨10%，上调港股至高配",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "高盛预计沪深300明年上涨10%，并将港股上调至高配。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "券商观点",
+        "A股"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-26/doc-inkaaawz8952609.shtml",
+      "title_cn": "花旗：中国公用事业上游能源成本高企、需求疲弱 看好中广核电力(01816)等",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "花旗称中国公用事业上游能源成本高企、需求疲弱，看好中广核电力等标的。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "公用事业",
+        "能源",
+        "券商观点"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/26/semiconductor-chips-are-the-new-oil-heres-why.html",
+      "title_cn": "Semiconductor chips are the new oil. Here's why",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "CNBC文章讨论半导体芯片为何被称为“新石油”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/25/nvidias-billion-dollar-board-bet-whos-protected-as-lawsuits-mount.html",
+      "title_cn": "Nvidia's billion-dollar board bet: Who's protected as lawsuits mount?",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/25",
+      "summary": "CNBC报道英伟达的数十亿美元董事会押注，以及诉讼增多背景下各方保护情况。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "英伟达",
+        "公司治理"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-ai-credit-markets.html",
+      "title_cn": "AI debt markets shudder as Nvidia's top 'banker' returns",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "CNBC报道称，随着英伟达头号“银行家”回归，AI债务市场出现波动。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "债券市场"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/24/kalshi-perps-volume-prediction-markets.html",
+      "title_cn": "Kalshi daily volume of ‘perps’ trading begins to top its prediction markets",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "Kalshi的“永续合约”日交易量开始超过其预测市场业务。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "交易平台",
+        "衍生品"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/23/nvidia-stock-jensen-huang-ai-trade.html",
+      "title_cn": "Nvidia surge: What investors should do with the stock and the AI trade now",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/23",
+      "summary": "CNBC讨论英伟达股价大涨后投资者对英伟达股票及AI交易的应对。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "英伟达",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/brazils-embraer-ceo-says-us-aircraft-tariff-will-hurt-airlines-5052544",
+      "title_cn": "Brazil’s Embraer criticizes new US tariffs, warns of air travel inflation",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "巴西航空工业公司批评美国新关税，并警告航空出行价格可能上涨。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "关税",
+        "航空"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/cryptocurrency-news/bitcoin-recovers-to-605k-but-rates-regulatory-fears-persist-5052101",
+      "title_cn": "Bitcoin stays afloat above $60.5k, but rates, regulatory fears persist",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "比特币维持在6.05万美元上方，但利率与监管担忧持续。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "加密货币",
+        "比特币"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/company-news/allegiance-resources-names-new-ceo-adds-board-member-93CH-5052731",
+      "title_cn": "Allegiance Resources names new CEO, adds board member",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "Allegiance Resources任命新任CEO，并新增一名董事会成员。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司人事"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/brazils-lula-sounds-out-bradescochairman-as-finance-minister-sources-say-5052498",
+      "title_cn": "Bradesco’s Trabuco accepts invitation to be Brazil’s finance minister, source says",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "消息称Bradesco的Trabuco接受邀请出任巴西财政部长。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "人事",
+        "巴西"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/forex-news/loonie-weakens-amid-thanksgiving-holiday-lull-canadian-labor-market-data-5052729",
+      "title_cn": "Loonie weakens amid Thanksgiving holiday lull, Canadian labor market data",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "加元在感恩节假期交投清淡及加拿大劳动力市场数据影响下走弱。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "外汇",
+        "加元"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/canadian-bonds-extend-rally-amid-ai-jitters-macklem-comments-5052727",
+      "title_cn": "Canadian bonds extend rally amid AI jitters, Macklem comments",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "在AI担忧情绪及加拿大央行行长Macklem讲话影响下，加拿大债券延续涨势。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "债券",
+        "加拿大"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/stock-market-news/mexico-stocks-lower-at-close-of-trade-spbmv-ipc-down-133-5052726",
+      "title_cn": "Mexico stocks lower at close of trade; S&P/BMV IPC down 1.33%",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "墨西哥股市收跌，S&P/BMV IPC指数下跌1.33%。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "墨西哥股市",
+        "大盘"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
