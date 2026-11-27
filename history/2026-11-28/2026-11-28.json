@@ -1,0 +1,1097 @@
+{
+  "date": "2026-11-28",
+  "hero_line": "今天主要看四个方面：资本市场改革与成交破两万亿，风险偏好回升；贷款罚息上下限取消，定价规则生变；广州楼市与公积金扩面，客群入口打开；黄金配置量化区间出炉，财富货架有据可依。",
+  "must_read": [
+    {
+      "title": "银行业总资产近496万亿增6.3%",
+      "why": "行业规模扩张延续，为分行规模与市场份额对标提供参照，也意味着同业竞争仍在同一扩张轨道上。",
+      "url": "https://finance.sina.com.cn/jryx/bank/2026-11-27/doc-inkaesmy7819999.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "贷款罚息利率上下限取消",
+      "why": "罚息定价自主权扩大，存量合同条款与逾期计息规则的合规衔接成为全行定价管理的现实变量。",
+      "url": "https://m.21jingji.com/article/20261127/herald/06bbaf788910a1482133c4b3dd30c9bc.html",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "黄金配置比例区间5%至28%",
+      "why": "世界黄金协会给出跨周期量化参照，为财富条线资产配置沟通提供权威依据，也牵动适当性匹配。",
+      "url": "https://finance.sina.com.cn/jjxw/2026-11-27/doc-inkaefwc1096224.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    },
+    {
+      "title": "创指暴涨超11%，成交破2万亿",
+      "why": "单日成交突破两万亿、科创50涨逾15%，风险偏好快速修复，客户申赎集中度与产品货架压力同步上升。",
+      "url": "https://finance.sina.com.cn/tob/2026-11-27/doc-inkaefwi3203424.shtml",
+      "delta": {
+        "state": "followup"
+      }
+    }
+  ],
+  "insights": [
+    {
+      "topic": "指数样本定期调整落地",
+      "tags": [
+        "财富"
+      ],
+      "impact": "沪深300等指数样本调整带来被动资金调仓窗口，指数基金客户的申购赎回节奏将更集中，货架衔接压力上升。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "中证指数公司公布沪深300等指数样本定期调整方案",
+          "url": "https://finance.sina.com.cn/jjxw/2026-11-28/doc-inkaftxs5117497.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "黄金配置量化区间出炉",
+      "tags": [
+        "财富"
+      ],
+      "impact": "不同经济周期下黄金配置比例5%至28%的量化参照，改变了客户资产配置的沟通口径，也抬高了适当性匹配要求。",
+      "segments": [
+        "零售AUM"
+      ],
+      "sources": [
+        {
+          "title": "世界黄金协会发布中国投资者黄金配置研究：不同经济周期下，黄金配置比例可在5%至28%之间",
+          "url": "https://finance.sina.com.cn/jjxw/2026-11-27/doc-inkaefwc1096224.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "回购增持贷款六大行全落地",
+      "tags": [
+        "对公",
+        "客群"
+      ],
+      "impact": "上市公司回购增持融资需求被六大行全面覆盖，本地上市公司客群的争夺加剧，产品对接节奏成为竞争位次关键。",
+      "segments": [
+        "中高端客群(过亿资产)"
+      ],
+      "sources": [
+        {
+          "title": "六大行全部落地股票回购增持贷款",
+          "url": "https://m.21jingji.com/article/20261127/herald/6b5d5970ef48033f3844dd71f20ee765.html"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "佛山数据要素带动农村金融",
+      "tags": [
+        "信贷",
+        "科技金融"
+      ],
+      "impact": "数据要素改革丰富涉农信贷的风控手段，数据类增信合作模式出现，小微与涉农客群的授信可得性发生变化。",
+      "segments": [
+        "普惠小微贷款客户"
+      ],
+      "sources": [
+        {
+          "title": "佛山以数据要素改革带动农村金融创新",
+          "url": "https://www.cnr.cn/gd/meiliguangdong/20261127/t20261127_527885596.shtml"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    },
+    {
+      "topic": "灵活就业公积金门槛优化",
+      "tags": [
+        "住房金融",
+        "代发"
+      ],
+      "impact": "灵活就业群体缴存扩面，代发、缴存与消费信贷的联动入口打开，新客群获取路径出现变化。",
+      "sources": [
+        {
+          "title": "广州灵活就业人员住房公积金政策全面优化",
+          "url": "https://news.dayoo.com/guangzhou/202611/27/139995_55028337.htm"
+        }
+      ],
+      "delta": {
+        "state": "followup"
+      },
+      "maturity": {
+        "stage": "clue"
+      }
+    }
+  ],
+  "sections": {
+    "gz_local": [
+      {
+        "url": "https://news.dayoo.com/guangzhou/202611/27/139995_55028356.htm",
+        "title_cn": "最新规划！广州中心五区有序增加一手房供给",
+        "title_orig": "",
+        "source": "广州日报·大洋网(广州频道)",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "中心五区一手房供给有序增加，按揭与开发贷需求有望边际回暖，可提前梳理合作楼盘与额度安排。",
+        "importance": 2,
+        "rank": 1,
+        "tags": [
+          "住房金融",
+          "信贷"
+        ],
+        "locale": "gz",
+        "locale_evidence": "最新规划！广州中心五区有序增加一手房供给"
+      },
+      {
+        "url": "https://news.dayoo.com/guangzhou/202611/27/139995_55028337.htm",
+        "title_cn": "广州灵活就业人员住房公积金政策全面优化",
+        "title_orig": "",
+        "source": "广州日报·大洋网(广州频道)",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "灵活就业群体公积金门槛优化，缴存扩面带来新客群入口，值得关注代发、缴存与消费贷的联动机会。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "住房金融",
+          "客群",
+          "信贷"
+        ],
+        "locale": "gz",
+        "locale_evidence": "广州灵活就业人员住房公积金政策全面优化"
+      },
+      {
+        "url": "https://www.cnr.cn/gd/fxgz/20261127/t20261127_527884700.shtml",
+        "title_cn": "广州举办2026跨境电商大会",
+        "title_orig": "",
+        "source": "央广网·广东频道",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "跨境电商大会落地广州，结算与贸易融资场景集中，可考虑对接参会卖家客群的收付与汇率避险需求。",
+        "importance": 1,
+        "rank": 3,
+        "tags": [
+          "跨境",
+          "政银合作",
+          "财富",
+          "客群"
+        ],
+        "locale": "gz",
+        "locale_evidence": "广州举办2026跨境电商大会"
+      }
+    ],
+    "biz_insight": [
+      {
+        "url": "https://m.21jingji.com/article/20261127/herald/6b5d5970ef48033f3844dd71f20ee765.html",
+        "title_cn": "六大行全部落地股票回购增持贷款",
+        "title_orig": "",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "六大行回购增持贷款全部落地，上市公司客群争夺加剧，可评估本地上市公司名单与产品对接节奏。",
+        "importance": 2,
+        "rank": 2,
+        "tags": [
+          "信贷",
+          "竞对动态"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnr.cn/gd/guangdongyaowen/20261127/t20261127_527884646.shtml",
+        "title_cn": "“自在卡杯”广场舞大赛广州站决赛落幕",
+        "title_orig": "",
+        "source": "央广网·广东频道",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "同业以广场舞赛事深耕广州中老年客群，提示关注社区场景获客与借记卡活客活动的对标空间。",
+        "importance": 1,
+        "rank": 3,
+        "tags": [
+          "客群",
+          "粤"
+        ],
+        "locale": "gz",
+        "locale_evidence": "“自在卡杯”广场舞大赛广州站决赛落幕"
+      },
+      {
+        "url": "https://m.21jingji.com/article/20261127/herald/7e6bd33b15d747a2409ac3bf6d09ad09.html",
+        "title_cn": "九江银行定增方案缩水，兴业银行缘何退出？",
+        "title_orig": "",
+        "source": "21世纪经济报道·金融",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "九江银行定增缩水、兴业银行退出，反映同业对中小银行股权投资的审慎取向，可作风险偏好观察样本。",
+        "importance": 1,
+        "rank": 4,
+        "tags": [
+          "竞对动态"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnr.cn/gd/meiliguangdong/20261127/t20261127_527885596.shtml",
+        "title_cn": "佛山以数据要素改革带动农村金融创新",
+        "title_orig": "",
+        "source": "央广网·广东频道",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "佛山以数据要素改革带动农村金融创新，涉农信贷风控手段可能丰富，值得关注数据类增信合作模式。",
+        "importance": 1,
+        "rank": 5,
+        "tags": [
+          "信贷",
+          "政银合作",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/stock/hyyj/2026-11-27/doc-inkaesne5507236.shtml",
+        "title_cn": "数字黄金实盘交易落地，对黄金市场影响几何？",
+        "title_orig": "",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "数字黄金实盘交易落地，黄金投资渠道再扩容，值得关注对实物金与积存金客户的替代效应。",
+        "importance": 1,
+        "rank": 6,
+        "tags": [
+          "财富",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/jryx/bank/2026-11-27/doc-inkaesmx1044180.shtml",
+        "title_cn": "民生银行：以530万元受让新希望集团所持彭州民生村镇银行200万股",
+        "title_orig": "",
+        "source": "新浪财经·银行频道",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "民生银行以530万元受让村镇银行200万股，同业股权整合延续，可留意中小机构化险中的业务承接机会。",
+        "importance": 1,
+        "rank": 7,
+        "tags": [
+          "竞对动态"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-27/doc-inkaencz1084440.shtml",
+        "title_cn": "理财收益下行下“打新”升温：4家理财子深交所报价651次，宁银理财502次领跑",
+        "title_orig": "",
+        "source": "新浪财经·理财保险",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "4家理财子深交所报价651次、宁银理财502次，理财收益下行下打新升温，可关注含权产品供给与客户风险偏好变化。",
+        "importance": 1,
+        "rank": 8,
+        "tags": [
+          "财富",
+          "竞对动态"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/money/gzqh/futuresyspzx/2026-11-27/doc-inkaayay5840316.shtml",
+        "title_cn": "A股缩量震荡 周期资源与银行板块走强",
+        "source": "新浪财经·A股频道",
+        "source_type": "media",
+        "tier": "T2",
+        "date": "11/27",
+        "summary": "A股缩量震荡、周期资源与银行板块走强，权益类客户风险偏好分化，基金投顾与仓位沟通需求可能上升。",
+        "importance": 2,
+        "rank": 9,
+        "tags": [],
+        "locale": "national"
+      }
+    ],
+    "policy_market": [
+      {
+        "url": "https://finance.sina.com.cn/jryx/bank/2026-11-27/doc-inkaesmy7820816.shtml",
+        "title_cn": "央行：研究建立在特定情景下向非银机构提供流动性的机制性安排 发挥好两项支持资本市场的货币政策工具作用",
+        "title_orig": "",
+        "source": "新浪财经·银行频道",
+        "source_type": "official",
+        "date": "11/27",
+        "summary": "央行研究特定情景下向非银提供流动性机制，并强调两项资本市场工具，市场稳定性预期增强，可关注客户风险偏好修复。",
+        "importance": 3,
+        "rank": 1,
+        "tags": [
+          "监管合规",
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/tob/2026-11-27/doc-inkaefwi3203424.shtml",
+        "title_cn": "收评：创指放量暴涨超11% 科创50暴涨逾15% 市场成交额突破2万亿",
+        "title_orig": "",
+        "source": "新浪财经·A股频道",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "创指涨超11%、科创50涨逾15%，成交额突破2万亿，市场情绪显著升温，提示关注客户申购与赎回的集中度。",
+        "importance": 2,
+        "rank": 3,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.eastmoney.com/a/202611273941563415.html",
+        "title_cn": "李强主持召开国务院常务会议 研究持续深化资本市场投融资综合改革工作",
+        "title_orig": "",
+        "source": "东方财富·A股股市新闻",
+        "source_type": "official",
+        "date": "11/27",
+        "summary": "国常会研究深化资本市场投融资综合改革，稳市信号明确，可关注权益类产品配置与上市公司客群联动。",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "市场",
+          "监管合规",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/jryx/bank/2026-11-27/doc-inkaesmy7819999.shtml",
+        "title_cn": "金融监管总局：截至10月末我国银行业金融机构总资产4958394亿元，同比增长6.3%",
+        "title_orig": "",
+        "source": "新浪财经·银行频道",
+        "source_type": "official",
+        "date": "11/27",
+        "summary": "10月末银行业总资产4958394亿元、同比增6.3%，行业规模扩张延续，可作分行规模与份额对标的参照。",
+        "importance": 2,
+        "rank": 5,
+        "tags": [
+          "监管合规"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/roll/2026-11-27/doc-inkaefwk5543365.shtml",
+        "title_cn": "10月以来机构持续净买入，上市公司回购增持近600亿元",
+        "title_orig": "",
+        "source": "新浪财经·A股频道",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "10月以来机构持续净买入、回购增持近600亿元，产业资本与机构资金同向，可作客户沟通的市场背景素材。",
+        "importance": 1,
+        "rank": 6,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-28/doc-inkaftxs5117497.shtml",
+        "title_cn": "中证指数公司公布沪深300等指数样本定期调整方案",
+        "title_orig": "",
+        "source": "新浪财经·A股频道",
+        "source_type": "media",
+        "date": "11/28",
+        "summary": "沪深300等指数样本定期调整方案公布，被动资金调仓窗口临近，提示关注指数基金客户的申赎节奏。",
+        "importance": 1,
+        "rank": 7,
+        "tags": [
+          "市场",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/jryx/bank/2026-11-27/doc-inkaesmy7823354.shtml",
+        "title_cn": "央行：促进票据市场、黄金市场规范健康发展",
+        "title_orig": "",
+        "source": "新浪财经·银行频道",
+        "source_type": "official",
+        "date": "11/27",
+        "summary": "央行提出促进票据与黄金市场规范健康发展，票据业务合规要求或细化，提示关注贸易背景审核与黄金代销规范。",
+        "importance": 1,
+        "rank": 8,
+        "tags": [
+          "市场",
+          "监管合规",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://finance.sina.com.cn/jryx/bank/2026-11-27/doc-inkaesmx1046838.shtml",
+        "title_cn": "央行：综合运用在线修复、兼并重组、市场退出等方式，推动中小银行改革化险",
+        "title_orig": "",
+        "source": "新浪财经·银行频道",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "央行明确中小银行在线修复、兼并重组、市场退出并举，区域金融格局或调整，值得关注客户与资产迁移动向。",
+        "importance": 1,
+        "rank": 9,
+        "tags": [
+          "监管合规",
+          "竞对动态"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.guancha.cn/GuanJinRong/2026_11_27_910184.shtml",
+        "title_cn": "融资保证金降至80%，券商信用业务转向精细化",
+        "title_orig": "",
+        "source": "观察者网·金融",
+        "source_type": "media",
+        "date": "11/27",
+        "summary": "融资保证金降至80%，券商信用业务转向精细化，两融活跃度或提升，可关注高净值客户杠杆资金流向变化。",
+        "importance": 1,
+        "rank": 10,
+        "tags": [
+          "市场",
+          "监管合规",
+          "客群"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.cnfin.com/yw-lb/detail/20261127/4501413_1.html",
+        "title_cn": "【中国证监会严肃查处两起编造传播证券市场误导性信息案件】近日，中国证监会对安某、乔某涉嫌编造传播证券市场误导性信息依法做出行政处罚。经查，安某、乔某在网络平台分别发布涉及上市公司中公教育、共进股份的误导性信息，相关低俗言论经网络渠道大范围传播，导致两家上市公司股价异常波动，违反证券法规，破坏公序良俗。中国证监会决定对安某、乔某没收违法所得并处罚款。中国证监会对资本市场造谣传谣零容忍，严惩编造、传播、散布虚假、误导性信息的行为，也提醒投资者加强信息辨别，不造谣不传谣不信谣。",
+        "source": "新华财经",
+        "source_type": "official",
+        "tier": "T1.5",
+        "date": "11/27",
+        "summary": "【中国证监会严肃查处两起编造传播证券市场误导性信息案件】近日，中国证监会对安某、乔某涉嫌编造传播证券市场误导性信息依法做出行政处罚。经查，安某、乔某在网络平台分别发布涉及上市公司中",
+        "importance": 2,
+        "rank": 11,
+        "tags": [],
+        "locale": "national"
+      }
+    ],
+    "tech": [],
+    "ipo": [
+      {
+        "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/28/PREIPO_F0101_V01_20261128_37600_Q/7D57207DDEED4AB58A00C5CDEAB5B132/关于深圳市深视智能科技股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf",
+        "title_cn": "深圳市深视智能科技股份有限公司IPO辅导验收",
+        "title_orig": "",
+        "source": "证监会辅导备案(官方csrcfd)",
+        "source_type": "official",
+        "date": "11/28",
+        "summary": "深视智能IPO辅导验收，辅导机构为中金公司，深圳科技企业资本化提速，可关注募投与员工持股相关金融需求。",
+        "importance": 1,
+        "rank": 1,
+        "tags": [
+          "科技金融"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/28/PREIPO_F0101_V01_20261128_37603_Q/B4DACD00DF094BFB90CB602C11E690EB/关于深圳飞扬骏研新材料股份有限公司向不特定合格投资者公开发行股票并在北京证券交易所上市辅导工作完成报告.pdf",
+        "title_cn": "深圳飞扬骏研新材料股份有限公司北交所上市辅导验收",
+        "title_orig": "",
+        "source": "证监会辅导备案(官方csrcfd)",
+        "source_type": "official",
+        "date": "11/28",
+        "summary": "飞扬骏研北交所上市辅导验收，辅导机构为开源证券，新材料企业对接北交所，可留意专精特新客群的融资需求。",
+        "importance": 1,
+        "rank": 2,
+        "tags": [
+          "科技金融"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "http://eid.csrc.gov.cn/mnt/storage/stock/pre_ipo/2026/11/24/PREIPO_F0101_V01_20261124_37591_Q/79B2DE3956D94970BACB4CF941DBA196/关于中星微技术股份有限公司首次公开发行股票并上市辅导工作完成报告.pdf",
+        "title_cn": "中星微技术股份有限公司IPO辅导验收",
+        "title_orig": "",
+        "source": "证监会辅导备案(官方csrcfd)",
+        "source_type": "official",
+        "date": "11/24",
+        "summary": "中星微技术IPO辅导验收，辅导机构为中国银河证券，科技企业上市进程推进，可纳入科技金融客群跟踪名单。",
+        "importance": 1,
+        "rank": 3,
+        "tags": [
+          "科技金融"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.bse.cn/audit/project_news_select.html#874659@P02",
+        "title_cn": "深鹏科技：IPO问询中（拟北交所）",
+        "source": "北交所审核项目动态(官方)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "11/26",
+        "summary": "注册地：广东省东莞市｜保荐：东莞证券股份有限公司｜代码：874659｜状态：IPO问询中｜更新：2026-11-26",
+        "ipoStage": "stage-reviewing",
+        "ipoMeta": "保荐 东莞证券股份有限公司 ｜ 拟上市北交所",
+        "ipoCity": "东莞市",
+        "importance": 2,
+        "rank": 4,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      },
+      {
+        "url": "https://www.bse.cn/audit/project_news_select.html#874729@P02",
+        "title_cn": "深达威：IPO问询中（拟北交所）",
+        "source": "北交所审核项目动态(官方)",
+        "source_type": "official",
+        "tier": "T1",
+        "date": "11/25",
+        "summary": "注册地：广东省东莞市｜保荐：广发证券股份有限公司｜代码：874729｜状态：IPO问询中｜更新：2026-11-25",
+        "ipoStage": "stage-reviewing",
+        "ipoMeta": "保荐 广发证券股份有限公司 ｜ 拟上市北交所",
+        "ipoCity": "东莞市",
+        "importance": 2,
+        "rank": 5,
+        "tags": [
+          "粤"
+        ],
+        "locale": "national"
+      }
+    ]
+  },
+  "risk": {
+    "topic": "证监会查处编造误导信息",
+    "evidence": "证监会对安某、乔某编造传播涉及中公教育、共进股份的误导性信息作出行政处罚，没收违法所得并处罚款。",
+    "impact": "财富条线代销与投顾内容传播面临合规审视，私行客户沟通素材需可溯源；风控需关注员工转发与自媒体引用的合规边界。",
+    "source": "T1",
+    "sources": [
+      {
+        "title": "【中国证监会严肃查处两起编造传播证券市场误导性信息案件】近日，中国证监会对安某、乔某涉嫌编造传播证券市场误导性信息依法做出行政处罚。经查，安某、乔某在网络平台分别发布涉及上市公司中公教育、共进股份的误导性信息，相关低俗言论经网络渠道大范围传播，导致两家上市公司股价异常波动，违反证券法规，破坏公序良俗。中国证监会决定对安某、乔某没收违法所得并处罚款。中国证监会对资本市场造谣传谣零容忍，严惩编造、传播、散布虚假、误导性信息的行为，也提醒投资者加强信息辨别，不造谣不传谣不信谣。",
+        "url": "https://www.cnfin.com/yw-lb/detail/20261127/4501413_1.html"
+      }
+    ],
+    "delta": {
+      "state": "followup"
+    }
+  },
+  "insightFunnel": {
+    "candidates": 12,
+    "played": 5,
+    "skippedByMemory": 1,
+    "dualCandidates": 2,
+    "sameAsMustRead": 1,
+    "target": 5
+  },
+  "mustReadFunnel": {
+    "candidates": 10,
+    "played": 4,
+    "skippedByMemory": 4,
+    "target": 4
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨2.31%，AI芯片需求与英伟达CEO回归提振科技股。",
+      "sectors": [
+        "半导体出口首超油气，AI需求推动芯片板块走强。",
+        "英伟达董事会遭调查、股东诉讼缠身，个股关注度升温。",
+        "市场担忧部分公司AI债务，AI相关债务市场承压。",
+        "Kalshi永续合约日成交量开始超过其预测市场业务。"
+      ],
+      "spoken": "美股三大指数集体收涨，纳指涨2.31%领涨，道指涨1.18%，标普500涨1.60%。半导体出口首次超过油气，AI芯片需求带动科技股走强。英伟达董事会遭调查、AI债务担忧升温，相关个股波动加大。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-28"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "50774.94",
+          "changePct": "+1.18%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "24129.50",
+          "changePct": "+2.31%"
+        },
+        {
+          "name": "标普500",
+          "value": "7297.49",
+          "changePct": "+1.60%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "创业板指放量暴涨超11%，科创50暴涨逾15%！市场成交额突破2万亿。",
+      "sectors": [
+        "科创50暴涨逾15%！市场成交额突破2万亿",
+        "上涨个股超5300只、逾400股涨停"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-28"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3606.49",
+          "changePct": "+3.73%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10814.02",
+          "changePct": "+7.24%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2443.96",
+          "changePct": "+11.61%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数涨2.11%，恒生科技指数大涨6.45%。",
+      "sectors": [
+        "科网股普涨",
+        "芯片股持续走强",
+        "智谱、MINIMAX均涨超17%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-27"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨2.11% 恒生科技指数大涨6.45% 科网股普涨 芯片股持续走强 智谱、MINIMAX均涨超17%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-27/doc-inkaefwe7906295.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22688.68",
+          "changePct": "+2.08%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3641.04",
+          "changePct": "+6.54%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-27",
+    "marketStatus": {
+      "reportDate": "2026-11-28",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-27"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-27"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-27"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月27日 周五 收盘；港股为 11月27日 周五 收盘；美股为 11月27日 周五 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941564045.html",
+      "title_cn": "国常会：加力发挥“国家队”稳市作用进一步优化中央汇金公司的类“平准基金”功能",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "国务院常务会议提出加力发挥“国家队”稳市作用，进一步优化中央汇金公司的类“平准基金”功能。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "资本市场",
+        "国家队"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941310187.html",
+      "title_cn": "美股股指期货刚刚突然拉升！美伊谈判传来大消息！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "美股股指期货突然拉升，报道称与美伊谈判传出的大消息有关。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "地缘政治",
+        "股指期货"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941649592.html",
+      "title_cn": "创业板指涨11.61%科创50指数涨15.07%超400只股涨停",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "创业板指涨11.61%，科创50指数涨15.07%，全市场超400只个股涨停。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "创业板",
+        "科创板",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-27/doc-inkaefwe7906295.shtml",
+      "title_cn": "港股收评：恒指涨2.11% 恒生科技指数大涨6.45% 科网股普涨 芯片股持续走强 智谱、MINIMAX均涨超17%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "港股收涨，恒指涨2.11%，恒生科技指数大涨6.45%，科网股普涨、芯片股持续走强，智谱与MINIMAX均涨超17%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生科技",
+        "芯片",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-11-27/doc-inkacksp1145277.shtml",
+      "title_cn": "港股概念追踪 | 法国计划2027年启动稀土战略储备 板块配置价值进一步凸显(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "法国计划2027年启动稀土战略储备，报道认为稀土板块配置价值进一步凸显并列出概念股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "稀土",
+        "能源",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-27/doc-inkacqyr3269514.shtml",
+      "title_cn": "北交所及港股通双周报（2026.11.09-2026.11.20）：情绪在短期定价中占据主导，两大市场大概率呈现震荡格局",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "北交所及港股通双周报（2026.11.09-11.20）认为情绪在短期定价中占主导，两大市场大概率呈震荡格局。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "北交所",
+        "港股通",
+        "研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    }
+  ],
+  "redchipPanel": {
+    "entries": [],
+    "capturedAt": "2026-11-28T07:09:18+08:00",
+    "capturedSource": "snapshot",
+    "ledgerCount": 39,
+    "lastChangedAt": "2026-11-28T07:09:15+08:00",
+    "ledgerByMarket": {
+      "us": 1,
+      "hk": 38
+    },
+    "gdAdjacent": [
+      {
+        "leadId": "108381",
+        "nameCn": "Alkaidsemi (Shanghai) Technologies Corporation",
+        "nameEn": "",
+        "submitDate": "2026-11-27",
+        "domicile": "中国(境内)",
+        "gdCityHits": 5,
+        "market": "hk",
+        "sourceUrl": "https://www1.hkexnews.hk/app/sehk/2026/108381/documents/sehk26033103112.pdf"
+      }
+    ]
+  },
+  "researchPanel": {
+    "items": [
+      {
+        "title": "国务院常务会议点评：稳市的新高度",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849133805405/index.phtml",
+        "publishedAt": "2026-11-27",
+        "org": "华福证券股份有限公司",
+        "researchers": "任志强/陈兴/谢钰",
+        "industry": "宏观"
+      },
+      {
+        "title": "宏观经济深度报告：过峰后的再平衡-2027年大类资产主线",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849126844246/index.phtml",
+        "publishedAt": "2026-11-27",
+        "org": "国信证券股份有限公司",
+        "researchers": "邵兴宇/王奕群/田地/董德志",
+        "industry": "宏观"
+      },
+      {
+        "title": "10月工业企业利润数据点评：上下游利润分化持续 企业库存累积",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849126844191/index.phtml",
+        "publishedAt": "2026-11-27",
+        "org": "万联证券股份有限公司",
+        "researchers": "于天旭",
+        "industry": "宏观"
+      },
+      {
+        "title": "工业企业效益数据点评(2026.10)：中下游盈利“剪刀差”再扩大",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849115988061/index.phtml",
+        "publishedAt": "2026-11-27",
+        "org": "上海申银万国证券研究所有限公司",
+        "researchers": "赵伟/屠强/耿佩璇",
+        "industry": "宏观"
+      },
+      {
+        "title": "2026年10月工业企业盈利数据点评：利润K型分化延续",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849115430573/index.phtml",
+        "publishedAt": "2026-11-27",
+        "org": "光大证券股份有限公司",
+        "researchers": "何宁/刘星辰",
+        "industry": "宏观"
+      },
+      {
+        "title": "1-10月财政收支数据解读：10月财政收入同比转为增长",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849115430545/index.phtml",
+        "publishedAt": "2026-11-27",
+        "org": "国新证券股份有限公司",
+        "researchers": "郝大明",
+        "industry": "宏观"
+      },
+      {
+        "title": "2026年1-10月工业企业效益数据点评：工企利润进一步改善 结构向新向优延续",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849106888422/index.phtml",
+        "publishedAt": "2026-11-27",
+        "org": "渤海证券股份有限公司",
+        "researchers": "宋亦威/严佩佩/靳沛芃",
+        "industry": "宏观"
+      },
+      {
+        "title": "宏观经济深度报告：美丽新世界/Brave New World-2027年海外宏观主线",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849088403313/index.phtml",
+        "publishedAt": "2026-11-27",
+        "org": "国信证券股份有限公司",
+        "researchers": "田地/邵兴宇/王奕群/董德志",
+        "industry": "宏观"
+      },
+      {
+        "title": "2027年宏观策略年度报告：半山望春",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849079584377/index.phtml",
+        "publishedAt": "2026-11-27",
+        "org": "中信期货有限公司",
+        "researchers": "姜婧/朱善颖/仲鼎/张皓云/王丹",
+        "industry": "宏观"
+      },
+      {
+        "title": "《央行观察》系列第十七篇：“现金为王”的三种类型",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849064788060/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "光大证券股份有限公司",
+        "researchers": "何宁/王佳雯",
+        "industry": "宏观"
+      },
+      {
+        "title": "宏观经济深度报告：雄关漫道真如铁-2027年国内宏观主线",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849008122401/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "国信证券股份有限公司",
+        "researchers": "王奕群/邵兴宇/田地/董德志",
+        "industry": "宏观"
+      },
+      {
+        "title": "进出口观察系列：内需能接续多少？-2027年外需波动下的空间测算",
+        "url": "https://stock.finance.sina.com.cn/stock/go.php/vReport_Show/kind/macro/rptid/849006462558/index.phtml",
+        "publishedAt": "2026-11-26",
+        "org": "国联民生证券股份有限公司",
+        "researchers": "陶川/钟渝梅/刘宏彦",
+        "industry": "宏观"
+      }
+    ],
+    "scanned": 23,
+    "windowDays": 3,
+    "capturedAt": "2026-11-27T23:22:42.624Z"
+  },
+  "sourceStats": [
+    {
+      "sourceId": "cnr-gd",
+      "inflow": 58,
+      "kept": 10,
+      "avgScore": 34
+    },
+    {
+      "sourceId": "guancha",
+      "inflow": 52,
+      "kept": 4,
+      "avgScore": 44
+    },
+    {
+      "sourceId": "cnfin",
+      "inflow": 46,
+      "kept": 20,
+      "avgScore": 31
+    },
+    {
+      "sourceId": "sina-bank",
+      "inflow": 46,
+      "kept": 6,
+      "avgScore": 47
+    },
+    {
+      "sourceId": "dayoo-gz",
+      "inflow": 31,
+      "kept": 20,
+      "avgScore": 36
+    },
+    {
+      "sourceId": "sina-hk-stock",
+      "inflow": 31,
+      "kept": 11,
+      "avgScore": 66
+    },
+    {
+      "sourceId": "cnbc-top",
+      "inflow": 30,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "cctv-finance",
+      "inflow": 25,
+      "kept": 1,
+      "avgScore": 48
+    },
+    {
+      "sourceId": "sina-a-stock",
+      "inflow": 24,
+      "kept": 14,
+      "avgScore": 45
+    },
+    {
+      "sourceId": "southcn",
+      "inflow": 22,
+      "kept": 1,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "sina-money",
+      "inflow": 20,
+      "kept": 9,
+      "avgScore": 63
+    },
+    {
+      "sourceId": "fed-press",
+      "inflow": 20,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "eastmoney-stock",
+      "inflow": 18,
+      "kept": 16,
+      "avgScore": 35
+    },
+    {
+      "sourceId": "21jingji-finance",
+      "inflow": 12,
+      "kept": 5,
+      "avgScore": 63
+    },
+    {
+      "sourceId": "investing-news",
+      "inflow": 10,
+      "kept": 8,
+      "avgScore": 21
+    },
+    {
+      "sourceId": "crunchbase-news",
+      "inflow": 10,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "govcn-policy",
+      "inflow": 7,
+      "kept": 0,
+      "avgScore": null
+    },
+    {
+      "sourceId": "gd-csrc-tutoring",
+      "inflow": 3,
+      "kept": 3,
+      "avgScore": 24
+    },
+    {
+      "sourceId": "gd-bse-audit",
+      "inflow": 2,
+      "kept": 2,
+      "avgScore": 61
+    }
+  ],
+  "heroDelta": {
+    "state": "new"
+  },
+  "productCoverage": [
+    {
+      "line": "按揭",
+      "count": 0,
+      "examples": []
+    },
+    {
+      "line": "信用卡",
+      "count": 0,
+      "examples": []
+    },
+    {
+      "line": "代发",
+      "count": 1,
+      "examples": [
+        "灵活就业公积金门槛优化"
+      ]
+    }
+  ]
+}
