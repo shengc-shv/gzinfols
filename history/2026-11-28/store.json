@@ -1,0 +1,862 @@
+{
+  "date": "2026-11-28",
+  "updatedAt": "2026-11-27T23:23:07.997Z",
+  "executive": {
+    "hero_line": "今天主要看四个方面：资本市场改革与成交破两万亿，风险偏好回升；贷款罚息上下限取消，定价规则生变；广州楼市与公积金扩面，客群入口打开；黄金配置量化区间出炉，财富货架有据可依。",
+    "spoken_hero": "今天主要看四个方面：资本市场改革叠加成交破两万亿，客户风险偏好在回升；贷款罚息上下限取消，定价规则变了；广州中心五区增供、灵活就业公积金优化，客群入口在打开；黄金配置给出百分之五到二十八的量化区间。",
+    "must_read": [
+      {
+        "title": "银行业总资产近496万亿增6.3%",
+        "why": "行业规模扩张延续，为分行规模与市场份额对标提供参照，也意味着同业竞争仍在同一扩张轨道上。",
+        "url": "https://finance.sina.com.cn/jryx/bank/2026-11-27/doc-inkaesmy7819999.shtml"
+      },
+      {
+        "title": "贷款罚息利率上下限取消",
+        "why": "罚息定价自主权扩大，存量合同条款与逾期计息规则的合规衔接成为全行定价管理的现实变量。",
+        "url": "https://m.21jingji.com/article/20261127/herald/06bbaf788910a1482133c4b3dd30c9bc.html"
+      },
+      {
+        "title": "黄金配置比例区间5%至28%",
+        "why": "世界黄金协会给出跨周期量化参照，为财富条线资产配置沟通提供权威依据，也牵动适当性匹配。",
+        "url": "https://finance.sina.com.cn/jjxw/2026-11-27/doc-inkaefwc1096224.shtml"
+      },
+      {
+        "title": "创指暴涨超11%，成交破2万亿",
+        "why": "单日成交突破两万亿、科创50涨逾15%，风险偏好快速修复，客户申赎集中度与产品货架压力同步上升。",
+        "url": "https://finance.sina.com.cn/tob/2026-11-27/doc-inkaefwi3203424.shtml"
+      }
+    ],
+    "spoken_must_read": "银行业总资产近496万亿增6.3%。行业规模扩张延续，为分行规模与市场份额对标提供参照，也意味着同业竞争仍在同一扩张轨道上。其次，贷款罚息利率上下限取消。罚息定价自主权扩大，存量合同条款与逾期计息规则的合规衔接成为全行定价管理的现实变量。此外，黄金配置比例区间5%至28%。世界黄金协会给出跨周期量化参照，为财富条线资产配置沟通提供权威依据，也牵动适当性匹配。还有，创指暴涨超11%，成交破2万亿。单日成交突破两万亿、科创50涨逾15%，风险偏好快速修复，客户申赎集中度与产品货架压力同步上升。",
+    "insights": [
+      {
+        "topic": "指数样本定期调整落地",
+        "impact": "沪深300等指数样本调整带来被动资金调仓窗口，指数基金客户的申购赎回节奏将更集中，货架衔接压力上升。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "中证指数公司公布沪深300等指数样本定期调整方案",
+            "url": "https://finance.sina.com.cn/jjxw/2026-11-28/doc-inkaftxs5117497.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "黄金配置量化区间出炉",
+        "impact": "不同经济周期下黄金配置比例5%至28%的量化参照，改变了客户资产配置的沟通口径，也抬高了适当性匹配要求。",
+        "tag": [
+          "财富"
+        ],
+        "segments": [
+          "零售AUM"
+        ],
+        "group": "零售AUM",
+        "sources": [
+          {
+            "title": "世界黄金协会发布中国投资者黄金配置研究：不同经济周期下，黄金配置比例可在5%至28%之间",
+            "url": "https://finance.sina.com.cn/jjxw/2026-11-27/doc-inkaefwc1096224.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "回购增持贷款六大行全落地",
+        "impact": "上市公司回购增持融资需求被六大行全面覆盖，本地上市公司客群的争夺加剧，产品对接节奏成为竞争位次关键。",
+        "tag": [
+          "对公",
+          "客群"
+        ],
+        "segments": [
+          "中高端客群(过亿资产)"
+        ],
+        "group": "高端客户",
+        "sources": [
+          {
+            "title": "六大行全部落地股票回购增持贷款",
+            "url": "https://m.21jingji.com/article/20261127/herald/6b5d5970ef48033f3844dd71f20ee765.html"
+          }
+        ]
+      },
+      {
+        "topic": "佛山数据要素带动农村金融",
+        "impact": "数据要素改革丰富涉农信贷的风控手段，数据类增信合作模式出现，小微与涉农客群的授信可得性发生变化。",
+        "tag": [
+          "信贷",
+          "科技金融"
+        ],
+        "segments": [
+          "普惠小微贷款客户"
+        ],
+        "group": "普惠小微",
+        "sources": [
+          {
+            "title": "佛山以数据要素改革带动农村金融创新",
+            "url": "https://www.cnr.cn/gd/meiliguangdong/20261127/t20261127_527885596.shtml"
+          }
+        ]
+      },
+      {
+        "topic": "灵活就业公积金门槛优化",
+        "impact": "灵活就业群体缴存扩面，代发、缴存与消费信贷的联动入口打开，新客群获取路径出现变化。",
+        "tag": [
+          "住房金融",
+          "代发"
+        ],
+        "group": "本地消费场景",
+        "sources": [
+          {
+            "title": "广州灵活就业人员住房公积金政策全面优化",
+            "url": "https://news.dayoo.com/guangzhou/202611/27/139995_55028337.htm"
+          }
+        ]
+      }
+    ],
+    "spoken_insights": "第一，零售AUM方面，指数样本定期调整落地、黄金配置量化区间出炉，沪深300等指数样本调整带来被动资金调仓窗口。第二，高端客户方面，回购增持贷款六大行全落地，上市公司回购增持融资需求被六大行全面覆盖。第三，普惠小微方面，佛山数据要素带动农村金融，数据要素改革丰富涉农信贷的风控手段。第四，本地消费场景方面，灵活就业公积金门槛优化，灵活就业群体缴存扩面。",
+    "risk": {
+      "topic": "证监会查处编造误导信息",
+      "evidence": "证监会对安某、乔某编造传播涉及中公教育、共进股份的误导性信息作出行政处罚，没收违法所得并处罚款。",
+      "impact": "财富条线代销与投顾内容传播面临合规审视，私行客户沟通素材需可溯源；风控需关注员工转发与自媒体引用的合规边界。",
+      "source": "T1",
+      "sources": [
+        {
+          "title": "【中国证监会严肃查处两起编造传播证券市场误导性信息案件】近日，中国证监会对安某、乔某涉嫌编造传播证券市场误导性信息依法做出行政处罚。经查，安某、乔某在网络平台分别发布涉及上市公司中公教育、共进股份的误导性信息，相关低俗言论经网络渠道大范围传播，导致两家上市公司股价异常波动，违反证券法规，破坏公序良俗。中国证监会决定对安某、乔某没收违法所得并处罚款。中国证监会对资本市场造谣传谣零容忍，严惩编造、传播、散布虚假、误导性信息的行为，也提醒投资者加强信息辨别，不造谣不传谣不信谣。",
+          "url": "https://www.cnfin.com/yw-lb/detail/20261127/4501413_1.html"
+        }
+      ]
+    },
+    "spoken_risk": "今天有 1 个需要警惕：证监会查处编造误导信息，财富条线代销与投顾内容传播面临合规审视，私行客户沟通素材需可溯源；风控需关注员工转发与自媒体引用的合规边界。",
+    "guangdong_ipo": {
+      "push_line": "深视智能科技辅导完成、飞扬骏研新材料辅导完成"
+    }
+  },
+  "stock_recap": {
+    "us": {
+      "overview": "纳指涨2.31%，AI芯片需求与英伟达CEO回归提振科技股。",
+      "sectors": [
+        "半导体出口首超油气，AI需求推动芯片板块走强。",
+        "英伟达董事会遭调查、股东诉讼缠身，个股关注度升温。",
+        "市场担忧部分公司AI债务，AI相关债务市场承压。",
+        "Kalshi永续合约日成交量开始超过其预测市场业务。"
+      ],
+      "spoken": "美股三大指数集体收涨，纳指涨2.31%领涨，道指涨1.18%，标普500涨1.60%。半导体出口首次超过油气，AI芯片需求带动科技股走强。英伟达董事会遭调查、AI债务担忧升温，相关个股波动加大。",
+      "meta": {
+        "source": "CNBC Investing",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-28"
+      },
+      "indices": [
+        {
+          "name": "道琼斯",
+          "value": "50774.94",
+          "changePct": "+1.18%"
+        },
+        {
+          "name": "纳斯达克",
+          "value": "24129.50",
+          "changePct": "+2.31%"
+        },
+        {
+          "name": "标普500",
+          "value": "7297.49",
+          "changePct": "+1.60%"
+        }
+      ]
+    },
+    "aShare": {
+      "overview": "创业板指放量暴涨超11%，科创50暴涨逾15%！市场成交额突破2万亿。",
+      "sectors": [
+        "科创50暴涨逾15%！市场成交额突破2万亿",
+        "上涨个股超5300只、逾400股涨停"
+      ],
+      "meta": {
+        "source": "东方财富",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-28"
+      },
+      "indices": [
+        {
+          "name": "上证指数",
+          "value": "3606.49",
+          "changePct": "+3.73%"
+        },
+        {
+          "name": "深证成指",
+          "value": "10814.02",
+          "changePct": "+7.24%"
+        },
+        {
+          "name": "创业板指",
+          "value": "2443.96",
+          "changePct": "+11.61%"
+        }
+      ]
+    },
+    "hk": {
+      "overview": "恒生指数涨2.11%，恒生科技指数大涨6.45%。",
+      "sectors": [
+        "科网股普涨",
+        "芯片股持续走强",
+        "智谱、MINIMAX均涨超17%"
+      ],
+      "meta": {
+        "source": "新浪财经·港股",
+        "quoteSource": "新浪行情",
+        "date": "2026-11-27"
+      },
+      "sourceReport": {
+        "title": "港股收评：恒指涨2.11% 恒生科技指数大涨6.45% 科网股普涨 芯片股持续走强 智谱、MINIMAX均涨超17%",
+        "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-27/doc-inkaefwe7906295.shtml"
+      },
+      "indices": [
+        {
+          "name": "恒生指数",
+          "value": "22688.68",
+          "changePct": "+2.08%"
+        },
+        {
+          "name": "恒生科技",
+          "value": "3641.04",
+          "changePct": "+6.54%"
+        }
+      ]
+    },
+    "quoteChannel": "新浪行情",
+    "quoteDate": "2026-11-27",
+    "marketStatus": {
+      "reportDate": "2026-11-28",
+      "markets": {
+        "aShare": {
+          "fresh": true,
+          "dataDate": "2026-11-27"
+        },
+        "hk": {
+          "fresh": true,
+          "dataDate": "2026-11-27"
+        },
+        "us": {
+          "fresh": true,
+          "dataDate": "2026-11-27"
+        }
+      },
+      "allStale": false,
+      "note": "",
+      "spokenNote": "A股为 11月27日 周五 收盘；港股为 11月27日 周五 收盘；美股为 11月27日 周五 收盘"
+    }
+  },
+  "stock_news": [
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941564045.html",
+      "title_cn": "国常会：加力发挥“国家队”稳市作用进一步优化中央汇金公司的类“平准基金”功能",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "国务院常务会议提出加力发挥“国家队”稳市作用，进一步优化中央汇金公司的类“平准基金”功能。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "资本市场",
+        "国家队"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941310187.html",
+      "title_cn": "美股股指期货刚刚突然拉升！美伊谈判传来大消息！",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "美股股指期货突然拉升，报道称与美伊谈判传出的大消息有关。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "地缘政治",
+        "股指期货"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941649592.html",
+      "title_cn": "创业板指涨11.61%科创50指数涨15.07%超400只股涨停",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "创业板指涨11.61%，科创50指数涨15.07%，全市场超400只个股涨停。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "创业板",
+        "科创板",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941653520.html",
+      "title_cn": "新华社：国常会关于资本市场部署释放五大鲜明信号",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "新华社解读国务院常务会议关于资本市场的部署，称其释放五大鲜明信号。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "资本市场",
+        "官媒"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941544392.html",
+      "title_cn": "掀涨停潮！算力概念集体大爆发发生了什么？",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "算力概念股集体大涨并掀起涨停潮，报道关注其背后原因。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "算力",
+        "AI",
+        "市场行情"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941365813.html",
+      "title_cn": "董明珠称汽车行业有老鼠",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "董明珠公开发表言论，称汽车行业存在“老鼠”现象。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "汽车",
+        "公司人物"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941825991.html",
+      "title_cn": "证监会：落实落细各项存量政策会同有关方面抓紧研究出台相关增量政策",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "证监会表示将落实落细各项存量政策，并会同有关方面抓紧研究出台相关增量政策。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "证监会",
+        "资本市场"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941563415.html",
+      "title_cn": "李强主持召开国务院常务会议研究持续深化资本市场投融资综合改革工作",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "国务院总理李强主持召开国务院常务会议，研究持续深化资本市场投融资综合改革工作。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "资本市场",
+        "国务院"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941651878.html",
+      "title_cn": "国务院国资委：中央企业对产能过剩、低价竞争的板块要坚决合并精简",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "国务院国资委要求中央企业对产能过剩、低价竞争的板块坚决合并精简。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "国企改革",
+        "央企"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611273941610251.html",
+      "title_cn": "“国家队”入市护盘过程中各类机构均表现为净买入",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "报道称“国家队”入市护盘过程中，各类机构均表现为净买入。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "A股",
+        "国家队",
+        "资金流向"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611283942148221.html",
+      "title_cn": "分析师“组团”转会卖方研究生态加速重塑",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/28",
+      "summary": "报道称分析师“组团”转会，卖方研究生态正加速重塑。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "券商",
+        "卖方研究",
+        "人事变动"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.eastmoney.com/a/202611283942146883.html",
+      "title_cn": "以投融资综合改革之力激活资本市场“动力源”",
+      "source": "东方财富",
+      "source_type": "media",
+      "date": "11/28",
+      "summary": "评论文章指出，应以投融资综合改革之力激活资本市场“动力源”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "政策",
+        "资本市场",
+        "评论"
+      ],
+      "locale": "national",
+      "market": "a-share"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/marketalerts/2026-11-27/doc-inkaefwe7906295.shtml",
+      "title_cn": "港股收评：恒指涨2.11% 恒生科技指数大涨6.45% 科网股普涨 芯片股持续走强 智谱、MINIMAX均涨超17%",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "港股收涨，恒指涨2.11%，恒生科技指数大涨6.45%，科网股普涨、芯片股持续走强，智谱与MINIMAX均涨超17%。",
+      "importance": 3,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "恒生科技",
+        "芯片",
+        "AI"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkstocknews/2026-11-27/doc-inkacksp1145277.shtml",
+      "title_cn": "港股概念追踪 | 法国计划2027年启动稀土战略储备 板块配置价值进一步凸显(附概念股)",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "法国计划2027年启动稀土战略储备，报道认为稀土板块配置价值进一步凸显并列出概念股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "稀土",
+        "能源",
+        "政策"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/roll/2026-11-27/doc-inkacqyr3269514.shtml",
+      "title_cn": "北交所及港股通双周报（2026.11.09-2026.11.20）：情绪在短期定价中占据主导，两大市场大概率呈现震荡格局",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "北交所及港股通双周报（2026.11.09-11.20）认为情绪在短期定价中占主导，两大市场大概率呈震荡格局。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "北交所",
+        "港股通",
+        "研报"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-27/doc-inkaefwk5587267.shtml",
+      "title_cn": "美银证券：上调波司登(03998)目标价11%至5港元 重申“买入”评级",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "美银证券将波司登目标价上调11%至5港元，并重申“买入”评级。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "研报",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-27/doc-inkaefwi3258408.shtml",
+      "title_cn": "中信里昂：首予小鹏集团-W(09868)“优于大市”评级 目标价45港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "中信里昂首次给予小鹏集团-W“优于大市”评级，目标价45港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "研报",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-27/doc-inkaefwc1109028.shtml",
+      "title_cn": "高盛：维持六福集团(00590)目标价17.9港元 评级“沽售”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "高盛维持六福集团目标价17.9港元，评级为“沽售”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "研报",
+        "珠宝零售"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-27/doc-inkaefwk5569582.shtml",
+      "title_cn": "大摩：维持翰森制药(03692)“增持”评级 目标价48港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "摩根士丹利维持翰森制药“增持”评级，目标价48港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "研报",
+        "医药"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-27/doc-inkaefwe7874048.shtml",
+      "title_cn": "花旗：维持友邦保险(01299)“买入”评级 目标价103港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "花旗维持友邦保险“买入”评级，目标价103港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "研报",
+        "保险"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-27/doc-inkaefwe7861625.shtml",
+      "title_cn": "美银证券：维持理想汽车-W(02015)“中性”评级 目标价53.8港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "美银证券维持理想汽车-W“中性”评级，目标价53.8港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "研报",
+        "汽车"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-27/doc-inkaefwk5545685.shtml",
+      "title_cn": "花旗：维持六福集团(00590)目标价27.4港元 评级“买入”",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "花旗维持六福集团目标价27.4港元，评级为“买入”。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "研报",
+        "珠宝零售"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/hkgg/2026-11-27/doc-inkaefwi3210004.shtml",
+      "title_cn": "花旗：维持华润万象生活(01209)买入评级 目标价53.3港元",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "花旗维持华润万象生活“买入”评级，目标价53.3港元。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "研报",
+        "地产"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://finance.sina.com.cn/stock/hkstock/ggscyd/2026-11-27/doc-inkaczqm3230908.shtml",
+      "title_cn": "蜜雪集团拟回购H股及根据H股奖励计划购入股份 总数不超379.6万股",
+      "source": "新浪财经·港股",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "蜜雪集团拟回购H股及根据H股奖励计划购入股份，总数不超过379.6万股。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "港股",
+        "回购",
+        "消费"
+      ],
+      "locale": "national",
+      "market": "hk"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/26/semiconductor-chips-are-the-new-oil-heres-why.html",
+      "title_cn": "Semiconductor chips are the new oil. Here's why",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/26",
+      "summary": "CNBC文章称半导体芯片正成为“新的石油”，并分析其原因。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "AI"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/25/nvidias-billion-dollar-board-bet-whos-protected-as-lawsuits-mount.html",
+      "title_cn": "Nvidia's billion-dollar board bet: Who's protected as lawsuits mount?",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "报道关注英伟达数十亿美元的董事会相关押注，以及诉讼增加背景下谁受到保护。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "半导体",
+        "公司治理"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/24/nvidia-jensen-huang-ai-credit-markets.html",
+      "title_cn": "AI debt markets shudder as Nvidia's top 'banker' returns",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "报道称随着英伟达最重要的“银行家”回归，AI债务市场出现震荡。",
+      "importance": 2,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "AI",
+        "债券市场"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.cnbc.com/2026/11/24/kalshi-perps-volume-prediction-markets.html",
+      "title_cn": "Kalshi daily volume of ‘perps’ trading begins to top its prediction markets",
+      "source": "CNBC Investing",
+      "source_type": "media",
+      "date": "11/24",
+      "summary": "Kalshi的“永续合约”日交易量开始超过其预测市场业务。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "衍生品",
+        "交易平台"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/beta-technologies-director-buys-16m-in-common-stock-93CH-5053978",
+      "title_cn": "Beta Technologies director buys $1.6M in common stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "Beta Technologies一名董事买入160万美元公司普通股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/post-holdings-ceo-sells-427581-in-common-stock-93CH-5053977",
+      "title_cn": "Post Holdings CEO sells $427,581 in common stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "Post Holdings首席执行官卖出427,581美元公司普通股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/dolby-executive-sells-166881-in-class-a-common-stock-93CH-5053976",
+      "title_cn": "Dolby executive sells $166,881 in class A common stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "杜比一名高管卖出166,881美元A类普通股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/saba-capital-buys-147823-in-ellsworth-growth--income-fund-93CH-5053975",
+      "title_cn": "Saba Capital buys $147,823 in Ellsworth Growth & Income Fund",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "Saba Capital买入147,823美元Ellsworth Growth & Income Fund份额。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "基金",
+        "持仓变动"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/auddia-releases-financial-statements-of-thramann-holdings-and-pro-forma-data-93CH-5053972",
+      "title_cn": "Auddia releases financial statements of Thramann Holdings and pro forma data",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "Auddia公布Thramann Holdings的财务报表及备考数据。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "财报",
+        "并购"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/icahn-enterprises-increases-executive-salaries-updates-employment-terms-93CH-5053969",
+      "title_cn": "Icahn Enterprises increases executive salaries, updates employment terms",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "Icahn Enterprises上调高管薪酬并更新雇佣条款。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "公司治理"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/insider-trading-news/fair-isaac-ceo-sells-265-million-in-company-stock-93CH-5053968",
+      "title_cn": "Fair Isaac CEO sells $2.65 million in company stock",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "Fair Isaac首席执行官卖出265万美元公司股票。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "内部人交易"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    },
+    {
+      "url": "https://www.investing.com/news/sec-filings/heartsciences-to-exchange-33-million-in-debt-for-class-a-common-stock-after-merger-93CH-5053961",
+      "title_cn": "HeartSciences to exchange $3.3 million in debt for Class A common stock after merger",
+      "source": "Investing.com News",
+      "source_type": "media",
+      "date": "11/27",
+      "summary": "HeartSciences在合并后拟以330万美元债务置换A类普通股。",
+      "importance": 1,
+      "rank": 0,
+      "tags": [
+        "美股",
+        "并购",
+        "债务重组"
+      ],
+      "locale": "overseas",
+      "market": "us"
+    }
+  ]
+}
