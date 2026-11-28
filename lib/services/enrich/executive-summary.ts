@@ -119,8 +119,19 @@ export interface ExecSummaryInput {
   marketOverview?: string;
   /** IPO 板块条目（用于筛广东/广州 IPO 动态口播，可选） */
   ipo?: Array<{ title?: string; summary?: string; url?: string; when?: string }>;
-  /** B-1：关键词层已识别的风险候选（来自 risk_tracker），喂给 LLM 的 risk 段 */
-  riskCandidates?: Array<{ title: string; url?: string; trackers: string[]; priority: string }>;
+  /**
+   * B-1：关键词层已识别的风险候选（来自 risk_tracker），喂给 LLM 的 risk 段。
+   * 2026-11-28 修复：title 必须是**原始文章真实标题**（不是命中词拼接 / URL），
+   * 命中词单独放 matched、证据片段放 evidence，供 LLM 区分「命中规则」与「事实」。
+   */
+  riskCandidates?: Array<{
+    title: string;
+    url?: string;
+    trackers: string[];
+    matched: string[];
+    evidence?: string;
+    priority: string;
+  }>;
   /**
    * 内容记忆提示（2026-09-02 去重机制）：近期已播报事件清单 + 若需重播的
    * 建议切入角度。由 lib/memory/event-memory.ts 的 formatMemoryBrief 生成，
@@ -216,6 +227,7 @@ const RULES = `你是股份行广州分行零售决策简报的主编。系统�
    - must_read 是宏观机会/趋势，insights 是落地动作，**risk 是"威胁/红线"**（监管处罚/合规风险/系统性风险事件/窗口指导等）
    - **不能同一条事件又当 must_read 又当 risk**（同一事件只在一边出现，避免重复说"同样的事情"）
    - 优先从「关键词层风险候选」（即输入中的 risk_candidates 数组，由 B-1 risk_tracker 预识别）里选 —— 这是关键词 + AI 双轨
+   - risk_candidates 的 title 是**原始文章真实标题**，直接用它做风险主题依据；matched 只是命中的关键词（规则线索，不是事实），evidence 是原文片段（可溯源的事实依据）。不得把 matched 拼接串当成新闻标题写进 topic。
    - 若 risk_candidates 都不合适，LLM 可自己从 finance/gz 中识别
    - 无突出风险时，risk 设为 null（不要硬编）
    - topic：风险主题（15 字内，如"央行重申防止资金空转"）

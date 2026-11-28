@@ -118,13 +118,32 @@ export function syncNarration(
  * B-1：从 keyword-funnel 的 filterResults 提取 risk_tracker 命中的条目，
  * 作为 LLM risk 段的"已识别候选"输入。
  * 取最高 priority（风险 S > A > B）作为条目的 priority 字段。
+ *
+ * 2026-11-28 规格修复：原实现 title = r.matched.join(" / ") || url，
+ * 即拿「命中的关键词拼接串」或「URL」冒充新闻标题（articles 参数还被闲置），
+ * LLM 据此写出的风险 topic 会失真。改为：
+ *  - title 一律取原始文章真实标题（title_cn 优先，其次 title）；
+ *  - 关键词命中降级为独立 matched 字段（规则线索，非事实）；
+ *  - evidence 取原文 excerpt/summary 前 120 字（可溯源片段）；
+ *  - 只有 articles 里确实找不到该 url 时才用 url 兜底，且显式标注，不冒充标题。
  */
-function extractRiskCandidates(
+export type RiskCandidate = {
+  title: string;
+  url?: string;
+  trackers: string[];
+  matched: string[];
+  evidence?: string;
+  priority: string;
+};
+
+export function extractRiskCandidates(
   filterResults: Map<string, FilterResult>,
-  _articles: ArticleInput[],
+  articles: ArticleInput[],
   _report: DailyReport,
-): Array<{ title: string; url?: string; trackers: string[]; priority: string }> {
-  const out: Array<{ title: string; url?: string; trackers: string[]; priority: string }> = [];
+): RiskCandidate[] {
+  const byUrl = new Map<string, ArticleInput>();
+  for (const a of articles) if (a.url && !byUrl.has(a.url)) byUrl.set(a.url, a);
+  const out: RiskCandidate[] = [];
   const PRIO: Record<string, number> = { S: 0, A: 1, B: 2 };
   for (const [url, r] of filterResults) {
     if (!r.risks || r.risks.length === 0) continue;
@@ -133,8 +152,17 @@ function extractRiskCandidates(
       (best, x) => (PRIO[x.priority] < PRIO[best] ? x.priority : best),
       "B",
     );
-    // 用 url 作 title 兜底（exec summary LLM 看到 url 也能去 search）
-    out.push({ title: r.matched.join(" / ") || url, url, trackers, priority });
+    const article = byUrl.get(url);
+    const realTitle = article?.title_cn?.trim() || article?.title?.trim() || "";
+    const evidence = (article?.excerpt || article?.summary || "").trim().slice(0, 120);
+    out.push({
+      title: realTitle || url,
+      ...(url ? { url } : {}),
+      trackers,
+      matched: r.matched,
+      ...(evidence ? { evidence } : {}),
+      priority,
+    });
   }
   // 按 priority S > A > B 排序，最多取 5 条
   out.sort((a, b) => PRIO[a.priority] - PRIO[b.priority]);
