@@ -355,3 +355,16 @@ test("⑯ 卡片经营重点标签：只打年度重点，必读/商机/风险�
   );
   assert.ok(!qd.includes('class="dv-ftag"') && !qd.includes("本季主攻"), "季度命中不贴卡片标签");
 });
+
+test("⑰ 专业内容入口：只放独立页面，不得混入页内锚点（底部点击被弹回顶部）", () => {
+  const d = decisionPart(renderHtml(report()));
+  const seg = d.slice(d.indexOf('id="dv-legacy"'));
+  const hrefs = [...seg.matchAll(/class="dv-legacy-item" href="([^"]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(
+    hrefs,
+    ["../topics.html", "../research.html", "../redchip/index.html", "../search.html", "../archive.html"],
+    "五个入口与站点独立页一一对应（相对期次页 ../ 为站点根）",
+  );
+  assert.ok(!hrefs.some((h) => h.startsWith("#")), "不得混入 # 页内锚点：底部点击会滚回页面上方，像链接没链对");
+  assert.ok(d.includes("独立页面 · 点击进入对应板块"), "板块副文案说明是独立页面");
+});

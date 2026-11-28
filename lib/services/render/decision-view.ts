@@ -404,9 +404,10 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
 </section>`;
 
   // ---- ⑧ 原有专业内容入口（全部复用现成链接，不建死链）----
+  // 🔴 只放**独立页面**入口（sc 2026-11-28 实测踩坑）：此前混进了 `#dv-mustread` /
+  // `#dv-opportunity` 两个页内锚点，读者在页面底部点「股市与必读」会被弹回页面上方，
+  // 看起来像「链接没链对」。页内跳转已有顶部快捷导航，这里不再重复。
   const legacyItems = [
-    { href: "#dv-mustread", label: "股市与必读", desc: "本期市场与要情" },
-    { href: "#dv-opportunity", label: "广东IPO", desc: "区域资本市场" },
     { href: "../topics.html", label: "主题追踪", desc: "跨日事件连续性" },
     { href: "../research.html", label: "研报解读", desc: "同业深度分析" },
     { href: "../redchip/index.html", label: "红筹线索", desc: "特色信息入口" },
@@ -414,7 +415,7 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
     { href: "../archive.html", label: "历史归档", desc: "按日期查阅" },
   ];
   const legacySection = `<section class="dv-mod" id="dv-legacy">
-  <div class="dv-mod-head"><h2>专业内容与深度阅读</h2><span class="dv-mod-sub">原有模块保留 · 不与首页核心内容重复堆叠</span></div>
+  <div class="dv-mod-head"><h2>专业内容与深度阅读</h2><span class="dv-mod-sub">独立页面 · 点击进入对应板块</span></div>
   <nav class="dv-legacy">${legacyItems.map((i) => `<a class="dv-legacy-item" href="${i.href}"><span class="dv-legacy-label">${escapeHtml(i.label)}</span><span class="dv-legacy-desc">${escapeHtml(i.desc)}</span></a>`).join("")}</nav>
   ${backToTop()}
 </section>`;
