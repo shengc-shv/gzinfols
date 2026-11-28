@@ -122,7 +122,10 @@ test("⑥ 六大经营领域导航 = 新配置六领域，带当日计数，链�
     assert.ok(d.includes(name), `缺领域：${name}`);
   }
   assert.ok(d.includes("当日 1 条") && d.includes("含重点 1"), "领域带当日计数与重点亮标");
-  assert.ok(d.includes('href="../topics.html"'), "链接复用现有专题页（不建死链）");
+  assert.ok(d.includes('data-expand-domain="retail_credit"'), "领域卡片改为本页展开按钮");
+  assert.ok(d.includes('id="dv-domain-detail-retail_credit"'), "该领域明细容器存在");
+  assert.ok(d.includes("房贷利率调整"), "明细列出该领域当日条目");
+  assert.ok(!d.includes('class="dv-domain" href='), "不再跳外页（预览死链已消除）");
 });
 
 test("⑥b 历史报告无领域字段：渲染期同源降级打标，不 mutate 入参", () => {
@@ -133,6 +136,19 @@ test("⑥b 历史报告无领域字段：渲染期同源降级打标，不 mutat
   assert.ok(d.includes("零售信贷"), "降级打标后领域导航有计数");
   assert.ok(!d.includes("当日暂无") || d.includes("当日 1 条"), "命中领域不再显示当日暂无");
   assert.equal(JSON.stringify(r), snapshot, "渲染不得 mutate 入参报告");
+});
+
+test("⑥c 领域明细：展开脚本 + 原文链接 + 空状态，不跳 topics.html", () => {
+  const body = item("房贷明细条目", { url: "https://e.com/detail", primary_domain: "retail_credit" });
+  const r = report({ sections: { gz_local: [body], biz_insight: [], policy_market: [], tech: [], ipo: [] } });
+  const html = renderHtml(r);
+  const d = decisionPart(html);
+  assert.ok(/data-expand-domain/.test(html) && /dv-domain-detail-/.test(html), "展开交互脚本存在");
+  assert.ok(d.includes('href="https://e.com/detail" target="_blank" rel="noopener noreferrer"'), "明细条目直连原文");
+  assert.ok(d.includes("当日暂无该领域条目"), "无条目的领域给空状态");
+  const domSection = d.slice(d.indexOf('id="dv-domains"'), d.indexOf('id="dv-legacy"'));
+  assert.ok(!domSection.includes('href="../topics.html"'), "领域导航不再指向预览会 404 的 topics.html");
+  assert.equal((domSection.match(/data-expand-domain=/g) ?? []).length, 6, "六个领域卡片齐全");
 });
 
 test("⑦ 角色轻量筛选：五角色 + data-domain 锚点，不新增 AI 任务", () => {

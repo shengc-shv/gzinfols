@@ -283,20 +283,39 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
     c.total += 1;
     if (it.importance === 3 || it.importance === 2) c.high += 1;
   }
-  const domainCards = BUSINESS_DOMAINS.map((d) => {
+  const domainCards: string[] = [];
+  const domainDetails: string[] = [];
+  for (const d of BUSINESS_DOMAINS) {
     const c = domainCounts.get(d.id) ?? { total: 0, high: 0 };
-    return `<a class="dv-domain" href="../topics.html" data-domain="${d.id}">
+    const members = allItems.filter((it) => it.primary_domain === d.id).slice(0, 12);
+    const detailId = `dv-domain-detail-${d.id}`;
+    domainCards.push(`<button type="button" class="dv-domain" data-expand-domain="${d.id}" aria-expanded="false" aria-controls="${detailId}">
       <span class="dv-domain-label">${escapeHtml(d.short)}</span>
       <span class="dv-domain-hint">${escapeHtml(d.name)}</span>
       <span class="dv-domain-count">${c.total > 0 ? `当日 ${c.total} 条${c.high ? ` · 含重点 ${c.high}` : ""}` : "当日暂无"}</span>
-    </a>`;
-  }).join("");
+    </button>`);
+    const detail = members.length
+      ? members.map((it) => {
+          const href = it.url ? escapeHtml(it.url) : "";
+          const title = escapeHtml(it.title_cn || it.url);
+          const line = href
+            ? `<a class="dv-domain-item" href="${href}" target="_blank" rel="noopener noreferrer">${title}</a>`
+            : `<span class="dv-domain-item dv-domain-item-plain">${title}</span>`;
+          return `<li class="dv-domain-row">${line}<span class="dv-domain-meta">${escapeHtml(it.source)}${it.date ? ` · ${escapeHtml(it.date)}` : ""}</span></li>`;
+        }).join("")
+      : `<li class="dv-domain-row dv-domain-none">当日暂无该领域条目</li>`;
+    domainDetails.push(`<div class="dv-domain-detail" id="${detailId}" hidden>
+      <div class="dv-domain-detail-head">${escapeHtml(d.short)} · 当日条目${members.length > 12 ? "（前 12 条）" : ""}</div>
+      <ul class="dv-domain-list">${detail}</ul>
+    </div>`);
+  }
   const domainsSection = `<section class="dv-mod" id="dv-domains">
-  <div class="dv-mod-head"><h2>六大经营领域</h2><span class="dv-mod-sub">按领域浏览 · 点击跳转主题追踪</span></div>
+  <div class="dv-mod-head"><h2>六大经营领域</h2><span class="dv-mod-sub">按领域浏览 · 点击展开当日条目</span></div>
   <div class="dv-roles" role="group" aria-label="角色视角筛选">
     ${DV_ROLE_VIEWS.map((r, i) => `<button type="button" class="dv-role${i === 0 ? " active" : ""}" data-role="${r.id}">${escapeHtml(r.label)}</button>`).join("")}
   </div>
-  <nav class="dv-domains">${domainCards}</nav>
+  <nav class="dv-domains">${domainCards.join("")}</nav>
+  ${domainDetails.join("")}
   ${backToTop()}
 </section>`;
 
@@ -428,7 +447,19 @@ export const DECISION_VIEW_CSS = `
   .dv-domains { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.6rem; }
   .dv-domain { display:flex; flex-direction:column; gap:0.2rem; min-height:64px; padding:0.7rem 0.8rem;
     border:1px solid var(--rule); border-radius:var(--r-md); background:var(--card); text-decoration:none; color:var(--fg); }
-  .dv-domain:active { background:var(--card-alt); }
+  .dv-domain { font:inherit; text-align:left; cursor:pointer; }
+  .dv-domain:active, .dv-domain[aria-expanded="true"] { background:var(--card-alt); }
+  .dv-domain-detail { margin:0.5rem 0 0; padding:0.7rem 0.85rem;
+    border:1px solid var(--rule); border-radius:var(--r-md); background:var(--bg); }
+  .dv-domain-detail[hidden] { display:none; }
+  .dv-domain-detail-head { font-size:0.78rem; font-weight:600; color:var(--fg-soft); margin-bottom:0.45rem; }
+  .dv-domain-list { list-style:none; margin:0; padding:0; }
+  .dv-domain-row { padding:0.4rem 0; border-top:1px solid var(--rule); }
+  .dv-domain-row:first-child { border-top:0; }
+  .dv-domain-item { font-size:0.85rem; line-height:1.5; color:var(--link); text-decoration:none; }
+  .dv-domain-item-plain { color:var(--fg); }
+  .dv-domain-meta { display:block; font-size:0.72rem; color:var(--muted); margin-top:0.15rem; }
+  .dv-domain-none { font-size:0.82rem; color:var(--muted); }
   .dv-domain-label { font-size:0.9rem; font-weight:600; }
   .dv-domain-hint { font-size:0.73rem; color:var(--muted); }
   .dv-domain-count { font-size:0.72rem; color:var(--accent-brand); }
@@ -511,6 +542,20 @@ export function generateDecisionViewScript(): string {
       var dom=card.getAttribute('data-domain')||'';
       card.style.display=(ids.length===0||ids.indexOf(dom)>=0)?'':'none';
     });
+  });
+
+  // 领域卡片点击 → 本页展开/收起该领域当日条目（不跳外页、零死链）
+  if(root) root.addEventListener('click',function(e){
+    var b=e.target&&e.target.closest?e.target.closest('.dv-domain[data-expand-domain]'):null;
+    if(!b)return;
+    var id=b.getAttribute('data-expand-domain');
+    var detail=document.getElementById('dv-domain-detail-'+id);
+    if(!detail)return;
+    var opening=detail.hidden;
+    root.querySelectorAll('.dv-domain-detail').forEach(function(d){d.hidden=true;});
+    root.querySelectorAll('.dv-domain[data-expand-domain]').forEach(function(x){x.setAttribute('aria-expanded','false');});
+    detail.hidden=!opening;
+    b.setAttribute('aria-expanded',opening?'true':'false');
   });
 })();`;
 }
