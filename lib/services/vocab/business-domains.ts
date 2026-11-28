@@ -17,6 +17,21 @@ export interface BusinessDomain {
   short: string;
   keywords: readonly string[];
   exclude: readonly string[];
+  /**
+   * 二级主题（二期 WP10 · 2026-11-28）。
+   *
+   * 🔴 **只用于领域专题页分组展示**，不参与 `classifyBusinessDomain` 的判定，
+   * 也不回写报告的 `primary_domain` —— 判定面一旦变宽，历史报告的领域标签就会漂。
+   */
+  subtopics: readonly { name: string; keywords: readonly string[] }[];
+  /** 相关客群（展示用） */
+  segments: readonly string[];
+  /** 相关产品（展示用） */
+  products: readonly string[];
+  /** 典型事件类型（展示用） */
+  event_types: readonly string[];
+  /** 机会/风险类型（展示用） */
+  opportunity_risk: { opportunity: readonly string[]; risk: readonly string[] };
 }
 
 export const BUSINESS_DOMAINS: readonly BusinessDomain[] = domainConfig.domains.map((d) => ({
@@ -25,6 +40,11 @@ export const BUSINESS_DOMAINS: readonly BusinessDomain[] = domainConfig.domains.
   short: d.short,
   keywords: d.keywords,
   exclude: d.exclude,
+  subtopics: d.subtopics ?? [],
+  segments: d.segments ?? [],
+  products: d.products ?? [],
+  event_types: d.event_types ?? [],
+  opportunity_risk: d.opportunity_risk ?? { opportunity: [], risk: [] },
 }));
 
 export const DOMAIN_IDS = BUSINESS_DOMAINS.map((d) => d.id);
@@ -62,4 +82,36 @@ export function classifyBusinessDomain(input: {
     primary_domain: scored[0].id,
     related_domains: scored.slice(1).map((s) => s.id),
   };
+}
+
+/**
+ * 领域内二级主题归类（二期 WP10 · 纯展示）。
+ *
+ * 🔴 只服务领域专题页的分组，**不参与生产判定**：`primary_domain` 仍只由
+ * `classifyBusinessDomain`（keywords/exclude）决定。这里多命中一个词只会让专题页
+ * 把这条放到另一个二级分组里，绝不改变报告里的领域标签与排序。
+ *
+ * 口径：命中数最多者胜；平局按配置顺序（与主领域判定同一条破平局规则）；
+ * 一个都不命中返回 null（页面归入「其他」，不硬凑）。
+ */
+export function classifySubtopic(
+  domainId: string,
+  input: { title?: string | null; summary?: string | null; tags?: readonly string[] | null },
+  opts: { minHits?: number } = {},
+): string | null {
+  const minHits = Math.max(1, Math.floor(opts.minHits ?? 1));
+  const domain = BUSINESS_DOMAINS.find((d) => d.id === domainId);
+  if (!domain || !domain.subtopics.length) return null;
+  const text = stripExcludes(
+    `${input.title ?? ""} ${input.summary ?? ""} ${(input.tags ?? []).join(" ")}`,
+    domain.exclude,
+  );
+  if (!text.trim()) return null;
+  let best: { name: string; hits: number; idx: number } | null = null;
+  domain.subtopics.forEach((sub, idx) => {
+    const hits = sub.keywords.reduce((n, kw) => (kw && text.includes(kw) ? n + 1 : n), 0);
+    if (hits < minHits) return;
+    if (!best || hits > best.hits) best = { name: sub.name, hits, idx };
+  });
+  return best ? (best as { name: string }).name : null;
 }

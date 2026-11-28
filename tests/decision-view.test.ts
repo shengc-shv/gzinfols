@@ -362,9 +362,39 @@ test("⑰ 专业内容入口：只放独立页面，不得混入页内锚点（�
   const hrefs = [...seg.matchAll(/class="dv-legacy-item" href="([^"]+)"/g)].map((m) => m[1]);
   assert.deepEqual(
     hrefs,
-    ["../topics.html", "../research.html", "../redchip/index.html", "../search.html", "../archive.html"],
-    "五个入口与站点独立页一一对应（相对期次页 ../ 为站点根）",
+    [
+      "../topics.html",
+      "../focus.html",
+      "../domains.html",
+      "../research.html",
+      "../redchip/index.html",
+      "../search.html",
+      "../archive.html",
+    ],
+    "七个入口与站点独立页一一对应（相对期次页 ../ 为站点根）",
   );
   assert.ok(!hrefs.some((h) => h.startsWith("#")), "不得混入 # 页内锚点：底部点击会滚回页面上方，像链接没链对");
   assert.ok(d.includes("独立页面 · 点击进入对应板块"), "板块副文案说明是独立页面");
+});
+
+
+test("⑱ 经营重点追踪入口：底部入口与模块内链都指向跨期页，首页副本改写为 ./focus.html", () => {
+  const hits = [
+    { id: "a26_aum", name: "AUM 规模与结构优化", layer: "annual" as const, grade: "S", level: "M3" as const, bonus: 15, reason: "标题命中 AUM" },
+  ];
+  const d = decisionPart(
+    renderHtml(
+      report({
+        hero_line: "定调",
+        focus: {
+          version: "f-21bd17f2",
+          items: [{ id: "a26_aum", name: "AUM 规模与结构优化", layer: "annual", grade: "S", count: 2, high: 1, domains: [] }],
+        },
+        sections: { gz_local: [item("AUM 规模突破千亿", { focus_hits: hits })], biz_insight: [], policy_market: [], tech: [], ipo: [] },
+      }),
+    ),
+  );
+  // 报告页在 <date>/ 子目录里 → 跨期页必须是 ../focus.html（构建时首页副本再改写为 ./）
+  assert.ok(d.includes('href="../focus.html"'), "模块头/底部入口用站点根相对路径");
+  assert.ok(d.includes("查看跨期追踪"), "重点模块内给跨期入口（当日命中 → 跨期观察的自然路径）");
 });

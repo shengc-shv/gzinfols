@@ -28,9 +28,12 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { renderRedchipPage } from "./lib/redchip-page.mjs";
 import { renderRedchipReport } from "./lib/redchip-report.mjs";
+import { renderOverseasPage } from "./lib/overseas-page.mjs";
 import { renderSearchPage } from "./lib/search-page.mjs";
 import { renderTopicsPage } from "./lib/topics-page.mjs";
 import { renderResearchPage, renderResearchDetailPage } from "./lib/research-page.mjs";
+import { renderFocusPage } from "./lib/focus-page.mjs";
+import { renderDomainsPage } from "./lib/domains-page.mjs";
 
 /** 汇集来源（按优先级：前一个命中即不再看后面的）。 */
 const SRC_DIRS = ["daily_reports", "history"];
@@ -170,6 +173,11 @@ const latestHtml = fs
   //    但 file:// 预览、子路径部署、严格 CSP 下都会真的 404 —— sc 2026-10-20 实测两个入口 404。
   .replace(/href="\.\.\/topics\.html"/g, 'href="./topics.html"')
   .replace(/href="\.\.\/research\.html"/g, 'href="./research.html"')
+  // 2026-11-28（二期 WP9）：经营重点追踪页同上，报告页写 `../focus.html`，发布根副本须改 `./`。
+  .replace(/href="\.\.\/focus\.html"/g, 'href="./focus.html"')
+  // 领域专题页（二期 WP10）同上。
+  .replace(/href="\.\.\/domains\.html"/g, 'href="./domains.html"')
+  // 领域专题页（二期 WP10）同上。
   // B1：最新一期的「归档」旁补一个「检索」入口（检索页只对发布根的相对路径成立）
   .replace(
     /(<a class="archive" href="\.\/archive\.html">[^<]*<\/a>)/,
@@ -232,7 +240,7 @@ const archiveHtml = `<!doctype html>
   <h1>每日资信简报 — 归档</h1>
   <p class="meta">共 ${dates.length} 期 · 最新在前 · 生成于 ${todayInReportTz()}</p>
   <div class="top">
-    <a href="./index.html">→ 最新一期（${latest}）</a> · <a href="./search.html">🔍 检索与两期对比</a> · <a href="./topics.html">🧭 主题跟踪</a> · <a href="./research.html">📐 研报解读</a>
+    <a href="./index.html">→ 最新一期（${latest}）</a> · <a href="./search.html">🔍 检索与两期对比</a> · <a href="./topics.html">🧭 主题跟踪</a> · <a href="./focus.html">📌 经营重点</a> · <a href="./domains.html">🏷 经营领域</a> · <a href="./research.html">📐 研报解读</a>
   </div>
   <ul>
 ${rows}
@@ -496,6 +504,100 @@ try {
   }
 }
 
+// ---------- 5.8b2) 经营重点追踪页（二期 WP9 · 2026-11-28）：site/focus.html ----------
+// 数据源：`data/focus-ledger.json`（每日 M2/M3 命中明细 + 计数）+ `data/focus/versions.json`
+// （配置定义快照）。两者都由 `scripts/daily.ts` 在**真实运行**时写、随 daily 工作流回流 main。
+// 🔴 页面可以先上、数据后长：台账还没产生时产出**空态页**（入口不 404），
+//    绝不因为「没有数据」跳过生成 —— 那会让首页入口直接 404。
+try {
+  const readJsonSafe = (p, label) => {
+    if (!fs.existsSync(p)) return null;
+    try {
+      return JSON.parse(fs.readFileSync(p, "utf8"));
+    } catch (e) {
+      console.log(`[build-site] ${label} 解析失败（按无数据处理）：${e && e.message ? e.message : e}`);
+      return null;
+    }
+  };
+  const ledger = readJsonSafe(path.resolve("data/focus-ledger.json"), "经营重点台账");
+  const archive = readJsonSafe(path.resolve("data/focus/versions.json"), "经营重点版本归档");
+  // 领域中文名真源仍是 config/business-domains.json（页面只展示，不另建第三份词表）
+  let domainLabels = {};
+  try {
+    const dc = JSON.parse(fs.readFileSync(path.resolve("config/business-domains.json"), "utf8"));
+    domainLabels = Object.fromEntries((dc.domains || []).map((d) => [d.id, d.name]));
+  } catch (e) {
+    console.log(`[build-site] 领域配置读取失败（领域名退回 id）：${e && e.message ? e.message : e}`);
+  }
+  const days = ledger && Array.isArray(ledger.days) ? ledger.days : [];
+  const hits = days.reduce((n, d) => n + ((d && d.hits) || []).length, 0);
+  fs.writeFileSync(
+    path.join(OUT, "focus.html"),
+    renderFocusPage({
+      ledger,
+      archive,
+      generatedAt: todayInReportTz(),
+      latest,
+      today: todayInReportTz(),
+      domainLabels,
+    }),
+    "utf8",
+  );
+  console.log(
+    days.length
+      ? `[build-site] focus.html（${days.length} 个期次 / ${hits} 条实质命中）`
+      : "[build-site] focus.html（空态：台账尚未产生数据）",
+  );
+} catch (e) {
+  console.log(`[build-site] 经营重点追踪页渲染失败，写兜底页：${e && e.message ? e.message : e}`);
+  try {
+    fs.writeFileSync(
+      path.join(OUT, "focus.html"),
+      fallbackPage("📌 经营重点追踪", "本期重点追踪页暂不可用，请稍后从日报页重新进入。", latest),
+      "utf8",
+    );
+  } catch (e2) {
+    console.log(`[build-site] ⚠️ 兜底页也写失败：${e2 && e2.message ? e2.message : e2}`);
+  }
+}
+
+// ---------- 5.8b3) 经营领域专题页（二期 WP10 · 2026-11-28）：site/domains.html ----------
+// 数据源：`data/domains.json`（由 `scripts/domains-index.ts` 用生产判定函数聚合跨期语料）。
+// 索引缺失 = 还没跑过索引步骤 → 空态页（入口不 404），绝不跳过生成。
+try {
+  let index = null;
+  const dp = path.resolve("data/domains.json");
+  if (fs.existsSync(dp)) {
+    try {
+      index = JSON.parse(fs.readFileSync(dp, "utf8"));
+    } catch (e) {
+      console.log(`[build-site] 领域索引解析失败（按空态处理）：${e && e.message ? e.message : e}`);
+    }
+  }
+  fs.writeFileSync(
+    path.join(OUT, "domains.html"),
+    renderDomainsPage({ index, generatedAt: todayInReportTz(), latest }),
+    "utf8",
+  );
+  const shown = index && Array.isArray(index.domains) ? index.domains.filter((d) => d.count > 0).length : 0;
+  console.log(
+    index
+      ? `[build-site] domains.html（${shown} 个有内容的领域 / 近 ${index.windowRuns} 期 ${index.total} 条）`
+      : "[build-site] domains.html（空态：无领域索引）",
+  );
+} catch (e) {
+  console.log(`[build-site] 领域专题页渲染失败，写兜底页：${e && e.message ? e.message : e}`);
+  try {
+    fs.writeFileSync(
+      path.join(OUT, "domains.html"),
+      fallbackPage("🏷 经营领域专题", "领域专题页暂不可用，请稍后从日报页重新进入。", latest),
+      "utf8",
+    );
+  } catch (e2) {
+    console.log(`[build-site] ⚠️ 兜底页也写失败：${e2 && e2.message ? e2.message : e2}`);
+  }
+}
+
 // ---------- 5.8c) 研报解读页（2026-10-19）：site/research.html ----------
 // 数据源：各期 report JSON 的 `researchPanel`（daily_reports 优先，回落 history）。
 // 与主题页同口径：模块缺失 / 单期坏 JSON 绝不阻断构建。
@@ -600,6 +702,28 @@ try {
     }
   }
 }
+}
+
+// ---------- 5.6) 境外线索池页：site/overseas/index.html ----------
+// 数据源 = data/overseas/leads.json（**入库**，由本地 `npm run overseas` 累积产出）。
+// 缺失或损坏时产出空态页而不报错 —— 入口卡不能 404。
+try {
+  const ovPath = path.join(process.cwd(), "data", "overseas", "leads.json");
+  let ovLedger = null;
+  if (fs.existsSync(ovPath)) {
+    try {
+      ovLedger = JSON.parse(fs.readFileSync(ovPath, "utf8"));
+    } catch {
+      ovLedger = null;
+    }
+  }
+  const ovOut = path.join(OUT, "overseas");
+  fs.mkdirSync(ovOut, { recursive: true });
+  fs.writeFileSync(path.join(ovOut, "index.html"), renderOverseasPage({ ledger: ovLedger }), "utf8");
+  const ovCount = ovLedger && Array.isArray(ovLedger.leads) ? ovLedger.leads.length : 0;
+  console.log(`[build-site] overseas/index.html (${ovCount} 家)`);
+} catch (e) {
+  console.log(`[build-site] 境外线索池页跳过：${e && e.message ? e.message : e}`);
 }
 
 // ---------- 6) .nojekyll：阻止 GitHub Pages 跑 Jekyll（否则下划线开头的目录会被吞）----------

@@ -329,6 +329,12 @@ jobs:
         run: npm run topics:cluster
         continue-on-error: true
 
+      # 领域专题索引（二期 WP10）：读上一行的语料快照，按生产判定函数聚合六大领域。
+      # 必须排在主题聚类之后（吃当天新并入的语料），且失败不影响发布（页面走空态）。
+      - name: 领域索引（domains:index → data/domains.json）
+        run: npm run domains:index
+        continue-on-error: true
+
       # ---------- 归档报告到 main/history/ + 提交滚动历史库（2026-09-11 B5 补齐）----------
       # 此前完全缺失 → CI 每次 runner 从零开始（历史库/记忆库不回流 main）。
       # 逐字对齐 gzinfo daily.yml 的归档步骤（2026-09-10 #201 并发教训）。
@@ -365,7 +371,7 @@ jobs:
           # 必须回流 main，否则每次 CI 都从旧版开始 → 累积失效。
           # 经营重点台账 + 版本归档（2026-11-28 二期 WP7）：同一模式 —— 专题页跨期聚合
           # 的唯一数据源，不回流就永远只有当天。
-          for f in data/article-history.json data/article-history-backup.json data/event-memory.json data/redchip/leads.json data/redchip/meta.json data/topics.json data/topics-corpus.json data/research-ledger.json data/focus-ledger.json data/focus/versions.json; do
+          for f in data/article-history.json data/article-history-backup.json data/event-memory.json data/redchip/leads.json data/redchip/meta.json data/topics.json data/topics-corpus.json data/research-ledger.json data/domains.json data/focus-ledger.json data/focus/versions.json; do
             [ -f "$f" ] && git add "$f" || true
           done
           if git diff --cached --quiet; then

@@ -149,6 +149,14 @@ export interface PipelineConfig {
    * 关闭后 exec 池与必读重排完全退回一期口径（不加载配置、不做匹配）。
    */
   focusEngine: boolean;
+  /**
+   * 经营重点 · AI 语义细化开关（二期 WP11；**默认关闭**，FOCUS_AI_MATCH=1 开启）。
+   *
+   * 开启后只对「规则判为 M1/M2」的候选做一次批量复核，把确认的命中原位升级；
+   * 不参与排序、失败自动退回规则结果。默认关的理由：这是可选的召回增强，
+   * 规则结果本身可核对，而 AI 判定每次都要花一次调用。
+   */
+  focusAiMatch: boolean;
   /** 过滤链旁路开关。 */
   filters: FilterFlags;
   /** LLM 模型覆盖（PASS1_MODEL / PASS2_MODEL；空则走后端默认）。 */

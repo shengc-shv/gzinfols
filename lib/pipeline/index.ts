@@ -18,7 +18,8 @@ import { applyDisplayCaps } from "../services/assemble/display-cap";
 import { annotateDeltas } from "../services/assemble/delta";
 import { annotateMaturity } from "../services/assemble/maturity";
 import { annotateItemMetadata } from "../services/assemble/item-metadata";
-import { annotateFocus } from "../services/assemble/focus-metadata";
+import { annotateFocus, collectSemanticCandidates } from "../services/assemble/focus-metadata";
+import { refineFocusWithAi, type FocusSemanticMap } from "../services/business-focus/focus-semantic";
 import { loadFocusForRun } from "./focus-context";
 import { productCoverageOf, productCoverageSummary } from "../services/assemble/product-coverage";
 import { mergeRollingAndSaveHistory } from "./history-step";
@@ -158,7 +159,30 @@ export async function runPipeline(
   {
     const fc = loadFocusForRun(ctx.date, ctx.config.focusEngine); // 日志在 side 侧已打印一次
     const displayFocus = fc.items.filter((f) => f.layer === "annual");
-    annotated = annotateFocus(annotated, displayFocus, fc.version);
+
+    // 二期 WP11（可选 · 默认关）：对「规则判为 M1/M2」的候选做一次批量语义复核。
+    // 任何异常都退回规则结果 —— 这是增强项，绝不能让日报因为它挂掉。
+    let semantic: FocusSemanticMap | undefined;
+    if (ctx.config.focusAiMatch && displayFocus.length) {
+      try {
+        const cands = collectSemanticCandidates(annotated, displayFocus);
+        if (cands.length) {
+          semantic = await refineFocusWithAi({
+            candidates: cands,
+            focuses: displayFocus,
+            llm: deps.llm,
+            log: ctx.log,
+          });
+        } else {
+          ctx.log.info("focus", "AI 语义细化：无 M1/M2 候选，跳过调用");
+        }
+      } catch (e) {
+        const msg = e instanceof Error ? e.message : String(e);
+        ctx.log.warn("focus", `AI 语义细化异常，退回规则判定：${msg}`);
+      }
+    }
+
+    annotated = annotateFocus(annotated, displayFocus, fc.version, semantic?.size ? { semantic } : {});
     if (fc.items.length) {
       const secItems = (Object.values(annotated.sections ?? {}) as ReportItem[][]).flat();
       const tagged = secItems.filter((it) => (it.focus_hits?.length ?? 0) > 0).length;

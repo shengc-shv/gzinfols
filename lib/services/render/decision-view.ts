@@ -268,7 +268,7 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   // 点击展开当日命中条目（本页展开、零死链）；专题页（跨期聚合）是后续 WP9。
   const focusSection = focusRows.length
     ? `<section class="dv-mod" id="dv-focus">
-  <div class="dv-mod-head"><h2>本期经营重点</h2><span class="dv-mod-sub">配置版本 ${escapeHtml(focusSummary?.version ?? "")} · 只列当日有实质命中的</span></div>
+  <div class="dv-mod-head"><h2>本期经营重点</h2><span class="dv-mod-sub">配置版本 ${escapeHtml(focusSummary?.version ?? "")} · 只列当日有实质命中的 · <a class="dv-mod-link" href="../focus.html">查看跨期追踪 →</a></span></div>
   <ul class="dv-focus-list">${focusRows
     .map(({ f, members }) => {
       const meta = [
@@ -397,7 +397,7 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
     </div>`);
   }
   const domainsSection = `<section class="dv-mod" id="dv-domains">
-  <div class="dv-mod-head"><h2>六大经营领域</h2><span class="dv-mod-sub">按领域浏览 · 点击标签查看当日条目</span></div>
+  <div class="dv-mod-head"><h2>六大经营领域</h2><span class="dv-mod-sub">按领域浏览 · 点击标签查看当日条目 · <a class="dv-mod-link" href="../domains.html">看跨期领域专题 →</a></span></div>
   <div class="dv-tabs" role="tablist" aria-label="六大经营领域">${domainTabs.join("")}</div>
   ${domainPanels.join("")}
   ${backToTop()}
@@ -409,6 +409,10 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   // 看起来像「链接没链对」。页内跳转已有顶部快捷导航，这里不再重复。
   const legacyItems = [
     { href: "../topics.html", label: "主题追踪", desc: "跨日事件连续性" },
+    // 二期 WP9：跨期命中聚合。首页模块低频（年度重点 ≥M2 的期次约 5/30 天），
+    // 这里是那 25 天里能进专题页的固定入口。
+    { href: "../focus.html", label: "经营重点追踪", desc: "重点命中与热度" },
+    { href: "../domains.html", label: "经营领域专题", desc: "六大领域跨期聚合" },
     { href: "../research.html", label: "研报解读", desc: "同业深度分析" },
     { href: "../redchip/index.html", label: "红筹线索", desc: "特色信息入口" },
     { href: "../search.html", label: "资讯搜索", desc: "按标题与主题检索" },
@@ -600,6 +604,8 @@ export const DECISION_VIEW_CSS = `
   .dv-legacy-item:active { background:var(--card-alt); }
   .dv-legacy-label { font-size:0.86rem; font-weight:600; }
   .dv-legacy-desc { font-size:0.72rem; color:var(--muted); }
+  .dv-mod-link { color:var(--accent-brand); text-decoration:none; border-bottom:1px dashed currentColor; }
+  .dv-mod-link:active { opacity:.7; }
   .dv-mod:target .dv-mod-head { border-bottom-color:var(--accent-brand); }
   @media (max-width:640px) {
     .dv-masthead h1 { font-size:1.28rem; }

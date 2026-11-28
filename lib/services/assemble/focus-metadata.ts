@@ -29,6 +29,12 @@ import type { FocusLedgerDay, FocusLedgerFocusCount, FocusLedgerHit } from "../.
 import { applyFocus } from "../business-focus/focus-apply";
 import type { FocusItem } from "../business-focus/types";
 import { itemIdOf } from "../../utils/item-id";
+import {
+  applySemanticUpgrade,
+  type FocusSemanticCandidate,
+  type FocusSemanticMap,
+  type FocusSemanticVerdict,
+} from "../business-focus/focus-semantic";
 
 /** 一条最多展示两个重点标签（规格 5.2「避免一张卡片出现过多彩色标签」）。 */
 const MAX_BADGES = 2;
@@ -46,17 +52,24 @@ const LAYER_RANK: Record<string, number> = { temporary: 0, quarterly: 1, annual:
 function matchesFor(
   it: Pick<ReportItem, "title_cn" | "primary_domain" | "related_domains">,
   focuses: readonly FocusItem[],
+  semantic?: FocusSemanticMap,
 ) {
   const title = (it.title_cn ?? "").trim();
   if (!title) return null;
   const domains = [it.primary_domain, ...(it.related_domains ?? [])].filter(
     (d): d is string => !!d && d.trim().length > 0,
   );
-  return applyFocus({ title, ...(domains.length ? { domains } : {}) }, 0, focuses);
+  const res = applyFocus({ title, ...(domains.length ? { domains } : {}) }, 0, focuses);
+  // 二期 WP11（可选、默认关）：AI 语义细化只**升级**规则给到 M1/M2 的命中，
+  // 且只改等级与理由，不动 `focusRelevance`/`counted`（那是排序侧真实账目）。
+  const verdicts: readonly FocusSemanticVerdict[] | undefined = semantic?.get(title);
+  if (!verdicts?.length) return res;
+  const upgraded = applySemanticUpgrade(res.matches, verdicts);
+  return upgraded === res.matches ? res : { ...res, matches: upgraded };
 }
 
-function hitOf(it: ReportItem, focuses: readonly FocusItem[]): ReportFocusHit[] {
-  const res = matchesFor(it, focuses);
+function hitOf(it: ReportItem, focuses: readonly FocusItem[], semantic?: FocusSemanticMap): ReportFocusHit[] {
+  const res = matchesFor(it, focuses, semantic);
   if (!res) return [];
   return res.matches
     .filter((m): m is typeof m & { matchLevel: "M2" | "M3" } => m.matchLevel === "M2" || m.matchLevel === "M3")
@@ -83,11 +96,11 @@ function hitOf(it: ReportItem, focuses: readonly FocusItem[]): ReportFocusHit[] 
 }
 
 /** 逐重点计数（count 含 M1；high 仅 M2/M3）。打标汇总与台账共用。 */
-function tallyOf(items: readonly ReportItem[], focuses: readonly FocusItem[]) {
+function tallyOf(items: readonly ReportItem[], focuses: readonly FocusItem[], semantic?: FocusSemanticMap) {
   const tally = new Map<string, { count: number; high: number }>();
   for (const f of focuses) tally.set(f.id, { count: 0, high: 0 });
   for (const it of items) {
-    const res = matchesFor(it, focuses);
+    const res = matchesFor(it, focuses, semantic);
     if (!res) continue;
     for (const m of res.matches) {
       const t = tally.get(m.focusId);
@@ -104,9 +117,10 @@ function summarize(
   items: readonly ReportItem[],
   focuses: readonly FocusItem[],
   version: string,
+  semantic?: FocusSemanticMap,
 ): ReportFocusSummary | undefined {
   if (!focuses.length) return undefined;
-  const tally = tallyOf(items, focuses);
+  const tally = tallyOf(items, focuses, semantic);
   return {
     version,
     items: focuses.map((f) => ({
@@ -122,6 +136,40 @@ function summarize(
 }
 
 /**
+ * 收集 AI 语义细化的候选（二期 WP11）。
+ *
+ * 只收「规则判为 M1/M2 且确实命中了某个重点」的条目：M0 没有信号、M3 已经是精准命中，
+ * 两者都不需要复核。去重按标题（与 `FocusSemanticMap` 的键一致）。
+ *
+ * 放在本模块而不是管线里：候选口径必须与打标用**同一个** `matchesFor`，
+ * 否则会出现「送模型的候选」与「最后打标的命中」两套判定。
+ */
+export function collectSemanticCandidates(
+  report: DailyReport,
+  focuses: readonly FocusItem[],
+): FocusSemanticCandidate[] {
+  if (!focuses.length) return [];
+  const seen = new Set<string>();
+  const out: FocusSemanticCandidate[] = [];
+  const items = Object.values(report.sections ?? {}).flat() as ReportItem[];
+  for (const it of items) {
+    const title = (it.title_cn ?? "").trim();
+    if (!title || seen.has(title)) continue;
+    const res = matchesFor(it, focuses);
+    if (!res) continue;
+    const relevant = res.matches.filter((m) => m.matchLevel === "M1" || m.matchLevel === "M2");
+    if (!relevant.length) continue;
+    // 最高等级决定候选档位（M2 优先送模型：还有升级到 M3 的空间，且更可能是真命中）
+    const level: "M1" | "M2" = relevant.some((m) => m.matchLevel === "M2") ? "M2" : "M1";
+    seen.add(title);
+    out.push({ title, level, focusIds: [...new Set(relevant.map((m) => m.focusId))] });
+  }
+  // M2 候选优先排队（候选上限截断时，先保住更可能是真命中的）
+  out.sort((a, b) => (a.level === b.level ? 0 : a.level === "M2" ? -1 : 1));
+  return out;
+}
+
+/**
  * 给报告打经营重点标（幂等：同输入同输出，重跑覆盖而不叠加）。
  * @param focuses 本期生效重点；空数组时**原样返回**（不做任何字段注入）
  */
@@ -129,20 +177,22 @@ export function annotateFocus(
   report: DailyReport,
   focuses: readonly FocusItem[],
   version: string,
+  opts: { semantic?: FocusSemanticMap } = {},
 ): DailyReport {
   if (!focuses.length) return report;
+  const semantic = opts.semantic;
   const sections = Object.fromEntries(
     Object.entries(report.sections ?? {}).map(([k, list]) => [
       k,
       (list as ReportItem[]).map((it) => {
-        const hits = hitOf(it, focuses);
+        const hits = hitOf(it, focuses, semantic);
         // 无命中不留空数组：JSON 里少一个字段比多一个 [] 更省，也便于判断「有没有标」
         return hits.length ? { ...it, focus_hits: hits } : it;
       }),
     ]),
   ) as unknown as DailyReport["sections"];
   const next: DailyReport = { ...report, sections };
-  const summary = summarize(Object.values(sections).flat() as ReportItem[], focuses, version);
+  const summary = summarize(Object.values(sections).flat() as ReportItem[], focuses, version, semantic);
   if (summary) next.focus = summary;
   return next;
 }

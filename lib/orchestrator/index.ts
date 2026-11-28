@@ -52,6 +52,9 @@ function defaultConfig(): PipelineConfig {
     eventMemory: (process.env.EVENT_MEMORY ?? "1") !== "0",
     // 二期动态经营重点引擎：默认开启；FOCUS_ENGINE=0 整体回退一期排序（配置坏也自动降级）
     focusEngine: (process.env.FOCUS_ENGINE ?? "1") !== "0",
+    // 二期 WP11：AI 语义细化**默认关闭**（要说开才开）——它是一次额外 LLM 调用，
+    // 与「默认开启、坏了自动降级」的引擎总开关不是一回事。
+    focusAiMatch: process.env.FOCUS_AI_MATCH === "1",
     filters: {
       keyword: envFlag("KEYWORD_FILTER"),
       keywordFallback: envFlag("KEYWORD_FILTER_FALLBACK"),

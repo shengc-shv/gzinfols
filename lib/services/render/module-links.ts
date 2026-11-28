@@ -14,12 +14,21 @@
  * 2026-10-19 sc 二次口径：**入口即导航**——日报页不再内嵌研报面板（内容只在独立主页），
  * 因此 `RESEARCH_PANEL=off` 的屏蔽点也从「面板」改为「入口卡 + 主页生成」。
  */
-export function renderModuleLinks(opts: { showResearch?: boolean } = {}): string {
+export function renderModuleLinks(
+  opts: { showResearch?: boolean; showOverseas?: boolean } = {},
+): string {
   const items: Array<{ href: string; icon: string; title: string; desc: string }> = [
     { href: "../topics.html", icon: "🧭", title: "主题追踪", desc: "一件事后来怎么样了" },
+    // 2026-11-28（WP9）：跨期命中聚合页。首页「本期经营重点」模块只在当天有实质命中时出现
+    // （年度重点本身低频），这个入口是那 25 天里唯一能进专题页的路。
+    { href: "../focus.html", icon: "📌", title: "经营重点", desc: "今年三个方向到哪了" },
   ];
   if (opts.showResearch !== false) {
     items.push({ href: "../research.html", icon: "📐", title: "研报解读", desc: "同业深度打法与框架" });
+  }
+  // 2026-10-27：境外线索池（独立板块，与 redchip 平级、口径正交）
+  if (opts.showOverseas !== false) {
+    items.push({ href: "../overseas/", icon: "🌏", title: "境外线索池", desc: "谁在办跨境业务" });
   }
   const cards = items
     .map(
