@@ -151,9 +151,14 @@ export async function runPipeline(
   // 必须排在 ⑦.10 之后：复用已回填的 primary_domain/related_domains，省一次词表扫描，
   // 也保证「展示标签」与「排序加权」用同一份领域判定。
   // 只打标、不改排序（排序在 exec 池与必读护栏里已完成）；M1 不入库（宽泛关联不贴标签）。
+  //
+  // 🔴 打标口径只认**年度三大重点**（sc 2026-11-28 定）：季度/临时专项仍参与上方排序加权
+  // （那是「本季度怎么打」），但不进首页模块、也不贴卡片标签（那是「今年三个方向」）。
+  // 否则一次命中会出现「卡片挂本季主攻标签、首页重点列表里却没有这条」的死链。
   {
     const fc = loadFocusForRun(ctx.date, ctx.config.focusEngine); // 日志在 side 侧已打印一次
-    annotated = annotateFocus(annotated, fc.items, fc.version);
+    const displayFocus = fc.items.filter((f) => f.layer === "annual");
+    annotated = annotateFocus(annotated, displayFocus, fc.version);
     if (fc.items.length) {
       const secItems = (Object.values(annotated.sections ?? {}) as ReportItem[][]).flat();
       const tagged = secItems.filter((it) => (it.focus_hits?.length ?? 0) > 0).length;
@@ -163,7 +168,8 @@ export async function runPipeline(
       );
       ctx.log.info(
         "focus",
-        `经营重点命中：${tagged}/${secItems.length} 条资讯带重点标签（M3 精准 ${strong} 处）｜` +
+        `经营重点命中：${tagged}/${secItems.length} 条资讯带年度重点标签（M3 精准 ${strong} 处）｜` +
+          `加权池 ${fc.items.length} 条（年度 ${displayFocus.length} 条参与展示）｜` +
           (annotated.focus?.items ?? [])
             .map((f) => `${f.name} ${f.count}${f.high ? `(实质${f.high})` : ""}`)
             .join("、"),

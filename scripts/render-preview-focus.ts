@@ -28,10 +28,12 @@ const sections = Object.fromEntries(
       return d ? { ...it, primary_domain: d.primary_domain, related_domains: d.related_domains } : it;
     }),
   ]),
-) as DailyReport["sections"];
+) as unknown as DailyReport["sections"];
 
 const fc = loadFocusForRun(date, true);
-const withFocus = annotateFocus({ ...report, sections }, fc.items, fc.version);
+// 与生产管线同一口径：只给年度三大重点打标（季度/临时只参与排序加权，不展示）
+const displayFocus = fc.items.filter((f) => f.layer === "annual");
+const withFocus = annotateFocus({ ...report, sections }, displayFocus, fc.version);
 
 const html = renderHtml(withFocus);
 const out = path.resolve("site/preview", `decision-${date}.html`);

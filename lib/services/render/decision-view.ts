@@ -64,19 +64,21 @@ function deltaText(d: DeltaMark | undefined): string {
 /**
  * 经营重点标签（二期，规格 5.2）。
  *
- * 分层高亮：季度主攻 / 临时专项 = 强调色（这两者才是「现在最该看」），
- * 年度重点 = 次级灰底；一条最多两个（数据侧 `focus_hits` 已截断）。
- * ⚠️ 标签只说明「与当前经营阶段相关」，**不是**事件本身的重要性 ——
+ * 🔴 只认**年度三大重点**（sc 2026-11-28 定）：季度/临时专项只参与排序加权，
+ * 不上卡片。此处再过滤一次，是防止旧报告或旁路脚本写入季度命中后泄漏到页面 ——
+ * 卡片上挂一个首页重点列表里没有的标签，等于给读者一个点不到的解释。
+ * 一条最多两个（数据侧 `focus_hits` 已截断）。
+ * ⚠️ 标签只说明「与年度经营重点相关」，**不是**事件本身的重要性 ——
  * 后者由同一行的「S/A/B 重大变化」独立表达，两者绝不合并成一句话（规格 5.4）。
  */
 function focusTags(hits: ReportFocusHit[] | undefined): string {
-  if (!hits?.length) return "";
-  return hits
-    .map((h) => {
-      const layerText = h.layer === "temporary" ? "临时专项" : h.layer === "quarterly" ? "本季主攻" : "年度重点";
-      const hot = h.layer !== "annual";
-      return `<span class="dv-ftag${hot ? " dv-ftag-hot" : ""}" title="${escapeHtml(h.reason)}">${layerText}：${escapeHtml(h.name)}</span>`;
-    })
+  const annual = (hits ?? []).filter((h) => h.layer === "annual");
+  if (!annual.length) return "";
+  return annual
+    .map(
+      (h) =>
+        `<span class="dv-ftag" title="${escapeHtml(h.reason)}">年度重点：${escapeHtml(h.name)}</span>`,
+    )
     .join("");
 }
 
@@ -221,9 +223,17 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   const keys = (report.must_read ?? []).slice(0, 3); // 默认 Top3，高价值最多 5 由数据侧定稿
   const opps = (report.insights ?? []).slice(0, 3);
   const yesterday = prevDateKey(date, 1);
-  // 本期经营重点（二期）：提前取，供顶部快捷跳转判断该锚点是否存在
+  // 本期经营重点（二期）：只列**年度三大重点**，且只列当日有实质命中（M2/M3）的。
+  // 无实质命中就整块不输出 —— 经营重点不是每天都有事发生，空行/占位只会稀释注意力
+  // （与「今日定调为空则整行消失」同一口径）。季度/临时专项仍参与排序加权，但不在此展示。
   const focusSummary = report.focus;
-  const focusRows = focusSummary?.items ?? [];
+  const focusRows = (focusSummary?.items ?? [])
+    .filter((f) => f.layer === "annual" && f.high > 0)
+    .map((f) => ({
+      f,
+      members: allItems.filter((it) => (it.focus_hits ?? []).some((h) => h.id === f.id)).slice(0, 8),
+    }))
+    .filter((r) => r.members.length > 0);
 
   // ---- ① 页头数据状态 ----
   const stats = [
@@ -251,33 +261,31 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
     : "";
 
   // ---- ②.5 本期经营重点（二期）----
-  // 数据来自 `report.focus`（生成当时写入的汇总），无则整块不输出 —— 不做「暂无重点」占位，
-  // 因为「配置里没设重点」是管理动作的空白，不该每天在首页提醒一次。
+  // 数据来自 `report.focus`（生成当时写入的汇总）。两条硬口径（sc 2026-11-28）：
+  // ① 只列年度三大重点（季度/临时专项只参与排序加权，不在此展示）；
+  // ② 只有当日常有实质命中（M2/M3）时才列该条，一条都没有则整块不输出 ——
+  //    「配置里没设重点」或「今天确实没事发生」都不该在首页占位提醒。
   // 点击展开当日命中条目（本页展开、零死链）；专题页（跨期聚合）是后续 WP9。
   const focusSection = focusRows.length
     ? `<section class="dv-mod" id="dv-focus">
-  <div class="dv-mod-head"><h2>本期经营重点</h2><span class="dv-mod-sub">配置版本 ${escapeHtml(focusSummary?.version ?? "")} · 命中会计入今日排序加权</span></div>
+  <div class="dv-mod-head"><h2>本期经营重点</h2><span class="dv-mod-sub">配置版本 ${escapeHtml(focusSummary?.version ?? "")} · 只列当日有实质命中的</span></div>
   <ul class="dv-focus-list">${focusRows
-    .map((f) => {
-      const members = allItems.filter((it) => (it.focus_hits ?? []).some((h) => h.id === f.id)).slice(0, 8);
-      const layerText = f.layer === "temporary" ? "临时专项" : f.layer === "quarterly" ? "本季主攻" : "年度重点";
+    .map(({ f, members }) => {
       const meta = [
-        `<span class="dv-focus-layer${f.layer === "annual" ? "" : " dv-focus-layer-hot"}">${layerText}</span>`,
+        `<span class="dv-focus-layer">年度重点</span>`,
         `<span class="dv-focus-grade">${escapeHtml(f.grade)} 级</span>`,
-        `当日 ${f.count} 条${f.high ? ` · 实质 ${f.high}` : ""}`,
+        `当日 ${f.count} 条 · 实质 ${f.high}`,
       ].join("");
-      const body = members.length
-        ? `<ul class="dv-focus-items">${members
-            .map((it) => {
-              const title = escapeHtml(it.title_cn || it.url);
-              const link = it.url
-                ? `<a class="dv-domain-item" href="${escapeHtml(it.url)}" target="_blank" rel="noopener noreferrer">${title}</a>`
-                : `<span class="dv-domain-item dv-domain-item-plain">${title}</span>`;
-              const lv = (it.focus_hits ?? []).find((h) => h.id === f.id);
-              return `<li class="dv-domain-row">${link}<span class="dv-domain-meta">${escapeHtml(it.source)}${it.date ? ` · ${escapeHtml(it.date)}` : ""}${lv ? ` · ${lv.level === "M3" ? "精准命中" : "高度相关"}` : ""}</span></li>`;
-            })
-            .join("")}</ul>`
-        : `<p class="dv-focus-none">${f.count > 0 ? `当日 ${f.count} 条弱相关，暂无实质命中条目` : "当日暂无相关情报"}</p>`;
+      const body = `<ul class="dv-focus-items">${members
+        .map((it) => {
+          const title = escapeHtml(it.title_cn || it.url);
+          const link = it.url
+            ? `<a class="dv-domain-item" href="${escapeHtml(it.url)}" target="_blank" rel="noopener noreferrer">${title}</a>`
+            : `<span class="dv-domain-item dv-domain-item-plain">${title}</span>`;
+          const lv = (it.focus_hits ?? []).find((h) => h.id === f.id);
+          return `<li class="dv-domain-row">${link}<span class="dv-domain-meta">${escapeHtml(it.source)}${it.date ? ` · ${escapeHtml(it.date)}` : ""}${lv ? ` · ${lv.level === "M3" ? "精准命中" : "高度相关"}` : ""}</span></li>`;
+        })
+        .join("")}</ul>`;
       return `<li class="dv-focus-row">
     <button type="button" class="dv-focus-btn" data-expand-focus="${escapeHtml(f.id)}" aria-expanded="false" aria-controls="dv-focus-detail-${escapeHtml(f.id)}">
       <span class="dv-focus-name">${escapeHtml(f.name)}</span>
@@ -537,12 +545,11 @@ export const DECISION_VIEW_CSS = `
   .dv-attn-n { display:inline-block; min-width:1.25rem; color:var(--accent-brand); font-variant-numeric:tabular-nums; }
   .dv-empty { margin:0; padding:1rem; font-size:0.85rem; color:var(--muted);
     border:1px dashed var(--rule); border-radius:var(--r-md); background:var(--bg); }
-  /* 本期经营重点（二期）：一行一条重点，点击展开当日命中条目。
-     季度/临时用强调色（「现在最该看」），年度用次级灰底 —— 与卡片标签同一口径。 */
+  /* 本期经营重点（二期）：一行一条年度重点，点击展开当日命中条目。
+     只展示年度三大重点（sc 2026-11-28），故不再有「本季主攻」强调态。 */
   .dv-ftags { display:flex; flex-wrap:wrap; gap:0.3rem; margin:0 0 0.45rem; }
   .dv-ftag { font-size:0.71rem; line-height:1.5; padding:0.08rem 0.42rem; border-radius:6px;
     background:var(--card-alt); color:var(--fg-soft); border:1px solid var(--rule); }
-  .dv-ftag-hot { background:var(--rank-high-bg); color:var(--rank-high-fg); border-color:transparent; font-weight:600; }
   .dv-focus-list { list-style:none; margin:0; padding:0;
     border:1px solid var(--rule); border-radius:var(--r-md); background:var(--card); overflow:hidden; }
   .dv-focus-row + .dv-focus-row { border-top:1px solid var(--rule); }
@@ -554,12 +561,10 @@ export const DECISION_VIEW_CSS = `
   .dv-focus-meta { display:flex; flex-wrap:wrap; align-items:center; gap:0.4rem;
     font-size:0.73rem; color:var(--muted); }
   .dv-focus-layer { padding:0.05rem 0.4rem; border-radius:999px; border:1px solid var(--rule); color:var(--fg-soft); }
-  .dv-focus-layer-hot { background:var(--rank-high-bg); color:var(--rank-high-fg); border-color:transparent; }
   .dv-focus-grade { color:var(--accent-brand); }
   .dv-focus-detail { padding:0.2rem 0.85rem 0.7rem; background:var(--bg); }
   .dv-focus-detail[hidden] { display:none; }
   .dv-focus-items { list-style:none; margin:0; padding:0; }
-  .dv-focus-none { margin:0; padding:0.5rem 0; font-size:0.82rem; color:var(--muted); }
   /* 六大经营领域：平铺标签条（窄屏两行三列全可见，桌面一行六等分）+ 单一明细面板 */
   .dv-tabs { display:flex; flex-wrap:wrap; margin:0 0 0.8rem; border-bottom:1px solid var(--rule); }
   .dv-tab { flex:1 1 33.33%; min-width:0; display:inline-flex; align-items:center; justify-content:center;

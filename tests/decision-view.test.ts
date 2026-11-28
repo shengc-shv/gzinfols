@@ -273,41 +273,50 @@ test("⑭ 风险来源：超长正文不铺页面，正常标题保留（11-28 �
   assert.ok(d.includes(`href="${url}"`), "链接仍可溯源");
 });
 
-test("⑮ 本期经营重点（二期）：模块 + 层级 + 命中数 + 点击展开 + 快捷跳转", () => {
+test("⑮ 本期经营重点（二期）：只列年度重点且有实质命中，无命中整块不输出", () => {
   const hits = [
-    { id: "q4_high_end_aum", name: "中高端客户 AUM 提升", layer: "quarterly" as const, grade: "S", level: "M3" as const, bonus: 20, reason: "标题命中 AUM" },
     { id: "a26_aum", name: "AUM 规模与结构优化", layer: "annual" as const, grade: "S", level: "M3" as const, bonus: 15, reason: "标题命中 AUM" },
   ];
+  const annual = { id: "a26_aum", name: "AUM 规模与结构优化", layer: "annual" as const, grade: "S", count: 5, high: 3, domains: ["wealth_aum"] };
+  const quarterly = { id: "q4_high_end_aum", name: "中高端客户 AUM 提升", layer: "quarterly" as const, grade: "S", count: 3, high: 2, domains: ["wealth_aum"] };
+  const base = {
+    hero_line: "定调",
+    sections: { gz_local: [item("AUM 规模突破千亿", { focus_hits: hits })], biz_insight: [], policy_market: [], tech: [], ipo: [] },
+  };
+
   const d = decisionPart(
-    renderHtml(
-      report({
-        hero_line: "定调",
-        focus: {
-          version: "f-21bd17f2",
-          items: [
-            { id: "q4_high_end_aum", name: "中高端客户 AUM 提升", layer: "quarterly", grade: "S", count: 3, high: 2, domains: ["wealth_aum"] },
-            { id: "a26_aum", name: "AUM 规模与结构优化", layer: "annual", grade: "S", count: 5, high: 0, domains: ["wealth_aum"] },
-          ],
-        },
-        sections: { gz_local: [item("AUM 规模突破千亿", { focus_hits: hits })], biz_insight: [], policy_market: [], tech: [], ipo: [] },
-      }),
-    ),
+    renderHtml(report({ ...base, focus: { version: "f-21bd17f2", items: [quarterly, annual] } })),
   );
-  assert.ok(d.includes('id="dv-focus"'), "本期经营重点模块存在");
+  assert.ok(d.includes('id="dv-focus"'), "年度重点有实质命中 → 模块存在");
   assert.ok(d.includes("配置版本 f-21bd17f2"), "显示配置版本（可追溯当时用的是哪版重点）");
-  assert.ok(d.includes("本季主攻") && d.includes("年度重点"), "层级标签区分季度/年度");
-  assert.ok(d.includes("当日 3 条 · 实质 2") && d.includes("当日 5 条"), "命中计数");
-  assert.ok(d.includes('data-expand-focus="q4_high_end_aum"') && d.includes('id="dv-focus-detail-q4_high_end_aum"'));
+  assert.ok(d.includes("年度重点") && d.includes("AUM 规模与结构优化"), "列年度重点");
+  assert.ok(!d.includes("本季主攻") && !d.includes("中高端客户 AUM 提升"), "季度重点只参与加权，不进模块");
+  assert.ok(d.includes("当日 5 条 · 实质 3"), "命中计数（相关条数 + 实质命中数）");
+  assert.ok(d.includes('data-expand-focus="a26_aum"') && d.includes('id="dv-focus-detail-a26_aum"'));
   assert.ok(d.includes("精准命中"), "展开条目标注匹配等级");
   assert.ok(/href="#dv-focus"/.test(d), "快捷跳转含本期重点");
+
+  // 只有季度命中、年度全为 0 → 整块不输出，快捷跳转同步去掉（不留死锚点）
+  const onlyQ = decisionPart(
+    renderHtml(report({ ...base, focus: { version: "f-x", items: [quarterly, { ...annual, high: 0 }] } })),
+  );
+  assert.ok(!onlyQ.includes('id="dv-focus"') && !onlyQ.includes("本期经营重点"), "无年度实质命中 → 模块不出现");
+  assert.ok(!/href="#dv-focus"/.test(onlyQ), "模块不存在时快捷跳转同步去掉");
+
+  // 年度有弱相关（count>0）但无实质命中 → 同样不输出，也不显示「当日 N 条」占位
+  const weak = decisionPart(
+    renderHtml(report({ ...base, focus: { version: "f-x", items: [{ ...annual, count: 4, high: 0 }] } })),
+  );
+  assert.ok(!weak.includes('id="dv-focus"') && !weak.includes("当日 4 条"), "弱相关不占位");
+
   // 空 focus（未配置）→ 整块不输出、不留占位
   const none = decisionPart(renderHtml(report()));
   assert.ok(!none.includes('id="dv-focus"') && !none.includes("本期经营重点"));
 });
 
-test("⑯ 卡片经营重点标签：必读/商机/风险按正文条目打标，与重要性标签并列不合并", () => {
+test("⑯ 卡片经营重点标签：只打年度重点，必读/商机/风险共用，与重要性标签并列不合并", () => {
   const hits = [
-    { id: "q4_high_end_aum", name: "中高端客户 AUM 提升", layer: "quarterly" as const, grade: "S", level: "M3" as const, bonus: 20, reason: "标题命中 AUM" },
+    { id: "a26_aum", name: "AUM 规模与结构优化", layer: "annual" as const, grade: "S", level: "M3" as const, bonus: 15, reason: "标题命中 AUM" },
   ];
   const url = "https://e.com/aum";
   const d = decisionPart(
@@ -327,9 +336,22 @@ test("⑯ 卡片经营重点标签：必读/商机/风险按正文条目打标�
       }),
     ),
   );
-  const tags = d.match(/class="dv-ftag dv-ftag-hot"/g) ?? [];
+  const tags = d.match(/class="dv-ftag"/g) ?? [];
   assert.equal(tags.length, 3, "必读 / 商机 / 风险三张卡都带同一重点标签");
-  assert.ok(d.includes("本季主攻：中高端客户 AUM 提升"), "标签文案含层级与重点名");
+  assert.ok(d.includes("年度重点：AUM 规模与结构优化"), "标签文案含层级与重点名");
   assert.ok(d.includes("S 重大变化"), "事件重要性（S/A/B）独立保留，不被重点标签替代");
   assert.ok(d.includes('title="标题命中 AUM"'), "标签带命中理由（悬停可核对）");
+
+  // 季度命中不进卡片（展示口径只认年度三条）
+  const qHits = [
+    { id: "q4_high_end_aum", name: "中高端客户 AUM 提升", layer: "quarterly" as const, grade: "S", level: "M3" as const, bonus: 20, reason: "标题命中 AUM" },
+  ];
+  const qd = decisionPart(
+    renderHtml(
+      report({
+        sections: { gz_local: [item("AUM 规模突破千亿", { focus_hits: qHits })], biz_insight: [], policy_market: [], tech: [], ipo: [] },
+      }),
+    ),
+  );
+  assert.ok(!qd.includes('class="dv-ftag"') && !qd.includes("本季主攻"), "季度命中不贴卡片标签");
 });
