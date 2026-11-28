@@ -62,8 +62,14 @@ export interface ReportItem {
   source_type: "official" | "media";
   /** MM/DD（展示格式）。 */
   date: string;
-  /** 完整 ISO 发布时间（enrich 期填充；展示层继续用 MM/DD）。 */
+  /** 完整 ISO 发布时间（enrich 期填充；展示层继续用 MM/DD）。取不到真实发布时间则留空，不兜底抓取时间。 */
   published_at?: string;
+  /**
+   * 六大经营领域归属（第一期新增；与五大内容分类正交，不替代 sections）。
+   * primary_domain 唯一；related_domains 可多个。由内容词表确定性判定（assemble 期写）。
+   */
+  primary_domain?: string;
+  related_domains?: string[];
   /** ≤90 字，结构 = 发生了什么 + 关键数字 + 所以呢。 */
   summary: string;
   /** 3=今日必知 / 2=默认 / 1=折叠。 */

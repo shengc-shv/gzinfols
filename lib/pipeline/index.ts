@@ -17,6 +17,7 @@ import { assembleReport } from "../services/assemble";
 import { applyDisplayCaps } from "../services/assemble/display-cap";
 import { annotateDeltas } from "../services/assemble/delta";
 import { annotateMaturity } from "../services/assemble/maturity";
+import { annotateItemMetadata } from "../services/assemble/item-metadata";
 import { productCoverageOf, productCoverageSummary } from "../services/assemble/product-coverage";
 import { mergeRollingAndSaveHistory } from "./history-step";
 import { buildSideOutputs } from "./side-outputs/side-outputs";
@@ -90,7 +91,7 @@ export async function runPipeline(
   // 复用**同一份事件记忆判重链**（findMatchingEvent + computeNovelty），不另立规则；
   // 记忆开关由组合根注入 ctx.config.eventMemory（服务层不直读 env）。关时跳过（页面不显示徽章）。
   const deltaStore = ctx.config.eventMemory ? loadEventMemory() : null;
-  const annotated = deltaStore ? annotateDeltas(capped, deltaStore) : capped;
+  let annotated = deltaStore ? annotateDeltas(capped, deltaStore) : capped;
   if (deltaStore) {
     const tally: Record<string, number> = { new: 0, changed: 0, followup: 0 };
     const marks = [
@@ -126,6 +127,21 @@ export async function runPipeline(
     ctx.log.info(
       "maturity",
       `C2 商机成熟度：线索 ${tally.clue} / 推进 ${tally.progress} / 落地 ${tally.landed}（零 LLM 词表判定）`,
+    );
+  }
+
+  // —— ⑦.10 条目元数据（第一期规格工作包 2）：published_at + 六大经营领域 ——
+  // 纯函数、零 LLM；published_at 只取真实发布时间（绝不兜底抓取时间），
+  // 领域归属由 config/business-domains.json 词表判定，与五大分类正交。
+  // 放在口播/渲染/发布之前，两处都读到同一份补丁。
+  annotated = annotateItemMetadata(annotated, selected.articles);
+  {
+    const items = Object.values(annotated.sections ?? {}).flat();
+    const withDomain = items.filter((it) => it.primary_domain).length;
+    const withPub = items.filter((it) => it.published_at).length;
+    ctx.log.info(
+      "metadata",
+      `条目元数据：${withPub}/${items.length} 有真实发布时间 / ${withDomain}/${items.length} 命中经营领域`,
     );
   }
 

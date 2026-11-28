@@ -9,3 +9,4 @@ export * from "./strings";
 export * from "./labels";
 export * from "./off-topic";
 export * from "./sort";
+export * from "./business-domains";
