@@ -115,6 +115,59 @@ export function renderStockRecap(report: DailyReport): string {
 }
 
 /**
+ * 新版第三层 · 股市紧凑纵向模块（2026-11-28）。
+ *
+ * 与旧版 `renderStockRecap` 的区别：**不做横向长卡滚动**，三市场改为纵向卡片；
+ * 每张卡只保留核心指数、一句话定调、最多 2 个主线板块与来源元信息。
+ * 旧版函数原样保留，互不影响。
+ */
+export function renderStockCompact(report: DailyReport): string {
+  const recap = report.stock_recap;
+  if (!recap) return "";
+  const items = [
+    { label: "A股", cls: "a", card: recap.aShare },
+    { label: "港股", cls: "hk", card: recap.hk },
+    { label: "美股", cls: "us", card: recap.us },
+  ].filter(({ card }) => card.overview || card.spoken || card.sectors.length || card.indices?.length);
+  if (!items.length) return "";
+
+  const cards = items
+    .map(({ label, cls, card }) => {
+      const quoteSrc = card.meta?.quoteSource ?? card.meta?.crossCheck ?? "";
+      const meta = [
+        card.meta?.source ? `渠道：${escapeHtml(card.meta.source)}` : "",
+        card.meta?.date ? `日期：${escapeHtml(card.meta.date)}` : "",
+        quoteSrc ? `行情：${escapeHtml(quoteSrc)}` : "",
+      ]
+        .filter(Boolean)
+        .join(" · ");
+      const sectors = card.sectors.length
+        ? `<div class="dv-stock-sectors"><span class="dv-stock-sec-label">主线板块</span><ul>${card.sectors
+            .slice(0, 2)
+            .map((s) => `<li>${escapeHtml(s)}</li>`)
+            .join("")}</ul></div>`
+        : "";
+      const sourceReport = card.sourceReport
+        ? `<a class="dv-stock-report" href="${escapeHtml(card.sourceReport.url)}" target="_blank" rel="noopener noreferrer">原报告：${escapeHtml(card.sourceReport.title)}</a>`
+        : "";
+      return `<article class="dv-stock-card dv-stock-card--${cls}">
+  <header class="dv-stock-head"><h3>${label}</h3><span>${escapeHtml(card.meta?.date ?? "")}</span></header>
+  ${renderStockIndexBlock(card, recap.quoteChannel, recap.quoteDate)}
+  ${card.overview ? `<p class="dv-stock-line">${escapeHtml(card.overview)}</p>` : ""}
+  ${sectors}
+  ${sourceReport}
+  ${meta ? `<p class="dv-stock-meta">${meta}</p>` : ""}
+</article>`;
+    })
+    .join("");
+
+  const note = recap.marketStatus?.note
+    ? `<p class="dv-stock-note">⚠️ ${escapeHtml(recap.marketStatus.note)}</p>`
+    : "";
+  return `<div class="dv-stock-grid">${note}${cards}</div>`;
+}
+
+/**
  * 广东 IPO 阶段 → 展示文案（横滑徽章、底部四阶段分栏组头、筛选条 chips 共用）。
  *
  * ⚠️ 2026-09-10 用户拍板口径：**「注册生效」归「注册发行」**，不归「已上市」

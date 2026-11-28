@@ -295,6 +295,9 @@ jobs:
           # 使从未送达客户的内容被误判「已播」而在次日被去重（实证：09-16 晚间 test run 写入
           # 15 条暂存 + 交付记录指纹缺失 → 次日本会误结算）。发布行为不受此开关影响。
           PUBLISH_RUN: ${{ (github.event_name == 'schedule' && needs.gate.outputs.should-run == 'true') || (github.event_name == 'workflow_dispatch' && inputs.publish == true && inputs.release_mode != 'test') }}
+          # 新版首页 brief（core_judgment + 三段式 priorities）：缺省开；
+          # 仓库 Settings→Variables 设 BRIEF_ENGINE=0 可整块回退 must_read。
+          BRIEF_ENGINE: ${{ vars.BRIEF_ENGINE || '1' }}
           # —— 语音播报（百炼 CosyVoice 优先 → 腾讯兜底）——
           AUDIO_ENABLED: ${{ (github.event_name == 'schedule' || inputs.audio) && 'true' || 'false' }}
           SKIP_TTS: ${{ vars.SKIP_TTS }}

@@ -238,6 +238,36 @@ export interface ReportMustRead {
   delta?: DeltaMark;
 }
 
+/**
+ * 今日经营重点单条（2026-11-28 三轮重构）。
+ *
+ * 由 `services/assemble/brief.ts` 的一次批量 LLM 生成，只写三段式正文；
+ * 标题/URL/领域/状态/重要性一律由既有报告字段回填，LLM 不得自带 URL 或数字。
+ * 缺省时渲染层回退到 must_read + body.summary（历史日报兼容）。
+ */
+export interface ReportBriefPriority {
+  /** 回填后的标题（来自 must_read / sections） */
+  title: string;
+  url?: string;
+  /** 首屏一句话变化（≤40 字） */
+  short: string;
+  /** 发生了什么 */
+  what: string;
+  /** 对经营意味着什么 */
+  impact: string;
+  /** 接下来关注什么 */
+  watch: string;
+  /** 重大风险硬兜底 / LLM 已纳入时标记，用于红色警示徽标 */
+  riskLevel?: "critical";
+}
+
+export interface ReportBrief {
+  /** 核心判断（建议 50~80 字；无重大变化时写固定降级句） */
+  core_judgment: string;
+  /** 按真实重要度排序，3~5 条 */
+  priorities: ReportBriefPriority[];
+}
+
 /** 股市解读单卡（口播友好）。 */
 export interface MarketCard {
   overview: string;
@@ -372,6 +402,17 @@ export interface DailyReport {
    * 缺省 / 空数组 → 决策视角不输出该模块（历史报告因此天然兼容，不需要回填）。
    */
   attention?: ReportAttention[];
+  /**
+   * 新版经营情报首页的三层内容（2026-11-28）：
+   * 核心判断 + 今日经营重点三段式。缺省时渲染层用 hero_line / must_read 回退，
+   * 历史日报无需回填。
+   */
+  brief?: ReportBrief;
+  /**
+   * 重大风险硬兜底（2026-11-28）：极高优先级风险未被 brief 纳入时，
+   * 由组装层生成并强制置顶到第二层。渲染层只读，不改写 brief。
+   */
+  promotedRisk?: ReportBriefPriority;
   /**
    * 产品条线覆盖（C4，2026-09-17）：按揭 / 信用卡 / 代发 三条线的命中情况。
    * 由 `assemble/product-coverage.ts` 纯函数统计（零 LLM）；`count = 0` 即「本期无」，

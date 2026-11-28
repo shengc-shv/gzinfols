@@ -17,6 +17,7 @@ import { assembleReport } from "../services/assemble";
 import { applyDisplayCaps } from "../services/assemble/display-cap";
 import { annotateDeltas } from "../services/assemble/delta";
 import { buildAttention } from "../services/assemble/attention";
+import { buildBrief, promoteCriticalRisk } from "../services/assemble/brief";
 import { annotateMaturity } from "../services/assemble/maturity";
 import { annotateItemMetadata } from "../services/assemble/item-metadata";
 import { annotateFocus, collectSemanticCandidates } from "../services/assemble/focus-metadata";
@@ -240,6 +241,31 @@ export async function runPipeline(
     }
   } else {
     ctx.log.info("attention", "管理关注：ATTENTION_ENGINE=0，本期不生成（模块不展示）");
+  }
+
+  // —— ⑦.13 新版首页 brief（2026-11-28）：核心判断 + 今日经营重点三段式 ——
+  // 1 次批量 LLM；失败/关闭 → undefined，渲染层回退 hero_line + must_read。
+  // 必须在 attention 之后：候选只读定稿 must_read，不再二次筛选。
+  if (ctx.config.briefEngine) {
+    try {
+      const brief = await buildBrief(annotated, { llm: deps.llm, log: ctx.log });
+      if (brief) annotated = { ...annotated, brief };
+    } catch (e) {
+      ctx.log.warn(
+        "brief",
+        `新版首页 brief 接线异常，回退 must_read：${e instanceof Error ? e.message : String(e)}`,
+      );
+    }
+  } else {
+    ctx.log.info("brief", "新版首页 brief：BRIEF_ENGINE=0，本期不生成（渲染层回退 must_read）");
+  }
+
+  // —— ⑦.14 重大风险硬兜底：确定性前置校验，不受 LLM 是否选中影响 ——
+  // 极高风险未被核心判断/第二层纳入 → 挂 `promotedRisk`，渲染层置顶第二层并加红色徽标。
+  const beforeRiskPromotion = annotated.promotedRisk;
+  annotated = promoteCriticalRisk(annotated);
+  if (annotated.promotedRisk && !beforeRiskPromotion) {
+    ctx.log.warn("brief", `重大风险硬兜底：${annotated.promotedRisk.title} 已强制置顶第二层`);
   }
 
   // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——

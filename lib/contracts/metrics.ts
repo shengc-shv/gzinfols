@@ -38,6 +38,7 @@ export type AiStage =
   | "pass1" // 两阶段管线：PASS1 筛选分类
   | "pass2" // 两阶段管线：PASS2 总编辑成稿
   | "attention" // 管理关注独立研判（2026-11-28；1 次批量提炼 + 确定性校验）
+  | "brief" // 新版首页核心判断 + 今日经营重点三段式（2026-11-28；1 次批量）
   | "other";
 
 /** 阶段维度调用计数（append-only，按日一份 data/metrics/ai-calls-<date>.jsonl）。 */

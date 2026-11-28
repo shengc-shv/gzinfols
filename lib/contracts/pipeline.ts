@@ -168,6 +168,13 @@ export interface PipelineConfig {
    * （等于回到「不出错但也不展示」的形态，供回滚用）。
    */
   attentionEngine: boolean;
+  /**
+   * 新版经营情报首页内容生成（2026-11-28）。默认开。
+   *
+   * 1 次批量 LLM 生成 core_judgment + priorities（三段式），失败返回 undefined，
+   * 渲染层回退 hero_line / must_read。BRIEF_ENGINE=0 可关闭（省调用/排查）。
+   */
+  briefEngine: boolean;
   /** 过滤链旁路开关。 */
   filters: FilterFlags;
   /** LLM 模型覆盖（PASS1_MODEL / PASS2_MODEL；空则走后端默认）。 */

@@ -59,6 +59,8 @@ function defaultConfig(): PipelineConfig {
     // 管理关注是首页六模块之一（读不到就等于模块缺失），而它可以安全降级为空。
     // ATTENTION_ENGINE=0 可整块关掉（省一次 LLM 调用 / 排查问题用）。
     attentionEngine: (process.env.ATTENTION_ENGINE ?? "1") !== "0",
+    // 新版首页三层内容（core_judgment + 三段式 priorities）：默认开；BRIEF_ENGINE=0 关闭。
+    briefEngine: (process.env.BRIEF_ENGINE ?? "1") !== "0",
     filters: {
       keyword: envFlag("KEYWORD_FILTER"),
       keywordFallback: envFlag("KEYWORD_FILTER_FALLBACK"),
