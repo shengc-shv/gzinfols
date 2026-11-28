@@ -14,7 +14,7 @@ import assert from "node:assert/strict";
 import { renderHtml } from "../lib/services/render";
 import { DV_MODULE_NAV } from "../lib/services/render/decision-view";
 import { BUSINESS_DOMAINS } from "../lib/services/vocab/business-domains";
-import type { DailyReport, ReportItem } from "../lib/contracts/report";
+import type { DailyReport, ReportAttention, ReportItem } from "../lib/contracts/report";
 import { todayKey } from "../lib/utils/time";
 
 const TODAY = todayKey();
@@ -48,6 +48,19 @@ function report(over: Partial<DailyReport> = {}): DailyReport {
   };
 }
 
+/** 管理关注样例（2026-11-28 起由组装阶段生成，渲染层只读；跨条线=domains≥2）。 */
+const ATTENTION: ReportAttention[] = [
+  {
+    id: "att-1",
+    topic: "客户资产配置需求与产品策略同步调整",
+    rationale: "多家银行调整财富产品策略，黄金配置区间上调至 5%—28%。",
+    significance: "可能影响客户沟通口径与产品适配节奏，值得关注后续市场反应。",
+    domains: ["wealth_aum", "customer_growth"],
+    source_urls: ["https://e.com/mr-1", "https://e.com/mr-2"],
+    confidence: "high",
+  },
+];
+
 /** 从产物中截取决策视角根节点。 */
 function decisionPart(html: string): string {
   const i = html.indexOf('id="view-decision"');
@@ -67,7 +80,7 @@ test("① 两视角共存：默认决策视角、切换开关、旧视角 DOM �
 });
 
 test("② 八模块结构：页头状态 + 定调 + 必读 + 商机 + 风险 + 关注 + 领域 + 专业内容", () => {
-  const html = renderHtml(report({ hero_line: "今日定调测试句。" }));
+  const html = renderHtml(report({ hero_line: "今日定调测试句。", attention: ATTENTION }));
   const d = decisionPart(html);
   const ids = [...d.matchAll(/class="dv-mod[^"]*" id="(dv-[a-z]+)"/g)].map((m) => m[1]);
   assert.deepEqual(ids, ["dv-hero", "dv-mustread", "dv-opportunity", "dv-risk", "dv-attention", "dv-domains", "dv-legacy"]);
@@ -90,7 +103,10 @@ test("④ 空字段给空状态，不 AI 造数补足", () => {
   const d = decisionPart(renderHtml(report()));
   assert.ok(!d.includes('id="dv-hero"'), "无定调则整块不输出");
   assert.ok(d.includes("宁缺毋滥"), "必读空态明确不造数");
-  assert.ok((d.match(/class="dv-empty"/g) ?? []).length >= 4, "多个模块给空状态");
+  assert.ok((d.match(/class="dv-empty"/g) ?? []).length >= 3, "必读/商机/风险给空状态");
+  // 2026-11-28：管理关注没有独立议题时**整块不输出**（不再用必读前两条凑数占位）
+  assert.ok(!d.includes('id="dv-attention"'), "无独立议题时管理关注整块不展示");
+  assert.ok(!d.includes("今日暂无需要归纳的管理关注事项"), "不再用空态占位，也不用必读凑数");
   assert.ok(!d.includes("undefined") && !d.includes("NaN"), "不得露出 undefined/NaN");
 });
 
@@ -175,6 +191,7 @@ test("⑦b 核心卡片横滑：必读/商机/风险/管理关注都包 dv-scrol
     must_read: [{ title: "必读", why: "理由", url: "https://e.com/a" }],
     insights: [{ topic: "商机", tags: [], impact: "影响", sources: [{ title: "源", url: "https://e.com/a" }] }],
     risk: { topic: "风险", evidence: "依据", impact: "影响", source: "T2" },
+    attention: [ATTENTION[0], { ...ATTENTION[0], id: "att-2", topic: "另一条管理议题", source_urls: ["https://e.com/mr-3"] }],
   });
   const html = renderHtml(r);
   const d = decisionPart(html);
@@ -198,19 +215,54 @@ test("⑧ 决策 DOM 不产生重复 itm id（锚点唯一性不回退）", () =
   assert.ok(d.includes("dv-card"), "使用独立 dv-card 类名");
 });
 
-test("⑨ 管理关注 ≤3 项，折中建议措辞，非已作决定，不下操作指令", () => {
-  const d = decisionPart(renderHtml(report({
-    must_read: [
-      { title: "A", why: "理由A", url: "https://e.com/a" },
-      { title: "B", why: "理由B", url: "https://e.com/b" },
-      { title: "C", why: "理由C", url: "https://e.com/c" },
-      { title: "D", why: "理由D", url: "https://e.com/d" },
-    ],
-    risk: { topic: "风险", evidence: "依据", impact: "影响", source: "T2" },
-  })));
-  assert.ok((d.match(/class="dv-card dv-attn"/g) ?? []).length <= 3);
-  assert.ok(d.includes("建议关注") && d.includes("非已作决定"), "折中建议措辞 + 非已作决定");
-  assert.ok(!d.includes("本周完成") && !d.includes("务必") && !d.includes("新增贷款投放"), "不输出业务指令/指标目标");
+test("⑨ 管理关注：只读独立研判，不复述必读/风险；跨条线看经营领域不看标签数量", () => {
+  const d = decisionPart(
+    renderHtml(
+      report({
+        must_read: [
+          { title: "多家银行调整财富产品策略", why: "理由A", url: "https://e.com/a" },
+          { title: "黄金配置需求上升", why: "理由B", url: "https://e.com/b" },
+          { title: "市场波动加剧", why: "理由C", url: "https://e.com/c" },
+        ],
+        risk: { topic: "市场波动风险", evidence: "依据", impact: "影响", source: "T2" },
+        attention: ATTENTION,
+      }),
+    ),
+  );
+  const attn = d.slice(d.indexOf('id="dv-attention"'), d.indexOf('id="dv-domains"'));
+  assert.equal((d.match(/class="dv-card dv-attn"/g) ?? []).length, 1, "渲染层原样输出，不从必读/风险凑条数");
+
+  // 旧行为是把必读前两条换个样式再放一遍：卡片数与必读条数相当、主题逐字等于必读标题。
+  // 新口径：管理关注是独立议题 —— 主题不得照抄必读标题，条数也不跟着必读走。
+  // （rationale 里引用必读事实是允许且要求的：那是「关注依据」，必须能回溯。）
+  const attnTopics = [...attn.matchAll(/<h3 class="dv-card-title">[\s\S]{0,80}?<\/h3>/g)].map((m) =>
+    m[0].replace(/<[^>]+>/g, "").trim(),
+  );
+  for (const t of ["多家银行调整财富产品策略", "黄金配置需求上升", "市场波动加剧"]) {
+    assert.ok(
+      !attnTopics.some((x) => x.includes(t)),
+      `管理关注主题不得照抄必读标题：${t}`,
+    );
+  }
+  assert.ok(attnTopics.length < 3, "不是「必读前两条换样式」：条数不跟着必读走");
+
+  assert.ok(attn.includes("关注依据") && attn.includes("管理意义"), "每条必须有依据与管理意义");
+  assert.ok(attn.includes("https://e.com/mr-1"), "来源可点回原文");
+  assert.ok(attn.includes("建议跨条线研究"), "两个不同经营领域 → 标注跨条线");
+  assert.ok(attn.includes("非已作决定"), "建议性质，非已作决定");
+  assert.ok(!/必须立即|要求各部门|责成/.test(attn), "不出现命令式语言");
+
+  // 单领域不标跨条线（旧口径 tags.length>1 已废弃）
+  const single = decisionPart(
+    renderHtml(
+      report({
+        attention: [{ ...ATTENTION[0], domains: ["wealth_aum"], source_urls: ["https://e.com/x"] }],
+      }),
+    ),
+  );
+  const one = single.slice(single.indexOf('id="dv-attention"'), single.indexOf('id="dv-domains"'));
+  assert.ok(one.includes("dv-attn"), "单领域条目照常展示");
+  assert.ok(!one.includes("建议跨条线研究"), "只有一个经营领域 → 不标跨条线");
 });
 
 test("⑩ 合规：脱敏 / 加密零容忍 / CSS 变量自洽", () => {
@@ -236,11 +288,12 @@ test("⑫ 顶部快捷跳转：锚点全部命中模块，空定调不产生死�
   const withHero = decisionPart(renderHtml(report({ hero_line: "定调" })));
   const nav = (withHero.match(/<nav class="dv-quicknav"[\s\S]*?<\/nav>/) ?? [""])[0];
   const targets = [...nav.matchAll(/href="#(dv-[a-z]+)"/g)].map((m) => m[1]);
-  // 本 fixture 无 report.focus → 「本期重点」模块不渲染，快捷跳转同步去掉该锚点
+  // 本 fixture 无 report.focus / 无 report.attention → 「本期重点」「管理关注」都不渲染，
+  // 快捷跳转同步去掉这两个锚点（不得留下点不到的死链）。
   assert.deepEqual(
     targets,
-    DV_MODULE_NAV.filter((m) => m.id !== "dv-focus").map((m) => m.id),
-    "有定调时跳转目标与模块一一对应（无重点配置时不列本期重点）",
+    DV_MODULE_NAV.filter((m) => m.id !== "dv-focus" && m.id !== "dv-attention").map((m) => m.id),
+    "有定调时跳转目标与模块一一对应（无重点配置、无管理关注时不列该锚点）",
   );
   for (const id of targets) assert.ok(withHero.includes(`id="${id}"`), `跳转目标不存在：${id}`);
   const noHero = decisionPart(renderHtml(report()));
@@ -255,9 +308,12 @@ test("⑫ 顶部快捷跳转：锚点全部命中模块，空定调不产生死�
 test("⑬ 返回顶部：板块底部链接 + 悬浮按钮 + 锚点 + 平滑滚动", () => {
   const html = renderHtml(report());
   const d = decisionPart(html);
-  assert.ok((d.match(/class="dv-back" href="#dv-top"/g) ?? []).length === 6, "空定调时六模块底部均有返回链接");
+  // 空定调 5 个模块（无定调、无管理关注）；有定调 6 个；再加管理关注 7 个。
+  assert.ok((d.match(/class="dv-back" href="#dv-top"/g) ?? []).length === 5, "空定调时五模块底部均有返回链接");
   const withHero = decisionPart(renderHtml(report({ hero_line: "定调" })));
-  assert.ok((withHero.match(/class="dv-back" href="#dv-top"/g) ?? []).length === 7, "有定调时七模块均有返回链接");
+  assert.ok((withHero.match(/class="dv-back" href="#dv-top"/g) ?? []).length === 6, "有定调时六模块均有返回链接");
+  const withAttn = decisionPart(renderHtml(report({ hero_line: "定调", attention: ATTENTION })));
+  assert.ok((withAttn.match(/class="dv-back" href="#dv-top"/g) ?? []).length === 7, "含管理关注时七模块均有返回链接");
   assert.ok(d.includes('id="dv-float-top"') && /position:\s*fixed/.test(html));
   assert.ok(/scrollY[\s\S]{0,120}>320/.test(html), "滚过一屏才出现");
   assert.ok(/scrollIntoView\(\{behavior:'smooth',block:'start'\}\)/.test(html));
@@ -431,4 +487,26 @@ test("⑲ IPO 线索：判不出领域时兜底进客户经营，商机洞察内
 
   // ③ 不进「商机 N 条」计数：IPO 线索是独立速览，不掺商机口径。
   assert.ok(!d.includes("商机 1 条"), "商机计数仍只认 insights");
+});
+
+test("⑳ 今日必读动态 3—5 条：有几条展示几条，超过 5 条才截断（不凑数也不机械砍）", () => {
+  // sc 2026-11-28：默认 3 条、最多 5 条、不足不凑数、超过不泛化。
+  // 数据侧真源是 MUST_READ_PLAY_TARGET=5（周末版 4），前端只做上限保护。
+  const mk = (n: number) =>
+    Array.from({ length: n }, (_, i) => ({
+      title: `必读事件 ${i + 1}`,
+      why: "值得关注的理由。",
+      url: `https://e.com/mr-${i + 1}`,
+    }));
+  const countOf = (n: number): number => {
+    const d = decisionPart(renderHtml(report({ must_read: mk(n) })));
+    const seg = d.slice(d.indexOf('id="dv-mustread"'), d.indexOf('id="dv-opportunity"'));
+    return (seg.match(/dv-card dv-key/g) ?? []).length;
+  };
+
+  assert.equal(countOf(2), 2, "只有 2 条就展示 2 条（宁缺毋滥，不拿低价值内容凑满 3）");
+  assert.equal(countOf(3), 3, "3 条展示 3 条");
+  assert.equal(countOf(4), 4, "数据侧 4 条（周末版目标）不得被截成 3 —— 原 slice(0,3) 就砍在这里");
+  assert.equal(countOf(5), 5, "数据侧 5 条（工作日目标）全部展示");
+  assert.equal(countOf(6), 5, "超过 5 条才截断（上限 5，不泛化）");
 });

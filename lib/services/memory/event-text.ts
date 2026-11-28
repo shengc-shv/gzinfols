@@ -43,6 +43,89 @@ function isGeoFact(f: string): boolean {
 }
 
 /**
+ * 地域识别（2026-11-28 · 增量三态校准）。
+ *
+ * 与上面的 `GEO_ANCHORS` 分工不同：`GEO_ANCHORS` 决定「地域词不算事实/锚点」（口径是
+ * 只有标题写地域才算、正文写的不算）；这里是**判断两条内容是否指向同一个地域**，
+ * 用于「同一主题不同地区的独立政策不得合并」。
+ *
+ * 只覆盖广东与港澳（本项目内容面），刻意**不铺全国城市表**：
+ * 表外的地名不参与互斥判断 —— 宁可漏判（仍按主题合并），不可把两个不同城市误判成同一个。
+ */
+const CITY_GEO = [
+  "广州",
+  "深圳",
+  "珠海",
+  "佛山",
+  "东莞",
+  "中山",
+  "惠州",
+  "江门",
+  "肇庆",
+  "汕头",
+  "湛江",
+  "茂名",
+  "清远",
+  "韶关",
+  "梅州",
+  "河源",
+  "阳江",
+  "云浮",
+  "潮州",
+  "揭阳",
+  "汕尾",
+  "香港",
+  "澳门",
+];
+/** 省级/区域级词：与任何省内城市**不互斥**（「广东」与「广州」不构成冲突）。 */
+const PROVINCE_GEO = ["广东", "广东省", "粤", "大湾区", "粤港澳", "全省"];
+/** 市内片区：视为所属城市的一部分（南沙→广州、横琴→珠海、前海→深圳）。 */
+const DISTRICT_GEO: Record<string, string> = {
+  南沙: "广州",
+  天河: "广州",
+  黄埔: "广州",
+  番禺: "广州",
+  增城: "广州",
+  花都: "广州",
+  横琴: "珠海",
+  前海: "深圳",
+  南山: "深圳",
+  福田: "深圳",
+};
+
+/**
+ * 提取文本指向的地域（返回规范化城市集合）。
+ *
+ * - 命中省级词 → 返回空集（表示「不挑城市」，与任何城市都不冲突）；
+ * - 命中片区 → 归到所属城市；
+ * - 一个都没命中 → 空集（不挑地域）。
+ */
+export function geoCitiesOf(text: string): Set<string> {
+  const t = text ?? "";
+  const out = new Set<string>();
+  if (PROVINCE_GEO.some((g) => t.includes(g))) return out; // 省级 = 不互斥
+  for (const [district, city] of Object.entries(DISTRICT_GEO)) {
+    if (t.includes(district)) out.add(city);
+  }
+  for (const c of CITY_GEO) if (t.includes(c)) out.add(c);
+  return out;
+}
+
+/**
+ * 两条内容的地域是否兼容（不冲突）。
+ *
+ * 规则：任一方不挑地域（空集）→ 兼容；双方都有城市且无交集 → 冲突。
+ * 只用于**收紧**判断（冲突即不认为是同一事件），不放宽任何匹配条件。
+ */
+export function geoCompatible(a: string, b: string): boolean {
+  const ca = geoCitiesOf(a);
+  const cb = geoCitiesOf(b);
+  if (ca.size === 0 || cb.size === 0) return true;
+  for (const c of ca) if (cb.has(c)) return true;
+  return false;
+}
+
+/**
  * 事实锚点抽取（信息增量的主要判据）。
  *
  * 三类，分别加前缀区分：
@@ -306,6 +389,11 @@ export function sanitizeEvents(
     if (isUsableRecord(rec)) out[id] = normalizeRecord(rec);
   }
   return out;
+}
+
+/** 两个标题的 Dice 相似度（bigram 集合，0~1）。用于「这条是不是那条的复述」这类判断。 */
+export function titleSim(a: string, b: string): number {
+  return dice(titleBigrams(a), titleBigrams(b));
 }
 
 /** 与某条历史记录的最高标题 Dice（与最近若干条样本比）。 */

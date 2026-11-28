@@ -55,6 +55,10 @@ function defaultConfig(): PipelineConfig {
     // 二期 WP11：AI 语义细化**默认关闭**（要说开才开）——它是一次额外 LLM 调用，
     // 与「默认开启、坏了自动降级」的引擎总开关不是一回事。
     focusAiMatch: process.env.FOCUS_AI_MATCH === "1",
+    // 管理关注独立研判（2026-11-28）：**默认开**。它与 focusAiMatch 不同 ——
+    // 管理关注是首页六模块之一（读不到就等于模块缺失），而它可以安全降级为空。
+    // ATTENTION_ENGINE=0 可整块关掉（省一次 LLM 调用 / 排查问题用）。
+    attentionEngine: (process.env.ATTENTION_ENGINE ?? "1") !== "0",
     filters: {
       keyword: envFlag("KEYWORD_FILTER"),
       keywordFallback: envFlag("KEYWORD_FILTER_FALLBACK"),

@@ -30,6 +30,7 @@ import {
   candidateText,
   classifyKind,
   extractTopicTags,
+  geoCompatible,
   isUsableRecord,
   normText,
   sharedSubjectAnchors,
@@ -124,6 +125,44 @@ function todayPseudoRecords(store: EventMemoryStore): Array<{ id: string; record
 }
 
 /**
+ * 该记录是否「整条只在某一天播报过」——即当天刚结算进长期记忆的新记录。
+ *
+ * 用途：增量三态标注时把它排除出「历史」（见 `MatchOptions.excludeDate`）。
+ * `samples` 为空时不判（没有播报留痕 → 不能断言它只属于当天，按历史处理更保守）。
+ */
+function isSettledOn(rec: EventRecord, date: string): boolean {
+  const samples = Array.isArray(rec.samples) ? rec.samples : [];
+  if (samples.length === 0) return false;
+  return samples.every((s) => Boolean(s) && s.date === date);
+}
+
+/**
+ * 匹配选项（2026-11-28 新增）。
+ *
+ * `excludeDate`：把「这一天的播报」排除在**历史**之外，只用于增量三态标注
+ * （`assemble/delta.ts` 传当天日期）。起因见 `assemble/delta.ts` 顶部注释：
+ * 上线 run 里 `side-exec-summary` 会**先**把本次播报写进 today 暂存区并落盘，
+ * 随后 delta 标注再读记忆库 —— 若不排除，每条都会命中「自己」→ 全站恒为续报
+ * （实测近 30 期 must_read：新增 0 / 有进展 0 / 续报 36）。
+ *
+ * ⚠️ 只影响匹配的**候选集**，不改任何阈值；不传该选项时行为与历史完全一致
+ * （exec-guard / 记忆去重链的调用一律不传）。
+ */
+export interface MatchOptions {
+  /** 视作「本次运行当天」的日期（YYYY-MM-DD）。当天的暂存条目与当天结算的记录不算历史。 */
+  excludeDate?: string;
+  /**
+   * 地域互斥（2026-11-28）：两侧都指向明确城市且无交集 → 不认为是同一事件。
+   *
+   * 只用于**增量三态**标注（`assemble/delta.ts`），**默认关闭** → exec-guard 的判重
+   * 行为一字不变。理由：判重（去重）宁可保守合并，三态（新增/续报）则必须区分
+   * 「广州和珠海各出一个购房补贴政策」这类「同主题不同地区」的独立事件。
+   * 这是**收紧**匹配，不放宽任何阈值。
+   */
+  requireGeoCompatible?: boolean;
+}
+
+/**
  * 在记忆库中查找与候选匹配的事件。
  *
  * 查找顺序：**当天暂存区优先 → 长期记忆**。
@@ -142,15 +181,35 @@ function todayPseudoRecords(store: EventMemoryStore): Array<{ id: string; record
 export function findMatchingEvent(
   cand: MemoryCandidate,
   store: EventMemoryStore,
+  opts: MatchOptions = {},
 ): { id: string; record: EventRecord; similarity: number; source: "today" | "events" } | null {
   const anchors = candidateAnchors(cand);
-  const tags = extractTopicTags(candidateText(cand));
+  const candText = candidateText(cand);
+  const tags = extractTopicTags(candText);
   const url = cand.url;
+  const excludeDate = opts.excludeDate;
+  // 记录侧文本（仅 requireGeoCompatible 时用到）：缓存一次，避免逐条重拼。
+  const recTextCache = new WeakMap<EventRecord, string>();
+  const recordTextOf = (rec: EventRecord): string => {
+    const cached = recTextCache.get(rec);
+    if (cached !== undefined) return cached;
+    const t = [
+      (Array.isArray(rec.samples) ? rec.samples : []).map((s) => s?.title ?? "").join(" "),
+      (rec.broadcastedTexts ?? []).join(" "),
+    ]
+      .filter(Boolean)
+      .join(" ");
+    recTextCache.set(rec, t);
+    return t;
+  };
   const score = (
     rec: EventRecord,
   ): number => {
     const samples = Array.isArray(rec.samples) ? rec.samples : [];
     if (url && samples.some((s) => s && s.url && s.url === url)) return 1;
+    // 地域互斥（收紧）：明确指向不同城市 → 不是同一事件。
+    // 放在 URL 判等之后：同一篇文章必然同地域，不该被地域规则推翻。
+    if (opts.requireGeoCompatible && !geoCompatible(candText, recordTextOf(rec))) return 0;
     const recAnchors = Array.isArray(rec.anchors) ? rec.anchors : [];
     const aj = anchorJaccard(anchors, recAnchors);
     const td = bestTitleDice(cand.title, rec);
@@ -186,11 +245,15 @@ export function findMatchingEvent(
   };
 
   // 1) 当天暂存区（同一次运行内已播报）
+  // 🔴 excludeDate 生效时跳过：「今天」的暂存条目不算历史（否则本次播报命中自己）。
   let bestToday: { id: string; record: EventRecord; similarity: number } | null = null;
-  for (const p of todayPseudoRecords(store)) {
-    const sim = score(p.record);
-    if (sim >= MATCH_THRESHOLD && (!bestToday || sim > bestToday.similarity)) {
-      bestToday = { id: p.id, record: p.record, similarity: sim };
+  const todayExcluded = Boolean(excludeDate && store.today?.date === excludeDate);
+  if (!todayExcluded) {
+    for (const p of todayPseudoRecords(store)) {
+      const sim = score(p.record);
+      if (sim >= MATCH_THRESHOLD && (!bestToday || sim > bestToday.similarity)) {
+        bestToday = { id: p.id, record: p.record, similarity: sim };
+      }
     }
   }
   if (bestToday) return { ...bestToday, source: "today" };
@@ -200,6 +263,9 @@ export function findMatchingEvent(
   for (const [id, rec] of Object.entries(store.events ?? {})) {
     // 损坏记录跳过（不使整体匹配失效）；落盘时会被 sanitizeEvents 清除 → 自愈
     if (!isUsableRecord(rec)) continue;
+    // 当天已结算进长期记忆的记录（微信推送后 settleTodayIntoEvents / 跨日 beginDay）
+    // 同样不算历史 —— 否则当天这一期永远判不出「新增」。
+    if (excludeDate && isSettledOn(rec, excludeDate)) continue;
     const sim = score(rec);
     if (sim >= MATCH_THRESHOLD && (!best || sim > best.similarity)) {
       best = { id, record: rec, similarity: sim };

@@ -16,6 +16,7 @@ import { enrich } from "../services/enrich";
 import { assembleReport } from "../services/assemble";
 import { applyDisplayCaps } from "../services/assemble/display-cap";
 import { annotateDeltas } from "../services/assemble/delta";
+import { buildAttention } from "../services/assemble/attention";
 import { annotateMaturity } from "../services/assemble/maturity";
 import { annotateItemMetadata } from "../services/assemble/item-metadata";
 import { annotateFocus, collectSemanticCandidates } from "../services/assemble/focus-metadata";
@@ -64,6 +65,13 @@ export async function runPipeline(
   // —— gzinfo history-step：PASS2 摘要回流 → merge+persist → buildRolling → 滚动并入 ——
   const histStep = mergeRollingAndSaveHistory(report, selected.articles, history, ctx);
 
+  // —— 增量三态基线快照（2026-11-28 修 A3 恒为续报）——
+  // 🔴 必须在 buildSideOutputs **之前**读取：exec-guard 在里面会把本次播报写进 today
+  // 暂存区并落盘（side-exec-summary 的 persistMemory）。若等到 ⑦.7 再读，读到的记忆库
+  // 已含「本期自己」→ 每条命中自己 → 全站恒为续报（实测近 30 期：新增 0 / 有进展 0 / 续报 36）。
+  // 这里拿的是一份「本次运行开始前」的快照，只给三态标注用，不参与判重与写入。
+  const deltaBaseline = ctx.config.eventMemory ? loadEventMemory() : null;
+
   // —— gzinfo side-outputs：必读/商机/风险旁路（2 日窗口）+ 广东IPO 板块（绕过相关性 LLM）——
   // 股市复盘三卡 / 股市消息清单随 B4 接入。
   const withSides = await buildSideOutputs(
@@ -93,20 +101,30 @@ export async function runPipeline(
   // —— ⑦.7 A3 增量三态（2026-09-17）：标注「新增 / 有进展 / 续报」——
   // 复用**同一份事件记忆判重链**（findMatchingEvent + computeNovelty），不另立规则；
   // 记忆开关由组合根注入 ctx.config.eventMemory（服务层不直读 env）。关时跳过（页面不显示徽章）。
-  const deltaStore = ctx.config.eventMemory ? loadEventMemory() : null;
-  let annotated = deltaStore ? annotateDeltas(capped, deltaStore) : capped;
+  //
+  // 🔴 2026-11-28 校准：用**运行前快照** deltaBaseline（见上），并把「当天」排除出历史
+  // （excludeDate）—— 否则本次播报命中自己，恒判续报；当天已 settle 进长期记忆的记录同理排除。
+  // 同一天重跑同一份内容时，按真实历史重新判定（不锁首次结果，也不把自己当历史）。
+  const deltaStore = deltaBaseline;
+  let annotated = deltaStore ? annotateDeltas(capped, deltaStore, { excludeDate: ctx.date }) : capped;
   if (deltaStore) {
     const tally: Record<string, number> = { new: 0, changed: 0, followup: 0 };
+    const lowConfidence: string[] = [];
     const marks = [
       annotated.heroDelta,
       ...annotated.must_read.map((m) => m.delta),
       ...annotated.insights.map((i) => i.delta),
       annotated.risk?.delta,
     ];
-    for (const d of marks) if (d) tally[d.state] = (tally[d.state] ?? 0) + 1;
+    for (const d of marks) {
+      if (!d) continue;
+      tally[d.state] = (tally[d.state] ?? 0) + 1;
+      if (d.confidence === "low") lowConfidence.push(d.state);
+    }
     ctx.log.info(
       "delta",
-      `A3 增量三态：新增 ${tally.new} / 有进展 ${tally.changed} / 续报 ${tally.followup}（未命中记忆库→新增）`,
+      `A3 增量三态：新增 ${tally.new} / 有进展 ${tally.changed} / 续报 ${tally.followup}` +
+        `（基线=运行前快照，当天排除；低置信 ${lowConfidence.length} 条）`,
     );
   }
 
@@ -202,6 +220,26 @@ export async function runPipeline(
     // WP7 台账**不在这里写**：管线也被 replay/测试直接调用，写在这里会往真实台账
     // 记进「2026-09-11 测试日」这类假数据。台账记的是**真实运行**，调用点在运行入口
     // `scripts/daily.ts`（那里 report 已定稿，`inMustRead/inInsights/isRisk` 才有意义）。
+  }
+
+  // —— ⑦.12 管理关注独立研判（2026-11-28 · sc 定向修订任务书 任务二）——
+  // 必须排在 ⑦.10 之后：候选要带 primary_domain 才能判「跨条线」（≥2 个不同经营领域）。
+  // 1 次批量 LLM 提炼 + 确定性校验（来源必须来自候选、领域必须合法、不做必读复述）；
+  // 失败 / 无独立议题 → 空数组，页面整块不展示 —— **绝不阻断发布**。
+  if (ctx.config.attentionEngine) {
+    try {
+      const attention = await buildAttention(annotated, { llm: deps.llm, log: ctx.log });
+      annotated = { ...annotated, attention };
+    } catch (e) {
+      // buildAttention 内部已兜底；这里是最外层保险（模块缺失好过整份日报发不出去）
+      ctx.log.warn(
+        "attention",
+        `管理关注接线异常，本期不展示该模块：${e instanceof Error ? e.message : String(e)}`,
+      );
+      annotated = { ...annotated, attention: [] };
+    }
+  } else {
+    ctx.log.info("attention", "管理关注：ATTENTION_ENGINE=0，本期不生成（模块不展示）");
   }
 
   // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——

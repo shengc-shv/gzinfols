@@ -157,6 +157,16 @@ export interface PipelineConfig {
    * 规则结果本身可核对，而 AI 判定每次都要花一次调用。
    */
   focusAiMatch: boolean;
+  /**
+   * 管理关注独立研判（2026-11-28 · sc 定向修订任务书 任务二）。默认开。
+   *
+   * 开：管线在领域打标完成后用 1 次批量 LLM 提炼 1~3 条管理关注，再走确定性校验
+   * （来源必须来自当日候选、领域必须合法、与必读高度重复则剔除）；任何异常 → 空数组，
+   * 页面模块整块不展示 —— **绝不阻断发布**。
+   * 关（ATTENTION_ENGINE=0）：不调用 LLM，报告不带 attention 字段，页面不输出该模块
+   * （等于回到「不出错但也不展示」的形态，供回滚用）。
+   */
+  attentionEngine: boolean;
   /** 过滤链旁路开关。 */
   filters: FilterFlags;
   /** LLM 模型覆盖（PASS1_MODEL / PASS2_MODEL；空则走后端默认）。 */

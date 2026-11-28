@@ -136,6 +136,35 @@ export interface ReportInsight {
 }
 
 /**
+ * 管理关注（2026-11-28 重构 · sc 定向修订任务书 任务二）。
+ *
+ * 产品定位：回答「从今天的信息里，有哪些值得**管理层**进一步了解的管理问题」——
+ * 不是今日必读的摘要，也不是风险预警的复述。六模块各答一问，管理关注必须独立成题。
+ *
+ * 生成在 `services/assemble/attention.ts`（1 次批量 LLM + 确定性校验），
+ * 渲染层只读不判断。**没有独立议题时整块不展示**（空数组或缺省）。
+ *
+ * 边界（任务书 3.5）：公开信息基础上的经营研判，不是行内管理指令 ——
+ * 不得虚构本行数据、不得把外部变化表述为本行已受影响、不得用命令式语言。
+ */
+export interface ReportAttention {
+  /** 稳定标识（同日重跑顺序稳定，供前端锚点与评估对齐）。 */
+  id: string;
+  /** 管理关注主题：一句话说清「值得管理层关注什么问题」。 */
+  topic: string;
+  /** 关注依据：相关事件与关键事实（不是标题复述，必须能在来源里核到）。 */
+  rationale: string;
+  /** 管理意义：为什么值得关注（审慎措辞，写「值得关注/建议进一步了解」，不写指令）。 */
+  significance: string;
+  /** 关联经营领域（≥1；**≥2 才算跨条线**，不再看标签数量）。 */
+  domains: string[];
+  /** 关联来源：必须来自当日候选条目，可点回原文。 */
+  source_urls: string[];
+  /** 判断置信度（内部用，不在页面展示技术分数）。 */
+  confidence?: DeltaConfidence;
+}
+
+/**
  * 增量三态（A3，2026-09-17）：这条内容相对**昨日及更早**是新增、续报还是有了新进展。
  *
  * 由 `services/assemble/delta.ts` 复用**事件记忆判重链**（`findMatchingEvent` +
@@ -143,12 +172,30 @@ export interface ReportInsight {
  */
 export type DeltaState = "new" | "followup" | "changed";
 
+/**
+ * 三态判定的内部置信度（2026-11-28）。
+ *
+ * 只进日志与评估，**不在页面展示技术分数**（行长不需要看 0.42 这种数）。
+ * 语义：
+ *  - `high`：事件匹配与新增事实都明确（changed 有新事实锚点 / new 无任何命中）；
+ *  - `medium`：事件匹配基本明确，但新增事实不充分（判成续报的确定命中）；
+ *  - `low`：仅宽泛主题相似（相似度偏低的命中）—— 允许判 followup，但**不得据此合并事件**。
+ */
+export type DeltaConfidence = "high" | "medium" | "low";
+
 export interface DeltaMark {
   state: DeltaState;
   /** 续报时为「第几期」（= 历史播报次数 + 1）；新增时不填。 */
   issueNo?: number;
-  /** 变更时列出的新进展锚点（≤2 个，让读者一眼看出「新在哪」）。 */
+  /**
+   * 变更时列出的新进展（≤2 条，让读者一眼看出「新在哪」）。
+   *
+   * 🔴 2026-11-28：**changed 必须有至少 1 条可核验新事实**，否则不得判 changed
+   * （说不出新在哪的「有进展」比标成续报更误导）。锚点已去掉内部前缀符，可直接展示。
+   */
   highlights?: string[];
+  /** 判定置信度（内部用，不展示给读者）。 */
+  confidence?: DeltaConfidence;
 }
 
 /**
@@ -311,6 +358,11 @@ export interface DailyReport {
    * 不进主信息流 / exec 池 / 口播，空则整块不渲染。
    */
   researchPanel?: ResearchPanel;
+  /**
+   * 管理关注（2026-11-28 独立研判）：由 `services/assemble/attention.ts` 生成。
+   * 缺省 / 空数组 → 决策视角不输出该模块（历史报告因此天然兼容，不需要回填）。
+   */
+  attention?: ReportAttention[];
   /**
    * 产品条线覆盖（C4，2026-09-17）：按揭 / 信用卡 / 代发 三条线的命中情况。
    * 由 `assemble/product-coverage.ts` 纯函数统计（零 LLM）；`count = 0` 即「本期无」，

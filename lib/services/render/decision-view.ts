@@ -26,6 +26,16 @@ import { BUSINESS_DOMAINS, DOMAIN_IDS, classifyBusinessDomainWithFallback } from
 import { IPO_DISPLAY_STAGE_LABEL } from "../classify/gd-ipo";
 import { gdIpoDisplayStageOf, ipoCompanyShortOf, isRoutineIpoItem } from "../classify/gd-ipo-spoken";
 
+/**
+ * 今日必读的**渲染上限**（2026-11-28）。
+ *
+ * 与数据侧真源 `MUST_READ_PLAY_TARGET = 5`（`services/memory/event-types.ts`，周末版 4）
+ * 对齐：数据侧定稿几条就展示几条，这里只做防御性上限，不做内容筛选。
+ * ⛔ 不要为了让页面「整齐」改成固定 3 —— 数据侧近 8 期稳定产出 4~5 条，
+ * 截到 3 等于每期丢掉 1~2 条最高价值信息。
+ */
+const MUST_READ_RENDER_CAP = 5;
+
 /** 顶部快捷跳转 + 八模块锚点（id 与下方 section 一一对应，测试守护）。 */
 export const DV_MODULE_NAV: ReadonlyArray<{ id: string; label: string }> = [
   { id: "dv-hero", label: "今日定调" },
@@ -227,7 +237,11 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
     for (const s of ins.sources ?? []) if (s?.url && !insightMap.has(s.url)) insightMap.set(s.url, ins);
   }
 
-  const keys = (report.must_read ?? []).slice(0, 3); // 默认 Top3，高价值最多 5 由数据侧定稿
+  // 今日必读：条数由**数据侧定稿**（exec 池顺序判重后 3~5 条：工作日目标 5、周末版 4，
+  // 候补用尽按实际剩余 —— 宁缺毋滥，绝不补足），渲染层只做上限保护，不再二次截断。
+  // ⚠️ 2026-11-28 修：原为 `slice(0, 3)`，而数据侧近 8 期实际产 4~5 条 → 每期被机械砍掉
+  // 1~2 条（实测 11-24~11-27 各 5 条、11-21~11-23 与 11-28 各 4 条，全部只显示 3 条）。
+  const keys = (report.must_read ?? []).slice(0, MUST_READ_RENDER_CAP);
   const opps = (report.insights ?? []).slice(0, 3);
   const yesterday = prevDateKey(date, 1);
   // 本期经营重点（二期）：只列**年度三大重点**，且只列当日有实质命中（M2/M3）的。
@@ -241,6 +255,12 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
       members: allItems.filter((it) => (it.focus_hits ?? []).some((h) => h.id === f.id)).slice(0, 8),
     }))
     .filter((r) => r.members.length > 0);
+
+  // 管理关注（2026-11-28 独立研判）：**只读契约**，渲染层不再从必读/风险里拼装。
+  // 无字段 / 空数组 → 整块不输出（历史报告天然兼容，不会退回「必读前两条换个样式」的旧行为）。
+  const attnRows = (report.attention ?? []).filter(
+    (a) => Boolean(a.topic) && (a.source_urls?.length ?? 0) > 0,
+  );
 
   // ---- ① 页头数据状态 ----
   const stats = [
@@ -256,8 +276,10 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   // 与旧版同源：剥掉历史遗留「今日分行焦点：」补位前缀，避免双标签/前缀泄漏。
   const hero = stripHeroPrefix(report.hero_line).trim();
   // 空定调整块不输出（PRD 铁律），快捷跳转同步过滤该锚点，避免指向不存在的目标。
+  // 管理关注同理（2026-11-28）：没有独立议题就整块不输出，导航同步去掉，不留死锚点。
   const navItems = (hero ? DV_MODULE_NAV : DV_MODULE_NAV.filter((m) => m.id !== "dv-hero")).filter(
-    (m) => m.id !== "dv-focus" || focusRows.length > 0,
+    (m) =>
+      (m.id !== "dv-focus" || focusRows.length > 0) && (m.id !== "dv-attention" || attnRows.length > 0),
   );
   const heroBlock = hero
     ? `<section class="dv-mod dv-hero" id="dv-hero">
@@ -308,7 +330,7 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
 
   // ---- ③ 今日必读 ----
   const mustRead = `<section class="dv-mod" id="dv-mustread">
-  <div class="dv-mod-head"><h2>今日必读</h2><span class="dv-mod-sub">默认 3 条 · 重要性优先 · 经营价值优先</span></div>
+  <div class="dv-mod-head"><h2>今日必读</h2><span class="dv-mod-sub">数据侧定稿 3—5 条 · 重要性优先 · 经营价值优先</span></div>
   ${keys.length ? `<div class="dv-scroller">${keys.map((m) => mustReadCard(m, bodyMap, insightMap)).join("")}</div>${swipeHint(keys.length)}` : empty("今日暂无值得重点关注的变化（宁缺毋滥，不生成内容补足数量）。")}
   ${backToTop()}
 </section>`;
@@ -351,37 +373,56 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   ${backToTop()}
 </section>`;
 
-  // ---- ⑥ 管理关注（折中建议：审慎措辞 + 可溯源，非已作决定）----
-  const attention: Array<{ topic: string; reason: string; needCheck: boolean; crossDept: boolean }> = [];
-  for (const m of keys.slice(0, 2)) {
-    attention.push({
-      topic: m.title || bodyMap.get(m.url)?.title_cn || m.url,
-      reason: m.why,
-      needCheck: false,
-      crossDept: (bodyMap.get(m.url)?.tags ?? []).length > 1,
-    });
-  }
-  if (report.risk) {
-    attention.push({
-      topic: report.risk.topic,
-      reason: report.risk.impact || report.risk.evidence,
-      needCheck: true,
-      crossDept: true,
-    });
-  }
-  const shown = attention.slice(0, 3);
-  const attentionHtml = shown.length
-    ? `<div class="dv-scroller">${shown.map((a, i) => `<article class="dv-card dv-attn">
+  // ---- ⑥ 管理关注（2026-11-28 重构：独立研判，不再复述必读/风险）----
+  // 每条都回答「管理层该了解什么」，并带：关注依据 / 管理意义 / 关联领域 / 可点回的来源。
+  // 🔴 跨条线只认「≥2 个不同经营领域」——旧口径 `tags.length > 1` 已废弃：
+  //    标签多不等于需要多部门共同关注，且标签本身不解释「跨了哪几条线」。
+  // 🔴 渲染层只读 `report.attention`，不做任何拼装与判断（判定在 assemble/attention.ts）。
+  const shortDomain = (id: string): string => BUSINESS_DOMAINS.find((d) => d.id === id)?.short ?? id;
+  const attentionHtml = attnRows
+    .map((a, i) => {
+      const crossLine = a.domains.length >= 2;
+      const chips = [
+        ...a.domains.map(
+          (d) => `<span class="dv-chip dv-chip-domain">${escapeHtml(shortDomain(d))}</span>`,
+        ),
+        crossLine ? '<span class="dv-chip">建议跨条线研究</span>' : "",
+        '<span class="dv-chip">建议关注</span>',
+      ]
+        .filter(Boolean)
+        .join("");
+      // 来源用站名可读标识（与必读卡同一套 bodyMap 反查）；同站多条加序号区分。
+      const labelCount = new Map<string, number>();
+      for (const u of a.source_urls.slice(0, 3)) {
+        const n = bodyMap.get(u)?.source ?? "原文";
+        labelCount.set(n, (labelCount.get(n) ?? 0) + 1);
+      }
+      const links = a.source_urls
+        .slice(0, 3)
+        .map((u) => {
+          const name = bodyMap.get(u)?.source ?? "原文";
+          const dup = (labelCount.get(name) ?? 0) > 1;
+          const label = dup ? `${name}${a.source_urls.indexOf(u) + 1}` : name;
+          return `<a class="dv-src" href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
+        })
+        .join(" ");
+      return `<article class="dv-card dv-attn">
     <h3 class="dv-card-title"><span class="dv-attn-n">${i + 1}</span> ${escapeHtml(a.topic)}</h3>
-    <p class="dv-why">${escapeHtml(a.reason)}</p>
-    <div class="dv-chips"><span class="dv-chip">建议关注</span>${a.needCheck ? '<span class="dv-chip dv-chip-risk">建议进一步核实</span>' : ""}${a.crossDept ? '<span class="dv-chip">建议跨条线研究</span>' : ""}</div>
-  </article>`).join("")}</div>${swipeHint(shown.length)}`
-    : empty("今日暂无需要归纳的管理关注事项。");
-  const attentionSection = `<section class="dv-mod" id="dv-attention">
-  <div class="dv-mod-head"><h2>管理关注</h2><span class="dv-mod-sub">不超过 3 项 · 建议性质 · 非已作决定</span></div>
-  ${attentionHtml}
+    <p class="dv-why"><b>关注依据</b> ${escapeHtml(a.rationale)}</p>
+    <p class="dv-infer"><b>管理意义</b> ${escapeHtml(a.significance)}</p>
+    <div class="dv-chips">${chips}</div>
+    <div class="dv-card-foot">来源：${links}</div>
+  </article>`;
+    })
+    .join("");
+  // 没有独立管理议题 → 整块不输出（导航已在上面同步过滤，不留死锚点）。
+  const attentionSection = attnRows.length
+    ? `<section class="dv-mod" id="dv-attention">
+  <div class="dv-mod-head"><h2>管理关注</h2><span class="dv-mod-sub">管理层视角的独立研判 · 建议性质 · 非已作决定</span></div>
+  <div class="dv-scroller">${attentionHtml}</div>${swipeHint(attnRows.length)}
   ${backToTop()}
-</section>`;
+</section>`
+    : "";
 
   // ---- ⑦ 六大经营领域（平铺标签 + 单一明细面板；不做跨模块过滤）----
   const domainCounts = new Map<string, { total: number; high: number }>();

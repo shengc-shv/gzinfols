@@ -21,7 +21,9 @@ import type {
 import { SECTION_LABELS, SECTION_ORDER } from "../../contracts/report";
 import { SOURCE_TIER_ORDER, type SourceTier } from "../../contracts/source";
 
-const MAX_MUST_READ = 3;
+// 注：2026-11-28 删除 `const MAX_MUST_READ = 3` —— 该常量全仓从未被引用（死常量），
+// 且与数据侧真源 `MUST_READ_PLAY_TARGET = 5`（event-types.ts）直接冲突，
+// 容易让人误以为必读上限是 3 而把 4~5 条截掉（决策视角实际就踩了这个坑）。
 
 function compareItems(a: ReportItem, b: ReportItem): number {
   if (a.importance !== b.importance) return b.importance - a.importance;

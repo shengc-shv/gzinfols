@@ -58,8 +58,13 @@ test("② 命中历史但无实质进展 → 续报（第 N 期 = 历史次数 +
 });
 
 test("③ 出现新进展（阶段推进）→ 有进展，且带上新事实锚点", () => {
+  // ⚠️ 用**新 URL**（另一篇报道）而不是同 URL：同一篇文章再次上榜内容没变，
+  // 不可能构成新进展（2026-11-28 起同 URL 直接判续报，见 delta-state ⑬ 与 delta.ts）。
   const text = `${TEXT_HIST} 该产品已过会，规模 2.5 亿元`;
-  const mark = deltaOf({ title: "经营贷利率悄然上行", text, url: URL_A }, store({ E1: record() }));
+  const mark = deltaOf(
+    { title: "经营贷利率悄然上行", text, url: "https://example.com/loans-v2" },
+    store({ E1: record() }),
+  );
   assert.equal(mark.state, "changed", "阶段词从「受理」推进到「过会」应判为有进展");
   assert.equal(mark.issueNo, 3);
   assert.ok((mark.highlights ?? []).length > 0, "应带出新事实锚点，让读者看到「新在哪」");
