@@ -7,7 +7,7 @@
  *  - 方案 A 版本切换保留：与旧版共存同一 HTML、切 class，旧视角 DOM 零改动；
  *  - 脱敏（无具体行名/分管行长）、时间真实性、事实与研判区分、证据等级、
  *    折中建议、宁缺毋滥、来源可追溯、超长正文不铺页面全部不回退；
- *  - 顶部快捷跳转 + 各板块返回顶部 + 悬浮按钮 + 核心卡片横滑 + 六大领域标签过滤。
+ *  - 顶部快捷跳转 + 各板块返回顶部 + 悬浮按钮 + 核心卡片横滑 + 六大领域平铺标签。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -122,8 +122,8 @@ test("⑥ 六大经营领域导航 = 新配置六领域，带当日计数，链�
     assert.ok(d.includes(name), `缺领域：${name}`);
   }
   assert.ok(d.includes("当日 1 条") && d.includes("含重点 1"), "领域带当日计数与重点亮标");
-  assert.ok(d.includes('data-expand-domain="retail_credit"'), "领域卡片改为本页展开按钮");
-  assert.ok(d.includes('id="dv-domain-detail-retail_credit"'), "该领域明细容器存在");
+  assert.ok(d.includes('data-domain-tab="retail_credit"'), "领域改为平铺标签");
+  assert.ok(d.includes('id="dv-domain-panel-retail_credit"'), "该领域明细面板存在");
   assert.ok(d.includes("房贷利率调整"), "明细列出该领域当日条目");
   assert.ok(!d.includes('class="dv-domain" href='), "不再跳外页（预览死链已消除）");
 });
@@ -138,42 +138,54 @@ test("⑥b 历史报告无领域字段：渲染期同源降级打标，不 mutat
   assert.equal(JSON.stringify(r), snapshot, "渲染不得 mutate 入参报告");
 });
 
-test("⑥c 领域明细：展开脚本 + 原文链接 + 空状态，不跳 topics.html", () => {
+test("⑥c 领域明细：标签切换脚本 + 原文链接 + 空状态，不跳 topics.html", () => {
   const body = item("房贷明细条目", { url: "https://e.com/detail", primary_domain: "retail_credit" });
   const r = report({ sections: { gz_local: [body], biz_insight: [], policy_market: [], tech: [], ipo: [] } });
   const html = renderHtml(r);
   const d = decisionPart(html);
-  assert.ok(/data-expand-domain/.test(html) && /dv-domain-detail-/.test(html), "展开交互脚本存在");
+  assert.ok(/data-domain-tab/.test(html) && /dv-domain-panel-/.test(html), "标签切换结构存在");
+  assert.ok(/selectDomain/.test(html) && /\.dv-domain-panel/.test(html), "切换脚本存在（面板显隐）");
   assert.ok(d.includes('href="https://e.com/detail" target="_blank" rel="noopener noreferrer"'), "明细条目直连原文");
   assert.ok(d.includes("当日暂无该领域条目"), "无条目的领域给空状态");
   const domSection = d.slice(d.indexOf('id="dv-domains"'), d.indexOf('id="dv-legacy"'));
   assert.ok(!domSection.includes('href="../topics.html"'), "领域导航不再指向预览会 404 的 topics.html");
-  assert.equal((domSection.match(/data-expand-domain=/g) ?? []).length, 6, "六个领域卡片齐全");
+  assert.equal((domSection.match(/data-domain-tab=/g) ?? []).length, 6, "六个领域标签齐全");
 });
 
-test("⑦ 领域标签过滤：全部 + 六大领域，角色视图已移除", () => {
+test("⑦ 经营领域改为平铺标签：无跨模块过滤条，六个 tab + 单一明细面板", () => {
   const d = decisionPart(renderHtml(report()));
-  const roles = [...d.matchAll(/data-role="([a-z_]+)"/g)].map((m) => m[1]);
-  assert.deepEqual(roles, ["all", ...BUSINESS_DOMAINS.map((x) => x.id)], "只有全部 + 六领域");
-  for (const bad of ["全景", "零售银行部", "私行部", "财富管理部", "零售信贷部"]) {
+  const dom = d.slice(d.indexOf('id="dv-domains"'), d.indexOf('id="dv-legacy"'));
+  assert.ok(!dom.includes('class="dv-roles"'), "过滤条已移除（不再按领域过滤上方卡片）");
+  assert.ok(!/class="dv-role[\s"]/.test(dom), "不再有领域过滤按钮");
+  const tabs = [...dom.matchAll(/data-domain-tab="([a-z_]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(tabs, BUSINESS_DOMAINS.map((x) => x.id), "只有六个领域标签（无「全部」）");
+  assert.equal((dom.match(/role="tab"/g) ?? []).length, 6, "六个 tab");
+  assert.equal((dom.match(/role="tabpanel"/g) ?? []).length, 6, "六块面板");
+  assert.equal((dom.match(/role="tabpanel"[^>]*hidden/g) ?? []).length, 5, "默认只显示一块面板");
+  assert.ok(dom.includes('role="tablist"'), "标签条有 tablist 语义");
+  assert.ok(!/data-domain="[a-z_]+"/.test(d), "卡片不再挂仅供过滤的 data-domain");
+  for (const bad of ["全景", "零售银行部", "私行部", "财富管理部"]) {
     assert.ok(!d.includes(bad), `角色视图已移除：${bad}`);
   }
-  const html = renderHtml(report());
-  assert.ok(/querySelectorAll\('\.dv-scroller \.dv-card'\)/.test(html), "过滤作用于横滑卡片（脚本在 DOM 外）");
 });
 
-test("⑦b 核心卡片横滑：必读/商机/风险包 dv-scroller，桌面转 grid", () => {
+test("⑦b 核心卡片横滑：必读/商机/风险/管理关注都包 dv-scroller，桌面转 grid", () => {
   const r = report({
     hero_line: "定调",
     must_read: [{ title: "必读", why: "理由", url: "https://e.com/a" }],
     insights: [{ topic: "商机", tags: [], impact: "影响", sources: [{ title: "源", url: "https://e.com/a" }] }],
     risk: { topic: "风险", evidence: "依据", impact: "影响", source: "T2" },
   });
-  const d = decisionPart(renderHtml(r));
-  assert.equal((d.match(/class="dv-scroller"/g) ?? []).length, 3, "三组核心卡片都横滑");
-  assert.ok(/overflow-x:\s*auto/.test(d === "" ? "" : renderHtml(r)) || /overflow-x:\s*auto/.test(renderHtml(r)), "横滑靠 overflow-x:auto");
-  assert.ok(/@media \(min-width:720px\)[\s\S]{0,200}dv-scroller[\s\S]{0,160}display:\s*grid/.test(renderHtml(r)), "桌面转网格");
-  assert.ok(d.includes('data-domain="retail_credit"') || d.includes('class="dv-card dv-opp"'), "商机/风险卡带领域锚点供过滤");
+  const html = renderHtml(r);
+  const d = decisionPart(html);
+  assert.equal((d.match(/class="dv-scroller"/g) ?? []).length, 4, "四组卡片都横滑（含管理关注）");
+  const attn = d.slice(d.indexOf('id="dv-attention"'), d.indexOf('id="dv-domains"'));
+  assert.ok(attn.includes('class="dv-scroller"'), "管理关注也在横滑容器内");
+  assert.ok(/class="dv-swipe-hint"/.test(d), "多卡时给左右滑提示（单卡不给）");
+  assert.ok(/overflow-x:\s*auto/.test(html), "横滑靠 overflow-x:auto");
+  assert.ok(/scrollbar-width:\s*none/.test(html), "隐藏原生滚动条（视觉干净）");
+  assert.ok(/mask-image:linear-gradient/.test(html), "右缘渐隐示意还有内容");
+  assert.ok(/@media \(min-width:720px\)[\s\S]{0,240}dv-scroller[\s\S]{0,200}display:\s*grid/.test(html), "桌面转网格");
 });
 
 test("⑧ 决策 DOM 不产生重复 itm id（锚点唯一性不回退）", () => {

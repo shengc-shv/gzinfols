@@ -3,7 +3,7 @@
  *
  * 2026-11-28 sc 拍板：按新规格**推翻早版六模块**，改为八模块结构：
  *   ① 页头数据状态 ② 今日定调 ③ 今日必读 ④ 商机洞察 ⑤ 风险预警
- *   ⑥ 管理关注 ⑦ 六大经营领域导航 ⑧ 原有专业内容入口（+ 角色轻量筛选）
+ *   ⑥ 管理关注 ⑦ 六大经营领域（平铺标签 + 单一明细面板） ⑧ 原有专业内容入口
  * 版本切换（方案 A）保留：本 DOM 与旧版资讯视角共存同一 HTML，body class 切显隐，
  * 共用同一 report JSON，旧视角 DOM/锚点/断言零改动。
  *
@@ -87,7 +87,7 @@ function mustReadCard(
   const domain = body?.primary_domain
     ? `<span class="dv-chip dv-chip-domain">${escapeHtml(BUSINESS_DOMAINS.find((d) => d.id === body.primary_domain)?.short ?? body.primary_domain)}</span>`
     : "";
-  return `<article class="dv-card dv-key"${body?.primary_domain ? ` data-domain="${escapeHtml(body.primary_domain)}"` : ""}>
+  return `<article class="dv-card dv-key">
   <h3 class="dv-card-title">${escapeHtml(m.title || (body?.title_cn ?? ""))}</h3>
   ${fields || domain ? `<div class="dv-chips">${domain}${fields}</div>` : ""}
   ${fact ? `<p class="dv-fact"><b>事实</b> ${escapeHtml(fact)}</p>` : ""}
@@ -98,9 +98,7 @@ function mustReadCard(
 }
 
 /** 商机洞察卡：机会 + 客群 + 影响（事实呈现，不写操作指令）。 */
-function opportunityCard(it: ReportInsight, domainOf: (url: string) => string): string {
-  const domain = (it.sources ?? []).map((s) => s?.url).find((u) => u && domainOf(u)) ?? "";
-  const dom = domain ? domainOf(domain) : "";
+function opportunityCard(it: ReportInsight): string {
   const marks = (it.sources ?? [])
     .filter((s) => s?.url)
     .slice(0, 3)
@@ -115,7 +113,7 @@ function opportunityCard(it: ReportInsight, domainOf: (url: string) => string): 
       : it.maturity?.stage === "progress" ? "公开信息显示推进中"
         : it.maturity?.stage === "clue" ? "线索阶段"
           : "";
-  return `<article class="dv-card dv-opp"${dom ? ` data-domain="${escapeHtml(dom)}"` : ""}>
+  return `<article class="dv-card dv-opp">
   <h3 class="dv-card-title">${escapeHtml(it.topic)}${marks ? `<span class="dv-srcs">${marks}</span>` : ""}</h3>
   ${stage ? `<div class="dv-chips"><span class="dv-chip">${stage}</span>${deltaText(it.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(it.delta))}</span>` : ""}</div>` : ""}
   ${it.impact ? `<p class="dv-infer"><b>经营影响</b> ${escapeHtml(it.impact)}</p>` : ""}
@@ -137,15 +135,14 @@ function riskSourceLabel(src: { title?: string; url: string }): string {
 }
 
 /** 风险预警卡：风险事项 + 事实依据 + 潜在影响 + 证据等级 + 来源。 */
-function riskBlock(r: RiskItem | undefined, domainOf: (url: string) => string): string {
+function riskBlock(r: RiskItem | undefined): string {
   if (!r) return "";
   const src = (r.sources ?? []).find((s) => s?.url);
-  const dom = (r.sources ?? []).map((s) => s?.url).find((u) => u && domainOf(u)) ?? "";
   const grade = evidenceGrade(r.source);
   const link = src
     ? `<a class="dv-src" href="${escapeHtml(src.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(riskSourceLabel(src))}</a>`
     : `<span class="dv-src dv-src-missing">来源未标注</span>`;
-  return `<article class="dv-card dv-risk"${dom ? ` data-domain="${escapeHtml(domainOf(dom))}"` : ""}>
+  return `<article class="dv-card dv-risk">
   <h3 class="dv-card-title">${escapeHtml(r.topic)}</h3>
   ${grade || deltaText(r.delta) ? `<div class="dv-chips">${grade ? `<span class="dv-chip dv-chip-grade">${grade}</span>` : ""}${deltaText(r.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(r.delta))}</span>` : ""}</div>` : ""}
   ${r.evidence ? `<p class="dv-fact"><b>事实依据</b> ${escapeHtml(r.evidence)}</p>` : ""}
@@ -156,6 +153,11 @@ function riskBlock(r: RiskItem | undefined, domainOf: (url: string) => string): 
 
 function empty(text: string): string {
   return `<p class="dv-empty">${escapeHtml(text)}</p>`;
+}
+
+/** 横滑提示：仅当卡片多于 1 张时给（单张不提示左右滑，避免无意义的滑动暗示）。 */
+function swipeHint(n: number): string {
+  return n > 1 ? `<p class="dv-swipe-hint">左右滑动查看 ${n} 条</p>` : "";
 }
 
 function backToTop(): string {
@@ -174,7 +176,6 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
     .map((it) => ({ ...it }));
   const bodyMap = new Map<string, ReportItem>();
   for (const it of allItems) if (it.url && !bodyMap.has(it.url)) bodyMap.set(it.url, it);
-  const domainOf = (url: string): string => bodyMap.get(url)?.primary_domain ?? "";
   // 历史报告无 primary_domain（字段为本期新增）：渲染期按同一词表临时打标，
   // 仅用于本次 DOM 展示，不 mutate 报告、不写盘；新报告走管线打标，口径同源。
   for (const it of allItems) {
@@ -220,21 +221,21 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   // ---- ③ 今日必读 ----
   const mustRead = `<section class="dv-mod" id="dv-mustread">
   <div class="dv-mod-head"><h2>今日必读</h2><span class="dv-mod-sub">默认 3 条 · 重要性优先 · 经营价值优先</span></div>
-  ${keys.length ? `<div class="dv-scroller">${keys.map((m) => mustReadCard(m, bodyMap, insightMap)).join("")}</div>` : empty("今日暂无值得重点关注的变化（宁缺毋滥，不生成内容补足数量）。")}
+  ${keys.length ? `<div class="dv-scroller">${keys.map((m) => mustReadCard(m, bodyMap, insightMap)).join("")}</div>${swipeHint(keys.length)}` : empty("今日暂无值得重点关注的变化（宁缺毋滥，不生成内容补足数量）。")}
   ${backToTop()}
 </section>`;
 
   // ---- ④ 商机洞察 ----
   const opportunity = `<section class="dv-mod" id="dv-opportunity">
   <div class="dv-mod-head"><h2>商机洞察</h2><span class="dv-mod-sub">公开变化中的业务线索 · 非已确认客户需求</span></div>
-  ${opps.length ? `<div class="dv-scroller">${opps.map((o) => opportunityCard(o, domainOf)).join("")}</div>` : empty("今日暂无可研判的经营机会。")}
+  ${opps.length ? `<div class="dv-scroller">${opps.map((o) => opportunityCard(o)).join("")}</div>${swipeHint(opps.length)}` : empty("今日暂无可研判的经营机会。")}
   ${backToTop()}
 </section>`;
 
   // ---- ⑤ 风险预警 ----
   const risk = `<section class="dv-mod" id="dv-risk">
   <div class="dv-mod-head"><h2>风险预警</h2><span class="dv-mod-sub">重大风险独立展示 · 等级依来源客观标注</span></div>
-  ${report.risk ? `<div class="dv-scroller">${riskBlock(report.risk, domainOf)}</div>` : empty("今日暂无重大风险预警。")}
+  ${report.risk ? `<div class="dv-scroller">${riskBlock(report.risk)}</div>` : empty("今日暂无重大风险预警。")}
   ${backToTop()}
 </section>`;
 
@@ -256,12 +257,13 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
       crossDept: true,
     });
   }
-  const attentionHtml = attention.length
-    ? attention.slice(0, 3).map((a, i) => `<article class="dv-card dv-attn">
+  const shown = attention.slice(0, 3);
+  const attentionHtml = shown.length
+    ? `<div class="dv-scroller">${shown.map((a, i) => `<article class="dv-card dv-attn">
     <h3 class="dv-card-title"><span class="dv-attn-n">${i + 1}</span> ${escapeHtml(a.topic)}</h3>
     <p class="dv-why">${escapeHtml(a.reason)}</p>
     <div class="dv-chips"><span class="dv-chip">建议关注</span>${a.needCheck ? '<span class="dv-chip dv-chip-risk">建议进一步核实</span>' : ""}${a.crossDept ? '<span class="dv-chip">建议跨条线研究</span>' : ""}</div>
-  </article>`).join("")
+  </article>`).join("")}</div>${swipeHint(shown.length)}`
     : empty("今日暂无需要归纳的管理关注事项。");
   const attentionSection = `<section class="dv-mod" id="dv-attention">
   <div class="dv-mod-head"><h2>管理关注</h2><span class="dv-mod-sub">不超过 3 项 · 建议性质 · 非已作决定</span></div>
@@ -269,7 +271,7 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   ${backToTop()}
 </section>`;
 
-  // ---- ⑦ 六大经营领域导航（当日计数 + S/A 亮标；领域判定来自数据侧 primary_domain）----
+  // ---- ⑦ 六大经营领域（平铺标签 + 单一明细面板；不做跨模块过滤）----
   const domainCounts = new Map<string, { total: number; high: number }>();
   for (const d of DOMAIN_IDS) domainCounts.set(d, { total: 0, high: 0 });
   for (const it of allItems) {
@@ -278,17 +280,26 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
     c.total += 1;
     if (it.importance === 3 || it.importance === 2) c.high += 1;
   }
-  const domainCards: string[] = [];
-  const domainDetails: string[] = [];
+  // 默认选中当日条目最多的领域（并列取配置顺序在前）；全为 0 时选第一个，
+  // 保证首屏就有内容可读，而不是一片空白面板。
+  let defaultDomain = DOMAIN_IDS[0];
+  let richest = -1;
+  for (const d of BUSINESS_DOMAINS) {
+    const t = domainCounts.get(d.id)?.total ?? 0;
+    if (t > richest) {
+      richest = t;
+      defaultDomain = d.id;
+    }
+  }
+  const domainTabs: string[] = [];
+  const domainPanels: string[] = [];
   for (const d of BUSINESS_DOMAINS) {
     const c = domainCounts.get(d.id) ?? { total: 0, high: 0 };
     const members = allItems.filter((it) => it.primary_domain === d.id).slice(0, 12);
-    const detailId = `dv-domain-detail-${d.id}`;
-    domainCards.push(`<button type="button" class="dv-domain" data-expand-domain="${d.id}" aria-expanded="false" aria-controls="${detailId}">
-      <span class="dv-domain-label">${escapeHtml(d.short)}</span>
-      <span class="dv-domain-hint">${escapeHtml(d.name)}</span>
-      <span class="dv-domain-count">${c.total > 0 ? `当日 ${c.total} 条${c.high ? ` · 含重点 ${c.high}` : ""}` : "当日暂无"}</span>
-    </button>`);
+    const tabId = `dv-domain-tab-${d.id}`;
+    const panelId = `dv-domain-panel-${d.id}`;
+    const on = d.id === defaultDomain;
+    domainTabs.push(`<button type="button" role="tab" class="dv-tab${on ? " active" : ""}" id="${tabId}" data-domain-tab="${d.id}" aria-selected="${on}" aria-controls="${panelId}" tabindex="${on ? "0" : "-1"}"><span class="dv-tab-label">${escapeHtml(d.short)}</span><span class="dv-tab-count${c.total ? "" : " dv-tab-zero"}">${c.total}</span></button>`);
     const detail = members.length
       ? members.map((it) => {
           const href = it.url ? escapeHtml(it.url) : "";
@@ -299,19 +310,15 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
           return `<li class="dv-domain-row">${line}<span class="dv-domain-meta">${escapeHtml(it.source)}${it.date ? ` · ${escapeHtml(it.date)}` : ""}</span></li>`;
         }).join("")
       : `<li class="dv-domain-row dv-domain-none">当日暂无该领域条目</li>`;
-    domainDetails.push(`<div class="dv-domain-detail" id="${detailId}" hidden>
-      <div class="dv-domain-detail-head">${escapeHtml(d.short)} · 当日条目${members.length > 12 ? "（前 12 条）" : ""}</div>
+    domainPanels.push(`<div class="dv-domain-panel" id="${panelId}" role="tabpanel" aria-labelledby="${tabId}"${on ? "" : " hidden"}>
+      <div class="dv-domain-panel-head">${escapeHtml(d.name)} · 当日 ${c.total} 条${c.high ? ` · 含重点 ${c.high}` : ""}${c.total > 12 ? "（前 12 条）" : ""}</div>
       <ul class="dv-domain-list">${detail}</ul>
     </div>`);
   }
   const domainsSection = `<section class="dv-mod" id="dv-domains">
-  <div class="dv-mod-head"><h2>六大经营领域</h2><span class="dv-mod-sub">按领域浏览 · 点击展开当日条目</span></div>
-  <div class="dv-roles" role="group" aria-label="按经营领域过滤">
-    <button type="button" class="dv-role active" data-role="all">全部</button>
-    ${BUSINESS_DOMAINS.map((d) => `<button type="button" class="dv-role" data-role="${d.id}">${escapeHtml(d.short)}</button>`).join("")}
-  </div>
-  <nav class="dv-domains">${domainCards.join("")}</nav>
-  ${domainDetails.join("")}
+  <div class="dv-mod-head"><h2>六大经营领域</h2><span class="dv-mod-sub">按领域浏览 · 点击标签查看当日条目</span></div>
+  <div class="dv-tabs" role="tablist" aria-label="六大经营领域">${domainTabs.join("")}</div>
+  ${domainPanels.join("")}
   ${backToTop()}
 </section>`;
 
@@ -407,16 +414,26 @@ export const DECISION_VIEW_CSS = `
   .dv-mod-sub { font-size:0.74rem; color:var(--muted); }
   .dv-hero-text { margin:0; padding:0.9rem 1rem; font-size:0.92rem; line-height:1.75;
     border-left:3px solid var(--accent-brand); border-radius:var(--r-md); background:var(--card); }
-  .dv-scroller { display:flex; flex-direction:row; gap:0.6rem;
-    overflow-x:auto; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory;
-    scrollbar-width:thin; scrollbar-color:var(--rule) transparent;
-    padding:0 0.4rem 0.6rem 0; }
-  .dv-scroller > .dv-card { flex:0 0 auto; width:82vw; max-width:340px;
-    margin:0; scroll-snap-align:start; box-sizing:border-box; }
+  /* 横滑：移动端左右滑（隐藏滚动条 + 右缘渐隐示意还有内容），桌面转等宽网格 */
+  .dv-scroller { display:flex; flex-direction:row; align-items:stretch; gap:0.7rem;
+    overflow-x:auto; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain;
+    scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none;
+    padding:0.2rem 0.15rem 0.5rem; }
+  .dv-scroller::-webkit-scrollbar { display:none; }
+  .dv-scroller.has-more:not(.at-end) {
+    -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 30px),transparent 100%);
+    mask-image:linear-gradient(to right,#000 calc(100% - 30px),transparent 100%); }
+  .dv-scroller > .dv-card { flex:0 0 auto; width:min(80vw,330px); margin:0;
+    display:flex; flex-direction:column; box-sizing:border-box;
+    scroll-snap-align:start; scroll-snap-stop:always; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+  .dv-scroller > .dv-card .dv-card-foot { margin-top:auto; padding-top:0.55rem; }
+  .dv-swipe-hint { margin:0.1rem 0 0; font-size:0.72rem; color:var(--muted); }
   @media (min-width:720px) {
-    .dv-scroller { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-      overflow:visible; padding-bottom:0; padding-right:0; scroll-snap-type:none; }
-    .dv-scroller > .dv-card { width:auto; max-width:none; }
+    .dv-scroller { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:0.7rem; overflow:visible; padding:0; scroll-snap-type:none;
+      -webkit-mask-image:none; mask-image:none; }
+    .dv-scroller > .dv-card { width:auto; max-width:none; scroll-snap-align:none; }
+    .dv-swipe-hint { display:none; }
   }
   .dv-card { padding:0.85rem 0.95rem; margin:0 0 0.7rem; border:1px solid var(--rule);
     border-radius:var(--r-md); background:var(--card); }
@@ -446,30 +463,33 @@ export const DECISION_VIEW_CSS = `
   .dv-attn-n { display:inline-block; min-width:1.25rem; color:var(--accent-brand); font-variant-numeric:tabular-nums; }
   .dv-empty { margin:0; padding:1rem; font-size:0.85rem; color:var(--muted);
     border:1px dashed var(--rule); border-radius:var(--r-md); background:var(--bg); }
-  .dv-roles { display:flex; flex-wrap:wrap; gap:0.4rem; margin:0 0 0.7rem; }
-  .dv-role { font:inherit; font-size:0.78rem; padding:0.24rem 0.7rem; min-height:32px;
-    border:1px solid var(--rule); border-radius:999px; background:var(--bg);
-    color:var(--fg-soft); cursor:pointer; }
-  .dv-role.active { background:var(--accent); color:var(--accent-fg); border-color:var(--accent); }
-  .dv-domains { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.6rem; }
-  .dv-domain { display:flex; flex-direction:column; gap:0.2rem; min-height:64px; padding:0.7rem 0.8rem;
-    border:1px solid var(--rule); border-radius:var(--r-md); background:var(--card); text-decoration:none; color:var(--fg); }
-  .dv-domain { font:inherit; text-align:left; cursor:pointer; }
-  .dv-domain:active, .dv-domain[aria-expanded="true"] { background:var(--card-alt); }
-  .dv-domain-detail { margin:0.5rem 0 0; padding:0.7rem 0.85rem;
-    border:1px solid var(--rule); border-radius:var(--r-md); background:var(--bg); }
-  .dv-domain-detail[hidden] { display:none; }
-  .dv-domain-detail-head { font-size:0.78rem; font-weight:600; color:var(--fg-soft); margin-bottom:0.45rem; }
+  /* 六大经营领域：平铺标签条（窄屏两行三列全可见，桌面一行六等分）+ 单一明细面板 */
+  .dv-tabs { display:flex; flex-wrap:wrap; margin:0 0 0.8rem; border-bottom:1px solid var(--rule); }
+  .dv-tab { flex:1 1 33.33%; min-width:0; display:inline-flex; align-items:center; justify-content:center;
+    gap:0.3rem; font:inherit; font-size:0.84rem; line-height:1.4; padding:0.55rem 0.35rem;
+    min-height:42px; border:0; border-bottom:2px solid transparent; border-radius:0;
+    background:transparent; color:var(--muted); cursor:pointer; white-space:nowrap; }
+  .dv-tab.active { color:var(--fg); font-weight:600; border-bottom-color:var(--accent-brand);
+    background:var(--card-alt); }
+  .dv-tab-label { overflow:hidden; text-overflow:ellipsis; }
+  .dv-tab-count { font-size:0.72rem; font-variant-numeric:tabular-nums; opacity:0.8; }
+  .dv-tab.active .dv-tab-count { color:var(--accent-brand); opacity:1; }
+  .dv-tab-zero { opacity:0.4; }
+  @media (min-width:720px) {
+    .dv-tab { flex:1 1 0; font-size:0.86rem; }
+  }
+  .dv-domain-panel { padding:0.75rem 0.9rem; border:1px solid var(--rule);
+    border-radius:var(--r-md); background:var(--bg); }
+  .dv-domain-panel[hidden] { display:none; }
+  .dv-domain-panel-head { font-size:0.78rem; font-weight:600; color:var(--fg-soft);
+    margin-bottom:0.4rem; padding-bottom:0.4rem; border-bottom:1px solid var(--rule); }
   .dv-domain-list { list-style:none; margin:0; padding:0; }
-  .dv-domain-row { padding:0.4rem 0; border-top:1px solid var(--rule); }
-  .dv-domain-row:first-child { border-top:0; }
-  .dv-domain-item { font-size:0.85rem; line-height:1.5; color:var(--link); text-decoration:none; }
+  .dv-domain-row { padding:0.45rem 0; border-top:1px solid var(--rule); }
+  .dv-domain-row:first-child { border-top:0; padding-top:0; }
+  .dv-domain-item { font-size:0.85rem; line-height:1.55; color:var(--link); text-decoration:none; }
   .dv-domain-item-plain { color:var(--fg); }
   .dv-domain-meta { display:block; font-size:0.72rem; color:var(--muted); margin-top:0.15rem; }
   .dv-domain-none { font-size:0.82rem; color:var(--muted); }
-  .dv-domain-label { font-size:0.9rem; font-weight:600; }
-  .dv-domain-hint { font-size:0.73rem; color:var(--muted); }
-  .dv-domain-count { font-size:0.72rem; color:var(--accent-brand); }
   .dv-legacy { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.5rem; }
   .dv-legacy-item { display:flex; flex-direction:column; gap:0.15rem; padding:0.6rem 0.75rem;
     border:1px solid var(--rule); border-radius:var(--r-md); background:var(--card);
@@ -482,13 +502,14 @@ export const DECISION_VIEW_CSS = `
     .dv-masthead h1 { font-size:1.28rem; }
     .dv-card { padding:0.8rem; }
     .dv-card-title { font-size:0.94rem; }
-    .dv-domains, .dv-legacy { grid-template-columns:1fr; }
+    .dv-legacy { grid-template-columns:1fr; }
+    .dv-domain-panel { padding:0.7rem 0.8rem; }
     .dv-float-top { right:0.75rem; bottom:0.75rem; width:42px; height:42px; }
     .view-switch-hint { flex-basis:100%; }
   }
 `;
 
-/** 视角切换 + 快捷跳转平滑滚动 + 返回顶部 + 角色轻量筛选（均纯前端，不改数据）。 */
+/** 视角切换 + 快捷跳转平滑滚动 + 返回顶部 + 横滑边缘态 + 领域标签切换（均纯前端，不改数据）。 */
 export function generateDecisionViewScript(): string {
   return `
 (function(){
@@ -538,32 +559,52 @@ export function generateDecisionViewScript(): string {
     smoothTo(t);
   });
 
-  // 六大领域标签过滤：只按领域 id 过滤卡片，不新增 AI 任务、不删数据、不改锚点
-  var roleBar=root?root.querySelector('.dv-roles'):null;
-  if(roleBar) roleBar.addEventListener('click',function(e){
-    var b=e.target&&e.target.closest?e.target.closest('.dv-role'):null;
-    if(!b)return;
-    var domain=b.getAttribute('data-role')||'all';
-    roleBar.querySelectorAll('.dv-role').forEach(function(x){x.classList.toggle('active',x===b);});
-    root.querySelectorAll('.dv-scroller .dv-card').forEach(function(card){
-      if(domain==='all'){card.style.display='';return;}
-      var dom=card.getAttribute('data-domain')||'';
-      card.style.display=(dom===domain)?'':'none';
+  // 横滑边缘态：内容超出时右缘渐隐，滑到底取消渐隐（纯视觉，不动数据/不改布局）
+  var scrollers=root?root.querySelectorAll('.dv-scroller'):[];
+  function markEdge(el){
+    var over=el.scrollWidth-el.clientWidth>4;
+    el.classList.toggle('has-more',over);
+    el.classList.toggle('at-end',!over||el.scrollLeft>=el.scrollWidth-el.clientWidth-4);
+  }
+  if(scrollers.length){
+    scrollers.forEach(function(el){
+      markEdge(el);
+      el.addEventListener('scroll',function(){markEdge(el);},{passive:true});
     });
-  });
+    window.addEventListener('resize',function(){scrollers.forEach(markEdge);},{passive:true});
+  }
 
-  // 领域卡片点击 → 本页展开/收起该领域当日条目（不跳外页、零死链）
+  // 六大经营领域：平铺标签切换单一明细面板（不跳外页、不做跨模块过滤）
+  function selectDomain(id){
+    if(!root) return;
+    root.querySelectorAll('.dv-tab[data-domain-tab]').forEach(function(t){
+      var on=t.getAttribute('data-domain-tab')===id;
+      t.classList.toggle('active',on);
+      t.setAttribute('aria-selected',on?'true':'false');
+      t.setAttribute('tabindex',on?'0':'-1');
+    });
+    root.querySelectorAll('.dv-domain-panel').forEach(function(p){
+      p.hidden=p.id!=='dv-domain-panel-'+id;
+    });
+  }
   if(root) root.addEventListener('click',function(e){
-    var b=e.target&&e.target.closest?e.target.closest('.dv-domain[data-expand-domain]'):null;
-    if(!b)return;
-    var id=b.getAttribute('data-expand-domain');
-    var detail=document.getElementById('dv-domain-detail-'+id);
-    if(!detail)return;
-    var opening=detail.hidden;
-    root.querySelectorAll('.dv-domain-detail').forEach(function(d){d.hidden=true;});
-    root.querySelectorAll('.dv-domain[data-expand-domain]').forEach(function(x){x.setAttribute('aria-expanded','false');});
-    detail.hidden=!opening;
-    b.setAttribute('aria-expanded',opening?'true':'false');
+    var t=e.target&&e.target.closest?e.target.closest('.dv-tab[data-domain-tab]'):null;
+    if(!t)return;
+    selectDomain(t.getAttribute('data-domain-tab'));
+  });
+  // 标签键盘可达：左右方向键在六个领域间切换（role=tablist 语义要求）
+  if(root) root.addEventListener('keydown',function(e){
+    var t=e.target;
+    if(!t||!t.getAttribute||!t.getAttribute('data-domain-tab'))return;
+    var step=e.key==='ArrowRight'?1:(e.key==='ArrowLeft'?-1:0);
+    if(!step)return;
+    var list=Array.prototype.slice.call(root.querySelectorAll('.dv-tab[data-domain-tab]'));
+    var i=list.indexOf(t);
+    if(i<0)return;
+    var next=list[(i+step+list.length)%list.length];
+    e.preventDefault();
+    selectDomain(next.getAttribute('data-domain-tab'));
+    next.focus();
   });
 })();`;
 }
