@@ -50,6 +50,8 @@ function defaultConfig(): PipelineConfig {
     // F3（2026-09-16 用户反馈「占比太高」）：股市面板每市场口径由 5 收到 3（三市场合计 ≤9）。
     maxStockNewsPerMarket: Number(process.env.MAX_STOCK_NEWS_PER_MARKET || DEFAULT_MAX_STOCK_NEWS_PER_MARKET),
     eventMemory: (process.env.EVENT_MEMORY ?? "1") !== "0",
+    // 二期动态经营重点引擎：默认开启；FOCUS_ENGINE=0 整体回退一期排序（配置坏也自动降级）
+    focusEngine: (process.env.FOCUS_ENGINE ?? "1") !== "0",
     filters: {
       keyword: envFlag("KEYWORD_FILTER"),
       keywordFallback: envFlag("KEYWORD_FILTER_FALLBACK"),

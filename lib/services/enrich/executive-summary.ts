@@ -1320,6 +1320,13 @@ export function buildExecutiveFromScores(
     locale?: string;
   }>,
   _date: string,
+  /**
+   * 二期：当前生效的经营重点。缺省 / 空 = 一期口径（排序逐位一致）。
+   *
+   * 兜底路径也必须带加权：它是 LLM 失败日的唯一 Top-N 生成路径，若此处不接，
+   * 就会出现「AI 正常的日子按重点排、AI 挂掉的日子按基础分排」两套口径。
+   */
+  focus: readonly FocusItem[] = [],
 ): ExecutiveSummary {
   const pool: ScorableArticle[] = (articles ?? [])
     .filter((a) => a && a.title)
@@ -1332,7 +1339,22 @@ export function buildExecutiveFromScores(
       url: a.url,
       locale: a.locale,
     }));
-  const ranked = rankByRelevance(pool);
+  const rankedBase = rankByRelevance(pool);
+  // 经营重点加权：只改**先后**，不改 tier —— 下面的必读/商机筛选仍按
+  // tier（must_read/insight）把关，drop/context 档加分再多也进不来（规格 4.5）。
+  const ranked = focus.length
+    ? rankedBase
+        .map((r) => ({
+          r,
+          s: applyFocus(
+            { title: r.article.title, ...(r.article.summary ? { excerpt: r.article.summary } : {}) },
+            r.relevance.score,
+            focus,
+          ).finalScore,
+        }))
+        .sort((a, b) => b.s - a.s) // 稳定排序：同分保持 rankByRelevance 原序
+        .map((x) => x.r)
+    : rankedBase;
   // 必读：从 must_read / insight 档里选（阈值把关：drop/context 档不进必读）。
   // 均衡优先：核心条线各取 1 条，再按重要性补齐（2026-08-29 用户拍板）。
   const mr = balancedPick(

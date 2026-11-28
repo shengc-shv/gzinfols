@@ -25,6 +25,10 @@ import { mergeStoredExecutive } from "../../services/assemble/merge-executive";
 import { loadExecStore, writeExecStore } from "../../adapters/persistence";
 import { dedupeExecAgainstSections } from "../../services/enrich/dedupe-sections";
 import { buildTwoDayExecPool, collectTwoDayArticles } from "../../services/enrich/exec-pool";
+// 二期：动态经营重点（配置读取 = IO，归本层；匹配/评分是纯函数，在服务层）
+import { readFocusConfigFiles } from "../../adapters/business-focus/config-store";
+import { loadFocusConfig, isFocusEffective } from "../../services/business-focus/config-loader";
+import type { FocusItem } from "../../services/business-focus/types";
 import type { HistoryStore } from "../../services/memory/history";
 import type { FilterResult, PipelineDeps } from "../../contracts/pipeline";
 import type { PipelineContext } from "../../contracts/pipeline";
@@ -219,6 +223,45 @@ export async function buildExecutiveSummary(
   // 只看今天会让兜底产出空必读；昨日白天的重要条目须从历史库捞回（2026-08-29）。
   const twoDayPool = collectTwoDayArticles({ history, articles, today: date });
 
+  /**
+   * 二期：本期生效的经营重点（动态加权）。
+   *
+   * 三条降级原则（规格 10.2：动态重点不能成为日报的单点故障）：
+   *  - 开关关闭（FOCUS_ENGINE=0）→ 空数组，排序与一期逐位一致；
+   *  - 配置读取/解析异常 → catch 后空数组，只告警不抛错，日报照常生成；
+   *  - 没有 active 或全部过期 → 空数组。
+   * 传入 `buildTwoDayExecPool` / `applyRelevanceGuardrail` 的都是这个数组：
+   * 空数组时两者内部直接走一期路径（不进入匹配、不改排序）。
+   */
+  const focusItems: FocusItem[] = (() => {
+    if (!ctx.config.focusEngine) return [];
+    try {
+      const files = readFocusConfigFiles();
+      const corrupt = files.filter((f) => f.state === "corrupt");
+      if (corrupt.length) {
+        ctx.log.warn(
+          "focus",
+          `⚠️ 经营重点配置损坏，已跳过该层：${corrupt.map((f) => f.file).join("、")}` +
+            `（这不是「本季度没重点」，请修 JSON）`,
+        );
+      }
+      const loaded = loadFocusConfig(files, { today: date });
+      const effective = loaded.items.filter((it) => isFocusEffective(it, date));
+      if (effective.length) {
+        ctx.log.info(
+          "focus",
+          `🎯 本期经营重点 ${effective.length} 条（配置版本 ${loaded.version}）：` +
+            effective.map((it) => `${it.name}[${it.layer}/${it.grade}]`).join("、"),
+        );
+      }
+      return effective;
+    } catch (e) {
+      const msg = e instanceof Error ? e.message : String(e);
+      ctx.log.warn("focus", `经营重点引擎异常，退回一期基础排序：${msg}`);
+      return [];
+    }
+  })();
+
   // —— 内容记忆与去重（2026-09-02）——
   // 解决「同一事件连续多天重复口播」：生成前把近期已播报事件告诉 LLM（含建议
   // 切入角度），生成后再用确定性闸门过滤掉无增量的重复表述。
@@ -335,7 +378,7 @@ export async function buildExecutiveSummary(
     // 评分层兜底：无 store 时用分行相关性评分器确定性生成必读/商机，
     // 保证 SKIP_AI 下报告也以客户为中心（不空、不靠运气、房贷40年型必然置顶）。
     // 输入用「今天+昨天」两天池（twoDayPool），覆盖凌晨突发与昨日白天重要条目。
-    const fallback = buildExecutiveFromScores(twoDayPool, date);
+    const fallback = buildExecutiveFromScores(twoDayPool, date, focusItems);
     if (fallback.must_read.length || fallback.insights.length) {
       const next = mergeStoredExecutive(report, await guard(fallback));
       ctx.log.info(
@@ -372,6 +415,8 @@ export async function buildExecutiveSummary(
       report,
       today: date,
       now: ctx.startTime,
+      // 空数组（引擎关闭/无配置/异常降级）→ 池内排序 = 一期口径
+      ...(focusItems.length ? { focus: focusItems } : {}),
     });
     // B-1：从 filterResults 提取 risk_tracker 候选，喂给 LLM 作为 risk 段输入
     const riskCandidates = filterResults
@@ -437,7 +482,7 @@ export async function buildExecutiveSummary(
           `🩺 LLM 返回内容空壳（must_read ${exec.must_read?.length ?? 0} / insights ${exec.insights?.length ?? 0}），回退 2 天评分兜底`,
         );
       }
-      const fb = buildExecutiveFromScores(twoDayPool, date);
+      const fb = buildExecutiveFromScores(twoDayPool, date, focusItems);
       ctx.log.info(
         "exec",
         `🔁 LLM 执行摘要为空/过薄，回退 2 天评分兜底（finance ${pool.finance.length}+gz ${pool.gz.length} → 必读 ${fb.must_read.length}/商机 ${fb.insights.length}）`,
@@ -459,7 +504,7 @@ export async function buildExecutiveSummary(
     if (exec) {
       // 评分护栏：LLM 生成后按分行相关性重排必读 + 强制顶入硬规则条目，
       // 让「客户中心」不依赖 LLM 临场发挥（房贷40年型不可能被埋）。
-      exec = applyRelevanceGuardrail(exec, twoDayPool);
+      exec = applyRelevanceGuardrail(exec, twoDayPool, focusItems);
       // B7 边界互斥守卫：同一事件不得既必读/商机又风险（确定性去重，不靠 LLM 自觉）。
       exec = dedupeExecutiveCrossSection(exec);
       // 内容记忆闸门：过滤「昨天刚说过、今天无增量」的重复表述，
@@ -517,7 +562,7 @@ export async function buildExecutiveSummary(
     // 2026-08-31：LLM 抛错同样回退 2 天评分兜底 —— 与「LLM 返回空」同口径，
     // 保证「今日分析/定调」永不空且与下方展示一致（此前沿用 PASS2 会重现薄产出问题）。
     try {
-      const fb = buildExecutiveFromScores(twoDayPool, date);
+      const fb = buildExecutiveFromScores(twoDayPool, date, focusItems);
       if (fb.must_read.length || fb.insights.length) {
         const next = mergeStoredExecutive(report, await guard(fb));
         ctx.log.info(

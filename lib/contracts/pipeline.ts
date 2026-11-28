@@ -144,6 +144,11 @@ export interface PipelineConfig {
   maxStockNewsPerMarket: number;
   /** 事件记忆总开关（EVENT_MEMORY=0 关闭，回滚/A-B 用）。 */
   eventMemory: boolean;
+  /**
+   * 动态经营重点引擎总开关（二期；FOCUS_ENGINE=0 关闭，回滚/A-B 用）。
+   * 关闭后 exec 池与必读重排完全退回一期口径（不加载配置、不做匹配）。
+   */
+  focusEngine: boolean;
   /** 过滤链旁路开关。 */
   filters: FilterFlags;
   /** LLM 模型覆盖（PASS1_MODEL / PASS2_MODEL；空则走后端默认）。 */
