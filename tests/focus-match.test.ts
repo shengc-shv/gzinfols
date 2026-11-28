@@ -54,9 +54,12 @@ test("② M3：标题命中两个普通关键词 + 领域匹配", () => {
   assert.equal(m[0].matchLevel, "M3");
 });
 
-test("③ M2：单个关键词 + 领域匹配（不到精准）", () => {
+test("③ 单个关键词 + 领域匹配最多 M1（不足 M2，防「关键词偶然出现」）", () => {
+  // 2026-11-28 回放校准：旧口径给 M2 +18，让 base 42 的统计稿「金融监管总局：银行业
+  // 总资产…」（仅命中机构名 + 领域）窜到 56 分政策稿之上，属 False Boost。
+  // 现在同一条只到 M1 +3，排位不动；要升到 M2 必须有概念级佐证。
   const m = matchFocus({ title: "银行加码资产配置服务", domains: ["wealth_aum"] }, [focus()]);
-  assert.equal(m[0].matchLevel, "M2");
+  assert.equal(m[0].matchLevel, "M1");
 });
 
 test("④ M2：无关键词但命中两个关联概念", () => {
@@ -67,7 +70,9 @@ test("④ M2：无关键词但命中两个关联概念", () => {
   assert.ok(!m[0].signals.domainMatched, "本例领域未匹配，靠概念佐证升到 M2");
 });
 
-test("⑤ M1：只靠领域匹配，或只命中一个概念", () => {
+test("⑤ 只靠领域匹配只到 M1；只命中一个概念也只到 M1", () => {
+  // 领域是宽分类（「黄金」→ 财富、`金融监管` → 风险管理），单靠它对上最多 +3，
+  // 这样一条新闻即使同时命中五个重点，也最多按前两条计 +3+0.9，不会改变量级。
   const byDomain = matchFocus({ title: "某行发布零售业务季度数据", domains: ["wealth_aum"] }, [focus()]);
   assert.equal(byDomain[0].matchLevel, "M1");
   const byConcept = matchFocus({ title: "银行推进客户分层", domains: [] }, [focus()]);
@@ -107,12 +112,13 @@ test("⑨ 每条命中都带可核对依据：reason 非空、evidence 是原文
 test("⑩ 确定性：同一输入两次匹配结果逐字一致，且按等级降序", () => {
   const inputs = [
     focus({ id: "q1", layer: "quarterly", grade: "S" }),
-    focus({ id: "a1", layer: "annual", grade: "A", core_keywords: [], keywords: ["资产配置"], concepts: [] }),
+    focus({ id: "a1", layer: "annual", grade: "A", core_keywords: [], keywords: ["资产配置", "财富客户"], concepts: [] }),
   ];
   const a = matchFocus({ title: "AUM 与资产配置", domains: ["wealth_aum"] }, inputs);
   const b = matchFocus({ title: "AUM 与资产配置", domains: ["wealth_aum"] }, inputs);
   assert.deepEqual(a, b);
-  assert.deepEqual(a.map((x) => x.matchLevel), ["M3", "M2"]);
+  // q1 命中核心词（AUM）+ 领域 → M3；a1 只命中 1 个关键词、无核心词无概念 → M1
+  assert.deepEqual(a.map((x) => x.matchLevel), ["M3", "M1"]);
 });
 
 test("⑪ 加分：季度 M3 = 20，finalScore = base + 20，基础分不被改写", () => {

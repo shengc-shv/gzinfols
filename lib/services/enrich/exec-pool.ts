@@ -29,6 +29,9 @@ import { isGdIpoCandidate } from "./heuristics";
 import { isRoutineTutoringReport } from "../classify/gd-ipo";
 import { isRoutineIpoItem } from "../classify/gd-ipo-spoken";
 import { IPO_VOICE_WINDOW_DAYS } from "../../ipo-config";
+// 二期（动态经营重点）：领域现场判定 + 重点匹配 + 加权（全部纯函数、零 LLM）
+import { applyFocus } from "../business-focus/focus-apply";
+import type { FocusItem } from "../business-focus/types";
 
 /** 持久化历史库条目（article-history.json 单条子集）。 */
 export interface ExecPoolHistoryEntry {
@@ -187,6 +190,15 @@ export interface BuildTwoDayExecPoolOpts {
   today?: string;
   /** 参照时刻（**必填**，2026-09-14 C-3）。由调用方注入 `ctx.startTime`，服务层不隐式读时钟。 */
   now: Date;
+  /**
+   * 二期：当前生效的经营重点（`FocusConfigResult.active`）。
+   *
+   * 缺省 / 空数组 = **完全不加权**，排序与一期逐位一致（零回归）。
+   * 传入后只改变「同档位内的先后」：`bodyRank`（正文优先）与 `policyRank`（国家政策优先）
+   * 这两级 10-29 口径仍是硬优先，focus **只作第三顺位比较** ——
+   * 否则一条命中季度重点的行情评论会挤掉必须被念到的政策稿。
+   */
+  focus?: readonly FocusItem[];
 }
 
 /**
@@ -198,6 +210,8 @@ export interface BuildTwoDayExecPoolOpts {
 export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResult {
   const tz = getReportTz();
   const now = opts.now;
+  /** 二期：生效重点（空 = 不加权，一期行为）。 */
+  const focuses = opts.focus ?? [];
   const tk = opts.today ?? todayKey(now);
   // 昨天：以「今天 00:00 减 24h」再取日期键，规避 DST 边缘（Asia/Shanghai 无 DST）。
   const yk = opts.today
@@ -365,8 +379,30 @@ export function buildTwoDayExecPool(opts: BuildTwoDayExecPoolOpts): ExecPoolResu
   const bodyRank = (it: ExecPoolItem): number => (it.inBody ? 1 : 0);
   const policyRank = (it: ExecPoolItem): number =>
     isNationalPolicyText(`${it.title} ${it.excerpt ?? it.summary ?? ""}`) ? 1 : 0;
+  /**
+   * 二期（2026-11-28）：排序用总分 = 基础分 + 经营关注度分（≤30，独立计算）。
+   *
+   * - `focuses` 为空 → 直接返回基础分，**不进入匹配**：一期行为逐位一致（零回归）。
+   * - 只落在 `byRank` 的**第三顺位**：正文优先 / 国家政策优先仍是硬优先。
+   * - 匹配只用 `excerpt`（采集侧原文）；无 excerpt 时不喂 `summary`（AI 摘要自证循环）。
+   */
+  const finalCache = new Map<string, number>();
+  const finalOf = (it: ExecPoolItem): number => {
+    const base = scoreOf(it);
+    if (!focuses.length) return base;
+    const key = it.url ?? it.title;
+    const hit = finalCache.get(key);
+    if (hit !== undefined) return hit;
+    const v = applyFocus(
+      { title: it.title, ...(it.excerpt?.trim() ? { excerpt: it.excerpt } : {}) },
+      base,
+      focuses,
+    ).finalScore;
+    finalCache.set(key, v);
+    return v;
+  };
   const byRank = (a: ExecPoolItem, b: ExecPoolItem): number =>
-    bodyRank(b) - bodyRank(a) || policyRank(b) - policyRank(a) || scoreOf(b) - scoreOf(a);
+    bodyRank(b) - bodyRank(a) || policyRank(b) - policyRank(a) || finalOf(b) - finalOf(a);
   finance.sort(byRank);
   gz.sort(byRank);
   if (finance.length > MAX_STRICT_ITEMS) finance.length = MAX_STRICT_ITEMS;

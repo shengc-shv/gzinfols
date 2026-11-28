@@ -15,6 +15,9 @@ import {
 } from "../select/filters/relevance-score";
 // 必读 / 洞察候选池条数（单一真源，禁止就地写死数字）
 import { MUST_READ_CANDIDATE_POOL, INSIGHT_CANDIDATE_POOL } from "../memory/event-types";
+// 二期：必读候选的「经营重点」加权（与 exec 池同一口径，见 focus-apply）
+import { applyFocus } from "../business-focus/focus-apply";
+import type { FocusItem } from "../business-focus/types";
 
 /**
  * 「执行摘要 / 商机提示」AI 层（用户 2026-08-19 确认实施）
@@ -1405,6 +1408,13 @@ export function applyRelevanceGuardrail(
     url?: string;
     locale?: string;
   }>,
+  /**
+   * 二期：当前生效的经营重点。缺省 / 空 = 不加权（一期行为逐位一致）。
+   *
+   * 只影响**同分档内的先后**：强制置顶（`rel.override`）与候选池截断规则都不动，
+   * 否则「重点命中」会变成绕过质量门槛的后门（规格 4.5 明令禁止）。
+   */
+  focus: readonly FocusItem[] = [],
 ): ExecutiveSummary {
   if (!exec || !Array.isArray(exec.must_read)) return exec;
   const pool: ScorableArticle[] = (articlePool ?? [])
@@ -1456,7 +1466,14 @@ export function applyRelevanceGuardrail(
   });
   const scoreOf = (m: { title: string; why?: string; url?: string }) =>
     scoreBranchRelevance({ title: m.title, summary: m.why, url: m.url }).score;
-  dedup.sort((a, b) => scoreOf(b) - scoreOf(a));
+  // 二期：排序口径 = 基础分 + 经营关注度分。匹配只用**标题**——
+  // `why` 是我们自己（LLM）写的理由，拿它做重点匹配会形成自证循环。
+  const finalOf = (m: { title: string; why?: string; url?: string }): number => {
+    const base = scoreOf(m);
+    if (!focus.length) return base;
+    return applyFocus({ title: m.title }, base, focus).finalScore;
+  };
+  dedup.sort((a, b) => finalOf(b) - finalOf(a));
 
   // 保留完整候选池（按关联度降序），截断到「播出目标」由下游 exec-guard 顺序判重时决定
   return { ...exec, must_read: dedup.slice(0, MUST_READ_CANDIDATE_POOL) };
