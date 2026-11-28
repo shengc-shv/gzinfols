@@ -29,6 +29,12 @@ data/local-acquired.json
 data/redchip/latest.json
 data/redchip/snapshots/
 data/redchip/changelog.jsonl
+# 境外线索池运行时产物（每次抓取重新生成）。累积台账 data/overseas/leads.json 单独管理
+# （将来启用 overseas 时随整套代码一并入库，届时它是 build-site 生成
+#  site/overseas/index.html 的唯一读方）；下列三个运行时文件不入库。
+data/overseas/latest.json
+data/overseas/snapshots/
+data/overseas/ashare-universe.json
 *.log
 
 # WorkBuddy 工作区数据（项目代码仓库不携带）
