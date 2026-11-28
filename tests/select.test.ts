@@ -117,7 +117,14 @@ test("Stage4 keyword-funnel：L0 硬排除（标题命中黑名单即丢）", as
   assert.deepEqual(r.articles.map((a) => a.url), ["good"]);
 });
 
-test("Stage5 标题相似度判重：同主题同 tier 只留 1（新→旧保留）；不同 tier 各留 1", async () => {
+test("Stage5 标题相似度判重：同主题同 tier 只留 1（内容价值分高者胜出）；不同 tier 各留 1", async () => {
+  // 为什么要让两条**跨天**（2026-11-28 校准）：
+  // 簇内取舍口径是「tier 升序 → 内容价值分降序，⛔ 不看 publishedAt」，同分则保持输入顺序。
+  // 原样本把两条放在同一天（07:00Z / 06:00Z，均落在 ≤1 天档 ×1.00）→ 实测**都是 87 分**，
+  // 于是胜负只由输入顺序决定（先输入的 t2 留下），断言「新的 t1 留下」必然红 ——
+  // 那条断言锁的是 2026-10-05 之前的「新→旧保留」旧语义，已与实现冲突。
+  // 现在把较旧的一条挪到昨天（×0.90）：实测 t1=87 / t2=84，胜出**靠分值而非输入顺序**，
+  // 顺带验证了 S3 时效衰减确实参与判重（跨天端到端证明见下方 S3 用例）。
   const a1 = article({
     url: "t1",
     sourceId: "s1",
@@ -130,7 +137,7 @@ test("Stage5 标题相似度判重：同主题同 tier 只留 1（新→旧保�
     sourceId: "s2",
     tier: "T2",
     title: "央行宣布降准0.5个百分点 释放长期流动性",
-    publishedAt: new Date("2026-09-11T06:00:00Z"),
+    publishedAt: new Date("2026-09-10T06:00:00Z"),
   });
   const a3 = article({
     url: "t3",
@@ -140,7 +147,8 @@ test("Stage5 标题相似度判重：同主题同 tier 只留 1（新→旧保�
     publishedAt: new Date("2026-09-11T05:00:00Z"),
   });
   const r = await runSelect([a2, a1, a3], makeCtx());
-  // 同 T2 只留更新的 t1；T1 与 T2 不同档 → 各留 1（gzinfo「政府留 1 + 媒体留 1」）
+  // 同 T2 只留分值更高的 t1（输入顺序是 t2 在前，故这不是「先来先得」）；
+  // T1 与 T2 不同档 → 各留 1（gzinfo「政府留 1 + 媒体留 1」）
   assert.deepEqual(r.articles.map((a) => a.url).sort(), ["t1", "t3"]);
 });
 
