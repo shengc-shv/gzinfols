@@ -122,8 +122,10 @@ const poolArticles = (Object.values(report.sections ?? {}) as ReportItem[][])
   .filter((it) => it?.title_cn || it?.title_orig)
   .map((it) => ({ title: it.title_cn || it.title_orig || "", summary: it.summary, url: it.url }));
 
-const guardA = applyRelevanceGuardrail(report, poolArticles);
-const guardB = applyRelevanceGuardrail(report, poolArticles, focuses);
+// 报告对象与 ExecutiveSummary 形状不完全一致（必读 title 可空）——回放只看顺序，显式转换
+const execView = report as unknown as Parameters<typeof applyRelevanceGuardrail>[0];
+const guardA = applyRelevanceGuardrail(execView, poolArticles);
+const guardB = applyRelevanceGuardrail(execView, poolArticles, focuses);
 const mrA = guardA.must_read?.map((m) => m.title) ?? [];
 const mrB = guardB.must_read?.map((m) => m.title) ?? [];
 

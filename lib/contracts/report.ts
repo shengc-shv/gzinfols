@@ -70,6 +70,12 @@ export interface ReportItem {
    */
   primary_domain?: string;
   related_domains?: string[];
+  /**
+   * 命中的经营重点（二期）。只记 M2/M3 —— M1（+0~3）是宽泛关联，
+   * 若也打标会让几乎每条资讯都挂标签、首页变成彩色噪音（规格 5.2「避免过多标签」）。
+   * 排序时 M1 仍参与加权（见 focus-scoring），此字段仅用于展示与追溯。
+   */
+  focus_hits?: ReportFocusHit[];
   /** ≤90 字，结构 = 发生了什么 + 关键数字 + 所以呢。 */
   summary: string;
   /** 3=今日必知 / 2=默认 / 1=折叠。 */
@@ -330,6 +336,50 @@ export interface DailyReport {
    * 还是「记忆判重砍多了」—— 商机侧有 insightFunnel 一眼可见，必读侧此前什么都没有）。
    */
   mustReadFunnel?: MustReadFunnel;
+  /**
+   * 本期经营重点汇总（二期）。首页「本期经营重点」模块与专题页的数据源。
+   *
+   * `version` 是**本期配置的内容指纹**：历史报告保留生成当时的值，改配置不回溯覆盖
+   * （规格 7.3「历史日报不重新计算」）。空 = 本期无生效重点或引擎降级。
+   */
+  focus?: ReportFocusSummary;
+}
+
+/** 单条资讯命中的经营重点（见 `ReportItem.focus_hits`）。 */
+export interface ReportFocusHit {
+  /** 重点 id（配置里的稳定标识）。 */
+  id: string;
+  /** 重点名称（生成当时的写法，不随配置改名回溯）。 */
+  name: string;
+  /** 层级：年度 / 季度 / 临时专项。 */
+  layer: "annual" | "quarterly" | "temporary";
+  /** 重点等级 S/A/B。 */
+  grade: string;
+  /** 匹配等级 M3 精准命中 / M2 高度相关（M1 不入库，见字段注释）。 */
+  level: "M2" | "M3";
+  /** 该条实际获得的重点加分（已封顶与衰减后）。 */
+  bonus: number;
+  /** 命中理由（关键词/概念/领域，可对原文核对）。 */
+  reason: string;
+}
+
+/** 本期经营重点汇总（见 `DailyReport.focus`）。 */
+export interface ReportFocusSummary {
+  /** 配置内容指纹 f-xxxxxxxx。 */
+  version: string;
+  /** 生效重点及当日命中计数（含 M1；`high` 仅 M2/M3）。 */
+  items: Array<{
+    id: string;
+    name: string;
+    layer: "annual" | "quarterly" | "temporary";
+    grade: string;
+    /** 当日相关情报总数（M1+M2+M3）。 */
+    count: number;
+    /** 其中有实质关联的条数（M2/M3），用于「是否有重要机会或风险」判断。 */
+    high: number;
+    /** 关联领域 id（展示用，来自配置）。 */
+    domains: string[];
+  }>;
 }
 
 /** 必读漏斗计数（见 `DailyReport.mustReadFunnel`）。 */

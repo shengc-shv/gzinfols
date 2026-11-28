@@ -236,7 +236,12 @@ test("⑫ 顶部快捷跳转：锚点全部命中模块，空定调不产生死�
   const withHero = decisionPart(renderHtml(report({ hero_line: "定调" })));
   const nav = (withHero.match(/<nav class="dv-quicknav"[\s\S]*?<\/nav>/) ?? [""])[0];
   const targets = [...nav.matchAll(/href="#(dv-[a-z]+)"/g)].map((m) => m[1]);
-  assert.deepEqual(targets, DV_MODULE_NAV.map((m) => m.id), "有定调时跳转目标与模块一一对应");
+  // 本 fixture 无 report.focus → 「本期重点」模块不渲染，快捷跳转同步去掉该锚点
+  assert.deepEqual(
+    targets,
+    DV_MODULE_NAV.filter((m) => m.id !== "dv-focus").map((m) => m.id),
+    "有定调时跳转目标与模块一一对应（无重点配置时不列本期重点）",
+  );
   for (const id of targets) assert.ok(withHero.includes(`id="${id}"`), `跳转目标不存在：${id}`);
   const noHero = decisionPart(renderHtml(report()));
   const nav2 = (noHero.match(/<nav class="dv-quicknav"[\s\S]*?<\/nav>/) ?? [""])[0];
@@ -266,4 +271,65 @@ test("⑭ 风险来源：超长正文不铺页面，正常标题保留（11-28 �
   })));
   assert.ok(!d.includes(longTitle) && d.includes("cnfin.com · 原文"));
   assert.ok(d.includes(`href="${url}"`), "链接仍可溯源");
+});
+
+test("⑮ 本期经营重点（二期）：模块 + 层级 + 命中数 + 点击展开 + 快捷跳转", () => {
+  const hits = [
+    { id: "q4_high_end_aum", name: "中高端客户 AUM 提升", layer: "quarterly" as const, grade: "S", level: "M3" as const, bonus: 20, reason: "标题命中 AUM" },
+    { id: "a26_aum", name: "AUM 规模与结构优化", layer: "annual" as const, grade: "S", level: "M3" as const, bonus: 15, reason: "标题命中 AUM" },
+  ];
+  const d = decisionPart(
+    renderHtml(
+      report({
+        hero_line: "定调",
+        focus: {
+          version: "f-21bd17f2",
+          items: [
+            { id: "q4_high_end_aum", name: "中高端客户 AUM 提升", layer: "quarterly", grade: "S", count: 3, high: 2, domains: ["wealth_aum"] },
+            { id: "a26_aum", name: "AUM 规模与结构优化", layer: "annual", grade: "S", count: 5, high: 0, domains: ["wealth_aum"] },
+          ],
+        },
+        sections: { gz_local: [item("AUM 规模突破千亿", { focus_hits: hits })], biz_insight: [], policy_market: [], tech: [], ipo: [] },
+      }),
+    ),
+  );
+  assert.ok(d.includes('id="dv-focus"'), "本期经营重点模块存在");
+  assert.ok(d.includes("配置版本 f-21bd17f2"), "显示配置版本（可追溯当时用的是哪版重点）");
+  assert.ok(d.includes("本季主攻") && d.includes("年度重点"), "层级标签区分季度/年度");
+  assert.ok(d.includes("当日 3 条 · 实质 2") && d.includes("当日 5 条"), "命中计数");
+  assert.ok(d.includes('data-expand-focus="q4_high_end_aum"') && d.includes('id="dv-focus-detail-q4_high_end_aum"'));
+  assert.ok(d.includes("精准命中"), "展开条目标注匹配等级");
+  assert.ok(/href="#dv-focus"/.test(d), "快捷跳转含本期重点");
+  // 空 focus（未配置）→ 整块不输出、不留占位
+  const none = decisionPart(renderHtml(report()));
+  assert.ok(!none.includes('id="dv-focus"') && !none.includes("本期经营重点"));
+});
+
+test("⑯ 卡片经营重点标签：必读/商机/风险按正文条目打标，与重要性标签并列不合并", () => {
+  const hits = [
+    { id: "q4_high_end_aum", name: "中高端客户 AUM 提升", layer: "quarterly" as const, grade: "S", level: "M3" as const, bonus: 20, reason: "标题命中 AUM" },
+  ];
+  const url = "https://e.com/aum";
+  const d = decisionPart(
+    renderHtml(
+      report({
+        hero_line: "定调",
+        must_read: [{ title: "AUM 开门红", why: "关注理财经理产能", url }],
+        insights: [{ topic: "AUM 争夺", tags: [], impact: "代销中收改善", sources: [{ title: "源", url }] }],
+        risk: { topic: "AUM 集中度", evidence: "依据", impact: "影响", source: "T2", sources: [{ title: "源", url }] },
+        sections: {
+          gz_local: [item("AUM 规模突破千亿", { url, focus_hits: hits })],
+          biz_insight: [],
+          policy_market: [],
+          tech: [],
+          ipo: [],
+        },
+      }),
+    ),
+  );
+  const tags = d.match(/class="dv-ftag dv-ftag-hot"/g) ?? [];
+  assert.equal(tags.length, 3, "必读 / 商机 / 风险三张卡都带同一重点标签");
+  assert.ok(d.includes("本季主攻：中高端客户 AUM 提升"), "标签文案含层级与重点名");
+  assert.ok(d.includes("S 重大变化"), "事件重要性（S/A/B）独立保留，不被重点标签替代");
+  assert.ok(d.includes('title="标题命中 AUM"'), "标签带命中理由（悬停可核对）");
 });

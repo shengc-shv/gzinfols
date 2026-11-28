@@ -25,10 +25,8 @@ import { mergeStoredExecutive } from "../../services/assemble/merge-executive";
 import { loadExecStore, writeExecStore } from "../../adapters/persistence";
 import { dedupeExecAgainstSections } from "../../services/enrich/dedupe-sections";
 import { buildTwoDayExecPool, collectTwoDayArticles } from "../../services/enrich/exec-pool";
-// 二期：动态经营重点（配置读取 = IO，归本层；匹配/评分是纯函数，在服务层）
-import { readFocusConfigFiles } from "../../adapters/business-focus/config-store";
-import { loadFocusConfig, isFocusEffective } from "../../services/business-focus/config-loader";
-import type { FocusItem } from "../../services/business-focus/types";
+// 二期：动态经营重点（加载/降级在 pipeline/focus-context，匹配评分在服务层）
+import { loadFocusForRun } from "../focus-context";
 import type { HistoryStore } from "../../services/memory/history";
 import type { FilterResult, PipelineDeps } from "../../contracts/pipeline";
 import type { PipelineContext } from "../../contracts/pipeline";
@@ -226,41 +224,12 @@ export async function buildExecutiveSummary(
   /**
    * 二期：本期生效的经营重点（动态加权）。
    *
-   * 三条降级原则（规格 10.2：动态重点不能成为日报的单点故障）：
-   *  - 开关关闭（FOCUS_ENGINE=0）→ 空数组，排序与一期逐位一致；
-   *  - 配置读取/解析异常 → catch 后空数组，只告警不抛错，日报照常生成；
-   *  - 没有 active 或全部过期 → 空数组。
-   * 传入 `buildTwoDayExecPool` / `applyRelevanceGuardrail` 的都是这个数组：
-   * 空数组时两者内部直接走一期路径（不进入匹配、不改排序）。
+   * 加载与降级都在 `pipeline/focus-context` 里做（同一份也被首页打标取用）：
+   * 开关关闭 / 配置缺失 / JSON 损坏 / 全部过期 → 空数组 → 池内排序与必读重排
+   * 完全退回一期口径（两者内部都不进入匹配）。
    */
-  const focusItems: FocusItem[] = (() => {
-    if (!ctx.config.focusEngine) return [];
-    try {
-      const files = readFocusConfigFiles();
-      const corrupt = files.filter((f) => f.state === "corrupt");
-      if (corrupt.length) {
-        ctx.log.warn(
-          "focus",
-          `⚠️ 经营重点配置损坏，已跳过该层：${corrupt.map((f) => f.file).join("、")}` +
-            `（这不是「本季度没重点」，请修 JSON）`,
-        );
-      }
-      const loaded = loadFocusConfig(files, { today: date });
-      const effective = loaded.items.filter((it) => isFocusEffective(it, date));
-      if (effective.length) {
-        ctx.log.info(
-          "focus",
-          `🎯 本期经营重点 ${effective.length} 条（配置版本 ${loaded.version}）：` +
-            effective.map((it) => `${it.name}[${it.layer}/${it.grade}]`).join("、"),
-        );
-      }
-      return effective;
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e);
-      ctx.log.warn("focus", `经营重点引擎异常，退回一期基础排序：${msg}`);
-      return [];
-    }
-  })();
+  const focusCtx = loadFocusForRun(date, ctx.config.focusEngine, ctx.log);
+  const focusItems = focusCtx.items;
 
   // —— 内容记忆与去重（2026-09-02）——
   // 解决「同一事件连续多天重复口播」：生成前把近期已播报事件告诉 LLM（含建议

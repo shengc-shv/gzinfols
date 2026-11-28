@@ -17,7 +17,7 @@
  *  - 宁缺毋滥：字段缺失给空状态，不 AI 造数补足；超长来源标题不铺正文。
  */
 import type { DailyReport, ReportInsight, ReportItem, RiskItem } from "../../contracts/report";
-import type { DeltaMark } from "../../contracts/report";
+import type { DeltaMark, ReportFocusHit } from "../../contracts/report";
 import { escapeHtml } from "./cards";
 import { itemAnchorId } from "./atoms";
 import { prevDateKey } from "../../utils/time";
@@ -27,6 +27,7 @@ import { BUSINESS_DOMAINS, DOMAIN_IDS, classifyBusinessDomain } from "../vocab/b
 /** 顶部快捷跳转 + 八模块锚点（id 与下方 section 一一对应，测试守护）。 */
 export const DV_MODULE_NAV: ReadonlyArray<{ id: string; label: string }> = [
   { id: "dv-hero", label: "今日定调" },
+  { id: "dv-focus", label: "本期重点" },
   { id: "dv-mustread", label: "今日必读" },
   { id: "dv-opportunity", label: "商机洞察" },
   { id: "dv-risk", label: "风险预警" },
@@ -60,6 +61,25 @@ function deltaText(d: DeltaMark | undefined): string {
   return `续报${d.issueNo ? ` · 第${d.issueNo}期` : ""}`;
 }
 
+/**
+ * 经营重点标签（二期，规格 5.2）。
+ *
+ * 分层高亮：季度主攻 / 临时专项 = 强调色（这两者才是「现在最该看」），
+ * 年度重点 = 次级灰底；一条最多两个（数据侧 `focus_hits` 已截断）。
+ * ⚠️ 标签只说明「与当前经营阶段相关」，**不是**事件本身的重要性 ——
+ * 后者由同一行的「S/A/B 重大变化」独立表达，两者绝不合并成一句话（规格 5.4）。
+ */
+function focusTags(hits: ReportFocusHit[] | undefined): string {
+  if (!hits?.length) return "";
+  return hits
+    .map((h) => {
+      const layerText = h.layer === "temporary" ? "临时专项" : h.layer === "quarterly" ? "本季主攻" : "年度重点";
+      const hot = h.layer !== "annual";
+      return `<span class="dv-ftag${hot ? " dv-ftag-hot" : ""}" title="${escapeHtml(h.reason)}">${layerText}：${escapeHtml(h.name)}</span>`;
+    })
+    .join("");
+}
+
 /** 今日必读单卡：标题 + 核心事实 + 研判 + 关注理由 + S/A/B + 证据等级 + 来源。 */
 function mustReadCard(
   m: { title?: string; why: string; url: string; delta?: DeltaMark },
@@ -89,6 +109,7 @@ function mustReadCard(
     : "";
   return `<article class="dv-card dv-key">
   <h3 class="dv-card-title">${escapeHtml(m.title || (body?.title_cn ?? ""))}</h3>
+  ${body?.focus_hits?.length ? `<div class="dv-ftags">${focusTags(body.focus_hits)}</div>` : ""}
   ${fields || domain ? `<div class="dv-chips">${domain}${fields}</div>` : ""}
   ${fact ? `<p class="dv-fact"><b>事实</b> ${escapeHtml(fact)}</p>` : ""}
   ${inference ? `<p class="dv-infer"><b>研判</b> ${escapeHtml(inference)}</p>` : ""}
@@ -98,7 +119,10 @@ function mustReadCard(
 }
 
 /** 商机洞察卡：机会 + 客群 + 影响（事实呈现，不写操作指令）。 */
-function opportunityCard(it: ReportInsight): string {
+function opportunityCard(it: ReportInsight, bodyMap: Map<string, ReportItem>): string {
+  // 命中信息挂在正文条目上（来源 url 反查）：商机卡没有自己的 url，
+  // 取第一条能对上正文的来源作为代表 —— 与「找原文」用的是同一落点。
+  const hitBody = (it.sources ?? []).map((s) => (s?.url ? bodyMap.get(s.url) : undefined)).find((b) => b?.focus_hits?.length);
   const marks = (it.sources ?? [])
     .filter((s) => s?.url)
     .slice(0, 3)
@@ -115,6 +139,7 @@ function opportunityCard(it: ReportInsight): string {
           : "";
   return `<article class="dv-card dv-opp">
   <h3 class="dv-card-title">${escapeHtml(it.topic)}${marks ? `<span class="dv-srcs">${marks}</span>` : ""}</h3>
+  ${hitBody?.focus_hits?.length ? `<div class="dv-ftags">${focusTags(hitBody.focus_hits)}</div>` : ""}
   ${stage ? `<div class="dv-chips"><span class="dv-chip">${stage}</span>${deltaText(it.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(it.delta))}</span>` : ""}</div>` : ""}
   ${it.impact ? `<p class="dv-infer"><b>经营影响</b> ${escapeHtml(it.impact)}</p>` : ""}
   ${segs ? `<div class="dv-tags"><span class="dv-tag-label">关联客群</span>${segs}</div>` : ""}
@@ -135,15 +160,17 @@ function riskSourceLabel(src: { title?: string; url: string }): string {
 }
 
 /** 风险预警卡：风险事项 + 事实依据 + 潜在影响 + 证据等级 + 来源。 */
-function riskBlock(r: RiskItem | undefined): string {
+function riskBlock(r: RiskItem | undefined, bodyMap: Map<string, ReportItem>): string {
   if (!r) return "";
   const src = (r.sources ?? []).find((s) => s?.url);
+  const hitBody = (r.sources ?? []).map((s) => (s?.url ? bodyMap.get(s.url) : undefined)).find((b) => b?.focus_hits?.length);
   const grade = evidenceGrade(r.source);
   const link = src
     ? `<a class="dv-src" href="${escapeHtml(src.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(riskSourceLabel(src))}</a>`
     : `<span class="dv-src dv-src-missing">来源未标注</span>`;
   return `<article class="dv-card dv-risk">
   <h3 class="dv-card-title">${escapeHtml(r.topic)}</h3>
+  ${hitBody?.focus_hits?.length ? `<div class="dv-ftags">${focusTags(hitBody.focus_hits)}</div>` : ""}
   ${grade || deltaText(r.delta) ? `<div class="dv-chips">${grade ? `<span class="dv-chip dv-chip-grade">${grade}</span>` : ""}${deltaText(r.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(r.delta))}</span>` : ""}</div>` : ""}
   ${r.evidence ? `<p class="dv-fact"><b>事实依据</b> ${escapeHtml(r.evidence)}</p>` : ""}
   ${r.impact ? `<p class="dv-infer"><b>潜在影响</b> ${escapeHtml(r.impact)}</p>` : ""}
@@ -194,6 +221,9 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   const keys = (report.must_read ?? []).slice(0, 3); // 默认 Top3，高价值最多 5 由数据侧定稿
   const opps = (report.insights ?? []).slice(0, 3);
   const yesterday = prevDateKey(date, 1);
+  // 本期经营重点（二期）：提前取，供顶部快捷跳转判断该锚点是否存在
+  const focusSummary = report.focus;
+  const focusRows = focusSummary?.items ?? [];
 
   // ---- ① 页头数据状态 ----
   const stats = [
@@ -209,11 +239,54 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   // 与旧版同源：剥掉历史遗留「今日分行焦点：」补位前缀，避免双标签/前缀泄漏。
   const hero = stripHeroPrefix(report.hero_line).trim();
   // 空定调整块不输出（PRD 铁律），快捷跳转同步过滤该锚点，避免指向不存在的目标。
-  const navItems = hero ? DV_MODULE_NAV : DV_MODULE_NAV.filter((m) => m.id !== "dv-hero");
+  const navItems = (hero ? DV_MODULE_NAV : DV_MODULE_NAV.filter((m) => m.id !== "dv-hero")).filter(
+    (m) => m.id !== "dv-focus" || focusRows.length > 0,
+  );
   const heroBlock = hero
     ? `<section class="dv-mod dv-hero" id="dv-hero">
   <div class="dv-mod-head"><h2>今日定调</h2><span class="dv-mod-sub">基于公开事实的综合判断 · 非新闻标题复述</span></div>
   <p class="dv-hero-text">${escapeHtml(hero)}</p>
+  ${backToTop()}
+</section>`
+    : "";
+
+  // ---- ②.5 本期经营重点（二期）----
+  // 数据来自 `report.focus`（生成当时写入的汇总），无则整块不输出 —— 不做「暂无重点」占位，
+  // 因为「配置里没设重点」是管理动作的空白，不该每天在首页提醒一次。
+  // 点击展开当日命中条目（本页展开、零死链）；专题页（跨期聚合）是后续 WP9。
+  const focusSection = focusRows.length
+    ? `<section class="dv-mod" id="dv-focus">
+  <div class="dv-mod-head"><h2>本期经营重点</h2><span class="dv-mod-sub">配置版本 ${escapeHtml(focusSummary?.version ?? "")} · 命中会计入今日排序加权</span></div>
+  <ul class="dv-focus-list">${focusRows
+    .map((f) => {
+      const members = allItems.filter((it) => (it.focus_hits ?? []).some((h) => h.id === f.id)).slice(0, 8);
+      const layerText = f.layer === "temporary" ? "临时专项" : f.layer === "quarterly" ? "本季主攻" : "年度重点";
+      const meta = [
+        `<span class="dv-focus-layer${f.layer === "annual" ? "" : " dv-focus-layer-hot"}">${layerText}</span>`,
+        `<span class="dv-focus-grade">${escapeHtml(f.grade)} 级</span>`,
+        `当日 ${f.count} 条${f.high ? ` · 实质 ${f.high}` : ""}`,
+      ].join("");
+      const body = members.length
+        ? `<ul class="dv-focus-items">${members
+            .map((it) => {
+              const title = escapeHtml(it.title_cn || it.url);
+              const link = it.url
+                ? `<a class="dv-domain-item" href="${escapeHtml(it.url)}" target="_blank" rel="noopener noreferrer">${title}</a>`
+                : `<span class="dv-domain-item dv-domain-item-plain">${title}</span>`;
+              const lv = (it.focus_hits ?? []).find((h) => h.id === f.id);
+              return `<li class="dv-domain-row">${link}<span class="dv-domain-meta">${escapeHtml(it.source)}${it.date ? ` · ${escapeHtml(it.date)}` : ""}${lv ? ` · ${lv.level === "M3" ? "精准命中" : "高度相关"}` : ""}</span></li>`;
+            })
+            .join("")}</ul>`
+        : `<p class="dv-focus-none">${f.count > 0 ? `当日 ${f.count} 条弱相关，暂无实质命中条目` : "当日暂无相关情报"}</p>`;
+      return `<li class="dv-focus-row">
+    <button type="button" class="dv-focus-btn" data-expand-focus="${escapeHtml(f.id)}" aria-expanded="false" aria-controls="dv-focus-detail-${escapeHtml(f.id)}">
+      <span class="dv-focus-name">${escapeHtml(f.name)}</span>
+      <span class="dv-focus-meta">${meta}</span>
+    </button>
+    <div class="dv-focus-detail" id="dv-focus-detail-${escapeHtml(f.id)}" hidden>${body}</div>
+  </li>`;
+    })
+    .join("")}</ul>
   ${backToTop()}
 </section>`
     : "";
@@ -228,14 +301,14 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   // ---- ④ 商机洞察 ----
   const opportunity = `<section class="dv-mod" id="dv-opportunity">
   <div class="dv-mod-head"><h2>商机洞察</h2><span class="dv-mod-sub">公开变化中的业务线索 · 非已确认客户需求</span></div>
-  ${opps.length ? `<div class="dv-scroller">${opps.map((o) => opportunityCard(o)).join("")}</div>${swipeHint(opps.length)}` : empty("今日暂无可研判的经营机会。")}
+  ${opps.length ? `<div class="dv-scroller">${opps.map((o) => opportunityCard(o, bodyMap)).join("")}</div>${swipeHint(opps.length)}` : empty("今日暂无可研判的经营机会。")}
   ${backToTop()}
 </section>`;
 
   // ---- ⑤ 风险预警 ----
   const risk = `<section class="dv-mod" id="dv-risk">
   <div class="dv-mod-head"><h2>风险预警</h2><span class="dv-mod-sub">重大风险独立展示 · 等级依来源客观标注</span></div>
-  ${report.risk ? `<div class="dv-scroller">${riskBlock(report.risk)}</div>` : empty("今日暂无重大风险预警。")}
+  ${report.risk ? `<div class="dv-scroller">${riskBlock(report.risk, bodyMap)}</div>` : empty("今日暂无重大风险预警。")}
   ${backToTop()}
 </section>`;
 
@@ -351,6 +424,7 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   </header>
 
   ${heroBlock}
+  ${focusSection}
   ${mustRead}
   ${opportunity}
   ${risk}
@@ -463,6 +537,29 @@ export const DECISION_VIEW_CSS = `
   .dv-attn-n { display:inline-block; min-width:1.25rem; color:var(--accent-brand); font-variant-numeric:tabular-nums; }
   .dv-empty { margin:0; padding:1rem; font-size:0.85rem; color:var(--muted);
     border:1px dashed var(--rule); border-radius:var(--r-md); background:var(--bg); }
+  /* 本期经营重点（二期）：一行一条重点，点击展开当日命中条目。
+     季度/临时用强调色（「现在最该看」），年度用次级灰底 —— 与卡片标签同一口径。 */
+  .dv-ftags { display:flex; flex-wrap:wrap; gap:0.3rem; margin:0 0 0.45rem; }
+  .dv-ftag { font-size:0.71rem; line-height:1.5; padding:0.08rem 0.42rem; border-radius:6px;
+    background:var(--card-alt); color:var(--fg-soft); border:1px solid var(--rule); }
+  .dv-ftag-hot { background:var(--rank-high-bg); color:var(--rank-high-fg); border-color:transparent; font-weight:600; }
+  .dv-focus-list { list-style:none; margin:0; padding:0;
+    border:1px solid var(--rule); border-radius:var(--r-md); background:var(--card); overflow:hidden; }
+  .dv-focus-row + .dv-focus-row { border-top:1px solid var(--rule); }
+  .dv-focus-btn { display:flex; flex-direction:column; gap:0.22rem; width:100%;
+    font:inherit; text-align:left; cursor:pointer; padding:0.7rem 0.85rem; min-height:52px;
+    background:transparent; border:0; color:var(--fg); }
+  .dv-focus-btn:active, .dv-focus-btn[aria-expanded="true"] { background:var(--card-alt); }
+  .dv-focus-name { font-size:0.9rem; font-weight:600; line-height:1.5; }
+  .dv-focus-meta { display:flex; flex-wrap:wrap; align-items:center; gap:0.4rem;
+    font-size:0.73rem; color:var(--muted); }
+  .dv-focus-layer { padding:0.05rem 0.4rem; border-radius:999px; border:1px solid var(--rule); color:var(--fg-soft); }
+  .dv-focus-layer-hot { background:var(--rank-high-bg); color:var(--rank-high-fg); border-color:transparent; }
+  .dv-focus-grade { color:var(--accent-brand); }
+  .dv-focus-detail { padding:0.2rem 0.85rem 0.7rem; background:var(--bg); }
+  .dv-focus-detail[hidden] { display:none; }
+  .dv-focus-items { list-style:none; margin:0; padding:0; }
+  .dv-focus-none { margin:0; padding:0.5rem 0; font-size:0.82rem; color:var(--muted); }
   /* 六大经营领域：平铺标签条（窄屏两行三列全可见，桌面一行六等分）+ 单一明细面板 */
   .dv-tabs { display:flex; flex-wrap:wrap; margin:0 0 0.8rem; border-bottom:1px solid var(--rule); }
   .dv-tab { flex:1 1 33.33%; min-width:0; display:inline-flex; align-items:center; justify-content:center;
@@ -605,6 +702,18 @@ export function generateDecisionViewScript(): string {
     e.preventDefault();
     selectDomain(next.getAttribute('data-domain-tab'));
     next.focus();
+  });
+  // 本期经营重点：点击展开/收起当日命中条目（逐行独立展开，不做单选互斥 ——
+  // 管理者常要同时对照两三条重点；与六大领域「单一面板」不同，那里是互斥浏览）
+  if(root) root.addEventListener('click',function(e){
+    var b=e.target&&e.target.closest?e.target.closest('.dv-focus-btn[data-expand-focus]'):null;
+    if(!b)return;
+    var id=b.getAttribute('data-expand-focus');
+    var box=document.getElementById('dv-focus-detail-'+id);
+    if(!box)return;
+    var opening=box.hidden;
+    box.hidden=!opening;
+    b.setAttribute('aria-expanded',opening?'true':'false');
   });
 })();`;
 }

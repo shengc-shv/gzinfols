@@ -7,7 +7,7 @@
  *   → 口播稿/TTS → 渲染 → 发布。
  * 历史库：管线开头 load（跨天判重/prefill 用），history-step 中 merge+persist（gzinfo 同位）。
  */
-import type { DailyReport } from "../contracts/report";
+import type { DailyReport, ReportItem } from "../contracts/report";
 import type { PipelineContext, PipelineDeps } from "../contracts/pipeline";
 import { ingestAll } from "../services/collect";
 import { normalize } from "../services/normalize";
@@ -18,6 +18,8 @@ import { applyDisplayCaps } from "../services/assemble/display-cap";
 import { annotateDeltas } from "../services/assemble/delta";
 import { annotateMaturity } from "../services/assemble/maturity";
 import { annotateItemMetadata } from "../services/assemble/item-metadata";
+import { annotateFocus } from "../services/assemble/focus-metadata";
+import { loadFocusForRun } from "./focus-context";
 import { productCoverageOf, productCoverageSummary } from "../services/assemble/product-coverage";
 import { mergeRollingAndSaveHistory } from "./history-step";
 import { buildSideOutputs } from "./side-outputs/side-outputs";
@@ -143,6 +145,30 @@ export async function runPipeline(
       "metadata",
       `条目元数据：${withPub}/${items.length} 有真实发布时间 / ${withDomain}/${items.length} 命中经营领域`,
     );
+  }
+
+  // —— ⑦.11 经营重点命中（二期）：条目级 focus_hits + 报告级 focus 汇总 ——
+  // 必须排在 ⑦.10 之后：复用已回填的 primary_domain/related_domains，省一次词表扫描，
+  // 也保证「展示标签」与「排序加权」用同一份领域判定。
+  // 只打标、不改排序（排序在 exec 池与必读护栏里已完成）；M1 不入库（宽泛关联不贴标签）。
+  {
+    const fc = loadFocusForRun(ctx.date, ctx.config.focusEngine); // 日志在 side 侧已打印一次
+    annotated = annotateFocus(annotated, fc.items, fc.version);
+    if (fc.items.length) {
+      const secItems = (Object.values(annotated.sections ?? {}) as ReportItem[][]).flat();
+      const tagged = secItems.filter((it) => (it.focus_hits?.length ?? 0) > 0).length;
+      const strong = secItems.reduce(
+        (n, it) => n + (it.focus_hits ?? []).filter((h) => h.level === "M3").length,
+        0,
+      );
+      ctx.log.info(
+        "focus",
+        `经营重点命中：${tagged}/${secItems.length} 条资讯带重点标签（M3 精准 ${strong} 处）｜` +
+          (annotated.focus?.items ?? [])
+            .map((f) => `${f.name} ${f.count}${f.high ? `(实质${f.high})` : ""}`)
+            .join("、"),
+      );
+    }
   }
 
   // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——
