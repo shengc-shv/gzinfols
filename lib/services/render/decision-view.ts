@@ -1,55 +1,57 @@
 /**
- * 零售经营决策情报视角（L1 领导首页 · 一期）。
+ * 零售经营决策情报视角（第一期 · 管理决策型经营情报首页）。
  *
- * 定位（PRD 1.2 / 1.4）：零售经营决策视角，把「发生了什么」转为「对零售经营意味着什么」。
- * 一期只做**信息价值链的重构呈现**——六模块全部复用 report 既有字段，
- * 零新数据契约、零 LLM、零操作建议（项目铁律：全篇不输出行动指引）。
+ * 2026-11-28 sc 拍板：按新规格**推翻早版六模块**，改为八模块结构：
+ *   ① 页头数据状态 ② 今日定调 ③ 今日必读 ④ 商机洞察 ⑤ 风险预警
+ *   ⑥ 管理关注 ⑦ 六大经营领域导航 ⑧ 原有专业内容入口（+ 角色轻量筛选）
+ * 版本切换（方案 A）保留：本 DOM 与旧版资讯视角共存同一 HTML，body class 切显隐，
+ * 共用同一 report JSON，旧视角 DOM/锚点/断言零改动。
  *
- * 与旧视角关系（sc 2026-11-28 拍板方案 A）：
- *  - 本模块渲染的 DOM 与旧版资讯视角**共存于同一份 HTML**，用 JS 切 class 显隐；
- *  - 两层共用同一 report JSON，不复制数据、不改采集/AI/发布链路；
- *  - 旧视角结构、id、锚点、测试断言一律不动（本文件只新增，不修改旧 DOM）。
- *
- * 内容红线（对齐用户级长期记忆）：
- *  - 时间真实性：只展示既有 `date`/`published_at`，不拿抓取时间兜底、不造"事件日"；
- *  - 事实与 AI 研判分栏标注：客观事实摘要 = item.summary，研判 = insight.impact/risk.impact；
- *  - 结论带来源：每张卡可溯源（站内锚点或外链），来源缺失显式标注；
- *  - 不输出操作建议：PRD 里的「建议研究方向」等改为「关注要点」（客观呈现，不下指令）。
+ * 内容红线（用户级长期记忆 + 本期 sc 口径）：
+ *  - 脱敏：不出现「广州分行 / 分管行长」等身份或具体行名，只写客观项目描述；
+ *  - 时间真实性：只展示报告既有 date / published_at，不拿抓取时间兜底、不造「事件日」；
+ *    本期按 sc 口径**不搞四字段拆分**（每天出报，今天/昨天足够）；
+ *  - 事实与 AI 研判分栏：summary/evidence = 事实，impact = 研判；证据等级由来源客观标注；
+ *  - 折中建议（sc 拍板）：管理关注用「建议关注 / 建议进一步核实」审慎措辞，明示非已作决定，
+ *    **不下业务指令、不生成指标目标**；
+ *  - 宁缺毋滥：字段缺失给空状态，不 AI 造数补足；超长来源标题不铺正文。
  */
 import type { DailyReport, ReportInsight, ReportItem, RiskItem } from "../../contracts/report";
 import type { DeltaMark } from "../../contracts/report";
 import { escapeHtml } from "./cards";
 import { itemAnchorId } from "./atoms";
 import { prevDateKey } from "../../utils/time";
+import { stripHeroPrefix } from "../../utils/hero-text";
+import { BUSINESS_DOMAINS, DOMAIN_IDS } from "../vocab/business-domains";
 
-/** 六大业务专题（PRD 4.7）。一期只做入口导航，专题页本身属后续阶段。 */
-export const BUSINESS_DOMAINS: ReadonlyArray<{ id: string; label: string; hint: string }> = [
-  { id: "wealth", label: "财富管理", hint: "理财 · 基金 · 保险 · 黄金 · 私行" },
-  { id: "customer", label: "客户经营", hint: "代发 · 社保 · 客群 · 社区金融" },
-  { id: "credit", label: "零售信贷", hint: "住房 · 消费贷 · 经营贷 · 信用卡" },
-  { id: "channel", label: "渠道科技", hint: "手机银行 · 网点 · AI 应用 · 数据安全" },
-  { id: "risk", label: "风险消保", hint: "监管 · 消保 · 反诈 · 适当性" },
-  { id: "region", label: "区域同业", hint: "广州经济 · 产业政策 · 同业动态" },
-];
-
-/**
- * 顶部快捷跳转的六个模块（PRD 8.3：移动端首屏可见、纵向排列、无需横向滚动）。
- * id 必须与下方六个 `<section class="dv-mod" id="...">` 一一对应，测试守护。
- */
+/** 顶部快捷跳转 + 八模块锚点（id 与下方 section 一一对应，测试守护）。 */
 export const DV_MODULE_NAV: ReadonlyArray<{ id: string; label: string }> = [
-  { id: "dv-yesterday", label: "关键要情" },
-  { id: "dv-morning", label: "今晨更新" },
-  { id: "dv-opportunity", label: "经营机会" },
+  { id: "dv-hero", label: "今日定调" },
+  { id: "dv-mustread", label: "今日必读" },
+  { id: "dv-opportunity", label: "商机洞察" },
   { id: "dv-risk", label: "风险预警" },
   { id: "dv-attention", label: "管理关注" },
-  { id: "dv-domains", label: "业务专题" },
+  { id: "dv-domains", label: "经营领域" },
+  { id: "dv-legacy", label: "专业内容" },
 ];
 
-/** 重要性等级（PRD 4.2）。只映射既有字段，不新造分数。 */
-function importanceLabel(it: ReportItem): string {
-  if (it.importance === 3) return "重点";
-  if (it.importance === 1) return "一般";
-  return "常规";
+/** 角色轻量筛选（规格第五章）：统一数据按角色关联领域重新筛选，不另起 AI 任务、不删其他重大信息。 */
+export const DV_ROLE_VIEWS: ReadonlyArray<{ id: string; label: string; domains: readonly string[] }> = [
+  { id: "all", label: "全景", domains: [] },
+  { id: "retail", label: "零售银行部", domains: ["wealth_aum", "customer_growth", "retail_credit", "channel_ai"] },
+  { id: "private", label: "私行部", domains: ["wealth_aum"] },
+  { id: "wealth", label: "财富管理部", domains: ["wealth_aum"] },
+  { id: "credit", label: "零售信贷部", domains: ["retail_credit"] },
+];
+
+/** 重要性 S/A/B（规格 2.2）：由既有 importance 1/2/3 映射展示，不改契约、不碰排序。 */
+function gradeLabel(it: Pick<ReportItem, "importance">): string {
+  return it.importance === 3 ? "S 重大变化" : it.importance === 2 ? "A 重要变化" : "B 一般关注";
+}
+
+/** 证据等级 E1~E4（规格 8.2）：由来源权威 T1/T1.5/T2 客观映射，不代表 AI 置信度。 */
+function evidenceGrade(source?: string): string {
+  return source === "T1" ? "E1 官方披露" : source === "T1.5" ? "E2 权威机构" : source === "T2" ? "E3 媒体报道" : "";
 }
 
 /** 来源溯源：正文已收录 → 站内锚点；否则外链；都缺失 → 标注来源名（不编造链接）。 */
@@ -67,8 +69,8 @@ function deltaText(d: DeltaMark | undefined): string {
   return `续报${d.issueNo ? ` · 第${d.issueNo}期` : ""}`;
 }
 
-/** 一条"昨日关键要情"卡（PRD 4.2 八要素）。事实与研判分栏。 */
-function keyEventCard(
+/** 今日必读单卡：标题 + 核心事实 + 研判 + 关注理由 + S/A/B + 证据等级 + 来源。 */
+function mustReadCard(
   m: { title?: string; why: string; url: string; delta?: DeltaMark },
   bodyMap: Map<string, ReportItem>,
   insightMap: Map<string, ReportInsight>,
@@ -82,24 +84,29 @@ function keyEventCard(
     ? `<a class="dv-src" href="${escapeHtml(href)}"${!body && m.url ? ' target="_blank" rel="noopener noreferrer"' : ""}>${escapeHtml(srcLabel)}</a>`
     : `<span class="dv-src dv-src-missing">${escapeHtml(srcLabel)}</span>`;
   const fields = [
-    body ? `<span class="dv-chip">${importanceLabel(body)}</span>` : "",
+    body ? `<span class="dv-chip dv-chip-grade">${gradeLabel(body)}</span>` : "",
+    body ? evidenceGrade(body.tier ? String(body.tier) : body.source_type === "official" ? "T1" : "T2")
+      ? `<span class="dv-chip">${evidenceGrade(body.tier ? String(body.tier) : body.source_type === "official" ? "T1" : "T2")}</span>` : ""
+      : "",
     body?.date ? `<span class="dv-chip">发布 ${escapeHtml(body.date)}</span>` : "",
     deltaText(m.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(m.delta))}</span>` : "",
   ]
     .filter(Boolean)
     .join("");
-  return `<article class="dv-card dv-key">
+  const domain = body?.primary_domain
+    ? `<span class="dv-chip dv-chip-domain">${escapeHtml(BUSINESS_DOMAINS.find((d) => d.id === body.primary_domain)?.short ?? body.primary_domain)}</span>`
+    : "";
+  return `<article class="dv-card dv-key"${body?.primary_domain ? ` data-domain="${escapeHtml(body.primary_domain)}"` : ""}>
   <h3 class="dv-card-title">${escapeHtml(m.title || (body?.title_cn ?? ""))}</h3>
-  ${fields ? `<div class="dv-chips">${fields}</div>` : ""}
+  ${fields || domain ? `<div class="dv-chips">${domain}${fields}</div>` : ""}
   ${fact ? `<p class="dv-fact"><b>事实</b> ${escapeHtml(fact)}</p>` : ""}
   ${inference ? `<p class="dv-infer"><b>研判</b> ${escapeHtml(inference)}</p>` : ""}
-  <p class="dv-why"><b>关注理由</b> ${escapeHtml(m.why)}</p>
-  ${body?.tags?.length ? `<div class="dv-tags">${body.tags.map((t) => `<span class="dv-tag">${escapeHtml(t)}</span>`).join("")}</div>` : ""}
+  <p class="dv-why"><b>值得关注</b> ${escapeHtml(m.why)}</p>
   <div class="dv-card-foot">来源：${src}</div>
 </article>`;
 }
 
-/** 经营机会卡（PRD 4.4）：事实影响呈现，不写"建议研究方向"（项目零建议红线）。 */
+/** 商机洞察卡：机会 + 客群 + 影响（事实呈现，不写操作指令）。 */
 function opportunityCard(it: ReportInsight): string {
   const marks = (it.sources ?? [])
     .filter((s) => s?.url)
@@ -109,9 +116,7 @@ function opportunityCard(it: ReportInsight): string {
         `<a class="dv-mark" href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(s.title)}">${["①", "②", "③"][i]}</a>`,
     )
     .join("");
-  const segs = (it.segments ?? [])
-    .map((s) => `<span class="dv-tag">${escapeHtml(s)}</span>`)
-    .join("");
+  const segs = (it.segments ?? []).map((s) => `<span class="dv-tag">${escapeHtml(s)}</span>`).join("");
   const stage =
     it.maturity?.stage === "landed" ? "公开信息显示已落地"
       : it.maturity?.stage === "progress" ? "公开信息显示推进中"
@@ -121,14 +126,11 @@ function opportunityCard(it: ReportInsight): string {
   <h3 class="dv-card-title">${escapeHtml(it.topic)}${marks ? `<span class="dv-srcs">${marks}</span>` : ""}</h3>
   ${stage ? `<div class="dv-chips"><span class="dv-chip">${stage}</span>${deltaText(it.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(it.delta))}</span>` : ""}</div>` : ""}
   ${it.impact ? `<p class="dv-infer"><b>经营影响</b> ${escapeHtml(it.impact)}</p>` : ""}
-  ${segs ? `<div class="dv-tags">${segs}</div>` : ""}
+  ${segs ? `<div class="dv-tags"><span class="dv-tag-label">关联客群</span>${segs}</div>` : ""}
 </article>`;
 }
 
-/**
- * 风险来源链接文字：正常标题原样显示；超长标题（实为正文被塞进 title）
- * 改显示域名 +「原文」，不把整篇正文铺在卡片上。链接本身始终可溯源。
- */
+/** 风险来源链接文字：正常标题原样；超长（正文被塞进 title）退化为域名 +「原文」。 */
 function riskSourceLabel(src: { title?: string; url: string }): string {
   const title = (src.title ?? "").trim();
   if (title && title.length <= 60) return title;
@@ -141,29 +143,27 @@ function riskSourceLabel(src: { title?: string; url: string }): string {
   return host ? `${host} · 原文` : "原文";
 }
 
-/** 风险卡（PRD 4.5）：等级由既有 source 字段客观标注，不凭标题判级。 */
+/** 风险预警卡：风险事项 + 事实依据 + 潜在影响 + 证据等级 + 来源。 */
 function riskBlock(r: RiskItem | undefined): string {
   if (!r) return "";
   const src = (r.sources ?? []).find((s) => s?.url);
-  const grade = r.source === "T1" ? "官方来源" : r.source === "T1.5" ? "准官方来源" : r.source === "T2" ? "媒体来源" : "";
+  const grade = evidenceGrade(r.source);
   const link = src
     ? `<a class="dv-src" href="${escapeHtml(src.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(riskSourceLabel(src))}</a>`
     : `<span class="dv-src dv-src-missing">来源未标注</span>`;
   return `<article class="dv-card dv-risk">
   <h3 class="dv-card-title">${escapeHtml(r.topic)}</h3>
-  ${grade ? `<div class="dv-chips"><span class="dv-chip dv-chip-risk">${grade}</span>${deltaText(r.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(r.delta))}</span>` : ""}</div>` : ""}
+  ${grade || deltaText(r.delta) ? `<div class="dv-chips">${grade ? `<span class="dv-chip dv-chip-grade">${grade}</span>` : ""}${deltaText(r.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(r.delta))}</span>` : ""}</div>` : ""}
   ${r.evidence ? `<p class="dv-fact"><b>事实依据</b> ${escapeHtml(r.evidence)}</p>` : ""}
   ${r.impact ? `<p class="dv-infer"><b>潜在影响</b> ${escapeHtml(r.impact)}</p>` : ""}
   <div class="dv-card-foot">来源：${link}</div>
 </article>`;
 }
 
-/** 空状态（PRD 4.2：不足 3 条允许少于 3，不允许 AI 制造内容补足）。 */
 function empty(text: string): string {
   return `<p class="dv-empty">${escapeHtml(text)}</p>`;
 }
 
-/** 板块底部返回顶部导航：长页面读到一半也能一键回到顶部快捷导航。 */
 function backToTop(): string {
   return `<a class="dv-back" href="#dv-top">↑ 返回顶部导航</a>`;
 }
@@ -183,18 +183,55 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
     for (const s of ins.sources ?? []) if (s?.url && !insightMap.has(s.url)) insightMap.set(s.url, ins);
   }
 
-  // 昨日关键要情：must_read（已是"与源一一匹配 + 分数最高"的定稿集）
-  const keys = (report.must_read ?? []).slice(0, 5);
+  const keys = (report.must_read ?? []).slice(0, 3); // 默认 Top3，高价值最多 5 由数据侧定稿
+  const opps = (report.insights ?? []).slice(0, 3);
+  const yesterday = prevDateKey(date, 1);
 
-  // 今晨重要更新：报告日当天发布（item.date = MM/DD），与昨日严格分离。
-  const mmdd = `${date.slice(5, 7)}/${date.slice(8, 10)}`;
-  const fresh = allItems.filter((it) => it.date === mmdd).slice(0, 5);
+  // ---- ① 页头数据状态 ----
+  const stats = [
+    `简报生成日 ${escapeHtml(date)}`,
+    `统计区间 ${escapeHtml(yesterday)} — ${escapeHtml(date)}`,
+    nowHm ? `数据更新 ${escapeHtml(nowHm)}` : "",
+    `去重后资讯 ${allItems.length} 条`,
+    `商机 ${report.insights?.length ?? 0} 条`,
+    `风险 ${report.risk ? 1 : 0} 条`,
+  ].filter(Boolean).join(" · ");
 
-  // 经营机会：insights 原样（已按客群配额选定）
-  const opps = report.insights ?? [];
+  // ---- ② 今日定调（复用 hero_line，有才显示，不凑主题）----
+  // 与旧版同源：剥掉历史遗留「今日分行焦点：」补位前缀，避免双标签/前缀泄漏。
+  const hero = stripHeroPrefix(report.hero_line).trim();
+  // 空定调整块不输出（PRD 铁律），快捷跳转同步过滤该锚点，避免指向不存在的目标。
+  const navItems = hero ? DV_MODULE_NAV : DV_MODULE_NAV.filter((m) => m.id !== "dv-hero");
+  const heroBlock = hero
+    ? `<section class="dv-mod dv-hero" id="dv-hero">
+  <div class="dv-mod-head"><h2>今日定调</h2><span class="dv-mod-sub">基于公开事实的综合判断 · 非新闻标题复述</span></div>
+  <p class="dv-hero-text">${escapeHtml(hero)}</p>
+  ${backToTop()}
+</section>`
+    : "";
 
-  // 今日管理关注：≤3 项，从"必读关注理由 + 风险 + 机会"归纳，措辞用"建议关注/建议研究/建议进一步核实"（PRD 4.6）。
-  // 只做归纳呈现，不新增 AI 判断、不下指令。
+  // ---- ③ 今日必读 ----
+  const mustRead = `<section class="dv-mod" id="dv-mustread">
+  <div class="dv-mod-head"><h2>今日必读</h2><span class="dv-mod-sub">默认 3 条 · 重要性优先 · 经营价值优先</span></div>
+  ${keys.length ? keys.map((m) => mustReadCard(m, bodyMap, insightMap)).join("") : empty("今日暂无值得重点关注的变化（宁缺毋滥，不生成内容补足数量）。")}
+  ${backToTop()}
+</section>`;
+
+  // ---- ④ 商机洞察 ----
+  const opportunity = `<section class="dv-mod" id="dv-opportunity">
+  <div class="dv-mod-head"><h2>商机洞察</h2><span class="dv-mod-sub">公开变化中的业务线索 · 非已确认客户需求</span></div>
+  ${opps.length ? opps.map(opportunityCard).join("") : empty("今日暂无可研判的经营机会。")}
+  ${backToTop()}
+</section>`;
+
+  // ---- ⑤ 风险预警 ----
+  const risk = `<section class="dv-mod" id="dv-risk">
+  <div class="dv-mod-head"><h2>风险预警</h2><span class="dv-mod-sub">重大风险独立展示 · 等级依来源客观标注</span></div>
+  ${riskBlock(report.risk) || empty("今日暂无重大风险预警。")}
+  ${backToTop()}
+</section>`;
+
+  // ---- ⑥ 管理关注（折中建议：审慎措辞 + 可溯源，非已作决定）----
   const attention: Array<{ topic: string; reason: string; needCheck: boolean; crossDept: boolean }> = [];
   for (const m of keys.slice(0, 2)) {
     attention.push({
@@ -213,92 +250,79 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
     });
   }
   const attentionHtml = attention.length
-    ? attention
-        .slice(0, 3)
-        .map(
-          (a, i) => `<article class="dv-card dv-attn">
+    ? attention.slice(0, 3).map((a, i) => `<article class="dv-card dv-attn">
     <h3 class="dv-card-title"><span class="dv-attn-n">${i + 1}</span> ${escapeHtml(a.topic)}</h3>
     <p class="dv-why">${escapeHtml(a.reason)}</p>
-    <div class="dv-chips"><span class="dv-chip">建议关注</span>${a.needCheck ? '<span class="dv-chip dv-chip-risk">建议进一步核实</span>' : ""}${a.crossDept ? '<span class="dv-chip">建议跨部门研究</span>' : ""}</div>
-  </article>`,
-        )
-        .join("")
+    <div class="dv-chips"><span class="dv-chip">建议关注</span>${a.needCheck ? '<span class="dv-chip dv-chip-risk">建议进一步核实</span>' : ""}${a.crossDept ? '<span class="dv-chip">建议跨条线研究</span>' : ""}</div>
+  </article>`).join("")
     : empty("今日暂无需要归纳的管理关注事项。");
+  const attentionSection = `<section class="dv-mod" id="dv-attention">
+  <div class="dv-mod-head"><h2>管理关注</h2><span class="dv-mod-sub">不超过 3 项 · 建议性质 · 非已作决定</span></div>
+  ${attentionHtml}
+  ${backToTop()}
+</section>`;
 
-  // 四大日期（PRD 4.1）：生成日 / 昨日事件统计日 / 今晨更新截止 / 数据更新。
-  // 事件实际发生时间无字段 → 不展示、不编造（时间真实性红线）。
-  const yesterday = prevDateKey(date, 1);
-  const dateLine = [
-    `简报生成日 ${escapeHtml(date)}`,
-    `昨日事件统计 ${escapeHtml(yesterday)}`,
-    nowHm ? `今晨更新截至 ${escapeHtml(nowHm)}` : "",
-    nowHm ? `数据更新 ${escapeHtml(nowHm)}` : "",
-  ]
-    .filter(Boolean)
-    .join(" · ");
+  // ---- ⑦ 六大经营领域导航（当日计数 + S/A 亮标；领域判定来自数据侧 primary_domain）----
+  const domainCounts = new Map<string, { total: number; high: number }>();
+  for (const d of DOMAIN_IDS) domainCounts.set(d, { total: 0, high: 0 });
+  for (const it of allItems) {
+    if (!it.primary_domain || !domainCounts.has(it.primary_domain)) continue;
+    const c = domainCounts.get(it.primary_domain)!;
+    c.total += 1;
+    if (it.importance === 3 || it.importance === 2) c.high += 1;
+  }
+  const domainCards = BUSINESS_DOMAINS.map((d) => {
+    const c = domainCounts.get(d.id) ?? { total: 0, high: 0 };
+    return `<a class="dv-domain" href="../topics.html" data-domain="${d.id}">
+      <span class="dv-domain-label">${escapeHtml(d.short)}</span>
+      <span class="dv-domain-hint">${escapeHtml(d.name)}</span>
+      <span class="dv-domain-count">${c.total > 0 ? `当日 ${c.total} 条${c.high ? ` · 含重点 ${c.high}` : ""}` : "当日暂无"}</span>
+    </a>`;
+  }).join("");
+  const domainsSection = `<section class="dv-mod" id="dv-domains">
+  <div class="dv-mod-head"><h2>六大经营领域</h2><span class="dv-mod-sub">按领域浏览 · 点击跳转主题追踪</span></div>
+  <div class="dv-roles" role="group" aria-label="角色视角筛选">
+    ${DV_ROLE_VIEWS.map((r, i) => `<button type="button" class="dv-role${i === 0 ? " active" : ""}" data-role="${r.id}">${escapeHtml(r.label)}</button>`).join("")}
+  </div>
+  <nav class="dv-domains">${domainCards}</nav>
+  ${backToTop()}
+</section>`;
+
+  // ---- ⑧ 原有专业内容入口（全部复用现成链接，不建死链）----
+  const legacyItems = [
+    { href: "#dv-mustread", label: "股市与必读", desc: "本期市场与要情" },
+    { href: "#dv-opportunity", label: "广东IPO", desc: "区域资本市场" },
+    { href: "../topics.html", label: "主题追踪", desc: "跨日事件连续性" },
+    { href: "../research.html", label: "研报解读", desc: "同业深度分析" },
+    { href: "../redchip/index.html", label: "红筹线索", desc: "特色信息入口" },
+    { href: "../search.html", label: "资讯搜索", desc: "按标题与主题检索" },
+    { href: "../archive.html", label: "历史归档", desc: "按日期查阅" },
+  ];
+  const legacySection = `<section class="dv-mod" id="dv-legacy">
+  <div class="dv-mod-head"><h2>专业内容与深度阅读</h2><span class="dv-mod-sub">原有模块保留 · 不与首页核心内容重复堆叠</span></div>
+  <nav class="dv-legacy">${legacyItems.map((i) => `<a class="dv-legacy-item" href="${i.href}"><span class="dv-legacy-label">${escapeHtml(i.label)}</span><span class="dv-legacy-desc">${escapeHtml(i.desc)}</span></a>`).join("")}</nav>
+  ${backToTop()}
+</section>`;
 
   return `<section class="dv-root" id="view-decision" aria-label="零售经营决策情报">
   <header class="dv-masthead">
     <div class="dv-eyebrow">零售经营决策情报 · 外部经营环境观察</div>
     <h1>零售经营决策情报</h1>
-    <p class="dv-date-line">${dateLine}</p>
-    <p class="dv-disclaimer">事实来自公开资讯；「研判 / 经营影响 / 潜在影响」为 AI 基于公开信息的分析，不构成经营决策或投资建议。</p>
+    <p class="dv-date-line">${stats}</p>
+    <p class="dv-disclaimer">事实来自公开资讯；「研判 / 经营影响 / 潜在影响」为 AI 基于公开信息的分析。管理关注为审慎建议，非已作决定，不构成经营决策或投资建议。</p>
     <nav class="dv-quicknav" id="dv-top" aria-label="模块快捷跳转">
       <span class="dv-quicknav-label">快捷跳转</span>
-      ${DV_MODULE_NAV.map((m) => `<a href="#${m.id}">${escapeHtml(m.label)}</a>`).join("")}
+      ${navItems.map((m) => `<a href="#${m.id}">${escapeHtml(m.label)}</a>`).join("")}
     </nav>
   </header>
 
-  <section class="dv-mod" id="dv-yesterday">
-    <div class="dv-mod-head"><h2>昨日最值得关注的 ${keys.length} 件事</h2><span class="dv-mod-sub">重要性优先 · 经营价值优先</span></div>
-    ${keys.length ? keys.map((m) => keyEventCard(m, bodyMap, insightMap)).join("") : empty("昨日暂无值得重点关注的事项（宁缺毋滥，不生成内容补足数量）。")}
-  ${backToTop()}
-  </section>
-
-  <section class="dv-mod" id="dv-morning">
-    <div class="dv-mod-head"><h2>今晨重要更新</h2><span class="dv-mod-sub">仅当日发布 · 与昨日要情严格分离</span></div>
-    ${fresh.length
-      ? fresh
-          .map(
-            (it) => `<article class="dv-card dv-fresh">
-      <h3 class="dv-card-title">${escapeHtml(it.title_cn)}</h3>
-      ${it.summary ? `<p class="dv-fact"><b>事实</b> ${escapeHtml(it.summary)}</p>` : ""}
-      <div class="dv-card-foot">来源：<a class="dv-src" href="${escapeHtml(sourceHref(it, true))}">${escapeHtml(it.source)}</a> · ${escapeHtml(it.date)}</div>
-    </article>`,
-          )
-          .join("")
-      : empty("今晨暂无新发布的重要变化。")}
-  ${backToTop()}
-  </section>
-
-  <section class="dv-mod" id="dv-opportunity">
-    <div class="dv-mod-head"><h2>经营机会</h2><span class="dv-mod-sub">基于公开变化研判 · 非已确认客户需求</span></div>
-    ${opps.length ? opps.map(opportunityCard).join("") : empty("本期暂无可研判的经营机会。")}
-  ${backToTop()}
-  </section>
-
-  <section class="dv-mod" id="dv-risk">
-    <div class="dv-mod-head"><h2>风险预警</h2><span class="dv-mod-sub">等级依来源客观标注 · 不凭标题判级</span></div>
-    ${riskBlock(report.risk) || empty("本期暂无风险预警事项。")}
-  ${backToTop()}
-  </section>
-
-  <section class="dv-mod" id="dv-attention">
-    <div class="dv-mod-head"><h2>今日管理关注</h2><span class="dv-mod-sub">归纳不超过 3 项 · 建议性质 · 非已作决定</span></div>
-    ${attentionHtml}
-  ${backToTop()}
-  </section>
-
-  <section class="dv-mod" id="dv-domains">
-    <div class="dv-mod-head"><h2>六大业务专题</h2><span class="dv-mod-sub">按业务领域浏览资讯 · 事件 · 历史追踪</span></div>
-    <nav class="dv-domains">${BUSINESS_DOMAINS.map(
-      (d) => `<a class="dv-domain" href="../topics.html">
-      <span class="dv-domain-label">${escapeHtml(d.label)}</span>
-      <span class="dv-domain-hint">${escapeHtml(d.hint)}</span>
-    </a>`,
-    ).join("")}</nav>
-  ${backToTop()}
-  </section>
+  ${heroBlock}
+  ${mustRead}
+  ${opportunity}
+  ${risk}
+  ${attentionSection}
+  ${domainsSection}
+  ${legacySection}
 
   <button type="button" class="dv-float-top" id="dv-float-top" aria-label="返回顶部导航" title="返回顶部导航">↑<span>顶部</span></button>
 </section>`;
@@ -314,10 +338,7 @@ export function renderViewSwitch(): string {
 </div>`;
 }
 
-/**
- * 视角切换 CSS。只定义新类名，不覆盖任何旧版选择器（防止两套视角串样式）。
- * 注意：CSS 注释会被 stripCssComments 剥离，源码注释保留给维护者。
- */
+/** 决策视角 CSS：只定义新类名，不覆盖任何旧版选择器（防止两套视角串样式）。 */
 export const DECISION_VIEW_CSS = `
   .view-switch { display:flex; flex-wrap:wrap; align-items:center; gap:0.4rem;
     margin:0 0 1.1rem; padding:0.55rem 0.7rem; border:1px solid var(--rule);
@@ -335,7 +356,7 @@ export const DECISION_VIEW_CSS = `
     border-left:4px solid var(--accent-brand); border-radius:var(--r-md); background:var(--bg-elevated); }
   .dv-eyebrow { font-size:0.76rem; letter-spacing:0.04em; color:var(--muted); }
   .dv-masthead h1 { margin:0.35rem 0 0.55rem; font-size:1.5rem; font-weight:600; }
-  .dv-date-line { margin:0; font-size:0.8rem; color:var(--fg-soft); font-variant-numeric:tabular-nums; }
+  .dv-date-line { margin:0; font-size:0.8rem; color:var(--fg-soft); font-variant-numeric:tabular-nums; line-height:1.7; }
   .dv-disclaimer { margin:0.6rem 0 0; font-size:0.74rem; color:var(--muted); line-height:1.55; }
   .dv-quicknav { display:flex; flex-wrap:wrap; align-items:center; gap:0.4rem; margin:0.8rem 0 0; }
   .dv-quicknav-label { font-size:0.74rem; color:var(--muted); margin-right:0.15rem; }
@@ -353,18 +374,21 @@ export const DECISION_VIEW_CSS = `
   .dv-float-top span { font-size:0.66rem; margin-top:0.12rem; }
   .dv-float-top.is-visible { display:flex; }
   .dv-mod { margin:0 0 1.7rem; }
-  .dv-mod:target .dv-mod-head { border-bottom-color:var(--accent-brand); }
   .dv-mod-head { display:flex; flex-wrap:wrap; align-items:baseline; gap:0.5rem;
     margin:0 0 0.7rem; padding-bottom:0.4rem; border-bottom:2px solid var(--rule); }
   .dv-mod-head h2 { margin:0; font-size:1.06rem; font-weight:600; }
   .dv-mod-sub { font-size:0.74rem; color:var(--muted); }
+  .dv-hero-text { margin:0; padding:0.9rem 1rem; font-size:0.92rem; line-height:1.75;
+    border-left:3px solid var(--accent-brand); border-radius:var(--r-md); background:var(--card); }
   .dv-card { padding:0.85rem 0.95rem; margin:0 0 0.7rem; border:1px solid var(--rule);
     border-radius:var(--r-md); background:var(--card); }
   .dv-card-title { margin:0 0 0.45rem; font-size:0.98rem; font-weight:600; line-height:1.5; }
   .dv-chips { display:flex; flex-wrap:wrap; gap:0.35rem; margin:0 0 0.5rem; }
   .dv-chip { font-size:0.72rem; padding:0.1rem 0.45rem; border-radius:999px;
     background:var(--card-alt); color:var(--fg-soft); }
-  .dv-chip-delta { background:var(--rank-mid-bg); color:var(--rank-mid-fg); }
+  .dv-chip-grade { background:var(--rank-mid-bg); color:var(--rank-mid-fg); }
+  .dv-chip-domain { background:var(--card-alt); color:var(--accent-brand); }
+  .dv-chip-delta { outline:1px solid var(--rank-mid-fg); }
   .dv-chip-risk { background:var(--rank-high-bg); color:var(--rank-high-fg); }
   .dv-fact, .dv-infer, .dv-why { margin:0.35rem 0; font-size:0.86rem; line-height:1.62; }
   .dv-fact b, .dv-infer b, .dv-why b { font-weight:600; color:var(--fg); }
@@ -372,6 +396,7 @@ export const DECISION_VIEW_CSS = `
   .dv-tags { display:flex; flex-wrap:wrap; gap:0.3rem; margin:0.5rem 0 0; }
   .dv-tag { font-size:0.71rem; padding:0.08rem 0.4rem; border:1px solid var(--rule);
     border-radius:6px; color:var(--muted); }
+  .dv-tag-label { font-size:0.71rem; color:var(--muted); }
   .dv-card-foot { margin:0.6rem 0 0; font-size:0.74rem; color:var(--muted); }
   .dv-src { color:var(--link); }
   .dv-src-missing { color:var(--muted); }
@@ -383,25 +408,37 @@ export const DECISION_VIEW_CSS = `
   .dv-attn-n { display:inline-block; min-width:1.25rem; color:var(--accent-brand); font-variant-numeric:tabular-nums; }
   .dv-empty { margin:0; padding:1rem; font-size:0.85rem; color:var(--muted);
     border:1px dashed var(--rule); border-radius:var(--r-md); background:var(--bg); }
+  .dv-roles { display:flex; flex-wrap:wrap; gap:0.4rem; margin:0 0 0.7rem; }
+  .dv-role { font:inherit; font-size:0.78rem; padding:0.24rem 0.7rem; min-height:32px;
+    border:1px solid var(--rule); border-radius:999px; background:var(--bg);
+    color:var(--fg-soft); cursor:pointer; }
+  .dv-role.active { background:var(--accent); color:var(--accent-fg); border-color:var(--accent); }
   .dv-domains { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.6rem; }
-  .dv-domain { display:flex; flex-direction:column; gap:0.2rem; min-height:56px; padding:0.7rem 0.8rem;
+  .dv-domain { display:flex; flex-direction:column; gap:0.2rem; min-height:64px; padding:0.7rem 0.8rem;
     border:1px solid var(--rule); border-radius:var(--r-md); background:var(--card); text-decoration:none; color:var(--fg); }
   .dv-domain:active { background:var(--card-alt); }
   .dv-domain-label { font-size:0.9rem; font-weight:600; }
   .dv-domain-hint { font-size:0.73rem; color:var(--muted); }
+  .dv-domain-count { font-size:0.72rem; color:var(--accent-brand); }
+  .dv-legacy { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0.5rem; }
+  .dv-legacy-item { display:flex; flex-direction:column; gap:0.15rem; padding:0.6rem 0.75rem;
+    border:1px solid var(--rule); border-radius:var(--r-md); background:var(--card);
+    text-decoration:none; color:var(--fg); }
+  .dv-legacy-item:active { background:var(--card-alt); }
+  .dv-legacy-label { font-size:0.86rem; font-weight:600; }
+  .dv-legacy-desc { font-size:0.72rem; color:var(--muted); }
+  .dv-mod:target .dv-mod-head { border-bottom-color:var(--accent-brand); }
   @media (max-width:640px) {
     .dv-masthead h1 { font-size:1.28rem; }
-    .dv-date-line { line-height:1.7; }
     .dv-card { padding:0.8rem; }
     .dv-card-title { font-size:0.94rem; }
-    .dv-fact, .dv-infer, .dv-why { font-size:0.84rem; }
-    .dv-domains { grid-template-columns:1fr; }
+    .dv-domains, .dv-legacy { grid-template-columns:1fr; }
     .dv-float-top { right:0.75rem; bottom:0.75rem; width:42px; height:42px; }
     .view-switch-hint { flex-basis:100%; }
   }
 `;
 
-/** 视角切换脚本：class 切 body + localStorage 记住偏好 + 更新按钮态。 */
+/** 视角切换 + 快捷跳转平滑滚动 + 返回顶部 + 角色轻量筛选（均纯前端，不改数据）。 */
 export function generateDecisionViewScript(): string {
   return `
 (function(){
@@ -425,21 +462,19 @@ export function generateDecisionViewScript(): string {
   var saved='decision';
   try{saved=localStorage.getItem(KEY)||'decision';}catch(e){}
   apply(saved);
-  document.getElementById('view-switch').addEventListener('click',function(e){
+  var sw=document.getElementById('view-switch');
+  if(sw) sw.addEventListener('click',function(e){
     var b=e.target&&e.target.closest?e.target.closest('.view-switch-btn'):null;
     if(!b)return;
     apply(b.getAttribute('data-view'));
   });
 
-  // 返回顶部：板块底部链接 + 右下角悬浮按钮（滚过一屏才出现，不遮挡开头）。
   var top=document.getElementById('dv-top');
   var floatTop=document.getElementById('dv-float-top');
   function onScroll(){
     if(floatTop) floatTop.classList.toggle('is-visible',(window.scrollY||window.pageYOffset||0)>320);
   }
-  function smoothTo(el){
-    if(el&&el.scrollIntoView) el.scrollIntoView({behavior:'smooth',block:'start'});
-  }
+  function smoothTo(el){ if(el&&el.scrollIntoView) el.scrollIntoView({behavior:'smooth',block:'start'}); }
   window.addEventListener('scroll',onScroll,{passive:true});
   onScroll();
   if(floatTop) floatTop.addEventListener('click',function(){smoothTo(top);});
@@ -451,6 +486,19 @@ export function generateDecisionViewScript(): string {
     if(!t)return;
     e.preventDefault();
     smoothTo(t);
+  });
+
+  // 角色轻量筛选：按领域重排可见性，不新增 AI 任务、不删数据、不改锚点
+  var roleBar=root?root.querySelector('.dv-roles'):null;
+  if(roleBar) roleBar.addEventListener('click',function(e){
+    var b=e.target&&e.target.closest?e.target.closest('.dv-role'):null;
+    if(!b)return;
+    var ids=(b.getAttribute('data-role')||'').split(',');
+    roleBar.querySelectorAll('.dv-role').forEach(function(x){x.classList.toggle('active',x===b);});
+    root.querySelectorAll('.dv-card[data-domain]').forEach(function(card){
+      var dom=card.getAttribute('data-domain')||'';
+      card.style.display=(ids.length===0||ids.indexOf(dom)>=0)?'':'none';
+    });
   });
 })();`;
 }
