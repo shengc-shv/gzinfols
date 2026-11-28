@@ -7,12 +7,12 @@
  *  - 方案 A 版本切换保留：与旧版共存同一 HTML、切 class，旧视角 DOM 零改动；
  *  - 脱敏（无具体行名/分管行长）、时间真实性、事实与研判区分、证据等级、
  *    折中建议、宁缺毋滥、来源可追溯、超长正文不铺页面全部不回退；
- *  - 顶部快捷跳转 + 各板块返回顶部 + 悬浮按钮 + 角色轻量筛选。
+ *  - 顶部快捷跳转 + 各板块返回顶部 + 悬浮按钮 + 核心卡片横滑 + 六大领域标签过滤。
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { renderHtml } from "../lib/services/render";
-import { DV_MODULE_NAV, DV_ROLE_VIEWS } from "../lib/services/render/decision-view";
+import { DV_MODULE_NAV } from "../lib/services/render/decision-view";
 import { BUSINESS_DOMAINS } from "../lib/services/vocab/business-domains";
 import type { DailyReport, ReportItem } from "../lib/contracts/report";
 import { todayKey } from "../lib/utils/time";
@@ -151,12 +151,29 @@ test("⑥c 领域明细：展开脚本 + 原文链接 + 空状态，不跳 topic
   assert.equal((domSection.match(/data-expand-domain=/g) ?? []).length, 6, "六个领域卡片齐全");
 });
 
-test("⑦ 角色轻量筛选：五角色 + data-domain 锚点，不新增 AI 任务", () => {
+test("⑦ 领域标签过滤：全部 + 六大领域，角色视图已移除", () => {
   const d = decisionPart(renderHtml(report()));
-  assert.equal(DV_ROLE_VIEWS.length, 5, "全景 + 四业务部门");
-  for (const r of DV_ROLE_VIEWS) assert.ok(d.includes(`data-role="${r.id}"`), `缺角色：${r.label}`);
+  const roles = [...d.matchAll(/data-role="([a-z_]+)"/g)].map((m) => m[1]);
+  assert.deepEqual(roles, ["all", ...BUSINESS_DOMAINS.map((x) => x.id)], "只有全部 + 六领域");
+  for (const bad of ["全景", "零售银行部", "私行部", "财富管理部", "零售信贷部"]) {
+    assert.ok(!d.includes(bad), `角色视图已移除：${bad}`);
+  }
   const html = renderHtml(report());
-  assert.ok(/querySelectorAll\('\.dv-card\[data-domain\]'\)/.test(html), "筛选只作用于带领域标签的卡片（脚本在 DOM 外）");
+  assert.ok(/querySelectorAll\('\.dv-scroller \.dv-card'\)/.test(html), "过滤作用于横滑卡片（脚本在 DOM 外）");
+});
+
+test("⑦b 核心卡片横滑：必读/商机/风险包 dv-scroller，桌面转 grid", () => {
+  const r = report({
+    hero_line: "定调",
+    must_read: [{ title: "必读", why: "理由", url: "https://e.com/a" }],
+    insights: [{ topic: "商机", tags: [], impact: "影响", sources: [{ title: "源", url: "https://e.com/a" }] }],
+    risk: { topic: "风险", evidence: "依据", impact: "影响", source: "T2" },
+  });
+  const d = decisionPart(renderHtml(r));
+  assert.equal((d.match(/class="dv-scroller"/g) ?? []).length, 3, "三组核心卡片都横滑");
+  assert.ok(/overflow-x:\s*auto/.test(d === "" ? "" : renderHtml(r)) || /overflow-x:\s*auto/.test(renderHtml(r)), "横滑靠 overflow-x:auto");
+  assert.ok(/@media \(min-width:720px\)[\s\S]{0,200}dv-scroller[\s\S]{0,160}display:\s*grid/.test(renderHtml(r)), "桌面转网格");
+  assert.ok(d.includes('data-domain="retail_credit"') || d.includes('class="dv-card dv-opp"'), "商机/风险卡带领域锚点供过滤");
 });
 
 test("⑧ 决策 DOM 不产生重复 itm id（锚点唯一性不回退）", () => {

@@ -35,15 +35,6 @@ export const DV_MODULE_NAV: ReadonlyArray<{ id: string; label: string }> = [
   { id: "dv-legacy", label: "专业内容" },
 ];
 
-/** 角色轻量筛选（规格第五章）：统一数据按角色关联领域重新筛选，不另起 AI 任务、不删其他重大信息。 */
-export const DV_ROLE_VIEWS: ReadonlyArray<{ id: string; label: string; domains: readonly string[] }> = [
-  { id: "all", label: "全景", domains: [] },
-  { id: "retail", label: "零售银行部", domains: ["wealth_aum", "customer_growth", "retail_credit", "channel_ai"] },
-  { id: "private", label: "私行部", domains: ["wealth_aum"] },
-  { id: "wealth", label: "财富管理部", domains: ["wealth_aum"] },
-  { id: "credit", label: "零售信贷部", domains: ["retail_credit"] },
-];
-
 /** 重要性 S/A/B（规格 2.2）：由既有 importance 1/2/3 映射展示，不改契约、不碰排序。 */
 function gradeLabel(it: Pick<ReportItem, "importance">): string {
   return it.importance === 3 ? "S 重大变化" : it.importance === 2 ? "A 重要变化" : "B 一般关注";
@@ -107,7 +98,9 @@ function mustReadCard(
 }
 
 /** 商机洞察卡：机会 + 客群 + 影响（事实呈现，不写操作指令）。 */
-function opportunityCard(it: ReportInsight): string {
+function opportunityCard(it: ReportInsight, domainOf: (url: string) => string): string {
+  const domain = (it.sources ?? []).map((s) => s?.url).find((u) => u && domainOf(u)) ?? "";
+  const dom = domain ? domainOf(domain) : "";
   const marks = (it.sources ?? [])
     .filter((s) => s?.url)
     .slice(0, 3)
@@ -122,7 +115,7 @@ function opportunityCard(it: ReportInsight): string {
       : it.maturity?.stage === "progress" ? "公开信息显示推进中"
         : it.maturity?.stage === "clue" ? "线索阶段"
           : "";
-  return `<article class="dv-card dv-opp">
+  return `<article class="dv-card dv-opp"${dom ? ` data-domain="${escapeHtml(dom)}"` : ""}>
   <h3 class="dv-card-title">${escapeHtml(it.topic)}${marks ? `<span class="dv-srcs">${marks}</span>` : ""}</h3>
   ${stage ? `<div class="dv-chips"><span class="dv-chip">${stage}</span>${deltaText(it.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(it.delta))}</span>` : ""}</div>` : ""}
   ${it.impact ? `<p class="dv-infer"><b>经营影响</b> ${escapeHtml(it.impact)}</p>` : ""}
@@ -144,14 +137,15 @@ function riskSourceLabel(src: { title?: string; url: string }): string {
 }
 
 /** 风险预警卡：风险事项 + 事实依据 + 潜在影响 + 证据等级 + 来源。 */
-function riskBlock(r: RiskItem | undefined): string {
+function riskBlock(r: RiskItem | undefined, domainOf: (url: string) => string): string {
   if (!r) return "";
   const src = (r.sources ?? []).find((s) => s?.url);
+  const dom = (r.sources ?? []).map((s) => s?.url).find((u) => u && domainOf(u)) ?? "";
   const grade = evidenceGrade(r.source);
   const link = src
     ? `<a class="dv-src" href="${escapeHtml(src.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(riskSourceLabel(src))}</a>`
     : `<span class="dv-src dv-src-missing">来源未标注</span>`;
-  return `<article class="dv-card dv-risk">
+  return `<article class="dv-card dv-risk"${dom ? ` data-domain="${escapeHtml(domainOf(dom))}"` : ""}>
   <h3 class="dv-card-title">${escapeHtml(r.topic)}</h3>
   ${grade || deltaText(r.delta) ? `<div class="dv-chips">${grade ? `<span class="dv-chip dv-chip-grade">${grade}</span>` : ""}${deltaText(r.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(r.delta))}</span>` : ""}</div>` : ""}
   ${r.evidence ? `<p class="dv-fact"><b>事实依据</b> ${escapeHtml(r.evidence)}</p>` : ""}
@@ -180,6 +174,7 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
     .map((it) => ({ ...it }));
   const bodyMap = new Map<string, ReportItem>();
   for (const it of allItems) if (it.url && !bodyMap.has(it.url)) bodyMap.set(it.url, it);
+  const domainOf = (url: string): string => bodyMap.get(url)?.primary_domain ?? "";
   // 历史报告无 primary_domain（字段为本期新增）：渲染期按同一词表临时打标，
   // 仅用于本次 DOM 展示，不 mutate 报告、不写盘；新报告走管线打标，口径同源。
   for (const it of allItems) {
@@ -225,21 +220,21 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   // ---- ③ 今日必读 ----
   const mustRead = `<section class="dv-mod" id="dv-mustread">
   <div class="dv-mod-head"><h2>今日必读</h2><span class="dv-mod-sub">默认 3 条 · 重要性优先 · 经营价值优先</span></div>
-  ${keys.length ? keys.map((m) => mustReadCard(m, bodyMap, insightMap)).join("") : empty("今日暂无值得重点关注的变化（宁缺毋滥，不生成内容补足数量）。")}
+  ${keys.length ? `<div class="dv-scroller">${keys.map((m) => mustReadCard(m, bodyMap, insightMap)).join("")}</div>` : empty("今日暂无值得重点关注的变化（宁缺毋滥，不生成内容补足数量）。")}
   ${backToTop()}
 </section>`;
 
   // ---- ④ 商机洞察 ----
   const opportunity = `<section class="dv-mod" id="dv-opportunity">
   <div class="dv-mod-head"><h2>商机洞察</h2><span class="dv-mod-sub">公开变化中的业务线索 · 非已确认客户需求</span></div>
-  ${opps.length ? opps.map(opportunityCard).join("") : empty("今日暂无可研判的经营机会。")}
+  ${opps.length ? `<div class="dv-scroller">${opps.map((o) => opportunityCard(o, domainOf)).join("")}</div>` : empty("今日暂无可研判的经营机会。")}
   ${backToTop()}
 </section>`;
 
   // ---- ⑤ 风险预警 ----
   const risk = `<section class="dv-mod" id="dv-risk">
   <div class="dv-mod-head"><h2>风险预警</h2><span class="dv-mod-sub">重大风险独立展示 · 等级依来源客观标注</span></div>
-  ${riskBlock(report.risk) || empty("今日暂无重大风险预警。")}
+  ${report.risk ? `<div class="dv-scroller">${riskBlock(report.risk, domainOf)}</div>` : empty("今日暂无重大风险预警。")}
   ${backToTop()}
 </section>`;
 
@@ -311,8 +306,9 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   }
   const domainsSection = `<section class="dv-mod" id="dv-domains">
   <div class="dv-mod-head"><h2>六大经营领域</h2><span class="dv-mod-sub">按领域浏览 · 点击展开当日条目</span></div>
-  <div class="dv-roles" role="group" aria-label="角色视角筛选">
-    ${DV_ROLE_VIEWS.map((r, i) => `<button type="button" class="dv-role${i === 0 ? " active" : ""}" data-role="${r.id}">${escapeHtml(r.label)}</button>`).join("")}
+  <div class="dv-roles" role="group" aria-label="按经营领域过滤">
+    <button type="button" class="dv-role active" data-role="all">全部</button>
+    ${BUSINESS_DOMAINS.map((d) => `<button type="button" class="dv-role" data-role="${d.id}">${escapeHtml(d.short)}</button>`).join("")}
   </div>
   <nav class="dv-domains">${domainCards.join("")}</nav>
   ${domainDetails.join("")}
@@ -411,6 +407,17 @@ export const DECISION_VIEW_CSS = `
   .dv-mod-sub { font-size:0.74rem; color:var(--muted); }
   .dv-hero-text { margin:0; padding:0.9rem 1rem; font-size:0.92rem; line-height:1.75;
     border-left:3px solid var(--accent-brand); border-radius:var(--r-md); background:var(--card); }
+  .dv-scroller { display:flex; flex-direction:row; gap:0.6rem;
+    overflow-x:auto; -webkit-overflow-scrolling:touch; scroll-snap-type:x mandatory;
+    scrollbar-width:thin; scrollbar-color:var(--rule) transparent;
+    padding:0 0.4rem 0.6rem 0; }
+  .dv-scroller > .dv-card { flex:0 0 auto; width:82vw; max-width:340px;
+    margin:0; scroll-snap-align:start; box-sizing:border-box; }
+  @media (min-width:720px) {
+    .dv-scroller { display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+      overflow:visible; padding-bottom:0; padding-right:0; scroll-snap-type:none; }
+    .dv-scroller > .dv-card { width:auto; max-width:none; }
+  }
   .dv-card { padding:0.85rem 0.95rem; margin:0 0 0.7rem; border:1px solid var(--rule);
     border-radius:var(--r-md); background:var(--card); }
   .dv-card-title { margin:0 0 0.45rem; font-size:0.98rem; font-weight:600; line-height:1.5; }
@@ -531,16 +538,17 @@ export function generateDecisionViewScript(): string {
     smoothTo(t);
   });
 
-  // 角色轻量筛选：按领域重排可见性，不新增 AI 任务、不删数据、不改锚点
+  // 六大领域标签过滤：只按领域 id 过滤卡片，不新增 AI 任务、不删数据、不改锚点
   var roleBar=root?root.querySelector('.dv-roles'):null;
   if(roleBar) roleBar.addEventListener('click',function(e){
     var b=e.target&&e.target.closest?e.target.closest('.dv-role'):null;
     if(!b)return;
-    var ids=(b.getAttribute('data-role')||'').split(',');
+    var domain=b.getAttribute('data-role')||'all';
     roleBar.querySelectorAll('.dv-role').forEach(function(x){x.classList.toggle('active',x===b);});
-    root.querySelectorAll('.dv-card[data-domain]').forEach(function(card){
+    root.querySelectorAll('.dv-scroller .dv-card').forEach(function(card){
+      if(domain==='all'){card.style.display='';return;}
       var dom=card.getAttribute('data-domain')||'';
-      card.style.display=(ids.length===0||ids.indexOf(dom)>=0)?'':'none';
+      card.style.display=(dom===domain)?'':'none';
     });
   });
 
