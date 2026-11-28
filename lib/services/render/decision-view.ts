@@ -22,7 +22,9 @@ import { escapeHtml } from "./cards";
 import { itemAnchorId } from "./atoms";
 import { prevDateKey } from "../../utils/time";
 import { stripHeroPrefix } from "../../utils/hero-text";
-import { BUSINESS_DOMAINS, DOMAIN_IDS, classifyBusinessDomain } from "../vocab/business-domains";
+import { BUSINESS_DOMAINS, DOMAIN_IDS, classifyBusinessDomainWithFallback } from "../vocab/business-domains";
+import { IPO_DISPLAY_STAGE_LABEL } from "../classify/gd-ipo";
+import { gdIpoDisplayStageOf, ipoCompanyShortOf, isRoutineIpoItem } from "../classify/gd-ipo-spoken";
 
 /** 顶部快捷跳转 + 八模块锚点（id 与下方 section 一一对应，测试守护）。 */
 export const DV_MODULE_NAV: ReadonlyArray<{ id: string; label: string }> = [
@@ -199,17 +201,22 @@ function backToTop(): string {
  */
 export function renderDecisionView(report: DailyReport, date: string, nowHm: string): string {
   // ---- 数据准备：全部来自既有字段 ----
-  const allItems: ReportItem[] = (["gz_local", "biz_insight", "policy_market", "tech", "ipo"] as const)
-    .flatMap((s) => report.sections?.[s] ?? [])
-    // 浅拷贝：历史报告降级打标只作用于本次渲染，绝不 mutate 入参报告。
-    .map((it) => ({ ...it }));
+  // `sec` 随条目一起带上：领域兜底（当前仅 IPO → 客户经营）需要知道条目属哪个板块。
+  const SECTION_KEYS = ["gz_local", "biz_insight", "policy_market", "tech", "ipo"] as const;
+  const rows: Array<{ it: ReportItem; sec: string }> = [];
+  for (const s of SECTION_KEYS) for (const it of report.sections?.[s] ?? []) rows.push({ it: { ...it }, sec: s });
+  // 浅拷贝：历史报告降级打标只作用于本次渲染，绝不 mutate 入参报告。
+  const allItems: ReportItem[] = rows.map((r) => r.it);
   const bodyMap = new Map<string, ReportItem>();
   for (const it of allItems) if (it.url && !bodyMap.has(it.url)) bodyMap.set(it.url, it);
   // 历史报告无 primary_domain（字段为本期新增）：渲染期按同一词表临时打标，
   // 仅用于本次 DOM 展示，不 mutate 报告、不写盘；新报告走管线打标，口径同源。
-  for (const it of allItems) {
+  for (const { it, sec } of rows) {
     if (it.primary_domain) continue;
-    const d = classifyBusinessDomain({ title: it.title_cn, summary: it.summary, tags: it.tags });
+    const d = classifyBusinessDomainWithFallback(
+      { title: it.title_cn, summary: it.summary, tags: it.tags },
+      sec,
+    );
     if (d) {
       it.primary_domain = d.primary_domain;
       if (d.related_domains.length) it.related_domains = d.related_domains;
@@ -306,10 +313,34 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   ${backToTop()}
 </section>`;
 
+  // ---- ③.5 广东IPO 线索（2026-11-28 sc：「IPO 至少兜底可以算经营线索」）----
+  // 不新建模块：作为商机洞察的补充线索行嵌在同一模块内 —— IPO 只在有里程碑时才有意义，
+  // 单开模块多数日子会留空。口径与三处外发（口播 / 横滑 / exec 池）同源：
+  //   · 只列里程碑，季度例行报送（isRoutineIpoItem）整类排除；
+  //   · 文案取「企业简称 + 阶段标签」，与推送行同一套收敛函数（ipoCompanyShortOf，逐字同源）；
+  //   · ⛔ 不进「商机 N 条」计数（那个口径只认 report.insights）。
+  const ipoLeadItems = (report.sections?.ipo ?? []).filter((it) => !isRoutineIpoItem(it));
+  const ipoLeads = ipoLeadItems.slice(0, 6);
+  const ipoLeadsBlock = ipoLeads.length
+    ? `<div class="dv-ipo-leads">
+    <p class="dv-ipo-leads-head">🏦 广东IPO 线索 ${ipoLeadItems.length} 条<span class="dv-ipo-leads-sub">仅里程碑 · 季度例行报送单列</span></p>
+    <ul class="dv-ipo-leads-list">${ipoLeads
+      .map((it) => {
+        const name = escapeHtml(ipoCompanyShortOf(it));
+        const stage = IPO_DISPLAY_STAGE_LABEL[gdIpoDisplayStageOf(it)] || "";
+        const label = it.url ? `<a href="${escapeHtml(it.url)}" target="_blank" rel="noopener noreferrer">${name}</a>` : name;
+        return `<li class="dv-ipo-lead">${label}${stage ? `<span class="dv-ipo-lead-stage">${escapeHtml(stage)}</span>` : ""}</li>`;
+      })
+      .join("")}</ul>
+    ${ipoLeadItems.length > ipoLeads.length ? `<p class="dv-ipo-leads-more">另有 ${ipoLeadItems.length - ipoLeads.length} 家，见原版资讯视角「广东IPO」</p>` : ""}
+  </div>`
+    : "";
+
   // ---- ④ 商机洞察 ----
   const opportunity = `<section class="dv-mod" id="dv-opportunity">
   <div class="dv-mod-head"><h2>商机洞察</h2><span class="dv-mod-sub">公开变化中的业务线索 · 非已确认客户需求</span></div>
   ${opps.length ? `<div class="dv-scroller">${opps.map((o) => opportunityCard(o, bodyMap)).join("")}</div>${swipeHint(opps.length)}` : empty("今日暂无可研判的经营机会。")}
+  ${ipoLeadsBlock}
   ${backToTop()}
 </section>`;
 
@@ -604,6 +635,18 @@ export const DECISION_VIEW_CSS = `
   .dv-legacy-item:active { background:var(--card-alt); }
   .dv-legacy-label { font-size:0.86rem; font-weight:600; }
   .dv-legacy-desc { font-size:0.72rem; color:var(--muted); }
+  /* 商机洞察内的 IPO 线索行（2026-11-28）：不占独立模块，只做「可跟进企业」速览 */
+  .dv-ipo-leads { margin:0.7rem 0 0; padding:0.6rem 0.7rem; border:1px solid var(--rule);
+    border-left:3px solid var(--c-ipo); border-radius:var(--r-md); background:var(--card); }
+  .dv-ipo-leads-head { margin:0 0 0.4rem; font-size:0.86rem; font-weight:600; display:flex; flex-wrap:wrap;
+    align-items:baseline; gap:0.4rem; }
+  .dv-ipo-leads-sub { font-size:0.7rem; font-weight:400; color:var(--muted); }
+  .dv-ipo-leads-list { margin:0; padding:0; list-style:none; display:flex; flex-wrap:wrap; gap:0.3rem 0.9rem; }
+  .dv-ipo-lead { font-size:0.82rem; }
+  .dv-ipo-lead a { color:inherit; text-decoration:none; border-bottom:1px solid var(--rule); }
+  .dv-ipo-lead-stage { margin-left:0.35rem; font-size:0.68rem; color:var(--muted);
+    border:1px solid var(--rule); border-radius:999px; padding:0 0.35rem; white-space:nowrap; }
+  .dv-ipo-leads-more { margin:0.45rem 0 0; font-size:0.7rem; color:var(--muted); }
   .dv-mod-link { color:var(--accent-brand); text-decoration:none; border-bottom:1px dashed currentColor; }
   .dv-mod-link:active { opacity:.7; }
   .dv-mod:target .dv-mod-head { border-bottom-color:var(--accent-brand); }

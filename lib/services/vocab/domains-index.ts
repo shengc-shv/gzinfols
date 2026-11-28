@@ -16,7 +16,7 @@
  * 时间基准：一律取**语料里最新的期次日**，不看系统时钟（补跑/回放时时钟不可信）。
  */
 import type { SlimItem } from "../topics/slim";
-import { BUSINESS_DOMAINS, classifyBusinessDomain, classifySubtopic } from "./business-domains";
+import { BUSINESS_DOMAINS, classifyBusinessDomainWithFallback, classifySubtopic } from "./business-domains";
 
 /** 专题页里的一条资讯（已裁剪到展示所需字段）。 */
 export interface DomainIndexItem {
@@ -105,7 +105,9 @@ export function buildDomainIndex(input: {
   for (const rec of byId.values()) {
     total += 1;
     const it = rec.item;
-    const cls = classifyBusinessDomain({ title: it.t, summary: it.x, tags: it.g });
+    // 与首页「六大经营领域」同一判定（含板块兜底：IPO → 客户经营），
+    // 否则会出现「首页看得到、专题页看不到」的双口径。
+    const cls = classifyBusinessDomainWithFallback({ title: it.t, summary: it.x, tags: it.g }, it.k);
     if (!cls) continue; // 无可靠关联：不硬凑进任何领域（与生产判定同一红线）
     classified += 1;
     const bucket = buckets.get(cls.primary_domain);

@@ -135,3 +135,13 @@ test("⑦ 词表结构：六大领域 id 稳定，二级主题字段齐全且不
     assert.ok(d.opportunity_risk.opportunity.length > 0 && d.opportunity_risk.risk.length > 0);
   }
 });
+
+test("⑤ IPO 板块兜底与首页同源：判不出领域时归客户经营，不再被索引漏掉", () => {
+  const idx = buildDomainIndex({
+    days: { "2026-11-28": { items: [item("p", "深鹏科技：IPO问询中（拟北交所）", { k: "ipo" })] } },
+    windowRuns: 30,
+  });
+  assert.equal(idx.classified, 1, "IPO 短标题不应被丢弃（否则首页看得到、专题页看不到）");
+  const cg = idx.domains.find((d) => d.id === "customer_growth")!;
+  assert.equal(cg.count, 1, "归客户经营与客群增长（与决策首页领域模块同一判定）");
+});

@@ -398,3 +398,37 @@ test("⑱ 经营重点追踪入口：底部入口与模块内链都指向跨期�
   assert.ok(d.includes('href="../focus.html"'), "模块头/底部入口用站点根相对路径");
   assert.ok(d.includes("查看跨期追踪"), "重点模块内给跨期入口（当日命中 → 跨期观察的自然路径）");
 });
+
+test("⑲ IPO 线索：判不出领域时兜底进客户经营，商机洞察内嵌速览，季度例行报送不入列", () => {
+  // tags 置空：模拟「短标题+纯阶段词」的真实形态（夹具默认带「财富」，会先把领域判走）
+  const milestone = item("深鹏科技：IPO问询中（拟北交所）", { url: "https://e.com/ipo-milestone", tags: [] });
+  const routine = item("盛凌电子辅导工作进展情况报告（第五期）", {
+    url: "https://e.com/ipo-routine",
+    tags: [],
+    ipoStage: "stage-tutoring",
+    summary: "报告: 辅导工作进展情况报告（第五期）",
+  });
+  const d = decisionPart(
+    renderHtml(
+      report({
+        sections: { gz_local: [], biz_insight: [], policy_market: [], tech: [], ipo: [milestone, routine] },
+      }),
+    ),
+  );
+
+  // ① 领域兜底（sc 2026-11-28：「IPO 至少兜底可以算经营线索」）：
+  //    词表判不出领域的 IPO 条目不得被领域模块静默丢弃。
+  const panel = d.slice(d.indexOf('id="dv-domain-panel-customer_growth"'));
+  assert.ok(panel.length > 0, "客户经营面板必须存在");
+  assert.ok(panel.slice(0, 4000).includes("深鹏科技"), "无领域 IPO 条目兜底进「客户经营与客群增长」");
+
+  // ② 商机洞察内嵌「广东IPO 线索」：只列里程碑，例行报送排除（三处外发同源口径）。
+  const opp = d.slice(d.indexOf('id="dv-opportunity"'), d.indexOf('id="dv-risk"'));
+  assert.ok(opp.includes("广东IPO 线索 1 条"), "只数里程碑，季度例行报送不计入");
+  assert.ok(opp.includes("深鹏科技"), "列出企业简称");
+  assert.ok(!opp.includes("盛凌电子"), "季度例行报送不入线索行");
+  assert.ok(opp.includes("仅里程碑"), "明确口径，避免被当成新增备案");
+
+  // ③ 不进「商机 N 条」计数：IPO 线索是独立速览，不掺商机口径。
+  assert.ok(!d.includes("商机 1 条"), "商机计数仍只认 insights");
+});

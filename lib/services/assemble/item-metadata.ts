@@ -14,7 +14,7 @@
  */
 import type { ArticleInput } from "../../contracts/article";
 import type { DailyReport, ReportItem, ReportSectionKey } from "../../contracts/report";
-import { classifyBusinessDomain } from "../vocab/business-domains";
+import { classifyBusinessDomainWithFallback } from "../vocab/business-domains";
 
 /** url → ArticleInput（首个匹配优先，同 url 多源不覆盖）。 */
 export function indexArticlesByUrl(articles: readonly ArticleInput[]): Map<string, ArticleInput> {
@@ -24,7 +24,11 @@ export function indexArticlesByUrl(articles: readonly ArticleInput[]): Map<strin
 }
 
 /** 给单条补 published_at + 领域（幂等：已有字段不覆盖）。 */
-export function annotateItem(it: ReportItem, byUrl: ReadonlyMap<string, ArticleInput>): ReportItem {
+export function annotateItem(
+  it: ReportItem,
+  byUrl: ReadonlyMap<string, ArticleInput>,
+  section?: ReportSectionKey,
+): ReportItem {
   const a = byUrl.get(it.url);
   const patch: Partial<ReportItem> = {};
 
@@ -35,8 +39,12 @@ export function annotateItem(it: ReportItem, byUrl: ReadonlyMap<string, ArticleI
   }
 
   // 领域归属：已有则不覆盖（老报告重渲染口径稳定）；无可靠关联则留空，不硬凑。
+  // 板块兜底只对「词表判不出」的条目生效（当前仅 IPO → 客户经营），不改变既有判定。
   if (!it.primary_domain) {
-    const domain = classifyBusinessDomain({ title: it.title_cn, summary: it.summary, tags: it.tags });
+    const domain = classifyBusinessDomainWithFallback(
+      { title: it.title_cn, summary: it.summary, tags: it.tags },
+      section,
+    );
     if (domain) {
       patch.primary_domain = domain.primary_domain;
       if (domain.related_domains.length) patch.related_domains = domain.related_domains;
@@ -57,7 +65,7 @@ export function annotateItemMetadata(
   let touched = false;
   for (const key of Object.keys(sections) as ReportSectionKey[]) {
     next[key] = (sections[key] ?? []).map((it) => {
-      const annotated = annotateItem(it, byUrl);
+      const annotated = annotateItem(it, byUrl, key);
       if (annotated !== it) touched = true;
       return annotated;
     });

@@ -98,3 +98,29 @@ test("⑤ 幂等 + 不 mutate 入参 + 五大分类键不变", () => {
   // tags 不被领域值污染
   assert.ok(once.sections!.gz_local![0].tags.every((t) => !DOMAIN_IDS.includes(t)), "领域值不写进 tags");
 });
+
+test("⑥ 板块兜底：IPO 条目判不出领域时归客户经营（+关联财富），其他板块不兜底", () => {
+  const ipoItem = item({ title_cn: "深鹏科技：IPO问询中（拟北交所）", summary: "", tags: [] });
+  const r: DailyReport = {
+    date: "2026-11-28",
+    sections: { gz_local: [], biz_insight: [], policy_market: [], tech: [], ipo: [ipoItem] },
+    must_read: [],
+    insights: [],
+  };
+  const out = annotateItemMetadata(r, [article({ url: ipoItem.url })]);
+  const got = out.sections!.ipo![0];
+  assert.equal(got.primary_domain, "customer_growth", "兜底主领域=客户经营与客群增长");
+  assert.deepEqual(got.related_domains, ["wealth_aum"], "关联领域带财富（企业主/董监高是私行客源）");
+  assert.ok(DOMAIN_IDS.includes(got.primary_domain!), "兜底值必须是配置里的合法 id");
+
+  // 同样的内容放到别的板块：不得兜底（兜底只按板块给，不扩大词表判定面）
+  const r2: DailyReport = { ...r, sections: { gz_local: [ipoItem], biz_insight: [], policy_market: [], tech: [], ipo: [] } };
+  const out2 = annotateItemMetadata(r2, [article({ url: ipoItem.url })]);
+  assert.equal(out2.sections!.gz_local![0].primary_domain, undefined, "非 IPO 板块不享受兜底");
+
+  // 词表本来判得出的 IPO 条目仍走词表（兜底不覆盖既有判定）
+  const hitItem = item({ title_cn: "广州某企业AUM规模突破，私行客户增长", summary: "财富管理", tags: ["财富"] });
+  const r3: DailyReport = { ...r, sections: { gz_local: [], biz_insight: [], policy_market: [], tech: [], ipo: [hitItem] } };
+  const out3 = annotateItemMetadata(r3, [article({ url: hitItem.url })]);
+  assert.equal(out3.sections!.ipo![0].primary_domain, "wealth_aum", "词表命中优先于兜底");
+});

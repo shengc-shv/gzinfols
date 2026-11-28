@@ -85,6 +85,49 @@ export function classifyBusinessDomain(input: {
 }
 
 /**
+ * 板块级兜底（2026-11-28 sc：「IPO 至少兜底可以算经营线索」）。
+ *
+ * 🔴 只处理**词表判不出领域**的条目（null 分支）：不参与打分、不动 keywords、
+ * 不回写既有非空判定 —— 历史报告的领域标签因此不会漂。
+ *
+ * 目前只有 IPO，理由：拟上市企业本身是对公获客对象，其企业主/董监高（股权激励、
+ * 减持、并购）又是私行客源，所以主领域取「客户经营与客群增长」、相关领域带「财富管理与AUM」。
+ *
+ * ⛔ 不要改成「把 IPO 相关词加进各领域 keywords」：那会把「IPO 审核节奏收紧」这类
+ * 政策稿也拽进客户经营，判定面一宽就再也收不回来。
+ */
+export const SECTION_FALLBACK_DOMAIN: Readonly<
+  Record<string, { primary: string; related: readonly string[] }>
+> = {
+  ipo: { primary: "customer_growth", related: ["wealth_aum"] },
+};
+
+/**
+ * 领域归属（带板块兜底）：先按内容词表判定，判不出再看板块是否有兜底。
+ *
+ * `section` 只用于**兜底选择**，不参与词表打分（无状态源红线：判定仍只看内容）。
+ * 兜底 id 不存在于配置时返回 null —— 宁可留空，也不写脏值进报告。
+ */
+export function classifyBusinessDomainWithFallback(
+  input: {
+    title?: string | null;
+    summary?: string | null;
+    tags?: readonly string[] | null;
+  },
+  section?: string | null,
+): { primary_domain: string; related_domains: string[] } | null {
+  const hit = classifyBusinessDomain(input);
+  if (hit) return hit;
+  const fb = section ? SECTION_FALLBACK_DOMAIN[section] : undefined;
+  if (!fb) return null;
+  if (!DOMAIN_IDS.includes(fb.primary)) return null;
+  return {
+    primary_domain: fb.primary,
+    related_domains: fb.related.filter((x) => x !== fb.primary && DOMAIN_IDS.includes(x)),
+  };
+}
+
+/**
  * 领域内二级主题归类（二期 WP10 · 纯展示）。
  *
  * 🔴 只服务领域专题页的分组，**不参与生产判定**：`primary_domain` 仍只由
