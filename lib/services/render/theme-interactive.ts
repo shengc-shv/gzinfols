@@ -205,6 +205,9 @@ export const THEME_INTERACTIVE_CSS = `  /* ===== 2026-08-21 交互重构（demo 
     display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem;
     margin: 0.75rem 0 0.15rem;
   }
+  /* 2026-11-28：入口卡为奇数张时，最后一张横跨整行（当前为 3 张：主题追踪/经营重点/研报解读；
+     研报面板关闭时剩 2 张，规则不生效，仍是两列）。 */
+  .module-links > .module-link:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .module-link {
     display: flex; align-items: center; gap: 0.55rem;
     min-height: 56px; padding: 0.6rem 0.75rem;

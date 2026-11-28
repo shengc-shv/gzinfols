@@ -28,7 +28,6 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { renderRedchipPage } from "./lib/redchip-page.mjs";
 import { renderRedchipReport } from "./lib/redchip-report.mjs";
-import { renderOverseasPage } from "./lib/overseas-page.mjs";
 import { renderSearchPage } from "./lib/search-page.mjs";
 import { renderTopicsPage } from "./lib/topics-page.mjs";
 import { renderResearchPage, renderResearchDetailPage } from "./lib/research-page.mjs";
@@ -177,7 +176,6 @@ const latestHtml = fs
   .replace(/href="\.\.\/focus\.html"/g, 'href="./focus.html"')
   // 领域专题页（二期 WP10）同上。
   .replace(/href="\.\.\/domains\.html"/g, 'href="./domains.html"')
-  // 领域专题页（二期 WP10）同上。
   // B1：最新一期的「归档」旁补一个「检索」入口（检索页只对发布根的相对路径成立）
   .replace(
     /(<a class="archive" href="\.\/archive\.html">[^<]*<\/a>)/,
@@ -702,28 +700,6 @@ try {
     }
   }
 }
-}
-
-// ---------- 5.6) 境外线索池页：site/overseas/index.html ----------
-// 数据源 = data/overseas/leads.json（**入库**，由本地 `npm run overseas` 累积产出）。
-// 缺失或损坏时产出空态页而不报错 —— 入口卡不能 404。
-try {
-  const ovPath = path.join(process.cwd(), "data", "overseas", "leads.json");
-  let ovLedger = null;
-  if (fs.existsSync(ovPath)) {
-    try {
-      ovLedger = JSON.parse(fs.readFileSync(ovPath, "utf8"));
-    } catch {
-      ovLedger = null;
-    }
-  }
-  const ovOut = path.join(OUT, "overseas");
-  fs.mkdirSync(ovOut, { recursive: true });
-  fs.writeFileSync(path.join(ovOut, "index.html"), renderOverseasPage({ ledger: ovLedger }), "utf8");
-  const ovCount = ovLedger && Array.isArray(ovLedger.leads) ? ovLedger.leads.length : 0;
-  console.log(`[build-site] overseas/index.html (${ovCount} 家)`);
-} catch (e) {
-  console.log(`[build-site] 境外线索池页跳过：${e && e.message ? e.message : e}`);
 }
 
 // ---------- 6) .nojekyll：阻止 GitHub Pages 跑 Jekyll（否则下划线开头的目录会被吞）----------
