@@ -1,0 +1,52 @@
+{
+  "version": "2026T.0-draft",
+  "updated_at": "2026-11-28",
+  "updated_by": "待业务确认",
+  "change_reason": "二期首版骨架：临时专项示例，全部 inactive；启用后到期自动失效（无需改代码）",
+  "focus_items": [
+    {
+      "id": "t26_property_risk_monitor",
+      "name": "区域房地产市场风险监测",
+      "description": "临时专项：监测广州及周边楼市量价、交付与政策变化对按揭资产质量的影响",
+      "level": "temporary",
+      "grade": "A",
+      "status": "inactive",
+      "priority": 2.0,
+      "highlight": true,
+      "start_date": "2026-10-01",
+      "end_date": "2026-12-31",
+      "domains": ["retail_credit", "regional_peer"],
+      "core_keywords": ["楼市"],
+      "keywords": ["房价", "成交面积", "土拍", "预售资金监管", "保交楼", "二手房挂牌", "库存去化"],
+      "synonyms": ["房地产市场", "商品房市场"],
+      "concepts": ["按揭资产质量", "抵押物价值", "区域风险"],
+      "segments": ["购房客群"],
+      "products": ["按揭"],
+      "exclude_keywords": ["房企美元债违约", "境外上市房企"],
+      "source": "临时专项（区域风险）",
+      "description_for_ai": "关注会影响按揭抵押物价值与资产质量的区域楼市信号，不收录房企资本市场融资新闻"
+    },
+    {
+      "id": "t26_policy_tracking",
+      "name": "重点监管政策跟踪",
+      "description": "临时专项：跟踪对零售业务有直接影响的新规、征求意见与处罚口径",
+      "level": "temporary",
+      "grade": "S",
+      "status": "inactive",
+      "priority": 2.0,
+      "highlight": true,
+      "start_date": "2026-11-01",
+      "end_date": "2027-01-31",
+      "domains": ["risk_consumer", "retail_credit", "wealth_aum"],
+      "core_keywords": ["征求意见", "管理办法", "监管新规"],
+      "keywords": ["金融监管总局", "人民银行", "罚单", "行政处罚", "合规要求", "业务规范"],
+      "synonyms": ["监管文件", "政策征求意见"],
+      "concepts": ["合规销售", "适当性管理", "信息披露"],
+      "segments": ["全客群"],
+      "products": ["理财", "保险", "贷款", "信用卡"],
+      "exclude_keywords": [],
+      "source": "临时专项（监管跟踪）",
+      "description_for_ai": "只收录对零售业务规则有实质改变的文件与处罚，不含会议活动与人事任免"
+    }
+  ]
+}

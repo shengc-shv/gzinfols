@@ -58,6 +58,13 @@ const SERVICE_LAYERS: Record<string, number> = {
   select: 1,
   enrich: 2,
   market: 2,
+  /**
+   * 动态经营重点引擎（二期 2026-11-28）：与 enrich 同层 ——
+   * 它是「给候选池排序加权的评分/匹配层」，被 enrich（exec 池、必读护栏）与
+   * render（首页重点模块、专题页）消费；自身只依赖 vocab（领域 id 真源）。
+   * ⛔ 不得反向依赖 assemble/render/publish（那会把评分层变成装配层）。
+   */
+  "business-focus": 2,
   memory: 3,
   assemble: 4,
   render: 4,
