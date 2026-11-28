@@ -160,6 +160,15 @@ export interface ReportAttention {
   domains: string[];
   /** 关联来源：必须来自当日候选条目，可点回原文。 */
   source_urls: string[];
+  /**
+   * 来源候选编号（第二轮修订 3.5）：必须来自本次输入候选；
+   * 领域与事实的归属都按它核对，不按 LLM 自报的 URL 集合信任。
+   */
+  source_candidate_ids?: string[];
+  /** 从候选事实里摘录出的支撑事实（第二轮修订 3.5；内部字段，页面不展示）。 */
+  supporting_facts?: string[];
+  /** 跨条线关联说明：domains ≥2 且来自 ≥2 条候选时必填，并需明确说出涉及的领域。 */
+  cross_domain_link?: string;
   /** 判断置信度（内部用，不在页面展示技术分数）。 */
   confidence?: DeltaConfidence;
 }
@@ -440,8 +449,14 @@ export interface MustReadFunnel {
   candidates: number;
   /** 最终选入条数（= 卡片数） */
   played: number;
-  /** 命中内容记忆判重被跳过条数 */
+  /** 命中内容记忆判重被跳过条数（不含扩展门槛拦下的） */
   skippedByMemory: number;
+  /** 第 4/5 条被额外质量门槛拦下的条数（2026-11-28） */
+  gateRejected?: number;
+  /** 基础条数（默认 3，工作日/周末一致） */
+  baseTarget?: number;
+  /** 实际通过扩展门槛多播出的条数（0~2） */
+  extended?: number;
   /** 目标上限（便于一眼看出缺口：target - played = 缺口） */
   target: number;
 }

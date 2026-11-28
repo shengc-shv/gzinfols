@@ -126,9 +126,10 @@ export interface GuardOutput {
 }
 
 /**
- * 顺序判重选单（2026-09-18 新口径）：按候选顺序（调用方保证已按「分行关联度」降序）
- * 依次判重 —— 未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延到下一条候补，
- * 直到选满 `target` 即停（其后候选留作备用）。
+ * 顺序判重选单（2026-09-18 口径；2026-11-28 增加扩展门槛）：
+ * 按候选顺序依次判重 —— 未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延到下一条候补，
+ * 直到选满 `target` 即停。传入 `baseTarget` 时，前 `baseTarget` 条只过判重，
+ * 之后每条还须过 `extensionGate`（必读第 4/5 条的高质量门槛）。
  *
  * ⚠️ 判重依据**完全复用** `evaluateCandidate`（事件指纹匹配：锚点 Jaccard / 标题 Dice /
  * 主题标签辅助 + 冷却期）。本函数**不改动任何判定规则**，只负责「选谁 / 跳过谁 /
@@ -142,35 +143,52 @@ export function pickUntilTarget<T>(opts: {
   section: MemorySection;
   today: string;
   broadcastAt: string;
+  /** 上限；选满即停。 */
   target: number;
+  /**
+   * 基础条数（2026-11-28 必读=3）：前 `baseTarget` 条只过判重；
+   * 之后每一条还必须过 `extensionGate`，否则跳过并继续看后面候补（⛔ 不降标准凑数）。
+   * 不传时行为与旧版完全一致（商机路径）。
+   */
+  baseTarget?: number;
+  extensionGate?: (item: T, decision: MemoryDecision) => boolean;
   store: EventMemoryStore;
 }): {
   chosen: Array<{ item: T; decision: MemoryDecision }>;
   skipped: MemoryDecision[];
+  /** 其中被扩展门槛拦下的条数（与判重跳过分开记账）。 */
+  gateRejected: number;
   store: EventMemoryStore;
 } {
   let store = opts.store;
   const chosen: Array<{ item: T; decision: MemoryDecision }> = [];
   const skipped: MemoryDecision[] = [];
+  let gateRejected = 0;
+  const base = opts.baseTarget ?? opts.target;
   for (const item of opts.items) {
+    if (chosen.length >= opts.target) break; // 选满即停，其后候选留作备用候补
     const cand = opts.toCandidate(item);
     const d = evaluateCandidate({ cand, section: opts.section, today: opts.today, store });
-    if (d.allow) {
-      chosen.push({ item, decision: d });
-      store = rememberBroadcast(store, {
-        cand,
-        section: opts.section,
-        date: opts.today,
-        novelty: d.novelty,
-        broadcastAt: opts.broadcastAt,
-        ...(d.requiredAngle ? { angle: d.requiredAngle } : {}),
-      });
-      if (chosen.length >= opts.target) break; // 选满即停，其后候选留作备用候补
-    } else {
+    if (!d.allow) {
       skipped.push(d); // 命中重复 → 跳过，继续顺延下一条候补
+      continue;
     }
+    if (chosen.length >= base && opts.extensionGate && !opts.extensionGate(item, d)) {
+      skipped.push(d);
+      gateRejected++;
+      continue; // 扩展位不合格 → 继续看后面的候补，绝不降低门槛补位
+    }
+    chosen.push({ item, decision: d });
+    store = rememberBroadcast(store, {
+      cand,
+      section: opts.section,
+      date: opts.today,
+      novelty: d.novelty,
+      broadcastAt: opts.broadcastAt,
+      ...(d.requiredAngle ? { angle: d.requiredAngle } : {}),
+    });
   }
-  return { chosen, skipped, store };
+  return { chosen, skipped, gateRejected, store };
 }
 
 /**
@@ -343,34 +361,43 @@ export function applyMemoryGuard(input: GuardInput): GuardOutput {
     // ② 按**宏观视角分**从高到低排序（同分保持 LLM 原序 —— 稳定排序）
     cands.sort((a, b) => b.macro - a.macro);
 
-    // ③ 顺序判重：依次取，未命中重复 → 选入并写记忆；命中重复 → 跳过、顺延下一条候补，
-    //    直到选满 MUST_READ_PLAY_TARGET（规则 3）。候补用尽仍不足 → 按实际剩余（规则 4），
-    //    不强拉池内条目凑数 —— 宁缺勿滥。
-    // 周末版降档（2026-11-02 sc）：周六/周日/周一素材只有工作日一半，满额会逼 LLM 拿股市评论凑数。
-    const mrTarget = mustReadTargetFor(today);
+    // ③ 动态 3—5 条（2026-11-28 sc 拍板）：
+    //    基础 3 条只过判重；第 4/5 条必须额外满足「业务线档 must_read + 宏观分达标 + 有原始来源 URL」，
+    //    门槛全部复用现有评分器（scoreBranchRelevance / scoreDualPerspective / evaluateCandidate），
+    //    ⛔ 不新造刻度、不为凑满 5 条降标准；周末同口径（原周末 4 条档已被覆盖）。
+    const mrBase = mustReadTargetFor(today);
+    const mrTarget = MUST_READ_PLAY_TARGET;
     const r = pickUntilTarget({
       items: cands,
       toCandidate: (c) => c.cand,
       section: "must_read",
       today,
       broadcastAt,
+      baseTarget: mrBase,
       target: mrTarget,
+      extensionGate: (c) =>
+        c.cand.tier === "must_read" && c.macro >= DUAL_THRESHOLD && Boolean(c.m.url),
       store,
     });
     store = r.store;
     decisions.push(...r.chosen.map((c) => c.decision), ...r.skipped);
     if (r.chosen.length > 0) next.must_read = r.chosen.map((c) => c.item.m);
 
+    const extended = Math.max(0, r.chosen.length - mrBase);
     if (r.skipped.length > 0 || r.chosen.length < mrTarget) {
       log.push(
         `🧠 必读：候选 ${cands.length} 条（按宏观视角分降序）→ 播出 ${r.chosen.length}/${mrTarget} 条` +
-          `（命中重复跳过 ${r.skipped.length} 条：${r.skipped.map((d) => d.verdict).join(",") || "无"}）`,
+          `（基础 ${mrBase} + 扩展 ${extended}；命中重复跳过 ${r.skipped.length - r.gateRejected} 条` +
+          `，扩展门槛拦下 ${r.gateRejected} 条：${r.skipped.map((d) => d.verdict).join(",") || "无"}）`,
       );
     }
     mustReadFunnel = {
       candidates: cands.length,
       played: r.chosen.length,
-      skippedByMemory: r.skipped.length,
+      skippedByMemory: r.skipped.length - r.gateRejected,
+      gateRejected: r.gateRejected,
+      baseTarget: mrBase,
+      extended,
       target: mrTarget,
     };
   }

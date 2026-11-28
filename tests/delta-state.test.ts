@@ -14,6 +14,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { deltaOf, DELTA_PROGRESS_THRESHOLD } from "../lib/services/assemble/delta";
+import { buildHistoricalEventView } from "../lib/services/memory/event-decide";
 import type { EventMemoryStore, EventRecord } from "../lib/services/memory/event-types";
 
 const DAY = "2026-11-28";
@@ -199,7 +200,7 @@ test("⑧ 同一事件新增关键数据 → 有进展", () => {
   const mark = deltaOf(
     {
       title: "广州房贷贴息政策落地",
-      text: "广州房贷贴息政策落地，首套房贷利率下调 20 个基点，覆盖 3.6 万户",
+      text: "广州房贷贴息政策落地，首套房贷利率下调 20 个基点，覆盖 36000 户",
       url: "https://e.com/e",
     },
     store({ E1: record() }),
@@ -257,26 +258,59 @@ test("⑪ 当天已结算进长期记忆的记录不算历史（否则当天这�
   );
 });
 
-test("⑫ 只播过今天、但更早也播过的记录仍算历史（排除只针对「整条仅当天」）", () => {
+test("⑫ 历史与当天样本混合：只用昨天证据判定，今天的新事实仍能被识别", () => {
+  // 修前：整条记录不排除，URL/锚点/事实全量参与 → 今天的「3.6万户」已在聚合字段里，
+  //       要么 sameArticle 直接续报，要么 novelty 算不出新事实 → 真实进展被吞。
   const s = store({
     E1: record({
       broadcastCount: 2,
+      firstBroadcastAt: PREV,
+      lastBroadcastAt: DAY,
       samples: [
-        { date: PREV, section: "must_read", title: "广州房贷贴息政策落地", url: "https://e.com/a", text: "广州房贷贴息政策落地" },
-        { date: DAY, section: "must_read", title: "广州房贷贴息政策落地", url: "https://e.com/a", text: "广州房贷贴息政策落地" },
+        {
+          date: PREV,
+          section: "must_read",
+          title: "广州房贷贴息政策征求意见稿发布",
+          url: "https://e.com/a",
+          text: "广州房贷贴息政策征求意见稿发布",
+          facts: ["!发布"],
+        },
+        {
+          date: DAY,
+          section: "must_read",
+          title: "广州房贷贴息政策正式印发，覆盖 36000 户",
+          url: "https://e.com/b",
+          text: "广州房贷贴息政策正式印发，覆盖 36000 户",
+          facts: ["!印发", "#36000户"],
+        },
       ],
+      broadcastedTexts: [
+        "广州房贷贴息政策征求意见稿发布",
+        "广州房贷贴息政策正式印发，覆盖 36000 户",
+      ],
+      broadcastedFacts: ["!发布", "!印发", "#36000户"],
     }),
   });
-  const mark = deltaOf({ title: "广州房贷贴息政策落地", text: "广州房贷贴息政策落地", url: "https://e.com/a" }, s, opts);
-  assert.equal(mark.state, "followup", "昨天播过、今天又报 → 续报，不能被排除规则误放为新增");
-  assert.equal(mark.issueNo, 3);
+  const mark = deltaOf(
+    {
+      title: "广州房贷贴息政策正式印发，覆盖 36000 户",
+      text: "广州房贷贴息政策正式印发，覆盖 36000 户",
+      url: "https://e.com/b",
+    },
+    s,
+    opts,
+  );
+  assert.equal(mark.state, "changed", "相对昨天的征求意见，今天是实质进展");
+  assert.equal(mark.issueNo, 2, "历史只有昨天 1 次 → 本期第 2 期；当天已结算不再单独计一期");
+  assert.ok(mark.highlights?.some((h) => /印发|36000户/.test(h)), "changed 要说出今天新在哪");
+  assert.ok(!mark.highlights?.some((h) => /发布/.test(h)), "昨天已播的事实不得当成新事实");
 });
 
 test("⑬ changed 必须带可核验新事实（凡 changed 必有 highlights）", () => {
   const samples = [
     { title: "广州房贷贴息政策落地", text: "广州房贷贴息政策落地，首套利率下调 20 个基点" },
     { title: "广州房贷贴息政策正式印发", text: "广州房贷贴息政策正式印发" },
-    { title: "广州房贷贴息政策施行", text: "广州房贷贴息政策施行，覆盖 3.6 万户" },
+    { title: "广州房贷贴息政策施行", text: "广州房贷贴息政策施行，覆盖 36000 户" },
   ];
   for (const s of samples) {
     const mark = deltaOf({ title: s.title, text: s.text, url: "https://e.com/z" }, store({ E1: record() }), opts);
@@ -290,4 +324,129 @@ test("⑬ changed 必须带可核验新事实（凡 changed 必有 highlights）
   }
   // 阈值本身没动（锁住，防被悄悄调松换准确率）
   assert.equal(DELTA_PROGRESS_THRESHOLD, 0.35);
+});
+
+// —— 2026-11-28 第二轮修订：当天样本不得进入历史基线的回归 ——————————
+
+function mixedRecord(): EventRecord {
+  return record({
+    broadcastCount: 2,
+    firstBroadcastAt: PREV,
+    lastBroadcastAt: DAY,
+    samples: [
+      {
+        date: PREV,
+        section: "must_read",
+        title: "广州房贷贴息政策征求意见稿发布",
+        url: "https://e.com/a",
+        text: "广州房贷贴息政策征求意见稿发布",
+        facts: ["!发布"],
+      },
+      {
+        date: DAY,
+        section: "must_read",
+        title: "广州房贷贴息政策正式印发",
+        url: "https://e.com/b",
+        text: "广州房贷贴息政策正式印发",
+        facts: ["!印发"],
+      },
+    ],
+    broadcastedTexts: [
+      "广州房贷贴息政策征求意见稿发布",
+      "广州房贷贴息政策正式印发",
+    ],
+    broadcastedFacts: ["!发布", "!印发"],
+  });
+}
+
+test("⑭ 候选 URL = 当天已写入的 URL：不得命中 sameArticle 吞掉新增数据", () => {
+  const mark = deltaOf(
+    {
+      title: "广州房贷贴息政策正式印发，覆盖 36000 户",
+      text: "广州房贷贴息政策正式印发，覆盖 36000 户",
+      url: "https://e.com/b", // 当天样本的 URL，历史样本是 /a
+    },
+    store({ E1: mixedRecord() }),
+    opts,
+  );
+  assert.equal(mark.state, "changed", "sameArticle 只能查历史样本，不能查当天写入的那条");
+  assert.ok(mark.highlights?.some((h) => /36000户/.test(h)));
+});
+
+test("⑮ 样本窗口被当天占满但仍有历史：保守降级 followup + low（sc 拍板口径）", () => {
+  const todaySamples = Array.from({ length: 6 }, (_, i) => ({
+    date: DAY,
+    section: "must_read" as const,
+    title: "广州房贷贴息政策正式印发",
+    url: `https://e.com/t${i}`,
+    text: "广州房贷贴息政策正式印发",
+    facts: ["!印发"],
+  }));
+  const s = store({
+    E1: record({
+      broadcastCount: 8,
+      firstBroadcastAt: PREV,
+      lastBroadcastAt: DAY,
+      samples: todaySamples,
+      broadcastedTexts: todaySamples.map((x) => x.text),
+      broadcastedFacts: ["!发布", "!印发"],
+    }),
+  });
+  const mark = deltaOf(
+    {
+      title: "广州房贷贴息政策正式印发",
+      text: "广州房贷贴息政策覆盖 36000 户",
+      url: "https://e.com/new",
+    },
+    s,
+    opts,
+  );
+  assert.equal(mark.state, "followup", "历史存在但证据不足 → 不误报新增，更不强行判有进展");
+  assert.equal(mark.confidence, "low");
+  assert.equal(mark.issueNo, undefined, "核对不了历史次数 → 不给期号");
+  assert.ok(!mark.highlights?.length, "证据不足不得输出新事实");
+});
+
+test("⑯ buildHistoricalEventView 是纯函数，且只保留 excludeDate 之前的证据", () => {
+  const original = mixedRecord();
+  const before = JSON.stringify(original);
+  const view = buildHistoricalEventView(original, DAY);
+  assert.ok(view, "混合记录有昨天样本 → 应能重建历史视图");
+  assert.equal(view.samples.length, 1);
+  assert.equal(view.samples[0].date, PREV);
+  assert.equal(view.broadcastCount, 1, "broadcastCount 扣掉当天计入的那一播报日");
+  assert.equal(view.lastBroadcastAt, PREV);
+  assert.ok(!view.broadcastedFacts.includes("!印发"), "当天才出现的事实不得进入历史事实集合");
+  assert.ok(!view.broadcastedTexts.some((t) => t.includes("正式印发")));
+  assert.equal(JSON.stringify(original), before, "不得 mutate 入参");
+  const onlyToday = record({
+    firstBroadcastAt: DAY,
+    lastBroadcastAt: DAY,
+    broadcastCount: 1,
+    samples: [
+      { date: DAY, section: "must_read", title: "广州房贷贴息政策落地", url: "https://e.com/t", text: "广州房贷贴息政策落地" },
+    ],
+  });
+  assert.equal(buildHistoricalEventView(onlyToday, DAY), null, "全是当天样本 → 没有历史视图");
+});
+
+test("⑰ 同一事件当天重复运行：当天暂存 + 当天结算都不算历史 → 新增", () => {
+  const title = "广州房贷贴息政策正式印发";
+  const s = store(
+    {
+      E1: record({
+        firstBroadcastAt: DAY,
+        lastBroadcastAt: DAY,
+        broadcastCount: 1,
+        samples: [
+          { date: DAY, section: "must_read", title, url: "https://e.com/x", text: title, facts: ["!印发"] },
+        ],
+        broadcastedTexts: [title],
+        broadcastedFacts: ["!印发"],
+      }),
+    },
+    { date: DAY, entries: [{ date: DAY, section: "must_read", title, url: "https://e.com/x", text: title }] },
+  );
+  const mark = deltaOf({ title, text: title, url: "https://e.com/x" }, s, opts);
+  assert.equal(mark.state, "new", "不能因自己刚写进记忆就标续报");
 });

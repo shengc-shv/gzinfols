@@ -358,12 +358,15 @@ export const SECTION_POLICY: Record<MemorySection, SectionPolicy> = {
  *
  * - `MUST_READ_CANDIDATE_POOL`：上游（enrich / pipeline）产出的**候选条数**；
  *   自第 `MUST_READ_PLAY_TARGET + 1` 条起即备用候补，供去重命中时顺延取用。
- * - `MUST_READ_PLAY_TARGET`：实际**播出条数**（顺序判重，选满即停）。
+ * - `MUST_READ_BASE_TARGET`：基础播出条数（2026-11-28 sc 拍板：默认 3，工作日/周末一致）。
+ * - `MUST_READ_PLAY_TARGET`：**上限** 5；第 4/5 条必须通过额外质量门槛，
+ *   ⛔ 不得为凑满目标降低标准（此前「工作日 5 / 周末 4」的降档口径已被本轮覆盖）。
  *
  * ⚠️ 单一真源：消费方一律从这里导入，**禁止就地写死数字** —— 历史教训
  *    `IPO_VOICE_WINDOW_DAYS` 曾在两处重复定义，改一处不生效。
  */
 export const MUST_READ_CANDIDATE_POOL = 10;
+export const MUST_READ_BASE_TARGET = 3;
 export const MUST_READ_PLAY_TARGET = 5;
 
 /**
@@ -379,13 +382,15 @@ export const INSIGHT_CANDIDATE_POOL = 12;
 export const INSIGHT_PLAY_TARGET = 6;
 
 // ---------------------------------------------------------------------------
-// 周末版降档（2026-11-02 sc 授权）
+// 周末版降档（2026-11-02 sc 授权；2026-11-28 必读口径被新规则覆盖）
 // ---------------------------------------------------------------------------
 // 背景（11-02 实测）：周末+周一早报的可用内容只有工作日的一半 ——
 //   sina-bank 抓到 47 条但**收录 0**（周末频道不更新，滚动列表还是周五那批，被时间窗整批挡掉）、
 //   guancha 53→0、southcn 33→2；能给内容的只剩 24 小时滚动的股市源（占比 31%→43%）。
-// 后果：满额 5+6 会逼着 LLM 拿「券商策略 / 估值观点 / 机构研判」凑数（11-02 商机 6 条全是市场评论）。
+// 后果：满额必读 5 + 商机 6 会逼着 LLM 拿「券商策略 / 估值观点 / 机构研判」凑数（11-02 商机 6 条全是市场评论）。
 // 处置：周末版**减少目标条数**（宁缺毋滥），而不是降低选条标准。
+// 🔴 11-28 覆盖：必读改为「基础 3 / 上限 5 + 质量门槛」，工作日与周末一致，不再有周末 4 条档；
+//    下面的周末降档现在只对商机生效。
 //
 // ⚠️ 判据用**报告日期**（不是抓取时刻）：周一早报抓的是周日内容，同样算周末版。
 
@@ -407,9 +412,13 @@ export function isWeekendEdition(dateKey: string): boolean {
   return wd === 0 || wd === 6 || wd === 1;
 }
 
-/** 当日必读播出目标：工作日 5、周末版 4。 */
+/**
+ * 当日必读**基础**播出条数：恒为 3（2026-11-28 sc 拍板覆盖周末降档）。
+ * 第 4/5 条由 exec-guard 的扩展质量门槛决定，与日期无关。
+ */
 export function mustReadTargetFor(dateKey: string): number {
-  return isWeekendEdition(dateKey) ? MUST_READ_PLAY_TARGET - 1 : MUST_READ_PLAY_TARGET;
+  void dateKey; // 周末降档已不适用于必读；保留参数兼容既有调用点
+  return MUST_READ_BASE_TARGET;
 }
 
 /** 当日商机播出目标：工作日 6、周末版 5。 */

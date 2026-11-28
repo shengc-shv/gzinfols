@@ -23,7 +23,7 @@
 import type { ReportAttention, DailyReport } from "../../contracts/report";
 import type { LlmPort, Logger } from "../../contracts/pipeline";
 import { BUSINESS_DOMAINS, DOMAIN_IDS } from "../vocab/business-domains";
-import { titleSim } from "../memory/event-text";
+import { normText, titleSim } from "../memory/event-text";
 import { extractJson } from "../enrich/json-util";
 
 /** 最多展示条数（任务书 3.6）。 */
@@ -32,6 +32,12 @@ export const MAX_ATTENTION = 3;
 const MAX_CANDIDATES = 14;
 /** 候选事实截断（只给 LLM 一句，避免把整份报告塞进 prompt）。 */
 const FACT_CLIP = 90;
+/**
+ * 候选标题截断（2026-11-28 sc）：个别源的 `title` 实为整篇正文（实测证监会稿 238 字），
+ * 原样塞进 prompt 会挤掉其他候选、并诱发 LLM 整段复述。
+ * ⛔ 只截 prompt 展示；候选对象仍保留完整 title，`titleSim` 复述校验口径不变。
+ */
+const TITLE_CLIP = 60;
 /** 判为「复述」的标题相似度阈值（与判重链的同一主题阈值同口径，不新造刻度）。 */
 const RESTATE_SIM = 0.7;
 
@@ -39,6 +45,8 @@ const RESTATE_SIM = 0.7;
 const ABSOLUTE_WORDING = [/必须立即/, /要求各部门/, /责成/, /立刻开展/, /马上落实/, /全行上下必须/];
 
 export interface AttentionCandidate {
+  /** 稳定编号 c1..cN：LLM 只能引用它，用于把领域/事实归属钉回具体候选。 */
+  id: string;
   kind: "must_read" | "insight" | "risk";
   title: string;
   fact: string;
@@ -70,15 +78,18 @@ export function collectAttentionCandidates(report: DailyReport): AttentionCandid
   };
 
   const out: AttentionCandidate[] = [];
+  const add = (c: Omit<AttentionCandidate, "id">) => {
+    if (out.length < MAX_CANDIDATES) out.push({ id: `c${out.length + 1}`, ...c });
+  };
   for (const m of report.must_read ?? []) {
     if (!m.url) continue;
     const urls = [m.url];
-    out.push({ kind: "must_read", title: m.title ?? "", fact: m.why ?? "", urls, domains: domsOf(urls) });
+    add({ kind: "must_read", title: m.title ?? "", fact: m.why ?? "", urls, domains: domsOf(urls) });
   }
   for (const it of report.insights ?? []) {
     const urls = (it.sources ?? []).map((s) => s?.url).filter((u): u is string => Boolean(u));
     if (!urls.length) continue;
-    out.push({ kind: "insight", title: it.topic ?? "", fact: it.impact ?? "", urls, domains: domsOf(urls) });
+    add({ kind: "insight", title: it.topic ?? "", fact: it.impact ?? "", urls, domains: domsOf(urls) });
   }
   if (report.risk) {
     const urls = [
@@ -86,7 +97,7 @@ export function collectAttentionCandidates(report: DailyReport): AttentionCandid
       report.risk.url,
     ].filter((u): u is string => Boolean(u));
     if (urls.length) {
-      out.push({
+      add({
         kind: "risk",
         title: report.risk.topic ?? "",
         fact: report.risk.evidence ?? report.risk.impact ?? "",
@@ -95,7 +106,7 @@ export function collectAttentionCandidates(report: DailyReport): AttentionCandid
       });
     }
   }
-  return out.slice(0, MAX_CANDIDATES);
+  return out;
 }
 
 function domainMenu(): string {
@@ -115,28 +126,50 @@ export function buildAttentionPrompt(cands: AttentionCandidate[]): { system: str
     "4. 管理关注必须回答「管理层该了解什么」，不能是某一条候选的标题复述；",
     "   能合并多条候选指向同一个管理问题的，优先合并（并引用多个来源）。",
     "5. 如果当天确实没有够格的管理议题，就返回空数组 []，不要凑数。",
-    "6. 只输出 JSON 数组，不要任何解释文字。",
+    "6. source_candidate_ids 只能引用上方 [cN] 编号；supporting_facts 必须逐字摘自对应候选的「事实」字段，不得自己总结。",
+    "7. domains 给出 ≥2 个领域时，必须写 cross_domain_link：一句话说明这批候选里这些领域实际如何关联；",
+    "   没有真实关联就只给 1 个领域。一条候选本身带多个标签，不构成跨条线。",
+    "8. 候选标题可能含整段正文，只作定位，不得整段复述；处罚/合规类事件优先按风险提示理解，",
+    "   管理关注只写管理层需要了解的问题，不搬运原文。",
+    "9. 只输出 JSON 数组，不要任何解释文字。",
   ].join("\n");
 
   const lines: string[] = [];
   lines.push("【今日候选】");
-  cands.forEach((c, i) => {
+  cands.forEach((c) => {
     const doms = c.domains.length ? c.domains.join(",") : "无";
+    const title = c.title.length > TITLE_CLIP ? `${c.title.slice(0, TITLE_CLIP)}…` : c.title;
     lines.push(
-      `[${i + 1}] (${KIND_LABEL[c.kind]}) ${c.title}｜事实：${c.fact.slice(0, FACT_CLIP)}｜领域：${doms}｜来源：${c.urls.join(" ")}`,
+      `[${c.id}] (${KIND_LABEL[c.kind]}) ${title}｜事实：${c.fact.slice(0, FACT_CLIP)}｜领域：${doms}｜来源：${c.urls.join(" ")}`,
     );
   });
   lines.push("");
   lines.push("【输出格式】严格如下 JSON 数组（最多 3 条，可为 []）：");
   lines.push(
     '[{"topic":"管理关注主题（一句话，不超过 40 字）","rationale":"关注依据：引用了哪些候选的哪些关键事实",' +
-      '"significance":"管理意义：为什么值得管理层关注（审慎措辞）","domains":["领域id"],"source_urls":["来源url"]}]',
+      '"significance":"管理意义：为什么值得管理层关注（审慎措辞）","domains":["领域id"],' +
+      '"source_candidate_ids":["c1"],"source_urls":["来源url"],"supporting_facts":["候选事实原文"],' +
+      '"cross_domain_link":"仅在 domains≥2 时填写：这些领域在本批候选中的实际关联"}]',
   );
   lines.push("");
   lines.push(`【领域取值】只能从这里选：${domainMenu()}`);
-  lines.push("【来源要求】source_urls 必须原样复制上面候选里出现过的 url，不得改写、不得自造。");
+  lines.push("【来源要求】source_urls / source_candidate_ids 必须原样复制上面候选里的 url 与编号，不得改写、不得自造。");
 
   return { system, prompt: lines.join("\n") };
+}
+
+/** 支撑事实必须能在被引用候选的事实字段里逐字核到（归一后子串，⛔ 不认自己的总结）。 */
+function factGrounded(fact: string, cited: readonly AttentionCandidate[]): boolean {
+  const needle = normText(fact);
+  return needle.length >= 2 && cited.some((c) => normText(c.fact).includes(needle));
+}
+
+/** 跨条线说明必须点到至少两个实际领域的中文名/简称。 */
+function domainNameSet(domains: readonly string[]): string[] {
+  return domains.flatMap((id) => {
+    const d = BUSINESS_DOMAINS.find((b) => b.id === id);
+    return d ? [d.name, d.short] : [];
+  });
 }
 
 /** 解析 + 确定性校验（纯函数，可单测；不信任 LLM 输出）。 */
@@ -153,10 +186,12 @@ export function parseAttention(raw: string, cands: AttentionCandidate[]): Report
       ? ((parsed as { items: unknown[] }).items as unknown[])
       : [];
 
+  const idToCand = new Map(cands.map((c) => [c.id, c]));
   const urlToCand = new Map<string, AttentionCandidate>();
   for (const c of cands) for (const u of c.urls) if (!urlToCand.has(u)) urlToCand.set(u, c);
   const riskCand = cands.find((c) => c.kind === "risk");
   const mustReadCands = cands.filter((c) => c.kind === "must_read");
+  const insightCands = cands.filter((c) => c.kind === "insight");
 
   const out: ReportAttention[] = [];
   for (const x of arr) {
@@ -167,44 +202,92 @@ export function parseAttention(raw: string, cands: AttentionCandidate[]): Report
     const significance = String(o.significance ?? "").trim();
     if (!topic || !rationale || !significance) continue;
 
-    // ① 来源必须来自候选（防凭空引用）
-    const urls = (Array.isArray(o.source_urls) ? o.source_urls : [])
+    // ① 引用必须落到当日候选：优先 source_candidate_ids，缺失时按 url 反查（兼容旧产物）
+    const cited: AttentionCandidate[] = [];
+    const seenIds = new Set<string>();
+    for (const rawId of Array.isArray(o.source_candidate_ids) ? o.source_candidate_ids : []) {
+      const id = String(rawId ?? "").trim();
+      const c = idToCand.get(id);
+      if (c && !seenIds.has(id)) {
+        cited.push(c);
+        seenIds.add(id);
+      }
+    }
+    const rawUrls = (Array.isArray(o.source_urls) ? o.source_urls : [])
       .map((u) => String(u ?? "").trim())
-      .filter((u) => u.length > 0 && urlToCand.has(u));
-    const uniqUrls = [...new Set(urls)];
-    if (!uniqUrls.length) continue;
+      .filter(Boolean);
+    if (!cited.length) {
+      for (const u of rawUrls) {
+        const c = urlToCand.get(u);
+        if (c && !seenIds.has(c.id)) {
+          cited.push(c);
+          seenIds.add(c.id);
+        }
+      }
+    }
+    if (!cited.length) continue;
+    const allowedUrls = new Set(cited.flatMap((c) => c.urls));
+    const uniqUrls = [...new Set(rawUrls.filter((u) => allowedUrls.has(u)))];
+    const sourceUrls = uniqUrls.length ? uniqUrls : [...new Set(cited.flatMap((c) => c.urls))];
+    if (!sourceUrls.length) continue;
 
     // ② 命令式 / 越界措辞兜底（prompt 已禁止，这里再判一次）
     const blob = `${topic} ${rationale} ${significance}`;
     if (ABSOLUTE_WORDING.some((re) => re.test(blob))) continue;
 
-    // ③ 领域：只认合法 id；LLM 给空则用来源条目的已有标签兜底
-    let domains = (Array.isArray(o.domains) ? o.domains : [])
+    // ③ 支撑事实：必须是候选事实的原文摘录；一条都核不到 → 来源不足以支撑，整条剔除
+    const rawFacts = (Array.isArray(o.supporting_facts) ? o.supporting_facts : [])
+      .map((f) => String(f ?? "").trim())
+      .filter(Boolean);
+    const facts = rawFacts.length ? rawFacts : [...new Set(cited.map((c) => c.fact).filter(Boolean))];
+    const groundedFacts = facts.filter((f) => factGrounded(f, cited));
+    if (!groundedFacts.length) continue;
+
+    // ④ 领域：AI 领域 ∩ 被引用来源支持的领域（⛔ 合法 ID ≠ 有来源依据）
+    const sourceDomains = [...new Set(cited.flatMap((c) => c.domains))];
+    const aiDomains = (Array.isArray(o.domains) ? o.domains : [])
       .map((d) => String(d ?? "").trim())
       .filter((d) => DOMAIN_IDS.includes(d));
-    if (!domains.length) {
-      const set = new Set<string>();
-      for (const u of uniqUrls) for (const d of urlToCand.get(u)?.domains ?? []) set.add(d);
-      domains = [...set];
-    }
-    domains = [...new Set(domains)];
+    let domains = [
+      ...new Set((aiDomains.length ? aiDomains : sourceDomains).filter((d) => sourceDomains.includes(d))),
+    ];
+    if (!domains.length) continue; // 来源没有领域信息 → 不得强行补出跨条线
 
-    // ④ 复述检查：与必读某条高度相似、且只引那一条 → 这就是必读的摘要，剔除
-    const restating = mustReadCands.some(
-      (m) => titleSim(topic, m.title) >= RESTATE_SIM && uniqUrls.every((u) => m.urls.includes(u)),
-    );
+    // ⑤ 跨条线：必须有两个以上不同候选分别支撑，且写得出实际关联；
+    //    单条候选自带多个标签不算跨条线（任务书 3.2 C）。
+    const supporters = new Map<string, Set<string>>();
+    for (const c of cited) {
+      for (const d of domains) {
+        if (!c.domains.includes(d)) continue;
+        const set = supporters.get(d) ?? new Set<string>();
+        set.add(c.id);
+        supporters.set(d, set);
+      }
+    }
+    const distinctSupporters = new Set([...supporters.values()].flatMap((s) => [...s]));
+    const crossLine = domains.length >= 2 && distinctSupporters.size >= 2;
+    if (!crossLine && domains.length > 1) domains = domains.slice(0, 1);
+    let crossDomainLink: string | undefined;
+    if (crossLine) {
+      const link = String(o.cross_domain_link ?? "").trim();
+      const names = domainNameSet(domains);
+      if (link.length < 8 || names.filter((n) => link.includes(n)).length < 2) continue;
+      crossDomainLink = link;
+    }
+
+    // ⑥ 复述检查：只引用一条必读/商机且标题高度相似 → 是卡片摘要，不是管理议题
+    const restating =
+      (cited.length === 1 &&
+        (mustReadCands.some((m) => m.id === cited[0].id && titleSim(topic, m.title) >= RESTATE_SIM) ||
+          insightCands.some((i) => i.id === cited[0].id && titleSim(topic, i.title) >= RESTATE_SIM))) ||
+      // 风险同源且没有额外领域 → 风险模块已说过
+      (riskCand &&
+        cited.length === 1 &&
+        cited[0].id === riskCand.id &&
+        domains.every((d) => riskCand.domains.includes(d)));
     if (restating) continue;
 
-    // ⑤ 风险同源：只引风险那一条、且不带额外领域 → 风险模块已经说过，剔除
-    if (
-      riskCand &&
-      uniqUrls.every((u) => riskCand.urls.includes(u)) &&
-      domains.every((d) => riskCand.domains.includes(d))
-    ) {
-      continue;
-    }
-
-    // ⑥ 自身重复：主题高度相似只留先出现的
+    // ⑦ 自身重复：主题高度相似只留先出现的
     if (out.some((a) => titleSim(a.topic, topic) >= RESTATE_SIM)) continue;
 
     out.push({
@@ -213,8 +296,12 @@ export function parseAttention(raw: string, cands: AttentionCandidate[]): Report
       rationale,
       significance,
       domains,
-      source_urls: uniqUrls,
-      confidence: "high",
+      source_urls: sourceUrls,
+      source_candidate_ids: cited.map((c) => c.id),
+      supporting_facts: groundedFacts,
+      ...(crossDomainLink ? { cross_domain_link: crossDomainLink } : {}),
+      // 事实全部核得到才给 high；夹带无法核到的摘录 → medium（内部字段）
+      confidence: groundedFacts.length === facts.length ? "high" : "medium",
     });
     if (out.length >= MAX_ATTENTION) break;
   }

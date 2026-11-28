@@ -69,9 +69,9 @@ function decisionPart(html: string): string {
   return html.slice(i, j);
 }
 
-test("① 两视角共存：默认决策视角、切换开关、旧视角 DOM 全部保留", () => {
+test("① 两视角共存：默认旧版资讯视角、切换开关、决策视角 DOM 全部保留", () => {
   const html = renderHtml(report());
-  assert.ok(html.includes('<body class="view-decision">'), "默认进入决策视角");
+  assert.ok(html.includes('<body class="view-classic">'), "默认进入旧版资讯视角（19:25 回退）");
   assert.ok(html.includes('id="view-decision"') && html.includes('id="view-classic"'), "两视角容器都在");
   assert.ok(html.includes('id="view-switch"') && html.includes('data-view="classic"'), "切换开关存在");
   assert.ok(html.includes('gz_view'), "偏好写入 localStorage");
@@ -457,7 +457,7 @@ test("⑱ 经营重点追踪入口：底部入口与模块内链都指向跨期�
 
 test("⑲ IPO 线索：判不出领域时兜底进客户经营，商机洞察内嵌速览，季度例行报送不入列", () => {
   // tags 置空：模拟「短标题+纯阶段词」的真实形态（夹具默认带「财富」，会先把领域判走）
-  const milestone = item("深鹏科技：IPO问询中（拟北交所）", { url: "https://e.com/ipo-milestone", tags: [] });
+  const milestone = item("深鹏科技：IPO问询中（拟北交所）", { url: "https://e.com/ipo-milestone", tags: ["粤"] });
   const routine = item("盛凌电子辅导工作进展情况报告（第五期）", {
     url: "https://e.com/ipo-routine",
     tags: [],
@@ -491,7 +491,7 @@ test("⑲ IPO 线索：判不出领域时兜底进客户经营，商机洞察内
 
 test("⑳ 今日必读动态 3—5 条：有几条展示几条，超过 5 条才截断（不凑数也不机械砍）", () => {
   // sc 2026-11-28：默认 3 条、最多 5 条、不足不凑数、超过不泛化。
-  // 数据侧真源是 MUST_READ_PLAY_TARGET=5（周末版 4），前端只做上限保护。
+  // 数据侧真源是「基础 3 / 上限 5 + 质量门槛」，前端只做上限保护。
   const mk = (n: number) =>
     Array.from({ length: n }, (_, i) => ({
       title: `必读事件 ${i + 1}`,
@@ -506,7 +506,69 @@ test("⑳ 今日必读动态 3—5 条：有几条展示几条，超过 5 条才
 
   assert.equal(countOf(2), 2, "只有 2 条就展示 2 条（宁缺毋滥，不拿低价值内容凑满 3）");
   assert.equal(countOf(3), 3, "3 条展示 3 条");
-  assert.equal(countOf(4), 4, "数据侧 4 条（周末版目标）不得被截成 3 —— 原 slice(0,3) 就砍在这里");
-  assert.equal(countOf(5), 5, "数据侧 5 条（工作日目标）全部展示");
+  assert.equal(countOf(4), 4, "数据侧扩展到 4 条（过质量门槛）不得被截成 3 —— 原 slice(0,3) 就砍在这里");
+  assert.equal(countOf(5), 5, "数据侧扩展到 5 条（上限）全部展示");
   assert.equal(countOf(6), 5, "超过 5 条才截断（上限 5，不泛化）");
+});
+
+test("㉑ 手机横滑卡片：外框与内容都固定，标题3行/正文4行截断（招行风白卡）", () => {
+  const html = renderHtml(report());
+  assert.match(html, /#dv-mustread \.dv-scroller > \.dv-card \{ width:min\(84vw,340px\); height:200px/, "必读收紧到 200px");
+  assert.match(html, /#dv-opportunity \.dv-scroller > \.dv-card \{ width:min\(80vw,320px\); height:195px/, "商机收紧到 195px");
+  assert.match(html, /#dv-risk \.dv-scroller > \.dv-card \{ width:min\(88vw,360px\); height:250px/, "风险收紧到 250px");
+  assert.match(html, /#dv-attention \.dv-scroller > \.dv-card \{ width:min\(88vw,360px\); height:235px/, "管理关注收紧到 235px");
+  assert.match(html, /\.dv-scroller\s*>\s*\.dv-card\s*\{[^}]*overflow:hidden/, "卡片内外都不滚动");
+  assert.doesNotMatch(html, /isDirectionalLockEnabled/, "无内层滚动 → 不再需要方向锁脚本");
+  assert.match(html, /\.dv-card-title[^}]*-webkit-line-clamp:3/, "标题限 3 行");
+  assert.match(html, /\.dv-fact, \.dv-infer, \.dv-why[^}]*-webkit-line-clamp:4/, "正文限 4 行");
+  assert.match(html, /\.dv-card\s*\{[^}]*box-shadow:var\(--shadow-sm\)/, "沿用老版 .brief 的招行风阴影");
+  assert.match(html, /scroll-snap-type:x proximity/, "吸附用 proximity");
+});
+
+test("㉒ 整卡可点：四类卡片都带 data-href，风险卡用 r.url 兜底", () => {
+  const html = renderHtml(
+      report({
+        must_read: [{ title: "必读标题", why: "关注理由", url: "https://e.com/m" }],
+        insights: [
+          { topic: "商机标题", impact: "经营影响", tags: [], sources: [{ title: "源", url: "https://e.com/i" }] } as never,
+        ],
+        risk: { topic: "风险标题", evidence: "事实依据", impact: "潜在影响", url: "https://e.com/r" } as never,
+        attention: [
+          {
+            id: "att-1",
+            topic: "管理议题",
+            rationale: "依据",
+            significance: "意义",
+            domains: ["wealth_aum"],
+            source_urls: ["https://e.com/a"],
+            confidence: "high",
+          },
+        ],
+      }),
+  );
+  const d = decisionPart(html);
+  assert.match(d, /class="dv-card dv-key" data-href="https:\/\/e\.com\/m"/);
+  assert.match(d, /class="dv-card dv-opp" data-href="https:\/\/e\.com\/i"/);
+  assert.match(d, /class="dv-card dv-risk" data-href="https:\/\/e\.com\/r"/
+    , "风险只有 r.url 时也必须可点");
+  assert.match(d, /class="dv-card dv-attn" data-href="https:\/\/e\.com\/a"/);
+  assert.match(html, /dv-scroller > \.dv-card\[data-href\]/, "整卡点击脚本存在");
+});
+
+test("㉓ 旧版资讯视角不得露出「经营重点」入口（新版独占功能）", () => {
+  const html = renderHtml(report());
+  const classic = html.slice(html.indexOf('id="view-classic"'));
+  assert.ok(!classic.includes('href="../focus.html"'), "旧版模块入口不得链到 focus.html");
+  assert.ok(!classic.includes('module-link-title">经营重点'), "旧版不得出现经营重点入口卡");
+});
+
+test("㉔ IPO 线索与旧版同源：走 topGdIpo（广东 + 7 天窗口），非广东条目不混入", () => {
+  const gd = item("深鹏科技：IPO问询中（拟北交所）", { url: "https://e.com/ipo-gd", tags: ["粤"] });
+  const other = item("浙江某科技 IPO 受理", { url: "https://e.com/ipo-other", tags: [] });
+  const d = decisionPart(
+    renderHtml(report({ sections: { gz_local: [], biz_insight: [], policy_market: [], tech: [], ipo: [gd, other] } })),
+  );
+  const opp = d.slice(d.indexOf('id="dv-opportunity"'), d.indexOf('id="dv-risk"'));
+  assert.ok(opp.includes("深鹏科技"), "广东 IPO 线索保留");
+  assert.ok(!opp.includes("浙江某科技"), "非广东条目不得进入新旧任一版的 IPO 集合");
 });

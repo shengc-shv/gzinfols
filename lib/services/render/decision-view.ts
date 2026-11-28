@@ -24,13 +24,14 @@ import { prevDateKey } from "../../utils/time";
 import { stripHeroPrefix } from "../../utils/hero-text";
 import { BUSINESS_DOMAINS, DOMAIN_IDS, classifyBusinessDomainWithFallback } from "../vocab/business-domains";
 import { IPO_DISPLAY_STAGE_LABEL } from "../classify/gd-ipo";
-import { gdIpoDisplayStageOf, ipoCompanyShortOf, isRoutineIpoItem } from "../classify/gd-ipo-spoken";
+import { gdIpoDisplayStageOf, ipoCompanyShortOf, isRoutineIpoItem, topGdIpo, companyNameOf } from "../classify/gd-ipo-spoken";
+import { IPO_LIST_WINDOW_DAYS } from "../../ipo-config";
 
 /**
  * 今日必读的**渲染上限**（2026-11-28）。
  *
- * 与数据侧真源 `MUST_READ_PLAY_TARGET = 5`（`services/memory/event-types.ts`，周末版 4）
- * 对齐：数据侧定稿几条就展示几条，这里只做防御性上限，不做内容筛选。
+ * 与数据侧真源 `MUST_READ_PLAY_TARGET = 5`（`services/memory/event-types.ts`，上限；
+ * 基础 3 条 + 质量门槛扩展 0~2 条）对齐：数据侧定稿几条就展示几条，这里只做防御性上限。
  * ⛔ 不要为了让页面「整齐」改成固定 3 —— 数据侧近 8 期稳定产出 4~5 条，
  * 截到 3 等于每期丢掉 1~2 条最高价值信息。
  */
@@ -121,7 +122,7 @@ function mustReadCard(
   const domain = body?.primary_domain
     ? `<span class="dv-chip dv-chip-domain">${escapeHtml(BUSINESS_DOMAINS.find((d) => d.id === body.primary_domain)?.short ?? body.primary_domain)}</span>`
     : "";
-  return `<article class="dv-card dv-key">
+  return `<article class="dv-card dv-key"${href ? ' data-href="' + escapeHtml(href) + '"' : ""}>
   <h3 class="dv-card-title">${escapeHtml(m.title || (body?.title_cn ?? ""))}</h3>
   ${body?.focus_hits?.length ? `<div class="dv-ftags">${focusTags(body.focus_hits)}</div>` : ""}
   ${fields || domain ? `<div class="dv-chips">${domain}${fields}</div>` : ""}
@@ -145,13 +146,19 @@ function opportunityCard(it: ReportInsight, bodyMap: Map<string, ReportItem>): s
         `<a class="dv-mark" href="${escapeHtml(s.url)}" target="_blank" rel="noopener noreferrer" title="${escapeHtml(s.title)}">${["①", "②", "③"][i]}</a>`,
     )
     .join("");
+  // 整卡可点：优先站内详情页（与必读同源落点），否则第一来源外链。
+  const primary = (it.sources ?? []).find((s) => s?.url);
+  const primaryBody = primary?.url ? bodyMap.get(primary.url) : undefined;
+  const href = primary?.url
+    ? sourceHref({ url: primary.url, source: primaryBody?.source ?? "" }, Boolean(primaryBody))
+    : "";
   const segs = (it.segments ?? []).map((s) => `<span class="dv-tag">${escapeHtml(s)}</span>`).join("");
   const stage =
     it.maturity?.stage === "landed" ? "公开信息显示已落地"
       : it.maturity?.stage === "progress" ? "公开信息显示推进中"
         : it.maturity?.stage === "clue" ? "线索阶段"
           : "";
-  return `<article class="dv-card dv-opp">
+  return `<article class="dv-card dv-opp"${href ? ' data-href="' + escapeHtml(href) + '"' : ""}>
   <h3 class="dv-card-title">${escapeHtml(it.topic)}${marks ? `<span class="dv-srcs">${marks}</span>` : ""}</h3>
   ${hitBody?.focus_hits?.length ? `<div class="dv-ftags">${focusTags(hitBody.focus_hits)}</div>` : ""}
   ${stage ? `<div class="dv-chips"><span class="dv-chip">${stage}</span>${deltaText(it.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(it.delta))}</span>` : ""}</div>` : ""}
@@ -176,13 +183,13 @@ function riskSourceLabel(src: { title?: string; url: string }): string {
 /** 风险预警卡：风险事项 + 事实依据 + 潜在影响 + 证据等级 + 来源。 */
 function riskBlock(r: RiskItem | undefined, bodyMap: Map<string, ReportItem>): string {
   if (!r) return "";
-  const src = (r.sources ?? []).find((s) => s?.url);
+  const src = (r.sources ?? []).find((s) => s?.url) ?? (r.url ? { url: r.url, title: r.topic } : undefined);
   const hitBody = (r.sources ?? []).map((s) => (s?.url ? bodyMap.get(s.url) : undefined)).find((b) => b?.focus_hits?.length);
   const grade = evidenceGrade(r.source);
   const link = src
     ? `<a class="dv-src" href="${escapeHtml(src.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(riskSourceLabel(src))}</a>`
     : `<span class="dv-src dv-src-missing">来源未标注</span>`;
-  return `<article class="dv-card dv-risk">
+  return `<article class="dv-card dv-risk"${src ? ' data-href="' + escapeHtml(src.url) + '"' : ""}>
   <h3 class="dv-card-title">${escapeHtml(r.topic)}</h3>
   ${hitBody?.focus_hits?.length ? `<div class="dv-ftags">${focusTags(hitBody.focus_hits)}</div>` : ""}
   ${grade || deltaText(r.delta) ? `<div class="dv-chips">${grade ? `<span class="dv-chip dv-chip-grade">${grade}</span>` : ""}${deltaText(r.delta) ? `<span class="dv-chip dv-chip-delta">${escapeHtml(deltaText(r.delta))}</span>` : ""}</div>` : ""}
@@ -341,14 +348,20 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
   //   · 只列里程碑，季度例行报送（isRoutineIpoItem）整类排除；
   //   · 文案取「企业简称 + 阶段标签」，与推送行同一套收敛函数（ipoCompanyShortOf，逐字同源）；
   //   · ⛔ 不进「商机 N 条」计数（那个口径只认 report.insights）。
-  const ipoLeadItems = (report.sections?.ipo ?? []).filter((it) => !isRoutineIpoItem(it));
+  // 🔴 与旧版资讯视角**同源**：同样走 topGdIpo（广东判定 + 7 天窗口 + 同企业不折叠），
+  // ⛔ 不再直接读 report.sections.ipo 原始数组（会混入非广东/超窗条目，导致两版信息不对齐）。
+  const ipoPool = topGdIpo(report.sections?.ipo ?? [], undefined, 9999, IPO_LIST_WINDOW_DAYS, {
+    uniqueCompany: false,
+  });
+  const ipoLeadItems = ipoPool.filter((it) => !isRoutineIpoItem(it));
   const ipoLeads = ipoLeadItems.slice(0, 6);
   const ipoLeadsBlock = ipoLeads.length
     ? `<div class="dv-ipo-leads">
     <p class="dv-ipo-leads-head">🏦 广东IPO 线索 ${ipoLeadItems.length} 条<span class="dv-ipo-leads-sub">仅里程碑 · 季度例行报送单列</span></p>
     <ul class="dv-ipo-leads-list">${ipoLeads
       .map((it) => {
-        const name = escapeHtml(ipoCompanyShortOf(it));
+        // 与旧版卡片同一企业名口径（全称优先，简称仅兜底）
+        const name = escapeHtml(companyNameOf(it.title_cn || "") || ipoCompanyShortOf(it));
         const stage = IPO_DISPLAY_STAGE_LABEL[gdIpoDisplayStageOf(it)] || "";
         const label = it.url ? `<a href="${escapeHtml(it.url)}" target="_blank" rel="noopener noreferrer">${name}</a>` : name;
         return `<li class="dv-ipo-lead">${label}${stage ? `<span class="dv-ipo-lead-stage">${escapeHtml(stage)}</span>` : ""}</li>`;
@@ -406,7 +419,12 @@ export function renderDecisionView(report: DailyReport, date: string, nowHm: str
           return `<a class="dv-src" href="${escapeHtml(u)}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`;
         })
         .join(" ");
-      return `<article class="dv-card dv-attn">
+      const first = a.source_urls[0];
+      const firstBody = first ? bodyMap.get(first) : undefined;
+      const href = first
+        ? sourceHref({ url: first, source: firstBody?.source ?? "" }, Boolean(firstBody))
+        : "";
+      return `<article class="dv-card dv-attn"${href ? ' data-href="' + escapeHtml(href) + '"' : ""}>
     <h3 class="dv-card-title"><span class="dv-attn-n">${i + 1}</span> ${escapeHtml(a.topic)}</h3>
     <p class="dv-why"><b>关注依据</b> ${escapeHtml(a.rationale)}</p>
     <p class="dv-infer"><b>管理意义</b> ${escapeHtml(a.significance)}</p>
@@ -573,30 +591,46 @@ export const DECISION_VIEW_CSS = `
   .dv-mod-sub { font-size:0.74rem; color:var(--muted); }
   .dv-hero-text { margin:0; padding:0.9rem 1rem; font-size:0.92rem; line-height:1.75;
     border-left:3px solid var(--accent-brand); border-radius:var(--r-md); background:var(--card); }
-  /* 横滑：移动端左右滑（隐藏滚动条 + 右缘渐隐示意还有内容），桌面转等宽网格 */
-  .dv-scroller { display:flex; flex-direction:row; align-items:stretch; gap:0.7rem;
+  /* 横滑：移动端左右滑（隐藏滚动条 + 右缘渐隐示意还有内容），桌面转等宽网格。
+     2026-11-28 sc：卡片按各自内容自然收口 —— 一条长稿不得把同排其余卡片拉到同样高、
+     底部留一大片空白（老版招行风 brief 卡片就是各卡独立高度）。 */
+  .dv-scroller { display:flex; flex-direction:row; align-items:flex-start; gap:0.7rem;
     overflow-x:auto; -webkit-overflow-scrolling:touch; overscroll-behavior-x:contain;
-    scroll-snap-type:x mandatory; scrollbar-width:none; -ms-overflow-style:none;
+    scroll-snap-type:x proximity; scrollbar-width:none; -ms-overflow-style:none;
     padding:0.2rem 0.15rem 0.5rem; }
   .dv-scroller::-webkit-scrollbar { display:none; }
   .dv-scroller.has-more:not(.at-end) {
     -webkit-mask-image:linear-gradient(to right,#000 calc(100% - 30px),transparent 100%);
     mask-image:linear-gradient(to right,#000 calc(100% - 30px),transparent 100%); }
-  .dv-scroller > .dv-card { flex:0 0 auto; width:min(80vw,330px); margin:0;
-    display:flex; flex-direction:column; box-sizing:border-box;
-    scroll-snap-align:start; scroll-snap-stop:always; box-shadow:0 1px 3px rgba(0,0,0,0.05); }
+  /* 固定外框 + 固定内容（sc 2026-11-28 终版）：各板块按自身文本长度定尺寸，
+     不再内滚，只做限行截断；外层横滑是唯一滚动容器。超出部分点击卡片来源看原文。 */
+  .dv-scroller > .dv-card { flex:0 0 auto; margin:0;
+    display:flex; flex-direction:column; box-sizing:border-box; overflow:hidden;
+    scroll-snap-align:start; }
+  /* 近 8 期实测：必读 43~75 字、商机 47~63 字、风险 97~133 字、管理关注 ~78 字。 */
+  /* 实测截图校正：按「内容占七成、留白可控」收紧高度；超长内容点卡片看原文。 */
+  #dv-mustread .dv-scroller > .dv-card { width:min(84vw,340px); height:200px; }
+  #dv-opportunity .dv-scroller > .dv-card { width:min(80vw,320px); height:195px; }
+  #dv-risk .dv-scroller > .dv-card { width:min(88vw,360px); height:250px; }
+  #dv-attention .dv-scroller > .dv-card { width:min(88vw,360px); height:235px; }
+  .dv-scroller > .dv-card[data-href] { cursor:pointer; }
   .dv-scroller > .dv-card .dv-card-foot { margin-top:auto; padding-top:0.55rem; }
   .dv-swipe-hint { margin:0.1rem 0 0; font-size:0.72rem; color:var(--muted); }
   @media (min-width:720px) {
     .dv-scroller { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
       gap:0.7rem; overflow:visible; padding:0; scroll-snap-type:none;
       -webkit-mask-image:none; mask-image:none; }
-    .dv-scroller > .dv-card { width:auto; max-width:none; scroll-snap-align:none; }
+    #dv-mustread .dv-scroller > .dv-card,
+    #dv-opportunity .dv-scroller > .dv-card,
+    #dv-risk .dv-scroller > .dv-card,
+    #dv-attention .dv-scroller > .dv-card { width:auto; max-width:none; scroll-snap-align:none; }
     .dv-swipe-hint { display:none; }
   }
-  .dv-card { padding:0.85rem 0.95rem; margin:0 0 0.7rem; border:1px solid var(--rule);
-    border-radius:var(--r-md); background:var(--card); }
-  .dv-card-title { margin:0 0 0.45rem; font-size:0.98rem; font-weight:600; line-height:1.5; }
+  /* 招行风：白卡 + 细边 + 12px 圆角 + --shadow-sm（与老版 .brief 同口径）。 */
+  .dv-card { padding:0.8rem 0.95rem; margin:0 0 0.7rem; border:1px solid var(--rule);
+    border-radius:12px; background:var(--card); box-shadow:var(--shadow-sm); }
+  .dv-card-title { margin:0 0 0.45rem; font-size:0.98rem; font-weight:600; line-height:1.5;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
   .dv-chips { display:flex; flex-wrap:wrap; gap:0.35rem; margin:0 0 0.5rem; }
   .dv-chip { font-size:0.72rem; padding:0.1rem 0.45rem; border-radius:999px;
     background:var(--card-alt); color:var(--fg-soft); }
@@ -604,7 +638,8 @@ export const DECISION_VIEW_CSS = `
   .dv-chip-domain { background:var(--card-alt); color:var(--accent-brand); }
   .dv-chip-delta { outline:1px solid var(--rank-mid-fg); }
   .dv-chip-risk { background:var(--rank-high-bg); color:var(--rank-high-fg); }
-  .dv-fact, .dv-infer, .dv-why { margin:0.35rem 0; font-size:0.86rem; line-height:1.62; }
+  .dv-fact, .dv-infer, .dv-why { margin:0.35rem 0; font-size:0.86rem; line-height:1.62;
+    display:-webkit-box; -webkit-line-clamp:4; -webkit-box-orient:vertical; overflow:hidden; }
   .dv-fact b, .dv-infer b, .dv-why b { font-weight:600; color:var(--fg); }
   .dv-infer { color:var(--fg-soft); }
   .dv-tags { display:flex; flex-wrap:wrap; gap:0.3rem; margin:0.5rem 0 0; }
@@ -706,7 +741,8 @@ export const DECISION_VIEW_CSS = `
 export function generateDecisionViewScript(): string {
   return `
 (function(){
-  var KEY='gz_view';
+  // 19:25 回退：偏好键升版，旧 gz_view=decision 不再覆盖默认旧版。
+  var KEY='gz_view_v2';
   var body=document.body;
   var btns=document.querySelectorAll('.view-switch-btn');
   var hint=document.getElementById('view-switch-hint');
@@ -723,8 +759,9 @@ export function generateDecisionViewScript(): string {
     if(hint) hint.textContent=DEFAULT_HINT.replace('零售经营决策视角',v==='classic'?'原版资讯视角':'零售经营决策视角');
     try{localStorage.setItem(KEY,v);}catch(e){}
   }
-  var saved='decision';
-  try{saved=localStorage.getItem(KEY)||'decision';}catch(e){}
+  // sc 2026-11-28 19:25：新版移动端体验不可用 → 默认回旧版，决策视角保留可切换。
+  var saved='classic';
+  try{saved=localStorage.getItem(KEY)||'classic';}catch(e){}
   apply(saved);
   var sw=document.getElementById('view-switch');
   if(sw) sw.addEventListener('click',function(e){
@@ -766,6 +803,15 @@ export function generateDecisionViewScript(): string {
     });
     window.addEventListener('resize',function(){scrollers.forEach(markEdge);},{passive:true});
   }
+
+  // 卡片内容固定不滚动 → 无需方向锁脚本；整卡可点进原文/站内详情（链接子元素仍优先）。
+  if(root) root.addEventListener('click',function(e){
+    if(e.target&&e.target.closest&&e.target.closest('a'))return;
+    var card=e.target&&e.target.closest?e.target.closest('.dv-scroller > .dv-card[data-href]'):null;
+    if(!card)return;
+    var href=card.getAttribute('data-href');
+    if(href) window.location.href=href;
+  });
 
   // 六大经营领域：平铺标签切换单一明细面板（不跳外页、不做跨模块过滤）
   function selectDomain(id){

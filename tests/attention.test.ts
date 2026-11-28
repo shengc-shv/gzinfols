@@ -126,6 +126,7 @@ test("③ 合法条目通过校验，并带上稳定 id", () => {
         rationale: "代销费率调整与黄金配置区间上调同时出现",
         significance: "值得关注客户沟通口径与产品适配节奏",
         domains: ["wealth_aum", "customer_growth"],
+        cross_domain_link: "财富管理与客户经营在代销费率和黄金配置上共同影响客户资产配置",
         source_urls: [U1, U2],
       },
     ]),
@@ -223,6 +224,7 @@ test("⑧ 命令式 / 越界措辞 → 剔除（管理关注不是行内指令�
           rationale: `依据：${wording}`,
           significance: "意义",
           domains: ["wealth_aum", "customer_growth"],
+        cross_domain_link: "财富管理与客户经营在代销费率和黄金配置上共同影响客户资产配置",
           source_urls: [U1, U2],
         },
       ]),
@@ -246,6 +248,7 @@ test("⑨ 主题自身重复 → 只留先出现的；超过上限 → 截断", 
     rationale: "依据",
     significance: "意义",
     domains: ["wealth_aum", "customer_growth"],
+        cross_domain_link: "财富管理与客户经营在代销费率和黄金配置上共同影响客户资产配置",
     source_urls: [U1, U2],
   }));
   const items = parseAttention(JSON.stringify(many), cands);
@@ -289,6 +292,7 @@ test("⑬ 正常路径：采用 LLM 产出，prompt 含领域枚举与来源约�
           rationale: "代销费率调整与黄金配置区间上调同时出现",
           significance: "值得关注客户沟通口径与产品适配节奏",
           domains: ["wealth_aum", "customer_growth"],
+        cross_domain_link: "财富管理与客户经营在代销费率和黄金配置上共同影响客户资产配置",
           source_urls: [U1, U2],
         },
       ]),
@@ -299,4 +303,164 @@ test("⑬ 正常路径：采用 LLM 产出，prompt 含领域枚举与来源约�
   assert.ok((seen.prompt ?? "").includes("wealth_aum"), "prompt 必须给出合法领域枚举");
   assert.ok((seen.prompt ?? "").includes("source_urls"), "prompt 必须约束来源");
   assert.ok(/不得虚构本行经营数据/.test(buildAttentionPrompt(collectAttentionCandidates(report())).system));
+});
+
+// —— 第二轮修订 3.2/3.3/3.4/3.5：领域必须由来源支撑 ——————————
+
+test("⑭ 合法但不相关的领域 ID 必须与来源领域取交集，不得凭空造跨条线", () => {
+  const items = parseAttention(
+    JSON.stringify([
+      {
+        topic: "财富业务沟通口径值得进一步了解",
+        rationale: "代销费率调整",
+        significance: "值得持续观察",
+        domains: ["wealth_aum", "retail_credit"], // retail_credit 合法，但来源没这个领域
+        source_urls: [U1],
+      },
+    ]),
+    collectAttentionCandidates(report()),
+  );
+  assert.equal(items.length, 1);
+  assert.deepEqual(items[0].domains, ["wealth_aum"], "来源不支持的合法 ID 必须被剔除");
+});
+
+test("⑮ 一条候选自带多个标签不构成跨条线；跨条线需两条候选分别支撑", () => {
+  const cands = collectAttentionCandidates(report());
+  const one = parseAttention(
+    JSON.stringify([
+      {
+        topic: "财富业务沟通口径值得进一步了解",
+        rationale: "代销费率调整",
+        significance: "值得持续观察",
+        domains: ["wealth_aum", "customer_growth"],
+        source_urls: [U1], // 只有 c1，它自带两个领域标签
+      },
+    ]),
+    cands,
+  );
+  assert.deepEqual(one[0].domains, ["wealth_aum"], "单来源多标签 ≠ 跨条线");
+  assert.equal(one[0].cross_domain_link, undefined);
+
+  const noLink = parseAttention(
+    JSON.stringify([
+      {
+        topic: "财富客户资产配置需求变化",
+        rationale: "代销费率调整与黄金配置区间上调同时出现",
+        significance: "值得关注客户沟通口径与产品适配节奏",
+        domains: ["wealth_aum", "customer_growth"],
+        source_urls: [U1, U2],
+      },
+    ]),
+    cands,
+  );
+  assert.deepEqual(noLink, [], "两条来源支撑但没有实际关联说明 → 不生成");
+});
+
+test("⑯ confidence 分档：事实全可核 → high；夹带无法核到的摘录 → medium；全不可核 → 不生成", () => {
+  const cands = collectAttentionCandidates(report());
+  const base = {
+    topic: "财富业务沟通口径值得进一步了解",
+    rationale: "代销费率调整",
+    significance: "值得持续观察",
+    domains: ["wealth_aum"],
+    source_urls: [U1],
+  };
+  const high = parseAttention(JSON.stringify([base]), cands);
+  assert.equal(high[0].confidence, "high", "未给摘录时用候选事实兜底，全部可核");
+
+  const medium = parseAttention(
+    JSON.stringify([
+      {
+        ...base,
+        supporting_facts: ["多家银行下调代销费率", "AI 自己总结的一条管理判断"],
+      },
+    ]),
+    cands,
+  );
+  assert.equal(medium[0].confidence, "medium", "部分事实核不到 → 不能继续标 high");
+
+  const none = parseAttention(
+    JSON.stringify([{ ...base, supporting_facts: ["完全无法在候选里核到的事实"] }]),
+    cands,
+  );
+  assert.deepEqual(none, [], "事实支撑不足 → 整条剔除");
+});
+
+test("⑰ 与商机洞察重复 → 剔除；多条商机合并成管理议题 → 保留全部来源", () => {
+  const cands = collectAttentionCandidates(report());
+  const restate = parseAttention(
+    JSON.stringify([
+      {
+        topic: "高净值客户黄金配置需求",
+        rationale: "黄金配置区间上调",
+        significance: "值得关注",
+        domains: ["customer_growth"],
+        source_candidate_ids: ["c3"], // U2 同时被必读和商机引用 → 用编号明确指向商机
+        source_urls: [U2],
+      },
+    ]),
+    cands,
+  );
+  assert.deepEqual(restate, [], "换个标题复述商机洞察不算管理关注");
+
+  const U4 = "https://e.com/fee";
+  const twoInsights = report({
+    insights: [
+      report().insights![0],
+      {
+        topic: "代销费率下行带来的收入结构变化",
+        impact: "财富管理中收承压",
+        action: "",
+        tags: [],
+        sources: [{ title: "源2", url: U4 }],
+      } as never,
+    ],
+    sections: {
+      ...report().sections!,
+      biz_insight: [...report().sections!.biz_insight, item(U4, { primary_domain: "wealth_aum" })],
+    },
+  });
+  const merged = parseAttention(
+    JSON.stringify([
+      {
+        topic: "财富与客群经营的中收议题",
+        rationale: "代销费率调整与黄金配置区间上调同时出现",
+        significance: "值得关注产品适配节奏",
+        domains: ["customer_growth", "wealth_aum"],
+        source_candidate_ids: ["c3", "c4"],
+        source_urls: [U2, U4],
+        cross_domain_link: "客户经营与财富管理在代销收入与黄金配置上共同变化",
+      },
+    ]),
+    collectAttentionCandidates(twoInsights),
+  );
+  assert.equal(merged.length, 1);
+  assert.deepEqual(merged[0].source_urls, [U2, U4], "多商机合并必须保留全部来源");
+});
+
+test("⑱ prompt 要求 candidate_id / supporting_facts / 跨条线关联说明", () => {
+  const { prompt, system } = buildAttentionPrompt(collectAttentionCandidates(report()));
+  assert.ok(prompt.includes("[c1]"), "候选必须编号，LLM 才能回引");
+  assert.ok(prompt.includes("source_candidate_ids"), "prompt 必须约束候选编号");
+  assert.ok(prompt.includes("supporting_facts"), "prompt 必须约束事实摘录");
+  assert.ok(prompt.includes("cross_domain_link"), "prompt 必须约束跨条线说明");
+  assert.ok(/一条候选本身带多个标签，不构成跨条线/.test(system));
+});
+
+test("⑲ prompt 不搬运整篇正文：长标题只截断展示，判定用候选仍保留全文", () => {
+  const longTitle = "中国证监会严肃查处编造传播证券市场误导性信息案件".repeat(6);
+  const c = {
+    id: "c1",
+    kind: "must_read" as const,
+    title: longTitle,
+    fact: "监管处罚事实",
+    urls: ["https://e.com/x"],
+    domains: [] as string[],
+  };
+  const { prompt, system } = buildAttentionPrompt([c]);
+  assert.ok(system.includes("只作定位"), "system 必须禁止整段复述候选标题");
+  assert.ok(system.includes("处罚/合规类事件优先按风险提示理解"));
+  assert.ok(!prompt.includes(longTitle), "prompt 不得塞进整篇正文");
+  assert.ok(prompt.includes("…"), "超长标题应有截断标记");
+  assert.equal(c.title.length, longTitle.length, "候选对象本身不 mutate，titleSim 口径不变");
 });

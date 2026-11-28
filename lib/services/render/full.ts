@@ -415,9 +415,10 @@ ${stripCssComments(DECISION_VIEW_CSS)}
 ${stripCssComments(MOBILE_OPT_CSS)}
   </style>
 </head>
-<body class="view-decision">
+<body class="view-classic">
 <main>
-  <!-- 版本视角切换（sc 2026-11-28 方案 A）：默认决策情报视角，原版资讯视角可一键切回。
+  <!-- 版本视角切换（sc 2026-11-28 方案 A）：默认原版资讯视角（19:25 因新版移动端体验不可用切回），
+       决策情报视角保留，可一键切换。
        两视角共用同一 report JSON；切换只改 body class + localStorage，不触碰任何数据。 -->
   ${renderViewSwitch()}
   ${renderDecisionView(report, date, nowHm)}

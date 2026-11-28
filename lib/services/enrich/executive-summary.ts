@@ -24,8 +24,8 @@ import type { FocusItem } from "../business-focus/types";
  *
  * 每天一次 LLM 调用，基于当日 宏观政策(finance) + 广州商机(gz) 的高信号条目
  * 与市场点评，产出：
- *  - must_read：今日必读 —— **候选 8-10 条**（以 prompt §1 为准），判重后**播出 5 条**
- *    （`MUST_READ_CANDIDATE_POOL=10` → `MUST_READ_PLAY_TARGET=5`；候补用尽按实际剩余，不凑数）
+ *  - must_read：今日必读 —— **候选 8-10 条**（以 prompt §1 为准），判重后**基础 3 条、上限 5 条**
+ *    （`MUST_READ_CANDIDATE_POOL=10` → 基础 3 + 扩展门槛 0~2 → `MUST_READ_PLAY_TARGET=5`；不凑数）
  *  - insights：商机洞察 —— **候选 10-12 条**（prompt §2），判重后**播出 6 条**
  *    （`INSIGHT_CANDIDATE_POOL=12` → `INSIGHT_PLAY_TARGET=6`）；每客群段≤2
  *    ⚠️ 与必读**互斥**（2026-10-04 sc）：同 URL / 同事件的条目不进商机（`exec-guard` 代码层剔除）

@@ -58,7 +58,10 @@ function hasHistoricalBaseline(store: EventMemoryStore, excludeDate?: string): b
   for (const rec of Object.values(store.events ?? {})) {
     const samples = Array.isArray(rec?.samples) ? rec.samples : [];
     if (samples.length === 0) return true; // 无留痕但存在记录：按历史处理（保守）
-    if (!excludeDate || samples.some((s) => s && s.date !== excludeDate)) return true;
+    if (!excludeDate || samples.some((s) => s && s.date < excludeDate)) return true;
+    // 样本窗口被当天挤满、但 broadcastCount 还留着窗口外的播报日 → 基线存在（只是证据不足）
+    const countedOnDate = rec?.lastBroadcastAt === excludeDate ? 1 : 0;
+    if ((rec?.broadcastCount ?? 0) - countedOnDate > 0) return true;
   }
   const todayEntries = store.today?.entries ?? [];
   return todayEntries.length > 0 && store.today?.date !== excludeDate;
@@ -84,6 +87,13 @@ export function deltaOf(
   // 命中当天暂存区：同一次运行内已播过同一事件 → 续报，不给期号（否则会谎报「第 N 期」）
   if (hit.source === "today") return { state: "followup", confidence: "medium" };
 
+  // 历史记录存在，但样本窗口被当天占满、没有可核验的历史证据：
+  // 按 sc 拍板保守降为 followup + low —— 不误报「新增」，更不强行判「有进展」；
+  // 不给期号（历史次数无法从被截断的样本核对），不做 novelty（不碰当天事实）。
+  if (hit.evidenceInsufficient) return { state: "followup", confidence: "low" };
+
+  // hit.record 在 excludeDate 生效时是 buildHistoricalEventView() 的历史视图，
+  // broadcastCount 已扣掉当天计入的那一播报日 → 期号不会因当天已播而过增。
   const issueNo = (hit.record.broadcastCount ?? 0) + 1;
 
   // 同一篇文章（URL 精确命中）再次上榜：稿件本身没变，不可能构成「新进展」。

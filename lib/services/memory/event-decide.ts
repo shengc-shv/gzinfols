@@ -125,15 +125,80 @@ function todayPseudoRecords(store: EventMemoryStore): Array<{ id: string; record
 }
 
 /**
+ * 扣掉「当天已计入的那一播报日」后的历史播报次数。
+ *
+ * 🔴 `broadcastCount` 的语义是**播报天数**（`upsertEvent` 里同一天重复呈现加 0），
+ * 不是样本条数 —— 所以只能扣 1（当 `lastBroadcastAt === date` 时），
+ * ⛔ 不能按「当天样本有几条」扣，否则当天跨板块播了 3 条就会把历史次数扣成 0。
+ * 样本窗口（MAX_SAMPLES=6）被当天挤满时，这个差值也是「窗口外还有历史」的唯一证据。
+ */
+export function historicalBroadcastCount(rec: EventRecord, date: string): number {
+  const countedOnDate = rec.lastBroadcastAt === date ? 1 : 0;
+  return Math.max(0, (rec.broadcastCount ?? 0) - countedOnDate);
+}
+
+/**
  * 该记录是否「整条只在某一天播报过」——即当天刚结算进长期记忆的新记录。
  *
  * 用途：增量三态标注时把它排除出「历史」（见 `MatchOptions.excludeDate`）。
  * `samples` 为空时不判（没有播报留痕 → 不能断言它只属于当天，按历史处理更保守）。
+ * 2026-11-28 校准：若样本窗口已被当天占满、但 `broadcastCount` 还有窗口外的历史，
+ * 就不能整条排除（那是「证据不足」，见 `buildHistoricalEventView` 的弱身份兜底）。
  */
 function isSettledOn(rec: EventRecord, date: string): boolean {
   const samples = Array.isArray(rec.samples) ? rec.samples : [];
   if (samples.length === 0) return false;
-  return samples.every((s) => Boolean(s) && s.date === date);
+  if (!samples.every((s) => Boolean(s) && s.date === date)) return false;
+  return historicalBroadcastCount(rec, date) === 0;
+}
+
+/**
+ * 只保留 `excludeDate` 之前证据的**历史事件视图**（2026-11-28 · 第二轮修订任务书 4.3/4.4）。
+ *
+ * 为什么必须重建、不能沿用原记录的聚合字段：
+ * 当天样本一旦被 `settleTodayIntoEvents` / `beginDay` 结算进 events，
+ * `anchors` / `topicTags` / `broadcastedTexts` / `broadcastedFacts` 就全是**并集**，
+ * 里面混着当天已播的新事实；继续拿它算 novelty，今天的新进展会被提前吞掉。
+ *
+ * 视图只从 `date < excludeDate` 的 `BroadcastSample` 重建，且**逐条按写入时同一口径**
+ * 重算 anchor / tag / fact（`candidateAnchors` / `candidateFacts` / `extractTopicTags`），
+ * 保证「写进去的」与「拿来比的」同源。纯函数，不改入参。
+ *
+ * @returns 没有可用历史样本时返回 `null`（调用方按「证据不足」保守降级，不拿当天充数）。
+ */
+export function buildHistoricalEventView(rec: EventRecord, excludeDate: string): EventRecord | null {
+  const samples = (Array.isArray(rec.samples) ? rec.samples : []).filter(
+    (s): s is BroadcastSample => Boolean(s) && s.date < excludeDate,
+  );
+  if (samples.length === 0) return null;
+
+  const toCandidate = (s: BroadcastSample) => ({ title: s.title, text: s.text ?? "" });
+  // 与 event-settle/upsertEvent 写入时完全同口径：text = candidateText(cand) = 标题 + 正文。
+  const textOf = (s: BroadcastSample) => candidateText(toCandidate(s));
+  const anchors = [
+    ...new Set(samples.flatMap((s) => candidateAnchors(toCandidate(s)))),
+  ];
+  const topicTags = [...new Set(samples.flatMap((s) => extractTopicTags(textOf(s))))];
+  const broadcastedTexts = samples.map(textOf);
+  const broadcastedFacts = [
+    ...new Set(
+      samples.flatMap((s) =>
+        Array.isArray(s.facts) && s.facts.length ? s.facts : candidateFacts(toCandidate(s)),
+      ),
+    ),
+  ];
+  const last = samples.map((s) => s.date).sort().at(-1) ?? rec.firstBroadcastAt;
+
+  return {
+    ...rec,
+    anchors,
+    topicTags,
+    samples,
+    broadcastedTexts,
+    broadcastedFacts,
+    broadcastCount: historicalBroadcastCount(rec, excludeDate),
+    lastBroadcastAt: last,
+  };
 }
 
 /**
@@ -149,7 +214,11 @@ function isSettledOn(rec: EventRecord, date: string): boolean {
  * （exec-guard / 记忆去重链的调用一律不传）。
  */
 export interface MatchOptions {
-  /** 视作「本次运行当天」的日期（YYYY-MM-DD）。当天的暂存条目与当天结算的记录不算历史。 */
+  /**
+   * 视作「本次运行当天」的日期（YYYY-MM-DD）。当天的暂存条目与当天结算的记录不算历史。
+   * 生效时**事件记录也只以 `buildHistoricalEventView()` 的历史视图参与匹配**，
+   * 不读原记录的聚合字段（其中可能含当天事实）。
+   */
   excludeDate?: string;
   /**
    * 地域互斥（2026-11-28）：两侧都指向明确城市且无交集 → 不认为是同一事件。
@@ -182,7 +251,14 @@ export function findMatchingEvent(
   cand: MemoryCandidate,
   store: EventMemoryStore,
   opts: MatchOptions = {},
-): { id: string; record: EventRecord; similarity: number; source: "today" | "events" } | null {
+): {
+  id: string;
+  record: EventRecord;
+  similarity: number;
+  source: "today" | "events";
+  /** 历史记录存在但样本窗口被当天占满 → 只有弱身份证据，三态必须降为 followup + low。 */
+  evidenceInsufficient?: boolean;
+} | null {
   const anchors = candidateAnchors(cand);
   const candText = candidateText(cand);
   const tags = extractTopicTags(candText);
@@ -258,20 +334,55 @@ export function findMatchingEvent(
   }
   if (bestToday) return { ...bestToday, source: "today" };
 
-  // 2) 长期记忆（昨天及更早）
-  let best: { id: string; record: EventRecord; similarity: number } | null = null;
+  // 2) 长期记忆（昨天及更早）—— 只用「按日期隔离后的历史视图」匹配
+  let best: {
+    id: string;
+    record: EventRecord;
+    similarity: number;
+    evidenceInsufficient: boolean;
+  } | null = null;
   for (const [id, rec] of Object.entries(store.events ?? {})) {
     // 损坏记录跳过（不使整体匹配失效）；落盘时会被 sanitizeEvents 清除 → 自愈
     if (!isUsableRecord(rec)) continue;
     // 当天已结算进长期记忆的记录（微信推送后 settleTodayIntoEvents / 跨日 beginDay）
     // 同样不算历史 —— 否则当天这一期永远判不出「新增」。
     if (excludeDate && isSettledOn(rec, excludeDate)) continue;
-    const sim = score(rec);
-    if (sim >= MATCH_THRESHOLD && (!best || sim > best.similarity)) {
-      best = { id, record: rec, similarity: sim };
+
+    let view = rec;
+    let evidenceInsufficient = false;
+    if (excludeDate) {
+      const usable = buildHistoricalEventView(rec, excludeDate);
+      if (usable) {
+        view = usable;
+      } else {
+        // 有历史但样本窗口被当天挤满（MAX_SAMPLES 截断）：没有可核验的历史证据。
+        // 只做一次弱身份识别，目的仅是**不把已经播过的事件误报成「新增」**；
+        // 绝不用这份视图算 novelty（三态层见 deltaOf 的 evidenceInsufficient 分支）。
+        const histCount = historicalBroadcastCount(rec, excludeDate);
+        if (histCount === 0) continue;
+        view = { ...rec, broadcastCount: histCount, lastBroadcastAt: rec.firstBroadcastAt };
+        evidenceInsufficient = true;
+      }
+    }
+    const sim = score(view);
+    if (
+      sim >= MATCH_THRESHOLD &&
+      (!best ||
+        (best.evidenceInsufficient && !evidenceInsufficient) ||
+        (best.evidenceInsufficient === evidenceInsufficient && sim > best.similarity))
+    ) {
+      best = { id, record: view, similarity: sim, evidenceInsufficient };
     }
   }
-  return best ? { ...best, source: "events" } : null;
+  return best
+    ? {
+        id: best.id,
+        record: best.record,
+        similarity: best.similarity,
+        source: "events",
+        ...(best.evidenceInsufficient ? { evidenceInsufficient: true } : {}),
+      }
+    : null;
 }
 
 // ---------------------------------------------------------------------------
