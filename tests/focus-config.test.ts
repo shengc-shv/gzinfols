@@ -37,13 +37,23 @@ function item(over: Record<string, unknown> = {}): Record<string, unknown> {
   };
 }
 
-test("① 真实三份配置可加载：无损坏、无 error 级问题、全部待启用", () => {
+test("① 真实三份配置可加载：无损坏、无 error 级问题、生效清单与业务确认一致", () => {
   const files = readFocusConfigFiles();
   const r = loadFocusConfig(files, { today: TODAY });
   assert.equal(r.degraded, false, "三份配置文件都应存在且可解析");
-  assert.deepEqual(r.issues, [], "首版配置不应有校验问题");
+  assert.deepEqual(r.issues, [], "配置不应有校验问题");
   assert.ok(r.items.length >= 8, `配置条目过少：${r.items.length}`);
-  assert.equal(r.active.length, 0, "全部 inactive，不得有任何重点参与加权");
+  // 业务确认口径（2026-11-28）：年度三个方向 = AUM / 高端客群（私行）/ 小微普惠；
+  // 季度围绕它们收窄 + 风险侧保留消保。代发与「重点监管政策跟踪」保持 inactive
+  // （前者窗口内无事件，后者一旦放宽会把宏观政策稿全部 +30）。
+  assert.deepEqual(
+    r.active.map((x) => x.id).sort(),
+    ["a26_aum", "a26_inclusive_sme", "a26_private_banking", "q4_consumer_protection", "q4_high_end_aum", "q4_housing_finance", "q4_inclusive_sme"],
+    "生效清单 = 年度三方向 + 季度四条",
+  );
+  const inactive = r.items.filter((x) => x.status === "inactive").map((x) => x.id);
+  assert.ok(inactive.includes("q4_payroll_to_wealth"), "代发转化未启用");
+  assert.ok(inactive.includes("t26_policy_tracking"), "政策跟踪未启用");
   assert.match(r.version, /^f-[0-9a-f]{8}$/, "版本号形如 f-xxxxxxxx");
   for (const it of r.items) {
     assert.ok(["annual", "quarterly", "temporary"].includes(it.layer));

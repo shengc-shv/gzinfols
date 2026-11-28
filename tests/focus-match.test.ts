@@ -70,11 +70,13 @@ test("④ M2：无关键词但命中两个关联概念", () => {
   assert.ok(!m[0].signals.domainMatched, "本例领域未匹配，靠概念佐证升到 M2");
 });
 
-test("⑤ 只靠领域匹配只到 M1；只命中一个概念也只到 M1", () => {
-  // 领域是宽分类（「黄金」→ 财富、`金融监管` → 风险管理），单靠它对上最多 +3，
-  // 这样一条新闻即使同时命中五个重点，也最多按前两条计 +3+0.9，不会改变量级。
+test("⑤ 只靠领域匹配不产生命中；只命中一个概念只到 M1", () => {
+  // 领域是宽分类（「黄金」→ 财富、`金融监管` → 风险管理），单靠它对上就产出一条命中，
+  // 等于「每条资讯都命中每个重点」——11-30 实测「代发客户向财富客户转化」词表在真实标题里
+  // 几乎零出现却命中 248/1234 条、「重点监管政策跟踪」命中 206 条，首页「当日相关情报数量」
+  // 会退化成「当日总条数」。故领域只作升级条件，无任何词面/概念信号 → M0。
   const byDomain = matchFocus({ title: "某行发布零售业务季度数据", domains: ["wealth_aum"] }, [focus()]);
-  assert.equal(byDomain[0].matchLevel, "M1");
+  assert.equal(byDomain.length, 0, "无任何词面/概念信号 → M0");
   const byConcept = matchFocus({ title: "银行推进客户分层", domains: [] }, [focus()]);
   assert.equal(byConcept[0].matchLevel, "M1");
 });

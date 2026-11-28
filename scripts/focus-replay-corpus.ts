@@ -16,7 +16,7 @@ import "./_env";
 import fs from "node:fs";
 import path from "node:path";
 import { readFocusConfigFiles } from "../lib/adapters/business-focus/config-store";
-import { loadFocusConfig, isFocusInWindow } from "../lib/services/business-focus/config-loader";
+import { loadFocusConfig, isFocusInWindow, isFocusEffective } from "../lib/services/business-focus/config-loader";
 import { applyFocus } from "../lib/services/business-focus/focus-apply";
 import { scoreBranchRelevance } from "../lib/services/select/filters/relevance-score";
 import type { FocusItem } from "../lib/services/business-focus/types";
@@ -40,8 +40,10 @@ if (!dates.length) {
 const lastDate = dates[dates.length - 1];
 
 const loaded = loadFocusConfig(readFocusConfigFiles(process.cwd()), { today: lastDate });
+// 默认只回放**当前生效**的重点（status=active 且落在窗口内）；--all 用于「假设全部启用」的压力测试。
+// 之前把 inactive 也强制打开，导致「代发转化」「政策跟踪」出现在覆盖表里，看着像已启用。
 const focuses: FocusItem[] = loaded.items
-  .filter((it) => (flag("all") ? true : isFocusInWindow(it, lastDate)))
+  .filter((it) => (flag("all") ? isFocusInWindow(it, lastDate) : isFocusEffective(it, lastDate)))
   .map((it) => ({ ...it, status: "active" as const }));
 
 const LAYER: Record<string, string> = { annual: "年度", quarterly: "季度", temporary: "临时" };

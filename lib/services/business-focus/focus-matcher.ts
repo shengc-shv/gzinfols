@@ -7,11 +7,12 @@
  *
  * 🔴 四条硬口径（验收要求「不因关键词偶然出现就判高度相关」）：
  *  1. **排除词一票否决**：命中 `exclude_keywords` 直接 M0（如「金价」不得算「黄金配置」）；
- *  2. **领域匹配单独只能到 M1（+3）**：领域是宽分类（「黄金」→ 财富、`金融监管` → 风险管理），
- *     只靠领域对上就判高度相关，会让一条新闻同时命中五个重点并大幅加分。
- *     11-28 实测：「金融监管总局：银行业总资产…」靠领域 + 机构名（1 个词）拿到
- *     M2 +18 → base 42 窜到 56 分政策稿之上，属典型 False Boost；
- *     现在同一条只到 M1 +3，排位不动。
+ *  2. **领域只能升级，不能单独构成命中**：领域是宽分类（「黄金」→ 财富、`金融监管` → 风险管理），
+ *     光靠领域对上就产出一条命中，等于「每条资讯都命中每个重点」。
+ *     11-30 实测（30 天 1234 条标题）：「代发客户向财富客户转化」词表在真实标题里几乎零出现，
+ *     却因领域匹配命中 248 条；「重点监管政策跟踪」命中 206 条 —— 首页「本期经营重点」的
+ *     「当日相关情报数量」会直接退化成「当日总条数」，该模块失去信息量。
+ *     故：**无任何词面/概念信号 → M0**，领域只作为 M2/M3 的必要条件或升级条件。
  *  3. **M3 必须在标题命中**核心词或 ≥2 个关键词，**且**领域匹配；
  *     只命中摘要不算精准命中（摘要常带上下文，容易误配）；
  *  4. **M2 必须有概念级佐证**：≥2 个关联概念，或「领域匹配 + 1 词 + 1 概念」；
@@ -99,8 +100,8 @@ export function matchFocus(input: FocusMatchInput, focuses: readonly FocusItem[]
     if (domainMatched && (core.length > 0 || keywords.length >= 2)) level = "M3";
     // M2 高度相关：必须有概念级佐证（≥2 概念，或领域 + 1 词 + 1 概念）
     else if (concepts.length >= 2 || (domainMatched && keywords.length >= 1 && concepts.length >= 1)) level = "M2";
-    // M1 间接相关：有词面/概念信号，或仅领域相关（+3，不足以改变量级）
-    else if (core.length > 0 || keywords.length >= 2 || concepts.length >= 1 || domainMatched) level = "M1";
+    // M1 间接相关：有明确的词面/概念信号（领域只作升级，不单独构成命中）
+    else if (core.length > 0 || keywords.length >= 1 || concepts.length >= 1) level = "M1";
     if (!level) continue;
 
     const parts: string[] = [];
