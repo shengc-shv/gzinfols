@@ -24,7 +24,9 @@ export interface ResearchPanelItem {
    *   - 东财 PDF 地址由 infoCode 确定性派生（`pdf.dfcfw.com/pdf/H3_<infoCode>_1.pdf`）；
    *   - 新浪源没有 PDF（其 url 是 GBK 正文网页）→ 该字段为空，渲染层回退 `url`；
    *   - 保留 `url` 才能同时给出「原页面」次级出口（与 IPO 卡的官方源双链接同构）。
-   * ⛔ 不影响主项目：本契约只被研报旁路三个文件 import（side-research / research/ledger / research/ledger-store）。
+   * ⛔ 不影响主项目：本契约只被研报旁路自身消费（side-research / research/ledger /
+   *    research/ledger-store / pipeline/research-context），外加 contracts/pipeline 的
+   *    一处类型引用（`ctx.researchCaptured`，2026-11-28 台账写入挪到装配层时引入）。
    */
   pdfUrl?: string;
   /** 券商简称（orgSName） */

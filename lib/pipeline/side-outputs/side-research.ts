@@ -13,19 +13,20 @@
  *
  * 🔴 2026-10-19 加固：本函数是旁路，**任何异常都不许冒到 runPipeline**（否则当天整天无报告）。
  * 最外层包一层 try 兜底，异常 → 空面板 + note。
- * 另：台账读不懂（corrupt）时**拒绝写回**，绝不拿空台账覆盖历史（见 ledger-store 注释）。
+ *
+ * 🔴 2026-11-28 sc：**台账写入已挪出本文件**（→ `pipeline/research-context.ts`，由
+ * `scripts/daily.ts` 消费）。本函数只抓取 + 出面板，**零写盘**；抓到的全量条目挂在
+ * `ctx.researchCaptured` 上交给装配层。原因见下方 collectAndMerge 内的注释。
  */
 import type { DailyReport } from "../../contracts/report";
 import type { PipelineContext } from "../../contracts/pipeline";
 import type { ResearchPanel, ResearchPanelItem } from "../../contracts/research";
 import { SinaResearchCrawler } from "../../adapters/crawlers/sources/sina-research";
-import { readResearchLedger, writeResearchLedger } from "../../adapters/research/ledger-store";
-import { mergeResearchLedger } from "../../services/research/ledger";
 
 /** 面板最多展示条数（参考区，不做信息轰炸）。 */
 export const RESEARCH_PANEL_MAX = 12;
 
-/** 面板/台账窗口天数缺省值（异常兜底时用于 note，正常路径取各爬虫的最大 windowDays）。 */
+/** 面板窗口天数缺省值（异常兜底时用于 note，正常路径取各爬虫的最大 windowDays）。 */
 const DEFAULT_WINDOW_DAYS = 3;
 
 /** excerpt 契约 `机构｜研究员｜行业` 的拆分（见爬虫注释）。 */
@@ -62,7 +63,8 @@ export function buildResearchPanel(
   };
 }
 
-/** IO 包装：抓两个研报源（东财行业/策略 + 新浪宏观）→ 合并进固定台账。任何单源失败不阻断。 */
+/** 抓取包装：新浪宏观研报 → 出面板，并把**全量**条目挂到 `ctx.researchCaptured` 交装配层。
+ *  任何单源失败不阻断；**本函数零写盘**（台账写入见 `pipeline/research-context.ts`）。 */
 export async function buildResearchFromSource(
   report: DailyReport,
   ctx: PipelineContext,
@@ -126,29 +128,13 @@ async function collectAndMerge(
   const windowDays = Math.max(DEFAULT_WINDOW_DAYS, ...sources.map((c) => c.windowDays));
   const panel = buildResearchPanel(items, { scanned, windowDays, now });
 
-  // 固定台账：读（三态）→ 并集合并（url 主键 + 标题归一化兜底 + 90 天滚动）→ 写回。
-  if (items.length) {
-    try {
-      const read = readResearchLedger();
-      if (read.state === "corrupt") {
-        // 🔴 拒写回：空台账 + 写回 = 历史被静默清空。原文件原样保留，等人工处理。
-        ctx.log.warn(
-          "research",
-          `研报台账解析失败，本次拒绝写回（历史保留，本期只出面板）: ${read.error}`,
-        );
-      } else {
-        const merged = mergeResearchLedger(read.ledger, items, { today: report.date });
-        writeResearchLedger(merged);
-        ctx.log.info(
-          "research",
-          `研报台账：本次抓 ${items.length} 条 · 新增 ${merged.items.length - read.ledger.items.length} 条 · 累计 ${merged.items.length} 条`,
-        );
-      }
-    } catch (e) {
-      const msg = e instanceof Error ? e.message : String(e);
-      ctx.log.warn("research", `研报台账写入失败（本期面板仍可用）: ${msg}`);
-    }
-  }
+  // 🔴 2026-11-28 sc：台账写入从本文件**挪到装配层**（`pipeline/research-context.ts`，
+  //    由 `scripts/daily.ts` 调用）。原因：`runPipeline` 也被 e2e / replay / 单测直接调用，
+  //    写盘写在管线里，等于让「换个 REPORT_DATE 跑一遍」的验证把真实台账灌成假日期
+  //    （实测：用 REPORT_DATE=2026-09-11 回跑，新浪首页 22 条研报全被记成 firstSeen=09-11）。
+  //    本函数现在只做「抓取 + 面板」（纯内存），全量条目挂到 ctx 交给装配层落盘。
+  //    ⚠️ 面板是截断后的（≤RESEARCH_PANEL_MAX），台账要的是**全量**，故此处存 items 而非 panel.items。
+  if (items.length) ctx.researchCaptured = items;
 
   // P17：全部源不可达 ≠ 真 0 命中 —— 前者必须留痕（note + 日志），不能静默空
   if (okSources === 0) {

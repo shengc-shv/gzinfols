@@ -17,6 +17,7 @@ import type {
 } from "./report";
 import type { ArticleInput, CrawledArticle, RawArticle } from "./article";
 import type { AiStage } from "./metrics";
+import type { ResearchPanelItem } from "./research";
 
 /** 文件系统端口（唯一磁盘出口）。 */
 export interface FileStore {
@@ -194,6 +195,14 @@ export interface PipelineContext {
   /** 错误聚合：每阶段 push 一条，末尾统一汇总。 */
   errors: Array<{ stage: string; source?: string; message: string; ts?: string }>;
   log: Logger;
+  /**
+   * 研报旁路本次抓到的**全量**条目（未截断），仅供装配层写台账用（2026-11-28）。
+   *
+   * 为什么放 ctx 而不是 report：台账是数据层的累积账本，不该随 report JSON 落盘；
+   * 为什么管线不自己写：`runPipeline` 也被 e2e / replay / 单测直接调用，写进管线会给
+   * 真实台账灌假日期。**只有 `scripts/daily.ts` 消费它**，其余入口读不到即不落盘。
+   */
+  researchCaptured?: ResearchPanelItem[];
 }
 
 /** 依赖注入容器：运行时把端口实现注入进来（组合根负责装配）。 */

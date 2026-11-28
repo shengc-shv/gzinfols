@@ -10,6 +10,7 @@ import { loadHistoryStore } from "../lib/adapters/persistence";
 import type { RunMode } from "../lib/contracts/pipeline";
 import { setReportLocale } from "../lib/services/render/locale";
 import { loadFocusForRun, recordFocusRun } from "../lib/pipeline/focus-context";
+import { recordResearchRun } from "../lib/pipeline/research-context";
 
 async function main() {
   const clock = new SystemClock();
@@ -37,6 +38,11 @@ async function main() {
   // 重载一次配置（不带日志，管线里已打印过）：同一 date + 同一份配置 → 同一批重点与版本号。
   const fc = loadFocusForRun(out.report.date, ctx.config.focusEngine);
   recordFocusRun(out.report, fc.items, fc.version, ctx.log);
+
+  // 研报台账（`data/research-ledger.json`）：与重点台账同理 —— **只在这里写**。
+  // runPipeline 也被 e2e / replay / 单测直接调用，写进管线会给真实台账灌假日期
+  //（2026-11-28 从 side-outputs/side-research 挪出，见 pipeline/research-context 注释）。
+  recordResearchRun(ctx.researchCaptured, out.report.date, ctx.log);
 
   if (ctx.errors.length)
     ctx.log.warn("daily", `运行期 ${ctx.errors.length} 条源级错误`, { count: ctx.errors.length });
