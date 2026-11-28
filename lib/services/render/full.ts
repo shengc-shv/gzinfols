@@ -143,6 +143,14 @@ import { renderRedchipPanel } from "./redchip-panel";
 import { renderCoverage } from "./coverage";
 import { renderModuleLinks } from "./module-links";
 import { SIGNAL_TONE, renderMarkdown } from "./markdown";
+// 零售经营决策情报视角（一期，sc 2026-11-28 方案 A）：与旧视角共存同一 HTML，
+// 由 body class 切换显隐；本文件只做装配，六模块的数据与样式全在 decision-view.ts。
+import {
+  renderDecisionView,
+  renderViewSwitch,
+  DECISION_VIEW_CSS,
+  generateDecisionViewScript,
+} from "./decision-view";
 
 export * from "./atoms";
 export * from "./report-item";
@@ -400,14 +408,20 @@ ${stripCssComments(SEARCH_ENTRY_CSS)}
   .seg-chip.seg-private { color: #fff; background: #8e44ad; }
   .seg-chip.seg-inclusive { color: #fff; background: #1e7e34; }
   .seg-chip.seg-other { color: #555; background: #ececec; }
+${stripCssComments(DECISION_VIEW_CSS)}
   /* 移动端增强层（2026-09-18）——**必须置于本 <style> 最末**：
      媒体查询不提升优先级，只要其后再出现同选择器规则（如上面的 .seg-chip），
      本层就会被静默压掉。合并本段时请保持它在最后。见 render/mobile-opt.ts。 */
 ${stripCssComments(MOBILE_OPT_CSS)}
   </style>
 </head>
-<body>
+<body class="view-decision">
 <main>
+  <!-- 版本视角切换（sc 2026-11-28 方案 A）：默认决策情报视角，原版资讯视角可一键切回。
+       两视角共用同一 report JSON；切换只改 body class + localStorage，不触碰任何数据。 -->
+  ${renderViewSwitch()}
+  ${renderDecisionView(report, date, nowHm)}
+  <div id="view-classic">
     ${opts.audio ? `<div class="player-card">
     <div class="player-title"><span class="ic">🎧</span> 今日语音简报 <span class="player-dur">${escapeHtml(opts.audio.duration)}</span>${renderTtsBadge(opts.audio.backend)}</div>
     <audio controls preload="none" src="${escapeHtml(opts.audio.src)}" id="audio-player"></audio>
@@ -467,6 +481,7 @@ ${stripCssComments(MOBILE_OPT_CSS)}
   </section>`).join("")}
 
   ${renderRedchipPanel(report.redchipPanel)}
+  </div><!-- /#view-classic -->
 
   <footer>
     <p>免责声明：本页面为个人学习项目，内容基于公开信息整理，不代表任何机构立场；市场信息不构成投资建议。页面面向内部参考，请勿外传。</p>
@@ -760,6 +775,9 @@ ${stripCssComments(MOBILE_OPT_CSS)}
 </script>
 <script>
 ${generatePageActionsScript()}
+</script>
+<script>
+${generateDecisionViewScript()}
 </script>
 ${opts.audio?.segments && opts.audio.segments.length ? `<script>
 ${generateAudioHighlightScript()}
