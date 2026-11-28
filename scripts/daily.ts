@@ -9,6 +9,7 @@ import { NodeFsAdapter, SystemClock } from "../lib/adapters";
 import { loadHistoryStore } from "../lib/adapters/persistence";
 import type { RunMode } from "../lib/contracts/pipeline";
 import { setReportLocale } from "../lib/services/render/locale";
+import { loadFocusForRun, recordFocusRun } from "../lib/pipeline/focus-context";
 
 async function main() {
   const clock = new SystemClock();
@@ -30,6 +31,12 @@ async function main() {
 
   const { ctx, deps } = await bootstrap({ date, mode });
   const out = await runPipeline(ctx, deps);
+
+  // 二期 WP7：经营重点台账 + 配置版本归档（`data/focus-ledger.json` / `data/focus/versions.json`）。
+  // 只在这里写 —— runPipeline 也被 replay / 单测直接调用，写进管线会给真实台账灌假日期。
+  // 重载一次配置（不带日志，管线里已打印过）：同一 date + 同一份配置 → 同一批重点与版本号。
+  const fc = loadFocusForRun(out.report.date, ctx.config.focusEngine);
+  recordFocusRun(out.report, fc.items, fc.version, ctx.log);
 
   if (ctx.errors.length)
     ctx.log.warn("daily", `运行期 ${ctx.errors.length} 条源级错误`, { count: ctx.errors.length });

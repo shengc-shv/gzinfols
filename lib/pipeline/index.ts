@@ -175,6 +175,9 @@ export async function runPipeline(
             .join("、"),
       );
     }
+    // WP7 台账**不在这里写**：管线也被 replay/测试直接调用，写在这里会往真实台账
+    // 记进「2026-09-11 测试日」这类假数据。台账记的是**真实运行**，调用点在运行入口
+    // `scripts/daily.ts`（那里 report 已定稿，`inMustRead/inInsights/isRisk` 才有意义）。
   }
 
   // —— C8 语音：口播稿拼装（gzinfo 链路：执行摘要 store.json 为主输入，无 exec 则跳过）——
