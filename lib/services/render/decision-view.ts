@@ -22,7 +22,7 @@ import { escapeHtml } from "./cards";
 import { itemAnchorId } from "./atoms";
 import { prevDateKey } from "../../utils/time";
 import { stripHeroPrefix } from "../../utils/hero-text";
-import { BUSINESS_DOMAINS, DOMAIN_IDS } from "../vocab/business-domains";
+import { BUSINESS_DOMAINS, DOMAIN_IDS, classifyBusinessDomain } from "../vocab/business-domains";
 
 /** 顶部快捷跳转 + 八模块锚点（id 与下方 section 一一对应，测试守护）。 */
 export const DV_MODULE_NAV: ReadonlyArray<{ id: string; label: string }> = [
@@ -175,9 +175,21 @@ function backToTop(): string {
 export function renderDecisionView(report: DailyReport, date: string, nowHm: string): string {
   // ---- 数据准备：全部来自既有字段 ----
   const allItems: ReportItem[] = (["gz_local", "biz_insight", "policy_market", "tech", "ipo"] as const)
-    .flatMap((s) => report.sections?.[s] ?? []);
+    .flatMap((s) => report.sections?.[s] ?? [])
+    // 浅拷贝：历史报告降级打标只作用于本次渲染，绝不 mutate 入参报告。
+    .map((it) => ({ ...it }));
   const bodyMap = new Map<string, ReportItem>();
   for (const it of allItems) if (it.url && !bodyMap.has(it.url)) bodyMap.set(it.url, it);
+  // 历史报告无 primary_domain（字段为本期新增）：渲染期按同一词表临时打标，
+  // 仅用于本次 DOM 展示，不 mutate 报告、不写盘；新报告走管线打标，口径同源。
+  for (const it of allItems) {
+    if (it.primary_domain) continue;
+    const d = classifyBusinessDomain({ title: it.title_cn, summary: it.summary, tags: it.tags });
+    if (d) {
+      it.primary_domain = d.primary_domain;
+      if (d.related_domains.length) it.related_domains = d.related_domains;
+    }
+  }
   const insightMap = new Map<string, ReportInsight>();
   for (const ins of report.insights ?? []) {
     for (const s of ins.sources ?? []) if (s?.url && !insightMap.has(s.url)) insightMap.set(s.url, ins);

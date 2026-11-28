@@ -125,6 +125,16 @@ test("⑥ 六大经营领域导航 = 新配置六领域，带当日计数，链�
   assert.ok(d.includes('href="../topics.html"'), "链接复用现有专题页（不建死链）");
 });
 
+test("⑥b 历史报告无领域字段：渲染期同源降级打标，不 mutate 入参", () => {
+  const body = item("广州住房金融政策调整，房贷利率下行", { primary_domain: undefined });
+  const r = report({ sections: { gz_local: [body], biz_insight: [], policy_market: [], tech: [], ipo: [] } });
+  const snapshot = JSON.stringify(r);
+  const d = decisionPart(renderHtml(r));
+  assert.ok(d.includes("零售信贷"), "降级打标后领域导航有计数");
+  assert.ok(!d.includes("当日暂无") || d.includes("当日 1 条"), "命中领域不再显示当日暂无");
+  assert.equal(JSON.stringify(r), snapshot, "渲染不得 mutate 入参报告");
+});
+
 test("⑦ 角色轻量筛选：五角色 + data-domain 锚点，不新增 AI 任务", () => {
   const d = decisionPart(renderHtml(report()));
   assert.equal(DV_ROLE_VIEWS.length, 5, "全景 + 四业务部门");
